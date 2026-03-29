@@ -1,0 +1,1822 @@
+{
+  "question": "How can urban farms build community support while dealing with lead contamination in soil?",
+  "root_id": "th-0001",
+  "frontier_ids": [
+    "th-0003",
+    "th-0004",
+    "th-0005",
+    "ev-th-0002-1",
+    "ev-th-0002-2",
+    "ev-th-0002-3",
+    "ev-th-0002-4",
+    "ev-th-0002-5",
+    "ev-th-0002-6",
+    "ev-th-0006-1",
+    "ev-th-0006-2",
+    "ev-th-0006-3",
+    "ev-th-0006-4",
+    "ev-th-0006-5",
+    "ev-th-0006-6",
+    "ev-th-0007-1",
+    "ev-th-0007-2",
+    "ev-th-0007-3",
+    "ev-th-0007-4",
+    "ev-th-0007-5",
+    "ev-th-0007-6",
+    "ev-th-0008-1",
+    "ev-th-0008-2",
+    "ev-th-0008-3",
+    "ev-th-0008-4",
+    "ev-th-0008-5",
+    "ev-th-0008-6",
+    "ev-th-0009-1",
+    "ev-th-0009-2",
+    "ev-th-0009-3",
+    "ev-th-0009-4",
+    "ev-th-0009-5",
+    "ev-th-0009-6",
+    "th-0010"
+  ],
+  "status": "done",
+  "termination_reason": "budget_exhausted",
+  "final_answer": {
+    "answer": "fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, an... fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, an...",
+    "reasoning_summary": "Mock synthesis over 2 verified evidence thoughts.",
+    "confidence": 0.55,
+    "remaining_gaps": []
+  },
+  "thoughts": {
+    "th-0001": {
+      "thought_id": "th-0001",
+      "role": "root",
+      "content": "How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [],
+        "evidence_ids": [],
+        "notes": [
+          "question-root"
+        ]
+      },
+      "score": 0.0,
+      "status": "expanded",
+      "parent_ids": [],
+      "metadata": {},
+      "grounding_text": "anchors: How, can, urban; notes: question-root"
+    },
+    "th-0002": {
+      "thought_id": "th-0002",
+      "role": "hypothesis",
+      "content": "The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [],
+        "evidence_ids": [],
+        "notes": []
+      },
+      "score": 0.9410995352512792,
+      "status": "expanded",
+      "parent_ids": [
+        "th-0001"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.7071067690849304,
+          "grounding_score": 0.33091574907302856
+        }
+      },
+      "grounding_text": "anchors: How, can, urban"
+    },
+    "th-0003": {
+      "thought_id": "th-0003",
+      "role": "constraint",
+      "content": "Use grounded evidence from retrieved chunks.",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [],
+        "evidence_ids": [],
+        "notes": []
+      },
+      "score": 0.0,
+      "status": "active",
+      "parent_ids": [
+        "th-0001"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.0,
+          "grounding_score": 0.08908708393573761
+        }
+      },
+      "grounding_text": "anchors: How, can, urban"
+    },
+    "th-0004": {
+      "thought_id": "th-0004",
+      "role": "constraint",
+      "content": "Prefer evidence chains over unsupported claims.",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [],
+        "evidence_ids": [],
+        "notes": []
+      },
+      "score": 0.0,
+      "status": "active",
+      "parent_ids": [
+        "th-0001"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.0,
+          "grounding_score": 0.028171809390187263
+        }
+      },
+      "grounding_text": "anchors: How, can, urban"
+    },
+    "th-0005": {
+      "thought_id": "th-0005",
+      "role": "bridge",
+      "content": "Connect evidence that explains How",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [],
+        "evidence_ids": [],
+        "notes": []
+      },
+      "score": 0.11180340498685837,
+      "status": "active",
+      "parent_ids": [
+        "th-0001"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.11180340498685837,
+          "grounding_score": 0.0
+        }
+      },
+      "grounding_text": "anchors: How, can, urban"
+    },
+    "ev-th-0002-1": {
+      "thought_id": "ev-th-0002-1",
+      "role": "evidence",
+      "content": "fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, and other tropical countries, and as American palates expand into these cuisines, goat is sure to follow. Why not raise brush-and-bramble meat goats in rotations through urban landscapes that need clearing? Grant warns that one obstacle to this idea is that many ornamental plants are poisonous to goats, and laurel is especially deadly. But she likes the idea. And if Grant likes the idea, then maybe the idea has a future. I'm no expert, but if there aren't other major, unforeseen obstacles to incorporating goats into different aspects of community life, then community goats may be here to stay. ### Building a Buzz across the Nation #### Community and Home Beekeeping _coauthored by Coogan Brennan_ The grassroots beekeeping movement is...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson.\"",
+          "<hyperedge>\"Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.'\"",
+          "\"STEPHANIE AVERILL\"",
+          "\"MICHAEL THOMPSON\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-b52b5200e77354191139029d689fb62d"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-1"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.24545661707859878,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-7525",
+          "edge-7526",
+          "edge-7751"
+        ],
+        "score_breakdown": {
+          "task_score": 0.19814848899841309,
+          "grounding_score": 0.2387508898973465
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson., Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.', STEPHANIE AVERILL, MICHAEL THOMPSON, HONEY; chunks: chunk-b52b5200e77354191139029d689fb62d; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "ev-th-0002-2": {
+      "thought_id": "ev-th-0002-2",
+      "role": "evidence",
+      "content": "is this defensive behavior that allows a colony of bees to store away large quantities of honey with minimum likelihood that it will be taken from them by predators. They are able to defend themselves, their home, and their wealth. Because they can store surplus honey, bees can survive the winter in relatively large numbers and can greet the new growing season ready to work. Under normal circumstances, that work results in more stores of honey—some for us, some for them. So stinging has a positive side. But it can create problems. A bee sting itself is an interesting event, not a particularly scary one. A single sting, although momentarily painful, normally has no persistent aftereffects. A beekeeper probably does not even experience any distinct pain. I will discuss this later, but first, let's consider bee sting reactions, especially as perceived by the general public. **B EE STINGS...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"For some people, there is a different outcome for stings.\"",
+          "<hyperedge>\"And finally, there are people who are stung for no other reason than they simply are there.\"",
+          "\"NECTAR\"",
+          "\"PRESENCE\"",
+          "\"HONEY\"",
+          "\"PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-5a4a1a431b94a27a92d263b7dde5aa5a"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-2"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.2068059676706735,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-22377",
+          "edge-22378"
+        ],
+        "score_breakdown": {
+          "task_score": 0.16553056240081787,
+          "grounding_score": 0.24935217201709747
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: For some people, there is a different outcome for stings., And finally, there are people who are stung for no other reason than they simply are there., NECTAR, PRESENCE, HONEY, PEOPLE; chunks: chunk-5a4a1a431b94a27a92d263b7dde5aa5a; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "ev-th-0002-3": {
+      "thought_id": "ev-th-0002-3",
+      "role": "evidence",
+      "content": "effective. After a winter with no stings, the tolerance may wear off and have to be reestablished. A few stings in the early season will take care of this. For some people, there is a different outcome for stings. Instead of building a tolerance, they begin to react more and more to each successive stinging incident, ultimately developing a true allergy and requiring medical assistance. This can happen to beekeepers and nonbeekeepers alike, and has been observed in members of beekeepers' families, even those who do not normally work with the bees. Apparently, the repeated breathing of particles of dried venom or other bee-related materials, which adhere to the beekeeper's clothing and are carried into the house, contributes to this type of increasing intolerance. One adverse reaction may not be enough to positively diagnose an allergic condition, but again, it is better to seek medica...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"For some people, there is a different outcome for stings.\"",
+          "<hyperedge>\"Today, we are also concerned with controlling the spread of two species of parasitic mites and of the Africanized bee, all of which have entered this country in recent years, are spreading, and are creating severe problems.\"",
+          "\"AFRICANIZED BEE\"",
+          "\"HONEY\"",
+          "\"PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-fc749ae5b6e2c5fae540d31c52a16691"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-3"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.19796971696905485,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-16337",
+          "edge-16768"
+        ],
+        "score_breakdown": {
+          "task_score": 0.13578136265277863,
+          "grounding_score": 0.45800361037254333
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: For some people, there is a different outcome for stings., Today, we are also concerned with controlling the spread of two species of parasitic mites and of the Africanized bee, all of which have entered this country in recent years, are spreading, and are creating severe problems., AFRICANIZED BEE, HONEY, PEOPLE; chunks: chunk-fc749ae5b6e2c5fae540d31c52a16691; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "ev-th-0002-4": {
+      "thought_id": "ev-th-0002-4",
+      "role": "evidence",
+      "content": "movable, renewable frames. Together these allowed for greater ease in hive manipulation and greater opportunity to study the workings of the hive. Furthermore, there was no longer a need to destroy colonies to take the crop, so the resulting crops were larger. Fewer but larger hives could be kept as well. Langstroth's discovery truly revolutionized beekeeping. As the third era progressed, beekeeping was mostly small scale—one or two hives to provide for a family's needs, although a few individuals kept enough hives to acquire a little pocket money from honey sales. Langstroth's discovery and the developments that followed gave rise to true commercial operations—honey by the ton—and this happened. Before the 1800s were over, several beekeepers in different parts of the country were becoming full-time commercial operators, some of whom had several hundred hives. Honey was shipped by the...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"CROPS\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-1b5f53667458d570c2b31bf11f9a153b"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-4"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.09891585260629654,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.09891585260629654,
+          "grounding_score": 0.0
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: CROPS, HONEY; chunks: chunk-1b5f53667458d570c2b31bf11f9a153b; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "ev-th-0002-5": {
+      "thought_id": "ev-th-0002-5",
+      "role": "evidence",
+      "content": "the spring, encourage those overwintered hives (the weak ones) to swarm. The result—breed to a weakness, breed to swarm. Very little was known about the bees themselves during this early era, and what was known tended to be localized. The Romans developed some knowledge. They fed the bees in times of need and began to wonder about them, but they had little or no understanding of what went on in the hive. This was at least in part because it was difficult to observe life in a hive without removable comb. These early beekeepers misunderstood or simply did not know about such things as the sexes of the three bees—the worker, the drone, and the queen. They did observe enough to know that there was a monarch, but thought the queen to be male, or king. The facts of mating were vague; one belief was that after eggs were laid in the cells, sperm was then somehow spread over them by the drones...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"COMB\"",
+          "\"BEE SPACE\"",
+          "\"PROPOLIS\"",
+          "\"CROPS\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-93fd599c3721904b0c0c72f8f1f0969f"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-5"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.12749875777313535,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.12621095776557922,
+          "grounding_score": 0.01020355150103569
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: COMB, BEE SPACE, PROPOLIS, CROPS, HONEY; chunks: chunk-93fd599c3721904b0c0c72f8f1f0969f; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "ev-th-0002-6": {
+      "thought_id": "ev-th-0002-6",
+      "role": "evidence",
+      "content": "throughout the United States are changing their laws to permit backyard chickens – specifically hens, not roosters. Cities that are saying \"yes\" to backyard poultry are of all sizes and shapes, including Boston, New York City, Los Angeles, San Francisco, Chicago, Madison (Wisconsin), Ann Arbor, Fort Collins, South Portland (Maine), Seattle, Portland (Oregon), and Everett (Oregon). Backyard chickens have catalyzed jokes, heated arguments, and citizen campaigns, as well as concerns for social justice, public health, and sustainability. Mayor Dave Cieslewicz doesn't mind ruffling feathers with his blogs in Madison, Wisconsin, which reversed its poultry ban in 2004. \"Chickens are really bringing us together as a community. For too long they've been cooped up,\" he wrote that year. \"It's a serious issue – it's no yolk.\" And five years later, in 2009, he blogged, \"It's not just a shell game....",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"LOCAL FOOD\""
+        ],
+        "chunk_ids": [
+          "chunk-7d94881bd64e92c01d329307d5d40738"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-6"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.11936518402873267,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.11718866974115372,
+          "grounding_score": 0.018572736531496048
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: LOCAL FOOD; chunks: chunk-7d94881bd64e92c01d329307d5d40738; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "th-0006": {
+      "thought_id": "th-0006",
+      "role": "bridge",
+      "content": "Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson.\"",
+          "<hyperedge>\"Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.'\"",
+          "\"STEPHANIE AVERILL\"",
+          "\"MICHAEL THOMPSON\"",
+          "\"HONEY\"",
+          "<hyperedge>\"For some people, there is a different outcome for stings.\"",
+          "<hyperedge>\"And finally, there are people who are stung for no other reason than they simply are there.\"",
+          "\"NECTAR\"",
+          "\"PRESENCE\"",
+          "\"HONEY\"",
+          "\"PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-b52b5200e77354191139029d689fb62d",
+          "chunk-5a4a1a431b94a27a92d263b7dde5aa5a"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-1",
+          "ev-th-0002-2"
+        ],
+        "notes": []
+      },
+      "score": 0.8341413190208264,
+      "status": "expanded",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.6666666865348816,
+          "grounding_score": 0.251211941242218
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson., Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.', STEPHANIE AVERILL, MICHAEL THOMPSON, HONEY, For some people, there is a different outcome for stings., And finally, there are people who are stung for no other reason than they simply are there., NECTAR; chunks: chunk-b52b5200e77354191139029d689fb62d, chunk-5a4a1a431b94a27a92d263b7dde5aa5a"
+    },
+    "ev-th-0006-1": {
+      "thought_id": "ev-th-0006-1",
+      "role": "evidence",
+      "content": "fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, and other tropical countries, and as American palates expand into these cuisines, goat is sure to follow. Why not raise brush-and-bramble meat goats in rotations through urban landscapes that need clearing? Grant warns that one obstacle to this idea is that many ornamental plants are poisonous to goats, and laurel is especially deadly. But she likes the idea. And if Grant likes the idea, then maybe the idea has a future. I'm no expert, but if there aren't other major, unforeseen obstacles to incorporating goats into different aspects of community life, then community goats may be here to stay. ### Building a Buzz across the Nation #### Community and Home Beekeeping _coauthored by Coogan Brennan_ The grassroots beekeeping movement is...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson.\"",
+          "<hyperedge>\"Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.'\"",
+          "\"STEPHANIE AVERILL\"",
+          "\"MICHAEL THOMPSON\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-b52b5200e77354191139029d689fb62d"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-1"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.24545661707859878,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-7525",
+          "edge-7526",
+          "edge-7751"
+        ],
+        "score_breakdown": {
+          "task_score": 0.19814848899841309,
+          "grounding_score": 0.2387508898973465
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson., Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.', STEPHANIE AVERILL, MICHAEL THOMPSON, HONEY; chunks: chunk-b52b5200e77354191139029d689fb62d; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "ev-th-0006-2": {
+      "thought_id": "ev-th-0006-2",
+      "role": "evidence",
+      "content": "is this defensive behavior that allows a colony of bees to store away large quantities of honey with minimum likelihood that it will be taken from them by predators. They are able to defend themselves, their home, and their wealth. Because they can store surplus honey, bees can survive the winter in relatively large numbers and can greet the new growing season ready to work. Under normal circumstances, that work results in more stores of honey—some for us, some for them. So stinging has a positive side. But it can create problems. A bee sting itself is an interesting event, not a particularly scary one. A single sting, although momentarily painful, normally has no persistent aftereffects. A beekeeper probably does not even experience any distinct pain. I will discuss this later, but first, let's consider bee sting reactions, especially as perceived by the general public. **B EE STINGS...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"For some people, there is a different outcome for stings.\"",
+          "<hyperedge>\"And finally, there are people who are stung for no other reason than they simply are there.\"",
+          "\"NECTAR\"",
+          "\"PRESENCE\"",
+          "\"HONEY\"",
+          "\"PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-5a4a1a431b94a27a92d263b7dde5aa5a"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-2"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.2068059676706735,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-22377",
+          "edge-22378"
+        ],
+        "score_breakdown": {
+          "task_score": 0.16553056240081787,
+          "grounding_score": 0.24935217201709747
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: For some people, there is a different outcome for stings., And finally, there are people who are stung for no other reason than they simply are there., NECTAR, PRESENCE, HONEY, PEOPLE; chunks: chunk-5a4a1a431b94a27a92d263b7dde5aa5a; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "ev-th-0006-3": {
+      "thought_id": "ev-th-0006-3",
+      "role": "evidence",
+      "content": "throughout the United States are changing their laws to permit backyard chickens – specifically hens, not roosters. Cities that are saying \"yes\" to backyard poultry are of all sizes and shapes, including Boston, New York City, Los Angeles, San Francisco, Chicago, Madison (Wisconsin), Ann Arbor, Fort Collins, South Portland (Maine), Seattle, Portland (Oregon), and Everett (Oregon). Backyard chickens have catalyzed jokes, heated arguments, and citizen campaigns, as well as concerns for social justice, public health, and sustainability. Mayor Dave Cieslewicz doesn't mind ruffling feathers with his blogs in Madison, Wisconsin, which reversed its poultry ban in 2004. \"Chickens are really bringing us together as a community. For too long they've been cooped up,\" he wrote that year. \"It's a serious issue – it's no yolk.\" And five years later, in 2009, he blogged, \"It's not just a shell game....",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"LOCAL FOOD\""
+        ],
+        "chunk_ids": [
+          "chunk-7d94881bd64e92c01d329307d5d40738"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-3"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.11936518402873267,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.11718866974115372,
+          "grounding_score": 0.018572736531496048
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: LOCAL FOOD; chunks: chunk-7d94881bd64e92c01d329307d5d40738; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "ev-th-0006-4": {
+      "thought_id": "ev-th-0006-4",
+      "role": "evidence",
+      "content": ", \"A Case for Backyard Chickens in Salem [Oregon]\" (September 2010), <http://www.chicken-revolution.com/Research_Packet_Sept_2010.pdf>. **** Genetic Resources Action International (GRAIN), \"Fowl Play: The Poultry Industry's Central Role in the Bird Flu Crisis\" (February 2006), <http://www.grain.org/briefings/?id=194>. **** Consumer Reports Health Blog, \"Health Weekender: Egg Safety – In Defense of Home-Grown Eggs,\" July 24, 2009, <http://blogs.consumerreports.org/health/2009/07/egg-safety-organic-eggs-health-benefits-of-eggs-salmonella-protect-yourself-from-foodborne-illness-.html>. **** Council President Richard Conlin, \"One Small Step For Man, One Giant Leap For Goatkind,\" _Making It Work_ (newsletter) 9, no. 8 (October 4, 2007), <http://www.seattle.gov/Council/Conlin/miw/0708miw.htm#4>. **** Angela Galloway, \"Seattle Homeowners May Keep Miniature Goats as Pets,\" _Seattle Post-Intel...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-475015ec5f08648d774910da2fb23967"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-4"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.14607699185748735,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.13867506384849548,
+          "grounding_score": 0.053376056253910065
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: HONEY; chunks: chunk-475015ec5f08648d774910da2fb23967; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "ev-th-0006-5": {
+      "thought_id": "ev-th-0006-5",
+      "role": "evidence",
+      "content": "movable, renewable frames. Together these allowed for greater ease in hive manipulation and greater opportunity to study the workings of the hive. Furthermore, there was no longer a need to destroy colonies to take the crop, so the resulting crops were larger. Fewer but larger hives could be kept as well. Langstroth's discovery truly revolutionized beekeeping. As the third era progressed, beekeeping was mostly small scale—one or two hives to provide for a family's needs, although a few individuals kept enough hives to acquire a little pocket money from honey sales. Langstroth's discovery and the developments that followed gave rise to true commercial operations—honey by the ton—and this happened. Before the 1800s were over, several beekeepers in different parts of the country were becoming full-time commercial operators, some of whom had several hundred hives. Honey was shipped by the...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"CROPS\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-1b5f53667458d570c2b31bf11f9a153b"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-5"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.09891585260629654,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.09891585260629654,
+          "grounding_score": 0.0
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: CROPS, HONEY; chunks: chunk-1b5f53667458d570c2b31bf11f9a153b; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "ev-th-0006-6": {
+      "thought_id": "ev-th-0006-6",
+      "role": "evidence",
+      "content": "the spring, encourage those overwintered hives (the weak ones) to swarm. The result—breed to a weakness, breed to swarm. Very little was known about the bees themselves during this early era, and what was known tended to be localized. The Romans developed some knowledge. They fed the bees in times of need and began to wonder about them, but they had little or no understanding of what went on in the hive. This was at least in part because it was difficult to observe life in a hive without removable comb. These early beekeepers misunderstood or simply did not know about such things as the sexes of the three bees—the worker, the drone, and the queen. They did observe enough to know that there was a monarch, but thought the queen to be male, or king. The facts of mating were vague; one belief was that after eggs were laid in the cells, sperm was then somehow spread over them by the drones...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"COMB\"",
+          "\"BEE SPACE\"",
+          "\"PROPOLIS\"",
+          "\"CROPS\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-93fd599c3721904b0c0c72f8f1f0969f"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-6"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.12749875777313535,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.12621095776557922,
+          "grounding_score": 0.01020355150103569
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: COMB, BEE SPACE, PROPOLIS, CROPS, HONEY; chunks: chunk-93fd599c3721904b0c0c72f8f1f0969f; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "th-0007": {
+      "thought_id": "th-0007",
+      "role": "bridge",
+      "content": "Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson.\"",
+          "<hyperedge>\"Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.'\"",
+          "\"STEPHANIE AVERILL\"",
+          "\"MICHAEL THOMPSON\"",
+          "\"HONEY\"",
+          "<hyperedge>\"For some people, there is a different outcome for stings.\"",
+          "<hyperedge>\"And finally, there are people who are stung for no other reason than they simply are there.\"",
+          "\"NECTAR\"",
+          "\"PRESENCE\"",
+          "\"HONEY\"",
+          "\"PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-b52b5200e77354191139029d689fb62d",
+          "chunk-5a4a1a431b94a27a92d263b7dde5aa5a"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-1",
+          "ev-th-0006-2"
+        ],
+        "notes": []
+      },
+      "score": 0.7604500434035444,
+      "status": "expanded",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.5773502588272095,
+          "grounding_score": 0.317138135433197
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson., Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.', STEPHANIE AVERILL, MICHAEL THOMPSON, HONEY, For some people, there is a different outcome for stings., And finally, there are people who are stung for no other reason than they simply are there., NECTAR; chunks: chunk-b52b5200e77354191139029d689fb62d, chunk-5a4a1a431b94a27a92d263b7dde5aa5a"
+    },
+    "ev-th-0007-1": {
+      "thought_id": "ev-th-0007-1",
+      "role": "evidence",
+      "content": "fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, and other tropical countries, and as American palates expand into these cuisines, goat is sure to follow. Why not raise brush-and-bramble meat goats in rotations through urban landscapes that need clearing? Grant warns that one obstacle to this idea is that many ornamental plants are poisonous to goats, and laurel is especially deadly. But she likes the idea. And if Grant likes the idea, then maybe the idea has a future. I'm no expert, but if there aren't other major, unforeseen obstacles to incorporating goats into different aspects of community life, then community goats may be here to stay. ### Building a Buzz across the Nation #### Community and Home Beekeeping _coauthored by Coogan Brennan_ The grassroots beekeeping movement is...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson.\"",
+          "<hyperedge>\"Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.'\"",
+          "\"STEPHANIE AVERILL\"",
+          "\"MICHAEL THOMPSON\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-b52b5200e77354191139029d689fb62d"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-1"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.24545661707859878,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-7525",
+          "edge-7526",
+          "edge-7751"
+        ],
+        "score_breakdown": {
+          "task_score": 0.19814848899841309,
+          "grounding_score": 0.2387508898973465
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson., Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.', STEPHANIE AVERILL, MICHAEL THOMPSON, HONEY; chunks: chunk-b52b5200e77354191139029d689fb62d; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "ev-th-0007-2": {
+      "thought_id": "ev-th-0007-2",
+      "role": "evidence",
+      "content": ", \"A Case for Backyard Chickens in Salem [Oregon]\" (September 2010), <http://www.chicken-revolution.com/Research_Packet_Sept_2010.pdf>. **** Genetic Resources Action International (GRAIN), \"Fowl Play: The Poultry Industry's Central Role in the Bird Flu Crisis\" (February 2006), <http://www.grain.org/briefings/?id=194>. **** Consumer Reports Health Blog, \"Health Weekender: Egg Safety – In Defense of Home-Grown Eggs,\" July 24, 2009, <http://blogs.consumerreports.org/health/2009/07/egg-safety-organic-eggs-health-benefits-of-eggs-salmonella-protect-yourself-from-foodborne-illness-.html>. **** Council President Richard Conlin, \"One Small Step For Man, One Giant Leap For Goatkind,\" _Making It Work_ (newsletter) 9, no. 8 (October 4, 2007), <http://www.seattle.gov/Council/Conlin/miw/0708miw.htm#4>. **** Angela Galloway, \"Seattle Homeowners May Keep Miniature Goats as Pets,\" _Seattle Post-Intel...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-475015ec5f08648d774910da2fb23967"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-2"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.14607699185748735,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.13867506384849548,
+          "grounding_score": 0.053376056253910065
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: HONEY; chunks: chunk-475015ec5f08648d774910da2fb23967; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "ev-th-0007-3": {
+      "thought_id": "ev-th-0007-3",
+      "role": "evidence",
+      "content": "queen being killed. The first couple of inspections should be relatively short and specific. On the first inspection, your purpose is to check on the queen. Has she been released? We have been proceeding on the assumption that the candy would be eaten away and the queen released by the third day after package installation. Checking that this has indeed happened is relatively simple and quick, although it does require that you open the hive. This initial inspection should take place on about the third day after installation. First, light your smoker. You probably won't need it, but have it ready (it is good practice to light it, at any rate). Smokers are simple things, but are often ornery and can go out with no warning. Always light the smoker before you do anything else. When it seems to be burning well, set it aside. Next, don your veil and any other protective gear. Proceed to the...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"BROOD\""
+        ],
+        "chunk_ids": [
+          "chunk-4ff7d8f22cb1bb72cdb48f20d4975e8d"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-3"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.07668507832493399,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.07566499710083008,
+          "grounding_score": 0.013481547124683857
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: BROOD; chunks: chunk-4ff7d8f22cb1bb72cdb48f20d4975e8d; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "ev-th-0007-4": {
+      "thought_id": "ev-th-0007-4",
+      "role": "evidence",
+      "content": "throughout the United States are changing their laws to permit backyard chickens – specifically hens, not roosters. Cities that are saying \"yes\" to backyard poultry are of all sizes and shapes, including Boston, New York City, Los Angeles, San Francisco, Chicago, Madison (Wisconsin), Ann Arbor, Fort Collins, South Portland (Maine), Seattle, Portland (Oregon), and Everett (Oregon). Backyard chickens have catalyzed jokes, heated arguments, and citizen campaigns, as well as concerns for social justice, public health, and sustainability. Mayor Dave Cieslewicz doesn't mind ruffling feathers with his blogs in Madison, Wisconsin, which reversed its poultry ban in 2004. \"Chickens are really bringing us together as a community. For too long they've been cooped up,\" he wrote that year. \"It's a serious issue – it's no yolk.\" And five years later, in 2009, he blogged, \"It's not just a shell game....",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"LOCAL FOOD\""
+        ],
+        "chunk_ids": [
+          "chunk-7d94881bd64e92c01d329307d5d40738"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-4"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.11936518402873267,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.11718866974115372,
+          "grounding_score": 0.018572736531496048
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: LOCAL FOOD; chunks: chunk-7d94881bd64e92c01d329307d5d40738; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "ev-th-0007-5": {
+      "thought_id": "ev-th-0007-5",
+      "role": "evidence",
+      "content": "is this defensive behavior that allows a colony of bees to store away large quantities of honey with minimum likelihood that it will be taken from them by predators. They are able to defend themselves, their home, and their wealth. Because they can store surplus honey, bees can survive the winter in relatively large numbers and can greet the new growing season ready to work. Under normal circumstances, that work results in more stores of honey—some for us, some for them. So stinging has a positive side. But it can create problems. A bee sting itself is an interesting event, not a particularly scary one. A single sting, although momentarily painful, normally has no persistent aftereffects. A beekeeper probably does not even experience any distinct pain. I will discuss this later, but first, let's consider bee sting reactions, especially as perceived by the general public. **B EE STINGS...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"For some people, there is a different outcome for stings.\"",
+          "<hyperedge>\"And finally, there are people who are stung for no other reason than they simply are there.\"",
+          "\"NECTAR\"",
+          "\"PRESENCE\"",
+          "\"HONEY\"",
+          "\"PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-5a4a1a431b94a27a92d263b7dde5aa5a"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-5"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.2068059676706735,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-22377",
+          "edge-22378"
+        ],
+        "score_breakdown": {
+          "task_score": 0.16553056240081787,
+          "grounding_score": 0.24935217201709747
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: For some people, there is a different outcome for stings., And finally, there are people who are stung for no other reason than they simply are there., NECTAR, PRESENCE, HONEY, PEOPLE; chunks: chunk-5a4a1a431b94a27a92d263b7dde5aa5a; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "ev-th-0007-6": {
+      "thought_id": "ev-th-0007-6",
+      "role": "evidence",
+      "content": "movable, renewable frames. Together these allowed for greater ease in hive manipulation and greater opportunity to study the workings of the hive. Furthermore, there was no longer a need to destroy colonies to take the crop, so the resulting crops were larger. Fewer but larger hives could be kept as well. Langstroth's discovery truly revolutionized beekeeping. As the third era progressed, beekeeping was mostly small scale—one or two hives to provide for a family's needs, although a few individuals kept enough hives to acquire a little pocket money from honey sales. Langstroth's discovery and the developments that followed gave rise to true commercial operations—honey by the ton—and this happened. Before the 1800s were over, several beekeepers in different parts of the country were becoming full-time commercial operators, some of whom had several hundred hives. Honey was shipped by the...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"CROPS\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-1b5f53667458d570c2b31bf11f9a153b"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-6"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.09891585260629654,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.09891585260629654,
+          "grounding_score": 0.0
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: CROPS, HONEY; chunks: chunk-1b5f53667458d570c2b31bf11f9a153b; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "th-0008": {
+      "thought_id": "th-0008",
+      "role": "bridge",
+      "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson.\"",
+          "<hyperedge>\"Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.'\"",
+          "\"STEPHANIE AVERILL\"",
+          "\"MICHAEL THOMPSON\"",
+          "\"HONEY\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-b52b5200e77354191139029d689fb62d",
+          "chunk-475015ec5f08648d774910da2fb23967"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-1",
+          "ev-th-0007-2"
+        ],
+        "notes": []
+      },
+      "score": 0.6335167536225708,
+      "status": "expanded",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.4850712716579437,
+          "grounding_score": 0.30602818727493286
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson., Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.', STEPHANIE AVERILL, MICHAEL THOMPSON, HONEY, HONEY; chunks: chunk-b52b5200e77354191139029d689fb62d, chunk-475015ec5f08648d774910da2fb23967"
+    },
+    "ev-th-0008-1": {
+      "thought_id": "ev-th-0008-1",
+      "role": "evidence",
+      "content": "queen being killed. The first couple of inspections should be relatively short and specific. On the first inspection, your purpose is to check on the queen. Has she been released? We have been proceeding on the assumption that the candy would be eaten away and the queen released by the third day after package installation. Checking that this has indeed happened is relatively simple and quick, although it does require that you open the hive. This initial inspection should take place on about the third day after installation. First, light your smoker. You probably won't need it, but have it ready (it is good practice to light it, at any rate). Smokers are simple things, but are often ornery and can go out with no warning. Always light the smoker before you do anything else. When it seems to be burning well, set it aside. Next, don your veil and any other protective gear. Proceed to the...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"BROOD\""
+        ],
+        "chunk_ids": [
+          "chunk-4ff7d8f22cb1bb72cdb48f20d4975e8d"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-1"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.07668507832493399,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.07566499710083008,
+          "grounding_score": 0.013481547124683857
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: BROOD; chunks: chunk-4ff7d8f22cb1bb72cdb48f20d4975e8d; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "ev-th-0008-2": {
+      "thought_id": "ev-th-0008-2",
+      "role": "evidence",
+      "content": "fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, and other tropical countries, and as American palates expand into these cuisines, goat is sure to follow. Why not raise brush-and-bramble meat goats in rotations through urban landscapes that need clearing? Grant warns that one obstacle to this idea is that many ornamental plants are poisonous to goats, and laurel is especially deadly. But she likes the idea. And if Grant likes the idea, then maybe the idea has a future. I'm no expert, but if there aren't other major, unforeseen obstacles to incorporating goats into different aspects of community life, then community goats may be here to stay. ### Building a Buzz across the Nation #### Community and Home Beekeeping _coauthored by Coogan Brennan_ The grassroots beekeeping movement is...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson.\"",
+          "<hyperedge>\"Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.'\"",
+          "\"STEPHANIE AVERILL\"",
+          "\"MICHAEL THOMPSON\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-b52b5200e77354191139029d689fb62d"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-2"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.24545661707859878,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-7525",
+          "edge-7526",
+          "edge-7751"
+        ],
+        "score_breakdown": {
+          "task_score": 0.19814848899841309,
+          "grounding_score": 0.2387508898973465
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson., Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.', STEPHANIE AVERILL, MICHAEL THOMPSON, HONEY; chunks: chunk-b52b5200e77354191139029d689fb62d; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "ev-th-0008-3": {
+      "thought_id": "ev-th-0008-3",
+      "role": "evidence",
+      "content": ", \"A Case for Backyard Chickens in Salem [Oregon]\" (September 2010), <http://www.chicken-revolution.com/Research_Packet_Sept_2010.pdf>. **** Genetic Resources Action International (GRAIN), \"Fowl Play: The Poultry Industry's Central Role in the Bird Flu Crisis\" (February 2006), <http://www.grain.org/briefings/?id=194>. **** Consumer Reports Health Blog, \"Health Weekender: Egg Safety – In Defense of Home-Grown Eggs,\" July 24, 2009, <http://blogs.consumerreports.org/health/2009/07/egg-safety-organic-eggs-health-benefits-of-eggs-salmonella-protect-yourself-from-foodborne-illness-.html>. **** Council President Richard Conlin, \"One Small Step For Man, One Giant Leap For Goatkind,\" _Making It Work_ (newsletter) 9, no. 8 (October 4, 2007), <http://www.seattle.gov/Council/Conlin/miw/0708miw.htm#4>. **** Angela Galloway, \"Seattle Homeowners May Keep Miniature Goats as Pets,\" _Seattle Post-Intel...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-475015ec5f08648d774910da2fb23967"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-3"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.14607699185748735,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.13867506384849548,
+          "grounding_score": 0.053376056253910065
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: HONEY; chunks: chunk-475015ec5f08648d774910da2fb23967; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "ev-th-0008-4": {
+      "thought_id": "ev-th-0008-4",
+      "role": "evidence",
+      "content": "throughout the United States are changing their laws to permit backyard chickens – specifically hens, not roosters. Cities that are saying \"yes\" to backyard poultry are of all sizes and shapes, including Boston, New York City, Los Angeles, San Francisco, Chicago, Madison (Wisconsin), Ann Arbor, Fort Collins, South Portland (Maine), Seattle, Portland (Oregon), and Everett (Oregon). Backyard chickens have catalyzed jokes, heated arguments, and citizen campaigns, as well as concerns for social justice, public health, and sustainability. Mayor Dave Cieslewicz doesn't mind ruffling feathers with his blogs in Madison, Wisconsin, which reversed its poultry ban in 2004. \"Chickens are really bringing us together as a community. For too long they've been cooped up,\" he wrote that year. \"It's a serious issue – it's no yolk.\" And five years later, in 2009, he blogged, \"It's not just a shell game....",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"LOCAL FOOD\""
+        ],
+        "chunk_ids": [
+          "chunk-7d94881bd64e92c01d329307d5d40738"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-4"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.11936518402873267,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.11718866974115372,
+          "grounding_score": 0.018572736531496048
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: LOCAL FOOD; chunks: chunk-7d94881bd64e92c01d329307d5d40738; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "ev-th-0008-5": {
+      "thought_id": "ev-th-0008-5",
+      "role": "evidence",
+      "content": "is this defensive behavior that allows a colony of bees to store away large quantities of honey with minimum likelihood that it will be taken from them by predators. They are able to defend themselves, their home, and their wealth. Because they can store surplus honey, bees can survive the winter in relatively large numbers and can greet the new growing season ready to work. Under normal circumstances, that work results in more stores of honey—some for us, some for them. So stinging has a positive side. But it can create problems. A bee sting itself is an interesting event, not a particularly scary one. A single sting, although momentarily painful, normally has no persistent aftereffects. A beekeeper probably does not even experience any distinct pain. I will discuss this later, but first, let's consider bee sting reactions, especially as perceived by the general public. **B EE STINGS...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"For some people, there is a different outcome for stings.\"",
+          "<hyperedge>\"And finally, there are people who are stung for no other reason than they simply are there.\"",
+          "\"NECTAR\"",
+          "\"PRESENCE\"",
+          "\"HONEY\"",
+          "\"PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-5a4a1a431b94a27a92d263b7dde5aa5a"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-5"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.2068059676706735,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-22377",
+          "edge-22378"
+        ],
+        "score_breakdown": {
+          "task_score": 0.16553056240081787,
+          "grounding_score": 0.24935217201709747
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: For some people, there is a different outcome for stings., And finally, there are people who are stung for no other reason than they simply are there., NECTAR, PRESENCE, HONEY, PEOPLE; chunks: chunk-5a4a1a431b94a27a92d263b7dde5aa5a; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "ev-th-0008-6": {
+      "thought_id": "ev-th-0008-6",
+      "role": "evidence",
+      "content": "movable, renewable frames. Together these allowed for greater ease in hive manipulation and greater opportunity to study the workings of the hive. Furthermore, there was no longer a need to destroy colonies to take the crop, so the resulting crops were larger. Fewer but larger hives could be kept as well. Langstroth's discovery truly revolutionized beekeeping. As the third era progressed, beekeeping was mostly small scale—one or two hives to provide for a family's needs, although a few individuals kept enough hives to acquire a little pocket money from honey sales. Langstroth's discovery and the developments that followed gave rise to true commercial operations—honey by the ton—and this happened. Before the 1800s were over, several beekeepers in different parts of the country were becoming full-time commercial operators, some of whom had several hundred hives. Honey was shipped by the...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"CROPS\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-1b5f53667458d570c2b31bf11f9a153b"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-6"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.09891585260629654,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.09891585260629654,
+          "grounding_score": 0.0
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: CROPS, HONEY; chunks: chunk-1b5f53667458d570c2b31bf11f9a153b; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "th-0009": {
+      "thought_id": "th-0009",
+      "role": "bridge",
+      "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"BROOD\"",
+          "<hyperedge>\"The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson.\"",
+          "<hyperedge>\"Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.'\"",
+          "\"STEPHANIE AVERILL\"",
+          "\"MICHAEL THOMPSON\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-4ff7d8f22cb1bb72cdb48f20d4975e8d",
+          "chunk-b52b5200e77354191139029d689fb62d"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-1",
+          "ev-th-0008-2"
+        ],
+        "notes": []
+      },
+      "score": 0.5157869389186054,
+      "status": "expanded",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.40824830532073975,
+          "grounding_score": 0.26341477036476135
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: BROOD, The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson., Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.', STEPHANIE AVERILL, MICHAEL THOMPSON, HONEY; chunks: chunk-4ff7d8f22cb1bb72cdb48f20d4975e8d, chunk-b52b5200e77354191139029d689fb62d"
+    },
+    "ev-th-0009-1": {
+      "thought_id": "ev-th-0009-1",
+      "role": "evidence",
+      "content": "queen being killed. The first couple of inspections should be relatively short and specific. On the first inspection, your purpose is to check on the queen. Has she been released? We have been proceeding on the assumption that the candy would be eaten away and the queen released by the third day after package installation. Checking that this has indeed happened is relatively simple and quick, although it does require that you open the hive. This initial inspection should take place on about the third day after installation. First, light your smoker. You probably won't need it, but have it ready (it is good practice to light it, at any rate). Smokers are simple things, but are often ornery and can go out with no warning. Always light the smoker before you do anything else. When it seems to be burning well, set it aside. Next, don your veil and any other protective gear. Proceed to the...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"BROOD\""
+        ],
+        "chunk_ids": [
+          "chunk-4ff7d8f22cb1bb72cdb48f20d4975e8d"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-1"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.14598088145256044,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": []
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: BROOD; chunks: chunk-4ff7d8f22cb1bb72cdb48f20d4975e8d; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "ev-th-0009-2": {
+      "thought_id": "ev-th-0009-2",
+      "role": "evidence",
+      "content": ", \"A Case for Backyard Chickens in Salem [Oregon]\" (September 2010), <http://www.chicken-revolution.com/Research_Packet_Sept_2010.pdf>. **** Genetic Resources Action International (GRAIN), \"Fowl Play: The Poultry Industry's Central Role in the Bird Flu Crisis\" (February 2006), <http://www.grain.org/briefings/?id=194>. **** Consumer Reports Health Blog, \"Health Weekender: Egg Safety – In Defense of Home-Grown Eggs,\" July 24, 2009, <http://blogs.consumerreports.org/health/2009/07/egg-safety-organic-eggs-health-benefits-of-eggs-salmonella-protect-yourself-from-foodborne-illness-.html>. **** Council President Richard Conlin, \"One Small Step For Man, One Giant Leap For Goatkind,\" _Making It Work_ (newsletter) 9, no. 8 (October 4, 2007), <http://www.seattle.gov/Council/Conlin/miw/0708miw.htm#4>. **** Angela Galloway, \"Seattle Homeowners May Keep Miniature Goats as Pets,\" _Seattle Post-Intel...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-475015ec5f08648d774910da2fb23967"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-2"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.13915056914091112,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": []
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: HONEY; chunks: chunk-475015ec5f08648d774910da2fb23967; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "ev-th-0009-3": {
+      "thought_id": "ev-th-0009-3",
+      "role": "evidence",
+      "content": "fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, and other tropical countries, and as American palates expand into these cuisines, goat is sure to follow. Why not raise brush-and-bramble meat goats in rotations through urban landscapes that need clearing? Grant warns that one obstacle to this idea is that many ornamental plants are poisonous to goats, and laurel is especially deadly. But she likes the idea. And if Grant likes the idea, then maybe the idea has a future. I'm no expert, but if there aren't other major, unforeseen obstacles to incorporating goats into different aspects of community life, then community goats may be here to stay. ### Building a Buzz across the Nation #### Community and Home Beekeeping _coauthored by Coogan Brennan_ The grassroots beekeeping movement is...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson.\"",
+          "<hyperedge>\"Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.'\"",
+          "\"STEPHANIE AVERILL\"",
+          "\"MICHAEL THOMPSON\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-b52b5200e77354191139029d689fb62d"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-3"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.13799257010221483,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-7525",
+          "edge-7526",
+          "edge-7751"
+        ]
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: The two rooftop beehives were installed by local beekeepers Stephanie Averill and Michael Thompson., Beekeeper Stephanie Averill says that this longer season is great for bees: 'They can get a lot of work done in those extra three weeks.', STEPHANIE AVERILL, MICHAEL THOMPSON, HONEY; chunks: chunk-b52b5200e77354191139029d689fb62d; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "ev-th-0009-4": {
+      "thought_id": "ev-th-0009-4",
+      "role": "evidence",
+      "content": "throughout the United States are changing their laws to permit backyard chickens – specifically hens, not roosters. Cities that are saying \"yes\" to backyard poultry are of all sizes and shapes, including Boston, New York City, Los Angeles, San Francisco, Chicago, Madison (Wisconsin), Ann Arbor, Fort Collins, South Portland (Maine), Seattle, Portland (Oregon), and Everett (Oregon). Backyard chickens have catalyzed jokes, heated arguments, and citizen campaigns, as well as concerns for social justice, public health, and sustainability. Mayor Dave Cieslewicz doesn't mind ruffling feathers with his blogs in Madison, Wisconsin, which reversed its poultry ban in 2004. \"Chickens are really bringing us together as a community. For too long they've been cooped up,\" he wrote that year. \"It's a serious issue – it's no yolk.\" And five years later, in 2009, he blogged, \"It's not just a shell game....",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"LOCAL FOOD\""
+        ],
+        "chunk_ids": [
+          "chunk-7d94881bd64e92c01d329307d5d40738"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-4"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.13486907809972765,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": []
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: LOCAL FOOD; chunks: chunk-7d94881bd64e92c01d329307d5d40738; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "ev-th-0009-5": {
+      "thought_id": "ev-th-0009-5",
+      "role": "evidence",
+      "content": "Chickens #### BackYardChickens.com **www.backyardchickens.com** This website calls itself the number one learning site for raising backyard chickens. It includes a learning center, a forum for discussions, a place to buy and sell equipment, and more. #### Chicken Revolution **www.salemchickens.com** Barbara Palermo, a backyard poultry advocate, created this site as part of an effort to legalize chickens in Salem. It offers advice and information for backyard chicken enthusiasts of all kinds and in all places. #### Urban Chickens **<http://urbanchickens.org>** This website offers probably the most comprehensive listing of zoning ordinances in each state, although many states still haven't provided information. Also, you'll find a wonderful map that allows you to locate urban chicken owners near you. ### Gleaning and Food Recovery #### _A Citizen's Guide to Food Recovery_ U.S. DEPARTMEN...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Abernethy Elementary School is located at 2421 SE Orange, Portland, OR 97214 and can be reached at 503-916-6190.\"",
+          "\"ABERNETHY ELEMENTARY SCHOOL\"",
+          "\"COMMUNITY GROUNDWORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-8d3d51c80e398fde0d7a70a89888fa0e"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-5"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.12390043765306473,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-1406"
+        ]
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Abernethy Elementary School is located at 2421 SE Orange, Portland, OR 97214 and can be reached at 503-916-6190., ABERNETHY ELEMENTARY SCHOOL, COMMUNITY GROUNDWORKS; chunks: chunk-8d3d51c80e398fde0d7a70a89888fa0e; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "ev-th-0009-6": {
+      "thought_id": "ev-th-0009-6",
+      "role": "evidence",
+      "content": "movable, renewable frames. Together these allowed for greater ease in hive manipulation and greater opportunity to study the workings of the hive. Furthermore, there was no longer a need to destroy colonies to take the crop, so the resulting crops were larger. Fewer but larger hives could be kept as well. Langstroth's discovery truly revolutionized beekeeping. As the third era progressed, beekeeping was mostly small scale—one or two hives to provide for a family's needs, although a few individuals kept enough hives to acquire a little pocket money from honey sales. Langstroth's discovery and the developments that followed gave rise to true commercial operations—honey by the ton—and this happened. Before the 1800s were over, several beekeepers in different parts of the country were becoming full-time commercial operators, some of whom had several hundred hives. Honey was shipped by the...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"CROPS\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-1b5f53667458d570c2b31bf11f9a153b"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-6"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.12361582919955254,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": []
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: CROPS, HONEY; chunks: chunk-1b5f53667458d570c2b31bf11f9a153b; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "th-0010": {
+      "thought_id": "th-0010",
+      "role": "bridge",
+      "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"BROOD\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-4ff7d8f22cb1bb72cdb48f20d4975e8d",
+          "chunk-475015ec5f08648d774910da2fb23967"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-1",
+          "ev-th-0009-2"
+        ],
+        "notes": []
+      },
+      "score": 0.0,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {},
+      "grounding_text": "anchors: How, can, urban; nodes: BROOD, HONEY; chunks: chunk-4ff7d8f22cb1bb72cdb48f20d4975e8d, chunk-475015ec5f08648d774910da2fb23967"
+    },
+    "th-0011": {
+      "thought_id": "th-0011",
+      "role": "answer",
+      "content": "fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, an... fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, an...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [
+          "chunk-b52b5200e77354191139029d689fb62d",
+          "chunk-b52b5200e77354191139029d689fb62d"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-1",
+          "ev-th-0006-1"
+        ],
+        "notes": [
+          "Mock synthesis over 2 verified evidence thoughts."
+        ]
+      },
+      "score": 0.24545661707859878,
+      "status": "completed",
+      "parent_ids": [
+        "ev-th-0002-1",
+        "ev-th-0006-1"
+      ],
+      "metadata": {
+        "answer": "fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, an... fat goat wins again, with only 0.79 gram, compared with 1.7 in chicken and 3.0 in beef. Goat is prominent in the cooking of the Caribbean, Southeast Asia, an...",
+        "reasoning_summary": "Mock synthesis over 2 verified evidence thoughts.",
+        "confidence": 0.55,
+        "remaining_gaps": []
+      },
+      "grounding_text": "anchors: How, can, urban; chunks: chunk-b52b5200e77354191139029d689fb62d, chunk-b52b5200e77354191139029d689fb62d; notes: Mock synthesis over 2 verified evidence thoughts."
+    }
+  },
+  "history": [
+    {
+      "event": "operation_executed",
+      "payload": {
+        "thought_id": "th-0002",
+        "operation": "expand",
+        "decision": {
+          "operation": "expand",
+          "reason": "Evidence is still weak, so the branch should be refined.",
+          "new_status": "expanded",
+          "new_thoughts": [
+            {
+              "role": "bridge",
+              "content": "Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+              "grounding_hints": {
+                "anchors": [
+                  "How",
+                  "can",
+                  "urban"
+                ]
+              }
+            }
+          ],
+          "merge_with_thought_ids": [],
+          "verification": {
+            "verdict": "insufficient",
+            "confidence": 0.2,
+            "evidence_ids": [],
+            "notes": "Need stronger evidence."
+          }
+        },
+        "new_thought_ids": [
+          "th-0006"
+        ],
+        "verified_evidence_ids": []
+      }
+    },
+    {
+      "event": "operation_executed",
+      "payload": {
+        "thought_id": "th-0006",
+        "operation": "expand",
+        "decision": {
+          "operation": "expand",
+          "reason": "Evidence is still weak, so the branch should be refined.",
+          "new_status": "expanded",
+          "new_thoughts": [
+            {
+              "role": "bridge",
+              "content": "Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+              "grounding_hints": {
+                "anchors": [
+                  "How",
+                  "can",
+                  "urban"
+                ]
+              }
+            }
+          ],
+          "merge_with_thought_ids": [],
+          "verification": {
+            "verdict": "insufficient",
+            "confidence": 0.2,
+            "evidence_ids": [],
+            "notes": "Need stronger evidence."
+          }
+        },
+        "new_thought_ids": [
+          "th-0007"
+        ],
+        "verified_evidence_ids": []
+      }
+    },
+    {
+      "event": "operation_executed",
+      "payload": {
+        "thought_id": "th-0007",
+        "operation": "expand",
+        "decision": {
+          "operation": "expand",
+          "reason": "Evidence is still weak, so the branch should be refined.",
+          "new_status": "expanded",
+          "new_thoughts": [
+            {
+              "role": "bridge",
+              "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+              "grounding_hints": {
+                "anchors": [
+                  "How",
+                  "can",
+                  "urban"
+                ]
+              }
+            }
+          ],
+          "merge_with_thought_ids": [],
+          "verification": {
+            "verdict": "insufficient",
+            "confidence": 0.2,
+            "evidence_ids": [],
+            "notes": "Need stronger evidence."
+          }
+        },
+        "new_thought_ids": [
+          "th-0008"
+        ],
+        "verified_evidence_ids": []
+      }
+    },
+    {
+      "event": "operation_executed",
+      "payload": {
+        "thought_id": "th-0008",
+        "operation": "expand",
+        "decision": {
+          "operation": "expand",
+          "reason": "Evidence is still weak, so the branch should be refined.",
+          "new_status": "expanded",
+          "new_thoughts": [
+            {
+              "role": "bridge",
+              "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+              "grounding_hints": {
+                "anchors": [
+                  "How",
+                  "can",
+                  "urban"
+                ]
+              }
+            }
+          ],
+          "merge_with_thought_ids": [],
+          "verification": {
+            "verdict": "insufficient",
+            "confidence": 0.2,
+            "evidence_ids": [],
+            "notes": "Need stronger evidence."
+          }
+        },
+        "new_thought_ids": [
+          "th-0009"
+        ],
+        "verified_evidence_ids": []
+      }
+    },
+    {
+      "event": "operation_executed",
+      "payload": {
+        "thought_id": "th-0009",
+        "operation": "expand",
+        "decision": {
+          "operation": "expand",
+          "reason": "Evidence is still weak, so the branch should be refined.",
+          "new_status": "expanded",
+          "new_thoughts": [
+            {
+              "role": "bridge",
+              "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+              "grounding_hints": {
+                "anchors": [
+                  "How",
+                  "can",
+                  "urban"
+                ]
+              }
+            }
+          ],
+          "merge_with_thought_ids": [],
+          "verification": {
+            "verdict": "insufficient",
+            "confidence": 0.2,
+            "evidence_ids": [],
+            "notes": "Need stronger evidence."
+          }
+        },
+        "new_thought_ids": [
+          "th-0010"
+        ],
+        "verified_evidence_ids": []
+      }
+    }
+  ]
+}

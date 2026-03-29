@@ -1,0 +1,23 @@
+2026-03-29 17:40:20,865 | INFO | Loading dataset from D:\GitHub\GoT_HGs_RAG\datasets\agriculture
+2026-03-29 17:40:20,866 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-03-29 17:40:27,213 | INFO | Starting GoTHyper pipeline for question: How can urban farms build community support while dealing with lead contamination in soil?
+2026-03-29 17:40:27,213 | INFO | TaskFrame created with 3 anchors, 2 constraints, 1 bridges
+2026-03-29 17:40:27,340 | INFO | Extracted subgraph with 490 nodes, 538 edges, 299 source chunks
+2026-03-29 17:40:27,341 | INFO | Initialized ThoughtGraph with 4 seed thoughts
+2026-03-29 17:40:27,343 | INFO | Reasoning step 1/5
+2026-03-29 17:40:27,344 | INFO | Scored 4 thoughts
+2026-03-29 17:40:27,353 | INFO | Retrieved 6 evidence items for thought th-0002
+2026-03-29 17:40:27,363 | INFO | Reasoning step 2/5
+2026-03-29 17:40:27,365 | INFO | Scored 10 thoughts
+2026-03-29 17:40:27,377 | INFO | Retrieved 6 evidence items for thought th-0006
+2026-03-29 17:40:27,380 | INFO | Reasoning step 3/5
+2026-03-29 17:40:27,381 | INFO | Scored 16 thoughts
+2026-03-29 17:40:27,392 | INFO | Retrieved 6 evidence items for thought th-0007
+2026-03-29 17:40:27,395 | INFO | Reasoning step 4/5
+2026-03-29 17:40:27,396 | INFO | Scored 22 thoughts
+2026-03-29 17:40:27,404 | INFO | Retrieved 6 evidence items for thought th-0008
+2026-03-29 17:40:27,406 | INFO | Reasoning step 5/5
+2026-03-29 17:40:27,409 | INFO | Scored 28 thoughts
+2026-03-29 17:40:27,419 | INFO | Retrieved 6 evidence items for thought th-0009
+2026-03-29 17:40:27,421 | INFO | Final answer synthesized with 2 evidence parents
+2026-03-29 17:40:27,435 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\GoT_HGs_RAG\runs\20260329_174020_test-smoke-run

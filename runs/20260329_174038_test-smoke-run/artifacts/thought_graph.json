@@ -1,0 +1,2063 @@
+{
+  "question": "How can urban farms build community support while dealing with lead contamination in soil?",
+  "root_id": "th-0001",
+  "frontier_ids": [
+    "th-0003",
+    "th-0004",
+    "th-0005",
+    "ev-th-0002-1",
+    "ev-th-0002-2",
+    "ev-th-0002-3",
+    "ev-th-0002-4",
+    "ev-th-0002-5",
+    "ev-th-0002-6",
+    "ev-th-0006-1",
+    "ev-th-0006-2",
+    "ev-th-0006-3",
+    "ev-th-0006-4",
+    "ev-th-0006-5",
+    "ev-th-0006-6",
+    "ev-th-0007-1",
+    "ev-th-0007-2",
+    "ev-th-0007-3",
+    "ev-th-0007-4",
+    "ev-th-0007-5",
+    "ev-th-0007-6",
+    "ev-th-0008-1",
+    "ev-th-0008-2",
+    "ev-th-0008-3",
+    "ev-th-0008-4",
+    "ev-th-0008-5",
+    "ev-th-0008-6",
+    "ev-th-0009-1",
+    "ev-th-0009-2",
+    "ev-th-0009-3",
+    "ev-th-0009-4",
+    "ev-th-0009-5",
+    "ev-th-0009-6",
+    "th-0010"
+  ],
+  "status": "done",
+  "termination_reason": "budget_exhausted",
+  "final_answer": {
+    "answer": ". His farm, in the back country of the Navajo Reservation, came back to life in the spring of 2011. Rose Marie Williams (at right) visits with her aunt, Tsos... . His farm, in the back country of the Navajo Reservation, came back to life in the spring of 2011. Rose Marie Williams (at right) visits with her aunt, Tsos...",
+    "reasoning_summary": "Mock synthesis over 2 verified evidence thoughts.",
+    "confidence": 0.55,
+    "remaining_gaps": []
+  },
+  "thoughts": {
+    "th-0001": {
+      "thought_id": "th-0001",
+      "role": "root",
+      "content": "How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [],
+        "evidence_ids": [],
+        "notes": [
+          "question-root"
+        ]
+      },
+      "score": 0.0,
+      "status": "expanded",
+      "parent_ids": [],
+      "metadata": {},
+      "grounding_text": "anchors: How, can, urban; notes: question-root"
+    },
+    "th-0002": {
+      "thought_id": "th-0002",
+      "role": "hypothesis",
+      "content": "The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [],
+        "evidence_ids": [],
+        "notes": []
+      },
+      "score": 0.7454910490907518,
+      "status": "expanded",
+      "parent_ids": [
+        "th-0001"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.6831300854682922,
+          "grounding_score": 0.09128709882497787
+        }
+      },
+      "grounding_text": "anchors: How, can, urban"
+    },
+    "th-0003": {
+      "thought_id": "th-0003",
+      "role": "constraint",
+      "content": "Use grounded evidence from retrieved chunks.",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [],
+        "evidence_ids": [],
+        "notes": []
+      },
+      "score": 0.0,
+      "status": "active",
+      "parent_ids": [
+        "th-0001"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.0,
+          "grounding_score": 0.20412415266036987
+        }
+      },
+      "grounding_text": "anchors: How, can, urban"
+    },
+    "th-0004": {
+      "thought_id": "th-0004",
+      "role": "constraint",
+      "content": "Prefer evidence chains over unsupported claims.",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [],
+        "evidence_ids": [],
+        "notes": []
+      },
+      "score": 0.0,
+      "status": "active",
+      "parent_ids": [
+        "th-0001"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.0,
+          "grounding_score": 0.0
+        }
+      },
+      "grounding_text": "anchors: How, can, urban"
+    },
+    "th-0005": {
+      "thought_id": "th-0005",
+      "role": "bridge",
+      "content": "Connect evidence that explains How",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [],
+        "evidence_ids": [],
+        "notes": []
+      },
+      "score": 0.11952286958694458,
+      "status": "active",
+      "parent_ids": [
+        "th-0001"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.11952286958694458,
+          "grounding_score": 0.0
+        }
+      },
+      "grounding_text": "anchors: How, can, urban"
+    },
+    "ev-th-0002-1": {
+      "thought_id": "ev-th-0002-1",
+      "role": "evidence",
+      "content": "prices run in cycles between low supply/high demand/high prices and high supply/low demand/low prices. Crop cycles depend on whether there are any surplus or deficits in previous years. Cattle cycles are normally long, whereas hogs and sheep—multibirth animals with short gestation periods—are normally shorter. It should be noted, however, that environmentally controlled housing, especially for poultry and hogs, has played havoc with seasonal cycles for livestock. Further consolidation of agriculture has essentially caused the marketing system for commodities to fail because there is in effect no supply and demand essential for price discovery. Do not embark on this type of farming (traditional agriculture with conventional markets) unless you want to be a contract grower making no management decisions and shouldering a large portion of the financial risk of farming, which is Land, Lab...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Do not embark on this type of farming (traditional agriculture with conventional markets) unless you want to be a contract grower making no management decisions and shouldering a large portion of the financial risk of farming, which is Land, Labor, and Machinery.\"",
+          "<hyperedge>\"Storey Publishing, 800-793-9396, www.storey.com. Storey publishes a wide variety of farming books, including this one.\"",
+          "\"STOREY PUBLISHING\"",
+          "\"LABOR\""
+        ],
+        "chunk_ids": [
+          "chunk-e410bfae74fb6896e8e0079e060cf83d"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-1"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.15794732871545802,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-16479",
+          "edge-16901"
+        ],
+        "score_breakdown": {
+          "task_score": 0.10505320876836777,
+          "grounding_score": 0.503498375415802
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Do not embark on this type of farming (traditional agriculture with conventional markets) unless you want to be a contract grower making no management decisions and shouldering a large portion of the financial risk of farming, which is Land, Labor, and Machinery., Storey Publishing, 800-793-9396, www.storey.com. Storey publishes a wide variety of farming books, including this one., STOREY PUBLISHING, LABOR; chunks: chunk-e410bfae74fb6896e8e0079e060cf83d; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "ev-th-0002-2": {
+      "thought_id": "ev-th-0002-2",
+      "role": "evidence",
+      "content": "is the requirement that a fishery be managed so it is not depleted or overfished, as assessed by a third-party evaluator). Modeled after the Forest Stewardship Council, which certifies wood from sustainably managed forests worldwide, the MSC works to create financial incentives for sustainable fisheries management. And it seems to be working; as of October 2010, some 95 fisheries globally had received the MSC certification. – by Tim Beatley ### Modeling Sustainability for Freshwater Fish Farms #### Sunburst Trout Farm Sunburst Trout Farm is a third-generation family-owned fish farm in **Canton, North Carolina**. The farm is a model of aquaculture sustainability, with innovative systems for raising fish ecologically and humanely, to benefit the fish, the consumers, the environment, and the local economy. For more than 50 years, a small trout farm nestled in the heart of western North C...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Sunburst is truly a family farm. Eason's husband, along with their two sons and their sons' wives, all work side by side as part of the farm's dozen or so staff.\"",
+          "<hyperedge>\"Sunburst Farm is creating ways to bring the community out to the farm.\"",
+          "<hyperedge>\"He volunteers with the Appalachian Sustainable Agriculture Project (ASAP; see page 243) as a chef in schools, and he enjoys exposing children to fresh trout.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-60071a35b7d93bd331a3e0d32f9f3fe4"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-2"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.12866208297743675,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-9673",
+          "edge-9987",
+          "edge-10129"
+        ],
+        "score_breakdown": {
+          "task_score": 0.08633317798376083,
+          "grounding_score": 0.4902970790863037
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Sunburst is truly a family farm. Eason's husband, along with their two sons and their sons' wives, all work side by side as part of the farm's dozen or so staff., Sunburst Farm is creating ways to bring the community out to the farm., He volunteers with the Appalachian Sustainable Agriculture Project (ASAP; see page 243) as a chef in schools, and he enjoys exposing children to fresh trout., HUSBAND, CHILDREN, COMMUNITY; chunks: chunk-60071a35b7d93bd331a3e0d32f9f3fe4; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "ev-th-0002-3": {
+      "thought_id": "ev-th-0002-3",
+      "role": "evidence",
+      "content": "involve sacrifice. Their farm is run on solar power, and like most families in the United States, they enjoy lights, running water (from a well), a refrigerator, computers, power tools, a washing machine, and more. People often don't try something new because they think they need to know it all themselves to get it right, says Habib. \"But we don't ask these same questions about fossil fuel. There's a trust we put into the system because we've been so used to it.\" So why, she wonders, is solar energy held to a different standard? \"We don't have to be solar experts,\" she insists. \"We can rely on friends and experts!\" Seeds of Solidarity operates with three solar electric systems: one for their house and the greenhouse water irrigation system; another for the apprentice housing building; and a third for the battery bank in their \"SOL Patrol\" van, a mobile source of electricity for irriga...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"2008\""
+        ],
+        "chunk_ids": [
+          "chunk-bf0fadd2de5cdd877a432eba713a59ce"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-3"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.05996901164560038,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.05902813747525215,
+          "grounding_score": 0.015939418226480484
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: 2008; chunks: chunk-bf0fadd2de5cdd877a432eba713a59ce; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "ev-th-0002-4": {
+      "thought_id": "ev-th-0002-4",
+      "role": "evidence",
+      "content": "to be done, even in a busy season. Further-more, many tasks are strictly seasonal. For instance, little or no foraging, nectar processing, or comb building is done during the winter months in most of the country, and brood rearing is cut back drastically or stopped altogether. Finally, at some point, the needs of the colony for new food gatherers, the ever-changing capabilities of her body, and the pressures of the new generations developing behind her push her out the door and into the life of a forager. #### **The Field Bee** When the house bee graduates, she becomes a field bee and will spend the rest of her days foraging. She may collect nectar, pollen, water, or propolis during this period. However, she will tend to concentrate on one or two of these. Foraging is not random. Except perhaps for a few scout bees, each bee, as she leaves the hive, goes after one of the specific raw...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Everything takes place in response to the absence or the presence of pheromones given off by adults and brood, which signal the status and the needs of life in the hive.\"",
+          "\"HOUSE BEES\"",
+          "\"POLLEN\"",
+          "\"NECTAR\"",
+          "\"PHEROMONES\"",
+          "\"LABORS\"",
+          "\"PROPOLIS\"",
+          "\"BROOD\""
+        ],
+        "chunk_ids": [
+          "chunk-65de87b95deadb72c4827d5a3bd2f316"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-4"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.09742844875694945,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-7478"
+        ],
+        "score_breakdown": {
+          "task_score": 0.061903197318315506,
+          "grounding_score": 0.5738839507102966
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Everything takes place in response to the absence or the presence of pheromones given off by adults and brood, which signal the status and the needs of life in the hive., HOUSE BEES, POLLEN, NECTAR, PHEROMONES, LABORS, PROPOLIS, BROOD; chunks: chunk-65de87b95deadb72c4827d5a3bd2f316; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "ev-th-0002-5": {
+      "thought_id": "ev-th-0002-5",
+      "role": "evidence",
+      "content": "wildlife. Lately, I've been told other farmers are having trouble with a black bird that has an orange spot. The black birds around here that I know of don't have orange spots. These have really, really hurt other farmers. I hunt quite a bit around here and back that way. I don't see the snakes anymore. I hunt only rabbits. We had a diet on jackrabbit. They're not out anymore. They're not alive.\" #### Corn Is Life Corn is at the center of Hopi life. \"Corn is life,\" explains Marie. \"Up here especially, us Hopi people, everything revolves around that. Weddings and dances, food, everything we use corn for. That's life for us.\" Carl explains how the life of corn and his people are intertwined and metaphorically the same. \"We consider the corn are our children. We plant them with love and care. Then urge them on to become fruitful. In each stage of a corn's life – I don't know all this but...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"We consider the corn our children. We plant them with love and care.\"",
+          "<hyperedge>\"To prove her point her husband chimes in.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-0875465d0b75e1a7aada73d20c5bbe6b"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-5"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.06989111076644472,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-15185",
+          "edge-15347"
+        ],
+        "score_breakdown": {
+          "task_score": 0.05513178929686546,
+          "grounding_score": 0.2677098214626312
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: We consider the corn our children. We plant them with love and care., To prove her point her husband chimes in., HUSBAND, CHILDREN; chunks: chunk-0875465d0b75e1a7aada73d20c5bbe6b; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "ev-th-0002-6": {
+      "thought_id": "ev-th-0002-6",
+      "role": "evidence",
+      "content": "or pastureland. Cultivated areas are small, and crops depend on slope. This is not a good soil type on which to plant 400 acres of corn, but it might make excellent orchard land. There will be more on soils in chapter 4, but you need to know the natural fertility of your farm soils and roughly what condition they are in currently. For any farm of less than 10 acres, the natural fertility of the farm is very important, because the physical size of the land will restrict the choice of enterprises. For instance, a cow-calf operation, which takes 3 acres to run a cow-calf pair, will not allow for much volume of income. The poorer the soils, the more area it would take; in some areas of the West, it takes 10 acres to run a cow-calf unit. Ten acres of vegetables or U-pick berries, however, would produce a large volume of income—but these require adequate water. Each enterprise must be evalu...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"VEGETABLES\""
+        ],
+        "chunk_ids": [
+          "chunk-d47a7d4e49c6e48a2727071f21a879ba"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-6"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0002"
+        ]
+      },
+      "score": 0.03663443773984909,
+      "status": "active",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.03663443773984909,
+          "grounding_score": 0.0
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: VEGETABLES; chunks: chunk-d47a7d4e49c6e48a2727071f21a879ba; notes: local-subgraph | retrieved-for:th-0002"
+    },
+    "th-0006": {
+      "thought_id": "th-0006",
+      "role": "bridge",
+      "content": "Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Do not embark on this type of farming (traditional agriculture with conventional markets) unless you want to be a contract grower making no management decisions and shouldering a large portion of the financial risk of farming, which is Land, Labor, and Machinery.\"",
+          "<hyperedge>\"Storey Publishing, 800-793-9396, www.storey.com. Storey publishes a wide variety of farming books, including this one.\"",
+          "\"STOREY PUBLISHING\"",
+          "\"LABOR\"",
+          "<hyperedge>\"Sunburst is truly a family farm. Eason's husband, along with their two sons and their sons' wives, all work side by side as part of the farm's dozen or so staff.\"",
+          "<hyperedge>\"Sunburst Farm is creating ways to bring the community out to the farm.\"",
+          "<hyperedge>\"He volunteers with the Appalachian Sustainable Agriculture Project (ASAP; see page 243) as a chef in schools, and he enjoys exposing children to fresh trout.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-e410bfae74fb6896e8e0079e060cf83d",
+          "chunk-60071a35b7d93bd331a3e0d32f9f3fe4"
+        ],
+        "evidence_ids": [
+          "ev-th-0002-1",
+          "ev-th-0002-2"
+        ],
+        "notes": []
+      },
+      "score": 0.8366357206510031,
+      "status": "expanded",
+      "parent_ids": [
+        "th-0002"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.6416890621185303,
+          "grounding_score": 0.30380237102508545
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Do not embark on this type of farming (traditional agriculture with conventional markets) unless you want to be a contract grower making no management decisions and shouldering a large portion of the financial risk of farming, which is Land, Labor, and Machinery., Storey Publishing, 800-793-9396, www.storey.com. Storey publishes a wide variety of farming books, including this one., STOREY PUBLISHING, LABOR, Sunburst is truly a family farm. Eason's husband, along with their two sons and their sons' wives, all work side by side as part of the farm's dozen or so staff., Sunburst Farm is creating ways to bring the community out to the farm., He volunteers with the Appalachian Sustainable Agriculture Project (ASAP; see page 243) as a chef in schools, and he enjoys exposing children to fresh trout., HUSBAND; chunks: chunk-e410bfae74fb6896e8e0079e060cf83d, chunk-60071a35b7d93bd331a3e0d32f9f3fe4"
+    },
+    "ev-th-0006-1": {
+      "thought_id": "ev-th-0006-1",
+      "role": "evidence",
+      "content": "wildlife. Lately, I've been told other farmers are having trouble with a black bird that has an orange spot. The black birds around here that I know of don't have orange spots. These have really, really hurt other farmers. I hunt quite a bit around here and back that way. I don't see the snakes anymore. I hunt only rabbits. We had a diet on jackrabbit. They're not out anymore. They're not alive.\" #### Corn Is Life Corn is at the center of Hopi life. \"Corn is life,\" explains Marie. \"Up here especially, us Hopi people, everything revolves around that. Weddings and dances, food, everything we use corn for. That's life for us.\" Carl explains how the life of corn and his people are intertwined and metaphorically the same. \"We consider the corn are our children. We plant them with love and care. Then urge them on to become fruitful. In each stage of a corn's life – I don't know all this but...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"We consider the corn our children. We plant them with love and care.\"",
+          "<hyperedge>\"To prove her point her husband chimes in.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-0875465d0b75e1a7aada73d20c5bbe6b"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-1"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.06989111076644472,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-15185",
+          "edge-15347"
+        ],
+        "score_breakdown": {
+          "task_score": 0.05513178929686546,
+          "grounding_score": 0.2677098214626312
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: We consider the corn our children. We plant them with love and care., To prove her point her husband chimes in., HUSBAND, CHILDREN; chunks: chunk-0875465d0b75e1a7aada73d20c5bbe6b; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "ev-th-0006-2": {
+      "thought_id": "ev-th-0006-2",
+      "role": "evidence",
+      "content": "prices run in cycles between low supply/high demand/high prices and high supply/low demand/low prices. Crop cycles depend on whether there are any surplus or deficits in previous years. Cattle cycles are normally long, whereas hogs and sheep—multibirth animals with short gestation periods—are normally shorter. It should be noted, however, that environmentally controlled housing, especially for poultry and hogs, has played havoc with seasonal cycles for livestock. Further consolidation of agriculture has essentially caused the marketing system for commodities to fail because there is in effect no supply and demand essential for price discovery. Do not embark on this type of farming (traditional agriculture with conventional markets) unless you want to be a contract grower making no management decisions and shouldering a large portion of the financial risk of farming, which is Land, Lab...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Do not embark on this type of farming (traditional agriculture with conventional markets) unless you want to be a contract grower making no management decisions and shouldering a large portion of the financial risk of farming, which is Land, Labor, and Machinery.\"",
+          "<hyperedge>\"Storey Publishing, 800-793-9396, www.storey.com. Storey publishes a wide variety of farming books, including this one.\"",
+          "\"STOREY PUBLISHING\"",
+          "\"LABOR\""
+        ],
+        "chunk_ids": [
+          "chunk-e410bfae74fb6896e8e0079e060cf83d"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-2"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.1572691972867153,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-16479",
+          "edge-16901"
+        ],
+        "score_breakdown": {
+          "task_score": 0.10505320876836777,
+          "grounding_score": 0.497043251991272
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Do not embark on this type of farming (traditional agriculture with conventional markets) unless you want to be a contract grower making no management decisions and shouldering a large portion of the financial risk of farming, which is Land, Labor, and Machinery., Storey Publishing, 800-793-9396, www.storey.com. Storey publishes a wide variety of farming books, including this one., STOREY PUBLISHING, LABOR; chunks: chunk-e410bfae74fb6896e8e0079e060cf83d; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "ev-th-0006-3": {
+      "thought_id": "ev-th-0006-3",
+      "role": "evidence",
+      "content": "to be done, even in a busy season. Further-more, many tasks are strictly seasonal. For instance, little or no foraging, nectar processing, or comb building is done during the winter months in most of the country, and brood rearing is cut back drastically or stopped altogether. Finally, at some point, the needs of the colony for new food gatherers, the ever-changing capabilities of her body, and the pressures of the new generations developing behind her push her out the door and into the life of a forager. #### **The Field Bee** When the house bee graduates, she becomes a field bee and will spend the rest of her days foraging. She may collect nectar, pollen, water, or propolis during this period. However, she will tend to concentrate on one or two of these. Foraging is not random. Except perhaps for a few scout bees, each bee, as she leaves the hive, goes after one of the specific raw...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Everything takes place in response to the absence or the presence of pheromones given off by adults and brood, which signal the status and the needs of life in the hive.\"",
+          "\"HOUSE BEES\"",
+          "\"POLLEN\"",
+          "\"NECTAR\"",
+          "\"PHEROMONES\"",
+          "\"LABORS\"",
+          "\"PROPOLIS\"",
+          "\"BROOD\""
+        ],
+        "chunk_ids": [
+          "chunk-65de87b95deadb72c4827d5a3bd2f316"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-3"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.09742844875694945,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-7478"
+        ],
+        "score_breakdown": {
+          "task_score": 0.061903197318315506,
+          "grounding_score": 0.5738839507102966
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Everything takes place in response to the absence or the presence of pheromones given off by adults and brood, which signal the status and the needs of life in the hive., HOUSE BEES, POLLEN, NECTAR, PHEROMONES, LABORS, PROPOLIS, BROOD; chunks: chunk-65de87b95deadb72c4827d5a3bd2f316; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "ev-th-0006-4": {
+      "thought_id": "ev-th-0006-4",
+      "role": "evidence",
+      "content": "is the requirement that a fishery be managed so it is not depleted or overfished, as assessed by a third-party evaluator). Modeled after the Forest Stewardship Council, which certifies wood from sustainably managed forests worldwide, the MSC works to create financial incentives for sustainable fisheries management. And it seems to be working; as of October 2010, some 95 fisheries globally had received the MSC certification. – by Tim Beatley ### Modeling Sustainability for Freshwater Fish Farms #### Sunburst Trout Farm Sunburst Trout Farm is a third-generation family-owned fish farm in **Canton, North Carolina**. The farm is a model of aquaculture sustainability, with innovative systems for raising fish ecologically and humanely, to benefit the fish, the consumers, the environment, and the local economy. For more than 50 years, a small trout farm nestled in the heart of western North C...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Sunburst is truly a family farm. Eason's husband, along with their two sons and their sons' wives, all work side by side as part of the farm's dozen or so staff.\"",
+          "<hyperedge>\"Sunburst Farm is creating ways to bring the community out to the farm.\"",
+          "<hyperedge>\"He volunteers with the Appalachian Sustainable Agriculture Project (ASAP; see page 243) as a chef in schools, and he enjoys exposing children to fresh trout.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-60071a35b7d93bd331a3e0d32f9f3fe4"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-4"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.12866208040450755,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-9673",
+          "edge-9987",
+          "edge-10129"
+        ],
+        "score_breakdown": {
+          "task_score": 0.08633317798376083,
+          "grounding_score": 0.4902970492839813
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Sunburst is truly a family farm. Eason's husband, along with their two sons and their sons' wives, all work side by side as part of the farm's dozen or so staff., Sunburst Farm is creating ways to bring the community out to the farm., He volunteers with the Appalachian Sustainable Agriculture Project (ASAP; see page 243) as a chef in schools, and he enjoys exposing children to fresh trout., HUSBAND, CHILDREN, COMMUNITY; chunks: chunk-60071a35b7d93bd331a3e0d32f9f3fe4; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "ev-th-0006-5": {
+      "thought_id": "ev-th-0006-5",
+      "role": "evidence",
+      "content": ". His farm, in the back country of the Navajo Reservation, came back to life in the spring of 2011. Rose Marie Williams (at right) visits with her aunt, Tsosie Hyden, in Pasture Canyon, an oasis-like wash several miles outside of Tuba City, where year-round springs flow from caves. Access is difficult, but Rose Marie and others are testing crops here, eager to take advantage of the fertile soil and natural irrigation. Rose Marie's husband, Dan, sells corn from their truck just off the main road into Tuba City. As part its effort to support local farmers, DINÉ, Inc., helps with marketing and infrastructure. For DanRose Farms, that help included replacing small signs fixed to cardboard boxes (at left) with more visible, permanent billboards (at right). Tyrone Thompson is the farm manager at the North Leupp Family Farm, a community program providing land, education, and basic infrastruct...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards.\"",
+          "<hyperedge>\"MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community.\"",
+          "\"DANROSE FARMS\"",
+          "\"SMALL SIGNS\"",
+          "\"PERMANENT BILLBOARDS\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-032143f2a2a12749c2695a447f73d523"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-5"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.20801456063913548,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-20752",
+          "edge-20753",
+          "edge-20754",
+          "edge-21312"
+        ],
+        "score_breakdown": {
+          "task_score": 0.14720511436462402,
+          "grounding_score": 0.41309329867362976
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards., MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community., DANROSE FARMS, SMALL SIGNS, PERMANENT BILLBOARDS, COMMUNITY; chunks: chunk-032143f2a2a12749c2695a447f73d523; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "ev-th-0006-6": {
+      "thought_id": "ev-th-0006-6",
+      "role": "evidence",
+      "content": "involve sacrifice. Their farm is run on solar power, and like most families in the United States, they enjoy lights, running water (from a well), a refrigerator, computers, power tools, a washing machine, and more. People often don't try something new because they think they need to know it all themselves to get it right, says Habib. \"But we don't ask these same questions about fossil fuel. There's a trust we put into the system because we've been so used to it.\" So why, she wonders, is solar energy held to a different standard? \"We don't have to be solar experts,\" she insists. \"We can rely on friends and experts!\" Seeds of Solidarity operates with three solar electric systems: one for their house and the greenhouse water irrigation system; another for the apprentice housing building; and a third for the battery bank in their \"SOL Patrol\" van, a mobile source of electricity for irriga...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"2008\""
+        ],
+        "chunk_ids": [
+          "chunk-bf0fadd2de5cdd877a432eba713a59ce"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-6"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0006"
+        ]
+      },
+      "score": 0.05996901164560038,
+      "status": "active",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "source_edge_ids": [],
+        "score_breakdown": {
+          "task_score": 0.05902813747525215,
+          "grounding_score": 0.015939418226480484
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: 2008; chunks: chunk-bf0fadd2de5cdd877a432eba713a59ce; notes: local-subgraph | retrieved-for:th-0006"
+    },
+    "th-0007": {
+      "thought_id": "th-0007",
+      "role": "bridge",
+      "content": "Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"We consider the corn our children. We plant them with love and care.\"",
+          "<hyperedge>\"To prove her point her husband chimes in.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\"",
+          "<hyperedge>\"Do not embark on this type of farming (traditional agriculture with conventional markets) unless you want to be a contract grower making no management decisions and shouldering a large portion of the financial risk of farming, which is Land, Labor, and Machinery.\"",
+          "<hyperedge>\"Storey Publishing, 800-793-9396, www.storey.com. Storey publishes a wide variety of farming books, including this one.\"",
+          "\"STOREY PUBLISHING\"",
+          "\"LABOR\""
+        ],
+        "chunk_ids": [
+          "chunk-0875465d0b75e1a7aada73d20c5bbe6b",
+          "chunk-e410bfae74fb6896e8e0079e060cf83d"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-1",
+          "ev-th-0006-2"
+        ],
+        "notes": []
+      },
+      "score": 0.662867329632399,
+      "status": "expanded",
+      "parent_ids": [
+        "th-0006"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.5516772866249084,
+          "grounding_score": 0.20154906809329987
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: We consider the corn our children. We plant them with love and care., To prove her point her husband chimes in., HUSBAND, CHILDREN, Do not embark on this type of farming (traditional agriculture with conventional markets) unless you want to be a contract grower making no management decisions and shouldering a large portion of the financial risk of farming, which is Land, Labor, and Machinery., Storey Publishing, 800-793-9396, www.storey.com. Storey publishes a wide variety of farming books, including this one., STOREY PUBLISHING, LABOR; chunks: chunk-0875465d0b75e1a7aada73d20c5bbe6b, chunk-e410bfae74fb6896e8e0079e060cf83d"
+    },
+    "ev-th-0007-1": {
+      "thought_id": "ev-th-0007-1",
+      "role": "evidence",
+      "content": "wildlife. Lately, I've been told other farmers are having trouble with a black bird that has an orange spot. The black birds around here that I know of don't have orange spots. These have really, really hurt other farmers. I hunt quite a bit around here and back that way. I don't see the snakes anymore. I hunt only rabbits. We had a diet on jackrabbit. They're not out anymore. They're not alive.\" #### Corn Is Life Corn is at the center of Hopi life. \"Corn is life,\" explains Marie. \"Up here especially, us Hopi people, everything revolves around that. Weddings and dances, food, everything we use corn for. That's life for us.\" Carl explains how the life of corn and his people are intertwined and metaphorically the same. \"We consider the corn are our children. We plant them with love and care. Then urge them on to become fruitful. In each stage of a corn's life – I don't know all this but...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"We consider the corn our children. We plant them with love and care.\"",
+          "<hyperedge>\"To prove her point her husband chimes in.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-0875465d0b75e1a7aada73d20c5bbe6b"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-1"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.06989111076644472,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-15185",
+          "edge-15347"
+        ],
+        "score_breakdown": {
+          "task_score": 0.05513178929686546,
+          "grounding_score": 0.2677098214626312
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: We consider the corn our children. We plant them with love and care., To prove her point her husband chimes in., HUSBAND, CHILDREN; chunks: chunk-0875465d0b75e1a7aada73d20c5bbe6b; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "ev-th-0007-2": {
+      "thought_id": "ev-th-0007-2",
+      "role": "evidence",
+      "content": ". His farm, in the back country of the Navajo Reservation, came back to life in the spring of 2011. Rose Marie Williams (at right) visits with her aunt, Tsosie Hyden, in Pasture Canyon, an oasis-like wash several miles outside of Tuba City, where year-round springs flow from caves. Access is difficult, but Rose Marie and others are testing crops here, eager to take advantage of the fertile soil and natural irrigation. Rose Marie's husband, Dan, sells corn from their truck just off the main road into Tuba City. As part its effort to support local farmers, DINÉ, Inc., helps with marketing and infrastructure. For DanRose Farms, that help included replacing small signs fixed to cardboard boxes (at left) with more visible, permanent billboards (at right). Tyrone Thompson is the farm manager at the North Leupp Family Farm, a community program providing land, education, and basic infrastruct...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards.\"",
+          "<hyperedge>\"MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community.\"",
+          "\"DANROSE FARMS\"",
+          "\"SMALL SIGNS\"",
+          "\"PERMANENT BILLBOARDS\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-032143f2a2a12749c2695a447f73d523"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-2"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.20801456063913548,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-20752",
+          "edge-20753",
+          "edge-20754",
+          "edge-21312"
+        ],
+        "score_breakdown": {
+          "task_score": 0.14720511436462402,
+          "grounding_score": 0.41309329867362976
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards., MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community., DANROSE FARMS, SMALL SIGNS, PERMANENT BILLBOARDS, COMMUNITY; chunks: chunk-032143f2a2a12749c2695a447f73d523; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "ev-th-0007-3": {
+      "thought_id": "ev-th-0007-3",
+      "role": "evidence",
+      "content": "considered. To direct-market your produce, you should be within 40 miles of a fairly large population. This is also important if you plan to sell some of your products through restaurants and grocery stores, for example. Are you considering a U-pick operation or some form of agritourism? In order to sell produce on-farm or through a roadside stand, you need to be near some well-traveled roads, perhaps on the way to a tourist site, such as a boating lake. Ask yourself how many roads lead to your farm. Are they blacktop? Are you on the blacktop or a major highway or are you back in the \"boonies\"? Easy access is important for hauling your crops and livestock to town, even if you don't have a U-pick operation. How close are you to a large-population town where you can purchase all the products and input items you need on the farm? Access to the farm is important both for visitors and for...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Machinery should enable you to produce the volume of business necessary to make a profit with as little labor as possible.\"",
+          "\"WORMS\"",
+          "\"LABOR\""
+        ],
+        "chunk_ids": [
+          "chunk-2f3d99de4967b60e7e74b3639abc430c"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-3"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.10852821593386297,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-9542"
+        ],
+        "score_breakdown": {
+          "task_score": 0.0808829814195633,
+          "grounding_score": 0.3417929708957672
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Machinery should enable you to produce the volume of business necessary to make a profit with as little labor as possible., WORMS, LABOR; chunks: chunk-2f3d99de4967b60e7e74b3639abc430c; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "ev-th-0007-4": {
+      "thought_id": "ev-th-0007-4",
+      "role": "evidence",
+      "content": "years. \"Pretty much everyone stopped farming because of water,\" says Yazzie. \"We have all the equipment for farming, but there's just no water. Sometimes I shed tears. Too much emotion. Sometimes I just sit out here.\" Today, living about an hour south in Tolani Lake with his wife and three sons, Yazzie is focusing on helping the community reclaim its farming tradition by gaining rights to use water for crop fields. \"My main goal is to get people involved,\" he says. He wants to help people who used to farm return to farming. He ticks off the things that need to happen: get a farm committee restarted, get a water line, get the land back into farming. When he meets me in 2009, he has been working as a DINÉ Inc. mentor farmer and has already helped 30 different families start growing their own food again, some with backyard gardens, some with larger plots of land. Yazzie is sure that one...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"She operates DanRose Farms with her husband and children and hopes that her farm will inspire others to support traditional Navajo agriculture.\"",
+          "\"DANROSE FARMS\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-250b989e44ece1db26830c2bcb6f8a7c"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-4"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.11242928347888803,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-1867",
+          "edge-1868",
+          "edge-1869"
+        ],
+        "score_breakdown": {
+          "task_score": 0.09336331486701965,
+          "grounding_score": 0.20421263575553894
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: She operates DanRose Farms with her husband and children and hopes that her farm will inspire others to support traditional Navajo agriculture., DANROSE FARMS, HUSBAND, CHILDREN; chunks: chunk-250b989e44ece1db26830c2bcb6f8a7c; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "ev-th-0007-5": {
+      "thought_id": "ev-th-0007-5",
+      "role": "evidence",
+      "content": "**Betterbee,** Greenwich, New York 800-632-3379, _www.betterbee.com_ **Brushy Mountain Bee Farm,** Moravian Falls, North Carolina 800-233-7929, _www.brushymountainbeefarm.com_ **Dadant and Sons, Inc.,** Hamilton, Illinois 888-922-1293, _www.dadant.com_ **F. W. Jones,** Bedford, Quebec 800-665 6637, _www.fwjones.com_ **Mann Lake Ltd.,** Hackensack, Minnesota 800-880-7694, _www.mannlakeltd.com_ **Rossman Apiaries Inc.,** Moultrie, Georgia 800-333-7677, _www.gabees.com_ **The Walter T. Kelley Company,** Clarkson, Kentucky 800-233-2899, _www.kelleybees.com_ You will also want bees, of course. If your choice is package bees, they can sometimes be obtained through a local equipment dealer or you may deal directly with the source and have them mailed to you. There are at least several dozen queen and package producers in this country. Ask for recommendations from other beekeepers. Look for t...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Brushy Mountain Bee Farm is located in Moravian Falls, North Carolina, and offers bee-related products with the contact number 800-233-7929 and website www.brushymountainbeefarm.com.\"",
+          "<hyperedge>\"APPENDIX C GLOSSARY consists of various terms related to beekeeping, including abdomen, absconding, acari, and many more.\"",
+          "<hyperedge>\"Pheromones are chemical substances secreted by bees that trigger specific actions or responses in others of the same species.\"",
+          "\"HYPOPHARYNGEAL GLANDS\"",
+          "\"LARVA (LARVAE)\"",
+          "\"NUCLEUS HIVE (NUC)\"",
+          "\"NOSEMA\"",
+          "\"OPEN BROOD\"",
+          "\"PACKAGE, PACKAGE BEES\"",
+          "\"PARTHENOGENESIS (VIRGIN BIRTH)\"",
+          "\"PHEROMONE\"",
+          "\"COMB\"",
+          "\"ABDOMEN\"",
+          "\"MORAVIAN FALLS, NORTH CAROLINA\"",
+          "\"800-233-7929\"",
+          "\"WWW.BRUSHYMOUNTAINBEEFARM.COM\"",
+          "\"800-233-2899\"",
+          "\"GLOSSARY\"",
+          "\"ABSCONDING\"",
+          "\"ACARAPIS WOODII\"",
+          "\"AFRICAN HONEY BEE\"",
+          "\"APIARY\"",
+          "\"BEE BREAD\"",
+          "\"BEE SPACE\"",
+          "\"PACKAGE BEES\"",
+          "\"BROOD CHAMBER\"",
+          "\"EMERGENCE\"",
+          "\"HONEY STOMACH\"",
+          "\"POLLEN\"",
+          "\"NECTAR\"",
+          "\"BRUSHY MOUNTAIN BEE FARM\"",
+          "\"BROOD NEST\"",
+          "\"APIS MELLIFERA\"",
+          "\"FOUNDATION\"",
+          "\"BEEKEEPERS\"",
+          "\"EUROPEAN FOULBROOD (EFB)\"",
+          "\"AMERICAN FOULBROOD (AFB)\"",
+          "\"CAPPED BROOD\"",
+          "\"CHALKBROOD\"",
+          "\"MITE\"",
+          "\"PROPOLIS\"",
+          "\"BROOD\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-13ca632d7241d4efd7901ef6c477cffc"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-5"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.11472249630099118,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-97",
+          "edge-98",
+          "edge-99",
+          "edge-100",
+          "edge-293",
+          "edge-294",
+          "edge-295",
+          "edge-296",
+          "edge-297",
+          "edge-298",
+          "edge-299",
+          "edge-300",
+          "edge-301",
+          "edge-302",
+          "edge-303",
+          "edge-304",
+          "edge-305",
+          "edge-306",
+          "edge-307",
+          "edge-308",
+          "edge-309",
+          "edge-310",
+          "edge-311",
+          "edge-312",
+          "edge-313",
+          "edge-314",
+          "edge-315",
+          "edge-316",
+          "edge-317",
+          "edge-318",
+          "edge-319",
+          "edge-320",
+          "edge-321",
+          "edge-322",
+          "edge-323",
+          "edge-324",
+          "edge-325",
+          "edge-388"
+        ],
+        "score_breakdown": {
+          "task_score": 0.09100315719842911,
+          "grounding_score": 0.26064303517341614
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Brushy Mountain Bee Farm is located in Moravian Falls, North Carolina, and offers bee-related products with the contact number 800-233-7929 and website www.brushymountainbeefarm.com., APPENDIX C GLOSSARY consists of various terms related to beekeeping, including abdomen, absconding, acari, and many more., Pheromones are chemical substances secreted by bees that trigger specific actions or responses in others of the same species., HYPOPHARYNGEAL GLANDS, LARVA (LARVAE), NUCLEUS HIVE (NUC), NOSEMA, OPEN BROOD; chunks: chunk-13ca632d7241d4efd7901ef6c477cffc; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "ev-th-0007-6": {
+      "thought_id": "ev-th-0007-6",
+      "role": "evidence",
+      "content": "to be done, even in a busy season. Further-more, many tasks are strictly seasonal. For instance, little or no foraging, nectar processing, or comb building is done during the winter months in most of the country, and brood rearing is cut back drastically or stopped altogether. Finally, at some point, the needs of the colony for new food gatherers, the ever-changing capabilities of her body, and the pressures of the new generations developing behind her push her out the door and into the life of a forager. #### **The Field Bee** When the house bee graduates, she becomes a field bee and will spend the rest of her days foraging. She may collect nectar, pollen, water, or propolis during this period. However, she will tend to concentrate on one or two of these. Foraging is not random. Except perhaps for a few scout bees, each bee, as she leaves the hive, goes after one of the specific raw...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Everything takes place in response to the absence or the presence of pheromones given off by adults and brood, which signal the status and the needs of life in the hive.\"",
+          "\"HOUSE BEES\"",
+          "\"POLLEN\"",
+          "\"NECTAR\"",
+          "\"PHEROMONES\"",
+          "\"LABORS\"",
+          "\"PROPOLIS\"",
+          "\"BROOD\""
+        ],
+        "chunk_ids": [
+          "chunk-65de87b95deadb72c4827d5a3bd2f316"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-6"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0007"
+        ]
+      },
+      "score": 0.09742844875694945,
+      "status": "active",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-7478"
+        ],
+        "score_breakdown": {
+          "task_score": 0.061903197318315506,
+          "grounding_score": 0.5738839507102966
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Everything takes place in response to the absence or the presence of pheromones given off by adults and brood, which signal the status and the needs of life in the hive., HOUSE BEES, POLLEN, NECTAR, PHEROMONES, LABORS, PROPOLIS, BROOD; chunks: chunk-65de87b95deadb72c4827d5a3bd2f316; notes: local-subgraph | retrieved-for:th-0007"
+    },
+    "th-0008": {
+      "thought_id": "th-0008",
+      "role": "bridge",
+      "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"We consider the corn our children. We plant them with love and care.\"",
+          "<hyperedge>\"To prove her point her husband chimes in.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\"",
+          "<hyperedge>\"For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards.\"",
+          "<hyperedge>\"MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community.\"",
+          "\"DANROSE FARMS\"",
+          "\"SMALL SIGNS\"",
+          "\"PERMANENT BILLBOARDS\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-0875465d0b75e1a7aada73d20c5bbe6b",
+          "chunk-032143f2a2a12749c2695a447f73d523"
+        ],
+        "evidence_ids": [
+          "ev-th-0007-1",
+          "ev-th-0007-2"
+        ],
+        "notes": []
+      },
+      "score": 0.5419966227593598,
+      "status": "expanded",
+      "parent_ids": [
+        "th-0007"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.4605662524700165,
+          "grounding_score": 0.17680490016937256
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: We consider the corn our children. We plant them with love and care., To prove her point her husband chimes in., HUSBAND, CHILDREN, For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards., MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community., DANROSE FARMS, SMALL SIGNS; chunks: chunk-0875465d0b75e1a7aada73d20c5bbe6b, chunk-032143f2a2a12749c2695a447f73d523"
+    },
+    "ev-th-0008-1": {
+      "thought_id": "ev-th-0008-1",
+      "role": "evidence",
+      "content": "wildlife. Lately, I've been told other farmers are having trouble with a black bird that has an orange spot. The black birds around here that I know of don't have orange spots. These have really, really hurt other farmers. I hunt quite a bit around here and back that way. I don't see the snakes anymore. I hunt only rabbits. We had a diet on jackrabbit. They're not out anymore. They're not alive.\" #### Corn Is Life Corn is at the center of Hopi life. \"Corn is life,\" explains Marie. \"Up here especially, us Hopi people, everything revolves around that. Weddings and dances, food, everything we use corn for. That's life for us.\" Carl explains how the life of corn and his people are intertwined and metaphorically the same. \"We consider the corn are our children. We plant them with love and care. Then urge them on to become fruitful. In each stage of a corn's life – I don't know all this but...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"We consider the corn our children. We plant them with love and care.\"",
+          "<hyperedge>\"To prove her point her husband chimes in.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-0875465d0b75e1a7aada73d20c5bbe6b"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-1"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.06989111076644472,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-15185",
+          "edge-15347"
+        ],
+        "score_breakdown": {
+          "task_score": 0.05513178929686546,
+          "grounding_score": 0.2677098214626312
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: We consider the corn our children. We plant them with love and care., To prove her point her husband chimes in., HUSBAND, CHILDREN; chunks: chunk-0875465d0b75e1a7aada73d20c5bbe6b; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "ev-th-0008-2": {
+      "thought_id": "ev-th-0008-2",
+      "role": "evidence",
+      "content": ". His farm, in the back country of the Navajo Reservation, came back to life in the spring of 2011. Rose Marie Williams (at right) visits with her aunt, Tsosie Hyden, in Pasture Canyon, an oasis-like wash several miles outside of Tuba City, where year-round springs flow from caves. Access is difficult, but Rose Marie and others are testing crops here, eager to take advantage of the fertile soil and natural irrigation. Rose Marie's husband, Dan, sells corn from their truck just off the main road into Tuba City. As part its effort to support local farmers, DINÉ, Inc., helps with marketing and infrastructure. For DanRose Farms, that help included replacing small signs fixed to cardboard boxes (at left) with more visible, permanent billboards (at right). Tyrone Thompson is the farm manager at the North Leupp Family Farm, a community program providing land, education, and basic infrastruct...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards.\"",
+          "<hyperedge>\"MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community.\"",
+          "\"DANROSE FARMS\"",
+          "\"SMALL SIGNS\"",
+          "\"PERMANENT BILLBOARDS\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-032143f2a2a12749c2695a447f73d523"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-2"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.20801456063913548,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-20752",
+          "edge-20753",
+          "edge-20754",
+          "edge-21312"
+        ],
+        "score_breakdown": {
+          "task_score": 0.14720511436462402,
+          "grounding_score": 0.41309329867362976
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards., MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community., DANROSE FARMS, SMALL SIGNS, PERMANENT BILLBOARDS, COMMUNITY; chunks: chunk-032143f2a2a12749c2695a447f73d523; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "ev-th-0008-3": {
+      "thought_id": "ev-th-0008-3",
+      "role": "evidence",
+      "content": "considered. To direct-market your produce, you should be within 40 miles of a fairly large population. This is also important if you plan to sell some of your products through restaurants and grocery stores, for example. Are you considering a U-pick operation or some form of agritourism? In order to sell produce on-farm or through a roadside stand, you need to be near some well-traveled roads, perhaps on the way to a tourist site, such as a boating lake. Ask yourself how many roads lead to your farm. Are they blacktop? Are you on the blacktop or a major highway or are you back in the \"boonies\"? Easy access is important for hauling your crops and livestock to town, even if you don't have a U-pick operation. How close are you to a large-population town where you can purchase all the products and input items you need on the farm? Access to the farm is important both for visitors and for...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Machinery should enable you to produce the volume of business necessary to make a profit with as little labor as possible.\"",
+          "\"WORMS\"",
+          "\"LABOR\""
+        ],
+        "chunk_ids": [
+          "chunk-2f3d99de4967b60e7e74b3639abc430c"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-3"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.10852821593386297,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-9542"
+        ],
+        "score_breakdown": {
+          "task_score": 0.0808829814195633,
+          "grounding_score": 0.3417929708957672
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Machinery should enable you to produce the volume of business necessary to make a profit with as little labor as possible., WORMS, LABOR; chunks: chunk-2f3d99de4967b60e7e74b3639abc430c; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "ev-th-0008-4": {
+      "thought_id": "ev-th-0008-4",
+      "role": "evidence",
+      "content": "years. \"Pretty much everyone stopped farming because of water,\" says Yazzie. \"We have all the equipment for farming, but there's just no water. Sometimes I shed tears. Too much emotion. Sometimes I just sit out here.\" Today, living about an hour south in Tolani Lake with his wife and three sons, Yazzie is focusing on helping the community reclaim its farming tradition by gaining rights to use water for crop fields. \"My main goal is to get people involved,\" he says. He wants to help people who used to farm return to farming. He ticks off the things that need to happen: get a farm committee restarted, get a water line, get the land back into farming. When he meets me in 2009, he has been working as a DINÉ Inc. mentor farmer and has already helped 30 different families start growing their own food again, some with backyard gardens, some with larger plots of land. Yazzie is sure that one...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"She operates DanRose Farms with her husband and children and hopes that her farm will inspire others to support traditional Navajo agriculture.\"",
+          "\"DANROSE FARMS\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-250b989e44ece1db26830c2bcb6f8a7c"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-4"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.1132582402086113,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-1867",
+          "edge-1868",
+          "edge-1869"
+        ],
+        "score_breakdown": {
+          "task_score": 0.09336331486701965,
+          "grounding_score": 0.21309146285057068
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: She operates DanRose Farms with her husband and children and hopes that her farm will inspire others to support traditional Navajo agriculture., DANROSE FARMS, HUSBAND, CHILDREN; chunks: chunk-250b989e44ece1db26830c2bcb6f8a7c; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "ev-th-0008-5": {
+      "thought_id": "ev-th-0008-5",
+      "role": "evidence",
+      "content": "**Betterbee,** Greenwich, New York 800-632-3379, _www.betterbee.com_ **Brushy Mountain Bee Farm,** Moravian Falls, North Carolina 800-233-7929, _www.brushymountainbeefarm.com_ **Dadant and Sons, Inc.,** Hamilton, Illinois 888-922-1293, _www.dadant.com_ **F. W. Jones,** Bedford, Quebec 800-665 6637, _www.fwjones.com_ **Mann Lake Ltd.,** Hackensack, Minnesota 800-880-7694, _www.mannlakeltd.com_ **Rossman Apiaries Inc.,** Moultrie, Georgia 800-333-7677, _www.gabees.com_ **The Walter T. Kelley Company,** Clarkson, Kentucky 800-233-2899, _www.kelleybees.com_ You will also want bees, of course. If your choice is package bees, they can sometimes be obtained through a local equipment dealer or you may deal directly with the source and have them mailed to you. There are at least several dozen queen and package producers in this country. Ask for recommendations from other beekeepers. Look for t...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Brushy Mountain Bee Farm is located in Moravian Falls, North Carolina, and offers bee-related products with the contact number 800-233-7929 and website www.brushymountainbeefarm.com.\"",
+          "<hyperedge>\"APPENDIX C GLOSSARY consists of various terms related to beekeeping, including abdomen, absconding, acari, and many more.\"",
+          "<hyperedge>\"Pheromones are chemical substances secreted by bees that trigger specific actions or responses in others of the same species.\"",
+          "\"HYPOPHARYNGEAL GLANDS\"",
+          "\"LARVA (LARVAE)\"",
+          "\"NUCLEUS HIVE (NUC)\"",
+          "\"NOSEMA\"",
+          "\"OPEN BROOD\"",
+          "\"PACKAGE, PACKAGE BEES\"",
+          "\"PARTHENOGENESIS (VIRGIN BIRTH)\"",
+          "\"PHEROMONE\"",
+          "\"COMB\"",
+          "\"ABDOMEN\"",
+          "\"MORAVIAN FALLS, NORTH CAROLINA\"",
+          "\"800-233-7929\"",
+          "\"WWW.BRUSHYMOUNTAINBEEFARM.COM\"",
+          "\"800-233-2899\"",
+          "\"GLOSSARY\"",
+          "\"ABSCONDING\"",
+          "\"ACARAPIS WOODII\"",
+          "\"AFRICAN HONEY BEE\"",
+          "\"APIARY\"",
+          "\"BEE BREAD\"",
+          "\"BEE SPACE\"",
+          "\"PACKAGE BEES\"",
+          "\"BROOD CHAMBER\"",
+          "\"EMERGENCE\"",
+          "\"HONEY STOMACH\"",
+          "\"POLLEN\"",
+          "\"NECTAR\"",
+          "\"BRUSHY MOUNTAIN BEE FARM\"",
+          "\"BROOD NEST\"",
+          "\"APIS MELLIFERA\"",
+          "\"FOUNDATION\"",
+          "\"BEEKEEPERS\"",
+          "\"EUROPEAN FOULBROOD (EFB)\"",
+          "\"AMERICAN FOULBROOD (AFB)\"",
+          "\"CAPPED BROOD\"",
+          "\"CHALKBROOD\"",
+          "\"MITE\"",
+          "\"PROPOLIS\"",
+          "\"BROOD\"",
+          "\"HONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-13ca632d7241d4efd7901ef6c477cffc"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-5"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.11472249630099118,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-97",
+          "edge-98",
+          "edge-99",
+          "edge-100",
+          "edge-293",
+          "edge-294",
+          "edge-295",
+          "edge-296",
+          "edge-297",
+          "edge-298",
+          "edge-299",
+          "edge-300",
+          "edge-301",
+          "edge-302",
+          "edge-303",
+          "edge-304",
+          "edge-305",
+          "edge-306",
+          "edge-307",
+          "edge-308",
+          "edge-309",
+          "edge-310",
+          "edge-311",
+          "edge-312",
+          "edge-313",
+          "edge-314",
+          "edge-315",
+          "edge-316",
+          "edge-317",
+          "edge-318",
+          "edge-319",
+          "edge-320",
+          "edge-321",
+          "edge-322",
+          "edge-323",
+          "edge-324",
+          "edge-325",
+          "edge-388"
+        ],
+        "score_breakdown": {
+          "task_score": 0.09100315719842911,
+          "grounding_score": 0.26064303517341614
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Brushy Mountain Bee Farm is located in Moravian Falls, North Carolina, and offers bee-related products with the contact number 800-233-7929 and website www.brushymountainbeefarm.com., APPENDIX C GLOSSARY consists of various terms related to beekeeping, including abdomen, absconding, acari, and many more., Pheromones are chemical substances secreted by bees that trigger specific actions or responses in others of the same species., HYPOPHARYNGEAL GLANDS, LARVA (LARVAE), NUCLEUS HIVE (NUC), NOSEMA, OPEN BROOD; chunks: chunk-13ca632d7241d4efd7901ef6c477cffc; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "ev-th-0008-6": {
+      "thought_id": "ev-th-0008-6",
+      "role": "evidence",
+      "content": ". But the Agers' decisions show they care about more than growing grass-fed meats for their community; they also care about being a resource and growing mental, physical, and spiritual connections with their community. At Polyface Farm, the Salatin family has been forced to learn how to manage an explosion of public interest. They've developed a set of guidelines that allow the farm to continue operating while valuing their customers. To begin, they open the farm store just one day a week. Customers can make purchases on other days, but they need to call in advance. The Salatins also have established clear parameters for their open-door policy. From December 15 through February 28, the farm is closed to visitors, except on Saturdays. From March through December 15, the doors are always open. People can come for a free self-guided tour and look around; Polyface feels this is important...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"The Agers' decisions show they care about more than growing grass-fed meats for their community; they also care about being a resource and growing mental, physical, and spiritual connections with their community.\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-f7ecda741e6aebaebfb4bbcd928bb80b"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-6"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0008"
+        ]
+      },
+      "score": 0.1379428166272363,
+      "status": "active",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-17899"
+        ],
+        "score_breakdown": {
+          "task_score": 0.09107651561498642,
+          "grounding_score": 0.5145816206932068
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: The Agers' decisions show they care about more than growing grass-fed meats for their community; they also care about being a resource and growing mental, physical, and spiritual connections with their community., COMMUNITY; chunks: chunk-f7ecda741e6aebaebfb4bbcd928bb80b; notes: local-subgraph | retrieved-for:th-0008"
+    },
+    "th-0009": {
+      "thought_id": "th-0009",
+      "role": "bridge",
+      "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"We consider the corn our children. We plant them with love and care.\"",
+          "<hyperedge>\"To prove her point her husband chimes in.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\"",
+          "<hyperedge>\"For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards.\"",
+          "<hyperedge>\"MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community.\"",
+          "\"DANROSE FARMS\"",
+          "\"SMALL SIGNS\"",
+          "\"PERMANENT BILLBOARDS\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-0875465d0b75e1a7aada73d20c5bbe6b",
+          "chunk-032143f2a2a12749c2695a447f73d523"
+        ],
+        "evidence_ids": [
+          "ev-th-0008-1",
+          "ev-th-0008-2"
+        ],
+        "notes": []
+      },
+      "score": 0.44309706220978917,
+      "status": "expanded",
+      "parent_ids": [
+        "th-0008"
+      ],
+      "metadata": {
+        "score_breakdown": {
+          "task_score": 0.38592255115509033,
+          "grounding_score": 0.1481502205133438
+        }
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: We consider the corn our children. We plant them with love and care., To prove her point her husband chimes in., HUSBAND, CHILDREN, For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards., MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community., DANROSE FARMS, SMALL SIGNS; chunks: chunk-0875465d0b75e1a7aada73d20c5bbe6b, chunk-032143f2a2a12749c2695a447f73d523"
+    },
+    "ev-th-0009-1": {
+      "thought_id": "ev-th-0009-1",
+      "role": "evidence",
+      "content": "wildlife. Lately, I've been told other farmers are having trouble with a black bird that has an orange spot. The black birds around here that I know of don't have orange spots. These have really, really hurt other farmers. I hunt quite a bit around here and back that way. I don't see the snakes anymore. I hunt only rabbits. We had a diet on jackrabbit. They're not out anymore. They're not alive.\" #### Corn Is Life Corn is at the center of Hopi life. \"Corn is life,\" explains Marie. \"Up here especially, us Hopi people, everything revolves around that. Weddings and dances, food, everything we use corn for. That's life for us.\" Carl explains how the life of corn and his people are intertwined and metaphorically the same. \"We consider the corn are our children. We plant them with love and care. Then urge them on to become fruitful. In each stage of a corn's life – I don't know all this but...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"We consider the corn our children. We plant them with love and care.\"",
+          "<hyperedge>\"To prove her point her husband chimes in.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-0875465d0b75e1a7aada73d20c5bbe6b"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-1"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.12767519235610963,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-15185",
+          "edge-15347"
+        ]
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: We consider the corn our children. We plant them with love and care., To prove her point her husband chimes in., HUSBAND, CHILDREN; chunks: chunk-0875465d0b75e1a7aada73d20c5bbe6b; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "ev-th-0009-2": {
+      "thought_id": "ev-th-0009-2",
+      "role": "evidence",
+      "content": ". His farm, in the back country of the Navajo Reservation, came back to life in the spring of 2011. Rose Marie Williams (at right) visits with her aunt, Tsosie Hyden, in Pasture Canyon, an oasis-like wash several miles outside of Tuba City, where year-round springs flow from caves. Access is difficult, but Rose Marie and others are testing crops here, eager to take advantage of the fertile soil and natural irrigation. Rose Marie's husband, Dan, sells corn from their truck just off the main road into Tuba City. As part its effort to support local farmers, DINÉ, Inc., helps with marketing and infrastructure. For DanRose Farms, that help included replacing small signs fixed to cardboard boxes (at left) with more visible, permanent billboards (at right). Tyrone Thompson is the farm manager at the North Leupp Family Farm, a community program providing land, education, and basic infrastruct...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards.\"",
+          "<hyperedge>\"MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community.\"",
+          "\"DANROSE FARMS\"",
+          "\"SMALL SIGNS\"",
+          "\"PERMANENT BILLBOARDS\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-032143f2a2a12749c2695a447f73d523"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-2"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.12612506553530695,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-20752",
+          "edge-20753",
+          "edge-20754",
+          "edge-21312"
+        ]
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards., MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community., DANROSE FARMS, SMALL SIGNS, PERMANENT BILLBOARDS, COMMUNITY; chunks: chunk-032143f2a2a12749c2695a447f73d523; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "ev-th-0009-3": {
+      "thought_id": "ev-th-0009-3",
+      "role": "evidence",
+      "content": "considered. To direct-market your produce, you should be within 40 miles of a fairly large population. This is also important if you plan to sell some of your products through restaurants and grocery stores, for example. Are you considering a U-pick operation or some form of agritourism? In order to sell produce on-farm or through a roadside stand, you need to be near some well-traveled roads, perhaps on the way to a tourist site, such as a boating lake. Ask yourself how many roads lead to your farm. Are they blacktop? Are you on the blacktop or a major highway or are you back in the \"boonies\"? Easy access is important for hauling your crops and livestock to town, even if you don't have a U-pick operation. How close are you to a large-population town where you can purchase all the products and input items you need on the farm? Access to the farm is important both for visitors and for...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"Machinery should enable you to produce the volume of business necessary to make a profit with as little labor as possible.\"",
+          "\"WORMS\"",
+          "\"LABOR\""
+        ],
+        "chunk_ids": [
+          "chunk-2f3d99de4967b60e7e74b3639abc430c"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-3"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.12323217645287514,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-9542"
+        ]
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: Machinery should enable you to produce the volume of business necessary to make a profit with as little labor as possible., WORMS, LABOR; chunks: chunk-2f3d99de4967b60e7e74b3639abc430c; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "ev-th-0009-4": {
+      "thought_id": "ev-th-0009-4",
+      "role": "evidence",
+      "content": "faith, in the form of funding for investment and 10 to 15 people who live at the farm and assist with labor and management. His faith community had also supported Porterfield's former organic tea business, which gave him solid business experience. His first year on the farm required preparation – building a greenhouse, digging a well, installing a walk-in cooler, clearing away overgrown vegetation, and picking enough rocks out of the field to fill a quarry. In the second year Porterfield planted his first crops and, selling directly to stores, he sold out. Porterfield credits this success in large part to Peter Marks of Appalachian Sustainable Agriculture Project (ASAP; see page 243), who helped him write a business plan and develop marketing tools. #### Opening the Door for Urban Farms The market was so strong in his first year, Porterfield says, that he could have sold \"ten times mo...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"STORES\""
+        ],
+        "chunk_ids": [
+          "chunk-51ecc7c9cb359df6578917b9d87ffcd7"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-4"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.12184979945421219,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": []
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: STORES; chunks: chunk-51ecc7c9cb359df6578917b9d87ffcd7; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "ev-th-0009-5": {
+      "thought_id": "ev-th-0009-5",
+      "role": "evidence",
+      "content": "years. \"Pretty much everyone stopped farming because of water,\" says Yazzie. \"We have all the equipment for farming, but there's just no water. Sometimes I shed tears. Too much emotion. Sometimes I just sit out here.\" Today, living about an hour south in Tolani Lake with his wife and three sons, Yazzie is focusing on helping the community reclaim its farming tradition by gaining rights to use water for crop fields. \"My main goal is to get people involved,\" he says. He wants to help people who used to farm return to farming. He ticks off the things that need to happen: get a farm committee restarted, get a water line, get the land back into farming. When he meets me in 2009, he has been working as a DINÉ Inc. mentor farmer and has already helped 30 different families start growing their own food again, some with backyard gardens, some with larger plots of land. Yazzie is sure that one...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"She operates DanRose Farms with her husband and children and hopes that her farm will inspire others to support traditional Navajo agriculture.\"",
+          "\"DANROSE FARMS\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-250b989e44ece1db26830c2bcb6f8a7c"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-5"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.12139956086874008,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": [
+          "edge-1867",
+          "edge-1868",
+          "edge-1869"
+        ]
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: She operates DanRose Farms with her husband and children and hopes that her farm will inspire others to support traditional Navajo agriculture., DANROSE FARMS, HUSBAND, CHILDREN; chunks: chunk-250b989e44ece1db26830c2bcb6f8a7c; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "ev-th-0009-6": {
+      "thought_id": "ev-th-0009-6",
+      "role": "evidence",
+      "content": "food, spend time in advance lining up the potential recipients and buyers. One radically simple idea is to show up with food and see who comes. Mary Seton Corboy of Greensgrow Farm in Philadelphia (page 96) suggests that you just buy local produce from community gardens, fill up a pickup truck, and take it to the site where you plan to establish a farm. Whoever shows up, she writes, \"those are your customers!\" **Don't overcapitalize**. \"New farmers are susceptible to the exact same traps as old-time farmers.\" Corboy has earned the right to say this, as she has grown a successful urban farm that now tops $1 million in revenues. One major mistake she's glad that Greensgrow Farm _didn't_ make was overcapitalization. By staying lean and not investing in expensive equipment they didn't really need, Greensgrow was able to stay flexible and make the changes needed to stay successful. She and...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "\"VEGETABLES\""
+        ],
+        "chunk_ids": [
+          "chunk-bcbabc72a18ceaedb14452609db7d256"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-6"
+        ],
+        "notes": [
+          "local-subgraph",
+          "retrieved-for:th-0009"
+        ]
+      },
+      "score": 0.12065551236271858,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {
+        "source_edge_ids": []
+      },
+      "grounding_text": "anchors: How, can, urban; nodes: VEGETABLES; chunks: chunk-bcbabc72a18ceaedb14452609db7d256; notes: local-subgraph | retrieved-for:th-0009"
+    },
+    "th-0010": {
+      "thought_id": "th-0010",
+      "role": "bridge",
+      "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [
+          "<hyperedge>\"We consider the corn our children. We plant them with love and care.\"",
+          "<hyperedge>\"To prove her point her husband chimes in.\"",
+          "\"HUSBAND\"",
+          "\"CHILDREN\"",
+          "<hyperedge>\"For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards.\"",
+          "<hyperedge>\"MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community.\"",
+          "\"DANROSE FARMS\"",
+          "\"SMALL SIGNS\"",
+          "\"PERMANENT BILLBOARDS\"",
+          "\"COMMUNITY\""
+        ],
+        "chunk_ids": [
+          "chunk-0875465d0b75e1a7aada73d20c5bbe6b",
+          "chunk-032143f2a2a12749c2695a447f73d523"
+        ],
+        "evidence_ids": [
+          "ev-th-0009-1",
+          "ev-th-0009-2"
+        ],
+        "notes": []
+      },
+      "score": 0.0,
+      "status": "active",
+      "parent_ids": [
+        "th-0009"
+      ],
+      "metadata": {},
+      "grounding_text": "anchors: How, can, urban; nodes: We consider the corn our children. We plant them with love and care., To prove her point her husband chimes in., HUSBAND, CHILDREN, For DanRose Farms, that help included replacing small signs fixed to cardboard boxes with more visible, permanent billboards., MFSI says the market is providing fresh, affordable, locally produced fruits and vegetables to the community., DANROSE FARMS, SMALL SIGNS; chunks: chunk-0875465d0b75e1a7aada73d20c5bbe6b, chunk-032143f2a2a12749c2695a447f73d523"
+    },
+    "th-0011": {
+      "thought_id": "th-0011",
+      "role": "answer",
+      "content": ". His farm, in the back country of the Navajo Reservation, came back to life in the spring of 2011. Rose Marie Williams (at right) visits with her aunt, Tsos... . His farm, in the back country of the Navajo Reservation, came back to life in the spring of 2011. Rose Marie Williams (at right) visits with her aunt, Tsos...",
+      "grounding": {
+        "anchor_texts": [
+          "How",
+          "can",
+          "urban"
+        ],
+        "node_ids": [],
+        "chunk_ids": [
+          "chunk-032143f2a2a12749c2695a447f73d523",
+          "chunk-032143f2a2a12749c2695a447f73d523"
+        ],
+        "evidence_ids": [
+          "ev-th-0006-5",
+          "ev-th-0007-2"
+        ],
+        "notes": [
+          "Mock synthesis over 2 verified evidence thoughts."
+        ]
+      },
+      "score": 0.20801456063913548,
+      "status": "completed",
+      "parent_ids": [
+        "ev-th-0006-5",
+        "ev-th-0007-2"
+      ],
+      "metadata": {
+        "answer": ". His farm, in the back country of the Navajo Reservation, came back to life in the spring of 2011. Rose Marie Williams (at right) visits with her aunt, Tsos... . His farm, in the back country of the Navajo Reservation, came back to life in the spring of 2011. Rose Marie Williams (at right) visits with her aunt, Tsos...",
+        "reasoning_summary": "Mock synthesis over 2 verified evidence thoughts.",
+        "confidence": 0.55,
+        "remaining_gaps": []
+      },
+      "grounding_text": "anchors: How, can, urban; chunks: chunk-032143f2a2a12749c2695a447f73d523, chunk-032143f2a2a12749c2695a447f73d523; notes: Mock synthesis over 2 verified evidence thoughts."
+    }
+  },
+  "history": [
+    {
+      "event": "operation_executed",
+      "payload": {
+        "thought_id": "th-0002",
+        "operation": "expand",
+        "decision": {
+          "operation": "expand",
+          "reason": "Evidence is still weak, so the branch should be refined.",
+          "new_status": "expanded",
+          "new_thoughts": [
+            {
+              "role": "bridge",
+              "content": "Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+              "grounding_hints": {
+                "anchors": [
+                  "How",
+                  "can",
+                  "urban"
+                ]
+              }
+            }
+          ],
+          "merge_with_thought_ids": [],
+          "verification": {
+            "verdict": "insufficient",
+            "confidence": 0.2,
+            "evidence_ids": [],
+            "notes": "Need stronger evidence."
+          }
+        },
+        "new_thought_ids": [
+          "th-0006"
+        ],
+        "verified_evidence_ids": []
+      }
+    },
+    {
+      "event": "operation_executed",
+      "payload": {
+        "thought_id": "th-0006",
+        "operation": "expand",
+        "decision": {
+          "operation": "expand",
+          "reason": "Evidence is still weak, so the branch should be refined.",
+          "new_status": "expanded",
+          "new_thoughts": [
+            {
+              "role": "bridge",
+              "content": "Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+              "grounding_hints": {
+                "anchors": [
+                  "How",
+                  "can",
+                  "urban"
+                ]
+              }
+            }
+          ],
+          "merge_with_thought_ids": [],
+          "verification": {
+            "verdict": "insufficient",
+            "confidence": 0.2,
+            "evidence_ids": [],
+            "notes": "Need stronger evidence."
+          }
+        },
+        "new_thought_ids": [
+          "th-0007"
+        ],
+        "verified_evidence_ids": []
+      }
+    },
+    {
+      "event": "operation_executed",
+      "payload": {
+        "thought_id": "th-0007",
+        "operation": "expand",
+        "decision": {
+          "operation": "expand",
+          "reason": "Evidence is still weak, so the branch should be refined.",
+          "new_status": "expanded",
+          "new_thoughts": [
+            {
+              "role": "bridge",
+              "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+              "grounding_hints": {
+                "anchors": [
+                  "How",
+                  "can",
+                  "urban"
+                ]
+              }
+            }
+          ],
+          "merge_with_thought_ids": [],
+          "verification": {
+            "verdict": "insufficient",
+            "confidence": 0.2,
+            "evidence_ids": [],
+            "notes": "Need stronger evidence."
+          }
+        },
+        "new_thought_ids": [
+          "th-0008"
+        ],
+        "verified_evidence_ids": []
+      }
+    },
+    {
+      "event": "operation_executed",
+      "payload": {
+        "thought_id": "th-0008",
+        "operation": "expand",
+        "decision": {
+          "operation": "expand",
+          "reason": "Evidence is still weak, so the branch should be refined.",
+          "new_status": "expanded",
+          "new_thoughts": [
+            {
+              "role": "bridge",
+              "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+              "grounding_hints": {
+                "anchors": [
+                  "How",
+                  "can",
+                  "urban"
+                ]
+              }
+            }
+          ],
+          "merge_with_thought_ids": [],
+          "verification": {
+            "verdict": "insufficient",
+            "confidence": 0.2,
+            "evidence_ids": [],
+            "notes": "Need stronger evidence."
+          }
+        },
+        "new_thought_ids": [
+          "th-0009"
+        ],
+        "verified_evidence_ids": []
+      }
+    },
+    {
+      "event": "operation_executed",
+      "payload": {
+        "thought_id": "th-0009",
+        "operation": "expand",
+        "decision": {
+          "operation": "expand",
+          "reason": "Evidence is still weak, so the branch should be refined.",
+          "new_status": "expanded",
+          "new_thoughts": [
+            {
+              "role": "bridge",
+              "content": "Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: Refine this reasoning branch: The answer should connect the anchors to the target question: How can urban farms build community support while dealing with lead contamination in soil?",
+              "grounding_hints": {
+                "anchors": [
+                  "How",
+                  "can",
+                  "urban"
+                ]
+              }
+            }
+          ],
+          "merge_with_thought_ids": [],
+          "verification": {
+            "verdict": "insufficient",
+            "confidence": 0.2,
+            "evidence_ids": [],
+            "notes": "Need stronger evidence."
+          }
+        },
+        "new_thought_ids": [
+          "th-0010"
+        ],
+        "verified_evidence_ids": []
+      }
+    }
+  ]
+}
