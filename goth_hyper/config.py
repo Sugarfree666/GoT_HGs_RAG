@@ -27,13 +27,9 @@ class RuntimeConfig:
 
 @dataclass(slots=True)
 class RetrievalConfig:
-    subgraph_hops: int = 3
-    anchor_top_k_per_anchor: int = 4
-    anchor_keep: int = 8
-    relation_top_k_per_query: int = 4
-    relation_keep: int = 8
-    evidence_top_k_local: int = 6
-    evidence_top_k_global: int = 6
+    entity_top_k: int = 6
+    hyperedge_top_k: int = 6
+    chunk_top_k: int = 8
     evidence_keep: int = 6
     taskframe_registration_threshold: float = 0.33
 
@@ -99,13 +95,9 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         log_level=str(runtime.get("log_level", "INFO")).upper(),
     )
     retrieval_cfg = RetrievalConfig(
-        subgraph_hops=int(retrieval.get("subgraph_hops", 3)),
-        anchor_top_k_per_anchor=int(retrieval.get("anchor_top_k_per_anchor", 4)),
-        anchor_keep=int(retrieval.get("anchor_keep", 8)),
-        relation_top_k_per_query=int(retrieval.get("relation_top_k_per_query", 4)),
-        relation_keep=int(retrieval.get("relation_keep", 8)),
-        evidence_top_k_local=int(retrieval.get("evidence_top_k_local", 6)),
-        evidence_top_k_global=int(retrieval.get("evidence_top_k_global", 6)),
+        entity_top_k=int(retrieval.get("entity_top_k", 6)),
+        hyperedge_top_k=int(retrieval.get("hyperedge_top_k", 6)),
+        chunk_top_k=int(retrieval.get("chunk_top_k", 8)),
         evidence_keep=int(retrieval.get("evidence_keep", 6)),
         taskframe_registration_threshold=float(retrieval.get("taskframe_registration_threshold", 0.33)),
     )

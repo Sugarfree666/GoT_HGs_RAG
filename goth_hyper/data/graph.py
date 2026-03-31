@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from collections import Counter, defaultdict, deque
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 import xml.etree.ElementTree as ET
 
-from ..models import ExtractedSubgraph, GraphEdge, GraphNode, VectorMatch
-from ..utils import normalize_label, split_source_ids
+from ..models import GraphEdge, GraphNode
+from ..utils import split_source_ids
 
 
 class KnowledgeHypergraph:
@@ -78,103 +78,6 @@ class KnowledgeHypergraph:
             "edge_count": len(self.edges),
             "node_roles": dict(role_counts),
             "edge_roles": dict(edge_role_counts),
-        }
-
-    def extract_subgraph(
-        self,
-        seed_node_ids: list[str],
-        hops: int,
-        seed_entities: list[VectorMatch],
-        seed_hyperedges: list[VectorMatch],
-    ) -> ExtractedSubgraph:
-        valid_seeds = [node_id for node_id in seed_node_ids if node_id in self.nodes]
-        if not valid_seeds:
-            return ExtractedSubgraph(
-                node_ids=[],
-                edge_ids=[],
-                seed_entities=seed_entities,
-                seed_hyperedges=seed_hyperedges,
-                source_chunk_ids=[],
-                hop_count=hops,
-                node_distances={},
-                summary={"node_count": 0, "edge_count": 0},
-            )
-
-        queue: deque[tuple[str, int]] = deque((seed, 0) for seed in valid_seeds)
-        node_distances: dict[str, int] = {seed: 0 for seed in valid_seeds}
-
-        while queue:
-            node_id, depth = queue.popleft()
-            if depth >= hops:
-                continue
-            for edge_id in self.adjacency.get(node_id, []):
-                edge = self.edges[edge_id]
-                neighbor = edge.target if edge.source == node_id else edge.source
-                if neighbor not in node_distances:
-                    node_distances[neighbor] = depth + 1
-                    queue.append((neighbor, depth + 1))
-
-        node_ids = sorted(node_distances.keys(), key=lambda node_id: (node_distances[node_id], normalize_label(node_id)))
-        node_set = set(node_ids)
-        edge_ids = sorted(
-            [
-                edge_id
-                for edge_id, edge in self.edges.items()
-                if edge.source in node_set and edge.target in node_set
-            ]
-        )
-
-        source_chunk_ids: set[str] = set()
-        for node_id in node_ids:
-            source_chunk_ids.update(self.nodes[node_id].source_ids)
-        for edge_id in edge_ids:
-            source_chunk_ids.update(self.edges[edge_id].source_ids)
-
-        summary = self._build_subgraph_summary(node_ids, edge_ids, node_distances, seed_entities, seed_hyperedges)
-        return ExtractedSubgraph(
-            node_ids=node_ids,
-            edge_ids=edge_ids,
-            seed_entities=seed_entities,
-            seed_hyperedges=seed_hyperedges,
-            source_chunk_ids=sorted(source_chunk_ids),
-            hop_count=hops,
-            node_distances=node_distances,
-            summary=summary,
-        )
-
-    def _build_subgraph_summary(
-        self,
-        node_ids: list[str],
-        edge_ids: list[str],
-        node_distances: dict[str, int],
-        seed_entities: list[VectorMatch],
-        seed_hyperedges: list[VectorMatch],
-    ) -> dict[str, Any]:
-        def sort_key(node_id: str) -> tuple[int, float, str]:
-            node = self.nodes[node_id]
-            return (node_distances.get(node_id, 999), -node.weight, node.display_label)
-
-        top_entities = [
-            self.nodes[node_id].display_label
-            for node_id in sorted(
-                [node_id for node_id in node_ids if self.nodes[node_id].role == "entity"],
-                key=sort_key,
-            )[:20]
-        ]
-        top_hyperedges = [
-            self.nodes[node_id].display_label
-            for node_id in sorted(
-                [node_id for node_id in node_ids if self.nodes[node_id].role == "hyperedge"],
-                key=sort_key,
-            )[:20]
-        ]
-        return {
-            "node_count": len(node_ids),
-            "edge_count": len(edge_ids),
-            "top_entities": top_entities,
-            "top_hyperedges": top_hyperedges,
-            "seed_entities": [match.to_dict() for match in seed_entities],
-            "seed_hyperedges": [match.to_dict() for match in seed_hyperedges],
         }
 
 

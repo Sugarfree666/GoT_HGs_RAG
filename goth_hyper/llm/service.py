@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 from ..models import EvidenceItem, TaskFrame, ThoughtGraph, ThoughtState
-from ..utils import normalize_label, short_text
+from ..utils import short_text
 from .client import OpenAICompatibleClient
 from .prompts import PromptManager
 
@@ -19,7 +19,6 @@ class ReasoningService(ABC):
         self,
         question: str,
         task_frame: TaskFrame,
-        subgraph_summary: dict[str, Any],
     ) -> list[dict[str, Any]]:
         raise NotImplementedError
 
@@ -78,12 +77,10 @@ class OpenAIReasoningService(ReasoningService):
         self,
         question: str,
         task_frame: TaskFrame,
-        subgraph_summary: dict[str, Any],
     ) -> list[dict[str, Any]]:
         payload = {
             "question": question,
             "task_frame": task_frame.to_dict(),
-            "subgraph_summary": subgraph_summary,
         }
         response = self.client.chat_json("seed_thoughts", self.prompts.get("seed_thoughts"), payload)
         thoughts = response.get("thoughts", [])
@@ -179,7 +176,6 @@ class MockReasoningService(ReasoningService):
         self,
         question: str,
         task_frame: TaskFrame,
-        subgraph_summary: dict[str, Any],
     ) -> list[dict[str, Any]]:
         thoughts: list[dict[str, Any]] = [
             {

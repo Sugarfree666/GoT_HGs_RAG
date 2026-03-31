@@ -24,6 +24,7 @@ class PipelineSmokeTest(unittest.TestCase):
 
         self.assertTrue(result["final_answer"]["answer"])
         self.assertTrue((run_dir / "artifacts" / "final_answer.json").exists())
+        self.assertFalse((run_dir / "artifacts" / "subgraph.json").exists())
         self.assertTrue((run_dir / "run.log").exists())
 
 

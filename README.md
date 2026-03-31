@@ -27,14 +27,13 @@ Each run creates `runs/<timestamp>_<slug>/` with:
 - `llm_calls.jsonl` in online mode
 - `artifacts/dataset_summary.json`
 - `artifacts/task_frame.json`
-- `artifacts/subgraph.json`
 - `artifacts/thought_graph.json`
 - `artifacts/final_answer.json`
 
 ## Module Boundaries
 
 - `goth_hyper/data`: GraphML + vector DB + document loaders
-- `goth_hyper/retrieval`: subgraph extraction and evidence retrieval
+- `goth_hyper/retrieval`: global hypergraph evidence retrieval
 - `goth_hyper/reasoning`: TaskFrame, scoring, operations, controller
 - `goth_hyper/llm`: OpenAI-compatible client, prompts, reasoning service
 - `goth_hyper/pipeline.py`: end-to-end assembly

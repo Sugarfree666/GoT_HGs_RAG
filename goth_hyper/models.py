@@ -55,24 +55,6 @@ class GraphEdge:
 
 
 @dataclass(slots=True)
-class ExtractedSubgraph:
-    node_ids: list[str]
-    edge_ids: list[str]
-    seed_entities: list[VectorMatch]
-    seed_hyperedges: list[VectorMatch]
-    source_chunk_ids: list[str]
-    hop_count: int
-    node_distances: dict[str, int] = field(default_factory=dict)
-    summary: dict[str, Any] = field(default_factory=dict)
-
-    def to_dict(self) -> dict[str, Any]:
-        payload = asdict(self)
-        payload["seed_entities"] = [match.to_dict() for match in self.seed_entities]
-        payload["seed_hyperedges"] = [match.to_dict() for match in self.seed_hyperedges]
-        return payload
-
-
-@dataclass(slots=True)
 class EvidenceItem:
     evidence_id: str
     chunk_id: str

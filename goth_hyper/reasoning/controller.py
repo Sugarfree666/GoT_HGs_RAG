@@ -8,7 +8,6 @@ from ..data.loaders import DatasetBundle
 from ..logging_utils import TraceStore
 from ..models import Grounding, TaskFrame, ThoughtGraph, ThoughtState
 from ..retrieval.evidence import EvidenceRetriever
-from ..retrieval.subgraph import SubgraphExtractor
 from .operations import ThoughtOperationExecutor
 from .scoring import ThoughtScorer
 from .taskframe import TaskFrameBuilder, TaskFrameRegistry
@@ -21,7 +20,6 @@ class ThoughtController:
         dataset: DatasetBundle,
         taskframe_builder: TaskFrameBuilder,
         registry: TaskFrameRegistry,
-        subgraph_extractor: SubgraphExtractor,
         scorer: ThoughtScorer,
         evidence_retriever: EvidenceRetriever,
         executor: ThoughtOperationExecutor,
@@ -33,7 +31,6 @@ class ThoughtController:
         self.dataset = dataset
         self.taskframe_builder = taskframe_builder
         self.registry = registry
-        self.subgraph_extractor = subgraph_extractor
         self.scorer = scorer
         self.evidence_retriever = evidence_retriever
         self.executor = executor
@@ -44,15 +41,13 @@ class ThoughtController:
 
     def run(self, question: str) -> dict[str, Any]:
         task_frame = self.taskframe_builder.build(question)
-        subgraph = self.subgraph_extractor.extract(question, task_frame)
-        self.registry.register_anchor_matches(task_frame, subgraph.seed_entities)
-        thought_graph = self._initialize_thought_graph(question, task_frame, subgraph.summary)
+        thought_graph = self._initialize_thought_graph(question, task_frame)
 
         for step in range(1, self.config.reasoning.max_steps + 1):
             self.logger.info("Reasoning step %s/%s", step, self.config.reasoning.max_steps)
             frontier = thought_graph.active_frontier()
             evidence_cache = {
-                thought.thought_id: self.evidence_retriever.retrieve(thought, subgraph)
+                thought.thought_id: self.evidence_retriever.retrieve(thought)
                 for thought in frontier
                 if thought.role in {"hypothesis", "constraint", "bridge"} and thought.status == "active"
             }
@@ -77,7 +72,7 @@ class ThoughtController:
                 related_thoughts = self._related_thoughts(thought_graph, current_thought)
                 evidence_items = evidence_cache.get(thought_id)
                 if evidence_items is None:
-                    evidence_items = self.evidence_retriever.retrieve(current_thought, subgraph)
+                    evidence_items = self.evidence_retriever.retrieve(current_thought)
                 self.executor.execute(
                     question=question,
                     task_frame=task_frame,
@@ -95,12 +90,11 @@ class ThoughtController:
         final_payload = self._finalize_answer(question, task_frame, thought_graph)
         return {
             "task_frame": task_frame.to_dict(),
-            "subgraph": subgraph.to_dict(),
             "thought_graph": thought_graph.to_dict(),
             "final_answer": final_payload,
         }
 
-    def _initialize_thought_graph(self, question: str, task_frame: TaskFrame, subgraph_summary: dict[str, Any]) -> ThoughtGraph:
+    def _initialize_thought_graph(self, question: str, task_frame: TaskFrame) -> ThoughtGraph:
         root_thought = ThoughtState(
             thought_id=self._next_id("th"),
             role="root",
@@ -111,7 +105,7 @@ class ThoughtController:
         thought_graph = ThoughtGraph(question=question, root_id=root_thought.thought_id)
         thought_graph.add_thought(root_thought)
 
-        seed_payloads = self.llm_service.initialize_seed_thoughts(question, task_frame, subgraph_summary)
+        seed_payloads = self.llm_service.initialize_seed_thoughts(question, task_frame)
         if not seed_payloads:
             seed_payloads = [
                 {

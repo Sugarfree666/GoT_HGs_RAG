@@ -13,7 +13,6 @@ from .reasoning.operations import ThoughtOperationExecutor
 from .reasoning.scoring import ThoughtScorer
 from .reasoning.taskframe import TaskFrameBuilder, TaskFrameRegistry
 from .retrieval.evidence import EvidenceRetriever
-from .retrieval.subgraph import SubgraphExtractor
 
 
 class GoTHyperPipeline:
@@ -49,13 +48,6 @@ class GoTHyperPipeline:
             logger=logger,
             trace_store=trace_store,
         )
-        subgraph_extractor = SubgraphExtractor(
-            dataset=self.dataset,
-            embedder=self.embedder,
-            config=config.retrieval,
-            logger=logger,
-            trace_store=trace_store,
-        )
         scorer = ThoughtScorer(embedder=self.embedder, config=config.reasoning, logger=logger)
         evidence_retriever = EvidenceRetriever(
             dataset=self.dataset,
@@ -75,7 +67,6 @@ class GoTHyperPipeline:
             dataset=self.dataset,
             taskframe_builder=taskframe_builder,
             registry=registry,
-            subgraph_extractor=subgraph_extractor,
             scorer=scorer,
             evidence_retriever=evidence_retriever,
             executor=executor,
@@ -88,7 +79,6 @@ class GoTHyperPipeline:
         self.logger.info("Starting GoTHyper pipeline for question: %s", question)
         result = self.controller.run(question)
         self.trace_store.save_artifact("artifacts/task_frame.json", result["task_frame"])
-        self.trace_store.save_artifact("artifacts/subgraph.json", result["subgraph"])
         self.trace_store.save_artifact("artifacts/thought_graph.json", result["thought_graph"])
         self.trace_store.save_artifact("artifacts/final_answer.json", result["final_answer"])
         result["run_dir"] = str(self.run_dir)

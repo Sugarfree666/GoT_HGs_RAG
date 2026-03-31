@@ -19,4 +19,4 @@ Requirements:
 - Generate up to 2 constraint thoughts when constraints exist.
 - Generate up to 2 bridge thoughts when bridges exist.
 - Keep each thought atomic and operational.
-- Use the TaskFrame and subgraph summary to avoid generic reasoning.
+- Use the TaskFrame only to avoid generic reasoning.
