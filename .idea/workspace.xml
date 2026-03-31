@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goth_hyper/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/goth_hyper/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goth_hyper/data/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/goth_hyper/data/graph.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goth_hyper/llm/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/goth_hyper/llm/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goth_hyper/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/goth_hyper/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goth_hyper/pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/goth_hyper/pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goth_hyper/reasoning/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/goth_hyper/reasoning/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goth_hyper/retrieval/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/goth_hyper/retrieval/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goth_hyper/retrieval/evidence.py" beforeDir="false" afterPath="$PROJECT_DIR$/goth_hyper/retrieval/evidence.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goth_hyper/retrieval/subgraph.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/prompts/seed_thoughts.md" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/seed_thoughts.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_pipeline_smoke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_pipeline_smoke.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goth_hyper/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/goth_hyper/cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="97" />
+    <option name="cachedIndexableFilesCount" value="67" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -45,6 +36,9 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="3BRDHMQiQ3wwaM7HHfuNHDxbVnU" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -53,6 +47,7 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.cli.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
@@ -85,6 +80,36 @@
       <recent name="D:\GitHub\GoT_HGs_RAG\datasets" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="cli" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="GoT_HGs_RAG" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="--question-file" value="D:\GitHub\GoT_HGs_RAG\questions\agriculture\query_test.json" />
+        <env name="OPENAI_API_KEY" value="sk-olxsNswN3LrJjFKOduxcUsn3LGiGUXPTz7X0v7uu5udabPrz" />
+        <env name="OPENAI_BASE_URL" value="https://api.chatanywhere.tech" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Remote 3.11 (sftp://ps@210.45.212.126:5202/home/ps/miniconda3/envs/proh_yq/bin/python3.11)" />
+      <option name="WORKING_DIRECTORY" value="D:\GitHub\GoT_HGs_RAG" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/goth_hyper/cli.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -103,7 +128,9 @@
       <workItem from="1774442902075" duration="7400000" />
       <workItem from="1774507387078" duration="37755000" />
       <workItem from="1774845279310" duration="197000" />
-      <workItem from="1774936018427" duration="5342000" />
+      <workItem from="1774936018427" duration="7466000" />
+      <workItem from="1774956916108" duration="194000" />
+      <workItem from="1774957125947" duration="3918000" />
     </task>
     <servers />
   </component>

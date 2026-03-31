@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
+from goth_hyper.cli import _load_question_from_file
 from goth_hyper.utils import extract_json_payload, normalize_label
 
 
@@ -16,6 +20,21 @@ class UtilsTest(unittest.TestCase):
             normalize_label('<hyperedge>"Urban farms build trust through transparency."'),
             "Urban farms build trust through transparency.",
         )
+
+    def test_load_question_from_json_list_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            path = Path(tmp_dir) / "query_test.json"
+            path.write_text(
+                json.dumps(
+                    [
+                        {"question": "First question?"},
+                        {"question": "Second question?"},
+                    ],
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            self.assertEqual(_load_question_from_file(path, 1), "Second question?")
 
 
 if __name__ == "__main__":
