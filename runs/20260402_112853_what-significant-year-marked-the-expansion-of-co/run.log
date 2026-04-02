@@ -1,0 +1,38 @@
+2026-04-02 11:28:53,723 | INFO | Loading dataset from D:\GitHub\GoT_HGs_RAG\datasets\agriculture
+2026-04-02 11:28:53,723 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-04-02 11:28:56,177 | INFO | Starting GoTHyper pipeline for question: What significant year marked the expansion of community gardening initiatives in Seattle and saw a surge in demand for similar programs in Portland schools?
+2026-04-02 11:28:57,885 | INFO | TaskFrame created with 5 anchors, 2 constraints, 3 bridges
+2026-04-02 11:29:01,970 | INFO | Initialized ThoughtGraph with 5 seed thoughts
+2026-04-02 11:29:01,970 | INFO | Reasoning step 1/6
+2026-04-02 11:29:06,859 | INFO | Retrieved 6 evidence items for thought th-0002
+2026-04-02 11:29:08,470 | INFO | Retrieved 6 evidence items for thought th-0003
+2026-04-02 11:29:09,733 | INFO | Retrieved 6 evidence items for thought th-0004
+2026-04-02 11:29:11,428 | INFO | Retrieved 6 evidence items for thought th-0005
+2026-04-02 11:29:14,308 | INFO | Retrieved 6 evidence items for thought th-0006
+2026-04-02 11:29:20,545 | INFO | Scored 5 thoughts
+2026-04-02 11:29:33,055 | INFO | Registered evidence thought ev-th-0002-3 to TaskFrame slots anchor-0, anchor-2, target-0, constraint-0, constraint-1, bridge-0, bridge-1
+2026-04-02 11:29:38,055 | INFO | Reasoning step 2/6
+2026-04-02 11:29:38,128 | INFO | Retrieved 6 evidence items for thought th-0003
+2026-04-02 11:29:38,166 | INFO | Retrieved 6 evidence items for thought th-0004
+2026-04-02 11:29:38,201 | INFO | Retrieved 6 evidence items for thought th-0006
+2026-04-02 11:29:42,006 | INFO | Retrieved 6 evidence items for thought th-0007
+2026-04-02 11:29:57,170 | INFO | Scored 14 thoughts
+2026-04-02 11:30:09,270 | INFO | Reasoning step 3/6
+2026-04-02 11:30:09,343 | INFO | Retrieved 6 evidence items for thought th-0004
+2026-04-02 11:30:10,154 | INFO | Retrieved 6 evidence items for thought th-0008
+2026-04-02 11:30:10,945 | INFO | Retrieved 6 evidence items for thought th-0009
+2026-04-02 11:30:11,722 | INFO | Retrieved 6 evidence items for thought th-0010
+2026-04-02 11:30:54,507 | INFO | Scored 32 thoughts
+2026-04-02 11:31:03,092 | INFO | Reasoning step 4/6
+2026-04-02 11:31:03,158 | INFO | Retrieved 6 evidence items for thought th-0004
+2026-04-02 11:31:03,210 | INFO | Retrieved 6 evidence items for thought th-0009
+2026-04-02 11:31:18,468 | INFO | Scored 38 thoughts
+2026-04-02 11:31:26,398 | INFO | Reasoning step 5/6
+2026-04-02 11:31:26,484 | INFO | Retrieved 6 evidence items for thought th-0011
+2026-04-02 11:31:29,042 | INFO | Retrieved 6 evidence items for thought th-0012
+2026-04-02 11:31:31,408 | INFO | Scored 50 thoughts
+2026-04-02 11:31:39,559 | INFO | Reasoning step 6/6
+2026-04-02 11:31:39,871 | INFO | Retrieved 6 evidence items for thought th-0013
+2026-04-02 11:31:58,117 | INFO | Scored 59 thoughts
+2026-04-02 11:32:06,268 | INFO | Final answer synthesized with 4 evidence parents
+2026-04-02 11:32:06,293 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\GoT_HGs_RAG\runs\20260402_112853_what-significant-year-marked-the-expansion-of-co
