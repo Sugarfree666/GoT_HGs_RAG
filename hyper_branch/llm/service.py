@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from collections import defaultdict
 from typing import Any
 
 from ..models import TaskFrame, ThoughtGraph
 from ..utils import content_tokens, lexical_overlap_score, normalize_label, short_text
 from .client import OpenAICompatibleClient
 from .prompts import PromptManager
+from .views import build_llm_thought_graph_summary
 
 
 class ReasoningService(ABC):
@@ -20,10 +20,8 @@ class ReasoningService(ABC):
         self,
         question: str,
         task_frame: TaskFrame,
-        merge_result: dict[str, Any],
-        evidence_subgraph: dict[str, Any],
+        llm_evidence_view: dict[str, Any],
         iteration: int,
-        retrieval_control_state: dict[str, Any],
     ) -> dict[str, Any]:
         raise NotImplementedError
 
@@ -33,8 +31,17 @@ class ReasoningService(ABC):
         question: str,
         task_frame: TaskFrame,
         thought_graph: ThoughtGraph,
-        evidence_subgraph: dict[str, Any],
-        merge_result: dict[str, Any],
+        llm_evidence_view: dict[str, Any],
+    ) -> dict[str, Any]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def select_expansion_entities(
+        self,
+        question: str,
+        task_frame: TaskFrame,
+        candidate_entities: list[dict[str, Any]],
+        control_state: Any,
     ) -> dict[str, Any]:
         raise NotImplementedError
 
@@ -61,18 +68,14 @@ class OpenAIReasoningService(ReasoningService):
         self,
         question: str,
         task_frame: TaskFrame,
-        merge_result: dict[str, Any],
-        evidence_subgraph: dict[str, Any],
+        llm_evidence_view: dict[str, Any],
         iteration: int,
-        retrieval_control_state: dict[str, Any],
     ) -> dict[str, Any]:
         payload = {
             "question": question,
             "iteration": iteration,
             "task_frame_progress": task_frame.progress_snapshot(),
-            "merge_result": merge_result,
-            "evidence_subgraph": evidence_subgraph,
-            "retrieval_control_state": retrieval_control_state,
+            "llm_evidence_view": llm_evidence_view,
         }
         response = self.client.chat_json("evidence_judge", self.prompts.get("evidence_judge"), payload)
         response.setdefault("enough", False)
@@ -87,25 +90,42 @@ class OpenAIReasoningService(ReasoningService):
         question: str,
         task_frame: TaskFrame,
         thought_graph: ThoughtGraph,
-        evidence_subgraph: dict[str, Any],
-        merge_result: dict[str, Any],
+        llm_evidence_view: dict[str, Any],
     ) -> dict[str, Any]:
         payload = {
             "question": question,
             "task_frame_progress": task_frame.progress_snapshot(),
-            "merge_result": merge_result,
-            "evidence_subgraph": evidence_subgraph,
-            "thought_graph_summary": {
-                "status": thought_graph.status,
-                "termination_reason": thought_graph.termination_reason,
-                "thoughts": [thought.brief() for thought in thought_graph.thoughts.values()],
-            },
+            "llm_evidence_view": llm_evidence_view,
+            "thought_graph_summary": build_llm_thought_graph_summary(thought_graph),
         }
         response = self.client.chat_json("final_answer", self.prompts.get("final_answer"), payload)
         response.setdefault("answer", "")
         response.setdefault("reasoning_summary", "")
         response.setdefault("confidence", 0.0)
         response.setdefault("remaining_gaps", [])
+        return response
+
+    def select_expansion_entities(
+        self,
+        question: str,
+        task_frame: TaskFrame,
+        candidate_entities: list[dict[str, Any]],
+        control_state: Any,
+    ) -> dict[str, Any]:
+        if not candidate_entities:
+            return {"selected_entity_ids": [], "reason": "No fresh expansion entities were available."}
+        payload = {
+            "question": question,
+            "topic_entities": list(task_frame.topic_entities),
+            "hard_constraints": list(task_frame.hard_constraints),
+            "relation_intent": task_frame.relation_intent,
+            "current_focus": list(control_state.current_focus()),
+            "selection_limit": 2,
+            "candidate_entities": candidate_entities,
+        }
+        response = self.client.chat_json("entity_frontier", self.prompts.get("entity_frontier"), payload)
+        response.setdefault("selected_entity_ids", [])
+        response.setdefault("reason", "")
         return response
 
 
@@ -133,16 +153,16 @@ class MockReasoningService(ReasoningService):
         self,
         question: str,
         task_frame: TaskFrame,
-        merge_result: dict[str, Any],
-        evidence_subgraph: dict[str, Any],
+        llm_evidence_view: dict[str, Any],
         iteration: int,
-        retrieval_control_state: dict[str, Any],
     ) -> dict[str, Any]:
-        del question, task_frame, retrieval_control_state
-        frontier = merge_result.get("frontier", [])
-        answer_hypotheses = merge_result.get("answer_hypotheses", [])
-        coverage = float(merge_result.get("coverage_summary", {}).get("topic_entity_coverage", 0.0) or 0.0)
-        evidence_count = len(evidence_subgraph.get("evidence", []))
+        del question, task_frame
+        frontier = llm_evidence_view.get("frontier_hyperedges", [])
+        answer_hypotheses = llm_evidence_view.get("coverage_summary", {}).get("answer_hypotheses", [])
+        covered_topics = llm_evidence_view.get("coverage_summary", {}).get("topics", {}).get("covered", [])
+        total_topics = covered_topics + llm_evidence_view.get("coverage_summary", {}).get("topics", {}).get("missing", [])
+        coverage = len(covered_topics) / max(len(total_topics), 1)
+        evidence_count = len([item for item in frontier if str(item.get("core_evidence", "")).strip()])
         enough = bool(frontier) and (coverage >= 0.5 or evidence_count >= 4 or (iteration >= 2 and bool(answer_hypotheses)))
 
         missing_requirements: list[str] = []
@@ -171,12 +191,11 @@ class MockReasoningService(ReasoningService):
         question: str,
         task_frame: TaskFrame,
         thought_graph: ThoughtGraph,
-        evidence_subgraph: dict[str, Any],
-        merge_result: dict[str, Any],
+        llm_evidence_view: dict[str, Any],
     ) -> dict[str, Any]:
         del task_frame, thought_graph
         answer = ""
-        answer_hypotheses = merge_result.get("answer_hypotheses", [])
+        answer_hypotheses = llm_evidence_view.get("coverage_summary", {}).get("answer_hypotheses", [])
         if isinstance(answer_hypotheses, list):
             for hypothesis in answer_hypotheses:
                 text = str(hypothesis).strip()
@@ -187,20 +206,39 @@ class MockReasoningService(ReasoningService):
             answer = f"No grounded answer was produced for: {question}"
 
         evidence_lines = []
-        for item in evidence_subgraph.get("evidence", [])[:3]:
+        for item in llm_evidence_view.get("frontier_hyperedges", [])[:3]:
             if isinstance(item, dict):
-                evidence_lines.append(short_text(str(item.get("content", "")), 180))
-        reasoning_summary = " | ".join(evidence_lines) if evidence_lines else "Mock synthesis over accumulated evidence subgraph."
-        remaining_gaps = list(merge_result.get("missing_requirements", []))
+                evidence_lines.append(short_text(str(item.get("core_evidence", "")), 180))
+        reasoning_summary = " | ".join(evidence_lines) if evidence_lines else "Mock synthesis over compressed evidence view."
+        remaining_gaps = list(llm_evidence_view.get("missing_requirements", []))
+        covered_topics = llm_evidence_view.get("coverage_summary", {}).get("topics", {}).get("covered", [])
+        total_topics = covered_topics + llm_evidence_view.get("coverage_summary", {}).get("topics", {}).get("missing", [])
         confidence = min(
             0.95,
-            0.3 + (0.15 * float(merge_result.get("coverage_summary", {}).get("topic_entity_coverage", 0.0) or 0.0)),
+            0.3 + (0.15 * (len(covered_topics) / max(len(total_topics), 1))),
         )
         return {
             "answer": answer,
             "reasoning_summary": reasoning_summary,
             "confidence": confidence,
             "remaining_gaps": remaining_gaps,
+        }
+
+    def select_expansion_entities(
+        self,
+        question: str,
+        task_frame: TaskFrame,
+        candidate_entities: list[dict[str, Any]],
+        control_state: Any,
+    ) -> dict[str, Any]:
+        del question, task_frame, control_state
+        return {
+            "selected_entity_ids": [
+                str(candidate.get("entity_id", "")).strip()
+                for candidate in candidate_entities[:2]
+                if str(candidate.get("entity_id", "")).strip()
+            ],
+            "reason": "Mock selector kept the top coarse-ranked fresh entities.",
         }
 
 

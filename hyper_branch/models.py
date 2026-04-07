@@ -109,11 +109,17 @@ class EvidenceSubgraph:
     entity_ids: list[str] = field(default_factory=list)
     chunk_ids: list[str] = field(default_factory=list)
     evidence: list[EvidenceItem] = field(default_factory=list)
+    expansion_frontier_entity_ids: list[str] = field(default_factory=list)
+    explored_entity_ids: list[str] = field(default_factory=list)
     branch_support: dict[str, list[str]] = field(default_factory=dict)
     branch_answers: dict[str, dict[str, Any]] = field(default_factory=dict)
     frontier_history: list[dict[str, Any]] = field(default_factory=list)
     control_history: list[dict[str, Any]] = field(default_factory=list)
+    expansion_history: list[dict[str, Any]] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
+
+    def seed_expansion_frontier(self, entity_ids: list[str]) -> None:
+        self.expansion_frontier_entity_ids = self._dedupe_ids(entity_ids)
 
     def record_branch_result(
         self,
@@ -134,6 +140,7 @@ class EvidenceSubgraph:
         candidates: list[HyperedgeCandidate],
         evidence_items: list[EvidenceItem],
         control_state: dict[str, Any],
+        expansion_state: dict[str, Any] | None = None,
     ) -> None:
         seen_hyperedges = set(self.hyperedge_ids)
         seen_entities = set(self.entity_ids)
@@ -161,10 +168,6 @@ class EvidenceSubgraph:
             if item.chunk_id and item.chunk_id not in seen_chunks:
                 self.chunk_ids.append(item.chunk_id)
                 seen_chunks.add(item.chunk_id)
-            for node_id in item.source_node_ids:
-                if node_id not in seen_entities and node_id not in seen_hyperedges:
-                    self.entity_ids.append(node_id)
-                    seen_entities.add(node_id)
 
         self.frontier_history.append(
             {
@@ -174,6 +177,24 @@ class EvidenceSubgraph:
             }
         )
         self.control_history.append(dict(control_state))
+        if expansion_state is not None:
+            explored = self._dedupe_ids(expansion_state.get("explored_entity_ids", []))
+            selected = self._dedupe_ids(expansion_state.get("selected_entity_ids", []))
+            seen_explored = set(self.explored_entity_ids)
+            for entity_id in explored:
+                if entity_id not in seen_explored:
+                    self.explored_entity_ids.append(entity_id)
+                    seen_explored.add(entity_id)
+            self.expansion_frontier_entity_ids = selected
+            self.expansion_history.append(
+                {
+                    "iteration": iteration,
+                    "selected_entity_ids": selected,
+                    "explored_entity_ids": explored,
+                    "candidate_entities": list(expansion_state.get("candidate_entities", [])),
+                    "reason": str(expansion_state.get("reason", "") or "").strip(),
+                }
+            )
 
     def to_text(self, limit: int = 5) -> str:
         parts: list[str] = []
@@ -192,14 +213,26 @@ class EvidenceSubgraph:
             "hyperedge_ids": list(self.hyperedge_ids),
             "entity_ids": list(self.entity_ids),
             "chunk_ids": list(self.chunk_ids),
+            "expansion_frontier_entity_ids": list(self.expansion_frontier_entity_ids),
+            "explored_entity_ids": list(self.explored_entity_ids),
             "branch_support": dict(self.branch_support),
             "branch_answers": dict(self.branch_answers),
             "frontier_history": list(self.frontier_history),
             "control_history": list(self.control_history),
+            "expansion_history": list(self.expansion_history),
             "notes": list(self.notes),
             "evidence": [item.to_dict() for item in self.evidence],
             "summary_text": self.to_text(),
         }
+
+    @staticmethod
+    def _dedupe_ids(values: list[Any]) -> list[str]:
+        deduped: list[str] = []
+        for value in values:
+            text = str(value).strip()
+            if text and text not in deduped:
+                deduped.append(text)
+        return deduped
 
 
 @dataclass(slots=True)

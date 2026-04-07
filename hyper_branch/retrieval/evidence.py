@@ -4,6 +4,8 @@ import logging
 from collections import defaultdict
 from typing import Any
 
+import numpy as np
+
 from ..config import ReasoningConfig, RetrievalConfig
 from ..data.loaders import DatasetBundle
 from ..models import EvidenceItem, HyperedgeCandidate, RetrievalControlState, TaskFrame, ThoughtState, VectorMatch
@@ -82,8 +84,15 @@ class EvidenceRetriever:
     ) -> list[HyperedgeCandidate]:
         evidence_subgraph = evidence_subgraph or {}
         connected_entity_ids = [
-            str(item).strip() for item in evidence_subgraph.get("entity_ids", []) if str(item).strip()
-        ] or list(task_frame.initial_entity_ids)
+            str(item).strip()
+            for item in evidence_subgraph.get("expansion_frontier_entity_ids", [])
+            if str(item).strip()
+        ]
+        explored_entity_ids = {
+            str(item).strip()
+            for item in evidence_subgraph.get("explored_entity_ids", [])
+            if str(item).strip()
+        }
         existing_hyperedge_ids = {
             str(item).strip() for item in evidence_subgraph.get("hyperedge_ids", []) if str(item).strip()
         }
@@ -103,6 +112,7 @@ class EvidenceRetriever:
             focus_texts=control_state.current_focus(),
             exclude_hyperedge_ids=exclude,
             existing_hyperedge_ids=existing_hyperedge_ids,
+            fallback_to_initial_entities=not connected_entity_ids and not explored_entity_ids and not existing_hyperedge_ids,
         )
         filtered = self._apply_control_filter(branch_kind, candidates, control_state)
         self.logger.info(
@@ -241,6 +251,86 @@ class EvidenceRetriever:
         }
         return selected_frontier, merge_result
 
+    def rank_expansion_entities(
+        self,
+        question: str,
+        task_frame: TaskFrame,
+        frontier_candidates: list[HyperedgeCandidate],
+        control_state: RetrievalControlState,
+        *,
+        exclude_entity_ids: set[str] | None = None,
+        top_k: int = 5,
+    ) -> list[dict[str, Any]]:
+        exclude = set(exclude_entity_ids or set())
+        support_map: dict[str, list[str]] = defaultdict(list)
+        frontier_size = max(len(frontier_candidates), 1)
+        query_texts = self._dedupe_texts(
+            [
+                question,
+                *task_frame.topic_entities,
+                *task_frame.hard_constraints,
+                task_frame.relation_intent,
+                task_frame.answer_type_hint,
+                *control_state.current_focus(),
+            ]
+        )
+        query_vectors = self.embedder.embed_texts(query_texts, stage="expansion_entities") if query_texts else []
+
+        for candidate in frontier_candidates:
+            hyperedge_label = short_text(
+                normalize_label(candidate.hyperedge_text or candidate.hyperedge_id),
+                180,
+            )
+            for entity_id in candidate.entity_ids:
+                if entity_id in exclude:
+                    continue
+                if hyperedge_label not in support_map[entity_id]:
+                    support_map[entity_id].append(hyperedge_label)
+
+        scored: list[dict[str, Any]] = []
+        for entity_id, supported_by in support_map.items():
+            profile_text = self._entity_profile_text(entity_id)
+            if not profile_text:
+                profile_text = normalize_label(entity_id)
+            question_match = max(
+                self._hybrid_text_score(
+                    [question, *task_frame.topic_entities, *task_frame.hard_constraints, task_frame.relation_intent],
+                    profile_text,
+                ),
+                self._entity_vector_similarity(query_vectors, entity_id),
+            )
+            focus_match = self._hybrid_text_score(control_state.current_focus(), profile_text)
+            answer_type_match = self._hybrid_text_score([task_frame.answer_type_hint], profile_text)
+            support_score = len(supported_by) / frontier_size
+            coarse_score = (
+                (0.45 * question_match)
+                + (0.2 * focus_match)
+                + (0.15 * answer_type_match)
+                + (0.2 * support_score)
+            )
+            scored.append(
+                {
+                    "entity_id": entity_id,
+                    "entity_label": normalize_label(entity_id),
+                    "description": short_text(profile_text, 280),
+                    "source_hyperedges": supported_by[:2],
+                    "question_match": round(question_match, 4),
+                    "focus_match": round(focus_match, 4),
+                    "support_count": len(supported_by),
+                    "coarse_score": round(coarse_score, 4),
+                }
+            )
+
+        scored.sort(
+            key=lambda item: (
+                item["focus_match"] > 0.0,
+                item["coarse_score"],
+                item["support_count"],
+            ),
+            reverse=True,
+        )
+        return scored[:top_k]
+
     def build_evidence_items(
         self,
         thought_id: str,
@@ -354,10 +444,13 @@ class EvidenceRetriever:
         focus_texts: list[str],
         exclude_hyperedge_ids: set[str],
         existing_hyperedge_ids: set[str],
+        fallback_to_initial_entities: bool = True,
     ) -> list[HyperedgeCandidate]:
-        pool = set(existing_hyperedge_ids)
-        pool.update(self.dataset.graph.expand_from_entities(initial_entity_ids))
-        pool.update(self.dataset.graph.expand_from_entities(connected_entity_ids))
+        pool: set[str] = set()
+        frontier_entities = list(connected_entity_ids)
+        if not frontier_entities and fallback_to_initial_entities:
+            frontier_entities = list(initial_entity_ids)
+        pool.update(self.dataset.graph.expand_from_entities(frontier_entities))
         pool.update(match.label for match in self._vector_hyperedge_matches(query_texts))
         pool.update(
             label
@@ -470,6 +563,7 @@ class EvidenceRetriever:
             control_state.candidate_filters[branch_kind] = {
                 "prefer_focus_match": False,
                 "focus_threshold": self.config.focus_match_min_score,
+                "expansion_frontier_size": 0,
             }
             return candidates
 
@@ -624,3 +718,21 @@ class EvidenceRetriever:
     def _cache_key(self, thought: ThoughtState) -> str:
         anchors = "||".join(thought.grounding.anchor_texts[:2])
         return f"{thought.thought_id}::{thought.content}::{anchors}"
+
+    def _entity_profile_text(self, entity_id: str) -> str:
+        node = self.dataset.graph.nodes.get(entity_id)
+        parts = [normalize_label(entity_id)]
+        if node is not None and node.description:
+            parts.append(normalize_label(node.description))
+        if node is not None:
+            for chunk_id in node.source_ids[:1]:
+                chunk_text = self.dataset.get_chunk_text(chunk_id)
+                if chunk_text:
+                    parts.append(short_text(chunk_text, 220))
+        return " ".join(part for part in parts if part).strip()
+
+    def _entity_vector_similarity(self, query_vectors: list[np.ndarray] | list[Any], entity_id: str) -> float:
+        row_id = self._entity_row_id_by_label.get(entity_id)
+        if row_id is None or not query_vectors:
+            return 0.0
+        return max(self.dataset.entity_store.similarity(query_vector, row_id) for query_vector in query_vectors)

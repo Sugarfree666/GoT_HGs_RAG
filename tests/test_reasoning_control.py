@@ -18,6 +18,7 @@ from hyper_branch.config import (
 from hyper_branch.logging_utils import TraceStore
 from hyper_branch.models import (
     EvidenceItem,
+    EvidenceSubgraph,
     GraphNode,
     HyperedgeCandidate,
     RetrievalControlState,
@@ -358,18 +359,50 @@ class FakeEvidenceRetriever:
             )
         ]
 
+    def rank_expansion_entities(
+        self,
+        question: str,
+        task_frame: TaskFrame,
+        frontier_candidates: list[HyperedgeCandidate],
+        control_state: RetrievalControlState,
+        *,
+        exclude_entity_ids: set[str] | None = None,
+        top_k: int = 5,
+    ) -> list[dict[str, object]]:
+        del question, task_frame, frontier_candidates, control_state, exclude_entity_ids
+        return [
+            {
+                "entity_id": '"URBAN FARM NETWORK"',
+                "entity_label": "URBAN FARM NETWORK",
+                "description": "A fresh entity for controlled frontier expansion.",
+                "source_hyperedges": ["ANCHOR branch supports community support."],
+                "question_match": 0.63,
+                "focus_match": 0.21,
+                "support_count": 1,
+                "coarse_score": 0.61,
+            },
+            {
+                "entity_id": '"LOCAL COOPERATIVE"',
+                "entity_label": "LOCAL COOPERATIVE",
+                "description": "A secondary expansion entity for controlled frontier expansion.",
+                "source_hyperedges": ["RELATION branch supports community support."],
+                "question_match": 0.47,
+                "focus_match": 0.12,
+                "support_count": 1,
+                "coarse_score": 0.45,
+            },
+        ][:top_k]
+
 
 class FakeLLMService:
     def judge_sufficiency(
         self,
         question: str,
         task_frame: TaskFrame,
-        merge_result: dict[str, object],
-        evidence_subgraph: dict[str, object],
+        llm_evidence_view: dict[str, object],
         iteration: int,
-        retrieval_control_state: dict[str, object],
     ) -> dict[str, object]:
-        del question, task_frame, merge_result, evidence_subgraph, retrieval_control_state
+        del question, task_frame, llm_evidence_view
         if iteration == 1:
             return {
                 "enough": False,
@@ -395,15 +428,30 @@ class FakeLLMService:
         question: str,
         task_frame: TaskFrame,
         thought_graph: ThoughtGraph,
-        evidence_subgraph: dict[str, object],
-        merge_result: dict[str, object],
+        llm_evidence_view: dict[str, object],
     ) -> dict[str, object]:
-        del question, task_frame, thought_graph, evidence_subgraph
+        del question, task_frame, thought_graph
         return {
-            "answer": str(merge_result.get("answer_hypotheses", [""])[0]),
+            "answer": str(llm_evidence_view.get("coverage_summary", {}).get("answer_hypotheses", [""])[0]),
             "reasoning_summary": "Final answer synthesized from fused frontier hyperedges.",
             "confidence": 0.93,
             "remaining_gaps": [],
+        }
+
+    def select_expansion_entities(
+        self,
+        question: str,
+        task_frame: TaskFrame,
+        candidate_entities: list[dict[str, object]],
+        control_state: RetrievalControlState,
+    ) -> dict[str, object]:
+        del question, task_frame, control_state
+        return {
+            "selected_entity_ids": [
+                str(candidate["entity_id"])
+                for candidate in candidate_entities[:2]
+            ],
+            "reason": "Fake LLM reranked fresh frontier entities.",
         }
 
 
@@ -469,6 +517,225 @@ class ThoughtControllerSelectionTest(unittest.TestCase):
                 "relation closure around community support",
                 latest_control["branch_queries"]["relation"],
             )
+            self.assertEqual(
+                result["evidence_subgraph"]["expansion_frontier_entity_ids"],
+                ['"URBAN FARM NETWORK"', '"LOCAL COOPERATIVE"'],
+            )
+
+
+class EmptyStore:
+    def __init__(self) -> None:
+        self.rows: list[dict[str, object]] = []
+        self.row_ids: list[str] = []
+
+    def query(self, vector: object, top_k: int) -> list[VectorMatch]:
+        del vector, top_k
+        return []
+
+    def similarity(self, query_vector: object, row_id: str) -> float:
+        del query_vector, row_id
+        return 0.0
+
+    def _label_for_row(self, row: dict[str, object], fallback: str) -> str:
+        del row
+        return fallback
+
+
+class ControlledFrontierGraph:
+    def __init__(self) -> None:
+        self.nodes = {
+            '"ENTITY A"': GraphNode(
+                node_id='"ENTITY A"',
+                role="entity",
+                description="Previously explored entity A.",
+                source_ids=["chunk-a"],
+            ),
+            '"ENTITY B"': GraphNode(
+                node_id='"ENTITY B"',
+                role="entity",
+                description="Fresh entity about lead contamination and urban farms.",
+                source_ids=["chunk-b"],
+            ),
+            '"ENTITY C"': GraphNode(
+                node_id='"ENTITY C"',
+                role="entity",
+                description="Irrelevant entity about goat milking routines.",
+                source_ids=["chunk-c"],
+            ),
+            '<hyperedge>"A links to B"': GraphNode(
+                node_id='<hyperedge>"A links to B"',
+                role="hyperedge",
+                source_ids=["chunk-ab"],
+            ),
+            '<hyperedge>"A only"': GraphNode(
+                node_id='<hyperedge>"A only"',
+                role="hyperedge",
+                source_ids=["chunk-a-only"],
+            ),
+            '<hyperedge>"B only"': GraphNode(
+                node_id='<hyperedge>"B only"',
+                role="hyperedge",
+                source_ids=["chunk-b-only"],
+            ),
+        }
+        self.adjacency = {
+            '<hyperedge>"A links to B"': [],
+            '<hyperedge>"A only"': [],
+            '<hyperedge>"B only"': [],
+        }
+
+    def expand_from_entities(self, entity_ids: list[str]) -> list[str]:
+        expanded: list[str] = []
+        for entity_id in entity_ids:
+            if entity_id == '"ENTITY A"':
+                expanded.extend(['<hyperedge>"A links to B"', '<hyperedge>"A only"'])
+            if entity_id == '"ENTITY B"':
+                expanded.extend(['<hyperedge>"A links to B"', '<hyperedge>"B only"'])
+        return expanded
+
+    def hyperedge_entity_ids(self, hyperedge_id: str) -> list[str]:
+        mapping = {
+            '<hyperedge>"A links to B"': ['"ENTITY A"', '"ENTITY B"'],
+            '<hyperedge>"A only"': ['"ENTITY A"'],
+            '<hyperedge>"B only"': ['"ENTITY B"', '"ENTITY C"'],
+        }
+        return mapping.get(hyperedge_id, [])
+
+    def hyperedge_chunk_ids(self, hyperedge_id: str) -> list[str]:
+        mapping = {
+            '<hyperedge>"A links to B"': ["chunk-ab"],
+            '<hyperedge>"A only"': ["chunk-a-only"],
+            '<hyperedge>"B only"': ["chunk-b-only"],
+        }
+        return mapping.get(hyperedge_id, [])
+
+
+class ControlledExpansionTest(unittest.TestCase):
+    def test_evidence_subgraph_does_not_promote_source_node_ids_into_expansion_entities(self) -> None:
+        subgraph = EvidenceSubgraph()
+        subgraph.seed_expansion_frontier(['"ENTITY A"'])
+        subgraph.add_frontier(
+            iteration=1,
+            candidates=[
+                HyperedgeCandidate(
+                    hyperedge_id='<hyperedge>"A links to B"',
+                    hyperedge_text="A links to B",
+                    score=0.8,
+                    branch_kind="frontier",
+                    entity_ids=['"ENTITY B"'],
+                    chunk_ids=["chunk-ab"],
+                )
+            ],
+            evidence_items=[
+                EvidenceItem(
+                    evidence_id="ev-1",
+                    chunk_id="chunk-ab",
+                    content="A links to B",
+                    score=0.8,
+                    source_node_ids=['<hyperedge>"A links to B"', '"IRRELEVANT SOURCE ENTITY"'],
+                )
+            ],
+            control_state={"iteration": 1},
+            expansion_state={
+                "selected_entity_ids": ['"ENTITY B"'],
+                "explored_entity_ids": ['"ENTITY A"'],
+                "candidate_entities": [],
+                "reason": "test",
+            },
+        )
+
+        self.assertNotIn('"IRRELEVANT SOURCE ENTITY"', subgraph.entity_ids)
+        self.assertEqual(subgraph.expansion_frontier_entity_ids, ['"ENTITY B"'])
+        self.assertEqual(subgraph.explored_entity_ids, ['"ENTITY A"'])
+
+    def test_retriever_only_expands_from_controlled_frontier_entities(self) -> None:
+        logger = logging.getLogger("test.controlled_frontier")
+        logger.handlers.clear()
+        logger.addHandler(logging.NullHandler())
+
+        dataset = SimpleNamespace(
+            chunk_store=EmptyStore(),
+            entity_store=EmptyStore(),
+            hyperedge_store=EmptyStore(),
+            graph=ControlledFrontierGraph(),
+            get_chunk_text=lambda chunk_id: {
+                "chunk-ab": "Entity B is the next useful frontier for lead contamination work.",
+                "chunk-a-only": "Entity A stays on the already explored branch.",
+                "chunk-b-only": "Entity B connects to lead contamination and urban farms.",
+                "chunk-b": "Entity B description support.",
+                "chunk-c": "Entity C is mostly about goats.",
+            }.get(chunk_id, ""),
+        )
+        retriever = EvidenceRetriever(
+            dataset=dataset,
+            embedder=EmbedderStub(),
+            config=RetrievalConfig(entity_top_k=1, hyperedge_top_k=3, chunk_top_k=1, evidence_keep=1, branch_candidate_pool=5),
+            logger=logger,
+        )
+        task_frame = TaskFrame.from_payload(
+            "How should urban farms handle lead contamination next?",
+            {
+                "topic_entities": ["urban farms", "lead contamination"],
+                "answer_type_hint": "entity",
+                "relation_intent": "find the next useful frontier entity",
+                "hard_constraints": ["Prefer the next unexplored entity."],
+            },
+        )
+        task_frame.initial_entity_ids = ['"ENTITY A"']
+        control_state = RetrievalControlState(iteration=2)
+
+        candidates = retriever.retrieve_branch_candidates(
+            question=task_frame.question,
+            task_frame=task_frame,
+            branch_kind="anchor",
+            control_state=control_state,
+            evidence_subgraph={
+                "entity_ids": ['"ENTITY A"', '"ENTITY B"', '"ENTITY C"'],
+                "hyperedge_ids": ['<hyperedge>"A links to B"'],
+                "expansion_frontier_entity_ids": ['"ENTITY B"'],
+                "explored_entity_ids": ['"ENTITY A"'],
+            },
+        )
+        expansion_entities = retriever.rank_expansion_entities(
+            question=task_frame.question,
+            task_frame=task_frame,
+            frontier_candidates=[
+                HyperedgeCandidate(
+                    hyperedge_id='<hyperedge>"B only"',
+                    hyperedge_text="B only",
+                    score=0.5,
+                    branch_kind="frontier",
+                    entity_ids=['"ENTITY B"', '"ENTITY C"'],
+                    chunk_ids=["chunk-b-only"],
+                )
+            ],
+            control_state=control_state,
+            exclude_entity_ids={'"ENTITY A"', '"ENTITY B"'},
+            top_k=2,
+        )
+        ranked_without_current_frontier_exclusion = retriever.rank_expansion_entities(
+            question=task_frame.question,
+            task_frame=task_frame,
+            frontier_candidates=[
+                HyperedgeCandidate(
+                    hyperedge_id='<hyperedge>"B only"',
+                    hyperedge_text="B only",
+                    score=0.5,
+                    branch_kind="frontier",
+                    entity_ids=['"ENTITY B"', '"ENTITY C"'],
+                    chunk_ids=["chunk-b-only"],
+                )
+            ],
+            control_state=control_state,
+            exclude_entity_ids={'"ENTITY A"'},
+            top_k=2,
+        )
+
+        candidate_ids = [candidate.hyperedge_id for candidate in candidates]
+        self.assertIn('<hyperedge>"B only"', candidate_ids)
+        self.assertNotIn('<hyperedge>"A only"', candidate_ids)
+        self.assertEqual(expansion_entities[0]["entity_id"], '"ENTITY C"')
+        self.assertEqual(ranked_without_current_frontier_exclusion[0]["entity_id"], '"ENTITY B"')
 
 
 if __name__ == "__main__":

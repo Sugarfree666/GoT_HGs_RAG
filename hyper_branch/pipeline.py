@@ -76,6 +76,8 @@ class HyperBranchPipeline:
         self.trace_store.save_artifact("artifacts/task_frame.json", result["task_frame"])
         self.trace_store.save_artifact("artifacts/thought_graph.json", result["thought_graph"])
         self.trace_store.save_artifact("artifacts/evidence_subgraph.json", result["evidence_subgraph"])
+        if "llm_evidence_view" in result:
+            self.trace_store.save_artifact("artifacts/llm_evidence_view.json", result["llm_evidence_view"])
         self.trace_store.save_artifact("artifacts/final_answer.json", result["final_answer"])
         result["run_dir"] = str(self.run_dir)
         self.logger.info("Pipeline finished. Artifacts saved under %s", self.run_dir)

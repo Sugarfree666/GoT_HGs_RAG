@@ -5,6 +5,7 @@ from typing import Any
 
 from ..config import Config
 from ..data.loaders import DatasetBundle
+from ..llm.views import build_llm_evidence_view
 from ..logging_utils import TraceStore
 from ..models import EvidenceSubgraph, RetrievalControlState, TaskFrame, ThoughtGraph, ThoughtState
 from ..retrieval.evidence import EvidenceRetriever
@@ -51,6 +52,7 @@ class ThoughtController:
 
         control_state = self._initial_control_state()
         evidence_subgraph = EvidenceSubgraph()
+        evidence_subgraph.seed_expansion_frontier(task_frame.initial_entity_ids)
         initial_candidates = list(anchor_payload.get("initial_hyperedge_candidates", []))[
             : self.config.reasoning.evidence_top_k_per_branch
         ]
@@ -88,6 +90,12 @@ class ThoughtController:
                 candidates=initial_candidates,
                 evidence_items=initial_evidence,
                 control_state=control_state.to_dict(),
+                expansion_state={
+                    "selected_entity_ids": list(evidence_subgraph.expansion_frontier_entity_ids),
+                    "explored_entity_ids": [],
+                    "candidate_entities": [],
+                    "reason": "Seeded initial expansion frontier from anchor entities.",
+                },
             )
             self.registry.register_reasoning(task_frame, initial_anchor_thought)
 
@@ -178,11 +186,19 @@ class ThoughtController:
                 candidates=global_frontier,
                 limit=min(self.config.retrieval.evidence_keep, len(global_frontier)),
             )
+            expansion_state = self._select_expansion_frontier_entities(
+                question=question,
+                task_frame=task_frame,
+                frontier_candidates=global_frontier,
+                control_state=control_state,
+                evidence_subgraph=evidence_subgraph,
+            )
             evidence_subgraph.add_frontier(
                 iteration=iteration,
                 candidates=global_frontier,
                 evidence_items=frontier_evidence,
                 control_state=control_state.to_dict(),
+                expansion_state=expansion_state,
             )
 
             merge_thought = self.executor.create_merge_thought(
@@ -200,10 +216,14 @@ class ThoughtController:
             sufficiency = self.llm_service.judge_sufficiency(
                 question=question,
                 task_frame=task_frame,
-                merge_result=latest_merge_result,
-                evidence_subgraph=evidence_subgraph.to_dict(),
+                llm_evidence_view=build_llm_evidence_view(
+                    question=question,
+                    task_frame=task_frame,
+                    evidence_subgraph=evidence_subgraph,
+                    merge_result=latest_merge_result,
+                    control_state=control_state,
+                ),
                 iteration=iteration,
-                retrieval_control_state=control_state.to_dict(),
             )
             latest_merge_result["missing_requirements"] = list(sufficiency.get("missing_requirements", []))
             latest_merge_result["next_focus"] = list(sufficiency.get("next_focus", []))
@@ -248,12 +268,18 @@ class ThoughtController:
             termination_reason = "budget_exhausted"
 
         thought_graph.termination_reason = termination_reason
+        final_llm_evidence_view = build_llm_evidence_view(
+            question=question,
+            task_frame=task_frame,
+            evidence_subgraph=evidence_subgraph,
+            merge_result=latest_merge_result,
+            control_state=control_state,
+        )
         final_payload = self.llm_service.synthesize_answer(
             question=question,
             task_frame=task_frame,
             thought_graph=thought_graph,
-            evidence_subgraph=evidence_subgraph.to_dict(),
-            merge_result=latest_merge_result,
+            llm_evidence_view=final_llm_evidence_view,
         )
         final_parent_ids = [
             thought.thought_id
@@ -277,6 +303,7 @@ class ThoughtController:
             "thought_graph": thought_graph.to_dict(),
             "final_answer": final_payload,
             "evidence_subgraph": evidence_subgraph.to_dict(),
+            "llm_evidence_view": final_llm_evidence_view,
         }
 
     def _initial_control_state(self) -> RetrievalControlState:
@@ -406,3 +433,64 @@ class ThoughtController:
     def _next_id(self, prefix: str) -> str:
         self._counter += 1
         return f"{prefix}-{self._counter:04d}"
+
+    def _select_expansion_frontier_entities(
+        self,
+        question: str,
+        task_frame: TaskFrame,
+        frontier_candidates: list[Any],
+        control_state: RetrievalControlState,
+        evidence_subgraph: EvidenceSubgraph,
+    ) -> dict[str, Any]:
+        current_frontier_entities = list(evidence_subgraph.expansion_frontier_entity_ids)
+        if not current_frontier_entities and not evidence_subgraph.explored_entity_ids:
+            current_frontier_entities = list(task_frame.initial_entity_ids)
+        exclude_entity_ids = set(current_frontier_entities) | set(evidence_subgraph.explored_entity_ids)
+        coarse_candidates = self.evidence_retriever.rank_expansion_entities(
+            question=question,
+            task_frame=task_frame,
+            frontier_candidates=list(frontier_candidates),
+            control_state=control_state,
+            exclude_entity_ids=exclude_entity_ids,
+            top_k=5,
+        )
+        selected_entity_ids = [candidate["entity_id"] for candidate in coarse_candidates[:2]]
+        reason = "Selected next frontier entities by coarse question/description similarity."
+
+        selector = getattr(self.llm_service, "select_expansion_entities", None)
+        if callable(selector) and coarse_candidates:
+            try:
+                llm_result = selector(
+                    question=question,
+                    task_frame=task_frame,
+                    candidate_entities=coarse_candidates,
+                    control_state=control_state,
+                )
+            except Exception as exc:
+                self.logger.warning("Entity frontier rerank failed; falling back to coarse ranking: %s", exc)
+            else:
+                allowed_ids = {candidate["entity_id"] for candidate in coarse_candidates}
+                reranked_ids: list[str] = []
+                for entity_id in llm_result.get("selected_entity_ids", []):
+                    cleaned = str(entity_id).strip()
+                    if cleaned and cleaned in allowed_ids and cleaned not in reranked_ids:
+                        reranked_ids.append(cleaned)
+                    if len(reranked_ids) >= 2:
+                        break
+                if reranked_ids:
+                    selected_entity_ids = reranked_ids
+                    reason = str(llm_result.get("reason", "") or "").strip() or "LLM reranked expansion frontier entities."
+
+        payload = {
+            "selected_entity_ids": selected_entity_ids,
+            "explored_entity_ids": current_frontier_entities,
+            "candidate_entities": coarse_candidates,
+            "reason": reason,
+        }
+        self.trace_store.log_event("expansion_frontier_selected", payload)
+        self.logger.info(
+            "Selected %s expansion frontier entities from %s coarse candidates",
+            len(selected_entity_ids),
+            len(coarse_candidates),
+        )
+        return payload
