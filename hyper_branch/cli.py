@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import traceback
 from pathlib import Path
 from .config import load_config
 from .logging_utils import TraceStore, configure_logging, create_run_dir
@@ -15,6 +16,7 @@ def main() -> int:
     parser.add_argument("--question-index", type=int, default=0, help="When --question-file is a JSON list, select this item index.")
     parser.add_argument("--config", default="configs/agriculture.yaml", help="Path to YAML config.")
     parser.add_argument("--mock-llm", action="store_true", help="Use mock reasoning service and local hash embeddings.")
+    parser.add_argument("--verbose", action="store_true", help="Show detailed console logs instead of the concise summary view.")
     parser.add_argument(
         "--allow-failure",
         action="store_true",
@@ -29,20 +31,21 @@ def main() -> int:
         config.llm.use_mock = True
 
     run_dir = create_run_dir(config.runtime.base_run_dir, question)
-    logger = configure_logging(run_dir, config.runtime.log_level)
+    logger = configure_logging(run_dir, config.runtime.log_level, verbose_console=args.verbose)
     trace_store = TraceStore(run_dir)
 
     try:
         pipeline = HyperBranchPipeline(config=config, run_dir=run_dir, logger=logger, trace_store=trace_store)
         result = pipeline.run(question)
     except Exception as exc:
-        logger.exception("Pipeline failed for question: %s", question)
+        logger.error("Pipeline failed for question: %s", question)
         trace_store.save_artifact(
             "artifacts/error.json",
             {
                 "question": question,
                 "error_type": type(exc).__name__,
                 "error_message": str(exc),
+                "traceback": traceback.format_exc(),
                 "config": {
                     "mock_llm": config.llm.use_mock,
                     "model": config.llm.model,

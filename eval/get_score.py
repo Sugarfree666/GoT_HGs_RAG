@@ -94,14 +94,15 @@ def discover_latest_runs(runs_dir: Path) -> dict[str, dict[str, Any]]:
     return latest_by_question
 
 
-def extract_generation(final_answer: dict[str, Any] | None) -> tuple[str, str]:
+def extract_generation(final_answer: dict[str, Any] | None) -> tuple[str, str, str]:
     if not isinstance(final_answer, dict):
-        return "", ""
+        return "", "", ""
     answer = str(final_answer.get("answer", "") or "").strip()
     reasoning_summary = str(final_answer.get("reasoning_summary", "") or "").strip()
     remaining_gaps = final_answer.get("remaining_gaps", [])
 
-    segments = [answer] if answer else []
+    generation = f"<answer>{answer}</answer>" if answer else ""
+    segments: list[str] = []
     if reasoning_summary:
         segments.append(f"Reasoning summary: {reasoning_summary}")
     if isinstance(remaining_gaps, list) and remaining_gaps:
@@ -109,7 +110,8 @@ def extract_generation(final_answer: dict[str, Any] | None) -> tuple[str, str]:
         if cleaned_gaps:
             segments.append("Remaining gaps: " + "; ".join(cleaned_gaps))
 
-    return answer, "\n\n".join(segments).strip()
+    generation_explanation = "\n\n".join(segments).strip()
+    return answer, generation, generation_explanation
 
 
 def _collect_evidence_from_thought(thought: dict[str, Any], sink: list[dict[str, Any]], seen_keys: set[str]) -> None:
@@ -218,6 +220,7 @@ def build_eval_record(question_entry: dict[str, Any], run_index: dict[str, dict[
         "run_status": "missing",
         "answer": "",
         "generation": "",
+        "generation_explanation": "",
         "retrieved": [],
         "retrieved_knowledge": "",
     }
@@ -232,7 +235,7 @@ def build_eval_record(question_entry: dict[str, Any], run_index: dict[str, dict[
     evidence_subgraph = load_json(run_dir / "artifacts" / "evidence_subgraph.json")
     error_payload = load_json(run_dir / "artifacts" / "error.json")
 
-    answer, generation = extract_generation(final_answer if isinstance(final_answer, dict) else None)
+    answer, generation, generation_explanation = extract_generation(final_answer if isinstance(final_answer, dict) else None)
     retrieved = extract_retrieved_knowledge(thought_graph if isinstance(thought_graph, dict) else None)
     if not retrieved:
         retrieved = extract_retrieved_from_evidence_subgraph(evidence_subgraph if isinstance(evidence_subgraph, dict) else None)
@@ -249,7 +252,8 @@ def build_eval_record(question_entry: dict[str, Any], run_index: dict[str, dict[
             "run_dir": str(run_dir),
             "run_status": run_status,
             "answer": answer,
-            "generation": generation or answer,
+            "generation": generation,
+            "generation_explanation": generation_explanation,
             "retrieved": retrieved,
             "retrieved_knowledge": knowledge_text,
         }
@@ -288,13 +292,17 @@ def evaluate_one(record: dict[str, Any], use_rsim: bool, use_gen: bool) -> dict[
 
     if use_gen:
         generation = str(record.get("generation", "") or "").strip()
-        if not generation:
+        generation_explanation = str(record.get("generation_explanation", "") or "").strip()
+        generation_for_gen = generation
+        if generation_explanation:
+            generation_for_gen = f"{generation}\n\n{generation_explanation}".strip()
+        if not generation_for_gen:
             record["g_e"] = 0.0
             record["g_e_exp"] = {"status": "empty_generation"}
         else:
             try:
                 gen_fn = _get_gen_fn()
-                gen_score = gen_fn(record["question"], gold_answers, generation, f1_score)
+                gen_score = gen_fn(record["question"], gold_answers, generation_for_gen, f1_score)
                 record["g_e"] = float(gen_score["score"])
                 record["g_e_exp"] = gen_score["explanation"]
             except Exception as exc:
@@ -372,6 +380,7 @@ def save_outputs(output_dir: Path, records: list[dict[str, Any]], summary: dict[
             "run_status": record.get("run_status"),
             "answer": record.get("answer"),
             "generation": record.get("generation"),
+            "generation_explanation": record.get("generation_explanation"),
             "retrieved": record.get("retrieved"),
             "retrieved_knowledge": record.get("retrieved_knowledge"),
         }

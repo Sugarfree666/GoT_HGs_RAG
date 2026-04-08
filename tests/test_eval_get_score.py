@@ -5,6 +5,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 def load_eval_get_score_module():
@@ -84,7 +85,8 @@ class EvalGetScoreTest(unittest.TestCase):
 
             self.assertEqual(record["run_status"], "success")
             self.assertEqual(record["answer"], "1979")
-            self.assertIn("Reasoning summary", record["generation"])
+            self.assertEqual(record["generation"], "<answer>1979</answer>")
+            self.assertIn("Reasoning summary", record["generation_explanation"])
             self.assertEqual(len(record["retrieved"]), 1)
             self.assertIn("1979", record["retrieved_knowledge"])
 
@@ -101,7 +103,30 @@ class EvalGetScoreTest(unittest.TestCase):
         )
         self.assertEqual(record["run_status"], "missing")
         self.assertEqual(record["answer"], "")
+        self.assertEqual(record["generation"], "")
+        self.assertEqual(record["generation_explanation"], "")
         self.assertEqual(record["retrieved"], [])
+
+    def test_evaluate_one_uses_generation_explanation_for_gen(self) -> None:
+        module = load_eval_get_score_module()
+        record = {
+            "question": "When did the expansion happen?",
+            "golden_answers": ["1979"],
+            "context": ["The program expanded in 1979 with strong grassroots support."],
+            "answer": "1979",
+            "generation": "<answer>1979</answer>",
+            "generation_explanation": "Reasoning summary: The evidence ties the expansion to 1979.",
+            "retrieved_knowledge": "",
+        }
+
+        with patch.object(module, "_get_gen_fn", return_value=lambda q, a, g, f: {"score": 0.5, "explanation": {"generation": g}}):
+            scored = module.evaluate_one(record, use_rsim=False, use_gen=True)
+
+        self.assertEqual(scored["f1"], 1.0)
+        self.assertEqual(
+            scored["g_e_exp"]["generation"],
+            "<answer>1979</answer>\n\nReasoning summary: The evidence ties the expansion to 1979.",
+        )
 
 
 if __name__ == "__main__":

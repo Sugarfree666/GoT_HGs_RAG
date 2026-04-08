@@ -35,6 +35,30 @@ class DummyPrompts:
         return name
 
 
+class LongAnswerClient(DummyClient):
+    def chat_json(self, stage: str, prompt: str, payload: dict) -> dict:
+        self.calls.append((stage, payload))
+        del prompt
+        if stage == "evidence_judge":
+            return {
+                "enough": True,
+                "confidence": 0.8,
+                "reason": "stub",
+                "missing_requirements": [],
+                "next_focus": [],
+            }
+        return {
+            "answer": (
+                "Initiatives aimed at improving neighborhoods and combating food insecurity "
+                "significantly contribute to community health in St. Louis and across the nation "
+                "by enhancing neighborhood aesthetics, reducing crime, and building community bonds."
+            ),
+            "reasoning_summary": "stub reasoning",
+            "confidence": 0.7,
+            "remaining_gaps": [],
+        }
+
+
 def contains_forbidden_key(payload) -> bool:
     if isinstance(payload, dict):
         for key, value in payload.items():
@@ -228,6 +252,68 @@ class LlmEvidenceViewTest(unittest.TestCase):
         self.assertFalse(contains_forbidden_key(judge_payload["llm_evidence_view"]))
         self.assertNotIn("score", answer_payload["thought_graph_summary"]["recent_thoughts"][0])
         self.assertNotIn("content", answer_payload["thought_graph_summary"]["recent_thoughts"][0])
+
+    def test_synthesize_answer_coerces_long_explanation_into_direct_answer(self) -> None:
+        client = LongAnswerClient()
+        service = OpenAIReasoningService(client=client, prompts=DummyPrompts())
+        question = (
+            "How do initiatives aimed at improving neighborhoods and combating food insecurity "
+            "contribute to the overall community health in St. Louis and across the nation?"
+        )
+        task_frame = TaskFrame.from_payload(
+            question,
+            {
+                "anchors": ["initiatives", "neighborhoods", "food insecurity", "community health"],
+                "target": "overall community health improvement",
+                "constraints": ["involves neighborhoods", "focus on combating food insecurity"],
+                "bridges": ["impact of initiatives on community health"],
+                "topic_entities": ["initiatives", "neighborhoods", "food insecurity", "community health"],
+                "answer_type_hint": "concept or outcome",
+                "relation_intent": "impact of initiatives on community health",
+                "hard_constraints": ["involves neighborhoods", "focus on combating food insecurity"],
+                "relation_skeleton": "initiatives linked to community health outcomes",
+            },
+        )
+        task_frame.mark_slot("target-0", status="supported")
+        thought_graph = ThoughtGraph(question=question, root_id="th-0001")
+        llm_evidence_view = {
+            "question": question,
+            "current_focus": [],
+            "missing_requirements": [],
+            "next_focus": [],
+            "frontier_hyperedges": [
+                {
+                    "hyperedge": "These initiatives improve community health while supporting food security.",
+                    "supporting_branches": ["constraint", "relation"],
+                    "matched_topics": ["community health"],
+                    "core_entities": ["RESILIENT COMMUNITY"],
+                    "core_evidence": "These initiatives improve community health while supporting food security.",
+                }
+            ],
+            "coverage_summary": {
+                "topics": {"covered": ["community health"], "missing": []},
+                "constraints": {"covered": ["involves neighborhoods", "focus on combating food insecurity"], "missing": []},
+                "relations": {"intent": "impact of initiatives on community health", "covered": ["impact of initiatives on community health"], "missing": []},
+                "target": {"text": "overall community health improvement", "status": "supported"},
+                "answer_hypotheses": ["RESILIENT COMMUNITY"],
+            },
+            "control_summary": {
+                "iteration": 3,
+                "branch_weights": {"constraint": 0.4, "relation": 0.35, "anchor": 0.25},
+                "preferred_branches": ["constraint", "relation"],
+            },
+            "evidence_summary": "Supported outcome: community health.",
+        }
+
+        response = service.synthesize_answer(
+            question=question,
+            task_frame=task_frame,
+            thought_graph=thought_graph,
+            llm_evidence_view=llm_evidence_view,
+        )
+
+        self.assertEqual(response["answer"].lower(), "community health")
+        self.assertLessEqual(len(response["answer"].split()), 3)
 
 
 if __name__ == "__main__":

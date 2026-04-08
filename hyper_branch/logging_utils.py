@@ -10,6 +10,13 @@ from typing import Any
 from .utils import pretty_json, slugify
 
 
+CONSOLE_SUMMARY_PREFIXES = (
+    "Starting HyperBranch pipeline",
+    "Iterative reasoning step",
+    "Pipeline finished",
+)
+
+
 class TraceStore:
     def __init__(self, run_dir: Path) -> None:
         self.run_dir = run_dir
@@ -56,7 +63,19 @@ def create_run_dir(base_dir: Path, question: str) -> Path:
     return run_dir
 
 
-def configure_logging(run_dir: Path, log_level: str = "INFO") -> logging.Logger:
+class ConsoleSummaryFilter(logging.Filter):
+    def __init__(self, *, verbose: bool = False) -> None:
+        super().__init__()
+        self.verbose = verbose
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        if self.verbose or record.levelno >= logging.WARNING:
+            return True
+        message = record.getMessage()
+        return any(message.startswith(prefix) for prefix in CONSOLE_SUMMARY_PREFIXES)
+
+
+def configure_logging(run_dir: Path, log_level: str = "INFO", *, verbose_console: bool = False) -> logging.Logger:
     logger = logging.getLogger("hyper_branch")
     logger.setLevel(getattr(logging, log_level.upper(), logging.INFO))
     for handler in list(logger.handlers):
@@ -66,8 +85,11 @@ def configure_logging(run_dir: Path, log_level: str = "INFO") -> logging.Logger:
     formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s")
     file_handler = logging.FileHandler(run_dir / "run.log", encoding="utf-8")
     file_handler.setFormatter(formatter)
+    file_handler.setLevel(getattr(logging, log_level.upper(), logging.INFO))
     console_handler = logging.StreamHandler()
-    console_handler.setFormatter(formatter)
+    console_handler.setFormatter(logging.Formatter("%(message)s"))
+    console_handler.setLevel(logging.INFO)
+    console_handler.addFilter(ConsoleSummaryFilter(verbose=verbose_console))
 
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
