@@ -7,6 +7,8 @@ runtime:
 
 retrieval:
   entity_top_k: 5
+  topic_entity_link_top_k: 1
+  topic_entity_link_threshold: 0.60
   hyperedge_top_k: 3
   chunk_top_k: 4
   evidence_keep: 6

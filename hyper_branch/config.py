@@ -28,6 +28,8 @@ class RuntimeConfig:
 @dataclass(slots=True)
 class RetrievalConfig:
     entity_top_k: int = 6
+    topic_entity_link_top_k: int = 1
+    topic_entity_link_threshold: float = 0.6
     hyperedge_top_k: int = 6
     chunk_top_k: int = 8
     evidence_keep: int = 6
@@ -117,6 +119,8 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     )
     retrieval_cfg = RetrievalConfig(
         entity_top_k=int(retrieval.get("entity_top_k", 6)),
+        topic_entity_link_top_k=int(retrieval.get("topic_entity_link_top_k", 1)),
+        topic_entity_link_threshold=float(retrieval.get("topic_entity_link_threshold", 0.6)),
         hyperedge_top_k=int(retrieval.get("hyperedge_top_k", 6)),
         chunk_top_k=int(retrieval.get("chunk_top_k", 8)),
         evidence_keep=int(retrieval.get("evidence_keep", 6)),

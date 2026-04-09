@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
-from .utils import normalize_label
+from .utils import content_tokens, normalize_label
 
 
 @dataclass(slots=True)
@@ -397,6 +397,24 @@ class TaskFrame:
             slot.notes.append(note)
         return True
 
+    def apply_entity_grounding(
+        self,
+        grounded_topic_entities: list[str],
+        metadata: dict[str, Any] | None = None,
+    ) -> None:
+        grounded = self._dedupe_texts(grounded_topic_entities)
+        if grounded:
+            self.topic_entities = list(grounded)
+            self.anchors = list(grounded)
+            self.checklist["anchors"] = [
+                TaskChecklistItem(slot_id=f"anchor-{index}", kind="anchors", text=text)
+                for index, text in enumerate(grounded)
+            ]
+        if metadata:
+            entity_grounding = dict(self.metadata.get("entity_grounding", {}))
+            entity_grounding.update(metadata)
+            self.metadata["entity_grounding"] = entity_grounding
+
     def progress_snapshot(self) -> dict[str, Any]:
         return {
             "question": self.question,
@@ -412,24 +430,6 @@ class TaskFrame:
             "constraints": [asdict(item) for item in self.checklist.get("constraints", [])],
             "bridges": [asdict(item) for item in self.checklist.get("bridges", [])],
             "all_required_satisfied": self.is_satisfied(),
-        }
-
-    def answerability_snapshot(self) -> dict[str, Any]:
-        return {
-            "question": self.question,
-            "topic_entities": list(self.topic_entities),
-            "answer_type_hint": self.answer_type_hint,
-            "relation_intent": self.relation_intent,
-            "hard_constraints": list(self.hard_constraints),
-            "relation_skeleton": self.relation_skeleton,
-            "target": self.target,
-            "anchors": list(self.anchors),
-            "constraints": list(self.constraints),
-            "bridges": list(self.bridges),
-            "guidance": (
-                "Use these fields as soft guidance for what the answer must address. "
-                "Do not require checklist completeness if the current evidence can already answer the original question."
-            ),
         }
 
     def is_satisfied(self) -> bool:
@@ -458,6 +458,20 @@ class TaskFrame:
             "metadata": self.metadata,
             "checklist": self.progress_snapshot(),
         }
+
+    @staticmethod
+    def _dedupe_texts(values: list[Any]) -> list[str]:
+        deduped: list[str] = []
+        for value in values:
+            text = normalize_label(str(value).strip())
+            if not text:
+                continue
+            token_count = len(content_tokens(text)) or len(text.split())
+            if token_count > 12:
+                continue
+            if text not in deduped:
+                deduped.append(text)
+        return deduped
 
 
 @dataclass(slots=True)

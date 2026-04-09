@@ -9,7 +9,54 @@ import numpy as np
 from ..config import ReasoningConfig, RetrievalConfig
 from ..data.loaders import DatasetBundle
 from ..models import EvidenceItem, HyperedgeCandidate, RetrievalControlState, TaskFrame, ThoughtState, VectorMatch
-from ..utils import lexical_overlap_score, normalize_label, short_text
+from ..utils import content_tokens, lexical_overlap_score, normalize_label, short_text
+
+
+GENERIC_TOPIC_ENTITY_TOKENS = {
+    "area",
+    "center",
+    "centre",
+    "city",
+    "college",
+    "community",
+    "concept",
+    "county",
+    "district",
+    "entity",
+    "farm",
+    "group",
+    "location",
+    "network",
+    "organization",
+    "person",
+    "place",
+    "program",
+    "project",
+    "region",
+    "school",
+    "state",
+    "system",
+    "team",
+}
+TEMPORAL_TOPIC_ENTITY_TOKENS = {
+    "centuries",
+    "century",
+    "day",
+    "days",
+    "decade",
+    "decades",
+    "era",
+    "eras",
+    "hundred",
+    "month",
+    "months",
+    "season",
+    "seasons",
+    "time",
+    "times",
+    "year",
+    "years",
+}
 
 
 class EvidenceRetriever:
@@ -31,8 +78,15 @@ class EvidenceRetriever:
         self._hyperedge_labels = [node_id for node_id, node in dataset.graph.nodes.items() if node.role == "hyperedge"]
         self._entity_row_id_by_label = self._build_row_lookup(dataset.entity_store)
         self._hyperedge_row_id_by_label = self._build_row_lookup(dataset.hyperedge_store)
+        self._entity_labels_by_normalized = self._build_normalized_label_lookup(self._entity_labels)
 
     def anchor_task_frame(self, question: str, task_frame: TaskFrame) -> dict[str, Any]:
+        grounding = self._ground_task_frame_entities(question, task_frame)
+        grounded_topic_entities = list(grounding.get("grounded_topic_entities", []))
+        grounding_metadata = dict(grounding.get("metadata", {}))
+        if grounded_topic_entities or grounding_metadata:
+            task_frame.apply_entity_grounding(grounded_topic_entities, grounding_metadata)
+
         query_texts = self._dedupe_texts(
             [
                 question,
@@ -42,7 +96,7 @@ class EvidenceRetriever:
                 task_frame.answer_type_hint,
             ]
         )
-        entity_matches = self._rank_entities(query_texts)
+        entity_matches = list(grounding.get("entity_matches", []))
         initial_entity_ids = [match.label for match in entity_matches[: self.config.entity_top_k]]
 
         hyperedge_candidates = self._rank_hyperedges(
@@ -62,7 +116,8 @@ class EvidenceRetriever:
             candidate.hyperedge_id for candidate in hyperedge_candidates[: self.config.hyperedge_top_k]
         ]
         self.logger.info(
-            "Anchored task frame with %s initial entities and %s initial hyperedges",
+            "Anchored task frame with %s grounded topics, %s initial entities and %s initial hyperedges",
+            len(task_frame.topic_entities),
             len(initial_entity_ids),
             len(initial_hyperedge_ids),
         )
@@ -71,6 +126,8 @@ class EvidenceRetriever:
             "initial_entity_ids": initial_entity_ids,
             "initial_hyperedge_ids": initial_hyperedge_ids,
             "initial_hyperedge_candidates": hyperedge_candidates[: self.config.hyperedge_top_k],
+            "entity_grounding": grounding_metadata,
+            "grounded_topic_entities": list(task_frame.topic_entities),
         }
 
     def retrieve_branch_candidates(
@@ -431,6 +488,171 @@ class EvidenceRetriever:
         ranked = sorted(match_meta.values(), key=lambda item: scores[item.label], reverse=True)
         return ranked[: max(self.config.entity_top_k * 2, self.config.lexical_anchor_top_k)]
 
+    def _ground_task_frame_entities(self, question: str, task_frame: TaskFrame) -> dict[str, Any]:
+        raw_topic_entities = self._dedupe_texts([*task_frame.topic_entities, *task_frame.anchors])
+        grounded_by_label: dict[str, VectorMatch] = {}
+        seed_traces: list[dict[str, Any]] = []
+        filtered_non_discriminative: list[str] = []
+
+        for seed in raw_topic_entities:
+            matches = self._link_topic_seed(seed, stage="seed")
+            accepted, filtered = self._partition_grounded_matches(matches, task_frame)
+            for match in accepted:
+                existing = grounded_by_label.get(match.label)
+                if existing is None or match.score > existing.score:
+                    grounded_by_label[match.label] = match
+            for label in filtered:
+                if label not in filtered_non_discriminative:
+                    filtered_non_discriminative.append(label)
+            seed_traces.append(
+                {
+                    "seed": seed,
+                    "stage": "seed",
+                    "linked_entities": [match.to_dict() for match in matches],
+                    "accepted_entities": [match.label for match in accepted],
+                    "filtered_non_discriminative": list(filtered),
+                }
+            )
+
+        used_question_fallback = False
+        if not grounded_by_label:
+            used_question_fallback = True
+            fallback_matches = self._link_topic_seed(question, stage="question_fallback")
+            accepted, filtered = self._partition_grounded_matches(fallback_matches, task_frame)
+            for match in accepted:
+                existing = grounded_by_label.get(match.label)
+                if existing is None or match.score > existing.score:
+                    grounded_by_label[match.label] = match
+            for label in filtered:
+                if label not in filtered_non_discriminative:
+                    filtered_non_discriminative.append(label)
+            seed_traces.append(
+                {
+                    "seed": question,
+                    "stage": "question_fallback",
+                    "linked_entities": [match.to_dict() for match in fallback_matches],
+                    "accepted_entities": [match.label for match in accepted],
+                    "filtered_non_discriminative": list(filtered),
+                }
+            )
+
+        entity_matches = sorted(
+            grounded_by_label.values(),
+            key=lambda match: (
+                str(match.metadata.get("method", "")) == "exact",
+                match.score,
+                lexical_overlap_score(raw_topic_entities or [question], match.label),
+            ),
+            reverse=True,
+        )
+        grounded_topic_entities = [match.label for match in entity_matches[: self.config.entity_top_k]]
+        metadata = {
+            "method": "proh_topic_linking",
+            "raw_topic_entities": list(raw_topic_entities),
+            "used_question_fallback": used_question_fallback,
+            "seed_traces": seed_traces,
+            "filtered_non_discriminative": filtered_non_discriminative,
+            "grounded_topic_entities": grounded_topic_entities,
+        }
+        return {
+            "entity_matches": entity_matches,
+            "grounded_topic_entities": grounded_topic_entities,
+            "metadata": metadata,
+        }
+
+    def _link_topic_seed(self, seed: str, stage: str) -> list[VectorMatch]:
+        cleaned_seed = normalize_label(seed)
+        if not cleaned_seed:
+            return []
+
+        exact_matches = self._exact_entity_matches(cleaned_seed, stage)
+        if exact_matches:
+            return exact_matches[: max(self.config.topic_entity_link_top_k, 1)]
+
+        query_vectors = self.embedder.embed_texts([cleaned_seed], stage="topic_entity_linking")
+        if not query_vectors:
+            return []
+        matches = self.dataset.entity_store.query(
+            query_vectors[0],
+            top_k=max(self.config.topic_entity_link_top_k, 1),
+        )
+        linked: list[VectorMatch] = []
+        for match in matches:
+            if match.score < self.config.topic_entity_link_threshold:
+                continue
+            metadata = dict(match.metadata)
+            metadata.update(
+                {
+                    "seed": cleaned_seed,
+                    "stage": stage,
+                    "method": "vector",
+                }
+            )
+            linked.append(
+                VectorMatch(
+                    item_id=match.item_id,
+                    label=match.label,
+                    score=match.score,
+                    metadata=metadata,
+                )
+            )
+        return linked
+
+    def _exact_entity_matches(self, seed: str, stage: str) -> list[VectorMatch]:
+        normalized_seed = normalize_label(seed).lower()
+        if not normalized_seed:
+            return []
+        matches: list[VectorMatch] = []
+        for label in self._entity_labels_by_normalized.get(normalized_seed, [])[: max(self.config.topic_entity_link_top_k, 1)]:
+            matches.append(
+                VectorMatch(
+                    item_id=self._entity_row_id_by_label.get(label, label),
+                    label=label,
+                    score=1.0,
+                    metadata={
+                        "seed": seed,
+                        "stage": stage,
+                        "method": "exact",
+                    },
+                )
+            )
+        return matches
+
+    def _partition_grounded_matches(
+        self,
+        matches: list[VectorMatch],
+        task_frame: TaskFrame,
+    ) -> tuple[list[VectorMatch], list[str]]:
+        accepted: list[VectorMatch] = []
+        filtered: list[str] = []
+        for match in matches:
+            if self._is_discriminative_topic_entity(match.label, task_frame):
+                accepted.append(match)
+            else:
+                filtered.append(match.label)
+        return accepted, filtered
+
+    def _is_discriminative_topic_entity(self, entity_id: str, task_frame: TaskFrame) -> bool:
+        tokens = set(content_tokens(entity_id))
+        if not tokens:
+            return False
+        if tokens.issubset(TEMPORAL_TOPIC_ENTITY_TOKENS):
+            return False
+        if len(tokens) == 1 and tokens.issubset(GENERIC_TOPIC_ENTITY_TOKENS):
+            return False
+
+        answer_type_tokens = set(content_tokens(task_frame.answer_type_hint))
+        if answer_type_tokens and tokens.issubset(answer_type_tokens | GENERIC_TOPIC_ENTITY_TOKENS):
+            return False
+        if len(tokens) <= 2 and tokens.issubset(GENERIC_TOPIC_ENTITY_TOKENS):
+            return False
+
+        node = self.dataset.graph.nodes.get(entity_id)
+        entity_type = str(getattr(node, "entity_type", "") or "").strip().lower()
+        if entity_type in {"date", "duration", "number", "numeric", "time", "year"}:
+            return False
+        return True
+
     def _rank_hyperedges(
         self,
         query_texts: list[str],
@@ -705,6 +927,15 @@ class EvidenceRetriever:
         for row, row_id in zip(store.rows, store.row_ids, strict=True):
             label = store._label_for_row(row, row_id)
             lookup[str(label)] = str(row_id)
+        return lookup
+
+    def _build_normalized_label_lookup(self, labels: list[str]) -> dict[str, list[str]]:
+        lookup: dict[str, list[str]] = defaultdict(list)
+        for label in labels:
+            normalized = normalize_label(label).lower()
+            if not normalized:
+                continue
+            lookup[normalized].append(label)
         return lookup
 
     def _dedupe_texts(self, texts: list[str]) -> list[str]:

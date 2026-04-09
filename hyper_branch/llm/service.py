@@ -132,7 +132,7 @@ class OpenAIReasoningService(ReasoningService):
         payload = {
             "question": question,
             "iteration": iteration,
-            "question_goal": task_frame.answerability_snapshot(),
+            "task_frame_progress": task_frame.progress_snapshot(),
             "llm_evidence_view": llm_evidence_view,
         }
         response = self.client.chat_json("evidence_judge", self.prompts.get("evidence_judge"), payload)

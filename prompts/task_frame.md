@@ -14,7 +14,8 @@ Return JSON only with this schema:
 }
 
 Requirements:
-- `topic_entities` are the entities, concepts, locations, organizations, or salient phrases explicitly mentioned in the question.
+- `topic_entities` are candidate graph-linking seeds from the question surface form; prefer entities, concepts, locations, organizations, or salient phrases explicitly mentioned in the question.
+- Do not invent specific named entities that are not directly supported by the question text. These seeds will be linked to graph entity names later.
 - `answer_type_hint` should describe the expected answer type, not the answer itself.
 - `relation_intent` should state what relation the question is really asking about.
 - `hard_constraints` should capture conjunctive conditions, time/location/type restrictions, or any "must satisfy" clues.
