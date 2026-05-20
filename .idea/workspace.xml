@@ -7,13 +7,6 @@
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/get_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval/get_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/llm/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/llm/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/reasoning/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/reasoning/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/reasoning/operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/reasoning/operations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/retrieval/evidence.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/retrieval/evidence.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_reasoning_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_reasoning_control.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="4563" />
+    <option name="cachedIndexableFilesCount" value="8374" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -32,6 +25,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/eval/results/mix/first88_20260414_183657/test_score.json" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -63,8 +59,10 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/GitHub/HyperBranch&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -72,13 +70,14 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMThirdPartyAiProvidersConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.intellij.sdk.settings.AppSettingsConfigurable&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\GitHub\HyperBranch" />
       <recent name="D:\GitHub\GoT_HGs_RAG" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -87,36 +86,6 @@
       <recent name="D:\GitHub\HyperBranch\questions" />
       <recent name="D:\GitHub\GoT_HGs_RAG\datasets" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="cli" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="GoT_HGs_RAG" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="--question-file" value="D:\GitHub\GoT_HGs_RAG\questions\agriculture\query_test.json" />
-        <env name="OPENAI_API_KEY" value="sk-olxsNswN3LrJjFKOduxcUsn3LGiGUXPTz7X0v7uu5udabPrz" />
-        <env name="OPENAI_BASE_URL" value="https://api.chatanywhere.tech" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Remote 3.11 (sftp://ps@210.45.212.126:5202/home/ps/miniconda3/envs/proh_yq/bin/python3.11)" />
-      <option name="WORKING_DIRECTORY" value="D:\GitHub\GoT_HGs_RAG" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/goth_hyper/cli.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -150,7 +119,27 @@
       <workItem from="1775783827377" duration="5228000" />
       <workItem from="1776047668856" duration="43380000" />
       <workItem from="1776163517782" duration="43850000" />
-      <workItem from="1776311637659" duration="17587000" />
+      <workItem from="1776311637659" duration="21210000" />
+      <workItem from="1776388534835" duration="559000" />
+      <workItem from="1776389329620" duration="110000" />
+      <workItem from="1776389502181" duration="18000" />
+      <workItem from="1776391482194" duration="32000" />
+      <workItem from="1776391629777" duration="1936000" />
+      <workItem from="1776393832186" duration="456000" />
+      <workItem from="1776394304357" duration="235000" />
+      <workItem from="1776394551546" duration="232000" />
+      <workItem from="1776394796777" duration="354000" />
+      <workItem from="1776395173645" duration="699000" />
+      <workItem from="1776397868179" duration="1987000" />
+      <workItem from="1776406366461" duration="360000" />
+      <workItem from="1776406741132" duration="3184000" />
+      <workItem from="1776414659065" duration="7242000" />
+      <workItem from="1776648211296" duration="194000" />
+      <workItem from="1776648435977" duration="141000" />
+      <workItem from="1776648598505" duration="7000" />
+      <workItem from="1776648635094" duration="280000" />
+      <workItem from="1776657273791" duration="13328000" />
+      <workItem from="1779189771278" duration="13929000" />
     </task>
     <servers />
   </component>
