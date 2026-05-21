@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -37,6 +37,13 @@ class RetrievalConfig:
     lexical_anchor_top_k: int = 12
     branch_candidate_pool: int = 18
     focus_match_min_score: float = 0.08
+    relation_top_k: int = 10
+    semantic_top_k: int = 10
+    evidence_top_k: int = 5
+    fusion_weights: dict[str, float] = field(
+        default_factory=lambda: {"anchor": 0.4, "relation": 0.4, "semantic": 0.2}
+    )
+    max_anchor_hyperedges_per_entity: int | None = None
 
 
 @dataclass(slots=True)
@@ -63,6 +70,7 @@ class ReasoningConfig:
     fused_penalty_weight: float = 0.18
     fused_focus_weight: float = 0.16
     control_weight_step: float = 0.35
+    enable_legacy_reasoning_controller: bool = False
 
 
 @dataclass(slots=True)
@@ -128,6 +136,11 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         lexical_anchor_top_k=int(retrieval.get("lexical_anchor_top_k", 12)),
         branch_candidate_pool=int(retrieval.get("branch_candidate_pool", 18)),
         focus_match_min_score=float(retrieval.get("focus_match_min_score", 0.08)),
+        relation_top_k=int(retrieval.get("relation_top_k", 10)),
+        semantic_top_k=int(retrieval.get("semantic_top_k", 10)),
+        evidence_top_k=int(retrieval.get("evidence_top_k", 5)),
+        fusion_weights=_fusion_weights(retrieval.get("fusion_weights", {})),
+        max_anchor_hyperedges_per_entity=_optional_int(retrieval.get("max_anchor_hyperedges_per_entity")),
     )
     reasoning_cfg = ReasoningConfig(
         max_steps=int(reasoning.get("max_steps", 5)),
@@ -152,6 +165,7 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         fused_penalty_weight=float(reasoning.get("fused_penalty_weight", 0.18)),
         fused_focus_weight=float(reasoning.get("fused_focus_weight", 0.16)),
         control_weight_step=float(reasoning.get("control_weight_step", 0.35)),
+        enable_legacy_reasoning_controller=bool(reasoning.get("enable_legacy_reasoning_controller", False)),
     )
     llm_cfg = LLMConfig(
         api_key_env=str(llm.get("api_key_env", "OPENAI_API_KEY")),
@@ -181,3 +195,19 @@ def _resolve_path(project_root: Path, value: str | Path) -> Path:
     if candidate.is_absolute():
         return candidate
     return (project_root / candidate).resolve()
+
+
+def _optional_int(value: Any) -> int | None:
+    if value is None or value == "":
+        return None
+    return int(value)
+
+
+def _fusion_weights(value: Any) -> dict[str, float]:
+    if not isinstance(value, dict):
+        value = {}
+    return {
+        "anchor": float(value.get("anchor", 0.4)),
+        "relation": float(value.get("relation", 0.4)),
+        "semantic": float(value.get("semantic", 0.2)),
+    }

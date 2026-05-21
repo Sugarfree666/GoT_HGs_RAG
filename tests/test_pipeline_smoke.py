@@ -24,8 +24,10 @@ class PipelineSmokeTest(unittest.TestCase):
 
         self.assertTrue(result["final_answer"]["answer"])
         self.assertTrue((run_dir / "artifacts" / "final_answer.json").exists())
-        self.assertTrue((run_dir / "artifacts" / "evidence_subgraph.json").exists())
-        self.assertTrue((run_dir / "artifacts" / "llm_evidence_view.json").exists())
+        self.assertTrue((run_dir / "artifacts" / "dag_input.json").exists())
+        self.assertTrue((run_dir / "artifacts" / "atomic_question_analyses.json").exists())
+        self.assertTrue((run_dir / "artifacts" / "atomic_retrieval.json").exists())
+        self.assertTrue((run_dir / "artifacts" / "atomic_answers.json").exists())
         self.assertTrue((run_dir / "run.log").exists())
 
 

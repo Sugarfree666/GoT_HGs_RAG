@@ -4,15 +4,17 @@ import logging
 from pathlib import Path
 from typing import Any
 
+from .atomic import (
+    AtomicDagExecutor,
+    AtomicEvidenceFusion,
+    AtomicHyperedgeRetriever,
+    AtomicQuestionAnalyzer,
+    FinalAnswerComposer,
+)
 from .config import Config
 from .data.loaders import HypergraphDatasetLoader
 from .llm import LocalHashEmbeddingClient, MockReasoningService, OpenAICompatibleClient, OpenAIReasoningService, PromptManager
 from .logging_utils import TraceStore
-from .reasoning.controller import ThoughtController
-from .reasoning.operations import ThoughtOperationExecutor
-from .reasoning.scoring import ThoughtScorer
-from .reasoning.taskframe import TaskFrameBuilder, TaskFrameRegistry
-from .retrieval.evidence import EvidenceRetriever
 
 
 class HyperBranchPipeline:
@@ -32,53 +34,48 @@ class HyperBranchPipeline:
         self.dataset = loader.load()
         self.trace_store.save_artifact("artifacts/dataset_summary.json", self.dataset.summary)
 
+        prompts = PromptManager(config.prompts.directory)
         if config.llm.use_mock:
             self.embedder = LocalHashEmbeddingClient()
             self.llm_service = MockReasoningService()
         else:
             client = OpenAICompatibleClient(config.llm, trace_store=trace_store)
             self.embedder = client
-            prompts = PromptManager(config.prompts.directory)
             self.llm_service = OpenAIReasoningService(client=client, prompts=prompts)
 
-        taskframe_builder = TaskFrameBuilder(self.llm_service, self.dataset, logger, trace_store)
-        registry = TaskFrameRegistry(
-            embedder=self.embedder,
-            threshold=config.retrieval.taskframe_registration_threshold,
-            logger=logger,
-            trace_store=trace_store,
-        )
-        scorer = ThoughtScorer(embedder=self.embedder, config=config.reasoning, logger=logger)
-        evidence_retriever = EvidenceRetriever(
+        analyzer = AtomicQuestionAnalyzer(llm_service=self.llm_service)
+        retriever = AtomicHyperedgeRetriever(
             dataset=self.dataset,
             embedder=self.embedder,
             config=config.retrieval,
             logger=logger,
-            reasoning_config=config.reasoning,
         )
-        executor = ThoughtOperationExecutor(logger=logger, trace_store=trace_store)
-        self.controller = ThoughtController(
-            config=config,
-            dataset=self.dataset,
-            taskframe_builder=taskframe_builder,
-            registry=registry,
-            scorer=scorer,
-            evidence_retriever=evidence_retriever,
-            executor=executor,
+        fusion = AtomicEvidenceFusion(config=config.retrieval, embedder=self.embedder)
+        composer = FinalAnswerComposer(llm_service=self.llm_service)
+        self.executor = AtomicDagExecutor(
+            analyzer=analyzer,
+            retriever=retriever,
+            fusion=fusion,
+            composer=composer,
             llm_service=self.llm_service,
             logger=logger,
-            trace_store=trace_store,
         )
 
-    def run(self, question: str) -> dict[str, Any]:
+    def run(self, question: str, dag_payload: Any | None = None) -> dict[str, Any]:
         self.logger.info("Starting HyperBranch pipeline for question: %s", question)
-        result = self.controller.run(question)
-        self.trace_store.save_artifact("artifacts/task_frame.json", result["task_frame"])
-        self.trace_store.save_artifact("artifacts/thought_graph.json", result["thought_graph"])
-        self.trace_store.save_artifact("artifacts/evidence_subgraph.json", result["evidence_subgraph"])
-        if "llm_evidence_view" in result:
-            self.trace_store.save_artifact("artifacts/llm_evidence_view.json", result["llm_evidence_view"])
-        self.trace_store.save_artifact("artifacts/final_answer.json", result["final_answer"])
-        result["run_dir"] = str(self.run_dir)
+        if dag_payload is None:
+            self.logger.info(
+                "No DAG payload supplied; treating the question as a single atomic node for compatibility."
+            )
+        result = self.executor.run(original_question=question, dag_payload=dag_payload)
+        artifacts = result.artifacts
+        self.trace_store.save_artifact("artifacts/dag_input.json", artifacts["dag_input"])
+        self.trace_store.save_artifact("artifacts/atomic_question_analyses.json", artifacts["atomic_question_analyses"])
+        self.trace_store.save_artifact("artifacts/atomic_retrieval.json", artifacts["atomic_retrieval"])
+        self.trace_store.save_artifact("artifacts/atomic_answers.json", artifacts["atomic_answers"])
+        self.trace_store.save_artifact("artifacts/final_answer.json", result.final_answer)
+
+        payload = result.to_dict()
+        payload["run_dir"] = str(self.run_dir)
         self.logger.info("Pipeline finished. Artifacts saved under %s", self.run_dir)
-        return result
+        return payload

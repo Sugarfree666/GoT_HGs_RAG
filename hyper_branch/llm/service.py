@@ -109,6 +109,73 @@ class OpenAIReasoningService(ReasoningService):
         self.client = client
         self.prompts = prompts
 
+    def analyze_atomic_question(
+        self,
+        atomic_question: str,
+        dependency_answers: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        payload = {
+            "atomic_question": atomic_question,
+            "dependency_answers": dependency_answers,
+        }
+        response = self.client.chat_json(
+            "atomic_question_analysis",
+            self.prompts.get("atomic_question_analysis"),
+            payload,
+            max_tokens=700,
+        )
+        response.setdefault("entities", [])
+        response.setdefault("relations", [])
+        response.setdefault("relation_query", "")
+        response.setdefault("answer_type", "")
+        return response
+
+    def answer_atomic_question(
+        self,
+        atomic_question: str,
+        dependency_answers: list[dict[str, Any]],
+        evidence: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        payload = {
+            "atomic_question": atomic_question,
+            "dependency_answers": dependency_answers,
+            "top_evidence": evidence,
+        }
+        response = self.client.chat_json(
+            "atomic_answer",
+            self.prompts.get("atomic_answer"),
+            payload,
+            max_tokens=900,
+        )
+        response.setdefault("answer", "")
+        response.setdefault("confidence", 0.0)
+        response.setdefault("reasoning_summary", "")
+        response.setdefault("used_hyperedge_ids", [])
+        response.setdefault("insufficient", False)
+        return response
+
+    def compose_final_answer(
+        self,
+        original_question: str,
+        atomic_results: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        payload = {
+            "original_question": original_question,
+            "atomic_results": atomic_results,
+        }
+        response = self.client.chat_json(
+            "final_answer_composer",
+            self.prompts.get("final_answer_composer"),
+            payload,
+            max_tokens=1100,
+        )
+        response.setdefault("answer", "")
+        response.setdefault("reasoning_summary", "")
+        response.setdefault("confidence", 0.0)
+        response.setdefault("atomic_answer_trace", [])
+        response.setdefault("remaining_gaps", [])
+        return response
+
     def build_task_frame(self, question: str, dataset_summary: dict[str, Any]) -> dict[str, Any]:
         payload = {
             "question": question,
@@ -188,6 +255,102 @@ class OpenAIReasoningService(ReasoningService):
 
 
 class MockReasoningService(ReasoningService):
+    def analyze_atomic_question(
+        self,
+        atomic_question: str,
+        dependency_answers: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        del dependency_answers
+        entities = [
+            phrase
+            for phrase in _extract_topic_phrases(atomic_question)
+            if phrase.lower() not in {"what", "which", "who", "where", "when", "how"}
+        ][:4]
+        relation_intent = _infer_relation_intent(atomic_question)
+        return {
+            "entities": entities,
+            "relations": [relation_intent] if relation_intent else [],
+            "relation_query": _mask_atomic_entities(atomic_question, entities),
+            "answer_type": _infer_answer_type(atomic_question),
+        }
+
+    def answer_atomic_question(
+        self,
+        atomic_question: str,
+        dependency_answers: list[dict[str, Any]],
+        evidence: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        del dependency_answers
+        if not evidence:
+            return {
+                "answer": "INSUFFICIENT_EVIDENCE",
+                "confidence": 0.0,
+                "reasoning_summary": "No top evidence was provided.",
+                "used_hyperedge_ids": [],
+                "insufficient": True,
+            }
+
+        query_tokens = set(content_tokens(atomic_question))
+        answer = ""
+        first = evidence[0]
+        for item in evidence:
+            for entity_id in ensure_list(item.get("entity_ids", [])):
+                label = normalize_label(str(entity_id))
+                label_tokens = set(content_tokens(label))
+                if label and not label_tokens.issubset(query_tokens):
+                    answer = label
+                    break
+            if answer:
+                break
+        if not answer:
+            answer = short_text(str(first.get("hyperedge_text", "")), 160)
+        confidence = min(0.95, 0.35 + (0.1 * len(first.get("branch_support", []))) + (0.03 * len(evidence)))
+        evidence_texts = ensure_list(first.get("evidence_texts", []))
+        summary = short_text(" ".join(str(item) for item in evidence_texts) or str(first.get("hyperedge_text", "")), 420)
+        return {
+            "answer": answer,
+            "confidence": confidence,
+            "reasoning_summary": summary,
+            "used_hyperedge_ids": [str(first.get("hyperedge_id", ""))],
+            "insufficient": False,
+        }
+
+    def compose_final_answer(
+        self,
+        original_question: str,
+        atomic_results: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        del original_question
+        answers = [
+            str(item.get("answer", "")).strip()
+            for item in atomic_results
+            if str(item.get("answer", "")).strip() and str(item.get("answer", "")).strip() != "INSUFFICIENT_EVIDENCE"
+        ]
+        answer = answers[-1] if answers else "INSUFFICIENT_EVIDENCE"
+        if len(answers) > 1:
+            answer = "; ".join(answers)
+        confidence_values = [float(item.get("confidence", 0.0) or 0.0) for item in atomic_results]
+        confidence = sum(confidence_values) / len(confidence_values) if confidence_values else 0.0
+        return {
+            "answer": answer,
+            "reasoning_summary": short_text(" | ".join(str(item.get("reasoning_summary", "")) for item in atomic_results), 600),
+            "confidence": confidence,
+            "atomic_answer_trace": [
+                {
+                    "node_id": item.get("node_id", ""),
+                    "question": item.get("question", ""),
+                    "answer": item.get("answer", ""),
+                    "used_hyperedge_ids": list(item.get("used_hyperedge_ids", [])),
+                }
+                for item in atomic_results
+            ],
+            "remaining_gaps": [
+                item.get("node_id", "")
+                for item in atomic_results
+                if str(item.get("answer", "")).strip() in {"", "INSUFFICIENT_EVIDENCE"}
+            ],
+        }
+
     def build_task_frame(self, question: str, dataset_summary: dict[str, Any]) -> dict[str, Any]:
         del dataset_summary
         phrases = _extract_topic_phrases(question)
@@ -328,6 +491,16 @@ def _extract_topic_phrases(question: str) -> list[str]:
         if phrase and phrase not in deduped:
             deduped.append(phrase)
     return deduped[:6]
+
+
+def _mask_atomic_entities(question: str, entities: list[str]) -> str:
+    masked = question.strip().rstrip("?")
+    for entity in entities:
+        text = str(entity).strip()
+        if text:
+            masked = re.sub(re.escape(text), "an entity", masked, flags=re.IGNORECASE)
+    tokens = content_tokens(masked)
+    return " ".join(tokens) if tokens else masked
 
 
 def _infer_answer_type(question: str) -> str:
