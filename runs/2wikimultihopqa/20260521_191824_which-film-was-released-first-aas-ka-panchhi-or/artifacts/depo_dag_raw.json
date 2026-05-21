@@ -1,0 +1,105 @@
+{
+  "nodes": [
+    {
+      "id": "q1",
+      "question": "What is the release date of Aas Ka Panchhi?",
+      "type": "lookup",
+      "inputs": [
+        "Aas Ka Panchhi"
+      ],
+      "output": "X1",
+      "depends_on": [],
+      "source_node": "film_1",
+      "target_node": "release_date_1",
+      "ast_edge": {
+        "source": "film_1",
+        "target": "release_date_1",
+        "edge_type": "attribute",
+        "relation_hint": "release date of film",
+        "support_path": [
+          "Aas Ka Panchhi",
+          "film",
+          "release date"
+        ],
+        "support_dependency_relations": []
+      },
+      "operator": null,
+      "candidate_bindings": [],
+      "source": "llm"
+    },
+    {
+      "id": "q2",
+      "question": "What is the release date of Phoolwari?",
+      "type": "lookup",
+      "inputs": [
+        "Phoolwari"
+      ],
+      "output": "X2",
+      "depends_on": [],
+      "source_node": "film_2",
+      "target_node": "release_date_2",
+      "ast_edge": {
+        "source": "film_2",
+        "target": "release_date_2",
+        "edge_type": "attribute",
+        "relation_hint": "release date of film",
+        "support_path": [
+          "Phoolwari",
+          "film",
+          "release date"
+        ],
+        "support_dependency_relations": []
+      },
+      "operator": null,
+      "candidate_bindings": [],
+      "source": "llm"
+    },
+    {
+      "id": "q3",
+      "question": "Which film has the release date X1 of Aas Ka Panchhi released first compared to the release date X2 of Phoolwari?",
+      "type": "selection",
+      "inputs": [
+        "X1",
+        "X2"
+      ],
+      "output": "FINAL",
+      "depends_on": [
+        "q1",
+        "q2"
+      ],
+      "source_node": null,
+      "target_node": null,
+      "ast_edge": null,
+      "operator": "COMPARE_LESS",
+      "candidate_bindings": [
+        {
+          "candidate": "Aas Ka Panchhi",
+          "value": "X1"
+        },
+        {
+          "candidate": "Phoolwari",
+          "value": "X2"
+        }
+      ],
+      "source": "llm"
+    }
+  ],
+  "edges": [
+    {
+      "source": "q1",
+      "target": "q3",
+      "variable": "X1"
+    },
+    {
+      "source": "q2",
+      "target": "q3",
+      "variable": "X2"
+    }
+  ],
+  "variable_to_question": {
+    "X1": "q1",
+    "X2": "q2",
+    "FINAL": "q3"
+  },
+  "warnings": []
+}

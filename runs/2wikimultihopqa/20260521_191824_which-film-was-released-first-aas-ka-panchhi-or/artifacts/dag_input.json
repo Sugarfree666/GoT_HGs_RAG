@@ -1,0 +1,91 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the release date of Aas Ka Panchhi?",
+    "dependencies": [],
+    "metadata": {
+      "type": "lookup",
+      "inputs": [
+        "Aas Ka Panchhi"
+      ],
+      "output": "X1",
+      "source_node": "film_1",
+      "target_node": "release_date_1",
+      "ast_edge": {
+        "source": "film_1",
+        "target": "release_date_1",
+        "edge_type": "attribute",
+        "relation_hint": "release date of film",
+        "support_path": [
+          "Aas Ka Panchhi",
+          "film",
+          "release date"
+        ],
+        "support_dependency_relations": []
+      },
+      "operator": null,
+      "candidate_bindings": [],
+      "source": "llm"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Phoolwari?",
+    "dependencies": [],
+    "metadata": {
+      "type": "lookup",
+      "inputs": [
+        "Phoolwari"
+      ],
+      "output": "X2",
+      "source_node": "film_2",
+      "target_node": "release_date_2",
+      "ast_edge": {
+        "source": "film_2",
+        "target": "release_date_2",
+        "edge_type": "attribute",
+        "relation_hint": "release date of film",
+        "support_path": [
+          "Phoolwari",
+          "film",
+          "release date"
+        ],
+        "support_dependency_relations": []
+      },
+      "operator": null,
+      "candidate_bindings": [],
+      "source": "llm"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Which film has the release date X1 of Aas Ka Panchhi released first compared to the release date X2 of Phoolwari?",
+    "dependencies": [
+      "q1",
+      "q2"
+    ],
+    "metadata": {
+      "type": "selection",
+      "inputs": [
+        "X1",
+        "X2"
+      ],
+      "output": "FINAL",
+      "source_node": null,
+      "target_node": null,
+      "ast_edge": null,
+      "operator": "COMPARE_LESS",
+      "candidate_bindings": [
+        {
+          "candidate": "Aas Ka Panchhi",
+          "value": "X1"
+        },
+        {
+          "candidate": "Phoolwari",
+          "value": "X2"
+        }
+      ],
+      "source": "llm"
+    }
+  }
+]
