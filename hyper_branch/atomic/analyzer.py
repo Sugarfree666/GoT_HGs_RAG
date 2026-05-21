@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from typing import Any
 
+from ..llm.service import AtomicLLMService
 from ..utils import content_tokens, ensure_list, normalize_label
 from .models import AtomicQuestionAnalysis
 
@@ -15,7 +16,7 @@ RELATION_STOPWORDS = WH_WORDS | {"did", "does", "do", "is", "are", "was", "were"
 
 
 class AtomicQuestionAnalyzer:
-    def __init__(self, llm_service: Any | None = None) -> None:
+    def __init__(self, llm_service: AtomicLLMService | None = None) -> None:
         self.llm_service = llm_service
 
     def analyze(
@@ -24,7 +25,7 @@ class AtomicQuestionAnalyzer:
         dependency_answers: list[dict[str, Any]] | None = None,
     ) -> AtomicQuestionAnalysis:
         dependency_answers = dependency_answers or []
-        if self.llm_service is not None and hasattr(self.llm_service, "analyze_atomic_question"):
+        if self.llm_service is not None:
             payload = self.llm_service.analyze_atomic_question(
                 atomic_question=atomic_question,
                 dependency_answers=dependency_answers,

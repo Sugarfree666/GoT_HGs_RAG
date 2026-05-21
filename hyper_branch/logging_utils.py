@@ -12,7 +12,7 @@ from .utils import pretty_json, slugify
 
 CONSOLE_SUMMARY_PREFIXES = (
     "Starting HyperBranch pipeline",
-    "Iterative reasoning step",
+    "Executing atomic DAG",
     "Pipeline finished",
 )
 

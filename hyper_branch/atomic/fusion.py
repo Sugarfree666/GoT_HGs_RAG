@@ -23,15 +23,13 @@ class AtomicEvidenceFusion:
         self.embedder = embedder
         self.weights = dict(DEFAULT_FUSION_WEIGHTS)
         if config is not None:
-            configured = getattr(config, "fusion_weights", None)
-            if isinstance(configured, dict):
-                self.weights.update(
-                    {
-                        "anchor": float(configured.get("anchor", self.weights["anchor"])),
-                        "relation": float(configured.get("relation", self.weights["relation"])),
-                        "semantic": float(configured.get("semantic", self.weights["semantic"])),
-                    }
-                )
+            self.weights.update(
+                {
+                    "anchor": float(getattr(config, "anchor_weight", self.weights["anchor"])),
+                    "relation": float(getattr(config, "relation_weight", self.weights["relation"])),
+                    "semantic": float(getattr(config, "semantic_weight", self.weights["semantic"])),
+                }
+            )
 
     def fuse(
         self,

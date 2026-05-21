@@ -5,4 +5,10 @@ eval/results
 PRoH-main
 HyperRAG-main
 __pycache__/
+**/__pycache__/
 *.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+!runs/2wikimultihopqa/20260521_184035_which-film-was-released-first-aas-ka-panchhi-or

@@ -23,6 +23,62 @@ from hyper_branch.utils import normalize_label
 
 
 class AtomicDagAdapterTest(unittest.TestCase):
+    def test_depo_entity_inputs_are_not_dependencies_when_depends_on_is_empty(self) -> None:
+        dag = {
+            "nodes": [
+                {
+                    "id": "q1",
+                    "question": "What is the release date of Aas Ka Panchhi?",
+                    "inputs": ["Aas Ka Panchhi"],
+                    "output": "X1",
+                    "depends_on": [],
+                },
+                {
+                    "id": "q2",
+                    "question": "What is the release date of Phoolwari?",
+                    "inputs": ["Phoolwari"],
+                    "output": "X2",
+                    "depends_on": [],
+                },
+                {
+                    "id": "q3",
+                    "question": "Which film was released first?",
+                    "inputs": ["X1", "X2"],
+                    "output": "FINAL",
+                    "depends_on": ["q1", "q2"],
+                },
+            ],
+            "edges": [
+                {"source": "q1", "target": "q3", "variable": "X1"},
+                {"source": "q2", "target": "q3", "variable": "X2"},
+            ],
+            "variable_to_question": {"X1": "q1", "X2": "q2", "FINAL": "q3"},
+        }
+
+        nodes = AtomicDagExecutor.normalize_dag_payload(dag)
+        by_id = {node.node_id: node for node in nodes}
+        order = AtomicDagExecutor.topological_sort(nodes)
+
+        self.assertEqual(by_id["q1"].dependencies, [])
+        self.assertEqual(by_id["q2"].dependencies, [])
+        self.assertEqual(by_id["q3"].dependencies, ["q1", "q2"])
+        self.assertEqual([node.node_id for node in order], ["q1", "q2", "q3"])
+
+    def test_inputs_can_derive_dependencies_only_from_known_nodes_or_variables(self) -> None:
+        dag = {
+            "nodes": [
+                {"id": "q1", "question": "What is X?", "output": "X1"},
+                {"id": "q2", "question": "Use X.", "inputs": ["X1", "literal entity"]},
+            ],
+            "variable_to_question": {"X1": "q1"},
+        }
+
+        nodes = AtomicDagExecutor.normalize_dag_payload(dag)
+        by_id = {node.node_id: node for node in nodes}
+
+        self.assertEqual(by_id["q1"].dependencies, [])
+        self.assertEqual(by_id["q2"].dependencies, ["q1"])
+
     def test_topological_sort_respects_dependencies(self) -> None:
         nodes = [
             AtomicQuestionNode(node_id="c", question="third", dependencies=["b"]),
@@ -167,6 +223,33 @@ class RetrieverGraph:
 
 
 class AtomicRetrieverTest(unittest.TestCase):
+    def test_retrieve_runs_anchor_relation_and_semantic_branches(self) -> None:
+        hyperedge_ids = ["anchor-hit", "relation-hit", "semantic-hit"]
+        store = MappingHyperedgeStore(
+            {
+                "relation query": [VectorMatch(item_id="relation-hit", label="relation-hit", score=0.8)],
+                "semantic question": [VectorMatch(item_id="semantic-hit", label="semantic-hit", score=0.7)],
+            }
+        )
+        dataset = SimpleNamespace(
+            graph=RetrieverGraph(hyperedge_ids),
+            hyperedge_store=store,
+            get_chunk_text=lambda chunk_id: f"text for {chunk_id}",
+        )
+        retriever = AtomicHyperedgeRetriever(
+            dataset=dataset,
+            embedder=TextEmbedder(),
+            config=RetrievalConfig(relation_top_k=10, semantic_top_k=10),
+            logger=logging.getLogger("test.atomic_retriever"),
+        )
+
+        hits = retriever.retrieve(
+            "semantic question",
+            AtomicQuestionAnalysis(entities=["ENTITY A"], relation_query="relation query"),
+        )
+
+        self.assertEqual({hit.branch for hit in hits}, {"anchor", "relation", "semantic"})
+
     def test_relation_and_semantic_branches_use_top_10(self) -> None:
         hyperedge_ids = [f"h{index}" for index in range(12)]
         relation_matches = [VectorMatch(item_id=item, label=item, score=1.0 - (index * 0.01)) for index, item in enumerate(hyperedge_ids)]
@@ -230,6 +313,22 @@ class AtomicPipelineSmokeTest(unittest.TestCase):
         self.assertTrue((run_dir / "artifacts" / "atomic_retrieval.json").exists())
         self.assertTrue((run_dir / "artifacts" / "atomic_answers.json").exists())
         self.assertTrue((run_dir / "artifacts" / "final_answer.json").exists())
+        self.assertFalse((run_dir / "artifacts" / "task_frame.json").exists())
+        self.assertFalse((run_dir / "artifacts" / "thought_graph.json").exists())
+        self.assertFalse((run_dir / "artifacts" / "evidence_subgraph.json").exists())
+        self.assertFalse((run_dir / "artifacts" / "llm_evidence_view.json").exists())
+
+    def test_pipeline_source_does_not_import_old_controller(self) -> None:
+        source = (Path(__file__).resolve().parents[1] / "hyper_branch" / "pipeline.py").read_text(encoding="utf-8")
+        forbidden = [
+            "Thought" + "Controller",
+            "Thought" + "Scorer",
+            "TaskFrame" + "Builder",
+            "TaskFrame" + "Registry",
+            "Evidence" + "Retriever",
+        ]
+
+        self.assertFalse(any(item in source for item in forbidden))
 
 
 if __name__ == "__main__":

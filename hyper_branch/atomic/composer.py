@@ -2,17 +2,18 @@ from __future__ import annotations
 
 from typing import Any
 
+from ..llm.service import AtomicLLMService
 from ..utils import short_text
 from .models import AtomicAnswerResult
 
 
 class FinalAnswerComposer:
-    def __init__(self, llm_service: Any | None = None) -> None:
+    def __init__(self, llm_service: AtomicLLMService | None = None) -> None:
         self.llm_service = llm_service
 
     def compose(self, original_question: str, atomic_results: list[AtomicAnswerResult]) -> dict[str, Any]:
         payload_results = [self._result_payload(result) for result in atomic_results]
-        if self.llm_service is not None and hasattr(self.llm_service, "compose_final_answer"):
+        if self.llm_service is not None:
             payload = self.llm_service.compose_final_answer(
                 original_question=original_question,
                 atomic_results=payload_results,

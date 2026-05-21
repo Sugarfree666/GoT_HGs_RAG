@@ -10,7 +10,7 @@ from unittest.mock import MagicMock, patch
 from urllib import error
 
 from hyper_branch import cli
-from hyper_branch.config import Config, DatasetConfig, LLMConfig, PromptConfig, ReasoningConfig, RetrievalConfig, RuntimeConfig
+from hyper_branch.config import Config, DatasetConfig, LLMConfig, PromptConfig, RetrievalConfig, RuntimeConfig
 from hyper_branch.llm.client import OpenAICompatibleClient
 
 
@@ -58,7 +58,6 @@ class CLIAllowFailureTest(unittest.TestCase):
                 dataset=DatasetConfig(root=Path(tmp_dir)),
                 runtime=RuntimeConfig(base_run_dir=base_run_dir),
                 retrieval=RetrievalConfig(),
-                reasoning=ReasoningConfig(),
                 llm=LLMConfig(use_mock=True),
                 prompts=PromptConfig(directory=Path(tmp_dir)),
             )

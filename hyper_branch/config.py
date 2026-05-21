@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -27,50 +27,13 @@ class RuntimeConfig:
 
 @dataclass(slots=True)
 class RetrievalConfig:
-    entity_top_k: int = 6
-    topic_entity_link_top_k: int = 1
-    topic_entity_link_threshold: float = 0.6
-    hyperedge_top_k: int = 6
-    chunk_top_k: int = 8
-    evidence_keep: int = 6
-    taskframe_registration_threshold: float = 0.33
-    lexical_anchor_top_k: int = 12
-    branch_candidate_pool: int = 18
-    focus_match_min_score: float = 0.08
     relation_top_k: int = 10
     semantic_top_k: int = 10
     evidence_top_k: int = 5
-    fusion_weights: dict[str, float] = field(
-        default_factory=lambda: {"anchor": 0.4, "relation": 0.4, "semantic": 0.2}
-    )
     max_anchor_hyperedges_per_entity: int | None = None
-
-
-@dataclass(slots=True)
-class ReasoningConfig:
-    max_steps: int = 5
-    max_step_extensions: int = 2
-    max_stalled_steps: int = 2
-    coarse_top_k: int = 6
-    llm_top_k: int = 3
-    min_fresh_thoughts_per_step: int = 1
-    max_considered_without_selection: int = 3
-    thought_score_threshold: float = 0.12
-    min_verified_reasoning: int = 2
-    evidence_score_threshold: float = 0.2
-    selection_penalty: float = 0.18
-    fresh_thought_bonus: float = 0.08
-    branch_top_k: int = 4
-    evidence_top_k_per_branch: int = 2
-    min_branch_agreement: int = 2
-    base_constraint_weight: float = 1.0
-    base_relation_weight: float = 1.0
-    base_anchor_weight: float = 1.0
-    fused_novelty_weight: float = 0.12
-    fused_penalty_weight: float = 0.18
-    fused_focus_weight: float = 0.16
-    control_weight_step: float = 0.35
-    enable_legacy_reasoning_controller: bool = False
+    anchor_weight: float = 0.4
+    relation_weight: float = 0.4
+    semantic_weight: float = 0.2
 
 
 @dataclass(slots=True)
@@ -97,7 +60,6 @@ class Config:
     dataset: DatasetConfig
     runtime: RuntimeConfig
     retrieval: RetrievalConfig
-    reasoning: ReasoningConfig
     llm: LLMConfig
     prompts: PromptConfig
 
@@ -107,7 +69,6 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     dataset = raw.get("dataset", {})
     runtime = raw.get("runtime", {})
     retrieval = raw.get("retrieval", {})
-    reasoning = raw.get("reasoning", {})
     llm = raw.get("llm", {})
     prompts = raw.get("prompts", {})
 
@@ -126,46 +87,13 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         log_level=str(runtime.get("log_level", "INFO")).upper(),
     )
     retrieval_cfg = RetrievalConfig(
-        entity_top_k=int(retrieval.get("entity_top_k", 6)),
-        topic_entity_link_top_k=int(retrieval.get("topic_entity_link_top_k", 1)),
-        topic_entity_link_threshold=float(retrieval.get("topic_entity_link_threshold", 0.6)),
-        hyperedge_top_k=int(retrieval.get("hyperedge_top_k", 6)),
-        chunk_top_k=int(retrieval.get("chunk_top_k", 8)),
-        evidence_keep=int(retrieval.get("evidence_keep", 6)),
-        taskframe_registration_threshold=float(retrieval.get("taskframe_registration_threshold", 0.33)),
-        lexical_anchor_top_k=int(retrieval.get("lexical_anchor_top_k", 12)),
-        branch_candidate_pool=int(retrieval.get("branch_candidate_pool", 18)),
-        focus_match_min_score=float(retrieval.get("focus_match_min_score", 0.08)),
         relation_top_k=int(retrieval.get("relation_top_k", 10)),
         semantic_top_k=int(retrieval.get("semantic_top_k", 10)),
         evidence_top_k=int(retrieval.get("evidence_top_k", 5)),
-        fusion_weights=_fusion_weights(retrieval.get("fusion_weights", {})),
         max_anchor_hyperedges_per_entity=_optional_int(retrieval.get("max_anchor_hyperedges_per_entity")),
-    )
-    reasoning_cfg = ReasoningConfig(
-        max_steps=int(reasoning.get("max_steps", 5)),
-        max_step_extensions=int(reasoning.get("max_step_extensions", 2)),
-        max_stalled_steps=int(reasoning.get("max_stalled_steps", 2)),
-        coarse_top_k=int(reasoning.get("coarse_top_k", 6)),
-        llm_top_k=int(reasoning.get("llm_top_k", 3)),
-        min_fresh_thoughts_per_step=int(reasoning.get("min_fresh_thoughts_per_step", 1)),
-        max_considered_without_selection=int(reasoning.get("max_considered_without_selection", 3)),
-        thought_score_threshold=float(reasoning.get("thought_score_threshold", 0.12)),
-        min_verified_reasoning=int(reasoning.get("min_verified_reasoning", reasoning.get("min_verified_evidence", 2))),
-        evidence_score_threshold=float(reasoning.get("evidence_score_threshold", 0.2)),
-        selection_penalty=float(reasoning.get("selection_penalty", 0.18)),
-        fresh_thought_bonus=float(reasoning.get("fresh_thought_bonus", 0.08)),
-        branch_top_k=int(reasoning.get("branch_top_k", 4)),
-        evidence_top_k_per_branch=int(reasoning.get("evidence_top_k_per_branch", 2)),
-        min_branch_agreement=int(reasoning.get("min_branch_agreement", 2)),
-        base_constraint_weight=float(reasoning.get("base_constraint_weight", 1.0)),
-        base_relation_weight=float(reasoning.get("base_relation_weight", 1.0)),
-        base_anchor_weight=float(reasoning.get("base_anchor_weight", 1.0)),
-        fused_novelty_weight=float(reasoning.get("fused_novelty_weight", 0.12)),
-        fused_penalty_weight=float(reasoning.get("fused_penalty_weight", 0.18)),
-        fused_focus_weight=float(reasoning.get("fused_focus_weight", 0.16)),
-        control_weight_step=float(reasoning.get("control_weight_step", 0.35)),
-        enable_legacy_reasoning_controller=bool(reasoning.get("enable_legacy_reasoning_controller", False)),
+        anchor_weight=float(retrieval.get("anchor_weight", _nested_weight(retrieval, "anchor", 0.4))),
+        relation_weight=float(retrieval.get("relation_weight", _nested_weight(retrieval, "relation", 0.4))),
+        semantic_weight=float(retrieval.get("semantic_weight", _nested_weight(retrieval, "semantic", 0.2))),
     )
     llm_cfg = LLMConfig(
         api_key_env=str(llm.get("api_key_env", "OPENAI_API_KEY")),
@@ -184,7 +112,6 @@ def load_config(config_path: Path, project_root: Path) -> Config:
         dataset=dataset_cfg,
         runtime=runtime_cfg,
         retrieval=retrieval_cfg,
-        reasoning=reasoning_cfg,
         llm=llm_cfg,
         prompts=prompt_cfg,
     )
@@ -203,11 +130,8 @@ def _optional_int(value: Any) -> int | None:
     return int(value)
 
 
-def _fusion_weights(value: Any) -> dict[str, float]:
-    if not isinstance(value, dict):
-        value = {}
-    return {
-        "anchor": float(value.get("anchor", 0.4)),
-        "relation": float(value.get("relation", 0.4)),
-        "semantic": float(value.get("semantic", 0.2)),
-    }
+def _nested_weight(retrieval: dict[str, Any], key: str, default: float) -> float:
+    weights = retrieval.get("fusion_weights", {})
+    if isinstance(weights, dict):
+        return float(weights.get(key, default))
+    return default

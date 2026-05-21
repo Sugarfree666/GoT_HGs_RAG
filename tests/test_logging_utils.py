@@ -17,18 +17,18 @@ class LoggingUtilsTest(unittest.TestCase):
             with redirect_stderr(stderr):
                 logger = configure_logging(run_dir, "INFO")
                 logger.info("Loading dataset from D:/dataset")
-                logger.info("Iterative reasoning step 1/3")
+                logger.info("Executing atomic DAG with 3 node(s)")
                 logger.warning("warning message")
                 self._close_logger(logger)
 
             console_output = stderr.getvalue()
-            self.assertIn("Iterative reasoning step 1/3", console_output)
+            self.assertIn("Executing atomic DAG with 3 node(s)", console_output)
             self.assertIn("warning message", console_output)
             self.assertNotIn("Loading dataset from D:/dataset", console_output)
 
             file_output = (run_dir / "run.log").read_text(encoding="utf-8")
             self.assertIn("Loading dataset from D:/dataset", file_output)
-            self.assertIn("Iterative reasoning step 1/3", file_output)
+            self.assertIn("Executing atomic DAG with 3 node(s)", file_output)
 
     def test_verbose_console_logging_shows_detailed_info_messages(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:

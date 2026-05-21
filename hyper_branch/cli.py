@@ -11,7 +11,7 @@ from .pipeline import HyperBranchPipeline
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Atomic DAG execution with three-view hyperedge retrieval.")
+    parser = argparse.ArgumentParser(description="Execute DEPO atomic DAG with three-view HyperBranch hyperedge retrieval.")
     parser.add_argument("--question", help="Question to answer.")
     parser.add_argument("--question-file", help="Optional file containing the question.")
     parser.add_argument("--question-index", type=int, default=0, help="When --question-file is a JSON list, select this item index.")
@@ -112,7 +112,7 @@ def _load_json_file(path: Path) -> object:
     if not path.is_file():
         raise SystemExit(f"DAG path is not a file: {path}")
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8-sig"))
     except json.JSONDecodeError as exc:
         raise SystemExit(f"DAG file is not valid JSON: {path}: {exc}") from exc
 

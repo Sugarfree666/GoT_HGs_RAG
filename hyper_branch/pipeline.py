@@ -13,7 +13,7 @@ from .atomic import (
 )
 from .config import Config
 from .data.loaders import HypergraphDatasetLoader
-from .llm import LocalHashEmbeddingClient, MockReasoningService, OpenAICompatibleClient, OpenAIReasoningService, PromptManager
+from .llm import LocalHashEmbeddingClient, MockAtomicLLMService, OpenAIAtomicLLMService, OpenAICompatibleClient, PromptManager
 from .logging_utils import TraceStore
 
 
@@ -32,16 +32,16 @@ class HyperBranchPipeline:
 
         loader = HypergraphDatasetLoader(config.dataset, logger)
         self.dataset = loader.load()
-        self.trace_store.save_artifact("artifacts/dataset_summary.json", self.dataset.summary)
+        self.trace_store.save_artifact("dataset_summary.json", self.dataset.summary)
 
         prompts = PromptManager(config.prompts.directory)
         if config.llm.use_mock:
             self.embedder = LocalHashEmbeddingClient()
-            self.llm_service = MockReasoningService()
+            self.llm_service = MockAtomicLLMService()
         else:
             client = OpenAICompatibleClient(config.llm, trace_store=trace_store)
             self.embedder = client
-            self.llm_service = OpenAIReasoningService(client=client, prompts=prompts)
+            self.llm_service = OpenAIAtomicLLMService(client=client, prompts=prompts)
 
         analyzer = AtomicQuestionAnalyzer(llm_service=self.llm_service)
         retriever = AtomicHyperedgeRetriever(

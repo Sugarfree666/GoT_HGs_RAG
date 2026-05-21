@@ -1,11 +1,12 @@
 from .client import LocalHashEmbeddingClient, OpenAICompatibleClient
 from .prompts import PromptManager
-from .service import MockReasoningService, OpenAIReasoningService
+from .service import AtomicLLMService, MockAtomicLLMService, OpenAIAtomicLLMService
 
 __all__ = [
+    "AtomicLLMService",
     "LocalHashEmbeddingClient",
-    "MockReasoningService",
+    "MockAtomicLLMService",
     "OpenAICompatibleClient",
-    "OpenAIReasoningService",
+    "OpenAIAtomicLLMService",
     "PromptManager",
 ]
