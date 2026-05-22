@@ -12,6 +12,25 @@ from models import (
     SemanticASTResult,
 )
 
+COMPARE_OPERATORS = {
+    "COMPARE_SAME",
+    "COMPARE_DIFF",
+    "COMPARE_GREATER",
+    "COMPARE_LESS",
+}
+
+MIN_OPERATOR_ARITY = {
+    "COMPARE_SAME": 2,
+    "COMPARE_DIFF": 2,
+    "COMPARE_GREATER": 2,
+    "COMPARE_LESS": 2,
+    "INTERSECTION": 2,
+    "UNION": 2,
+    "DIFFERENCE": 2,
+    "LOGICAL_AND": 2,
+    "LOGICAL_OR": 2,
+}
+
 
 @dataclass
 class ValueSlotCueFrame:
@@ -139,25 +158,26 @@ def detect_value_slot_cue_frame(original_question: str) -> ValueSlotCueFrame | N
 
 
 def validate_ast_completeness(original_question: str, ast: SemanticASTResult) -> list[str]:
-    frame = detect_value_slot_cue_frame(original_question)
-    if frame is None:
-        return []
-
-    warnings: list[str] = []
+    warnings = validate_operator_usage(original_question, ast)
     operator = ast.primary_operator.operator
     if operator == "NONE":
+        return warnings
+
+    frame = detect_value_slot_cue_frame(original_question)
+    if frame is None:
+        return warnings
+
+    if operator not in frame.expected_operators:
         warnings.append(
-            f"Operator NONE is inconsistent with cue {frame.cue_text!r}, which requires expected_value_slot={frame.expected_value_slot}."
-        )
-    elif operator not in frame.expected_operators:
-        warnings.append(
-            f"Operator {operator} is triggered by {frame.cue_text!r}, but expected one of {', '.join(frame.expected_operators)} for expected_value_slot={frame.expected_value_slot}."
+            f"Operator {operator} does not match confirmed value slot cue {frame.cue_text!r}; "
+            f"expected one of {', '.join(frame.expected_operators)} for expected_value_slot={frame.expected_value_slot}. "
+            "If this is only a chain lookup, use primary_operator=NONE."
         )
 
     input_ids = operator_input_node_ids(ast)
     if not input_ids:
         warnings.append(
-            f"Operator {operator} is triggered by {frame.cue_text!r}, but no operator inputs were provided."
+            f"Operator {operator} is non-NONE but no operator inputs were provided."
         )
         return warnings
 
@@ -166,9 +186,34 @@ def validate_ast_completeness(original_question: str, ast: SemanticASTResult) ->
             node = ast.node_by_id().get(input_id)
             label = node.label if node is not None else input_id
             warnings.append(
-                f"Operator {operator} is triggered by {frame.cue_text!r}, which requires expected_value_slot={frame.expected_value_slot}, "
+                f"Operator {operator} uses cue {frame.cue_text!r}, which requires expected_value_slot={frame.expected_value_slot}, "
                 f"but current input is {input_id} ({label}). Missing implicit variable {frame.expected_value_slot} for {input_id}."
             )
+    return warnings
+
+
+def validate_operator_usage(original_question: str, ast: SemanticASTResult) -> list[str]:
+    """Validate operator arity and reject comparison operators on serial lookup chains."""
+    del original_question
+    operator = ast.primary_operator.operator
+    if operator == "NONE":
+        return []
+
+    warnings: list[str] = []
+    input_ids = operator_input_node_ids(ast)
+    min_arity = MIN_OPERATOR_ARITY.get(operator)
+    if min_arity is not None and len(input_ids) < min_arity:
+        warnings.append(
+            f"Operator {operator} has {len(input_ids)} input(s) {input_ids}; "
+            f"{operator} requires at least {min_arity} independent input values. "
+            "This looks like a single-chain lookup or incomplete branch split; use primary_operator=NONE unless the final answer truly compares multiple branch results."
+        )
+
+    if operator in COMPARE_OPERATORS and _is_single_chain_ast(ast):
+        warnings.append(
+            f"Operator {operator} is attached to a single-chain semantic AST. "
+            "Chain lookup predicates/events/attributes must be represented as semantic edges with primary_operator=NONE."
+        )
     return warnings
 
 
@@ -188,8 +233,16 @@ def operator_input_node_ids(ast: SemanticASTResult) -> list[str]:
 
 
 def repair_missing_value_slots(original_question: str, semantic_ast: SemanticASTResult) -> SemanticASTResult:
+    misuse_warnings = validate_operator_usage(original_question, semantic_ast)
+    if misuse_warnings and semantic_ast.primary_operator.operator in COMPARE_OPERATORS:
+        return _demote_operator_to_none(semantic_ast, misuse_warnings)
+
     frame = detect_value_slot_cue_frame(original_question)
     if frame is None:
+        return semantic_ast
+    if semantic_ast.primary_operator.operator == "NONE":
+        return semantic_ast
+    if semantic_ast.primary_operator.operator not in frame.expected_operators:
         return semantic_ast
 
     repaired = copy.deepcopy(semantic_ast)
@@ -197,12 +250,6 @@ def repair_missing_value_slots(original_question: str, semantic_ast: SemanticAST
     repaired.detected_cue_frame = frame.to_dict()
     repaired.operator_inputs_before_validation = list(before_inputs)
     actions: list[str] = []
-
-    if repaired.primary_operator.operator == "NONE" or repaired.primary_operator.operator not in frame.expected_operators:
-        old_operator = repaired.primary_operator.operator
-        repaired.primary_operator.operator = frame.expected_operators[0]
-        repaired.primary_operator.cue_text = repaired.primary_operator.cue_text or frame.cue_text
-        actions.append(f"Changed operator from {old_operator} to {repaired.primary_operator.operator} for cue {frame.cue_text!r}.")
 
     if not before_inputs:
         before_inputs = _infer_operator_inputs_from_edges(repaired)
@@ -255,6 +302,34 @@ def repair_missing_value_slots(original_question: str, semantic_ast: SemanticAST
     repaired.fallback_repair_actions.extend(actions)
     if actions:
         repaired.validation_warnings.extend(validate_ast_completeness(original_question, semantic_ast))
+    return repaired
+
+
+def _demote_operator_to_none(ast: SemanticASTResult, reasons: list[str]) -> SemanticASTResult:
+    repaired = copy.deepcopy(ast)
+    old_operator = repaired.primary_operator.operator
+    operator_node_ids = {
+        node.id
+        for node in repaired.nodes
+        if node.kind == "operator" or node.label == old_operator
+    }
+    repaired.primary_operator = SemanticASTPrimaryOperator(operator="NONE")
+    repaired.nodes = [
+        node
+        for node in repaired.nodes
+        if node.id not in operator_node_ids and node.kind != "operator"
+    ]
+    repaired.edges = [
+        edge
+        for edge in repaired.edges
+        if edge.edge_type != "operator"
+        and edge.source not in operator_node_ids
+        and edge.target not in operator_node_ids
+    ]
+    repaired.validation_warnings.extend(reason for reason in reasons if reason not in repaired.validation_warnings)
+    repaired.fallback_repair_actions.append(
+        f"Changed operator from {old_operator} to NONE because the AST did not provide enough independent operator inputs."
+    )
     return repaired
 
 
@@ -346,6 +421,50 @@ def _rewrite_operator_edges(ast: SemanticASTResult, old_inputs: list[str], new_i
                 )
             )
             existing.add(key)
+
+
+def _is_single_chain_ast(ast: SemanticASTResult) -> bool:
+    ordinary_edges = [edge for edge in ast.edges if edge.edge_type != "operator"]
+    ordinary_node_ids = {
+        node.id
+        for node in ast.nodes
+        if node.kind != "operator" and node.label != ast.primary_operator.operator
+    }
+    if not ordinary_edges:
+        return len(ordinary_node_ids) <= 1
+
+    involved = {edge.source for edge in ordinary_edges} | {edge.target for edge in ordinary_edges}
+    if len(ordinary_edges) != max(0, len(involved) - 1):
+        return False
+
+    indegree = {node_id: 0 for node_id in involved}
+    outdegree = {node_id: 0 for node_id in involved}
+    undirected: dict[str, set[str]] = {node_id: set() for node_id in involved}
+    for edge in ordinary_edges:
+        outdegree[edge.source] = outdegree.get(edge.source, 0) + 1
+        indegree[edge.target] = indegree.get(edge.target, 0) + 1
+        undirected.setdefault(edge.source, set()).add(edge.target)
+        undirected.setdefault(edge.target, set()).add(edge.source)
+
+    if any(value > 1 for value in indegree.values()):
+        return False
+    if any(value > 1 for value in outdegree.values()):
+        return False
+
+    roots = [node_id for node_id in involved if indegree.get(node_id, 0) == 0]
+    leaves = [node_id for node_id in involved if outdegree.get(node_id, 0) == 0]
+    if len(roots) != 1 or len(leaves) != 1:
+        return False
+
+    seen: set[str] = set()
+    stack = [roots[0]]
+    while stack:
+        node_id = stack.pop()
+        if node_id in seen:
+            continue
+        seen.add(node_id)
+        stack.extend(sorted(undirected.get(node_id, set()) - seen))
+    return seen == involved
 
 
 def _format_relation_hint(frame: ValueSlotCueFrame, source_node: SemanticASTNode) -> str:

@@ -11,6 +11,7 @@ if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
 from models import SemanticASTEdge, SemanticASTNode, SemanticASTPrimaryOperator, SemanticASTResult
+from ast_validator import repair_missing_value_slots, validate_ast_completeness
 from subquestion_generator import SubquestionGenerator
 from surface_validator import contains_bare_variable, validate_atomic_dag_surface
 from hyper_branch.atomic import AtomicDagExecutor
@@ -110,6 +111,75 @@ class DepoSurfaceRealizationTest(unittest.TestCase):
         )
         normalized = AtomicDagExecutor.normalize_dag_payload(payload)
         self.assertEqual([node.node_id for node in AtomicDagExecutor.topological_sort(normalized)], ["q1", "q2", "q3"])
+
+    def test_compare_operator_with_single_chain_gets_none_feedback(self) -> None:
+        ast = SemanticASTResult(
+            status="ok",
+            primary_operator=SemanticASTPrimaryOperator(
+                operator="COMPARE_DIFF",
+                inputs=["death_date"],
+                output="answer",
+                cue_text="date of death",
+            ),
+            nodes=[
+                SemanticASTNode(id="film", label="Madame La Presidente", kind="entity"),
+                SemanticASTNode(id="director", label="director", kind="type_variable"),
+                SemanticASTNode(id="death_date", label="date of death", kind="type_variable"),
+                SemanticASTNode(id="COMPARE_DIFF", label="COMPARE_DIFF", kind="operator"),
+            ],
+            edges=[
+                SemanticASTEdge(source="film", target="director", relation_hint="director of film"),
+                SemanticASTEdge(source="director", target="death_date", relation_hint="date of death"),
+                SemanticASTEdge(source="death_date", target="COMPARE_DIFF", edge_type="operator", relation_hint="COMPARE_DIFF"),
+            ],
+        )
+
+        warnings = validate_ast_completeness(
+            "What is the date of death of the director of film Madame La Presidente?",
+            ast,
+        )
+
+        self.assertTrue(any("requires at least 2" in warning for warning in warnings))
+        self.assertTrue(any("single-chain" in warning for warning in warnings))
+
+    def test_single_chain_compare_operator_is_demoted_before_dag_generation(self) -> None:
+        ast = SemanticASTResult(
+            status="ok",
+            primary_operator=SemanticASTPrimaryOperator(
+                operator="COMPARE_DIFF",
+                inputs=["death_date"],
+                output="answer",
+                cue_text="date of death",
+            ),
+            nodes=[
+                SemanticASTNode(id="film", label="Madame La Presidente", kind="entity"),
+                SemanticASTNode(id="director", label="director", kind="type_variable"),
+                SemanticASTNode(id="death_date", label="date of death", kind="type_variable"),
+                SemanticASTNode(id="COMPARE_DIFF", label="COMPARE_DIFF", kind="operator"),
+            ],
+            edges=[
+                SemanticASTEdge(source="film", target="director", relation_hint="director of film"),
+                SemanticASTEdge(source="director", target="death_date", relation_hint="date of death"),
+                SemanticASTEdge(source="death_date", target="COMPARE_DIFF", edge_type="operator", relation_hint="COMPARE_DIFF"),
+            ],
+        )
+
+        repaired = repair_missing_value_slots(
+            "What is the date of death of the director of film Madame La Presidente?",
+            ast,
+        )
+        self.assertEqual(repaired.primary_operator.operator, "NONE")
+
+        dag = SubquestionGenerator(FakeSurfaceLLM()).generate_dag(
+            "What is the date of death of the director of film Madame La Presidente?",
+            ast,
+        )
+        payload = dag.to_dict()
+
+        self.assertEqual(validate_atomic_dag_surface(payload), [])
+        self.assertEqual(len(payload["nodes"]), 2)
+        self.assertFalse(any(node.get("metadata", {}).get("operator") for node in payload["nodes"]))
+        self.assertEqual(payload["nodes"][1]["dependencies"], ["q1"])
 
 
 if __name__ == "__main__":

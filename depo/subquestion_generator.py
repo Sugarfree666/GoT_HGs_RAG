@@ -948,30 +948,46 @@ def compile_execution_plan(semantic_ast: SemanticASTResult) -> ExecutionPlan:
             branch_steps=branch_steps,
         )
 
-    if semantic_ast.primary_operator.operator != "NONE":
+    operator = semantic_ast.primary_operator.operator or "NONE"
+    if operator != "NONE":
         semantic_inputs = _operator_semantic_inputs(semantic_ast)
-        operator_inputs = _operator_input_variables_for_inputs(semantic_inputs, node_bindings)
-        operator_branches = _operator_branches_for_inputs(
-            semantic_inputs=semantic_inputs,
-            node_by_id=node_by_id,
-            node_bindings=node_bindings,
-            branch_by_variable=branch_by_variable,
-        )
-        steps.append(
-            ExecutionPlanStep(
-                step_id=f"q{len(steps) + 1}",
-                step_type="operator",
-                operator=semantic_ast.primary_operator.operator,
-                inputs=operator_inputs,
-                semantic_inputs=semantic_inputs,
-                output=semantic_ast.primary_operator.output,
-                cue_text=semantic_ast.primary_operator.cue_text,
-                answer_variable=None,
-                operator_branches=operator_branches,
+        minimum_inputs = _operator_min_input_count(operator)
+        if len(semantic_inputs) < minimum_inputs:
+            warnings.append(
+                f"Skipped operator step for {operator}: expected at least {minimum_inputs} semantic input(s), "
+                f"got {len(semantic_inputs)}. Treating AST as ordinary lookup edges."
             )
-        )
+        else:
+            operator_inputs = _operator_input_variables_for_inputs(semantic_inputs, node_bindings)
+            operator_branches = _operator_branches_for_inputs(
+                semantic_inputs=semantic_inputs,
+                node_by_id=node_by_id,
+                node_bindings=node_bindings,
+                branch_by_variable=branch_by_variable,
+            )
+            steps.append(
+                ExecutionPlanStep(
+                    step_id=f"q{len(steps) + 1}",
+                    step_type="operator",
+                    operator=operator,
+                    inputs=operator_inputs,
+                    semantic_inputs=semantic_inputs,
+                    output=semantic_ast.primary_operator.output,
+                    cue_text=semantic_ast.primary_operator.cue_text,
+                    answer_variable=None,
+                    operator_branches=operator_branches,
+                )
+            )
 
     return ExecutionPlan(steps=steps, node_bindings=node_bindings, warnings=warnings)
+
+
+def _operator_min_input_count(operator: str) -> int:
+    if operator.startswith("COMPARE"):
+        return 2
+    if operator in {"INTERSECTION", "UNION", "DIFFERENCE", "LOGICAL_AND", "LOGICAL_OR"}:
+        return 2
+    return 1
 
 
 def _ordered_ordinary_semantic_edges(semantic_ast: SemanticASTResult) -> list[SemanticASTEdge]:

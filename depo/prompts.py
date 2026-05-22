@@ -303,7 +303,10 @@ The directed AST is a reasoning DAG: each edge must point from an already-known 
 Coreference, same-as, apposition, and repeated mentions are not reasoning hops. Merge them into one canonical semantic node instead of outputting an edge.
 Merge this/that/the/its/his/her/their mentions with their antecedent. Merge a wh-variable with later mentions that refer to the same variable, such as "which university" and "this university".
 This is the only step that may create implicit type variables and choose a primary operator.
-Choose exactly one primary_operator from the allowed operator set. Use NONE when there is no comparison, superlative, set, or logical cue.
+Choose exactly one primary_operator from the allowed operator set. NONE is the default.
+Use a non-NONE operator only when the final answer requires an operation over multiple branch results, multiple retrieved values, sets, propositions, or candidate entities.
+Do not choose an operator for a serial chain lookup. Predicates, events, and attributes such as die, born, graduate, located, released, founded, developed, directed, and authored should normally be represented as semantic edges, not operators.
+Keyword or cue words alone must never force an operator; decide from the full question semantics.
 Do not invent entities that are not present in the original question or mask mapping.
 Do not generate subquestions.
 Return valid JSON only.
@@ -382,37 +385,41 @@ Validation feedback to fix:
 
 Rules:
 - Choose exactly one primary_operator.operator from the allowed set.
-- If validation feedback is non-empty, the previous AST operator inputs do not match expected value slots inferred from the original question; regenerate the AST by inserting implicit_type_variable nodes before the operator inputs.
-- Use NONE when no operator cue is present.
-- Operator choice must be grounded in the original question cue, e.g. same -> COMPARE_SAME, different -> COMPARE_DIFF, older -> COMPARE_GREATER on age, largest/highest/most -> ARGMAX.
-- You may add implicit type variables only when grounded by a cue in the original question.
+- NONE is the default operator.
+- If the question is a chain-shaped lookup, use NONE even when it contains predicates or attributes such as die, born, graduate, located, released, founded, developed, directed, or authored.
+- Use a non-NONE operator only when the final answer asks you to compare, rank/select, combine sets, or combine propositions across multiple branch results, multiple values, or multiple candidate entities.
+- Do not use keyword matching to choose operators. Words like same, different, first, older, largest, died, born, released, or founded are evidence to interpret the question, not automatic triggers.
+- COMPARE_* operators require at least two independent input value nodes. A single value chain such as entity -> mother -> death_date must use NONE.
+- If validation feedback says an operator has too few inputs or looks like a single-chain lookup, regenerate with primary_operator.operator=NONE and model the requested facts as semantic edges.
+- If validation feedback is non-empty and a non-NONE operator remains semantically justified, fix only the reported operator inputs or value-slot nodes.
+- You may add implicit type variables only when they are required by a semantically confirmed non-NONE operator or by a needed lookup edge.
 - Implicit variables must include cue_text and grounding_text.
-- Before attaching branch endpoints to an operator, infer the expected value slot required by the original question.
+- Before attaching branch endpoints to a semantically confirmed non-NONE operator, infer the expected value slot required by the original question.
 - A value slot is the actual attribute, date, measure, category, count, role value, or comparable value that must be retrieved before the operator can be applied.
 - The operator should consume value slot nodes, not merely the current branch endpoints.
 - Do not only check whether the operator input is a bare entity. Even if the operator input is an intermediate variable such as director, actor, CEO, city, university, company, country, person, film, organization, or type variable, the AST is incomplete if the original cue requires an additional value slot such as birth_date, nationality, release_date, population, founding_date, height, length, count, or category.
 - For each branch: identify the current branch endpoint; infer the expected value slot from the original question cue; if the endpoint is not already that slot, create an implicit_type_variable; connect current endpoint -> implicit_type_variable; make the operator consume the implicit_type_variable.
 - Every implicit_type_variable must include cue_text, grounding_text, branch_of, relation_hint, and expected_value_slot.
-- Cue-to-value-slot guidance:
-  released first/earliest/earlier -> expected_value_slot=release_date, operator=ARGMIN or COMPARE_LESS.
-  released later/latest/last -> expected_value_slot=release_date, operator=ARGMAX or COMPARE_GREATER.
-  born earlier -> expected_value_slot=birth_date, operator=COMPARE_LESS.
-  born later -> expected_value_slot=birth_date, operator=COMPARE_GREATER.
-  died earlier/later -> expected_value_slot=death_date, operator=COMPARE_LESS/COMPARE_GREATER.
-  founded earlier/later -> expected_value_slot=founding_date, operator=COMPARE_LESS/COMPARE_GREATER.
-  published first/earlier -> expected_value_slot=publication_date, operator=ARGMIN or COMPARE_LESS.
-  launched first/earlier -> expected_value_slot=launch_date, operator=ARGMIN or COMPARE_LESS.
-  older -> expected_value_slot=age or birth_date, operator=COMPARE_GREATER if using age and COMPARE_LESS if using birth_date.
-  younger -> expected_value_slot=age or birth_date, operator=COMPARE_LESS if using age and COMPARE_GREATER if using birth_date.
-  same/different nationality/director/author/country -> expected_value_slot=that noun, operator=COMPARE_SAME/COMPARE_DIFF.
-  largest/smallest population -> expected_value_slot=population, operator=ARGMAX/ARGMIN.
-  highest mountain -> expected_value_slot=height or elevation, operator=ARGMAX.
-  lowest point -> expected_value_slot=elevation, operator=ARGMIN.
-  longest/shortest river -> expected_value_slot=length, operator=ARGMAX/ARGMIN.
-  most/fewest awards -> expected_value_slot=award_count, operator=ARGMAX/ARGMIN.
-  most populous city -> expected_value_slot=population, operator=ARGMAX.
+- Value-slot guidance for already-confirmed non-NONE operators only:
+  released first/earliest/earlier across candidates -> expected_value_slot=release_date.
+  released later/latest/last across candidates -> expected_value_slot=release_date.
+  born earlier/later across candidates -> expected_value_slot=birth_date.
+  died earlier/later across candidates -> expected_value_slot=death_date.
+  founded earlier/later across candidates -> expected_value_slot=founding_date.
+  published first/earlier across candidates -> expected_value_slot=publication_date.
+  launched first/earlier across candidates -> expected_value_slot=launch_date.
+  older/younger across candidates -> expected_value_slot=age or birth_date.
+  same/different nationality/director/author/country across branches -> expected_value_slot=that noun.
+  largest/smallest population over candidates -> expected_value_slot=population.
+  highest mountain -> expected_value_slot=height or elevation.
+  lowest point -> expected_value_slot=elevation.
+  longest/shortest river -> expected_value_slot=length.
+  most/fewest awards -> expected_value_slot=award_count.
+  most populous city -> expected_value_slot=population.
 - Bad: FilmA -> director_1 -> COMPARE_LESS and FilmB -> director_2 -> COMPARE_LESS when the question says "director who was born earlier". Good: FilmA -> director_1 -> birth_date_1 -> COMPARE_LESS and FilmB -> director_2 -> birth_date_2 -> COMPARE_LESS.
 - Bad: FilmA -> director_1 -> COMPARE_SAME and FilmB -> director_2 -> COMPARE_SAME when the question says "same nationality". Good: FilmA -> director_1 -> nationality_1 -> COMPARE_SAME and FilmB -> director_2 -> nationality_2 -> COMPARE_SAME.
+- Bad: MovieA -> director -> death_date -> COMPARE_DIFF for "What is the date of death of the director of MovieA?" Good: MovieA -> director -> death_date with primary_operator=NONE.
+- Bad: PersonA -> mother -> death_date -> COMPARE_LESS for "When did PersonA's mother die?" Good: PersonA -> mother -> death_date with primary_operator=NONE.
 - Original question semantics outrank the anchor connected graph. Use the graph only as evidence for endpoints and local wording.
 - Do not turn dependency relations, coreference arcs, apposition arcs, same-as mentions, or pronoun/determiner mentions into semantic edges.
 - Merge coreferent mentions into one node. In particular, merge this/that/the/its/his/her/their mentions with the antecedent they refer to.
