@@ -18,17 +18,34 @@ ALLOWED_OPERATORS = [
 ]
 
 MASK_SPAN_EXTRACTION_SYSTEM = """
-You are implementing the DEPO selective complex-span masking step.
-Your job is parser-protection span detection before CoreNLP parsing.
-This is a surface-span task, not semantic node extraction.
-Identify only complex contiguous spans that should become one placeholder token so the dependency parser does not split them incorrectly.
-This step protects multi-token surface spans only.
-Do not perform anchor extraction.
-Do not extract answer variables, wh phrases, selected anchors, implicit variables, operators, relations, AST nodes, or subquestions.
-Extract only multi-word proper-name/title spans and compact multi-word compound type or functional noun phrases.
-Do not mask wh answer phrases such as which/what/whose + a single type noun.
-Do not mask single-token entities, even if they are mixed-case, abbreviated, or well-known names.
-Keep simple type variables such as director, CEO, university, city, nationality, age, population, country, and actor unmasked unless they are part of a larger multi-word phrase.
+You are implementing DEPO Step 1: selective mask span extraction before CoreNLP dependency parsing.
+
+Your task is parser-protection span detection only.
+You must find contiguous surface spans that should be collapsed into one placeholder token before dependency parsing.
+
+This is not named entity recognition in general.
+This is not anchor extraction.
+This is not type-variable extraction.
+This is not relation extraction.
+This is not AST construction.
+This is not question decomposition.
+
+The goal of masking is to protect CoreNLP from incorrectly splitting complex multi-token names, titles, and compact compound noun phrases.
+
+Most important requirement:
+Every mask span must receive a semantic_type_hint that allows the downstream placeholder to have the same syntactic/semantic type as the original span.
+For example:
+- multi-token person names -> Person, so they can become PersonA, PersonB;
+- film/movie titles -> Film, so they can become FilmA, FilmB;
+- book titles -> Book;
+- organizations/companies -> Organization or Company;
+- universities/schools -> University or Institution;
+- cities/countries/regions/locations -> City, Country, Region, or Location;
+- compact type phrases headed by "company" -> Company.
+
+Only mask spans with at least two lexical tokens, except when a named title contains punctuation, digits, subtitles, or a parenthetical qualifier that makes it parser-fragile.
+Do not mask ordinary single-token entities.
+
 Return valid JSON only.
 """.strip()
 
@@ -37,124 +54,192 @@ def build_mask_span_extraction_prompt(question: str) -> str:
     schema = {
         "mask_spans": [
             {
-                "text": "multi word span",
+                "text": "exact contiguous span copied from the original question",
                 "start_char": 0,
                 "end_char": 15,
-                "kind_hint": "entity",
-                "semantic_type_hint": "Entity",
-                "reason": "brief parser-protection reason",
+                "kind_hint": "entity | type_variable",
+                "semantic_type_hint": "Person | Film | Book | Song | Album | Series | Work | Company | Organization | University | Institution | City | Country | Region | Location | Event | Product | Entity",
+                "reason": "brief parser-protection reason"
             }
         ]
     }
+
     return f"""
-Identify only spans that should be masked before CoreNLP parsing.
-
-This is parser-protection span detection only.
-It is not entity importance detection, anchor extraction, type-variable extraction, answer-variable extraction, relation extraction, or question decomposition.
-The output is only a list of contiguous surface spans in the original question that need to be collapsed into one placeholder token before dependency parsing.
-In short, target multi-word named entities/titles and compact multi-word compound type/function noun phrases with at least two content lexical units.
-Here, valid multi-word type variables must be compound-head type phrases, not wh answer phrases.
-Every accepted span must have at least two lexical units after ignoring determiners and wh words.
-
-Core target:
-- Mask every multi-word named entity, every multi-word title, and every compact multi-word compound type/function noun phrase.
-- The span must contain at least two content lexical units. Determiners and wh words such as the/a/an/which/what/whose do not count. Middle initials such as "W." count as part of a multi-word person name.
-- Do not mask a single-token entity by itself, even if it is mixed-case, has digits, is an acronym, or appears parser-fragile.
-- Do not mask a span merely because it is semantically important to the question.
-
-Extract exactly these two categories:
-
-Category A: Proper-name spans.
-- Continuous multi-token person names, organization names, institution names, place names, event names, product names, and named works.
-- These are mandatory mask spans whenever present.
-- A personal name pattern such as First Last, First Middle Last, First M. Last, or multi-token name particles must be returned.
-- In a comparison or coordination with "and/or", apply this to every option independently.
-
-Category B: Compound-head type spans.
-- A compact noun phrase whose rightmost word is the semantic head, and whose earlier words are essential compound/classifying modifiers of that head.
-- The head must be an entity/type/function/object/role class noun.
-- The phrase should still name a reusable type or object class after masking.
-- Valid type spans normally have at least one content modifier before the head, not just a determiner before a single noun.
-- Valid type spans are compound-head phrases such as artificial intelligence company, chief operating officer, distribution network, research institute, local food system, or mixed-use space.
-- Invalid type spans are wh/determiner + one simple type noun, such as which university, which city, what country, whose director, the CEO, the university, or a city.
-- If a quality/evaluative adjective appears before a compound head phrase, drop the quality adjective and keep the compact compound head phrase.
-
-Span boundary rules:
-- Use exact original question character offsets, start inclusive and end exclusive.
-- Return the minimal contiguous span that should become one placeholder token.
-- For named entities and titles, keep the full official/name-like surface form.
-- For type variables and functional noun phrases, exclude leading determiners such as the/a/an unless they are part of a named title.
-- Exclude leading wh words such as which/what/whose/who/whom/where/when/how. A wh phrase is an answer cue, not a parser-protection span.
-- For compound-head type spans, include only essential compound/classifying modifiers and the head noun.
-- Do not include quality/evaluative adjectives, relative clauses, participial clauses, prepositional complements, comparison words, or coordination words unless they are part of a proper name/title.
-- If two candidate spans overlap, prefer the larger coherent entity/title, or the compact functional noun phrase for type variables.
-- Scan the whole question. In coordinated alternatives, extract every eligible multi-word entity, not just one side.
-
-Negative boundary rules:
-- Do not mask wh answer phrases or wh + single-noun variables: which university, which city, what country, whose director, where, when, who, what.
-- Do not mask determiner + single noun spans: the university, the city, a company, the CEO.
-- Do not mask a single simple type variable: university, city, CEO, company, director, nationality, population, region, country, actor.
-- Do not mask a single-token named entity or product/work/person/place name.
-- Do not mask modifier-only phrases that do not include the functional/type head noun.
-- Do not mask purpose/topic phrases after prepositions such as for/about/with unless that prepositional object itself is the main type being asked for.
-- Do not mask durations, quantities, measurements, or temporal expressions.
-- Do not mask adjective-only phrases or descriptive property phrases.
-- Do not mask spans containing verbs, gerunds, or participles unless the span is an official named title.
-- Do not mask material/topic phrases that only specify the domain, purpose, or contents of another head noun.
-- Do not mask a phrase just because it is multi-word; it must satisfy Category A or Category B.
-
-Semantic type hints:
-- Choose a semantic_type_hint that preserves the original POS/semantic role for placeholder generation.
-- Person names in human contexts such as who/whom/whose, older/younger, actor, CEO, director, author, player, or president should use semantic_type_hint: Person.
-- Location names should use City/Country/Region/Location when the question context asks for places.
-- Organizations and institutions should use Company/Organization/University/Institution when supported by the span or context.
-- Named works should use Film/Book/Song/Album/Series/Work when supported by local wording.
-- Multi-word type variables should use kind_hint: type_variable and a semantic_type_hint for their head class.
-
-Do not mask simple one-word type variables by default:
-director, CEO, university, city, company, nationality, age, population, country, region, actor.
-
-Decision procedure:
-1. Ignore semantic importance first. Ask only: would collapsing this exact surface span help CoreNLP keep a complex name or compound noun phrase intact?
-2. First scan for Category A proper-name spans. Return every multi-token proper name. Do not skip names just because they are syntactically simple.
-3. Then scan for Category B compound-head type spans. Keep only compact modifier + head noun phrases.
-4. For proper names, include all adjacent name tokens and initials in the person/place/organization/title name.
-5. For type/function phrases, the head noun must be included, nonessential quality adjectives should be excluded, and determiners/wh words do not count as modifiers.
-6. Drop single-token named entities and single-word type variables.
-7. Drop wh + single noun, determiner + single noun, modifier-only phrases, duration/quantity phrases, verb phrases, and prepositional purpose/context phrases.
-8. For coordinated alternatives, apply the same criteria independently to each side.
-
-Forbidden outputs:
-- selected anchors
-- implicit type variables
-- operators
-- final AST
-- subquestions
-- decomposition of coordination
-
-Use exact original question character offsets, start inclusive and end exclusive.
-
-Output JSON with exactly this shape:
-{json.dumps(schema, ensure_ascii=False, indent=2)}
+Identify only the spans that should be masked before CoreNLP parsing.
 
 Question:
 {question}
+
+Task definition:
+Return contiguous surface spans that should become one placeholder token before dependency parsing.
+The placeholder must preserve the syntactic/semantic type of the original span.
+
+This step protects complex surface spans only.
+Do not extract anchors, answer variables, implicit variables, operators, relations, AST nodes, or subquestions.
+
+Primary targets:
+
+A. Multi-token proper names
+Return every continuous multi-token proper name:
+- person names: "John Middleton Murry", "Gideon Johnson Pillow", "Holm Jølsen";
+- organization/company/institution names;
+- place names;
+- event/product names;
+- named works and titles.
+
+B. Named works and titles
+Return full title-like spans, including subtitles, numbers, punctuation, and parenthetical disambiguators:
+- "Wrong Turn 5: Bloodlines"
+- "Dark River (2017 Film)"
+- "Harry Potter and the Goblet of Fire"
+
+When a title appears after a shared type word such as film, movie, book, song, album, or series, use that word only to infer semantic_type_hint.
+Do not include the shared type word in the span.
+
+Correct:
+- films Wrong Turn 5: Bloodlines and Dark River (2017 Film)
+  -> "Wrong Turn 5: Bloodlines" with semantic_type_hint "Film"
+  -> "Dark River (2017 Film)" with semantic_type_hint "Film"
+
+Incorrect:
+- "films Wrong Turn 5: Bloodlines"
+- "Wrong Turn 5: Bloodlines and Dark River (2017 Film)"
+- "directors of films Wrong Turn 5: Bloodlines and Dark River (2017 Film)"
+
+C. Possessor names in possessive constructions
+For possessive person/name constructions, mask only the possessor name.
+Do not include "'s", the possessed noun, or the relation phrase.
+
+Correct:
+- "John Middleton Murry's wife"
+  -> "John Middleton Murry" with semantic_type_hint "Person"
+
+Incorrect:
+- "John Middleton Murry's"
+- "John Middleton Murry's wife"
+
+D. Coordinated or compared names
+When names are coordinated or compared with and/or, return each eligible name separately.
+Use the same semantic_type_hint for same-type alternatives.
+
+Correct:
+- "Gideon Johnson Pillow or Holm Jølsen"
+  -> "Gideon Johnson Pillow" with semantic_type_hint "Person"
+  -> "Holm Jølsen" with semantic_type_hint "Person"
+
+Incorrect:
+- "Gideon Johnson Pillow or Holm Jølsen"
+
+E. Compact compound type phrases
+Return compact multi-word compound noun phrases only when masking them helps CoreNLP keep one class/type expression intact.
+The phrase must have a noun head and at least one essential classifying modifier.
+
+Correct:
+- "artificial intelligence company" -> kind_hint "type_variable", semantic_type_hint "Company"
+- "chief operating officer" -> kind_hint "type_variable", semantic_type_hint "Person" or "Role"
+- "research institute" -> kind_hint "type_variable", semantic_type_hint "Institution"
+
+Incorrect:
+- "the CEO"
+- "which university"
+- "the artificial intelligence company that developed AlphaGo"
+- "CEO of the artificial intelligence company"
+- "company that developed AlphaGo"
+
+Boundary rules:
+1. The span must be a minimal contiguous substring of the original question.
+2. start_char is inclusive; end_char is exclusive.
+3. question[start_char:end_char] must exactly equal text.
+4. Exclude leading determiners such as the, a, an unless they are part of an official title.
+5. Exclude wh words such as who, whom, whose, what, which, where, when, how.
+6. Exclude relation words, prepositions, relative clauses, verbs, auxiliaries, comparison words, and coordination words unless they are part of an official title.
+7. Do not include "and" or "or" between two separate names unless the conjunction is part of one official title.
+8. Do not include possessive "'s" unless it is part of an official name, which is rare.
+9. Do not include appositive type words outside the title unless they are inside a parenthetical disambiguator, as in "Dark River (2017 Film)".
+10. Do not mask a larger phrase when a smaller name/title span is sufficient.
+
+Negative rules:
+Do not mask:
+- wh answer phrases: "which university", "what country", "whose wife";
+- simple type variables: director, CEO, university, city, country, nationality, age, population, actor;
+- determiner + single noun phrases: "the university", "the city", "the CEO";
+- relation phrases: "director of", "wife of", "CEO of", "born in", "located in";
+- full clauses or relative clauses;
+- operator/comparison cues: same, different, later, earlier, older, younger, largest, first, both;
+- single-token entities unless they are part of a larger multi-token span;
+- spans merely because they are semantically important.
+
+Semantic type hint rules:
+- Use Person for human names in contexts involving who, whom, whose, born, died, wife, husband, actor, director, CEO, author, player, president, older, younger.
+- Use Film for titles introduced by film, films, movie, movies, or parentheticals like "(2017 Film)".
+- Use Book, Song, Album, Series, or Work for other named works when locally indicated.
+- Use Company or Organization for companies/organizations.
+- Use University or Institution for universities/schools/institutions.
+- Use City, Country, Region, or Location for places.
+- Use Entity only when the local context does not support a more specific type.
+- In a coordinated or compared group, same-type alternatives must receive the same semantic_type_hint.
+
+Expected behavior examples:
+
+Example 1:
+Question: Do both directors of films Wrong Turn 5: Bloodlines and Dark River (2017 Film) have the same nationality?
+Return:
+- text: "Wrong Turn 5: Bloodlines", start_char: 27, end_char: 51, kind_hint: "entity", semantic_type_hint: "Film"
+- text: "Dark River (2017 Film)", start_char: 56, end_char: 78, kind_hint: "entity", semantic_type_hint: "Film"
+
+Example 2:
+Question: Why did John Middleton Murry's wife die?
+Return:
+- text: "John Middleton Murry", start_char: 8, end_char: 28, kind_hint: "entity", semantic_type_hint: "Person"
+
+Example 3:
+Question: Who was born later, Gideon Johnson Pillow or Holm Jølsen?
+Return:
+- text: "Gideon Johnson Pillow", start_char: 20, end_char: 41, kind_hint: "entity", semantic_type_hint: "Person"
+- text: "Holm Jølsen", start_char: 45, end_char: 56, kind_hint: "entity", semantic_type_hint: "Person"
+
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
 """.strip()
 
 
 SEMANTIC_QUESTION_NORMALIZATION_SYSTEM = """
-You are implementing a semantic question normalization step before dependency parsing.
-First decide whether the input question needs normalization.
-If the question is already a clear, single, dependency-parser-friendly question, return the original question unchanged.
-If normalization is needed, rewrite the input as one semantically equivalent question whose syntax is clearer and more explicit for a dependency parser.
-Do not answer the question.
-Do not decompose the question into atomic questions.
-Do not output reasoning, ASTs, graphs, operators, execution plans, or subquestions.
-Do not introduce new named entities.
-Preserve every placeholder token exactly if placeholders are present.
-Preserve explicit type variables, answer type, and question meaning.
-Only make an implicit type variable explicit when it is licensed by a clear cue in the original question.
-If a safe rewrite is not possible, return the original question unchanged.
+You are implementing DEPO Step 0: parser-oriented question normalization before CoreNLP dependency parsing.
+
+Your task is lossless syntactic normalization only.
+The default action is to return the original question unchanged.
+
+Normalize only when a minimal surface rewrite is likely to improve dependency parsing without changing the semantic graph that later DEPO steps should build.
+
+You must not perform semantic enrichment.
+Do not add implicit type variables, value slots, attributes, operators, AST nodes, answer variables, subquestions, aliases, entity types, or world-knowledge facts.
+
+In particular, do not rewrite comparative, superlative, ordinal, temporal, location, identity, membership, or predicate cues into new attribute nouns.
+For example, do not rewrite "older" as "age", "released first" as "release date", "where" as "location", or "who" as "person" unless that noun already appears explicitly in the original question.
+
+Preserve all named entities, placeholders, wh focus, comparison cues, logical cues, and coreference cues exactly.
+Do not replace this/that/its/his/her/their references with long antecedent phrases.
+Coreference resolution belongs to the semantic AST step, not this step.
+
+Allowed edits are limited to:
+- adding or adjusting light function words needed for grammaticality;
+- converting a relation-bearing possessive common-noun phrase into an of-prepositional phrase when it makes the dependency head clearer;
+- expanding clear surface ellipsis or shared coordination only using semantic material already present in the original question;
+- lightly reordering words to form a grammatical single question when the original is syntactically malformed.
+
+Forbidden edits:
+- do not answer the question;
+- do not split the question into multiple questions;
+- do not decompose the question;
+- do not infer missing facts or entity types;
+- do not introduce new content nouns or semantic attributes;
+- do not remove, rename, paraphrase, or duplicate named entities;
+- do not change the answer focus;
+- do not change comparison, set, temporal, location, or logical conditions;
+- do not output reasoning, ASTs, graphs, operators, or execution plans.
+
+If a safe minimal rewrite is not obvious, return the original question unchanged.
+
 Return valid JSON only.
 """.strip()
 
@@ -165,18 +250,15 @@ def build_semantic_question_normalization_prompt(
 ) -> str:
     placeholders = placeholders or []
     schema = {
-        "normalized_question": "the original question if no rewrite is needed, otherwise one semantically equivalent normalized single-sentence question",
-        "changed": True,
-        "added_type_variables": [
-            {
-                "text": "explicit type variable added by the rewrite",
-                "trigger_text": "exact cue in the original question",
-                "reason": "brief justification",
-            }
-        ],
+        "normalized_question": "the original question if no safe minimal syntactic rewrite is needed",
+        "changed": False,
+        "rewrite_type": "identity | possessive_to_of | ellipsis_expansion | coordination_clarification | grammar_repair",
+        "added_type_variables": [],
+        "reason": "brief reason for the decision"
     }
+
     return f"""
-Decide whether the question needs semantic normalization for dependency parsing.
+Decide whether the question needs minimal parser-oriented normalization.
 
 Original question:
 {question}
@@ -184,36 +266,41 @@ Original question:
 Placeholder tokens that must be preserved exactly:
 {json.dumps(placeholders, ensure_ascii=False, indent=2)}
 
-Rewrite goals:
-- If the original question is already clear, complete, and parser-friendly, set normalized_question to the exact original question and changed to false.
-- If the original question has ellipsis, compressed coordination, unclear attachment, implicit comparison attributes, or a structure likely to confuse dependency parsing, provide a normalized question.
-- Keep the output as exactly one question.
-- Remove ellipsis and expand shared coordinated structure when doing so does not change meaning.
-- Make relationships between entities, type variables, comparison targets, logical constraints, and answer focus syntactically explicit.
-- If a comparative, superlative, ordinal, location, time, identity, membership, or predicate cue clearly implies an attribute/type variable, the rewrite may name that variable explicitly.
-- Keep all explicit type variables from the input.
-- Keep all placeholders exactly as written, with the same number of occurrences.
-- Keep all named entities exactly as written.
-- Prefer a direct, parser-friendly clause structure over compressed coordination.
-- For coordination or comparison, make each compared or coordinated item attach clearly to the same relation or attribute.
-- Keep the result a natural English question, not a statement, fragment, list, or template.
+Decision procedure:
+1. Start with identity: assume the original question should be returned unchanged.
+2. Rewrite only if there is a clear syntactic risk for dependency parsing.
+3. The rewrite must remain exactly one natural English question.
+4. The rewrite must preserve the same answer focus and all original constraints.
+5. Use only semantic content already present in the original question.
+6. You may add only light grammatical/function words when needed.
+7. Do not introduce new content nouns, attributes, value slots, entity types, or implicit variables.
+8. Do not turn cues into attributes:
+   - "older/younger" must not become "age" or "birth date";
+   - "released first/earlier" must not become "release date";
+   - "where" must not become "location";
+   - "who" must not become "person";
+   - "largest/highest/longest" must not become "population/height/length" unless that noun already appears.
+9. Preserve coreference expressions such as "this university", "that city", "its director", "his mother", and "their nationality".
+10. Preserve every named entity and every placeholder exactly as written.
+11. If the rewrite would require semantic inference, return the original question unchanged.
 
-Strict restrictions:
-- Do not answer the question.
-- Do not split the input into multiple questions.
-- Do not output an AST, graph, decomposition, solving order, or reasoning trace.
-- Do not introduce a named entity not present in the original question.
-- Do not infer missing facts, categories, locations, dates, genders, nationalities, occupations, or aliases from world knowledge.
-- Do not remove or rename any placeholder.
-- Do not change the answer type.
-- Do not change the comparison, set, temporal, location, or logical condition being asked.
-- If the rewrite would require guessing unstated facts or entity types, return the original question unchanged and changed=false.
+Allowed rewrite examples:
+- "When did Lothair II's mother die?"
+  -> "When did the mother of Lothair II die?"
+  This is allowed because it only changes a possessive relation into an of-relation and adds no new semantic variable.
 
-Added type-variable reporting:
-- If the rewrite adds an explicit type-variable noun that was only implicit in the original, list it in added_type_variables.
-- The trigger_text must be an exact cue span from the original question.
-- Do not list variables that already appeared explicitly in the input.
-- If normalized_question is exactly the original question, added_type_variables must be an empty list.
+Forbidden rewrite examples:
+- "Who is older, Alice or Bob?"
+  -> "Which person has the greater age, Alice or Bob?"
+  This is forbidden because it adds "person" and "age".
+
+- "Which film was released first, FilmA or FilmB?"
+  -> "Which film has the earliest release date, FilmA or FilmB?"
+  This is forbidden because it adds "release date".
+
+- "In which city is this university located?"
+  -> "In which city is the university that the CEO graduated from located?"
+  This is forbidden because it resolves coreference by duplicating an antecedent.
 
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
@@ -222,20 +309,56 @@ Output JSON with exactly this shape:
 
 ANCHOR_SELECTION_SYSTEM = """
 You are implementing DEPO Step 4: explicit anchor selection.
+
+Your task is to select a minimal sufficient set of explicit semantic node endpoints from the provided candidate anchor set.
+
 You must select anchors only from the provided candidate anchor set.
-You will see only the semantic-normalized question and the candidate anchor set.
-Do not require masked text, dependency tokens, dependency edges, POS tags, parser labels, placeholders, ASTs, or subquestions.
-The candidate text already shows the surface text to judge.
-Allowed anchor kinds are exactly: entity, type_variable.
-Select every explicit entity or explicit type-variable endpoint that must be preserved as a node in the semantic graph.
-Anchors are not only final answers. Select intermediate entities, roles, classes, and attributes that are required to preserve relation chains and constraints.
-Select single-token named entities when they are explicit fixed inputs to a relation or constraint.
-Select compact multi-word type variables and single-word type variables when they are answer variables, intermediate constraint variables, relation-chain endpoints, or explicit attributes.
-For nested phrases, possessive/of-prepositional phrases, and relative clauses, select each explicit endpoint needed to express the chain, not just the final answer variable.
-Do not select generic answer labels that merely restate who/what/where/when, such as person, thing, place, time, entity, item, one, someone, something, or somewhere, unless that exact class must be independently bound in a relation chain.
-Use entity only for proper named entities or fixed named inputs. Use type_variable for common-noun roles, classes, institutions, organizations, places, and attributes such as CEO, company, university, city, actor, director, nationality, population, and compact noun phrases.
-Do not select implicit_type_variable, operator, cue, comparative cue, superlative cue, coordination cue, logical cue, function word, or predicate-only verb.
-Do not select words such as same, different, older, younger, larger, smaller, largest, highest, first, last, before, after, and, or, both, either.
+Do not invent node_id values, entities, variables, attributes, relations, operators, AST nodes, or subquestions.
+
+An anchor is an explicit candidate node that must survive as a node in the later semantic graph.
+An anchor is not a relation edge, not an operator cue, not a dependency bridge, and not a word that is merely syntactically useful.
+
+Allowed anchor_kind values are exactly:
+- entity
+- type_variable
+
+Select anchors in these cases:
+
+1. Fixed named inputs
+Select explicit named people, organizations, places, works, products, events, or other fixed named entities that are given as inputs to the question.
+Single-token named entities may be selected if they are explicit fixed inputs.
+
+2. Explicit answer variables
+Select explicit common-noun variables that represent what the question asks for, such as university, city, country, director, actor, company, date, nationality, population, or similar, when they are truly the answer target.
+
+3. Intermediate relation-chain variables
+Select explicit roles/classes that must be solved between a known input and the final answer, such as mother, wife, CEO, director, author, founder, company, university, city, or country.
+
+4. Explicit attributes or value slots
+Select explicit attributes/measures only when the attribute noun itself appears in the candidate text, such as nationality, population, date of death, release date, height, length, or age.
+
+Use anchor_kind=entity for proper named entities and fixed named inputs.
+Use anchor_kind=type_variable for common-noun roles, classes, answer variables, intermediate variables, and explicit attributes.
+
+Do not select:
+- implicit variables or value slots;
+- relation-only verbs or predicates such as born, died, developed, graduated, located, released, directed, authored;
+- operator/comparison/logical cues such as same, different, older, younger, later, earlier, largest, first, last, both, either, and, or;
+- wh words or generic answer labels such as who, what, where, when, person, thing, place, time, someone, something, somewhere, unless the exact common noun is independently bound in a relation chain;
+- prepositions, auxiliaries, determiners, relativizers, punctuation, or function words;
+- appositive/context type labels that merely introduce a nearby named entity, such as film in "film Titanic", city in "city Paris", or actor in "actor Tom Hanks", unless that type word is itself the answer or an intermediate variable;
+- broad context labels when a more specific entity anchor already represents the object, such as films before two film titles.
+
+For repeated or coreferent mentions:
+Select multiple mentions only if each mention anchors a different relation clause needed by the question.
+Do not treat coreferent mentions as different semantic variables. The semantic AST step will merge them.
+
+For nested phrases, possessives, of-phrases, and relative clauses:
+Select the explicit endpoint nodes needed to express the relation chain.
+Do not select the relation phrase itself.
+
+If uncertain, prefer the smaller set of anchors that still preserves the reasoning chain.
+
 Return valid JSON only.
 """.strip()
 
@@ -249,17 +372,18 @@ def build_anchor_selection_prompt(
             {
                 "node_id": "8",
                 "anchor_kind": "entity",
-                "text": "Ten9Eight: Shoot For The Moon",
-                "reason": "Film entity explicitly mentioned in the question",
+                "text": "Wrong Turn 5: Bloodlines",
+                "reason": "role=fixed_named_input; explicit film title used as a branch input"
             },
             {
                 "node_id": "13",
                 "anchor_kind": "type_variable",
                 "text": "nationality",
-                "reason": "Explicit attribute being compared",
-            },
+                "reason": "role=explicit_attribute; nationality is the explicit compared attribute"
+            }
         ]
     }
+
     return f"""
 Select explicit anchors for the semantic-normalized question.
 
@@ -269,25 +393,78 @@ Semantic-Normalized Question:
 Candidate anchor set:
 {json.dumps(restored_graph_node_candidates, ensure_ascii=False, indent=2)}
 
-Rules:
-- Output node_id values from the candidate anchor set.
-- Use only the Semantic-Normalized Question and the candidate anchor set.
-- Do not infer from missing parser metadata. Do not invent entities, variables, attributes, or relations.
-- Select all explicit semantic endpoints needed to reconstruct the question's relation chain.
-- Select entity anchors for explicit named people, organizations, places, works, products, events, or other fixed named inputs, including single-token names.
-- Select type_variable anchors for explicit answer variables, intermediate role/class variables, constrained noun phrases, and explicit attributes or measures.
-- Do not use anchor_kind=entity for common-noun roles or classes just because they are important. CEO, company, university, city, actor, director, region, nationality, population, and multi-word class phrases should use anchor_kind=type_variable unless they are part of an official proper name.
-- Select relation-chain endpoints inside of-phrases, possessives, prepositional constraints, and relative clauses when they name an entity or type variable.
-- Select intermediate variables even when they are not the final answer, if removing them would lose a constraint needed to reach the answer.
-- Select repeated mentions separately when they are separate candidate nodes and play separate roles in the question.
-- Do not select implicit variables. If a comparative cue implies age but age is not a candidate text, do not create or select age.
-- Do not select operators or cues. For "same nationality", select nationality, not same.
-- Do not select generic answer labels. For "Who is the older person, PersonA or PersonB?", select PersonA and PersonB only; do not select person.
-- Do not select predicate-only verbs, auxiliaries, determiners, wh words, prepositions, relativizers, punctuation, function words, comparative/superlative words, coordination words, or purely syntactic bridge words.
-- Relation phrases belong later in semantic AST edge relation_hint; Step 4 selects the endpoint nodes, not relation text.
-- Use anchor_kind=entity for proper named entities and fixed named inputs. Use anchor_kind=type_variable for type variables, roles, classes, answer variables, and explicit attributes.
-- The text field of each selected item must exactly copy the candidate text for that node_id. Do not output implied attributes such as age unless age is itself a candidate text.
-- If no candidate should be selected, return an empty selected_anchors list.
+Output requirements:
+- Output only node_id values from the candidate anchor set.
+- The text field must exactly copy the candidate text for that node_id.
+- Use only anchor_kind "entity" or "type_variable".
+- Do not add fields outside the requested JSON shape.
+- In the reason, briefly state the semantic role, for example:
+  role=fixed_named_input
+  role=answer_variable
+  role=intermediate_variable
+  role=explicit_attribute
+  role=coreferent_clause_anchor
+
+Decision test:
+Select a candidate only if it is an explicit semantic node endpoint needed to preserve the question's reasoning chain.
+
+A candidate should be selected if it is one of:
+1. a fixed named entity input;
+2. an explicit answer variable;
+3. an explicit intermediate role/class variable;
+4. an explicit attribute or value slot that appears in the question;
+5. a repeated/coreferent mention that anchors a different relation clause.
+
+A candidate should not be selected if it is only:
+1. a relation word or predicate;
+2. an operator/comparison/logical cue;
+3. a wh word or generic answer label;
+4. a syntactic bridge;
+5. a broad type label introducing a nearby named entity;
+6. an implied attribute not explicitly present as candidate text.
+
+Important distinctions:
+
+- Named entity input:
+  "Gideon Johnson Pillow" and "Holm Jølsen" should be selected as entity anchors.
+
+- Explicit intermediate variable:
+  In "John Middleton Murry's wife", select "John Middleton Murry" and "wife".
+  Do not select "die" or "why".
+
+- Explicit compared attribute:
+  In "same nationality", select "nationality".
+  Do not select "same".
+
+- Implied value slot:
+  In "Who was born later, A or B?", select A and B.
+  Do not select "birth date" unless "birth date" is an actual candidate.
+
+- Context type label:
+  In "films Wrong Turn 5: Bloodlines and Dark River (2017 Film)", select the two film titles.
+  Do not select "films" if the film titles themselves are selected.
+
+- Appositive type label:
+  In "actor Tom Hanks", select "Tom Hanks".
+  Do not select "actor" unless the question asks for or constrains an unknown actor.
+
+- Coreference:
+  In "Which university did X graduate from and in which city is this university located?",
+  select both university mentions only if they appear as separate candidates anchoring different clauses.
+  The reason should indicate they are coreferent mentions of the same variable.
+  Do not treat them as two different universities.
+
+Anchor kind rules:
+- Use entity for proper names, named works, named organizations, named places, products, or events.
+- Use type_variable for common-noun roles/classes/variables/attributes.
+- Do not use entity for common nouns merely because they are important.
+- Do not use type_variable for implicit variables that are not explicit candidates.
+
+Minimality rule:
+Do not select every noun.
+Select the minimal sufficient set of explicit node endpoints needed to reconstruct the semantic chain.
+
+If no candidate should be selected, return an empty selected_anchors list.
 
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
@@ -295,20 +472,83 @@ Output JSON with exactly this shape:
 
 
 SEMANTIC_AST_OPTIMIZATION_SYSTEM = """
-You are implementing DEPO Step 9: final semantic AST optimization.
-The anchor connected graph is only syntactic/structural evidence, not the final reasoning AST.
-Use original question semantics as the highest-priority source of truth.
-Do not copy dependency edges or evidence paths directly as semantic edges.
-The directed AST is a reasoning DAG: each edge must point from an already-known or already-bound node to the next node that should be solved.
-Coreference, same-as, apposition, and repeated mentions are not reasoning hops. Merge them into one canonical semantic node instead of outputting an edge.
-Merge this/that/the/its/his/her/their mentions with their antecedent. Merge a wh-variable with later mentions that refer to the same variable, such as "which university" and "this university".
-This is the only step that may create implicit type variables and choose a primary operator.
-Choose exactly one primary_operator from the allowed operator set. NONE is the default.
-Use a non-NONE operator only when the final answer requires an operation over multiple branch results, multiple retrieved values, sets, propositions, or candidate entities.
-Do not choose an operator for a serial chain lookup. Predicates, events, and attributes such as die, born, graduate, located, released, founded, developed, directed, and authored should normally be represented as semantic edges, not operators.
-Keyword or cue words alone must never force an operator; decide from the full question semantics.
-Do not invent entities that are not present in the original question or mask mapping.
-Do not generate subquestions.
+You are implementing DEPO Step 9: final semantic AST construction.
+
+Your task is to convert the selected anchors and the restored anchor-connected evidence graph into a clean directed semantic reasoning AST.
+
+The anchor-connected graph is only syntactic/structural evidence.
+It is not the final AST.
+Use the original question semantics as the highest-priority source of truth.
+Use selected anchors and the restored graph only as grounding evidence.
+
+The AST must be a directed reasoning DAG.
+Each edge must represent exactly one semantic lookup relation from a known or previously solvable source node to the next target node to solve.
+
+Do not copy dependency edges directly.
+Do not output dependency paths as semantic edges.
+Do not output subquestions.
+Do not answer the question.
+
+Node contract:
+- A node is a semantic endpoint: named entity, explicit type variable, role, class, answer variable, attribute/value slot, or implicit value slot.
+- Node labels must be clean natural-language endpoint labels, such as "director", "death date", "nationality", "university", "city", or a named entity.
+- Do not put relation phrases into node labels.
+- For example, use label "nationality", not "nationality of director".
+- Put relation phrases only in edge.relation_hint.
+
+Edge contract:
+- Each edge must be one-hop.
+- Each edge source is the known entity or previously solved variable.
+- Each edge target is the next variable/value to retrieve.
+- Do not merge multiple reasoning hops into one edge.
+- Do not use coreference, apposition, same-as, mention-of, or syntactic attachment as reasoning edges.
+
+Coreference contract:
+- Merge repeated mentions that refer to the same semantic variable.
+- Merge this/that/its/his/her/their references with their true antecedent.
+- Merge wh variables with later mentions when they refer to the same variable, such as "which university" and "this university".
+- Do not merge same-label variables across independent branches. For example, two directors of two different films must remain separate nodes.
+
+Implicit variable contract:
+This is the only step that may create implicit type variables or implicit value slots.
+Create an implicit node only when the original question explicitly licenses it through a wh-focus, predicate cue, attribute cue, comparison cue, ranking cue, set cue, or logical cue.
+Do not create implicit nodes from world knowledge or from generic plausibility.
+Every implicit node must have:
+- kind = "implicit_type_variable";
+- cue_text;
+- grounding_text;
+- relation_hint;
+- expected_value_slot when applicable;
+- branch_of when it belongs to one branch of a comparison/set/logical operation.
+
+Operator contract:
+Choose exactly one primary_operator.operator from the allowed operator set.
+NONE is the default.
+
+Use NONE for ordinary chain-shaped lookup questions.
+Predicates, events, and attributes such as die, born, graduate, located, released, founded, developed, directed, authored, and discovered are normally semantic edges, not operators.
+
+Use a non-NONE operator only when the final answer requires an operation over multiple branch results, multiple values, candidate entities, sets, or propositions.
+Cue words alone must never force an operator.
+Decide from the full question semantics.
+
+For non-NONE operators:
+- primary_operator.inputs must be terminal value nodes or proposition nodes that can be obtained from the AST edges.
+- Do not attach an operator directly to an intermediate entity if the question actually compares or ranks one of its attributes.
+- If the compared/ranked/combined value is implicit, create the required value-slot node first, then use that node as the operator input.
+
+For operator NONE:
+- primary_operator.inputs should be empty unless the existing schema requires otherwise.
+- Model the requested answer entirely as directed semantic edges.
+
+Direction contract:
+Orient edges in the order needed to solve the question.
+If explicit named inputs exist, branches usually start from those inputs and move toward answer variables or operator inputs.
+If there is no fixed named input, start from the candidate/answer class and move toward the attribute or value required by the question.
+
+Preserve selected anchors unless they are redundant coreferent mentions or appositive/context labels that should be merged into a canonical node.
+Do not invent named entities absent from the original question or mask restore information.
+
 Return valid JSON only.
 """.strip()
 
@@ -325,42 +565,78 @@ def build_semantic_ast_optimization_prompt(
     schema = {
         "status": "ok",
         "primary_operator": {
-            "operator": "COMPARE_SAME",
-            "cue_text": "same",
-            "inputs": ["nationality_1", "nationality_2"],
+            "operator": "NONE",
+            "cue_text": "",
+            "inputs": [],
             "output": "answer",
-            "explanation": "The question asks whether two nationalities are the same.",
+            "explanation": "Use NONE for a serial chain lookup; use a non-NONE operator only when the final answer requires comparison, ranking, set, or logical composition."
         },
         "nodes": [
             {
-                "id": "movie_1",
-                "label": "Ten9Eight: Shoot For The Moon",
+                "id": "film_1",
+                "label": "Madame La Presidente",
                 "kind": "entity",
                 "semantic_type": "Film",
                 "source": "selected_anchor",
                 "source_graph_nodes": ["8"],
                 "source_token_indices": [8],
-                "grounding_text": "Ten9Eight: Shoot For The Moon",
+                "grounding_text": "Madame La Presidente",
                 "cue_text": "",
                 "branch_of": "",
                 "expected_value_slot": "",
-                "relation_hint": "",
+                "relation_hint": ""
+            },
+            {
+                "id": "director_1",
+                "label": "director",
+                "kind": "type_variable",
+                "semantic_type": "Person",
+                "source": "selected_anchor",
+                "source_graph_nodes": ["4"],
+                "source_token_indices": [4],
+                "grounding_text": "director",
+                "cue_text": "",
+                "branch_of": "",
+                "expected_value_slot": "",
+                "relation_hint": ""
+            },
+            {
+                "id": "death_date_1",
+                "label": "death date",
+                "kind": "implicit_type_variable",
+                "semantic_type": "Date",
+                "source": "implicit_from_question",
+                "source_graph_nodes": [],
+                "source_token_indices": [],
+                "grounding_text": "die",
+                "cue_text": "When ... die",
+                "branch_of": "director_1",
+                "expected_value_slot": "death_date",
+                "relation_hint": "date of death"
             }
         ],
         "edges": [
             {
-                "source": "movie_1",
+                "source": "film_1",
                 "target": "director_1",
                 "edge_type": "attribute",
                 "relation_hint": "director of film",
-                "support_path": ["Ten9Eight: Shoot For The Moon", "film", "director"],
-                "support_dependency_relations": ["appos", "nmod:of"],
+                "support_path": ["Madame La Presidente", "director"],
+                "support_dependency_relations": []
+            },
+            {
+                "source": "director_1",
+                "target": "death_date_1",
+                "edge_type": "attribute",
+                "relation_hint": "date of death",
+                "support_path": ["director", "die"],
+                "support_dependency_relations": []
             }
-        ],
+        ]
     }
+
     return f"""
-Optimize the restored anchor connected subgraph into a directed semantic AST.
-The anchor connected graph is only evidence. The final AST must be the semantic reasoning skeleton of the original question, not a transcription of dependency edges.
+Construct the final directed semantic AST for the original question.
 
 Original question:
 {original_question}
@@ -371,7 +647,7 @@ Mask restore information:
 Selected explicit anchors:
 {json.dumps(selected_anchors, ensure_ascii=False, indent=2)}
 
-Restored anchor connected subgraph:
+Restored anchor-connected subgraph:
 {json.dumps(restored_anchor_connected_subgraph, ensure_ascii=False, indent=2)}
 
 Allowed primary operators:
@@ -383,65 +659,162 @@ Previous AST that failed validation:
 Validation feedback to fix:
 {json.dumps(validation_feedback or [], ensure_ascii=False, indent=2)}
 
-Rules:
-- Choose exactly one primary_operator.operator from the allowed set.
-- NONE is the default operator.
-- If the question is a chain-shaped lookup, use NONE even when it contains predicates or attributes such as die, born, graduate, located, released, founded, developed, directed, or authored.
-- Use a non-NONE operator only when the final answer asks you to compare, rank/select, combine sets, or combine propositions across multiple branch results, multiple values, or multiple candidate entities.
-- Do not use keyword matching to choose operators. Words like same, different, first, older, largest, died, born, released, or founded are evidence to interpret the question, not automatic triggers.
-- COMPARE_* operators require at least two independent input value nodes. A single value chain such as entity -> mother -> death_date must use NONE.
-- If validation feedback says an operator has too few inputs or looks like a single-chain lookup, regenerate with primary_operator.operator=NONE and model the requested facts as semantic edges.
-- If validation feedback is non-empty and a non-NONE operator remains semantically justified, fix only the reported operator inputs or value-slot nodes.
-- You may add implicit type variables only when they are required by a semantically confirmed non-NONE operator or by a needed lookup edge.
-- Implicit variables must include cue_text and grounding_text.
-- Before attaching branch endpoints to a semantically confirmed non-NONE operator, infer the expected value slot required by the original question.
-- A value slot is the actual attribute, date, measure, category, count, role value, or comparable value that must be retrieved before the operator can be applied.
-- The operator should consume value slot nodes, not merely the current branch endpoints.
-- Do not only check whether the operator input is a bare entity. Even if the operator input is an intermediate variable such as director, actor, CEO, city, university, company, country, person, film, organization, or type variable, the AST is incomplete if the original cue requires an additional value slot such as birth_date, nationality, release_date, population, founding_date, height, length, count, or category.
-- For each branch: identify the current branch endpoint; infer the expected value slot from the original question cue; if the endpoint is not already that slot, create an implicit_type_variable; connect current endpoint -> implicit_type_variable; make the operator consume the implicit_type_variable.
-- Every implicit_type_variable must include cue_text, grounding_text, branch_of, relation_hint, and expected_value_slot.
-- Value-slot guidance for already-confirmed non-NONE operators only:
-  released first/earliest/earlier across candidates -> expected_value_slot=release_date.
-  released later/latest/last across candidates -> expected_value_slot=release_date.
-  born earlier/later across candidates -> expected_value_slot=birth_date.
-  died earlier/later across candidates -> expected_value_slot=death_date.
-  founded earlier/later across candidates -> expected_value_slot=founding_date.
-  published first/earlier across candidates -> expected_value_slot=publication_date.
-  launched first/earlier across candidates -> expected_value_slot=launch_date.
-  older/younger across candidates -> expected_value_slot=age or birth_date.
-  same/different nationality/director/author/country across branches -> expected_value_slot=that noun.
-  largest/smallest population over candidates -> expected_value_slot=population.
-  highest mountain -> expected_value_slot=height or elevation.
-  lowest point -> expected_value_slot=elevation.
-  longest/shortest river -> expected_value_slot=length.
-  most/fewest awards -> expected_value_slot=award_count.
-  most populous city -> expected_value_slot=population.
-- Bad: FilmA -> director_1 -> COMPARE_LESS and FilmB -> director_2 -> COMPARE_LESS when the question says "director who was born earlier". Good: FilmA -> director_1 -> birth_date_1 -> COMPARE_LESS and FilmB -> director_2 -> birth_date_2 -> COMPARE_LESS.
-- Bad: FilmA -> director_1 -> COMPARE_SAME and FilmB -> director_2 -> COMPARE_SAME when the question says "same nationality". Good: FilmA -> director_1 -> nationality_1 -> COMPARE_SAME and FilmB -> director_2 -> nationality_2 -> COMPARE_SAME.
-- Bad: MovieA -> director -> death_date -> COMPARE_DIFF for "What is the date of death of the director of MovieA?" Good: MovieA -> director -> death_date with primary_operator=NONE.
-- Bad: PersonA -> mother -> death_date -> COMPARE_LESS for "When did PersonA's mother die?" Good: PersonA -> mother -> death_date with primary_operator=NONE.
-- Original question semantics outrank the anchor connected graph. Use the graph only as evidence for endpoints and local wording.
-- Do not turn dependency relations, coreference arcs, apposition arcs, same-as mentions, or pronoun/determiner mentions into semantic edges.
-- Merge coreferent mentions into one node. In particular, merge this/that/the/its/his/her/their mentions with the antecedent they refer to.
-- Merge repeated mentions of the same wh-variable with later references. For example, "which university" and "this university" must be one node such as university_1.
-- Never output edges whose relation_hint is same as, is the same as, corefers with, refers to, appositive, or mention-of; perform node merging instead.
-- Correct semantic roles before writing edges: a graduate-from edge should be Person/Role -> University; located-in should be Institution/Organization/Place -> City/Country/Location; developed should connect product/system and developer; CEO-of should be Company/Organization -> CEO/Person.
-- You may split parallel branches and copy shared variables, e.g. nationality -> nationality_1 and nationality_2.
-- Node id may carry branch suffixes such as director_1 or nationality_2, but node label must be clean natural-language text such as director or nationality.
-- Do not put edge/relation phrases into node labels. For example, label the node nationality, not nationality of director.
-- Put phrases such as director of film or nationality of director only in edge.relation_hint.
-- Convert the undirected evidence graph into directed semantic edges whose direction follows inference, not surface syntax.
-- Direction rule: source is a known constant/entity or a previously solved variable; target is the next variable/value to solve.
-- If explicit named entities exist, start each branch from those entities and move toward answer variables or operator inputs.
-- If no explicit entity exists, start from the answer candidate type or comparison subject, then move toward attributes used for constraints/operators.
-- For "Which university did the CEO of the company that developed AlphaGo graduate from?", the reasoning direction is AlphaGo -> company -> CEO -> university, not university -> CEO -> company -> AlphaGo.
-- For "Which university did the CEO of the company that developed AlphaGo graduate from and in which city is this university located?", use AlphaGo -> company -> CEO -> university -> city. There must be only one university node; do not add university -> university same-as/coreference edges.
-- For "Do film A and film B share the same nationality?", use film A -> director_1 -> nationality_1 and film B -> director_2 -> nationality_2.
-- For "Which country has the largest population?", use country -> population, with ARGMAX over population.
-- The primary operator will be represented as an operator node by the system; primary_operator.inputs must name the branch endpoint node ids consumed by the operator.
-- Keep selected anchors unless you provide an explicit reason in the node/edge choices.
-- Do not create entities that are absent from selected anchors or mask mappings.
-- Do not generate atomic subquestions.
+Your goal:
+Build the clean semantic reasoning skeleton of the original question.
+
+The output AST will later be compiled into atomic subquestions.
+Therefore, each AST edge must correspond to one atomic lookup relation.
+
+High-level decision procedure:
+
+1. Identify the semantic endpoints.
+   Use selected anchors as explicit endpoint candidates.
+   Add implicit value-slot nodes only when the original question explicitly requires a value not already represented by an anchor.
+
+2. Merge coreferent mentions.
+   Merge this/that/its/his/her/their mentions with their true antecedent.
+   Merge repeated wh-variable mentions with later mentions of the same variable.
+   Do not create same-as, coreference, apposition, or mention-of edges.
+
+3. Keep independent branches separate.
+   Do not merge two nodes merely because they have the same label.
+   In parallel questions, use branch-specific ids such as director_1/director_2 or nationality_1/nationality_2.
+
+4. Create one-hop directed edges.
+   Each edge must represent one semantic relation from a known or previously solvable source to the next target.
+   Do not put two or more reasoning hops into one edge.
+   Do not create relation nodes when an edge.relation_hint is enough.
+
+5. Choose the primary operator.
+   Choose exactly one operator from the allowed set.
+   NONE is the default.
+   Use NONE for serial chain lookup questions.
+   Use a non-NONE operator only when the final answer requires comparison, ranking, set composition, or logical composition over multiple independently obtained values/propositions.
+
+Rules for implicit nodes:
+
+- An implicit node is allowed when the original question asks for a value through a predicate or cue rather than an explicit noun.
+- Examples of licensed implicit values:
+  - "When did X die?" licenses a death-date value.
+  - "Where was X born?" licenses a birthplace/location value.
+  - "Who was born later, A or B?" licenses birth-date values for both branches.
+  - "Do A and B have the same nationality?" licenses nationality values if nationality nodes are not already explicit branch endpoints.
+- These are examples, not a closed keyword list.
+- Infer the needed value slot from the full question semantics.
+- Do not add implicit nodes that are only plausible from world knowledge.
+- Do not add extra attributes that the question does not ask for.
+
+Rules for primary_operator:
+
+- Use NONE when the question can be answered by following a single directed chain.
+  Example:
+  "When did the director of Madame La Presidente die?"
+  AST:
+  film_1 -> director_1
+  director_1 -> death_date_1
+  operator = NONE
+
+- Use COMPARE_SAME or COMPARE_DIFF only when the final answer asks whether two or more branch values are the same or different.
+  The operator inputs must be the actual compared value nodes, not merely the branch entities.
+
+- Use COMPARE_GREATER or COMPARE_LESS only when the final answer asks which of two values is greater/less, earlier/later, older/younger, or otherwise ordered.
+  The operator inputs must be the ordered value nodes.
+
+- Use ARGMAX or ARGMIN only when the final answer asks for the candidate with the maximum/minimum value among a candidate set.
+  The operator input should be the value being maximized/minimized, with candidate linkage preserved through branch_of or edges.
+
+- Use INTERSECTION, UNION, or DIFFERENCE only for set-valued questions.
+  Do not use them for ordinary relation chains.
+
+- Use LOGICAL_AND or LOGICAL_OR only when the final answer combines propositions, not merely because the surface question contains "and" or "or".
+
+Cue words are evidence, not triggers.
+A word like same, first, later, older, largest, born, died, released, founded, or located does not automatically determine the operator.
+Always decide from the final answer requirement.
+
+Direction rules:
+
+- Source should be a known entity, fixed input, candidate class, or previously solvable node.
+- Target should be the next variable/value to retrieve.
+- For named-input chains, start from the named input.
+- For candidate-selection questions, start from the candidate type and move to the attribute/value used for filtering, comparison, or ranking.
+
+Examples:
+
+Example 1:
+Question:
+When did the director of Madame La Presidente die?
+
+Correct:
+operator = NONE
+film_1: Madame La Presidente
+director_1: director
+death_date_1: death date
+film_1 -> director_1 (director of film)
+director_1 -> death_date_1 (date of death)
+
+Incorrect:
+operator = COMPARE_DIFF
+director_1 -> death_date_1 -> operator
+
+Example 2:
+Question:
+Do both directors of films Wrong Turn 5: Bloodlines and Dark River (2017 Film) have the same nationality?
+
+Correct:
+film_1 -> director_1
+director_1 -> nationality_1
+film_2 -> director_2
+director_2 -> nationality_2
+primary_operator = COMPARE_SAME
+primary_operator.inputs = ["nationality_1", "nationality_2"]
+
+Incorrect:
+film_1 -> director_1 -> COMPARE_SAME
+film_2 -> director_2 -> COMPARE_SAME
+
+Example 3:
+Question:
+Which university did the CEO of the company that developed AlphaGo graduate from and in which city is this university located?
+
+Correct:
+AlphaGo -> company_1
+company_1 -> ceo_1
+ceo_1 -> university_1
+university_1 -> city_1
+operator = NONE
+There must be one university node.
+Do not create a coreference edge between "which university" and "this university".
+
+Example 4:
+Question:
+Who was born later, Gideon Johnson Pillow or Holm Jølsen?
+
+Correct:
+person_1 -> birth_date_1
+person_2 -> birth_date_2
+primary_operator = COMPARE_GREATER or COMPARE_LESS according to the system's operator semantics
+primary_operator.inputs = ["birth_date_1", "birth_date_2"]
+
+Incorrect:
+person_1 -> COMPARE_GREATER
+person_2 -> COMPARE_GREATER
+
+Node id rules:
+- Use stable snake_case ids.
+- Use numeric suffixes for branch-specific nodes: director_1, director_2, nationality_1, nationality_2.
+- The label should be clean natural language.
+- The id may be technical; the label must not be technical.
+
+Output quality checklist:
+- Every selected anchor is represented or intentionally merged.
+- Every edge is one-hop.
+- No relation phrase is used as a node label.
+- No coreference/apposition/same-as edge is output.
+- NONE is used for serial chain lookups.
+- Non-NONE operators consume terminal value/proposition nodes.
+- Implicit nodes are grounded in explicit question cues.
+- No atomic subquestions are generated.
 
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
@@ -463,17 +836,60 @@ Return valid JSON only.
 
 
 ATOMIC_PLAN_STEP_SURFACE_SYSTEM = """
-You are implementing DEPO Step 8 surface realization for one deterministic execution-plan step.
-The semantic AST has already been compiled into a variable-bound execution DAG by code.
-Do not re-plan, reorder, infer hidden hops, merge steps, or use any node not present in this single plan step.
-For an edge step, generate one atomic question from exactly one AST one-hop relation; the answer is answer_variable.
-Internal variables are implementation details. Do not expose X1, X2, V1, VAR_*, or similar variables in the question.
-If step.known is a variable, use the provided resolved_known_subject natural-language description.
-For an operator step, generate the final atomic operator question from the original question, step.operator, step.cue_text, step.inputs, and step.operator_branches.
-Preserve the concrete comparison/logical meaning from the original question; do not replace it with generic greater/less wording unless the original cue is actually greater/less.
-For operator steps, preserve dependency semantics through DAG dependencies and optional candidates metadata; do not mention input variables.
-Do not decide execution dependencies, outputs, DAG edges, or candidate bindings; those are deterministic fields outside this prompt.
-Do not include comparative/superlative/operator cue words in ordinary edge questions.
+You are implementing DEPO Step 10: atomic subquestion surface realization.
+
+The semantic AST has already been compiled by code into an ordered atomic subquestion DAG.
+The DAG order, dependencies, current step, inputs, outputs, and operator placement are already decided by code.
+
+Your only task is to write one natural-language atomic question for the single provided execution-plan step.
+
+This step is not responsible for:
+- deciding the DAG topology;
+- deciding dependencies;
+- decomposing the original question again;
+- merging multiple future steps;
+- creating new nodes or variables;
+- choosing operators;
+- answering the question;
+- generating the final answer.
+
+For step_type=edge:
+Generate exactly one atomic question whose target is the current one-hop AST edge target.
+
+The current step determines what is being asked.
+The resolved_known_subject determines who or what the question is about.
+
+You may use resolved_known_subject to make the question natural and self-contained.
+If resolved_known_subject contains an upstream path, you may use it directly as the subject phrase of the current question.
+
+For example, if the current step asks for the death date of a director, and resolved_known_subject is "the director of Madame La Presidente", then a valid question is:
+"When did the director of Madame La Presidente die?"
+
+This is allowed because the current target is still only the death date.
+Do not force vague wording such as "the previously identified director" unless it is the most natural wording.
+
+However, do not add any downstream relation, final-answer target, comparison, ranking, set operation, or extra condition that is not part of the current step.
+
+For ordinary edge steps:
+- Ask only for the target of the current edge.
+- Use relation_hint only as wording guidance.
+- Use resolved_known_subject as the known subject.
+- Do not include operator cues such as same, different, older, younger, earlier, later, largest, highest, first, last, both, either, whether, and, or, unless they are literally part of a named entity/title.
+- Do not ask the full original question unless the current step itself corresponds to that full question.
+- Do not create a new hidden hop that is not represented in the current step.
+- Do not ask for downstream nodes.
+
+For step_type=operator:
+Generate exactly one final operator question.
+Use the original question, step.operator, step.cue_text, input_descriptions, and candidate metadata.
+Preserve the concrete comparison, ranking, set, or logical meaning from the original question.
+Do not turn the operator step into another lookup question.
+
+Internal variables such as X1, X2, V1, VAR_*, answer_variable, source_id, and target_id are implementation IDs.
+They must never appear in the generated question.
+
+The external contract is semantic dependency between atomic questions, not variable-name binding.
+
 Return valid JSON only.
 """.strip()
 
@@ -485,12 +901,14 @@ def build_atomic_plan_step_surface_prompt(
     input_descriptions: dict[str, str] | None = None,
 ) -> str:
     input_descriptions = input_descriptions or {}
+
     schema = {
-        "question": "What is the nationality of the director of Film A?",
-        "explanation": "This surfaces only the provided execution step.",
+        "question": "one natural-language atomic question for this single execution-plan step",
+        "explanation": "briefly explain why this question asks only for the current step target"
     }
+
     return f"""
-Generate one atomic subquestion from this already-compiled execution-plan step.
+Generate one atomic subquestion for this single already-compiled execution-plan step.
 
 Original question:
 {original_question}
@@ -504,18 +922,146 @@ Resolved known subject:
 Input descriptions:
 {json.dumps(input_descriptions, ensure_ascii=False, indent=2)}
 
-Rules:
-- Do not infer a different step from the original question.
-- Do not use the full AST or any unstated path.
-- For step_type=edge, ask only for the relation from the resolved known subject to step.ask using step.relation_hint as wording guidance.
-- The answer to an edge step will be step.answer_variable.
-- Internal variables such as X1, X2, V1, and VAR_* are implementation details. They must not appear in question.
-- If step.known is a variable, use resolved_known_subject to write a natural-language question.
-- For ordinary edge steps, do not include operator cue words such as same, different, older, younger, largest, highest, first, before, or after.
-- For step_type=operator, generate the final operator question, not another one-hop attribute question.
-- For step_type=operator, use step.operator_branches and input_descriptions to understand what each input represents; the question must not mention variables.
-- For step_type=operator, preserve the original cue/attribute/event in step.cue_text and the original question. If the cue is a concrete property or event, ask about that property or event rather than asking whether one input is abstractly greater/less than another.
-- For comparison or selection nodes, name the natural-language candidates or compared facts explicitly.
+Core rule:
+Generate exactly one natural-language question for the current execution-plan step.
+The current step determines what is being asked.
+The resolved_known_subject determines who or what the question is about.
+
+The original question is only wording context.
+Do not use the original question to add extra hops, downstream targets, extra constraints, or a final-answer request.
+
+For step_type=edge:
+1. Generate one atomic question for the current directed AST edge only.
+2. The known/source side is resolved_known_subject.
+3. The asked/target side is step.ask.
+4. Use step.relation_hint only to choose natural wording.
+5. The question may be self-contained.
+6. The question may reuse an upstream path inside resolved_known_subject.
+7. The question must not ask for any downstream target.
+8. The question must not include operator/comparison/logical meaning unless the current step is an operator step.
+
+Important:
+Using resolved_known_subject is allowed even if it contains an upstream relation chain.
+
+Example:
+If the current step is:
+director_1 -> death_date_1, relation_hint="date of death"
+
+and resolved_known_subject is:
+"the director of Madame La Presidente"
+
+Then this is valid:
+"When did the director of Madame La Presidente die?"
+
+This is valid because the current question only asks for the death date.
+It does not ask for a downstream value or final comparison.
+
+Do not expose internal variables such as X1, X2, V1, VAR_*, answer_variable, source_id, or target_id.
+
+For ordinary edge steps:
+- Ask only for the target of the current edge.
+- Do not add comparison/operator cues such as same, different, older, younger, earlier, later, largest, highest, first, last, both, either, whether, and, or.
+- Do not ask whether two things are equal, different, before, after, larger, smaller, or ranked.
+- Do not generate a final answer question.
+- Do not create new entities, variables, attributes, or relation hops.
+- Do not include downstream relations from later steps.
+
+For step_type=operator:
+1. Generate the final comparison/ranking/set/logical question.
+2. Use step.operator, step.cue_text, input_descriptions, and candidate metadata.
+3. Preserve the original concrete operator meaning.
+4. Do not mention internal variables.
+5. Do not generate another lookup question.
+
+Positive examples:
+
+Example A:
+Original question:
+When did the director of Madame La Presidente die?
+
+Current edge:
+film_1 -> director_1, relation_hint="director of film"
+
+Resolved known subject:
+Madame La Presidente
+
+Output:
+"Who is the director of Madame La Presidente?"
+
+Example B:
+Original question:
+When did the director of Madame La Presidente die?
+
+Current edge:
+director_1 -> death_date_1, relation_hint="date of death"
+
+Resolved known subject:
+the director of Madame La Presidente
+
+Output:
+"When did the director of Madame La Presidente die?"
+
+Example C:
+Original question:
+Do both directors of films Wrong Turn 5: Bloodlines and Dark River (2017 Film) have the same nationality?
+
+Current ordinary edge:
+film_1 -> director_1, relation_hint="director of film"
+
+Resolved known subject:
+Wrong Turn 5: Bloodlines
+
+Output:
+"Who is the director of Wrong Turn 5: Bloodlines?"
+
+Example D:
+Original question:
+Do both directors of films Wrong Turn 5: Bloodlines and Dark River (2017 Film) have the same nationality?
+
+Current ordinary edge:
+director_1 -> nationality_1, relation_hint="nationality of director"
+
+Resolved known subject:
+the director of Wrong Turn 5: Bloodlines
+
+Output:
+"What is the nationality of the director of Wrong Turn 5: Bloodlines?"
+
+Example E:
+Original question:
+Do both directors of films Wrong Turn 5: Bloodlines and Dark River (2017 Film) have the same nationality?
+
+Current operator step:
+COMPARE_SAME over nationality_1 and nationality_2
+
+Input descriptions:
+nationality_1: the nationality of the director of Wrong Turn 5: Bloodlines
+nationality_2: the nationality of the director of Dark River (2017 Film)
+
+Output:
+"Do the two directors have the same nationality?"
+
+Negative examples:
+
+Do not turn this ordinary edge:
+film_1 -> director_1
+
+into:
+"Do the directors of Wrong Turn 5: Bloodlines and Dark River (2017 Film) have the same nationality?"
+
+because that asks the final operator question, not the current edge target.
+
+Do not turn this ordinary edge:
+director_1 -> nationality_1
+
+into:
+"Does the director of Wrong Turn 5: Bloodlines have the same nationality as the director of Dark River (2017 Film)?"
+
+because that adds comparison logic that belongs only to the operator step.
+
+Do not output internal-variable wording such as:
+"What is the nationality of X1?"
+"Find V2 from director_1."
 
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
