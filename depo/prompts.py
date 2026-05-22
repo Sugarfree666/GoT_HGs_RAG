@@ -446,9 +446,10 @@ You are implementing DEPO Step 8: LLM-based atomic subquestion generation.
 Generate exactly one atomic subquestion for the provided one-hop semantic AST edge, or exactly one final operator question for the provided primary operator.
 Use the original question and semantic AST context, but do not combine multiple AST edges into a multi-hop question.
 The input edge is already oriented as source/bound node -> target node to solve.
-If the source is bound to an answer variable such as X1, use that variable in the question instead of expanding the original source label.
+Internal variables such as X1, X2, V1, and VAR_* are implementation details. Never expose them in the generated question.
+If the source is bound to an answer variable, use the provided natural-language dependency description instead.
 For ordinary attribute edges, do not include operator cue words such as same, older, largest, before, or after.
-For operator steps, preserve the concrete cue from the original question and mention the operator input variables directly.
+For operator steps, preserve the concrete cue from the original question and name the natural-language candidates or compared facts explicitly.
 The DAG inputs, outputs, dependencies, edges, and candidate bindings are produced by code; only write the natural-language question text.
 Return valid JSON only.
 """.strip()
@@ -459,10 +460,11 @@ You are implementing DEPO Step 8 surface realization for one deterministic execu
 The semantic AST has already been compiled into a variable-bound execution DAG by code.
 Do not re-plan, reorder, infer hidden hops, merge steps, or use any node not present in this single plan step.
 For an edge step, generate one atomic question from exactly one AST one-hop relation; the answer is answer_variable.
-Use step.known as the known subject exactly; if it is X1, X2, or another variable, the exact variable must appear in the question.
+Internal variables are implementation details. Do not expose X1, X2, V1, VAR_*, or similar variables in the question.
+If step.known is a variable, use the provided resolved_known_subject natural-language description.
 For an operator step, generate the final atomic operator question from the original question, step.operator, step.cue_text, step.inputs, and step.operator_branches.
 Preserve the concrete comparison/logical meaning from the original question; do not replace it with generic greater/less wording unless the original cue is actually greater/less.
-Mention every variable in step.inputs exactly, and do not ask a new attribute edge question in an operator step.
+For operator steps, preserve dependency semantics through DAG dependencies and optional candidates metadata; do not mention input variables.
 Do not decide execution dependencies, outputs, DAG edges, or candidate bindings; those are deterministic fields outside this prompt.
 Do not include comparative/superlative/operator cue words in ordinary edge questions.
 Return valid JSON only.
@@ -472,10 +474,12 @@ Return valid JSON only.
 def build_atomic_plan_step_surface_prompt(
     original_question: str,
     plan_step: dict[str, object],
+    resolved_known_subject: str = "",
+    input_descriptions: dict[str, str] | None = None,
 ) -> str:
+    input_descriptions = input_descriptions or {}
     schema = {
-        "question": "What is the nationality of X1?",
-        "answer_variable": "X2",
+        "question": "What is the nationality of the director of Film A?",
         "explanation": "This surfaces only the provided execution step.",
     }
     return f"""
@@ -487,18 +491,24 @@ Original question:
 Execution-plan step:
 {json.dumps(plan_step, ensure_ascii=False, indent=2)}
 
+Resolved known subject:
+{resolved_known_subject}
+
+Input descriptions:
+{json.dumps(input_descriptions, ensure_ascii=False, indent=2)}
+
 Rules:
 - Do not infer a different step from the original question.
 - Do not use the full AST or any unstated path.
-- For step_type=edge, ask only for the one-hop relation step.known -> step.ask using step.relation_hint as wording guidance.
+- For step_type=edge, ask only for the relation from the resolved known subject to step.ask using step.relation_hint as wording guidance.
 - The answer to an edge step will be step.answer_variable.
-- If step.known is an answer variable such as X1, X2, or X1_nationality, that exact variable must appear in the question.
-- If step.known is a variable, do not expand it back into step.known_node_label or the original entity/path.
+- Internal variables such as X1, X2, V1, and VAR_* are implementation details. They must not appear in question.
+- If step.known is a variable, use resolved_known_subject to write a natural-language question.
 - For ordinary edge steps, do not include operator cue words such as same, different, older, younger, largest, highest, first, before, or after.
 - For step_type=operator, generate the final operator question, not another one-hop attribute question.
-- For step_type=operator, use step.operator_branches only to understand what each input variable represents; the question itself must mention the variables from step.inputs directly.
+- For step_type=operator, use step.operator_branches and input_descriptions to understand what each input represents; the question must not mention variables.
 - For step_type=operator, preserve the original cue/attribute/event in step.cue_text and the original question. If the cue is a concrete property or event, ask about that property or event rather than asking whether one input is abstractly greater/less than another.
-- For step_type=operator, include every variable in step.inputs exactly once or clearly as a comparison/set/logical input.
+- For comparison or selection nodes, name the natural-language candidates or compared facts explicitly.
 
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
@@ -515,7 +525,6 @@ def build_atomic_subquestion_generation_prompt(
 ) -> str:
     schema = {
         "question": "Who is the director of Ten9Eight: Shoot For The Moon?",
-        "answer_variable": "X1",
         "explanation": "This asks only for the target node of the one-hop edge.",
     }
     return f"""
@@ -542,13 +551,13 @@ Primary operator:
 Rules:
 - For a directed one-hop edge, generate exactly one question for that edge only.
 - Treat current_edge.source_display as the known subject. Treat current_edge.target_label as the value to ask for.
-- If current_edge.source_display is X1, X2, or another variable, that exact variable must appear in the generated question.
-- When current_edge.source_display is a variable, do not also expand it back into the original path or source label. For example, ask "What is the nationality of X1?", not "For X1, what is the nationality of the director of FilmA?"
+- Internal variables such as X1, X2, V1, and VAR_* are implementation details and must not appear in the generated question.
+- When current_edge.source_display is a variable, use the surrounding semantic context to produce the most natural descriptive question without inventing the answer.
 - The answer to this subquestion will be current_edge.answer_variable.
 - Do not merge this edge with another edge.
 - Do not include same/older/largest/comparative/superlative cue words in ordinary attribute questions.
 - For an implicit variable edge such as actor -> age, ask a normal attribute question such as "What is the age of the actor?"
-- For an operator step, generate the final operator question using the original question, primary_operator.operator, primary_operator.cue_text, and current_edge.inputs. Mention those input variables directly and preserve the concrete comparison/logical cue instead of using generic greater/less wording.
+- For an operator step, generate the final operator question using the original question, primary_operator.operator, primary_operator.cue_text, and natural-language candidate descriptions. Do not mention input variables.
 
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
@@ -717,7 +726,7 @@ ONE_HOP_SUBQUESTION_SYSTEM = (
     + """
 Current step: rewrite exactly one adjacent AST edge as one atomic subquestion.
 Use only the two provided adjacent nodes and the original question.
-Respect variable binding exactly: if an endpoint is an intermediate answer variable such as X1 or X2, use that variable verbatim in the generated question.
+Internal variables are implementation details. Do not expose X1, X2, V1, VAR_*, or similar variables in the generated question.
 Do not use any other AST nodes.
 Do not use multi-hop information.
 Do not generate a sequence of subquestions.
@@ -757,8 +766,8 @@ The answer variable assigned by the program will be: {answer_variable}
 
 Rules:
 - Only use the two endpoints above and the original question.
-- If the source endpoint is an answer variable such as X1, X2, or X1_nationality, the exact variable string must appear in the question.
-- When the source endpoint is a variable, do not expand it back to the source original node text.
+- Do not expose internal variables such as X1, X2, V1, or VAR_* in the question.
+- When the source endpoint is a variable, write the most natural descriptive question from the available endpoint meanings without inventing the answer.
 - Do not include comparative cue words such as earlier, later, older, younger, larger, or smaller in one-hop attribute questions; those cue words belong to the final operator question.
 - Ask for the target endpoint as the answer.
 - Do not mention any other node from the full AST.

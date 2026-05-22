@@ -485,10 +485,27 @@ class AtomicQuestionNode:
     ast_edge: dict[str, Any] | None = None
     operator: str | None = None
     candidate_bindings: list[dict[str, Any]] = field(default_factory=list)
+    metadata: dict[str, Any] = field(default_factory=dict)
     source: str = "llm"
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        payload: dict[str, Any] = {
+            "node_id": self.id,
+            "question": self.question,
+            "dependencies": list(self.depends_on),
+        }
+        metadata: dict[str, Any] = {}
+        if self.operator:
+            metadata["operator"] = self.operator
+        candidates = _external_candidates(self.candidate_bindings)
+        if candidates:
+            metadata["candidates"] = candidates
+        warning = str(self.metadata.get("warning", "") or "").strip()
+        if warning:
+            metadata["warning"] = warning
+        if metadata:
+            payload["metadata"] = metadata
+        return payload
 
 
 @dataclass
@@ -509,7 +526,12 @@ class AtomicQuestionDAG:
     warnings: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        payload: dict[str, Any] = {
+            "nodes": [node.to_dict() for node in self.nodes],
+        }
+        if self.warnings:
+            payload["warnings"] = list(self.warnings)
+        return payload
 
     def to_subquestions(self) -> list[AtomicSubquestion]:
         subquestions: list[AtomicSubquestion] = []
@@ -528,3 +550,13 @@ class AtomicQuestionDAG:
                 )
             )
         return subquestions
+
+
+def _external_candidates(candidate_bindings: list[dict[str, Any]]) -> list[dict[str, str]]:
+    candidates: list[dict[str, str]] = []
+    for item in candidate_bindings:
+        label = str(item.get("label") or item.get("candidate") or "").strip()
+        source_node_id = str(item.get("source_node_id") or "").strip()
+        if label and source_node_id:
+            candidates.append({"label": label, "source_node_id": source_node_id})
+    return candidates

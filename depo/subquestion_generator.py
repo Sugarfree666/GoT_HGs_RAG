@@ -28,6 +28,7 @@ from prompts import (
     build_atomic_subquestion_generation_prompt,
     build_one_hop_prompt,
 )
+from surface_validator import contains_bare_variable, validate_atomic_dag_surface
 
 if TYPE_CHECKING:
     from llm_client import LLMClient
@@ -76,12 +77,9 @@ class SubquestionGenerator:
         nodes: list[AtomicQuestionNode] = []
         edges: list[AtomicQuestionEdge] = []
         variable_to_question: dict[str, str] = {}
+        variable_descriptions: dict[str, str] = {}
 
         for plan_step in execution_plan.steps:
-            question_text, source = self._surface_plan_step(
-                original_question=original_question,
-                plan_step=plan_step,
-            )
             inputs = _dag_step_inputs(plan_step)
             depends_on: list[str] = []
             for input_value in inputs:
@@ -97,8 +95,13 @@ class SubquestionGenerator:
                     )
                 )
 
+            question_text, source = self._surface_plan_step(
+                original_question=original_question,
+                plan_step=plan_step,
+                variable_descriptions=variable_descriptions,
+            )
             output = _dag_step_output(plan_step)
-            candidate_bindings = _dag_candidate_bindings(plan_step, original_question)
+            candidate_bindings = _dag_candidate_bindings(plan_step, original_question, variable_to_question)
             node = AtomicQuestionNode(
                 id=plan_step.step_id,
                 question=question_text,
@@ -116,10 +119,12 @@ class SubquestionGenerator:
             nodes.append(node)
             if output:
                 variable_to_question[output] = node.id
+                variable_descriptions[output] = _output_description(plan_step, variable_descriptions)
             if plan_step.answer_variable:
                 variable_to_question[plan_step.answer_variable] = node.id
+                variable_descriptions[plan_step.answer_variable] = _output_description(plan_step, variable_descriptions)
 
-        return AtomicQuestionDAG(
+        dag = AtomicQuestionDAG(
             nodes=nodes,
             edges=edges,
             variable_to_question=variable_to_question,
@@ -129,6 +134,11 @@ class SubquestionGenerator:
                 *semantic_ast.fallback_repair_actions,
             ],
         )
+        _repair_atomic_dag_surface(dag, original_question, variable_descriptions)
+        validation_messages = validate_atomic_dag_surface(dag)
+        if validation_messages:
+            raise ValueError("Invalid atomic DAG surface after repair: " + "; ".join(validation_messages))
+        return dag
 
     def _generate_from_semantic_ast(
         self,
@@ -141,45 +151,36 @@ class SubquestionGenerator:
         self,
         original_question: str,
         plan_step: ExecutionPlanStep,
+        variable_descriptions: dict[str, str] | None = None,
     ) -> tuple[str, str]:
+        variable_descriptions = variable_descriptions or {}
         try:
             payload = self.llm_client.chat_json(
                 ATOMIC_PLAN_STEP_SURFACE_SYSTEM,
                 build_atomic_plan_step_surface_prompt(
                     original_question=original_question,
                     plan_step=plan_step.to_dict(),
+                    resolved_known_subject=_known_description(plan_step, variable_descriptions),
+                    input_descriptions=_input_descriptions(plan_step.inputs, variable_descriptions),
                 ),
             )
             question = str(payload.get("question", "")).strip()
             if not question:
                 raise ValueError("empty question")
+            if contains_bare_variable(question):
+                raise ValueError("surface question exposed an internal variable")
             if plan_step.step_type == "operator":
-                if not _operator_question_uses_inputs(question, plan_step.inputs):
-                    raise ValueError("operator question did not use bound operator inputs")
                 return question, "llm"
             if _contains_operator_cue(question):
                 raise ValueError("ordinary edge question included operator cue")
-            if _expands_bound_source(question, plan_step.known, plan_step.known_node_label):
-                raise ValueError("ordinary edge question expanded an already-bound source variable")
-            question = _enforce_source_variable_binding(
-                question,
-                plan_step.known,
-                plan_step.known_node_label,
-            )
-            if _is_answer_variable(plan_step.known) and not _contains_variable(question, plan_step.known):
-                raise ValueError("ordinary edge question omitted bound source variable")
             return question, "llm"
         except Exception:
             if plan_step.step_type == "operator":
                 return (
-                    _operator_question(
-                        plan_step.operator or "NONE",
-                        plan_step.inputs,
-                        plan_step.cue_text,
-                    ),
+                    _operator_surface_question(original_question, plan_step, variable_descriptions),
                     "fallback_template",
                 )
-            return _fallback_plan_edge_question(plan_step), "fallback_template"
+            return _fallback_plan_edge_question(plan_step, variable_descriptions), "fallback_template"
 
     def _semantic_edge_question(
         self,
@@ -500,6 +501,67 @@ def _slug(value: str) -> str:
     return "_".join(words[-2:]) if len(words) > 2 else "_".join(words)
 
 
+def _known_description(
+    plan_step: ExecutionPlanStep,
+    variable_descriptions: dict[str, str],
+) -> str:
+    known = str(plan_step.known or "").strip()
+    if known in variable_descriptions:
+        return variable_descriptions[known]
+    if known:
+        return known
+    return str(plan_step.known_node_label or "the source").strip()
+
+
+def _input_descriptions(
+    inputs: list[str],
+    variable_descriptions: dict[str, str],
+) -> dict[str, str]:
+    return {
+        input_value: variable_descriptions.get(input_value, input_value)
+        for input_value in inputs
+        if str(input_value).strip()
+    }
+
+
+def _output_description(
+    plan_step: ExecutionPlanStep,
+    variable_descriptions: dict[str, str],
+) -> str:
+    if plan_step.step_type == "operator":
+        return "the final answer"
+    known = _known_description(plan_step, variable_descriptions)
+    ask = str(plan_step.ask or "value").strip()
+    if not ask:
+        return f"the answer related to {known}"
+    return _attribute_phrase(ask, known)
+
+
+def _attribute_phrase(attribute: str, subject: str) -> str:
+    attribute = re.sub(r"\s+", " ", str(attribute).strip())
+    subject = re.sub(r"\s+", " ", str(subject).strip())
+    if not subject:
+        subject = "the subject"
+    if not attribute:
+        return f"the value of {subject}"
+    normalized_attribute = attribute.lower()
+    if normalized_attribute.startswith(("who ", "what ", "which ", "where ", "when ")):
+        return f"the answer to {attribute}"
+    return f"the {attribute} of {subject}"
+
+
+def _operator_surface_question(
+    original_question: str,
+    plan_step: ExecutionPlanStep,
+    variable_descriptions: dict[str, str],
+) -> str:
+    question = original_question.strip()
+    if question and not contains_bare_variable(question):
+        return question
+    inputs = [variable_descriptions.get(input_value, input_value) for input_value in plan_step.inputs]
+    return _operator_question(plan_step.operator or "NONE", inputs, plan_step.cue_text)
+
+
 def _enforce_source_variable_binding(question: str, source_display: str, source_original: str) -> str:
     if not _is_answer_variable(source_display) or _contains_variable(question, source_display):
         return question
@@ -734,12 +796,20 @@ def _dag_node_type(
 def _dag_candidate_bindings(
     plan_step: ExecutionPlanStep,
     original_question: str,
+    variable_to_question: dict[str, str],
 ) -> list[dict[str, object]]:
     if plan_step.step_type != "operator":
         return []
     bindings = _operator_candidate_bindings(plan_step)
     if not bindings:
         return []
+    for binding in bindings:
+        value = str(binding.get("value") or "").strip()
+        source_node_id = variable_to_question.get(value, "")
+        if source_node_id:
+            binding["source_node_id"] = source_node_id
+        if "candidate" in binding:
+            binding["label"] = binding["candidate"]
     operator = plan_step.operator or ""
     if operator in {"ARGMIN", "ARGMAX"}:
         return bindings
@@ -1062,8 +1132,12 @@ def _fallback_semantic_edge_question(
     return f"What is the {target} related to {source_display}?"
 
 
-def _fallback_plan_edge_question(plan_step: ExecutionPlanStep) -> str:
-    known = plan_step.known or "the source"
+def _fallback_plan_edge_question(
+    plan_step: ExecutionPlanStep,
+    variable_descriptions: dict[str, str] | None = None,
+) -> str:
+    variable_descriptions = variable_descriptions or {}
+    known = _known_description(plan_step, variable_descriptions)
     ask = plan_step.ask or "value"
     relation = plan_step.relation_hint.lower()
     if _is_person_answer_label(ask):
@@ -1071,6 +1145,82 @@ def _fallback_plan_edge_question(plan_step: ExecutionPlanStep) -> str:
     if relation.startswith(("develop", "create", "invent", "found", "write", "direct")):
         return f"What {ask} is related to {known}?"
     return f"What is the {ask} of {known}?"
+
+
+def _repair_atomic_dag_surface(
+    dag: AtomicQuestionDAG,
+    original_question: str,
+    variable_descriptions: dict[str, str],
+) -> None:
+    node_by_id = {node.id: node for node in dag.nodes}
+    for node in dag.nodes:
+        repair_notes: list[str] = []
+        if contains_bare_variable(node.question):
+            original_surface = node.question
+            node.question = _replace_internal_variables(
+                node.question,
+                variable_descriptions=variable_descriptions,
+                dependency_questions=[node_by_id[dependency].question for dependency in node.depends_on if dependency in node_by_id],
+            )
+            if contains_bare_variable(node.question):
+                if node.operator:
+                    node.question = _repair_operator_question_from_metadata(original_question, node, variable_descriptions)
+                else:
+                    node.question = _generic_dependency_question(node)
+            repair_notes.append(f"Repaired internal variable exposure in question: {original_surface}")
+
+        for binding in node.candidate_bindings:
+            for key in ("candidate", "label"):
+                label = str(binding.get(key) or "").strip()
+                if label and contains_bare_variable(label):
+                    binding[key] = _replace_internal_variables(
+                        label,
+                        variable_descriptions=variable_descriptions,
+                        dependency_questions=[],
+                    )
+                    repair_notes.append(f"Repaired internal variable exposure in candidate label: {label}")
+
+        if repair_notes:
+            existing_warning = str(node.metadata.get("warning", "") or "").strip()
+            combined = "; ".join([existing_warning, *repair_notes] if existing_warning else repair_notes)
+            node.metadata["warning"] = combined
+
+
+def _replace_internal_variables(
+    text: str,
+    *,
+    variable_descriptions: dict[str, str],
+    dependency_questions: list[str],
+) -> str:
+    dependency_iter = iter(dependency_questions)
+
+    def replacement(match: re.Match[str]) -> str:
+        variable = match.group(0)
+        if variable in variable_descriptions:
+            return variable_descriptions[variable]
+        dependency_question = next(dependency_iter, "")
+        if dependency_question:
+            return f"the answer to '{dependency_question}'"
+        return "the dependent answer"
+
+    return re.sub(r"(?<![A-Za-z0-9_])(?:X\d+(?:_[A-Za-z0-9_]+)?|V\d+|VAR_[A-Za-z0-9_]+)(?![A-Za-z0-9_])", replacement, text)
+
+
+def _repair_operator_question_from_metadata(
+    original_question: str,
+    node: AtomicQuestionNode,
+    variable_descriptions: dict[str, str],
+) -> str:
+    if original_question and not contains_bare_variable(original_question):
+        return original_question
+    input_descriptions = [variable_descriptions.get(item, item) for item in node.inputs]
+    return _operator_question(node.operator or "NONE", input_descriptions)
+
+
+def _generic_dependency_question(node: AtomicQuestionNode) -> str:
+    if node.depends_on:
+        return "What fact is needed from the dependency evidence?"
+    return "What is the requested fact?"
 
 
 def _is_person_answer_label(label: str) -> bool:

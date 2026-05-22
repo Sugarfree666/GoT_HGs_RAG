@@ -1,5 +1,6 @@
 ﻿from __future__ import annotations
 
+import http.client
 import io
 import os
 import tempfile
@@ -29,6 +30,18 @@ class FakeHTTPResponse:
         return self.body.encode("utf-8")
 
 
+class IncompleteHTTPResponse:
+    def __enter__(self) -> "IncompleteHTTPResponse":
+        return self
+
+    def __exit__(self, exc_type, exc, tb) -> bool:
+        del exc_type, exc, tb
+        return False
+
+    def read(self) -> bytes:
+        raise http.client.IncompleteRead(b'{"partial":')
+
+
 class LLMClientRetryTest(unittest.TestCase):
     def test_transport_timeout_is_retried(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir, patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}):
@@ -44,6 +57,24 @@ class LLMClientRetryTest(unittest.TestCase):
                 "hyper_branch.llm.client.time.sleep"
             ):
                 payload = client._post_json("/chat/completions", {"ping": "pong"})
+
+            self.assertEqual(payload["ok"], True)
+            self.assertEqual(mocked_urlopen.call_count, 2)
+
+    def test_incomplete_chunked_response_is_retried(self) -> None:
+        with tempfile.TemporaryDirectory(), patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}):
+            config = LLMConfig(timeout_seconds=1, max_retries=2, retry_backoff_seconds=0.0)
+            client = OpenAICompatibleClient(config=config)
+
+            responses = [
+                IncompleteHTTPResponse(),
+                FakeHTTPResponse('{"ok": true}'),
+            ]
+
+            with patch("hyper_branch.llm.client.request.urlopen", side_effect=responses) as mocked_urlopen, patch(
+                "hyper_branch.llm.client.time.sleep"
+            ):
+                payload = client._post_json("/embeddings", {"input": ["x"]})
 
             self.assertEqual(payload["ok"], True)
             self.assertEqual(mocked_urlopen.call_count, 2)

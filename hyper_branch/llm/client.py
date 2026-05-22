@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import http.client
 import json
 import os
 import socket
@@ -94,6 +95,13 @@ class OpenAICompatibleClient:
                 with request.urlopen(req, timeout=self.config.timeout_seconds) as resp:
                     body = resp.read().decode("utf-8")
                 return json.loads(body)
+            except json.JSONDecodeError as exc:
+                if attempt < attempts:
+                    self._before_retry(endpoint, attempt, attempts, f"incomplete or invalid JSON response: {exc}")
+                    continue
+                raise RuntimeError(
+                    f"LLM request returned invalid JSON after {attempt} attempt(s): {exc}"
+                ) from exc
             except error.HTTPError as exc:
                 body = exc.read().decode("utf-8", errors="replace")
                 if self._should_retry_http(exc.code) and attempt < attempts:
@@ -102,7 +110,7 @@ class OpenAICompatibleClient:
                 raise RuntimeError(
                     f"LLM request failed with HTTP {exc.code} after {attempt} attempt(s): {body}"
                 ) from exc
-            except (error.URLError, TimeoutError, socket.timeout, ssl.SSLError) as exc:
+            except (error.URLError, TimeoutError, socket.timeout, ssl.SSLError, http.client.IncompleteRead) as exc:
                 reason = exc.reason if isinstance(exc, error.URLError) else exc
                 if self._should_retry_transport(reason) and attempt < attempts:
                     self._before_retry(endpoint, attempt, attempts, reason)
@@ -132,7 +140,7 @@ class OpenAICompatibleClient:
         return status_code in {408, 409, 425, 429, 500, 502, 503, 504}
 
     def _should_retry_transport(self, reason: object) -> bool:
-        if isinstance(reason, (TimeoutError, socket.timeout, ssl.SSLError, ConnectionResetError)):
+        if isinstance(reason, (TimeoutError, socket.timeout, ssl.SSLError, ConnectionResetError, http.client.IncompleteRead)):
             return True
         text = str(reason).lower()
         transient_markers = (

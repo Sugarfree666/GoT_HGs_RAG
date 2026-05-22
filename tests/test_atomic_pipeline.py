@@ -6,6 +6,8 @@ import unittest
 from pathlib import Path
 from types import SimpleNamespace
 
+import numpy as np
+
 from hyper_branch.atomic import (
     AtomicDagExecutor,
     AtomicEvidenceFusion,
@@ -179,11 +181,49 @@ class AtomicFusionTest(unittest.TestCase):
 
         self.assertAlmostEqual(candidate.anchor_score, 0.5)
 
+    def test_fusion_batches_embedding_similarity_calls(self) -> None:
+        embedder = CountingEmbedder()
+        fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=embedder)
+        analysis = AtomicQuestionAnalysis(
+            entities=["Entity A"],
+            relations=["directed by"],
+            relation_query="a film was directed by a person",
+        )
+        hits = [
+            BranchHit(
+                hyperedge_id=f"h{index}",
+                branch="anchor",
+                raw_score=1.0,
+                hyperedge_text=f"Entity A directed by Person {index}",
+                entity_ids=["Entity A", f"Person {index}"],
+            )
+            for index in range(20)
+        ]
+
+        fusion.fuse("Who directed Entity A?", analysis, hits, top_k=5)
+
+        relation_calls = [call for call in embedder.calls if call[0] == "atomic_relation_similarity"]
+        semantic_calls = [call for call in embedder.calls if call[0] == "atomic_semantic_similarity"]
+
+        self.assertLessEqual(len(embedder.calls), 4)
+        self.assertTrue(relation_calls)
+        self.assertTrue(semantic_calls)
+        self.assertTrue(all(len(texts) <= 16 for _, texts in embedder.calls))
+
 
 class TextEmbedder:
     def embed_texts(self, texts: list[str], stage: str) -> list[str]:
         del stage
         return [normalize_label(text) for text in texts]
+
+
+class CountingEmbedder:
+    def __init__(self) -> None:
+        self.calls: list[tuple[str, list[str]]] = []
+
+    def embed_texts(self, texts: list[str], stage: str) -> list[np.ndarray]:
+        self.calls.append((stage, list(texts)))
+        return [np.asarray([len(text), sum(ord(char) for char in text) % 97, 1.0], dtype=np.float32) for text in texts]
 
 
 class MappingHyperedgeStore:
