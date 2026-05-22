@@ -18,6 +18,7 @@ from hyper_branch.atomic import (
     DagCycleError,
 )
 from hyper_branch.config import RetrievalConfig, load_config
+from hyper_branch.data.vector_store import VectorStore
 from hyper_branch.logging_utils import TraceStore, configure_logging, create_run_dir
 from hyper_branch.models import GraphNode, VectorMatch
 from hyper_branch.pipeline import HyperBranchPipeline
@@ -80,6 +81,29 @@ class AtomicDagAdapterTest(unittest.TestCase):
 
         self.assertEqual(by_id["q1"].dependencies, [])
         self.assertEqual(by_id["q2"].dependencies, ["q1"])
+
+    def test_minimal_dag_metadata_is_not_nested(self) -> None:
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "First?", "dependencies": []},
+                {
+                    "node_id": "q2",
+                    "question": "Compare?",
+                    "dependencies": ["q1"],
+                    "metadata": {
+                        "operator": "COMPARE_LESS",
+                        "candidates": [{"label": "A", "source_node_id": "q1"}],
+                    },
+                },
+            ]
+        }
+
+        nodes = AtomicDagExecutor.normalize_dag_payload(dag)
+        by_id = {node.node_id: node for node in nodes}
+
+        self.assertEqual(by_id["q2"].metadata["operator"], "COMPARE_LESS")
+        self.assertEqual(by_id["q2"].metadata["candidates"], [{"label": "A", "source_node_id": "q1"}])
+        self.assertNotIn("metadata", by_id["q2"].metadata)
 
     def test_topological_sort_respects_dependencies(self) -> None:
         nodes = [
@@ -181,9 +205,10 @@ class AtomicFusionTest(unittest.TestCase):
 
         self.assertAlmostEqual(candidate.anchor_score, 0.5)
 
-    def test_fusion_batches_embedding_similarity_calls(self) -> None:
+    def test_fusion_reuses_hyperedge_vectors_without_embedding_candidate_texts(self) -> None:
         embedder = CountingEmbedder()
-        fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=embedder)
+        store = SimilarityStore({f"h{index}": 0.9 - (index * 0.001) for index in range(233)})
+        fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=embedder, hyperedge_store=store)
         analysis = AtomicQuestionAnalysis(
             entities=["Entity A"],
             relations=["directed by"],
@@ -197,18 +222,66 @@ class AtomicFusionTest(unittest.TestCase):
                 hyperedge_text=f"Entity A directed by Person {index}",
                 entity_ids=["Entity A", f"Person {index}"],
             )
-            for index in range(20)
+            for index in range(233)
         ]
 
         fusion.fuse("Who directed Entity A?", analysis, hits, top_k=5)
 
-        relation_calls = [call for call in embedder.calls if call[0] == "atomic_relation_similarity"]
-        semantic_calls = [call for call in embedder.calls if call[0] == "atomic_semantic_similarity"]
+        embedded_texts = [text for _, texts in embedder.calls for text in texts]
 
-        self.assertLessEqual(len(embedder.calls), 4)
-        self.assertTrue(relation_calls)
-        self.assertTrue(semantic_calls)
-        self.assertTrue(all(len(texts) <= 16 for _, texts in embedder.calls))
+        self.assertEqual(embedded_texts, ["a film was directed by a person", "Who directed Entity A?"])
+        self.assertFalse(any(text.startswith("Entity A directed by Person") for text in embedded_texts))
+        self.assertEqual(store.calls, [233, 233])
+
+    def test_fusion_does_not_rescore_when_relation_and_semantic_raw_scores_exist(self) -> None:
+        embedder = CountingEmbedder()
+        store = SimilarityStore({"h1": 0.9})
+        fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=embedder, hyperedge_store=store)
+        analysis = AtomicQuestionAnalysis(relation_query="query")
+        hits = [
+            BranchHit("h1", "anchor", 1.0, "Entity A relation", entity_ids=["Entity A"]),
+            BranchHit("h1", "relation", 0.7, "Entity A relation"),
+            BranchHit("h1", "semantic", 0.6, "Entity A relation"),
+        ]
+
+        candidate = fusion.fuse("question", analysis, hits, top_k=5)[0]
+
+        self.assertEqual(embedder.calls, [])
+        self.assertEqual(store.calls, [])
+        self.assertAlmostEqual(candidate.relation_score, 0.7)
+        self.assertAlmostEqual(candidate.semantic_score, 0.6)
+
+    def test_fusion_uses_lexical_fallback_when_candidate_vector_is_missing(self) -> None:
+        embedder = CountingEmbedder()
+        store = SimilarityStore({})
+        fusion = AtomicEvidenceFusion(config=RetrievalConfig(), embedder=embedder, hyperedge_store=store)
+        analysis = AtomicQuestionAnalysis(relation_query="directed by")
+        hits = [
+            BranchHit("missing", "anchor", 1.0, "Entity A directed by Person B", entity_ids=["Entity A"]),
+        ]
+
+        candidate = fusion.fuse("Who directed Entity A?", analysis, hits, top_k=5)[0]
+
+        self.assertEqual([text for _, texts in embedder.calls for text in texts], ["directed by", "Who directed Entity A?"])
+        self.assertGreater(candidate.relation_score, 0.0)
+        self.assertGreater(candidate.semantic_score, 0.0)
+
+    def test_vector_store_batch_similarities_resolve_ids_and_labels(self) -> None:
+        store = VectorStore(
+            name="test",
+            rows=[
+                {"__id__": "row-1", "hyperedge_name": "Hyperedge One"},
+                {"__id__": "row-2", "hyperedge_name": "Hyperedge Two"},
+            ],
+            matrix=np.asarray([[1.0, 0.0], [0.0, 1.0]], dtype=np.float32),
+            label_fields=("hyperedge_name",),
+        )
+
+        scores = store.similarities(np.asarray([1.0, 0.0], dtype=np.float32), ["row-1", "Hyperedge Two", "missing"])
+
+        self.assertAlmostEqual(scores["row-1"], 1.0)
+        self.assertAlmostEqual(scores["Hyperedge Two"], 0.0)
+        self.assertNotIn("missing", scores)
 
 
 class TextEmbedder:
@@ -224,6 +297,17 @@ class CountingEmbedder:
     def embed_texts(self, texts: list[str], stage: str) -> list[np.ndarray]:
         self.calls.append((stage, list(texts)))
         return [np.asarray([len(text), sum(ord(char) for char in text) % 97, 1.0], dtype=np.float32) for text in texts]
+
+
+class SimilarityStore:
+    def __init__(self, scores: dict[str, float]) -> None:
+        self.scores = scores
+        self.calls: list[int] = []
+
+    def similarities(self, query_vector: np.ndarray, row_ids: list[str]) -> dict[str, float]:
+        del query_vector
+        self.calls.append(len(row_ids))
+        return {row_id: self.scores[row_id] for row_id in row_ids if row_id in self.scores}
 
 
 class MappingHyperedgeStore:

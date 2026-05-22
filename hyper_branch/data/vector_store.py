@@ -8,6 +8,7 @@ from typing import Any
 import numpy as np
 
 from ..models import VectorMatch
+from ..utils import normalize_label
 
 
 class VectorStore:
@@ -18,6 +19,7 @@ class VectorStore:
         self.row_ids = [str(row.get("__id__", index)) for index, row in enumerate(rows)]
         self.id_to_index = {row_id: index for index, row_id in enumerate(self.row_ids)}
         self.matrix = self._normalize_matrix(matrix.astype(np.float32))
+        self.label_to_index = self._build_label_to_index()
 
     @classmethod
     def from_json(
@@ -107,6 +109,55 @@ class VectorStore:
             return 0.0
         query = query / query_norm
         return float(np.dot(self.matrix[index], query))
+
+    def similarities(self, query_vector: np.ndarray, row_ids: list[str]) -> dict[str, float]:
+        """Score candidate IDs against a query vector using stored row vectors only.
+
+        The query vector may come from online embedding, but candidate vectors are
+        always reused from the precomputed vector-store matrix.
+        """
+        if not row_ids:
+            return {}
+        query = np.asarray(query_vector, dtype=np.float32)
+        query_norm = np.linalg.norm(query)
+        if query_norm == 0:
+            return {row_id: 0.0 for row_id in row_ids}
+        query = query / query_norm
+
+        indices: list[int] = []
+        resolved_row_ids: list[str] = []
+        for row_id in row_ids:
+            index = self._index_for_candidate_id(row_id)
+            if index is None:
+                continue
+            indices.append(index)
+            resolved_row_ids.append(row_id)
+        if not indices:
+            return {}
+
+        matrix = self.matrix[np.asarray(indices, dtype=np.int32)]
+        scores = matrix @ query
+        return {row_id: float(score) for row_id, score in zip(resolved_row_ids, scores, strict=True)}
+
+    def _index_for_candidate_id(self, candidate_id: str) -> int | None:
+        if candidate_id in self.id_to_index:
+            return self.id_to_index[candidate_id]
+        normalized = normalize_label(candidate_id).lower()
+        return self.label_to_index.get(normalized)
+
+    def _build_label_to_index(self) -> dict[str, int]:
+        lookup: dict[str, int] = {}
+        for index, row in enumerate(self.rows):
+            candidates = [self.row_ids[index], self._label_for_row(row, self.row_ids[index])]
+            for field in self.label_fields:
+                value = row.get(field)
+                if isinstance(value, str):
+                    candidates.append(value)
+            for candidate in candidates:
+                normalized = normalize_label(str(candidate)).lower()
+                if normalized and normalized not in lookup:
+                    lookup[normalized] = index
+        return lookup
 
     def _label_for_row(self, row: dict[str, Any], fallback: str) -> str:
         for field in self.label_fields:

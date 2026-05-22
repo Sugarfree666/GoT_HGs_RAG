@@ -50,7 +50,11 @@ class HyperBranchPipeline:
             config=config.retrieval,
             logger=logger,
         )
-        fusion = AtomicEvidenceFusion(config=config.retrieval, embedder=self.embedder)
+        fusion = AtomicEvidenceFusion(
+            config=config.retrieval,
+            embedder=self.embedder,
+            hyperedge_store=self.dataset.hyperedge_store,
+        )
         composer = FinalAnswerComposer(llm_service=self.llm_service)
         self.executor = AtomicDagExecutor(
             analyzer=analyzer,

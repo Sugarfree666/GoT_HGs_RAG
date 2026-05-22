@@ -220,24 +220,7 @@ class AtomicDagExecutor:
                     variable_to_question=variable_to_question,
                     keep_unknown=True,
                 )
-            metadata = {
-                key: value
-                for key, value in item.items()
-                if key
-                not in {
-                    "node_id",
-                    "id",
-                    "qid",
-                    "step_id",
-                    "question",
-                    "sub_question",
-                    "subquestion",
-                    "dependencies",
-                    "depends_on",
-                    "parents",
-                    "prerequisites",
-                }
-            }
+            metadata = _coerce_node_metadata(item)
             nodes.append(
                 AtomicQuestionNode(
                     node_id=node_id,
@@ -429,6 +412,29 @@ def _first_present(payload: dict[str, Any], keys: tuple[str, ...]) -> Any:
     return _MISSING
 
 
+def _coerce_node_metadata(item: dict[str, Any]) -> dict[str, Any]:
+    reserved = {
+        "node_id",
+        "id",
+        "qid",
+        "step_id",
+        "question",
+        "sub_question",
+        "subquestion",
+        "dependencies",
+        "depends_on",
+        "parents",
+        "prerequisites",
+    }
+    raw_metadata = item.get("metadata", {})
+    metadata = dict(raw_metadata) if isinstance(raw_metadata, dict) else {}
+    for key, value in item.items():
+        if key in reserved or key == "metadata":
+            continue
+        metadata.setdefault(key, value)
+    return metadata
+
+
 def _clean_variable_map(value: Any) -> dict[str, str]:
     if not isinstance(value, dict):
         return {}
@@ -492,4 +498,3 @@ def _resolve_dependency_id(
     if mapped in node_id_set:
         return mapped
     return ""
-

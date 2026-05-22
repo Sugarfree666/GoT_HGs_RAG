@@ -6,12 +6,11 @@ from typing import Any
 import numpy as np
 
 from ..config import RetrievalConfig
-from ..utils import cosine_similarity, lexical_overlap_score, normalize_label
+from ..utils import lexical_overlap_score, normalize_label
 from .models import AtomicQuestionAnalysis, BranchHit, FusedHyperedgeCandidate
 
 
 DEFAULT_FUSION_WEIGHTS = {"anchor": 0.4, "relation": 0.4, "semantic": 0.2}
-EMBEDDING_BATCH_SIZE = 16
 
 
 class AtomicEvidenceFusion:
@@ -19,9 +18,11 @@ class AtomicEvidenceFusion:
         self,
         config: RetrievalConfig | None = None,
         embedder: Any | None = None,
+        hyperedge_store: Any | None = None,
     ) -> None:
         self.config = config
         self.embedder = embedder
+        self.hyperedge_store = hyperedge_store
         self.weights = dict(DEFAULT_FUSION_WEIGHTS)
         if config is not None:
             self.weights.update(
@@ -156,29 +157,14 @@ class AtomicEvidenceFusion:
         return _dedupe(texts)
 
     def _max_text_similarity(self, query_texts: list[str], candidate_texts: list[str], stage: str) -> float:
+        del stage
         if not query_texts or not candidate_texts:
             return 0.0
-        embedding_score = self._max_embedding_similarity(query_texts, candidate_texts, stage)
-        lexical_score = max(
+        return max(
             lexical_overlap_score([query_text], candidate_text)
             for query_text in query_texts
             for candidate_text in candidate_texts
         )
-        return max(embedding_score, lexical_score)
-
-    def _max_embedding_similarity(self, query_texts: list[str], candidate_texts: list[str], stage: str) -> float:
-        if self.embedder is None or not hasattr(self.embedder, "embed_texts"):
-            return 0.0
-        try:
-            query_vectors = self.embedder.embed_texts(query_texts, stage=stage)
-            candidate_vectors = self.embedder.embed_texts(candidate_texts, stage=stage)
-            return max(
-                cosine_similarity(np.asarray(query_vector, dtype=np.float32), np.asarray(candidate_vector, dtype=np.float32))
-                for query_vector in query_vectors
-                for candidate_vector in candidate_vectors
-            )
-        except (TypeError, ValueError):
-            return 0.0
 
     def _score_relation_and_semantic_candidates(
         self,
@@ -186,7 +172,8 @@ class AtomicEvidenceFusion:
         analysis: AtomicQuestionAnalysis,
         scored_items: list[tuple[FusedHyperedgeCandidate, list[BranchHit]]],
     ) -> None:
-        relation_query_texts = _dedupe([analysis.relation_query, *analysis.relations])
+        relation_query = normalize_label(analysis.relation_query or " ".join(analysis.relations)).strip()
+        relation_query_texts = _dedupe([relation_query, *analysis.relations])
         relation_texts_by_candidate: dict[str, list[str]] = {}
         semantic_text_by_candidate: dict[str, str] = {}
 
@@ -199,18 +186,31 @@ class AtomicEvidenceFusion:
                 [candidate.hyperedge_text, *candidate.evidence_texts]
             ).strip()
 
-        relation_vectors = self._embed_text_mapping(
-            [*relation_query_texts, *[text for texts in relation_texts_by_candidate.values() for text in texts]],
-            stage="atomic_relation_similarity",
+        candidate_ids = [candidate.hyperedge_id for candidate, _ in scored_items]
+        needs_relation_vector = bool(relation_query) and any(
+            _branch_raw_score(hits, "relation") is None for _, hits in scored_items
         )
-        semantic_vectors = self._embed_text_mapping(
-            [question, *semantic_text_by_candidate.values()],
+        needs_semantic_vector = bool(question.strip()) and any(
+            _branch_raw_score(hits, "semantic") is None for _, hits in scored_items
+        )
+        relation_vector_scores = self._vector_store_scores(
+            query=relation_query,
+            candidate_ids=candidate_ids,
+            stage="atomic_relation_similarity",
+            enabled=needs_relation_vector,
+        )
+        semantic_vector_scores = self._vector_store_scores(
+            query=question,
+            candidate_ids=candidate_ids,
             stage="atomic_semantic_similarity",
+            enabled=needs_semantic_vector,
         )
 
         for candidate, hits in scored_items:
-            raw_relation = max((hit.raw_score for hit in hits if hit.branch == "relation"), default=0.0)
-            if relation_query_texts:
+            raw_relation = _branch_raw_score(hits, "relation")
+            if raw_relation is not None:
+                candidate.relation_score = _bound(raw_relation)
+            elif relation_query_texts:
                 relation_texts = relation_texts_by_candidate.get(candidate.hyperedge_id, [])
                 lexical_relation = max(
                     (
@@ -220,56 +220,43 @@ class AtomicEvidenceFusion:
                     ),
                     default=0.0,
                 )
-                embedding_relation = self._max_cached_similarity(
-                    relation_query_texts,
-                    relation_texts,
-                    relation_vectors,
-                )
-                candidate.relation_score = _bound(max(raw_relation, lexical_relation, embedding_relation))
+                vector_relation = relation_vector_scores.get(candidate.hyperedge_id, 0.0)
+                candidate.relation_score = _bound(max(lexical_relation, vector_relation))
             else:
-                candidate.relation_score = _bound(raw_relation)
+                candidate.relation_score = 0.0
 
-            raw_semantic = max((hit.raw_score for hit in hits if hit.branch == "semantic"), default=0.0)
-            if raw_semantic:
+            raw_semantic = _branch_raw_score(hits, "semantic")
+            if raw_semantic is not None:
                 candidate.semantic_score = _bound(raw_semantic)
             else:
                 semantic_text = semantic_text_by_candidate.get(candidate.hyperedge_id, "")
                 lexical_semantic = lexical_overlap_score([question], semantic_text)
-                embedding_semantic = self._max_cached_similarity([question], [semantic_text], semantic_vectors)
-                candidate.semantic_score = _bound(max(lexical_semantic, embedding_semantic))
+                vector_semantic = semantic_vector_scores.get(candidate.hyperedge_id, 0.0)
+                candidate.semantic_score = _bound(max(lexical_semantic, vector_semantic))
 
-    def _embed_text_mapping(self, texts: list[str], stage: str) -> dict[str, np.ndarray]:
+    def _vector_store_scores(
+        self,
+        query: str,
+        candidate_ids: list[str],
+        stage: str,
+        *,
+        enabled: bool,
+    ) -> dict[str, float]:
+        """Embed the query online once and score candidates with stored vectors."""
+        if not enabled or not query.strip():
+            return {}
         if self.embedder is None or not hasattr(self.embedder, "embed_texts"):
             return {}
-        unique_texts = _dedupe([text for text in texts if str(text).strip()])
-        vectors_by_text: dict[str, np.ndarray] = {}
+        if self.hyperedge_store is None or not hasattr(self.hyperedge_store, "similarities"):
+            return {}
         try:
-            for start in range(0, len(unique_texts), EMBEDDING_BATCH_SIZE):
-                batch = unique_texts[start : start + EMBEDDING_BATCH_SIZE]
-                vectors = self.embedder.embed_texts(batch, stage=stage)
-                for text, vector in zip(batch, vectors, strict=True):
-                    vectors_by_text[text] = np.asarray(vector, dtype=np.float32)
+            query_vectors = self.embedder.embed_texts([query], stage=stage)
+            if not query_vectors:
+                return {}
+            query_vector = np.asarray(query_vectors[0], dtype=np.float32)
+            return dict(self.hyperedge_store.similarities(query_vector, _dedupe(candidate_ids)))
         except (TypeError, ValueError):
             return {}
-        return vectors_by_text
-
-    @staticmethod
-    def _max_cached_similarity(
-        query_texts: list[str],
-        candidate_texts: list[str],
-        vectors_by_text: dict[str, np.ndarray],
-    ) -> float:
-        scores: list[float] = []
-        for query_text in query_texts:
-            query_vector = vectors_by_text.get(query_text)
-            if query_vector is None:
-                continue
-            for candidate_text in candidate_texts:
-                candidate_vector = vectors_by_text.get(candidate_text)
-                if candidate_vector is None:
-                    continue
-                scores.append(cosine_similarity(query_vector, candidate_vector))
-        return max(scores, default=0.0)
 
 
 def _append_unique(target: list[str], values: list[str]) -> None:
@@ -286,6 +273,13 @@ def _dedupe(values: list[str]) -> list[str]:
         if text and text not in deduped:
             deduped.append(text)
     return deduped
+
+
+def _branch_raw_score(hits: list[BranchHit], branch: str) -> float | None:
+    scores = [float(hit.raw_score) for hit in hits if hit.branch == branch]
+    if not scores:
+        return None
+    return max(scores)
 
 
 def _bound(value: float) -> float:
