@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the performer of the song B Boy (Song)?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where was the performer of B Boy (Song) detained?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

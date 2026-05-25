@@ -1,0 +1,25 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "The director of The Outlaw Express is Leo D. Maloney, but there is no evidence provided regarding his birthplace.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of The Outlaw Express?",
+      "answer": "Leo D. Maloney",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney.\"",
+        "<hyperedge>\"Leo D. Maloney directed and starred in The Outlaw Express.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where was the director of The Outlaw Express born?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

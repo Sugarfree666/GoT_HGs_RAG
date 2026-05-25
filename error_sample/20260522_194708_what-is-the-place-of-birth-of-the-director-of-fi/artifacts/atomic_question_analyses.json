@@ -1,0 +1,81 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Fortunella?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Fortunella"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the birth place of the director of Fortunella?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Fortunella?",
+        "answer": "Eduardo De Filippo",
+        "confidence": 1.0,
+        "reasoning_summary": "The evidence clearly states that 'Fortunella is directed by Eduardo De Filippo.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Fortunella is directed by Eduardo De Filippo.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Fortunella is a 1958 Italian film directed by Eduardo De Filippo, with script by Federico Fellini.\"",
+            "fusion_score": 0.5280664682388306,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Fortunella is a 1958 Italian film directed by Eduardo De Filippo, with script by Federico Fellini.",
+              "Fortunella (film) Fortunella is a 1958 Italian film directed by Eduardo De Filippo, with script by Federico Fellini."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Fortunella is a 1958 Italian film.\"",
+            "fusion_score": 0.5229316234588623,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Fortunella is a 1958 Italian film.",
+              "Fortunella (film) Fortunella is a 1958 Italian film directed by Eduardo De Filippo, with script by Federico Fellini."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Fortunella is directed by Eduardo De Filippo.\"",
+            "fusion_score": 0.5348637700080872,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Fortunella is directed by Eduardo De Filippo.",
+              "Fortunella (film) Fortunella is a 1958 Italian film directed by Eduardo De Filippo, with script by Federico Fellini."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Fortunella",
+        "Eduardo De Filippo"
+      ],
+      "relations": [
+        "birth place of a director"
+      ],
+      "relation_query": "What is the birth place of the director of a work?",
+      "answer_type": "location"
+    }
+  }
+]

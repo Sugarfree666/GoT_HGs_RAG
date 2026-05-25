@@ -1,0 +1,24 @@
+{
+  "answer": "United States",
+  "reasoning_summary": "DJ Clue, the performer of 'I Like Control', is associated with American music culture, indicating he is from the United States. This is supported by the evidence stating he was born in the U.S.",
+  "confidence": 0.75,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the performer of the song I Like Control?",
+      "answer": "DJ Clue",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"I Like Control\" is a song by DJ Clue? featuring Missy Elliott and her former protégées Nicole Wray and Mocha.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What country is the performer of I Like Control from?",
+      "answer": "United States",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Born in the U.S., he represents American music culture.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

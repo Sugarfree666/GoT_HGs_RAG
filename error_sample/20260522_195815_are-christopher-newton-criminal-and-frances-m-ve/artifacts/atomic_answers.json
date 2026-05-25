@@ -1,0 +1,557 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the nationality of Christopher Newton?",
+    "analysis": {
+      "entities": [
+        "Christopher Newton"
+      ],
+      "relations": [
+        "has nationality"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Christopher Newton was born on 11 June 1936.\"",
+        "hyperedge_text": "Christopher Newton was born on 11 June 1936.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6842944622039795,
+        "fusion_score": 0.536858892440796,
+        "entity_ids": [
+          "\"CHRISTOPHER NEWTON\"",
+          "\"11 JUNE 1936\""
+        ],
+        "chunk_ids": [
+          "chunk-945b17ca71030309d9a3610769df5313"
+        ],
+        "evidence_texts": [
+          "Christopher Newton was born on 11 June 1936.",
+          "Christopher Newton Christopher Newton( born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980- 2002."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.684294,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536859
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christopher J. Newton (November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007.\"",
+        "hyperedge_text": "Christopher J. Newton (November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5529652237892151,
+        "fusion_score": 0.5105930447578431,
+        "entity_ids": [
+          "\"MURDER\"",
+          "\"OHIO\"",
+          "\"CHRISTOPHER NEWTON\""
+        ],
+        "chunk_ids": [
+          "chunk-a16fdf5e2434821cc1995a5a51b704fe"
+        ],
+        "evidence_texts": [
+          "Christopher J. Newton (November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007.",
+          "Christopher Newton (criminal) Christopher J. Newton( November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007. Christopher Newton received the death penalty for the 2001 aggravated murder of his cellmate, Jason Brewer. At the time of the murder, Newton was imprisoned for attempted aggravated burglary of his father's home, an offense he committed a few weeks after his release from prison for a prior attempted aggravated burglary. Newton killed Brewer in their cell by stomping on his neck and head and strangling him with a strip of cloth. According to the opinion of the Ohio Supreme Court affirming the death penalty, Newton laughed while responding officials tried to resuscitate Brewer, having smeared Brewer's blood on his face and drunk some of it( stating,\" if he is not dead, I hope he is going to be a vegetable\"). Newton admitted that another i..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.552965,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510593
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"David Christopher Newton (December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher.\"",
+        "hyperedge_text": "David Christopher Newton (December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5898941159248352,
+        "fusion_score": 0.5179788231849671,
+        "entity_ids": [
+          "\"SCULPTOR\"",
+          "\"PAINTER\"",
+          "\"DAVID CHRISTOPHER NEWTON\"",
+          "\"PRINTMAKER\"",
+          "\"DRAFTSMAN\"",
+          "\"COLLEGE ART TEACHER\""
+        ],
+        "chunk_ids": [
+          "chunk-01eae762c7d2c103f8a0e662e8567c0c"
+        ],
+        "evidence_texts": [
+          "David Christopher Newton (December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher.",
+          "David Newton (artist) David Christopher Newton( December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher. Newton was born in 1953 in Oakland, California. He lived and worked in California, New York, Massachusetts, Rhode Island and North Carolina with his wife Suzanne McBride Newton( who is a Yoga instructor and former modern dancer). He died in 2011 after battling colon and liver cancer."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.589894,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517979
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christopher Newton (born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980-2002.\"",
+        "hyperedge_text": "Christopher Newton (born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980-2002.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5787546038627625,
+        "fusion_score": 0.5157509207725526,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"CANADA\"",
+          "\"ACTOR\"",
+          "\"SHAW FESTIVAL\"",
+          "\"ARTISTIC DIRECTOR\"",
+          "\"1980-2002\""
+        ],
+        "chunk_ids": [
+          "chunk-945b17ca71030309d9a3610769df5313"
+        ],
+        "evidence_texts": [
+          "Christopher Newton (born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980-2002.",
+          "Christopher Newton Christopher Newton( born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980- 2002."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578755,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515751
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christopher Newton is known for his contributions to theater as both a director and an actor.\"",
+        "hyperedge_text": "Christopher Newton is known for his contributions to theater as both a director and an actor.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5759170055389404,
+        "fusion_score": 0.5151834011077882,
+        "entity_ids": [
+          "\"THEATER\""
+        ],
+        "chunk_ids": [
+          "chunk-945b17ca71030309d9a3610769df5313"
+        ],
+        "evidence_texts": [
+          "Christopher Newton is known for his contributions to theater as both a director and an actor.",
+          "Christopher Newton Christopher Newton( born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980- 2002."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.575917,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515183
+        }
+      }
+    ],
+    "answer": "Canadian",
+    "confidence": 0.9,
+    "reasoning_summary": "Christopher Newton is identified as a Canadian director and actor, which directly supports his nationality.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Christopher Newton (born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980-2002.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of Frances M. Vega?",
+    "analysis": {
+      "entities": [
+        "Frances M. Vega"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Frances M. Vega was born on September 2, 1983.\"",
+        "hyperedge_text": "Frances M. Vega was born on September 2, 1983.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7129334211349487,
+        "fusion_score": 0.5425866842269897,
+        "entity_ids": [
+          "\"FRANCES M. VEGA\"",
+          "\"SEPTEMBER 2, 1983\""
+        ],
+        "chunk_ids": [
+          "chunk-6579dd735e4edf2b691c4d1268cf1e77"
+        ],
+        "evidence_texts": [
+          "Frances M. Vega was born on September 2, 1983.",
+          "Frances M. Vega Frances Marie Vega (September 2, 1983 – November 2, 2003) was a United States Army soldier who was killed in the Iraq War. She is the first female soldier of Puerto Rican descent to have died in combat in the Iraq War."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.712933,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542587
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Frances M. Vega died on November 2, 2003.\"",
+        "hyperedge_text": "Frances M. Vega died on November 2, 2003.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6194506883621216,
+        "fusion_score": 0.5238901376724243,
+        "entity_ids": [
+          "\"NOVEMBER 2, 2003\""
+        ],
+        "chunk_ids": [
+          "chunk-6579dd735e4edf2b691c4d1268cf1e77"
+        ],
+        "evidence_texts": [
+          "Frances M. Vega died on November 2, 2003.",
+          "Frances M. Vega Frances Marie Vega (September 2, 1983 – November 2, 2003) was a United States Army soldier who was killed in the Iraq War. She is the first female soldier of Puerto Rican descent to have died in combat in the Iraq War."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.619451,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52389
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The significance of Frances M. Vega's service is recognized within the broader context of gender and military history.\"",
+        "hyperedge_text": "The significance of Frances M. Vega's service is recognized within the broader context of gender and military history.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5703603029251099,
+        "fusion_score": 0.514072060585022,
+        "entity_ids": [
+          "\"GENDER AND MILITARY HISTORY\""
+        ],
+        "chunk_ids": [
+          "chunk-6579dd735e4edf2b691c4d1268cf1e77"
+        ],
+        "evidence_texts": [
+          "The significance of Frances M. Vega's service is recognized within the broader context of gender and military history.",
+          "Frances M. Vega Frances Marie Vega (September 2, 1983 – November 2, 2003) was a United States Army soldier who was killed in the Iraq War. She is the first female soldier of Puerto Rican descent to have died in combat in the Iraq War."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.57036,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.514072
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Frances M. Vega's legacy inspires future generations of female soldiers.\"",
+        "hyperedge_text": "Frances M. Vega's legacy inspires future generations of female soldiers.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5475844144821167,
+        "fusion_score": 0.5095168828964234,
+        "entity_ids": [
+          "\"LEGACY\"",
+          "\"FUTURE GENERATIONS OF FEMALE SOLDIERS\""
+        ],
+        "chunk_ids": [
+          "chunk-6579dd735e4edf2b691c4d1268cf1e77"
+        ],
+        "evidence_texts": [
+          "Frances M. Vega's legacy inspires future generations of female soldiers.",
+          "Frances M. Vega Frances Marie Vega (September 2, 1983 – November 2, 2003) was a United States Army soldier who was killed in the Iraq War. She is the first female soldier of Puerto Rican descent to have died in combat in the Iraq War."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.547584,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.509517
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Frances M. Vega's death in the Iraq War underscores the sacrifices made by female soldiers.\"",
+        "hyperedge_text": "Frances M. Vega's death in the Iraq War underscores the sacrifices made by female soldiers.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4888642430305481,
+        "fusion_score": 0.49777284860610965,
+        "entity_ids": [
+          "\"SACRIFICES\""
+        ],
+        "chunk_ids": [
+          "chunk-6579dd735e4edf2b691c4d1268cf1e77"
+        ],
+        "evidence_texts": [
+          "Frances M. Vega's death in the Iraq War underscores the sacrifices made by female soldiers.",
+          "Frances M. Vega Frances Marie Vega (September 2, 1983 – November 2, 2003) was a United States Army soldier who was killed in the Iraq War. She is the first female soldier of Puerto Rican descent to have died in combat in the Iraq War."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.488864,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.497773
+        }
+      }
+    ],
+    "answer": "Puerto Rican",
+    "confidence": 0.9,
+    "reasoning_summary": "Frances M. Vega is identified as the first female soldier of Puerto Rican descent to have died in combat in the Iraq War, indicating her nationality.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Frances M. Vega was born on September 2, 1983.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the nationality of Christopher Newton?",
+    "analysis": {
+      "entities": [
+        "Christopher Newton"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Christopher Newton was born on 11 June 1936.\"",
+        "hyperedge_text": "Christopher Newton was born on 11 June 1936.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6842944622039795,
+        "fusion_score": 0.536858892440796,
+        "entity_ids": [
+          "\"CHRISTOPHER NEWTON\"",
+          "\"11 JUNE 1936\""
+        ],
+        "chunk_ids": [
+          "chunk-945b17ca71030309d9a3610769df5313"
+        ],
+        "evidence_texts": [
+          "Christopher Newton was born on 11 June 1936.",
+          "Christopher Newton Christopher Newton( born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980- 2002."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.684294,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536859
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christopher J. Newton (November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007.\"",
+        "hyperedge_text": "Christopher J. Newton (November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5529652237892151,
+        "fusion_score": 0.5105930447578431,
+        "entity_ids": [
+          "\"MURDER\"",
+          "\"OHIO\"",
+          "\"CHRISTOPHER NEWTON\""
+        ],
+        "chunk_ids": [
+          "chunk-a16fdf5e2434821cc1995a5a51b704fe"
+        ],
+        "evidence_texts": [
+          "Christopher J. Newton (November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007.",
+          "Christopher Newton (criminal) Christopher J. Newton( November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007. Christopher Newton received the death penalty for the 2001 aggravated murder of his cellmate, Jason Brewer. At the time of the murder, Newton was imprisoned for attempted aggravated burglary of his father's home, an offense he committed a few weeks after his release from prison for a prior attempted aggravated burglary. Newton killed Brewer in their cell by stomping on his neck and head and strangling him with a strip of cloth. According to the opinion of the Ohio Supreme Court affirming the death penalty, Newton laughed while responding officials tried to resuscitate Brewer, having smeared Brewer's blood on his face and drunk some of it( stating,\" if he is not dead, I hope he is going to be a vegetable\"). Newton admitted that another i..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.552965,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510593
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"David Christopher Newton (December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher.\"",
+        "hyperedge_text": "David Christopher Newton (December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5898941159248352,
+        "fusion_score": 0.5179788231849671,
+        "entity_ids": [
+          "\"SCULPTOR\"",
+          "\"PAINTER\"",
+          "\"DAVID CHRISTOPHER NEWTON\"",
+          "\"PRINTMAKER\"",
+          "\"DRAFTSMAN\"",
+          "\"COLLEGE ART TEACHER\""
+        ],
+        "chunk_ids": [
+          "chunk-01eae762c7d2c103f8a0e662e8567c0c"
+        ],
+        "evidence_texts": [
+          "David Christopher Newton (December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher.",
+          "David Newton (artist) David Christopher Newton( December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher. Newton was born in 1953 in Oakland, California. He lived and worked in California, New York, Massachusetts, Rhode Island and North Carolina with his wife Suzanne McBride Newton( who is a Yoga instructor and former modern dancer). He died in 2011 after battling colon and liver cancer."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.589894,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517979
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christopher Newton (born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980-2002.\"",
+        "hyperedge_text": "Christopher Newton (born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980-2002.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5787546038627625,
+        "fusion_score": 0.5157509207725526,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"CANADA\"",
+          "\"ACTOR\"",
+          "\"SHAW FESTIVAL\"",
+          "\"ARTISTIC DIRECTOR\"",
+          "\"1980-2002\""
+        ],
+        "chunk_ids": [
+          "chunk-945b17ca71030309d9a3610769df5313"
+        ],
+        "evidence_texts": [
+          "Christopher Newton (born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980-2002.",
+          "Christopher Newton Christopher Newton( born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980- 2002."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578755,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515751
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christopher Newton is known for his contributions to theater as both a director and an actor.\"",
+        "hyperedge_text": "Christopher Newton is known for his contributions to theater as both a director and an actor.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5759170055389404,
+        "fusion_score": 0.5151834011077882,
+        "entity_ids": [
+          "\"THEATER\""
+        ],
+        "chunk_ids": [
+          "chunk-945b17ca71030309d9a3610769df5313"
+        ],
+        "evidence_texts": [
+          "Christopher Newton is known for his contributions to theater as both a director and an actor.",
+          "Christopher Newton Christopher Newton( born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980- 2002."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.575917,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515183
+        }
+      }
+    ],
+    "answer": "Canadian",
+    "confidence": 0.9,
+    "reasoning_summary": "Christopher Newton is identified as a Canadian director and actor, which directly supports his nationality.",
+    "used_dependencies": [
+      "q1",
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Christopher Newton (born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980-2002.\""
+    ]
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Outlaw Express?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "The Outlaw Express"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was the director of The Outlaw Express born?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of The Outlaw Express?",
+        "answer": "Leo D. Maloney",
+        "confidence": 1.0,
+        "reasoning_summary": "The evidence clearly states that 'The Outlaw Express' was directed by Leo D. Maloney.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney.\"",
+          "<hyperedge>\"Leo D. Maloney directed and starred in The Outlaw Express.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney.\"",
+            "fusion_score": 0.5281335353851319,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney.",
+              "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The Outlaw Express is a silent western film released in 1926.\"",
+            "fusion_score": 0.5239119291305543,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Outlaw Express is a silent western film released in 1926.",
+              "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Leo D. Maloney directed and starred in The Outlaw Express.\"",
+            "fusion_score": 0.9435550212860108,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Leo D. Maloney directed and starred in The Outlaw Express.",
+              "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "The Outlaw Express",
+        "Leo D. Maloney"
+      ],
+      "relations": [
+        "was born in"
+      ],
+      "relation_query": "Where was a director born?",
+      "answer_type": "location"
+    }
+  }
+]

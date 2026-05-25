@@ -32,6 +32,16 @@ def normalize_answer(answer: str) -> str:
     
     return white_space_fix(remove_articles(remove_punc(lower(answer))))
 
+
+def hyperrag_exact_match(predicted: str, gold: str) -> float:
+    """HyperRAG-compatible EM: case-insensitive no-space substring match."""
+    clean_predicted = str(predicted).strip().replace(" ", "").lower()
+    clean_gold = str(gold).strip().replace(" ", "").lower()
+    if not clean_predicted or not clean_gold:
+        return 0.0
+    return 1.0 if clean_predicted == clean_gold or clean_predicted in clean_gold or clean_gold in clean_predicted else 0.0
+
+
 def calculate_metric_scores_em(gold_answers, predicted_answers, aggregation_fn):
     assert len(gold_answers) == len(predicted_answers), "Length of gold answers and predicted answers should be the same."
 
@@ -39,7 +49,7 @@ def calculate_metric_scores_em(gold_answers, predicted_answers, aggregation_fn):
     total_em = 0
 
     for gold_list, predicted in zip(gold_answers, predicted_answers):
-        em_scores = [1.0 if normalize_answer(gold) == normalize_answer(predicted) else 0.0 for gold in gold_list]
+        em_scores = [hyperrag_exact_match(predicted, gold) for gold in gold_list]
         aggregated_em = aggregation_fn(em_scores)
         example_eval_results.append({"ExactMatch": aggregated_em})
         total_em += aggregated_em

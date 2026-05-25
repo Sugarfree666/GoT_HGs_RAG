@@ -1,0 +1,96 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Coulson?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Coulson"
+      ],
+      "relations": [
+        "father of"
+      ],
+      "relation_query": "who is the father of an entity",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the father of Wallop?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Wallop"
+      ],
+      "relations": [
+        "father of"
+      ],
+      "relation_query": "who is the father of an entity",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Coulson study?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the father of Coulson?",
+        "answer": "John Wallop, 2nd Earl of Portsmouth",
+        "confidence": 0.75,
+        "reasoning_summary": "Coulson Wallop was the son of John Wallop, 2nd Earl of Portsmouth, which indicates that John Wallop is his father.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Coulson Wallop (19 September 1774 – 31 August 1807) was a British Member of Parliament.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Coulson Wallop (19 September 1774 – 31 August 1807) was a British Member of Parliament.\"",
+            "fusion_score": 0.4905593037605286,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Coulson Wallop (19 September 1774 – 31 August 1807) was a British Member of Parliament.",
+              "Coulson Wallop Coulson Wallop (19 September 1774 – 31 August 1807) was a British Member of Parliament. The younger son of the Earl of Portsmouth, he briefly sat in Parliament on a family interest and later died in captivity in France during the Napoleonic Wars. Wallop was the third son of John Wallop, 2nd Earl of Portsmouth. He was educated at Eton from 1785 to 1792. On 29 April 1794, he was commissioned a captain of volunteers in the South Hampshire militia, and was given the captaincy of one of the permanent companies of the regiment on 4 April 1795. Wallop resigned his commission on 24 July 1799. Wallop was returned for Andover in 1796 on his father's electoral interest. He made little mark in Parliament and supported, at his father's direction, the Pitt ministry. However, he was apparently somewhat mentally deficient, like his eldest brother Viscount Lymington. John King, who had..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"He was the father.\"",
+            "fusion_score": 0.2574886202812195,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "He was the father.",
+              "Obata Toramori He was the father of Obata Masamori."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"On 27 August 1763, Portsmouth married Urania Fellowes (d. 1812), daughter of Coulson Fellowes.\"",
+            "fusion_score": 0.6000000000000001,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "On 27 August 1763, Portsmouth married Urania Fellowes (d. 1812), daughter of Coulson Fellowes.",
+              "John Wallop, 2nd Earl of Portsmouth John Wallop, 2nd Earl of Portsmouth (29 June 1742 – 16 May 1797), styled Hon. John Wallop from 1743 to 1749 and Viscount Lymington from 1749 to 1762, was a British nobleman. He was the son of John Wallop, Viscount Lymington and his wife Catherine. Through his father he inherited the Wallop electoral interests at Andover, near the family seat of Hurstbourne Park, and through his mother, those of the Conduitt family at Whitchurch, although his influence there had ceased by 1774. His father died at the age of 31 in 1749; Wallop, now styled \"Viscount Lymington,\" did not inherit the earldom from his grandfather until 1762. On 1 October 1755, he was created a DCL of Oxford. On 27 August 1763, Portsmouth married Urania Fellowes (d. 1812), daughter of Coulson Fellowes. They had four sons and four daughters:"
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "John Wallop, 2nd Earl of Portsmouth",
+        "Coulson Wallop"
+      ],
+      "relations": [
+        "studied at"
+      ],
+      "relation_query": "Where did the father of an entity study?",
+      "answer_type": "location"
+    }
+  }
+]

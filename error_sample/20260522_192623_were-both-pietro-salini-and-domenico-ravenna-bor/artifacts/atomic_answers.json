@@ -1,0 +1,563 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Where was Pietro Salini born?",
+    "analysis": {
+      "entities": [
+        "Pietro Salini"
+      ],
+      "relations": [
+        "birthplace"
+      ],
+      "relation_query": "the birthplace of a person",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Pietro Salini was born on 29 March 1959 in Rome, Italy.\"",
+        "hyperedge_text": "Pietro Salini was born on 29 March 1959 in Rome, Italy.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.782902717590332,
+        "fusion_score": 0.5565805435180664,
+        "entity_ids": [
+          "\"ROME\"",
+          "\"ITALY\"",
+          "\"29 MARCH 1959\"",
+          "\"PIETRO SALINI\""
+        ],
+        "chunk_ids": [
+          "chunk-b713a3e2d8d420f5946702133ebcf7be"
+        ],
+        "evidence_texts": [
+          "Pietro Salini was born on 29 March 1959 in Rome, Italy.",
+          "Pietro Salini Pietro Salini( born 29 March 1959 in Rome, Italy) is an Italian businessman and Chief Executive Officer of Salini Impregilo and Salini Costruttori SpA. On 31 May 2013 he was honoured with the title of “ Cavaliere del Lavoro ”( Knight of Labor, for his service to industry), and on 11 December 2013 he won the Tiepolo Award in Madrid for the deal that resulted in the takeover of Impregilo."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.782903,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.556581
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Pietro Salini (born 29 March 1959 in Rome, Italy) is an Italian businessman and Chief Executive Officer of Salini Impregilo and Salini Costruttori SpA.\"",
+        "hyperedge_text": "Pietro Salini (born 29 March 1959 in Rome, Italy) is an Italian businessman and Chief Executive Officer of Salini Impregilo and Salini Costruttori SpA.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.704636812210083,
+        "fusion_score": 0.5409273624420167,
+        "entity_ids": [
+          "\"PIETRO SALINI\"",
+          "\"SALINI IMPREGILO\"",
+          "\"SALINI COSTRUTTORI SPA\""
+        ],
+        "chunk_ids": [
+          "chunk-b713a3e2d8d420f5946702133ebcf7be"
+        ],
+        "evidence_texts": [
+          "Pietro Salini (born 29 March 1959 in Rome, Italy) is an Italian businessman and Chief Executive Officer of Salini Impregilo and Salini Costruttori SpA.",
+          "Pietro Salini Pietro Salini( born 29 March 1959 in Rome, Italy) is an Italian businessman and Chief Executive Officer of Salini Impregilo and Salini Costruttori SpA. On 31 May 2013 he was honoured with the title of “ Cavaliere del Lavoro ”( Knight of Labor, for his service to industry), and on 11 December 2013 he won the Tiepolo Award in Madrid for the deal that resulted in the takeover of Impregilo."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.704637,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540927
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.617861270904541,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.3138111750284831,
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.617861,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.313811
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth is not necessarily the place where the parents of the new baby live.\"",
+        "hyperedge_text": "The place of birth is not necessarily the place where the parents of the new baby live.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5804392099380493,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2988423506418864,
+        "entity_ids": [
+          "\"PARENTS\"",
+          "\"NEW BABY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth is not necessarily the place where the parents of the new baby live.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.580439,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.298842
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5720354914665222,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.29548086325327555,
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.572035,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.295481
+        }
+      }
+    ],
+    "answer": "Rome, Italy",
+    "confidence": 1.0,
+    "reasoning_summary": "Pietro Salini was born in Rome, Italy, as stated in the evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Pietro Salini was born on 29 March 1959 in Rome, Italy.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was Domenico Ravenna born?",
+    "analysis": {
+      "entities": [
+        "Domenico Ravenna"
+      ],
+      "relations": [
+        "birthplace"
+      ],
+      "relation_query": "the birthplace of a person",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate.\"",
+        "hyperedge_text": "Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.759080171585083,
+        "fusion_score": 0.5518160343170166,
+        "entity_ids": [
+          "\"DOMENICO RAVENNA\""
+        ],
+        "chunk_ids": [
+          "chunk-90b5fd4874a487ac4703ff9becf00c8e"
+        ],
+        "evidence_texts": [
+          "Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate.",
+          "Domenico Ravenna Domenico Ravenna( 1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro( 1635 – 1637)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.75908,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.551816
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro (1635 – 1637).\"",
+        "hyperedge_text": "Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro (1635 – 1637).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7503507137298584,
+        "fusion_score": 0.5500701427459718,
+        "entity_ids": [
+          "\"DOMENICO RAVENNA\"",
+          "\"BISHOP OF NICASTRO\"",
+          "\"ROMAN CATHOLIC PRELATE\"",
+          "\"NICASTRO\"",
+          "\"1584\"",
+          "\"1637\"",
+          "\"1635\""
+        ],
+        "chunk_ids": [
+          "chunk-90b5fd4874a487ac4703ff9becf00c8e"
+        ],
+        "evidence_texts": [
+          "Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro (1635 – 1637).",
+          "Domenico Ravenna Domenico Ravenna( 1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro( 1635 – 1637)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.750351,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55007
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Domenico Ravenna was born in 1584 and died in 1637.\"",
+        "hyperedge_text": "Domenico Ravenna was born in 1584 and died in 1637.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8028719425201416,
+        "fusion_score": 0.5605743885040284,
+        "entity_ids": [
+          "\"1584\"",
+          "\"1637\""
+        ],
+        "chunk_ids": [
+          "chunk-90b5fd4874a487ac4703ff9becf00c8e"
+        ],
+        "evidence_texts": [
+          "Domenico Ravenna was born in 1584 and died in 1637.",
+          "Domenico Ravenna Domenico Ravenna( 1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro( 1635 – 1637)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.802872,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.560574
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Domenico Ravenna's ecclesiastical duties extended from 1635 until his death in 1637.\"",
+        "hyperedge_text": "Domenico Ravenna's ecclesiastical duties extended from 1635 until his death in 1637.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.740837574005127,
+        "fusion_score": 0.5481675148010254,
+        "entity_ids": [
+          "\"ECCLESIASTICAL DUTIES\""
+        ],
+        "chunk_ids": [
+          "chunk-90b5fd4874a487ac4703ff9becf00c8e"
+        ],
+        "evidence_texts": [
+          "Domenico Ravenna's ecclesiastical duties extended from 1635 until his death in 1637.",
+          "Domenico Ravenna Domenico Ravenna( 1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro( 1635 – 1637)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.740838,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.548168
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Domenico Ravenna's contributions to the church lasted until his death in 1637.\"",
+        "hyperedge_text": "Domenico Ravenna's contributions to the church lasted until his death in 1637.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7253751754760742,
+        "fusion_score": 0.5450750350952149,
+        "entity_ids": [
+          "\"CONTRIBUTIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-90b5fd4874a487ac4703ff9becf00c8e"
+        ],
+        "evidence_texts": [
+          "Domenico Ravenna's contributions to the church lasted until his death in 1637.",
+          "Domenico Ravenna Domenico Ravenna( 1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro( 1635 – 1637)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.725375,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.545075
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "The evidence does not provide information about the birthplace of Domenico Ravenna.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Do Pietro Salini and Domenico Ravenna have the same birthplace?",
+    "analysis": {
+      "entities": [
+        "Pietro Salini",
+        "Domenico Ravenna",
+        "Rome, Italy"
+      ],
+      "relations": [
+        "have the same birthplace"
+      ],
+      "relation_query": "Do two individuals have the same birthplace?",
+      "answer_type": "boolean"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Pietro Salini was born on 29 March 1959 in Rome, Italy.\"",
+        "hyperedge_text": "Pietro Salini was born on 29 March 1959 in Rome, Italy.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.6226669549942017,
+        "fusion_score": 0.39120005766550703,
+        "entity_ids": [
+          "\"ROME\"",
+          "\"ITALY\"",
+          "\"29 MARCH 1959\"",
+          "\"PIETRO SALINI\""
+        ],
+        "chunk_ids": [
+          "chunk-b713a3e2d8d420f5946702133ebcf7be"
+        ],
+        "evidence_texts": [
+          "Pietro Salini was born on 29 March 1959 in Rome, Italy.",
+          "Pietro Salini Pietro Salini( born 29 March 1959 in Rome, Italy) is an Italian businessman and Chief Executive Officer of Salini Impregilo and Salini Costruttori SpA. On 31 May 2013 he was honoured with the title of “ Cavaliere del Lavoro ”( Knight of Labor, for his service to industry), and on 11 December 2013 he won the Tiepolo Award in Madrid for the deal that resulted in the takeover of Impregilo."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.622667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.3912
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Pietro Salini (born 29 March 1959 in Rome, Italy) is an Italian businessman and Chief Executive Officer of Salini Impregilo and Salini Costruttori SpA.\"",
+        "hyperedge_text": "Pietro Salini (born 29 March 1959 in Rome, Italy) is an Italian businessman and Chief Executive Officer of Salini Impregilo and Salini Costruttori SpA.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.5423155426979065,
+        "fusion_score": 0.37512977520624796,
+        "entity_ids": [
+          "\"PIETRO SALINI\"",
+          "\"SALINI IMPREGILO\"",
+          "\"SALINI COSTRUTTORI SPA\""
+        ],
+        "chunk_ids": [
+          "chunk-b713a3e2d8d420f5946702133ebcf7be"
+        ],
+        "evidence_texts": [
+          "Pietro Salini (born 29 March 1959 in Rome, Italy) is an Italian businessman and Chief Executive Officer of Salini Impregilo and Salini Costruttori SpA.",
+          "Pietro Salini Pietro Salini( born 29 March 1959 in Rome, Italy) is an Italian businessman and Chief Executive Officer of Salini Impregilo and Salini Costruttori SpA. On 31 May 2013 he was honoured with the title of “ Cavaliere del Lavoro ”( Knight of Labor, for his service to industry), and on 11 December 2013 he won the Tiepolo Award in Madrid for the deal that resulted in the takeover of Impregilo."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.542316,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.37513
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro (1635 – 1637).\"",
+        "hyperedge_text": "Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro (1635 – 1637).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 0.0,
+        "semantic_score": 0.5474131107330322,
+        "fusion_score": 0.24281595547993978,
+        "entity_ids": [
+          "\"DOMENICO RAVENNA\"",
+          "\"BISHOP OF NICASTRO\"",
+          "\"ROMAN CATHOLIC PRELATE\"",
+          "\"NICASTRO\"",
+          "\"1584\"",
+          "\"1637\"",
+          "\"1635\""
+        ],
+        "chunk_ids": [
+          "chunk-90b5fd4874a487ac4703ff9becf00c8e"
+        ],
+        "evidence_texts": [
+          "Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro (1635 – 1637).",
+          "Domenico Ravenna Domenico Ravenna( 1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro( 1635 – 1637)."
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 0.0,
+          "S": 0.547413,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.242816
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate.\"",
+        "hyperedge_text": "Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 0.0,
+        "semantic_score": 0.5456965565681458,
+        "fusion_score": 0.2424726446469625,
+        "entity_ids": [
+          "\"DOMENICO RAVENNA\""
+        ],
+        "chunk_ids": [
+          "chunk-90b5fd4874a487ac4703ff9becf00c8e"
+        ],
+        "evidence_texts": [
+          "Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate.",
+          "Domenico Ravenna Domenico Ravenna( 1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro( 1635 – 1637)."
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 0.0,
+          "S": 0.545697,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.242473
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.\"",
+        "hyperedge_text": "A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.511584997177124,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2713006655375163,
+        "entity_ids": [
+          "\"CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.511585,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.271301
+        }
+      }
+    ],
+    "answer": "no",
+    "confidence": 0.75,
+    "reasoning_summary": "Pietro Salini was born in Rome, Italy, but there is insufficient evidence regarding Domenico Ravenna's birthplace, making it impossible to confirm if they share the same birthplace.",
+    "used_dependencies": [
+      "q1",
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Pietro Salini was born on 29 March 1959 in Rome, Italy.\""
+    ]
+  }
+]

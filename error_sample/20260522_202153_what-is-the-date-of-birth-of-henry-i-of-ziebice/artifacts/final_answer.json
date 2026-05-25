@@ -1,0 +1,32 @@
+{
+  "answer": "c. 1470",
+  "reasoning_summary": "The date of birth of Henry I of Ziębice's father, Charles Somerset, is inferred to be around 1470 based on the timeline of his marriage to Elizabeth Herbert in 1492 and the birth of their son Henry around 1496. This is supported by the evidence regarding their family history.",
+  "confidence": 0.75,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Henry?",
+      "answer": "Charles Somerset",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Their only son, Henry, was born in around 1496.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the date of birth of the father of Henry?",
+      "answer": "c. 1470",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Their only son, Henry, was born in around 1496.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "What is the date of birth of the father of Henry?",
+      "answer": "c. 1470",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Their only son, Henry, was born in around 1496.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

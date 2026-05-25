@@ -1,0 +1,141 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the nationality of Christopher Newton?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Christopher Newton"
+      ],
+      "relations": [
+        "has nationality"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of Frances M. Vega?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Frances M. Vega"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the nationality of Christopher Newton?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "What is the nationality of Christopher Newton?",
+        "answer": "Canadian",
+        "confidence": 0.9,
+        "reasoning_summary": "Christopher Newton is identified as a Canadian director and actor, which directly supports his nationality.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Christopher Newton (born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980-2002.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Christopher Newton was born on 11 June 1936.\"",
+            "fusion_score": 0.536858892440796,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Christopher Newton was born on 11 June 1936.",
+              "Christopher Newton Christopher Newton( born 11 June 1936) is a Canadian director and actor and served as artistic director of the Shaw Festival from 1980- 2002."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Christopher J. Newton (November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007.\"",
+            "fusion_score": 0.5105930447578431,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Christopher J. Newton (November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007.",
+              "Christopher Newton (criminal) Christopher J. Newton( November 13, 1969 – May 24, 2007) was an American murderer executed in the state of Ohio in 2007. Christopher Newton received the death penalty for the 2001 aggravated murder of his cellmate, Jason Brewer. At the time of the murder, Newton was imprisoned for attempted aggravated burglary of his father's home, an offense he committed a few weeks after his release from prison for a prior attempted aggravated burglary. Newton killed Brewer in their cell by stomping on his neck and head and strangling him with a strip of cloth. According to the opinion of the Ohio Supreme Court affirming the death penalty, Newton laughed while responding officials tried to resuscitate Brewer, having smeared Brewer's blood on his face and drunk some of it( stating,\" if he is not dead, I hope he is going to be a vegetable\"). Newton admitted that another i..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"David Christopher Newton (December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher.\"",
+            "fusion_score": 0.5179788231849671,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "David Christopher Newton (December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher.",
+              "David Newton (artist) David Christopher Newton( December 1953 – April 2011) was an American sculptor, painter, printmaker, draftsman, and college art teacher. Newton was born in 1953 in Oakland, California. He lived and worked in California, New York, Massachusetts, Rhode Island and North Carolina with his wife Suzanne McBride Newton( who is a Yoga instructor and former modern dancer). He died in 2011 after battling colon and liver cancer."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "What is the nationality of Frances M. Vega?",
+        "answer": "Puerto Rican",
+        "confidence": 0.9,
+        "reasoning_summary": "Frances M. Vega is identified as the first female soldier of Puerto Rican descent to have died in combat in the Iraq War, indicating her nationality.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Frances M. Vega was born on September 2, 1983.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Frances M. Vega was born on September 2, 1983.\"",
+            "fusion_score": 0.5425866842269897,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Frances M. Vega was born on September 2, 1983.",
+              "Frances M. Vega Frances Marie Vega (September 2, 1983 – November 2, 2003) was a United States Army soldier who was killed in the Iraq War. She is the first female soldier of Puerto Rican descent to have died in combat in the Iraq War."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Frances M. Vega died on November 2, 2003.\"",
+            "fusion_score": 0.5238901376724243,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Frances M. Vega died on November 2, 2003.",
+              "Frances M. Vega Frances Marie Vega (September 2, 1983 – November 2, 2003) was a United States Army soldier who was killed in the Iraq War. She is the first female soldier of Puerto Rican descent to have died in combat in the Iraq War."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The significance of Frances M. Vega's service is recognized within the broader context of gender and military history.\"",
+            "fusion_score": 0.514072060585022,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The significance of Frances M. Vega's service is recognized within the broader context of gender and military history.",
+              "Frances M. Vega Frances Marie Vega (September 2, 1983 – November 2, 2003) was a United States Army soldier who was killed in the Iraq War. She is the first female soldier of Puerto Rican descent to have died in combat in the Iraq War."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Christopher Newton"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    }
+  }
+]

@@ -107,6 +107,27 @@ class EvalGetScoreTest(unittest.TestCase):
         self.assertEqual(record["generation_explanation"], "")
         self.assertEqual(record["retrieved"], [])
 
+    def test_discover_latest_runs_supports_atomic_run_log(self) -> None:
+        module = load_eval_get_score_module()
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            run_dir = root / "runs" / "20260522_120000_atomic"
+            artifacts_dir = run_dir / "artifacts"
+            artifacts_dir.mkdir(parents=True)
+            (run_dir / "run.log").write_text(
+                "2026-05-22 12:00:00 | INFO | Starting HyperBranch pipeline for question: Who wrote Hamlet?\n",
+                encoding="utf-8",
+            )
+            (artifacts_dir / "final_answer.json").write_text(
+                json.dumps({"answer": "William Shakespeare", "reasoning_summary": "", "remaining_gaps": []}),
+                encoding="utf-8",
+            )
+
+            run_index = module.discover_latest_runs(root / "runs")
+            self.assertIn("Who wrote Hamlet?", run_index)
+            self.assertEqual(run_index["Who wrote Hamlet?"]["status"], "success")
+
     def test_evaluate_one_uses_generation_explanation_for_gen(self) -> None:
         module = load_eval_get_score_module()
         record = {

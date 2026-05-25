@@ -62,6 +62,13 @@ def resolve_run_question(run_dir: Path) -> tuple[str | None, str]:
         if isinstance(question, str) and question.strip():
             return question.strip(), "failed"
 
+    log_question = _extract_question_from_run_log(run_dir / "run.log")
+    if log_question:
+        final_answer = load_json(run_dir / "artifacts" / "final_answer.json")
+        if isinstance(final_answer, dict):
+            return log_question, "success"
+        return log_question, "partial"
+
     thought_graph = load_json(run_dir / "artifacts" / "thought_graph.json")
     if isinstance(thought_graph, dict):
         question = thought_graph.get("question")
@@ -75,6 +82,22 @@ def resolve_run_question(run_dir: Path) -> tuple[str | None, str]:
             return question.strip(), "partial"
 
     return None, "unknown"
+
+
+def _extract_question_from_run_log(log_path: Path) -> str | None:
+    if not log_path.exists():
+        return None
+    markers = (
+        "Starting HyperBranch pipeline for question: ",
+        "Pipeline failed for question: ",
+    )
+    for line in log_path.read_text(encoding="utf-8", errors="replace").splitlines():
+        for marker in markers:
+            if marker in line:
+                question = line.split(marker, 1)[1].strip()
+                if question:
+                    return question
+    return None
 
 
 def discover_latest_runs(runs_dir: Path) -> dict[str, dict[str, Any]]:

@@ -1,0 +1,371 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song B Boy (Song)?",
+    "analysis": {
+      "entities": [
+        "B Boy (Song)"
+      ],
+      "relations": [
+        "performer of"
+      ],
+      "relation_query": "who is the performer of a song",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"B Boy is a hip hop song performed by Meek Mill.\"",
+        "hyperedge_text": "B Boy is a hip hop song performed by Meek Mill.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5864824056625366,
+        "fusion_score": 0.31729648113250736,
+        "entity_ids": [
+          "\"B BOY\"",
+          "\"HIP HOP\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy is a hip hop song performed by Meek Mill.",
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.586482,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.317296
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"B Boy is a song by American hip hop recording artist Meek Mill.\"",
+        "hyperedge_text": "B Boy is a song by American hip hop recording artist Meek Mill.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5628538131713867,
+        "fusion_score": 0.31257076263427735,
+        "entity_ids": [
+          "\"B BOY\"",
+          "\"MEEK MILL\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy is a song by American hip hop recording artist Meek Mill.",
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.562854,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.312571
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Kesha wrote the song about a boy that she had been stalking and who had refused to call the singer.\"",
+        "hyperedge_text": "Kesha wrote the song about a boy that she had been stalking and who had refused to call the singer.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.4183701276779175,
+        "fusion_score": 0.2836740255355835,
+        "entity_ids": [
+          "\"BOY\""
+        ],
+        "chunk_ids": [
+          "chunk-0a274860d4123cad7a7429abcb0fd2d3"
+        ],
+        "evidence_texts": [
+          "Kesha wrote the song about a boy that she had been stalking and who had refused to call the singer.",
+          "Stephen (song) \" Stephen\" is a song by American recording artist and songwriter Kesha, taken from her debut studio album\" Animal\"( 2010). The song was written by Kesha in collaboration with David Gamson, Pebe Sebert, Oliver Leiber. It was produced by Gamson with additional production done by Leiber. The song's instrumentation was by Gamson, with the exception of the accordion, which was played by Kesha. Kesha wrote the song about a boy that she had been stalking and who had refused to call the singer. Musically,\" Stephen\" is a dance- pop song that incorporates elements of country music. The song received some positive reviews from music critics upon its release. After the release of\" Animal\" for download,\" Stephen\" charted on the lower regions of the South Korea Gaon International Chart. A music video for the song was released on the repackaging of the singer's debut album,\" Animal+ C..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.41837,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.283674
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the composer and original singer of the song.\"",
+        "hyperedge_text": "He is also the composer and original singer of the song.",
+        "branch_support": [
+          "anchor",
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43017494678497314,
+        "semantic_score": 0.25,
+        "fusion_score": 0.22206997871398926,
+        "entity_ids": [
+          "\"SONG\""
+        ],
+        "chunk_ids": [
+          "chunk-c81436a59c043046312b45c13fcee5a3"
+        ],
+        "evidence_texts": [
+          "He is also the composer and original singer of the song.",
+          "Ami Banglay Gaan Gai \" Ami Banglay Gaan Gai\" is a patriotic song by Bangladeshi poet and composer Pratul Mukhopadhyay. He is also the composer and original singer of the song. The song was nominated as one the most popular songs on March, 2006."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.430175,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.22207
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"B Boy was released as a third single from 'Dreams Worth More Than Money'.\"",
+        "hyperedge_text": "B Boy was released as a third single from 'Dreams Worth More Than Money'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5487019419670105,
+        "fusion_score": 0.10974038839340211,
+        "entity_ids": [
+          "\"THIRD SINGLE\"",
+          "\"B BOY\"",
+          "\"DREAMS WORTH MORE THAN MONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy was released as a third single from 'Dreams Worth More Than Money'.",
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.548702,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.10974
+        }
+      }
+    ],
+    "answer": "Meek Mill",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'B Boy' is a hip hop song performed by Meek Mill.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"B Boy is a hip hop song performed by Meek Mill.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was the performer of B Boy (Song) detained?",
+    "analysis": {
+      "entities": [
+        "B Boy",
+        "Meek Mill"
+      ],
+      "relations": [
+        "detained location"
+      ],
+      "relation_query": "Where was the performer of a song detained?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"B Boy is a hip hop song performed by Meek Mill.\"",
+        "hyperedge_text": "B Boy is a hip hop song performed by Meek Mill.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.4598407745361328,
+        "fusion_score": 0.6253014882405599,
+        "entity_ids": [
+          "\"B BOY\"",
+          "\"HIP HOP\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy is a hip hop song performed by Meek Mill.",
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.333333,
+          "S": 0.459841,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.625301
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"B Boy is a song by American hip hop recording artist Meek Mill.\"",
+        "hyperedge_text": "B Boy is a song by American hip hop recording artist Meek Mill.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.4450618326663971,
+        "fusion_score": 0.6223456998666128,
+        "entity_ids": [
+          "\"B BOY\"",
+          "\"MEEK MILL\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy is a song by American hip hop recording artist Meek Mill.",
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.333333,
+          "S": 0.445062,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.622346
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"B Boy was released as a third single from 'Dreams Worth More Than Money'.\"",
+        "hyperedge_text": "B Boy was released as a third single from 'Dreams Worth More Than Money'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.42340803146362305,
+        "fusion_score": 0.28468160629272465,
+        "entity_ids": [
+          "\"THIRD SINGLE\"",
+          "\"B BOY\"",
+          "\"DREAMS WORTH MORE THAN MONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy was released as a third single from 'Dreams Worth More Than Money'.",
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.423408,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.284682
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song was released by Maybach Music Group and Atlantic Records.\"",
+        "hyperedge_text": "The song was released by Maybach Music Group and Atlantic Records.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.6,
+        "fusion_score": 0.45333333333333337,
+        "entity_ids": [
+          "\"ATLANTIC RECORDS\"",
+          "\"MEEK MILL\"",
+          "\"MAYBACH MUSIC GROUP\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "The song was released by Maybach Music Group and Atlantic Records.",
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.6,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.453333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"B Boy features guest appearances from Big Sean and ASAP Ferg.\"",
+        "hyperedge_text": "B Boy features guest appearances from Big Sean and ASAP Ferg.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.4197593033313751,
+        "fusion_score": 0.28395186066627504,
+        "entity_ids": [
+          "\"BIG SEAN\"",
+          "\"ASAP FERG\"",
+          "\"GUEST APPEARANCES\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy features guest appearances from Big Sean and ASAP Ferg.",
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.419759,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.283952
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the location where Meek Mill was detained.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"B Boy is a hip hop song performed by Meek Mill.\""
+    ]
+  }
+]

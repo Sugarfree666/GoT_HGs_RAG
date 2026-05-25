@@ -1,0 +1,365 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is Saw Thanda's husband?",
+    "analysis": {
+      "entities": [
+        "Saw Thanda"
+      ],
+      "relations": [
+        "is married to"
+      ],
+      "relation_query": "who is married to a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Saw Thanda Dewi was married to four consecutive kings, indicating her significant role in the royal lineage of Arakan.\"",
+        "hyperedge_text": "Saw Thanda Dewi was married to four consecutive kings, indicating her significant role in the royal lineage of Arakan.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4662139117717743,
+        "fusion_score": 0.893242782354355,
+        "entity_ids": [
+          "\"ROYAL LINEAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb0bfb95509c534513d293e4b05bcde"
+        ],
+        "evidence_texts": [
+          "Saw Thanda Dewi was married to four consecutive kings, indicating her significant role in the royal lineage of Arakan.",
+          "Saw Thanda Saw Thanda Dewi was queen consort to four consecutive of kings of Arakan. She was the chief queen of King Dikkha (r. 1554–56). She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons, and later to King Phalaung (r. 1572–93)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.466214,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.893243
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Saw Thanda's marriage to King Phalaung was pivotal for diplomatic relations with neighboring regions.\"",
+        "hyperedge_text": "Saw Thanda's marriage to King Phalaung was pivotal for diplomatic relations with neighboring regions.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5413018465042114,
+        "fusion_score": 0.5082603693008423,
+        "entity_ids": [
+          "\"DIPLOMATIC RELATIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb0bfb95509c534513d293e4b05bcde"
+        ],
+        "evidence_texts": [
+          "Saw Thanda's marriage to King Phalaung was pivotal for diplomatic relations with neighboring regions.",
+          "Saw Thanda Saw Thanda Dewi was queen consort to four consecutive of kings of Arakan. She was the chief queen of King Dikkha (r. 1554–56). She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons, and later to King Phalaung (r. 1572–93)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.541302,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.50826
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Saw Thanda Dewi was queen consort to four consecutive kings of Arakan.\"",
+        "hyperedge_text": "Saw Thanda Dewi was queen consort to four consecutive kings of Arakan.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"SAW THANDA DEWI\"",
+          "\"QUEENSHIP\"",
+          "\"KINGS OF ARAKAN\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb0bfb95509c534513d293e4b05bcde"
+        ],
+        "evidence_texts": [
+          "Saw Thanda Dewi was queen consort to four consecutive kings of Arakan.",
+          "Saw Thanda Saw Thanda Dewi was queen consort to four consecutive of kings of Arakan. She was the chief queen of King Dikkha (r. 1554–56). She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons, and later to King Phalaung (r. 1572–93)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Saw Thanda Dewi's role as queen consort was central in maintaining stability in the kingdom.\"",
+        "hyperedge_text": "Saw Thanda Dewi's role as queen consort was central in maintaining stability in the kingdom.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.46543580293655396,
+        "fusion_score": 0.49308716058731084,
+        "entity_ids": [
+          "\"STABILITY IN THE KINGDOM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb0bfb95509c534513d293e4b05bcde"
+        ],
+        "evidence_texts": [
+          "Saw Thanda Dewi's role as queen consort was central in maintaining stability in the kingdom.",
+          "Saw Thanda Saw Thanda Dewi was queen consort to four consecutive of kings of Arakan. She was the chief queen of King Dikkha (r. 1554–56). She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons, and later to King Phalaung (r. 1572–93)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.465436,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.493087
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Saw Thanda's life and reign provide insight into the complexities of Arakanese society.\"",
+        "hyperedge_text": "Saw Thanda's life and reign provide insight into the complexities of Arakanese society.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4457146227359772,
+        "fusion_score": 0.48914292454719543,
+        "entity_ids": [
+          "\"COMPLEXITIES OF ARAKANESE SOCIETY\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb0bfb95509c534513d293e4b05bcde"
+        ],
+        "evidence_texts": [
+          "Saw Thanda's life and reign provide insight into the complexities of Arakanese society.",
+          "Saw Thanda Saw Thanda Dewi was queen consort to four consecutive of kings of Arakan. She was the chief queen of King Dikkha (r. 1554–56). She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons, and later to King Phalaung (r. 1572–93)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.445715,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.489143
+        }
+      }
+    ],
+    "answer": "King Phalaung",
+    "confidence": 0.9,
+    "reasoning_summary": "Saw Thanda was married to four consecutive kings, including King Phalaung, as indicated in the evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Saw Thanda Dewi was married to four consecutive kings, indicating her significant role in the royal lineage of Arakan.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the husband of Saw Thanda die?",
+    "analysis": {
+      "entities": [
+        "Saw Thanda",
+        "King Phalaung"
+      ],
+      "relations": [
+        "place of death"
+      ],
+      "relation_query": "Where did the husband of a historical figure die?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"His wife survived him by thirteen years and died in June 1872.\"",
+        "hyperedge_text": "His wife survived him by thirteen years and died in June 1872.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5579760074615479,
+        "semantic_score": 0.4348278343677521,
+        "fusion_score": 0.31015596985816957,
+        "entity_ids": [
+          "\"SIX MONTHS\"",
+          "\"HOUSE OF COMMONS\"",
+          "\"SURVIVED\"",
+          "\"THREE YEARS\"",
+          "\"THIRTEEN YEARS\"",
+          "\"ROYAL LICENCE\"",
+          "\"YOUNGER SON OF A MARQUESS\"",
+          "\"JUNE 1872\"",
+          "\"RIDING ACCIDENT\"",
+          "\"LORD-LIEUTENANT\""
+        ],
+        "chunk_ids": [
+          "chunk-72aa2c12dd056e73da75617be9b36199"
+        ],
+        "evidence_texts": [
+          "His wife survived him by thirteen years and died in June 1872.",
+          "Lord Patrick Crichton-Stuart Born Patrick Stuart , he was the second son of John Stuart, Lord Mount Stuart, eldest son of John Stuart, 1st Marquess of Bute, son of Prime Minister John Stuart, 3rd Earl of Bute. His mother was Lady Elizabeth Penelope, daughter and heiress of Patrick McDouall-Crichton, 6th Earl of Dumfries, while John Crichton-Stuart, 2nd Marquess of Bute, was his elder brother. His father was killed in a riding accident six months before he was born and his mother died when he was three. In 1817 he was granted the rank of a younger son of a marquess and assumed by Royal licence the surname of Crichton. The following year he was returned to Parliament for Cardiff, succeeding his uncle Lord Evelyn Stuart, a seat he held until 1820 and again from 1826 to 1832. Between 1847 and 1859 he also served as Lord-Lieutenant of Buteshire. Crichton-Stuart married Hannah, daughter of..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.557976,
+          "S": 0.434828,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.310156
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Saw Thanda's marriage to King Phalaung was pivotal for diplomatic relations with neighboring regions.\"",
+        "hyperedge_text": "Saw Thanda's marriage to King Phalaung was pivotal for diplomatic relations with neighboring regions.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5150039196014404,
+        "fusion_score": 0.5030007839202881,
+        "entity_ids": [
+          "\"DIPLOMATIC RELATIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb0bfb95509c534513d293e4b05bcde"
+        ],
+        "evidence_texts": [
+          "Saw Thanda's marriage to King Phalaung was pivotal for diplomatic relations with neighboring regions.",
+          "Saw Thanda Saw Thanda Dewi was queen consort to four consecutive of kings of Arakan. She was the chief queen of King Dikkha (r. 1554–56). She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons, and later to King Phalaung (r. 1572–93)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.515004,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503001
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Saw Thanda Dewi was queen consort to four consecutive kings of Arakan.\"",
+        "hyperedge_text": "Saw Thanda Dewi was queen consort to four consecutive kings of Arakan.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30000000000000004,
+        "entity_ids": [
+          "\"SAW THANDA DEWI\"",
+          "\"QUEENSHIP\"",
+          "\"KINGS OF ARAKAN\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb0bfb95509c534513d293e4b05bcde"
+        ],
+        "evidence_texts": [
+          "Saw Thanda Dewi was queen consort to four consecutive kings of Arakan.",
+          "Saw Thanda Saw Thanda Dewi was queen consort to four consecutive of kings of Arakan. She was the chief queen of King Dikkha (r. 1554–56). She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons, and later to King Phalaung (r. 1572–93)."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.3
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"and later to King Phalaung (r. 1572–93).\"",
+        "hyperedge_text": "and later to King Phalaung (r. 1572–93).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30000000000000004,
+        "entity_ids": [
+          "\"KING PHALAUNG\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb0bfb95509c534513d293e4b05bcde"
+        ],
+        "evidence_texts": [
+          "and later to King Phalaung (r. 1572–93).",
+          "Saw Thanda Saw Thanda Dewi was queen consort to four consecutive of kings of Arakan. She was the chief queen of King Dikkha (r. 1554–56). She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons, and later to King Phalaung (r. 1572–93)."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.3
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Saw Thanda Dewi was married to four consecutive kings, indicating her significant role in the royal lineage of Arakan.\"",
+        "hyperedge_text": "Saw Thanda Dewi was married to four consecutive kings, indicating her significant role in the royal lineage of Arakan.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.4684922695159912,
+        "fusion_score": 0.29369845390319826,
+        "entity_ids": [
+          "\"ROYAL LINEAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb0bfb95509c534513d293e4b05bcde"
+        ],
+        "evidence_texts": [
+          "Saw Thanda Dewi was married to four consecutive kings, indicating her significant role in the royal lineage of Arakan.",
+          "Saw Thanda Saw Thanda Dewi was queen consort to four consecutive of kings of Arakan. She was the chief queen of King Dikkha (r. 1554–56). She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons, and later to King Phalaung (r. 1572–93)."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.468492,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.293698
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the location of King Phalaung's death.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"His wife survived him by thirteen years and died in June 1872.\""
+    ]
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Tombstone Rashomon?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "When was the director of Tombstone Rashomon born?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Waiting For The Clouds?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of Waiting For The Clouds born?",
+    "dependencies": [
+      "q3"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q5",
+    "question": "What is the birth date of the director of Tombstone Rashomon?",
+    "dependencies": [
+      "q2",
+      "q4"
+    ],
+    "metadata": {
+      "operator": "COMPARE_GREATER",
+      "candidates": [
+        {
+          "label": "Tombstone Rashomon",
+          "source_node_id": "q2"
+        },
+        {
+          "label": "Waiting For The Clouds",
+          "source_node_id": "q4"
+        }
+      ]
+    }
+  }
+]

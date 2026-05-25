@@ -1,0 +1,365 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Muhammad?",
+    "analysis": {
+      "entities": [
+        "Muhammad"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Abd al-Muttalib Shaybah ibn Hashim (c. 497 – 578) was the grandfather of Islamic prophet Muhammad.\"",
+        "hyperedge_text": "Abd al-Muttalib Shaybah ibn Hashim (c. 497 – 578) was the grandfather of Islamic prophet Muhammad.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5234407782554626,
+        "fusion_score": 0.5046881556510926,
+        "entity_ids": [
+          "\"ABD AL-MUTTALIB SHAYBAH IBN HASHIM\"",
+          "\"MUHAMMAD\""
+        ],
+        "chunk_ids": [
+          "chunk-ab422e7c44b9b6009ca69a6c5d1b6299"
+        ],
+        "evidence_texts": [
+          "Abd al-Muttalib Shaybah ibn Hashim (c. 497 – 578) was the grandfather of Islamic prophet Muhammad.",
+          "Abd al-Muttalib Abd al- Muttalib Shaybah ibn Hashim( c. 497 – 578) was the grandfather of Islamic prophet Muhammad."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.523441,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504688
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad.\"",
+        "hyperedge_text": "Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.513168215751648,
+        "fusion_score": 0.5026336431503297,
+        "entity_ids": [
+          "\"MUHAMMAD\"",
+          "\"AZ-ZUBAYR IBN ABD AL-MUTTALIB\"",
+          "\"FATIMAH BINT AMR\"",
+          "\"SHAIBA IBN HASHIM\""
+        ],
+        "chunk_ids": [
+          "chunk-047015c39bef516acf237a99c8b2762d"
+        ],
+        "evidence_texts": [
+          "Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad.",
+          "Az-Zubayr ibn Abd al-Muttalib Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad. He was full brother to Abu Talib and to Muhammad's father Abdullah."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.513168,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.502634
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdullah’s father, Muhammad, gave him the name of his father, which is notable in Islamic tradition.\"",
+        "hyperedge_text": "Abdullah’s father, Muhammad, gave him the name of his father, which is notable in Islamic tradition.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5564498901367188,
+        "fusion_score": 0.9112899780273438,
+        "entity_ids": [
+          "\"ISLAMIC TRADITION\""
+        ],
+        "chunk_ids": [
+          "chunk-08b91b7fc52d6cea11c0f27e48917483"
+        ],
+        "evidence_texts": [
+          "Abdullah’s father, Muhammad, gave him the name of his father, which is notable in Islamic tradition.",
+          "Abdullah ibn Muhammad Abdullah ibn Muhammad also known as Tahir ibn Muhammad(\" Tahirclean/ pure\") or Tayib ibn Muhammad was one of the sons of Muhammad and Khadija. Qasim ibn Muhammad was his older brother. Muhammad gave him the name of his father. Abdullah died in childhood in 615 CE."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.55645,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.91129
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.\"",
+        "hyperedge_text": "Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5103843212127686,
+        "fusion_score": 0.9020768642425537,
+        "entity_ids": [
+          "\"ABDULLAH\""
+        ],
+        "chunk_ids": [
+          "chunk-047015c39bef516acf237a99c8b2762d"
+        ],
+        "evidence_texts": [
+          "Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.",
+          "Az-Zubayr ibn Abd al-Muttalib Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad. He was full brother to Abu Talib and to Muhammad's father Abdullah."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.510384,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.902077
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Muslims respect him as a grandson of the Islamic Prophet Muhammad.\"",
+        "hyperedge_text": "Muslims respect him as a grandson of the Islamic Prophet Muhammad.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 1.0,
+        "fusion_score": 0.6000000000000001,
+        "entity_ids": [
+          "\"MUHAMMAD\""
+        ],
+        "chunk_ids": [
+          "chunk-34b815928e95a1dbad948f02589b07de"
+        ],
+        "evidence_texts": [
+          "Muslims respect him as a grandson of the Islamic Prophet Muhammad.",
+          "Hasan ibn Ali Al-Hasan ibn Ali ibn Abi Talib (624–670 CE), sometimes spelled Hasan or Hassan, was the eldest son of Ali and Muhammad's daughter Fatimah, and was the older brother of Husayn. Muslims respect him as a grandson of the Islamic Prophet Muhammad. Among Shia Muslims, Hasan is revered as the second Imam. Hasan was elected for the caliphate after his father's death, but abdicated after six or seven months to Muawiyah I, the founder of the Umayyad dynasty to end the First Fitna. Al-Hasan was known for donating to the poor, his kindness to the poor and bondmen, and for his knowledge, tolerance and bravery. For the rest of his life, Hasan lived in Medina, until he died at the age of 45 and was buried in the Jannat al-Baqi cemetery in Medina. His wife, Ja'da bint al-Ash'at, is commonly accused of having poisoned him."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.6
+        }
+      }
+    ],
+    "answer": "Abdullah",
+    "confidence": 0.9,
+    "reasoning_summary": "Az-Zubayr ibn Abd al-Muttalib is noted as a full brother to Muhammad's father, Abdullah, which directly identifies Abdullah as Muhammad's father.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Muhammad die?",
+    "analysis": {
+      "entities": [
+        "Muhammad",
+        "Abdullah"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Muhammad bin Musafir died before 953.\"",
+        "hyperedge_text": "Muhammad bin Musafir died before 953.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.5225297808647156,
+        "fusion_score": 0.7045059561729432,
+        "entity_ids": [
+          "\"MUHAMMAD BIN MUSAFIR\""
+        ],
+        "chunk_ids": [
+          "chunk-bb755bc3295396a47e65c6e8926ae080"
+        ],
+        "evidence_texts": [
+          "Muhammad bin Musafir died before 953.",
+          "Muhammad ibn Musafir Muhammad bin Musafir (died before 953) was the Sallarid ruler of Tarum in modern northwest Iran (before 916–941) and Iranian Azerbaijan (949). He was the son of Musafir, whose name appears to have been an Arabicized form of his Persian name Asfar/Asvar. Muhammad's original name seems to have been Sallar or Salar (Persian for 'commander'); 'Sallar' would later become a title used by his successors."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.52253,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.704506
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Shah Muhammad (died 5 August 1433) was a son of Qara Yusuf and a governor of Baghdad.\"",
+        "hyperedge_text": "Shah Muhammad (died 5 August 1433) was a son of Qara Yusuf and a governor of Baghdad.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.48111510276794434,
+        "fusion_score": 0.696223020553589,
+        "entity_ids": [
+          "\"BAGHDAD\"",
+          "\"QARA YUSUF\"",
+          "\"SHAH MUHAMMAD\""
+        ],
+        "chunk_ids": [
+          "chunk-d39eda0c18e764007961defebf6b3b46"
+        ],
+        "evidence_texts": [
+          "Shah Muhammad (died 5 August 1433) was a son of Qara Yusuf and a governor of Baghdad.",
+          "Shah Muhammad (Kara Koyunlu) Shah Muhammad (died 5 August 1433) was a son of Qara Yusuf and a governor of Baghdad. He was appointed to this post in 1410. He supported Qara Iskander in his struggle to throne. He was soon deposed by Ispend bin Yusuf and sent into exile to Hamadan. He was murdered on orders of Baba Haji Hamadani - governor of Gaverud. His son, Shah Ali fled to Qara Iskander."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.481115,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.696223
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdullah ibn Muhammad also known as Tahir ibn Muhammad or Tayib ibn Muhammad was one of the sons of Muhammad and Khadija.\"",
+        "hyperedge_text": "Abdullah ibn Muhammad also known as Tahir ibn Muhammad or Tayib ibn Muhammad was one of the sons of Muhammad and Khadija.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"MUHAMMAD\"",
+          "\"ABDULLAH IBN MUHAMMAD\"",
+          "\"TAHIR IBN MUHAMMAD\"",
+          "\"TAYIB IBN MUHAMMAD\"",
+          "\"KHADIJA\"",
+          "\"QASIM IBN MUHAMMAD\""
+        ],
+        "chunk_ids": [
+          "chunk-08b91b7fc52d6cea11c0f27e48917483"
+        ],
+        "evidence_texts": [
+          "Abdullah ibn Muhammad also known as Tahir ibn Muhammad or Tayib ibn Muhammad was one of the sons of Muhammad and Khadija.",
+          "Abdullah ibn Muhammad Abdullah ibn Muhammad also known as Tahir ibn Muhammad(\" Tahirclean/ pure\") or Tayib ibn Muhammad was one of the sons of Muhammad and Khadija. Qasim ibn Muhammad was his older brother. Muhammad gave him the name of his father. Abdullah died in childhood in 615 CE."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was full brother to Abu Talib and to Muhammad's father Abdullah.\"",
+        "hyperedge_text": "He was full brother to Abu Talib and to Muhammad's father Abdullah.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"ABDULLAH\"",
+          "\"ABU TALIB\""
+        ],
+        "chunk_ids": [
+          "chunk-047015c39bef516acf237a99c8b2762d"
+        ],
+        "evidence_texts": [
+          "He was full brother to Abu Talib and to Muhammad's father Abdullah.",
+          "Az-Zubayr ibn Abd al-Muttalib Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad. He was full brother to Abu Talib and to Muhammad's father Abdullah."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.\"",
+        "hyperedge_text": "Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"ABDULLAH\""
+        ],
+        "chunk_ids": [
+          "chunk-047015c39bef516acf237a99c8b2762d"
+        ],
+        "evidence_texts": [
+          "Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.",
+          "Az-Zubayr ibn Abd al-Muttalib Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad. He was full brother to Abu Talib and to Muhammad's father Abdullah."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ],
+    "answer": "Mecca",
+    "confidence": 0.9,
+    "reasoning_summary": "Abdullah, the father of Muhammad, died in Mecca, which is a well-established fact in Islamic tradition.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Muhammad bin Musafir died before 953.\""
+    ]
+  }
+]

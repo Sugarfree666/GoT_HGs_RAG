@@ -1,0 +1,362 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Dancing In The Rain?",
+    "analysis": {
+      "entities": [
+        "Dancing In The Rain"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain\"",
+        "hyperedge_text": "Dancing in the Rain",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5580055713653564,
+        "fusion_score": 0.5116011142730713,
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "evidence_texts": [
+          "Dancing in the Rain",
+          "Dancing in the Rain Dancing in the Rain may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.558006,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511601
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain may refer to:\"",
+        "hyperedge_text": "Dancing in the Rain may refer to:",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5512105226516724,
+        "fusion_score": 0.5102421045303345,
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "evidence_texts": [
+          "Dancing in the Rain may refer to:",
+          "Dancing in the Rain Dancing in the Rain may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.551211,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510242
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.\"",
+        "hyperedge_text": "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.48326539993286133,
+        "fusion_score": 0.49665307998657227,
+        "entity_ids": [
+          "\"ACADEMY AWARD\"",
+          "\"RAIN MAN\""
+        ],
+        "chunk_ids": [
+          "chunk-05b05506ca70485c32c5fa0212b82406"
+        ],
+        "evidence_texts": [
+          "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+          "Barry Levinson Barry Levinson( born April 6, 1942) is an American filmmaker, screenwriter, and actor. Levinson's best- known works are mid-budget comedy- drama and drama films such as\" Diner\"( 1982);\" The Natural\"( 1984);\" Good Morning, Vietnam\"( 1987);\" Bugsy\"( 1991); and\" Wag the Dog\"( 1997). He won the Academy Award for Best Director for\" Rain Man\"( 1988), which also won the Academy Award for Best Picture."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.483265,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496653
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).\"",
+        "hyperedge_text": "He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.41489845514297485,
+        "fusion_score": 0.482979691028595,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"THE RAGGEDY RAWNEY\"",
+          "\"RAINBOW\""
+        ],
+        "chunk_ids": [
+          "chunk-297dfcb15f148329a263fa82fc01a4cf"
+        ],
+        "evidence_texts": [
+          "He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).",
+          "Bob Hoskins Robert William Hoskins( 26 October 1942 – 29 April 2014) was an English actor. His work included lead roles in\" Pennies from Heaven\"( 1978),\" The Long Good Friday\"( 1980),\" Mona Lisa\"( 1986),\" Who Framed Roger Rabbit\"( 1988),\" Mermaids\"( 1990), and\" Super Mario Bros.\"( 1993), and supporting performances in\" Brazil\"( 1985),\" Hook\"( 1991),\" Nixon\"( 1995),\" Enemy at the Gates\"( 2001),\" Mrs. Henderson Presents\"( 2005),\" A Christmas Carol\"( 2009),\" Made in Dagenham\"( 2010), and\" Snow White and the Huntsman\"( 2012). He also directed two feature films:\" The Raggedy Rawney\"( 1988) and\" Rainbow\"( 1996). Hoskins received the best actor award at the Cannes Film Festival, the BAFTA Award for Best Actor in a Leading Role and the Golden Globe Award for Best Actor – Motion Picture Drama for his role in\" Mona Lisa\". He was also nominated for the Academy Award for Best Actor for the same r..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.414898,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.48298
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5064207315444946,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2692349592844645,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.506421,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.269235
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that specifies the director of 'Dancing In The Rain'.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Dancing in the Rain\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the director of Dancing In The Rain die?",
+    "analysis": {
+      "entities": [
+        "Dancing In The Rain"
+      ],
+      "relations": [
+        "where did the director die"
+      ],
+      "relation_query": "where did the director of a work die",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain\"",
+        "hyperedge_text": "Dancing in the Rain",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5153247117996216,
+        "fusion_score": 0.5030649423599244,
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "evidence_texts": [
+          "Dancing in the Rain",
+          "Dancing in the Rain Dancing in the Rain may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.515325,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503065
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain may refer to:\"",
+        "hyperedge_text": "Dancing in the Rain may refer to:",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5035201907157898,
+        "fusion_score": 0.500704038143158,
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "evidence_texts": [
+          "Dancing in the Rain may refer to:",
+          "Dancing in the Rain Dancing in the Rain may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.50352,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.500704
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The music director died before the release of the film.\"",
+        "hyperedge_text": "The music director died before the release of the film.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5521876811981201,
+        "semantic_score": 0.498078852891922,
+        "fusion_score": 0.3204908430576325,
+        "entity_ids": [
+          "\"SAMPATH SELVAM\""
+        ],
+        "chunk_ids": [
+          "chunk-7b18343d2c0ab9d855df8ec895675e28"
+        ],
+        "evidence_texts": [
+          "The music director died before the release of the film.",
+          "Thulasi (1987 film) Thulasi is a 1987 Tamil romantic drama film directed by Ameerjan. The film features Murali and Seetha in lead roles. The film, produced by P. S. V. Hariharan, had musical score by Sampath Selvam and was released on 27 November 1987. The music director died before the release of the film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.552188,
+          "S": 0.498079,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.320491
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.\"",
+        "hyperedge_text": "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5151561498641968,
+        "semantic_score": 0.4551719129085541,
+        "fusion_score": 0.29709684252738955,
+        "entity_ids": [
+          "\"2007\"",
+          "\"STARY CZŁOWIEK I PIES (THE OLD MAN AND THE DOG)\""
+        ],
+        "chunk_ids": [
+          "chunk-d3d9377a1c523159f484fa4ec74bec5e"
+        ],
+        "evidence_texts": [
+          "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+          "Witold Leszczyński Witold Leszczyński( 16 August 1933 – 1 September 2007) was a Polish film director and screenwriter. In 1967 he graduated from the National Film School in Łódź. He directed over thirty films between 1959 and 2007. Most known for\" Żywot MateuszaMatthew's Days\") based on a novel by Norwegian writer Tarjei Vesaas,\" Konopielka\", adapted from the novel of Edward Redliński,\" Siekierezada\" based on a novel by Edward Stachura and many others films. He received numerous awards, including Grand Prix at the Polish Film Festival in 1986. The director died during the shoot of his film\" Stary człowiek i pies The Old Man and the Dog\") in 2007."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.515156,
+          "S": 0.455172,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.297097
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Both the film's male lead (Trevor Goddard) and the original producer died during production.\"",
+        "hyperedge_text": "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4927319884300232,
+        "semantic_score": 0.4536501467227936,
+        "fusion_score": 0.287822824716568,
+        "entity_ids": [
+          "\"PASSING OF ORIGINAL PRODUCER\"",
+          "\"PASSING OF TREVOR GODDARD\""
+        ],
+        "chunk_ids": [
+          "chunk-1127f76ebf275b50e146e11ff176c899"
+        ],
+        "evidence_texts": [
+          "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+          "Flexing with Monty Flexing with Monty is a 2010 comedy- drama film and stars Trevor Goddard and Sally Kirkland. Shooting started in 1994 and was finally completed in 2008 during which both the film's male lead( Trevor Goddard), and the original producer died."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.492732,
+          "S": 0.45365,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.287823
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that specifies the director of 'Dancing In The Rain', making it impossible to determine where they died.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Dancing in the Rain\""
+    ]
+  }
+]

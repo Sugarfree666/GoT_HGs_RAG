@@ -1,0 +1,25 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Where was Pietro Salini born?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was Domenico Ravenna born?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "Do Pietro Salini and Domenico Ravenna have the same birthplace?",
+    "dependencies": [
+      "q1",
+      "q2"
+    ],
+    "metadata": {
+      "operator": "COMPARE_SAME"
+    }
+  }
+]

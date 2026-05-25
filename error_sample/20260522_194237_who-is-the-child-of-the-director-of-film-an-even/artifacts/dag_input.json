@@ -1,0 +1,16 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of the film An Event?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the child of the director of An Event?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  }
+]

@@ -1,0 +1,1535 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of the film An Event?",
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+        "entity_ids": [
+          "\"SHORT STORY\"",
+          "\"AN EVENT\"",
+          "\"VATROSLAV MIMICA\"",
+          "\"1969 YUGOSLAV FEATURE FILM\"",
+          "\"ANTON CHEKHOV\""
+        ],
+        "chunk_ids": [
+          "chunk-a3e67876b5dbc631af62b25278fa125d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+            "An Event An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov."
+          ],
+          "relation_texts": [
+            "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+            "link",
+            "SHORT STORY",
+            "AN EVENT",
+            "VATROSLAV MIMICA",
+            "1969 YUGOSLAV FEATURE FILM",
+            "ANTON CHEKHOV"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker.\"",
+        "branch": "relation",
+        "raw_score": 0.5412876605987549,
+        "hyperedge_text": "The film was directed by a notable filmmaker.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-878081a5191725d702602749081a77c4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker.",
+            "California Winter California Winter is an American drama film from 2012."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c8914e7c16c6931f8328589f436a636c",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.5262852311134338,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Robert G. Vignola is the director of the film.\"",
+        "branch": "relation",
+        "raw_score": 0.5214390754699707,
+        "hyperedge_text": "Robert G. Vignola is the director of the film.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-5a83efe0d439c48988a77409ef3ba477"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Robert G. Vignola is the director of the film.",
+            "The World and His Wife The World and His Wife is a lost American 1920 silent drama film produced by Cosmopolitan Productions and distributed through Paramount Pictures. Directed by Robert G. Vignola, the film was based on the 1908 Broadway play of the same name by Charles Frederic Nirdlinger, which was adapted from the Spanish language play\" El Gran Galeoto\" by Jose Echegaray Y Eizaguirre. The film stars Alma Rubens, Montagu Love, and Pedro de Cordoba and Broadway actress Margaret Dale in her film debut. The story was later filmed at MGM as\" Lovers\"( 1927)."
+          ],
+          "relation_texts": [
+            "Robert G. Vignola is the director of the film."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6e6cf14061c435a4695e70acad82dff7",
+            "hyperedge_name": "<hyperedge>\"Robert G. Vignola is the director of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision is reflected in the cinematography of the film.\"",
+        "branch": "relation",
+        "raw_score": 0.5214198231697083,
+        "hyperedge_text": "The director's vision is reflected in the cinematography of the film.",
+        "entity_ids": [
+          "\"CINEMATOGRAPHY\""
+        ],
+        "chunk_ids": [
+          "chunk-875d0ddc97498458b33924bd007cede5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director's vision is reflected in the cinematography of the film.",
+            "Tahaan Tahaan – A Boy With a Grenade is an Indian Hindi- language drama film by Santosh Sivan. The film is based on the life of a young boy and his pet donkey. It is a fable- like journey of the eponymous eight- year- old boy, whose life revolves around the pursuit to find real purpose in his little world. The film stars Purav Bhandare as the young boy. Anupam Kher, Sarika, Rahul Bose, Rahul Khanna and Victor Banerjee form the rest of the cast. It was filmed on location in Jammu and Kashmir."
+          ],
+          "relation_texts": [
+            "The director's vision is reflected in the cinematography of the film.",
+            "link",
+            "CINEMATOGRAPHY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a6e2e2c5bab166ecb5cc3d5ab325c087",
+            "hyperedge_name": "<hyperedge>\"The director's vision is reflected in the cinematography of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\"",
+        "branch": "relation",
+        "raw_score": 0.5194759368896484,
+        "hyperedge_text": "The director's vision shaped the film's narrative style and storytelling.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"NARRATIVE STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-bc89e6fb4b1d4bc13f12b778e185493c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director's vision shaped the film's narrative style and storytelling.",
+            "The Law and Mr. Lee The Law and Mr Lee is a 2003 American TV film."
+          ],
+          "relation_texts": [
+            "The director's vision shaped the film's narrative style and storytelling.",
+            "link",
+            "DIRECTOR",
+            "NARRATIVE STYLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1f7ac9a08a885fa2e8df00bc09ea825c",
+            "hyperedge_name": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced by a notable director known for his unique style.\"",
+        "branch": "relation",
+        "raw_score": 0.5123361349105835,
+        "hyperedge_text": "The film was produced by a notable director known for his unique style.",
+        "entity_ids": [
+          "\"NOTABLE DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-c941044d9eea8f24da132557f170b690"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was produced by a notable director known for his unique style.",
+            "Two Sinners Two Sinners is a 1935 film directed by Arthur Lubin."
+          ],
+          "relation_texts": [
+            "The film was produced by a notable director known for his unique style.",
+            "link",
+            "NOTABLE DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e0d9ea7b735ff5e23618a784dd155c83",
+            "hyperedge_name": "<hyperedge>\"The film was produced by a notable director known for his unique style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The involvement of directors Slavko Vorkapich and Harlan Thompson contributed to the film's unique direction.\"",
+        "branch": "relation",
+        "raw_score": 0.5058163404464722,
+        "hyperedge_text": "The involvement of directors Slavko Vorkapich and Harlan Thompson contributed to the film's unique direction.",
+        "entity_ids": [
+          "\"UNIQUE DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-4a77f792e139979bfee8a0a4524ebaf4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The involvement of directors Slavko Vorkapich and Harlan Thompson contributed to the film's unique direction.",
+            "The Past of Mary Holmes The Past of Mary Holmes is a 1933 American pre-Code drama film, directed by Slavko Vorkapich and Harlan Thompson, and released by RKO. The film is a remake of the silent film\" The Goose Woman\"( 1925), which is based on a short story by Rex Beach, partly based on the Hall- Mills murder case."
+          ],
+          "relation_texts": [
+            "The involvement of directors Slavko Vorkapich and Harlan Thompson contributed to the film's unique direction.",
+            "link",
+            "UNIQUE DIRECTION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f884ae5cc601abeb6e00cb94e32729c0",
+            "hyperedge_name": "<hyperedge>\"The involvement of directors Slavko Vorkapich and Harlan Thompson contributed to the film's unique direction.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is a director, screenwriter and producer known for various film projects.\"",
+        "branch": "relation",
+        "raw_score": 0.5025501251220703,
+        "hyperedge_text": "He is a director, screenwriter and producer known for various film projects.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-b4ed25c2fae2f870d9ec38eac14a3a3b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is a director, screenwriter and producer known for various film projects.",
+            "Daniel Lind Lagerlöf Daniel Lind Lagerlöf (6 February 1969 – missing since 6 October 2011) is a Swedish director, screenwriter and producer who is presumed dead."
+          ],
+          "relation_texts": [
+            "He is a director, screenwriter and producer known for various film projects.",
+            "link",
+            "DIRECTOR",
+            "SCREENWRITER",
+            "PRODUCER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d75ab289592ffe69ca7fee2248128966",
+            "hyperedge_name": "<hyperedge>\"He is a director, screenwriter and producer known for various film projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Tom Forman.\"",
+        "branch": "relation",
+        "raw_score": 0.49891719222068787,
+        "hyperedge_text": "The film is directed by Tom Forman.",
+        "entity_ids": [
+          "\"TOM FORMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-d873a9df2c83145a29b9828e32ce3e24"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed by Tom Forman.",
+            "The People vs. Nancy Preston The People vs. Nancy Preston is a 1925 American silent drama film directed by Tom Forman and starring Marguerite De La Motte, John Bowers and Frankie Darro."
+          ],
+          "relation_texts": [
+            "The film is directed by Tom Forman.",
+            "link",
+            "TOM FORMAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0397d9fd65744a8e3e1cc7b69e497929",
+            "hyperedge_name": "<hyperedge>\"The film is directed by Tom Forman.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker known for his work in the genre.\"",
+        "branch": "relation",
+        "raw_score": 0.49830126762390137,
+        "hyperedge_text": "The film was directed by a notable filmmaker known for his work in the genre.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-6e25006195b0898fe74a70b73996ec78"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker known for his work in the genre.",
+            "The Guns and the Fury The Guns and the Fury is a 1981 film starring Peter Graves and Cameron Mitchell."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker known for his work in the genre.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-48c9abe99558440a7384f0ae0ee35cd7",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker known for his work in the genre.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.\"",
+        "branch": "semantic",
+        "raw_score": 0.5281171798706055,
+        "hyperedge_text": "The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.",
+        "entity_ids": [
+          "\"YUGOSLAV FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-a3e67876b5dbc631af62b25278fa125d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.",
+            "An Event An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov."
+          ],
+          "relation_texts": [
+            "The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.",
+            "link",
+            "YUGOSLAV FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-63b7688f63729ce2234f222c53778e2a",
+            "hyperedge_name": "<hyperedge>\"The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.\"",
+        "branch": "semantic",
+        "raw_score": 0.484377920627594,
+        "hyperedge_text": "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+        "entity_ids": [
+          "\"SHORT STORY\"",
+          "\"AN EVENT\"",
+          "\"VATROSLAV MIMICA\"",
+          "\"1969 YUGOSLAV FEATURE FILM\"",
+          "\"ANTON CHEKHOV\""
+        ],
+        "chunk_ids": [
+          "chunk-a3e67876b5dbc631af62b25278fa125d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+            "An Event An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov."
+          ],
+          "relation_texts": [
+            "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+            "link",
+            "SHORT STORY",
+            "AN EVENT",
+            "VATROSLAV MIMICA",
+            "1969 YUGOSLAV FEATURE FILM",
+            "ANTON CHEKHOV"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-17f5e26830ab7e1dc504a6e544f3b687",
+            "hyperedge_name": "<hyperedge>\"An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Obi Emelonye.\"",
+        "branch": "semantic",
+        "raw_score": 0.45536330342292786,
+        "hyperedge_text": "The film was directed by Obi Emelonye.",
+        "entity_ids": [
+          "\"OBI EMELONYE\""
+        ],
+        "chunk_ids": [
+          "chunk-83b7f74e7c814a9cd9a63c1b5b97333c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Obi Emelonye.",
+            "Oxford Gardens Oxford Gardens is a 2015 film produced and directed by Obi Emelonye."
+          ],
+          "relation_texts": [
+            "The film was directed by Obi Emelonye.",
+            "link",
+            "OBI EMELONYE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9692f91b13c223e5f6440522f1d848f0",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Obi Emelonye.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Richard Eichberg.\"",
+        "branch": "semantic",
+        "raw_score": 0.44919902086257935,
+        "hyperedge_text": "The film was directed by Richard Eichberg.",
+        "entity_ids": [
+          "\"RICHARD EICHBERG\""
+        ],
+        "chunk_ids": [
+          "chunk-a9446529647dcb65724e259fd19e6c0f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Richard Eichberg.",
+            "The Prince and the Dancer The Prince and the Dancer( German: Der Prinz und die Tänzerin) is a 1926 German silent film directed by Richard Eichberg and starring Willy Fritsch, Lucy Doraine and Hans Albers."
+          ],
+          "relation_texts": [
+            "The film was directed by Richard Eichberg.",
+            "link",
+            "RICHARD EICHBERG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2402c6d5b2662a1275ce6ff357cf16ce",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Richard Eichberg.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by John Krish, the film is produced by Jack Carruthers, with Anne Balfour-Fraser serving as the executive producer.\"",
+        "branch": "semantic",
+        "raw_score": 0.43983590602874756,
+        "hyperedge_text": "Directed by John Krish, the film is produced by Jack Carruthers, with Anne Balfour-Fraser serving as the executive producer.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-648777381500675b2da02eb94df881c3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Directed by John Krish, the film is produced by Jack Carruthers, with Anne Balfour-Fraser serving as the executive producer.",
+            "I Think They Call Him John I Think They Call Him John is a British short film, written and directed by John Krish and produced by Jack Carruthers, with Anne Balfour-Fraser serving as the film's executive producer, for Samaritan Films. Made in 1964, it is a narrated observation of an elderly, lonely man during one day of his life. It was released at the Polish Film Festival in Warsaw."
+          ],
+          "relation_texts": [
+            "Directed by John Krish, the film is produced by Jack Carruthers, with Anne Balfour-Fraser serving as the executive producer."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5ed8b8f7576861c8b508673e9f0fb08c",
+            "hyperedge_name": "<hyperedge>\"Directed by John Krish, the film is produced by Jack Carruthers, with Anne Balfour-Fraser serving as the executive producer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Giorgio Venturini.\"",
+        "branch": "semantic",
+        "raw_score": 0.43678897619247437,
+        "hyperedge_text": "The film was directed by Giorgio Venturini.",
+        "entity_ids": [
+          "\"GIORGIO VENTURINI\""
+        ],
+        "chunk_ids": [
+          "chunk-c6c32a72b261b90e87837e6eea052c64"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Giorgio Venturini.",
+            "The Avenger (1962 film) The Avenger is a 1962 film directed by Giorgio Venturini."
+          ],
+          "relation_texts": [
+            "The film was directed by Giorgio Venturini.",
+            "link",
+            "GIORGIO VENTURINI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b5ad9d1eacd619105f455d1537a65413",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Giorgio Venturini.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed By Siddharth Anand Kumar, produced by Francisco Leria and written by Sudip Sharma and Rahul Singh.\"",
+        "branch": "semantic",
+        "raw_score": 0.436090886592865,
+        "hyperedge_text": "The film was directed By Siddharth Anand Kumar, produced by Francisco Leria and written by Sudip Sharma and Rahul Singh.",
+        "entity_ids": [
+          "\"SIDDHARTH ANAND KUMAR\"",
+          "\"FRANCISCO LERIA\"",
+          "\"SUDIP SHARMA\"",
+          "\"RAHUL SINGH\""
+        ],
+        "chunk_ids": [
+          "chunk-221ef7cb52e3571c65231f4b607bb0bc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed By Siddharth Anand Kumar, produced by Francisco Leria and written by Sudip Sharma and Rahul Singh.",
+            "Semshook Semshook is a 2010 Indian film about one man's search for truth on a journey across the Himalayas. The film was directed By Siddharth Anand Kumar, produced by Francisco Leria and written by Sudip Sharma and Rahul Singh. The film ran 116 minutes. It is available in Hindi and Tibetan( with English subtitles)."
+          ],
+          "relation_texts": [
+            "The film was directed By Siddharth Anand Kumar, produced by Francisco Leria and written by Sudip Sharma and Rahul Singh.",
+            "link",
+            "SIDDHARTH ANAND KUMAR",
+            "FRANCISCO LERIA",
+            "SUDIP SHARMA",
+            "RAHUL SINGH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e6a51e4f95c60c252d8be0aabab2a6cc",
+            "hyperedge_name": "<hyperedge>\"The film was directed By Siddharth Anand Kumar, produced by Francisco Leria and written by Sudip Sharma and Rahul Singh.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker.\"",
+        "branch": "semantic",
+        "raw_score": 0.43562519550323486,
+        "hyperedge_text": "The film was directed by a notable filmmaker.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-878081a5191725d702602749081a77c4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker.",
+            "California Winter California Winter is an American drama film from 2012."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c8914e7c16c6931f8328589f436a636c",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Ameerjan.\"",
+        "branch": "semantic",
+        "raw_score": 0.4346820116043091,
+        "hyperedge_text": "The film is directed by Ameerjan.",
+        "entity_ids": [
+          "\"AMEERJAN\""
+        ],
+        "chunk_ids": [
+          "chunk-7b18343d2c0ab9d855df8ec895675e28"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed by Ameerjan.",
+            "Thulasi (1987 film) Thulasi is a 1987 Tamil romantic drama film directed by Ameerjan. The film features Murali and Seetha in lead roles. The film, produced by P. S. V. Hariharan, had musical score by Sampath Selvam and was released on 27 November 1987. The music director died before the release of the film."
+          ],
+          "relation_texts": [
+            "The film is directed by Ameerjan.",
+            "link",
+            "AMEERJAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62583d40b7b90049e82808be71e27dbf",
+            "hyperedge_name": "<hyperedge>\"The film is directed by Ameerjan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Ertem Eğilmez.\"",
+        "branch": "semantic",
+        "raw_score": 0.43437087535858154,
+        "hyperedge_text": "The film was directed by Ertem Eğilmez.",
+        "entity_ids": [
+          "\"ERTEM EĞILMEZ\""
+        ],
+        "chunk_ids": [
+          "chunk-7aa28e41f98f2aeff0ed56d600a70d4a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Ertem Eğilmez.",
+            "My Dear Brother My Dear Brother is a 1973 Turkish drama film directed by Ertem Eğilmez."
+          ],
+          "relation_texts": [
+            "The film was directed by Ertem Eğilmez.",
+            "link",
+            "ERTEM EĞILMEZ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0cd4cdf77c75d2e80ca490747bec8e7c",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Ertem Eğilmez.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.\"",
+        "hyperedge_text": "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.484377920627594,
+        "fusion_score": 0.6968755841255189,
+        "entity_ids": [
+          "\"SHORT STORY\"",
+          "\"AN EVENT\"",
+          "\"VATROSLAV MIMICA\"",
+          "\"1969 YUGOSLAV FEATURE FILM\"",
+          "\"ANTON CHEKHOV\""
+        ],
+        "chunk_ids": [
+          "chunk-a3e67876b5dbc631af62b25278fa125d"
+        ],
+        "evidence_texts": [
+          "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+          "An Event An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.484378,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.696876
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker.\"",
+        "hyperedge_text": "The film was directed by a notable filmmaker.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5412876605987549,
+        "semantic_score": 0.43562519550323486,
+        "fusion_score": 0.3036401033401489,
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-878081a5191725d702602749081a77c4"
+        ],
+        "evidence_texts": [
+          "The film was directed by a notable filmmaker.",
+          "California Winter California Winter is an American drama film from 2012."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.541288,
+          "S": 0.435625,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.30364
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.\"",
+        "hyperedge_text": "The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5281171798706055,
+        "fusion_score": 0.7056234359741211,
+        "entity_ids": [
+          "\"YUGOSLAV FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-a3e67876b5dbc631af62b25278fa125d"
+        ],
+        "evidence_texts": [
+          "The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.",
+          "An Event An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.528117,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.705623
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5262852311134338,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.34384742577870686,
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "evidence_texts": [
+          "As a film director, he has directed several works in addition to acting.",
+          "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.526285,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.343847
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Robert G. Vignola is the director of the film.\"",
+        "hyperedge_text": "Robert G. Vignola is the director of the film.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5214390754699707,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.3419089635213216,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-5a83efe0d439c48988a77409ef3ba477"
+        ],
+        "evidence_texts": [
+          "Robert G. Vignola is the director of the film.",
+          "The World and His Wife The World and His Wife is a lost American 1920 silent drama film produced by Cosmopolitan Productions and distributed through Paramount Pictures. Directed by Robert G. Vignola, the film was based on the 1908 Broadway play of the same name by Charles Frederic Nirdlinger, which was adapted from the Spanish language play\" El Gran Galeoto\" by Jose Echegaray Y Eizaguirre. The film stars Alma Rubens, Montagu Love, and Pedro de Cordoba and Broadway actress Margaret Dale in her film debut. The story was later filmed at MGM as\" Lovers\"( 1927)."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.521439,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.341909
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the child of the director of An Event?",
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Vatroslav Mimica (born 25 June 1923) is a Croatian film director and screenwriter.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Vatroslav Mimica (born 25 June 1923) is a Croatian film director and screenwriter.",
+        "entity_ids": [
+          "\"VATROSLAV MIMICA\"",
+          "\"CROATIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-5170f21e9bd2c3167c1d6b041311be22"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vatroslav Mimica (born 25 June 1923) is a Croatian film director and screenwriter.",
+            "Vatroslav Mimica Vatroslav Mimica (born 25 June 1923) is a Croatian film director and screenwriter. Born in Omiš, Mimica had enrolled at the University of Zagreb School of Medicine before the outbreak of World War II. In 1942 he joined Young Communist League of Yugoslavia (SKOJ) and in 1943 he went on to join the Yugoslav Partisans, becoming a member of their medical units. After the war Mimica wrote literary and film reviews, and his career in filmmaking began in 1950 when he became the director of the Jadran Film production studio. He had his directorial and screenwriting debut in the 1952 Yugoslav film \" In the Storm\" (Croatian: \"U oluji\") which starred Veljko Bulajić, Mia Oremović and Antun Nalis. In the 1950s Mimica worked as a director and writer on a number of critically acclaimed animated films and became a prominent member of the Zagreb School of Animated Films (his 1958 anim..."
+          ],
+          "relation_texts": [
+            "Vatroslav Mimica (born 25 June 1923) is a Croatian film director and screenwriter.",
+            "link",
+            "VATROSLAV MIMICA",
+            "CROATIAN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+        "entity_ids": [
+          "\"SHORT STORY\"",
+          "\"AN EVENT\"",
+          "\"VATROSLAV MIMICA\"",
+          "\"1969 YUGOSLAV FEATURE FILM\"",
+          "\"ANTON CHEKHOV\""
+        ],
+        "chunk_ids": [
+          "chunk-a3e67876b5dbc631af62b25278fa125d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+            "An Event An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov."
+          ],
+          "relation_texts": [
+            "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+            "link",
+            "SHORT STORY",
+            "AN EVENT",
+            "VATROSLAV MIMICA",
+            "1969 YUGOSLAV FEATURE FILM",
+            "ANTON CHEKHOV"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4721599221229553,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.46865567564964294,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\"",
+        "branch": "relation",
+        "raw_score": 0.4449717700481415,
+        "hyperedge_text": "The director's vision shaped the film's narrative style and storytelling.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"NARRATIVE STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-bc89e6fb4b1d4bc13f12b778e185493c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director's vision shaped the film's narrative style and storytelling.",
+            "The Law and Mr. Lee The Law and Mr Lee is a 2003 American TV film."
+          ],
+          "relation_texts": [
+            "The director's vision shaped the film's narrative style and storytelling.",
+            "link",
+            "DIRECTOR",
+            "NARRATIVE STYLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1f7ac9a08a885fa2e8df00bc09ea825c",
+            "hyperedge_name": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.444881409406662,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He directed both his own films as well as films directed by others.\"",
+        "branch": "relation",
+        "raw_score": 0.4444420039653778,
+        "hyperedge_text": "He directed both his own films as well as films directed by others.",
+        "entity_ids": [
+          "\"HIS OWN FILMS\"",
+          "\"FILMS DIRECTED BY OTHERS\""
+        ],
+        "chunk_ids": [
+          "chunk-1622512e42b9fe00ff1ff6a93ac35761"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "Maurice Elvey Maurice Elvey( 11 November 1887 – 28 August 1967) was the most prolific film director in British history. He directed nearly 200 films between 1913 and 1957. During the silent film era he directed as many as twenty films per year. He also produced more than fifty films- his own as well as films directed by others."
+          ],
+          "relation_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "link",
+            "HIS OWN FILMS",
+            "FILMS DIRECTED BY OTHERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-427500c2d82019f242a873db4d43cbc1",
+            "hyperedge_name": "<hyperedge>\"He directed both his own films as well as films directed by others.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.44334152340888977,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as an assistant director with Director K.S.G.\"",
+        "branch": "relation",
+        "raw_score": 0.44323861598968506,
+        "hyperedge_text": "He worked as an assistant director with Director K.S.G.",
+        "entity_ids": [
+          "\"K.S.G.\""
+        ],
+        "chunk_ids": [
+          "chunk-bd044fbb6a01893d5ab3e1a7813efbcf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as an assistant director with Director K.S.G.",
+            "Kasthuri Raja Kasthuri Raja is an Indian film director based in Chennai, India, and his native place is Mallingapuram near Pannaipuram, Theni District, Tamil Nadu. He is the father of actor Dhanush and director Selvaraghavan. He worked as an assistant director with Director K.S.G. Most of the films he directed were either village based or infatuation of youngsters. He also worked with Director Visu on more than 16 films. He began his life, running away from home to Chennai and working in a mill."
+          ],
+          "relation_texts": [
+            "He worked as an assistant director with Director K.S.G.",
+            "link",
+            "K.S.G."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d733fec31833ea20ef59a8d646787b3e",
+            "hyperedge_name": "<hyperedge>\"He worked as an assistant director with Director K.S.G.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His influence extends beyond directing, impacting the writing and production aspects in film.\"",
+        "branch": "relation",
+        "raw_score": 0.4397493898868561,
+        "hyperedge_text": "His influence extends beyond directing, impacting the writing and production aspects in film.",
+        "entity_ids": [
+          "\"INFLUENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-1efd5d924faa7fce7a80b9f9155a4895"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His influence extends beyond directing, impacting the writing and production aspects in film.",
+            "Gordon Chan Gordon Chan Kar-Seung , born in 1960, is a Hong Kong film director, writer and producer. His most notable works include \"Beast CopsFist of LegendPainted Skin2000 AD\" and . In 2011 he announced and launched the productions for \"MuralFour Detectives/Four Marshals\", and \"Painted Skin 2\". Though for Painted Skin 2 he dropped out as the director and the director's seat was given to Wuershan. His 1996 film \"First Option\" was entered into the 20th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "His influence extends beyond directing, impacting the writing and production aspects in film.",
+            "link",
+            "INFLUENCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-77db79c6507fc94428910ff7fe6aeca4",
+            "hyperedge_name": "<hyperedge>\"His influence extends beyond directing, impacting the writing and production aspects in film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.43859678506851196,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision is reflected in the cinematography of the film.\"",
+        "branch": "relation",
+        "raw_score": 0.4382731318473816,
+        "hyperedge_text": "The director's vision is reflected in the cinematography of the film.",
+        "entity_ids": [
+          "\"CINEMATOGRAPHY\""
+        ],
+        "chunk_ids": [
+          "chunk-875d0ddc97498458b33924bd007cede5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director's vision is reflected in the cinematography of the film.",
+            "Tahaan Tahaan – A Boy With a Grenade is an Indian Hindi- language drama film by Santosh Sivan. The film is based on the life of a young boy and his pet donkey. It is a fable- like journey of the eponymous eight- year- old boy, whose life revolves around the pursuit to find real purpose in his little world. The film stars Purav Bhandare as the young boy. Anupam Kher, Sarika, Rahul Bose, Rahul Khanna and Victor Banerjee form the rest of the cast. It was filmed on location in Jammu and Kashmir."
+          ],
+          "relation_texts": [
+            "The director's vision is reflected in the cinematography of the film.",
+            "link",
+            "CINEMATOGRAPHY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a6e2e2c5bab166ecb5cc3d5ab325c087",
+            "hyperedge_name": "<hyperedge>\"The director's vision is reflected in the cinematography of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.\"",
+        "branch": "semantic",
+        "raw_score": 0.4366043508052826,
+        "hyperedge_text": "The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.",
+        "entity_ids": [
+          "\"YUGOSLAV FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-a3e67876b5dbc631af62b25278fa125d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.",
+            "An Event An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov."
+          ],
+          "relation_texts": [
+            "The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.",
+            "link",
+            "YUGOSLAV FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-63b7688f63729ce2234f222c53778e2a",
+            "hyperedge_name": "<hyperedge>\"The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the son of veteran writer Inder Raj Anand, brother of producer Bittu Anand and uncle of director Siddharth Anand.",
+        "branch": "semantic",
+        "raw_score": 0.42426052689552307,
+        "hyperedge_text": "\"He is the son of veteran writer Inder Raj Anand, brother of producer Bittu Anand and uncle of director Siddharth Anand.",
+        "entity_ids": [
+          "\"INDER RAJ ANAND\"",
+          "\"BITTU ANAND\"",
+          "\"SIDDHARTH ANAND\""
+        ],
+        "chunk_ids": [
+          "chunk-e2424634e0b9259f671662cb95767867"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "\"He is the son of veteran writer Inder Raj Anand, brother of producer Bittu Anand and uncle of director Siddharth Anand.",
+            "Tinnu Anand Tinnu Anand( born 12 October, 1945), sometimes referred to as Tinnu Anand or Virender Raj Anand, is an Indian actor, writer and director from Bollywood, who is most known as the director of Amitabh Bachchan's movies including,\" Kaalia\"( 1981),\" Shahenshah\"( 1988),\" Main Azaad Hoon\"( 1989) and\" Major Saab\"( 1998). He is the son of veteran writer Inder Raj Anand, brother of producer Bittu Anand and uncle of director Siddharth Anand. Anand portrayed an important role in\" Ghajini\" in 2008. He did his schooling from Mayo College in India. In an interview, Tinu Anand spoke about his early days and also praised Amitabh Bachchan for his generosity. He also worked as an assistant director to Satyajit Ray for five years, in Bengali films,\" Goopy Gyne Bagha Byne\"( 1969),\" Aranyer Din Ratri\"( 1970),\" Pratidwandi\"( 1970),\" Seemabaddha\"( 1971) to\" Ashani Sanket\"( 1973)."
+          ],
+          "relation_texts": [
+            "\"He is the son of veteran writer Inder Raj Anand, brother of producer Bittu Anand and uncle of director Siddharth Anand.",
+            "link",
+            "INDER RAJ ANAND",
+            "BITTU ANAND",
+            "SIDDHARTH ANAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-01edda5c9966565b15650a3c615ea91b",
+            "hyperedge_name": "<hyperedge>\"He is the son of veteran writer Inder Raj Anand, brother of producer Bittu Anand and uncle of director Siddharth Anand."
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.\"",
+        "branch": "semantic",
+        "raw_score": 0.4153725504875183,
+        "hyperedge_text": "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+        "entity_ids": [
+          "\"SHORT STORY\"",
+          "\"AN EVENT\"",
+          "\"VATROSLAV MIMICA\"",
+          "\"1969 YUGOSLAV FEATURE FILM\"",
+          "\"ANTON CHEKHOV\""
+        ],
+        "chunk_ids": [
+          "chunk-a3e67876b5dbc631af62b25278fa125d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+            "An Event An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov."
+          ],
+          "relation_texts": [
+            "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+            "link",
+            "SHORT STORY",
+            "AN EVENT",
+            "VATROSLAV MIMICA",
+            "1969 YUGOSLAV FEATURE FILM",
+            "ANTON CHEKHOV"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-17f5e26830ab7e1dc504a6e544f3b687",
+            "hyperedge_name": "<hyperedge>\"An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film tells the story centered around the relationship between the boss and his daughter.\"",
+        "branch": "semantic",
+        "raw_score": 0.4051496982574463,
+        "hyperedge_text": "The film tells the story centered around the relationship between the boss and his daughter.",
+        "entity_ids": [
+          "\"RELATIONSHIP\""
+        ],
+        "chunk_ids": [
+          "chunk-ce487869a33ae12dc3b422e5569e5bc6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film tells the story centered around the relationship between the boss and his daughter.",
+            "The Boss's Daughter The Boss's Daughter( original title: La Fille du patron) is a 2015 French romance film directed and co-written by Olivier Loustau and starring Loustau and Christa Theret."
+          ],
+          "relation_texts": [
+            "The film tells the story centered around the relationship between the boss and his daughter.",
+            "link",
+            "RELATIONSHIP"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b960762c458ed64896e0651156b0e313",
+            "hyperedge_name": "<hyperedge>\"The film tells the story centered around the relationship between the boss and his daughter.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's director, Yonfan, is known for exploring complex relationships in his works.\"",
+        "branch": "semantic",
+        "raw_score": 0.40419715642929077,
+        "hyperedge_text": "The film's director, Yonfan, is known for exploring complex relationships in his works.",
+        "entity_ids": [
+          "\"COMPLEX RELATIONSHIPS\"",
+          "\"INSPIRATION\""
+        ],
+        "chunk_ids": [
+          "chunk-8be531ca1ff24f13ae390bcd6a513bd0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's director, Yonfan, is known for exploring complex relationships in his works.",
+            "Colour Blossoms Colour Blossoms( 桃色,\" Toh sik\") is a 2004 Hong Kong art film written and directed by Yonfan, and the third in an informal trilogy of films inspired by Tang Xianzu's\" The Peony Pavilion\". The original Chinese title of\" Colour Blossoms\" literally translates as\" Peach Colour\", a euphemism for sexual desire, one of the central themes in the film."
+          ],
+          "relation_texts": [
+            "The film's director, Yonfan, is known for exploring complex relationships in his works.",
+            "link",
+            "COMPLEX RELATIONSHIPS",
+            "INSPIRATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1be7ff3f0adba8ebd5314f085722f9f8",
+            "hyperedge_name": "<hyperedge>\"The film's director, Yonfan, is known for exploring complex relationships in his works.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film features themes of tradition and familial obligations as it revolves around a performance directed by Mr Ma.\"",
+        "branch": "semantic",
+        "raw_score": 0.4040009677410126,
+        "hyperedge_text": "The film features themes of tradition and familial obligations as it revolves around a performance directed by Mr Ma.",
+        "entity_ids": [
+          "\"TRADITION\"",
+          "\"FAMILIAL OBLIGATIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-238e96bf21c6d271fe4d7e58a642f078"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film features themes of tradition and familial obligations as it revolves around a performance directed by Mr Ma.",
+            "The Spooky Bunch The Spooky Bunch( 小姐撞到鬼 a.k.a. 撞到正) is a 1980 Hong Kong movie directed by Ann Hui. The film is about a Cantonese opera troupe arrives on Cheung Chau Island to perform a show under the request by a wealthy man, Mr Ma who insists that and Ah Chi( Josephine Siao), their second rate supporting actress, takes the leading role in the performance. Mr Ma also invites his nephew Dick Ma( Kenny Bee) to the island to watch the show. He hopes by arranging this his nephew will marry Ah Chi so that his family curse being done by Ah Chi's her grandfather placed on this grandfather can be released."
+          ],
+          "relation_texts": [
+            "The film features themes of tradition and familial obligations as it revolves around a performance directed by Mr Ma.",
+            "link",
+            "TRADITION",
+            "FAMILIAL OBLIGATIONS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-39333370661b1b4bb71ca59e0e15d42b",
+            "hyperedge_name": "<hyperedge>\"The film features themes of tradition and familial obligations as it revolves around a performance directed by Mr Ma.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 2016, he directed 'Nessie & Me', marking the first time that he directed a children's film.\"",
+        "branch": "semantic",
+        "raw_score": 0.40375635027885437,
+        "hyperedge_text": "In 2016, he directed 'Nessie & Me', marking the first time that he directed a children's film.",
+        "entity_ids": [
+          "\"NESSIE & ME\""
+        ],
+        "chunk_ids": [
+          "chunk-7344a19bddd9a92d9abf9ea10b53f366"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In 2016, he directed 'Nessie & Me', marking the first time that he directed a children's film.",
+            "Jim Wynorski Jim Wynorski (born August 14, 1950 in Glen Cove, Long Island, New York) is an American screenwriter, director, and producer. Wynorski has been making B-movies and exploitation movies since the early 1980s, and has directed over 150 feature films. His earliest films were released to movie theaters, but his later works have predominantly been released to cable or the straight-to-video market. He often works under pseudonyms such as \"Jay Andrews,Arch Stanton,H.R. Blueberry,Tom Popatopolis,\" and \"Noble Henry.\" His movies often spoof horror films: \"Cleavagefield\", for example, parodies \"CloverfieldThe Bare Wench Project\" parodies \"The Blair Witch Project\", and \"Para-Knockers Activity\" parodies \"Paranormal Activity\". A character in the film \"The Final Destination\" is named after him. In 2009, the documentary \"Popatopolis\", directed by Clay Westervelt and named for one of Wynors..."
+          ],
+          "relation_texts": [
+            "In 2016, he directed 'Nessie & Me', marking the first time that he directed a children's film.",
+            "link",
+            "NESSIE & ME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fd522ca8539782a670c1730623ce69ff",
+            "hyperedge_name": "<hyperedge>\"In 2016, he directed 'Nessie & Me', marking the first time that he directed a children's film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the son of the producer Alain Poiré.\"",
+        "branch": "semantic",
+        "raw_score": 0.4031086564064026,
+        "hyperedge_text": "He is the son of the producer Alain Poiré.",
+        "entity_ids": [
+          "\"PRODUCER\"",
+          "\"ALAIN POIRÉ\""
+        ],
+        "chunk_ids": [
+          "chunk-764f7758d85c8d66368f02b13bf31956"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the son of the producer Alain Poiré.",
+            "Jean-Marie Poiré Jean-Marie Poiré ; born 10 July 1945) is a French film director, and screenwriter. He is the son of the producer Alain Poiré."
+          ],
+          "relation_texts": [
+            "He is the son of the producer Alain Poiré.",
+            "link",
+            "PRODUCER",
+            "ALAIN POIRÉ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-aa66f960b68a06d0a0cf9950f51b7916",
+            "hyperedge_name": "<hyperedge>\"He is the son of the producer Alain Poiré.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is the sequel to the 2014 film 'The Invisible Boy'.\"",
+        "branch": "semantic",
+        "raw_score": 0.40289944410324097,
+        "hyperedge_text": "It is the sequel to the 2014 film 'The Invisible Boy'.",
+        "entity_ids": [
+          "\"2014\"",
+          "\"SEQUEL\"",
+          "\"THE INVISIBLE BOY\""
+        ],
+        "chunk_ids": [
+          "chunk-bbca4c3d7b6a8f344ef507df37bcb400"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is the sequel to the 2014 film 'The Invisible Boy'.",
+            "The Invisible Boy: Second Generation The Invisible Boy: Second Generation is a 2018 Italian fantasy- superhero film directed by Gabriele Salvatores. It is the sequel to the 2014 film\" The Invisible Boy\"."
+          ],
+          "relation_texts": [
+            "It is the sequel to the 2014 film 'The Invisible Boy'.",
+            "link",
+            "2014",
+            "SEQUEL",
+            "THE INVISIBLE BOY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cbe5da0817397f05197f8946799cc0db",
+            "hyperedge_name": "<hyperedge>\"It is the sequel to the 2014 film 'The Invisible Boy'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Anthony Kimmins who also wrote the screenplay.\"",
+        "branch": "semantic",
+        "raw_score": 0.4004027843475342,
+        "hyperedge_text": "The film was directed by Anthony Kimmins who also wrote the screenplay.",
+        "entity_ids": [
+          "\"SCREENPLAY\""
+        ],
+        "chunk_ids": [
+          "chunk-8424da381afc2e6a7353479684cc861c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Anthony Kimmins who also wrote the screenplay.",
+            "It's in the Air It ’s in the Air is a 1938 British comedy film written and directed by Anthony Kimmins and starring George Formby, Polly Ward and Jack Hobbs. The film was released in the United States with the alternative title George Takes the Air in 1940. Although released in pre-war times, no mention of the imminent hostilities is in\" It's in the Air\"."
+          ],
+          "relation_texts": [
+            "The film was directed by Anthony Kimmins who also wrote the screenplay.",
+            "link",
+            "SCREENPLAY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-10b5f933eb1b5e5ef586b381e3f34990",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Anthony Kimmins who also wrote the screenplay.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.\"",
+        "hyperedge_text": "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4153725504875183,
+        "fusion_score": 0.4830745100975037,
+        "entity_ids": [
+          "\"SHORT STORY\"",
+          "\"AN EVENT\"",
+          "\"VATROSLAV MIMICA\"",
+          "\"1969 YUGOSLAV FEATURE FILM\"",
+          "\"ANTON CHEKHOV\""
+        ],
+        "chunk_ids": [
+          "chunk-a3e67876b5dbc631af62b25278fa125d"
+        ],
+        "evidence_texts": [
+          "An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov.",
+          "An Event An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.415373,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.483075
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.\"",
+        "hyperedge_text": "The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4366043508052826,
+        "fusion_score": 0.4873208701610565,
+        "entity_ids": [
+          "\"YUGOSLAV FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-a3e67876b5dbc631af62b25278fa125d"
+        ],
+        "evidence_texts": [
+          "The film An Event is a Yugoslav film from 1969, directed by Vatroslav Mimica.",
+          "An Event An Event is a 1969 Yugoslav feature film directed by Vatroslav Mimica, based on a short story by Anton Chekhov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.436604,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.487321
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vatroslav Mimica (born 25 June 1923) is a Croatian film director and screenwriter.\"",
+        "hyperedge_text": "Vatroslav Mimica (born 25 June 1923) is a Croatian film director and screenwriter.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.4,
+        "entity_ids": [
+          "\"VATROSLAV MIMICA\"",
+          "\"CROATIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-5170f21e9bd2c3167c1d6b041311be22"
+        ],
+        "evidence_texts": [
+          "Vatroslav Mimica (born 25 June 1923) is a Croatian film director and screenwriter.",
+          "Vatroslav Mimica Vatroslav Mimica (born 25 June 1923) is a Croatian film director and screenwriter. Born in Omiš, Mimica had enrolled at the University of Zagreb School of Medicine before the outbreak of World War II. In 1942 he joined Young Communist League of Yugoslavia (SKOJ) and in 1943 he went on to join the Yugoslav Partisans, becoming a member of their medical units. After the war Mimica wrote literary and film reviews, and his career in filmmaking began in 1950 when he became the director of the Jadran Film production studio. He had his directorial and screenwriting debut in the 1952 Yugoslav film \" In the Storm\" (Croatian: \"U oluji\") which starred Veljko Bulajić, Mia Oremović and Antun Nalis. In the 1950s Mimica worked as a director and writer on a number of critically acclaimed animated films and became a prominent member of the Zagreb School of Animated Films (his 1958 anim..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.4
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4721599221229553,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2555306355158488,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.47216,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.255531
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46865567564964294,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.25412893692652383,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this, he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.468656,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.254129
+        }
+      }
+    ]
+  }
+]

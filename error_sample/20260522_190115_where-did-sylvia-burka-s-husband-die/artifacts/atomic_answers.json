@@ -1,0 +1,385 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the husband of Sylvia Burka?",
+    "analysis": {
+      "entities": [
+        "Sylvia Burka"
+      ],
+      "relations": [
+        "is the husband of"
+      ],
+      "relation_query": "who is the husband of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Sylvia Burka is a former ice speed skater and track cyclist from Canada of Latvian descent.\"",
+        "hyperedge_text": "Sylvia Burka is a former ice speed skater and track cyclist from Canada of Latvian descent.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5870007276535034,
+        "fusion_score": 0.5174001455307007,
+        "entity_ids": [
+          "\"SYLVIA BURKA\"",
+          "\"ICE SPEED SKATER\"",
+          "\"TRACK CYCLIST\""
+        ],
+        "chunk_ids": [
+          "chunk-ffdaa8a0ced46cd62b45c5ffe7753cf8"
+        ],
+        "evidence_texts": [
+          "Sylvia Burka is a former ice speed skater and track cyclist from Canada of Latvian descent.",
+          "Sylvia Burka Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan. She was the first person in history to win a World Championship in both Allround and Sprint disciplines (1976 and 1977). She never won an Olympic medal, with her best Olympic result being the fourth place in 1000 m in 1976. In 1977, she was inducted into Canada's Sports Hall of Fame. In 1983 she was inducted into the Manitoba Sports Hall of Fame and Museum. She was married to Jocelyn Lovell, an Olympic cyclist."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.587001,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5174
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan.\"",
+        "hyperedge_text": "Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5715725421905518,
+        "fusion_score": 0.5143145084381104,
+        "entity_ids": [
+          "\"CANADA\"",
+          "\"SYLVIA BURKA\"",
+          "\"LATVIAN DESCENT\"",
+          "\"WINTER OLYMPICS\"",
+          "\"SAPPORO\""
+        ],
+        "chunk_ids": [
+          "chunk-ffdaa8a0ced46cd62b45c5ffe7753cf8"
+        ],
+        "evidence_texts": [
+          "Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan.",
+          "Sylvia Burka Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan. She was the first person in history to win a World Championship in both Allround and Sprint disciplines (1976 and 1977). She never won an Olympic medal, with her best Olympic result being the fourth place in 1000 m in 1976. In 1977, she was inducted into Canada's Sports Hall of Fame. In 1983 she was inducted into the Manitoba Sports Hall of Fame and Museum. She was married to Jocelyn Lovell, an Olympic cyclist."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.571573,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.514315
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"husband of actress Gabriella Wilde\"",
+        "hyperedge_text": "husband of actress Gabriella Wilde",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5032564401626587,
+        "semantic_score": 0.408883661031723,
+        "fusion_score": 0.2830793082714081,
+        "entity_ids": [
+          "\"ACTRESS GABRIELLA WILDE\""
+        ],
+        "chunk_ids": [
+          "chunk-ff775504cf67541b9da0cc36aaafe92c"
+        ],
+        "evidence_texts": [
+          "husband of actress Gabriella Wilde",
+          "Alan Pownall Stephen Alan Fletcher Pownall( born 30 December 1986) is an English singer- songwriter and the husband of actress Gabriella Wilde."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.503256,
+          "S": 0.408884,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.283079
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the husband of Holocaust survivor Eva Marks.\"",
+        "hyperedge_text": "He is the husband of Holocaust survivor Eva Marks.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46753883361816406,
+        "semantic_score": 0.38858428597450256,
+        "fusion_score": 0.26473239064216614,
+        "entity_ids": [
+          "\"EVA MARKS\""
+        ],
+        "chunk_ids": [
+          "chunk-9c372af2d0001f05b8d4736d15ea66ae"
+        ],
+        "evidence_texts": [
+          "He is the husband of Holocaust survivor Eva Marks.",
+          "Stan Marks Stan Marks is an Australian writer and journalist. He is the husband of Holocaust survivor Eva Marks."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.467539,
+          "S": 0.388584,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.264732
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the uncle of, whose husband is.\"",
+        "hyperedge_text": "He is also the uncle of, whose husband is.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5187849402427673,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.27418064276377363,
+        "entity_ids": [
+          "\"HUSBAND\"",
+          "\"UNCLE\"",
+          "\"NEPHEW/NIECE\""
+        ],
+        "chunk_ids": [
+          "chunk-ab4fd963a6e1bb18c7ff575cca5ddd08"
+        ],
+        "evidence_texts": [
+          "He is also the uncle of, whose husband is.",
+          "Andrzej Gawroński (actor) Andrzej Gawroński( born 10 February 1935 in Warsaw, Poland) is a Polish film and theatre actor. He is the brother of the late actor. He is also the uncle of, whose husband is."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.518785,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.274181
+        }
+      }
+    ],
+    "answer": "Jocelyn Lovell",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that Sylvia Burka was married to Jocelyn Lovell, an Olympic cyclist.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the husband of Sylvia Burka die?",
+    "analysis": {
+      "entities": [
+        "Sylvia Burka",
+        "Jocelyn Lovell"
+      ],
+      "relations": [
+        "died",
+        "location of death"
+      ],
+      "relation_query": "Where did the husband of a person die?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"His wife survived him by thirteen years and died in June 1872.\"",
+        "hyperedge_text": "His wife survived him by thirteen years and died in June 1872.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5697554349899292,
+        "semantic_score": 0.4011574387550354,
+        "fusion_score": 0.30813366174697876,
+        "entity_ids": [
+          "\"SIX MONTHS\"",
+          "\"HOUSE OF COMMONS\"",
+          "\"SURVIVED\"",
+          "\"THREE YEARS\"",
+          "\"THIRTEEN YEARS\"",
+          "\"ROYAL LICENCE\"",
+          "\"YOUNGER SON OF A MARQUESS\"",
+          "\"JUNE 1872\"",
+          "\"RIDING ACCIDENT\"",
+          "\"LORD-LIEUTENANT\""
+        ],
+        "chunk_ids": [
+          "chunk-72aa2c12dd056e73da75617be9b36199"
+        ],
+        "evidence_texts": [
+          "His wife survived him by thirteen years and died in June 1872.",
+          "Lord Patrick Crichton-Stuart Born Patrick Stuart , he was the second son of John Stuart, Lord Mount Stuart, eldest son of John Stuart, 1st Marquess of Bute, son of Prime Minister John Stuart, 3rd Earl of Bute. His mother was Lady Elizabeth Penelope, daughter and heiress of Patrick McDouall-Crichton, 6th Earl of Dumfries, while John Crichton-Stuart, 2nd Marquess of Bute, was his elder brother. His father was killed in a riding accident six months before he was born and his mother died when he was three. In 1817 he was granted the rank of a younger son of a marquess and assumed by Royal licence the surname of Crichton. The following year he was returned to Parliament for Cardiff, succeeding his uncle Lord Evelyn Stuart, a seat he held until 1820 and again from 1826 to 1832. Between 1847 and 1859 he also served as Lord-Lieutenant of Buteshire. Crichton-Stuart married Hannah, daughter of..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.569755,
+          "S": 0.401157,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.308134
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan.\"",
+        "hyperedge_text": "Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5328063368797302,
+        "fusion_score": 0.3065612673759461,
+        "entity_ids": [
+          "\"CANADA\"",
+          "\"SYLVIA BURKA\"",
+          "\"LATVIAN DESCENT\"",
+          "\"WINTER OLYMPICS\"",
+          "\"SAPPORO\""
+        ],
+        "chunk_ids": [
+          "chunk-ffdaa8a0ced46cd62b45c5ffe7753cf8"
+        ],
+        "evidence_texts": [
+          "Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan.",
+          "Sylvia Burka Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan. She was the first person in history to win a World Championship in both Allround and Sprint disciplines (1976 and 1977). She never won an Olympic medal, with her best Olympic result being the fourth place in 1000 m in 1976. In 1977, she was inducted into Canada's Sports Hall of Fame. In 1983 she was inducted into the Manitoba Sports Hall of Fame and Museum. She was married to Jocelyn Lovell, an Olympic cyclist."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.532806,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.306561
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sylvia Burka is a former ice speed skater and track cyclist from Canada of Latvian descent.\"",
+        "hyperedge_text": "Sylvia Burka is a former ice speed skater and track cyclist from Canada of Latvian descent.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5258435606956482,
+        "fusion_score": 0.30516871213912966,
+        "entity_ids": [
+          "\"SYLVIA BURKA\"",
+          "\"ICE SPEED SKATER\"",
+          "\"TRACK CYCLIST\""
+        ],
+        "chunk_ids": [
+          "chunk-ffdaa8a0ced46cd62b45c5ffe7753cf8"
+        ],
+        "evidence_texts": [
+          "Sylvia Burka is a former ice speed skater and track cyclist from Canada of Latvian descent.",
+          "Sylvia Burka Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan. She was the first person in history to win a World Championship in both Allround and Sprint disciplines (1976 and 1977). She never won an Olympic medal, with her best Olympic result being the fourth place in 1000 m in 1976. In 1977, she was inducted into Canada's Sports Hall of Fame. In 1983 she was inducted into the Manitoba Sports Hall of Fame and Museum. She was married to Jocelyn Lovell, an Olympic cyclist."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.525844,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.305169
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His third wife, Marina Semyonova, died in 2010.\"",
+        "hyperedge_text": "His third wife, Marina Semyonova, died in 2010.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4311160743236542,
+        "fusion_score": 0.48622321486473086,
+        "entity_ids": [
+          "\"MARINA SEMYONOVA\""
+        ],
+        "chunk_ids": [
+          "chunk-5d656545c5a2987b474c92fe7c95e079"
+        ],
+        "evidence_texts": [
+          "His third wife, Marina Semyonova, died in 2010.",
+          "Lev Karakhan Lev Mikhailovich Karakhan (\"Karakhanian\") Armenian Կարախանյան Լեւոն Միքայելի, Russian Лев Михайлович Карахан (20 January 1889, Tiflis – 20 September 1937, Moscow) was a Russian revolutionary and a Soviet diplomat. A member of the RSDLP from 1904. At first a Menshevik, he joined the Bolsheviks in May 1917. In October 1917, he was member of the Revolutionary Military Council; then served as secretary of the Soviet delegation at the Brest-Litovsk peace talks together with Leon Trotsky and Adolph Joffe. In 1918-1920 and 1927–1934, he was the Deputy People's Commissar for Foreign Affairs. In 1919, he issued a statement concerning relations with China called the Karakhan Manifesto. In 1921, he was the Soviet Ambassador to Poland; in 1923-1926, the Ambassador to China; after 1934, the Ambassador to Turkey. Karakhan was known for his dandyish appearance; Karl Radek is quoted as h..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.431116,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.486223
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dependent on an Argentine Institute of Cinematography pension, he lost his wife in 1996, and in 1998, Julio Saraceni died at age 86.\"",
+        "hyperedge_text": "Dependent on an Argentine Institute of Cinematography pension, he lost his wife in 1996, and in 1998, Julio Saraceni died at age 86.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.3972390294075012,
+        "fusion_score": 0.47944780588150027,
+        "entity_ids": [
+          "\"1998\"",
+          "\"1996\"",
+          "\"AGE 86\"",
+          "\"ARGENTINE INSTITUTE OF CINEMATOGRAPHY\""
+        ],
+        "chunk_ids": [
+          "chunk-1bdf7840589bdd046108766f7c843ca6"
+        ],
+        "evidence_texts": [
+          "Dependent on an Argentine Institute of Cinematography pension, he lost his wife in 1996, and in 1998, Julio Saraceni died at age 86.",
+          "Julio Saraceni Julio Saraceni ( October 10, 1912 – October 12, 1998) was a prolific Argentine film director whose career in the Cinema of Argentina as a movie director spanned six decades. He was an aviator as a young man, but later found a career in film, where he debuted as a director in a 1937 short film,\" Fórmula secreta\", in which he used his flying experience for the making of numerous scenes. He directed his first full- length title, Florencio Parravicini's comedy vehicle,\" Noches de carnaval\", later that year. Saraceni married a member of the crew, Argentina Mori, and with her made some 60 films between 1938 and 1986, such as\" María Celeste\"( 1944),\" Alma de bohemio\"( 1949),\" La barra de la esquina\"( 1950), and\" La mejor del colegio\"( 1953). Saraceni was best known for directing comedies, and worked with many of the best known local figures in the genre, including Parravicini,..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.397239,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.479448
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the location of Jocelyn Lovell's death.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"His wife survived him by thirteen years and died in June 1872.\""
+    ]
+  }
+]

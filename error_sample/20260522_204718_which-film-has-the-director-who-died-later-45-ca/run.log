@@ -1,0 +1,8 @@
+2026-05-22 20:47:18,689 | INFO | Generating atomic question DAG with DEPO.
+2026-05-22 20:48:30,462 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-22 20:48:30,463 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-22 20:48:44,455 | INFO | Starting HyperBranch pipeline for question: Which film has the director who died later, 45 Calibre Echo or Bons Baisers De Hong Kong?
+2026-05-22 20:48:44,456 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-22 20:48:49,348 | INFO | Atomic retrieval returned 22 hits for question=Who is the director of 45 Calibre Echo?
+2026-05-22 20:49:02,805 | INFO | Atomic retrieval returned 25 hits for question=When did the director of 45 Calibre Echo die?
+2026-05-22 20:49:20,714 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260522_204718_which-film-has-the-director-who-died-later-45-ca

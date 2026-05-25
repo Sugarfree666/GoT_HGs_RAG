@@ -1,0 +1,728 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the child-in-law of Sibyl Hathaway?",
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.",
+        "entity_ids": [
+          "\"SIBYL HATHAWAY\"",
+          "\"21ST SEIGNEUR OF SARK\""
+        ],
+        "chunk_ids": [
+          "chunk-f10cbab16da992171d9c3a757a2f497b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.",
+            "Dudley Beaumont Dudley John Beaumont( 1877–24 November 1918) was a British army officer and painter. He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark, and grandfather of her successor, Michael Beaumont."
+          ],
+          "relation_texts": [
+            "He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.",
+            "link",
+            "SIBYL HATHAWAY",
+            "21ST SEIGNEUR OF SARK"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the uncle of, whose husband is.\"",
+        "branch": "relation",
+        "raw_score": 0.47217684984207153,
+        "hyperedge_text": "He is also the uncle of, whose husband is.",
+        "entity_ids": [
+          "\"HUSBAND\"",
+          "\"UNCLE\"",
+          "\"NEPHEW/NIECE\""
+        ],
+        "chunk_ids": [
+          "chunk-ab4fd963a6e1bb18c7ff575cca5ddd08"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is also the uncle of, whose husband is.",
+            "Andrzej Gawroński (actor) Andrzej Gawroński( born 10 February 1935 in Warsaw, Poland) is a Polish film and theatre actor. He is the brother of the late actor. He is also the uncle of, whose husband is."
+          ],
+          "relation_texts": [
+            "He is also the uncle of, whose husband is.",
+            "link",
+            "HUSBAND",
+            "UNCLE",
+            "NEPHEW/NIECE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a679e373fd231056e13421459e53e0cd",
+            "hyperedge_name": "<hyperedge>\"He is also the uncle of, whose husband is.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.\"",
+        "branch": "relation",
+        "raw_score": 0.4692072868347168,
+        "hyperedge_text": "He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.",
+        "entity_ids": [
+          "\"RAHUL GANDHI\"",
+          "\"RAJIV GANDHI\"",
+          "\"SONIA GANDHI\""
+        ],
+        "chunk_ids": [
+          "chunk-87dcaf39187f4ea031241f8385eaa982"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.",
+            "Robert Vadra Robert Vadra is an Indian businessman, entrepreneur and the husband of Priyanka Gandhi. He is the son -in- law of Sonia Gandhi and Rajiv Gandhi, and the brother- in- law of Rahul Gandhi."
+          ],
+          "relation_texts": [
+            "He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.",
+            "link",
+            "RAHUL GANDHI",
+            "RAJIV GANDHI",
+            "SONIA GANDHI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2f27884004f85f3597cf9aa7ec2ecb1",
+            "hyperedge_name": "<hyperedge>\"He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of Imran Farhat.\"",
+        "branch": "relation",
+        "raw_score": 0.45345908403396606,
+        "hyperedge_text": "He is the father-in-law of Imran Farhat.",
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-10333be7c973d42a00364ad277052021"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "Mohammad Ilyas (cricketer) Mohammad Ilyas Mahmood( born March 19, 1946, Lahore, Punjab) is a former Pakistani cricketer who played in ten Tests from 1964 to 1969. He is the father- in- law of Imran Farhat."
+          ],
+          "relation_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "link",
+            "FATHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dfb75f61e308d9f2ded0e2f2dc62859e",
+            "hyperedge_name": "<hyperedge>\"He is the father-in-law of Imran Farhat.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His granddaughter is the spouse of Manaf Tlass.\"",
+        "branch": "relation",
+        "raw_score": 0.4443722665309906,
+        "hyperedge_text": "His granddaughter is the spouse of Manaf Tlass.",
+        "entity_ids": [
+          "\"GRANDDAUGHTER\"",
+          "\"MANAF TLASS\""
+        ],
+        "chunk_ids": [
+          "chunk-a7c85c0897a3b4d8bba52af80245ea10"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His granddaughter is the spouse of Manaf Tlass.",
+            "Adib Kheir Adib Kheir was a leading Syrian nationalist of the 1920s. He was the owner of the Librairie Universelle in Damascus. His granddaughter is the spouse of Manaf Tlass."
+          ],
+          "relation_texts": [
+            "His granddaughter is the spouse of Manaf Tlass.",
+            "link",
+            "GRANDDAUGHTER",
+            "MANAF TLASS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2ec1ecbea75e8c5906047e3d3cd9373a",
+            "hyperedge_name": "<hyperedge>\"His granddaughter is the spouse of Manaf Tlass.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Being a morganatic spouse implied that her children would not inherit the throne.\"",
+        "branch": "relation",
+        "raw_score": 0.44410908222198486,
+        "hyperedge_text": "Being a morganatic spouse implied that her children would not inherit the throne.",
+        "entity_ids": [
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-c50aa2a8d992ac41f021a14257591733"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Being a morganatic spouse implied that her children would not inherit the throne.",
+            "Marie Émilie de Joly de Choin Marie Émilie Thérèse de Joly, \"Mademoiselle de Choin\" (2 August 1670 – 1732) was a French lady-in-waiting, the lover and later the morganatic spouse of Louis, Dauphin of France. As a morganatic spouse, she was not styled Dauphine of France."
+          ],
+          "relation_texts": [
+            "Being a morganatic spouse implied that her children would not inherit the throne.",
+            "link",
+            "CHILDREN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-701423f580426cb7d8c328889999aa82",
+            "hyperedge_name": "<hyperedge>\"Being a morganatic spouse implied that her children would not inherit the throne.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the son-in-law of actress Rosalind Knight and brother-in-law of actress Susannah Elliott-Knight.\"",
+        "branch": "relation",
+        "raw_score": 0.4429575800895691,
+        "hyperedge_text": "He is the son-in-law of actress Rosalind Knight and brother-in-law of actress Susannah Elliott-Knight.",
+        "entity_ids": [
+          "\"ROSALIND KNIGHT\"",
+          "\"SUSANNAH ELLIOTT-KNIGHT\""
+        ],
+        "chunk_ids": [
+          "chunk-72014e9558870e70113d30b83c1022b7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the son-in-law of actress Rosalind Knight and brother-in-law of actress Susannah Elliott-Knight.",
+            "Nick Sidi Nick Sidi( born 22 February 1966 in Manchester, England) is an English actor. He is the son -in- law of actress Rosalind Knight and brother- in- law of actress Susannah Elliott- Knight. He often plays drama or comedy roles on television and frequently appears in BBC dramas."
+          ],
+          "relation_texts": [
+            "He is the son-in-law of actress Rosalind Knight and brother-in-law of actress Susannah Elliott-Knight.",
+            "link",
+            "ROSALIND KNIGHT",
+            "SUSANNAH ELLIOTT-KNIGHT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-85a4808be58de1fc2ce4fd6772511a90",
+            "hyperedge_name": "<hyperedge>\"He is the son-in-law of actress Rosalind Knight and brother-in-law of actress Susannah Elliott-Knight.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The childless nature of their marriage may reflect on the dynastic implications for the lineage of Courland.\"",
+        "branch": "relation",
+        "raw_score": 0.4421335458755493,
+        "hyperedge_text": "The childless nature of their marriage may reflect on the dynastic implications for the lineage of Courland.",
+        "entity_ids": [
+          "\"DYNASTIC IMPLICATIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-e0fba357345640811683958e6eaa1509"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The childless nature of their marriage may reflect on the dynastic implications for the lineage of Courland.",
+            "Johanna Magdalene of Saxe-Weissenfels Johanna Magdalene of Saxe-Weissenfels (17 March 1708 – 25 January 1760), was a Duchess consort of Courland. She married the Duke of Courland, Ferdinand Kettler, on 20 September 1730. She was the daughter of Johann Georg, Duke of Saxe-Weissenfels and Fredericka Elisabeth of Saxe-Eisenach. The marriage was childless."
+          ],
+          "relation_texts": [
+            "The childless nature of their marriage may reflect on the dynastic implications for the lineage of Courland.",
+            "link",
+            "DYNASTIC IMPLICATIONS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ef86477de7136ef54ac425c4bf7ec19b",
+            "hyperedge_name": "<hyperedge>\"The childless nature of their marriage may reflect on the dynastic implications for the lineage of Courland.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The second marriage was also childless.\"",
+        "branch": "relation",
+        "raw_score": 0.441753089427948,
+        "hyperedge_text": "The second marriage was also childless.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-e7f81e9f04ab2944dfe58426bd6467d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The second marriage was also childless.",
+            "Wilhelm Heinrich, Duke of Saxe-Eisenach Wilhelm Heinrich, Duke of Saxe- Eisenach( 10 November 1691 – 26 July 1741), was a duke of Saxe- Eisenach. He was born in Oranjewoud, the eldest and only surviving son of Johann Wilhelm, Duke of Saxe- Eisenach and his first wife Amalie of Nassau- Dietz. Wilhelm Heinrich first married Albertine Juliane of Nassau- Idstein( daughter George August, Count of Nassau- Idstein) in Idstein on 15 February 1713. This marriage was childless. He married his second wife Anna Sophie Charlotte of Brandenburg- Schwedt in Berlin on 3 June 1723, just eight months after the death of Albertine Juliane. The second marriage was also childless. Wilhelm Heinrich acceded to the duchy of Saxe- Eisenach in 1729 upon the death of his father and was succeeded by his second cousin, duke Ernst August I of Saxe- Weimar. The personal union between Eisenach and Weimar created by t..."
+          ],
+          "relation_texts": [
+            "The second marriage was also childless."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-75591cbdaec0f4789377f43bbaaca11b",
+            "hyperedge_name": "<hyperedge>\"The second marriage was also childless.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.\"",
+        "branch": "relation",
+        "raw_score": 0.44112035632133484,
+        "hyperedge_text": "Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.",
+        "entity_ids": [
+          "\"MARIE CLAUDINE\"",
+          "\"JOAKIM LEHMKUHL\""
+        ],
+        "chunk_ids": [
+          "chunk-bd104fa2041daef047dcf8d8b9637f0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.",
+            "Barthold A. Butenschøn Sr. Hans Barthold Andresen Butenschøn( 27 December 1877 – 28 November 1971) was a Norwegian businessperson. He was born in Kristiania as a son of Nils August Andresen Butenschøn and Hanna Butenschøn, and grandson of Nicolay Andresen. Together with Mabel Anette Plahte( 1877 – 1973, a daughter of Frithjof M. Plahte) he had the son Hans Barthold Andresen Butenschøn Jr. and was through him the father- in- law of Ragnhild Butenschøn and grandfather of Peter Butenschøn. Through his daughter Marie Claudine he was the father- in- law of Joakim Lehmkuhl, through his daughter Mabel Anette he was the father- in- law of Harald Astrup( a son of Sigurd Astrup) and through his daughter Nini Augusta he was the father- in- law of Ernst Torp. He took commerce school and agricultural school. He was hired in the family company N. A. Andresen& Co, and became a co-owner in 1910. He e..."
+          ],
+          "relation_texts": [
+            "Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.",
+            "link",
+            "MARIE CLAUDINE",
+            "JOAKIM LEHMKUHL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-41d8d76a9facfaec716017057cabd996",
+            "hyperedge_name": "<hyperedge>\"Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of actor and TV presenter Warwick Davis.\"",
+        "branch": "relation",
+        "raw_score": 0.43614473938941956,
+        "hyperedge_text": "He is the father-in-law of actor and TV presenter Warwick Davis.",
+        "entity_ids": [
+          "\"WARWICK DAVIS\"",
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-8415c56614547b6b806a4164bba8e4d1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father-in-law of actor and TV presenter Warwick Davis.",
+            "Peter Burroughs Peter Burroughs( born 27 January 1947) is a British television and film actor, the director of Willow Management. He is the father- in- law of actor and TV presenter Warwick Davis."
+          ],
+          "relation_texts": [
+            "He is the father-in-law of actor and TV presenter Warwick Davis.",
+            "link",
+            "WARWICK DAVIS",
+            "FATHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-75855ff18e9b2568de60a43305677e8f",
+            "hyperedge_name": "<hyperedge>\"He is the father-in-law of actor and TV presenter Warwick Davis.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the first husband of Sibyl Hathaway.\"",
+        "branch": "semantic",
+        "raw_score": 0.689836859703064,
+        "hyperedge_text": "He was the first husband of Sibyl Hathaway.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-f10cbab16da992171d9c3a757a2f497b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the first husband of Sibyl Hathaway.",
+            "Dudley Beaumont Dudley John Beaumont( 1877–24 November 1918) was a British army officer and painter. He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark, and grandfather of her successor, Michael Beaumont."
+          ],
+          "relation_texts": [
+            "He was the first husband of Sibyl Hathaway."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-15b24545ff03a9599095b187118f85ed",
+            "hyperedge_name": "<hyperedge>\"He was the first husband of Sibyl Hathaway.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sibyl Hathaway's legacy continues through her successor, Michael Beaumont.\"",
+        "branch": "semantic",
+        "raw_score": 0.5937207937240601,
+        "hyperedge_text": "Sibyl Hathaway's legacy continues through her successor, Michael Beaumont.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-f10cbab16da992171d9c3a757a2f497b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sibyl Hathaway's legacy continues through her successor, Michael Beaumont.",
+            "Dudley Beaumont Dudley John Beaumont( 1877–24 November 1918) was a British army officer and painter. He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark, and grandfather of her successor, Michael Beaumont."
+          ],
+          "relation_texts": [
+            "Sibyl Hathaway's legacy continues through her successor, Michael Beaumont."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b66c48a600bb97025fa78e0597673611",
+            "hyperedge_name": "<hyperedge>\"Sibyl Hathaway's legacy continues through her successor, Michael Beaumont.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.\"",
+        "branch": "semantic",
+        "raw_score": 0.5903732776641846,
+        "hyperedge_text": "He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.",
+        "entity_ids": [
+          "\"SIBYL HATHAWAY\"",
+          "\"21ST SEIGNEUR OF SARK\""
+        ],
+        "chunk_ids": [
+          "chunk-f10cbab16da992171d9c3a757a2f497b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.",
+            "Dudley Beaumont Dudley John Beaumont( 1877–24 November 1918) was a British army officer and painter. He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark, and grandfather of her successor, Michael Beaumont."
+          ],
+          "relation_texts": [
+            "He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.",
+            "link",
+            "SIBYL HATHAWAY",
+            "21ST SEIGNEUR OF SARK"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6f2b097853d0a51eb5fddc2f2acc986b",
+            "hyperedge_name": "<hyperedge>\"He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dame Sibyl Hathaway was born on 13 January 1884 and died on 14 July 1974.\"",
+        "branch": "semantic",
+        "raw_score": 0.5530415773391724,
+        "hyperedge_text": "Dame Sibyl Hathaway was born on 13 January 1884 and died on 14 July 1974.",
+        "entity_ids": [
+          "\"13 JANUARY 1884\"",
+          "\"14 JULY 1974\""
+        ],
+        "chunk_ids": [
+          "chunk-aff1dd488f1754f71d3311f3f1a35dc8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dame Sibyl Hathaway was born on 13 January 1884 and died on 14 July 1974.",
+            "Sibyl Hathaway Dame Sibyl Mary Hathaway (\"née\" Collings; 13 January 1884 – 14 July 1974) was Dame of Sark from 1927 until her death in 1974. Her 47-year rule over Sark, in the Channel Islands, spanned the reigns of four Monarchs: George V, Edward VIII, George VI and Elizabeth II. Hathaway was a financially troubled widow with six children when she succeeded her eccentric father, William Frederick Collings, as feudal lady of Sark. She immediately set about reinforcing her feudal rights and promoting tourism on the island, which she affectionately called \"the last bastion of feudalism\". When she remarried in 1929, her second husband, Robert Hathaway, legally became her senior co-ruler, but she kept control of the government. Hathaway's tenure saw the German occupation of the Channel Islands in the Second World War, during which she refused to evacuate and convinced the islanders to stay..."
+          ],
+          "relation_texts": [
+            "Dame Sibyl Hathaway was born on 13 January 1884 and died on 14 July 1974.",
+            "link",
+            "13 JANUARY 1884",
+            "14 JULY 1974"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6f11b08f7d78a1937c4bd3b9103e6b89",
+            "hyperedge_name": "<hyperedge>\"Dame Sibyl Hathaway was born on 13 January 1884 and died on 14 July 1974.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Michael Beaumont is recognized as the successor to the title held by Sibyl Hathaway.\"",
+        "branch": "semantic",
+        "raw_score": 0.5523332357406616,
+        "hyperedge_text": "Michael Beaumont is recognized as the successor to the title held by Sibyl Hathaway.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-f10cbab16da992171d9c3a757a2f497b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Michael Beaumont is recognized as the successor to the title held by Sibyl Hathaway.",
+            "Dudley Beaumont Dudley John Beaumont( 1877–24 November 1918) was a British army officer and painter. He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark, and grandfather of her successor, Michael Beaumont."
+          ],
+          "relation_texts": [
+            "Michael Beaumont is recognized as the successor to the title held by Sibyl Hathaway."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-eab0af9a038b92117156dadcc4c0114d",
+            "hyperedge_name": "<hyperedge>\"Michael Beaumont is recognized as the successor to the title held by Sibyl Hathaway.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Hathaway was a financially troubled widow with six children when she succeeded her eccentric father, William Frederick Collings, as feudal lady of Sark.\"",
+        "branch": "semantic",
+        "raw_score": 0.5435024499893188,
+        "hyperedge_text": "Hathaway was a financially troubled widow with six children when she succeeded her eccentric father, William Frederick Collings, as feudal lady of Sark.",
+        "entity_ids": [
+          "\"WIDOW\"",
+          "\"CHILDREN\"",
+          "\"WILLIAM FREDERICK COLLINGS\""
+        ],
+        "chunk_ids": [
+          "chunk-aff1dd488f1754f71d3311f3f1a35dc8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Hathaway was a financially troubled widow with six children when she succeeded her eccentric father, William Frederick Collings, as feudal lady of Sark.",
+            "Sibyl Hathaway Dame Sibyl Mary Hathaway (\"née\" Collings; 13 January 1884 – 14 July 1974) was Dame of Sark from 1927 until her death in 1974. Her 47-year rule over Sark, in the Channel Islands, spanned the reigns of four Monarchs: George V, Edward VIII, George VI and Elizabeth II. Hathaway was a financially troubled widow with six children when she succeeded her eccentric father, William Frederick Collings, as feudal lady of Sark. She immediately set about reinforcing her feudal rights and promoting tourism on the island, which she affectionately called \"the last bastion of feudalism\". When she remarried in 1929, her second husband, Robert Hathaway, legally became her senior co-ruler, but she kept control of the government. Hathaway's tenure saw the German occupation of the Channel Islands in the Second World War, during which she refused to evacuate and convinced the islanders to stay..."
+          ],
+          "relation_texts": [
+            "Hathaway was a financially troubled widow with six children when she succeeded her eccentric father, William Frederick Collings, as feudal lady of Sark.",
+            "link",
+            "WIDOW",
+            "CHILDREN",
+            "WILLIAM FREDERICK COLLINGS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-07f0e49891d95292c9ccd953488710a6",
+            "hyperedge_name": "<hyperedge>\"Hathaway was a financially troubled widow with six children when she succeeded her eccentric father, William Frederick Collings, as feudal lady of Sark.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dudley John Beaumont's marriage to Sibyl Hathaway was significant as she was the Seigneur of Sark.\"",
+        "branch": "semantic",
+        "raw_score": 0.5365050435066223,
+        "hyperedge_text": "Dudley John Beaumont's marriage to Sibyl Hathaway was significant as she was the Seigneur of Sark.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-f10cbab16da992171d9c3a757a2f497b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dudley John Beaumont's marriage to Sibyl Hathaway was significant as she was the Seigneur of Sark.",
+            "Dudley Beaumont Dudley John Beaumont( 1877–24 November 1918) was a British army officer and painter. He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark, and grandfather of her successor, Michael Beaumont."
+          ],
+          "relation_texts": [
+            "Dudley John Beaumont's marriage to Sibyl Hathaway was significant as she was the Seigneur of Sark."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1f4e5e7939748da3e306684304dfafdf",
+            "hyperedge_name": "<hyperedge>\"Dudley John Beaumont's marriage to Sibyl Hathaway was significant as she was the Seigneur of Sark.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dame Sibyl Mary Hathaway ('née' Collings; 13 January 1884 – 14 July 1974) was Dame of Sark from 1927 until her death in 1974.\"",
+        "branch": "semantic",
+        "raw_score": 0.5212051868438721,
+        "hyperedge_text": "Dame Sibyl Mary Hathaway ('née' Collings; 13 January 1884 – 14 July 1974) was Dame of Sark from 1927 until her death in 1974.",
+        "entity_ids": [
+          "\"DAME SIBYL MARY HATHAWAY\"",
+          "\"SARK\""
+        ],
+        "chunk_ids": [
+          "chunk-aff1dd488f1754f71d3311f3f1a35dc8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dame Sibyl Mary Hathaway ('née' Collings; 13 January 1884 – 14 July 1974) was Dame of Sark from 1927 until her death in 1974.",
+            "Sibyl Hathaway Dame Sibyl Mary Hathaway (\"née\" Collings; 13 January 1884 – 14 July 1974) was Dame of Sark from 1927 until her death in 1974. Her 47-year rule over Sark, in the Channel Islands, spanned the reigns of four Monarchs: George V, Edward VIII, George VI and Elizabeth II. Hathaway was a financially troubled widow with six children when she succeeded her eccentric father, William Frederick Collings, as feudal lady of Sark. She immediately set about reinforcing her feudal rights and promoting tourism on the island, which she affectionately called \"the last bastion of feudalism\". When she remarried in 1929, her second husband, Robert Hathaway, legally became her senior co-ruler, but she kept control of the government. Hathaway's tenure saw the German occupation of the Channel Islands in the Second World War, during which she refused to evacuate and convinced the islanders to stay..."
+          ],
+          "relation_texts": [
+            "Dame Sibyl Mary Hathaway ('née' Collings; 13 January 1884 – 14 July 1974) was Dame of Sark from 1927 until her death in 1974.",
+            "link",
+            "DAME SIBYL MARY HATHAWAY",
+            "SARK"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2f492d4163881436bd0d273f84eb12d2",
+            "hyperedge_name": "<hyperedge>\"Dame Sibyl Mary Hathaway ('née' Collings; 13 January 1884 – 14 July 1974) was Dame of Sark from 1927 until her death in 1974.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dame Sibyl died at the age of 90, and was succeeded by her grandson, Michael Beaumont.\"",
+        "branch": "semantic",
+        "raw_score": 0.48330140113830566,
+        "hyperedge_text": "Dame Sibyl died at the age of 90, and was succeeded by her grandson, Michael Beaumont.",
+        "entity_ids": [
+          "\"MICHAEL BEAUMONT\""
+        ],
+        "chunk_ids": [
+          "chunk-aff1dd488f1754f71d3311f3f1a35dc8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dame Sibyl died at the age of 90, and was succeeded by her grandson, Michael Beaumont.",
+            "Sibyl Hathaway Dame Sibyl Mary Hathaway (\"née\" Collings; 13 January 1884 – 14 July 1974) was Dame of Sark from 1927 until her death in 1974. Her 47-year rule over Sark, in the Channel Islands, spanned the reigns of four Monarchs: George V, Edward VIII, George VI and Elizabeth II. Hathaway was a financially troubled widow with six children when she succeeded her eccentric father, William Frederick Collings, as feudal lady of Sark. She immediately set about reinforcing her feudal rights and promoting tourism on the island, which she affectionately called \"the last bastion of feudalism\". When she remarried in 1929, her second husband, Robert Hathaway, legally became her senior co-ruler, but she kept control of the government. Hathaway's tenure saw the German occupation of the Channel Islands in the Second World War, during which she refused to evacuate and convinced the islanders to stay..."
+          ],
+          "relation_texts": [
+            "Dame Sibyl died at the age of 90, and was succeeded by her grandson, Michael Beaumont.",
+            "link",
+            "MICHAEL BEAUMONT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dccf88a9df89ce55573e1ad8eea2beb0",
+            "hyperedge_name": "<hyperedge>\"Dame Sibyl died at the age of 90, and was succeeded by her grandson, Michael Beaumont.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sybilla's lineage includes William I and his wife Stephanie.\"",
+        "branch": "semantic",
+        "raw_score": 0.4779995083808899,
+        "hyperedge_text": "Sybilla's lineage includes William I and his wife Stephanie.",
+        "entity_ids": [
+          "\"LINEAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-2a54fa8068cdaf0997526a9640d127dc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sybilla's lineage includes William I and his wife Stephanie.",
+            "Sibylla of Burgundy, Duchess of Burgundy Sybilla of Burgundy( 1065 – 1103), was a French noble, Duchess consort of Burgundy by marriage to Eudes I, Duke of Burgundy. She was a daughter of William I, Count of Burgundy and Stephanie. She was married to Eudes I, Duke of Burgundy in 1080. Children:"
+          ],
+          "relation_texts": [
+            "Sybilla's lineage includes William I and his wife Stephanie.",
+            "link",
+            "LINEAGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b1e4b9e8ea5106be6fe9d40e44f66d2d",
+            "hyperedge_name": "<hyperedge>\"Sybilla's lineage includes William I and his wife Stephanie.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.\"",
+        "hyperedge_text": "He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5903732776641846,
+        "fusion_score": 0.5180746555328369,
+        "entity_ids": [
+          "\"SIBYL HATHAWAY\"",
+          "\"21ST SEIGNEUR OF SARK\""
+        ],
+        "chunk_ids": [
+          "chunk-f10cbab16da992171d9c3a757a2f497b"
+        ],
+        "evidence_texts": [
+          "He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark.",
+          "Dudley Beaumont Dudley John Beaumont( 1877–24 November 1918) was a British army officer and painter. He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark, and grandfather of her successor, Michael Beaumont."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.590373,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518075
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the first husband of Sibyl Hathaway.\"",
+        "hyperedge_text": "He was the first husband of Sibyl Hathaway.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.689836859703064,
+        "fusion_score": 0.5379673719406128,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-f10cbab16da992171d9c3a757a2f497b"
+        ],
+        "evidence_texts": [
+          "He was the first husband of Sibyl Hathaway.",
+          "Dudley Beaumont Dudley John Beaumont( 1877–24 November 1918) was a British army officer and painter. He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark, and grandfather of her successor, Michael Beaumont."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.689837,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.537967
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sibyl Hathaway's legacy continues through her successor, Michael Beaumont.\"",
+        "hyperedge_text": "Sibyl Hathaway's legacy continues through her successor, Michael Beaumont.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5937207937240601,
+        "fusion_score": 0.5187441587448121,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-f10cbab16da992171d9c3a757a2f497b"
+        ],
+        "evidence_texts": [
+          "Sibyl Hathaway's legacy continues through her successor, Michael Beaumont.",
+          "Dudley Beaumont Dudley John Beaumont( 1877–24 November 1918) was a British army officer and painter. He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark, and grandfather of her successor, Michael Beaumont."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.593721,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518744
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dame Sibyl Hathaway was born on 13 January 1884 and died on 14 July 1974.\"",
+        "hyperedge_text": "Dame Sibyl Hathaway was born on 13 January 1884 and died on 14 July 1974.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5530415773391724,
+        "fusion_score": 0.5106083154678345,
+        "entity_ids": [
+          "\"13 JANUARY 1884\"",
+          "\"14 JULY 1974\""
+        ],
+        "chunk_ids": [
+          "chunk-aff1dd488f1754f71d3311f3f1a35dc8"
+        ],
+        "evidence_texts": [
+          "Dame Sibyl Hathaway was born on 13 January 1884 and died on 14 July 1974.",
+          "Sibyl Hathaway Dame Sibyl Mary Hathaway (\"née\" Collings; 13 January 1884 – 14 July 1974) was Dame of Sark from 1927 until her death in 1974. Her 47-year rule over Sark, in the Channel Islands, spanned the reigns of four Monarchs: George V, Edward VIII, George VI and Elizabeth II. Hathaway was a financially troubled widow with six children when she succeeded her eccentric father, William Frederick Collings, as feudal lady of Sark. She immediately set about reinforcing her feudal rights and promoting tourism on the island, which she affectionately called \"the last bastion of feudalism\". When she remarried in 1929, her second husband, Robert Hathaway, legally became her senior co-ruler, but she kept control of the government. Hathaway's tenure saw the German occupation of the Channel Islands in the Second World War, during which she refused to evacuate and convinced the islanders to stay..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.553042,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510608
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Michael Beaumont is recognized as the successor to the title held by Sibyl Hathaway.\"",
+        "hyperedge_text": "Michael Beaumont is recognized as the successor to the title held by Sibyl Hathaway.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5523332357406616,
+        "fusion_score": 0.5104666471481324,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-f10cbab16da992171d9c3a757a2f497b"
+        ],
+        "evidence_texts": [
+          "Michael Beaumont is recognized as the successor to the title held by Sibyl Hathaway.",
+          "Dudley Beaumont Dudley John Beaumont( 1877–24 November 1918) was a British army officer and painter. He was the first husband of Sibyl Hathaway, 21st Seigneur of Sark, and grandfather of her successor, Michael Beaumont."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.552333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510467
+        }
+      }
+    ]
+  }
+]

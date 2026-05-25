@@ -1,0 +1,82 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song Me And Bobby Mcgee?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Me And Bobby Mcgee"
+      ],
+      "relations": [
+        "performer of"
+      ],
+      "relation_query": "who is the performer of a song",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the child of the performer of Me And Bobby Mcgee?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the performer of the song Me And Bobby Mcgee?",
+        "answer": "Roger Miller",
+        "confidence": 0.9,
+        "reasoning_summary": "The song 'Me and Bobby McGee' was originally performed by Roger Miller, as stated in the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Me and Bobby McGee\" is a song written by American singer-songwriter Kris Kristofferson and songwriter Fred Foster, originally performed by Roger Miller.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Me and Bobby McGee\" is a song written by American singer-songwriter Kris Kristofferson and songwriter Fred Foster, originally performed by Roger Miller.\"",
+            "fusion_score": 0.7300275325775147,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Me and Bobby McGee\" is a song written by American singer-songwriter Kris Kristofferson and songwriter Fred Foster, originally performed by Roger Miller.",
+              "Me and Bobby McGee \"Me and Bobby McGee\" is a song written by American singer-songwriter Kris Kristofferson and songwriter Fred Foster, originally performed by Roger Miller. A posthumously released version by Janis Joplin topped the U.S. singles chart in 1971, making the song the second posthumously released No. 1 single in U.S. chart history after \"(Sittin' On) The Dock of the Bay\" by Otis Redding. \" Billboard\" ranked Joplin's version as the No. 11 song for 1971. Other recordings of the song include those by Waylon Jennings, Grateful Dead, Loretta Lynn, Kristofferson himself, Kenny Rogers and The First Edition, Gordon Lightfoot, Dolly Parton, Miranda Lambert, Olivia Newton-John, Vicki Britton, Johnny Cash."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Five singles by Joplin reached the Billboard Hot 100, including a cover of the Kris Kristofferson song 'Me and Bobby McGee', which reached number 1 in March 1971.\"",
+            "fusion_score": 0.6961390137672425,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Five singles by Joplin reached the Billboard Hot 100, including a cover of the Kris Kristofferson song 'Me and Bobby McGee', which reached number 1 in March 1971.",
+              "Janis Joplin Janis Lyn Joplin ( January 19, 1943 – October 4, 1970) was an American singer- songwriter who sang rock, soul and blues music. One of the most successful and widely known rock stars of her era, she was known for her powerful mezzo- soprano vocals and\" electric\" stage presence. In 1967, Joplin rose to fame following an appearance at Monterey Pop Festival, where she was the lead singer of the then little- known San Francisco psychedelic rock band Big Brother and the Holding Company. After releasing two albums with the band, she left Big Brother to continue as a solo artist with her own backing groups, first the Kozmic Blues Band and then the Full Tilt Boogie Band. She appeared at the Woodstock festival and the\" Festival Express\" train tour. Five singles by Joplin reached the Billboard Hot 100, including a cover of the Kris Kristofferson song\" Me and Bobby McGee\", which reac..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Foster suggested to Kris Kristofferson the title and theme of 'Me and Bobby McGee', which became a hit for Kristofferson, Roger Miller, and Janis Joplin.\"",
+            "fusion_score": 0.5209158897399903,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Foster suggested to Kris Kristofferson the title and theme of 'Me and Bobby McGee', which became a hit for Kristofferson, Roger Miller, and Janis Joplin.",
+              "Fred Foster Fred Luther Foster( July 26, 1931 – February 20, 2019) was an American record producer, songwriter, and music business executive who founded Monument Records. As a record producer he was most closely associated with Roy Orbison, and was also involved in the early careers of Dolly Parton and Willie Nelson. Foster suggested to Kris Kristofferson the title and theme of\" Me and Bobby McGee\", which became a hit for Kristofferson, Roger Miller, and Janis Joplin, and for which Foster received a co-writing credit."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Me And Bobby Mcgee",
+        "Roger Miller"
+      ],
+      "relations": [
+        "is the child of"
+      ],
+      "relation_query": "Who is the child of the performer of a song?",
+      "answer_type": "person"
+    }
+  }
+]

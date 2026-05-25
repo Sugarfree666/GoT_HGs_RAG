@@ -1,0 +1,85 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song Am I Wrong (Étienne De Crécy Song)?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Am I Wrong",
+        "Étienne De Crécy"
+      ],
+      "relations": [
+        "performer of"
+      ],
+      "relation_query": "Who is the performer of the song titled 'Am I Wrong' by an artist?",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the performer of Am I Wrong (Étienne De Crécy Song)?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the performer of the song Am I Wrong (Étienne De Crécy Song)?",
+        "answer": "Étienne de Crécy",
+        "confidence": 0.9,
+        "reasoning_summary": "The evidence clearly states that 'Am I Wrong' is a song by Étienne de Crécy, confirming him as the performer.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Am I Wrong is a 2000 house song by Étienne de Crécy.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Am I Wrong is a 2000 house song by Étienne de Crécy.\"",
+            "fusion_score": 0.7677028059959412,
+            "branch_support": [
+              "anchor",
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Am I Wrong is a 2000 house song by Étienne de Crécy.",
+              "Am I Wrong (Étienne de Crécy song) \"Am I Wrong\" is a 2000 house song by Étienne de Crécy. The track is mainly instrumental except for sampling the phrase \"am I wrong\" from Millie Jackson's voice singing \" Am I wrong to hunger...\", from the song \"(If Loving You Is Wrong) I Don't Want to Be Right\". The song was lead single from his album \"Tempovision\", and its 3D animated video received wide airplay in Europe. \" Am I Wrong\" charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001. The song is best remembered for its prize-winning video clip."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"'Am I Wrong' charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001.\"",
+            "fusion_score": 0.48639088273048403,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "'Am I Wrong' charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001.",
+              "Am I Wrong (Étienne de Crécy song) \"Am I Wrong\" is a 2000 house song by Étienne de Crécy. The track is mainly instrumental except for sampling the phrase \"am I wrong\" from Millie Jackson's voice singing \" Am I wrong to hunger...\", from the song \"(If Loving You Is Wrong) I Don't Want to Be Right\". The song was lead single from his album \"Tempovision\", and its 3D animated video received wide airplay in Europe. \" Am I Wrong\" charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001. The song is best remembered for its prize-winning video clip."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The track is mainly instrumental except for sampling the phrase 'am I wrong' from Millie Jackson's voice singing 'Am I wrong to hunger...'",
+            "fusion_score": 0.4772459149360657,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "\"The track is mainly instrumental except for sampling the phrase 'am I wrong' from Millie Jackson's voice singing 'Am I wrong to hunger...'",
+              "Am I Wrong (Étienne de Crécy song) \"Am I Wrong\" is a 2000 house song by Étienne de Crécy. The track is mainly instrumental except for sampling the phrase \"am I wrong\" from Millie Jackson's voice singing \" Am I wrong to hunger...\", from the song \"(If Loving You Is Wrong) I Don't Want to Be Right\". The song was lead single from his album \"Tempovision\", and its 3D animated video received wide airplay in Europe. \" Am I Wrong\" charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001. The song is best remembered for its prize-winning video clip."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Étienne de Crécy",
+        "Am I Wrong",
+        "Tempovision"
+      ],
+      "relations": [
+        "has nationality"
+      ],
+      "relation_query": "What is the nationality of the performer of a song?",
+      "answer_type": "nationality"
+    }
+  }
+]

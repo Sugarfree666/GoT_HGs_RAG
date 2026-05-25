@@ -1,0 +1,11 @@
+2026-05-22 19:51:12,635 | INFO | Generating atomic question DAG with DEPO.
+2026-05-22 19:52:19,568 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-22 19:52:19,568 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-22 19:52:33,185 | INFO | Starting HyperBranch pipeline for question: Which film has the director who died later, Love, Honor And Oh-Baby! or I Cover The Underworld?
+2026-05-22 19:52:33,185 | INFO | Executing atomic DAG with 5 node(s)
+2026-05-22 19:53:06,660 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of Love, Honor And Oh-Baby!?
+2026-05-22 19:53:12,579 | INFO | Atomic retrieval returned 22 hits for question=Who is the director of I Cover The Underworld?
+2026-05-22 19:53:20,256 | INFO | Atomic retrieval returned 25 hits for question=When did the director of Love, Honor And Oh-Baby! die?
+2026-05-22 19:53:27,325 | INFO | Atomic retrieval returned 27 hits for question=When did the director of I Cover The Underworld die?
+2026-05-22 19:53:38,398 | INFO | Atomic retrieval returned 25 hits for question=What is the death date of the director of Love, Honor And Oh-Baby!
+2026-05-22 19:53:53,887 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260522_195112_which-film-has-the-director-who-died-later-love

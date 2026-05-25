@@ -1,0 +1,24 @@
+{
+  "answer": "Airheads",
+  "reasoning_summary": "Michael Lehmann, the director of 'Airheads', is older than Po-Chih Leong, the director of 'Return To Cabin By The Lake'. Therefore, 'Airheads' is the film directed by the older director.",
+  "confidence": 0.9,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Airheads?",
+      "answer": "Michael Lehmann",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the director of Return To Cabin By The Lake?",
+      "answer": "Po-Chih Leong",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Return to Cabin by the Lake is a 2001 American crime comedy telefilm.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

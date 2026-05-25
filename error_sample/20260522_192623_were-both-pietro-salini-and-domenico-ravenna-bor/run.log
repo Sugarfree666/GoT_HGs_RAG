@@ -1,0 +1,9 @@
+2026-05-22 19:26:23,281 | INFO | Generating atomic question DAG with DEPO.
+2026-05-22 19:27:06,992 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-22 19:27:06,993 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-22 19:27:20,493 | INFO | Starting HyperBranch pipeline for question: Were both Pietro Salini and Domenico Ravenna, born in the same place?
+2026-05-22 19:27:20,493 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-22 19:27:25,456 | INFO | Atomic retrieval returned 22 hits for question=Where was Pietro Salini born?
+2026-05-22 19:27:33,935 | INFO | Atomic retrieval returned 22 hits for question=Where was Domenico Ravenna born?
+2026-05-22 19:27:41,083 | INFO | Atomic retrieval returned 130 hits for question=Do Pietro Salini and Domenico Ravenna have the same birthplace?
+2026-05-22 19:27:54,965 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260522_192623_were-both-pietro-salini-and-domenico-ravenna-bor

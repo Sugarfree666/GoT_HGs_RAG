@@ -1,0 +1,358 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Airheads?",
+    "analysis": {
+      "entities": [
+        "Airheads"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.\"",
+        "hyperedge_text": "Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7212389707565308,
+        "fusion_score": 0.5442477941513062,
+        "entity_ids": [
+          "\"MICHAEL LEHMANN\"",
+          "\"AIRHEADS\"",
+          "\"RICH WILKES\""
+        ],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.",
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.721239,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.544248
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Airheads is a 1994 American comedy film.\"",
+        "hyperedge_text": "Airheads is a 1994 American comedy film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6710606217384338,
+        "fusion_score": 0.5342121243476868,
+        "entity_ids": [
+          "\"AIRHEADS\""
+        ],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads is a 1994 American comedy film.",
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.671061,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534212
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Airheads was released in 1994.\"",
+        "hyperedge_text": "Airheads was released in 1994.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6217362880706787,
+        "fusion_score": 0.5243472576141358,
+        "entity_ids": [
+          "\"1994\""
+        ],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads was released in 1994.",
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.621736,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524347
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Airheads involves hijinks surrounding the attempt to capture attention from radio audiences.\"",
+        "hyperedge_text": "Airheads involves hijinks surrounding the attempt to capture attention from radio audiences.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5949395298957825,
+        "fusion_score": 0.5189879059791566,
+        "entity_ids": [
+          "\"HIJINKS\""
+        ],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads involves hijinks surrounding the attempt to capture attention from radio audiences.",
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.59494,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518988
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Airheads has become a cult classic over the years.\"",
+        "hyperedge_text": "Airheads has become a cult classic over the years.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5478280186653137,
+        "fusion_score": 0.5095656037330628,
+        "entity_ids": [
+          "\"CULT CLASSIC\""
+        ],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads has become a cult classic over the years.",
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.547828,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.509566
+        }
+      }
+    ],
+    "answer": "Michael Lehmann",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence states that 'Airheads' was directed by Michael Lehmann, providing clear support for the answer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Return To Cabin By The Lake?",
+    "analysis": {
+      "entities": [
+        "Return To Cabin By The Lake"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Return to Cabin by the Lake is a 2001 American crime comedy telefilm.\"",
+        "hyperedge_text": "Return to Cabin by the Lake is a 2001 American crime comedy telefilm.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5751696825027466,
+        "fusion_score": 0.5150339365005494,
+        "entity_ids": [
+          "\"2001\"",
+          "\"RETURN TO CABIN BY THE LAKE\"",
+          "\"CRIME COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b93638467141714a4f4725ae38f7100"
+        ],
+        "evidence_texts": [
+          "Return to Cabin by the Lake is a 2001 American crime comedy telefilm.",
+          "Return to Cabin by the Lake Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson. It was directed by Po-Chih Leong. The movie is a sequel to \"Cabin by the Lake\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.57517,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515034
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson.\"",
+        "hyperedge_text": "Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5433966517448425,
+        "fusion_score": 0.5086793303489685,
+        "entity_ids": [
+          "\"RETURN TO CABIN BY THE LAKE\"",
+          "\"JUDD NELSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b93638467141714a4f4725ae38f7100"
+        ],
+        "evidence_texts": [
+          "Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson.",
+          "Return to Cabin by the Lake Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson. It was directed by Po-Chih Leong. The movie is a sequel to \"Cabin by the Lake\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.543397,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.508679
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5064207315444946,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25256829261779784,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.506421,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.252568
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5018224120140076,
+        "semantic_score": 0.25,
+        "fusion_score": 0.250728964805603,
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "evidence_texts": [
+          "As a director, he has likely worked on a variety of projects spanning different genres.",
+          "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.501822,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.250729
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.49626192450523376,
+        "semantic_score": 0.25,
+        "fusion_score": 0.24850476980209352,
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "evidence_texts": [
+          "His work as a director spanned over two decades.",
+          "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.496262,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.248505
+        }
+      }
+    ],
+    "answer": "Po-Chih Leong",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'Return to Cabin by the Lake' was directed by Po-Chih Leong, providing clear support for the answer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Return to Cabin by the Lake is a 2001 American crime comedy telefilm.\""
+    ]
+  }
+]

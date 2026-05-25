@@ -1,0 +1,24 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "The performer of 'Me And Bobby McGee' is Roger Miller, but there is no evidence regarding his child. Therefore, the answer is insufficient.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the performer of the song Me And Bobby Mcgee?",
+      "answer": "Roger Miller",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Me and Bobby McGee\" is a song written by American singer-songwriter Kris Kristofferson and songwriter Fred Foster, originally performed by Roger Miller.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the child of the performer of Me And Bobby Mcgee?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Me and Bobby McGee\" is a song written by American singer-songwriter Kris Kristofferson and songwriter Fred Foster, originally performed by Roger Miller.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

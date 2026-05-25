@@ -1,0 +1,143 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Henry?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Henry"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the date of birth of the father of Henry?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the father of Henry?",
+        "answer": "Charles Somerset",
+        "confidence": 0.75,
+        "reasoning_summary": "The evidence indicates that Henry is the son of Charles Somerset, as it mentions their only son, Henry, was born to Elizabeth Herbert and Charles Somerset. This is supported by the evidence about Elizabeth Herbert's marriage to Charles Somerset.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Their only son, Henry, was born in around 1496.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Their only son, Henry, was born in around 1496.\"",
+            "fusion_score": 0.5270445108413697,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Their only son, Henry, was born in around 1496.",
+              "Elizabeth Somerset, Baroness Herbert Elizabeth Herbert, 3rd Baroness Herbert (c. 1476 – 27 August 1507) was the sole heir and daughter of William Herbert, 2nd Earl of Pembroke, and his first wife, Mary Woodville. Her father died on 16 July 1491, and she inherited extensive lands in Wales. As her father had no sons, she succeeded to his barony, but could not succeed to the earldom, which was restricted to the male line. She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492. Their only son, Henry, was born in around 1496. In 1504, Somerset was created Baron Herbert. Elizabeth died on 27 August 1507, and was buried in St George's Chapel, Windsor Castle. The following month, further estates, including the lease of Caldicot Castle, devolved on Elizabeth's husband on the death of her uncle, Sir Walter Herbert. The addition of He..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Henry III's lineage is connected through his mother, Elisabeth of Hesse-Marburg, and father, Count John V.\"",
+            "fusion_score": 0.915218734741211,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Henry III's lineage is connected through his mother, Elisabeth of Hesse-Marburg, and father, Count John V.",
+              "Henry III of Nassau-Breda Count Henry III of Nassau- Dillenburg- Dietz( 12 January 1483, Siegen – 14 September 1538, Breda), Lord( from 1530 Baron) of Breda, Lord of the Lek, of Dietz, etc. was a count of the House of Nassau. He was the son of Count John V of Nassau- Dillenburg and Elisabeth of Hesse- Marburg. His younger brother was William I, Count of Nassau- Dillenburg( the father of William the Silent)."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Henry II was the Landgrave of Hesse and the father of Adelaide of Hesse.\"",
+            "fusion_score": 0.9136720895767212,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Henry II was the Landgrave of Hesse and the father of Adelaide of Hesse.",
+              "Adelaide of Hesse Adelaide of Hesse( after 1323 – after May 26, 1371) was a daughter of Henry II, Landgrave of Hesse, and his wife Elisabeth of Thuringia, daughter of Frederick I, margrave of Meissen. Adelaide was a member of the House of Hesse."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Henry",
+        "Charles Somerset"
+      ],
+      "relations": [
+        "date of birth of"
+      ],
+      "relation_query": "What is the date of birth of the father of a person?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the date of birth of the father of Henry?",
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "What is the date of birth of the father of Henry?",
+        "answer": "c. 1470",
+        "confidence": 0.75,
+        "reasoning_summary": "Charles Somerset, the father of Henry, was born around 1470, inferred from the context of his marriage and the birth of his son Henry around 1496. This is supported by the evidence regarding Elizabeth Herbert's marriage to Charles Somerset.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Their only son, Henry, was born in around 1496.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Their only son, Henry, was born in around 1496.\"",
+            "fusion_score": 0.3227726936340332,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Their only son, Henry, was born in around 1496.",
+              "Elizabeth Somerset, Baroness Herbert Elizabeth Herbert, 3rd Baroness Herbert (c. 1476 – 27 August 1507) was the sole heir and daughter of William Herbert, 2nd Earl of Pembroke, and his first wife, Mary Woodville. Her father died on 16 July 1491, and she inherited extensive lands in Wales. As her father had no sons, she succeeded to his barony, but could not succeed to the earldom, which was restricted to the male line. She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492. Their only son, Henry, was born in around 1496. In 1504, Somerset was created Baron Herbert. Elizabeth died on 27 August 1507, and was buried in St George's Chapel, Windsor Castle. The following month, further estates, including the lease of Caldicot Castle, devolved on Elizabeth's husband on the death of her uncle, Sir Walter Herbert. The addition of He..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The date of death for Henry I is significant in understanding his timeline.\"",
+            "fusion_score": 0.5215077161788941,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The date of death for Henry I is significant in understanding his timeline.",
+              "Henry I of Werle Henry I( died 8 October 1291) was a Prince of Mecklenburg- Werle and Mecklenburg- Güstrow."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492.\"",
+            "fusion_score": 0.5,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492.",
+              "Elizabeth Somerset, Baroness Herbert Elizabeth Herbert, 3rd Baroness Herbert (c. 1476 – 27 August 1507) was the sole heir and daughter of William Herbert, 2nd Earl of Pembroke, and his first wife, Mary Woodville. Her father died on 16 July 1491, and she inherited extensive lands in Wales. As her father had no sons, she succeeded to his barony, but could not succeed to the earldom, which was restricted to the male line. She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492. Their only son, Henry, was born in around 1496. In 1504, Somerset was created Baron Herbert. Elizabeth died on 27 August 1507, and was buried in St George's Chapel, Windsor Castle. The following month, further estates, including the lease of Caldicot Castle, devolved on Elizabeth's husband on the death of her uncle, Sir Walter Herbert. The addition of He..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Henry",
+        "Charles Somerset"
+      ],
+      "relations": [
+        "date of birth of a father"
+      ],
+      "relation_query": "What is the date of birth of the father of a person?",
+      "answer_type": "date"
+    }
+  }
+]

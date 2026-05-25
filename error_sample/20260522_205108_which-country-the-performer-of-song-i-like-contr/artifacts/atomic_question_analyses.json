@@ -1,0 +1,81 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song I Like Control?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "I Like Control"
+      ],
+      "relations": [
+        "performer of"
+      ],
+      "relation_query": "who is the performer of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What country is the performer of I Like Control from?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the performer of the song I Like Control?",
+        "answer": "DJ Clue",
+        "confidence": 0.9,
+        "reasoning_summary": "The song 'I Like Control' is performed by DJ Clue, featuring Missy Elliott and others, as stated in the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"I Like Control\" is a song by DJ Clue? featuring Missy Elliott and her former protégées Nicole Wray and Mocha.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"I Like Control\" is a song by DJ Clue? featuring Missy Elliott and her former protégées Nicole Wray and Mocha.\"",
+            "fusion_score": 0.5166913747787476,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "I Like Control\" is a song by DJ Clue? featuring Missy Elliott and her former protégées Nicole Wray and Mocha.",
+              "I Like Control \"I Like Control\" is a song by DJ Clue? featuring Missy Elliott and her former protégées Nicole Wray and Mocha. The song was released via radio airplay on February 13, 1999 as the second single from Clue's solo debut studio album, \"The Professional\" (1998). The song charted on \"Billboard\" Hot R&B/Hip-Hop Songs based solely on airplay, where it debuted in its peak position of #81."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The song 'I Like Control' represents a collaboration among various artists in the hip-hop genre.\"",
+            "fusion_score": 0.5183474302291871,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The song 'I Like Control' represents a collaboration among various artists in the hip-hop genre.",
+              "I Like Control \"I Like Control\" is a song by DJ Clue? featuring Missy Elliott and her former protégées Nicole Wray and Mocha. The song was released via radio airplay on February 13, 1999 as the second single from Clue's solo debut studio album, \"The Professional\" (1998). The song charted on \"Billboard\" Hot R&B/Hip-Hop Songs based solely on airplay, where it debuted in its peak position of #81."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The success of 'I Like Control' added to the rich history of collaborations in the hip-hop genre during the 1990s.\"",
+            "fusion_score": 0.4994583308696747,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The success of 'I Like Control' added to the rich history of collaborations in the hip-hop genre during the 1990s.",
+              "I Like Control \"I Like Control\" is a song by DJ Clue? featuring Missy Elliott and her former protégées Nicole Wray and Mocha. The song was released via radio airplay on February 13, 1999 as the second single from Clue's solo debut studio album, \"The Professional\" (1998). The song charted on \"Billboard\" Hot R&B/Hip-Hop Songs based solely on airplay, where it debuted in its peak position of #81."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "I Like Control",
+        "DJ Clue"
+      ],
+      "relations": [
+        "performer of a song",
+        "origin country"
+      ],
+      "relation_query": "What country is the performer of a song from?",
+      "answer_type": "country"
+    }
+  }
+]

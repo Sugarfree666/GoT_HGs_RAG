@@ -91,7 +91,7 @@ class AtomicDagExecutor:
             answer_artifact.append(result.to_dict())
 
         atomic_results = [results_by_id[node.node_id] for node in order]
-        final_answer = self.composer.compose(original_question, atomic_results)
+        final_answer = self.composer.compose(original_question, atomic_results, dag_nodes=order)
         artifacts = {
             "dag_input": [node.to_dict() for node in nodes],
             "execution_order": [node.node_id for node in order],

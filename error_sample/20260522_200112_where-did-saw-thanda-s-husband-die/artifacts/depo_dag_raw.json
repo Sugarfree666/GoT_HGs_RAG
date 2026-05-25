@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is Saw Thanda's husband?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the husband of Saw Thanda die?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

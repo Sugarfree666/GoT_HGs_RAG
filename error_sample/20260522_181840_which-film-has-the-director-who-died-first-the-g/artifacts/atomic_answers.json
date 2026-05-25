@@ -1,0 +1,932 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Goose Woman?",
+    "analysis": {
+      "entities": [
+        "The Goose Woman"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Goose Woman is a 1925 silent film drama directed by Clarence Brown\"",
+        "hyperedge_text": "The Goose Woman is a 1925 silent film drama directed by Clarence Brown",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6509448289871216,
+        "fusion_score": 0.5301889657974244,
+        "entity_ids": [
+          "\"THE GOOSE WOMAN\"",
+          "\"CLARENCE BROWN\""
+        ],
+        "chunk_ids": [
+          "chunk-a969cf9bdb906133d07a143e3dfb835b"
+        ],
+        "evidence_texts": [
+          "The Goose Woman is a 1925 silent film drama directed by Clarence Brown",
+          "The Goose Woman The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son. The film was released by Universal Pictures. The Rex Beach short story is based in part on the then already sensational Hall- Mills murder case in which a woman named Jane Gibson is described as a pig woman because of the pigs she raised on her property. Both critics and audiences favorably received the film. \" The Goose Woman\" was remade in 1933 as\" The Past of Mary Holmes\" featuring Helen MacKellar and Jean Arthur."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.650945,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530189
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son.\"",
+        "hyperedge_text": "The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6188591718673706,
+        "fusion_score": 0.5237718343734742,
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"THE GOOSE WOMAN\"",
+          "\"CLARENCE BROWN\"",
+          "\"LOUISE DRESSER\"",
+          "\"JACK PICKFORD\""
+        ],
+        "chunk_ids": [
+          "chunk-a969cf9bdb906133d07a143e3dfb835b"
+        ],
+        "evidence_texts": [
+          "The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son.",
+          "The Goose Woman The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son. The film was released by Universal Pictures. The Rex Beach short story is based in part on the then already sensational Hall- Mills murder case in which a woman named Jane Gibson is described as a pig woman because of the pigs she raised on her property. Both critics and audiences favorably received the film. \" The Goose Woman\" was remade in 1933 as\" The Past of Mary Holmes\" featuring Helen MacKellar and Jean Arthur."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.618859,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523772
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is a remake of the silent film 'The Goose Woman' (1925), which is based on a short story by Rex Beach, partly based on the Hall-Mills murder case.\"",
+        "hyperedge_text": "The film is a remake of the silent film 'The Goose Woman' (1925), which is based on a short story by Rex Beach, partly based on the Hall-Mills murder case.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5787182450294495,
+        "fusion_score": 0.51574364900589,
+        "entity_ids": [
+          "\"REX BEACH\"",
+          "\"HALL-MILLS MURDER CASE\"",
+          "\"THE GOOSE WOMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-4a77f792e139979bfee8a0a4524ebaf4"
+        ],
+        "evidence_texts": [
+          "The film is a remake of the silent film 'The Goose Woman' (1925), which is based on a short story by Rex Beach, partly based on the Hall-Mills murder case.",
+          "The Past of Mary Holmes The Past of Mary Holmes is a 1933 American pre-Code drama film, directed by Slavko Vorkapich and Harlan Thompson, and released by RKO. The film is a remake of the silent film\" The Goose Woman\"( 1925), which is based on a short story by Rex Beach, partly based on the Hall- Mills murder case."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578718,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515744
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is a remake of the silent film 'The Goose Woman' (1925).\"",
+        "hyperedge_text": "The film is a remake of the silent film 'The Goose Woman' (1925).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6222698092460632,
+        "fusion_score": 0.5244539618492127,
+        "entity_ids": [
+          "\"REMAKE\"",
+          "\"SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-4a77f792e139979bfee8a0a4524ebaf4"
+        ],
+        "evidence_texts": [
+          "The film is a remake of the silent film 'The Goose Woman' (1925).",
+          "The Past of Mary Holmes The Past of Mary Holmes is a 1933 American pre-Code drama film, directed by Slavko Vorkapich and Harlan Thompson, and released by RKO. The film is a remake of the silent film\" The Goose Woman\"( 1925), which is based on a short story by Rex Beach, partly based on the Hall- Mills murder case."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.62227,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524454
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Goose Woman was remade in 1933 as 'The Past of Mary Holmes'.\"",
+        "hyperedge_text": "The Goose Woman was remade in 1933 as 'The Past of Mary Holmes'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5651376247406006,
+        "fusion_score": 0.5130275249481202,
+        "entity_ids": [
+          "\"THE PAST OF MARY HOLMES\"",
+          "\"HELEN MACKELLAR\"",
+          "\"JEAN ARTHUR\""
+        ],
+        "chunk_ids": [
+          "chunk-a969cf9bdb906133d07a143e3dfb835b"
+        ],
+        "evidence_texts": [
+          "The Goose Woman was remade in 1933 as 'The Past of Mary Holmes'.",
+          "The Goose Woman The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son. The film was released by Universal Pictures. The Rex Beach short story is based in part on the then already sensational Hall- Mills murder case in which a woman named Jane Gibson is described as a pig woman because of the pigs she raised on her property. Both critics and audiences favorably received the film. \" The Goose Woman\" was remade in 1933 as\" The Past of Mary Holmes\" featuring Helen MacKellar and Jean Arthur."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.565138,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.513028
+        }
+      }
+    ],
+    "answer": "Clarence Brown",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'The Goose Woman' is directed by Clarence Brown.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Goose Woman is a 1925 silent film drama directed by Clarence Brown\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of You Can No Longer Remain Silent?",
+    "analysis": {
+      "entities": [
+        "You Can No Longer Remain Silent"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.\"",
+        "hyperedge_text": "You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5259488821029663,
+        "fusion_score": 0.5051897764205933,
+        "entity_ids": [
+          "\"WILHELM BORCHERT\"",
+          "\"ROBERT A. STEMMLE\"",
+          "\"YOU CAN NO LONGER REMAIN SILENT\"",
+          "\"HEIDEMARIE HATHEYER\"",
+          "\"WERNER HINZ\""
+        ],
+        "chunk_ids": [
+          "chunk-2dc402abb93a79d412498caefa469f61"
+        ],
+        "evidence_texts": [
+          "You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.",
+          "You Can No Longer Remain Silent You Can No Longer Remain Silent( German: Du darfst nicht länger schweigen) is a 1955 West German romantic drama film directed by Robert A. Stemmle and starring Heidemarie Hatheyer, Wilhelm Borchert and Werner Hinz. It is based on the 1929 novel\" Morning of Life\" by Kristmann Gudmundsson. It is set amongst feuding Scandinavian fishing families. The film's sets were designed by the art directors Helmut Nentwig and Karl Weber."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.525949,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.50519
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"You Can No Longer Remain Silent (German: Du darfst nicht länger schweigen) is the original title of the film.\"",
+        "hyperedge_text": "You Can No Longer Remain Silent (German: Du darfst nicht länger schweigen) is the original title of the film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5062142610549927,
+        "fusion_score": 0.5012428522109986,
+        "entity_ids": [
+          "\"DU DARFST NICHT LÄNGER SCHWEIGEN\""
+        ],
+        "chunk_ids": [
+          "chunk-2dc402abb93a79d412498caefa469f61"
+        ],
+        "evidence_texts": [
+          "You Can No Longer Remain Silent (German: Du darfst nicht länger schweigen) is the original title of the film.",
+          "You Can No Longer Remain Silent You Can No Longer Remain Silent( German: Du darfst nicht länger schweigen) is a 1955 West German romantic drama film directed by Robert A. Stemmle and starring Heidemarie Hatheyer, Wilhelm Borchert and Werner Hinz. It is based on the 1929 novel\" Morning of Life\" by Kristmann Gudmundsson. It is set amongst feuding Scandinavian fishing families. The film's sets were designed by the art directors Helmut Nentwig and Karl Weber."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.506214,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.501243
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the director of 'Alone Among The Taliban'. \"",
+        "hyperedge_text": "He is the director of 'Alone Among The Taliban'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.39290136098861694,
+        "fusion_score": 0.4785802721977234,
+        "entity_ids": [
+          "\"ALONE AMONG THE TALIBAN\""
+        ],
+        "chunk_ids": [
+          "chunk-cbbb167608e3d3460719215f1e5f9a3f"
+        ],
+        "evidence_texts": [
+          "He is the director of 'Alone Among The Taliban'.",
+          "Mohsen Eslamzadeh Mohsen Eslamzadeh is an Iranian documentary filmmaker. He is the director of\" Alone Among The Taliban\". This film has won the best documentary award at the 44th Athens International Film and Video Festival in the United States. This film has won the best documentary award at the 12th Marbella International Film Festival in Spain. This film has won the Shahid Avini Award offers."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.392901,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.47858
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lucy Mulloy is the sole writer and director of Una Noche.\"",
+        "hyperedge_text": "Lucy Mulloy is the sole writer and director of Una Noche.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.3881039619445801,
+        "fusion_score": 0.477620792388916,
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-2151217bdf2cea754b5f1dd2a7c69d67"
+        ],
+        "evidence_texts": [
+          "Lucy Mulloy is the sole writer and director of Una Noche.",
+          "Una Noche (film) Una Noche(\" One Night\") is a Cuban- set drama- thriller film written and directed by Lucy Mulloy and starring Dariel Arrechada, Anailín de la Rúa de la Torre, and Javier Nuñez Florián."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.388104,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.477621
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ying Liang is an independent film director.\"",
+        "hyperedge_text": "Ying Liang is an independent film director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.38624393939971924,
+        "fusion_score": 0.47724878787994385,
+        "entity_ids": [
+          "\"INDEPENDENT FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-5e67efc111eabedbad579f43814d6c72"
+        ],
+        "evidence_texts": [
+          "Ying Liang is an independent film director.",
+          "Ying Liang Ying Liang( born 1977) is a Chinese independent film director and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.386244,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.477249
+        }
+      }
+    ],
+    "answer": "Robert A. Stemmle",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'You Can No Longer Remain Silent' is directed by Robert A. Stemmle.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the director of The Goose Woman die?",
+    "analysis": {
+      "entities": [
+        "The Goose Woman",
+        "Clarence Brown"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "When did the director of a work die?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Goose Woman is a 1925 silent film drama directed by Clarence Brown\"",
+        "hyperedge_text": "The Goose Woman is a 1925 silent film drama directed by Clarence Brown",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.613064169883728,
+        "fusion_score": 0.5226128339767456,
+        "entity_ids": [
+          "\"THE GOOSE WOMAN\"",
+          "\"CLARENCE BROWN\""
+        ],
+        "chunk_ids": [
+          "chunk-a969cf9bdb906133d07a143e3dfb835b"
+        ],
+        "evidence_texts": [
+          "The Goose Woman is a 1925 silent film drama directed by Clarence Brown",
+          "The Goose Woman The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son. The film was released by Universal Pictures. The Rex Beach short story is based in part on the then already sensational Hall- Mills murder case in which a woman named Jane Gibson is described as a pig woman because of the pigs she raised on her property. Both critics and audiences favorably received the film. \" The Goose Woman\" was remade in 1933 as\" The Past of Mary Holmes\" featuring Helen MacKellar and Jean Arthur."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.613064,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522613
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son.\"",
+        "hyperedge_text": "The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5735829472541809,
+        "fusion_score": 0.5147165894508362,
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"THE GOOSE WOMAN\"",
+          "\"CLARENCE BROWN\"",
+          "\"LOUISE DRESSER\"",
+          "\"JACK PICKFORD\""
+        ],
+        "chunk_ids": [
+          "chunk-a969cf9bdb906133d07a143e3dfb835b"
+        ],
+        "evidence_texts": [
+          "The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son.",
+          "The Goose Woman The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son. The film was released by Universal Pictures. The Rex Beach short story is based in part on the then already sensational Hall- Mills murder case in which a woman named Jane Gibson is described as a pig woman because of the pigs she raised on her property. Both critics and audiences favorably received the film. \" The Goose Woman\" was remade in 1933 as\" The Past of Mary Holmes\" featuring Helen MacKellar and Jean Arthur."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.573583,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.514717
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is a remake of the silent film 'The Goose Woman' (1925), which is based on a short story by Rex Beach, partly based on the Hall-Mills murder case.\"",
+        "hyperedge_text": "The film is a remake of the silent film 'The Goose Woman' (1925), which is based on a short story by Rex Beach, partly based on the Hall-Mills murder case.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5518705248832703,
+        "fusion_score": 0.3103741049766541,
+        "entity_ids": [
+          "\"REX BEACH\"",
+          "\"HALL-MILLS MURDER CASE\"",
+          "\"THE GOOSE WOMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-4a77f792e139979bfee8a0a4524ebaf4"
+        ],
+        "evidence_texts": [
+          "The film is a remake of the silent film 'The Goose Woman' (1925), which is based on a short story by Rex Beach, partly based on the Hall-Mills murder case.",
+          "The Past of Mary Holmes The Past of Mary Holmes is a 1933 American pre-Code drama film, directed by Slavko Vorkapich and Harlan Thompson, and released by RKO. The film is a remake of the silent film\" The Goose Woman\"( 1925), which is based on a short story by Rex Beach, partly based on the Hall- Mills murder case."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.551871,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.310374
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is a remake of the silent film 'The Goose Woman' (1925).\"",
+        "hyperedge_text": "The film is a remake of the silent film 'The Goose Woman' (1925).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5717887282371521,
+        "fusion_score": 0.31435774564743046,
+        "entity_ids": [
+          "\"REMAKE\"",
+          "\"SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-4a77f792e139979bfee8a0a4524ebaf4"
+        ],
+        "evidence_texts": [
+          "The film is a remake of the silent film 'The Goose Woman' (1925).",
+          "The Past of Mary Holmes The Past of Mary Holmes is a 1933 American pre-Code drama film, directed by Slavko Vorkapich and Harlan Thompson, and released by RKO. The film is a remake of the silent film\" The Goose Woman\"( 1925), which is based on a short story by Rex Beach, partly based on the Hall- Mills murder case."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.571789,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.314358
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Goose Woman was remade in 1933 as 'The Past of Mary Holmes' featuring Helen MacKellar and Jean Arthur.\"",
+        "hyperedge_text": "The Goose Woman was remade in 1933 as 'The Past of Mary Holmes' featuring Helen MacKellar and Jean Arthur.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5495991706848145,
+        "fusion_score": 0.3099198341369629,
+        "entity_ids": [
+          "\"THE PAST OF MARY HOLMES\"",
+          "\"HELEN MACKELLAR\"",
+          "\"JEAN ARTHUR\""
+        ],
+        "chunk_ids": [
+          "chunk-a969cf9bdb906133d07a143e3dfb835b"
+        ],
+        "evidence_texts": [
+          "The Goose Woman was remade in 1933 as 'The Past of Mary Holmes' featuring Helen MacKellar and Jean Arthur.",
+          "The Goose Woman The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son. The film was released by Universal Pictures. The Rex Beach short story is based in part on the then already sensational Hall- Mills murder case in which a woman named Jane Gibson is described as a pig woman because of the pigs she raised on her property. Both critics and audiences favorably received the film. \" The Goose Woman\" was remade in 1933 as\" The Past of Mary Holmes\" featuring Helen MacKellar and Jean Arthur."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.549599,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.30992
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the death date of Clarence Brown, the director of 'The Goose Woman'.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Goose Woman is a 1925 silent film drama directed by Clarence Brown\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "When did the director of You Can No Longer Remain Silent die?",
+    "analysis": {
+      "entities": [
+        "You Can No Longer Remain Silent",
+        "Robert A. Stemmle"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of the director of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.\"",
+        "hyperedge_text": "You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49635249376296997,
+        "fusion_score": 0.499270498752594,
+        "entity_ids": [
+          "\"WILHELM BORCHERT\"",
+          "\"ROBERT A. STEMMLE\"",
+          "\"YOU CAN NO LONGER REMAIN SILENT\"",
+          "\"HEIDEMARIE HATHEYER\"",
+          "\"WERNER HINZ\""
+        ],
+        "chunk_ids": [
+          "chunk-2dc402abb93a79d412498caefa469f61"
+        ],
+        "evidence_texts": [
+          "You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.",
+          "You Can No Longer Remain Silent You Can No Longer Remain Silent( German: Du darfst nicht länger schweigen) is a 1955 West German romantic drama film directed by Robert A. Stemmle and starring Heidemarie Hatheyer, Wilhelm Borchert and Werner Hinz. It is based on the 1929 novel\" Morning of Life\" by Kristmann Gudmundsson. It is set amongst feuding Scandinavian fishing families. The film's sets were designed by the art directors Helmut Nentwig and Karl Weber."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.496352,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.49927
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The music director died before the release of the film.\"",
+        "hyperedge_text": "The music director died before the release of the film.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4987061619758606,
+        "semantic_score": 0.486323744058609,
+        "fusion_score": 0.2967472136020661,
+        "entity_ids": [
+          "\"SAMPATH SELVAM\""
+        ],
+        "chunk_ids": [
+          "chunk-7b18343d2c0ab9d855df8ec895675e28"
+        ],
+        "evidence_texts": [
+          "The music director died before the release of the film.",
+          "Thulasi (1987 film) Thulasi is a 1987 Tamil romantic drama film directed by Ameerjan. The film features Murali and Seetha in lead roles. The film, produced by P. S. V. Hariharan, had musical score by Sampath Selvam and was released on 27 November 1987. The music director died before the release of the film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.498706,
+          "S": 0.486324,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.296747
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.\"",
+        "hyperedge_text": "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4541282653808594,
+        "semantic_score": 0.43245214223861694,
+        "fusion_score": 0.2681417346000672,
+        "entity_ids": [
+          "\"2007\"",
+          "\"STARY CZŁOWIEK I PIES (THE OLD MAN AND THE DOG)\""
+        ],
+        "chunk_ids": [
+          "chunk-d3d9377a1c523159f484fa4ec74bec5e"
+        ],
+        "evidence_texts": [
+          "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+          "Witold Leszczyński Witold Leszczyński( 16 August 1933 – 1 September 2007) was a Polish film director and screenwriter. In 1967 he graduated from the National Film School in Łódź. He directed over thirty films between 1959 and 2007. Most known for\" Żywot MateuszaMatthew's Days\") based on a novel by Norwegian writer Tarjei Vesaas,\" Konopielka\", adapted from the novel of Edward Redliński,\" Siekierezada\" based on a novel by Edward Stachura and many others films. He received numerous awards, including Grand Prix at the Polish Film Festival in 1986. The director died during the shoot of his film\" Stary człowiek i pies The Old Man and the Dog\") in 2007."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.454128,
+          "S": 0.432452,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268142
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Robert Adolf Stemmle (10 June 1903 – 24 February 1974) was a German screenwriter and film director.\"",
+        "hyperedge_text": "Robert Adolf Stemmle (10 June 1903 – 24 February 1974) was a German screenwriter and film director.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.25,
+        "semantic_score": 0.25,
+        "fusion_score": 0.35000000000000003,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"SCREENWRITER\"",
+          "\"GERMAN\"",
+          "\"ROBERT A. STEMMLE\""
+        ],
+        "chunk_ids": [
+          "chunk-7cb9f11d9c459db3e677f82be841e3a4"
+        ],
+        "evidence_texts": [
+          "Robert Adolf Stemmle (10 June 1903 – 24 February 1974) was a German screenwriter and film director.",
+          "Robert A. Stemmle Robert Adolf Stemmle( 10 June 1903 – 24 February 1974) was a German screenwriter and film director. He wrote for 86 films between 1932 and 1967. He also directed 46 films between 1934 and 1970. His 1959 film\" Die unvollkommene Ehe\" was entered into the 1st Moscow International Film Festival. He was born in Magdeburg, Germany and died in Baden- Baden, Germany."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.25,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.35
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"You Can No Longer Remain Silent (German: Du darfst nicht länger schweigen) is the original title of the film.\"",
+        "hyperedge_text": "You Can No Longer Remain Silent (German: Du darfst nicht länger schweigen) is the original title of the film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.43989455699920654,
+        "fusion_score": 0.28797891139984133,
+        "entity_ids": [
+          "\"DU DARFST NICHT LÄNGER SCHWEIGEN\""
+        ],
+        "chunk_ids": [
+          "chunk-2dc402abb93a79d412498caefa469f61"
+        ],
+        "evidence_texts": [
+          "You Can No Longer Remain Silent (German: Du darfst nicht länger schweigen) is the original title of the film.",
+          "You Can No Longer Remain Silent You Can No Longer Remain Silent( German: Du darfst nicht länger schweigen) is a 1955 West German romantic drama film directed by Robert A. Stemmle and starring Heidemarie Hatheyer, Wilhelm Borchert and Werner Hinz. It is based on the 1929 novel\" Morning of Life\" by Kristmann Gudmundsson. It is set amongst feuding Scandinavian fishing families. The film's sets were designed by the art directors Helmut Nentwig and Karl Weber."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.439895,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.287979
+        }
+      }
+    ],
+    "answer": "24 February 1974",
+    "confidence": 0.9,
+    "reasoning_summary": "Robert A. Stemmle, the director of 'You Can No Longer Remain Silent', died on 24 February 1974, as stated in the evidence.",
+    "used_dependencies": [
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Robert Adolf Stemmle (10 June 1903 – 24 February 1974) was a German screenwriter and film director.\""
+    ]
+  },
+  {
+    "node_id": "q5",
+    "question": "Who is the director of You Can No Longer Remain Silent?",
+    "analysis": {
+      "entities": [
+        "You Can No Longer Remain Silent",
+        "Robert A. Stemmle"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "Who is the director of a work titled 'You Can No Longer Remain Silent'?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.\"",
+        "hyperedge_text": "You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5517411828041077,
+        "semantic_score": 0.5259488821029663,
+        "fusion_score": 0.7258862495422364,
+        "entity_ids": [
+          "\"WILHELM BORCHERT\"",
+          "\"ROBERT A. STEMMLE\"",
+          "\"YOU CAN NO LONGER REMAIN SILENT\"",
+          "\"HEIDEMARIE HATHEYER\"",
+          "\"WERNER HINZ\""
+        ],
+        "chunk_ids": [
+          "chunk-2dc402abb93a79d412498caefa469f61"
+        ],
+        "evidence_texts": [
+          "You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.",
+          "You Can No Longer Remain Silent You Can No Longer Remain Silent( German: Du darfst nicht länger schweigen) is a 1955 West German romantic drama film directed by Robert A. Stemmle and starring Heidemarie Hatheyer, Wilhelm Borchert and Werner Hinz. It is based on the 1929 novel\" Morning of Life\" by Kristmann Gudmundsson. It is set amongst feuding Scandinavian fishing families. The film's sets were designed by the art directors Helmut Nentwig and Karl Weber."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.551741,
+          "S": 0.525949,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.725886
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"You Can No Longer Remain Silent (German: Du darfst nicht länger schweigen) is the original title of the film.\"",
+        "hyperedge_text": "You Can No Longer Remain Silent (German: Du darfst nicht länger schweigen) is the original title of the film.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.5398473739624023,
+        "semantic_score": 0.5062142610549927,
+        "fusion_score": 0.5171818017959595,
+        "entity_ids": [
+          "\"DU DARFST NICHT LÄNGER SCHWEIGEN\""
+        ],
+        "chunk_ids": [
+          "chunk-2dc402abb93a79d412498caefa469f61"
+        ],
+        "evidence_texts": [
+          "You Can No Longer Remain Silent (German: Du darfst nicht länger schweigen) is the original title of the film.",
+          "You Can No Longer Remain Silent You Can No Longer Remain Silent( German: Du darfst nicht länger schweigen) is a 1955 West German romantic drama film directed by Robert A. Stemmle and starring Heidemarie Hatheyer, Wilhelm Borchert and Werner Hinz. It is based on the 1929 novel\" Morning of Life\" by Kristmann Gudmundsson. It is set amongst feuding Scandinavian fishing families. The film's sets were designed by the art directors Helmut Nentwig and Karl Weber."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.539847,
+          "S": 0.506214,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517182
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Silent Voices may refer to various interpretations across artistic and cultural contexts.\"",
+        "hyperedge_text": "Silent Voices may refer to various interpretations across artistic and cultural contexts.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4619712233543396,
+        "semantic_score": 0.3831472396850586,
+        "fusion_score": 0.26141793727874757,
+        "entity_ids": [
+          "\"CULTURAL CONTEXT\"",
+          "\"ARTISTIC CONTEXT\""
+        ],
+        "chunk_ids": [
+          "chunk-7d77937836b4270c95faaea0da350cbe"
+        ],
+        "evidence_texts": [
+          "Silent Voices may refer to various interpretations across artistic and cultural contexts.",
+          "Silent Voices Silent Voice, Silent Voices or variants may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.461971,
+          "S": 0.383147,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.261418
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Erich Schönfelder directed the film, showcasing his directorial skills in a silent cinema format.\"",
+        "hyperedge_text": "Erich Schönfelder directed the film, showcasing his directorial skills in a silent cinema format.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.42065563797950745,
+        "semantic_score": 0.39667993783950806,
+        "fusion_score": 0.2475982427597046,
+        "entity_ids": [
+          "\"DIRECTORIAL SKILLS\""
+        ],
+        "chunk_ids": [
+          "chunk-8f9dd85c485eac98ce4653d47bf2f6c4"
+        ],
+        "evidence_texts": [
+          "Erich Schönfelder directed the film, showcasing his directorial skills in a silent cinema format.",
+          "The Fate of a Night The Fate of a Night( German: Das Schicksal einer Nacht) is a 1927 German silent film directed by Erich Schönfelder. The film's art direction was by Ernst Stern."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.420656,
+          "S": 0.39668,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.247598
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lucy Mulloy is the sole writer and director of Una Noche.\"",
+        "hyperedge_text": "Lucy Mulloy is the sole writer and director of Una Noche.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.40110599994659424,
+        "semantic_score": 0.3881039619445801,
+        "fusion_score": 0.23806319236755374,
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-2151217bdf2cea754b5f1dd2a7c69d67"
+        ],
+        "evidence_texts": [
+          "Lucy Mulloy is the sole writer and director of Una Noche.",
+          "Una Noche (film) Una Noche(\" One Night\") is a Cuban- set drama- thriller film written and directed by Lucy Mulloy and starring Dariel Arrechada, Anailín de la Rúa de la Torre, and Javier Nuñez Florián."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.401106,
+          "S": 0.388104,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.238063
+        }
+      }
+    ],
+    "answer": "Robert A. Stemmle",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'You Can No Longer Remain Silent' is directed by Robert A. Stemmle.",
+    "used_dependencies": [
+      "q2",
+      "q4"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.\""
+    ]
+  }
+]

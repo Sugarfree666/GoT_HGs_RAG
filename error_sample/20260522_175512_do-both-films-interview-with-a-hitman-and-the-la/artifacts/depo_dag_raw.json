@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Interview With A Hitman?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the nationality of the director of Interview With A Hitman?",
+      "dependencies": [
+        "q1"
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of The Last Coupon?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q4",
+      "question": "What is the nationality of the director of The Last Coupon?",
+      "dependencies": [
+        "q3"
+      ]
+    },
+    {
+      "node_id": "q5",
+      "question": "What is the nationality of the director of Interview With A Hitman?",
+      "dependencies": [
+        "q2",
+        "q4"
+      ],
+      "metadata": {
+        "operator": "COMPARE_SAME"
+      }
+    }
+  ]
+}

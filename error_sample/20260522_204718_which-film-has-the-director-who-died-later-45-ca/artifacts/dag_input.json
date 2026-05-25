@@ -1,0 +1,16 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of 45 Calibre Echo?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the director of 45 Calibre Echo die?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  }
+]

@@ -1,0 +1,273 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Phalitamsha?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Phalitamsha"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Gladiators Seven?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Gladiators Seven"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Phalitamsha?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Phalitamsha?",
+        "answer": "S. R. Puttanna Kanagal",
+        "confidence": 1.0,
+        "reasoning_summary": "The evidence clearly states that Phalitamsha is directed by S. R. Puttanna Kanagal.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Released in 1976, Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Released in 1976, Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal.\"",
+            "fusion_score": 0.5200658559799195,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Released in 1976, Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal.",
+              "Phalitamsha Released in 1976 Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal. It was written by Srinivasa Kulakarni under the Banner of A 1 Movietone. The movie paired newcomer Jai Jagadish with four heroines. Aarathi as expected has the meatiest role and delivers yet another power- packed performance. Despite a good- looking hero, top notch actresses and beautiful outdoor locales, Phalitamsha remains one of the few flops of ace director Puttana Kanagal's career."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Phalitamsha, released in 1976, is a romantic movie.\"",
+            "fusion_score": 0.509342646598816,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Phalitamsha, released in 1976, is a romantic movie.",
+              "Phalitamsha Released in 1976 Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal. It was written by Srinivasa Kulakarni under the Banner of A 1 Movietone. The movie paired newcomer Jai Jagadish with four heroines. Aarathi as expected has the meatiest role and delivers yet another power- packed performance. Despite a good- looking hero, top notch actresses and beautiful outdoor locales, Phalitamsha remains one of the few flops of ace director Puttana Kanagal's career."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Phalitamsha is a romantic Kannada movie.\"",
+            "fusion_score": 0.5082611083984375,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Phalitamsha is a romantic Kannada movie.",
+              "Phalitamsha Released in 1976 Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal. It was written by Srinivasa Kulakarni under the Banner of A 1 Movietone. The movie paired newcomer Jai Jagadish with four heroines. Aarathi as expected has the meatiest role and delivers yet another power- packed performance. Despite a good- looking hero, top notch actresses and beautiful outdoor locales, Phalitamsha remains one of the few flops of ace director Puttana Kanagal's career."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Phalitamsha",
+        "S. R. Puttanna Kanagal"
+      ],
+      "relations": [
+        "age of the director"
+      ],
+      "relation_query": "What is the age of the director of a work?",
+      "answer_type": "number"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of Gladiators Seven?",
+    "dependency_answers": [
+      {
+        "node_id": "q3",
+        "question": "Who is the director of Gladiators Seven?",
+        "answer": "Alberto De Martino",
+        "confidence": 1.0,
+        "reasoning_summary": "The evidence clearly states that Gladiators Seven is directed by Alberto De Martino.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Gladiators Seven, also known as The Revolt of the Seven, The Spartan Gladiator and The Spartan Gladiators, is a 1964 Italian peplum film directed by Alberto De Martino and starring Tony Russel.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Gladiators Seven, also known as The Revolt of the Seven, The Spartan Gladiator and The Spartan Gladiators, is a 1964 Italian peplum film directed by Alberto De Martino and starring Tony Russel.\"",
+            "fusion_score": 0.5298938751220703,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Gladiators Seven, also known as The Revolt of the Seven, The Spartan Gladiator and The Spartan Gladiators, is a 1964 Italian peplum film directed by Alberto De Martino and starring Tony Russel.",
+              "Gladiators Seven Gladiators Seven( also known as The Revolt of the Seven, The Spartan Gladiator and The Spartan Gladiators) is a 1964 Italian peplum film directed by Alberto De Martino and starring Tony Russel."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Gladiators Seven is also known as The Revolt of the Seven, The Spartan Gladiator, and The Spartan Gladiators.\"",
+            "fusion_score": 0.529006314277649,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Gladiators Seven is also known as The Revolt of the Seven, The Spartan Gladiator, and The Spartan Gladiators.",
+              "Gladiators Seven Gladiators Seven( also known as The Revolt of the Seven, The Spartan Gladiator and The Spartan Gladiators) is a 1964 Italian peplum film directed by Alberto De Martino and starring Tony Russel."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Tony Russel starred in Gladiators Seven, showcasing his acting talents in the role.\"",
+            "fusion_score": 0.52483149766922,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Tony Russel starred in Gladiators Seven, showcasing his acting talents in the role.",
+              "Gladiators Seven Gladiators Seven( also known as The Revolt of the Seven, The Spartan Gladiator and The Spartan Gladiators) is a 1964 Italian peplum film directed by Alberto De Martino and starring Tony Russel."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Gladiators Seven",
+        "Alberto De Martino"
+      ],
+      "relations": [
+        "age of the director"
+      ],
+      "relation_query": "What is the age of the director of a work?",
+      "answer_type": "number"
+    }
+  },
+  {
+    "node_id": "q5",
+    "question": "What is the age of the director of Phalitamsha?",
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "What is the age of the director of Phalitamsha?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "reasoning_summary": "While I know the director of Phalitamsha is S. R. Puttanna Kanagal, there is no evidence provided regarding his age.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Released in 1976, Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Released in 1976, Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal.\"",
+            "fusion_score": 0.5160396099090576,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Released in 1976, Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal.",
+              "Phalitamsha Released in 1976 Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal. It was written by Srinivasa Kulakarni under the Banner of A 1 Movietone. The movie paired newcomer Jai Jagadish with four heroines. Aarathi as expected has the meatiest role and delivers yet another power- packed performance. Despite a good- looking hero, top notch actresses and beautiful outdoor locales, Phalitamsha remains one of the few flops of ace director Puttana Kanagal's career."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Phalitamsha, released in 1976, is a romantic movie.\"",
+            "fusion_score": 0.3074299454689026,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Phalitamsha, released in 1976, is a romantic movie.",
+              "Phalitamsha Released in 1976 Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal. It was written by Srinivasa Kulakarni under the Banner of A 1 Movietone. The movie paired newcomer Jai Jagadish with four heroines. Aarathi as expected has the meatiest role and delivers yet another power- packed performance. Despite a good- looking hero, top notch actresses and beautiful outdoor locales, Phalitamsha remains one of the few flops of ace director Puttana Kanagal's career."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Phalitamsha is a romantic Kannada movie.\"",
+            "fusion_score": 0.2984119772911072,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Phalitamsha is a romantic Kannada movie.",
+              "Phalitamsha Released in 1976 Phalitamsha is a romantic Kannada movie, directed by S. R. Puttanna Kanagal. It was written by Srinivasa Kulakarni under the Banner of A 1 Movietone. The movie paired newcomer Jai Jagadish with four heroines. Aarathi as expected has the meatiest role and delivers yet another power- packed performance. Despite a good- looking hero, top notch actresses and beautiful outdoor locales, Phalitamsha remains one of the few flops of ace director Puttana Kanagal's career."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q4",
+        "question": "What is the age of the director of Gladiators Seven?",
+        "answer": "94",
+        "confidence": 0.9,
+        "reasoning_summary": "Alberto De Martino was born on 12 June 1929 and passed away on 2 June 2015, making him 94 years old at the time of his death.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Alberto De Martino (12 June 1929 – 2 June 2015) was an Italian film director and screenwriter.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Gladiators Seven, also known as The Revolt of the Seven, The Spartan Gladiator and The Spartan Gladiators, is a 1964 Italian peplum film directed by Alberto De Martino and starring Tony Russel.\"",
+            "fusion_score": 0.5122623443603516,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Gladiators Seven, also known as The Revolt of the Seven, The Spartan Gladiator and The Spartan Gladiators, is a 1964 Italian peplum film directed by Alberto De Martino and starring Tony Russel.",
+              "Gladiators Seven Gladiators Seven( also known as The Revolt of the Seven, The Spartan Gladiator and The Spartan Gladiators) is a 1964 Italian peplum film directed by Alberto De Martino and starring Tony Russel."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+            "fusion_score": 0.28945053815841676,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "His work as a director spanned over two decades.",
+              "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"His career as director, spanning 127 feature films and dozens of TV episodes, lasted from 1936-68.\"",
+            "fusion_score": 0.25575039386749265,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "His career as director, spanning 127 feature films and dozens of TV episodes, lasted from 1936-68.",
+              "Lesley Selander Lesley Selander( May 26, 1900 – December 5, 1979) was an American film director of Westerns and adventure movies. His career as director, spanning 127 feature films and dozens of TV episodes, lasted from 1936- 68. Before that, Selander was assistant director on films such as\" The Cat and the Fiddle\"( 1934),\" A Night at the Opera\"( 1935), and Fritz Lang's\" Fury\"( 1936). To this day Selander remains one of the most prolific directors of feature Westerns in cinema history, having taken the helm for 107 Westerns between his first directorial feature in 1936 and 1967. In 1956 he was nominated for the Directors Guild of America award for Outstanding Directorial Achievement in Television, for his work directing a 1954 episode of\" Lassie\"."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Phalitamsha",
+        "S. R. Puttanna Kanagal"
+      ],
+      "relations": [
+        "age of the director"
+      ],
+      "relation_query": "What is the age of the director of a work?",
+      "answer_type": "number"
+    }
+  }
+]

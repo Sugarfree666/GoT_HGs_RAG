@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Talk About A Stranger?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where does the director of Talk About A Stranger work?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Prince Ferdinand Of Bavaria?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Prince Ferdinand Of Bavaria"
+      ],
+      "relations": [
+        "is the mother of"
+      ],
+      "relation_query": "who is the mother of a royal figure",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the mother of Prince Ferdinand Of Bavaria die?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the mother of Prince Ferdinand Of Bavaria?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "reasoning_summary": "There is no evidence provided that directly identifies the mother of Prince Ferdinand of Bavaria.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Her role as the mother of the Crown Prince strengthens her position within the royal family.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Her role as the mother of the Crown Prince strengthens her position within the royal family.\"",
+            "fusion_score": 0.3314180612564087,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "Her role as the mother of the Crown Prince strengthens her position within the royal family.",
+              "Sabika bint Ibrahim Al Khalifa Sabika bint Ibrahim Al Khalifa( born in Muharraq in 1948) is the Princess consort of Bahrain as the first wife of the present King of Bahrain, Hamad bin Isa Al Khalifa, and the mother of the Crown Prince, Salman bin Hamad bin Isa Al Khalifa."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Being the mother of Christopher of Bavaria signifies her direct connection to the monarchy of the Kalmar Union.\"",
+            "fusion_score": 0.31436643600463865,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "Being the mother of Christopher of Bavaria signifies her direct connection to the monarchy of the Kalmar Union.",
+              "Catherine of Pomerania, Countess Palatine of Neumarkt Catherine of Pomerania (German: \" Katharina von Pommern\"; c. 1390 - 4 March 1426), was a Pomeranian princess and Countess Palatine of Neumarkt. She was the wife of John, Count Palatine of Neumarkt and the mother of Christopher of Bavaria, who would rule over Denmark, Sweden, and Norway as king of the Kalmar Union."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"She was the mother of the future King Louis XV of France.\"",
+            "fusion_score": 0.2786888122558594,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "She was the mother of the future King Louis XV of France.",
+              "Marie Adélaïde of Savoy Marie Adélaïde of Savoy, Princess of Savoy( 6 December 1685 – 12 February 1712) was the wife of Louis, Dauphin of France, Duke of Burgundy. She was the eldest daughter of Duke Victor Amadeus II of Savoy and of Anne Marie d'Orléans. Her betrothal to the Duke of Burgundy in June 1696 was part of the Treaty of Turin, signed on 29 August 1696. She was the mother of the future King Louis XV of France. Styled as Duchess of Burgundy after her marriage, she became Dauphine of France upon the death of her father- in- law, Le Grand Dauphin, in 1711. She died of measles in 1712, followed by her husband a week later."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Prince Ferdinand Of Bavaria"
+      ],
+      "relations": [
+        "died"
+      ],
+      "relation_query": "Where did the mother of a royal figure die?",
+      "answer_type": "location"
+    }
+  }
+]

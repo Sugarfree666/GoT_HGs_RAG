@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Maurice, Prince Of Orange?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where was the place of death of the father of Maurice, Prince Of Orange?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

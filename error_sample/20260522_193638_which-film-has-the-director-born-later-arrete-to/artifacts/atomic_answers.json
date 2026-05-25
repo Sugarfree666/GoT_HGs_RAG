@@ -1,0 +1,737 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Arrête Ton Cinéma?",
+    "analysis": {
+      "entities": [
+        "Arrête Ton Cinéma"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.\"",
+        "hyperedge_text": "Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6823174953460693,
+        "fusion_score": 0.5364634990692139,
+        "entity_ids": [
+          "\"2016\"",
+          "\"FRENCH\"",
+          "\"DIANE KURYS\"",
+          "\"ARRÊTE TON CINÉMA\""
+        ],
+        "chunk_ids": [
+          "chunk-f34ee9c59bb528aabea0a4fc4e1937a2"
+        ],
+        "evidence_texts": [
+          "Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.",
+          "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.682317,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536463
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Arrête ton cinéma was produced in France.\"",
+        "hyperedge_text": "Arrête ton cinéma was produced in France.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6459988355636597,
+        "fusion_score": 0.529199767112732,
+        "entity_ids": [
+          "\"FRANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-f34ee9c59bb528aabea0a4fc4e1937a2"
+        ],
+        "evidence_texts": [
+          "Arrête ton cinéma was produced in France.",
+          "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.645999,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5292
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Arrête ton cinéma is a comedy film.\"",
+        "hyperedge_text": "Arrête ton cinéma is a comedy film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6351958513259888,
+        "fusion_score": 0.5270391702651978,
+        "entity_ids": [
+          "\"COMEDY FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-f34ee9c59bb528aabea0a4fc4e1937a2"
+        ],
+        "evidence_texts": [
+          "Arrête ton cinéma is a comedy film.",
+          "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.635196,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527039
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"2016 marks the release year of the film Arrête ton cinéma.\"",
+        "hyperedge_text": "2016 marks the release year of the film Arrête ton cinéma.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5833725929260254,
+        "fusion_score": 0.5166745185852051,
+        "entity_ids": [
+          "\"2016\""
+        ],
+        "chunk_ids": [
+          "chunk-f34ee9c59bb528aabea0a4fc4e1937a2"
+        ],
+        "evidence_texts": [
+          "2016 marks the release year of the film Arrête ton cinéma.",
+          "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.583373,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516675
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5064207315444946,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.23590162595113118,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.506421,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.235902
+        }
+      }
+    ],
+    "answer": "Diane Kurys",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Agni (2004 Film)?",
+    "analysis": {
+      "entities": [
+        "Agni",
+        "2004 Film"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work released in 2004",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar.\"",
+        "hyperedge_text": "Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.25,
+        "semantic_score": 0.6485582590103149,
+        "fusion_score": 0.42971165180206305,
+        "entity_ids": [
+          "\"AGNI\"",
+          "\"SWAPAN SAHA\"",
+          "\"MUKUL SARKAR\""
+        ],
+        "chunk_ids": [
+          "chunk-61aace8dc452eb7bc62c0fb13b7d9916"
+        ],
+        "evidence_texts": [
+          "Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar.",
+          "Agni (2004 film) Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar. The film features actors Prosenjit Chatterjee and Rachana Banerjee in the lead roles. Music of the film has been composed by Ashok Bhadra The film was a Superhit at the box office."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.25,
+          "S": 0.648558,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.429712
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Agni is a 2004 Bengali film.\"",
+        "hyperedge_text": "Agni is a 2004 Bengali film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.25,
+        "semantic_score": 0.6238002777099609,
+        "fusion_score": 0.42476005554199225,
+        "entity_ids": [
+          "\"AGNI\""
+        ],
+        "chunk_ids": [
+          "chunk-61aace8dc452eb7bc62c0fb13b7d9916"
+        ],
+        "evidence_texts": [
+          "Agni is a 2004 Bengali film.",
+          "Agni (2004 film) Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar. The film features actors Prosenjit Chatterjee and Rachana Banerjee in the lead roles. Music of the film has been composed by Ashok Bhadra The film was a Superhit at the box office."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.25,
+          "S": 0.6238,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.42476
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released in 2004 and is referred to as a Chinese film.\"",
+        "hyperedge_text": "The film was released in 2004 and is referred to as a Chinese film.",
+        "branch_support": [
+          "anchor",
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5476468801498413,
+        "semantic_score": 0.75,
+        "fusion_score": 0.36905875205993655,
+        "entity_ids": [
+          "\"2004\"",
+          "\"CHINESE FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-120fff9898a2fea104dcbe570e9d9a01"
+        ],
+        "evidence_texts": [
+          "The film was released in 2004 and is referred to as a Chinese film.",
+          "South of the Clouds (2004 film) South of the Clouds is a 2004 Chinese film and the second film directed by the writer Zhu Wen. The film stands in stark contrast to Zhu's previous film. In terms of production,\" South of the Clouds\" received the cooperation of the state apparatus unlike 2001's\" Seafood\" which was an underground production shot on digital hand- held cameras. In terms of story, the transgressive tale of a prostitute and a policeman in\" Seafood\" is a far cry from\" South of the Cloud\"'s gentle tale of a retiree who fulfills a lifelong desire to travel to the southern province of Yunnan( literally\" South of the Clouds\"). \" South of the Clouds\" stars Li Xuejian as the protagonist, Xu Daqin, and features a cameo by director Tian Zhuangzhuang as the police chief in a small town in Yunnan. It was produced by China Film Assist, an independent production company in China;\" South o..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.547647,
+          "S": 0.75,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.369059
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released in theaters in 2004.\"",
+        "hyperedge_text": "It was released in theaters in 2004.",
+        "branch_support": [
+          "anchor",
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.6154772043228149,
+        "semantic_score": 0.5,
+        "fusion_score": 0.346190881729126,
+        "entity_ids": [
+          "\"2004\""
+        ],
+        "chunk_ids": [
+          "chunk-8f82ee05aebefdbf9b661187926c9a9a"
+        ],
+        "evidence_texts": [
+          "It was released in theaters in 2004.",
+          "Silver Lake (film) Silver Lake is a 2004 film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.615477,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.346191
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released in 2004 and directed by Lionel Baier.\"",
+        "hyperedge_text": "The film was released in 2004 and directed by Lionel Baier.",
+        "branch_support": [
+          "anchor",
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5817854404449463,
+        "semantic_score": 0.5,
+        "fusion_score": 0.3327141761779785,
+        "entity_ids": [
+          "\"DIRECTED\"",
+          "\"2004\""
+        ],
+        "chunk_ids": [
+          "chunk-8864bd7584c0021f82d388558d8a0aff"
+        ],
+        "evidence_texts": [
+          "The film was released in 2004 and directed by Lionel Baier.",
+          "Garçon stupide Garçon stupide (English: \"Stupid Boy\") is a 2004 film directed by Lionel Baier."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.581785,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.332714
+        }
+      }
+    ],
+    "answer": "Swapan Saha",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'Agni is a 2004 Bengali film directed by Swapan Saha.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When was the director of Arrête Ton Cinéma born?",
+    "analysis": {
+      "entities": [
+        "Arrête Ton Cinéma",
+        "Diane Kurys"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of the director of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.\"",
+        "hyperedge_text": "Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5989557504653931,
+        "fusion_score": 0.5197911500930786,
+        "entity_ids": [
+          "\"2016\"",
+          "\"FRENCH\"",
+          "\"DIANE KURYS\"",
+          "\"ARRÊTE TON CINÉMA\""
+        ],
+        "chunk_ids": [
+          "chunk-f34ee9c59bb528aabea0a4fc4e1937a2"
+        ],
+        "evidence_texts": [
+          "Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.",
+          "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.598956,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519791
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Diane Kurys.\"",
+        "hyperedge_text": "The film was directed by Diane Kurys.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.7142857142857143,
+        "fusion_score": 0.34285714285714286,
+        "entity_ids": [
+          "\"DIANE KURYS\""
+        ],
+        "chunk_ids": [
+          "chunk-f34ee9c59bb528aabea0a4fc4e1937a2"
+        ],
+        "evidence_texts": [
+          "The film was directed by Diane Kurys.",
+          "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.714286,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.342857
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Arrête ton cinéma was produced in France.\"",
+        "hyperedge_text": "Arrête ton cinéma was produced in France.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5874701738357544,
+        "fusion_score": 0.3174940347671509,
+        "entity_ids": [
+          "\"FRANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-f34ee9c59bb528aabea0a4fc4e1937a2"
+        ],
+        "evidence_texts": [
+          "Arrête ton cinéma was produced in France.",
+          "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.58747,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.317494
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"2016 marks the release year of the film Arrête ton cinéma.\"",
+        "hyperedge_text": "2016 marks the release year of the film Arrête ton cinéma.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5744173526763916,
+        "fusion_score": 0.3148834705352783,
+        "entity_ids": [
+          "\"2016\""
+        ],
+        "chunk_ids": [
+          "chunk-f34ee9c59bb528aabea0a4fc4e1937a2"
+        ],
+        "evidence_texts": [
+          "2016 marks the release year of the film Arrête ton cinéma.",
+          "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.574417,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.314883
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Arrête ton cinéma is a comedy film.\"",
+        "hyperedge_text": "Arrête ton cinéma is a comedy film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5438361167907715,
+        "fusion_score": 0.3087672233581543,
+        "entity_ids": [
+          "\"COMEDY FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-f34ee9c59bb528aabea0a4fc4e1937a2"
+        ],
+        "evidence_texts": [
+          "Arrête ton cinéma is a comedy film.",
+          "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.543836,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.308767
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the birth date of Diane Kurys.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of Agni (2004 Film) born?",
+    "analysis": {
+      "entities": [
+        "Agni (2004 Film)",
+        "Swapan Saha"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was the director of a work born?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar.\"",
+        "hyperedge_text": "Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.599075198173523,
+        "fusion_score": 0.3198150396347046,
+        "entity_ids": [
+          "\"AGNI\"",
+          "\"SWAPAN SAHA\"",
+          "\"MUKUL SARKAR\""
+        ],
+        "chunk_ids": [
+          "chunk-61aace8dc452eb7bc62c0fb13b7d9916"
+        ],
+        "evidence_texts": [
+          "Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar.",
+          "Agni (2004 film) Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar. The film features actors Prosenjit Chatterjee and Rachana Banerjee in the lead roles. Music of the film has been composed by Ashok Bhadra The film was a Superhit at the box office."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.599075,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.319815
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Agni is a 2004 Bengali film.\"",
+        "hyperedge_text": "Agni is a 2004 Bengali film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5929813385009766,
+        "fusion_score": 0.11859626770019532,
+        "entity_ids": [
+          "\"AGNI\""
+        ],
+        "chunk_ids": [
+          "chunk-61aace8dc452eb7bc62c0fb13b7d9916"
+        ],
+        "evidence_texts": [
+          "Agni is a 2004 Bengali film.",
+          "Agni (2004 film) Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar. The film features actors Prosenjit Chatterjee and Rachana Banerjee in the lead roles. Music of the film has been composed by Ashok Bhadra The film was a Superhit at the box office."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.592981,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.118596
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Swapan Saha was born on 10 January 1930 in Ajmer, Rajasthan, India and is known for his work as a film director, producer, story writer and score composer.\"",
+        "hyperedge_text": "Swapan Saha was born on 10 January 1930 in Ajmer, Rajasthan, India and is known for his work as a film director, producer, story writer and score composer.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.6,
+        "fusion_score": 0.7200000000000001,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"PRODUCER\"",
+          "\"AJMER\"",
+          "\"RAJASTHAN\"",
+          "\"INDIA\"",
+          "\"BENGALI\"",
+          "\"STORY WRITER\"",
+          "\"SCORE COMPOSER\"",
+          "\"SWAPAN SAHA\""
+        ],
+        "chunk_ids": [
+          "chunk-9089cb310858addca9d1f825fd2df077"
+        ],
+        "evidence_texts": [
+          "Swapan Saha was born on 10 January 1930 in Ajmer, Rajasthan, India and is known for his work as a film director, producer, story writer and score composer.",
+          "Swapan Saha Swapan Saha( born 10 January 1930 in Ajmer, Rajasthan, India) is an Indian Bengali film director, producer, story writer and score composer."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.6,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.72
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Swapan Saha was born in Ajmer on 10 January 1930.\"",
+        "hyperedge_text": "Swapan Saha was born in Ajmer on 10 January 1930.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.6,
+        "fusion_score": 0.7200000000000001,
+        "entity_ids": [
+          "\"AJMER\"",
+          "\"10 JANUARY 1930\"",
+          "\"SWAPAN SAHA\""
+        ],
+        "chunk_ids": [
+          "chunk-9089cb310858addca9d1f825fd2df077"
+        ],
+        "evidence_texts": [
+          "Swapan Saha was born in Ajmer on 10 January 1930.",
+          "Swapan Saha Swapan Saha( born 10 January 1930 in Ajmer, Rajasthan, India) is an Indian Bengali film director, producer, story writer and score composer."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.6,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.72
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"born in Tehran in 1965.\"",
+        "hyperedge_text": "born in Tehran in 1965.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.6,
+        "fusion_score": 0.52,
+        "entity_ids": [
+          "\"1965\"",
+          "\"FILM\"",
+          "\"TEHRAN\"",
+          "\"IRANIAN\"",
+          "\"DIRECTING\""
+        ],
+        "chunk_ids": [
+          "chunk-d0768f5a0e2717ce7055b46864930cb0"
+        ],
+        "evidence_texts": [
+          "born in Tehran in 1965.",
+          "Sepideh Farsi Sepideh Farsi is an Iranian film director, born in Tehran in 1965."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.6,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52
+        }
+      }
+    ],
+    "answer": "10 January 1930",
+    "confidence": 1.0,
+    "reasoning_summary": "Swapan Saha, the director of Agni, was born on 10 January 1930 in Ajmer, Rajasthan, India, as stated in the evidence.",
+    "used_dependencies": [
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Swapan Saha was born on 10 January 1930 in Ajmer, Rajasthan, India and is known for his work as a film director, producer, story writer and score composer.\"",
+      "<hyperedge>\"Swapan Saha was born in Ajmer on 10 January 1930.\""
+    ]
+  }
+]

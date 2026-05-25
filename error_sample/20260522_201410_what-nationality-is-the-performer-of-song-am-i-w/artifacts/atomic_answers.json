@@ -1,0 +1,386 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song Am I Wrong (Étienne De Crécy Song)?",
+    "analysis": {
+      "entities": [
+        "Am I Wrong",
+        "Étienne De Crécy"
+      ],
+      "relations": [
+        "performer of"
+      ],
+      "relation_query": "Who is the performer of the song titled 'Am I Wrong' by an artist?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Am I Wrong is a 2000 house song by Étienne de Crécy.\"",
+        "hyperedge_text": "Am I Wrong is a 2000 house song by Étienne de Crécy.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5638250112533569,
+        "semantic_score": 0.7108640074729919,
+        "fusion_score": 0.7677028059959412,
+        "entity_ids": [
+          "\"ÉTIENNE DE CRÉCY\"",
+          "\"AM I WRONG\""
+        ],
+        "chunk_ids": [
+          "chunk-307009922e0bf8b70daded7009d8ea5c"
+        ],
+        "evidence_texts": [
+          "Am I Wrong is a 2000 house song by Étienne de Crécy.",
+          "Am I Wrong (Étienne de Crécy song) \"Am I Wrong\" is a 2000 house song by Étienne de Crécy. The track is mainly instrumental except for sampling the phrase \"am I wrong\" from Millie Jackson's voice singing \" Am I wrong to hunger...\", from the song \"(If Loving You Is Wrong) I Don't Want to Be Right\". The song was lead single from his album \"Tempovision\", and its 3D animated video received wide airplay in Europe. \" Am I Wrong\" charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001. The song is best remembered for its prize-winning video clip."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.563825,
+          "S": 0.710864,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.767703
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'Am I Wrong' charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001.\"",
+        "hyperedge_text": "'Am I Wrong' charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.4963972568511963,
+        "semantic_score": 0.43915989995002747,
+        "fusion_score": 0.48639088273048403,
+        "entity_ids": [
+          "\"EUROPEAN DANCE AND HOUSE CHARTS\"",
+          "\"UK SINGLES CHART\""
+        ],
+        "chunk_ids": [
+          "chunk-307009922e0bf8b70daded7009d8ea5c"
+        ],
+        "evidence_texts": [
+          "'Am I Wrong' charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001.",
+          "Am I Wrong (Étienne de Crécy song) \"Am I Wrong\" is a 2000 house song by Étienne de Crécy. The track is mainly instrumental except for sampling the phrase \"am I wrong\" from Millie Jackson's voice singing \" Am I wrong to hunger...\", from the song \"(If Loving You Is Wrong) I Don't Want to Be Right\". The song was lead single from his album \"Tempovision\", and its 3D animated video received wide airplay in Europe. \" Am I Wrong\" charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001. The song is best remembered for its prize-winning video clip."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.496397,
+          "S": 0.43916,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.486391
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The track is mainly instrumental except for sampling the phrase 'am I wrong' from Millie Jackson's voice singing 'Am I wrong to hunger...'",
+        "hyperedge_text": "\"The track is mainly instrumental except for sampling the phrase 'am I wrong' from Millie Jackson's voice singing 'Am I wrong to hunger...'",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.4894947409629822,
+        "semantic_score": 0.407240092754364,
+        "fusion_score": 0.4772459149360657,
+        "entity_ids": [
+          "\"PHRASE 'AM I WRONG'",
+          "\"MILLIE JACKSON\"",
+          "\"(IF LOVING YOU IS WRONG) I DON'T WANT TO BE RIGHT\"",
+          "\"MILLIE JACKSON'S VOICE\"",
+          "\"'AM I WRONG TO HUNGER...'"
+        ],
+        "chunk_ids": [
+          "chunk-307009922e0bf8b70daded7009d8ea5c"
+        ],
+        "evidence_texts": [
+          "\"The track is mainly instrumental except for sampling the phrase 'am I wrong' from Millie Jackson's voice singing 'Am I wrong to hunger...'",
+          "Am I Wrong (Étienne de Crécy song) \"Am I Wrong\" is a 2000 house song by Étienne de Crécy. The track is mainly instrumental except for sampling the phrase \"am I wrong\" from Millie Jackson's voice singing \" Am I wrong to hunger...\", from the song \"(If Loving You Is Wrong) I Don't Want to Be Right\". The song was lead single from his album \"Tempovision\", and its 3D animated video received wide airplay in Europe. \" Am I Wrong\" charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001. The song is best remembered for its prize-winning video clip."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.489495,
+          "S": 0.40724,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.477246
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Étienne Bernard Marie de Crécy is a French DJ and producer who composes electronic music, primarily house.\"",
+        "hyperedge_text": "Étienne Bernard Marie de Crécy is a French DJ and producer who composes electronic music, primarily house.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.44578230381011963,
+        "fusion_score": 0.28915646076202395,
+        "entity_ids": [
+          "\"FRANCE\"",
+          "\"LYON\"",
+          "\"ÉTIENNE DE CRÉCY\"",
+          "\"SUPERDISCOUNT\"",
+          "\"EDC\"",
+          "\"MINOS POUR MAIN BASSE\"",
+          "\"MOOLOODJEE\"",
+          "\"ELECTRONIC MUSIC\"",
+          "\"HOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-696d8e3afc381066e240815d4bda17e7"
+        ],
+        "evidence_texts": [
+          "Étienne Bernard Marie de Crécy is a French DJ and producer who composes electronic music, primarily house.",
+          "Étienne de Crécy Étienne Bernard Marie de Crécy (born 25 February 1969, Lyon, France), also known as Superdiscount, EDC, Minos Pour Main Basse and Mooloodjee, is a French DJ and producer who composes electronic music, primarily house."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.445782,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.289156
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Étienne de Crécy is known for composing electronic music.\"",
+        "hyperedge_text": "Étienne de Crécy is known for composing electronic music.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.4310649633407593,
+        "fusion_score": 0.28621299266815187,
+        "entity_ids": [
+          "\"PRODUCER\"",
+          "\"DJ\""
+        ],
+        "chunk_ids": [
+          "chunk-696d8e3afc381066e240815d4bda17e7"
+        ],
+        "evidence_texts": [
+          "Étienne de Crécy is known for composing electronic music.",
+          "Étienne de Crécy Étienne Bernard Marie de Crécy (born 25 February 1969, Lyon, France), also known as Superdiscount, EDC, Minos Pour Main Basse and Mooloodjee, is a French DJ and producer who composes electronic music, primarily house."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.431065,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.286213
+        }
+      }
+    ],
+    "answer": "Étienne de Crécy",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'Am I Wrong' is a song by Étienne de Crécy, confirming him as the performer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Am I Wrong is a 2000 house song by Étienne de Crécy.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the performer of Am I Wrong (Étienne De Crécy Song)?",
+    "analysis": {
+      "entities": [
+        "Étienne de Crécy",
+        "Am I Wrong",
+        "Tempovision"
+      ],
+      "relations": [
+        "has nationality"
+      ],
+      "relation_query": "What is the nationality of the performer of a song?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Am I Wrong is a 2000 house song by Étienne de Crécy.\"",
+        "hyperedge_text": "Am I Wrong is a 2000 house song by Étienne de Crécy.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.6436678767204285,
+        "fusion_score": 0.5287335753440857,
+        "entity_ids": [
+          "\"ÉTIENNE DE CRÉCY\"",
+          "\"AM I WRONG\""
+        ],
+        "chunk_ids": [
+          "chunk-307009922e0bf8b70daded7009d8ea5c"
+        ],
+        "evidence_texts": [
+          "Am I Wrong is a 2000 house song by Étienne de Crécy.",
+          "Am I Wrong (Étienne de Crécy song) \"Am I Wrong\" is a 2000 house song by Étienne de Crécy. The track is mainly instrumental except for sampling the phrase \"am I wrong\" from Millie Jackson's voice singing \" Am I wrong to hunger...\", from the song \"(If Loving You Is Wrong) I Don't Want to Be Right\". The song was lead single from his album \"Tempovision\", and its 3D animated video received wide airplay in Europe. \" Am I Wrong\" charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001. The song is best remembered for its prize-winning video clip."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.333333,
+          "S": 0.643668,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528734
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Étienne Bernard Marie de Crécy is a French DJ and producer who composes electronic music, primarily house.\"",
+        "hyperedge_text": "Étienne Bernard Marie de Crécy is a French DJ and producer who composes electronic music, primarily house.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 0.0,
+        "semantic_score": 0.4665254056453705,
+        "fusion_score": 0.22663841446240743,
+        "entity_ids": [
+          "\"FRANCE\"",
+          "\"LYON\"",
+          "\"ÉTIENNE DE CRÉCY\"",
+          "\"SUPERDISCOUNT\"",
+          "\"EDC\"",
+          "\"MINOS POUR MAIN BASSE\"",
+          "\"MOOLOODJEE\"",
+          "\"ELECTRONIC MUSIC\"",
+          "\"HOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-696d8e3afc381066e240815d4bda17e7"
+        ],
+        "evidence_texts": [
+          "Étienne Bernard Marie de Crécy is a French DJ and producer who composes electronic music, primarily house.",
+          "Étienne de Crécy Étienne Bernard Marie de Crécy (born 25 February 1969, Lyon, France), also known as Superdiscount, EDC, Minos Pour Main Basse and Mooloodjee, is a French DJ and producer who composes electronic music, primarily house."
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 0.0,
+          "S": 0.466525,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.226638
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Laurent Tirard's nationality is French.\"",
+        "hyperedge_text": "Laurent Tirard's nationality is French.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4008677005767822,
+        "fusion_score": 0.48017354011535646,
+        "entity_ids": [
+          "\"FRANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-0d2d09ccded1dd6b3177b77028eddeed"
+        ],
+        "evidence_texts": [
+          "Laurent Tirard's nationality is French.",
+          "Laurent Tirard Laurent Tirard( born 18 February 1967) is a French film director and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.400868,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.480174
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song was the lead single from his album 'Tempovision', and its 3D animated video received wide airplay in Europe.\"",
+        "hyperedge_text": "The song was the lead single from his album 'Tempovision', and its 3D animated video received wide airplay in Europe.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.8,
+        "fusion_score": 0.4266666666666667,
+        "entity_ids": [
+          "\"TEMPOVISION\"",
+          "\"3D ANIMATED VIDEO\""
+        ],
+        "chunk_ids": [
+          "chunk-307009922e0bf8b70daded7009d8ea5c"
+        ],
+        "evidence_texts": [
+          "The song was the lead single from his album 'Tempovision', and its 3D animated video received wide airplay in Europe.",
+          "Am I Wrong (Étienne de Crécy song) \"Am I Wrong\" is a 2000 house song by Étienne de Crécy. The track is mainly instrumental except for sampling the phrase \"am I wrong\" from Millie Jackson's voice singing \" Am I wrong to hunger...\", from the song \"(If Loving You Is Wrong) I Don't Want to Be Right\". The song was lead single from his album \"Tempovision\", and its 3D animated video received wide airplay in Europe. \" Am I Wrong\" charted on European dance and house charts, and peaked at #44 in the UK Singles Chart in January 2001. The song is best remembered for its prize-winning video clip."
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 0.333333,
+          "S": 0.8,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.426667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Étienne de Crécy is known for composing electronic music.\"",
+        "hyperedge_text": "Étienne de Crécy is known for composing electronic music.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 0.0,
+        "semantic_score": 0.4323876202106476,
+        "fusion_score": 0.21981085737546285,
+        "entity_ids": [
+          "\"PRODUCER\"",
+          "\"DJ\""
+        ],
+        "chunk_ids": [
+          "chunk-696d8e3afc381066e240815d4bda17e7"
+        ],
+        "evidence_texts": [
+          "Étienne de Crécy is known for composing electronic music.",
+          "Étienne de Crécy Étienne Bernard Marie de Crécy (born 25 February 1969, Lyon, France), also known as Superdiscount, EDC, Minos Pour Main Basse and Mooloodjee, is a French DJ and producer who composes electronic music, primarily house."
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 0.0,
+          "S": 0.432388,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.219811
+        }
+      }
+    ],
+    "answer": "French",
+    "confidence": 0.9,
+    "reasoning_summary": "Étienne de Crécy is identified as a French DJ and producer, confirming his nationality.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Étienne Bernard Marie de Crécy is a French DJ and producer who composes electronic music, primarily house.\""
+    ]
+  }
+]

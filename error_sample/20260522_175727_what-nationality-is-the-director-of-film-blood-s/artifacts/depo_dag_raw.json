@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Blood Street?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the nationality of the director of Blood Street?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

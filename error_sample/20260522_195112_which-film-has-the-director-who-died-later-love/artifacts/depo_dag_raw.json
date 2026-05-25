@@ -1,0 +1,49 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Love, Honor And Oh-Baby!?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "When did the director of Love, Honor And Oh-Baby! die?",
+      "dependencies": [
+        "q1"
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of I Cover The Underworld?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q4",
+      "question": "When did the director of I Cover The Underworld die?",
+      "dependencies": [
+        "q3"
+      ]
+    },
+    {
+      "node_id": "q5",
+      "question": "What is the death date of the director of Love, Honor And Oh-Baby!",
+      "dependencies": [
+        "q2",
+        "q4"
+      ],
+      "metadata": {
+        "operator": "COMPARE_GREATER",
+        "candidates": [
+          {
+            "label": "Love, Honor And Oh-Baby!",
+            "source_node_id": "q2"
+          },
+          {
+            "label": "I Cover The Underworld",
+            "source_node_id": "q4"
+          }
+        ]
+      }
+    }
+  ]
+}

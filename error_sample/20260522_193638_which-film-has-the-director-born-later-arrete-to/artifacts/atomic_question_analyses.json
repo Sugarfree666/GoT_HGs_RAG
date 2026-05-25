@@ -1,0 +1,161 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Arrête Ton Cinéma?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Arrête Ton Cinéma"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Agni (2004 Film)?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Agni",
+        "2004 Film"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work released in 2004",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was the director of Arrête Ton Cinéma born?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Arrête Ton Cinéma?",
+        "answer": "Diane Kurys",
+        "confidence": 1.0,
+        "reasoning_summary": "The evidence clearly states that 'Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.\"",
+            "fusion_score": 0.5364634990692139,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys.",
+              "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Arrête ton cinéma was produced in France.\"",
+            "fusion_score": 0.529199767112732,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Arrête ton cinéma was produced in France.",
+              "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Arrête ton cinéma is a comedy film.\"",
+            "fusion_score": 0.5270391702651978,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Arrête ton cinéma is a comedy film.",
+              "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Arrête Ton Cinéma",
+        "Diane Kurys"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of the director of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of Agni (2004 Film) born?",
+    "dependency_answers": [
+      {
+        "node_id": "q3",
+        "question": "Who is the director of Agni (2004 Film)?",
+        "answer": "Swapan Saha",
+        "confidence": 0.9,
+        "reasoning_summary": "The evidence clearly states that 'Agni is a 2004 Bengali film directed by Swapan Saha.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar.\"",
+            "fusion_score": 0.42971165180206305,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar.",
+              "Agni (2004 film) Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar. The film features actors Prosenjit Chatterjee and Rachana Banerjee in the lead roles. Music of the film has been composed by Ashok Bhadra The film was a Superhit at the box office."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Agni is a 2004 Bengali film.\"",
+            "fusion_score": 0.42476005554199225,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Agni is a 2004 Bengali film.",
+              "Agni (2004 film) Agni is a 2004 Bengali film directed by Swapan Saha and produced by Mukul Sarkar. The film features actors Prosenjit Chatterjee and Rachana Banerjee in the lead roles. Music of the film has been composed by Ashok Bhadra The film was a Superhit at the box office."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film was released in 2004 and is referred to as a Chinese film.\"",
+            "fusion_score": 0.36905875205993655,
+            "branch_support": [
+              "anchor",
+              "relation"
+            ],
+            "evidence_texts": [
+              "The film was released in 2004 and is referred to as a Chinese film.",
+              "South of the Clouds (2004 film) South of the Clouds is a 2004 Chinese film and the second film directed by the writer Zhu Wen. The film stands in stark contrast to Zhu's previous film. In terms of production,\" South of the Clouds\" received the cooperation of the state apparatus unlike 2001's\" Seafood\" which was an underground production shot on digital hand- held cameras. In terms of story, the transgressive tale of a prostitute and a policeman in\" Seafood\" is a far cry from\" South of the Cloud\"'s gentle tale of a retiree who fulfills a lifelong desire to travel to the southern province of Yunnan( literally\" South of the Clouds\"). \" South of the Clouds\" stars Li Xuejian as the protagonist, Xu Daqin, and features a cameo by director Tian Zhuangzhuang as the police chief in a small town in Yunnan. It was produced by China Film Assist, an independent production company in China;\" South o..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Agni (2004 Film)",
+        "Swapan Saha"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was the director of a work born?",
+      "answer_type": "date"
+    }
+  }
+]

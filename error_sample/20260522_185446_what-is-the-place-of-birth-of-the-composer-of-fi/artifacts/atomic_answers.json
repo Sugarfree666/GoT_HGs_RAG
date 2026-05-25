@@ -1,0 +1,380 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the composer of Inherent Vice?",
+    "analysis": {
+      "entities": [
+        "Inherent Vice"
+      ],
+      "relations": [
+        "is the composer of"
+      ],
+      "relation_query": "who is the composer of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.\"",
+        "hyperedge_text": "Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6599807143211365,
+        "fusion_score": 0.5319961428642274,
+        "entity_ids": [
+          "\"UNITED STATES\"",
+          "\"PAUL THOMAS ANDERSON\"",
+          "\"NEO-NOIR PERIOD COMEDY-DRAMA\"",
+          "\"INHERENT VICE\"",
+          "\"THOMAS PYNCHON\""
+        ],
+        "chunk_ids": [
+          "chunk-c473661fcc558b2c33e8445aef638c51"
+        ],
+        "evidence_texts": [
+          "Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.659981,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531996
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'Inherent Vice' premiered at the New York Film Festival on October 4, 2014, and began a limited theatrical release in the United States on December 12, 2014.\"",
+        "hyperedge_text": "'Inherent Vice' premiered at the New York Film Festival on October 4, 2014, and began a limited theatrical release in the United States on December 12, 2014.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5822798013687134,
+        "fusion_score": 0.5164559602737427,
+        "entity_ids": [
+          "\"NEW YORK FILM FESTIVAL\"",
+          "\"OCTOBER 4, 2014\"",
+          "\"LIMITED THEATRICAL RELEASE\"",
+          "\"DECEMBER 12, 2014\""
+        ],
+        "chunk_ids": [
+          "chunk-c473661fcc558b2c33e8445aef638c51"
+        ],
+        "evidence_texts": [
+          "'Inherent Vice' premiered at the New York Film Festival on October 4, 2014, and began a limited theatrical release in the United States on December 12, 2014.",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.58228,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516456
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Anderson's adaptation of 'Inherent Vice' had been in development since 2010; it is the first Pynchon novel to be adapted for the screen.\"",
+        "hyperedge_text": "Anderson's adaptation of 'Inherent Vice' had been in development since 2010; it is the first Pynchon novel to be adapted for the screen.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5490630865097046,
+        "fusion_score": 0.5098126173019409,
+        "entity_ids": [
+          "\"ADAPTATION\"",
+          "\"DEVELOPMENT\"",
+          "\"FIRST PYNCHON NOVEL\""
+        ],
+        "chunk_ids": [
+          "chunk-c473661fcc558b2c33e8445aef638c51"
+        ],
+        "evidence_texts": [
+          "Anderson's adaptation of 'Inherent Vice' had been in development since 2010; it is the first Pynchon novel to be adapted for the screen.",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.549063,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.509813
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Some critics have said that 'Inherent Vice' has the makings of a cult film.\"",
+        "hyperedge_text": "Some critics have said that 'Inherent Vice' has the makings of a cult film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4993077218532562,
+        "fusion_score": 0.4998615443706513,
+        "entity_ids": [
+          "\"CULT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-c473661fcc558b2c33e8445aef638c51"
+        ],
+        "evidence_texts": [
+          "Some critics have said that 'Inherent Vice' has the makings of a cult film.",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.499308,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499862
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work in film scores showcases his versatility as a composer.\"",
+        "hyperedge_text": "His work in film scores showcases his versatility as a composer.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4113577902317047,
+        "fusion_score": 0.482271558046341,
+        "entity_ids": [
+          "\"VERSATILITY AS A COMPOSER\""
+        ],
+        "chunk_ids": [
+          "chunk-cc54631b0402ccd34badf271c2c0852b"
+        ],
+        "evidence_texts": [
+          "His work in film scores showcases his versatility as a composer.",
+          "Jonny Greenwood Jonathan Richard Guy Greenwood (born 5 November 1971) is an English musician and composer. He is the lead guitarist and keyboardist of the alternative rock band Radiohead, and has written a number of film scores. Along with his elder brother, Radiohead bassist Colin, Greenwood attended Abingdon School in Abingdon near Oxford, England, where he met the future band members. The youngest of the group, Greenwood was the last to join, first playing keyboards and harmonica but soon becoming lead guitarist. He abandoned a degree in music when the band signed to Parlophone; their debut single \"Creep\" was distinguished by Greenwood's aggressive guitar work. Radiohead have since achieved critical acclaim and sold over 30 million albums. Along with the other members of Radiohead, Greenwood was inducted into the Rock and Roll Hall of Fame in 2019. Greenwood has been named one of t..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.411358,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.482272
+        }
+      }
+    ],
+    "answer": "Jonny Greenwood",
+    "confidence": 0.75,
+    "reasoning_summary": "The evidence indicates that Jonny Greenwood is a composer who has written film scores, which includes the film 'Inherent Vice'. However, the specific evidence linking him directly to 'Inherent Vice' is not explicitly stated, leading to moderate confidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"His work in film scores showcases his versatility as a composer.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the place of birth of the composer of Inherent Vice?",
+    "analysis": {
+      "entities": [
+        "Inherent Vice",
+        "Jonny Greenwood"
+      ],
+      "relations": [
+        "place of birth"
+      ],
+      "relation_query": "What is the place of birth of the composer of a work?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.\"",
+        "hyperedge_text": "Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5867085456848145,
+        "fusion_score": 0.3173417091369629,
+        "entity_ids": [
+          "\"UNITED STATES\"",
+          "\"PAUL THOMAS ANDERSON\"",
+          "\"NEO-NOIR PERIOD COMEDY-DRAMA\"",
+          "\"INHERENT VICE\"",
+          "\"THOMAS PYNCHON\""
+        ],
+        "chunk_ids": [
+          "chunk-c473661fcc558b2c33e8445aef638c51"
+        ],
+        "evidence_texts": [
+          "Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.586709,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.317342
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is Anderson's second collaboration with Phoenix, following 'The Master,' and involves a number of his other recurring collaborators, including producers Daniel Lupi and JoAnne Sellar, cinematographer Robert Elswit, editor Leslie Jones, and composer Jonny Greenwood.\"",
+        "hyperedge_text": "It is Anderson's second collaboration with Phoenix, following 'The Master,' and involves a number of his other recurring collaborators, including producers Daniel Lupi and JoAnne Sellar, cinematographer Robert Elswit, editor Leslie Jones, and composer Jonny Greenwood.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.25,
+        "semantic_score": 0.6,
+        "fusion_score": 0.42000000000000004,
+        "entity_ids": [
+          "\"JONNY GREENWOOD\"",
+          "\"SECOND COLLABORATION\"",
+          "\"THE MASTER\"",
+          "\"DANIEL LUPI\"",
+          "\"JOANNE SELLAR\"",
+          "\"ROBERT ELSWIT\"",
+          "\"LESLIE JONES\""
+        ],
+        "chunk_ids": [
+          "chunk-c473661fcc558b2c33e8445aef638c51"
+        ],
+        "evidence_texts": [
+          "It is Anderson's second collaboration with Phoenix, following 'The Master,' and involves a number of his other recurring collaborators, including producers Daniel Lupi and JoAnne Sellar, cinematographer Robert Elswit, editor Leslie Jones, and composer Jonny Greenwood.",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.25,
+          "S": 0.6,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.42
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jonathan Richard Guy Greenwood is an English musician and composer, born 5 November 1971.\"",
+        "hyperedge_text": "Jonathan Richard Guy Greenwood is an English musician and composer, born 5 November 1971.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.25,
+        "semantic_score": 0.2,
+        "fusion_score": 0.3400000000000001,
+        "entity_ids": [
+          "\"MUSICIAN\"",
+          "\"ENGLISH\"",
+          "\"COMPOSER\"",
+          "\"JONNY GREENWOOD\""
+        ],
+        "chunk_ids": [
+          "chunk-cc54631b0402ccd34badf271c2c0852b"
+        ],
+        "evidence_texts": [
+          "Jonathan Richard Guy Greenwood is an English musician and composer, born 5 November 1971.",
+          "Jonny Greenwood Jonathan Richard Guy Greenwood (born 5 November 1971) is an English musician and composer. He is the lead guitarist and keyboardist of the alternative rock band Radiohead, and has written a number of film scores. Along with his elder brother, Radiohead bassist Colin, Greenwood attended Abingdon School in Abingdon near Oxford, England, where he met the future band members. The youngest of the group, Greenwood was the last to join, first playing keyboards and harmonica but soon becoming lead guitarist. He abandoned a degree in music when the band signed to Parlophone; their debut single \"Creep\" was distinguished by Greenwood's aggressive guitar work. Radiohead have since achieved critical acclaim and sold over 30 million albums. Along with the other members of Radiohead, Greenwood was inducted into the Rock and Roll Hall of Fame in 2019. Greenwood has been named one of t..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.25,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.34
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'Inherent Vice' premiered at the New York Film Festival on October 4, 2014, and began a limited theatrical release in the United States on December 12, 2014.\"",
+        "hyperedge_text": "'Inherent Vice' premiered at the New York Film Festival on October 4, 2014, and began a limited theatrical release in the United States on December 12, 2014.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5478367805480957,
+        "fusion_score": 0.30956735610961916,
+        "entity_ids": [
+          "\"NEW YORK FILM FESTIVAL\"",
+          "\"OCTOBER 4, 2014\"",
+          "\"LIMITED THEATRICAL RELEASE\"",
+          "\"DECEMBER 12, 2014\""
+        ],
+        "chunk_ids": [
+          "chunk-c473661fcc558b2c33e8445aef638c51"
+        ],
+        "evidence_texts": [
+          "'Inherent Vice' premiered at the New York Film Festival on October 4, 2014, and began a limited theatrical release in the United States on December 12, 2014.",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.547837,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.309567
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Anderson's adaptation of 'Inherent Vice' had been in development since 2010; it is the first Pynchon novel to be adapted for the screen.\"",
+        "hyperedge_text": "Anderson's adaptation of 'Inherent Vice' had been in development since 2010; it is the first Pynchon novel to be adapted for the screen.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.47249969840049744,
+        "fusion_score": 0.2944999396800995,
+        "entity_ids": [
+          "\"ADAPTATION\"",
+          "\"DEVELOPMENT\"",
+          "\"FIRST PYNCHON NOVEL\""
+        ],
+        "chunk_ids": [
+          "chunk-c473661fcc558b2c33e8445aef638c51"
+        ],
+        "evidence_texts": [
+          "Anderson's adaptation of 'Inherent Vice' had been in development since 2010; it is the first Pynchon novel to be adapted for the screen.",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.4725,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.2945
+        }
+      }
+    ],
+    "answer": "England",
+    "confidence": 0.9,
+    "reasoning_summary": "Jonny Greenwood, the composer of 'Inherent Vice', was born in England, as indicated by the evidence stating his full name and birthplace.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Jonathan Richard Guy Greenwood is an English musician and composer, born 5 November 1971.\""
+    ]
+  }
+]

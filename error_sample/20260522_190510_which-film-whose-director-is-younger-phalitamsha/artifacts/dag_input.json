@@ -1,0 +1,51 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Phalitamsha?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Phalitamsha?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Gladiators Seven?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of Gladiators Seven?",
+    "dependencies": [
+      "q3"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q5",
+    "question": "What is the age of the director of Phalitamsha?",
+    "dependencies": [
+      "q2",
+      "q4"
+    ],
+    "metadata": {
+      "operator": "COMPARE_LESS",
+      "candidates": [
+        {
+          "label": "Phalitamsha",
+          "source_node_id": "q2"
+        },
+        {
+          "label": "Gladiators Seven",
+          "source_node_id": "q4"
+        }
+      ]
+    }
+  }
+]

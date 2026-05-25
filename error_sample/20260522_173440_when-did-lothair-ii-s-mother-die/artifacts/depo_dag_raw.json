@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the mother of Lothair II?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "When did the mother of Lothair II die?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

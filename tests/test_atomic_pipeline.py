@@ -9,6 +9,7 @@ from types import SimpleNamespace
 import numpy as np
 
 from hyper_branch.atomic import (
+    AtomicAnswerResult,
     AtomicDagExecutor,
     AtomicEvidenceFusion,
     AtomicHyperedgeRetriever,
@@ -16,6 +17,8 @@ from hyper_branch.atomic import (
     AtomicQuestionNode,
     BranchHit,
     DagCycleError,
+    FinalAnswerComposer,
+    FusedHyperedgeCandidate,
 )
 from hyper_branch.config import RetrievalConfig, load_config
 from hyper_branch.data.vector_store import VectorStore
@@ -402,6 +405,84 @@ class AtomicRetrieverTest(unittest.TestCase):
         self.assertEqual(len(relation_hits), 10)
         self.assertEqual(len(semantic_hits), 10)
         self.assertEqual(store.calls, [("relation query", 10), ("semantic question", 10)])
+
+
+class FinalAnswerComposerTest(unittest.TestCase):
+    def test_final_synthesis_uses_two_llm_stages(self) -> None:
+        llm = TwoStageLLM()
+        composer = FinalAnswerComposer(llm)
+        result = AtomicAnswerResult(
+            node_id="q1",
+            question="Was A or B born first?",
+            analysis=AtomicQuestionAnalysis(),
+            evidence=[
+                FusedHyperedgeCandidate(
+                    hyperedge_id="h1",
+                    hyperedge_text="A was born in 1900. B was born in 1910.",
+                    branch_support={"semantic"},
+                )
+            ],
+            answer="A was born first in 1900.",
+            confidence=0.9,
+            reasoning_summary="A predates B.",
+            used_hyperedge_ids=["h1"],
+        )
+
+        payload = composer.compose(
+            "Was A or B born first?",
+            [result],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="Was A or B born first?")],
+        )
+
+        self.assertEqual(llm.calls, ["compose", "span"])
+        self.assertEqual(payload["candidate_answer"], "A was born first in 1900.")
+        self.assertEqual(payload["answer"], "A")
+        self.assertEqual(payload["atomic_answer_trace"][0]["node_id"], "q1")
+
+
+class TwoStageLLM:
+    def __init__(self) -> None:
+        self.calls: list[str] = []
+
+    def analyze_atomic_question(self, atomic_question, dependency_answers):
+        raise NotImplementedError
+
+    def answer_atomic_question(self, atomic_question, dependency_answers, evidence):
+        raise NotImplementedError
+
+    def compose_final_answer(self, original_question, dag_nodes, atomic_results):
+        self.calls.append("compose")
+        self.compose_payload = {
+            "original_question": original_question,
+            "dag_nodes": dag_nodes,
+            "atomic_results": atomic_results,
+        }
+        return {
+            "candidate_answer": "A was born first in 1900.",
+            "reasoning_summary": "A has the earlier birth date.",
+            "confidence": 0.9,
+            "atomic_answer_trace": [
+                {
+                    "node_id": "q1",
+                    "question": "Was A or B born first?",
+                    "answer": "A was born first in 1900.",
+                    "used_hyperedge_ids": ["h1"],
+                }
+            ],
+            "remaining_gaps": [],
+        }
+
+    def finalize_answer_span(self, original_question, synthesis_candidate):
+        self.calls.append("span")
+        self.span_payload = {
+            "original_question": original_question,
+            "synthesis_candidate": synthesis_candidate,
+        }
+        return {
+            "answer": "A",
+            "confidence": 0.9,
+            "answer_span_reasoning": "The selected candidate is A.",
+        }
 
 
 class AtomicPipelineSmokeTest(unittest.TestCase):

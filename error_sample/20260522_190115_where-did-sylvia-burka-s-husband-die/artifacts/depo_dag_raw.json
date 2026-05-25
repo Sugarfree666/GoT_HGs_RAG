@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the husband of Sylvia Burka?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the husband of Sylvia Burka die?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

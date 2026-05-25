@@ -1,0 +1,533 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Henry?",
+    "analysis": {
+      "entities": [
+        "Henry"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Their only son, Henry, was born in around 1496.\"",
+        "hyperedge_text": "Their only son, Henry, was born in around 1496.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6352225542068481,
+        "fusion_score": 0.5270445108413697,
+        "entity_ids": [
+          "\"HENRY\""
+        ],
+        "chunk_ids": [
+          "chunk-9e010e664c51efdfa75dd480dcc98798"
+        ],
+        "evidence_texts": [
+          "Their only son, Henry, was born in around 1496.",
+          "Elizabeth Somerset, Baroness Herbert Elizabeth Herbert, 3rd Baroness Herbert (c. 1476 – 27 August 1507) was the sole heir and daughter of William Herbert, 2nd Earl of Pembroke, and his first wife, Mary Woodville. Her father died on 16 July 1491, and she inherited extensive lands in Wales. As her father had no sons, she succeeded to his barony, but could not succeed to the earldom, which was restricted to the male line. She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492. Their only son, Henry, was born in around 1496. In 1504, Somerset was created Baron Herbert. Elizabeth died on 27 August 1507, and was buried in St George's Chapel, Windsor Castle. The following month, further estates, including the lease of Caldicot Castle, devolved on Elizabeth's husband on the death of her uncle, Sir Walter Herbert. The addition of He..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.635223,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527045
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry III's lineage is connected through his mother, Elisabeth of Hesse-Marburg, and father, Count John V.\"",
+        "hyperedge_text": "Henry III's lineage is connected through his mother, Elisabeth of Hesse-Marburg, and father, Count John V.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5760936737060547,
+        "fusion_score": 0.915218734741211,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-06350ba89bf76288c8a5575519d38942"
+        ],
+        "evidence_texts": [
+          "Henry III's lineage is connected through his mother, Elisabeth of Hesse-Marburg, and father, Count John V.",
+          "Henry III of Nassau-Breda Count Henry III of Nassau- Dillenburg- Dietz( 12 January 1483, Siegen – 14 September 1538, Breda), Lord( from 1530 Baron) of Breda, Lord of the Lek, of Dietz, etc. was a count of the House of Nassau. He was the son of Count John V of Nassau- Dillenburg and Elisabeth of Hesse- Marburg. His younger brother was William I, Count of Nassau- Dillenburg( the father of William the Silent)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.576094,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.915219
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry II was the Landgrave of Hesse and the father of Adelaide of Hesse.\"",
+        "hyperedge_text": "Henry II was the Landgrave of Hesse and the father of Adelaide of Hesse.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.568360447883606,
+        "fusion_score": 0.9136720895767212,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-246a2e423ced5b62eef678b0c153be58"
+        ],
+        "evidence_texts": [
+          "Henry II was the Landgrave of Hesse and the father of Adelaide of Hesse.",
+          "Adelaide of Hesse Adelaide of Hesse( after 1323 – after May 26, 1371) was a daughter of Henry II, Landgrave of Hesse, and his wife Elisabeth of Thuringia, daughter of Frederick I, margrave of Meissen. Adelaide was a member of the House of Hesse."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.56836,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.913672
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king.\"",
+        "hyperedge_text": "When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5636911392211914,
+        "fusion_score": 0.9127382278442383,
+        "entity_ids": [
+          "\"JANUARY 10, 1218\"",
+          "\"8-MONTH-OLD HENRY\""
+        ],
+        "chunk_ids": [
+          "chunk-451965210ed4f8304d0c7349dd432231"
+        ],
+        "evidence_texts": [
+          "When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king.",
+          "Henry I of Cyprus Henry I of Cyprus, nicknamed the Fat (3 May 1217 – 18 January 1253 at Nicosia) was King of Cyprus from 1218 to 1253. He was the son of Hugh I of Cyprus and Alice of Champagne. When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king. His mother was the official regent, but handed off the actual governing to her uncle, Philip of Ibelin. When Philip died, the effective regency passed to his brother, John of Ibelin, the Old Lord of Beirut."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.563691,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.912738
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Stafford's eldest son had died of plague two years earlier and the Buckingham dukedom descended to Stafford’s five-year-old grandson, Henry, a ward of the King until he came of age in 1473.\"",
+        "hyperedge_text": "Stafford's eldest son had died of plague two years earlier and the Buckingham dukedom descended to Stafford’s five-year-old grandson, Henry, a ward of the King until he came of age in 1473.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 1.0,
+        "fusion_score": 0.6000000000000001,
+        "entity_ids": [
+          "\"ELDEST SON\"",
+          "\"HENRY\"",
+          "\"1473\""
+        ],
+        "chunk_ids": [
+          "chunk-e7afe06a2303780afa62c2c8a93441a3"
+        ],
+        "evidence_texts": [
+          "Stafford's eldest son had died of plague two years earlier and the Buckingham dukedom descended to Stafford’s five-year-old grandson, Henry, a ward of the King until he came of age in 1473.",
+          "Humphrey Stafford, 1st Duke of Buckingham Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford, (December 1402 – 10 July 1460) was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses. Through his mother he had royal descent from King Edward III, his great-grandfather, and from his father, he inherited, at an early age, the earldom of Stafford. By his marriage to a daughter of Ralph, Earl of Westmorland, Humphrey was related to the powerful Neville family and to many of the leading aristocratic houses of the time. He joined the English campaign in France with King Henry V in 1420 and following Henry V's death two years later he became a councillor for the new King, the nine-month-old Henry VI. Stafford acted as a peacemaker during the partisan, factional politics of the 1430s, when Humphrey, Duke of Gloucester, vied with Cardinal..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.6
+        }
+      }
+    ],
+    "answer": "Charles Somerset",
+    "confidence": 0.75,
+    "reasoning_summary": "The evidence indicates that Henry is the son of Charles Somerset, as it mentions their only son, Henry, was born to Elizabeth Herbert and Charles Somerset. This is supported by the evidence about Elizabeth Herbert's marriage to Charles Somerset.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Their only son, Henry, was born in around 1496.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the date of birth of the father of Henry?",
+    "analysis": {
+      "entities": [
+        "Henry",
+        "Charles Somerset"
+      ],
+      "relations": [
+        "date of birth of"
+      ],
+      "relation_query": "What is the date of birth of the father of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Their only son, Henry, was born in around 1496.\"",
+        "hyperedge_text": "Their only son, Henry, was born in around 1496.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.613863468170166,
+        "fusion_score": 0.3227726936340332,
+        "entity_ids": [
+          "\"HENRY\""
+        ],
+        "chunk_ids": [
+          "chunk-9e010e664c51efdfa75dd480dcc98798"
+        ],
+        "evidence_texts": [
+          "Their only son, Henry, was born in around 1496.",
+          "Elizabeth Somerset, Baroness Herbert Elizabeth Herbert, 3rd Baroness Herbert (c. 1476 – 27 August 1507) was the sole heir and daughter of William Herbert, 2nd Earl of Pembroke, and his first wife, Mary Woodville. Her father died on 16 July 1491, and she inherited extensive lands in Wales. As her father had no sons, she succeeded to his barony, but could not succeed to the earldom, which was restricted to the male line. She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492. Their only son, Henry, was born in around 1496. In 1504, Somerset was created Baron Herbert. Elizabeth died on 27 August 1507, and was buried in St George's Chapel, Windsor Castle. The following month, further estates, including the lease of Caldicot Castle, devolved on Elizabeth's husband on the death of her uncle, Sir Walter Herbert. The addition of He..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.613863,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.322773
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of death for Henry I is significant in understanding his timeline.\"",
+        "hyperedge_text": "The date of death for Henry I is significant in understanding his timeline.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.5,
+        "semantic_score": 0.6075385808944702,
+        "fusion_score": 0.5215077161788941,
+        "entity_ids": [
+          "\"8 OCTOBER 1291\""
+        ],
+        "chunk_ids": [
+          "chunk-ecca302ef4cd54f8f9b27e412a1ed14f"
+        ],
+        "evidence_texts": [
+          "The date of death for Henry I is significant in understanding his timeline.",
+          "Henry I of Werle Henry I( died 8 October 1291) was a Prince of Mecklenburg- Werle and Mecklenburg- Güstrow."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.5,
+          "S": 0.607539,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.521508
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492.\"",
+        "hyperedge_text": "She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"CHARLES SOMERSET\"",
+          "\"KING HENRY VII\""
+        ],
+        "chunk_ids": [
+          "chunk-9e010e664c51efdfa75dd480dcc98798"
+        ],
+        "evidence_texts": [
+          "She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492.",
+          "Elizabeth Somerset, Baroness Herbert Elizabeth Herbert, 3rd Baroness Herbert (c. 1476 – 27 August 1507) was the sole heir and daughter of William Herbert, 2nd Earl of Pembroke, and his first wife, Mary Woodville. Her father died on 16 July 1491, and she inherited extensive lands in Wales. As her father had no sons, she succeeded to his barony, but could not succeed to the earldom, which was restricted to the male line. She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492. Their only son, Henry, was born in around 1496. In 1504, Somerset was created Baron Herbert. Elizabeth died on 27 August 1507, and was buried in St George's Chapel, Windsor Castle. The following month, further estates, including the lease of Caldicot Castle, devolved on Elizabeth's husband on the death of her uncle, Sir Walter Herbert. The addition of He..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king.\"",
+        "hyperedge_text": "When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.25,
+        "semantic_score": 0.5606805086135864,
+        "fusion_score": 0.4121361017227173,
+        "entity_ids": [
+          "\"JANUARY 10, 1218\"",
+          "\"8-MONTH-OLD HENRY\""
+        ],
+        "chunk_ids": [
+          "chunk-451965210ed4f8304d0c7349dd432231"
+        ],
+        "evidence_texts": [
+          "When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king.",
+          "Henry I of Cyprus Henry I of Cyprus, nicknamed the Fat (3 May 1217 – 18 January 1253 at Nicosia) was King of Cyprus from 1218 to 1253. He was the son of Hugh I of Cyprus and Alice of Champagne. When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king. His mother was the official regent, but handed off the actual governing to her uncle, Philip of Ibelin. When Philip died, the effective regency passed to his brother, John of Ibelin, the Old Lord of Beirut."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.25,
+          "S": 0.560681,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.412136
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry I ascended to the throne at a very young age of 8 months due to his father's death.\"",
+        "hyperedge_text": "Henry I ascended to the throne at a very young age of 8 months due to his father's death.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.25,
+        "semantic_score": 0.5413559675216675,
+        "fusion_score": 0.40827119350433355,
+        "entity_ids": [
+          "\"THRONE\""
+        ],
+        "chunk_ids": [
+          "chunk-451965210ed4f8304d0c7349dd432231"
+        ],
+        "evidence_texts": [
+          "Henry I ascended to the throne at a very young age of 8 months due to his father's death.",
+          "Henry I of Cyprus Henry I of Cyprus, nicknamed the Fat (3 May 1217 – 18 January 1253 at Nicosia) was King of Cyprus from 1218 to 1253. He was the son of Hugh I of Cyprus and Alice of Champagne. When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king. His mother was the official regent, but handed off the actual governing to her uncle, Philip of Ibelin. When Philip died, the effective regency passed to his brother, John of Ibelin, the Old Lord of Beirut."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.25,
+          "S": 0.541356,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.408271
+        }
+      }
+    ],
+    "answer": "c. 1470",
+    "confidence": 0.75,
+    "reasoning_summary": "Charles Somerset, the father of Henry, was born around 1470, inferred from the context of his marriage and the birth of his son Henry around 1496. This is supported by the evidence regarding Elizabeth Herbert's marriage to Charles Somerset.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Their only son, Henry, was born in around 1496.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the date of birth of the father of Henry?",
+    "analysis": {
+      "entities": [
+        "Henry",
+        "Charles Somerset"
+      ],
+      "relations": [
+        "date of birth of a father"
+      ],
+      "relation_query": "What is the date of birth of the father of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Their only son, Henry, was born in around 1496.\"",
+        "hyperedge_text": "Their only son, Henry, was born in around 1496.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.613863468170166,
+        "fusion_score": 0.3227726936340332,
+        "entity_ids": [
+          "\"HENRY\""
+        ],
+        "chunk_ids": [
+          "chunk-9e010e664c51efdfa75dd480dcc98798"
+        ],
+        "evidence_texts": [
+          "Their only son, Henry, was born in around 1496.",
+          "Elizabeth Somerset, Baroness Herbert Elizabeth Herbert, 3rd Baroness Herbert (c. 1476 – 27 August 1507) was the sole heir and daughter of William Herbert, 2nd Earl of Pembroke, and his first wife, Mary Woodville. Her father died on 16 July 1491, and she inherited extensive lands in Wales. As her father had no sons, she succeeded to his barony, but could not succeed to the earldom, which was restricted to the male line. She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492. Their only son, Henry, was born in around 1496. In 1504, Somerset was created Baron Herbert. Elizabeth died on 27 August 1507, and was buried in St George's Chapel, Windsor Castle. The following month, further estates, including the lease of Caldicot Castle, devolved on Elizabeth's husband on the death of her uncle, Sir Walter Herbert. The addition of He..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.613863,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.322773
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492.\"",
+        "hyperedge_text": "She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"CHARLES SOMERSET\"",
+          "\"KING HENRY VII\""
+        ],
+        "chunk_ids": [
+          "chunk-9e010e664c51efdfa75dd480dcc98798"
+        ],
+        "evidence_texts": [
+          "She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492.",
+          "Elizabeth Somerset, Baroness Herbert Elizabeth Herbert, 3rd Baroness Herbert (c. 1476 – 27 August 1507) was the sole heir and daughter of William Herbert, 2nd Earl of Pembroke, and his first wife, Mary Woodville. Her father died on 16 July 1491, and she inherited extensive lands in Wales. As her father had no sons, she succeeded to his barony, but could not succeed to the earldom, which was restricted to the male line. She was made a ward of King Henry VII of England, and married Charles Somerset, 1st Earl of Worcester on 2 June 1492. Their only son, Henry, was born in around 1496. In 1504, Somerset was created Baron Herbert. Elizabeth died on 27 August 1507, and was buried in St George's Chapel, Windsor Castle. The following month, further estates, including the lease of Caldicot Castle, devolved on Elizabeth's husband on the death of her uncle, Sir Walter Herbert. The addition of He..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of death for Henry I is significant in understanding his timeline.\"",
+        "hyperedge_text": "The date of death for Henry I is significant in understanding his timeline.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.6075385808944702,
+        "fusion_score": 0.4548410495122274,
+        "entity_ids": [
+          "\"8 OCTOBER 1291\""
+        ],
+        "chunk_ids": [
+          "chunk-ecca302ef4cd54f8f9b27e412a1ed14f"
+        ],
+        "evidence_texts": [
+          "The date of death for Henry I is significant in understanding his timeline.",
+          "Henry I of Werle Henry I( died 8 October 1291) was a Prince of Mecklenburg- Werle and Mecklenburg- Güstrow."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.607539,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.454841
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king.\"",
+        "hyperedge_text": "When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.5606805086135864,
+        "fusion_score": 0.44546943505605063,
+        "entity_ids": [
+          "\"JANUARY 10, 1218\"",
+          "\"8-MONTH-OLD HENRY\""
+        ],
+        "chunk_ids": [
+          "chunk-451965210ed4f8304d0c7349dd432231"
+        ],
+        "evidence_texts": [
+          "When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king.",
+          "Henry I of Cyprus Henry I of Cyprus, nicknamed the Fat (3 May 1217 – 18 January 1253 at Nicosia) was King of Cyprus from 1218 to 1253. He was the son of Hugh I of Cyprus and Alice of Champagne. When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king. His mother was the official regent, but handed off the actual governing to her uncle, Philip of Ibelin. When Philip died, the effective regency passed to his brother, John of Ibelin, the Old Lord of Beirut."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.560681,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.445469
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry I ascended to the throne at a very young age of 8 months due to his father's death.\"",
+        "hyperedge_text": "Henry I ascended to the throne at a very young age of 8 months due to his father's death.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.5413559675216675,
+        "fusion_score": 0.4416045268376669,
+        "entity_ids": [
+          "\"THRONE\""
+        ],
+        "chunk_ids": [
+          "chunk-451965210ed4f8304d0c7349dd432231"
+        ],
+        "evidence_texts": [
+          "Henry I ascended to the throne at a very young age of 8 months due to his father's death.",
+          "Henry I of Cyprus Henry I of Cyprus, nicknamed the Fat (3 May 1217 – 18 January 1253 at Nicosia) was King of Cyprus from 1218 to 1253. He was the son of Hugh I of Cyprus and Alice of Champagne. When his father Hugh I died on January 10, 1218, the 8-month-old Henry became king. His mother was the official regent, but handed off the actual governing to her uncle, Philip of Ibelin. When Philip died, the effective regency passed to his brother, John of Ibelin, the Old Lord of Beirut."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.541356,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.441605
+        }
+      }
+    ],
+    "answer": "c. 1470",
+    "confidence": 0.75,
+    "reasoning_summary": "The date of birth of Charles Somerset, the father of Henry, is inferred to be around 1470 based on the timeline of his marriage and the birth of his son Henry around 1496.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Their only son, Henry, was born in around 1496.\""
+    ]
+  }
+]

@@ -31,7 +31,16 @@ class AtomicLLMService(ABC):
     def compose_final_answer(
         self,
         original_question: str,
+        dag_nodes: list[dict[str, Any]],
         atomic_results: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def finalize_answer_span(
+        self,
+        original_question: str,
+        synthesis_candidate: dict[str, Any],
     ) -> dict[str, Any]:
         raise NotImplementedError
 
@@ -87,6 +96,7 @@ class OpenAIAtomicLLMService(AtomicLLMService):
     def compose_final_answer(
         self,
         original_question: str,
+        dag_nodes: list[dict[str, Any]],
         atomic_results: list[dict[str, Any]],
     ) -> dict[str, Any]:
         response = self.client.chat_json(
@@ -94,15 +104,36 @@ class OpenAIAtomicLLMService(AtomicLLMService):
             self.prompts.get("final_answer_composer"),
             {
                 "original_question": original_question,
+                "dag": dag_nodes,
                 "atomic_results": atomic_results,
             },
             max_tokens=1100,
         )
-        response.setdefault("answer", "")
+        response.setdefault("candidate_answer", response.get("answer", ""))
         response.setdefault("reasoning_summary", "")
         response.setdefault("confidence", 0.0)
         response.setdefault("atomic_answer_trace", [])
         response.setdefault("remaining_gaps", [])
+        return response
+
+    def finalize_answer_span(
+        self,
+        original_question: str,
+        synthesis_candidate: dict[str, Any],
+    ) -> dict[str, Any]:
+        response = self.client.chat_json(
+            "final_answer_span",
+            self.prompts.get("final_answer_span"),
+            {
+                "original_question": original_question,
+                "candidate_answer": synthesis_candidate.get("candidate_answer", synthesis_candidate.get("answer", "")),
+                "reasoning_summary": synthesis_candidate.get("reasoning_summary", ""),
+            },
+            max_tokens=400,
+        )
+        response.setdefault("answer", "")
+        response.setdefault("confidence", synthesis_candidate.get("confidence", 0.0))
+        response.setdefault("answer_span_reasoning", "")
         return response
 
 
@@ -174,9 +205,10 @@ class MockAtomicLLMService(AtomicLLMService):
     def compose_final_answer(
         self,
         original_question: str,
+        dag_nodes: list[dict[str, Any]],
         atomic_results: list[dict[str, Any]],
     ) -> dict[str, Any]:
-        del original_question
+        del original_question, dag_nodes
         answers = [
             str(item.get("answer", "")).strip()
             for item in atomic_results
@@ -188,7 +220,7 @@ class MockAtomicLLMService(AtomicLLMService):
         confidence_values = [float(item.get("confidence", 0.0) or 0.0) for item in atomic_results]
         confidence = sum(confidence_values) / len(confidence_values) if confidence_values else 0.0
         return {
-            "answer": answer,
+            "candidate_answer": answer,
             "reasoning_summary": short_text(
                 " | ".join(str(item.get("reasoning_summary", "")) for item in atomic_results),
                 600,
@@ -208,6 +240,18 @@ class MockAtomicLLMService(AtomicLLMService):
                 for item in atomic_results
                 if str(item.get("answer", "")).strip() in {"", "INSUFFICIENT_EVIDENCE"}
             ],
+        }
+
+    def finalize_answer_span(
+        self,
+        original_question: str,
+        synthesis_candidate: dict[str, Any],
+    ) -> dict[str, Any]:
+        del original_question
+        return {
+            "answer": str(synthesis_candidate.get("candidate_answer", synthesis_candidate.get("answer", ""))).strip(),
+            "confidence": float(synthesis_candidate.get("confidence", 0.0) or 0.0),
+            "answer_span_reasoning": "Mock final span mirrors the candidate answer.",
         }
 
 

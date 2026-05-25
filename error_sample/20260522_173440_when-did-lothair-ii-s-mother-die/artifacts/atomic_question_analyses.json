@@ -1,0 +1,82 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Lothair II?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Lothair II"
+      ],
+      "relations": [
+        "is the mother of"
+      ],
+      "relation_query": "who is the mother of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the mother of Lothair II die?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the mother of Lothair II?",
+        "answer": "Ermengarde of Tours",
+        "confidence": 0.9,
+        "reasoning_summary": "Lothair II was the second son of Emperor Lothair I and Ermengarde of Tours, which directly identifies Ermengarde as his mother.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Lothair II (835 –) was the king of Lotharingia from 855 until his death.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Lothair II (835 –) was the king of Lotharingia from 855 until his death.\"",
+            "fusion_score": 0.5391554594039918,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Lothair II (835 –) was the king of Lotharingia from 855 until his death.",
+              "Lothair II Lothair II (835 –) was the king of Lotharingia from 855 until his death. He was the second son of Emperor Lothair I and Ermengarde of Tours. He was married to Teutberga (died 875), daughter of Boso the Elder."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Waldrada later became the wife of Lothair II of Lotharingia.\"",
+            "fusion_score": 0.5337082862854005,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Waldrada later became the wife of Lothair II of Lotharingia.",
+              "Waldrada of Lotharingia Waldrada was the mistress, and later the wife, of Lothair II of Lotharingia."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Bertha, daughter of Lothair II.\"",
+            "fusion_score": 0.5313814401626588,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Bertha, daughter of Lothair II.",
+              "Bertha, daughter of Lothair II Bertha( 863- 8 – March 925 in Lucca) was countess of Arles by marriage to Theobald of Arles, and margravine of Tuccany by marriage to Adalbert II of Tuscany. She served as regent of Lucca and Tuscany from 915 until 916 during the minority of her son Guy of Tuscany. She was described as beautiful, spirited, and courageous, and her influence over her spouse was, coupled with ambition, attributed to have involved her husbands in many wars. She was the second illegitimate daughter of Lothair II, King of Lotharingia, by his concubine Waldrada."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Lothair II",
+        "Ermengarde of Tours"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of the mother of a king?",
+      "answer_type": "date"
+    }
+  }
+]

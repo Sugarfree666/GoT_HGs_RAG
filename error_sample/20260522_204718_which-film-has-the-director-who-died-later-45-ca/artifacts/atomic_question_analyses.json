@@ -1,0 +1,82 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of 45 Calibre Echo?",
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "45 Calibre Echo"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the director of 45 Calibre Echo die?",
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of 45 Calibre Echo?",
+        "answer": "Bruce M. Mitchell",
+        "confidence": 1.0,
+        "reasoning_summary": "The evidence clearly states that '45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"45 Calibre Echo is a 1932 American western film.\"",
+            "fusion_score": 0.5286422371864319,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "45 Calibre Echo is a 1932 American western film.",
+              "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.\"",
+            "fusion_score": 0.5258285284042359,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.",
+              "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Jack Perrin stars in 45 Calibre Echo.\"",
+            "fusion_score": 0.5330438494682312,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Jack Perrin stars in 45 Calibre Echo.",
+              "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Bruce M. Mitchell",
+        "45 Calibre Echo"
+      ],
+      "relations": [
+        "died",
+        "death date"
+      ],
+      "relation_query": "When did the director of a work die?",
+      "answer_type": "date"
+    }
+  }
+]
