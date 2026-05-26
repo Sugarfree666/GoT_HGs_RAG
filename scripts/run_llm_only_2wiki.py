@@ -19,23 +19,23 @@ from hyper_branch.logging_utils import TraceStore, configure_logging, create_run
 from hyper_branch.utils import extract_json_payload
 
 
-SYSTEM_PROMPT = """You are an LLM-only QA baseline.
+SYSTEM_PROMPT = """You are a closed-book QA baseline for 2WikiMultiHopQA.
 
-Return JSON only:
-{
-  "answer": "...",
-  "reasoning_summary": "...",
-  "confidence": 0.0
-}
+Return valid JSON only with exactly these keys:
+{"answer": "...", "confidence": 0.0}
 
 Rules:
-- Answer the question directly using only your internal knowledge.
-- Do not use retrieval, tools, documents, or hidden evidence.
-- The answer field must be the clean shortest answer span suitable for QA evaluation.
+- Use only your internal model knowledge. Do not use tools, web, retrieval, documents, external context, or provided evidence.
+- Answer the original question directly.
+- The answer must be the shortest evaluation-ready span, but keep the required specificity.
+- For dates, output the full date if known; otherwise output the most specific date you know.
 - For yes/no questions, answer exactly "yes" or "no".
-- If you do not know, set answer to "INSUFFICIENT_EVIDENCE" and confidence to 0.0.
-- Keep reasoning_summary brief.
-- Keep confidence between 0 and 1.
+- For comparison or selection questions, output only the selected answer.
+- For count questions, output only the number.
+- Do not include explanations, evidence, citations, or uncertainty language in the "answer" field.
+- Make your best effort even if uncertain.
+- Do not output "INSUFFICIENT_EVIDENCE". If uncertain, output your best guess and use a lower confidence.
+- confidence must be a number from 0 to 1.
 """
 
 
