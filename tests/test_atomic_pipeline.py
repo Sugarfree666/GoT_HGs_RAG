@@ -128,6 +128,136 @@ class AtomicDagAdapterTest(unittest.TestCase):
         with self.assertRaises(DagCycleError):
             AtomicDagExecutor.topological_sort(nodes)
 
+    def test_dependency_answer_rewrites_retrieval_question_when_confident_entity(self) -> None:
+        analyzer = RecordingAnalyzer()
+        retriever = RecordingRetriever()
+        fusion = RecordingFusion()
+        executor = AtomicDagExecutor(
+            analyzer=analyzer,
+            retriever=retriever,
+            fusion=fusion,
+            composer=StaticComposer(),
+            llm_service=DependencyRewriteLLM({"q1": ("Ermengarde of Tours", 0.85), "q2": ("20 March 851", 0.9)}),
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Who is the mother of Lothair II?", "dependencies": []},
+                {"node_id": "q2", "question": "When did the mother of Lothair II die?", "dependencies": ["q1"]},
+            ]
+        }
+
+        result = executor.run("When did Lothair II's mother die?", dag)
+
+        self.assertEqual(analyzer.questions[1], "When did Ermengarde of Tours die?")
+        self.assertEqual(retriever.questions[1], "When did Ermengarde of Tours die?")
+        self.assertEqual(fusion.questions[1], "When did Ermengarde of Tours die?")
+        self.assertEqual(result.atomic_results[1].question, "When did the mother of Lothair II die?")
+        rewrite = result.artifacts["atomic_question_analyses"][1]["dependency_question_rewrite"]
+        self.assertTrue(rewrite["whether_rewritten"])
+        self.assertEqual(rewrite["replacement_span"], "the mother of Lothair II")
+        self.assertEqual(rewrite["replacement_answer"], "Ermengarde of Tours")
+        self.assertEqual(rewrite["retrieval_question"], "When did Ermengarde of Tours die?")
+
+    def test_dependency_answer_does_not_rewrite_when_low_confidence_or_non_entity(self) -> None:
+        analyzer = RecordingAnalyzer()
+        executor = AtomicDagExecutor(
+            analyzer=analyzer,
+            retriever=RecordingRetriever(),
+            fusion=RecordingFusion(),
+            composer=StaticComposer(),
+            llm_service=DependencyRewriteLLM({"q1": ("20 March 851", 0.95), "q2": ("done", 0.9)}),
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "When did Lothair II die?", "dependencies": []},
+                {"node_id": "q2", "question": "Where is Lothair II buried?", "dependencies": ["q1"]},
+            ]
+        }
+
+        result = executor.run("Where is Lothair II buried?", dag)
+
+        self.assertEqual(analyzer.questions[1], "Where is Lothair II buried?")
+        rewrite = result.artifacts["atomic_question_analyses"][1]["dependency_question_rewrite"]
+        self.assertFalse(rewrite["whether_rewritten"])
+        self.assertEqual(rewrite["retrieval_question"], "Where is Lothair II buried?")
+
+
+class RecordingAnalyzer:
+    def __init__(self) -> None:
+        self.questions: list[str] = []
+
+    def analyze(self, atomic_question: str, dependency_answers=None) -> AtomicQuestionAnalysis:
+        del dependency_answers
+        self.questions.append(atomic_question)
+        answer_type = "person" if atomic_question.lower().startswith("who ") else "date"
+        return AtomicQuestionAnalysis(
+            entities=["Lothair II"] if "Lothair II" in atomic_question else ["Ermengarde of Tours"],
+            relations=["relation"],
+            relation_query=atomic_question,
+            answer_type=answer_type,
+        )
+
+
+class RecordingRetriever:
+    def __init__(self) -> None:
+        self.questions: list[str] = []
+
+    def retrieve(self, question: str, analysis: AtomicQuestionAnalysis) -> list[BranchHit]:
+        del analysis
+        self.questions.append(question)
+        return []
+
+
+class RecordingFusion:
+    def __init__(self) -> None:
+        self.questions: list[str] = []
+
+    def fuse(
+        self,
+        question: str,
+        analysis: AtomicQuestionAnalysis,
+        branch_hits: list[BranchHit],
+    ) -> list[FusedHyperedgeCandidate]:
+        del analysis, branch_hits
+        self.questions.append(question)
+        return []
+
+
+class StaticComposer:
+    def compose(self, original_question, atomic_results, dag_nodes=None):
+        del original_question, dag_nodes
+        return {"answer": atomic_results[-1].answer if atomic_results else ""}
+
+
+class DependencyRewriteLLM:
+    def __init__(self, answers_by_node_id: dict[str, tuple[str, float]]) -> None:
+        self.answers_by_node_id = answers_by_node_id
+
+    def analyze_atomic_question(self, atomic_question, dependency_answers):
+        raise NotImplementedError
+
+    def answer_atomic_question(self, atomic_question, dependency_answers, evidence):
+        del dependency_answers, evidence
+        if "mother of Lothair" in atomic_question:
+            answer, confidence = self.answers_by_node_id["q1"]
+        elif "Lothair II die" in atomic_question:
+            answer, confidence = self.answers_by_node_id["q1"]
+        else:
+            answer, confidence = self.answers_by_node_id.get("q2", ("INSUFFICIENT_EVIDENCE", 0.0))
+        return {
+            "answer": answer,
+            "confidence": confidence,
+            "reasoning_summary": "test answer",
+            "used_hyperedge_ids": [],
+            "insufficient": answer == "INSUFFICIENT_EVIDENCE",
+        }
+
+    def compose_final_answer(self, original_question, dag_nodes, atomic_results):
+        raise NotImplementedError
+
+    def finalize_answer_span(self, original_question, synthesis_candidate):
+        raise NotImplementedError
+
 
 class AtomicFusionTest(unittest.TestCase):
     def test_branch_hits_merge_by_hyperedge_id(self) -> None:

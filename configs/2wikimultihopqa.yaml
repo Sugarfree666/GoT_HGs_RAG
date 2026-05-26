@@ -19,6 +19,7 @@ llm:
   base_url_env: OPENAI_BASE_URL
   model: gpt-4o-mini
   embedding_model: text-embedding-3-small
+
   timeout_seconds: 120
   max_retries: 3
   retry_backoff_seconds: 2.0

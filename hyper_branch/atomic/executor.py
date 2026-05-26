@@ -8,6 +8,7 @@ from ..llm.service import AtomicLLMService
 from ..utils import ensure_list, normalize_label, short_text
 from .analyzer import AtomicQuestionAnalyzer
 from .composer import FinalAnswerComposer
+from .dependency_rewrite import resolve_dependency_question
 from .fusion import AtomicEvidenceFusion
 from .models import (
     AtomicAnswerResult,
@@ -51,9 +52,18 @@ class AtomicDagExecutor:
         self.logger.info("Executing atomic DAG with %s node(s)", len(order))
         for node in order:
             dependency_answers = self._dependency_context(node.dependencies, results_by_id)
-            analysis = self.analyzer.analyze(node.question, dependency_answers)
-            branch_hits = self.retriever.retrieve(node.question, analysis)
-            fused_evidence = self.fusion.fuse(node.question, analysis, branch_hits)
+            dependency_rewrite = resolve_dependency_question(node.question, dependency_answers)
+            retrieval_question = dependency_rewrite.retrieval_question
+            if dependency_rewrite.whether_rewritten:
+                self.logger.info(
+                    "Rewrote retrieval question for %s: %s -> %s",
+                    node.node_id,
+                    node.question,
+                    retrieval_question,
+                )
+            analysis = self.analyzer.analyze(retrieval_question, dependency_answers)
+            branch_hits = self.retriever.retrieve(retrieval_question, analysis)
+            fused_evidence = self.fusion.fuse(retrieval_question, analysis, branch_hits)
             answer_payload = self._answer_atomic_question(
                 node=node,
                 analysis=analysis,
@@ -76,6 +86,8 @@ class AtomicDagExecutor:
                 {
                     "node_id": node.node_id,
                     "question": node.question,
+                    "retrieval_question": retrieval_question,
+                    "dependency_question_rewrite": dependency_rewrite.to_dict(),
                     "dependency_answers": dependency_answers,
                     "analysis": analysis.to_dict(),
                 }
@@ -84,6 +96,8 @@ class AtomicDagExecutor:
                 {
                     "node_id": node.node_id,
                     "question": node.question,
+                    "retrieval_question": retrieval_question,
+                    "dependency_question_rewrite": dependency_rewrite.to_dict(),
                     "branch_hits": [hit.to_dict() for hit in branch_hits],
                     "top_evidence": [candidate.to_dict() for candidate in fused_evidence],
                 }
@@ -268,6 +282,7 @@ class AtomicDagExecutor:
                     "question": result.question,
                     "answer": result.answer,
                     "confidence": result.confidence,
+                    "answer_type": result.analysis.answer_type,
                     "reasoning_summary": result.reasoning_summary,
                     "used_hyperedge_ids": list(result.used_hyperedge_ids),
                     "evidence_summary": [
