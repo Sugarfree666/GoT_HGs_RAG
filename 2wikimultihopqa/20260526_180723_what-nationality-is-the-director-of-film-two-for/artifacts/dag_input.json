@@ -1,0 +1,16 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Two For Texas?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the director of Two For Texas?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  }
+]

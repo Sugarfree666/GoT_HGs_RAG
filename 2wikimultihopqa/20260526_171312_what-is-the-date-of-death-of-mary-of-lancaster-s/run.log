@@ -1,0 +1,10 @@
+2026-05-26 17:13:12,564 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 17:14:20,742 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 17:14:20,742 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 17:14:45,830 | INFO | Starting HyperBranch pipeline for question: What is the date of death of Mary Of Lancaster's mother?
+2026-05-26 17:14:45,831 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-26 17:14:52,732 | INFO | Atomic retrieval returned 21 hits for question=Who is the mother of Mary Of Lancaster?
+2026-05-26 17:15:02,570 | INFO | Rewrote retrieval question for q2: When did the mother of Mary Of Lancaster die? -> When did Maud Chaworth die?
+2026-05-26 17:15:20,653 | INFO | Atomic retrieval returned 22 hits for question=When did Maud Chaworth die?
+2026-05-26 17:15:41,670 | INFO | Atomic retrieval returned 26 hits for question=What is the date of death of the mother of Mary Of Lancaster?
+2026-05-26 17:16:43,020 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_171312_what-is-the-date-of-death-of-mary-of-lancaster-s

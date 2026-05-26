@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "When was Shawn Lewfatt born?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "When was Ken Karpoff born?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q3",
+      "question": "What is the birth date of Shawn Lewfatt?",
+      "dependencies": [
+        "q1",
+        "q2"
+      ],
+      "metadata": {
+        "operator": "COMPARE_GREATER"
+      }
+    }
+  ]
+}

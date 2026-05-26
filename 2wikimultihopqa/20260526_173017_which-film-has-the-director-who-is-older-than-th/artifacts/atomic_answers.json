@@ -1,0 +1,561 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Inside Man?",
+    "analysis": {
+      "entities": [
+        "The Inside Man"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Inside Man (film) is a 1984 Swedish-British thriller film directed by Tom Clegg and starring Dennis Hopper.\"",
+        "hyperedge_text": "The Inside Man (film) is a 1984 Swedish-British thriller film directed by Tom Clegg and starring Dennis Hopper.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6500928401947021,
+        "fusion_score": 0.5300185680389404,
+        "entity_ids": [
+          "\"DENNIS HOPPER\"",
+          "\"HARRY KULLMAN\"",
+          "\"SLAGSKÄMPEN\"",
+          "\"TOM CLEGG\"",
+          "\"THE INSIDE MAN\""
+        ],
+        "chunk_ids": [
+          "chunk-76dfb97baecd0116195a77f6c776d597"
+        ],
+        "evidence_texts": [
+          "The Inside Man (film) is a 1984 Swedish-British thriller film directed by Tom Clegg and starring Dennis Hopper.",
+          "The Inside Man (film) The Inside Man( also titled Slagskämpen) is a 1984 Swedish- British thriller film directed by Tom Clegg and starring Dennis Hopper. It is based on the book\" Slagskämpen\" by Harry Kullman."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.650093,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530019
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Inside Man is categorized as a thriller film.\"",
+        "hyperedge_text": "The Inside Man is categorized as a thriller film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6546605825424194,
+        "fusion_score": 0.5309321165084839,
+        "entity_ids": [
+          "\"THRILLER\""
+        ],
+        "chunk_ids": [
+          "chunk-76dfb97baecd0116195a77f6c776d597"
+        ],
+        "evidence_texts": [
+          "The Inside Man is categorized as a thriller film.",
+          "The Inside Man (film) The Inside Man( also titled Slagskämpen) is a 1984 Swedish- British thriller film directed by Tom Clegg and starring Dennis Hopper. It is based on the book\" Slagskämpen\" by Harry Kullman."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.654661,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530932
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dennis Hopper stars in The Inside Man.\"",
+        "hyperedge_text": "Dennis Hopper stars in The Inside Man.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6089017391204834,
+        "fusion_score": 0.5217803478240968,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-76dfb97baecd0116195a77f6c776d597"
+        ],
+        "evidence_texts": [
+          "Dennis Hopper stars in The Inside Man.",
+          "The Inside Man (film) The Inside Man( also titled Slagskämpen) is a 1984 Swedish- British thriller film directed by Tom Clegg and starring Dennis Hopper. It is based on the book\" Slagskämpen\" by Harry Kullman."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.608902,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52178
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.33647418816884356,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.336474
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4973045885562897,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.3322551687558492,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this, he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.497305,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.332255
+        }
+      }
+    ],
+    "answer": "Tom Clegg",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'The Inside Man (film) is a 1984 Swedish-British thriller film directed by Tom Clegg.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Inside Man (film) is a 1984 Swedish-British thriller film directed by Tom Clegg and starring Dennis Hopper.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Dog'S Heart?",
+    "analysis": {
+      "entities": [
+        "Dog'S Heart"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Cuore di cane (International title- Dog's Heart) is a 1976 joint Italian-German comedy film directed by Alberto Lattuada based on a novel 'Heart of a Dog' by Mikhail Bulgakov adapted by Mario Gallo.\"",
+        "hyperedge_text": "Cuore di cane (International title- Dog's Heart) is a 1976 joint Italian-German comedy film directed by Alberto Lattuada based on a novel 'Heart of a Dog' by Mikhail Bulgakov adapted by Mario Gallo.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6328294277191162,
+        "fusion_score": 0.5265658855438233,
+        "entity_ids": [
+          "\"CONSTANTIN FILM\"",
+          "\"CUORE DI CANE\"",
+          "\"DOG'S HEART\"",
+          "\"ALBERTO LATTUADA\"",
+          "\"MIKHAIL BULGAKOV\"",
+          "\"MARIO GALLO\"",
+          "\"CORONA FILMPRODUKTION\"",
+          "\"113 MIN\"",
+          "\"PIERO PICCIONI\"",
+          "\"LAMBERTO CAIMI\"",
+          "\"SERGIO MONTANARI\"",
+          "\"ITALIAN-GERMAN\"",
+          "\"FILMALPHA\""
+        ],
+        "chunk_ids": [
+          "chunk-7af61c73608d7292a279b9c8b4066ef8"
+        ],
+        "evidence_texts": [
+          "Cuore di cane (International title- Dog's Heart) is a 1976 joint Italian-German comedy film directed by Alberto Lattuada based on a novel 'Heart of a Dog' by Mikhail Bulgakov adapted by Mario Gallo.",
+          "Dog's Heart Cuore di cane( International title- Dog's Heart) is a 1976 joint Italian- German comedy film directed by Alberto Lattuada based on a novel\" Heart of a Dog\" by Mikhail Bulgakov adapted by Mario Gallo. Screenplay by Alberto Lattuada with Viveca Melander. Composer- Piero Piccioni, editor- Sergio Montanari. Cinematography by Lamberto Caimi. Production companies- Corona Filmproduktion, Filmalpha, distribution by Constantin Film. Runtime- 113 min."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.632829,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.526566
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30314085483551023,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.303141
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4973045885562897,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2989218354225159,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this, he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.497305,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.298922
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4840206205844879,
+        "semantic_score": 0.5,
+        "fusion_score": 0.29360824823379517,
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "evidence_texts": [
+          "As a film director, he has directed several works in addition to acting.",
+          "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.484021,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.293608
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48202356696128845,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2928094267845154,
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "evidence_texts": [
+          "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+          "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.482024,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.292809
+        }
+      }
+    ],
+    "answer": "Alberto Lattuada",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Dog's Heart' (Cuore di cane) is directed by Alberto Lattuada.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Cuore di cane (International title- Dog's Heart) is a 1976 joint Italian-German comedy film directed by Alberto Lattuada based on a novel 'Heart of a Dog' by Mikhail Bulgakov adapted by Mario Gallo.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Is the age of the director of The Inside Man older than the age of the director of Dog'S Heart?",
+    "analysis": {
+      "entities": [
+        "The Inside Man",
+        "Dog'S Heart"
+      ],
+      "relations": [
+        "is older than",
+        "age of the director"
+      ],
+      "relation_query": "Is the age of the director of a work older than the age of the director of another work?",
+      "answer_type": "boolean"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Inside Man (film) is a 1984 Swedish-British thriller film directed by Tom Clegg and starring Dennis Hopper.\"",
+        "hyperedge_text": "The Inside Man (film) is a 1984 Swedish-British thriller film directed by Tom Clegg and starring Dennis Hopper.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.48824450373649597,
+        "fusion_score": 0.2976489007472992,
+        "entity_ids": [
+          "\"DENNIS HOPPER\"",
+          "\"HARRY KULLMAN\"",
+          "\"SLAGSKÄMPEN\"",
+          "\"TOM CLEGG\"",
+          "\"THE INSIDE MAN\""
+        ],
+        "chunk_ids": [
+          "chunk-76dfb97baecd0116195a77f6c776d597"
+        ],
+        "evidence_texts": [
+          "The Inside Man (film) is a 1984 Swedish-British thriller film directed by Tom Clegg and starring Dennis Hopper.",
+          "The Inside Man (film) The Inside Man( also titled Slagskämpen) is a 1984 Swedish- British thriller film directed by Tom Clegg and starring Dennis Hopper. It is based on the book\" Slagskämpen\" by Harry Kullman."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.488245,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.297649
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.\"",
+        "hyperedge_text": "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.4874773919582367,
+        "fusion_score": 0.29749547839164736,
+        "entity_ids": [
+          "\"2007\"",
+          "\"STARY CZŁOWIEK I PIES (THE OLD MAN AND THE DOG)\""
+        ],
+        "chunk_ids": [
+          "chunk-d3d9377a1c523159f484fa4ec74bec5e"
+        ],
+        "evidence_texts": [
+          "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+          "Witold Leszczyński Witold Leszczyński( 16 August 1933 – 1 September 2007) was a Polish film director and screenwriter. In 1967 he graduated from the National Film School in Łódź. He directed over thirty films between 1959 and 2007. Most known for\" Żywot MateuszaMatthew's Days\") based on a novel by Norwegian writer Tarjei Vesaas,\" Konopielka\", adapted from the novel of Edward Redliński,\" Siekierezada\" based on a novel by Edward Stachura and many others films. He received numerous awards, including Grand Prix at the Polish Film Festival in 1986. The director died during the shoot of his film\" Stary człowiek i pies The Old Man and the Dog\") in 2007."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.487477,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.297495
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Inside Man is categorized as a thriller film.\"",
+        "hyperedge_text": "The Inside Man is categorized as a thriller film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.47691336274147034,
+        "fusion_score": 0.2953826725482941,
+        "entity_ids": [
+          "\"THRILLER\""
+        ],
+        "chunk_ids": [
+          "chunk-76dfb97baecd0116195a77f6c776d597"
+        ],
+        "evidence_texts": [
+          "The Inside Man is categorized as a thriller film.",
+          "The Inside Man (film) The Inside Man( also titled Slagskämpen) is a 1984 Swedish- British thriller film directed by Tom Clegg and starring Dennis Hopper. It is based on the book\" Slagskämpen\" by Harry Kullman."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.476913,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.295383
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cuore di cane (International title- Dog's Heart) is a 1976 joint Italian-German comedy film directed by Alberto Lattuada based on a novel 'Heart of a Dog' by Mikhail Bulgakov adapted by Mario Gallo.\"",
+        "hyperedge_text": "Cuore di cane (International title- Dog's Heart) is a 1976 joint Italian-German comedy film directed by Alberto Lattuada based on a novel 'Heart of a Dog' by Mikhail Bulgakov adapted by Mario Gallo.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.26666666666666666,
+        "entity_ids": [
+          "\"CONSTANTIN FILM\"",
+          "\"CUORE DI CANE\"",
+          "\"DOG'S HEART\"",
+          "\"ALBERTO LATTUADA\"",
+          "\"MIKHAIL BULGAKOV\"",
+          "\"MARIO GALLO\"",
+          "\"CORONA FILMPRODUKTION\"",
+          "\"113 MIN\"",
+          "\"PIERO PICCIONI\"",
+          "\"LAMBERTO CAIMI\"",
+          "\"SERGIO MONTANARI\"",
+          "\"ITALIAN-GERMAN\"",
+          "\"FILMALPHA\""
+        ],
+        "chunk_ids": [
+          "chunk-7af61c73608d7292a279b9c8b4066ef8"
+        ],
+        "evidence_texts": [
+          "Cuore di cane (International title- Dog's Heart) is a 1976 joint Italian-German comedy film directed by Alberto Lattuada based on a novel 'Heart of a Dog' by Mikhail Bulgakov adapted by Mario Gallo.",
+          "Dog's Heart Cuore di cane( International title- Dog's Heart) is a 1976 joint Italian- German comedy film directed by Alberto Lattuada based on a novel\" Heart of a Dog\" by Mikhail Bulgakov adapted by Mario Gallo. Screenplay by Alberto Lattuada with Viveca Melander. Composer- Piero Piccioni, editor- Sergio Montanari. Cinematography by Lamberto Caimi. Production companies- Corona Filmproduktion, Filmalpha, distribution by Constantin Film. Runtime- 113 min."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.266667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5466084480285645,
+        "semantic_score": 0.1111111111111111,
+        "fusion_score": 0.24086560143364802,
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "evidence_texts": [
+          "His work as a director spanned over two decades.",
+          "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.546608,
+          "S": 0.111111,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.240866
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the ages of the directors of 'The Inside Man' and 'Dog's Heart', making it impossible to determine if one is older than the other.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Inside Man (film) is a 1984 Swedish-British thriller film directed by Tom Clegg and starring Dennis Hopper.\""
+    ]
+  }
+]

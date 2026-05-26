@@ -1,0 +1,372 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who performed the song You Changed Me?",
+    "analysis": {
+      "entities": [
+        "You Changed Me"
+      ],
+      "relations": [
+        "performed by"
+      ],
+      "relation_query": "who performed a work titled 'You Changed Me'",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\"",
+        "hyperedge_text": "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5896250009536743,
+        "semantic_score": 0.6222749948501587,
+        "fusion_score": 0.7603049993515015,
+        "entity_ids": [
+          "\"CHRIS BROWN\"",
+          "\"YOU CHANGED ME\"",
+          "\"JAMIE FOXX\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.589625,
+          "S": 0.622275,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.760305
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.\"",
+        "hyperedge_text": "'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5662411451339722,
+        "semantic_score": 0.5819054841995239,
+        "fusion_score": 0.7428775548934937,
+        "entity_ids": [
+          "\"'YOU CHANGED ME'\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.566241,
+          "S": 0.581905,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.742878
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'You Changed Me' combines elements of R&B and pop, appealing to a variety of listeners.\"",
+        "hyperedge_text": "'You Changed Me' combines elements of R&B and pop, appealing to a variety of listeners.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5484896898269653,
+        "semantic_score": 0.5486708879470825,
+        "fusion_score": 0.7291300535202027,
+        "entity_ids": [
+          "\"POP\"",
+          "\"R&B\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "'You Changed Me' combines elements of R&B and pop, appealing to a variety of listeners.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.54849,
+          "S": 0.548671,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.72913
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.\"",
+        "hyperedge_text": "The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.4948882460594177,
+        "semantic_score": 0.4867270588874817,
+        "fusion_score": 0.6953007102012635,
+        "entity_ids": [
+          "\"SUCCESS\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.494888,
+          "S": 0.486727,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.695301
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Changed It\" is a song by Trinidadian-American rapper and singer Nicki Minaj and American rapper Lil Wayne.\"",
+        "hyperedge_text": "Changed It\" is a song by Trinidadian-American rapper and singer Nicki Minaj and American rapper Lil Wayne.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.41557884216308594,
+        "semantic_score": 0.44450193643569946,
+        "fusion_score": 0.2551319241523743,
+        "entity_ids": [
+          "\"CHANGED IT\"",
+          "\"LIL WAYNE\"",
+          "\"NICKI MINAJ\""
+        ],
+        "chunk_ids": [
+          "chunk-aa6e61975599526c539dcf0c6a65da9e"
+        ],
+        "evidence_texts": [
+          "Changed It\" is a song by Trinidadian-American rapper and singer Nicki Minaj and American rapper Lil Wayne.",
+          "Changed It \"Changed It\" is a song by Trinidadian-American rapper and singer Nicki Minaj and American rapper Lil Wayne. Produced by Motiv, Detail, and Sidney Swift, the song was released as a single on March 10, 2017 by Young Money Entertainment, Cash Money Records and Republic Records, along with \"No Frauds\" and \"Regret in Your Tears\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.415579,
+          "S": 0.444502,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.255132
+        }
+      }
+    ],
+    "answer": "Jamie Foxx featuring Chris Brown",
+    "confidence": 0.9,
+    "reasoning_summary": "The song 'You Changed Me' is performed by Jamie Foxx featuring Chris Brown, as stated in the evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What award did the performer of You Changed Me win?",
+    "analysis": {
+      "entities": [
+        "You Changed Me",
+        "Jamie Foxx",
+        "Chris Brown"
+      ],
+      "relations": [
+        "won",
+        "received"
+      ],
+      "relation_query": "What award did the performer of a song win?",
+      "answer_type": "award"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\"",
+        "hyperedge_text": "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.25,
+        "semantic_score": 0.538227379322052,
+        "fusion_score": 0.6076454758644104,
+        "entity_ids": [
+          "\"CHRIS BROWN\"",
+          "\"YOU CHANGED ME\"",
+          "\"JAMIE FOXX\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.25,
+          "S": 0.538227,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.607645
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song earned the singer a Grammy Award for Best Gospel Performance/ Song.\"",
+        "hyperedge_text": "The song earned the singer a Grammy Award for Best Gospel Performance/ Song.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5193042755126953,
+        "semantic_score": 0.46197110414505005,
+        "fusion_score": 0.3001159310340881,
+        "entity_ids": [
+          "\"GRAMMY AWARD\"",
+          "\"BEST GOSPEL PERFORMANCE/ SONG\""
+        ],
+        "chunk_ids": [
+          "chunk-ffc6b813f86677307ba0d3d2acf041bf"
+        ],
+        "evidence_texts": [
+          "The song earned the singer a Grammy Award for Best Gospel Performance/ Song.",
+          "Never Have to Be Alone Never Have to Be Alone is a song by American gospel singer CeCe Winans, released in 2017. The song earned the singer a Grammy Award for Best Gospel Performance/ Song. The song is from the artist's\" Let Them Fall in Love\" album."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.519304,
+          "S": 0.461971,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.300116
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Special International Award she received in 2008 highlights her international success as a songwriter.\"",
+        "hyperedge_text": "The Special International Award she received in 2008 highlights her international success as a songwriter.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4957886338233948,
+        "semantic_score": 0.4350498616695404,
+        "fusion_score": 0.28532542586326604,
+        "entity_ids": [
+          "\"INTERNATIONAL SUCCESS\""
+        ],
+        "chunk_ids": [
+          "chunk-b92d456ec44c199b1d914531a53bed6c"
+        ],
+        "evidence_texts": [
+          "The Special International Award she received in 2008 highlights her international success as a songwriter.",
+          "Diane Warren Diane Eve Warren (born September 7, 1956) is an American songwriter. She rose to prominence in 1983, and has since written songs for and co-written songs with multiple singers, as well as for several films. Warren has written nine number-one songs and 32 top 10 songs on the \"Billboard\" Hot 100 chart. Additionally, two of the top 13 hits in the Hot 100's 57-year history were composed by her. Warren's career catapulted in the late 1980s shortly after joining forces with the UK music company EMI when Warren became the first songwriter in the history of \"Billboard\" magazine to have seven hits, all by different artists, on the singles chart at the same time prompting the UK's former Chairman of EMI Music Publishing Peter Reichardt to credit her as \"the most important songwriter in the world\". She has been rated the third most successful female artist in the UK. Warren has won..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.495789,
+          "S": 0.43505,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.285325
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her UK success saw her win an Ivor Novello Award from the British Academy of Songwriters, Composers and Authors when she received the Special International Award in 2008.\"",
+        "hyperedge_text": "Her UK success saw her win an Ivor Novello Award from the British Academy of Songwriters, Composers and Authors when she received the Special International Award in 2008.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46790868043899536,
+        "semantic_score": 0.4258635342121124,
+        "fusion_score": 0.27233617901802065,
+        "entity_ids": [
+          "\"IVOR NOVELLO AWARD\"",
+          "\"BRITISH ACADEMY OF SONGWRITERS, COMPOSERS AND AUTHORS\""
+        ],
+        "chunk_ids": [
+          "chunk-b92d456ec44c199b1d914531a53bed6c"
+        ],
+        "evidence_texts": [
+          "Her UK success saw her win an Ivor Novello Award from the British Academy of Songwriters, Composers and Authors when she received the Special International Award in 2008.",
+          "Diane Warren Diane Eve Warren (born September 7, 1956) is an American songwriter. She rose to prominence in 1983, and has since written songs for and co-written songs with multiple singers, as well as for several films. Warren has written nine number-one songs and 32 top 10 songs on the \"Billboard\" Hot 100 chart. Additionally, two of the top 13 hits in the Hot 100's 57-year history were composed by her. Warren's career catapulted in the late 1980s shortly after joining forces with the UK music company EMI when Warren became the first songwriter in the history of \"Billboard\" magazine to have seven hits, all by different artists, on the singles chart at the same time prompting the UK's former Chairman of EMI Music Publishing Peter Reichardt to credit her as \"the most important songwriter in the world\". She has been rated the third most successful female artist in the UK. Warren has won..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.467909,
+          "S": 0.425864,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.272336
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.\"",
+        "hyperedge_text": "'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.25,
+        "semantic_score": 0.512265145778656,
+        "fusion_score": 0.6024530291557312,
+        "entity_ids": [
+          "\"'YOU CHANGED ME'\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.25,
+          "S": 0.512265,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.602453
+        }
+      }
+    ],
+    "answer": "Grammy Award for Best Gospel Performance/ Song",
+    "confidence": 0.75,
+    "reasoning_summary": "The song 'You Changed Me' earned the performer a Grammy Award for Best Gospel Performance/ Song, as indicated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The song earned the singer a Grammy Award for Best Gospel Performance/ Song.\""
+    ]
+  }
+]

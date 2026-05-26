@@ -1,0 +1,25 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Angus Wagner born?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Juan Carlos Falcón born?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "Was Angus Wagner born first?",
+    "dependencies": [
+      "q1",
+      "q2"
+    ],
+    "metadata": {
+      "operator": "COMPARE_LESS"
+    }
+  }
+]

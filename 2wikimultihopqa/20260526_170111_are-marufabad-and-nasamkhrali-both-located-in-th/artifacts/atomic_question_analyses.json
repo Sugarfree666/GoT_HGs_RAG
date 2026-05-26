@@ -1,0 +1,50 @@
+[
+  {
+    "node_id": "q1",
+    "question": "In which country is Marufabad located?",
+    "retrieval_question": "In which country is Marufabad located?",
+    "dependency_question_rewrite": {
+      "original_question": "In which country is Marufabad located?",
+      "retrieval_question": "In which country is Marufabad located?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Marufabad"
+      ],
+      "relations": [
+        "location"
+      ],
+      "relation_query": "In which country is a place located?",
+      "answer_type": "country"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "In which country is Nasamkhrali located?",
+    "retrieval_question": "In which country is Nasamkhrali located?",
+    "dependency_question_rewrite": {
+      "original_question": "In which country is Nasamkhrali located?",
+      "retrieval_question": "In which country is Nasamkhrali located?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Nasamkhrali"
+      ],
+      "relations": [
+        "is located in"
+      ],
+      "relation_query": "which country is a place located in",
+      "answer_type": "country"
+    }
+  }
+]

@@ -1,0 +1,364 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of the film Days And Hours?",
+    "analysis": {
+      "entities": [
+        "Days And Hours"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a film",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\"",
+        "hyperedge_text": "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5013720989227295,
+        "fusion_score": 0.700274419784546,
+        "entity_ids": [
+          "\"KOD AMIDŽE IDRIZA\"",
+          "\"PJER ŽALICA\"",
+          "\"NAMIK KABIL\"",
+          "\"DAYS AND HOURS\""
+        ],
+        "chunk_ids": [
+          "chunk-9a1aa6f2b9c7e4bc018743d029544886"
+        ],
+        "evidence_texts": [
+          "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+          "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.501372,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.700274
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.\"",
+        "hyperedge_text": "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.4968322515487671,
+        "fusion_score": 0.6993664503097535,
+        "entity_ids": [
+          "\"2004\"",
+          "\"BOSNIAN FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-9a1aa6f2b9c7e4bc018743d029544886"
+        ],
+        "evidence_texts": [
+          "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.",
+          "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.496832,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.699366
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'\"",
+        "hyperedge_text": "Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4533531367778778,
+        "fusion_score": 0.4906706273555756,
+        "entity_ids": [
+          "\"ONE SUNDAY AFTERNOON\""
+        ],
+        "chunk_ids": [
+          "chunk-5f5e821dcf8cd0e062e4412a88f5e962"
+        ],
+        "evidence_texts": [
+          "Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'",
+          "The Strawberry Blonde The Strawberry Blonde is a 1941 American romantic comedy film directed by Raoul Walsh, starring James Cagney and Olivia de Havilland, and featuring Rita Hayworth, Alan Hale, Jack Carson, and George Tobias. The picture was nominated for an Academy Award in 1941 for Best Scoring of a Musical Picture and features songs such as\" The Band Played OnBill Bailey Meet Me in St. Louis, Louie, Wait Till The Sun Shines Nellie,\" and\" Love Me and the World Is Mine.\" The title is most often listed beginning with the word The, but the film's posters and promotional materials call it simply Strawberry Blonde. Director Walsh remade the film in 1948 as\" One Sunday Afternoon\". It was a remake of\" One Sunday Afternoon\"( 1933) with Gary Cooper."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.453353,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.490671
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5262852311134338,
+        "semantic_score": 0.5,
+        "fusion_score": 0.31051409244537354,
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "evidence_texts": [
+          "As a film director, he has directed several works in addition to acting.",
+          "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.526285,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.310514
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Robert G. Vignola is the director of the film.\"",
+        "hyperedge_text": "Robert G. Vignola is the director of the film.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5214390754699707,
+        "semantic_score": 0.5,
+        "fusion_score": 0.3085756301879883,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-5a83efe0d439c48988a77409ef3ba477"
+        ],
+        "evidence_texts": [
+          "Robert G. Vignola is the director of the film.",
+          "The World and His Wife The World and His Wife is a lost American 1920 silent drama film produced by Cosmopolitan Productions and distributed through Paramount Pictures. Directed by Robert G. Vignola, the film was based on the 1908 Broadway play of the same name by Charles Frederic Nirdlinger, which was adapted from the Spanish language play\" El Gran Galeoto\" by Jose Echegaray Y Eizaguirre. The film stars Alma Rubens, Montagu Love, and Pedro de Cordoba and Broadway actress Margaret Dale in her film debut. The story was later filmed at MGM as\" Lovers\"( 1927)."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.521439,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.308576
+        }
+      }
+    ],
+    "answer": "Pjer Žalica",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'Days and Hours' is directed by Pjer Žalica.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the spouse of the director of Days And Hours?",
+    "analysis": {
+      "entities": [
+        "Pjer Žalica"
+      ],
+      "relations": [
+        "is the spouse of"
+      ],
+      "relation_query": "Who is the spouse of a person?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.\"",
+        "hyperedge_text": "Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6246267557144165,
+        "fusion_score": 0.5249253511428833,
+        "entity_ids": [
+          "\"SCREENWRITER\"",
+          "\"SARAJEVO\"",
+          "\"ACADEMY OF PERFORMING ARTS IN SARAJEVO\"",
+          "\"BOSNIAN FILM DIRECTOR\"",
+          "\"ACADEMY OF PERFORMING ARTS\"",
+          "\"7 MAY 1964\"",
+          "\"PJER ŽALICA\""
+        ],
+        "chunk_ids": [
+          "chunk-f8aa8c68802a54b3526a4863f98c8632"
+        ],
+        "evidence_texts": [
+          "Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.",
+          "Pjer Žalica Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo. His father Miodrag (1926–1992) was a noted dramaturgist and poet who scripted several TV movies. He has directed several short films, only one of which is (\"Mostar Sevdah Reunion\" 2000) as well as two feature films, \"Gori vatra\" (2003), and \"Kod amidže Idriza\" (2004). In May 2008, he directed the music video for the duet \"Dabogda\" by Dino Merlin and Hari Mata Hari. In 2017, Žalica signed the Declaration on the Common Language of the Croats, Serbs, Bosniaks and Montenegrins. He is married to Bosnian actress Jasna Žalica and has one child with the actress."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.624627,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524925
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\"",
+        "hyperedge_text": "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"KOD AMIDŽE IDRIZA\"",
+          "\"PJER ŽALICA\"",
+          "\"NAMIK KABIL\"",
+          "\"DAYS AND HOURS\""
+        ],
+        "chunk_ids": [
+          "chunk-9a1aa6f2b9c7e4bc018743d029544886"
+        ],
+        "evidence_texts": [
+          "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+          "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.\"",
+        "hyperedge_text": "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5093562602996826,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2704091707865397,
+        "entity_ids": [
+          "\"MORGANATIC MARRIAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-0092baaf76dc583f3ca640f254f9f6cc"
+        ],
+        "evidence_texts": [
+          "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+          "Maria Chiara Spinucci Maria Chiara Spinucci( 1741–1792), was an Italian aristocrat, courtier of Duchess Maria Antonia of Bavaria and the morganatic spouse of Prince Francis Xavier of Saxony."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.509356,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.270409
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.\"",
+        "hyperedge_text": "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.472663015127182,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2557318727175395,
+        "entity_ids": [
+          "\"POLITICAL INFLUENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-5bda47c753bf133f277d071017097db0"
+        ],
+        "evidence_texts": [
+          "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+          "Amalia of Solms-Braunfels Amalia of Solms- Braunfels( 31 August 1602, Braunfels – 8 September 1675, The Hague), was Princess consort of Orange by marriage to Frederick Henry, Prince of Orange. She acted as the political adviser of her spouse during his reign, and acted as his de facto deputy and regent during his infirmity from 1640 – 47. She also served as chair of the regency council during the minority of her grandson William III, Prince of Orange from 1650 until 1672. She was the daughter of count John Albert I of Solms- Braunfels and countess Agnes of Sayn- Wittgenstein."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.472663,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.255732
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.\"",
+        "hyperedge_text": "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46323880553245544,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.25196218887964883,
+        "entity_ids": [
+          "\"SPOUSE\"",
+          "\"DIVORCE\""
+        ],
+        "chunk_ids": [
+          "chunk-bcc25aab891d91cd91b0922f44d42c9a"
+        ],
+        "evidence_texts": [
+          "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+          "Mehdi Abrishamchi Mehdi Abrishamchi is an Iranian People's Mujahedin of Iran( MEK) politician who has been described as\" the right hand man of Massoud Rajavi\". He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.463239,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.251962
+        }
+      }
+    ],
+    "answer": "Jasna Žalica",
+    "confidence": 0.9,
+    "reasoning_summary": "Pjer Žalica is married to Jasna Žalica, as stated in the evidence about his biography.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.\""
+    ]
+  }
+]

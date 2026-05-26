@@ -1,0 +1,562 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Flash Gordon Conquers The Universe released?",
+    "analysis": {
+      "entities": [
+        "Flash Gordon Conquers The Universe"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.\"",
+        "hyperedge_text": "Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7396841049194336,
+        "fusion_score": 0.5479368209838867,
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"RAY TAYLOR\"",
+          "\"HENRY MACRAE\"",
+          "\"FORD BEEBE\"",
+          "\"FLASH GORDON CONQUERS THE UNIVERSE\""
+        ],
+        "chunk_ids": [
+          "chunk-ed0898d17ab913bb502184a252898321"
+        ],
+        "evidence_texts": [
+          "Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.",
+          "Flash Gordon Conquers the Universe Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor. The serial stars Buster Crabbe, Carol Hughes, Charles B. Middleton, Frank Shannon, and Roland Drew. It was written by George H. Plympton, Basil Dickey, and Barry Shipman and was adapted from Alex Raymond's syndicated newspaper comic strip of the same name from King Features Syndicate. Shown theatrically in 12 separate weekly \"chapters\", it was the last of the three Universal Flash Gordon serials made between 1936 and 1940. During the 1950s, all three Flash Gordon serials were syndicated to television by Motion Pictures for Television, along with many of Universal's other serial output. To avoid confusion with the imported Flash Gordon TV series airing around..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.739684,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.547937
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.\"",
+        "hyperedge_text": "The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.696796178817749,
+        "fusion_score": 0.5393592357635498,
+        "entity_ids": [
+          "\"FLASH GORDON CONQUERS THE UNIVERSE\""
+        ],
+        "chunk_ids": [
+          "chunk-e322116e19ce775d112b2e4a21cd0b5e"
+        ],
+        "evidence_texts": [
+          "The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.",
+          "Flash Gordon's Trip to Mars Flash Gordon's Trip to Mars is a 1938 Universal Pictures 15 – chapter superhero movie serial, based on the syndicated newspaper comic strip\" Flash Gordon\". It is the second of the three Flash Gordon serials made by Universal between 1936 and 1940. The main cast from the first serial reprise their roles: Buster Crabbe as Flash Gordon, Jean Rogers as Dale Arden, Frank Shannon as Dr. Alexis Zarkov, Charles B. Middleton as Ming the Merciless, and Richard Alexander as Prince Barin. Also in the principal cast are Beatrice Roberts as Queen Azura, Donald Kerr as Happy Hapgood, Montague Shaw as the Clay King, and Wheeler Oakman as Ming's chief henchman. The serial was followed by\" Flash Gordon Conquers the Universe\"( 1940)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.696796,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.539359
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The serial was followed by 'Flash Gordon Conquers the Universe' (1940).\"",
+        "hyperedge_text": "The serial was followed by 'Flash Gordon Conquers the Universe' (1940).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.59767746925354,
+        "fusion_score": 0.5195354938507081,
+        "entity_ids": [
+          "\"FLASH GORDON CONQUERS THE UNIVERSE\""
+        ],
+        "chunk_ids": [
+          "chunk-e322116e19ce775d112b2e4a21cd0b5e"
+        ],
+        "evidence_texts": [
+          "The serial was followed by 'Flash Gordon Conquers the Universe' (1940).",
+          "Flash Gordon's Trip to Mars Flash Gordon's Trip to Mars is a 1938 Universal Pictures 15 – chapter superhero movie serial, based on the syndicated newspaper comic strip\" Flash Gordon\". It is the second of the three Flash Gordon serials made by Universal between 1936 and 1940. The main cast from the first serial reprise their roles: Buster Crabbe as Flash Gordon, Jean Rogers as Dale Arden, Frank Shannon as Dr. Alexis Zarkov, Charles B. Middleton as Ming the Merciless, and Richard Alexander as Prince Barin. Also in the principal cast are Beatrice Roberts as Queen Azura, Donald Kerr as Happy Hapgood, Montague Shaw as the Clay King, and Wheeler Oakman as Ming's chief henchman. The serial was followed by\" Flash Gordon Conquers the Universe\"( 1940)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.597677,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519535
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Purple Death from Outer Space is a 1966 American feature-length compilation of the first half of the 1940 serial 'Flash Gordon Conquers the Universe'.\"",
+        "hyperedge_text": "Purple Death from Outer Space is a 1966 American feature-length compilation of the first half of the 1940 serial 'Flash Gordon Conquers the Universe'.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8,
+        "fusion_score": 0.56,
+        "entity_ids": [
+          "\"1966\"",
+          "\"PURPLE DEATH FROM OUTER SPACE\"",
+          "\"FLASH GORDON CONQUERS THE UNIVERSE\""
+        ],
+        "chunk_ids": [
+          "chunk-839551b57f39be758607dc3529e62448"
+        ],
+        "evidence_texts": [
+          "Purple Death from Outer Space is a 1966 American feature-length compilation of the first half of the 1940 serial 'Flash Gordon Conquers the Universe'.",
+          "Purple Death from Outer Space Purple Death from Outer Space is a 1966 American feature- length compilation of the first half of the 1940 serial\" Flash Gordon Conquers the Universe\". A second feature with footage from the second half of the serial was used to complete another 1966 feature film,\" Perils from the Planet Mongo\". Both were made available directly as made- for- TV movies."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.8,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.56
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is best known for her leading roles opposite Gene Autry and Roy Rogers, and for her role as Dale Arden in 'Flash Gordon Conquers the Universe' (1940).\"",
+        "hyperedge_text": "She is best known for her leading roles opposite Gene Autry and Roy Rogers, and for her role as Dale Arden in 'Flash Gordon Conquers the Universe' (1940).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8,
+        "fusion_score": 0.56,
+        "entity_ids": [
+          "\"1940\"",
+          "\"GENE AUTRY\"",
+          "\"ROY ROGERS\"",
+          "\"DALE ARDEN\"",
+          "\"FLASH GORDON CONQUERS THE UNIVERSE\""
+        ],
+        "chunk_ids": [
+          "chunk-0898b552fa25f00d6c2e9ad8c882672d"
+        ],
+        "evidence_texts": [
+          "She is best known for her leading roles opposite Gene Autry and Roy Rogers, and for her role as Dale Arden in 'Flash Gordon Conquers the Universe' (1940).",
+          "Carol Hughes (actress) Carol Hughes( born Catherine Mabel Hukill, January 17, 1910 – August 8, 1995) was an American actress. She is best known for her leading roles opposite Gene Autry and Roy Rogers, and for her role as Dale Arden in\" Flash Gordon Conquers the Universe\"( 1940)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.8,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.56
+        }
+      }
+    ],
+    "answer": "1940",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Flash Gordon Conquers the Universe' was released in 1940.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.\"",
+      "<hyperedge>\"The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.\"",
+      "<hyperedge>\"The serial was followed by 'Flash Gordon Conquers the Universe' (1940).\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Siti Noerbaja?",
+    "analysis": {
+      "entities": [
+        "Siti Noerbaja"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Siti Noerbaja is a 1941 film from the Dutch East Indies, directed by Lie Tek Swie, and is the first film adaptation of Marah Roesli's 1922 novel.\"",
+        "hyperedge_text": "Siti Noerbaja is a 1941 film from the Dutch East Indies, directed by Lie Tek Swie, and is the first film adaptation of Marah Roesli's 1922 novel.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6058568954467773,
+        "fusion_score": 0.5211713790893555,
+        "entity_ids": [
+          "\"SITI NOERBAJA\"",
+          "\"LIE TEK SWIE\"",
+          "\"MARAH ROESLI\"",
+          "\"ASMANAH\"",
+          "\"MOMO\"",
+          "\"SOERJONO\""
+        ],
+        "chunk_ids": [
+          "chunk-2ce87d931d936775ac9f5c23e354e8f2"
+        ],
+        "evidence_texts": [
+          "Siti Noerbaja is a 1941 film from the Dutch East Indies, directed by Lie Tek Swie, and is the first film adaptation of Marah Roesli's 1922 novel.",
+          "Siti Noerbaja Siti Noerbaja( Perfected Spelling: Siti Nurbaya) is a 1941 film from the Dutch East Indies. Directed by Lie Tek Swie, it was the first film adaptation of Marah Roesli's 1922 novel of the same name. Starring Asmanah, Momo, and Soerjono, it follows two star- crossed teenage lovers."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.605857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.521171
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Rakka was 14 June 2017.\"",
+        "hyperedge_text": "The release date of Rakka was 14 June 2017.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45409703254699707,
+        "semantic_score": 0.38762444257736206,
+        "fusion_score": 0.25916370153427126,
+        "entity_ids": [
+          "\"14 JUNE 2017\""
+        ],
+        "chunk_ids": [
+          "chunk-44787de4ca914ea38ca9818d0ecd9288"
+        ],
+        "evidence_texts": [
+          "The release date of Rakka was 14 June 2017.",
+          "Rakka (film) The film was released on YouTube and Steam on 14 June 2017."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.454097,
+          "S": 0.387624,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.259164
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46724173426628113,
+        "semantic_score": 0.3605688810348511,
+        "fusion_score": 0.2590104699134827,
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "evidence_texts": [
+          "The release date was on 10 October 2009.",
+          "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.467242,
+          "S": 0.360569,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.25901
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Siti Noerbaja, based on a novel published in 1922, was significant for being the first adaptation of that work.\"",
+        "hyperedge_text": "Siti Noerbaja, based on a novel published in 1922, was significant for being the first adaptation of that work.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.5392901301383972,
+        "fusion_score": 0.6411913593610128,
+        "entity_ids": [
+          "\"NOVEL\"",
+          "\"DUTCH EAST INDIES\""
+        ],
+        "chunk_ids": [
+          "chunk-2ce87d931d936775ac9f5c23e354e8f2"
+        ],
+        "evidence_texts": [
+          "Siti Noerbaja, based on a novel published in 1922, was significant for being the first adaptation of that work.",
+          "Siti Noerbaja Siti Noerbaja( Perfected Spelling: Siti Nurbaya) is a 1941 film from the Dutch East Indies. Directed by Lie Tek Swie, it was the first film adaptation of Marah Roesli's 1922 novel of the same name. Starring Asmanah, Momo, and Soerjono, it follows two star- crossed teenage lovers."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.333333,
+          "S": 0.53929,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.641191
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by Lie Tek Swie, the film Siti Noerbaja marks the first film adaptation of Marah Roesli's novel.\"",
+        "hyperedge_text": "Directed by Lie Tek Swie, the film Siti Noerbaja marks the first film adaptation of Marah Roesli's novel.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5991451740264893,
+        "fusion_score": 0.5198290348052979,
+        "entity_ids": [
+          "\"LIE TEK SWIE\""
+        ],
+        "chunk_ids": [
+          "chunk-2ce87d931d936775ac9f5c23e354e8f2"
+        ],
+        "evidence_texts": [
+          "Directed by Lie Tek Swie, the film Siti Noerbaja marks the first film adaptation of Marah Roesli's novel.",
+          "Siti Noerbaja Siti Noerbaja( Perfected Spelling: Siti Nurbaya) is a 1941 film from the Dutch East Indies. Directed by Lie Tek Swie, it was the first film adaptation of Marah Roesli's 1922 novel of the same name. Starring Asmanah, Momo, and Soerjono, it follows two star- crossed teenage lovers."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.599145,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519829
+        }
+      }
+    ],
+    "answer": "1941",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'Siti Noerbaja is a 1941 film from the Dutch East Indies,' which directly provides the release date.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Siti Noerbaja is a 1941 film from the Dutch East Indies, directed by Lie Tek Swie, and is the first film adaptation of Marah Roesli's 1922 novel.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Flash Gordon Conquers The Universe?",
+    "analysis": {
+      "entities": [
+        "Flash Gordon Conquers The Universe"
+      ],
+      "relations": [
+        "release date of"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.\"",
+        "hyperedge_text": "Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6492648720741272,
+        "fusion_score": 0.5298529744148255,
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"RAY TAYLOR\"",
+          "\"HENRY MACRAE\"",
+          "\"FORD BEEBE\"",
+          "\"FLASH GORDON CONQUERS THE UNIVERSE\""
+        ],
+        "chunk_ids": [
+          "chunk-ed0898d17ab913bb502184a252898321"
+        ],
+        "evidence_texts": [
+          "Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.",
+          "Flash Gordon Conquers the Universe Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor. The serial stars Buster Crabbe, Carol Hughes, Charles B. Middleton, Frank Shannon, and Roland Drew. It was written by George H. Plympton, Basil Dickey, and Barry Shipman and was adapted from Alex Raymond's syndicated newspaper comic strip of the same name from King Features Syndicate. Shown theatrically in 12 separate weekly \"chapters\", it was the last of the three Universal Flash Gordon serials made between 1936 and 1940. During the 1950s, all three Flash Gordon serials were syndicated to television by Motion Pictures for Television, along with many of Universal's other serial output. To avoid confusion with the imported Flash Gordon TV series airing around..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.649265,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.529853
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.\"",
+        "hyperedge_text": "The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6260045170783997,
+        "fusion_score": 0.5252009034156799,
+        "entity_ids": [
+          "\"FLASH GORDON CONQUERS THE UNIVERSE\""
+        ],
+        "chunk_ids": [
+          "chunk-e322116e19ce775d112b2e4a21cd0b5e"
+        ],
+        "evidence_texts": [
+          "The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.",
+          "Flash Gordon's Trip to Mars Flash Gordon's Trip to Mars is a 1938 Universal Pictures 15 – chapter superhero movie serial, based on the syndicated newspaper comic strip\" Flash Gordon\". It is the second of the three Flash Gordon serials made by Universal between 1936 and 1940. The main cast from the first serial reprise their roles: Buster Crabbe as Flash Gordon, Jean Rogers as Dale Arden, Frank Shannon as Dr. Alexis Zarkov, Charles B. Middleton as Ming the Merciless, and Richard Alexander as Prince Barin. Also in the principal cast are Beatrice Roberts as Queen Azura, Donald Kerr as Happy Hapgood, Montague Shaw as the Clay King, and Wheeler Oakman as Ming's chief henchman. The serial was followed by\" Flash Gordon Conquers the Universe\"( 1940)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.626005,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525201
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Purple Death from Outer Space is a 1966 American feature-length compilation of the first half of the 1940 serial 'Flash Gordon Conquers the Universe'.\"",
+        "hyperedge_text": "Purple Death from Outer Space is a 1966 American feature-length compilation of the first half of the 1940 serial 'Flash Gordon Conquers the Universe'.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1966\"",
+          "\"PURPLE DEATH FROM OUTER SPACE\"",
+          "\"FLASH GORDON CONQUERS THE UNIVERSE\""
+        ],
+        "chunk_ids": [
+          "chunk-839551b57f39be758607dc3529e62448"
+        ],
+        "evidence_texts": [
+          "Purple Death from Outer Space is a 1966 American feature-length compilation of the first half of the 1940 serial 'Flash Gordon Conquers the Universe'.",
+          "Purple Death from Outer Space Purple Death from Outer Space is a 1966 American feature- length compilation of the first half of the 1940 serial\" Flash Gordon Conquers the Universe\". A second feature with footage from the second half of the serial was used to complete another 1966 feature film,\" Perils from the Planet Mongo\". Both were made available directly as made- for- TV movies."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The serial was followed by 'Flash Gordon Conquers the Universe' (1940).\"",
+        "hyperedge_text": "The serial was followed by 'Flash Gordon Conquers the Universe' (1940).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"FLASH GORDON CONQUERS THE UNIVERSE\""
+        ],
+        "chunk_ids": [
+          "chunk-e322116e19ce775d112b2e4a21cd0b5e"
+        ],
+        "evidence_texts": [
+          "The serial was followed by 'Flash Gordon Conquers the Universe' (1940).",
+          "Flash Gordon's Trip to Mars Flash Gordon's Trip to Mars is a 1938 Universal Pictures 15 – chapter superhero movie serial, based on the syndicated newspaper comic strip\" Flash Gordon\". It is the second of the three Flash Gordon serials made by Universal between 1936 and 1940. The main cast from the first serial reprise their roles: Buster Crabbe as Flash Gordon, Jean Rogers as Dale Arden, Frank Shannon as Dr. Alexis Zarkov, Charles B. Middleton as Ming the Merciless, and Richard Alexander as Prince Barin. Also in the principal cast are Beatrice Roberts as Queen Azura, Donald Kerr as Happy Hapgood, Montague Shaw as the Clay King, and Wheeler Oakman as Ming's chief henchman. The serial was followed by\" Flash Gordon Conquers the Universe\"( 1940)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is best known for her leading roles opposite Gene Autry and Roy Rogers, and for her role as Dale Arden in 'Flash Gordon Conquers the Universe' (1940).\"",
+        "hyperedge_text": "She is best known for her leading roles opposite Gene Autry and Roy Rogers, and for her role as Dale Arden in 'Flash Gordon Conquers the Universe' (1940).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1940\"",
+          "\"GENE AUTRY\"",
+          "\"ROY ROGERS\"",
+          "\"DALE ARDEN\"",
+          "\"FLASH GORDON CONQUERS THE UNIVERSE\""
+        ],
+        "chunk_ids": [
+          "chunk-0898b552fa25f00d6c2e9ad8c882672d"
+        ],
+        "evidence_texts": [
+          "She is best known for her leading roles opposite Gene Autry and Roy Rogers, and for her role as Dale Arden in 'Flash Gordon Conquers the Universe' (1940).",
+          "Carol Hughes (actress) Carol Hughes( born Catherine Mabel Hukill, January 17, 1910 – August 8, 1995) was an American actress. She is best known for her leading roles opposite Gene Autry and Roy Rogers, and for her role as Dale Arden in\" Flash Gordon Conquers the Universe\"( 1940)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ],
+    "answer": "1940",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Flash Gordon Conquers the Universe' was released in 1940.",
+    "used_dependencies": [
+      "q1",
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.\"",
+      "<hyperedge>\"The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.\"",
+      "<hyperedge>\"The serial was followed by 'Flash Gordon Conquers the Universe' (1940).\""
+    ]
+  }
+]

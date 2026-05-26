@@ -1,0 +1,539 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Shawn Lewfatt born?",
+    "analysis": {
+      "entities": [
+        "Shawn Lewfatt"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "the birth date of a person",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).\"",
+        "hyperedge_text": "Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7056465744972229,
+        "fusion_score": 0.5411293148994446,
+        "entity_ids": [
+          "\"AUSTRALIAN RULES FOOTBALLER\"",
+          "\"ESSENDON\"",
+          "\"AUSTRALIAN FOOTBALL LEAGUE\"",
+          "\"SHAWN LEWFATT\""
+        ],
+        "chunk_ids": [
+          "chunk-f06a76364be576f80fd2e5c9f7e0fc18"
+        ],
+        "evidence_texts": [
+          "Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).",
+          "Shawn Lewfatt Shawn Lewfatt( born 11 March 1977) is a former Australian rules footballer who played for Essendon in the Australian Football League( AFL). He was drafted by the Essendon Football Club in the 1994 National Draft at pick 28. He played three games with Essendon during the 1995 season."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.705647,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.541129
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Shawn Lewfatt was born on 11 March 1977.\"",
+        "hyperedge_text": "Shawn Lewfatt was born on 11 March 1977.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8132410049438477,
+        "fusion_score": 0.5626482009887696,
+        "entity_ids": [
+          "\"11 MARCH 1977\""
+        ],
+        "chunk_ids": [
+          "chunk-f06a76364be576f80fd2e5c9f7e0fc18"
+        ],
+        "evidence_texts": [
+          "Shawn Lewfatt was born on 11 March 1977.",
+          "Shawn Lewfatt Shawn Lewfatt( born 11 March 1977) is a former Australian rules footballer who played for Essendon in the Australian Football League( AFL). He was drafted by the Essendon Football Club in the 1994 National Draft at pick 28. He played three games with Essendon during the 1995 season."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.813241,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.562648
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Shawn Lewfatt played for Essendon in the Australian Football League (AFL).\"",
+        "hyperedge_text": "Shawn Lewfatt played for Essendon in the Australian Football League (AFL).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5796875953674316,
+        "fusion_score": 0.5159375190734864,
+        "entity_ids": [
+          "\"ESSENDON\"",
+          "\"AFL\""
+        ],
+        "chunk_ids": [
+          "chunk-f06a76364be576f80fd2e5c9f7e0fc18"
+        ],
+        "evidence_texts": [
+          "Shawn Lewfatt played for Essendon in the Australian Football League (AFL).",
+          "Shawn Lewfatt Shawn Lewfatt( born 11 March 1977) is a former Australian rules footballer who played for Essendon in the Australian Football League( AFL). He was drafted by the Essendon Football Club in the 1994 National Draft at pick 28. He played three games with Essendon during the 1995 season."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.579688,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515938
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5337122678756714,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.28015157381693523,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.533712,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.280152
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5235011577606201,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.27606712977091474,
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "evidence_texts": [
+          "His date of birth is significant as it contextualizes his career timeline.",
+          "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.523501,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.276067
+        }
+      }
+    ],
+    "answer": "11 March 1977",
+    "confidence": 0.95,
+    "reasoning_summary": "Multiple pieces of evidence explicitly state Shawn Lewfatt was born on 11 March 1977, directly supporting the answer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).\"",
+      "<hyperedge>\"Shawn Lewfatt was born on 11 March 1977.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Ken Karpoff born?",
+    "analysis": {
+      "entities": [
+        "Ken Karpoff"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "the birth date of a person",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ken Karpoff is a Canadian former biathlete who competed in the 1988 Winter Olympics.\"",
+        "hyperedge_text": "Ken Karpoff is a Canadian former biathlete who competed in the 1988 Winter Olympics.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6561110019683838,
+        "fusion_score": 0.5312222003936768,
+        "entity_ids": [
+          "\"CANADA\"",
+          "\"1988 WINTER OLYMPICS\"",
+          "\"KEN KARPOFF\"",
+          "\"BIATHLETE\"",
+          "\"JANUARY 14, 1956\""
+        ],
+        "chunk_ids": [
+          "chunk-5d3981736843614a04b2c0a07ea98adf"
+        ],
+        "evidence_texts": [
+          "Ken Karpoff is a Canadian former biathlete who competed in the 1988 Winter Olympics.",
+          "Ken Karpoff Ken Karpoff( born 14 January 1956) is a Canadian former biathlete who competed in the 1988 Winter Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.656111,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531222
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ken Karpoff was born on January 14, 1956.\"",
+        "hyperedge_text": "Ken Karpoff was born on January 14, 1956.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8243726491928101,
+        "fusion_score": 0.564874529838562,
+        "entity_ids": [
+          "\"JANUARY 14, 1956\""
+        ],
+        "chunk_ids": [
+          "chunk-5d3981736843614a04b2c0a07ea98adf"
+        ],
+        "evidence_texts": [
+          "Ken Karpoff was born on January 14, 1956.",
+          "Ken Karpoff Ken Karpoff( born 14 January 1956) is a Canadian former biathlete who competed in the 1988 Winter Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.824373,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.564875
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ken Karpoff is a former athlete who participated in the Winter Olympics.\"",
+        "hyperedge_text": "Ken Karpoff is a former athlete who participated in the Winter Olympics.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6348328590393066,
+        "fusion_score": 0.5269665718078613,
+        "entity_ids": [
+          "\"FORMER ATHLETE\""
+        ],
+        "chunk_ids": [
+          "chunk-5d3981736843614a04b2c0a07ea98adf"
+        ],
+        "evidence_texts": [
+          "Ken Karpoff is a former athlete who participated in the Winter Olympics.",
+          "Ken Karpoff Ken Karpoff( born 14 January 1956) is a Canadian former biathlete who competed in the 1988 Winter Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.634833,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.526967
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ken Karpoff competed in biathlon, which combines skiing and shooting.\"",
+        "hyperedge_text": "Ken Karpoff competed in biathlon, which combines skiing and shooting.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5042279362678528,
+        "fusion_score": 0.5008455872535706,
+        "entity_ids": [
+          "\"BIATHLON\""
+        ],
+        "chunk_ids": [
+          "chunk-5d3981736843614a04b2c0a07ea98adf"
+        ],
+        "evidence_texts": [
+          "Ken Karpoff competed in biathlon, which combines skiing and shooting.",
+          "Ken Karpoff Ken Karpoff( born 14 January 1956) is a Canadian former biathlete who competed in the 1988 Winter Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.504228,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.500846
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Competing at the Winter Olympics highlights Ken Karpoff's achievements in biathlon.\"",
+        "hyperedge_text": "Competing at the Winter Olympics highlights Ken Karpoff's achievements in biathlon.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4838065207004547,
+        "fusion_score": 0.49676130414009095,
+        "entity_ids": [
+          "\"ACHIEVEMENTS\""
+        ],
+        "chunk_ids": [
+          "chunk-5d3981736843614a04b2c0a07ea98adf"
+        ],
+        "evidence_texts": [
+          "Competing at the Winter Olympics highlights Ken Karpoff's achievements in biathlon.",
+          "Ken Karpoff Ken Karpoff( born 14 January 1956) is a Canadian former biathlete who competed in the 1988 Winter Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.483807,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496761
+        }
+      }
+    ],
+    "answer": "January 14, 1956",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence explicitly states that Ken Karpoff was born on January 14, 1956.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Ken Karpoff was born on January 14, 1956.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the birth date of Shawn Lewfatt?",
+    "analysis": {
+      "entities": [
+        "Shawn Lewfatt"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).\"",
+        "hyperedge_text": "Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6705204844474792,
+        "fusion_score": 0.5341040968894959,
+        "entity_ids": [
+          "\"AUSTRALIAN RULES FOOTBALLER\"",
+          "\"ESSENDON\"",
+          "\"AUSTRALIAN FOOTBALL LEAGUE\"",
+          "\"SHAWN LEWFATT\""
+        ],
+        "chunk_ids": [
+          "chunk-f06a76364be576f80fd2e5c9f7e0fc18"
+        ],
+        "evidence_texts": [
+          "Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).",
+          "Shawn Lewfatt Shawn Lewfatt( born 11 March 1977) is a former Australian rules footballer who played for Essendon in the Australian Football League( AFL). He was drafted by the Essendon Football Club in the 1994 National Draft at pick 28. He played three games with Essendon during the 1995 season."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.67052,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534104
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Shawn Lewfatt was born on 11 March 1977.\"",
+        "hyperedge_text": "Shawn Lewfatt was born on 11 March 1977.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7980713844299316,
+        "fusion_score": 0.5596142768859864,
+        "entity_ids": [
+          "\"11 MARCH 1977\""
+        ],
+        "chunk_ids": [
+          "chunk-f06a76364be576f80fd2e5c9f7e0fc18"
+        ],
+        "evidence_texts": [
+          "Shawn Lewfatt was born on 11 March 1977.",
+          "Shawn Lewfatt Shawn Lewfatt( born 11 March 1977) is a former Australian rules footballer who played for Essendon in the Australian Football League( AFL). He was drafted by the Essendon Football Club in the 1994 National Draft at pick 28. He played three games with Essendon during the 1995 season."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.798071,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.559614
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Shawn Lewfatt played for Essendon in the Australian Football League (AFL).\"",
+        "hyperedge_text": "Shawn Lewfatt played for Essendon in the Australian Football League (AFL).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5325807929039001,
+        "fusion_score": 0.50651615858078,
+        "entity_ids": [
+          "\"ESSENDON\"",
+          "\"AFL\""
+        ],
+        "chunk_ids": [
+          "chunk-f06a76364be576f80fd2e5c9f7e0fc18"
+        ],
+        "evidence_texts": [
+          "Shawn Lewfatt played for Essendon in the Australian Football League (AFL).",
+          "Shawn Lewfatt Shawn Lewfatt( born 11 March 1977) is a former Australian rules footballer who played for Essendon in the Australian Football League( AFL). He was drafted by the Essendon Football Club in the 1994 National Draft at pick 28. He played three games with Essendon during the 1995 season."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.532581,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.506516
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5044424533843994,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30177698135375974,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "evidence_texts": [
+          "His date of birth is January 30, 1871.",
+          "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.504442,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.301777
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4859986901283264,
+        "semantic_score": 0.5,
+        "fusion_score": 0.29439947605133054,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.485999,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.294399
+        }
+      }
+    ],
+    "answer": "11 March 1977",
+    "confidence": 0.95,
+    "reasoning_summary": "The answer is directly supported by multiple pieces of evidence stating that Shawn Lewfatt was born on 11 March 1977.",
+    "used_dependencies": [
+      "q1",
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).\"",
+      "<hyperedge>\"Shawn Lewfatt was born on 11 March 1977.\""
+    ]
+  }
+]

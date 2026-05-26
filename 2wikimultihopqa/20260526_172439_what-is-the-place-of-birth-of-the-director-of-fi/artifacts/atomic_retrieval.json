@@ -1,0 +1,1596 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Thiruvannamalai?",
+    "retrieval_question": "Who is the director of Thiruvannamalai?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Thiruvannamalai?",
+      "retrieval_question": "Who is the director of Thiruvannamalai?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Thiruvannamalai is a 2008 Indian Tamil masala film.",
+        "entity_ids": [
+          "\"2008\"",
+          "\"TAMIL\"",
+          "\"THIRUVANNAMALAI\""
+        ],
+        "chunk_ids": [
+          "chunk-4ef806104ab58ced8fd84fea488f4578"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film.",
+            "Thiruvannamalai (film) Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu. It stars Arjun Sarja, Pooja Gandhi, Karunaas, Sai Kumar, and Vidharth. The music was composed by Srikanth Deva. The film was later dubbed in Hindi as \"Main Hoon Vinashak\" and in Telugu as \"Jai Sambasiva\"."
+          ],
+          "relation_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film.",
+            "link",
+            "2008",
+            "TAMIL",
+            "THIRUVANNAMALAI"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+        "entity_ids": [
+          "\"THIRUVANNAMALAI\"",
+          "\"PERARASU\""
+        ],
+        "chunk_ids": [
+          "chunk-4ef806104ab58ced8fd84fea488f4578"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+            "Thiruvannamalai (film) Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu. It stars Arjun Sarja, Pooja Gandhi, Karunaas, Sai Kumar, and Vidharth. The music was composed by Srikanth Deva. The film was later dubbed in Hindi as \"Main Hoon Vinashak\" and in Telugu as \"Jai Sambasiva\"."
+          ],
+          "relation_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+            "link",
+            "THIRUVANNAMALAI",
+            "PERARASU"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078521370887756,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027865171432495,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4973045885562897,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49680250883102417,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49399447441101074,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48563748598098755,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4840206205844879,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48202356696128845,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47992169857025146,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.4777419865131378,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.\"",
+        "branch": "semantic",
+        "raw_score": 0.5609697699546814,
+        "hyperedge_text": "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+        "entity_ids": [
+          "\"THIRUVANNAMALAI\"",
+          "\"PERARASU\""
+        ],
+        "chunk_ids": [
+          "chunk-4ef806104ab58ced8fd84fea488f4578"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+            "Thiruvannamalai (film) Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu. It stars Arjun Sarja, Pooja Gandhi, Karunaas, Sai Kumar, and Vidharth. The music was composed by Srikanth Deva. The film was later dubbed in Hindi as \"Main Hoon Vinashak\" and in Telugu as \"Jai Sambasiva\"."
+          ],
+          "relation_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+            "link",
+            "THIRUVANNAMALAI",
+            "PERARASU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2c3262a35279f4b6201b930f607888d2",
+            "hyperedge_name": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was written and directed by Tamilvannan.\"",
+        "branch": "semantic",
+        "raw_score": 0.5420380234718323,
+        "hyperedge_text": "The film was written and directed by Tamilvannan.",
+        "entity_ids": [
+          "\"TAMILVANNAN\""
+        ],
+        "chunk_ids": [
+          "chunk-702c2b37f961cd460321b7dac02f14ea"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was written and directed by Tamilvannan.",
+            "Nandhi Nandhi is a 2011 Indian Tamil- language action masala film written and directed by Tamilvannan and produced by Dinesh Karthik. The film stars Akhil, Sanusha, and Singampuli. The music was composed by Bharathwaj with editing by V. T. Vijayan and cinematography by M. P. Ratheesh. The film was released on 11 February 2011."
+          ],
+          "relation_texts": [
+            "The film was written and directed by Tamilvannan.",
+            "link",
+            "TAMILVANNAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a617f8dcf34e8b5747c0015a0ecffe34",
+            "hyperedge_name": "<hyperedge>\"The film was written and directed by Tamilvannan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film.\"",
+        "branch": "semantic",
+        "raw_score": 0.5054734349250793,
+        "hyperedge_text": "Thiruvannamalai is a 2008 Indian Tamil masala film.",
+        "entity_ids": [
+          "\"2008\"",
+          "\"TAMIL\"",
+          "\"THIRUVANNAMALAI\""
+        ],
+        "chunk_ids": [
+          "chunk-4ef806104ab58ced8fd84fea488f4578"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film.",
+            "Thiruvannamalai (film) Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu. It stars Arjun Sarja, Pooja Gandhi, Karunaas, Sai Kumar, and Vidharth. The music was composed by Srikanth Deva. The film was later dubbed in Hindi as \"Main Hoon Vinashak\" and in Telugu as \"Jai Sambasiva\"."
+          ],
+          "relation_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film.",
+            "link",
+            "2008",
+            "TAMIL",
+            "THIRUVANNAMALAI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7a9e52aa4f5563267dcc13722b761aaf",
+            "hyperedge_name": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by P. G. Viswambharan.\"",
+        "branch": "semantic",
+        "raw_score": 0.4897049069404602,
+        "hyperedge_text": "The film was directed by P. G. Viswambharan.",
+        "entity_ids": [
+          "\"P. G. VISWAMBHARAN\""
+        ],
+        "chunk_ids": [
+          "chunk-3f91cc4bd2d2245ee798ae7f87a5c257"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by P. G. Viswambharan.",
+            "Pravachakan Pravachakan is a Malayalam movie released in 1993 under the direction of P. G. Viswambharan. The films has notable actors like Mukesh, Rajan P. Dev, Siddique and Narendra Prasad."
+          ],
+          "relation_texts": [
+            "The film was directed by P. G. Viswambharan.",
+            "link",
+            "P. G. VISWAMBHARAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-53b85ef2bf5a78ac54f26b97b8ffb779",
+            "hyperedge_name": "<hyperedge>\"The film was directed by P. G. Viswambharan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Kasthuri Raja.\"",
+        "branch": "semantic",
+        "raw_score": 0.4847375154495239,
+        "hyperedge_text": "The film was directed by Kasthuri Raja.",
+        "entity_ids": [
+          "\"KASTHURI RAJA\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc5d4b3291d044024d9a1ba4d46a448"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Kasthuri Raja.",
+            "En Aasai Rasave En Aasai Rasave is a 1998 Tamil drama film directed by Kasthuri Raja. The film features Sivaji Ganesan and Murali in the lead roles while Raadhika, Roja and Suvalakshmi all play other supporting roles. The film, which focussed on the lives of street dancers, released in August 1998."
+          ],
+          "relation_texts": [
+            "The film was directed by Kasthuri Raja.",
+            "link",
+            "KASTHURI RAJA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-22fd5a7a7a838b35c43f1b3382b6e6d4",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Kasthuri Raja.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Shakthi Chidambaram directed the film, marking his contribution to Tamil cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.4821338355541229,
+        "hyperedge_text": "Shakthi Chidambaram directed the film, marking his contribution to Tamil cinema.",
+        "entity_ids": [
+          "\"TAMIL CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-e7ff6d6aafa36d1a6b88ff9ddbabfd8e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Shakthi Chidambaram directed the film, marking his contribution to Tamil cinema.",
+            "Charlie Chaplin 2 Charlie Chaplin 2 is a 2019 Indian Tamil-language comedy film directed by Shakthi Chidambaram. The film stars Prabhu Deva, Nikki Galrani and Prabhu in the lead roles. The film is a sequel to 2002 film \"Charlie Chaplin\". The music for the film is scored by Amresh Ganesh. The film is produced by T. Siva under the production banner Amma Creations. The film released on 25 January 2019."
+          ],
+          "relation_texts": [
+            "Shakthi Chidambaram directed the film, marking his contribution to Tamil cinema.",
+            "link",
+            "TAMIL CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7013087893de07045ca8b2182fa278be",
+            "hyperedge_name": "<hyperedge>\"Shakthi Chidambaram directed the film, marking his contribution to Tamil cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was written and directed by Padmarajan.\"",
+        "branch": "semantic",
+        "raw_score": 0.4791839122772217,
+        "hyperedge_text": "It was written and directed by Padmarajan.",
+        "entity_ids": [
+          "\"PADMARAJAN\""
+        ],
+        "chunk_ids": [
+          "chunk-42c3acecd9557bcf1e11aaaa2c1b280c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was written and directed by Padmarajan.",
+            "Moonnam Pakkam Moonnam Pakkam is a 1988 Indian Malayalam- language sentimental drama film written and directed by Padmarajan. It stars Jayaram, Thilakan, Kirti Singh, Jagathi Sreekumar, Rahman, Ashokan and Ajayan. Kirti and Ajayan made their debut in this film. This film was also a commercial success."
+          ],
+          "relation_texts": [
+            "It was written and directed by Padmarajan.",
+            "link",
+            "PADMARAJAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-be3b901efc9a871a62bf1f5f0ec496e5",
+            "hyperedge_name": "<hyperedge>\"It was written and directed by Padmarajan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by M. Krishnan Nair.\"",
+        "branch": "semantic",
+        "raw_score": 0.47899505496025085,
+        "hyperedge_text": "The film is directed by M. Krishnan Nair.",
+        "entity_ids": [
+          "\"M. KRISHNAN NAIR\""
+        ],
+        "chunk_ids": [
+          "chunk-60fe53075520cbe072f859880744b542"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed by M. Krishnan Nair.",
+            "Kadal (1968 film) Kadal is a 1968 Indian Malayalam film, directed by M. Krishnan Nair and produced by P. Subramaniam. The film stars Madhu, Sharada, Thikkurissi Sukumaran Nair and Shobha in the lead roles. The film had musical score by M. B. Sreenivasan."
+          ],
+          "relation_texts": [
+            "The film is directed by M. Krishnan Nair.",
+            "link",
+            "M. KRISHNAN NAIR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-771010c5a53603baaa5e181343e7c9c9",
+            "hyperedge_name": "<hyperedge>\"The film is directed by M. Krishnan Nair.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed and produced by Navodaya Appachan.\"",
+        "branch": "semantic",
+        "raw_score": 0.4672260582447052,
+        "hyperedge_text": "The film is directed and produced by Navodaya Appachan.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-dd7a75653440f2f462941c93952ce8db"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed and produced by Navodaya Appachan.",
+            "Kadathanaattu Maakkam Kadathanaattu Maakkam is a 1978 Indian Malayalam-language historical period drama film directed and produced by Navodaya Appachan under Navodaya Studio. The film stars Prem Nazir, Jayan, Sheela and Sukumari in the lead roles. The film has musical score by G. Devarajan."
+          ],
+          "relation_texts": [
+            "The film is directed and produced by Navodaya Appachan.",
+            "link",
+            "DIRECTOR",
+            "PRODUCER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c927b0cf37dccfbe8bbc1111b01396cf",
+            "hyperedge_name": "<hyperedge>\"The film is directed and produced by Navodaya Appachan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has also directed two Tamil movies.\"",
+        "branch": "semantic",
+        "raw_score": 0.4560229778289795,
+        "hyperedge_text": "He has also directed two Tamil movies.",
+        "entity_ids": [
+          "\"TAMIL MOVIES\""
+        ],
+        "chunk_ids": [
+          "chunk-ee61ad1c0a312876ac50098a2231f437"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has also directed two Tamil movies.",
+            "A. B. Raj Antony Basker Raj( born 21 April 1925), also known as A. B. Raj, is an Indian director of Malayalam movies. Since 1951 to 1960, he directed ten Singalese movies followed by directing 65 Malayalam movies from 1963 till 1984. He has also directed two Tamil movies. He is the father of National Award- winning actress Saranya Ponvannan. She is a leading actress in Tamil cinema. A. B. Raj was the Second Unit Assistant Director of The Bridge on the River Kwai by David Lean"
+          ],
+          "relation_texts": [
+            "He has also directed two Tamil movies.",
+            "link",
+            "TAMIL MOVIES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-eeda6192a29e540e810a7e1c50d48d4f",
+            "hyperedge_name": "<hyperedge>\"He has also directed two Tamil movies.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.\"",
+        "hyperedge_text": "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5609697699546814,
+        "fusion_score": 0.5121939539909364,
+        "entity_ids": [
+          "\"THIRUVANNAMALAI\"",
+          "\"PERARASU\""
+        ],
+        "chunk_ids": [
+          "chunk-4ef806104ab58ced8fd84fea488f4578"
+        ],
+        "evidence_texts": [
+          "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+          "Thiruvannamalai (film) Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu. It stars Arjun Sarja, Pooja Gandhi, Karunaas, Sai Kumar, and Vidharth. The music was composed by Srikanth Deva. The film was later dubbed in Hindi as \"Main Hoon Vinashak\" and in Telugu as \"Jai Sambasiva\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.56097,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.512194
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film.\"",
+        "hyperedge_text": "Thiruvannamalai is a 2008 Indian Tamil masala film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5054734349250793,
+        "fusion_score": 0.5010946869850159,
+        "entity_ids": [
+          "\"2008\"",
+          "\"TAMIL\"",
+          "\"THIRUVANNAMALAI\""
+        ],
+        "chunk_ids": [
+          "chunk-4ef806104ab58ced8fd84fea488f4578"
+        ],
+        "evidence_texts": [
+          "Thiruvannamalai is a 2008 Indian Tamil masala film.",
+          "Thiruvannamalai (film) Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu. It stars Arjun Sarja, Pooja Gandhi, Karunaas, Sai Kumar, and Vidharth. The music was composed by Srikanth Deva. The film was later dubbed in Hindi as \"Main Hoon Vinashak\" and in Telugu as \"Jai Sambasiva\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.505473,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.501095
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed and produced by Navodaya Appachan.\"",
+        "hyperedge_text": "The film is directed and produced by Navodaya Appachan.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4672260582447052,
+        "fusion_score": 0.49344521164894106,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-dd7a75653440f2f462941c93952ce8db"
+        ],
+        "evidence_texts": [
+          "The film is directed and produced by Navodaya Appachan.",
+          "Kadathanaattu Maakkam Kadathanaattu Maakkam is a 1978 Indian Malayalam-language historical period drama film directed and produced by Navodaya Appachan under Navodaya Studio. The film stars Prem Nazir, Jayan, Sheela and Sukumari in the lead roles. The film has musical score by G. Devarajan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.467226,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.493445
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30314085483551023,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.303141
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5027865171432495,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30111460685729985,
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "evidence_texts": [
+          "As a director, he has likely worked on a variety of projects spanning different genres.",
+          "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.502787,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.301115
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the birth place of the director of Thiruvannamalai?",
+    "retrieval_question": "What is the birth place of Perarasu?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth place of the director of Thiruvannamalai?",
+      "retrieval_question": "What is the birth place of Perarasu?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Thiruvannamalai",
+      "replacement_answer": "Perarasu",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Thiruvannamalai",
+          "replacement_answer": "Perarasu"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Perarasu is an Indian film director who works primarily in Tamil cinema.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Perarasu is an Indian film director who works primarily in Tamil cinema.",
+        "entity_ids": [
+          "\"TAMIL CINEMA\"",
+          "\"PERARASU\""
+        ],
+        "chunk_ids": [
+          "chunk-beec4827917e97a1c000ed2cf7b6c4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Perarasu is an Indian film director who works primarily in Tamil cinema.",
+            "Perarasu Perarasu is an Indian film director who works primarily in Tamil cinema. As a director, he is best known for his commercial movies with actors Vijay and Ajith Kumar. He has also been credited as an actor, music director, singer and lyricist in some of his ventures. He has mentioned that all his movies are named for cities in Tamil Nadu, India. He is from Nattarasankottai, near Sivagangai in Tamil Nadu."
+          ],
+          "relation_texts": [
+            "Perarasu is an Indian film director who works primarily in Tamil cinema.",
+            "link",
+            "TAMIL CINEMA",
+            "PERARASU"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+        "entity_ids": [
+          "\"THIRUVANNAMALAI\"",
+          "\"PERARASU\""
+        ],
+        "chunk_ids": [
+          "chunk-4ef806104ab58ced8fd84fea488f4578"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+            "Thiruvannamalai (film) Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu. It stars Arjun Sarja, Pooja Gandhi, Karunaas, Sai Kumar, and Vidharth. The music was composed by Srikanth Deva. The film was later dubbed in Hindi as \"Main Hoon Vinashak\" and in Telugu as \"Jai Sambasiva\"."
+          ],
+          "relation_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+            "link",
+            "THIRUVANNAMALAI",
+            "PERARASU"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "branch": "relation",
+        "raw_score": 0.6215571761131287,
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth (POB) or birthplace is the place where a person was born.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth (POB) or birthplace is the place where a person was born.",
+            "link",
+            "BIRTH",
+            "PLACE OF BIRTH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d5eff26d110559cc075b3378c12f50e3",
+            "hyperedge_name": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "branch": "relation",
+        "raw_score": 0.607018232345581,
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "link",
+            "TERRITORIAL WATERS",
+            "LAW OF THE COUNTRIES INVOLVED",
+            "NATIONALITY OF THE PLANE OR SHIP",
+            "LAW",
+            "AIRSPACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e736e546ef2766fb6eee3ec329d43975",
+            "hyperedge_name": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\"",
+        "branch": "relation",
+        "raw_score": 0.5803524255752563,
+        "hyperedge_text": "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+        "entity_ids": [
+          "\"ETHNIC GROUP\"",
+          "\"PLACE OF ORIGIN\""
+        ],
+        "chunk_ids": [
+          "chunk-90ef8b646c23d30cfdfe5eeaca1544c1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "Motherland (disambiguation) Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group. Motherland may also refer to:"
+          ],
+          "relation_texts": [
+            "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "link",
+            "ETHNIC GROUP",
+            "PLACE OF ORIGIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f3f41e1fb657d16e75bd85ffccfeaeb",
+            "hyperedge_name": "<hyperedge>\"The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.\"",
+        "branch": "relation",
+        "raw_score": 0.5395867228507996,
+        "hyperedge_text": "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+        "entity_ids": [
+          "\"NATIONALITY\"",
+          "\"AMERICAS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+            "link",
+            "NATIONALITY",
+            "AMERICAS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9533e282d05fe0ed1aae66ae544046ce",
+            "hyperedge_name": "<hyperedge>\"In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth is not necessarily the place where the parents of the new baby live.\"",
+        "branch": "relation",
+        "raw_score": 0.5363516807556152,
+        "hyperedge_text": "The place of birth is not necessarily the place where the parents of the new baby live.",
+        "entity_ids": [
+          "\"PARENTS\"",
+          "\"NEW BABY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth is not necessarily the place where the parents of the new baby live.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth is not necessarily the place where the parents of the new baby live.",
+            "link",
+            "PARENTS",
+            "NEW BABY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c2f00fbd2ed64c5e26a5f01350457df0",
+            "hyperedge_name": "<hyperedge>\"The place of birth is not necessarily the place where the parents of the new baby live.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.\"",
+        "branch": "relation",
+        "raw_score": 0.5136013031005859,
+        "hyperedge_text": "It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.",
+        "entity_ids": [
+          "\"PLACE OF BIRTH\"",
+          "\"PLACE OF RESIDENCE\"",
+          "\"CIRCUMSTANCES\""
+        ],
+        "chunk_ids": [
+          "chunk-1ce3735ca51311e37578f27d0613f4a2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.",
+            "Place of origin In Switzerland, the place of origin( literally\" home place\" or\" citizen place\") denotes where a Swiss citizen has their municipal citizenship. It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances."
+          ],
+          "relation_texts": [
+            "It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.",
+            "link",
+            "PLACE OF BIRTH",
+            "PLACE OF RESIDENCE",
+            "CIRCUMSTANCES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-55706a83d1361720d261cfbc0feda0ce",
+            "hyperedge_name": "<hyperedge>\"It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\"",
+        "branch": "relation",
+        "raw_score": 0.49740904569625854,
+        "hyperedge_text": "Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+        "entity_ids": [
+          "\"MOTHERLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-90ef8b646c23d30cfdfe5eeaca1544c1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "Motherland (disambiguation) Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group. Motherland may also refer to:"
+          ],
+          "relation_texts": [
+            "Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "link",
+            "MOTHERLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f7659258daa9a6bfb34d9adb4e882053",
+            "hyperedge_name": "<hyperedge>\"Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"If the baby is born in a hospital in another place, that place is the place of birth.\"",
+        "branch": "relation",
+        "raw_score": 0.49151450395584106,
+        "hyperedge_text": "If the baby is born in a hospital in another place, that place is the place of birth.",
+        "entity_ids": [
+          "\"HOSPITAL\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "If the baby is born in a hospital in another place, that place is the place of birth.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "If the baby is born in a hospital in another place, that place is the place of birth.",
+            "link",
+            "HOSPITAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b4a5e47f76dca3a3ae2699b9d644d7e5",
+            "hyperedge_name": "<hyperedge>\"If the baby is born in a hospital in another place, that place is the place of birth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.\"",
+        "branch": "relation",
+        "raw_score": 0.483615905046463,
+        "hyperedge_text": "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+        "entity_ids": [
+          "\"COUNTRY\"",
+          "\"US CITIZENS\"",
+          "\"US CONSTITUTION\"",
+          "\"USA\"",
+          "\"US CITIZENSHIP\"",
+          "\"ACTUAL BIRTH LOCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+            "link",
+            "COUNTRY",
+            "US CITIZENS",
+            "US CONSTITUTION",
+            "USA",
+            "US CITIZENSHIP",
+            "ACTUAL BIRTH LOCATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-46faca6a891180adb3d5dc8164abade8",
+            "hyperedge_name": "<hyperedge>\"For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth.\"",
+        "branch": "relation",
+        "raw_score": 0.47698062658309937,
+        "hyperedge_text": "In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth.",
+        "entity_ids": [
+          "\"SWISS PASSPORT\"",
+          "\"IDENTITY CARD\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth.",
+            "link",
+            "SWISS PASSPORT",
+            "IDENTITY CARD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f59554ad62fdf0cac95c36d52163a39d",
+            "hyperedge_name": "<hyperedge>\"In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Perarasu is an Indian film director who works primarily in Tamil cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.5615839958190918,
+        "hyperedge_text": "Perarasu is an Indian film director who works primarily in Tamil cinema.",
+        "entity_ids": [
+          "\"TAMIL CINEMA\"",
+          "\"PERARASU\""
+        ],
+        "chunk_ids": [
+          "chunk-beec4827917e97a1c000ed2cf7b6c4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Perarasu is an Indian film director who works primarily in Tamil cinema.",
+            "Perarasu Perarasu is an Indian film director who works primarily in Tamil cinema. As a director, he is best known for his commercial movies with actors Vijay and Ajith Kumar. He has also been credited as an actor, music director, singer and lyricist in some of his ventures. He has mentioned that all his movies are named for cities in Tamil Nadu, India. He is from Nattarasankottai, near Sivagangai in Tamil Nadu."
+          ],
+          "relation_texts": [
+            "Perarasu is an Indian film director who works primarily in Tamil cinema.",
+            "link",
+            "TAMIL CINEMA",
+            "PERARASU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6c34db5cb214c095b36daf7f090db3cb",
+            "hyperedge_name": "<hyperedge>\"Perarasu is an Indian film director who works primarily in Tamil cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Perarasu's films often feature themes of family, love, and friendship.\"",
+        "branch": "semantic",
+        "raw_score": 0.48232704401016235,
+        "hyperedge_text": "Perarasu's films often feature themes of family, love, and friendship.",
+        "entity_ids": [
+          "\"THEMES OF FAMILY, LOVE, AND FRIENDSHIP\""
+        ],
+        "chunk_ids": [
+          "chunk-beec4827917e97a1c000ed2cf7b6c4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Perarasu's films often feature themes of family, love, and friendship.",
+            "Perarasu Perarasu is an Indian film director who works primarily in Tamil cinema. As a director, he is best known for his commercial movies with actors Vijay and Ajith Kumar. He has also been credited as an actor, music director, singer and lyricist in some of his ventures. He has mentioned that all his movies are named for cities in Tamil Nadu, India. He is from Nattarasankottai, near Sivagangai in Tamil Nadu."
+          ],
+          "relation_texts": [
+            "Perarasu's films often feature themes of family, love, and friendship.",
+            "link",
+            "THEMES OF FAMILY, LOVE, AND FRIENDSHIP"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f81d1cca4d49c6e812cd5fedd6b433e8",
+            "hyperedge_name": "<hyperedge>\"Perarasu's films often feature themes of family, love, and friendship.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.\"",
+        "branch": "semantic",
+        "raw_score": 0.4569135904312134,
+        "hyperedge_text": "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+        "entity_ids": [
+          "\"THIRUVANNAMALAI\"",
+          "\"PERARASU\""
+        ],
+        "chunk_ids": [
+          "chunk-4ef806104ab58ced8fd84fea488f4578"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+            "Thiruvannamalai (film) Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu. It stars Arjun Sarja, Pooja Gandhi, Karunaas, Sai Kumar, and Vidharth. The music was composed by Srikanth Deva. The film was later dubbed in Hindi as \"Main Hoon Vinashak\" and in Telugu as \"Jai Sambasiva\"."
+          ],
+          "relation_texts": [
+            "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+            "link",
+            "THIRUVANNAMALAI",
+            "PERARASU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2c3262a35279f4b6201b930f607888d2",
+            "hyperedge_name": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh.\"",
+        "branch": "semantic",
+        "raw_score": 0.45513051748275757,
+        "hyperedge_text": "He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh.",
+        "entity_ids": [
+          "\"TAMIL BRAHMIN\"",
+          "\"CHITTOOR\""
+        ],
+        "chunk_ids": [
+          "chunk-9ac6f5d2c836f12fc74dd081a050e75c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh.",
+            "M. B. Sreenivasan Manamadurai Balakrishnan Sreenivasan (19 September 1925 – 9 March 1988), or MBS, as he was called, was a South Indian music director who worked mainly in the Malayalam and Tamil film industries. He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh. He had his schooling at P.S. High School, Chennai. During his college days at Madras Presidency College, he was attracted to communist ideals and joined the Madras Students Organisation. His acquaintance with Nemai Ghosh, a Bengali director, paved his entry into films. His first film song was written to the words of noted Tamil lyricist, Jayakanthan, for the Tamil film \"Paadhai Theriyudhu Paar\". He played a major part in the formation of Indian Peoples Theatre Association (IPTA). He formed the Madras Youth Choir in 1971, which sings Indian choral music, based at Chennai. You can..."
+          ],
+          "relation_texts": [
+            "He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh.",
+            "link",
+            "TAMIL BRAHMIN",
+            "CHITTOOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b96ab4c5d1f64f3c412b5f35128823ed",
+            "hyperedge_name": "<hyperedge>\"He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Perarasu has also ventured into various roles in the film industry beyond direction.\"",
+        "branch": "semantic",
+        "raw_score": 0.4381672739982605,
+        "hyperedge_text": "Perarasu has also ventured into various roles in the film industry beyond direction.",
+        "entity_ids": [
+          "\"VARIOUS ROLES\""
+        ],
+        "chunk_ids": [
+          "chunk-beec4827917e97a1c000ed2cf7b6c4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Perarasu has also ventured into various roles in the film industry beyond direction.",
+            "Perarasu Perarasu is an Indian film director who works primarily in Tamil cinema. As a director, he is best known for his commercial movies with actors Vijay and Ajith Kumar. He has also been credited as an actor, music director, singer and lyricist in some of his ventures. He has mentioned that all his movies are named for cities in Tamil Nadu, India. He is from Nattarasankottai, near Sivagangai in Tamil Nadu."
+          ],
+          "relation_texts": [
+            "Perarasu has also ventured into various roles in the film industry beyond direction.",
+            "link",
+            "VARIOUS ROLES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-23b39acc7bc49334065fd6c46b7ac896",
+            "hyperedge_name": "<hyperedge>\"Perarasu has also ventured into various roles in the film industry beyond direction.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Narayan Rao was born on 10 August 1755.\"",
+        "branch": "semantic",
+        "raw_score": 0.42419442534446716,
+        "hyperedge_text": "Narayan Rao was born on 10 August 1755.",
+        "entity_ids": [
+          "\"NARAYAN RAO\""
+        ],
+        "chunk_ids": [
+          "chunk-55a80cc87d6594eddc7c0205f3022e99"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Narayan Rao was born on 10 August 1755.",
+            "Narayan Rao Narayan Rao (10 August 1755 – 30 August 1773) was the 9th Peshwa of the Maratha Empire from November 1772 until his assassination in August 1773. He married Gangabai Sathe who later gave birth to Sawai Madhavrao Peshwa."
+          ],
+          "relation_texts": [
+            "Narayan Rao was born on 10 August 1755.",
+            "link",
+            "NARAYAN RAO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a3597ff84d65554e3e71de831763a94f",
+            "hyperedge_name": "<hyperedge>\"Narayan Rao was born on 10 August 1755.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is from Nattarasankottai, near Sivagangai in Tamil Nadu.\"",
+        "branch": "semantic",
+        "raw_score": 0.4082551598548889,
+        "hyperedge_text": "He is from Nattarasankottai, near Sivagangai in Tamil Nadu.",
+        "entity_ids": [
+          "\"NATTARASANKOTTAI\"",
+          "\"SIVAGANGAI\""
+        ],
+        "chunk_ids": [
+          "chunk-beec4827917e97a1c000ed2cf7b6c4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is from Nattarasankottai, near Sivagangai in Tamil Nadu.",
+            "Perarasu Perarasu is an Indian film director who works primarily in Tamil cinema. As a director, he is best known for his commercial movies with actors Vijay and Ajith Kumar. He has also been credited as an actor, music director, singer and lyricist in some of his ventures. He has mentioned that all his movies are named for cities in Tamil Nadu, India. He is from Nattarasankottai, near Sivagangai in Tamil Nadu."
+          ],
+          "relation_texts": [
+            "He is from Nattarasankottai, near Sivagangai in Tamil Nadu.",
+            "link",
+            "NATTARASANKOTTAI",
+            "SIVAGANGAI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-418232607ab9c09eff8c671669b03552",
+            "hyperedge_name": "<hyperedge>\"He is from Nattarasankottai, near Sivagangai in Tamil Nadu.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"S. R. Puttanna Kanagal was born Shubraveshti Ramaswamiah Seetharama Sharma.\"",
+        "branch": "semantic",
+        "raw_score": 0.40162456035614014,
+        "hyperedge_text": "S. R. Puttanna Kanagal was born Shubraveshti Ramaswamiah Seetharama Sharma.",
+        "entity_ids": [
+          "\"SHUBRAVESHTI RAMASWAMIAH SEETHARAMA SHARMA\""
+        ],
+        "chunk_ids": [
+          "chunk-f8eaaf87db0eb1ff1f1cd98a8160d5c8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "S. R. Puttanna Kanagal was born Shubraveshti Ramaswamiah Seetharama Sharma.",
+            "Puttanna Kanagal S. R. Puttanna Kanagal( born Shubraveshti Ramaswamiah Seetharama Sharma, 1 December 1933 – 5 June 1985), fondly called the' Chitra Bramha'( God of Films, Kannada) was an Indian filmmaker and is considered as one of Indian cinema's greatest filmmakers."
+          ],
+          "relation_texts": [
+            "S. R. Puttanna Kanagal was born Shubraveshti Ramaswamiah Seetharama Sharma.",
+            "link",
+            "SHUBRAVESHTI RAMASWAMIAH SEETHARAMA SHARMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c67d25eed8f2d25fdd050a8fb9334e9f",
+            "hyperedge_name": "<hyperedge>\"S. R. Puttanna Kanagal was born Shubraveshti Ramaswamiah Seetharama Sharma.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sanal Kumar Sasidharan was born in India.\"",
+        "branch": "semantic",
+        "raw_score": 0.40097975730895996,
+        "hyperedge_text": "Sanal Kumar Sasidharan was born in India.",
+        "entity_ids": [
+          "\"INDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-a530b6646f4ab951f5b795b683cb70db"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sanal Kumar Sasidharan was born in India.",
+            "Sanal Kumar Sasidharan Sanal Kumar Sasidharan( born 8 April 1977) is an Indian film director and poet."
+          ],
+          "relation_texts": [
+            "Sanal Kumar Sasidharan was born in India.",
+            "link",
+            "INDIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-10e8029861da362278057620226450ce",
+            "hyperedge_name": "<hyperedge>\"Sanal Kumar Sasidharan was born in India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"P. S. Ramakrishna Rao was born on 12 October 1918.\"",
+        "branch": "semantic",
+        "raw_score": 0.3972800374031067,
+        "hyperedge_text": "P. S. Ramakrishna Rao was born on 12 October 1918.",
+        "entity_ids": [
+          "\"12 OCTOBER 1918\""
+        ],
+        "chunk_ids": [
+          "chunk-9d0af77999d15da059dd3a6c69957389"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "P. S. Ramakrishna Rao was born on 12 October 1918.",
+            "P. S. Ramakrishna Rao P. S. Ramakrishna Rao (b: 12 October 1918 - d: 7 September 1986) was a veteran Telugu film director and producer. He married Bhanumathi Ramakrishna, a multi-talented film artist from South India, on 8 August 1943. Raavu Balasaraswathi is his sister."
+          ],
+          "relation_texts": [
+            "P. S. Ramakrishna Rao was born on 12 October 1918.",
+            "link",
+            "12 OCTOBER 1918"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4c9ec29a90d084e18e54fdb221da07ae",
+            "hyperedge_name": "<hyperedge>\"P. S. Ramakrishna Rao was born on 12 October 1918.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Perarasu is an Indian film director who works primarily in Tamil cinema.\"",
+        "hyperedge_text": "Perarasu is an Indian film director who works primarily in Tamil cinema.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5615839958190918,
+        "fusion_score": 0.5123167991638184,
+        "entity_ids": [
+          "\"TAMIL CINEMA\"",
+          "\"PERARASU\""
+        ],
+        "chunk_ids": [
+          "chunk-beec4827917e97a1c000ed2cf7b6c4d5"
+        ],
+        "evidence_texts": [
+          "Perarasu is an Indian film director who works primarily in Tamil cinema.",
+          "Perarasu Perarasu is an Indian film director who works primarily in Tamil cinema. As a director, he is best known for his commercial movies with actors Vijay and Ajith Kumar. He has also been credited as an actor, music director, singer and lyricist in some of his ventures. He has mentioned that all his movies are named for cities in Tamil Nadu, India. He is from Nattarasankottai, near Sivagangai in Tamil Nadu."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.561584,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.512317
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.\"",
+        "hyperedge_text": "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4569135904312134,
+        "fusion_score": 0.4913827180862427,
+        "entity_ids": [
+          "\"THIRUVANNAMALAI\"",
+          "\"PERARASU\""
+        ],
+        "chunk_ids": [
+          "chunk-4ef806104ab58ced8fd84fea488f4578"
+        ],
+        "evidence_texts": [
+          "Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu.",
+          "Thiruvannamalai (film) Thiruvannamalai is a 2008 Indian Tamil masala film written and directed by Perarasu. It stars Arjun Sarja, Pooja Gandhi, Karunaas, Sai Kumar, and Vidharth. The music was composed by Srikanth Deva. The film was later dubbed in Hindi as \"Main Hoon Vinashak\" and in Telugu as \"Jai Sambasiva\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.456914,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.491383
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Perarasu's films often feature themes of family, love, and friendship.\"",
+        "hyperedge_text": "Perarasu's films often feature themes of family, love, and friendship.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48232704401016235,
+        "fusion_score": 0.4964654088020325,
+        "entity_ids": [
+          "\"THEMES OF FAMILY, LOVE, AND FRIENDSHIP\""
+        ],
+        "chunk_ids": [
+          "chunk-beec4827917e97a1c000ed2cf7b6c4d5"
+        ],
+        "evidence_texts": [
+          "Perarasu's films often feature themes of family, love, and friendship.",
+          "Perarasu Perarasu is an Indian film director who works primarily in Tamil cinema. As a director, he is best known for his commercial movies with actors Vijay and Ajith Kumar. He has also been credited as an actor, music director, singer and lyricist in some of his ventures. He has mentioned that all his movies are named for cities in Tamil Nadu, India. He is from Nattarasankottai, near Sivagangai in Tamil Nadu."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.482327,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496465
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Perarasu has also ventured into various roles in the film industry beyond direction.\"",
+        "hyperedge_text": "Perarasu has also ventured into various roles in the film industry beyond direction.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4381672739982605,
+        "fusion_score": 0.48763345479965214,
+        "entity_ids": [
+          "\"VARIOUS ROLES\""
+        ],
+        "chunk_ids": [
+          "chunk-beec4827917e97a1c000ed2cf7b6c4d5"
+        ],
+        "evidence_texts": [
+          "Perarasu has also ventured into various roles in the film industry beyond direction.",
+          "Perarasu Perarasu is an Indian film director who works primarily in Tamil cinema. As a director, he is best known for his commercial movies with actors Vijay and Ajith Kumar. He has also been credited as an actor, music director, singer and lyricist in some of his ventures. He has mentioned that all his movies are named for cities in Tamil Nadu, India. He is from Nattarasankottai, near Sivagangai in Tamil Nadu."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.438167,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.487633
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.6215571761131287,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.3819562037785848,
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.621557,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.381956
+        }
+      }
+    ]
+  }
+]

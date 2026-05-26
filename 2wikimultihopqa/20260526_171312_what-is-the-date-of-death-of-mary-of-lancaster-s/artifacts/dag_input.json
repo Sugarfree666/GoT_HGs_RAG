@@ -1,0 +1,24 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Mary Of Lancaster?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the mother of Mary Of Lancaster die?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the date of death of the mother of Mary Of Lancaster?",
+    "dependencies": [
+      "q2"
+    ],
+    "metadata": {}
+  }
+]

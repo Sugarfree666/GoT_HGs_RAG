@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of They Who Dare?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "When did the director of They Who Dare die?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

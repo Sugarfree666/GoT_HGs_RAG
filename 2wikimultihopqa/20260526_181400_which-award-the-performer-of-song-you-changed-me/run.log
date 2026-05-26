@@ -1,0 +1,8 @@
+2026-05-26 18:14:00,023 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 18:14:50,204 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 18:14:50,205 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 18:15:13,390 | INFO | Starting HyperBranch pipeline for question: Which award the performer of song You Changed Me won?
+2026-05-26 18:15:13,390 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-26 18:15:22,255 | INFO | Atomic retrieval returned 21 hits for question=Who performed the song You Changed Me?
+2026-05-26 18:15:34,660 | INFO | Atomic retrieval returned 26 hits for question=What award did the performer of You Changed Me win?
+2026-05-26 18:16:03,717 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_181400_which-award-the-performer-of-song-you-changed-me

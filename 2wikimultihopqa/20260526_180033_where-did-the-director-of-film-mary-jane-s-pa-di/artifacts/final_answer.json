@@ -1,0 +1,26 @@
+{
+  "answer": "New York, New York",
+  "candidate_answer": "New York, New York",
+  "reasoning_summary": "The director of Mary Jane's Pa, William Keighley, is confirmed to have died in New York, New York, based on strong evidence.",
+  "answer_span_reasoning": "The answer is based on confirmed evidence regarding the director's death location.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Mary Jane's Pa?",
+      "answer": "William Keighley",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Mary Jane's Pa is a 1935 American drama film directed by William Keighley and written by Tom Reed and Peter Milne.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the director of Mary Jane's Pa die?",
+      "answer": "New York, New York",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"William Jackson Keighley (August 4, 1889, Philadelphia, Pennsylvania – June 24, 1984, New York, New York) was an American stage actor and Hollywood film director.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

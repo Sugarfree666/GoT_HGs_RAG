@@ -1,0 +1,104 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the composer of Before Sunset?",
+    "retrieval_question": "What is the composer of Before Sunset?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the composer of Before Sunset?",
+      "retrieval_question": "What is the composer of Before Sunset?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Before Sunset"
+      ],
+      "relations": [
+        "composer of"
+      ],
+      "relation_query": "who is the composer of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the study of the composer of Before Sunset?",
+    "retrieval_question": "What is the study of Richard Linklater?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the study of the composer of Before Sunset?",
+      "retrieval_question": "What is the study of Richard Linklater?",
+      "whether_rewritten": true,
+      "replacement_span": "the composer of Before Sunset",
+      "replacement_answer": "Richard Linklater",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the composer of Before Sunset",
+          "replacement_answer": "Richard Linklater"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "What is the composer of Before Sunset?",
+        "answer": "Richard Linklater",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that 'Before Sunset' was directed by Richard Linklater, indicating his role as a key creative figure associated with the film.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Before Sunset is a 2004 American romantic drama film, the sequel to 'Before Sunrise' (1995).\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Before Sunset is a 2004 American romantic drama film, the sequel to 'Before Sunrise' (1995).\"",
+            "fusion_score": 0.5392766475677491,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Before Sunset is a 2004 American romantic drama film, the sequel to 'Before Sunrise' (1995).",
+              "Before Sunset Before Sunset is a 2004 American romantic drama film, the sequel to \"Before Sunrise\" (1995). Like its predecessor, the film was directed by Richard Linklater. He shares screenplay credit with actors Ethan Hawke and Julie Delpy, and with Kim Krizan, the screenwriter for the first film featuring these two characters. The film picks up the story in \"Before Sunrise\" of the young American man (Hawke) and French woman (Delpy) who spent a passionate night together in Vienna. Their paths intersect nine years later in Paris, and the film appears to take place in real time as they spend an afternoon together. \"Before Sunset\" received broad critical acclaim and has appeared on many publications' lists of the best films of the 2000s. It was nominated for an Oscar for Best Adapted Screenplay. The directors and lead actors collaborated on another film following these characters, \"Befo..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Before Sunset received broad critical acclaim and has appeared on many publications' lists of the best films of the 2000s.\"",
+            "fusion_score": 0.518588161468506,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Before Sunset received broad critical acclaim and has appeared on many publications' lists of the best films of the 2000s.",
+              "Before Sunset Before Sunset is a 2004 American romantic drama film, the sequel to \"Before Sunrise\" (1995). Like its predecessor, the film was directed by Richard Linklater. He shares screenplay credit with actors Ethan Hawke and Julie Delpy, and with Kim Krizan, the screenwriter for the first film featuring these two characters. The film picks up the story in \"Before Sunrise\" of the young American man (Hawke) and French woman (Delpy) who spent a passionate night together in Vienna. Their paths intersect nine years later in Paris, and the film appears to take place in real time as they spend an afternoon together. \"Before Sunset\" received broad critical acclaim and has appeared on many publications' lists of the best films of the 2000s. It was nominated for an Oscar for Best Adapted Screenplay. The directors and lead actors collaborated on another film following these characters, \"Befo..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"As the creator of acknowledged masterpieces across numerous music genres, he is regarded as one of the major composers of the 20th century.\"",
+            "fusion_score": 0.2759304682413737,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "As the creator of acknowledged masterpieces across numerous music genres, he is regarded as one of the major composers of the 20th century.",
+              "Sergei Prokofiev Sergei Sergeyevich Prokofiev (27 April [O.S. 15 April] 1891 – 5 March 1953) was a Russian Soviet composer, pianist and conductor. As the creator of acknowledged masterpieces across numerous music genres, he is regarded as one of the major composers of the 20th century. His works include such widely heard pieces as the March from \"The Love for Three Oranges,\" the suite \"Lieutenant Kijé\", the ballet \"Romeo and Juliet\"—from which \"Dance of the Knights\" is taken—and \"Peter and the Wolf. \" Of the established forms and genres in which he worked, he created – excluding juvenilia – seven completed operas, seven symphonies, eight ballets, five piano concertos, two violin concertos, a cello concerto, a symphony-concerto for cello and orchestra, and nine completed piano sonatas. A graduate of the Saint Petersburg Conservatory, Prokofiev initially made his name as an iconoclastic..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Richard Linklater"
+      ],
+      "relations": [
+        "study of"
+      ],
+      "relation_query": "What is the study of a person?",
+      "answer_type": "short phrase"
+    }
+  }
+]

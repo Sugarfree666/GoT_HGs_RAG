@@ -1,0 +1,9 @@
+2026-05-26 16:57:58,598 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 16:59:11,308 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 16:59:11,309 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 16:59:39,907 | INFO | Starting HyperBranch pipeline for question: Who was born later, Burhan Atak or Pepe Hern?
+2026-05-26 16:59:39,907 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-26 16:59:47,368 | INFO | Atomic retrieval returned 21 hits for question=When was Burhan Atak born?
+2026-05-26 16:59:56,836 | INFO | Atomic retrieval returned 21 hits for question=What is the birth date of Pepe Hern?
+2026-05-26 17:00:23,187 | INFO | Atomic retrieval returned 21 hits for question=What is the birth date of Burhan Atak?
+2026-05-26 17:01:12,015 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_165758_who-was-born-later-burhan-atak-or-pepe-hern

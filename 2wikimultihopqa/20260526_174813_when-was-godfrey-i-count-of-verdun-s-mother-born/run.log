@@ -1,0 +1,9 @@
+2026-05-26 17:48:13,537 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 17:49:27,976 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 17:49:27,977 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 17:49:42,993 | INFO | Starting HyperBranch pipeline for question: When was Godfrey I, Count Of Verdun's mother born?
+2026-05-26 17:49:42,994 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-26 17:49:48,243 | INFO | Atomic retrieval returned 23 hits for question=Who is the mother of Godfrey I?
+2026-05-26 17:49:53,162 | INFO | Rewrote retrieval question for q2: When was the mother of Godfrey I born? -> When was Oda of Metz born?
+2026-05-26 17:49:58,485 | INFO | Atomic retrieval returned 22 hits for question=When was Oda of Metz born?
+2026-05-26 17:50:19,111 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_174813_when-was-godfrey-i-count-of-verdun-s-mother-born

@@ -1,0 +1,34 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "Both films lack sufficient evidence for their release dates. 'Jazz Boat' has no clear release date, and 'Her Husband's Trademark' only provides the year 1922 without a specific date. Therefore, it is impossible to determine which film was released earlier.",
+  "answer_span_reasoning": "There is not enough information to determine the release dates of both films.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "What is the release date of Jazz Boat?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the release date of Her Husband's Trademark?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "What is the release date of Jazz Boat?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

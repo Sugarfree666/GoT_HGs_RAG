@@ -1,0 +1,2396 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Angus Wagner born?",
+    "retrieval_question": "When was Angus Wagner born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Angus Wagner born?",
+      "retrieval_question": "When was Angus Wagner born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"ANGUS WAGNER\"",
+          "\"RUGBY UNION\"",
+          "\"BRUMBIES\"",
+          "\"SUPER RUGBY\"",
+          "\"PROP\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+            "link",
+            "AUSTRALIA",
+            "ANGUS WAGNER",
+            "RUGBY UNION",
+            "BRUMBIES",
+            "SUPER RUGBY",
+            "PROP"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.5393712520599365,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.5337122678756714,
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has the birth date of 1 November 1982.",
+            "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+          ],
+          "relation_texts": [
+            "He has the birth date of 1 November 1982.",
+            "link",
+            "1 NOVEMBER 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e7ccd25dfeb68bf5e59c3683e27f9a72",
+            "hyperedge_name": "<hyperedge>\"He has the birth date of 1 November 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "branch": "relation",
+        "raw_score": 0.5235011577606201,
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+          ],
+          "relation_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "link",
+            "CAREER TIMELINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f292719350c455f48b3bb7d98ae9f7f2",
+            "hyperedge_name": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\"",
+        "branch": "relation",
+        "raw_score": 0.5198907256126404,
+        "hyperedge_text": "The date of birth April 18, 1973, marks an important milestone in his life.",
+        "entity_ids": [
+          "\"MILESTONE\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "link",
+            "MILESTONE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d651f368d8e93791546127e4938cabb",
+            "hyperedge_name": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was April 1, 1883.\"",
+        "branch": "relation",
+        "raw_score": 0.5148507356643677,
+        "hyperedge_text": "His birth date was April 1, 1883.",
+        "entity_ids": [
+          "\"APRIL 1, 1883\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was April 1, 1883.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His birth date was April 1, 1883.",
+            "link",
+            "APRIL 1, 1883"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-513618e3e9a5db9731bf910947f84866",
+            "hyperedge_name": "<hyperedge>\"His birth date was April 1, 1883.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\"",
+        "branch": "relation",
+        "raw_score": 0.510990560054779,
+        "hyperedge_text": "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-68776c5ec312f8403508c9a611746b32"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "Jean-Pierre de Keyser Jean- Pierre de Keyser( born 13 April 1965) is a retired German football player."
+          ],
+          "relation_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-028758a1e84246436fa83f391bd7fc4c",
+            "hyperedge_name": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.5081870555877686,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 16, 1993.\"",
+        "branch": "relation",
+        "raw_score": 0.50186687707901,
+        "hyperedge_text": "He was born on December 16, 1993.",
+        "entity_ids": [
+          "\"DECEMBER 16, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-2434daa5d2e639dffeeacdeae7136b7e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 16, 1993.",
+            "Michael Rector Michael Rector( born December 16, 1993) is an American football wide receiver who is currently a free agent of the National Football League. He played college football at Stanford."
+          ],
+          "relation_texts": [
+            "He was born on December 16, 1993.",
+            "link",
+            "DECEMBER 16, 1993"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd47ba46ad7b16c6fa6f60940ac4bafe",
+            "hyperedge_name": "<hyperedge>\"He was born on December 16, 1993.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"born 30 December 1986\"",
+        "branch": "relation",
+        "raw_score": 0.5016270875930786,
+        "hyperedge_text": "born 30 December 1986",
+        "entity_ids": [
+          "\"30 DECEMBER 1986\""
+        ],
+        "chunk_ids": [
+          "chunk-ff775504cf67541b9da0cc36aaafe92c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "born 30 December 1986",
+            "Alan Pownall Stephen Alan Fletcher Pownall( born 30 December 1986) is an English singer- songwriter and the husband of actress Gabriella Wilde."
+          ],
+          "relation_texts": [
+            "born 30 December 1986",
+            "link",
+            "30 DECEMBER 1986"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-29ec9775fe4e17981cfe174aa175550d",
+            "hyperedge_name": "<hyperedge>\"born 30 December 1986\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was on October 9, 1892.\"",
+        "branch": "relation",
+        "raw_score": 0.5009931325912476,
+        "hyperedge_text": "His birth date was on October 9, 1892.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0866c3f8d6fb59c7691bda418ca8c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was on October 9, 1892.",
+            "Robert P. Kerr Robert P. Kerr (October 9, 1892 – September 5, 1960) was an American film director, actor and screenwriter. He directed 41 films between 1917 and 1928. He was born in Burlington, Colorado and died in Porterville, California from a heart attack."
+          ],
+          "relation_texts": [
+            "His birth date was on October 9, 1892.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fe9b22788083ee137d022bf188d617cf",
+            "hyperedge_name": "<hyperedge>\"His birth date was on October 9, 1892.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner was born on 30 October 1997 in Australia.\"",
+        "branch": "semantic",
+        "raw_score": 0.7800536155700684,
+        "hyperedge_text": "Angus Wagner was born on 30 October 1997 in Australia.",
+        "entity_ids": [
+          "\"30 OCTOBER 1997\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Angus Wagner was born on 30 October 1997 in Australia.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "Angus Wagner was born on 30 October 1997 in Australia.",
+            "link",
+            "30 OCTOBER 1997"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a809829971fda2fcb792731738f77935",
+            "hyperedge_name": "<hyperedge>\"Angus Wagner was born on 30 October 1997 in Australia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.\"",
+        "branch": "semantic",
+        "raw_score": 0.6841150522232056,
+        "hyperedge_text": "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"ANGUS WAGNER\"",
+          "\"RUGBY UNION\"",
+          "\"BRUMBIES\"",
+          "\"SUPER RUGBY\"",
+          "\"PROP\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+            "link",
+            "AUSTRALIA",
+            "ANGUS WAGNER",
+            "RUGBY UNION",
+            "BRUMBIES",
+            "SUPER RUGBY",
+            "PROP"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4980e33dadb35f9a1842daf5ecf9ad6a",
+            "hyperedge_name": "<hyperedge>\"Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In May 2019, Angus Wagner was signed as a replacement player.\"",
+        "branch": "semantic",
+        "raw_score": 0.6441166400909424,
+        "hyperedge_text": "In May 2019, Angus Wagner was signed as a replacement player.",
+        "entity_ids": [
+          "\"REPLACEMENT PLAYER\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In May 2019, Angus Wagner was signed as a replacement player.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "In May 2019, Angus Wagner was signed as a replacement player.",
+            "link",
+            "REPLACEMENT PLAYER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cf4f1204fc8bdeb1f287f0a39963be91",
+            "hyperedge_name": "<hyperedge>\"In May 2019, Angus Wagner was signed as a replacement player.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner plays for the Brumbies in Super Rugby.\"",
+        "branch": "semantic",
+        "raw_score": 0.5644325017929077,
+        "hyperedge_text": "Angus Wagner plays for the Brumbies in Super Rugby.",
+        "entity_ids": [
+          "\"RUGBY UNION PLAYER\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Angus Wagner plays for the Brumbies in Super Rugby.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "Angus Wagner plays for the Brumbies in Super Rugby.",
+            "link",
+            "RUGBY UNION PLAYER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a3b9298ab296094687d824b462760360",
+            "hyperedge_name": "<hyperedge>\"Angus Wagner plays for the Brumbies in Super Rugby.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"August Wicke (May 7, 1885 – January 3, 1947), also known as 'Gus Wicke' and 'Gus Wickie', was a German-born American baritone singer, and stage and voice actor.\"",
+        "branch": "semantic",
+        "raw_score": 0.4256160855293274,
+        "hyperedge_text": "August Wicke (May 7, 1885 – January 3, 1947), also known as 'Gus Wicke' and 'Gus Wickie', was a German-born American baritone singer, and stage and voice actor.",
+        "entity_ids": [
+          "\"AMERICAN\"",
+          "\"STAGE ACTOR\"",
+          "\"GERMAN-BORN\"",
+          "\"VOICE ACTOR\"",
+          "\"AUGUST WICKE\"",
+          "\"GUS WICKE\"",
+          "\"GUS WICKIE\"",
+          "\"BARITONE SINGER\""
+        ],
+        "chunk_ids": [
+          "chunk-1671aeb5077147c56a9ac2f2efefe2f9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "August Wicke (May 7, 1885 – January 3, 1947), also known as 'Gus Wicke' and 'Gus Wickie', was a German-born American baritone singer, and stage and voice actor.",
+            "Gus Wickie August Wicke( May 7, 1885 – January 3, 1947), also known as\" Gus Wicke\" and\" Gus Wickie\", was a German- born American baritone singer, and stage and voice actor."
+          ],
+          "relation_texts": [
+            "August Wicke (May 7, 1885 – January 3, 1947), also known as 'Gus Wicke' and 'Gus Wickie', was a German-born American baritone singer, and stage and voice actor.",
+            "link",
+            "AMERICAN",
+            "STAGE ACTOR",
+            "GERMAN-BORN",
+            "VOICE ACTOR",
+            "AUGUST WICKE",
+            "GUS WICKE",
+            "GUS WICKIE",
+            "BARITONE SINGER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-790e82d0d0b921624b1028aebab798c7",
+            "hyperedge_name": "<hyperedge>\"August Wicke (May 7, 1885 – January 3, 1947), also known as 'Gus Wicke' and 'Gus Wickie', was a German-born American baritone singer, and stage and voice actor.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As Lord Lieutenant of Angus from 1937, he played a critical role in Scottish nobility.\"",
+        "branch": "semantic",
+        "raw_score": 0.42298364639282227,
+        "hyperedge_text": "As Lord Lieutenant of Angus from 1937, he played a critical role in Scottish nobility.",
+        "entity_ids": [
+          "\"ANGUS\""
+        ],
+        "chunk_ids": [
+          "chunk-4696e8a930ffde400da343959b45e916"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As Lord Lieutenant of Angus from 1937, he played a critical role in Scottish nobility.",
+            "David Ogilvy, 12th Earl of Airlie Colonel David Lyulph Gore Wolseley Ogilvy, 12th and 7th Earl of Airlie (18 July 1893, Cahir, County Tipperary, Ireland – 28 December 1968) was a Scottish peer, soldier and courtier. He was the eldest son of David Ogilvy, 11th Earl of Airlie, and his wife, the former Lady Mabell Gore. He inherited his father's titles in 1900 at the age of six, and was one of the trainbearers to Mary of Teck at her coronation in 1911. He became a Representative Peer for Scotland in 1922, was appointed a Lord-in-waiting in Stanley Baldwin's government in 1926, and was made a Knight Commander of the Royal Victorian Order in 1929. In 1937, he became Lord Lieutenant of Angus and was appointed Lord Chamberlain to Queen Elizabeth in 1937. As a senior member of the royal household, he was a guest at the 1947 wedding of Princess Elizabeth and Philip Mountbatten, Duke of Edinbur..."
+          ],
+          "relation_texts": [
+            "As Lord Lieutenant of Angus from 1937, he played a critical role in Scottish nobility.",
+            "link",
+            "ANGUS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c55fca0e1ae3b58fea4bd98ba7c86182",
+            "hyperedge_name": "<hyperedge>\"As Lord Lieutenant of Angus from 1937, he played a critical role in Scottish nobility.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton was the son of David, 7th Earl of Angus.\"",
+        "branch": "semantic",
+        "raw_score": 0.41903388500213623,
+        "hyperedge_text": "Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton was the son of David, 7th Earl of Angus.",
+        "entity_ids": [
+          "\"TITLE\"",
+          "\"ESTATES\"",
+          "\"ARCHIBALD DOUGLAS\"",
+          "\"DAVID DOUGLAS\""
+        ],
+        "chunk_ids": [
+          "chunk-b097e57c4ebee44d104458f3980cc5ac"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton was the son of David, 7th Earl of Angus.",
+            "Archibald Douglas, 8th Earl of Angus Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton( 15554 August 1588) was the son of David, 7th Earl of Angus. He succeeded to the title and estates in 1558, being brought up by his uncle, James Douglas, 4th Earl of Morton, a Presbyterian. In 1573 he was made a Privy Councillor and Sheriff of Berwickshire; in 1574 Lieutenant- General in Scotland; in 1577 Warden of the West Marches and Steward of Fife; and in 1578 Lieutenant- General of the realm. As a supporter of Morton and\" ultra- Protestant\" policy he was twice forced in exile in England."
+          ],
+          "relation_texts": [
+            "Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton was the son of David, 7th Earl of Angus.",
+            "link",
+            "TITLE",
+            "ESTATES",
+            "ARCHIBALD DOUGLAS",
+            "DAVID DOUGLAS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-be2c856c8ed24abe4c32bbd363870f32",
+            "hyperedge_name": "<hyperedge>\"Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton was the son of David, 7th Earl of Angus.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Hans Herwig was born on 10 April 1909 in Vienna.\"",
+        "branch": "semantic",
+        "raw_score": 0.41313913464546204,
+        "hyperedge_text": "Hans Herwig was born on 10 April 1909 in Vienna.",
+        "entity_ids": [
+          "\"VIENNA\"",
+          "\"10 APRIL 1909\"",
+          "\"HANS HERWIG\""
+        ],
+        "chunk_ids": [
+          "chunk-d2a9d1885d2bd5ee8340b0c78a993b29"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Hans Herwig was born on 10 April 1909 in Vienna.",
+            "Hans Herwig Hans Herwig( 10 April 1909 Vienna – 5 October 1967 Germany) was an Austrian film producer and director."
+          ],
+          "relation_texts": [
+            "Hans Herwig was born on 10 April 1909 in Vienna.",
+            "link",
+            "VIENNA",
+            "10 APRIL 1909",
+            "HANS HERWIG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ac046703a96f68515595d340a52a30e0",
+            "hyperedge_name": "<hyperedge>\"Hans Herwig was born on 10 April 1909 in Vienna.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gus Wicke, also known as August Wicke, was a singer and actor during his lifetime.\"",
+        "branch": "semantic",
+        "raw_score": 0.411837100982666,
+        "hyperedge_text": "Gus Wicke, also known as August Wicke, was a singer and actor during his lifetime.",
+        "entity_ids": [
+          "\"SINGER\"",
+          "\"ACTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-1671aeb5077147c56a9ac2f2efefe2f9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gus Wicke, also known as August Wicke, was a singer and actor during his lifetime.",
+            "Gus Wickie August Wicke( May 7, 1885 – January 3, 1947), also known as\" Gus Wicke\" and\" Gus Wickie\", was a German- born American baritone singer, and stage and voice actor."
+          ],
+          "relation_texts": [
+            "Gus Wicke, also known as August Wicke, was a singer and actor during his lifetime.",
+            "link",
+            "SINGER",
+            "ACTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d8ba98d4fb05182ff54d1057d65a6e49",
+            "hyperedge_name": "<hyperedge>\"Gus Wicke, also known as August Wicke, was a singer and actor during his lifetime.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in 1927, Doug Wendt represents a generation of early footballers in Australia.\"",
+        "branch": "semantic",
+        "raw_score": 0.40621304512023926,
+        "hyperedge_text": "Born in 1927, Doug Wendt represents a generation of early footballers in Australia.",
+        "entity_ids": [
+          "\"GENERATION OF EARLY FOOTBALLERS\""
+        ],
+        "chunk_ids": [
+          "chunk-fb18838a2ae860cc780a98874eeb8a27"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born in 1927, Doug Wendt represents a generation of early footballers in Australia.",
+            "Doug Wendt Doug Wendt( born 1927) is a former Australian association football player."
+          ],
+          "relation_texts": [
+            "Born in 1927, Doug Wendt represents a generation of early footballers in Australia.",
+            "link",
+            "GENERATION OF EARLY FOOTBALLERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dedd5b289ed04b40f709cf1ec8adf7c2",
+            "hyperedge_name": "<hyperedge>\"Born in 1927, Doug Wendt represents a generation of early footballers in Australia.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.\"",
+        "hyperedge_text": "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6841150522232056,
+        "fusion_score": 0.5368230104446412,
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"ANGUS WAGNER\"",
+          "\"RUGBY UNION\"",
+          "\"BRUMBIES\"",
+          "\"SUPER RUGBY\"",
+          "\"PROP\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "evidence_texts": [
+          "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+          "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.684115,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536823
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner was born on 30 October 1997 in Australia.\"",
+        "hyperedge_text": "Angus Wagner was born on 30 October 1997 in Australia.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7800536155700684,
+        "fusion_score": 0.5560107231140137,
+        "entity_ids": [
+          "\"30 OCTOBER 1997\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "evidence_texts": [
+          "Angus Wagner was born on 30 October 1997 in Australia.",
+          "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.780054,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.556011
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In May 2019, Angus Wagner was signed as a replacement player.\"",
+        "hyperedge_text": "In May 2019, Angus Wagner was signed as a replacement player.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6441166400909424,
+        "fusion_score": 0.5288233280181885,
+        "entity_ids": [
+          "\"REPLACEMENT PLAYER\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "evidence_texts": [
+          "In May 2019, Angus Wagner was signed as a replacement player.",
+          "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.644117,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528823
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner plays for the Brumbies in Super Rugby.\"",
+        "hyperedge_text": "Angus Wagner plays for the Brumbies in Super Rugby.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5644325017929077,
+        "fusion_score": 0.5128865003585816,
+        "entity_ids": [
+          "\"RUGBY UNION PLAYER\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "evidence_texts": [
+          "Angus Wagner plays for the Brumbies in Super Rugby.",
+          "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.564433,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.512887
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5337122678756714,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.28015157381693523,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.533712,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.280152
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Juan Carlos Falcón born?",
+    "retrieval_question": "When was Juan Carlos Falcón born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Juan Carlos Falcón born?",
+      "retrieval_question": "When was Juan Carlos Falcón born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+        "entity_ids": [
+          "\"FOOTBALL MIDFIELDER\"",
+          "\"ARGENTINA\"",
+          "\"JUAN CARLOS FALCÓN\"",
+          "\"19 NOVEMBER 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+            "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+          ],
+          "relation_texts": [
+            "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+            "link",
+            "FOOTBALL MIDFIELDER",
+            "ARGENTINA",
+            "JUAN CARLOS FALCÓN",
+            "19 NOVEMBER 1979"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.5393712520599365,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.5337122678756714,
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has the birth date of 1 November 1982.",
+            "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+          ],
+          "relation_texts": [
+            "He has the birth date of 1 November 1982.",
+            "link",
+            "1 NOVEMBER 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e7ccd25dfeb68bf5e59c3683e27f9a72",
+            "hyperedge_name": "<hyperedge>\"He has the birth date of 1 November 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "branch": "relation",
+        "raw_score": 0.5235011577606201,
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+          ],
+          "relation_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "link",
+            "CAREER TIMELINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f292719350c455f48b3bb7d98ae9f7f2",
+            "hyperedge_name": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\"",
+        "branch": "relation",
+        "raw_score": 0.5198907256126404,
+        "hyperedge_text": "The date of birth April 18, 1973, marks an important milestone in his life.",
+        "entity_ids": [
+          "\"MILESTONE\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "link",
+            "MILESTONE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d651f368d8e93791546127e4938cabb",
+            "hyperedge_name": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was April 1, 1883.\"",
+        "branch": "relation",
+        "raw_score": 0.5148507356643677,
+        "hyperedge_text": "His birth date was April 1, 1883.",
+        "entity_ids": [
+          "\"APRIL 1, 1883\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was April 1, 1883.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His birth date was April 1, 1883.",
+            "link",
+            "APRIL 1, 1883"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-513618e3e9a5db9731bf910947f84866",
+            "hyperedge_name": "<hyperedge>\"His birth date was April 1, 1883.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\"",
+        "branch": "relation",
+        "raw_score": 0.510990560054779,
+        "hyperedge_text": "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-68776c5ec312f8403508c9a611746b32"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "Jean-Pierre de Keyser Jean- Pierre de Keyser( born 13 April 1965) is a retired German football player."
+          ],
+          "relation_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-028758a1e84246436fa83f391bd7fc4c",
+            "hyperedge_name": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.5081870555877686,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 16, 1993.\"",
+        "branch": "relation",
+        "raw_score": 0.50186687707901,
+        "hyperedge_text": "He was born on December 16, 1993.",
+        "entity_ids": [
+          "\"DECEMBER 16, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-2434daa5d2e639dffeeacdeae7136b7e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 16, 1993.",
+            "Michael Rector Michael Rector( born December 16, 1993) is an American football wide receiver who is currently a free agent of the National Football League. He played college football at Stanford."
+          ],
+          "relation_texts": [
+            "He was born on December 16, 1993.",
+            "link",
+            "DECEMBER 16, 1993"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd47ba46ad7b16c6fa6f60940ac4bafe",
+            "hyperedge_name": "<hyperedge>\"He was born on December 16, 1993.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"born 30 December 1986\"",
+        "branch": "relation",
+        "raw_score": 0.5016270875930786,
+        "hyperedge_text": "born 30 December 1986",
+        "entity_ids": [
+          "\"30 DECEMBER 1986\""
+        ],
+        "chunk_ids": [
+          "chunk-ff775504cf67541b9da0cc36aaafe92c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "born 30 December 1986",
+            "Alan Pownall Stephen Alan Fletcher Pownall( born 30 December 1986) is an English singer- songwriter and the husband of actress Gabriella Wilde."
+          ],
+          "relation_texts": [
+            "born 30 December 1986",
+            "link",
+            "30 DECEMBER 1986"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-29ec9775fe4e17981cfe174aa175550d",
+            "hyperedge_name": "<hyperedge>\"born 30 December 1986\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was on October 9, 1892.\"",
+        "branch": "relation",
+        "raw_score": 0.5009931325912476,
+        "hyperedge_text": "His birth date was on October 9, 1892.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0866c3f8d6fb59c7691bda418ca8c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was on October 9, 1892.",
+            "Robert P. Kerr Robert P. Kerr (October 9, 1892 – September 5, 1960) was an American film director, actor and screenwriter. He directed 41 films between 1917 and 1928. He was born in Burlington, Colorado and died in Porterville, California from a heart attack."
+          ],
+          "relation_texts": [
+            "His birth date was on October 9, 1892.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fe9b22788083ee137d022bf188d617cf",
+            "hyperedge_name": "<hyperedge>\"His birth date was on October 9, 1892.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón was born on 19 November 1979.\"",
+        "branch": "semantic",
+        "raw_score": 0.8206111192703247,
+        "hyperedge_text": "Juan Carlos Falcón was born on 19 November 1979.",
+        "entity_ids": [
+          "\"19 NOVEMBER 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Juan Carlos Falcón was born on 19 November 1979.",
+            "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+          ],
+          "relation_texts": [
+            "Juan Carlos Falcón was born on 19 November 1979.",
+            "link",
+            "19 NOVEMBER 1979"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-00c4a3251080c254798722416053f6b6",
+            "hyperedge_name": "<hyperedge>\"Juan Carlos Falcón was born on 19 November 1979.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.\"",
+        "branch": "semantic",
+        "raw_score": 0.7323589324951172,
+        "hyperedge_text": "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+        "entity_ids": [
+          "\"FOOTBALL MIDFIELDER\"",
+          "\"ARGENTINA\"",
+          "\"JUAN CARLOS FALCÓN\"",
+          "\"19 NOVEMBER 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+            "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+          ],
+          "relation_texts": [
+            "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+            "link",
+            "FOOTBALL MIDFIELDER",
+            "ARGENTINA",
+            "JUAN CARLOS FALCÓN",
+            "19 NOVEMBER 1979"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b8233be96b9d63666f1f514b697b6f03",
+            "hyperedge_name": "<hyperedge>\"Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón is an Argentine football midfielder.\"",
+        "branch": "semantic",
+        "raw_score": 0.6771456003189087,
+        "hyperedge_text": "Juan Carlos Falcón is an Argentine football midfielder.",
+        "entity_ids": [
+          "\"MIDFIELDER\"",
+          "\"ARGENTINE\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Juan Carlos Falcón is an Argentine football midfielder.",
+            "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+          ],
+          "relation_texts": [
+            "Juan Carlos Falcón is an Argentine football midfielder.",
+            "link",
+            "MIDFIELDER",
+            "ARGENTINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3433f1763c91dab91589159fec510a13",
+            "hyperedge_name": "<hyperedge>\"Juan Carlos Falcón is an Argentine football midfielder.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"José Luis Falcón (born 19 July 1938) is a Spanish athlete.\"",
+        "branch": "semantic",
+        "raw_score": 0.6620379686355591,
+        "hyperedge_text": "José Luis Falcón (born 19 July 1938) is a Spanish athlete.",
+        "entity_ids": [
+          "\"JOSÉ LUIS FALCÓN\"",
+          "\"SPANISH ATHLETE\""
+        ],
+        "chunk_ids": [
+          "chunk-9ad60b5a5bf662dd3efc9a5804b7d4cd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "José Luis Falcón (born 19 July 1938) is a Spanish athlete.",
+            "José Luis Falcón José Luis Falcón( born 19 July 1938) is a Spanish athlete. He competed in the men's hammer throw at the 1960 Summer Olympics."
+          ],
+          "relation_texts": [
+            "José Luis Falcón (born 19 July 1938) is a Spanish athlete.",
+            "link",
+            "JOSÉ LUIS FALCÓN",
+            "SPANISH ATHLETE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-97bf0f60a3a926a3cd320aefc1f0cfd2",
+            "hyperedge_name": "<hyperedge>\"José Luis Falcón (born 19 July 1938) is a Spanish athlete.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"José Luis Falcón, born on 19 July 1938, is identified as an athlete from Spain.\"",
+        "branch": "semantic",
+        "raw_score": 0.6348588466644287,
+        "hyperedge_text": "José Luis Falcón, born on 19 July 1938, is identified as an athlete from Spain.",
+        "entity_ids": [
+          "\"JOSÉ LUIS FALCÓN\"",
+          "\"19 JULY 1938\""
+        ],
+        "chunk_ids": [
+          "chunk-9ad60b5a5bf662dd3efc9a5804b7d4cd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "José Luis Falcón, born on 19 July 1938, is identified as an athlete from Spain.",
+            "José Luis Falcón José Luis Falcón( born 19 July 1938) is a Spanish athlete. He competed in the men's hammer throw at the 1960 Summer Olympics."
+          ],
+          "relation_texts": [
+            "José Luis Falcón, born on 19 July 1938, is identified as an athlete from Spain.",
+            "link",
+            "JOSÉ LUIS FALCÓN",
+            "19 JULY 1938"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f547b4dfd49075e2a8e06c067e8dcb3e",
+            "hyperedge_name": "<hyperedge>\"José Luis Falcón, born on 19 July 1938, is identified as an athlete from Spain.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos was born on 19 January 1965 in Puente Castro, León.\"",
+        "branch": "semantic",
+        "raw_score": 0.5701988339424133,
+        "hyperedge_text": "Juan Carlos was born on 19 January 1965 in Puente Castro, León.",
+        "entity_ids": [
+          "\"SPANISH\"",
+          "\"19 JANUARY 1965\"",
+          "\"RETIRED FOOTBALLER\""
+        ],
+        "chunk_ids": [
+          "chunk-03aec89c561ffa20abbc2a8695ca4b9e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Juan Carlos was born on 19 January 1965 in Puente Castro, León.",
+            "Juan Carlos (footballer, born 1965) Juan Carlos Rodríguez Moreno( born 19 January 1965 in Puente Castro, León), known as Juan Carlos, is a Spanish retired footballer who played as a left back."
+          ],
+          "relation_texts": [
+            "Juan Carlos was born on 19 January 1965 in Puente Castro, León.",
+            "link",
+            "SPANISH",
+            "19 JANUARY 1965",
+            "RETIRED FOOTBALLER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2ee3913cb2692804b28be0e190b70a04",
+            "hyperedge_name": "<hyperedge>\"Juan Carlos was born on 19 January 1965 in Puente Castro, León.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Alberto Falcón (born 3 May 1970) is a Spanish fencer.\"",
+        "branch": "semantic",
+        "raw_score": 0.5683244466781616,
+        "hyperedge_text": "Alberto Falcón (born 3 May 1970) is a Spanish fencer.",
+        "entity_ids": [
+          "\"1992 SUMMER OLYMPICS\"",
+          "\"ALBERTO FALCÓN\"",
+          "\"2000 SUMMER OLYMPICS\"",
+          "\"3 MAY 1970\"",
+          "\"FENCER\"",
+          "\"SABRE EVENTS\""
+        ],
+        "chunk_ids": [
+          "chunk-e0fe83680c2e66e9a2abedd1fa1e9f4e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Alberto Falcón (born 3 May 1970) is a Spanish fencer.",
+            "Alberto Falcón Alberto Falcón( born 3 May 1970) is a Spanish fencer. He competed in the sabre events at the 1992 and 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Alberto Falcón (born 3 May 1970) is a Spanish fencer.",
+            "link",
+            "1992 SUMMER OLYMPICS",
+            "ALBERTO FALCÓN",
+            "2000 SUMMER OLYMPICS",
+            "3 MAY 1970",
+            "FENCER",
+            "SABRE EVENTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9fa3bf896a3b9f42e0a53d001a78ca00",
+            "hyperedge_name": "<hyperedge>\"Alberto Falcón (born 3 May 1970) is a Spanish fencer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Real was born on 15 March 1991.\"",
+        "branch": "semantic",
+        "raw_score": 0.5210703611373901,
+        "hyperedge_text": "Juan Carlos Real was born on 15 March 1991.",
+        "entity_ids": [
+          "\"15 MARCH 1991\""
+        ],
+        "chunk_ids": [
+          "chunk-8469fb180653c20dcea355710e1f7fa6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Juan Carlos Real was born on 15 March 1991.",
+            "Juan Carlos Real Juan Carlos Real Ruiz( born 15 March 1991), known as Juan Carlos, is a Spanish footballer who plays for SD Huesca as an attacking midfielder."
+          ],
+          "relation_texts": [
+            "Juan Carlos Real was born on 15 March 1991.",
+            "link",
+            "15 MARCH 1991"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a04197d3df6172902e47e43a4876ef2d",
+            "hyperedge_name": "<hyperedge>\"Juan Carlos Real was born on 15 March 1991.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born on 20 January 1988, Juan Carlos is a professional athlete who has committed his career to football.\"",
+        "branch": "semantic",
+        "raw_score": 0.4998343586921692,
+        "hyperedge_text": "Born on 20 January 1988, Juan Carlos is a professional athlete who has committed his career to football.",
+        "entity_ids": [
+          "\"20 JANUARY 1988\""
+        ],
+        "chunk_ids": [
+          "chunk-6e181e99a7edbdbfbcb2fa4afd5aec56"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born on 20 January 1988, Juan Carlos is a professional athlete who has committed his career to football.",
+            "Juan Carlos Martín Corral Juan Carlos Martín Corral( born 20 January 1988), known as Juan Carlos, is a Spanish professional footballer who plays for Girona FC as a goalkeeper."
+          ],
+          "relation_texts": [
+            "Born on 20 January 1988, Juan Carlos is a professional athlete who has committed his career to football.",
+            "link",
+            "20 JANUARY 1988"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-890784e4a4e221b71fb281c20c52e5a6",
+            "hyperedge_name": "<hyperedge>\"Born on 20 January 1988, Juan Carlos is a professional athlete who has committed his career to football.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Pérez Frías was born on 27 July 1956.\"",
+        "branch": "semantic",
+        "raw_score": 0.49688708782196045,
+        "hyperedge_text": "Juan Carlos Pérez Frías was born on 27 July 1956.",
+        "entity_ids": [
+          "\"27 JULY 1956\""
+        ],
+        "chunk_ids": [
+          "chunk-8154c0f03f423b322a614ee772fafb9f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Juan Carlos Pérez Frías was born on 27 July 1956.",
+            "Juan Carlos Pérez Frías Juan Carlos Pérez Frías( born 27 July 1956), known as Juan Carlos, is a Spanish former professional footballer who played as a midfielder."
+          ],
+          "relation_texts": [
+            "Juan Carlos Pérez Frías was born on 27 July 1956.",
+            "link",
+            "27 JULY 1956"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-162fdcbce5e06a3882885451cb1654ff",
+            "hyperedge_name": "<hyperedge>\"Juan Carlos Pérez Frías was born on 27 July 1956.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.\"",
+        "hyperedge_text": "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7323589324951172,
+        "fusion_score": 0.5464717864990235,
+        "entity_ids": [
+          "\"FOOTBALL MIDFIELDER\"",
+          "\"ARGENTINA\"",
+          "\"JUAN CARLOS FALCÓN\"",
+          "\"19 NOVEMBER 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "evidence_texts": [
+          "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+          "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.732359,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.546472
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón was born on 19 November 1979.\"",
+        "hyperedge_text": "Juan Carlos Falcón was born on 19 November 1979.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8206111192703247,
+        "fusion_score": 0.564122223854065,
+        "entity_ids": [
+          "\"19 NOVEMBER 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "evidence_texts": [
+          "Juan Carlos Falcón was born on 19 November 1979.",
+          "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.820611,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.564122
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón is an Argentine football midfielder.\"",
+        "hyperedge_text": "Juan Carlos Falcón is an Argentine football midfielder.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6771456003189087,
+        "fusion_score": 0.5354291200637817,
+        "entity_ids": [
+          "\"MIDFIELDER\"",
+          "\"ARGENTINE\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "evidence_texts": [
+          "Juan Carlos Falcón is an Argentine football midfielder.",
+          "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.677146,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535429
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5337122678756714,
+        "semantic_score": 0.2,
+        "fusion_score": 0.2534849071502686,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.533712,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.253485
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5235011577606201,
+        "semantic_score": 0.2,
+        "fusion_score": 0.24940046310424807,
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "evidence_texts": [
+          "His date of birth is significant as it contextualizes his career timeline.",
+          "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.523501,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.2494
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Was Angus Wagner born first?",
+    "retrieval_question": "Was Angus Wagner born first?",
+    "dependency_question_rewrite": {
+      "original_question": "Was Angus Wagner born first?",
+      "retrieval_question": "Was Angus Wagner born first?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"ANGUS WAGNER\"",
+          "\"RUGBY UNION\"",
+          "\"BRUMBIES\"",
+          "\"SUPER RUGBY\"",
+          "\"PROP\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+            "link",
+            "AUSTRALIA",
+            "ANGUS WAGNER",
+            "RUGBY UNION",
+            "BRUMBIES",
+            "SUPER RUGBY",
+            "PROP"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+        "entity_ids": [
+          "\"FOOTBALL MIDFIELDER\"",
+          "\"ARGENTINA\"",
+          "\"JUAN CARLOS FALCÓN\"",
+          "\"19 NOVEMBER 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+            "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+          ],
+          "relation_texts": [
+            "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+            "link",
+            "FOOTBALL MIDFIELDER",
+            "ARGENTINA",
+            "JUAN CARLOS FALCÓN",
+            "19 NOVEMBER 1979"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner was born on 30 October 1997 in Australia.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Angus Wagner was born on 30 October 1997 in Australia.",
+        "entity_ids": [
+          "\"30 OCTOBER 1997\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Angus Wagner was born on 30 October 1997 in Australia.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "Angus Wagner was born on 30 October 1997 in Australia.",
+            "link",
+            "30 OCTOBER 1997"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón was born on 19 November 1979.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Juan Carlos Falcón was born on 19 November 1979.",
+        "entity_ids": [
+          "\"19 NOVEMBER 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Juan Carlos Falcón was born on 19 November 1979.",
+            "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+          ],
+          "relation_texts": [
+            "Juan Carlos Falcón was born on 19 November 1979.",
+            "link",
+            "19 NOVEMBER 1979"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 21 or 23, 1941.\"",
+        "branch": "relation",
+        "raw_score": 0.45098841190338135,
+        "hyperedge_text": "He was born on December 21 or 23, 1941.",
+        "entity_ids": [
+          "\"1941\""
+        ],
+        "chunk_ids": [
+          "chunk-1d07ba113761624b0e78670c361833c7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 21 or 23, 1941.",
+            "Wee Willie Walker Willie Earl Walker( December 21 or 23, 1941 – November 19, 2019), known as Willie Walker or Wee Willie Walker, was an American soul and blues singer."
+          ],
+          "relation_texts": [
+            "He was born on December 21 or 23, 1941.",
+            "link",
+            "1941"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9b2c9a0afb290126f1e24e8b69108049",
+            "hyperedge_name": "<hyperedge>\"He was born on December 21 or 23, 1941.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 1 February 1966.\"",
+        "branch": "relation",
+        "raw_score": 0.4442213177680969,
+        "hyperedge_text": "He was born on 1 February 1966.",
+        "entity_ids": [
+          "\"1 FEBRUARY 1966\""
+        ],
+        "chunk_ids": [
+          "chunk-f3c77bb2afc73748b8784ae36d6eec21"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 1 February 1966.",
+            "Andrew Upton Andrew Upton( born 1 February 1966) is an Australian playwright, screenwriter, and director. He is the husband of actress Cate Blanchett."
+          ],
+          "relation_texts": [
+            "He was born on 1 February 1966.",
+            "link",
+            "1 FEBRUARY 1966"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9f1f994efe80a37519eeaa32da531008",
+            "hyperedge_name": "<hyperedge>\"He was born on 1 February 1966.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.4427105784416199,
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has the birth date of 1 November 1982.",
+            "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+          ],
+          "relation_texts": [
+            "He has the birth date of 1 November 1982.",
+            "link",
+            "1 NOVEMBER 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e7ccd25dfeb68bf5e59c3683e27f9a72",
+            "hyperedge_name": "<hyperedge>\"He has the birth date of 1 November 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 16, 1993.\"",
+        "branch": "relation",
+        "raw_score": 0.4370502829551697,
+        "hyperedge_text": "He was born on December 16, 1993.",
+        "entity_ids": [
+          "\"DECEMBER 16, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-2434daa5d2e639dffeeacdeae7136b7e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 16, 1993.",
+            "Michael Rector Michael Rector( born December 16, 1993) is an American football wide receiver who is currently a free agent of the National Football League. He played college football at Stanford."
+          ],
+          "relation_texts": [
+            "He was born on December 16, 1993.",
+            "link",
+            "DECEMBER 16, 1993"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd47ba46ad7b16c6fa6f60940ac4bafe",
+            "hyperedge_name": "<hyperedge>\"He was born on December 16, 1993.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"born 30 December 1986\"",
+        "branch": "relation",
+        "raw_score": 0.43475818634033203,
+        "hyperedge_text": "born 30 December 1986",
+        "entity_ids": [
+          "\"30 DECEMBER 1986\""
+        ],
+        "chunk_ids": [
+          "chunk-ff775504cf67541b9da0cc36aaafe92c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "born 30 December 1986",
+            "Alan Pownall Stephen Alan Fletcher Pownall( born 30 December 1986) is an English singer- songwriter and the husband of actress Gabriella Wilde."
+          ],
+          "relation_texts": [
+            "born 30 December 1986",
+            "link",
+            "30 DECEMBER 1986"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-29ec9775fe4e17981cfe174aa175550d",
+            "hyperedge_name": "<hyperedge>\"born 30 December 1986\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 2 June 1993.\"",
+        "branch": "relation",
+        "raw_score": 0.43442749977111816,
+        "hyperedge_text": "He was born on 2 June 1993.",
+        "entity_ids": [
+          "\"2 JUNE 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-9c5f2df531cc52bb3531203601fd3115"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 2 June 1993.",
+            "Alyaksey Vasilewski Alyaksey Vasilewski( born 2 June 1993) is a Belarusian professional footballer. As of 2018, he plays for Krumkachy Minsk."
+          ],
+          "relation_texts": [
+            "He was born on 2 June 1993.",
+            "link",
+            "2 JUNE 1993"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-49693bf166b768be106574d128878746",
+            "hyperedge_name": "<hyperedge>\"He was born on 2 June 1993.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 1 November 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.4335187077522278,
+        "hyperedge_text": "He was born on 1 November 1982.",
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 1 November 1982.",
+            "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+          ],
+          "relation_texts": [
+            "He was born on 1 November 1982.",
+            "link",
+            "1 NOVEMBER 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-22893a37eae7deff41ca63e1569daeaf",
+            "hyperedge_name": "<hyperedge>\"He was born on 1 November 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was April 1, 1883.\"",
+        "branch": "relation",
+        "raw_score": 0.43085888028144836,
+        "hyperedge_text": "His birth date was April 1, 1883.",
+        "entity_ids": [
+          "\"APRIL 1, 1883\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was April 1, 1883.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His birth date was April 1, 1883.",
+            "link",
+            "APRIL 1, 1883"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-513618e3e9a5db9731bf910947f84866",
+            "hyperedge_name": "<hyperedge>\"His birth date was April 1, 1883.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 15, 1972.\"",
+        "branch": "relation",
+        "raw_score": 0.42987358570098877,
+        "hyperedge_text": "He was born on December 15, 1972.",
+        "entity_ids": [
+          "\"DECEMBER 15, 1972\""
+        ],
+        "chunk_ids": [
+          "chunk-bf591100c972b8a0c2793f6e0bea6c96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 15, 1972.",
+            "Stuart Townsend Stuart Peter Townsend (born 15 December 1972) is an Irish actor. His most notable portrayals are of the characters Lestat de Lioncourt in the 2002 film adaptation of Anne Rice's \"Queen of the Damned\", and Dorian Gray in the 2003 film adaptation of Alan Moore's \"The League of Extraordinary Gentlemen\"."
+          ],
+          "relation_texts": [
+            "He was born on December 15, 1972.",
+            "link",
+            "DECEMBER 15, 1972"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8e0f26e5dfb7279726f227d33918efa7",
+            "hyperedge_name": "<hyperedge>\"He was born on December 15, 1972.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 7 December 1964.\"",
+        "branch": "relation",
+        "raw_score": 0.4287111163139343,
+        "hyperedge_text": "He was born on 7 December 1964.",
+        "entity_ids": [
+          "\"7 DECEMBER 1964\""
+        ],
+        "chunk_ids": [
+          "chunk-1fbccc1f31752fb4fb1421e959a5204c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 7 December 1964.",
+            "Joël Germain Joël Germain( born 7 December 1964) is a retired French football defender."
+          ],
+          "relation_texts": [
+            "He was born on 7 December 1964.",
+            "link",
+            "7 DECEMBER 1964"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-679864f8eef01a6649cb6c2c8a4f6035",
+            "hyperedge_name": "<hyperedge>\"He was born on 7 December 1964.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner was born on 30 October 1997 in Australia.\"",
+        "branch": "semantic",
+        "raw_score": 0.7300686836242676,
+        "hyperedge_text": "Angus Wagner was born on 30 October 1997 in Australia.",
+        "entity_ids": [
+          "\"30 OCTOBER 1997\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Angus Wagner was born on 30 October 1997 in Australia.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "Angus Wagner was born on 30 October 1997 in Australia.",
+            "link",
+            "30 OCTOBER 1997"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a809829971fda2fcb792731738f77935",
+            "hyperedge_name": "<hyperedge>\"Angus Wagner was born on 30 October 1997 in Australia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.\"",
+        "branch": "semantic",
+        "raw_score": 0.639581561088562,
+        "hyperedge_text": "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"ANGUS WAGNER\"",
+          "\"RUGBY UNION\"",
+          "\"BRUMBIES\"",
+          "\"SUPER RUGBY\"",
+          "\"PROP\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+            "link",
+            "AUSTRALIA",
+            "ANGUS WAGNER",
+            "RUGBY UNION",
+            "BRUMBIES",
+            "SUPER RUGBY",
+            "PROP"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4980e33dadb35f9a1842daf5ecf9ad6a",
+            "hyperedge_name": "<hyperedge>\"Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In May 2019, Angus Wagner was signed as a replacement player.\"",
+        "branch": "semantic",
+        "raw_score": 0.5969775915145874,
+        "hyperedge_text": "In May 2019, Angus Wagner was signed as a replacement player.",
+        "entity_ids": [
+          "\"REPLACEMENT PLAYER\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In May 2019, Angus Wagner was signed as a replacement player.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "In May 2019, Angus Wagner was signed as a replacement player.",
+            "link",
+            "REPLACEMENT PLAYER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cf4f1204fc8bdeb1f287f0a39963be91",
+            "hyperedge_name": "<hyperedge>\"In May 2019, Angus Wagner was signed as a replacement player.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner plays for the Brumbies in Super Rugby.\"",
+        "branch": "semantic",
+        "raw_score": 0.5302000045776367,
+        "hyperedge_text": "Angus Wagner plays for the Brumbies in Super Rugby.",
+        "entity_ids": [
+          "\"RUGBY UNION PLAYER\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Angus Wagner plays for the Brumbies in Super Rugby.",
+            "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+          ],
+          "relation_texts": [
+            "Angus Wagner plays for the Brumbies in Super Rugby.",
+            "link",
+            "RUGBY UNION PLAYER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a3b9298ab296094687d824b462760360",
+            "hyperedge_name": "<hyperedge>\"Angus Wagner plays for the Brumbies in Super Rugby.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton was the son of David, 7th Earl of Angus.\"",
+        "branch": "semantic",
+        "raw_score": 0.43418630957603455,
+        "hyperedge_text": "Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton was the son of David, 7th Earl of Angus.",
+        "entity_ids": [
+          "\"TITLE\"",
+          "\"ESTATES\"",
+          "\"ARCHIBALD DOUGLAS\"",
+          "\"DAVID DOUGLAS\""
+        ],
+        "chunk_ids": [
+          "chunk-b097e57c4ebee44d104458f3980cc5ac"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton was the son of David, 7th Earl of Angus.",
+            "Archibald Douglas, 8th Earl of Angus Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton( 15554 August 1588) was the son of David, 7th Earl of Angus. He succeeded to the title and estates in 1558, being brought up by his uncle, James Douglas, 4th Earl of Morton, a Presbyterian. In 1573 he was made a Privy Councillor and Sheriff of Berwickshire; in 1574 Lieutenant- General in Scotland; in 1577 Warden of the West Marches and Steward of Fife; and in 1578 Lieutenant- General of the realm. As a supporter of Morton and\" ultra- Protestant\" policy he was twice forced in exile in England."
+          ],
+          "relation_texts": [
+            "Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton was the son of David, 7th Earl of Angus.",
+            "link",
+            "TITLE",
+            "ESTATES",
+            "ARCHIBALD DOUGLAS",
+            "DAVID DOUGLAS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-be2c856c8ed24abe4c32bbd363870f32",
+            "hyperedge_name": "<hyperedge>\"Archibald Douglas, 8th Earl of Angus and 5th Earl of Morton was the son of David, 7th Earl of Angus.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in 1927, Doug Wendt represents a generation of early footballers in Australia.\"",
+        "branch": "semantic",
+        "raw_score": 0.4032975435256958,
+        "hyperedge_text": "Born in 1927, Doug Wendt represents a generation of early footballers in Australia.",
+        "entity_ids": [
+          "\"GENERATION OF EARLY FOOTBALLERS\""
+        ],
+        "chunk_ids": [
+          "chunk-fb18838a2ae860cc780a98874eeb8a27"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born in 1927, Doug Wendt represents a generation of early footballers in Australia.",
+            "Doug Wendt Doug Wendt( born 1927) is a former Australian association football player."
+          ],
+          "relation_texts": [
+            "Born in 1927, Doug Wendt represents a generation of early footballers in Australia.",
+            "link",
+            "GENERATION OF EARLY FOOTBALLERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dedd5b289ed04b40f709cf1ec8adf7c2",
+            "hyperedge_name": "<hyperedge>\"Born in 1927, Doug Wendt represents a generation of early footballers in Australia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was a daughter of George Douglas, Master of Angus, and sister to Archibald Douglas, 6th Earl of Angus.\"",
+        "branch": "semantic",
+        "raw_score": 0.4015125334262848,
+        "hyperedge_text": "She was a daughter of George Douglas, Master of Angus, and sister to Archibald Douglas, 6th Earl of Angus.",
+        "entity_ids": [
+          "\"GEORGE DOUGLAS\"",
+          "\"MASTER OF ANGUS\"",
+          "\"ARCHIBALD DOUGLAS\"",
+          "\"6TH EARL OF ANGUS\""
+        ],
+        "chunk_ids": [
+          "chunk-66eb4ddee9bc4be42446195b3206d344"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She was a daughter of George Douglas, Master of Angus, and sister to Archibald Douglas, 6th Earl of Angus.",
+            "John Lyon, 6th Lord Glamis John Lyon, 6th Lord Glamis( died 1528) was a Scottish nobleman. He was the second son of John Lyon, 4th Lord Glamis, and succeeded his brother as Lord Glamis in 1505. He married Janet Douglas( died 17 July 1537) Janet was falsely charged with witchcraft by King James V, and burned at the stake on Castle Hill, Edinburgh, Scotland. She was a daughter of George Douglas, Master of Angus, and sister to Archibald Douglas, 6th Earl of Angus. His son John Lyon, 7th Lord Glamis, was still a minor when the 6th Lord died in 1528. John was 16 years old and was witness to his mother being burned alive."
+          ],
+          "relation_texts": [
+            "She was a daughter of George Douglas, Master of Angus, and sister to Archibald Douglas, 6th Earl of Angus.",
+            "link",
+            "GEORGE DOUGLAS",
+            "MASTER OF ANGUS",
+            "ARCHIBALD DOUGLAS",
+            "6TH EARL OF ANGUS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-590744bd0b99c79b65dd1acde792be05",
+            "hyperedge_name": "<hyperedge>\"She was a daughter of George Douglas, Master of Angus, and sister to Archibald Douglas, 6th Earl of Angus.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As Lord Lieutenant of Angus from 1937, he played a critical role in Scottish nobility.\"",
+        "branch": "semantic",
+        "raw_score": 0.39466920495033264,
+        "hyperedge_text": "As Lord Lieutenant of Angus from 1937, he played a critical role in Scottish nobility.",
+        "entity_ids": [
+          "\"ANGUS\""
+        ],
+        "chunk_ids": [
+          "chunk-4696e8a930ffde400da343959b45e916"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As Lord Lieutenant of Angus from 1937, he played a critical role in Scottish nobility.",
+            "David Ogilvy, 12th Earl of Airlie Colonel David Lyulph Gore Wolseley Ogilvy, 12th and 7th Earl of Airlie (18 July 1893, Cahir, County Tipperary, Ireland – 28 December 1968) was a Scottish peer, soldier and courtier. He was the eldest son of David Ogilvy, 11th Earl of Airlie, and his wife, the former Lady Mabell Gore. He inherited his father's titles in 1900 at the age of six, and was one of the trainbearers to Mary of Teck at her coronation in 1911. He became a Representative Peer for Scotland in 1922, was appointed a Lord-in-waiting in Stanley Baldwin's government in 1926, and was made a Knight Commander of the Royal Victorian Order in 1929. In 1937, he became Lord Lieutenant of Angus and was appointed Lord Chamberlain to Queen Elizabeth in 1937. As a senior member of the royal household, he was a guest at the 1947 wedding of Princess Elizabeth and Philip Mountbatten, Duke of Edinbur..."
+          ],
+          "relation_texts": [
+            "As Lord Lieutenant of Angus from 1937, he played a critical role in Scottish nobility.",
+            "link",
+            "ANGUS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c55fca0e1ae3b58fea4bd98ba7c86182",
+            "hyperedge_name": "<hyperedge>\"As Lord Lieutenant of Angus from 1937, he played a critical role in Scottish nobility.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Agnes was from the lineage of Rudolf I, Duke of Saxe-Wittenberg.\"",
+        "branch": "semantic",
+        "raw_score": 0.3894514739513397,
+        "hyperedge_text": "Agnes was from the lineage of Rudolf I, Duke of Saxe-Wittenberg.",
+        "entity_ids": [
+          "\"LINEAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-aa88746ecb95477cc64a69278848aba6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Agnes was from the lineage of Rudolf I, Duke of Saxe-Wittenberg.",
+            "Bernhard IV, Prince of Anhalt-Bernburg Bernhard IV, Prince of Anhalt- Bernburg( died 28 June 1354) was a German prince of the House of Ascania and ruler of the principality of Anhalt- Bernburg. He was the eldest son of Bernhard III, Prince of Anhalt- Bernburg, by his first wife Agnes, daughter of Rudolf I, Duke of Saxe- Wittenberg and Elector of Saxony."
+          ],
+          "relation_texts": [
+            "Agnes was from the lineage of Rudolf I, Duke of Saxe-Wittenberg.",
+            "link",
+            "LINEAGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b10bf1025fd8a2e4a7acd4de0a5ebb0b",
+            "hyperedge_name": "<hyperedge>\"Agnes was from the lineage of Rudolf I, Duke of Saxe-Wittenberg.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Ogilvy married Princess Alexandra of Kent in 1963.\"",
+        "branch": "semantic",
+        "raw_score": 0.3862455487251282,
+        "hyperedge_text": "Angus Ogilvy married Princess Alexandra of Kent in 1963.",
+        "entity_ids": [
+          "\"1963\"",
+          "\"MARRIAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-56260ee06408911fa4ff7853abf94444"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Angus Ogilvy married Princess Alexandra of Kent in 1963.",
+            "David Ogilvy, 11th Earl of Airlie Lt.-Col. David Stanley William Ogilvy, 11th Earl of Airlie (20 January 1856 – 11 June 1900) was a Scottish peer. He was born at Florence, Italy. He was the third child and elder son of David Ogilvy, 10th Earl of Airlie, and The Hon. Henrietta Blanche Stanley. In 1963, his grandson Angus Ogilvy married Princess Alexandra of Kent, a granddaughter of King George V."
+          ],
+          "relation_texts": [
+            "Angus Ogilvy married Princess Alexandra of Kent in 1963.",
+            "link",
+            "1963",
+            "MARRIAGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-865b108c399c6e90b779339d3bb22cf7",
+            "hyperedge_name": "<hyperedge>\"Angus Ogilvy married Princess Alexandra of Kent in 1963.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner was born on 30 October 1997 in Australia.\"",
+        "hyperedge_text": "Angus Wagner was born on 30 October 1997 in Australia.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.7300686836242676,
+        "fusion_score": 0.7460137367248536,
+        "entity_ids": [
+          "\"30 OCTOBER 1997\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "evidence_texts": [
+          "Angus Wagner was born on 30 October 1997 in Australia.",
+          "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.730069,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.746014
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.\"",
+        "hyperedge_text": "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.639581561088562,
+        "fusion_score": 0.7279163122177125,
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"ANGUS WAGNER\"",
+          "\"RUGBY UNION\"",
+          "\"BRUMBIES\"",
+          "\"SUPER RUGBY\"",
+          "\"PROP\""
+        ],
+        "chunk_ids": [
+          "chunk-77087371cc877ceb6982ad0d467d314e"
+        ],
+        "evidence_texts": [
+          "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+          "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.639582,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.727916
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.\"",
+        "hyperedge_text": "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.25,
+        "fusion_score": 0.6500000000000001,
+        "entity_ids": [
+          "\"FOOTBALL MIDFIELDER\"",
+          "\"ARGENTINA\"",
+          "\"JUAN CARLOS FALCÓN\"",
+          "\"19 NOVEMBER 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "evidence_texts": [
+          "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+          "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.65
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón was born on 19 November 1979.\"",
+        "hyperedge_text": "Juan Carlos Falcón was born on 19 November 1979.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.25,
+        "fusion_score": 0.6500000000000001,
+        "entity_ids": [
+          "\"19 NOVEMBER 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-d858eaad37a51e21a3548afbfb5a9b26"
+        ],
+        "evidence_texts": [
+          "Juan Carlos Falcón was born on 19 November 1979.",
+          "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.65
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in 1927, Doug Wendt represents a generation of early footballers in Australia.\"",
+        "hyperedge_text": "Born in 1927, Doug Wendt represents a generation of early footballers in Australia.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4032975435256958,
+        "fusion_score": 0.4806595087051392,
+        "entity_ids": [
+          "\"GENERATION OF EARLY FOOTBALLERS\""
+        ],
+        "chunk_ids": [
+          "chunk-fb18838a2ae860cc780a98874eeb8a27"
+        ],
+        "evidence_texts": [
+          "Born in 1927, Doug Wendt represents a generation of early footballers in Australia.",
+          "Doug Wendt Doug Wendt( born 1927) is a former Australian association football player."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.403298,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.48066
+        }
+      }
+    ]
+  }
+]

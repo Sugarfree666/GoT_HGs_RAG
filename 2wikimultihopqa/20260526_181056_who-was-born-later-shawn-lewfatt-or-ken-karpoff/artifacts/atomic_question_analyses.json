@@ -1,0 +1,170 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Shawn Lewfatt born?",
+    "retrieval_question": "When was Shawn Lewfatt born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Shawn Lewfatt born?",
+      "retrieval_question": "When was Shawn Lewfatt born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Shawn Lewfatt"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "the birth date of a person",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Ken Karpoff born?",
+    "retrieval_question": "When was Ken Karpoff born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Ken Karpoff born?",
+      "retrieval_question": "When was Ken Karpoff born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Ken Karpoff"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "the birth date of a person",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the birth date of Shawn Lewfatt?",
+    "retrieval_question": "What is the birth date of Shawn Lewfatt?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth date of Shawn Lewfatt?",
+      "retrieval_question": "What is the birth date of Shawn Lewfatt?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "When was Shawn Lewfatt born?",
+        "answer": "11 March 1977",
+        "confidence": 0.95,
+        "answer_type": "date",
+        "reasoning_summary": "Multiple pieces of evidence explicitly state Shawn Lewfatt was born on 11 March 1977, directly supporting the answer.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).\"",
+          "<hyperedge>\"Shawn Lewfatt was born on 11 March 1977.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).\"",
+            "fusion_score": 0.5411293148994446,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Shawn Lewfatt, born 11 March 1977, is a former Australian rules footballer who played for Essendon in the Australian Football League (AFL).",
+              "Shawn Lewfatt Shawn Lewfatt( born 11 March 1977) is a former Australian rules footballer who played for Essendon in the Australian Football League( AFL). He was drafted by the Essendon Football Club in the 1994 National Draft at pick 28. He played three games with Essendon during the 1995 season."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Shawn Lewfatt was born on 11 March 1977.\"",
+            "fusion_score": 0.5626482009887696,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Shawn Lewfatt was born on 11 March 1977.",
+              "Shawn Lewfatt Shawn Lewfatt( born 11 March 1977) is a former Australian rules footballer who played for Essendon in the Australian Football League( AFL). He was drafted by the Essendon Football Club in the 1994 National Draft at pick 28. He played three games with Essendon during the 1995 season."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Shawn Lewfatt played for Essendon in the Australian Football League (AFL).\"",
+            "fusion_score": 0.5159375190734864,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Shawn Lewfatt played for Essendon in the Australian Football League (AFL).",
+              "Shawn Lewfatt Shawn Lewfatt( born 11 March 1977) is a former Australian rules footballer who played for Essendon in the Australian Football League( AFL). He was drafted by the Essendon Football Club in the 1994 National Draft at pick 28. He played three games with Essendon during the 1995 season."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "When was Ken Karpoff born?",
+        "answer": "January 14, 1956",
+        "confidence": 1.0,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence explicitly states that Ken Karpoff was born on January 14, 1956.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Ken Karpoff was born on January 14, 1956.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Ken Karpoff is a Canadian former biathlete who competed in the 1988 Winter Olympics.\"",
+            "fusion_score": 0.5312222003936768,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Ken Karpoff is a Canadian former biathlete who competed in the 1988 Winter Olympics.",
+              "Ken Karpoff Ken Karpoff( born 14 January 1956) is a Canadian former biathlete who competed in the 1988 Winter Olympics."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Ken Karpoff was born on January 14, 1956.\"",
+            "fusion_score": 0.564874529838562,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Ken Karpoff was born on January 14, 1956.",
+              "Ken Karpoff Ken Karpoff( born 14 January 1956) is a Canadian former biathlete who competed in the 1988 Winter Olympics."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Ken Karpoff is a former athlete who participated in the Winter Olympics.\"",
+            "fusion_score": 0.5269665718078613,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Ken Karpoff is a former athlete who participated in the Winter Olympics.",
+              "Ken Karpoff Ken Karpoff( born 14 January 1956) is a Canadian former biathlete who competed in the 1988 Winter Olympics."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Shawn Lewfatt"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    }
+  }
+]

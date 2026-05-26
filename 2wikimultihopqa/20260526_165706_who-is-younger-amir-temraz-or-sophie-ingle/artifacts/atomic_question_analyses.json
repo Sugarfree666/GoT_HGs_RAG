@@ -1,0 +1,171 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the birth date of Amir Temraz?",
+    "retrieval_question": "What is the birth date of Amir Temraz?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth date of Amir Temraz?",
+      "retrieval_question": "What is the birth date of Amir Temraz?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Amir Temraz"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the birth date of Sophie Ingle?",
+    "retrieval_question": "What is the birth date of Sophie Ingle?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth date of Sophie Ingle?",
+      "retrieval_question": "What is the birth date of Sophie Ingle?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Sophie Ingle"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the birth date of Amir Temraz?",
+    "retrieval_question": "What is the birth date of Amir Temraz?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth date of Amir Temraz?",
+      "retrieval_question": "What is the birth date of Amir Temraz?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "What is the birth date of Amir Temraz?",
+        "answer": "12 August 1977",
+        "confidence": 1.0,
+        "answer_type": "date",
+        "reasoning_summary": "The birth date of Amir Temraz is explicitly stated in the evidence: 'Amir Temraz is a rower born on 12 August 1977.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\"",
+            "fusion_score": 0.5358126163482666,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Amir Temraz is a rower born on 12 August 1977.",
+              "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\"",
+            "fusion_score": 0.5260195255279542,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+              "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Amir Temraz competed at the Olympics representing Egypt.\"",
+            "fusion_score": 0.5037561416625977,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Amir Temraz competed at the Olympics representing Egypt.",
+              "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "What is the birth date of Sophie Ingle?",
+        "answer": "2 September 1991",
+        "confidence": 1.0,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence clearly states that Sophie Ingle was born on 2 September 1991.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Sophie Ingle was born on 2 September 1991.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Sophie Ingle was born on 2 September 1991.\"",
+            "fusion_score": 0.5572396993637085,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Sophie Ingle was born on 2 September 1991.",
+              "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.\"",
+            "fusion_score": 0.5288554191589356,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+              "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Sophie Ingle is a Welsh footballer.\"",
+            "fusion_score": 0.5087552905082703,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Sophie Ingle is a Welsh footballer.",
+              "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Amir Temraz"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    }
+  }
+]

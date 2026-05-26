@@ -1,0 +1,25 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the life span of Louis Ncamiso Ndlovu?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the life span of Raymond Balze?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the life span of Louis Ncamiso Ndlovu?",
+    "dependencies": [
+      "q1",
+      "q2"
+    ],
+    "metadata": {
+      "operator": "COMPARE_GREATER"
+    }
+  }
+]

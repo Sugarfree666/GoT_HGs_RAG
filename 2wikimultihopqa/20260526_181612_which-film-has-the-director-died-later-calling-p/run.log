@@ -1,0 +1,13 @@
+2026-05-26 18:16:12,511 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 18:17:36,563 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 18:17:36,563 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 18:17:52,823 | INFO | Starting HyperBranch pipeline for question: Which film has the director died later, Calling Philo Vance or The Witch'S Curse?
+2026-05-26 18:17:52,823 | INFO | Executing atomic DAG with 5 node(s)
+2026-05-26 18:17:59,146 | INFO | Atomic retrieval returned 23 hits for question=Who is the director of Calling Philo Vance?
+2026-05-26 18:18:29,453 | INFO | Atomic retrieval returned 23 hits for question=Who is the director of The Witch'S Curse?
+2026-05-26 18:18:33,942 | INFO | Rewrote retrieval question for q2: When did the director of Calling Philo Vance die? -> When did William Clemens die?
+2026-05-26 18:18:38,624 | INFO | Atomic retrieval returned 29 hits for question=When did William Clemens die?
+2026-05-26 18:18:45,098 | INFO | Rewrote retrieval question for q4: When did the director of The Witch'S Curse die? -> When did Riccardo Freda die?
+2026-05-26 18:18:50,527 | INFO | Atomic retrieval returned 26 hits for question=When did Riccardo Freda die?
+2026-05-26 18:19:01,288 | INFO | Atomic retrieval returned 32 hits for question=When did the director of Calling Philo Vance die?
+2026-05-26 18:19:46,371 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_181612_which-film-has-the-director-died-later-calling-p

@@ -1,0 +1,737 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Pit And The Pendulum (1913 Film)?",
+    "analysis": {
+      "entities": [
+        "The Pit And The Pendulum",
+        "1913 Film"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work released in a specific year",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Pit and the Pendulum (1991 film) is a 1991 American horror film directed by Stuart Gordon and based on the eponymous short story by Edgar Allan Poe.\"",
+        "hyperedge_text": "The Pit and the Pendulum (1991 film) is a 1991 American horror film directed by Stuart Gordon and based on the eponymous short story by Edgar Allan Poe.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.636570930480957,
+        "fusion_score": 0.32731418609619145,
+        "entity_ids": [
+          "\"EDGAR ALLAN POE\"",
+          "\"THE PIT AND THE PENDULUM\"",
+          "\"1991 AMERICAN HORROR FILM\"",
+          "\"STUART GORDON\""
+        ],
+        "chunk_ids": [
+          "chunk-ad334dce04d32e6528d832f470e0b54a"
+        ],
+        "evidence_texts": [
+          "The Pit and the Pendulum (1991 film) is a 1991 American horror film directed by Stuart Gordon and based on the eponymous short story by Edgar Allan Poe.",
+          "The Pit and the Pendulum (1991 film) The Pit and the Pendulum( released on DVD in the United States as The Inquisitor) is a 1991 American horror film directed by Stuart Gordon and based on the eponymous short story by Edgar Allan Poe. The film is an amalgamation of the aforementioned story with Poe's\" The Cask of Amontillado\", and it also appropriates the anecdote of\" The Sword of Damocles\", reassigning it to the character of Torquemada."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.636571,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.327314
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Pit and the Pendulum is a three-reel film adapted from the Edgar Allan Poe short story of the same name.\"",
+        "hyperedge_text": "The Pit and the Pendulum is a three-reel film adapted from the Edgar Allan Poe short story of the same name.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.6133570671081543,
+        "fusion_score": 0.32267141342163086,
+        "entity_ids": [
+          "\"EDGAR ALLAN POE\"",
+          "\"THE PIT AND THE PENDULUM\""
+        ],
+        "chunk_ids": [
+          "chunk-ec4003fcb02665cd3830d28e1059358d"
+        ],
+        "evidence_texts": [
+          "The Pit and the Pendulum is a three-reel film adapted from the Edgar Allan Poe short story of the same name.",
+          "The Pit and the Pendulum (1913 film) The Pit and the Pendulum is a three-reel film adapted from the Edgar Allan Poe short story of the same name, directed, and produced by pioneering French filmmaker Alice Guy-Blaché through her American company Solax Studios in 1913."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.613357,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.322671
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film, written by Manfred R. Köhler, is based on Edgar Allan Poe's 1842 short story 'The Pit and the Pendulum'.\"",
+        "hyperedge_text": "The film, written by Manfred R. Köhler, is based on Edgar Allan Poe's 1842 short story 'The Pit and the Pendulum'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.6043964624404907,
+        "fusion_score": 0.32087929248809816,
+        "entity_ids": [
+          "\"EDGAR ALLAN POE\"",
+          "\"THE PIT AND THE PENDULUM\"",
+          "\"MANFRED R. KÖHLER\""
+        ],
+        "chunk_ids": [
+          "chunk-86e0e981571fc5fd366aeb2a1e81bd1f"
+        ],
+        "evidence_texts": [
+          "The film, written by Manfred R. Köhler, is based on Edgar Allan Poe's 1842 short story 'The Pit and the Pendulum'.",
+          "The Blood Demon The Blood Demon( Die Schlangengrube und das Pendel in West Germany), also known as The Torture Chamber of Dr. Sadism, The Snake Pit and the Pendulum, and Castle of the Walking Dead, is a 1967 West German horror film directed by Harald Reinl and starring Christopher Lee, Karin Dor, and Lex Barker. The film, written by Manfred R. Köhler, is based on Edgar Allan Poe's 1842 short story\" The Pit and the Pendulum\" and concerns the saga of Count Regula( Lee) who, after being drawn and quartered for murdering 12 maidens, returns to life seeking revenge. The film was advertised in Rhode Island newspapers as Crimson Demon, due to a practice at the time of deleting the word\" Blood\" from film titles. It was shot at the Bavaria Studios in Munich. The film's sets were designed by the art directors Gabriel Pellon and Rolf Zehetbauer."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.604396,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.320879
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edgar Allan Poe's The Pit and the Pendulum is a 2009 horror erotic thriller film directed by David DeCoteau.\"",
+        "hyperedge_text": "Edgar Allan Poe's The Pit and the Pendulum is a 2009 horror erotic thriller film directed by David DeCoteau.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5742964744567871,
+        "fusion_score": 0.31485929489135744,
+        "entity_ids": [
+          "\"THE PIT AND THE PENDULUM\"",
+          "\"DAVID DECOTEAU\"",
+          "\"LORIELLE NEW\"",
+          "\"STEPHEN HANSEN\"",
+          "\"BART VOITILA\""
+        ],
+        "chunk_ids": [
+          "chunk-5d4411e3527bfed0a96e9f36815c8eeb"
+        ],
+        "evidence_texts": [
+          "Edgar Allan Poe's The Pit and the Pendulum is a 2009 horror erotic thriller film directed by David DeCoteau.",
+          "The Pit and the Pendulum (2009 film) Edgar Allan Poe's The Pit and the Pendulum is a 2009 horror erotic thriller film directed by David DeCoteau and starring Lorielle New, Stephen Hansen and Bart Voitila. It is retelling of Edgar Allan Poe's classic\" The Pit and the Pendulum\" with a new twist."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.574296,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.314859
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Peter Levin is an American director of film, television and theatre.\"",
+        "hyperedge_text": "Peter Levin is an American director of film, television and theatre.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4,
+        "fusion_score": 0.48000000000000004,
+        "entity_ids": [
+          "\"TELEVISION\"",
+          "\"FILM\"",
+          "\"PETER LEVIN\"",
+          "\"AMERICAN DIRECTOR\"",
+          "\"THEATRE\""
+        ],
+        "chunk_ids": [
+          "chunk-425fedcc281170fa2bbce5b09593b868"
+        ],
+        "evidence_texts": [
+          "Peter Levin is an American director of film, television and theatre.",
+          "Peter Levin Peter Levin is an American director of film, television and theatre."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.4,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.48
+        }
+      }
+    ],
+    "answer": "Alice Guy-Blaché",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'The Pit and the Pendulum (1913 film) is directed and produced by pioneering French filmmaker Alice Guy-Blaché.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Pit and the Pendulum (1991 film) is a 1991 American horror film directed by Stuart Gordon and based on the eponymous short story by Edgar Allan Poe.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the nationality of the director?",
+    "analysis": {
+      "entities": [
+        "director"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a director?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"He is a French film director.\"",
+        "hyperedge_text": "He is a French film director.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.49593299627304077,
+        "semantic_score": 0.47432321310043335,
+        "fusion_score": 0.693237841129303,
+        "entity_ids": [
+          "\"FRENCH FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-764f7758d85c8d66368f02b13bf31956"
+        ],
+        "evidence_texts": [
+          "He is a French film director.",
+          "Jean-Marie Poiré Jean-Marie Poiré ; born 10 July 1945) is a French film director, and screenwriter. He is the son of the producer Alain Poiré."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.495933,
+          "S": 0.474323,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.693238
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"This film was created by a British director.\"",
+        "hyperedge_text": "This film was created by a British director.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.48867714405059814,
+        "semantic_score": 0.4846891760826111,
+        "fusion_score": 0.6924086928367615,
+        "entity_ids": [
+          "\"BRITISH DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-d0df18cac844ebf0de713301fdcd3d6f"
+        ],
+        "evidence_texts": [
+          "This film was created by a British director.",
+          "The Kingdom of Twilight The Kingdom of Twilight is a 1929 film directed by British author and explorer Alexander MacDonald."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.488677,
+          "S": 0.484689,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.692409
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is a director, screenwriter and producer known for various film projects.\"",
+        "hyperedge_text": "He is a director, screenwriter and producer known for various film projects.",
+        "branch_support": [
+          "anchor",
+          "relation"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.4806130528450012,
+        "semantic_score": 0.5,
+        "fusion_score": 0.6922452211380005,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-b4ed25c2fae2f870d9ec38eac14a3a3b"
+        ],
+        "evidence_texts": [
+          "He is a director, screenwriter and producer known for various film projects.",
+          "Daniel Lind Lagerlöf Daniel Lind Lagerlöf (6 February 1969 – missing since 6 October 2011) is a Swedish director, screenwriter and producer who is presumed dead."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.480613,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.692245
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is a film director and producer based in New York City.\"",
+        "hyperedge_text": "He is a film director and producer based in New York City.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.4878920912742615,
+        "semantic_score": 0.4761728048324585,
+        "fusion_score": 0.6903913974761964,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"PRODUCER\"",
+          "\"NEW YORK CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-cfb99730ad7097d52d8b955423877457"
+        ],
+        "evidence_texts": [
+          "He is a film director and producer based in New York City.",
+          "Boaz Yakin Boaz Yakin (Hebrew: בועז יכין, born June 20, 1966) is an American screenwriter, film director, and producer based in New York City. He has written screenplays to films like \"The RookieA Price Above Rubies\", , and \"Now You See Me\", and has directed the 2000 sports drama \"Remember the Titans\" and the 2012 Jason Statham action film \"Safe\". As a producer he has collaborated frequently with filmmaker Eli Roth and served as executive producer for the first two entries in the \"Hostel\" franchise."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.487892,
+          "S": 0.476173,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.690391
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced by a notable director known for his unique style.\"",
+        "hyperedge_text": "The film was produced by a notable director known for his unique style.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.4818724989891052,
+        "semantic_score": 0.4623017907142639,
+        "fusion_score": 0.6852093577384949,
+        "entity_ids": [
+          "\"NOTABLE DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-c941044d9eea8f24da132557f170b690"
+        ],
+        "evidence_texts": [
+          "The film was produced by a notable director known for his unique style.",
+          "Two Sinners Two Sinners is a 1935 film directed by Arthur Lubin."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.481872,
+          "S": 0.462302,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.685209
+        }
+      }
+    ],
+    "answer": "French",
+    "confidence": 0.95,
+    "reasoning_summary": "The evidence states that he is a French film director, which directly answers the question about his nationality.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"He is a French film director.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the director of The Pit And The Pendulum (1913 Film)?",
+    "analysis": {
+      "entities": [
+        "Alice Guy-Blaché"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Alice Guy or Alice Guy-Blaché (July 1, 1873 – March 24, 1968) was a French pioneer filmmaker, active from the late 19th century, and one of the very first to make a narrative fiction film.\"",
+        "hyperedge_text": "Alice Guy or Alice Guy-Blaché (July 1, 1873 – March 24, 1968) was a French pioneer filmmaker, active from the late 19th century, and one of the very first to make a narrative fiction film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7070506811141968,
+        "fusion_score": 0.5414101362228394,
+        "entity_ids": [
+          "\"FRENCH\"",
+          "\"ALICE GUY-BLACHÉ\"",
+          "\"NARRATIVE FICTION FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-fabe627c22fb234cd9e6a34bbf1a2af6"
+        ],
+        "evidence_texts": [
+          "Alice Guy or Alice Guy-Blaché (July 1, 1873 – March 24, 1968) was a French pioneer filmmaker, active from the late 19th century, and one of the very first to make a narrative fiction film.",
+          "Alice Guy-Blaché Alice Guy or Alice Guy- Blaché( July 1, 1873 – March 24, 1968) was a French pioneer filmmaker, active from the late 19th century, and one of the very first to make a narrative fiction film. She was the first woman to direct a film. From 1896 to 1906, she was probably the only female filmmaker in the world. She experimented with Gaumont's Chronophone sync- sound system, and with color- tinting, interracial casting, and special effects. She was artistic director and a co-founder of Solax Studios in Flushing, New York. In 1912, Solax invested$ 100,000 for a new studio in Fort Lee, New Jersey, the center of American filmmaking prior to the establishment of Hollywood. That year, she made the film\" A Fool and His Money\", probably the first to have an all- African- American cast. The film is now at the National Center for Film and Video Preservation at the American Film Inst..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.707051,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.54141
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed and produced by pioneering French filmmaker Alice Guy-Blaché through her American company Solax Studios in 1913.\"",
+        "hyperedge_text": "The film was directed and produced by pioneering French filmmaker Alice Guy-Blaché through her American company Solax Studios in 1913.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6200326681137085,
+        "fusion_score": 0.5240065336227417,
+        "entity_ids": [
+          "\"1913\"",
+          "\"ALICE GUY-BLACHÉ\"",
+          "\"SOLAX STUDIOS\""
+        ],
+        "chunk_ids": [
+          "chunk-ec4003fcb02665cd3830d28e1059358d"
+        ],
+        "evidence_texts": [
+          "The film was directed and produced by pioneering French filmmaker Alice Guy-Blaché through her American company Solax Studios in 1913.",
+          "The Pit and the Pendulum (1913 film) The Pit and the Pendulum is a three-reel film adapted from the Edgar Allan Poe short story of the same name, directed, and produced by pioneering French filmmaker Alice Guy-Blaché through her American company Solax Studios in 1913."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.620033,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524007
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Alice Guy-Blaché was active from the late 19th century.\"",
+        "hyperedge_text": "Alice Guy-Blaché was active from the late 19th century.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6768564581871033,
+        "fusion_score": 0.5353712916374207,
+        "entity_ids": [
+          "\"LATE 19TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-fabe627c22fb234cd9e6a34bbf1a2af6"
+        ],
+        "evidence_texts": [
+          "Alice Guy-Blaché was active from the late 19th century.",
+          "Alice Guy-Blaché Alice Guy or Alice Guy- Blaché( July 1, 1873 – March 24, 1968) was a French pioneer filmmaker, active from the late 19th century, and one of the very first to make a narrative fiction film. She was the first woman to direct a film. From 1896 to 1906, she was probably the only female filmmaker in the world. She experimented with Gaumont's Chronophone sync- sound system, and with color- tinting, interracial casting, and special effects. She was artistic director and a co-founder of Solax Studios in Flushing, New York. In 1912, Solax invested$ 100,000 for a new studio in Fort Lee, New Jersey, the center of American filmmaking prior to the establishment of Hollywood. That year, she made the film\" A Fool and His Money\", probably the first to have an all- African- American cast. The film is now at the National Center for Film and Video Preservation at the American Film Inst..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.676856,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535371
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Alice Guy-Blaché was probably the only female filmmaker in the world from 1896 to 1906.\"",
+        "hyperedge_text": "Alice Guy-Blaché was probably the only female filmmaker in the world from 1896 to 1906.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6516035795211792,
+        "fusion_score": 0.5303207159042359,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-fabe627c22fb234cd9e6a34bbf1a2af6"
+        ],
+        "evidence_texts": [
+          "Alice Guy-Blaché was probably the only female filmmaker in the world from 1896 to 1906.",
+          "Alice Guy-Blaché Alice Guy or Alice Guy- Blaché( July 1, 1873 – March 24, 1968) was a French pioneer filmmaker, active from the late 19th century, and one of the very first to make a narrative fiction film. She was the first woman to direct a film. From 1896 to 1906, she was probably the only female filmmaker in the world. She experimented with Gaumont's Chronophone sync- sound system, and with color- tinting, interracial casting, and special effects. She was artistic director and a co-founder of Solax Studios in Flushing, New York. In 1912, Solax invested$ 100,000 for a new studio in Fort Lee, New Jersey, the center of American filmmaking prior to the establishment of Hollywood. That year, she made the film\" A Fool and His Money\", probably the first to have an all- African- American cast. The film is now at the National Center for Film and Video Preservation at the American Film Inst..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.651604,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530321
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Alice Guy-Blaché is recognized as one of the first female filmmakers in history.\"",
+        "hyperedge_text": "Alice Guy-Blaché is recognized as one of the first female filmmakers in history.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.63670414686203,
+        "fusion_score": 0.527340829372406,
+        "entity_ids": [
+          "\"FEMALE FILMMAKERS\""
+        ],
+        "chunk_ids": [
+          "chunk-ec4003fcb02665cd3830d28e1059358d"
+        ],
+        "evidence_texts": [
+          "Alice Guy-Blaché is recognized as one of the first female filmmakers in history.",
+          "The Pit and the Pendulum (1913 film) The Pit and the Pendulum is a three-reel film adapted from the Edgar Allan Poe short story of the same name, directed, and produced by pioneering French filmmaker Alice Guy-Blaché through her American company Solax Studios in 1913."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.636704,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527341
+        }
+      }
+    ],
+    "answer": "French",
+    "confidence": 0.9,
+    "reasoning_summary": "Alice Guy-Blaché, the director of The Pit And The Pendulum (1913 Film), is identified as a pioneering French filmmaker.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Alice Guy or Alice Guy-Blaché (July 1, 1873 – March 24, 1968) was a French pioneer filmmaker, active from the late 19th century, and one of the very first to make a narrative fiction film.\"",
+      "<hyperedge>\"The film was directed and produced by pioneering French filmmaker Alice Guy-Blaché through her American company Solax Studios in 1913.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the nationality of the director?",
+    "analysis": {
+      "entities": [],
+      "relations": [
+        "nationality of the director"
+      ],
+      "relation_query": "What is the nationality of a film director?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"He is a French film director.\"",
+        "hyperedge_text": "He is a French film director.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5278286337852478,
+        "semantic_score": 0.47432321310043335,
+        "fusion_score": 0.30599609613418577,
+        "entity_ids": [
+          "\"FRENCH FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-764f7758d85c8d66368f02b13bf31956"
+        ],
+        "evidence_texts": [
+          "He is a French film director.",
+          "Jean-Marie Poiré Jean-Marie Poiré ; born 10 July 1945) is a French film director, and screenwriter. He is the son of the producer Alain Poiré."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.527829,
+          "S": 0.474323,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.305996
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"This film was created by a British director.\"",
+        "hyperedge_text": "This film was created by a British director.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.502506673336029,
+        "semantic_score": 0.4846891760826111,
+        "fusion_score": 0.29794050455093385,
+        "entity_ids": [
+          "\"BRITISH DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-d0df18cac844ebf0de713301fdcd3d6f"
+        ],
+        "evidence_texts": [
+          "This film was created by a British director.",
+          "The Kingdom of Twilight The Kingdom of Twilight is a 1929 film directed by British author and explorer Alexander MacDonald."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.502507,
+          "S": 0.484689,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.297941
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is a film director and producer based in New York City.\"",
+        "hyperedge_text": "He is a film director and producer based in New York City.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5056779980659485,
+        "semantic_score": 0.4761728048324585,
+        "fusion_score": 0.2975057601928711,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"PRODUCER\"",
+          "\"NEW YORK CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-cfb99730ad7097d52d8b955423877457"
+        ],
+        "evidence_texts": [
+          "He is a film director and producer based in New York City.",
+          "Boaz Yakin Boaz Yakin (Hebrew: בועז יכין, born June 20, 1966) is an American screenwriter, film director, and producer based in New York City. He has written screenplays to films like \"The RookieA Price Above Rubies\", , and \"Now You See Me\", and has directed the 2000 sports drama \"Remember the Titans\" and the 2012 Jason Statham action film \"Safe\". As a producer he has collaborated frequently with filmmaker Eli Roth and served as executive producer for the first two entries in the \"Hostel\" franchise."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.505678,
+          "S": 0.476173,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.297506
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker.\"",
+        "hyperedge_text": "The film was directed by a notable filmmaker.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5008804202079773,
+        "semantic_score": 0.463249146938324,
+        "fusion_score": 0.29300199747085576,
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-878081a5191725d702602749081a77c4"
+        ],
+        "evidence_texts": [
+          "The film was directed by a notable filmmaker.",
+          "California Winter California Winter is an American drama film from 2012."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.50088,
+          "S": 0.463249,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.293002
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Kenneth Branagh was born in Northern Ireland, which is an important aspect of his identity as a filmmaker.\"",
+        "hyperedge_text": "Kenneth Branagh was born in Northern Ireland, which is an important aspect of his identity as a filmmaker.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48859426379203796,
+        "semantic_score": 0.4756411612033844,
+        "fusion_score": 0.29056593775749207,
+        "entity_ids": [
+          "\"NORTHERN IRELAND\""
+        ],
+        "chunk_ids": [
+          "chunk-494ed679721d046de36db04fb68e63f6"
+        ],
+        "evidence_texts": [
+          "Kenneth Branagh was born in Northern Ireland, which is an important aspect of his identity as a filmmaker.",
+          "Kenneth Branagh Sir Kenneth Charles Branagh (born 10 December 1960) is a Northern Irish actor, director, film producer and screenwriter. Branagh trained at the Royal Academy of Dramatic Art in London; in 2015 he succeeded Richard Attenborough as its president. He has both directed and starred in several film adaptations of William Shakespeare's plays, including \"Henry V\" (1989) (for which he was nominated for the Academy Awards for Best Actor and Best Director), \"Much Ado About Nothing\" (1993), \"Othello\" (1995), \"Hamlet\" (1996) (for which he was nominated for the Academy Award for Best Adapted Screenplay), \"Love's Labour's Lost\" (2000), and \"As You Like It\" (2006). Branagh has starred in numerous other films and television series including \"Fortunes of War\" (1987), Woody Allen's \" Celebrity\" (1998), \"Wild Wild West\" (1999), as the voice of Miguel in \"The Road to El Dorado\" (2000), as..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.488594,
+          "S": 0.475641,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.290566
+        }
+      }
+    ],
+    "answer": "French",
+    "confidence": 0.9,
+    "reasoning_summary": "The director of The Pit And The Pendulum (1913 Film), Alice Guy-Blaché, is identified as a pioneering French filmmaker.",
+    "used_dependencies": [
+      "q2",
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"He is a French film director.\""
+    ]
+  }
+]

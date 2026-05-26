@@ -1,0 +1,288 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the producer of the film?",
+    "retrieval_question": "Who is the producer of the film?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the producer of the film?",
+      "retrieval_question": "Who is the producer of the film?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "the film"
+      ],
+      "relations": [
+        "is the producer of"
+      ],
+      "relation_query": "who is the producer of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the producer of the film?",
+    "retrieval_question": "What is the age of the producer of the film?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the producer of the film?",
+      "retrieval_question": "What is the age of the producer of the film?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the producer of the film?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence indicates that the film was co-produced by multiple producers, but does not specify any names.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The film was co-produced by multiple producers, but specific names were not mentioned.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The film was co-produced by multiple producers, but specific names were not mentioned.\"",
+            "fusion_score": 0.7069180727005006,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film was co-produced by multiple producers, but specific names were not mentioned.",
+              "Golmaal Again Golmaal Again is a 2017 Indian Hindi- language supernatural action comedy film co-produced and directed by Rohit Shetty, and written by Sajid- Farhad and Yunus Sajawal. The film stars Ajay Devgn, Arshad Warsi, Tusshar Kapoor, Kunal Khemu, Shreyas Talpade, Parineeti Chopra, Tabu, Johnny Lever, Prakash Raj and Neil Nitin Mukesh in the lead roles while Mukesh Tiwari, Sanjay Mishra, Vrajesh Hirjee, Murali Sharma, Vijay Patkar, Uday Tikekar, Sachin Khedekar, Ashwini Kalsekar are featured in supporting roles and Nana Patekar makes a special appearance as himself. Golmaal Again is the fourth installment of the Golmaal franchise. Production of the film began in July 2016. Chopra signed to play the female lead after Kareena Kapoor opted out of the film because of pregnancy. Principal photography took place from March to July 2017. Produced on a budget of, the film was theatricall..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Isle of Man Film is now using its experience in the film industry to work with the public-private partnership, Isle of Media.\"",
+            "fusion_score": 0.7000000000000001,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Isle of Man Film is now using its experience in the film industry to work with the public-private partnership, Isle of Media.",
+              "Isle of Man Film Isle of Man Film is a regional screen agency, part of Isle of Man Government ’s Department of Economic Development. They drive inward investment in relation to film and the creative industries. Since 1995 Isle of Man Film has built a worldwide reputation, having co-financed and co-produced over 100 feature film and television dramas which have all filmed on the Isle of Man. They are one of the busiest areas of film production in the British Isles. Isle of Man Film offers a package of services for film producers and production companies. Loans and equity investment, a wealth of natural locations, a talented crew base, experienced facilities and services companies, together with a film- friendly Government. Isle of Man Film commits funding support to micro-budget projects, under the banner of the Mannin Shorts scheme, an educational platform aimed at providing Isle of M..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Sam Newfield's ability to work on various projects and genres made him a significant figure in the film industry.\"",
+            "fusion_score": 0.7000000000000001,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Sam Newfield's ability to work on various projects and genres made him a significant figure in the film industry.",
+              "Sam Newfield Sam Newfield, born Samuel Neufeld,( December 6, 1899- November 10, 1964), also known as Sherman Scott or Peter Stewart, was an American B-movie director, one of the most prolific in American film history —he is credited with directing over 250 feature films in a career which began during the silent era and ended in 1958. In addition to his staggering feature output, he also directed one- and two- reel comedy shorts, training films, industrial films, TV episodes and pretty much anything anyone would pay him for. Because of this massive output—he would sometimes direct more than 20 films in a single year —he has been called the most prolific director of the sound era. Many of Newfield's films were made for PRC Pictures. This was a film production company headed by his brother Sigmund Neufeld. The films PRC produced were low- budget productions, the majority being westerns,..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [],
+      "relations": [
+        "age of the producer"
+      ],
+      "relation_query": "What is the age of a person who produced a film?",
+      "answer_type": "number"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the age of the producer of film?",
+    "retrieval_question": "What is the age of the producer of film?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the producer of film?",
+      "retrieval_question": "What is the age of the producer of film?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the producer of the film?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence indicates that the film was co-produced by multiple producers, but does not specify any names.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The film was co-produced by multiple producers, but specific names were not mentioned.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The film was co-produced by multiple producers, but specific names were not mentioned.\"",
+            "fusion_score": 0.7069180727005006,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film was co-produced by multiple producers, but specific names were not mentioned.",
+              "Golmaal Again Golmaal Again is a 2017 Indian Hindi- language supernatural action comedy film co-produced and directed by Rohit Shetty, and written by Sajid- Farhad and Yunus Sajawal. The film stars Ajay Devgn, Arshad Warsi, Tusshar Kapoor, Kunal Khemu, Shreyas Talpade, Parineeti Chopra, Tabu, Johnny Lever, Prakash Raj and Neil Nitin Mukesh in the lead roles while Mukesh Tiwari, Sanjay Mishra, Vrajesh Hirjee, Murali Sharma, Vijay Patkar, Uday Tikekar, Sachin Khedekar, Ashwini Kalsekar are featured in supporting roles and Nana Patekar makes a special appearance as himself. Golmaal Again is the fourth installment of the Golmaal franchise. Production of the film began in July 2016. Chopra signed to play the female lead after Kareena Kapoor opted out of the film because of pregnancy. Principal photography took place from March to July 2017. Produced on a budget of, the film was theatricall..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Isle of Man Film is now using its experience in the film industry to work with the public-private partnership, Isle of Media.\"",
+            "fusion_score": 0.7000000000000001,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Isle of Man Film is now using its experience in the film industry to work with the public-private partnership, Isle of Media.",
+              "Isle of Man Film Isle of Man Film is a regional screen agency, part of Isle of Man Government ’s Department of Economic Development. They drive inward investment in relation to film and the creative industries. Since 1995 Isle of Man Film has built a worldwide reputation, having co-financed and co-produced over 100 feature film and television dramas which have all filmed on the Isle of Man. They are one of the busiest areas of film production in the British Isles. Isle of Man Film offers a package of services for film producers and production companies. Loans and equity investment, a wealth of natural locations, a talented crew base, experienced facilities and services companies, together with a film- friendly Government. Isle of Man Film commits funding support to micro-budget projects, under the banner of the Mannin Shorts scheme, an educational platform aimed at providing Isle of M..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Sam Newfield's ability to work on various projects and genres made him a significant figure in the film industry.\"",
+            "fusion_score": 0.7000000000000001,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Sam Newfield's ability to work on various projects and genres made him a significant figure in the film industry.",
+              "Sam Newfield Sam Newfield, born Samuel Neufeld,( December 6, 1899- November 10, 1964), also known as Sherman Scott or Peter Stewart, was an American B-movie director, one of the most prolific in American film history —he is credited with directing over 250 feature films in a career which began during the silent era and ended in 1958. In addition to his staggering feature output, he also directed one- and two- reel comedy shorts, training films, industrial films, TV episodes and pretty much anything anyone would pay him for. Because of this massive output—he would sometimes direct more than 20 films in a single year —he has been called the most prolific director of the sound era. Many of Newfield's films were made for PRC Pictures. This was a film production company headed by his brother Sigmund Neufeld. The films PRC produced were low- budget productions, the majority being westerns,..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [],
+      "relations": [
+        "age of the producer"
+      ],
+      "relation_query": "What is the age of a producer of a film?",
+      "answer_type": "number"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the producer of the film?",
+    "retrieval_question": "What is the age of the producer of the film?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the producer of the film?",
+      "retrieval_question": "What is the age of the producer of the film?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "What is the age of the producer of the film?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "answer_type": "number",
+        "reasoning_summary": "The producer of the film is not specified in the evidence, making it impossible to determine their age.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The film was produced by Film Age.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The film was produced by Film Age.\"",
+            "fusion_score": 0.3316133737564087,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film was produced by Film Age.",
+              "Kumari Mon Kumari Mon( 1962) Bengali film directed by Chitrarath. The screenplay of the film was written by Ritwik Ghatak. The film was produced by\" Film Age\" and the music director was Jyotirindra Moitra."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.\"",
+            "fusion_score": 0.3041438698768616,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.",
+              "The Demise of Herman Durer The Demise of Herman Durer( Dutch:\" De Verwording van Herman Dürer\") is a 1979 Dutch film directed by Leon de Winter."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film was produced in 1928.\"",
+            "fusion_score": 0.29701982736587523,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film was produced in 1928.",
+              "The Exploits of the Emden The Exploits of the Emden is a 1928 silent Australian film about the Battle of Cocos; the World War I naval battle between Australian cruiser and German cruiser. It consists of footage from a 1926 German film,\" Our Emden\", with additional sequences shot in Australia by director Ken G. Hall. Only part of the film survives today."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q3",
+        "question": "What is the age of the producer of film?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "answer_type": "number",
+        "reasoning_summary": "The evidence does not specify the name of the producer, making it impossible to determine their age.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The film was produced by Film Age.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The film was produced by Film Age.\"",
+            "fusion_score": 0.33467565774917607,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film was produced by Film Age.",
+              "Kumari Mon Kumari Mon( 1962) Bengali film directed by Chitrarath. The screenplay of the film was written by Ritwik Ghatak. The film was produced by\" Film Age\" and the music director was Jyotirindra Moitra."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.\"",
+            "fusion_score": 0.29649555683135986,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.",
+              "The Demise of Herman Durer The Demise of Herman Durer( Dutch:\" De Verwording van Herman Dürer\") is a 1979 Dutch film directed by Leon de Winter."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Additionally, he is a producer of films.\"",
+            "fusion_score": 0.3211513956387838,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "Additionally, he is a producer of films.",
+              "Perry Bhandal Perry Bhandal( born 12 January 1968) is a British film director, screenwriter, and producer of the films\" Interview with a Hitman\"&'' and author of _prelude a collection of short stories and artwork."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Film Age"
+      ],
+      "relations": [
+        "age of the producer"
+      ],
+      "relation_query": "What is the age of the producer of a film produced by an organization?",
+      "answer_type": "number"
+    }
+  }
+]

@@ -1,0 +1,547 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Guiomar Novaes born?",
+    "analysis": {
+      "entities": [
+        "Guiomar Novaes"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "the birth date of a person",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations.\"",
+        "hyperedge_text": "Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7628660202026367,
+        "fusion_score": 0.5525732040405273,
+        "entity_ids": [
+          "\"TWENTIETH CENTURY\"",
+          "\"GUIOMAR NOVAES\"",
+          "\"BRAZILIAN PIANIST\"",
+          "\"INDIVIDUALITY OF TONE\"",
+          "\"PHRASING\"",
+          "\"SINGING LINE\"",
+          "\"NUANCED APPROACH\""
+        ],
+        "chunk_ids": [
+          "chunk-0612defb63fe0af6eca6ecae76414205"
+        ],
+        "evidence_texts": [
+          "Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations.",
+          "Guiomar Novaes Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations. She is widely considered one of the great pianists of the twentieth century."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.762866,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.552573
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing.\"",
+        "hyperedge_text": "Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.748708963394165,
+        "fusion_score": 0.549741792678833,
+        "entity_ids": [
+          "\"FEBRUARY 28, 1895\"",
+          "\"MARCH 7, 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-0612defb63fe0af6eca6ecae76414205"
+        ],
+        "evidence_texts": [
+          "Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing.",
+          "Guiomar Novaes Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations. She is widely considered one of the great pianists of the twentieth century."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.748709,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549742
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guiomar Novaes is widely considered one of the great pianists of the twentieth century.\"",
+        "hyperedge_text": "Guiomar Novaes is widely considered one of the great pianists of the twentieth century.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6146430373191833,
+        "fusion_score": 0.5229286074638367,
+        "entity_ids": [
+          "\"INTERPRETATIONS\"",
+          "\"INDIVIDUALITY\"",
+          "\"GREAT PIANISTS\""
+        ],
+        "chunk_ids": [
+          "chunk-0612defb63fe0af6eca6ecae76414205"
+        ],
+        "evidence_texts": [
+          "Guiomar Novaes is widely considered one of the great pianists of the twentieth century.",
+          "Guiomar Novaes Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations. She is widely considered one of the great pianists of the twentieth century."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.614643,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522929
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5337122678756714,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.28015157381693523,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.533712,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.280152
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5235011577606201,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.27606712977091474,
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "evidence_texts": [
+          "His date of birth is significant as it contextualizes his career timeline.",
+          "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.523501,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.276067
+        }
+      }
+    ],
+    "answer": "February 28, 1895",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that Guiomar Novaes was born on February 28, 1895.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Abdul Nasser Al-Sayegh born?",
+    "analysis": {
+      "entities": [
+        "Abdul Nasser Al-Sayegh"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "the birth date of a person",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Abdul Nasser Al-Sayegh, born 19 February 1959, is a Kuwaiti fencer who competed at the 1976 and 1984 Summer Olympics.\"",
+        "hyperedge_text": "Abdul Nasser Al-Sayegh, born 19 February 1959, is a Kuwaiti fencer who competed at the 1976 and 1984 Summer Olympics.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7228221893310547,
+        "fusion_score": 0.544564437866211,
+        "entity_ids": [
+          "\"1984 SUMMER OLYMPICS\"",
+          "\"1976 SUMMER OLYMPICS\"",
+          "\"1996 SUMMER OLYMPICS\"",
+          "\"KUWAITI FENCER\"",
+          "\"ABDUL NASSER AL-SAYEGH\""
+        ],
+        "chunk_ids": [
+          "chunk-793de58da8c2dd579003dcb50a231aa2"
+        ],
+        "evidence_texts": [
+          "Abdul Nasser Al-Sayegh, born 19 February 1959, is a Kuwaiti fencer who competed at the 1976 and 1984 Summer Olympics.",
+          "Abdul Nasser Al-Sayegh Abdul Nasser Al- Sayegh( born 19 February 1959) is a Kuwaiti fencer. He competed at the 1976 and 1984 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.722822,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.544564
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdul Nasser Al-Sayegh was born on 19 February 1959.\"",
+        "hyperedge_text": "Abdul Nasser Al-Sayegh was born on 19 February 1959.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8383148908615112,
+        "fusion_score": 0.5676629781723023,
+        "entity_ids": [
+          "\"19 FEBRUARY 1959\""
+        ],
+        "chunk_ids": [
+          "chunk-793de58da8c2dd579003dcb50a231aa2"
+        ],
+        "evidence_texts": [
+          "Abdul Nasser Al-Sayegh was born on 19 February 1959.",
+          "Abdul Nasser Al-Sayegh Abdul Nasser Al- Sayegh( born 19 February 1959) is a Kuwaiti fencer. He competed at the 1976 and 1984 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.838315,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.567663
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdul Nasser Al-Sayegh is a Kuwaiti fencer.\"",
+        "hyperedge_text": "Abdul Nasser Al-Sayegh is a Kuwaiti fencer.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5996009111404419,
+        "fusion_score": 0.5199201822280884,
+        "entity_ids": [
+          "\"KUWAIT\""
+        ],
+        "chunk_ids": [
+          "chunk-793de58da8c2dd579003dcb50a231aa2"
+        ],
+        "evidence_texts": [
+          "Abdul Nasser Al-Sayegh is a Kuwaiti fencer.",
+          "Abdul Nasser Al-Sayegh Abdul Nasser Al- Sayegh( born 19 February 1959) is a Kuwaiti fencer. He competed at the 1976 and 1984 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.599601,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51992
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5337122678756714,
+        "semantic_score": 0.2,
+        "fusion_score": 0.2534849071502686,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.533712,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.253485
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5235011577606201,
+        "semantic_score": 0.2,
+        "fusion_score": 0.24940046310424807,
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "evidence_texts": [
+          "His date of birth is significant as it contextualizes his career timeline.",
+          "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.523501,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.2494
+        }
+      }
+    ],
+    "answer": "19 February 1959",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that Abdul Nasser Al-Sayegh was born on 19 February 1959.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Abdul Nasser Al-Sayegh was born on 19 February 1959.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the birth date of Guiomar Novaes?",
+    "analysis": {
+      "entities": [
+        "Guiomar Novaes"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations.\"",
+        "hyperedge_text": "Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7369914054870605,
+        "fusion_score": 0.5473982810974122,
+        "entity_ids": [
+          "\"TWENTIETH CENTURY\"",
+          "\"GUIOMAR NOVAES\"",
+          "\"BRAZILIAN PIANIST\"",
+          "\"INDIVIDUALITY OF TONE\"",
+          "\"PHRASING\"",
+          "\"SINGING LINE\"",
+          "\"NUANCED APPROACH\""
+        ],
+        "chunk_ids": [
+          "chunk-0612defb63fe0af6eca6ecae76414205"
+        ],
+        "evidence_texts": [
+          "Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations.",
+          "Guiomar Novaes Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations. She is widely considered one of the great pianists of the twentieth century."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.736991,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.547398
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing.\"",
+        "hyperedge_text": "Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7251381874084473,
+        "fusion_score": 0.5450276374816895,
+        "entity_ids": [
+          "\"FEBRUARY 28, 1895\"",
+          "\"MARCH 7, 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-0612defb63fe0af6eca6ecae76414205"
+        ],
+        "evidence_texts": [
+          "Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing.",
+          "Guiomar Novaes Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations. She is widely considered one of the great pianists of the twentieth century."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.725138,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.545028
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guiomar Novaes is widely considered one of the great pianists of the twentieth century.\"",
+        "hyperedge_text": "Guiomar Novaes is widely considered one of the great pianists of the twentieth century.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.581411600112915,
+        "fusion_score": 0.516282320022583,
+        "entity_ids": [
+          "\"INTERPRETATIONS\"",
+          "\"INDIVIDUALITY\"",
+          "\"GREAT PIANISTS\""
+        ],
+        "chunk_ids": [
+          "chunk-0612defb63fe0af6eca6ecae76414205"
+        ],
+        "evidence_texts": [
+          "Guiomar Novaes is widely considered one of the great pianists of the twentieth century.",
+          "Guiomar Novaes Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations. She is widely considered one of the great pianists of the twentieth century."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.581412,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516282
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5045208930969238,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30180835723876953,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "evidence_texts": [
+          "His date of birth is January 30, 1871.",
+          "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.504521,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.301808
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48608091473579407,
+        "semantic_score": 0.5,
+        "fusion_score": 0.29443236589431765,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.486081,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.294432
+        }
+      }
+    ],
+    "answer": "February 28, 1895",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that Guiomar Novaes was born on February 28, 1895.",
+    "used_dependencies": [
+      "q1",
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Guiomar Novaes (February 28, 1895 - March 7, 1979) was a Brazilian pianist noted for individuality of tone and phrasing, singing line, and a subtle and nuanced approach to her interpretations.\""
+    ]
+  }
+]

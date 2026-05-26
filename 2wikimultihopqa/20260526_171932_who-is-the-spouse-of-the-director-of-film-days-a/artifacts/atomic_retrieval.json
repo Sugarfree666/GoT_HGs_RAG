@@ -1,0 +1,1583 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of the film Days And Hours?",
+    "retrieval_question": "Who is the director of the film Days And Hours?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of the film Days And Hours?",
+      "retrieval_question": "Who is the director of the film Days And Hours?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+        "entity_ids": [
+          "\"KOD AMIDŽE IDRIZA\"",
+          "\"PJER ŽALICA\"",
+          "\"NAMIK KABIL\"",
+          "\"DAYS AND HOURS\""
+        ],
+        "chunk_ids": [
+          "chunk-9a1aa6f2b9c7e4bc018743d029544886"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+            "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+          ],
+          "relation_texts": [
+            "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+            "link",
+            "KOD AMIDŽE IDRIZA",
+            "PJER ŽALICA",
+            "NAMIK KABIL",
+            "DAYS AND HOURS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker.\"",
+        "branch": "relation",
+        "raw_score": 0.5412876605987549,
+        "hyperedge_text": "The film was directed by a notable filmmaker.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-878081a5191725d702602749081a77c4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker.",
+            "California Winter California Winter is an American drama film from 2012."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c8914e7c16c6931f8328589f436a636c",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.5262852311134338,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Robert G. Vignola is the director of the film.\"",
+        "branch": "relation",
+        "raw_score": 0.5214390754699707,
+        "hyperedge_text": "Robert G. Vignola is the director of the film.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-5a83efe0d439c48988a77409ef3ba477"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Robert G. Vignola is the director of the film.",
+            "The World and His Wife The World and His Wife is a lost American 1920 silent drama film produced by Cosmopolitan Productions and distributed through Paramount Pictures. Directed by Robert G. Vignola, the film was based on the 1908 Broadway play of the same name by Charles Frederic Nirdlinger, which was adapted from the Spanish language play\" El Gran Galeoto\" by Jose Echegaray Y Eizaguirre. The film stars Alma Rubens, Montagu Love, and Pedro de Cordoba and Broadway actress Margaret Dale in her film debut. The story was later filmed at MGM as\" Lovers\"( 1927)."
+          ],
+          "relation_texts": [
+            "Robert G. Vignola is the director of the film."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6e6cf14061c435a4695e70acad82dff7",
+            "hyperedge_name": "<hyperedge>\"Robert G. Vignola is the director of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision is reflected in the cinematography of the film.\"",
+        "branch": "relation",
+        "raw_score": 0.5214198231697083,
+        "hyperedge_text": "The director's vision is reflected in the cinematography of the film.",
+        "entity_ids": [
+          "\"CINEMATOGRAPHY\""
+        ],
+        "chunk_ids": [
+          "chunk-875d0ddc97498458b33924bd007cede5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director's vision is reflected in the cinematography of the film.",
+            "Tahaan Tahaan – A Boy With a Grenade is an Indian Hindi- language drama film by Santosh Sivan. The film is based on the life of a young boy and his pet donkey. It is a fable- like journey of the eponymous eight- year- old boy, whose life revolves around the pursuit to find real purpose in his little world. The film stars Purav Bhandare as the young boy. Anupam Kher, Sarika, Rahul Bose, Rahul Khanna and Victor Banerjee form the rest of the cast. It was filmed on location in Jammu and Kashmir."
+          ],
+          "relation_texts": [
+            "The director's vision is reflected in the cinematography of the film.",
+            "link",
+            "CINEMATOGRAPHY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a6e2e2c5bab166ecb5cc3d5ab325c087",
+            "hyperedge_name": "<hyperedge>\"The director's vision is reflected in the cinematography of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\"",
+        "branch": "relation",
+        "raw_score": 0.5194759368896484,
+        "hyperedge_text": "The director's vision shaped the film's narrative style and storytelling.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"NARRATIVE STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-bc89e6fb4b1d4bc13f12b778e185493c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director's vision shaped the film's narrative style and storytelling.",
+            "The Law and Mr. Lee The Law and Mr Lee is a 2003 American TV film."
+          ],
+          "relation_texts": [
+            "The director's vision shaped the film's narrative style and storytelling.",
+            "link",
+            "DIRECTOR",
+            "NARRATIVE STYLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1f7ac9a08a885fa2e8df00bc09ea825c",
+            "hyperedge_name": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced by a notable director known for his unique style.\"",
+        "branch": "relation",
+        "raw_score": 0.5123361349105835,
+        "hyperedge_text": "The film was produced by a notable director known for his unique style.",
+        "entity_ids": [
+          "\"NOTABLE DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-c941044d9eea8f24da132557f170b690"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was produced by a notable director known for his unique style.",
+            "Two Sinners Two Sinners is a 1935 film directed by Arthur Lubin."
+          ],
+          "relation_texts": [
+            "The film was produced by a notable director known for his unique style.",
+            "link",
+            "NOTABLE DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e0d9ea7b735ff5e23618a784dd155c83",
+            "hyperedge_name": "<hyperedge>\"The film was produced by a notable director known for his unique style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The involvement of directors Slavko Vorkapich and Harlan Thompson contributed to the film's unique direction.\"",
+        "branch": "relation",
+        "raw_score": 0.5058163404464722,
+        "hyperedge_text": "The involvement of directors Slavko Vorkapich and Harlan Thompson contributed to the film's unique direction.",
+        "entity_ids": [
+          "\"UNIQUE DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-4a77f792e139979bfee8a0a4524ebaf4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The involvement of directors Slavko Vorkapich and Harlan Thompson contributed to the film's unique direction.",
+            "The Past of Mary Holmes The Past of Mary Holmes is a 1933 American pre-Code drama film, directed by Slavko Vorkapich and Harlan Thompson, and released by RKO. The film is a remake of the silent film\" The Goose Woman\"( 1925), which is based on a short story by Rex Beach, partly based on the Hall- Mills murder case."
+          ],
+          "relation_texts": [
+            "The involvement of directors Slavko Vorkapich and Harlan Thompson contributed to the film's unique direction.",
+            "link",
+            "UNIQUE DIRECTION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f884ae5cc601abeb6e00cb94e32729c0",
+            "hyperedge_name": "<hyperedge>\"The involvement of directors Slavko Vorkapich and Harlan Thompson contributed to the film's unique direction.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is a director, screenwriter and producer known for various film projects.\"",
+        "branch": "relation",
+        "raw_score": 0.5025501251220703,
+        "hyperedge_text": "He is a director, screenwriter and producer known for various film projects.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-b4ed25c2fae2f870d9ec38eac14a3a3b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is a director, screenwriter and producer known for various film projects.",
+            "Daniel Lind Lagerlöf Daniel Lind Lagerlöf (6 February 1969 – missing since 6 October 2011) is a Swedish director, screenwriter and producer who is presumed dead."
+          ],
+          "relation_texts": [
+            "He is a director, screenwriter and producer known for various film projects.",
+            "link",
+            "DIRECTOR",
+            "SCREENWRITER",
+            "PRODUCER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d75ab289592ffe69ca7fee2248128966",
+            "hyperedge_name": "<hyperedge>\"He is a director, screenwriter and producer known for various film projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Tom Forman.\"",
+        "branch": "relation",
+        "raw_score": 0.49891719222068787,
+        "hyperedge_text": "The film is directed by Tom Forman.",
+        "entity_ids": [
+          "\"TOM FORMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-d873a9df2c83145a29b9828e32ce3e24"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed by Tom Forman.",
+            "The People vs. Nancy Preston The People vs. Nancy Preston is a 1925 American silent drama film directed by Tom Forman and starring Marguerite De La Motte, John Bowers and Frankie Darro."
+          ],
+          "relation_texts": [
+            "The film is directed by Tom Forman.",
+            "link",
+            "TOM FORMAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0397d9fd65744a8e3e1cc7b69e497929",
+            "hyperedge_name": "<hyperedge>\"The film is directed by Tom Forman.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker known for his work in the genre.\"",
+        "branch": "relation",
+        "raw_score": 0.49830126762390137,
+        "hyperedge_text": "The film was directed by a notable filmmaker known for his work in the genre.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-6e25006195b0898fe74a70b73996ec78"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker known for his work in the genre.",
+            "The Guns and the Fury The Guns and the Fury is a 1981 film starring Peter Graves and Cameron Mitchell."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker known for his work in the genre.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-48c9abe99558440a7384f0ae0ee35cd7",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker known for his work in the genre.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\"",
+        "branch": "semantic",
+        "raw_score": 0.5013720989227295,
+        "hyperedge_text": "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+        "entity_ids": [
+          "\"KOD AMIDŽE IDRIZA\"",
+          "\"PJER ŽALICA\"",
+          "\"NAMIK KABIL\"",
+          "\"DAYS AND HOURS\""
+        ],
+        "chunk_ids": [
+          "chunk-9a1aa6f2b9c7e4bc018743d029544886"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+            "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+          ],
+          "relation_texts": [
+            "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+            "link",
+            "KOD AMIDŽE IDRIZA",
+            "PJER ŽALICA",
+            "NAMIK KABIL",
+            "DAYS AND HOURS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-da50fc91f4f8f9a704d6d39ddb27c598",
+            "hyperedge_name": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.\"",
+        "branch": "semantic",
+        "raw_score": 0.4968322515487671,
+        "hyperedge_text": "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.",
+        "entity_ids": [
+          "\"2004\"",
+          "\"BOSNIAN FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-9a1aa6f2b9c7e4bc018743d029544886"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.",
+            "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+          ],
+          "relation_texts": [
+            "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.",
+            "link",
+            "2004",
+            "BOSNIAN FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7ea09152d1c7be7c8782a5bb008246b6",
+            "hyperedge_name": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Robert Hayes.\"",
+        "branch": "semantic",
+        "raw_score": 0.4903984069824219,
+        "hyperedge_text": "The film is directed by Robert Hayes.",
+        "entity_ids": [
+          "\"POST APOCALYPTIC FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-c4e3c22edefb287acb0dd1b31ba7de5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed by Robert Hayes.",
+            "She-Wolves of the Wasteland She- Wolves of the Wasteland, also known as Phoenix the Warrior and She Wolves of the Wasteland, is a 1988 American post apocalyptic film directed by Robert Hayes and starring Persis Khambatta, Kathleen Kinmont and Peggy McIntaggart."
+          ],
+          "relation_texts": [
+            "The film is directed by Robert Hayes.",
+            "link",
+            "POST APOCALYPTIC FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9342b57b0a7b966d5b6259ffbc011ef3",
+            "hyperedge_name": "<hyperedge>\"The film is directed by Robert Hayes.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Day and Night is a 2004 Swedish drama film directed by Simon Staho.\"",
+        "branch": "semantic",
+        "raw_score": 0.4853636622428894,
+        "hyperedge_text": "Day and Night is a 2004 Swedish drama film directed by Simon Staho.",
+        "entity_ids": [
+          "\"SWEDEN\"",
+          "\"2004\"",
+          "\"DAY AND NIGHT\"",
+          "\"SIMON STAHO\""
+        ],
+        "chunk_ids": [
+          "chunk-48ae8fd22d2887405c100d21f462f80a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Day and Night is a 2004 Swedish drama film directed by Simon Staho.",
+            "Day and Night (2004 Swedish film) Day and Night is a 2004 Swedish drama film directed by Simon Staho."
+          ],
+          "relation_texts": [
+            "Day and Night is a 2004 Swedish drama film directed by Simon Staho.",
+            "link",
+            "SWEDEN",
+            "2004",
+            "DAY AND NIGHT",
+            "SIMON STAHO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a3609259547e5190464d1a5d9466b390",
+            "hyperedge_name": "<hyperedge>\"Day and Night is a 2004 Swedish drama film directed by Simon Staho.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Day and Night was released in 2004, showcasing a narrative centered around human experiences.\"",
+        "branch": "semantic",
+        "raw_score": 0.474104106426239,
+        "hyperedge_text": "The film Day and Night was released in 2004, showcasing a narrative centered around human experiences.",
+        "entity_ids": [
+          "\"NARRATIVE\"",
+          "\"HUMAN EXPERIENCES\""
+        ],
+        "chunk_ids": [
+          "chunk-48ae8fd22d2887405c100d21f462f80a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Day and Night was released in 2004, showcasing a narrative centered around human experiences.",
+            "Day and Night (2004 Swedish film) Day and Night is a 2004 Swedish drama film directed by Simon Staho."
+          ],
+          "relation_texts": [
+            "The film Day and Night was released in 2004, showcasing a narrative centered around human experiences.",
+            "link",
+            "NARRATIVE",
+            "HUMAN EXPERIENCES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5951b37fc9cd15c74c6711534ef8f9c3",
+            "hyperedge_name": "<hyperedge>\"The film Day and Night was released in 2004, showcasing a narrative centered around human experiences.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 2003 he wrote and directed 'The Day Britain Stopped', a feature-length drama told in the style of documentary.\"",
+        "branch": "semantic",
+        "raw_score": 0.46695470809936523,
+        "hyperedge_text": "In 2003 he wrote and directed 'The Day Britain Stopped', a feature-length drama told in the style of documentary.",
+        "entity_ids": [
+          "\"DOCUMENTARY STYLE\"",
+          "\"THE DAY BRITAIN STOPPED\"",
+          "\"FEATURE-LENGTH DRAMA\""
+        ],
+        "chunk_ids": [
+          "chunk-62506f6dd0ee29909a89ab96a8dc0873"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In 2003 he wrote and directed 'The Day Britain Stopped', a feature-length drama told in the style of documentary.",
+            "Gabriel Range Gabriel Range is a British filmmaker, who is probably best known for his fictional political-documentary about the assassination of George W. Bush in \"Death of a President\". Range worked in journalism before moving into documentaries and docudrama. In 2003 he wrote and directed \"The Day Britain Stopped\", a feature-length drama told in the style of documentary. The film earned Range a nomination for a British Academy (BAFTA) TV Craft Award for Best New Director and won a Royal Television Society Craft and Design Award. In 2005 Range wrote and directed \"Death of a President\", which had its debut at the 2006 Toronto International Film Festival. The film won a total of 6 awards including; the International Critics Prize (FIPRESCI) at Toronto, the International Emmy Award for the TV Movie/Mini-Series category, the RTS Television Award in the Digital Channel Programme category..."
+          ],
+          "relation_texts": [
+            "In 2003 he wrote and directed 'The Day Britain Stopped', a feature-length drama told in the style of documentary.",
+            "link",
+            "DOCUMENTARY STYLE",
+            "THE DAY BRITAIN STOPPED",
+            "FEATURE-LENGTH DRAMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4b433e907fb12aa35e1e001eca313f9b",
+            "hyperedge_name": "<hyperedge>\"In 2003 he wrote and directed 'The Day Britain Stopped', a feature-length drama told in the style of documentary.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"3096 Days is a 2013 German drama film directed by Sherry Hormann.\"",
+        "branch": "semantic",
+        "raw_score": 0.4667547941207886,
+        "hyperedge_text": "3096 Days is a 2013 German drama film directed by Sherry Hormann.",
+        "entity_ids": [
+          "\"SHERRY HORMANN\"",
+          "\"3096 DAYS\""
+        ],
+        "chunk_ids": [
+          "chunk-ae8b08c63257896f41b4bbdd5261063a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "3096 Days is a 2013 German drama film directed by Sherry Hormann.",
+            "3096 Days 3096 Days is a 2013 German drama film directed by Sherry Hormann. The film is based on the true story of Natascha Kampusch, a 10- year- old girl and her eight- year ordeal being kidnapped by Wolfgang Přiklopil. Northern Irish actress Antonia Campbell- Hughes portrays Kampusch, while Thure Lindhardt plays Přiklopil. The film was writer Bernd Eichinger's last film before his sudden death, and Martin Moskowicz, head of TV and Film at Constantin Film, and Ruth Toma(\" Gloomy Sunday\") took over."
+          ],
+          "relation_texts": [
+            "3096 Days is a 2013 German drama film directed by Sherry Hormann.",
+            "link",
+            "SHERRY HORMANN",
+            "3096 DAYS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2e16cfa30d9e75a45fea14f2a97c368b",
+            "hyperedge_name": "<hyperedge>\"3096 Days is a 2013 German drama film directed by Sherry Hormann.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The screenplay for Daytime Wives was written by Helmer Walton Bergman and Wyndham Gittens.\"",
+        "branch": "semantic",
+        "raw_score": 0.4662706255912781,
+        "hyperedge_text": "The screenplay for Daytime Wives was written by Helmer Walton Bergman and Wyndham Gittens.",
+        "entity_ids": [
+          "\"HELMER WALTON BERGMAN\"",
+          "\"WYNDHAM GITTENS\""
+        ],
+        "chunk_ids": [
+          "chunk-938e7fe516603bfd2158159e8ce4eb29"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The screenplay for Daytime Wives was written by Helmer Walton Bergman and Wyndham Gittens.",
+            "Daytime Wives Daytime Wives is a 1923 American drama film directed by Émile Chautard, and written by Helmer Walton Bergman and Wyndham Gittens. The film stars Derelys Perdue, Wyndham Standing, Grace Darmond, William Conklin, Guy Edward Hearn, and Katherine Lewis. The film was released on September 2, 1923, by Film Booking Offices of America."
+          ],
+          "relation_texts": [
+            "The screenplay for Daytime Wives was written by Helmer Walton Bergman and Wyndham Gittens.",
+            "link",
+            "HELMER WALTON BERGMAN",
+            "WYNDHAM GITTENS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-df1612b2b906ba76dbc51287dd551ed1",
+            "hyperedge_name": "<hyperedge>\"The screenplay for Daytime Wives was written by Helmer Walton Bergman and Wyndham Gittens.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Diane Kurys.\"",
+        "branch": "semantic",
+        "raw_score": 0.46200937032699585,
+        "hyperedge_text": "The film was directed by Diane Kurys.",
+        "entity_ids": [
+          "\"DIANE KURYS\""
+        ],
+        "chunk_ids": [
+          "chunk-f34ee9c59bb528aabea0a4fc4e1937a2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Diane Kurys.",
+            "Arrête ton cinéma Arrête ton cinéma is a 2016 French comedy film directed by Diane Kurys."
+          ],
+          "relation_texts": [
+            "The film was directed by Diane Kurys.",
+            "link",
+            "DIANE KURYS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b0b6d7f4d92ba9156f68f313c855ed5f",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Diane Kurys.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'\"",
+        "branch": "semantic",
+        "raw_score": 0.4533531367778778,
+        "hyperedge_text": "Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'",
+        "entity_ids": [
+          "\"ONE SUNDAY AFTERNOON\""
+        ],
+        "chunk_ids": [
+          "chunk-5f5e821dcf8cd0e062e4412a88f5e962"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'",
+            "The Strawberry Blonde The Strawberry Blonde is a 1941 American romantic comedy film directed by Raoul Walsh, starring James Cagney and Olivia de Havilland, and featuring Rita Hayworth, Alan Hale, Jack Carson, and George Tobias. The picture was nominated for an Academy Award in 1941 for Best Scoring of a Musical Picture and features songs such as\" The Band Played OnBill Bailey Meet Me in St. Louis, Louie, Wait Till The Sun Shines Nellie,\" and\" Love Me and the World Is Mine.\" The title is most often listed beginning with the word The, but the film's posters and promotional materials call it simply Strawberry Blonde. Director Walsh remade the film in 1948 as\" One Sunday Afternoon\". It was a remake of\" One Sunday Afternoon\"( 1933) with Gary Cooper."
+          ],
+          "relation_texts": [
+            "Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'",
+            "link",
+            "ONE SUNDAY AFTERNOON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-87abbd26c474ad1b20c398a0211bc598",
+            "hyperedge_name": "<hyperedge>\"Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\"",
+        "hyperedge_text": "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5013720989227295,
+        "fusion_score": 0.700274419784546,
+        "entity_ids": [
+          "\"KOD AMIDŽE IDRIZA\"",
+          "\"PJER ŽALICA\"",
+          "\"NAMIK KABIL\"",
+          "\"DAYS AND HOURS\""
+        ],
+        "chunk_ids": [
+          "chunk-9a1aa6f2b9c7e4bc018743d029544886"
+        ],
+        "evidence_texts": [
+          "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+          "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.501372,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.700274
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.\"",
+        "hyperedge_text": "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.4968322515487671,
+        "fusion_score": 0.6993664503097535,
+        "entity_ids": [
+          "\"2004\"",
+          "\"BOSNIAN FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-9a1aa6f2b9c7e4bc018743d029544886"
+        ],
+        "evidence_texts": [
+          "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.",
+          "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.496832,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.699366
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'\"",
+        "hyperedge_text": "Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4533531367778778,
+        "fusion_score": 0.4906706273555756,
+        "entity_ids": [
+          "\"ONE SUNDAY AFTERNOON\""
+        ],
+        "chunk_ids": [
+          "chunk-5f5e821dcf8cd0e062e4412a88f5e962"
+        ],
+        "evidence_texts": [
+          "Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'",
+          "The Strawberry Blonde The Strawberry Blonde is a 1941 American romantic comedy film directed by Raoul Walsh, starring James Cagney and Olivia de Havilland, and featuring Rita Hayworth, Alan Hale, Jack Carson, and George Tobias. The picture was nominated for an Academy Award in 1941 for Best Scoring of a Musical Picture and features songs such as\" The Band Played OnBill Bailey Meet Me in St. Louis, Louie, Wait Till The Sun Shines Nellie,\" and\" Love Me and the World Is Mine.\" The title is most often listed beginning with the word The, but the film's posters and promotional materials call it simply Strawberry Blonde. Director Walsh remade the film in 1948 as\" One Sunday Afternoon\". It was a remake of\" One Sunday Afternoon\"( 1933) with Gary Cooper."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.453353,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.490671
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5262852311134338,
+        "semantic_score": 0.5,
+        "fusion_score": 0.31051409244537354,
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "evidence_texts": [
+          "As a film director, he has directed several works in addition to acting.",
+          "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.526285,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.310514
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Robert G. Vignola is the director of the film.\"",
+        "hyperedge_text": "Robert G. Vignola is the director of the film.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5214390754699707,
+        "semantic_score": 0.5,
+        "fusion_score": 0.3085756301879883,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-5a83efe0d439c48988a77409ef3ba477"
+        ],
+        "evidence_texts": [
+          "Robert G. Vignola is the director of the film.",
+          "The World and His Wife The World and His Wife is a lost American 1920 silent drama film produced by Cosmopolitan Productions and distributed through Paramount Pictures. Directed by Robert G. Vignola, the film was based on the 1908 Broadway play of the same name by Charles Frederic Nirdlinger, which was adapted from the Spanish language play\" El Gran Galeoto\" by Jose Echegaray Y Eizaguirre. The film stars Alma Rubens, Montagu Love, and Pedro de Cordoba and Broadway actress Margaret Dale in her film debut. The story was later filmed at MGM as\" Lovers\"( 1927)."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.521439,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.308576
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the spouse of the director of Days And Hours?",
+    "retrieval_question": "Who is the spouse of Pjer Žalica?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the spouse of the director of Days And Hours?",
+      "retrieval_question": "Who is the spouse of Pjer Žalica?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Days And Hours",
+      "replacement_answer": "Pjer Žalica",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Days And Hours",
+          "replacement_answer": "Pjer Žalica"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+        "entity_ids": [
+          "\"KOD AMIDŽE IDRIZA\"",
+          "\"PJER ŽALICA\"",
+          "\"NAMIK KABIL\"",
+          "\"DAYS AND HOURS\""
+        ],
+        "chunk_ids": [
+          "chunk-9a1aa6f2b9c7e4bc018743d029544886"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+            "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+          ],
+          "relation_texts": [
+            "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+            "link",
+            "KOD AMIDŽE IDRIZA",
+            "PJER ŽALICA",
+            "NAMIK KABIL",
+            "DAYS AND HOURS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.",
+        "entity_ids": [
+          "\"SCREENWRITER\"",
+          "\"SARAJEVO\"",
+          "\"ACADEMY OF PERFORMING ARTS IN SARAJEVO\"",
+          "\"BOSNIAN FILM DIRECTOR\"",
+          "\"ACADEMY OF PERFORMING ARTS\"",
+          "\"7 MAY 1964\"",
+          "\"PJER ŽALICA\""
+        ],
+        "chunk_ids": [
+          "chunk-f8aa8c68802a54b3526a4863f98c8632"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.",
+            "Pjer Žalica Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo. His father Miodrag (1926–1992) was a noted dramaturgist and poet who scripted several TV movies. He has directed several short films, only one of which is (\"Mostar Sevdah Reunion\" 2000) as well as two feature films, \"Gori vatra\" (2003), and \"Kod amidže Idriza\" (2004). In May 2008, he directed the music video for the duet \"Dabogda\" by Dino Merlin and Hari Mata Hari. In 2017, Žalica signed the Declaration on the Common Language of the Croats, Serbs, Bosniaks and Montenegrins. He is married to Bosnian actress Jasna Žalica and has one child with the actress."
+          ],
+          "relation_texts": [
+            "Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.",
+            "link",
+            "SCREENWRITER",
+            "SARAJEVO",
+            "ACADEMY OF PERFORMING ARTS IN SARAJEVO",
+            "BOSNIAN FILM DIRECTOR",
+            "ACADEMY OF PERFORMING ARTS",
+            "7 MAY 1964",
+            "PJER ŽALICA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.\"",
+        "branch": "relation",
+        "raw_score": 0.5093562602996826,
+        "hyperedge_text": "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+        "entity_ids": [
+          "\"MORGANATIC MARRIAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-0092baaf76dc583f3ca640f254f9f6cc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+            "Maria Chiara Spinucci Maria Chiara Spinucci( 1741–1792), was an Italian aristocrat, courtier of Duchess Maria Antonia of Bavaria and the morganatic spouse of Prince Francis Xavier of Saxony."
+          ],
+          "relation_texts": [
+            "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+            "link",
+            "MORGANATIC MARRIAGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-44cf4f5245a347aec5ae9c32df739078",
+            "hyperedge_name": "<hyperedge>\"Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.\"",
+        "branch": "relation",
+        "raw_score": 0.472663015127182,
+        "hyperedge_text": "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+        "entity_ids": [
+          "\"POLITICAL INFLUENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-5bda47c753bf133f277d071017097db0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+            "Amalia of Solms-Braunfels Amalia of Solms- Braunfels( 31 August 1602, Braunfels – 8 September 1675, The Hague), was Princess consort of Orange by marriage to Frederick Henry, Prince of Orange. She acted as the political adviser of her spouse during his reign, and acted as his de facto deputy and regent during his infirmity from 1640 – 47. She also served as chair of the regency council during the minority of her grandson William III, Prince of Orange from 1650 until 1672. She was the daughter of count John Albert I of Solms- Braunfels and countess Agnes of Sayn- Wittgenstein."
+          ],
+          "relation_texts": [
+            "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+            "link",
+            "POLITICAL INFLUENCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cb438ea26c41c09c3379943cb8558715",
+            "hyperedge_name": "<hyperedge>\"She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the husband of Pratibha Patil.\"",
+        "branch": "relation",
+        "raw_score": 0.4669957756996155,
+        "hyperedge_text": "He is the husband of Pratibha Patil.",
+        "entity_ids": [
+          "\"PRATIBHA PATIL\""
+        ],
+        "chunk_ids": [
+          "chunk-ffbdea53ddd08af0ec051afd0804d4fc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the husband of Pratibha Patil.",
+            "Devisingh Ransingh Shekhawat Devisingh Ransingh Shekhawat is the former and first First Gentleman of India as the husband of Pratibha Patil."
+          ],
+          "relation_texts": [
+            "He is the husband of Pratibha Patil.",
+            "link",
+            "PRATIBHA PATIL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-652b38e2ca76c243866d87632dc1bc9f",
+            "hyperedge_name": "<hyperedge>\"He is the husband of Pratibha Patil.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.\"",
+        "branch": "relation",
+        "raw_score": 0.46323880553245544,
+        "hyperedge_text": "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+        "entity_ids": [
+          "\"SPOUSE\"",
+          "\"DIVORCE\""
+        ],
+        "chunk_ids": [
+          "chunk-bcc25aab891d91cd91b0922f44d42c9a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+            "Mehdi Abrishamchi Mehdi Abrishamchi is an Iranian People's Mujahedin of Iran( MEK) politician who has been described as\" the right hand man of Massoud Rajavi\". He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi."
+          ],
+          "relation_texts": [
+            "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+            "link",
+            "SPOUSE",
+            "DIVORCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-813b98a1ef692af07f9f193554c67846",
+            "hyperedge_name": "<hyperedge>\"He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maryam Rajavi is now the spouse of Massoud Rajavi.\"",
+        "branch": "relation",
+        "raw_score": 0.46022558212280273,
+        "hyperedge_text": "Maryam Rajavi is now the spouse of Massoud Rajavi.",
+        "entity_ids": [
+          "\"SPOUSE OF MASSOUD RAJAVI\""
+        ],
+        "chunk_ids": [
+          "chunk-bcc25aab891d91cd91b0922f44d42c9a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maryam Rajavi is now the spouse of Massoud Rajavi.",
+            "Mehdi Abrishamchi Mehdi Abrishamchi is an Iranian People's Mujahedin of Iran( MEK) politician who has been described as\" the right hand man of Massoud Rajavi\". He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi."
+          ],
+          "relation_texts": [
+            "Maryam Rajavi is now the spouse of Massoud Rajavi.",
+            "link",
+            "SPOUSE OF MASSOUD RAJAVI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b9d30f6b45503435670321bb1cebee75",
+            "hyperedge_name": "<hyperedge>\"Maryam Rajavi is now the spouse of Massoud Rajavi.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the husband of Lindsay Davenport.\"",
+        "branch": "relation",
+        "raw_score": 0.4585364758968353,
+        "hyperedge_text": "He is the husband of Lindsay Davenport.",
+        "entity_ids": [
+          "\"LINDSAY DAVENPORT\"",
+          "\"HUSBAND\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the husband of Lindsay Davenport.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "He is the husband of Lindsay Davenport.",
+            "link",
+            "LINDSAY DAVENPORT",
+            "HUSBAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a82168d955eae145b3a3b95287b40073",
+            "hyperedge_name": "<hyperedge>\"He is the husband of Lindsay Davenport.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As the spouse of Håkon V of Norway, she held a significant status in the royal hierarchy.\"",
+        "branch": "relation",
+        "raw_score": 0.45744088292121887,
+        "hyperedge_text": "As the spouse of Håkon V of Norway, she held a significant status in the royal hierarchy.",
+        "entity_ids": [
+          "\"HÅKON V OF NORWAY\""
+        ],
+        "chunk_ids": [
+          "chunk-c9afa13907ea48683656ead40d943fe1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As the spouse of Håkon V of Norway, she held a significant status in the royal hierarchy.",
+            "Euphemia of Rügen Euphemia of Rügen( c. 1280 – May 1312) was the Queen consort of Norway as the spouse of Håkon V of Norway. She is famous in history as a literary person, and known for commissioning translations of romances."
+          ],
+          "relation_texts": [
+            "As the spouse of Håkon V of Norway, she held a significant status in the royal hierarchy.",
+            "link",
+            "HÅKON V OF NORWAY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-da0c398e5ef23fdc5588621478a566dc",
+            "hyperedge_name": "<hyperedge>\"As the spouse of Håkon V of Norway, she held a significant status in the royal hierarchy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the uncle of, whose husband is.\"",
+        "branch": "relation",
+        "raw_score": 0.45306020975112915,
+        "hyperedge_text": "He is also the uncle of, whose husband is.",
+        "entity_ids": [
+          "\"HUSBAND\"",
+          "\"UNCLE\"",
+          "\"NEPHEW/NIECE\""
+        ],
+        "chunk_ids": [
+          "chunk-ab4fd963a6e1bb18c7ff575cca5ddd08"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is also the uncle of, whose husband is.",
+            "Andrzej Gawroński (actor) Andrzej Gawroński( born 10 February 1935 in Warsaw, Poland) is a Polish film and theatre actor. He is the brother of the late actor. He is also the uncle of, whose husband is."
+          ],
+          "relation_texts": [
+            "He is also the uncle of, whose husband is.",
+            "link",
+            "HUSBAND",
+            "UNCLE",
+            "NEPHEW/NIECE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a679e373fd231056e13421459e53e0cd",
+            "hyperedge_name": "<hyperedge>\"He is also the uncle of, whose husband is.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Heather D. Gibson is the spouse of Euclid Tsakalotos.\"",
+        "branch": "relation",
+        "raw_score": 0.45283135771751404,
+        "hyperedge_text": "Heather D. Gibson is the spouse of Euclid Tsakalotos.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-56bb73568ef1188b68a1d504f7b4a5cc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Heather D. Gibson is the spouse of Euclid Tsakalotos.",
+            "Heather D. Gibson Heather Denise Gibson is a Scottish economist currently serving as Director- Advisor to the Bank of Greece( since 2011). She is the spouse of Euclid Tsakalotos, former Greek Minister of Finance."
+          ],
+          "relation_texts": [
+            "Heather D. Gibson is the spouse of Euclid Tsakalotos."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3ac8ae1e1229a1ce35696d6d6e12e7da",
+            "hyperedge_name": "<hyperedge>\"Heather D. Gibson is the spouse of Euclid Tsakalotos.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maria Teresa is the spouse of Grand Duke Henri.\"",
+        "branch": "relation",
+        "raw_score": 0.4526611566543579,
+        "hyperedge_text": "Maria Teresa is the spouse of Grand Duke Henri.",
+        "entity_ids": [
+          "\"SPOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-e35022991097fdd609155ded14b2d96b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maria Teresa is the spouse of Grand Duke Henri.",
+            "Maria Teresa, Grand Duchess of Luxembourg Maria Teresa, Grand Duchess of Luxembourg( born María Teresa Mestre y Batista; on 22 March 1956), is the spouse of Grand Duke Henri."
+          ],
+          "relation_texts": [
+            "Maria Teresa is the spouse of Grand Duke Henri.",
+            "link",
+            "SPOUSE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b79087ec707525ef62aacd868c640e1b",
+            "hyperedge_name": "<hyperedge>\"Maria Teresa is the spouse of Grand Duke Henri.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.\"",
+        "branch": "semantic",
+        "raw_score": 0.6246267557144165,
+        "hyperedge_text": "Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.",
+        "entity_ids": [
+          "\"SCREENWRITER\"",
+          "\"SARAJEVO\"",
+          "\"ACADEMY OF PERFORMING ARTS IN SARAJEVO\"",
+          "\"BOSNIAN FILM DIRECTOR\"",
+          "\"ACADEMY OF PERFORMING ARTS\"",
+          "\"7 MAY 1964\"",
+          "\"PJER ŽALICA\""
+        ],
+        "chunk_ids": [
+          "chunk-f8aa8c68802a54b3526a4863f98c8632"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.",
+            "Pjer Žalica Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo. His father Miodrag (1926–1992) was a noted dramaturgist and poet who scripted several TV movies. He has directed several short films, only one of which is (\"Mostar Sevdah Reunion\" 2000) as well as two feature films, \"Gori vatra\" (2003), and \"Kod amidže Idriza\" (2004). In May 2008, he directed the music video for the duet \"Dabogda\" by Dino Merlin and Hari Mata Hari. In 2017, Žalica signed the Declaration on the Common Language of the Croats, Serbs, Bosniaks and Montenegrins. He is married to Bosnian actress Jasna Žalica and has one child with the actress."
+          ],
+          "relation_texts": [
+            "Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.",
+            "link",
+            "SCREENWRITER",
+            "SARAJEVO",
+            "ACADEMY OF PERFORMING ARTS IN SARAJEVO",
+            "BOSNIAN FILM DIRECTOR",
+            "ACADEMY OF PERFORMING ARTS",
+            "7 MAY 1964",
+            "PJER ŽALICA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-27e27ce6d301652021f8dba77a6e0eb1",
+            "hyperedge_name": "<hyperedge>\"Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is married to Bosnian actress Jasna Žalica and has one child with the actress.\"",
+        "branch": "semantic",
+        "raw_score": 0.6148808598518372,
+        "hyperedge_text": "He is married to Bosnian actress Jasna Žalica and has one child with the actress.",
+        "entity_ids": [
+          "\"CHILD\"",
+          "\"JASNA ŽALICA\"",
+          "\"BOSNIAN ACTRESS\"",
+          "\"ONE CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-f8aa8c68802a54b3526a4863f98c8632"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is married to Bosnian actress Jasna Žalica and has one child with the actress.",
+            "Pjer Žalica Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo. His father Miodrag (1926–1992) was a noted dramaturgist and poet who scripted several TV movies. He has directed several short films, only one of which is (\"Mostar Sevdah Reunion\" 2000) as well as two feature films, \"Gori vatra\" (2003), and \"Kod amidže Idriza\" (2004). In May 2008, he directed the music video for the duet \"Dabogda\" by Dino Merlin and Hari Mata Hari. In 2017, Žalica signed the Declaration on the Common Language of the Croats, Serbs, Bosniaks and Montenegrins. He is married to Bosnian actress Jasna Žalica and has one child with the actress."
+          ],
+          "relation_texts": [
+            "He is married to Bosnian actress Jasna Žalica and has one child with the actress.",
+            "link",
+            "CHILD",
+            "JASNA ŽALICA",
+            "BOSNIAN ACTRESS",
+            "ONE CHILD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cfd1a9b8ecbbfd90f5b3751a13f8e878",
+            "hyperedge_name": "<hyperedge>\"He is married to Bosnian actress Jasna Žalica and has one child with the actress.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The relationship between Miloš Zličić and Lazar Zličić indicates a family connection.\"",
+        "branch": "semantic",
+        "raw_score": 0.47824400663375854,
+        "hyperedge_text": "The relationship between Miloš Zličić and Lazar Zličić indicates a family connection.",
+        "entity_ids": [
+          "\"FAMILY CONNECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-ae298fff0462fa634e61dce30383bac1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The relationship between Miloš Zličić and Lazar Zličić indicates a family connection.",
+            "Miloš Zličić Miloš Zličić( born 29 December 1999) is a Serbian football forward. He is a younger brother of Lazar Zličić."
+          ],
+          "relation_texts": [
+            "The relationship between Miloš Zličić and Lazar Zličić indicates a family connection.",
+            "link",
+            "FAMILY CONNECTION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4d9bc4273b2c3101557fd9b0a330d114",
+            "hyperedge_name": "<hyperedge>\"The relationship between Miloš Zličić and Lazar Zličić indicates a family connection.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was a father of Sandalj Hranić and brother of Vlatko Vuković.\"",
+        "branch": "semantic",
+        "raw_score": 0.450833797454834,
+        "hyperedge_text": "He was a father of Sandalj Hranić and brother of Vlatko Vuković.",
+        "entity_ids": [
+          "\"SANDALJ HRANIĆ\"",
+          "\"VLATKO VUKOVIĆ\""
+        ],
+        "chunk_ids": [
+          "chunk-afbc143af6f99f524d38d1c6c06886c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was a father of Sandalj Hranić and brother of Vlatko Vuković.",
+            "Hrana Vuković Hrana Vuković (1370 – 15 March 1435) was a Bosnian magnate who ruled the area between Neretva and Drina rivers in Bosnia with the title \"Grand Duke of Bosnia\" prior to 1380. He was a father of Sandalj Hranić and brother of Vlatko Vuković. After his death, he was succeeded by Vlatko Vuković as a head of Vuković-Kosača family, and Hrvoje Vukčić as a Grand Duke of Bosnia."
+          ],
+          "relation_texts": [
+            "He was a father of Sandalj Hranić and brother of Vlatko Vuković.",
+            "link",
+            "SANDALJ HRANIĆ",
+            "VLATKO VUKOVIĆ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f3f30b929bb798b7841c89f7437a2a06",
+            "hyperedge_name": "<hyperedge>\"He was a father of Sandalj Hranić and brother of Vlatko Vuković.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Miloš Zličić's nationality is Serbian.\"",
+        "branch": "semantic",
+        "raw_score": 0.4431055784225464,
+        "hyperedge_text": "Miloš Zličić's nationality is Serbian.",
+        "entity_ids": [
+          "\"SERBIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-ae298fff0462fa634e61dce30383bac1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Miloš Zličić's nationality is Serbian.",
+            "Miloš Zličić Miloš Zličić( born 29 December 1999) is a Serbian football forward. He is a younger brother of Lazar Zličić."
+          ],
+          "relation_texts": [
+            "Miloš Zličić's nationality is Serbian.",
+            "link",
+            "SERBIAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2910d9b6d41b5806d8e71cc94abc478",
+            "hyperedge_name": "<hyperedge>\"Miloš Zličić's nationality is Serbian.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Miloš Zličić is the younger brother of Lazar Zličić.\"",
+        "branch": "semantic",
+        "raw_score": 0.4425615668296814,
+        "hyperedge_text": "Miloš Zličić is the younger brother of Lazar Zličić.",
+        "entity_ids": [
+          "\"LAZAR ZLIČIĆ\"",
+          "\"YOUNGER BROTHER\""
+        ],
+        "chunk_ids": [
+          "chunk-ae298fff0462fa634e61dce30383bac1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Miloš Zličić is the younger brother of Lazar Zličić.",
+            "Miloš Zličić Miloš Zličić( born 29 December 1999) is a Serbian football forward. He is a younger brother of Lazar Zličić."
+          ],
+          "relation_texts": [
+            "Miloš Zličić is the younger brother of Lazar Zličić.",
+            "link",
+            "LAZAR ZLIČIĆ",
+            "YOUNGER BROTHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e644a263bd5c056ea481aa3f2b2df9b4",
+            "hyperedge_name": "<hyperedge>\"Miloš Zličić is the younger brother of Lazar Zličić.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The relationship between Vera Miletić and Slobodan Milošević emphasizes her familial connection to a notable Serbian leader.\"",
+        "branch": "semantic",
+        "raw_score": 0.44207763671875,
+        "hyperedge_text": "The relationship between Vera Miletić and Slobodan Milošević emphasizes her familial connection to a notable Serbian leader.",
+        "entity_ids": [
+          "\"CONNECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-4b182845c9cd25e8b4237f5fb02264a9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The relationship between Vera Miletić and Slobodan Milošević emphasizes her familial connection to a notable Serbian leader.",
+            "Vera Miletić Vera Miletić (Serbian Cyrillic: Вера Милетић; 8 March 1920 – 7 September 1944) was a Serbian student and soldier. She was notable for being the mother of Mira Marković, posthumously making her the mother-in-law of Serbian president Slobodan Milošević."
+          ],
+          "relation_texts": [
+            "The relationship between Vera Miletić and Slobodan Milošević emphasizes her familial connection to a notable Serbian leader.",
+            "link",
+            "CONNECTION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-27174c8798e146e38bc92589541b2502",
+            "hyperedge_name": "<hyperedge>\"The relationship between Vera Miletić and Slobodan Milošević emphasizes her familial connection to a notable Serbian leader.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is a younger brother of Lazar Zličić.\"",
+        "branch": "semantic",
+        "raw_score": 0.43814772367477417,
+        "hyperedge_text": "He is a younger brother of Lazar Zličić.",
+        "entity_ids": [
+          "\"LAZAR ZLIČIĆ\"",
+          "\"YOUNGER BROTHER\""
+        ],
+        "chunk_ids": [
+          "chunk-ae298fff0462fa634e61dce30383bac1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is a younger brother of Lazar Zličić.",
+            "Miloš Zličić Miloš Zličić( born 29 December 1999) is a Serbian football forward. He is a younger brother of Lazar Zličić."
+          ],
+          "relation_texts": [
+            "He is a younger brother of Lazar Zličić.",
+            "link",
+            "LAZAR ZLIČIĆ",
+            "YOUNGER BROTHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1dc963cc3fddd280719cc21879b6f010",
+            "hyperedge_name": "<hyperedge>\"He is a younger brother of Lazar Zličić.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Viktor Šiljeg is dual-nationality with Slovene and Bosnian citizenship.\"",
+        "branch": "semantic",
+        "raw_score": 0.4331497251987457,
+        "hyperedge_text": "Viktor Šiljeg is dual-nationality with Slovene and Bosnian citizenship.",
+        "entity_ids": [
+          "\"DUAL-NATIONALITY\""
+        ],
+        "chunk_ids": [
+          "chunk-4be833a199e4837e87ed4fd7f184e8f4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Viktor Šiljeg is dual-nationality with Slovene and Bosnian citizenship.",
+            "Viktor Šiljeg Viktor Šiljeg( born 2 May 1992) is a Croatian professional football defender who plays for Triglav Kranj in the Slovenian Second League. He holds Slovene, Croatian and Bosnian citizenship."
+          ],
+          "relation_texts": [
+            "Viktor Šiljeg is dual-nationality with Slovene and Bosnian citizenship.",
+            "link",
+            "DUAL-NATIONALITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6541962d650558cec42bc8441acceb79",
+            "hyperedge_name": "<hyperedge>\"Viktor Šiljeg is dual-nationality with Slovene and Bosnian citizenship.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was married to the Polish artist, Anna Rajecka.\"",
+        "branch": "semantic",
+        "raw_score": 0.431192547082901,
+        "hyperedge_text": "He was married to the Polish artist, Anna Rajecka.",
+        "entity_ids": [
+          "\"ANNA RAJECKA\""
+        ],
+        "chunk_ids": [
+          "chunk-88df52d4454cb3c2b6735241f78c655f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was married to the Polish artist, Anna Rajecka.",
+            "Pierre-Marie Gault de Saint-Germain Pierre-Marie Gault de Saint-Germain (9 February 1754 – 11 November 1842) was a painter and art historian, inspired by the French enlightenment. He was born in Paris and studied under Louis Jean-Jacques Durameau. He left a very large number of historical and landscape pictures, miniatures and portraits. Among his portraits are those of Voltaire, Mademoiselle Clairon, Crébillon, and Stanislaus, King of Poland. He wrote accounts of the lives and works of Leonardo da Vinci and Nicolas Poussin; a \"Guide des Amateurs de Tableaux pour les Ecoles allemande, flamande et hollandaise,\" 1818; and other works relative to painting, in which he displayed much knowledge and judgment. He was married to the Polish artist, Anna Rajecka. It is not known if they had any children. The Rue Gault de Saint-Germain in Clermont-Ferrand is named after him."
+          ],
+          "relation_texts": [
+            "He was married to the Polish artist, Anna Rajecka.",
+            "link",
+            "ANNA RAJECKA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c845e3e2d8b6315826b1b5ae8b74dd3e",
+            "hyperedge_name": "<hyperedge>\"He was married to the Polish artist, Anna Rajecka.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.\"",
+        "hyperedge_text": "Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6246267557144165,
+        "fusion_score": 0.5249253511428833,
+        "entity_ids": [
+          "\"SCREENWRITER\"",
+          "\"SARAJEVO\"",
+          "\"ACADEMY OF PERFORMING ARTS IN SARAJEVO\"",
+          "\"BOSNIAN FILM DIRECTOR\"",
+          "\"ACADEMY OF PERFORMING ARTS\"",
+          "\"7 MAY 1964\"",
+          "\"PJER ŽALICA\""
+        ],
+        "chunk_ids": [
+          "chunk-f8aa8c68802a54b3526a4863f98c8632"
+        ],
+        "evidence_texts": [
+          "Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo.",
+          "Pjer Žalica Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo. His father Miodrag (1926–1992) was a noted dramaturgist and poet who scripted several TV movies. He has directed several short films, only one of which is (\"Mostar Sevdah Reunion\" 2000) as well as two feature films, \"Gori vatra\" (2003), and \"Kod amidže Idriza\" (2004). In May 2008, he directed the music video for the duet \"Dabogda\" by Dino Merlin and Hari Mata Hari. In 2017, Žalica signed the Declaration on the Common Language of the Croats, Serbs, Bosniaks and Montenegrins. He is married to Bosnian actress Jasna Žalica and has one child with the actress."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.624627,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524925
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\"",
+        "hyperedge_text": "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"KOD AMIDŽE IDRIZA\"",
+          "\"PJER ŽALICA\"",
+          "\"NAMIK KABIL\"",
+          "\"DAYS AND HOURS\""
+        ],
+        "chunk_ids": [
+          "chunk-9a1aa6f2b9c7e4bc018743d029544886"
+        ],
+        "evidence_texts": [
+          "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+          "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.\"",
+        "hyperedge_text": "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5093562602996826,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2704091707865397,
+        "entity_ids": [
+          "\"MORGANATIC MARRIAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-0092baaf76dc583f3ca640f254f9f6cc"
+        ],
+        "evidence_texts": [
+          "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+          "Maria Chiara Spinucci Maria Chiara Spinucci( 1741–1792), was an Italian aristocrat, courtier of Duchess Maria Antonia of Bavaria and the morganatic spouse of Prince Francis Xavier of Saxony."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.509356,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.270409
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.\"",
+        "hyperedge_text": "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.472663015127182,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2557318727175395,
+        "entity_ids": [
+          "\"POLITICAL INFLUENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-5bda47c753bf133f277d071017097db0"
+        ],
+        "evidence_texts": [
+          "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+          "Amalia of Solms-Braunfels Amalia of Solms- Braunfels( 31 August 1602, Braunfels – 8 September 1675, The Hague), was Princess consort of Orange by marriage to Frederick Henry, Prince of Orange. She acted as the political adviser of her spouse during his reign, and acted as his de facto deputy and regent during his infirmity from 1640 – 47. She also served as chair of the regency council during the minority of her grandson William III, Prince of Orange from 1650 until 1672. She was the daughter of count John Albert I of Solms- Braunfels and countess Agnes of Sayn- Wittgenstein."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.472663,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.255732
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.\"",
+        "hyperedge_text": "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46323880553245544,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.25196218887964883,
+        "entity_ids": [
+          "\"SPOUSE\"",
+          "\"DIVORCE\""
+        ],
+        "chunk_ids": [
+          "chunk-bcc25aab891d91cd91b0922f44d42c9a"
+        ],
+        "evidence_texts": [
+          "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+          "Mehdi Abrishamchi Mehdi Abrishamchi is an Iranian People's Mujahedin of Iran( MEK) politician who has been described as\" the right hand man of Massoud Rajavi\". He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.463239,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.251962
+        }
+      }
+    ]
+  }
+]

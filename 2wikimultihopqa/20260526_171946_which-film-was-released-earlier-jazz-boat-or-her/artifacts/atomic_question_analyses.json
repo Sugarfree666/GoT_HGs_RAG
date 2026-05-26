@@ -1,0 +1,172 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the release date of Jazz Boat?",
+    "retrieval_question": "What is the release date of Jazz Boat?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Jazz Boat?",
+      "retrieval_question": "What is the release date of Jazz Boat?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Jazz Boat"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Her Husband's Trademark?",
+    "retrieval_question": "What is the release date of Her Husband's Trademark?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Her Husband's Trademark?",
+      "retrieval_question": "What is the release date of Her Husband's Trademark?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Her Husband's Trademark"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Jazz Boat?",
+    "retrieval_question": "What is the release date of Jazz Boat?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Jazz Boat?",
+      "retrieval_question": "What is the release date of Jazz Boat?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "What is the release date of Jazz Boat?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence does not provide a specific release date for 'Jazz Boat'. The closest evidence mentions a release date of 10 October 2009, but it is unclear if this pertains to 'Jazz Boat'.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\"",
+            "fusion_score": 0.5130192518234253,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+              "Jazz Boat Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+            "fusion_score": 0.2685448467731476,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The release date was on 10 October 2009.",
+              "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+            "fusion_score": 0.26130797863006594,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The release date on CD was September 22.",
+              "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "What is the release date of Her Husband's Trademark?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence does not provide a specific release date for 'Her Husband's Trademark'; it only mentions the year 1922. The other evidence refers to a different film's release date.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.\"",
+            "fusion_score": 0.5087066173553467,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.",
+              "Her Husband's Trademark Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne. Produced by Famous Players- Lasky and distributed by Paramount Pictures, the film was shot on location in El Paso, Texas. Prints of\" Her Husband's Trademark\" are held at the George Eastman House and the Gosfilmofond archive in Moscow."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+            "fusion_score": 0.2535988211631775,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The release date of the film is July 25, 1920.",
+              "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film.\"",
+            "fusion_score": 0.5240330815315247,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Her Husband's Trademark is a 1922 American silent drama film.",
+              "Her Husband's Trademark Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne. Produced by Famous Players- Lasky and distributed by Paramount Pictures, the film was shot on location in El Paso, Texas. Prints of\" Her Husband's Trademark\" are held at the George Eastman House and the Gosfilmofond archive in Moscow."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Jazz Boat"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  }
+]

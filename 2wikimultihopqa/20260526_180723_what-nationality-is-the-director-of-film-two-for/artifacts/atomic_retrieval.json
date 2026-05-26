@@ -1,0 +1,1738 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Two For Texas?",
+    "retrieval_question": "Who is the director of Two For Texas?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Two For Texas?",
+      "retrieval_question": "Who is the director of Two For Texas?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+        "entity_ids": [
+          "\"KRIS KRISTOFFERSON\"",
+          "\"TOM SKERRITT\"",
+          "\"TWO FOR TEXAS\"",
+          "\"LARRY BROTHERS\"",
+          "\"SCOTT BAIRSTOW\"",
+          "\"IRENE BEDARD\"",
+          "\"PETER COYOTE\"",
+          "\"VICTOR RIVERS\"",
+          "\"1982 NOVEL 'TWO FOR TEXAS'\"",
+          "\"JAMES LEE BURKE\"",
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+            "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+          ],
+          "relation_texts": [
+            "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+            "link",
+            "KRIS KRISTOFFERSON",
+            "TOM SKERRITT",
+            "TWO FOR TEXAS",
+            "LARRY BROTHERS",
+            "SCOTT BAIRSTOW",
+            "IRENE BEDARD",
+            "PETER COYOTE",
+            "VICTOR RIVERS",
+            "1982 NOVEL 'TWO FOR TEXAS'",
+            "JAMES LEE BURKE",
+            "ROD HARDY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Two for Texas is a 1998 American Western film.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Two for Texas is a 1998 American Western film.",
+        "entity_ids": [
+          "\"1998\"",
+          "\"WESTERN\"",
+          "\"TWO FOR TEXAS\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Two for Texas is a 1998 American Western film.",
+            "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+          ],
+          "relation_texts": [
+            "Two for Texas is a 1998 American Western film.",
+            "link",
+            "1998",
+            "WESTERN",
+            "TWO FOR TEXAS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078521370887756,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027865171432495,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4973045885562897,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49680250883102417,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49399447441101074,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48563748598098755,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4840206205844879,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48202356696128845,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47992169857025146,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.4777419865131378,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.\"",
+        "branch": "semantic",
+        "raw_score": 0.6817643642425537,
+        "hyperedge_text": "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+        "entity_ids": [
+          "\"KRIS KRISTOFFERSON\"",
+          "\"TOM SKERRITT\"",
+          "\"TWO FOR TEXAS\"",
+          "\"LARRY BROTHERS\"",
+          "\"SCOTT BAIRSTOW\"",
+          "\"IRENE BEDARD\"",
+          "\"PETER COYOTE\"",
+          "\"VICTOR RIVERS\"",
+          "\"1982 NOVEL 'TWO FOR TEXAS'\"",
+          "\"JAMES LEE BURKE\"",
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+            "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+          ],
+          "relation_texts": [
+            "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+            "link",
+            "KRIS KRISTOFFERSON",
+            "TOM SKERRITT",
+            "TWO FOR TEXAS",
+            "LARRY BROTHERS",
+            "SCOTT BAIRSTOW",
+            "IRENE BEDARD",
+            "PETER COYOTE",
+            "VICTOR RIVERS",
+            "1982 NOVEL 'TWO FOR TEXAS'",
+            "JAMES LEE BURKE",
+            "ROD HARDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-45be74a5de795b90668bba0512276296",
+            "hyperedge_name": "<hyperedge>\"Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Two for Texas is a 1998 American Western film.\"",
+        "branch": "semantic",
+        "raw_score": 0.6470088958740234,
+        "hyperedge_text": "Two for Texas is a 1998 American Western film.",
+        "entity_ids": [
+          "\"1998\"",
+          "\"WESTERN\"",
+          "\"TWO FOR TEXAS\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Two for Texas is a 1998 American Western film.",
+            "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+          ],
+          "relation_texts": [
+            "Two for Texas is a 1998 American Western film.",
+            "link",
+            "1998",
+            "WESTERN",
+            "TWO FOR TEXAS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7bbea91a56927ad768f3a4f50b0a7975",
+            "hyperedge_name": "<hyperedge>\"Two for Texas is a 1998 American Western film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"James Lee Burke authored the 1982 novel 'Two for Texas'.\"",
+        "branch": "semantic",
+        "raw_score": 0.5452245473861694,
+        "hyperedge_text": "James Lee Burke authored the 1982 novel 'Two for Texas'.",
+        "entity_ids": [
+          "\"JAMES LEE BURKE\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "James Lee Burke authored the 1982 novel 'Two for Texas'.",
+            "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+          ],
+          "relation_texts": [
+            "James Lee Burke authored the 1982 novel 'Two for Texas'.",
+            "link",
+            "JAMES LEE BURKE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f12a2e0c4cf702b7dc08bcc8c8d48125",
+            "hyperedge_name": "<hyperedge>\"James Lee Burke authored the 1982 novel 'Two for Texas'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's narrative is based on the 1982 novel 'Two for Texas' by James Lee Burke.\"",
+        "branch": "semantic",
+        "raw_score": 0.5286720395088196,
+        "hyperedge_text": "The film's narrative is based on the 1982 novel 'Two for Texas' by James Lee Burke.",
+        "entity_ids": [
+          "\"1982 NOVEL 'TWO FOR TEXAS'\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's narrative is based on the 1982 novel 'Two for Texas' by James Lee Burke.",
+            "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+          ],
+          "relation_texts": [
+            "The film's narrative is based on the 1982 novel 'Two for Texas' by James Lee Burke.",
+            "link",
+            "1982 NOVEL 'TWO FOR TEXAS'"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6add9323c80290380ec46578f4d2b78a",
+            "hyperedge_name": "<hyperedge>\"The film's narrative is based on the 1982 novel 'Two for Texas' by James Lee Burke.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film directed by William Witney is known as Eyes of Texas.\"",
+        "branch": "semantic",
+        "raw_score": 0.506191074848175,
+        "hyperedge_text": "The film directed by William Witney is known as Eyes of Texas.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-fbbfe454abeb409bf9538c8da60f6791"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film directed by William Witney is known as Eyes of Texas.",
+            "Eyes of Texas (film) Eyes of Texas is a 1948 American film directed by William Witney."
+          ],
+          "relation_texts": [
+            "The film directed by William Witney is known as Eyes of Texas.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0fbff62940cd9f387ff71130f3b3999f",
+            "hyperedge_name": "<hyperedge>\"The film directed by William Witney is known as Eyes of Texas.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He directed 'The Trail Beyond', 'The Lawless Frontier', and 'Texas Terror' in 1934 and 1935.\"",
+        "branch": "semantic",
+        "raw_score": 0.4572684168815613,
+        "hyperedge_text": "He directed 'The Trail Beyond', 'The Lawless Frontier', and 'Texas Terror' in 1934 and 1935.",
+        "entity_ids": [
+          "\"THE TRAIL BEYOND\"",
+          "\"THE LAWLESS FRONTIER\"",
+          "\"TEXAS TERROR\""
+        ],
+        "chunk_ids": [
+          "chunk-8b13d8fa838655952a09b58272c87404"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He directed 'The Trail Beyond', 'The Lawless Frontier', and 'Texas Terror' in 1934 and 1935.",
+            "Robert North Bradbury Robert N. Bradbury( March 23, 1886 – November 24, 1949)( born Ronald E. Bradbury) was an American film director and screenwriter who directed 125 movies between 1918 and 1941. He is most famous for directing early Western films starring John Wayne in the 1930s, including\" Riders of Destiny\"( 1933; an early singing- cowboy movie),\" The Lucky Texan\"( 1934),\" West of the Divide\"( 1934),\" Blue Steel\"( 1934),\" The Man From Utah\"( 1934),\" The Star Packer\"( 1934),\" The Trail Beyond\"( 1934; co-starring Noah Beery, Sr. and Noah Beery, Jr.),\" The Lawless Frontier\"( 1934),\" Texas Terror\"( 1935),\" Rainbow Valley\"( 1935),\" The Dawn Rider\"( 1935),\" Westward Ho\"( 1935), and\" Lawless Range\"( 1935). These were inexpensively shot\" Poverty Row\" movies; many were also written by Bradbury and almost all of them featured character actor George\" Gabby\" Hayes. Bradbury also shot numerou..."
+          ],
+          "relation_texts": [
+            "He directed 'The Trail Beyond', 'The Lawless Frontier', and 'Texas Terror' in 1934 and 1935.",
+            "link",
+            "THE TRAIL BEYOND",
+            "THE LAWLESS FRONTIER",
+            "TEXAS TERROR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c6da351be69967b88ac59792a6ba183f",
+            "hyperedge_name": "<hyperedge>\"He directed 'The Trail Beyond', 'The Lawless Frontier', and 'Texas Terror' in 1934 and 1935.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The title of the film is Two for the Money.\"",
+        "branch": "semantic",
+        "raw_score": 0.4558764398097992,
+        "hyperedge_text": "The title of the film is Two for the Money.",
+        "entity_ids": [
+          "\"TWO FOR THE MONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-7a2eda46f59470a54306bad9f0f464fe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The title of the film is Two for the Money.",
+            "Two for the Money (1972 film) Two for the Money is a 1972 American TV film."
+          ],
+          "relation_texts": [
+            "The title of the film is Two for the Money.",
+            "link",
+            "TWO FOR THE MONEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5e06ec3b66fd43fb7990d0d90b3c43ec",
+            "hyperedge_name": "<hyperedge>\"The title of the film is Two for the Money.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Two for the Money is a 1972 American TV film.\"",
+        "branch": "semantic",
+        "raw_score": 0.45236271619796753,
+        "hyperedge_text": "Two for the Money is a 1972 American TV film.",
+        "entity_ids": [
+          "\"1972\"",
+          "\"TWO FOR THE MONEY\"",
+          "\"AMERICAN TV FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-7a2eda46f59470a54306bad9f0f464fe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Two for the Money is a 1972 American TV film.",
+            "Two for the Money (1972 film) Two for the Money is a 1972 American TV film."
+          ],
+          "relation_texts": [
+            "Two for the Money is a 1972 American TV film.",
+            "link",
+            "1972",
+            "TWO FOR THE MONEY",
+            "AMERICAN TV FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b578bdc5e851b816275900b3315a8aa3",
+            "hyperedge_name": "<hyperedge>\"Two for the Money is a 1972 American TV film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Eyes of Texas was released in the year 1948 and directed by William Witney.\"",
+        "branch": "semantic",
+        "raw_score": 0.4489678144454956,
+        "hyperedge_text": "The film Eyes of Texas was released in the year 1948 and directed by William Witney.",
+        "entity_ids": [
+          "\"TEXAS\"",
+          "\"FILM DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-fbbfe454abeb409bf9538c8da60f6791"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Eyes of Texas was released in the year 1948 and directed by William Witney.",
+            "Eyes of Texas (film) Eyes of Texas is a 1948 American film directed by William Witney."
+          ],
+          "relation_texts": [
+            "The film Eyes of Texas was released in the year 1948 and directed by William Witney.",
+            "link",
+            "TEXAS",
+            "FILM DIRECTION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-85f3acbd3bca70a15359391a5b88873d",
+            "hyperedge_name": "<hyperedge>\"The film Eyes of Texas was released in the year 1948 and directed by William Witney.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has twice been nominated for the Academy Award for Best Original Screenplay, for 'Passion Fish' and 'Lone Star'.\"",
+        "branch": "semantic",
+        "raw_score": 0.44309359788894653,
+        "hyperedge_text": "He has twice been nominated for the Academy Award for Best Original Screenplay, for 'Passion Fish' and 'Lone Star'.",
+        "entity_ids": [
+          "\"ACADEMY AWARD\"",
+          "\"PASSION FISH\"",
+          "\"LONE STAR\""
+        ],
+        "chunk_ids": [
+          "chunk-ad6edaa2bb485908addce3aeef08e1b6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has twice been nominated for the Academy Award for Best Original Screenplay, for 'Passion Fish' and 'Lone Star'.",
+            "John Sayles John Thomas Sayles( born September 28, 1950) is an American independent film director, screenwriter, editor, actor and novelist. He has twice been nominated for the Academy Award for Best Original Screenplay, for\" Passion Fish\"( 1992) and\" Lone Star\"( 1996). His film\" Men with Guns\"( 1997) was nominated for the Golden Globe for Best Foreign Language Film. His directorial debut,\" Return of the Secaucus 7\"( 1980), has been added to the National Film Registry."
+          ],
+          "relation_texts": [
+            "He has twice been nominated for the Academy Award for Best Original Screenplay, for 'Passion Fish' and 'Lone Star'.",
+            "link",
+            "ACADEMY AWARD",
+            "PASSION FISH",
+            "LONE STAR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3523c8884682fc6c95520c6db6a67d46",
+            "hyperedge_name": "<hyperedge>\"He has twice been nominated for the Academy Award for Best Original Screenplay, for 'Passion Fish' and 'Lone Star'.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.\"",
+        "hyperedge_text": "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6817643642425537,
+        "fusion_score": 0.5363528728485107,
+        "entity_ids": [
+          "\"KRIS KRISTOFFERSON\"",
+          "\"TOM SKERRITT\"",
+          "\"TWO FOR TEXAS\"",
+          "\"LARRY BROTHERS\"",
+          "\"SCOTT BAIRSTOW\"",
+          "\"IRENE BEDARD\"",
+          "\"PETER COYOTE\"",
+          "\"VICTOR RIVERS\"",
+          "\"1982 NOVEL 'TWO FOR TEXAS'\"",
+          "\"JAMES LEE BURKE\"",
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "evidence_texts": [
+          "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+          "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.681764,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536353
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Two for Texas is a 1998 American Western film.\"",
+        "hyperedge_text": "Two for Texas is a 1998 American Western film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6470088958740234,
+        "fusion_score": 0.5294017791748047,
+        "entity_ids": [
+          "\"1998\"",
+          "\"WESTERN\"",
+          "\"TWO FOR TEXAS\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "evidence_texts": [
+          "Two for Texas is a 1998 American Western film.",
+          "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.647009,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.529402
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"James Lee Burke authored the 1982 novel 'Two for Texas'.\"",
+        "hyperedge_text": "James Lee Burke authored the 1982 novel 'Two for Texas'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5452245473861694,
+        "fusion_score": 0.5090449094772339,
+        "entity_ids": [
+          "\"JAMES LEE BURKE\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "evidence_texts": [
+          "James Lee Burke authored the 1982 novel 'Two for Texas'.",
+          "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.545225,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.509045
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's narrative is based on the 1982 novel 'Two for Texas' by James Lee Burke.\"",
+        "hyperedge_text": "The film's narrative is based on the 1982 novel 'Two for Texas' by James Lee Burke.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5286720395088196,
+        "fusion_score": 0.5057344079017639,
+        "entity_ids": [
+          "\"1982 NOVEL 'TWO FOR TEXAS'\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "evidence_texts": [
+          "The film's narrative is based on the 1982 novel 'Two for Texas' by James Lee Burke.",
+          "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.528672,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505734
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film directed by William Witney is known as Eyes of Texas.\"",
+        "hyperedge_text": "The film directed by William Witney is known as Eyes of Texas.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.506191074848175,
+        "fusion_score": 0.501238214969635,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-fbbfe454abeb409bf9538c8da60f6791"
+        ],
+        "evidence_texts": [
+          "The film directed by William Witney is known as Eyes of Texas.",
+          "Eyes of Texas (film) Eyes of Texas is a 1948 American film directed by William Witney."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.506191,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.501238
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the director of Two For Texas?",
+    "retrieval_question": "What is the nationality of Rod Hardy?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the nationality of the director of Two For Texas?",
+      "retrieval_question": "What is the nationality of Rod Hardy?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Two For Texas",
+      "replacement_answer": "Rod Hardy",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Two For Texas",
+          "replacement_answer": "Rod Hardy"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+        "entity_ids": [
+          "\"KRIS KRISTOFFERSON\"",
+          "\"TOM SKERRITT\"",
+          "\"TWO FOR TEXAS\"",
+          "\"LARRY BROTHERS\"",
+          "\"SCOTT BAIRSTOW\"",
+          "\"IRENE BEDARD\"",
+          "\"PETER COYOTE\"",
+          "\"VICTOR RIVERS\"",
+          "\"1982 NOVEL 'TWO FOR TEXAS'\"",
+          "\"JAMES LEE BURKE\"",
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+            "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+          ],
+          "relation_texts": [
+            "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+            "link",
+            "KRIS KRISTOFFERSON",
+            "TOM SKERRITT",
+            "TWO FOR TEXAS",
+            "LARRY BROTHERS",
+            "SCOTT BAIRSTOW",
+            "IRENE BEDARD",
+            "PETER COYOTE",
+            "VICTOR RIVERS",
+            "1982 NOVEL 'TWO FOR TEXAS'",
+            "JAMES LEE BURKE",
+            "ROD HARDY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Rod Hardy.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The film was directed by Rod Hardy.",
+        "entity_ids": [
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Rod Hardy.",
+            "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+          ],
+          "relation_texts": [
+            "The film was directed by Rod Hardy.",
+            "link",
+            "ROD HARDY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rod Hardy is an Australian television and film director.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Rod Hardy is an Australian television and film director.",
+        "entity_ids": [
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rod Hardy is an Australian television and film director.",
+            "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+          ],
+          "relation_texts": [
+            "Rod Hardy is an Australian television and film director.",
+            "link",
+            "ROD HARDY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"AUSTRALIA\"",
+          "\"TELEVISION DIRECTOR\"",
+          "\"MELBOURNE\"",
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.",
+            "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+          ],
+          "relation_texts": [
+            "Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.",
+            "link",
+            "FILM DIRECTOR",
+            "AUSTRALIA",
+            "TELEVISION DIRECTOR",
+            "MELBOURNE",
+            "ROD HARDY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').\"",
+        "branch": "relation",
+        "raw_score": 0.48663467168807983,
+        "hyperedge_text": "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+        "entity_ids": [
+          "\"JUS SANGUINIS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+            "link",
+            "JUS SANGUINIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bcc8e08086e6cc89021620a9cfd18d3f",
+            "hyperedge_name": "<hyperedge>\"Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "branch": "relation",
+        "raw_score": 0.4700075089931488,
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "link",
+            "TERRITORIAL WATERS",
+            "LAW OF THE COUNTRIES INVOLVED",
+            "NATIONALITY OF THE PLANE OR SHIP",
+            "LAW",
+            "AIRSPACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e736e546ef2766fb6eee3ec329d43975",
+            "hyperedge_name": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.\"",
+        "branch": "relation",
+        "raw_score": 0.46732693910598755,
+        "hyperedge_text": "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+        "entity_ids": [
+          "\"NATIONALITY\"",
+          "\"AMERICAS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+            "link",
+            "NATIONALITY",
+            "AMERICAS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9533e282d05fe0ed1aae66ae544046ce",
+            "hyperedge_name": "<hyperedge>\"In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is important to determine from the requester whether the information requested refers to the applicant's 'place of birth' or 'nationality at birth'.\"",
+        "branch": "relation",
+        "raw_score": 0.46595436334609985,
+        "hyperedge_text": "It is important to determine from the requester whether the information requested refers to the applicant's 'place of birth' or 'nationality at birth'.",
+        "entity_ids": [
+          "\"REQUESTER\"",
+          "\"NATIONALITY AT BIRTH\"",
+          "\"REQUESTER'S CLARIFICATION\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is important to determine from the requester whether the information requested refers to the applicant's 'place of birth' or 'nationality at birth'.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "It is important to determine from the requester whether the information requested refers to the applicant's 'place of birth' or 'nationality at birth'.",
+            "link",
+            "REQUESTER",
+            "NATIONALITY AT BIRTH",
+            "REQUESTER'S CLARIFICATION",
+            "PLACE OF BIRTH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c4d31c1eecf3e485057a426833733d87",
+            "hyperedge_name": "<hyperedge>\"It is important to determine from the requester whether the information requested refers to the applicant's 'place of birth' or 'nationality at birth'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.\"",
+        "branch": "relation",
+        "raw_score": 0.45888763666152954,
+        "hyperedge_text": "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+        "entity_ids": [
+          "\"COUNTRY\"",
+          "\"US CITIZENS\"",
+          "\"US CONSTITUTION\"",
+          "\"USA\"",
+          "\"US CITIZENSHIP\"",
+          "\"ACTUAL BIRTH LOCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+            "link",
+            "COUNTRY",
+            "US CITIZENS",
+            "US CONSTITUTION",
+            "USA",
+            "US CITIZENSHIP",
+            "ACTUAL BIRTH LOCATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-46faca6a891180adb3d5dc8164abade8",
+            "hyperedge_name": "<hyperedge>\"For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His nationality is not known.\"",
+        "branch": "relation",
+        "raw_score": 0.4459039866924286,
+        "hyperedge_text": "His nationality is not known.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-7318c8a72025c333f7292577275ef015"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His nationality is not known.",
+            "Fulco Fulco was the first known missionary Bishop of Estonia. He was appointed in 1165 by Eskil, the Danish Archbishop of Lund. Before his appointment, Fulco was a Benedictine monk in the abbey of Moutier- la- Celle, near Troyes in France. His nationality is not known. After his appointment, Fulco appears in sources only once. In 1171, Pope Alexander III asked the Archbishop of Trondheim to assign an Estonian monk Nicolaus living in Stavanger to go to Fulco's assistance. No further information survives about Fulco's work in Estonia, or whether he ever even got there."
+          ],
+          "relation_texts": [
+            "His nationality is not known."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1da0ba24482d2ade665482f243ec73ab",
+            "hyperedge_name": "<hyperedge>\"His nationality is not known.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The transmission of Iraqi nationality reflects the importance of familial ties in determining nationality.\"",
+        "branch": "relation",
+        "raw_score": 0.42001670598983765,
+        "hyperedge_text": "The transmission of Iraqi nationality reflects the importance of familial ties in determining nationality.",
+        "entity_ids": [
+          "\"TRANSMISSION OF NATIONALITY\""
+        ],
+        "chunk_ids": [
+          "chunk-ac273e3621287a243dc3c92fa35aa263"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The transmission of Iraqi nationality reflects the importance of familial ties in determining nationality.",
+            "Iraqi nationality law Iraqi nationality is transmitted by one's parents."
+          ],
+          "relation_texts": [
+            "The transmission of Iraqi nationality reflects the importance of familial ties in determining nationality.",
+            "link",
+            "TRANSMISSION OF NATIONALITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fca12bb9973822a1939b26724f93e8db",
+            "hyperedge_name": "<hyperedge>\"The transmission of Iraqi nationality reflects the importance of familial ties in determining nationality.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Children inherit Iraqi nationality from their parents in accordance with nationality law.\"",
+        "branch": "relation",
+        "raw_score": 0.41773325204849243,
+        "hyperedge_text": "Children inherit Iraqi nationality from their parents in accordance with nationality law.",
+        "entity_ids": [
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-ac273e3621287a243dc3c92fa35aa263"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Children inherit Iraqi nationality from their parents in accordance with nationality law.",
+            "Iraqi nationality law Iraqi nationality is transmitted by one's parents."
+          ],
+          "relation_texts": [
+            "Children inherit Iraqi nationality from their parents in accordance with nationality law.",
+            "link",
+            "CHILDREN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1078afa04310a070080843dd84827f15",
+            "hyperedge_name": "<hyperedge>\"Children inherit Iraqi nationality from their parents in accordance with nationality law.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Iraqi nationality law governs the rules around the acquisition of nationality in Iraq.\"",
+        "branch": "relation",
+        "raw_score": 0.41448038816452026,
+        "hyperedge_text": "Iraqi nationality law governs the rules around the acquisition of nationality in Iraq.",
+        "entity_ids": [
+          "\"IRAQI NATIONALITY LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-ac273e3621287a243dc3c92fa35aa263"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Iraqi nationality law governs the rules around the acquisition of nationality in Iraq.",
+            "Iraqi nationality law Iraqi nationality is transmitted by one's parents."
+          ],
+          "relation_texts": [
+            "Iraqi nationality law governs the rules around the acquisition of nationality in Iraq.",
+            "link",
+            "IRAQI NATIONALITY LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7d26a5f3c7005275648bd522df3220c7",
+            "hyperedge_name": "<hyperedge>\"Iraqi nationality law governs the rules around the acquisition of nationality in Iraq.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Some administrative forms may request the applicant's 'country of birth'. \"",
+        "branch": "relation",
+        "raw_score": 0.40883082151412964,
+        "hyperedge_text": "Some administrative forms may request the applicant's 'country of birth'.",
+        "entity_ids": [
+          "\"ADMINISTRATIVE FORMS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Some administrative forms may request the applicant's 'country of birth'.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "Some administrative forms may request the applicant's 'country of birth'.",
+            "link",
+            "ADMINISTRATIVE FORMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1c441b07ef908be79cd5d5ec537e508e",
+            "hyperedge_name": "<hyperedge>\"Some administrative forms may request the applicant's 'country of birth'. \""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in Melbourne, Australia, Rod Hardy has a background that influences his work in the film and television industry.\"",
+        "branch": "semantic",
+        "raw_score": 0.6600342988967896,
+        "hyperedge_text": "Born in Melbourne, Australia, Rod Hardy has a background that influences his work in the film and television industry.",
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"MELBOURNE\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born in Melbourne, Australia, Rod Hardy has a background that influences his work in the film and television industry.",
+            "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+          ],
+          "relation_texts": [
+            "Born in Melbourne, Australia, Rod Hardy has a background that influences his work in the film and television industry.",
+            "link",
+            "AUSTRALIA",
+            "MELBOURNE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-03c9dbc5f2a39173fe0b4edc01a1ca4a",
+            "hyperedge_name": "<hyperedge>\"Born in Melbourne, Australia, Rod Hardy has a background that influences his work in the film and television industry.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.\"",
+        "branch": "semantic",
+        "raw_score": 0.6405286192893982,
+        "hyperedge_text": "Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"AUSTRALIA\"",
+          "\"TELEVISION DIRECTOR\"",
+          "\"MELBOURNE\"",
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.",
+            "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+          ],
+          "relation_texts": [
+            "Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.",
+            "link",
+            "FILM DIRECTOR",
+            "AUSTRALIA",
+            "TELEVISION DIRECTOR",
+            "MELBOURNE",
+            "ROD HARDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6fdd80a8292560d0f490dec994f14318",
+            "hyperedge_name": "<hyperedge>\"Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rod Hardy is an Australian television and film director.\"",
+        "branch": "semantic",
+        "raw_score": 0.6269873380661011,
+        "hyperedge_text": "Rod Hardy is an Australian television and film director.",
+        "entity_ids": [
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rod Hardy is an Australian television and film director.",
+            "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+          ],
+          "relation_texts": [
+            "Rod Hardy is an Australian television and film director.",
+            "link",
+            "ROD HARDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8ac22e3dcd953ddc71b482f2e7540276",
+            "hyperedge_name": "<hyperedge>\"Rod Hardy is an Australian television and film director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Rod Hardy.\"",
+        "branch": "semantic",
+        "raw_score": 0.5578271150588989,
+        "hyperedge_text": "The film was directed by Rod Hardy.",
+        "entity_ids": [
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Rod Hardy.",
+            "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+          ],
+          "relation_texts": [
+            "The film was directed by Rod Hardy.",
+            "link",
+            "ROD HARDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-88dd2c2cf5682a4aacbdd4bd60ceaebe",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Rod Hardy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rod Hardy's work in television includes directing a variety of programs that have gained popularity in Australia.\"",
+        "branch": "semantic",
+        "raw_score": 0.5382977724075317,
+        "hyperedge_text": "Rod Hardy's work in television includes directing a variety of programs that have gained popularity in Australia.",
+        "entity_ids": [
+          "\"TELEVISION PROGRAMS\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rod Hardy's work in television includes directing a variety of programs that have gained popularity in Australia.",
+            "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+          ],
+          "relation_texts": [
+            "Rod Hardy's work in television includes directing a variety of programs that have gained popularity in Australia.",
+            "link",
+            "TELEVISION PROGRAMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e9ec31c1f2f8a086aca827516ad1ed21",
+            "hyperedge_name": "<hyperedge>\"Rod Hardy's work in television includes directing a variety of programs that have gained popularity in Australia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In addition to television, Rod Hardy has contributed to the film industry through various directing roles.\"",
+        "branch": "semantic",
+        "raw_score": 0.5350943803787231,
+        "hyperedge_text": "In addition to television, Rod Hardy has contributed to the film industry through various directing roles.",
+        "entity_ids": [
+          "\"FILM INDUSTRY\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In addition to television, Rod Hardy has contributed to the film industry through various directing roles.",
+            "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+          ],
+          "relation_texts": [
+            "In addition to television, Rod Hardy has contributed to the film industry through various directing roles.",
+            "link",
+            "FILM INDUSTRY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ffe8bcda72681d0532fbd8fc40416746",
+            "hyperedge_name": "<hyperedge>\"In addition to television, Rod Hardy has contributed to the film industry through various directing roles.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rod Hardy's contributions have made him a respected figure among other directors in Australia.\"",
+        "branch": "semantic",
+        "raw_score": 0.5242446064949036,
+        "hyperedge_text": "Rod Hardy's contributions have made him a respected figure among other directors in Australia.",
+        "entity_ids": [
+          "\"DIRECTORS\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rod Hardy's contributions have made him a respected figure among other directors in Australia.",
+            "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+          ],
+          "relation_texts": [
+            "Rod Hardy's contributions have made him a respected figure among other directors in Australia.",
+            "link",
+            "DIRECTORS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4105a9db810c9ade082901109a131464",
+            "hyperedge_name": "<hyperedge>\"Rod Hardy's contributions have made him a respected figure among other directors in Australia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rodney’s family connections were steeped in both military and aristocratic traditions, reflective of his dual heritage.\"",
+        "branch": "semantic",
+        "raw_score": 0.41268813610076904,
+        "hyperedge_text": "Rodney’s family connections were steeped in both military and aristocratic traditions, reflective of his dual heritage.",
+        "entity_ids": [
+          "\"FAMILY LEGACY\"",
+          "\"POLITICAL AFFAIRS\"",
+          "\"MILITARY CAPACITIES\"",
+          "\"EARLY LIFE IMPACT\""
+        ],
+        "chunk_ids": [
+          "chunk-3e72e28f527251ddbf82d469986b7ba3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rodney’s family connections were steeped in both military and aristocratic traditions, reflective of his dual heritage.",
+            "George Rodney, 2nd Baron Rodney Lieutenant-Colonel George Rodney, 2nd Baron Rodney (25 December 1753 – 2 January 1802), was a British soldier and politician. Rodney was the son of Admiral George Rodney, 1st Baron Rodney, by his first wife Lady Jane Compton, daughter of the Honourable Charles Compton. His mother died when he was three years old. Rodney was a captain in the 3rd Foot Guards and a lieutenant-colonel in the British Army. In 1780 he was returned to Parliament for Northampton, a seat he held until 1784. In 1792 he entered the House of Lords on the death of his father and inherited Old Alresford House, built by his father at Old Alresford, Hampshire. Lord Rodney married Anne Harley, daughter of the Honourable Thomas Harley, in 1781. They had nine sons and one daughter. He died in January 1802, aged 48, and was succeeded by his eldest son, George. Lady Rodney died in April 184..."
+          ],
+          "relation_texts": [
+            "Rodney’s family connections were steeped in both military and aristocratic traditions, reflective of his dual heritage.",
+            "link",
+            "FAMILY LEGACY",
+            "POLITICAL AFFAIRS",
+            "MILITARY CAPACITIES",
+            "EARLY LIFE IMPACT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e6947d041a89cc2a820aa1f69d77f4dc",
+            "hyperedge_name": "<hyperedge>\"Rodney’s family connections were steeped in both military and aristocratic traditions, reflective of his dual heritage.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Terence D. Robinson was a male wrestler who competed for England.\"",
+        "branch": "semantic",
+        "raw_score": 0.3973482847213745,
+        "hyperedge_text": "Terence D. Robinson was a male wrestler who competed for England.",
+        "entity_ids": [
+          "\"ENGLAND\"",
+          "\"TERENCE D. ROBINSON\"",
+          "\"WRESTLER\""
+        ],
+        "chunk_ids": [
+          "chunk-d437fce36cecf1d71e02d40a86cf6640"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Terence D. Robinson was a male wrestler who competed for England.",
+            "Terence Robinson Terence D. Robinson( date of birth and death unknown) was a male wrestler who competed for England."
+          ],
+          "relation_texts": [
+            "Terence D. Robinson was a male wrestler who competed for England.",
+            "link",
+            "ENGLAND",
+            "TERENCE D. ROBINSON",
+            "WRESTLER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-761e888a62df27eefaba2adb1aba81b7",
+            "hyperedge_name": "<hyperedge>\"Terence D. Robinson was a male wrestler who competed for England.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Terence D. Robinson (date of birth and death unknown) was a male wrestler who competed for England.\"",
+        "branch": "semantic",
+        "raw_score": 0.39714276790618896,
+        "hyperedge_text": "Terence D. Robinson (date of birth and death unknown) was a male wrestler who competed for England.",
+        "entity_ids": [
+          "\"DATE OF BIRTH AND DEATH\"",
+          "\"MALE\""
+        ],
+        "chunk_ids": [
+          "chunk-d437fce36cecf1d71e02d40a86cf6640"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Terence D. Robinson (date of birth and death unknown) was a male wrestler who competed for England.",
+            "Terence Robinson Terence D. Robinson( date of birth and death unknown) was a male wrestler who competed for England."
+          ],
+          "relation_texts": [
+            "Terence D. Robinson (date of birth and death unknown) was a male wrestler who competed for England.",
+            "link",
+            "DATE OF BIRTH AND DEATH",
+            "MALE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cc78964388300afd998b9825ccc2d513",
+            "hyperedge_name": "<hyperedge>\"Terence D. Robinson (date of birth and death unknown) was a male wrestler who competed for England.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.\"",
+        "hyperedge_text": "Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6405286192893982,
+        "fusion_score": 0.5281057238578797,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"AUSTRALIA\"",
+          "\"TELEVISION DIRECTOR\"",
+          "\"MELBOURNE\"",
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "evidence_texts": [
+          "Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.",
+          "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.640529,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528106
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rod Hardy is an Australian television and film director.\"",
+        "hyperedge_text": "Rod Hardy is an Australian television and film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6269873380661011,
+        "fusion_score": 0.5253974676132203,
+        "entity_ids": [
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "evidence_texts": [
+          "Rod Hardy is an Australian television and film director.",
+          "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.626987,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525397
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Rod Hardy.\"",
+        "hyperedge_text": "The film was directed by Rod Hardy.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5578271150588989,
+        "fusion_score": 0.5115654230117799,
+        "entity_ids": [
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "evidence_texts": [
+          "The film was directed by Rod Hardy.",
+          "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.557827,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511565
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.\"",
+        "hyperedge_text": "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"KRIS KRISTOFFERSON\"",
+          "\"TOM SKERRITT\"",
+          "\"TWO FOR TEXAS\"",
+          "\"LARRY BROTHERS\"",
+          "\"SCOTT BAIRSTOW\"",
+          "\"IRENE BEDARD\"",
+          "\"PETER COYOTE\"",
+          "\"VICTOR RIVERS\"",
+          "\"1982 NOVEL 'TWO FOR TEXAS'\"",
+          "\"JAMES LEE BURKE\"",
+          "\"ROD HARDY\""
+        ],
+        "chunk_ids": [
+          "chunk-ae1c3caabcbfcbae2a4590ac950bd9c0"
+        ],
+        "evidence_texts": [
+          "Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.",
+          "Two for Texas Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers. It is based on the 1982 novel \"Two for Texas\" by James Lee Burke. The film premiered on TNT on January 18, 1998."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in Melbourne, Australia, Rod Hardy has a background that influences his work in the film and television industry.\"",
+        "hyperedge_text": "Born in Melbourne, Australia, Rod Hardy has a background that influences his work in the film and television industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6600342988967896,
+        "fusion_score": 0.5320068597793579,
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"MELBOURNE\""
+        ],
+        "chunk_ids": [
+          "chunk-5724be56a077d823732a4d396be89cf7"
+        ],
+        "evidence_texts": [
+          "Born in Melbourne, Australia, Rod Hardy has a background that influences his work in the film and television industry.",
+          "Rod Hardy Rod Hardy (born in Melbourne, Australia) is an Australian television and film director."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.660034,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532007
+        }
+      }
+    ]
+  }
+]

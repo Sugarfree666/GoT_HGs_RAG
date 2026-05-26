@@ -1,0 +1,720 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the producer of the film?",
+    "analysis": {
+      "entities": [
+        "the film"
+      ],
+      "relations": [
+        "is the producer of"
+      ],
+      "relation_query": "who is the producer of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The film was co-produced by multiple producers, but specific names were not mentioned.\"",
+        "hyperedge_text": "The film was co-produced by multiple producers, but specific names were not mentioned.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.4668709635734558,
+        "semantic_score": 0.6008484363555908,
+        "fusion_score": 0.7069180727005006,
+        "entity_ids": [
+          "\"FILM PRODUCTION\""
+        ],
+        "chunk_ids": [
+          "chunk-2eb5bf1c4618c7907f3bbb5d99d24ec1"
+        ],
+        "evidence_texts": [
+          "The film was co-produced by multiple producers, but specific names were not mentioned.",
+          "Golmaal Again Golmaal Again is a 2017 Indian Hindi- language supernatural action comedy film co-produced and directed by Rohit Shetty, and written by Sajid- Farhad and Yunus Sajawal. The film stars Ajay Devgn, Arshad Warsi, Tusshar Kapoor, Kunal Khemu, Shreyas Talpade, Parineeti Chopra, Tabu, Johnny Lever, Prakash Raj and Neil Nitin Mukesh in the lead roles while Mukesh Tiwari, Sanjay Mishra, Vrajesh Hirjee, Murali Sharma, Vijay Patkar, Uday Tikekar, Sachin Khedekar, Ashwini Kalsekar are featured in supporting roles and Nana Patekar makes a special appearance as himself. Golmaal Again is the fourth installment of the Golmaal franchise. Production of the film began in July 2016. Chopra signed to play the female lead after Kareena Kapoor opted out of the film because of pregnancy. Principal photography took place from March to July 2017. Produced on a budget of, the film was theatricall..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.466871,
+          "S": 0.600848,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.706918
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Isle of Man Film is now using its experience in the film industry to work with the public-private partnership, Isle of Media.\"",
+        "hyperedge_text": "Isle of Man Film is now using its experience in the film industry to work with the public-private partnership, Isle of Media.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5,
+        "fusion_score": 0.7000000000000001,
+        "entity_ids": [
+          "\"EXPERIENCE IN THE FILM INDUSTRY\"",
+          "\"PUBLIC-PRIVATE PARTNERSHIP\"",
+          "\"ISLE OF MEDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-e8647754d911f52fe4bccec6f2f88a4a"
+        ],
+        "evidence_texts": [
+          "Isle of Man Film is now using its experience in the film industry to work with the public-private partnership, Isle of Media.",
+          "Isle of Man Film Isle of Man Film is a regional screen agency, part of Isle of Man Government ’s Department of Economic Development. They drive inward investment in relation to film and the creative industries. Since 1995 Isle of Man Film has built a worldwide reputation, having co-financed and co-produced over 100 feature film and television dramas which have all filmed on the Isle of Man. They are one of the busiest areas of film production in the British Isles. Isle of Man Film offers a package of services for film producers and production companies. Loans and equity investment, a wealth of natural locations, a talented crew base, experienced facilities and services companies, together with a film- friendly Government. Isle of Man Film commits funding support to micro-budget projects, under the banner of the Mannin Shorts scheme, an educational platform aimed at providing Isle of M..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.7
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sam Newfield's ability to work on various projects and genres made him a significant figure in the film industry.\"",
+        "hyperedge_text": "Sam Newfield's ability to work on various projects and genres made him a significant figure in the film industry.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5,
+        "fusion_score": 0.7000000000000001,
+        "entity_ids": [
+          "\"SIGNIFICANT FIGURE IN THE FILM INDUSTRY\""
+        ],
+        "chunk_ids": [
+          "chunk-5e9ebde7863aa6154a6ca1feb1ab13fd"
+        ],
+        "evidence_texts": [
+          "Sam Newfield's ability to work on various projects and genres made him a significant figure in the film industry.",
+          "Sam Newfield Sam Newfield, born Samuel Neufeld,( December 6, 1899- November 10, 1964), also known as Sherman Scott or Peter Stewart, was an American B-movie director, one of the most prolific in American film history —he is credited with directing over 250 feature films in a career which began during the silent era and ended in 1958. In addition to his staggering feature output, he also directed one- and two- reel comedy shorts, training films, industrial films, TV episodes and pretty much anything anyone would pay him for. Because of this massive output—he would sometimes direct more than 20 films in a single year —he has been called the most prolific director of the sound era. Many of Newfield's films were made for PRC Pictures. This was a film production company headed by his brother Sigmund Neufeld. The films PRC produced were low- budget productions, the majority being westerns,..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.7
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sinem Saban is an Australian film writer, producer, director, and human rights activist.\"",
+        "hyperedge_text": "Sinem Saban is an Australian film writer, producer, director, and human rights activist.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 1.0,
+        "fusion_score": 0.6000000000000001,
+        "entity_ids": [
+          "\"FILM\"",
+          "\"SINEM SABAN\"",
+          "\"HUMAN RIGHTS ACTIVIST\""
+        ],
+        "chunk_ids": [
+          "chunk-6d7533572a27c4fc8b850951d9efa15c"
+        ],
+        "evidence_texts": [
+          "Sinem Saban is an Australian film writer, producer, director, and human rights activist.",
+          "Sinem Saban Sinem Saban is an Australian film writer, producer, director, and human rights activist. She is best known for directing and producing the film Our Generation."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.6
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tony Vitale is known primarily for his work in film and television.\"",
+        "hyperedge_text": "Tony Vitale is known primarily for his work in film and television.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 1.0,
+        "fusion_score": 0.6000000000000001,
+        "entity_ids": [
+          "\"FILM\"",
+          "\"TELEVISION PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-72554f80356f362a872a82f824aa10f0"
+        ],
+        "evidence_texts": [
+          "Tony Vitale is known primarily for his work in film and television.",
+          "Tony Vitale Tony Vitale( born Anthony Vitale) is an American film director, screenwriter, producer and television producer. He is best known for the 1997 film\" Kiss Me, Guido\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.6
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "The evidence indicates that the film was co-produced by multiple producers, but does not specify any names.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The film was co-produced by multiple producers, but specific names were not mentioned.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the producer of the film?",
+    "analysis": {
+      "entities": [],
+      "relations": [
+        "age of the producer"
+      ],
+      "relation_query": "What is the age of a person who produced a film?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced by Film Age.\"",
+        "hyperedge_text": "The film was produced by Film Age.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5358576774597168,
+        "semantic_score": 0.5863515138626099,
+        "fusion_score": 0.3316133737564087,
+        "entity_ids": [
+          "\"PRODUCTION COMPANY\""
+        ],
+        "chunk_ids": [
+          "chunk-987a03ff2786db3e4212f15d4cf525eb"
+        ],
+        "evidence_texts": [
+          "The film was produced by Film Age.",
+          "Kumari Mon Kumari Mon( 1962) Bengali film directed by Chitrarath. The screenplay of the film was written by Ritwik Ghatak. The film was produced by\" Film Age\" and the music director was Jyotirindra Moitra."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.535858,
+          "S": 0.586352,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.331613
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.\"",
+        "hyperedge_text": "The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5129309296607971,
+        "semantic_score": 0.4948574900627136,
+        "fusion_score": 0.3041438698768616,
+        "entity_ids": [
+          "\"LATE 20TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-83184d49b2e885311719cd2f3287ea90"
+        ],
+        "evidence_texts": [
+          "The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.",
+          "The Demise of Herman Durer The Demise of Herman Durer( Dutch:\" De Verwording van Herman Dürer\") is a 1979 Dutch film directed by Leon de Winter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.512931,
+          "S": 0.494857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.304144
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced in 1928.\"",
+        "hyperedge_text": "The film was produced in 1928.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4951038956642151,
+        "semantic_score": 0.49489134550094604,
+        "fusion_score": 0.29701982736587523,
+        "entity_ids": [
+          "\"1928\""
+        ],
+        "chunk_ids": [
+          "chunk-2b7f13beea4aa5ca30b777e68d503703"
+        ],
+        "evidence_texts": [
+          "The film was produced in 1928.",
+          "The Exploits of the Emden The Exploits of the Emden is a 1928 silent Australian film about the Battle of Cocos; the World War I naval battle between Australian cruiser and German cruiser. It consists of footage from a 1926 German film,\" Our Emden\", with additional sequences shot in Australia by director Ken G. Hall. Only part of the film survives today."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.495104,
+          "S": 0.494891,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.29702
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He produced 70 films between 1937 and 1960, and directed 47 films between 1919 and 1929.\"",
+        "hyperedge_text": "He produced 70 films between 1937 and 1960, and directed 47 films between 1919 and 1929.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5230075120925903,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.34253633817036944,
+        "entity_ids": [
+          "\"47 FILMS\"",
+          "\"70 FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-382df67357fba5f04b9a2c369f0b9c6b"
+        ],
+        "evidence_texts": [
+          "He produced 70 films between 1937 and 1960, and directed 47 films between 1919 and 1929.",
+          "Scott R. Dunlap Scott R. Dunlap( June 20, 1892 – March 30, 1970) was an American film producer, director, screenwriter, and actor. Dunlap was born in Chicago, Illinois in 1892 and entered the film business in 1915. He produced 70 films between 1937 and 1960, and directed 47 films between 1919 and 1929. In 1942, Dunlap was with Western star Buck Jones at the Cocoanut Grove fire in Boston, Massachusetts. Dunlap was hosting a party in Jones's honor at the nightclub. Jones died two days after the fire, while Dunlap was seriously hurt, but survived. Dunlap died in Los Angeles in 1970."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.523008,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.342536
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He produced 100 films between 1924 and 1940.\"",
+        "hyperedge_text": "He produced 100 films between 1924 and 1940.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5098403692245483,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.3372694810231527,
+        "entity_ids": [
+          "\"1940\"",
+          "\"1924\"",
+          "\"100 FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-eff6f8b4e1eb8d443670c8f76367fabd"
+        ],
+        "evidence_texts": [
+          "He produced 100 films between 1924 and 1940.",
+          "Harry S. Webb Harry S. Webb( October 15, 1892 – July 4, 1959) was an American film producer, director and screenwriter. He produced 100 films between 1924 and 1940. He also directed 55 films between 1924 and 1940. He was the brother of\" B\"- film producer and director Ira S. Webb and the husband of screenwriter Rose Gordon, who wrote many of his films. In 1933 Webb and Bernard B. Ray created Reliable Pictures Corporation with a studio at Beachwood and Sunset Boulevard in Hollywood. Reliable produced and released many Westerns, starting with\" Girl Trouble\"( 1933), until the company closed in 1937. Its final release was\" The Silver Trail\". Webb and Ray then started Metropolitan Pictures Corporation in 1938, which produced and released several films until 1940, its last being\" Pinto Canyon\". Webb then produced Westerns for Monogram Pictures. He was born in Pennsylvania and died in Hollywo..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.50984,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.337269
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "The producer of the film is not specified in the evidence, making it impossible to determine their age.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The film was produced by Film Age.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the age of the producer of film?",
+    "analysis": {
+      "entities": [],
+      "relations": [
+        "age of the producer"
+      ],
+      "relation_query": "What is the age of a producer of a film?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced by Film Age.\"",
+        "hyperedge_text": "The film was produced by Film Age.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5405063033103943,
+        "semantic_score": 0.5923656821250916,
+        "fusion_score": 0.33467565774917607,
+        "entity_ids": [
+          "\"PRODUCTION COMPANY\""
+        ],
+        "chunk_ids": [
+          "chunk-987a03ff2786db3e4212f15d4cf525eb"
+        ],
+        "evidence_texts": [
+          "The film was produced by Film Age.",
+          "Kumari Mon Kumari Mon( 1962) Bengali film directed by Chitrarath. The screenplay of the film was written by Ritwik Ghatak. The film was produced by\" Film Age\" and the music director was Jyotirindra Moitra."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.540506,
+          "S": 0.592366,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.334676
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.\"",
+        "hyperedge_text": "The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4737207293510437,
+        "semantic_score": 0.5350363254547119,
+        "fusion_score": 0.29649555683135986,
+        "entity_ids": [
+          "\"LATE 20TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-83184d49b2e885311719cd2f3287ea90"
+        ],
+        "evidence_texts": [
+          "The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.",
+          "The Demise of Herman Durer The Demise of Herman Durer( Dutch:\" De Verwording van Herman Dürer\") is a 1979 Dutch film directed by Leon de Winter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.473721,
+          "S": 0.535036,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.296496
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Additionally, he is a producer of films.\"",
+        "hyperedge_text": "Additionally, he is a producer of films.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4695451557636261,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.3211513956387838,
+        "entity_ids": [
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-e2d4614340c4dc57c494dabe5d2e6715"
+        ],
+        "evidence_texts": [
+          "Additionally, he is a producer of films.",
+          "Perry Bhandal Perry Bhandal( born 12 January 1968) is a British film director, screenwriter, and producer of the films\" Interview with a Hitman\"&'' and author of _prelude a collection of short stories and artwork."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.469545,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.321151
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Beginning his film career as an actor, he went on to direct over 80 films, at times co-credited as producer and consultant.\"",
+        "hyperedge_text": "Beginning his film career as an actor, he went on to direct over 80 films, at times co-credited as producer and consultant.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45489710569381714,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.3152921756108602,
+        "entity_ids": [
+          "\"PRODUCER\"",
+          "\"ACTOR\"",
+          "\"CONSULTANT\"",
+          "\"OVER 80 FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-fd549be163e1b49589bd0d5f45606e3c"
+        ],
+        "evidence_texts": [
+          "Beginning his film career as an actor, he went on to direct over 80 films, at times co-credited as producer and consultant.",
+          "William A. Wellman William Augustus Wellman( February 29, 1896 – December 9, 1975) was an American film director notable for his work in crime, adventure and action genre films, often focusing on aviation themes, a particular passion. He also directed several well- regarded satirical comedies. Beginning his film career as an actor, he went on to direct over 80 films, at times co-credited as producer and consultant. In 1927, Wellman famously directed\" Wings\", which became the first film to win an Academy Award for Best Picture at the 1st Academy Awards ceremony. He also won the Academy Award for Best Story for his film\" A Star Is Born\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.454897,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.315292
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was a film producer.\"",
+        "hyperedge_text": "He was a film producer.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4506022334098816,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.31357422669728596,
+        "entity_ids": [
+          "\"FILM PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-261b6c6231b6c62f27b019687cd8b565"
+        ],
+        "evidence_texts": [
+          "He was a film producer.",
+          "Jerrold Wexler Jerrold Wexler( June 27, 1924 – November 10, 1992) was a noted American businessman and film producer. He was the brother of cinematographer Haskell Wexler and the stepfather of actress Daryl Hannah."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.450602,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.313574
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "The evidence does not specify the name of the producer, making it impossible to determine their age.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The film was produced by Film Age.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the producer of the film?",
+    "analysis": {
+      "entities": [
+        "Film Age"
+      ],
+      "relations": [
+        "age of the producer"
+      ],
+      "relation_query": "What is the age of the producer of a film produced by an organization?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced by Film Age.\"",
+        "hyperedge_text": "The film was produced by Film Age.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.560391902923584,
+        "semantic_score": 0.5863515138626099,
+        "fusion_score": 0.7414270639419556,
+        "entity_ids": [
+          "\"PRODUCTION COMPANY\""
+        ],
+        "chunk_ids": [
+          "chunk-987a03ff2786db3e4212f15d4cf525eb"
+        ],
+        "evidence_texts": [
+          "The film was produced by Film Age.",
+          "Kumari Mon Kumari Mon( 1962) Bengali film directed by Chitrarath. The screenplay of the film was written by Ritwik Ghatak. The film was produced by\" Film Age\" and the music director was Jyotirindra Moitra."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.560392,
+          "S": 0.586352,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.741427
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released in 2012, indicating its production year.\"",
+        "hyperedge_text": "The film was released in 2012, indicating its production year.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4541012644767761,
+        "semantic_score": 0.49415385723114014,
+        "fusion_score": 0.2804712772369385,
+        "entity_ids": [
+          "\"2012\""
+        ],
+        "chunk_ids": [
+          "chunk-72e36347526e0e93e0708e95e799b041"
+        ],
+        "evidence_texts": [
+          "The film was released in 2012, indicating its production year.",
+          "Dead Mine Dead Mine is a 2012 English- language Indonesian horror film directed by Steven Sheil and starring Ario Bayu and Joe Taslim. The Film was produced by Infinite Frameworks, the production house before working on the musical animated film\" Meraih Mimpi\"( Achieved a dream) in 2009. Filming and production of the film was done in the filming facility integrated in Batam Island."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.454101,
+          "S": 0.494154,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.280471
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.\"",
+        "hyperedge_text": "The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45310187339782715,
+        "semantic_score": 0.4948574900627136,
+        "fusion_score": 0.2802122473716736,
+        "entity_ids": [
+          "\"LATE 20TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-83184d49b2e885311719cd2f3287ea90"
+        ],
+        "evidence_texts": [
+          "The film was likely produced during the late 20th century, reflecting cinematic styles and norms of that era.",
+          "The Demise of Herman Durer The Demise of Herman Durer( Dutch:\" De Verwording van Herman Dürer\") is a 1979 Dutch film directed by Leon de Winter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.453102,
+          "S": 0.494857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.280212
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released on September 30, 1943, by Producers Releasing Corporation.\"",
+        "hyperedge_text": "The film was released on September 30, 1943, by Producers Releasing Corporation.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45186400413513184,
+        "semantic_score": 0.48665308952331543,
+        "fusion_score": 0.2780762195587158,
+        "entity_ids": [
+          "\"PRODUCERS RELEASING CORPORATION\"",
+          "\"SEPTEMBER 30, 1943\""
+        ],
+        "chunk_ids": [
+          "chunk-60a7fe156c336c5f2765e7f745e9155b"
+        ],
+        "evidence_texts": [
+          "The film was released on September 30, 1943, by Producers Releasing Corporation.",
+          "Raiders of Red Gap Raiders of Red Gap is a 1943 American Western film directed by Sam Newfield and written by Joseph O'Donnell. The film stars Robert Livingston, Al St. John, Myrna Dell, Ed Cassidy, Charles King and Kermit Maynard. The film was released on September 30, 1943, by Producers Releasing Corporation."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.451864,
+          "S": 0.486653,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.278076
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced in 1984, which marks its release year.\"",
+        "hyperedge_text": "The film was produced in 1984, which marks its release year.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4436066150665283,
+        "semantic_score": 0.5029585361480713,
+        "fusion_score": 0.2780343532562256,
+        "entity_ids": [
+          "\"1984\""
+        ],
+        "chunk_ids": [
+          "chunk-e6f5675e157743d674b8e26b72b7eedc"
+        ],
+        "evidence_texts": [
+          "The film was produced in 1984, which marks its release year.",
+          "Man Without Memory Man Without Memory is a 1984 Swiss drama film directed by Kurt Gloor. It was entered into the 34th Berlin International Film Festival."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.443607,
+          "S": 0.502959,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.278034
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "The producer of the film is not specified in the evidence, making it impossible to determine their age.",
+    "used_dependencies": [
+      "q2",
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The film was produced by Film Age.\""
+    ]
+  }
+]

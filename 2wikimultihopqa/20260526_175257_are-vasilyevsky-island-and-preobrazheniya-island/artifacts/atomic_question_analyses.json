@@ -1,0 +1,171 @@
+[
+  {
+    "node_id": "q1",
+    "question": "In which country is Vasilyevsky Island located?",
+    "retrieval_question": "In which country is Vasilyevsky Island located?",
+    "dependency_question_rewrite": {
+      "original_question": "In which country is Vasilyevsky Island located?",
+      "retrieval_question": "In which country is Vasilyevsky Island located?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Vasilyevsky Island"
+      ],
+      "relations": [
+        "is located in"
+      ],
+      "relation_query": "which country contains a place",
+      "answer_type": "country"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "In which country is Preobrazheniya Island located?",
+    "retrieval_question": "In which country is Preobrazheniya Island located?",
+    "dependency_question_rewrite": {
+      "original_question": "In which country is Preobrazheniya Island located?",
+      "retrieval_question": "In which country is Preobrazheniya Island located?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Preobrazheniya Island"
+      ],
+      "relations": [
+        "location of"
+      ],
+      "relation_query": "the country where a place is located",
+      "answer_type": "country"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Are Vasilyevsky Island and Preobrazheniya Island located in the same country?",
+    "retrieval_question": "Are Vasilyevsky Island and Preobrazheniya Island located in the same country?",
+    "dependency_question_rewrite": {
+      "original_question": "Are Vasilyevsky Island and Preobrazheniya Island located in the same country?",
+      "retrieval_question": "Are Vasilyevsky Island and Preobrazheniya Island located in the same country?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "In which country is Vasilyevsky Island located?",
+        "answer": "Russia",
+        "confidence": 1.0,
+        "answer_type": "country",
+        "reasoning_summary": "Vasilyevsky Island is explicitly stated to be located in St. Petersburg, Russia, according to the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.\"",
+            "fusion_score": 0.5465201735496521,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+              "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.\"",
+            "fusion_score": 0.5456642866134644,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+              "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.\"",
+            "fusion_score": 0.5249059200286865,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.",
+              "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "In which country is Preobrazheniya Island located?",
+        "answer": "Russia",
+        "confidence": 1.0,
+        "answer_type": "country",
+        "reasoning_summary": "Preobrazheniya Island is explicitly stated to be located in Russia according to the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\"",
+            "fusion_score": 0.524896001815796,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+              "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The location of Preobrazheniya Island may hold significance for researchers studying Arctic ecosystems.\"",
+            "fusion_score": 0.9053311824798584,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The location of Preobrazheniya Island may hold significance for researchers studying Arctic ecosystems.",
+              "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The remoteness of Preobrazheniya Island makes it less accessible for human activities.\"",
+            "fusion_score": 0.5198412895202638,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The remoteness of Preobrazheniya Island makes it less accessible for human activities.",
+              "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Vasilyevsky Island",
+        "Preobrazheniya Island",
+        "Russia"
+      ],
+      "relations": [
+        "are located in the same country"
+      ],
+      "relation_query": "Are two islands located in the same country?",
+      "answer_type": "boolean"
+    }
+  }
+]

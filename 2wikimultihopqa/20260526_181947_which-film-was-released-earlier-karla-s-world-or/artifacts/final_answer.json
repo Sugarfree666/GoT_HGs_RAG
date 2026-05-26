@@ -1,0 +1,34 @@
+{
+  "answer": "Dharti",
+  "candidate_answer": "Karla'S World was released later than Dharti.",
+  "reasoning_summary": "Karla'S World was released in 2007, while Dharti was released in 1970. Therefore, Dharti was released earlier.",
+  "answer_span_reasoning": "Dharti was released earlier than Karla'S World.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "When was Karla'S World released?",
+      "answer": "2007",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the release date of Dharti?",
+      "answer": "1970",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Dharti (Earth) is a 1970 Bollywood action film directed by C.V. Sridhar.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "What is the release date of Karla'S World?",
+      "answer": "2007",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

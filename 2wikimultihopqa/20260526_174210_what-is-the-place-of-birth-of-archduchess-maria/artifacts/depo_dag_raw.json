@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the mother of Archduchess Maria Immakulata Of Austria?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the place of birth of the mother of Archduchess Maria Immakulata Of Austria?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

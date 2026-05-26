@@ -1,0 +1,556 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Karla'S World released?",
+    "analysis": {
+      "entities": [
+        "Karla'S World"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.\"",
+        "hyperedge_text": "Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5980917811393738,
+        "fusion_score": 0.5196183562278748,
+        "entity_ids": [
+          "\"DANISH\"",
+          "\"2007\"",
+          "\"2003\"",
+          "\"BOOK\"",
+          "\"KARLA'S WORLD\"",
+          "\"RENÉE SIMONSEN\"",
+          "\"CHARLOTTE SACHS BOSTRUP\""
+        ],
+        "chunk_ids": [
+          "chunk-53f7e2ce42cb1d2bbb52a0289623bb71"
+        ],
+        "evidence_texts": [
+          "Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.",
+          "Karla's World Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.598092,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519618
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Karla's World is a movie based on a book written by Renée Simonsen.\"",
+        "hyperedge_text": "Karla's World is a movie based on a book written by Renée Simonsen.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5583915710449219,
+        "fusion_score": 0.5116783142089845,
+        "entity_ids": [
+          "\"KARLA'S WORLD\"",
+          "\"RENÉE SIMONSEN\""
+        ],
+        "chunk_ids": [
+          "chunk-53f7e2ce42cb1d2bbb52a0289623bb71"
+        ],
+        "evidence_texts": [
+          "Karla's World is a movie based on a book written by Renée Simonsen.",
+          "Karla's World Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.558392,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511678
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen.\"",
+        "hyperedge_text": "Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.75,
+        "fusion_score": 0.55,
+        "entity_ids": [
+          "\"DANISH\"",
+          "\"2007\"",
+          "\"2003\"",
+          "\"BOOK\"",
+          "\"KARLA'S WORLD\"",
+          "\"RENÉE SIMONSEN\"",
+          "\"CHARLOTTE SACHS BOSTRUP\""
+        ],
+        "chunk_ids": [
+          "chunk-53f7e2ce42cb1d2bbb52a0289623bb71"
+        ],
+        "evidence_texts": [
+          "Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen.",
+          "Karla's World Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.75,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Karla's World is the title of both the movie and the book by Renée Simonsen.\"",
+        "hyperedge_text": "Karla's World is the title of both the movie and the book by Renée Simonsen.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5775694251060486,
+        "fusion_score": 0.5155138850212098,
+        "entity_ids": [
+          "\"TITLE\""
+        ],
+        "chunk_ids": [
+          "chunk-53f7e2ce42cb1d2bbb52a0289623bb71"
+        ],
+        "evidence_texts": [
+          "Karla's World is the title of both the movie and the book by Renée Simonsen.",
+          "Karla's World Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.577569,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515514
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Charlotte Sachs Bostrup directed the film Karla's World.\"",
+        "hyperedge_text": "Charlotte Sachs Bostrup directed the film Karla's World.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5367774367332458,
+        "fusion_score": 0.5073554873466493,
+        "entity_ids": [
+          "\"CHARLOTTE SACHS BOSTRUP\""
+        ],
+        "chunk_ids": [
+          "chunk-53f7e2ce42cb1d2bbb52a0289623bb71"
+        ],
+        "evidence_texts": [
+          "Charlotte Sachs Bostrup directed the film Karla's World.",
+          "Karla's World Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.536777,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.507355
+        }
+      }
+    ],
+    "answer": "2007",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Karla's World is a 2007 Danish movie'.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Dharti?",
+    "analysis": {
+      "entities": [
+        "Dharti"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dharti (Earth) is a 1970 Bollywood action film directed by C.V. Sridhar.\"",
+        "hyperedge_text": "Dharti (Earth) is a 1970 Bollywood action film directed by C.V. Sridhar.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49835139513015747,
+        "fusion_score": 0.4996702790260315,
+        "entity_ids": [
+          "\"EARTH\"",
+          "\"DHARTI\""
+        ],
+        "chunk_ids": [
+          "chunk-67cfb2a035a3f576eabdb88bf58e9b01"
+        ],
+        "evidence_texts": [
+          "Dharti (Earth) is a 1970 Bollywood action film directed by C.V. Sridhar.",
+          "Dharti Dharti(\" Earth\") is a 1970 Bollywood action film directed by C.V. Sridhar. The film stars Rajendra Kumar and Waheeda Rehman. It is a remake of the 1969 Tamil language film\" Sivandha Mann\" that starred Sivaji Ganesan."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.498351,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.49967
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Rakka was 14 June 2017.\"",
+        "hyperedge_text": "The release date of Rakka was 14 June 2017.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45409703254699707,
+        "semantic_score": 0.4130377769470215,
+        "fusion_score": 0.26424636840820315,
+        "entity_ids": [
+          "\"14 JUNE 2017\""
+        ],
+        "chunk_ids": [
+          "chunk-44787de4ca914ea38ca9818d0ecd9288"
+        ],
+        "evidence_texts": [
+          "The release date of Rakka was 14 June 2017.",
+          "Rakka (film) The film was released on YouTube and Steam on 14 June 2017."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.454097,
+          "S": 0.413038,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.264246
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The action film Dharti features a storyline that incorporates elements of heroism, romance, and drama typical of the genre.\"",
+        "hyperedge_text": "The action film Dharti features a storyline that incorporates elements of heroism, romance, and drama typical of the genre.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5087630748748779,
+        "fusion_score": 0.5017526149749756,
+        "entity_ids": [
+          "\"DRAMA\"",
+          "\"HEROISM\"",
+          "\"ROMANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-67cfb2a035a3f576eabdb88bf58e9b01"
+        ],
+        "evidence_texts": [
+          "The action film Dharti features a storyline that incorporates elements of heroism, romance, and drama typical of the genre.",
+          "Dharti Dharti(\" Earth\") is a 1970 Bollywood action film directed by C.V. Sridhar. The film stars Rajendra Kumar and Waheeda Rehman. It is a remake of the 1969 Tamil language film\" Sivandha Mann\" that starred Sivaji Ganesan."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.508763,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.501753
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Dharti showcases the cultural influences of Bollywood cinema during the 1970s, reflecting societal themes of that era.\"",
+        "hyperedge_text": "The film Dharti showcases the cultural influences of Bollywood cinema during the 1970s, reflecting societal themes of that era.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5004716515541077,
+        "fusion_score": 0.5000943303108216,
+        "entity_ids": [
+          "\"BOLLYWOOD\""
+        ],
+        "chunk_ids": [
+          "chunk-67cfb2a035a3f576eabdb88bf58e9b01"
+        ],
+        "evidence_texts": [
+          "The film Dharti showcases the cultural influences of Bollywood cinema during the 1970s, reflecting societal themes of that era.",
+          "Dharti Dharti(\" Earth\") is a 1970 Bollywood action film directed by C.V. Sridhar. The film stars Rajendra Kumar and Waheeda Rehman. It is a remake of the 1969 Tamil language film\" Sivandha Mann\" that starred Sivaji Ganesan."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.500472,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.500094
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dharti is a Bollywood film directed by C.V. Sridhar, which features a blend of action elements typical of 1970s cinema.\"",
+        "hyperedge_text": "Dharti is a Bollywood film directed by C.V. Sridhar, which features a blend of action elements typical of 1970s cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.480092316865921,
+        "fusion_score": 0.4960184633731842,
+        "entity_ids": [
+          "\"C.V. SRIDHAR\""
+        ],
+        "chunk_ids": [
+          "chunk-67cfb2a035a3f576eabdb88bf58e9b01"
+        ],
+        "evidence_texts": [
+          "Dharti is a Bollywood film directed by C.V. Sridhar, which features a blend of action elements typical of 1970s cinema.",
+          "Dharti Dharti(\" Earth\") is a 1970 Bollywood action film directed by C.V. Sridhar. The film stars Rajendra Kumar and Waheeda Rehman. It is a remake of the 1969 Tamil language film\" Sivandha Mann\" that starred Sivaji Ganesan."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.480092,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496018
+        }
+      }
+    ],
+    "answer": "1970",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'Dharti (Earth) is a 1970 Bollywood action film directed by C.V. Sridhar.' This directly supports the release date as 1970.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Dharti (Earth) is a 1970 Bollywood action film directed by C.V. Sridhar.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Karla'S World?",
+    "analysis": {
+      "entities": [
+        "Karla's World"
+      ],
+      "relations": [
+        "release date of"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.\"",
+        "hyperedge_text": "Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5411628484725952,
+        "fusion_score": 0.5082325696945191,
+        "entity_ids": [
+          "\"DANISH\"",
+          "\"2007\"",
+          "\"2003\"",
+          "\"BOOK\"",
+          "\"KARLA'S WORLD\"",
+          "\"RENÉE SIMONSEN\"",
+          "\"CHARLOTTE SACHS BOSTRUP\""
+        ],
+        "chunk_ids": [
+          "chunk-53f7e2ce42cb1d2bbb52a0289623bb71"
+        ],
+        "evidence_texts": [
+          "Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.",
+          "Karla's World Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.541163,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.508233
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Karla's World is a movie based on a book written by Renée Simonsen.\"",
+        "hyperedge_text": "Karla's World is a movie based on a book written by Renée Simonsen.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5008262395858765,
+        "fusion_score": 0.5001652479171753,
+        "entity_ids": [
+          "\"KARLA'S WORLD\"",
+          "\"RENÉE SIMONSEN\""
+        ],
+        "chunk_ids": [
+          "chunk-53f7e2ce42cb1d2bbb52a0289623bb71"
+        ],
+        "evidence_texts": [
+          "Karla's World is a movie based on a book written by Renée Simonsen.",
+          "Karla's World Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.500826,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.500165
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Rakka was 14 June 2017.\"",
+        "hyperedge_text": "The release date of Rakka was 14 June 2017.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45409703254699707,
+        "semantic_score": 0.45482194423675537,
+        "fusion_score": 0.27260320186614995,
+        "entity_ids": [
+          "\"14 JUNE 2017\""
+        ],
+        "chunk_ids": [
+          "chunk-44787de4ca914ea38ca9818d0ecd9288"
+        ],
+        "evidence_texts": [
+          "The release date of Rakka was 14 June 2017.",
+          "Rakka (film) The film was released on YouTube and Steam on 14 June 2017."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.454097,
+          "S": 0.454822,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.272603
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46724173426628113,
+        "semantic_score": 0.4035569131374359,
+        "fusion_score": 0.26760807633399963,
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "evidence_texts": [
+          "The release date was on 10 October 2009.",
+          "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.467242,
+          "S": 0.403557,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.267608
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "hyperedge_text": "The release date on CD was September 22.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4368012547492981,
+        "semantic_score": 0.4103541970252991,
+        "fusion_score": 0.2567913413047791,
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "evidence_texts": [
+          "The release date on CD was September 22.",
+          "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.436801,
+          "S": 0.410354,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.256791
+        }
+      }
+    ],
+    "answer": "2007",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Karla's World is a 2007 Danish movie'.",
+    "used_dependencies": [
+      "q1",
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.\""
+    ]
+  }
+]

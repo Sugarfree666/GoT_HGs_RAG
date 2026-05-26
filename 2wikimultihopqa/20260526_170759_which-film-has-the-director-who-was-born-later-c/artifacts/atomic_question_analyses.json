@@ -1,0 +1,131 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Complete Unknown?",
+    "retrieval_question": "Who is the director of Complete Unknown?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Complete Unknown?",
+      "retrieval_question": "Who is the director of Complete Unknown?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Complete Unknown"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Dr. Goldfoot And The Girl Bombs?",
+    "retrieval_question": "Who is the director of Dr. Goldfoot And The Girl Bombs?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Dr. Goldfoot And The Girl Bombs?",
+      "retrieval_question": "Who is the director of Dr. Goldfoot And The Girl Bombs?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Dr. Goldfoot And The Girl Bombs"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "Who is the director of a work?",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What film has the director of Complete Unknown?",
+    "retrieval_question": "What film has Joshua Marston?",
+    "dependency_question_rewrite": {
+      "original_question": "What film has the director of Complete Unknown?",
+      "retrieval_question": "What film has Joshua Marston?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Complete Unknown",
+      "replacement_answer": "Joshua Marston",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Complete Unknown",
+          "replacement_answer": "Joshua Marston"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Complete Unknown?",
+        "answer": "Joshua Marston",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Complete Unknown' is directed by Joshua Marston.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.\"",
+            "fusion_score": 0.5222391486167908,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.",
+              "Complete Unknown Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard. It stars Rachel Weisz, Michael Shannon, Kathy Bates and Danny Glover. It had its world premiere at the Sundance Film Festival on January 25, 2016. The film was released on August 26, 2016, by Amazon Studios and IFC Films."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Complete Unknown is a 2016 American-British drama mystery thriller film.\"",
+            "fusion_score": 0.5188504576683045,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Complete Unknown is a 2016 American-British drama mystery thriller film.",
+              "Complete Unknown Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard. It stars Rachel Weisz, Michael Shannon, Kathy Bates and Danny Glover. It had its world premiere at the Sundance Film Festival on January 25, 2016. The film was released on August 26, 2016, by Amazon Studios and IFC Films."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"In 2016, Marston made his English-language debut on 'Complete Unknown' starring Rachel Weisz and Michael Shannon.\"",
+            "fusion_score": 0.49802494049072266,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "In 2016, Marston made his English-language debut on 'Complete Unknown' starring Rachel Weisz and Michael Shannon.",
+              "Joshua Marston Joshua Jacob Marston( born August 13, 1968) is an American screenwriter and film director best known for the film\" Maria Full of Grace\". Born in Los Angeles County, California, he graduated from Beverly Hills High School. Marston worked in Paris as an intern for\" Life\", then for ABC News during the Gulf War. He returned to the United States and earned a master's degree in Political science from University of Chicago in 1994 before earning a Master of Fine Arts in film at New York University. Marston also directed an episode of\" Six Feet Under\", and Episode 7 of\" The Newsroom\" in 2012. Marston directed a segment of the collective film\" New York, I Love You\". His 2011 film\" The Forgiveness of Blood\" premiered in competition at the 61st Berlin International Film Festival and competed for the Golden Bear. Along with Andamion Murataj, Marston won the Silver Bear for Best Scr..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Joshua Marston",
+        "Complete Unknown"
+      ],
+      "relations": [
+        "directed"
+      ],
+      "relation_query": "Which film is directed by a person?",
+      "answer_type": "work"
+    }
+  }
+]

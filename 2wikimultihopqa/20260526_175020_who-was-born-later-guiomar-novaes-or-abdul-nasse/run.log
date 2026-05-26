@@ -1,0 +1,9 @@
+2026-05-26 17:50:20,537 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 17:51:39,212 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 17:51:39,212 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 17:51:51,623 | INFO | Starting HyperBranch pipeline for question: Who was born later, Guiomar Novaes or Abdul Nasser Al-Sayegh?
+2026-05-26 17:51:51,623 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-26 17:51:56,450 | INFO | Atomic retrieval returned 21 hits for question=When was Guiomar Novaes born?
+2026-05-26 17:52:07,442 | INFO | Atomic retrieval returned 21 hits for question=When was Abdul Nasser Al-Sayegh born?
+2026-05-26 17:52:22,451 | INFO | Atomic retrieval returned 21 hits for question=What is the birth date of Guiomar Novaes?
+2026-05-26 17:52:56,236 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_175020_who-was-born-later-guiomar-novaes-or-abdul-nasse

@@ -1,0 +1,104 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Yang ± Yin: Gender In Chinese Cinema?",
+    "retrieval_question": "Who is the director of Yang ± Yin: Gender In Chinese Cinema?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Yang ± Yin: Gender In Chinese Cinema?",
+      "retrieval_question": "Who is the director of Yang ± Yin: Gender In Chinese Cinema?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Yang ± Yin: Gender In Chinese Cinema"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the director of Yang ± Yin: Gender In Chinese Cinema study?",
+    "retrieval_question": "Where did Stanley Kwan study?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the director of Yang ± Yin: Gender In Chinese Cinema study?",
+      "retrieval_question": "Where did Stanley Kwan study?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Yang ± Yin: Gender In Chinese Cinema",
+      "replacement_answer": "Stanley Kwan",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Yang ± Yin: Gender In Chinese Cinema",
+          "replacement_answer": "Stanley Kwan"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Yang ± Yin: Gender In Chinese Cinema?",
+        "answer": "Stanley Kwan",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that Stanley Kwan is the filmmaker of 'Yang ± Yin: Gender in Chinese Cinema'.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Yang ± Yin: Gender in Chinese Cinema is a 1996 documentary by filmmaker Stanley Kwan exploring representations of queerness and LGBT identity in film from Greater China.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Yang ± Yin: Gender in Chinese Cinema is a 1996 documentary by filmmaker Stanley Kwan exploring representations of queerness and LGBT identity in film from Greater China.\"",
+            "fusion_score": 0.5433834433555603,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Yang ± Yin: Gender in Chinese Cinema is a 1996 documentary by filmmaker Stanley Kwan exploring representations of queerness and LGBT identity in film from Greater China.",
+              "Yang ± Yin: Gender in Chinese Cinema Yang ± Yin : Gender in Chinese Cinema is a 1996 documentary by filmmaker Stanley Kwan exploring representations of queerness and LGBT identity in film from Greater China. The film was produced and partially funded by the BFI to mark the centenary of cinema."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Ying Liang is a Chinese independent film director and screenwriter.\"",
+            "fusion_score": 0.5186793208122253,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Ying Liang is a Chinese independent film director and screenwriter.",
+              "Ying Liang Ying Liang( born 1977) is a Chinese independent film director and screenwriter."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Ying Liang is a film director and screenwriter.\"",
+            "fusion_score": 0.5186219453811646,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Ying Liang is a film director and screenwriter.",
+              "Ying Liang Ying Liang( born 1977) is a Chinese independent film director and screenwriter."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Stanley Kwan"
+      ],
+      "relations": [
+        "study location"
+      ],
+      "relation_query": "Where did a person study?",
+      "answer_type": "location"
+    }
+  }
+]

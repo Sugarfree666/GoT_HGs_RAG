@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Afrika?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the nationality of the director of Afrika?",
+      "dependencies": [
+        "q1"
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of Man From The Deep River?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q4",
+      "question": "What is the nationality of the director of Man From The Deep River?",
+      "dependencies": [
+        "q3"
+      ]
+    },
+    {
+      "node_id": "q5",
+      "question": "What is the nationality of the director of Afrika?",
+      "dependencies": [
+        "q2",
+        "q4"
+      ],
+      "metadata": {
+        "operator": "COMPARE_SAME"
+      }
+    }
+  ]
+}

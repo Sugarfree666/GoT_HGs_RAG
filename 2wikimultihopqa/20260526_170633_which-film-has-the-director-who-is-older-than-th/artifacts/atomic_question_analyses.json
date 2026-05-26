@@ -1,0 +1,76 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Taming Of The Fire?",
+    "retrieval_question": "Who is the director of Taming Of The Fire?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Taming Of The Fire?",
+      "retrieval_question": "Who is the director of Taming Of The Fire?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Taming Of The Fire"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of The Lady Takes A Flyer?",
+    "retrieval_question": "Who is the director of The Lady Takes A Flyer?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of The Lady Takes A Flyer?",
+      "retrieval_question": "Who is the director of The Lady Takes A Flyer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "The Lady Takes A Flyer"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Is the age of the director of Taming Of The Fire greater than the age of the director of The Lady Takes A Flyer?",
+    "retrieval_question": "Is the age of the director of Taming Of The Fire greater than the age of the director of The Lady Takes A Flyer?",
+    "dependency_question_rewrite": {
+      "original_question": "Is the age of the director of Taming Of The Fire greater than the age of the director of The Lady Takes A Flyer?",
+      "retrieval_question": "Is the age of the director of Taming Of The Fire greater than the age of the director of The Lady Takes A Flyer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Taming Of The Fire",
+        "The Lady Takes A Flyer"
+      ],
+      "relations": [
+        "age comparison",
+        "is greater than"
+      ],
+      "relation_query": "Is the age of the director of a work greater than the age of the director of another work?",
+      "answer_type": "boolean"
+    }
+  }
+]

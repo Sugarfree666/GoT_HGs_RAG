@@ -1,0 +1,9 @@
+2026-05-26 16:57:06,802 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 16:59:01,136 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 16:59:01,137 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 16:59:31,501 | INFO | Starting HyperBranch pipeline for question: Who is younger, Amir Temraz or Sophie Ingle?
+2026-05-26 16:59:31,502 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-26 16:59:47,843 | INFO | Atomic retrieval returned 22 hits for question=What is the birth date of Amir Temraz?
+2026-05-26 17:00:01,584 | INFO | Atomic retrieval returned 22 hits for question=What is the birth date of Sophie Ingle?
+2026-05-26 17:00:13,765 | INFO | Atomic retrieval returned 22 hits for question=What is the birth date of Amir Temraz?
+2026-05-26 17:01:10,136 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_165706_who-is-younger-amir-temraz-or-sophie-ingle

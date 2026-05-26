@@ -1,0 +1,2308 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the release date of Jazz Boat?",
+    "retrieval_question": "What is the release date of Jazz Boat?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Jazz Boat?",
+      "retrieval_question": "What is the release date of Jazz Boat?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+        "entity_ids": [
+          "\"ORCHESTRA\"",
+          "\"JAZZ BOAT\"",
+          "\"KEN HUGHES\"",
+          "\"ANTHONY NEWLEY\"",
+          "\"ANNE AUBREY\"",
+          "\"LIONEL JEFFRIES\"",
+          "\"TED HEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-fcb3e51d21742516cbb4a50ce53ecae6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+            "Jazz Boat Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra."
+          ],
+          "relation_texts": [
+            "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+            "link",
+            "ORCHESTRA",
+            "JAZZ BOAT",
+            "KEN HUGHES",
+            "ANTHONY NEWLEY",
+            "ANNE AUBREY",
+            "LIONEL JEFFRIES",
+            "TED HEATH"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\"",
+        "branch": "relation",
+        "raw_score": 0.4918246269226074,
+        "hyperedge_text": "After setting an initial release date in the same month, casting took place between April and June 2015.",
+        "entity_ids": [
+          "\"APRIL 2015\"",
+          "\"JUNE 2015\""
+        ],
+        "chunk_ids": [
+          "chunk-b877a56c3c1803c310d3092526abfa76"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After setting an initial release date in the same month, casting took place between April and June 2015.",
+            "The Fate of the Furious The Fate of the Furious( alternatively known as Fast& Furious 8 and Fast 8 and often stylized as F8) is a 2017 American action film directed by F. Gary Gray and written by Chris Morgan. A sequel to 2015's\" Furious 7\", it is the eighth installment in the\" Fast& Furious\" franchise and stars Vin Diesel, Dwayne Johnson, Jason Statham, Michelle Rodriguez, Tyrese Gibson, Chris\" Ludacris\" Bridges, Scott Eastwood, Nathalie Emmanuel, Elsa Pataky, Kurt Russell and Charlize Theron. \" The Fate of the Furious\" follows Dominic Toretto( Diesel), who has settled down with his wife Letty Ortiz( Rodriguez), until cyberterrorist Cipher( Theron) coerces him into working for her and turns him against his team, forcing them to find Dom and take down Cipher. \" The Fate of the Furious\" marks the first installment in the franchise since( 2006) not to feature either Paul Walker, who die..."
+          ],
+          "relation_texts": [
+            "After setting an initial release date in the same month, casting took place between April and June 2015.",
+            "link",
+            "APRIL 2015",
+            "JUNE 2015"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e6cbbce13d732880961d6e63686a9ca6",
+            "hyperedge_name": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "branch": "relation",
+        "raw_score": 0.4723891019821167,
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's release occurred on a specific date.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The film's release occurred on a specific date.",
+            "link",
+            "SPECIFIC DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf00e02cc9aa046e03d764b86b678f46",
+            "hyperedge_name": "<hyperedge>\"The film's release occurred on a specific date.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "branch": "relation",
+        "raw_score": 0.46724173426628113,
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date was on 10 October 2009.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The release date was on 10 October 2009.",
+            "link",
+            "RELEASE DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-066e3d9efe074f8299dde1f259ae335f",
+            "hyperedge_name": "<hyperedge>\"The release date was on 10 October 2009.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Rakka was 14 June 2017.\"",
+        "branch": "relation",
+        "raw_score": 0.45409703254699707,
+        "hyperedge_text": "The release date of Rakka was 14 June 2017.",
+        "entity_ids": [
+          "\"14 JUNE 2017\""
+        ],
+        "chunk_ids": [
+          "chunk-44787de4ca914ea38ca9818d0ecd9288"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of Rakka was 14 June 2017.",
+            "Rakka (film) The film was released on YouTube and Steam on 14 June 2017."
+          ],
+          "relation_texts": [
+            "The release date of Rakka was 14 June 2017.",
+            "link",
+            "14 JUNE 2017"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f2ea9c55e817f00696be39ce6c6232e",
+            "hyperedge_name": "<hyperedge>\"The release date of Rakka was 14 June 2017.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.43862271308898926,
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is July 25, 1920.",
+            "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+          ],
+          "relation_texts": [
+            "The release date of the film is July 25, 1920.",
+            "link",
+            "JULY 25, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62471a4725f6e026bc7378dd17783972",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is July 25, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on May 30, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.4376589059829712,
+        "hyperedge_text": "It was released on May 30, 1920.",
+        "entity_ids": [
+          "\"MAY 30, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-677670aef346a64df94317540622436a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on May 30, 1920.",
+            "The Revenge of Tarzan The Revenge of Tarzan( 1920) is a silent adventure film, originally advertised as The Return of Tarzan, and the third Tarzan film produced. The film was produced by the Great Western Film Producing Company, a subsidiary of the Numa Pictures Corporation. The film was sold to Goldwyn Pictures for distribution. The film was written by Robert Saxmar, based on the 1915 novel\" The Return of Tarzan\" by Edgar Rice Burroughs, and directed by Harry Revier and George M. Merrick. It was released on May 30, 1920."
+          ],
+          "relation_texts": [
+            "It was released on May 30, 1920.",
+            "link",
+            "MAY 30, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82730c2563bc7b854d6b0e419a0c0e68",
+            "hyperedge_name": "<hyperedge>\"It was released on May 30, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "branch": "relation",
+        "raw_score": 0.4368012547492981,
+        "hyperedge_text": "The release date on CD was September 22.",
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date on CD was September 22.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date on CD was September 22.",
+            "link",
+            "SEPTEMBER 22"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5348043ffa573d6b9577c2a39d1c0828",
+            "hyperedge_name": "<hyperedge>\"The release date on CD was September 22.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released two months after her previous work.\"",
+        "branch": "relation",
+        "raw_score": 0.4339386224746704,
+        "hyperedge_text": "It was released two months after her previous work.",
+        "entity_ids": [
+          "\"FOURTH STUDIO ALBUM\"",
+          "\"TWO MONTHS\""
+        ],
+        "chunk_ids": [
+          "chunk-0810f85005cb33553abde2a595e2c086"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released two months after her previous work.",
+            "The Season for Romance The Season for Romance is the fifth studio album, and first Christmas album, from Lee Ann Womack. It was released two months after her fourth studio album,\" Something Worth Leaving Behind\"."
+          ],
+          "relation_texts": [
+            "It was released two months after her previous work.",
+            "link",
+            "FOURTH STUDIO ALBUM",
+            "TWO MONTHS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-175d0b8445f687da1f01c1903e270312",
+            "hyperedge_name": "<hyperedge>\"It was released two months after her previous work.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\"",
+        "branch": "relation",
+        "raw_score": 0.4294666647911072,
+        "hyperedge_text": "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+        "entity_ids": [
+          "\"PORTFOLIO\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+            "link",
+            "PORTFOLIO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-800463cc0af33ef22968d66931543a06",
+            "hyperedge_name": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on September 6, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.42727920413017273,
+        "hyperedge_text": "It was released on September 6, 1920.",
+        "entity_ids": [
+          "\"SEPTEMBER 6, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-abf58852e1b4b8d1ff00e32c25ebc8af"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on September 6, 1920.",
+            "Love, Honor and Obey Love, Honor and Obey is a 1920 American silent drama film. Directed by Leander de Cordova, the film stars Wilda Bennett, Claire Whitney, and Henry Harmon. It was released on September 6, 1920."
+          ],
+          "relation_texts": [
+            "It was released on September 6, 1920.",
+            "link",
+            "SEPTEMBER 6, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c971308713d91513707a3175e8322c4d",
+            "hyperedge_name": "<hyperedge>\"It was released on September 6, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Jazz Boat was made in 1960, categorizing it as a British musical comedy.\"",
+        "branch": "semantic",
+        "raw_score": 0.5653598308563232,
+        "hyperedge_text": "The film Jazz Boat was made in 1960, categorizing it as a British musical comedy.",
+        "entity_ids": [
+          "\"1960\"",
+          "\"BRITISH MUSICAL COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-fcb3e51d21742516cbb4a50ce53ecae6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Jazz Boat was made in 1960, categorizing it as a British musical comedy.",
+            "Jazz Boat Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra."
+          ],
+          "relation_texts": [
+            "The film Jazz Boat was made in 1960, categorizing it as a British musical comedy.",
+            "link",
+            "1960",
+            "BRITISH MUSICAL COMEDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7b91a709cd4a307d52aca7e623ec6b9f",
+            "hyperedge_name": "<hyperedge>\"The film Jazz Boat was made in 1960, categorizing it as a British musical comedy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\"",
+        "branch": "semantic",
+        "raw_score": 0.5650962591171265,
+        "hyperedge_text": "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+        "entity_ids": [
+          "\"ORCHESTRA\"",
+          "\"JAZZ BOAT\"",
+          "\"KEN HUGHES\"",
+          "\"ANTHONY NEWLEY\"",
+          "\"ANNE AUBREY\"",
+          "\"LIONEL JEFFRIES\"",
+          "\"TED HEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-fcb3e51d21742516cbb4a50ce53ecae6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+            "Jazz Boat Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra."
+          ],
+          "relation_texts": [
+            "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+            "link",
+            "ORCHESTRA",
+            "JAZZ BOAT",
+            "KEN HUGHES",
+            "ANTHONY NEWLEY",
+            "ANNE AUBREY",
+            "LIONEL JEFFRIES",
+            "TED HEATH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-aff65eaefb9cf7b1aedeabbb2ede2057",
+            "hyperedge_name": "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the album on the vinyl LP was August 25, 2009.\"",
+        "branch": "semantic",
+        "raw_score": 0.4407159388065338,
+        "hyperedge_text": "The release date of the album on the vinyl LP was August 25, 2009.",
+        "entity_ids": [
+          "\"AUGUST 25, 2009\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the album on the vinyl LP was August 25, 2009.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date of the album on the vinyl LP was August 25, 2009.",
+            "link",
+            "AUGUST 25, 2009"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8621be053ad985e774b4aad1b1925084",
+            "hyperedge_name": "<hyperedge>\"The release date of the album on the vinyl LP was August 25, 2009.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "branch": "semantic",
+        "raw_score": 0.4329373836517334,
+        "hyperedge_text": "The release date on CD was September 22.",
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date on CD was September 22.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date on CD was September 22.",
+            "link",
+            "SEPTEMBER 22"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5348043ffa573d6b9577c2a39d1c0828",
+            "hyperedge_name": "<hyperedge>\"The release date on CD was September 22.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Mary Jane's Pa is April 27, 1935.\"",
+        "branch": "semantic",
+        "raw_score": 0.42832282185554504,
+        "hyperedge_text": "The release date of Mary Jane's Pa is April 27, 1935.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-9c0062763a5518efa75a2cf5d4bf970e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of Mary Jane's Pa is April 27, 1935.",
+            "Mary Jane's Pa Mary Jane's Pa is a 1935 American drama film directed by William Keighley and written by Tom Reed and Peter Milne. The film stars Aline MacMahon, Guy Kibbee, Tom Brown, Robert McWade, Minor Watson and Nan Grey. The film was released by Warner Bros. on April 27, 1935."
+          ],
+          "relation_texts": [
+            "The release date of Mary Jane's Pa is April 27, 1935."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bdfcc8daf271b6c8fa23f871f5c13bba",
+            "hyperedge_name": "<hyperedge>\"The release date of Mary Jane's Pa is April 27, 1935.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The album includes the original recording of 'Rock The Boat.'\"",
+        "branch": "semantic",
+        "raw_score": 0.4244539141654968,
+        "hyperedge_text": "The album includes the original recording of 'Rock The Boat.'",
+        "entity_ids": [
+          "\"ROCK THE BOAT\""
+        ],
+        "chunk_ids": [
+          "chunk-82a371fdacd392e71f9db9e37f4c02fe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The album includes the original recording of 'Rock The Boat.'",
+            "Freedom for the Stallion Freedom For The Stallion is the debut album by The Hues Corporation released in 1973. The album includes the original recording of \"Rock The Boat.\" A later re-mix version of this recording became one of the first Disco hits in 1974 and reached #1 on the \"Billboard\" Hot 100 in the United States. The title track, \"Freedom for the Stallion\" was also a minor hit. This Allen Toussaint song had been recorded earlier by Lee Dorsey in 1971. Later versions of \"Freedom for the Stallion\" include The Oak Ridge Boys on their 1974 self-titled Columbia Records debut, and a 2006 recording by Toussaint and Elvis Costello on the album \"The River in Reverse\"."
+          ],
+          "relation_texts": [
+            "The album includes the original recording of 'Rock The Boat.'",
+            "link",
+            "ROCK THE BOAT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d8973203ae210d58d77c3690862d9157",
+            "hyperedge_name": "<hyperedge>\"The album includes the original recording of 'Rock The Boat.'\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "branch": "semantic",
+        "raw_score": 0.4180440604686737,
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is July 25, 1920.",
+            "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+          ],
+          "relation_texts": [
+            "The release date of the film is July 25, 1920.",
+            "link",
+            "JULY 25, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62471a4725f6e026bc7378dd17783972",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is July 25, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "branch": "semantic",
+        "raw_score": 0.40824076533317566,
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date was on 10 October 2009.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The release date was on 10 October 2009.",
+            "link",
+            "RELEASE DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-066e3d9efe074f8299dde1f259ae335f",
+            "hyperedge_name": "<hyperedge>\"The release date was on 10 October 2009.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After releasing 'Sinatra at the Sands', recorded at the Sands Hotel and Casino in Vegas with frequent collaborator Count Basie in early 1966, the following year he recorded one of his most famous collaborations with Tom Jobim, the album 'Francis Albert Sinatra & Antonio Carlos Jobim'.\"",
+        "branch": "semantic",
+        "raw_score": 0.4036961495876312,
+        "hyperedge_text": "After releasing 'Sinatra at the Sands', recorded at the Sands Hotel and Casino in Vegas with frequent collaborator Count Basie in early 1966, the following year he recorded one of his most famous collaborations with Tom Jobim, the album 'Francis Albert Sinatra & Antonio Carlos Jobim'.",
+        "entity_ids": [
+          "\"SINATRA AT THE SANDS\"",
+          "\"SANDS HOTEL AND CASINO\"",
+          "\"COUNT BASIE\"",
+          "\"FRANCIS ALBERT SINATRA & ANTONIO CARLOS JOBIM\""
+        ],
+        "chunk_ids": [
+          "chunk-7973e49ba1d461b9629a5daac2083845"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After releasing 'Sinatra at the Sands', recorded at the Sands Hotel and Casino in Vegas with frequent collaborator Count Basie in early 1966, the following year he recorded one of his most famous collaborations with Tom Jobim, the album 'Francis Albert Sinatra & Antonio Carlos Jobim'.",
+            "Frank Sinatra Francis Albert Sinatra ( December 12, 1915 – May 14, 1998) was an American singer, actor and producer who was one of the most popular and influential musical artists of the 20th century. He is one of the best- selling music artists of all time, having sold more than 150 million records worldwide. Born to Italian immigrants in Hoboken, New Jersey, Sinatra began his musical career in the swing era with bandleaders Harry James and Tommy Dorsey. Sinatra found success as a solo artist after he signed with Columbia Records in 1943, becoming the idol of the\" bobby soxers\". He released his debut album,\" The Voice of Frank Sinatra\", in 1946. But by the early 1950s his professional career had stalled and he turned to Las Vegas, where he became one of its best known residency performers as part of the Rat Pack. His career was reborn in 1953 with the success of\" From Here to Eternit..."
+          ],
+          "relation_texts": [
+            "After releasing 'Sinatra at the Sands', recorded at the Sands Hotel and Casino in Vegas with frequent collaborator Count Basie in early 1966, the following year he recorded one of his most famous collaborations with Tom Jobim, the album 'Francis Albert Sinatra & Antonio Carlos Jobim'.",
+            "link",
+            "SINATRA AT THE SANDS",
+            "SANDS HOTEL AND CASINO",
+            "COUNT BASIE",
+            "FRANCIS ALBERT SINATRA & ANTONIO CARLOS JOBIM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-247e9f360039c9f67eaf741299427f9a",
+            "hyperedge_name": "<hyperedge>\"After releasing 'Sinatra at the Sands', recorded at the Sands Hotel and Casino in Vegas with frequent collaborator Count Basie in early 1966, the following year he recorded one of his most famous collaborations with Tom Jobim, the album 'Francis Albert Sinatra & Antonio Carlos Jobim'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on May 30, 1920.\"",
+        "branch": "semantic",
+        "raw_score": 0.39917290210723877,
+        "hyperedge_text": "It was released on May 30, 1920.",
+        "entity_ids": [
+          "\"MAY 30, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-677670aef346a64df94317540622436a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on May 30, 1920.",
+            "The Revenge of Tarzan The Revenge of Tarzan( 1920) is a silent adventure film, originally advertised as The Return of Tarzan, and the third Tarzan film produced. The film was produced by the Great Western Film Producing Company, a subsidiary of the Numa Pictures Corporation. The film was sold to Goldwyn Pictures for distribution. The film was written by Robert Saxmar, based on the 1915 novel\" The Return of Tarzan\" by Edgar Rice Burroughs, and directed by Harry Revier and George M. Merrick. It was released on May 30, 1920."
+          ],
+          "relation_texts": [
+            "It was released on May 30, 1920.",
+            "link",
+            "MAY 30, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82730c2563bc7b854d6b0e419a0c0e68",
+            "hyperedge_name": "<hyperedge>\"It was released on May 30, 1920.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\"",
+        "hyperedge_text": "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5650962591171265,
+        "fusion_score": 0.5130192518234253,
+        "entity_ids": [
+          "\"ORCHESTRA\"",
+          "\"JAZZ BOAT\"",
+          "\"KEN HUGHES\"",
+          "\"ANTHONY NEWLEY\"",
+          "\"ANNE AUBREY\"",
+          "\"LIONEL JEFFRIES\"",
+          "\"TED HEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-fcb3e51d21742516cbb4a50ce53ecae6"
+        ],
+        "evidence_texts": [
+          "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+          "Jazz Boat Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.565096,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.513019
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46724173426628113,
+        "semantic_score": 0.40824076533317566,
+        "fusion_score": 0.2685448467731476,
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "evidence_texts": [
+          "The release date was on 10 October 2009.",
+          "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.467242,
+          "S": 0.408241,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268545
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "hyperedge_text": "The release date on CD was September 22.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4368012547492981,
+        "semantic_score": 0.4329373836517334,
+        "fusion_score": 0.26130797863006594,
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "evidence_texts": [
+          "The release date on CD was September 22.",
+          "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.436801,
+          "S": 0.432937,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.261308
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43862271308898926,
+        "semantic_score": 0.4180440604686737,
+        "fusion_score": 0.2590578973293305,
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "evidence_texts": [
+          "The release date of the film is July 25, 1920.",
+          "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.438623,
+          "S": 0.418044,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.259058
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on May 30, 1920.\"",
+        "hyperedge_text": "It was released on May 30, 1920.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4376589059829712,
+        "semantic_score": 0.39917290210723877,
+        "fusion_score": 0.25489814281463624,
+        "entity_ids": [
+          "\"MAY 30, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-677670aef346a64df94317540622436a"
+        ],
+        "evidence_texts": [
+          "It was released on May 30, 1920.",
+          "The Revenge of Tarzan The Revenge of Tarzan( 1920) is a silent adventure film, originally advertised as The Return of Tarzan, and the third Tarzan film produced. The film was produced by the Great Western Film Producing Company, a subsidiary of the Numa Pictures Corporation. The film was sold to Goldwyn Pictures for distribution. The film was written by Robert Saxmar, based on the 1915 novel\" The Return of Tarzan\" by Edgar Rice Burroughs, and directed by Harry Revier and George M. Merrick. It was released on May 30, 1920."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.437659,
+          "S": 0.399173,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.254898
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Her Husband's Trademark?",
+    "retrieval_question": "What is the release date of Her Husband's Trademark?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Her Husband's Trademark?",
+      "retrieval_question": "What is the release date of Her Husband's Trademark?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.",
+        "entity_ids": [
+          "\"SAM WOOD\"",
+          "\"HER HUSBAND'S TRADEMARK\"",
+          "\"GLORIA SWANSON\"",
+          "\"RICHARD WAYNE\""
+        ],
+        "chunk_ids": [
+          "chunk-66a0680eae34a47f3305efe4bf4424ce"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.",
+            "Her Husband's Trademark Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne. Produced by Famous Players- Lasky and distributed by Paramount Pictures, the film was shot on location in El Paso, Texas. Prints of\" Her Husband's Trademark\" are held at the George Eastman House and the Gosfilmofond archive in Moscow."
+          ],
+          "relation_texts": [
+            "Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.",
+            "link",
+            "SAM WOOD",
+            "HER HUSBAND'S TRADEMARK",
+            "GLORIA SWANSON",
+            "RICHARD WAYNE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\"",
+        "branch": "relation",
+        "raw_score": 0.4918246269226074,
+        "hyperedge_text": "After setting an initial release date in the same month, casting took place between April and June 2015.",
+        "entity_ids": [
+          "\"APRIL 2015\"",
+          "\"JUNE 2015\""
+        ],
+        "chunk_ids": [
+          "chunk-b877a56c3c1803c310d3092526abfa76"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After setting an initial release date in the same month, casting took place between April and June 2015.",
+            "The Fate of the Furious The Fate of the Furious( alternatively known as Fast& Furious 8 and Fast 8 and often stylized as F8) is a 2017 American action film directed by F. Gary Gray and written by Chris Morgan. A sequel to 2015's\" Furious 7\", it is the eighth installment in the\" Fast& Furious\" franchise and stars Vin Diesel, Dwayne Johnson, Jason Statham, Michelle Rodriguez, Tyrese Gibson, Chris\" Ludacris\" Bridges, Scott Eastwood, Nathalie Emmanuel, Elsa Pataky, Kurt Russell and Charlize Theron. \" The Fate of the Furious\" follows Dominic Toretto( Diesel), who has settled down with his wife Letty Ortiz( Rodriguez), until cyberterrorist Cipher( Theron) coerces him into working for her and turns him against his team, forcing them to find Dom and take down Cipher. \" The Fate of the Furious\" marks the first installment in the franchise since( 2006) not to feature either Paul Walker, who die..."
+          ],
+          "relation_texts": [
+            "After setting an initial release date in the same month, casting took place between April and June 2015.",
+            "link",
+            "APRIL 2015",
+            "JUNE 2015"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e6cbbce13d732880961d6e63686a9ca6",
+            "hyperedge_name": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "branch": "relation",
+        "raw_score": 0.4723891019821167,
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's release occurred on a specific date.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The film's release occurred on a specific date.",
+            "link",
+            "SPECIFIC DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf00e02cc9aa046e03d764b86b678f46",
+            "hyperedge_name": "<hyperedge>\"The film's release occurred on a specific date.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "branch": "relation",
+        "raw_score": 0.46724173426628113,
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date was on 10 October 2009.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The release date was on 10 October 2009.",
+            "link",
+            "RELEASE DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-066e3d9efe074f8299dde1f259ae335f",
+            "hyperedge_name": "<hyperedge>\"The release date was on 10 October 2009.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Rakka was 14 June 2017.\"",
+        "branch": "relation",
+        "raw_score": 0.45409703254699707,
+        "hyperedge_text": "The release date of Rakka was 14 June 2017.",
+        "entity_ids": [
+          "\"14 JUNE 2017\""
+        ],
+        "chunk_ids": [
+          "chunk-44787de4ca914ea38ca9818d0ecd9288"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of Rakka was 14 June 2017.",
+            "Rakka (film) The film was released on YouTube and Steam on 14 June 2017."
+          ],
+          "relation_texts": [
+            "The release date of Rakka was 14 June 2017.",
+            "link",
+            "14 JUNE 2017"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f2ea9c55e817f00696be39ce6c6232e",
+            "hyperedge_name": "<hyperedge>\"The release date of Rakka was 14 June 2017.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.43862271308898926,
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is July 25, 1920.",
+            "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+          ],
+          "relation_texts": [
+            "The release date of the film is July 25, 1920.",
+            "link",
+            "JULY 25, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62471a4725f6e026bc7378dd17783972",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is July 25, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on May 30, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.4376589059829712,
+        "hyperedge_text": "It was released on May 30, 1920.",
+        "entity_ids": [
+          "\"MAY 30, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-677670aef346a64df94317540622436a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on May 30, 1920.",
+            "The Revenge of Tarzan The Revenge of Tarzan( 1920) is a silent adventure film, originally advertised as The Return of Tarzan, and the third Tarzan film produced. The film was produced by the Great Western Film Producing Company, a subsidiary of the Numa Pictures Corporation. The film was sold to Goldwyn Pictures for distribution. The film was written by Robert Saxmar, based on the 1915 novel\" The Return of Tarzan\" by Edgar Rice Burroughs, and directed by Harry Revier and George M. Merrick. It was released on May 30, 1920."
+          ],
+          "relation_texts": [
+            "It was released on May 30, 1920.",
+            "link",
+            "MAY 30, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82730c2563bc7b854d6b0e419a0c0e68",
+            "hyperedge_name": "<hyperedge>\"It was released on May 30, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "branch": "relation",
+        "raw_score": 0.4368012547492981,
+        "hyperedge_text": "The release date on CD was September 22.",
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date on CD was September 22.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date on CD was September 22.",
+            "link",
+            "SEPTEMBER 22"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5348043ffa573d6b9577c2a39d1c0828",
+            "hyperedge_name": "<hyperedge>\"The release date on CD was September 22.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released two months after her previous work.\"",
+        "branch": "relation",
+        "raw_score": 0.4339386224746704,
+        "hyperedge_text": "It was released two months after her previous work.",
+        "entity_ids": [
+          "\"FOURTH STUDIO ALBUM\"",
+          "\"TWO MONTHS\""
+        ],
+        "chunk_ids": [
+          "chunk-0810f85005cb33553abde2a595e2c086"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released two months after her previous work.",
+            "The Season for Romance The Season for Romance is the fifth studio album, and first Christmas album, from Lee Ann Womack. It was released two months after her fourth studio album,\" Something Worth Leaving Behind\"."
+          ],
+          "relation_texts": [
+            "It was released two months after her previous work.",
+            "link",
+            "FOURTH STUDIO ALBUM",
+            "TWO MONTHS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-175d0b8445f687da1f01c1903e270312",
+            "hyperedge_name": "<hyperedge>\"It was released two months after her previous work.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\"",
+        "branch": "relation",
+        "raw_score": 0.4294666647911072,
+        "hyperedge_text": "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+        "entity_ids": [
+          "\"PORTFOLIO\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+            "link",
+            "PORTFOLIO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-800463cc0af33ef22968d66931543a06",
+            "hyperedge_name": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on September 6, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.42727920413017273,
+        "hyperedge_text": "It was released on September 6, 1920.",
+        "entity_ids": [
+          "\"SEPTEMBER 6, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-abf58852e1b4b8d1ff00e32c25ebc8af"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on September 6, 1920.",
+            "Love, Honor and Obey Love, Honor and Obey is a 1920 American silent drama film. Directed by Leander de Cordova, the film stars Wilda Bennett, Claire Whitney, and Henry Harmon. It was released on September 6, 1920."
+          ],
+          "relation_texts": [
+            "It was released on September 6, 1920.",
+            "link",
+            "SEPTEMBER 6, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c971308713d91513707a3175e8322c4d",
+            "hyperedge_name": "<hyperedge>\"It was released on September 6, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film.\"",
+        "branch": "semantic",
+        "raw_score": 0.6201654076576233,
+        "hyperedge_text": "Her Husband's Trademark is a 1922 American silent drama film.",
+        "entity_ids": [
+          "\"1922\"",
+          "\"SILENT DRAMA FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-66a0680eae34a47f3305efe4bf4424ce"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her Husband's Trademark is a 1922 American silent drama film.",
+            "Her Husband's Trademark Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne. Produced by Famous Players- Lasky and distributed by Paramount Pictures, the film was shot on location in El Paso, Texas. Prints of\" Her Husband's Trademark\" are held at the George Eastman House and the Gosfilmofond archive in Moscow."
+          ],
+          "relation_texts": [
+            "Her Husband's Trademark is a 1922 American silent drama film.",
+            "link",
+            "1922",
+            "SILENT DRAMA FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6b75735c137c7a7fede9386e96567359",
+            "hyperedge_name": "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.\"",
+        "branch": "semantic",
+        "raw_score": 0.5435330867767334,
+        "hyperedge_text": "Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.",
+        "entity_ids": [
+          "\"SAM WOOD\"",
+          "\"HER HUSBAND'S TRADEMARK\"",
+          "\"GLORIA SWANSON\"",
+          "\"RICHARD WAYNE\""
+        ],
+        "chunk_ids": [
+          "chunk-66a0680eae34a47f3305efe4bf4424ce"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.",
+            "Her Husband's Trademark Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne. Produced by Famous Players- Lasky and distributed by Paramount Pictures, the film was shot on location in El Paso, Texas. Prints of\" Her Husband's Trademark\" are held at the George Eastman House and the Gosfilmofond archive in Moscow."
+          ],
+          "relation_texts": [
+            "Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.",
+            "link",
+            "SAM WOOD",
+            "HER HUSBAND'S TRADEMARK",
+            "GLORIA SWANSON",
+            "RICHARD WAYNE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e939a50a97f1486912164713441111cd",
+            "hyperedge_name": "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date for Daytime Wives was September 2, 1923.\"",
+        "branch": "semantic",
+        "raw_score": 0.49618783593177795,
+        "hyperedge_text": "The release date for Daytime Wives was September 2, 1923.",
+        "entity_ids": [
+          "\"SEPTEMBER 2, 1923\""
+        ],
+        "chunk_ids": [
+          "chunk-938e7fe516603bfd2158159e8ce4eb29"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date for Daytime Wives was September 2, 1923.",
+            "Daytime Wives Daytime Wives is a 1923 American drama film directed by Émile Chautard, and written by Helmer Walton Bergman and Wyndham Gittens. The film stars Derelys Perdue, Wyndham Standing, Grace Darmond, William Conklin, Guy Edward Hearn, and Katherine Lewis. The film was released on September 2, 1923, by Film Booking Offices of America."
+          ],
+          "relation_texts": [
+            "The release date for Daytime Wives was September 2, 1923.",
+            "link",
+            "SEPTEMBER 2, 1923"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e72e21a45fe4d0b21fb1618555fe4df5",
+            "hyperedge_name": "<hyperedge>\"The release date for Daytime Wives was September 2, 1923.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Prints of 'Her Husband's Trademark' are held at the George Eastman House and the Gosfilmofond archive in Moscow.\"",
+        "branch": "semantic",
+        "raw_score": 0.46916717290878296,
+        "hyperedge_text": "Prints of 'Her Husband's Trademark' are held at the George Eastman House and the Gosfilmofond archive in Moscow.",
+        "entity_ids": [
+          "\"MOSCOW\"",
+          "\"GEORGE EASTMAN HOUSE\"",
+          "\"GOSFILMOFOND\""
+        ],
+        "chunk_ids": [
+          "chunk-66a0680eae34a47f3305efe4bf4424ce"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Prints of 'Her Husband's Trademark' are held at the George Eastman House and the Gosfilmofond archive in Moscow.",
+            "Her Husband's Trademark Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne. Produced by Famous Players- Lasky and distributed by Paramount Pictures, the film was shot on location in El Paso, Texas. Prints of\" Her Husband's Trademark\" are held at the George Eastman House and the Gosfilmofond archive in Moscow."
+          ],
+          "relation_texts": [
+            "Prints of 'Her Husband's Trademark' are held at the George Eastman House and the Gosfilmofond archive in Moscow.",
+            "link",
+            "MOSCOW",
+            "GEORGE EASTMAN HOUSE",
+            "GOSFILMOFOND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1834f20f319a83152253a5f55d2c9f3c",
+            "hyperedge_name": "<hyperedge>\"Prints of 'Her Husband's Trademark' are held at the George Eastman House and the Gosfilmofond archive in Moscow.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Mary Jane's Pa is April 27, 1935.\"",
+        "branch": "semantic",
+        "raw_score": 0.4012579321861267,
+        "hyperedge_text": "The release date of Mary Jane's Pa is April 27, 1935.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-9c0062763a5518efa75a2cf5d4bf970e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of Mary Jane's Pa is April 27, 1935.",
+            "Mary Jane's Pa Mary Jane's Pa is a 1935 American drama film directed by William Keighley and written by Tom Reed and Peter Milne. The film stars Aline MacMahon, Guy Kibbee, Tom Brown, Robert McWade, Minor Watson and Nan Grey. The film was released by Warner Bros. on April 27, 1935."
+          ],
+          "relation_texts": [
+            "The release date of Mary Jane's Pa is April 27, 1935."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bdfcc8daf271b6c8fa23f871f5c13bba",
+            "hyperedge_name": "<hyperedge>\"The release date of Mary Jane's Pa is April 27, 1935.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'Why Did I Get Married Too?' was released in 2010 as a sequel that continues exploring the same characters and themes.\"",
+        "branch": "semantic",
+        "raw_score": 0.39975324273109436,
+        "hyperedge_text": "'Why Did I Get Married Too?' was released in 2010 as a sequel that continues exploring the same characters and themes.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-e8f549f2afc703c6fc3ce1c6627994e7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "'Why Did I Get Married Too?' was released in 2010 as a sequel that continues exploring the same characters and themes.",
+            "Richard T. Jones Richard Timothy Jones( born January 16, 1972) is an American actor. Jones is best known for his portrayals of Laveinio in the dramatic film\" The Wood\"( 1999) and Mike of the dramatic films\" Why Did I Get Married?\"( 2007) and\" Why Did I Get Married Too?\"( 2010). He is also well known for his role as Bruce Van Exel, court services officer on the CBS television series\" Judging Amy\" that aired from 1999 to 2005."
+          ],
+          "relation_texts": [
+            "'Why Did I Get Married Too?' was released in 2010 as a sequel that continues exploring the same characters and themes."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-642153fe6a4f173e2e6417b2530fcf4d",
+            "hyperedge_name": "<hyperedge>\"'Why Did I Get Married Too?' was released in 2010 as a sequel that continues exploring the same characters and themes.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"My Wife Is Being Stupid or My Wife Is Acting Silly was released in 1952.\"",
+        "branch": "semantic",
+        "raw_score": 0.397899329662323,
+        "hyperedge_text": "My Wife Is Being Stupid or My Wife Is Acting Silly was released in 1952.",
+        "entity_ids": [
+          "\"1952\""
+        ],
+        "chunk_ids": [
+          "chunk-ea5d046ce4c18bc7b2c8285726746772"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "My Wife Is Being Stupid or My Wife Is Acting Silly was released in 1952.",
+            "My Wife Is Being Stupid My Wife Is Being Stupid or My Wife Is Acting Silly is a 1952 West German comedy film directed by Géza von Bolváry and starring Inge Egger, Hans Holt and Marina Ried. It was made at the Göttingen Studios. The film's sets were designed by Mathias Matthies and Ellen Schmidt."
+          ],
+          "relation_texts": [
+            "My Wife Is Being Stupid or My Wife Is Acting Silly was released in 1952.",
+            "link",
+            "1952"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f8da7e480af2694af8ddd2f2c9c2c61f",
+            "hyperedge_name": "<hyperedge>\"My Wife Is Being Stupid or My Wife Is Acting Silly was released in 1952.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "branch": "semantic",
+        "raw_score": 0.39074867963790894,
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is July 25, 1920.",
+            "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+          ],
+          "relation_texts": [
+            "The release date of the film is July 25, 1920.",
+            "link",
+            "JULY 25, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62471a4725f6e026bc7378dd17783972",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is July 25, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"With a third (My Wife Is a Gangster 3) released at the end of 2006.\"",
+        "branch": "semantic",
+        "raw_score": 0.39068952202796936,
+        "hyperedge_text": "With a third (My Wife Is a Gangster 3) released at the end of 2006.",
+        "entity_ids": [
+          "\"2006\"",
+          "\"2001\"",
+          "\"2003\"",
+          "\"GANGSTER\"",
+          "\"FILM SERIES\""
+        ],
+        "chunk_ids": [
+          "chunk-657fc1325aa44d47b27c58921637d930"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "With a third (My Wife Is a Gangster 3) released at the end of 2006.",
+            "My Wife Is a Gangster My Wife Is a Gangster is a 2001 South Korean film directed by Jo Jin -kyu; it's about a female gang boss who needs to get married to fulfill her dying sister's wishes. A sequel,\" My Wife Is a Gangster 2\", was released in 2003, with a third(\" My Wife Is a Gangster 3\") released at the end of 2006."
+          ],
+          "relation_texts": [
+            "With a third (My Wife Is a Gangster 3) released at the end of 2006.",
+            "link",
+            "2006",
+            "2001",
+            "2003",
+            "GANGSTER",
+            "FILM SERIES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cce765504f338f1f02160c5eab03e669",
+            "hyperedge_name": "<hyperedge>\"With a third (My Wife Is a Gangster 3) released at the end of 2006.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is November 15, 1955.\"",
+        "branch": "semantic",
+        "raw_score": 0.38876765966415405,
+        "hyperedge_text": "The release date of the film is November 15, 1955.",
+        "entity_ids": [
+          "\"NOVEMBER 15, 1955\""
+        ],
+        "chunk_ids": [
+          "chunk-a49ee799ce6a7193f132ce150feefe35"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is November 15, 1955.",
+            "Target Zero Target Zero is a 1955 American drama film directed by Harmon Jones and written by James Warner Bellah and Sam Rolfe. The film stars Richard Conte, Peggie Castle, Charles Bronson, Richard Wyler, L. Q. Jones and Chuck Connors. The film was released by Warner Bros. on November 15, 1955."
+          ],
+          "relation_texts": [
+            "The release date of the film is November 15, 1955.",
+            "link",
+            "NOVEMBER 15, 1955"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1b8b4718d5d0e64a544c23a44d7ae41b",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is November 15, 1955.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.\"",
+        "hyperedge_text": "Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5435330867767334,
+        "fusion_score": 0.5087066173553467,
+        "entity_ids": [
+          "\"SAM WOOD\"",
+          "\"HER HUSBAND'S TRADEMARK\"",
+          "\"GLORIA SWANSON\"",
+          "\"RICHARD WAYNE\""
+        ],
+        "chunk_ids": [
+          "chunk-66a0680eae34a47f3305efe4bf4424ce"
+        ],
+        "evidence_texts": [
+          "Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne.",
+          "Her Husband's Trademark Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne. Produced by Famous Players- Lasky and distributed by Paramount Pictures, the film was shot on location in El Paso, Texas. Prints of\" Her Husband's Trademark\" are held at the George Eastman House and the Gosfilmofond archive in Moscow."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.543533,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.508707
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43862271308898926,
+        "semantic_score": 0.39074867963790894,
+        "fusion_score": 0.2535988211631775,
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "evidence_texts": [
+          "The release date of the film is July 25, 1920.",
+          "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.438623,
+          "S": 0.390749,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.253599
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her Husband's Trademark is a 1922 American silent drama film.\"",
+        "hyperedge_text": "Her Husband's Trademark is a 1922 American silent drama film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6201654076576233,
+        "fusion_score": 0.5240330815315247,
+        "entity_ids": [
+          "\"1922\"",
+          "\"SILENT DRAMA FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-66a0680eae34a47f3305efe4bf4424ce"
+        ],
+        "evidence_texts": [
+          "Her Husband's Trademark is a 1922 American silent drama film.",
+          "Her Husband's Trademark Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne. Produced by Famous Players- Lasky and distributed by Paramount Pictures, the film was shot on location in El Paso, Texas. Prints of\" Her Husband's Trademark\" are held at the George Eastman House and the Gosfilmofond archive in Moscow."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.620165,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524033
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date for Daytime Wives was September 2, 1923.\"",
+        "hyperedge_text": "The release date for Daytime Wives was September 2, 1923.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.49618783593177795,
+        "fusion_score": 0.4992375671863556,
+        "entity_ids": [
+          "\"SEPTEMBER 2, 1923\""
+        ],
+        "chunk_ids": [
+          "chunk-938e7fe516603bfd2158159e8ce4eb29"
+        ],
+        "evidence_texts": [
+          "The release date for Daytime Wives was September 2, 1923.",
+          "Daytime Wives Daytime Wives is a 1923 American drama film directed by Émile Chautard, and written by Helmer Walton Bergman and Wyndham Gittens. The film stars Derelys Perdue, Wyndham Standing, Grace Darmond, William Conklin, Guy Edward Hearn, and Katherine Lewis. The film was released on September 2, 1923, by Film Booking Offices of America."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.496188,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499238
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Prints of 'Her Husband's Trademark' are held at the George Eastman House and the Gosfilmofond archive in Moscow.\"",
+        "hyperedge_text": "Prints of 'Her Husband's Trademark' are held at the George Eastman House and the Gosfilmofond archive in Moscow.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.46916717290878296,
+        "fusion_score": 0.4938334345817566,
+        "entity_ids": [
+          "\"MOSCOW\"",
+          "\"GEORGE EASTMAN HOUSE\"",
+          "\"GOSFILMOFOND\""
+        ],
+        "chunk_ids": [
+          "chunk-66a0680eae34a47f3305efe4bf4424ce"
+        ],
+        "evidence_texts": [
+          "Prints of 'Her Husband's Trademark' are held at the George Eastman House and the Gosfilmofond archive in Moscow.",
+          "Her Husband's Trademark Her Husband's Trademark is a 1922 American silent drama film directed by Sam Wood and starring Gloria Swanson and Richard Wayne. Produced by Famous Players- Lasky and distributed by Paramount Pictures, the film was shot on location in El Paso, Texas. Prints of\" Her Husband's Trademark\" are held at the George Eastman House and the Gosfilmofond archive in Moscow."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.469167,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.493833
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Jazz Boat?",
+    "retrieval_question": "What is the release date of Jazz Boat?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Jazz Boat?",
+      "retrieval_question": "What is the release date of Jazz Boat?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+        "entity_ids": [
+          "\"ORCHESTRA\"",
+          "\"JAZZ BOAT\"",
+          "\"KEN HUGHES\"",
+          "\"ANTHONY NEWLEY\"",
+          "\"ANNE AUBREY\"",
+          "\"LIONEL JEFFRIES\"",
+          "\"TED HEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-fcb3e51d21742516cbb4a50ce53ecae6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+            "Jazz Boat Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra."
+          ],
+          "relation_texts": [
+            "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+            "link",
+            "ORCHESTRA",
+            "JAZZ BOAT",
+            "KEN HUGHES",
+            "ANTHONY NEWLEY",
+            "ANNE AUBREY",
+            "LIONEL JEFFRIES",
+            "TED HEATH"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\"",
+        "branch": "relation",
+        "raw_score": 0.4918246269226074,
+        "hyperedge_text": "After setting an initial release date in the same month, casting took place between April and June 2015.",
+        "entity_ids": [
+          "\"APRIL 2015\"",
+          "\"JUNE 2015\""
+        ],
+        "chunk_ids": [
+          "chunk-b877a56c3c1803c310d3092526abfa76"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After setting an initial release date in the same month, casting took place between April and June 2015.",
+            "The Fate of the Furious The Fate of the Furious( alternatively known as Fast& Furious 8 and Fast 8 and often stylized as F8) is a 2017 American action film directed by F. Gary Gray and written by Chris Morgan. A sequel to 2015's\" Furious 7\", it is the eighth installment in the\" Fast& Furious\" franchise and stars Vin Diesel, Dwayne Johnson, Jason Statham, Michelle Rodriguez, Tyrese Gibson, Chris\" Ludacris\" Bridges, Scott Eastwood, Nathalie Emmanuel, Elsa Pataky, Kurt Russell and Charlize Theron. \" The Fate of the Furious\" follows Dominic Toretto( Diesel), who has settled down with his wife Letty Ortiz( Rodriguez), until cyberterrorist Cipher( Theron) coerces him into working for her and turns him against his team, forcing them to find Dom and take down Cipher. \" The Fate of the Furious\" marks the first installment in the franchise since( 2006) not to feature either Paul Walker, who die..."
+          ],
+          "relation_texts": [
+            "After setting an initial release date in the same month, casting took place between April and June 2015.",
+            "link",
+            "APRIL 2015",
+            "JUNE 2015"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e6cbbce13d732880961d6e63686a9ca6",
+            "hyperedge_name": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "branch": "relation",
+        "raw_score": 0.4723891019821167,
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's release occurred on a specific date.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The film's release occurred on a specific date.",
+            "link",
+            "SPECIFIC DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf00e02cc9aa046e03d764b86b678f46",
+            "hyperedge_name": "<hyperedge>\"The film's release occurred on a specific date.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "branch": "relation",
+        "raw_score": 0.46724173426628113,
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date was on 10 October 2009.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The release date was on 10 October 2009.",
+            "link",
+            "RELEASE DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-066e3d9efe074f8299dde1f259ae335f",
+            "hyperedge_name": "<hyperedge>\"The release date was on 10 October 2009.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Rakka was 14 June 2017.\"",
+        "branch": "relation",
+        "raw_score": 0.45409703254699707,
+        "hyperedge_text": "The release date of Rakka was 14 June 2017.",
+        "entity_ids": [
+          "\"14 JUNE 2017\""
+        ],
+        "chunk_ids": [
+          "chunk-44787de4ca914ea38ca9818d0ecd9288"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of Rakka was 14 June 2017.",
+            "Rakka (film) The film was released on YouTube and Steam on 14 June 2017."
+          ],
+          "relation_texts": [
+            "The release date of Rakka was 14 June 2017.",
+            "link",
+            "14 JUNE 2017"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f2ea9c55e817f00696be39ce6c6232e",
+            "hyperedge_name": "<hyperedge>\"The release date of Rakka was 14 June 2017.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.43862271308898926,
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is July 25, 1920.",
+            "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+          ],
+          "relation_texts": [
+            "The release date of the film is July 25, 1920.",
+            "link",
+            "JULY 25, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62471a4725f6e026bc7378dd17783972",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is July 25, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on May 30, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.4376589059829712,
+        "hyperedge_text": "It was released on May 30, 1920.",
+        "entity_ids": [
+          "\"MAY 30, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-677670aef346a64df94317540622436a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on May 30, 1920.",
+            "The Revenge of Tarzan The Revenge of Tarzan( 1920) is a silent adventure film, originally advertised as The Return of Tarzan, and the third Tarzan film produced. The film was produced by the Great Western Film Producing Company, a subsidiary of the Numa Pictures Corporation. The film was sold to Goldwyn Pictures for distribution. The film was written by Robert Saxmar, based on the 1915 novel\" The Return of Tarzan\" by Edgar Rice Burroughs, and directed by Harry Revier and George M. Merrick. It was released on May 30, 1920."
+          ],
+          "relation_texts": [
+            "It was released on May 30, 1920.",
+            "link",
+            "MAY 30, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82730c2563bc7b854d6b0e419a0c0e68",
+            "hyperedge_name": "<hyperedge>\"It was released on May 30, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "branch": "relation",
+        "raw_score": 0.4368012547492981,
+        "hyperedge_text": "The release date on CD was September 22.",
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date on CD was September 22.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date on CD was September 22.",
+            "link",
+            "SEPTEMBER 22"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5348043ffa573d6b9577c2a39d1c0828",
+            "hyperedge_name": "<hyperedge>\"The release date on CD was September 22.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released two months after her previous work.\"",
+        "branch": "relation",
+        "raw_score": 0.4339386224746704,
+        "hyperedge_text": "It was released two months after her previous work.",
+        "entity_ids": [
+          "\"FOURTH STUDIO ALBUM\"",
+          "\"TWO MONTHS\""
+        ],
+        "chunk_ids": [
+          "chunk-0810f85005cb33553abde2a595e2c086"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released two months after her previous work.",
+            "The Season for Romance The Season for Romance is the fifth studio album, and first Christmas album, from Lee Ann Womack. It was released two months after her fourth studio album,\" Something Worth Leaving Behind\"."
+          ],
+          "relation_texts": [
+            "It was released two months after her previous work.",
+            "link",
+            "FOURTH STUDIO ALBUM",
+            "TWO MONTHS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-175d0b8445f687da1f01c1903e270312",
+            "hyperedge_name": "<hyperedge>\"It was released two months after her previous work.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\"",
+        "branch": "relation",
+        "raw_score": 0.4294666647911072,
+        "hyperedge_text": "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+        "entity_ids": [
+          "\"PORTFOLIO\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+            "link",
+            "PORTFOLIO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-800463cc0af33ef22968d66931543a06",
+            "hyperedge_name": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on September 6, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.42727920413017273,
+        "hyperedge_text": "It was released on September 6, 1920.",
+        "entity_ids": [
+          "\"SEPTEMBER 6, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-abf58852e1b4b8d1ff00e32c25ebc8af"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on September 6, 1920.",
+            "Love, Honor and Obey Love, Honor and Obey is a 1920 American silent drama film. Directed by Leander de Cordova, the film stars Wilda Bennett, Claire Whitney, and Henry Harmon. It was released on September 6, 1920."
+          ],
+          "relation_texts": [
+            "It was released on September 6, 1920.",
+            "link",
+            "SEPTEMBER 6, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c971308713d91513707a3175e8322c4d",
+            "hyperedge_name": "<hyperedge>\"It was released on September 6, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Jazz Boat was made in 1960, categorizing it as a British musical comedy.\"",
+        "branch": "semantic",
+        "raw_score": 0.5653598308563232,
+        "hyperedge_text": "The film Jazz Boat was made in 1960, categorizing it as a British musical comedy.",
+        "entity_ids": [
+          "\"1960\"",
+          "\"BRITISH MUSICAL COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-fcb3e51d21742516cbb4a50ce53ecae6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Jazz Boat was made in 1960, categorizing it as a British musical comedy.",
+            "Jazz Boat Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra."
+          ],
+          "relation_texts": [
+            "The film Jazz Boat was made in 1960, categorizing it as a British musical comedy.",
+            "link",
+            "1960",
+            "BRITISH MUSICAL COMEDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7b91a709cd4a307d52aca7e623ec6b9f",
+            "hyperedge_name": "<hyperedge>\"The film Jazz Boat was made in 1960, categorizing it as a British musical comedy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\"",
+        "branch": "semantic",
+        "raw_score": 0.5650962591171265,
+        "hyperedge_text": "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+        "entity_ids": [
+          "\"ORCHESTRA\"",
+          "\"JAZZ BOAT\"",
+          "\"KEN HUGHES\"",
+          "\"ANTHONY NEWLEY\"",
+          "\"ANNE AUBREY\"",
+          "\"LIONEL JEFFRIES\"",
+          "\"TED HEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-fcb3e51d21742516cbb4a50ce53ecae6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+            "Jazz Boat Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra."
+          ],
+          "relation_texts": [
+            "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+            "link",
+            "ORCHESTRA",
+            "JAZZ BOAT",
+            "KEN HUGHES",
+            "ANTHONY NEWLEY",
+            "ANNE AUBREY",
+            "LIONEL JEFFRIES",
+            "TED HEATH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-aff65eaefb9cf7b1aedeabbb2ede2057",
+            "hyperedge_name": "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the album on the vinyl LP was August 25, 2009.\"",
+        "branch": "semantic",
+        "raw_score": 0.4407159388065338,
+        "hyperedge_text": "The release date of the album on the vinyl LP was August 25, 2009.",
+        "entity_ids": [
+          "\"AUGUST 25, 2009\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the album on the vinyl LP was August 25, 2009.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date of the album on the vinyl LP was August 25, 2009.",
+            "link",
+            "AUGUST 25, 2009"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8621be053ad985e774b4aad1b1925084",
+            "hyperedge_name": "<hyperedge>\"The release date of the album on the vinyl LP was August 25, 2009.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "branch": "semantic",
+        "raw_score": 0.4329373836517334,
+        "hyperedge_text": "The release date on CD was September 22.",
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date on CD was September 22.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date on CD was September 22.",
+            "link",
+            "SEPTEMBER 22"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5348043ffa573d6b9577c2a39d1c0828",
+            "hyperedge_name": "<hyperedge>\"The release date on CD was September 22.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Mary Jane's Pa is April 27, 1935.\"",
+        "branch": "semantic",
+        "raw_score": 0.42832282185554504,
+        "hyperedge_text": "The release date of Mary Jane's Pa is April 27, 1935.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-9c0062763a5518efa75a2cf5d4bf970e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of Mary Jane's Pa is April 27, 1935.",
+            "Mary Jane's Pa Mary Jane's Pa is a 1935 American drama film directed by William Keighley and written by Tom Reed and Peter Milne. The film stars Aline MacMahon, Guy Kibbee, Tom Brown, Robert McWade, Minor Watson and Nan Grey. The film was released by Warner Bros. on April 27, 1935."
+          ],
+          "relation_texts": [
+            "The release date of Mary Jane's Pa is April 27, 1935."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bdfcc8daf271b6c8fa23f871f5c13bba",
+            "hyperedge_name": "<hyperedge>\"The release date of Mary Jane's Pa is April 27, 1935.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The album includes the original recording of 'Rock The Boat.'\"",
+        "branch": "semantic",
+        "raw_score": 0.4244539141654968,
+        "hyperedge_text": "The album includes the original recording of 'Rock The Boat.'",
+        "entity_ids": [
+          "\"ROCK THE BOAT\""
+        ],
+        "chunk_ids": [
+          "chunk-82a371fdacd392e71f9db9e37f4c02fe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The album includes the original recording of 'Rock The Boat.'",
+            "Freedom for the Stallion Freedom For The Stallion is the debut album by The Hues Corporation released in 1973. The album includes the original recording of \"Rock The Boat.\" A later re-mix version of this recording became one of the first Disco hits in 1974 and reached #1 on the \"Billboard\" Hot 100 in the United States. The title track, \"Freedom for the Stallion\" was also a minor hit. This Allen Toussaint song had been recorded earlier by Lee Dorsey in 1971. Later versions of \"Freedom for the Stallion\" include The Oak Ridge Boys on their 1974 self-titled Columbia Records debut, and a 2006 recording by Toussaint and Elvis Costello on the album \"The River in Reverse\"."
+          ],
+          "relation_texts": [
+            "The album includes the original recording of 'Rock The Boat.'",
+            "link",
+            "ROCK THE BOAT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d8973203ae210d58d77c3690862d9157",
+            "hyperedge_name": "<hyperedge>\"The album includes the original recording of 'Rock The Boat.'\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "branch": "semantic",
+        "raw_score": 0.4180440604686737,
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is July 25, 1920.",
+            "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+          ],
+          "relation_texts": [
+            "The release date of the film is July 25, 1920.",
+            "link",
+            "JULY 25, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62471a4725f6e026bc7378dd17783972",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is July 25, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "branch": "semantic",
+        "raw_score": 0.40824076533317566,
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date was on 10 October 2009.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The release date was on 10 October 2009.",
+            "link",
+            "RELEASE DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-066e3d9efe074f8299dde1f259ae335f",
+            "hyperedge_name": "<hyperedge>\"The release date was on 10 October 2009.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After releasing 'Sinatra at the Sands', recorded at the Sands Hotel and Casino in Vegas with frequent collaborator Count Basie in early 1966, the following year he recorded one of his most famous collaborations with Tom Jobim, the album 'Francis Albert Sinatra & Antonio Carlos Jobim'.\"",
+        "branch": "semantic",
+        "raw_score": 0.4036961495876312,
+        "hyperedge_text": "After releasing 'Sinatra at the Sands', recorded at the Sands Hotel and Casino in Vegas with frequent collaborator Count Basie in early 1966, the following year he recorded one of his most famous collaborations with Tom Jobim, the album 'Francis Albert Sinatra & Antonio Carlos Jobim'.",
+        "entity_ids": [
+          "\"SINATRA AT THE SANDS\"",
+          "\"SANDS HOTEL AND CASINO\"",
+          "\"COUNT BASIE\"",
+          "\"FRANCIS ALBERT SINATRA & ANTONIO CARLOS JOBIM\""
+        ],
+        "chunk_ids": [
+          "chunk-7973e49ba1d461b9629a5daac2083845"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After releasing 'Sinatra at the Sands', recorded at the Sands Hotel and Casino in Vegas with frequent collaborator Count Basie in early 1966, the following year he recorded one of his most famous collaborations with Tom Jobim, the album 'Francis Albert Sinatra & Antonio Carlos Jobim'.",
+            "Frank Sinatra Francis Albert Sinatra ( December 12, 1915 – May 14, 1998) was an American singer, actor and producer who was one of the most popular and influential musical artists of the 20th century. He is one of the best- selling music artists of all time, having sold more than 150 million records worldwide. Born to Italian immigrants in Hoboken, New Jersey, Sinatra began his musical career in the swing era with bandleaders Harry James and Tommy Dorsey. Sinatra found success as a solo artist after he signed with Columbia Records in 1943, becoming the idol of the\" bobby soxers\". He released his debut album,\" The Voice of Frank Sinatra\", in 1946. But by the early 1950s his professional career had stalled and he turned to Las Vegas, where he became one of its best known residency performers as part of the Rat Pack. His career was reborn in 1953 with the success of\" From Here to Eternit..."
+          ],
+          "relation_texts": [
+            "After releasing 'Sinatra at the Sands', recorded at the Sands Hotel and Casino in Vegas with frequent collaborator Count Basie in early 1966, the following year he recorded one of his most famous collaborations with Tom Jobim, the album 'Francis Albert Sinatra & Antonio Carlos Jobim'.",
+            "link",
+            "SINATRA AT THE SANDS",
+            "SANDS HOTEL AND CASINO",
+            "COUNT BASIE",
+            "FRANCIS ALBERT SINATRA & ANTONIO CARLOS JOBIM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-247e9f360039c9f67eaf741299427f9a",
+            "hyperedge_name": "<hyperedge>\"After releasing 'Sinatra at the Sands', recorded at the Sands Hotel and Casino in Vegas with frequent collaborator Count Basie in early 1966, the following year he recorded one of his most famous collaborations with Tom Jobim, the album 'Francis Albert Sinatra & Antonio Carlos Jobim'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on May 30, 1920.\"",
+        "branch": "semantic",
+        "raw_score": 0.39917290210723877,
+        "hyperedge_text": "It was released on May 30, 1920.",
+        "entity_ids": [
+          "\"MAY 30, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-677670aef346a64df94317540622436a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on May 30, 1920.",
+            "The Revenge of Tarzan The Revenge of Tarzan( 1920) is a silent adventure film, originally advertised as The Return of Tarzan, and the third Tarzan film produced. The film was produced by the Great Western Film Producing Company, a subsidiary of the Numa Pictures Corporation. The film was sold to Goldwyn Pictures for distribution. The film was written by Robert Saxmar, based on the 1915 novel\" The Return of Tarzan\" by Edgar Rice Burroughs, and directed by Harry Revier and George M. Merrick. It was released on May 30, 1920."
+          ],
+          "relation_texts": [
+            "It was released on May 30, 1920.",
+            "link",
+            "MAY 30, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82730c2563bc7b854d6b0e419a0c0e68",
+            "hyperedge_name": "<hyperedge>\"It was released on May 30, 1920.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.\"",
+        "hyperedge_text": "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5650962591171265,
+        "fusion_score": 0.5130192518234253,
+        "entity_ids": [
+          "\"ORCHESTRA\"",
+          "\"JAZZ BOAT\"",
+          "\"KEN HUGHES\"",
+          "\"ANTHONY NEWLEY\"",
+          "\"ANNE AUBREY\"",
+          "\"LIONEL JEFFRIES\"",
+          "\"TED HEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-fcb3e51d21742516cbb4a50ce53ecae6"
+        ],
+        "evidence_texts": [
+          "Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra.",
+          "Jazz Boat Jazz Boat is a 1960 British musical comedy film directed by Ken Hughes and starring Anthony Newley, Anne Aubrey, Lionel Jeffries and big band leader Ted Heath and his orchestra."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.565096,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.513019
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46724173426628113,
+        "semantic_score": 0.40824076533317566,
+        "fusion_score": 0.2685448467731476,
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "evidence_texts": [
+          "The release date was on 10 October 2009.",
+          "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.467242,
+          "S": 0.408241,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268545
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "hyperedge_text": "The release date on CD was September 22.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4368012547492981,
+        "semantic_score": 0.4329373836517334,
+        "fusion_score": 0.26130797863006594,
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "evidence_texts": [
+          "The release date on CD was September 22.",
+          "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.436801,
+          "S": 0.432937,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.261308
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43862271308898926,
+        "semantic_score": 0.4180440604686737,
+        "fusion_score": 0.2590578973293305,
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "evidence_texts": [
+          "The release date of the film is July 25, 1920.",
+          "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.438623,
+          "S": 0.418044,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.259058
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on May 30, 1920.\"",
+        "hyperedge_text": "It was released on May 30, 1920.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4376589059829712,
+        "semantic_score": 0.39917290210723877,
+        "fusion_score": 0.25489814281463624,
+        "entity_ids": [
+          "\"MAY 30, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-677670aef346a64df94317540622436a"
+        ],
+        "evidence_texts": [
+          "It was released on May 30, 1920.",
+          "The Revenge of Tarzan The Revenge of Tarzan( 1920) is a silent adventure film, originally advertised as The Return of Tarzan, and the third Tarzan film produced. The film was produced by the Great Western Film Producing Company, a subsidiary of the Numa Pictures Corporation. The film was sold to Goldwyn Pictures for distribution. The film was written by Robert Saxmar, based on the 1915 novel\" The Return of Tarzan\" by Edgar Rice Burroughs, and directed by Harry Revier and George M. Merrick. It was released on May 30, 1920."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.437659,
+          "S": 0.399173,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.254898
+        }
+      }
+    ]
+  }
+]

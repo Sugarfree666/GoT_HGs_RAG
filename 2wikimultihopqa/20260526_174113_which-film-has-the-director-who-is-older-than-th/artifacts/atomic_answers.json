@@ -1,0 +1,910 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Mektoub?",
+    "analysis": {
+      "entities": [
+        "Mektoub"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.\"",
+        "hyperedge_text": "Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6904172897338867,
+        "fusion_score": 0.5380834579467774,
+        "entity_ids": [
+          "\"MEKTOUB\"",
+          "\"NABIL AYOUCH\""
+        ],
+        "chunk_ids": [
+          "chunk-cfd0b228ab5557469533618843f64b27"
+        ],
+        "evidence_texts": [
+          "Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.",
+          "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.690417,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.538083
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.\"",
+        "hyperedge_text": "Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6849379539489746,
+        "fusion_score": 0.536987590789795,
+        "entity_ids": [
+          "\"DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-cfd0b228ab5557469533618843f64b27"
+        ],
+        "evidence_texts": [
+          "Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.",
+          "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.684938,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536988
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mektoub is a French-Moroccan drama film, emphasizing its cultural and geographical significance.\"",
+        "hyperedge_text": "Mektoub is a French-Moroccan drama film, emphasizing its cultural and geographical significance.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6515520811080933,
+        "fusion_score": 0.5303104162216187,
+        "entity_ids": [
+          "\"FRENCH-MOROCCAN\""
+        ],
+        "chunk_ids": [
+          "chunk-cfd0b228ab5557469533618843f64b27"
+        ],
+        "evidence_texts": [
+          "Mektoub is a French-Moroccan drama film, emphasizing its cultural and geographical significance.",
+          "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.651552,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.53031
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mektoub, as a drama film, portrays themes that resonate with audiences across cultures.\"",
+        "hyperedge_text": "Mektoub, as a drama film, portrays themes that resonate with audiences across cultures.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5959798097610474,
+        "fusion_score": 0.5191959619522095,
+        "entity_ids": [
+          "\"DRAMA FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-cfd0b228ab5557469533618843f64b27"
+        ],
+        "evidence_texts": [
+          "Mektoub, as a drama film, portrays themes that resonate with audiences across cultures.",
+          "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.59598,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519196
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mektoub is a film that was released in 1997, marking a significant year in cinema.\"",
+        "hyperedge_text": "Mektoub is a film that was released in 1997, marking a significant year in cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.570681095123291,
+        "fusion_score": 0.5141362190246582,
+        "entity_ids": [
+          "\"1997\""
+        ],
+        "chunk_ids": [
+          "chunk-cfd0b228ab5557469533618843f64b27"
+        ],
+        "evidence_texts": [
+          "Mektoub is a film that was released in 1997, marking a significant year in cinema.",
+          "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.570681,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.514136
+        }
+      }
+    ],
+    "answer": "Nabil Ayouch",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Sail A Crooked Ship?",
+    "analysis": {
+      "entities": [
+        "Sail A Crooked Ship"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin.\"",
+        "hyperedge_text": "Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6001014709472656,
+        "fusion_score": 0.5200202941894532,
+        "entity_ids": [
+          "\"FRANKIE AVALON\"",
+          "\"SAIL A CROOKED SHIP\"",
+          "\"ROBERT WAGNER\"",
+          "\"DOLORES HART\"",
+          "\"CAROLYN JONES\"",
+          "\"ERNIE KOVACS\"",
+          "\"FRANK GORSHIN\""
+        ],
+        "chunk_ids": [
+          "chunk-06c1e96e951e8ddbb7e3800421ab0fb9"
+        ],
+        "evidence_texts": [
+          "Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin.",
+          "Sail a Crooked Ship Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin. It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960. \"Sail a Crooked Ship\" was Kovacs' last movie, released shortly before he was killed in a car crash. Hart's other 1961 film, \"Francis of Assisi\", inspired her to retire from acting two years later and become a Roman Catholic nun."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.600101,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52002
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Sail a Crooked Ship is a comedy heist film released in 1961.\"",
+        "hyperedge_text": "The film Sail a Crooked Ship is a comedy heist film released in 1961.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5984561443328857,
+        "fusion_score": 0.5196912288665771,
+        "entity_ids": [
+          "\"1961\"",
+          "\"COMEDY HEIST FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-06c1e96e951e8ddbb7e3800421ab0fb9"
+        ],
+        "evidence_texts": [
+          "The film Sail a Crooked Ship is a comedy heist film released in 1961.",
+          "Sail a Crooked Ship Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin. It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960. \"Sail a Crooked Ship\" was Kovacs' last movie, released shortly before he was killed in a car crash. Hart's other 1961 film, \"Francis of Assisi\", inspired her to retire from acting two years later and become a Roman Catholic nun."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.598456,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519691
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sail a Crooked Ship was based on the novel published in 1960.\"",
+        "hyperedge_text": "Sail a Crooked Ship was based on the novel published in 1960.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5428613424301147,
+        "fusion_score": 0.508572268486023,
+        "entity_ids": [
+          "\"1960\""
+        ],
+        "chunk_ids": [
+          "chunk-06c1e96e951e8ddbb7e3800421ab0fb9"
+        ],
+        "evidence_texts": [
+          "Sail a Crooked Ship was based on the novel published in 1960.",
+          "Sail a Crooked Ship Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin. It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960. \"Sail a Crooked Ship\" was Kovacs' last movie, released shortly before he was killed in a car crash. Hart's other 1961 film, \"Francis of Assisi\", inspired her to retire from acting two years later and become a Roman Catholic nun."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.542861,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.508572
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Kovacs' involvement in Sail a Crooked Ship marks a significant point in his career.\"",
+        "hyperedge_text": "Kovacs' involvement in Sail a Crooked Ship marks a significant point in his career.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4998268187046051,
+        "fusion_score": 0.49996536374092104,
+        "entity_ids": [
+          "\"SIGNIFICANT POINT IN CAREER\""
+        ],
+        "chunk_ids": [
+          "chunk-06c1e96e951e8ddbb7e3800421ab0fb9"
+        ],
+        "evidence_texts": [
+          "Kovacs' involvement in Sail a Crooked Ship marks a significant point in his career.",
+          "Sail a Crooked Ship Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin. It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960. \"Sail a Crooked Ship\" was Kovacs' last movie, released shortly before he was killed in a car crash. Hart's other 1961 film, \"Francis of Assisi\", inspired her to retire from acting two years later and become a Roman Catholic nun."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.499827,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499965
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sail a Crooked Ship was Kovacs' last movie, released shortly before he was killed in a car crash.\"",
+        "hyperedge_text": "Sail a Crooked Ship was Kovacs' last movie, released shortly before he was killed in a car crash.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49077731370925903,
+        "fusion_score": 0.49815546274185185,
+        "entity_ids": [
+          "\"CAR CRASH\""
+        ],
+        "chunk_ids": [
+          "chunk-06c1e96e951e8ddbb7e3800421ab0fb9"
+        ],
+        "evidence_texts": [
+          "Sail a Crooked Ship was Kovacs' last movie, released shortly before he was killed in a car crash.",
+          "Sail a Crooked Ship Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin. It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960. \"Sail a Crooked Ship\" was Kovacs' last movie, released shortly before he was killed in a car crash. Hart's other 1961 film, \"Francis of Assisi\", inspired her to retire from acting two years later and become a Roman Catholic nun."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.490777,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.498155
+        }
+      }
+    ],
+    "answer": "Irving Brecher",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'Sail a Crooked Ship' was directed by Irving Brecher.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Mektoub?",
+    "analysis": {
+      "entities": [
+        "Nabil Ayouch"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Nabil Ayouch (born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin.\"",
+        "hyperedge_text": "Nabil Ayouch (born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7295597791671753,
+        "fusion_score": 0.5459119558334351,
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"FILM DIRECTOR\"",
+          "\"PRODUCER\"",
+          "\"FRANCE\"",
+          "\"TELEVISION DIRECTOR\"",
+          "\"MOROCCAN ORIGIN\"",
+          "\"NABIL AYOUCH\""
+        ],
+        "chunk_ids": [
+          "chunk-762f0de46333f5be630af7e1b090f1d3"
+        ],
+        "evidence_texts": [
+          "Nabil Ayouch (born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin.",
+          "Nabil Ayouch Nabil Ayouch( born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.72956,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.545912
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nabil Ayouch (born 1 April 1969) is a French television and film director.\"",
+        "hyperedge_text": "Nabil Ayouch (born 1 April 1969) is a French television and film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7202893495559692,
+        "fusion_score": 0.5440578699111939,
+        "entity_ids": [
+          "\"NABIL AYOUCH\""
+        ],
+        "chunk_ids": [
+          "chunk-762f0de46333f5be630af7e1b090f1d3"
+        ],
+        "evidence_texts": [
+          "Nabil Ayouch (born 1 April 1969) is a French television and film director.",
+          "Nabil Ayouch Nabil Ayouch( born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.720289,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.544058
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.\"",
+        "hyperedge_text": "Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.520545244216919,
+        "fusion_score": 0.5041090488433838,
+        "entity_ids": [
+          "\"MEKTOUB\"",
+          "\"NABIL AYOUCH\""
+        ],
+        "chunk_ids": [
+          "chunk-cfd0b228ab5557469533618843f64b27"
+        ],
+        "evidence_texts": [
+          "Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.",
+          "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.520545,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504109
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nabil Ayouch's work spans both television and film industries in France.\"",
+        "hyperedge_text": "Nabil Ayouch's work spans both television and film industries in France.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6032513380050659,
+        "fusion_score": 0.5206502676010132,
+        "entity_ids": [
+          "\"FILM INDUSTRY\"",
+          "\"TELEVISION INDUSTRY\""
+        ],
+        "chunk_ids": [
+          "chunk-762f0de46333f5be630af7e1b090f1d3"
+        ],
+        "evidence_texts": [
+          "Nabil Ayouch's work spans both television and film industries in France.",
+          "Nabil Ayouch Nabil Ayouch( born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.603251,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52065
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.\"",
+        "hyperedge_text": "Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5600478649139404,
+        "fusion_score": 0.5120095729827882,
+        "entity_ids": [
+          "\"DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-cfd0b228ab5557469533618843f64b27"
+        ],
+        "evidence_texts": [
+          "Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.",
+          "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.560048,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51201
+        }
+      }
+    ],
+    "answer": "54",
+    "confidence": 0.9,
+    "reasoning_summary": "Nabil Ayouch was born on 1 April 1969, making him 54 years old as of now.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Nabil Ayouch (born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of Sail A Crooked Ship?",
+    "analysis": {
+      "entities": [
+        "Irving Brecher"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960.\"",
+        "hyperedge_text": "It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48114413022994995,
+        "fusion_score": 0.49622882604599,
+        "entity_ids": [
+          "\"IRVING BRECHER\"",
+          "\"NATHANIEL BENCHLEY\""
+        ],
+        "chunk_ids": [
+          "chunk-06c1e96e951e8ddbb7e3800421ab0fb9"
+        ],
+        "evidence_texts": [
+          "It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960.",
+          "Sail a Crooked Ship Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin. It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960. \"Sail a Crooked Ship\" was Kovacs' last movie, released shortly before he was killed in a car crash. Hart's other 1961 film, \"Francis of Assisi\", inspired her to retire from acting two years later and become a Roman Catholic nun."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.481144,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496229
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\"",
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.438227117061615,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.24195751349131267,
+        "entity_ids": [
+          "\"OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "evidence_texts": [
+          "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+          "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.438227,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.241958
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth.\"",
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.40443557500839233,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2284408966700236,
+        "entity_ids": [
+          "\"ONE OF THE OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN OF PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "evidence_texts": [
+          "making him around 90, which would make him one of the oldest men on the earth.",
+          "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.404436,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.228441
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ou Ya's birthdate indicates he is 37 years old as of 2023.\"",
+        "hyperedge_text": "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.3962096869945526,
+        "semantic_score": 0.0,
+        "fusion_score": 0.15848387479782106,
+        "entity_ids": [
+          "\"37 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2013d0a1c4248a598513d667f5a48c61"
+        ],
+        "evidence_texts": [
+          "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+          "Ou Ya Ou Ya( born 14 February 1986 in Baoding) is a Chinese footballer."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.39621,
+          "S": 0.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.158484
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The term 'old soul' is often used to describe someone who is wise beyond their years.\"",
+        "hyperedge_text": "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.39542803168296814,
+        "semantic_score": 0.0,
+        "fusion_score": 0.15817121267318726,
+        "entity_ids": [
+          "\"WISE PERSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b5802b8cb99b1a4c5bd61bd2f766c8c"
+        ],
+        "evidence_texts": [
+          "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+          "Old soul Old soul or variants may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.395428,
+          "S": 0.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.158171
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "While I know the director of 'Sail A Crooked Ship' is Irving Brecher, there is no evidence provided regarding his age.",
+    "used_dependencies": [
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960.\""
+    ]
+  },
+  {
+    "node_id": "q5",
+    "question": "What is the age of the director of Mektoub?",
+    "analysis": {
+      "entities": [
+        "Mektoub",
+        "Nabil Ayouch"
+      ],
+      "relations": [
+        "age of the director"
+      ],
+      "relation_query": "What is the age of the director of a work?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.\"",
+        "hyperedge_text": "Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6190255880355835,
+        "fusion_score": 0.5238051176071168,
+        "entity_ids": [
+          "\"MEKTOUB\"",
+          "\"NABIL AYOUCH\""
+        ],
+        "chunk_ids": [
+          "chunk-cfd0b228ab5557469533618843f64b27"
+        ],
+        "evidence_texts": [
+          "Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.",
+          "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.619026,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523805
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nabil Ayouch (born 1 April 1969) is a French television and film director.\"",
+        "hyperedge_text": "Nabil Ayouch (born 1 April 1969) is a French television and film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.5,
+        "semantic_score": 0.5232324600219727,
+        "fusion_score": 0.5046464920043946,
+        "entity_ids": [
+          "\"NABIL AYOUCH\""
+        ],
+        "chunk_ids": [
+          "chunk-762f0de46333f5be630af7e1b090f1d3"
+        ],
+        "evidence_texts": [
+          "Nabil Ayouch (born 1 April 1969) is a French television and film director.",
+          "Nabil Ayouch Nabil Ayouch( born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.5,
+          "S": 0.523232,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504646
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nabil Ayouch (born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin.\"",
+        "hyperedge_text": "Nabil Ayouch (born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.5,
+        "semantic_score": 0.5188834071159363,
+        "fusion_score": 0.5037766814231873,
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"FILM DIRECTOR\"",
+          "\"PRODUCER\"",
+          "\"FRANCE\"",
+          "\"TELEVISION DIRECTOR\"",
+          "\"MOROCCAN ORIGIN\"",
+          "\"NABIL AYOUCH\""
+        ],
+        "chunk_ids": [
+          "chunk-762f0de46333f5be630af7e1b090f1d3"
+        ],
+        "evidence_texts": [
+          "Nabil Ayouch (born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin.",
+          "Nabil Ayouch Nabil Ayouch( born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.5,
+          "S": 0.518883,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503777
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.\"",
+        "hyperedge_text": "Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5989909768104553,
+        "fusion_score": 0.5197981953620912,
+        "entity_ids": [
+          "\"DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-cfd0b228ab5557469533618843f64b27"
+        ],
+        "evidence_texts": [
+          "Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.",
+          "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.598991,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519798
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mektoub is a film that was released in 1997, marking a significant year in cinema.\"",
+        "hyperedge_text": "Mektoub is a film that was released in 1997, marking a significant year in cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.596272349357605,
+        "fusion_score": 0.319254469871521,
+        "entity_ids": [
+          "\"1997\""
+        ],
+        "chunk_ids": [
+          "chunk-cfd0b228ab5557469533618843f64b27"
+        ],
+        "evidence_texts": [
+          "Mektoub is a film that was released in 1997, marking a significant year in cinema.",
+          "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.596272,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.319254
+        }
+      }
+    ],
+    "answer": "54",
+    "confidence": 0.9,
+    "reasoning_summary": "Nabil Ayouch was born on 1 April 1969, making him 54 years old as of now.",
+    "used_dependencies": [
+      "q2",
+      "q4"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Nabil Ayouch (born 1 April 1969) is a French television and film director, producer and writer of Moroccan origin.\""
+    ]
+  }
+]

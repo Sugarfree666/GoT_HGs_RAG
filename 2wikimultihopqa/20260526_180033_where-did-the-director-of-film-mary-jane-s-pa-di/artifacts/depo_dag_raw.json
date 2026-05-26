@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Mary Jane's Pa?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the director of Mary Jane's Pa die?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

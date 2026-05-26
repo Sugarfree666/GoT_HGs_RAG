@@ -1,0 +1,2513 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Mary Of Lancaster?",
+    "retrieval_question": "Who is the mother of Mary Of Lancaster?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the mother of Mary Of Lancaster?",
+      "retrieval_question": "Who is the mother of Mary Of Lancaster?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+        "entity_ids": [
+          "\"MARY OF LANCASTER\"",
+          "\"HENRY, 3RD EARL OF LANCASTER\"",
+          "\"MAUD CHAWORTH\"",
+          "\"HENRY III OF ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "link",
+            "MARY OF LANCASTER",
+            "HENRY, 3RD EARL OF LANCASTER",
+            "MAUD CHAWORTH",
+            "HENRY III OF ENGLAND"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her identity as a mother contributed to her recognition in historical texts and lineage discussions.\"",
+        "branch": "relation",
+        "raw_score": 0.48981213569641113,
+        "hyperedge_text": "Her identity as a mother contributed to her recognition in historical texts and lineage discussions.",
+        "entity_ids": [
+          "\"HISTORICAL TEXTS\""
+        ],
+        "chunk_ids": [
+          "chunk-48f0efae8a4f5fe8d7c54b402d353bb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her identity as a mother contributed to her recognition in historical texts and lineage discussions.",
+            "Minamoto no Chikako She was the mother of Prince Morinaga."
+          ],
+          "relation_texts": [
+            "Her identity as a mother contributed to her recognition in historical texts and lineage discussions.",
+            "link",
+            "HISTORICAL TEXTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9f8cc5926002ea11e73b6e0fdfeae5a7",
+            "hyperedge_name": "<hyperedge>\"Her identity as a mother contributed to her recognition in historical texts and lineage discussions.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is the mother of Amy Irving.\"",
+        "branch": "relation",
+        "raw_score": 0.4364059567451477,
+        "hyperedge_text": "She is the mother of Amy Irving.",
+        "entity_ids": [
+          "\"MOTHER\""
+        ],
+        "chunk_ids": [
+          "chunk-f7cdfdbee3ce98054a94e28973dcbf5c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She is the mother of Amy Irving.",
+            "Priscilla Pointer Priscilla Marie Pointer( born May 18, 1924) is an American stage, film and television character actress. She began her career in the theater, including productions on Broadway. Later, Pointer moved to Hollywood to act in films and on television. She is the mother of Amy Irving, therefore making her the former mother- in- law of filmmakers Steven Spielberg and Bruno Barreto and the mother- in- law of documentary filmmaker Kenneth Bowser, Jr."
+          ],
+          "relation_texts": [
+            "She is the mother of Amy Irving.",
+            "link",
+            "MOTHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e514fbc6ca9ebcf2def66cba01e3e0e6",
+            "hyperedge_name": "<hyperedge>\"She is the mother of Amy Irving.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Doria L. Ragland is the mother of Meghan, Duchess of Sussex, the mother-in-law of Prince Harry, and the maternal grandmother of Archie Mountbatten-Windsor.\"",
+        "branch": "relation",
+        "raw_score": 0.42629343271255493,
+        "hyperedge_text": "Doria L. Ragland is the mother of Meghan, Duchess of Sussex, the mother-in-law of Prince Harry, and the maternal grandmother of Archie Mountbatten-Windsor.",
+        "entity_ids": [
+          "\"DORIA L. RAGLAND\"",
+          "\"MEGHAN, DUCHESS OF SUSSEX\"",
+          "\"PRINCE HARRY\"",
+          "\"ARCHIE MOUNTBATTEN-WINDSOR\""
+        ],
+        "chunk_ids": [
+          "chunk-4d6cd86c0f35c1fa12023b26c78be9f3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Doria L. Ragland is the mother of Meghan, Duchess of Sussex, the mother-in-law of Prince Harry, and the maternal grandmother of Archie Mountbatten-Windsor.",
+            "Doria Ragland Doria L. Ragland( born September 2, 1956) is the mother of Meghan, Duchess of Sussex, the mother- in- law of Prince Harry, and the maternal grandmother of Archie Mountbatten- Windsor, who is seventh in line to the British throne. She is a former makeup artist, business owner, yoga instructor, and former social worker who worked in the mental health sector from 2015 to 2018."
+          ],
+          "relation_texts": [
+            "Doria L. Ragland is the mother of Meghan, Duchess of Sussex, the mother-in-law of Prince Harry, and the maternal grandmother of Archie Mountbatten-Windsor.",
+            "link",
+            "DORIA L. RAGLAND",
+            "MEGHAN, DUCHESS OF SUSSEX",
+            "PRINCE HARRY",
+            "ARCHIE MOUNTBATTEN-WINDSOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1cd4f9d1e9191a49e3b9d309d07bf736",
+            "hyperedge_name": "<hyperedge>\"Doria L. Ragland is the mother of Meghan, Duchess of Sussex, the mother-in-law of Prince Harry, and the maternal grandmother of Archie Mountbatten-Windsor.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is recognized as the mother of Kamehameha I, a prominent king in Hawaiian history.\"",
+        "branch": "relation",
+        "raw_score": 0.4180595874786377,
+        "hyperedge_text": "She is recognized as the mother of Kamehameha I, a prominent king in Hawaiian history.",
+        "entity_ids": [
+          "\"KAMEHAMEHA I\""
+        ],
+        "chunk_ids": [
+          "chunk-f243f40db75c823a6cc5123268eec77b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She is recognized as the mother of Kamehameha I, a prominent king in Hawaiian history.",
+            "Kekuʻiapoiwa II Kekuʻiapoiwa II was a Hawaiian chiefess and the mother of the king Kamehameha I."
+          ],
+          "relation_texts": [
+            "She is recognized as the mother of Kamehameha I, a prominent king in Hawaiian history.",
+            "link",
+            "KAMEHAMEHA I"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-398ede191e43714111e154a2e59ef9b3",
+            "hyperedge_name": "<hyperedge>\"She is recognized as the mother of Kamehameha I, a prominent king in Hawaiian history.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was the mother of Prince Morinaga.\"",
+        "branch": "relation",
+        "raw_score": 0.4174705147743225,
+        "hyperedge_text": "She was the mother of Prince Morinaga.",
+        "entity_ids": [
+          "\"PRINCE MORINAGA\""
+        ],
+        "chunk_ids": [
+          "chunk-48f0efae8a4f5fe8d7c54b402d353bb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She was the mother of Prince Morinaga.",
+            "Minamoto no Chikako She was the mother of Prince Morinaga."
+          ],
+          "relation_texts": [
+            "She was the mother of Prince Morinaga.",
+            "link",
+            "PRINCE MORINAGA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dc1adb7ae10508b6f3f56274ce31af7f",
+            "hyperedge_name": "<hyperedge>\"She was the mother of Prince Morinaga.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is the mother of queen Tiye.\"",
+        "branch": "relation",
+        "raw_score": 0.4158506393432617,
+        "hyperedge_text": "She is the mother of queen Tiye.",
+        "entity_ids": [
+          "\"QUEEN TIYE\""
+        ],
+        "chunk_ids": [
+          "chunk-23a01f624a62c2966228c9018b2159b8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She is the mother of queen Tiye.",
+            "Tjuyu Tjuyu( sometimes transliterated as Thuya or Thuyu) was an Egyptian noblewoman and the mother of queen Tiye, and the wife of Yuya. She is the grandmother of Akhenaten, and great grandmother of Tutankhamun."
+          ],
+          "relation_texts": [
+            "She is the mother of queen Tiye.",
+            "link",
+            "QUEEN TIYE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b9375bfc23b67e5d463918fc6067b61f",
+            "hyperedge_name": "<hyperedge>\"She is the mother of queen Tiye.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Doria L. Ragland (born September 2, 1956) is the mother of Meghan, Duchess of Sussex.\"",
+        "branch": "relation",
+        "raw_score": 0.4120867848396301,
+        "hyperedge_text": "Doria L. Ragland (born September 2, 1956) is the mother of Meghan, Duchess of Sussex.",
+        "entity_ids": [
+          "\"DORIA L. RAGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-4d6cd86c0f35c1fa12023b26c78be9f3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Doria L. Ragland (born September 2, 1956) is the mother of Meghan, Duchess of Sussex.",
+            "Doria Ragland Doria L. Ragland( born September 2, 1956) is the mother of Meghan, Duchess of Sussex, the mother- in- law of Prince Harry, and the maternal grandmother of Archie Mountbatten- Windsor, who is seventh in line to the British throne. She is a former makeup artist, business owner, yoga instructor, and former social worker who worked in the mental health sector from 2015 to 2018."
+          ],
+          "relation_texts": [
+            "Doria L. Ragland (born September 2, 1956) is the mother of Meghan, Duchess of Sussex.",
+            "link",
+            "DORIA L. RAGLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ca17f0582712bf3a626e7f1661227479",
+            "hyperedge_name": "<hyperedge>\"Doria L. Ragland (born September 2, 1956) is the mother of Meghan, Duchess of Sussex.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gytha Thorkelsdóttir's legacy includes her role as the mother of influential historical figures.\"",
+        "branch": "relation",
+        "raw_score": 0.41083210706710815,
+        "hyperedge_text": "Gytha Thorkelsdóttir's legacy includes her role as the mother of influential historical figures.",
+        "entity_ids": [
+          "\"LEGACY\""
+        ],
+        "chunk_ids": [
+          "chunk-37bdc5345979f4b9b7f83fa30d09deb1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gytha Thorkelsdóttir's legacy includes her role as the mother of influential historical figures.",
+            "Gytha Thorkelsdóttir Gytha Thorkelsdóttir( 997 – c. 1069), also called Githa, was a Danish noblewoman. She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England."
+          ],
+          "relation_texts": [
+            "Gytha Thorkelsdóttir's legacy includes her role as the mother of influential historical figures.",
+            "link",
+            "LEGACY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-035e99ad7482dc8e2ca23dfce6810c95",
+            "hyperedge_name": "<hyperedge>\"Gytha Thorkelsdóttir's legacy includes her role as the mother of influential historical figures.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His mother is Mary Sheila Gibbs.\"",
+        "branch": "relation",
+        "raw_score": 0.4084957242012024,
+        "hyperedge_text": "His mother is Mary Sheila Gibbs.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-64d796e1308d70d9df3830fadb5c09e4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His mother is Mary Sheila Gibbs.",
+            "Stewart Douglas, 22nd Earl of Morton John Stewart Sholto Douglas, 22nd Earl of Morton( born 17 January 1952) is a Scottish peer and landowner. Known as Stewart, Douglas is the son of John Douglas, 21st Earl of Morton and Mary Sheila Gibbs. He succeeded to the earldom in 2016, upon the death of his father. He married Amanda Kirsten Mitchell and has three children."
+          ],
+          "relation_texts": [
+            "His mother is Mary Sheila Gibbs."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fbc9400ea0a93370f3af8446339ce7f8",
+            "hyperedge_name": "<hyperedge>\"His mother is Mary Sheila Gibbs.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His mother was Constance, whose parentage has been subject to recent speculation.\"",
+        "branch": "relation",
+        "raw_score": 0.4084194302558899,
+        "hyperedge_text": "His mother was Constance, whose parentage has been subject to recent speculation.",
+        "entity_ids": [
+          "\"CONSTANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-43583f426ff3c6713070c876b9d30817"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His mother was Constance, whose parentage has been subject to recent speculation.",
+            "Ramiro Sánchez Ramiro Sánchez of Monzón (1070–1129/1130) was a noble kinsman of the kings of Navarre. In 1104 he was \"tenente\" of Urroz, of Monzón between 1104 and 1116, probably of Tudela in 1117 and from 1122 to 1129 in Erro. His father was Sancho Garcés, an illegitimate son of king García Sánchez III of Navarre. His mother was Constance, whose parentage has been subject to recent speculation - associated with the lords of Marañón in traditional sources, she has lately been suggested to have been daughter of queen Estefanía, King García's wife, and hence stepsister of her husband. With the fall of his uncle, king Sancho IV of Navarre, the kingdom was divided between Castile and Aragon, and the royal family parceled out between the two. Ramiro was thus raised at the Aragonese court, and was lord of Monzón, in which he was succeeded by his eldest son, the future king García Ramírez of..."
+          ],
+          "relation_texts": [
+            "His mother was Constance, whose parentage has been subject to recent speculation.",
+            "link",
+            "CONSTANCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-84b2ecbc6676b138d63011480edf0216",
+            "hyperedge_name": "<hyperedge>\"His mother was Constance, whose parentage has been subject to recent speculation.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.\"",
+        "branch": "semantic",
+        "raw_score": 0.6602310538291931,
+        "hyperedge_text": "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+        "entity_ids": [
+          "\"YOUNGEST SURVIVING CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+            "link",
+            "YOUNGEST SURVIVING CHILD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8790ae80d21fae6eac0073267cb0a2af",
+            "hyperedge_name": "<hyperedge>\"Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+        "branch": "semantic",
+        "raw_score": 0.6267329454421997,
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+        "entity_ids": [
+          "\"MARY OF LANCASTER\"",
+          "\"HENRY, 3RD EARL OF LANCASTER\"",
+          "\"MAUD CHAWORTH\"",
+          "\"HENRY III OF ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "link",
+            "MARY OF LANCASTER",
+            "HENRY, 3RD EARL OF LANCASTER",
+            "MAUD CHAWORTH",
+            "HENRY III OF ENGLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c92a5bbbe8e03d6c09ba892d713f17f9",
+            "hyperedge_name": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.\"",
+        "branch": "semantic",
+        "raw_score": 0.5830464363098145,
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.",
+        "entity_ids": [
+          "\"BARONESS PERCY\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.",
+            "link",
+            "BARONESS PERCY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d29df70660c40e3edca0dfdc8982b251",
+            "hyperedge_name": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children.\"",
+        "branch": "semantic",
+        "raw_score": 0.5596303939819336,
+        "hyperedge_text": "Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children.",
+        "entity_ids": [
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children.",
+            "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+          ],
+          "relation_texts": [
+            "Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children.",
+            "link",
+            "CHILDREN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1beb0fc3b9325e54853b6e44b5b2e10e",
+            "hyperedge_name": "<hyperedge>\"Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Elizabeth of Lancaster (b. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster.\"",
+        "branch": "semantic",
+        "raw_score": 0.5499534010887146,
+        "hyperedge_text": "Elizabeth of Lancaster (b. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster.",
+        "entity_ids": [
+          "\"FAMILY\"",
+          "\"FIRST WIFE\"",
+          "\"THIRD CHILD\"",
+          "\"FEBRUARY 21, 1363\"",
+          "\"NOVEMBER 24, 1426\"",
+          "\"DUKE OF LANCASTER\""
+        ],
+        "chunk_ids": [
+          "chunk-52cf2fd81a5d090cb527fb1951eb936d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Elizabeth of Lancaster (b. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster.",
+            "Elizabeth of Lancaster, Duchess of Exeter Elizabeth of Lancaster( bf. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster."
+          ],
+          "relation_texts": [
+            "Elizabeth of Lancaster (b. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster.",
+            "link",
+            "FAMILY",
+            "FIRST WIFE",
+            "THIRD CHILD",
+            "FEBRUARY 21, 1363",
+            "NOVEMBER 24, 1426",
+            "DUKE OF LANCASTER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cbe297a3155ec597a02304165f3baa23",
+            "hyperedge_name": "<hyperedge>\"Elizabeth of Lancaster (b. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maud had seven children with Henry, 3rd Earl of Lancaster.\"",
+        "branch": "semantic",
+        "raw_score": 0.5264958143234253,
+        "hyperedge_text": "Maud had seven children with Henry, 3rd Earl of Lancaster.",
+        "entity_ids": [
+          "\"SEVEN CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maud had seven children with Henry, 3rd Earl of Lancaster.",
+            "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+          ],
+          "relation_texts": [
+            "Maud had seven children with Henry, 3rd Earl of Lancaster.",
+            "link",
+            "SEVEN CHILDREN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1b5bdf3517ba72daa494b811d563fe35",
+            "hyperedge_name": "<hyperedge>\"Maud had seven children with Henry, 3rd Earl of Lancaster.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Burgundy, Duchess of Cleves (1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good.\"",
+        "branch": "semantic",
+        "raw_score": 0.5228657722473145,
+        "hyperedge_text": "Mary of Burgundy, Duchess of Cleves (1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good.",
+        "entity_ids": [
+          "\"MARY OF BURGUNDY\"",
+          "\"MARGARET OF BAVARIA\"",
+          "\"JOHN THE FEARLESS\"",
+          "\"PHILIP THE GOOD\"",
+          "\"DUCHESS OF CLEVES\""
+        ],
+        "chunk_ids": [
+          "chunk-8415fe62c4d308afa9c62c528cdce2b2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Burgundy, Duchess of Cleves (1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good.",
+            "Mary of Burgundy, Duchess of Cleves Mary of Burgundy, Duchess of Cleves( 1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good. Born in Dijon, she became the second wife of Adolph, Count of Mark in May 1406. He was made the 1st Duke of Cleves in 1417. They were the grandparents of King Louis XII of France and the great- grandparents of John III, Duke of Cleves, father of Anne of Cleves, who was fourth Queen consort of Henry VIII of England. By their daughter, Catherine, they were ancestors of Mary, Queen of Scots. The Duke and Duchess of Cleves lived at Wijnendale Castle in West Flanders. She died in Cleves in present- day Monterberg, Kalkar."
+          ],
+          "relation_texts": [
+            "Mary of Burgundy, Duchess of Cleves (1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good.",
+            "link",
+            "MARY OF BURGUNDY",
+            "MARGARET OF BAVARIA",
+            "JOHN THE FEARLESS",
+            "PHILIP THE GOOD",
+            "DUCHESS OF CLEVES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b1d522e5a8fb76eefd1def7d8e69d107",
+            "hyperedge_name": "<hyperedge>\"Mary of Burgundy, Duchess of Cleves (1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.\"",
+        "branch": "semantic",
+        "raw_score": 0.5140252709388733,
+        "hyperedge_text": "Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.",
+        "entity_ids": [
+          "\"1244\"",
+          "\"1253\"",
+          "\"CRUSADE\"",
+          "\"MARIE DE LUSIGNAN\"",
+          "\"1251\""
+        ],
+        "chunk_ids": [
+          "chunk-69f67d04468c670ab343874b99d379c7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.",
+            "Mary of Lusignan, Countess of Brienne Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244. Mary's parents were King Hugh I of Cyprus and Alice of Champagne, making her a maternal granddaughter of Queen Isabella I of Jerusalem. Her two surviving sons were John, Count of Brienne, and Hugh of Brienne."
+          ],
+          "relation_texts": [
+            "Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.",
+            "link",
+            "1244",
+            "1253",
+            "CRUSADE",
+            "MARIE DE LUSIGNAN",
+            "1251"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9d132554307da41276b18ee22bbb3a14",
+            "hyperedge_name": "<hyperedge>\"Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Burgundy was the second child of John the Fearless and Margaret of Bavaria.\"",
+        "branch": "semantic",
+        "raw_score": 0.4936705529689789,
+        "hyperedge_text": "Mary of Burgundy was the second child of John the Fearless and Margaret of Bavaria.",
+        "entity_ids": [
+          "\"MARY OF BURGUNDY\"",
+          "\"MARGARET OF BAVARIA\"",
+          "\"JOHN THE FEARLESS\""
+        ],
+        "chunk_ids": [
+          "chunk-8415fe62c4d308afa9c62c528cdce2b2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Burgundy was the second child of John the Fearless and Margaret of Bavaria.",
+            "Mary of Burgundy, Duchess of Cleves Mary of Burgundy, Duchess of Cleves( 1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good. Born in Dijon, she became the second wife of Adolph, Count of Mark in May 1406. He was made the 1st Duke of Cleves in 1417. They were the grandparents of King Louis XII of France and the great- grandparents of John III, Duke of Cleves, father of Anne of Cleves, who was fourth Queen consort of Henry VIII of England. By their daughter, Catherine, they were ancestors of Mary, Queen of Scots. The Duke and Duchess of Cleves lived at Wijnendale Castle in West Flanders. She died in Cleves in present- day Monterberg, Kalkar."
+          ],
+          "relation_texts": [
+            "Mary of Burgundy was the second child of John the Fearless and Margaret of Bavaria.",
+            "link",
+            "MARY OF BURGUNDY",
+            "MARGARET OF BAVARIA",
+            "JOHN THE FEARLESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-95783f93a32ec1db81e3691ce88fc069",
+            "hyperedge_name": "<hyperedge>\"Mary of Burgundy was the second child of John the Fearless and Margaret of Bavaria.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maud married Henry, 3rd Earl of Lancaster, before 2 March 1297.\"",
+        "branch": "semantic",
+        "raw_score": 0.482688307762146,
+        "hyperedge_text": "Maud married Henry, 3rd Earl of Lancaster, before 2 March 1297.",
+        "entity_ids": [
+          "\"HENRY, 3RD EARL OF LANCASTER\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maud married Henry, 3rd Earl of Lancaster, before 2 March 1297.",
+            "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+          ],
+          "relation_texts": [
+            "Maud married Henry, 3rd Earl of Lancaster, before 2 March 1297.",
+            "link",
+            "HENRY, 3RD EARL OF LANCASTER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8b2a432d0db959af171d66b2e3464b7e",
+            "hyperedge_name": "<hyperedge>\"Maud married Henry, 3rd Earl of Lancaster, before 2 March 1297.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6267329454421997,
+        "fusion_score": 0.52534658908844,
+        "entity_ids": [
+          "\"MARY OF LANCASTER\"",
+          "\"HENRY, 3RD EARL OF LANCASTER\"",
+          "\"MAUD CHAWORTH\"",
+          "\"HENRY III OF ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "evidence_texts": [
+          "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+          "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.626733,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525347
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.\"",
+        "hyperedge_text": "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6602310538291931,
+        "fusion_score": 0.5320462107658387,
+        "entity_ids": [
+          "\"YOUNGEST SURVIVING CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "evidence_texts": [
+          "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+          "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.660231,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532046
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.\"",
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5830464363098145,
+        "fusion_score": 0.516609287261963,
+        "entity_ids": [
+          "\"BARONESS PERCY\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "evidence_texts": [
+          "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.",
+          "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.583046,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516609
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His mother is Mary Sheila Gibbs.\"",
+        "hyperedge_text": "His mother is Mary Sheila Gibbs.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4084957242012024,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.2967316230138143,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-64d796e1308d70d9df3830fadb5c09e4"
+        ],
+        "evidence_texts": [
+          "His mother is Mary Sheila Gibbs.",
+          "Stewart Douglas, 22nd Earl of Morton John Stewart Sholto Douglas, 22nd Earl of Morton( born 17 January 1952) is a Scottish peer and landowner. Known as Stewart, Douglas is the son of John Douglas, 21st Earl of Morton and Mary Sheila Gibbs. He succeeded to the earldom in 2016, upon the death of his father. He married Amanda Kirsten Mitchell and has three children."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.408496,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.296732
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her identity as a mother contributed to her recognition in historical texts and lineage discussions.\"",
+        "hyperedge_text": "Her identity as a mother contributed to her recognition in historical texts and lineage discussions.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48981213569641113,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.26259152094523114,
+        "entity_ids": [
+          "\"HISTORICAL TEXTS\""
+        ],
+        "chunk_ids": [
+          "chunk-48f0efae8a4f5fe8d7c54b402d353bb4"
+        ],
+        "evidence_texts": [
+          "Her identity as a mother contributed to her recognition in historical texts and lineage discussions.",
+          "Minamoto no Chikako She was the mother of Prince Morinaga."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.489812,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.262592
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the mother of Mary Of Lancaster die?",
+    "retrieval_question": "When did Maud Chaworth die?",
+    "dependency_question_rewrite": {
+      "original_question": "When did the mother of Mary Of Lancaster die?",
+      "retrieval_question": "When did Maud Chaworth die?",
+      "whether_rewritten": true,
+      "replacement_span": "the mother of Mary Of Lancaster",
+      "replacement_answer": "Maud Chaworth",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the mother of Mary Of Lancaster",
+          "replacement_answer": "Maud Chaworth"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+        "entity_ids": [
+          "\"MAUD CHAWORTH\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+            "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+          ],
+          "relation_texts": [
+            "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+            "link",
+            "MAUD CHAWORTH"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+        "entity_ids": [
+          "\"MARY OF LANCASTER\"",
+          "\"HENRY, 3RD EARL OF LANCASTER\"",
+          "\"MAUD CHAWORTH\"",
+          "\"HENRY III OF ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "link",
+            "MARY OF LANCASTER",
+            "HENRY, 3RD EARL OF LANCASTER",
+            "MAUD CHAWORTH",
+            "HENRY III OF ENGLAND"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of death is December 13, 1940.\"",
+        "branch": "relation",
+        "raw_score": 0.5866867303848267,
+        "hyperedge_text": "His date of death is December 13, 1940.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of death is December 13, 1940.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of death is December 13, 1940."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7eedcb18bd8ff211e7d28e4b6f89376f",
+            "hyperedge_name": "<hyperedge>\"His date of death is December 13, 1940.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of his death is recorded as 1 February 1685.\"",
+        "branch": "relation",
+        "raw_score": 0.5306836366653442,
+        "hyperedge_text": "The date of his death is recorded as 1 February 1685.",
+        "entity_ids": [
+          "\"1 FEBRUARY 1685\""
+        ],
+        "chunk_ids": [
+          "chunk-98e21cadb5b074a0a8681790b4b3087f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of his death is recorded as 1 February 1685.",
+            "William Alington, 3rd Baron Alington Major General William Alington, 3rd Baron Alington LL( bef. 1641 – 1 February 1685) was an Irish peer. Alington was the son of William Alington, 1st Baron Alington and Elizabeth Tollemache. He succeeded to the title of 3rd Baron Alington of Killard, Co. Cork circa March 1660, on the death of his brother the 2nd Baron who died without male issue. In 1664, he was elected Member of Parliament for Cambridge in a by-election to the Cavalier Parliament and was re-elected for the same constituency in 1679 and 1681. He was created 1st Baron Alington of Wymondley, Hertfordshire on 5 December 1682. He served as Constable of the Tower from 1679 to his death and as Lord- Lieutenant of Cambridgeshire from 1681 to his death."
+          ],
+          "relation_texts": [
+            "The date of his death is recorded as 1 February 1685.",
+            "link",
+            "1 FEBRUARY 1685"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-92f15181b6fdfab6e0e01d9a235d18df",
+            "hyperedge_name": "<hyperedge>\"The date of his death is recorded as 1 February 1685.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His death date was on September 5, 1960.\"",
+        "branch": "relation",
+        "raw_score": 0.5209023356437683,
+        "hyperedge_text": "His death date was on September 5, 1960.",
+        "entity_ids": [
+          "\"DEATH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0866c3f8d6fb59c7691bda418ca8c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His death date was on September 5, 1960.",
+            "Robert P. Kerr Robert P. Kerr (October 9, 1892 – September 5, 1960) was an American film director, actor and screenwriter. He directed 41 films between 1917 and 1928. He was born in Burlington, Colorado and died in Porterville, California from a heart attack."
+          ],
+          "relation_texts": [
+            "His death date was on September 5, 1960.",
+            "link",
+            "DEATH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf495e8cde0a4a19ab39b565836fdf64",
+            "hyperedge_name": "<hyperedge>\"His death date was on September 5, 1960.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of death for Frederick Light is unknown.\"",
+        "branch": "relation",
+        "raw_score": 0.5120664238929749,
+        "hyperedge_text": "The date of death for Frederick Light is unknown.",
+        "entity_ids": [
+          "\"UNKNOWN\""
+        ],
+        "chunk_ids": [
+          "chunk-a637ab3330339abbb2d2352bdddb2acd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of death for Frederick Light is unknown.",
+            "Frederick Light Frederick Light( born 1905, date of death unknown) was a British long- distance runner. He competed in the men's 5000 metres at the 1928 Summer Olympics."
+          ],
+          "relation_texts": [
+            "The date of death for Frederick Light is unknown.",
+            "link",
+            "UNKNOWN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b95dc8df4c81099f8148595f2d78c4bc",
+            "hyperedge_name": "<hyperedge>\"The date of death for Frederick Light is unknown.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His death date was March 29, 1966.\"",
+        "branch": "relation",
+        "raw_score": 0.5059401988983154,
+        "hyperedge_text": "His death date was March 29, 1966.",
+        "entity_ids": [
+          "\"MARCH 29, 1966\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His death date was March 29, 1966.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His death date was March 29, 1966.",
+            "link",
+            "MARCH 29, 1966"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8234e150aa284e1661396a7be23b7017",
+            "hyperedge_name": "<hyperedge>\"His death date was March 29, 1966.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her exact date of death remains unspecified, though it is estimated to be before the year 69.\"",
+        "branch": "relation",
+        "raw_score": 0.5058091878890991,
+        "hyperedge_text": "Her exact date of death remains unspecified, though it is estimated to be before the year 69.",
+        "entity_ids": [
+          "\"EXACT DATE OF DEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-8a899026112f02ddff716beb87859952"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her exact date of death remains unspecified, though it is estimated to be before the year 69.",
+            "Domitilla the Elder Flavia Domitilla Major(\" Major\", Latin for\" the elder\") Flavia Domitilla the Elder or Domitilla the Elder( died before 69, perhaps c. 65) was the wife of the Roman Emperor Vespasian."
+          ],
+          "relation_texts": [
+            "Her exact date of death remains unspecified, though it is estimated to be before the year 69.",
+            "link",
+            "EXACT DATE OF DEATH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-72adaf1042d0070ab8da3301cc8b2f48",
+            "hyperedge_name": "<hyperedge>\"Her exact date of death remains unspecified, though it is estimated to be before the year 69.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned from January 30, 1871, to December 13, 1940.\"",
+        "branch": "relation",
+        "raw_score": 0.49772846698760986,
+        "hyperedge_text": "His life spanned from January 30, 1871, to December 13, 1940.",
+        "entity_ids": [
+          "\"JANUARY 30, 1871\"",
+          "\"DECEMBER 13, 1940\""
+        ],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned from January 30, 1871, to December 13, 1940.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His life spanned from January 30, 1871, to December 13, 1940.",
+            "link",
+            "JANUARY 30, 1871",
+            "DECEMBER 13, 1940"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0d92fa04edd26b6389d2cc448f519045",
+            "hyperedge_name": "<hyperedge>\"His life spanned from January 30, 1871, to December 13, 1940.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The dates of his birth and death, 9 January 1759 and 20 March 1837 respectively, highlight his lifetime.\"",
+        "branch": "relation",
+        "raw_score": 0.4938068091869354,
+        "hyperedge_text": "The dates of his birth and death, 9 January 1759 and 20 March 1837 respectively, highlight his lifetime.",
+        "entity_ids": [
+          "\"LIFETIME\""
+        ],
+        "chunk_ids": [
+          "chunk-8ce9287b50c0e8bc7b988d910276a726"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The dates of his birth and death, 9 January 1759 and 20 March 1837 respectively, highlight his lifetime.",
+            "William, Prince of Solms-Braunfels Wilhelm Christian Karl, 3rd Prince of Solms Braunfels (9 January 1759, in Braunfels – 20 March 1837, in Braunfels) was by succession an immediate Prince, then a nobleman and head of the Princely House of Solms-Braunfels, a Prussian major general and Hessian deputy."
+          ],
+          "relation_texts": [
+            "The dates of his birth and death, 9 January 1759 and 20 March 1837 respectively, highlight his lifetime.",
+            "link",
+            "LIFETIME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ffe3e6e96eab82f67de36641fc45ccb9",
+            "hyperedge_name": "<hyperedge>\"The dates of his birth and death, 9 January 1759 and 20 March 1837 respectively, highlight his lifetime.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died on 29 December 1820.\"",
+        "branch": "relation",
+        "raw_score": 0.49185192584991455,
+        "hyperedge_text": "He died on 29 December 1820.",
+        "entity_ids": [
+          "\"29 DECEMBER 1820\""
+        ],
+        "chunk_ids": [
+          "chunk-e72247916f0167075e7ef05d53032345"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died on 29 December 1820.",
+            "Jean Baptiste Antoine Auget de Montyon Antoine Jean Baptiste Robert Auget, Baron de Montyon( 23 December 173329 December 1820) was a French philanthropist, born in Paris."
+          ],
+          "relation_texts": [
+            "He died on 29 December 1820.",
+            "link",
+            "29 DECEMBER 1820"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a6e31ec45556aeb4f63a0e57535f8ec8",
+            "hyperedge_name": "<hyperedge>\"He died on 29 December 1820.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He passed away on 28 April 1910.\"",
+        "branch": "relation",
+        "raw_score": 0.48948007822036743,
+        "hyperedge_text": "He passed away on 28 April 1910.",
+        "entity_ids": [
+          "\"28 APRIL 1910\""
+        ],
+        "chunk_ids": [
+          "chunk-c9e607b6ae63847d9e03697c9485128b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He passed away on 28 April 1910.",
+            "Arthur Beauchamp Arthur Beauchamp( 1827 – 28 April 1910) was a Member of Parliament from New Zealand. He is remembered as the father of Harold Beauchamp, who rose to fame as chairman of the Bank of New Zealand and was the father of writer Katherine Mansfield."
+          ],
+          "relation_texts": [
+            "He passed away on 28 April 1910.",
+            "link",
+            "28 APRIL 1910"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0c554170e00fb4d95ccd434c1cabeb6b",
+            "hyperedge_name": "<hyperedge>\"He passed away on 28 April 1910.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.\"",
+        "branch": "semantic",
+        "raw_score": 0.8026621341705322,
+        "hyperedge_text": "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+        "entity_ids": [
+          "\"MAUD CHAWORTH\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+            "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+          ],
+          "relation_texts": [
+            "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+            "link",
+            "MAUD CHAWORTH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd81c2dcc693f9b6777fbdcb1555a4dd",
+            "hyperedge_name": "<hyperedge>\"Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress.\"",
+        "branch": "semantic",
+        "raw_score": 0.7502555251121521,
+        "hyperedge_text": "Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress.",
+        "entity_ids": [
+          "\"PATRICK DE CHAWORTH\"",
+          "\"MAUD DE CHAWORTH\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress.",
+            "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+          ],
+          "relation_texts": [
+            "Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress.",
+            "link",
+            "PATRICK DE CHAWORTH",
+            "MAUD DE CHAWORTH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f5dbec790ceaca2e56f9ab6438c2cf3",
+            "hyperedge_name": "<hyperedge>\"Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born on 2 February 1282, Maud Chaworth's life was marked by her noble lineage and marriage to Henry.\"",
+        "branch": "semantic",
+        "raw_score": 0.6582277417182922,
+        "hyperedge_text": "Born on 2 February 1282, Maud Chaworth's life was marked by her noble lineage and marriage to Henry.",
+        "entity_ids": [
+          "\"NOBLE LINEAGE\"",
+          "\"WEALTHY HEIRESS\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born on 2 February 1282, Maud Chaworth's life was marked by her noble lineage and marriage to Henry.",
+            "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+          ],
+          "relation_texts": [
+            "Born on 2 February 1282, Maud Chaworth's life was marked by her noble lineage and marriage to Henry.",
+            "link",
+            "NOBLE LINEAGE",
+            "WEALTHY HEIRESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-90d93ade176d6b7e78d2809c6d884cbf",
+            "hyperedge_name": "<hyperedge>\"Born on 2 February 1282, Maud Chaworth's life was marked by her noble lineage and marriage to Henry.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.\"",
+        "branch": "semantic",
+        "raw_score": 0.5219351649284363,
+        "hyperedge_text": "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+        "entity_ids": [
+          "\"YOUNGEST SURVIVING CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+            "link",
+            "YOUNGEST SURVIVING CHILD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8790ae80d21fae6eac0073267cb0a2af",
+            "hyperedge_name": "<hyperedge>\"Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+        "branch": "semantic",
+        "raw_score": 0.5173265337944031,
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+        "entity_ids": [
+          "\"MARY OF LANCASTER\"",
+          "\"HENRY, 3RD EARL OF LANCASTER\"",
+          "\"MAUD CHAWORTH\"",
+          "\"HENRY III OF ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "link",
+            "MARY OF LANCASTER",
+            "HENRY, 3RD EARL OF LANCASTER",
+            "MAUD CHAWORTH",
+            "HENRY III OF ENGLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c92a5bbbe8e03d6c09ba892d713f17f9",
+            "hyperedge_name": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was the only child of Patrick de Chaworth.\"",
+        "branch": "semantic",
+        "raw_score": 0.49527639150619507,
+        "hyperedge_text": "She was the only child of Patrick de Chaworth.",
+        "entity_ids": [
+          "\"HENRY, 3RD EARL OF LANCASTER\"",
+          "\"PATRICK DE CHAWORTH\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She was the only child of Patrick de Chaworth.",
+            "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+          ],
+          "relation_texts": [
+            "She was the only child of Patrick de Chaworth.",
+            "link",
+            "HENRY, 3RD EARL OF LANCASTER",
+            "PATRICK DE CHAWORTH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62646f9d14bc90905e9fd756fd64cf26",
+            "hyperedge_name": "<hyperedge>\"She was the only child of Patrick de Chaworth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Anne Woodville was born around 1438 and died on 30 July 1489.\"",
+        "branch": "semantic",
+        "raw_score": 0.49232217669487,
+        "hyperedge_text": "Anne Woodville was born around 1438 and died on 30 July 1489.",
+        "entity_ids": [
+          "\"1438\"",
+          "\"30 JULY 1489\""
+        ],
+        "chunk_ids": [
+          "chunk-12ebd3e8b430f1030cf142be815abcaf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Anne Woodville was born around 1438 and died on 30 July 1489.",
+            "Anne Woodville Anne Woodville, Viscountess Bourchier( c. 1438 – 30 July 1489) was an English noblewoman. She was a younger sister of Queen Consort Elizabeth Woodville to whom she served as a lady- in- waiting. Anne was married twice; first to William Bourchier, Viscount Bourchier, and secondly to George Grey, 2nd Earl of Kent. Anne was the grandmother of the disinherited adulteress Anne Bourchier, 7th Baroness Bourchier, and an ancestress of Robert Devereux, 2nd Earl of Essex."
+          ],
+          "relation_texts": [
+            "Anne Woodville was born around 1438 and died on 30 July 1489.",
+            "link",
+            "1438",
+            "30 JULY 1489"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76a53cb6f825802589fff57f7882a041",
+            "hyperedge_name": "<hyperedge>\"Anne Woodville was born around 1438 and died on 30 July 1489.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Anne Woodville, Viscountess Bourchier (c. 1438 – 30 July 1489) was an English noblewoman.\"",
+        "branch": "semantic",
+        "raw_score": 0.48952311277389526,
+        "hyperedge_text": "Anne Woodville, Viscountess Bourchier (c. 1438 – 30 July 1489) was an English noblewoman.",
+        "entity_ids": [
+          "\"ANNE WOODVILLE\"",
+          "\"VISCOUNTESS BOURCHIER\"",
+          "\"QUEEN CONSORT ELIZABETH WOODVILLE\""
+        ],
+        "chunk_ids": [
+          "chunk-12ebd3e8b430f1030cf142be815abcaf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Anne Woodville, Viscountess Bourchier (c. 1438 – 30 July 1489) was an English noblewoman.",
+            "Anne Woodville Anne Woodville, Viscountess Bourchier( c. 1438 – 30 July 1489) was an English noblewoman. She was a younger sister of Queen Consort Elizabeth Woodville to whom she served as a lady- in- waiting. Anne was married twice; first to William Bourchier, Viscount Bourchier, and secondly to George Grey, 2nd Earl of Kent. Anne was the grandmother of the disinherited adulteress Anne Bourchier, 7th Baroness Bourchier, and an ancestress of Robert Devereux, 2nd Earl of Essex."
+          ],
+          "relation_texts": [
+            "Anne Woodville, Viscountess Bourchier (c. 1438 – 30 July 1489) was an English noblewoman.",
+            "link",
+            "ANNE WOODVILLE",
+            "VISCOUNTESS BOURCHIER",
+            "QUEEN CONSORT ELIZABETH WOODVILLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f6a906333b242c2863d781c929166931",
+            "hyperedge_name": "<hyperedge>\"Anne Woodville, Viscountess Bourchier (c. 1438 – 30 July 1489) was an English noblewoman.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Joan de Beauchamp passed away on 14 November 1435.\"",
+        "branch": "semantic",
+        "raw_score": 0.4613496959209442,
+        "hyperedge_text": "Joan de Beauchamp passed away on 14 November 1435.",
+        "entity_ids": [
+          "\"14 NOVEMBER 1435\""
+        ],
+        "chunk_ids": [
+          "chunk-45c59bd0406e20be65c620cca04d5ec0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Joan de Beauchamp passed away on 14 November 1435.",
+            "Joan FitzAlan, Baroness Bergavenny Joan de Beauchamp, Baroness Bergavenny( née FitzAlan; 1375 – 14 November 1435) was an English noblewoman, and the wife of William de Beauchamp, 1st Baron Bergavenny of the Welsh Marches."
+          ],
+          "relation_texts": [
+            "Joan de Beauchamp passed away on 14 November 1435.",
+            "link",
+            "14 NOVEMBER 1435"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1d141412f6b95ed1270d35b4c0433910",
+            "hyperedge_name": "<hyperedge>\"Joan de Beauchamp passed away on 14 November 1435.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Matilda of England was also called Maud.\"",
+        "branch": "semantic",
+        "raw_score": 0.4562339782714844,
+        "hyperedge_text": "Matilda of England was also called Maud.",
+        "entity_ids": [
+          "\"MAUD\""
+        ],
+        "chunk_ids": [
+          "chunk-e9a5ca11e6da881c1ee5a2fe754715b8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Matilda of England was also called Maud.",
+            "Matilda of England, Duchess of Saxony Matilda of England( also called Maud; 6 January 1156 – 28 June 1189) was the eldest daughter of King Henry II of England and Eleanor of Aquitaine. Through her marriage with the Welf duke Henry the Lion, she was Duchess consort of Saxony and Bavaria from 1168 until her husband's deposition in 1180. She was named after her grandmother Matilda of England."
+          ],
+          "relation_texts": [
+            "Matilda of England was also called Maud.",
+            "link",
+            "MAUD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-14dbba743d541b34efb09cfa180419fc",
+            "hyperedge_name": "<hyperedge>\"Matilda of England was also called Maud.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.\"",
+        "hyperedge_text": "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8026621341705322,
+        "fusion_score": 0.5605324268341065,
+        "entity_ids": [
+          "\"MAUD CHAWORTH\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "evidence_texts": [
+          "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+          "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.802662,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.560532
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5173265337944031,
+        "fusion_score": 0.5034653067588807,
+        "entity_ids": [
+          "\"MARY OF LANCASTER\"",
+          "\"HENRY, 3RD EARL OF LANCASTER\"",
+          "\"MAUD CHAWORTH\"",
+          "\"HENRY III OF ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "evidence_texts": [
+          "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+          "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.517327,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503465
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born on 2 February 1282, Maud Chaworth's life was marked by her noble lineage and marriage to Henry.\"",
+        "hyperedge_text": "Born on 2 February 1282, Maud Chaworth's life was marked by her noble lineage and marriage to Henry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6582277417182922,
+        "fusion_score": 0.5316455483436585,
+        "entity_ids": [
+          "\"NOBLE LINEAGE\"",
+          "\"WEALTHY HEIRESS\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "evidence_texts": [
+          "Born on 2 February 1282, Maud Chaworth's life was marked by her noble lineage and marriage to Henry.",
+          "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.658228,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531646
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.\"",
+        "hyperedge_text": "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5219351649284363,
+        "fusion_score": 0.5043870329856873,
+        "entity_ids": [
+          "\"YOUNGEST SURVIVING CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "evidence_texts": [
+          "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+          "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.521935,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504387
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of death is December 13, 1940.\"",
+        "hyperedge_text": "His date of death is December 13, 1940.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5866867303848267,
+        "semantic_score": 0.0,
+        "fusion_score": 0.23467469215393066,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "evidence_texts": [
+          "His date of death is December 13, 1940.",
+          "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.586687,
+          "S": 0.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.234675
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the date of death of the mother of Mary Of Lancaster?",
+    "retrieval_question": "What is the date of death of the mother of Mary Of Lancaster?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the date of death of the mother of Mary Of Lancaster?",
+      "retrieval_question": "What is the date of death of the mother of Mary Of Lancaster?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+        "branch": "anchor",
+        "raw_score": 0.6666666666666666,
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+        "entity_ids": [
+          "\"MARY OF LANCASTER\"",
+          "\"HENRY, 3RD EARL OF LANCASTER\"",
+          "\"MAUD CHAWORTH\"",
+          "\"HENRY III OF ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "link",
+            "MARY OF LANCASTER",
+            "HENRY, 3RD EARL OF LANCASTER",
+            "MAUD CHAWORTH",
+            "HENRY III OF ENGLAND"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.\"",
+        "branch": "anchor",
+        "raw_score": 0.6666666666666666,
+        "hyperedge_text": "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+        "entity_ids": [
+          "\"MAUD CHAWORTH\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+            "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+          ],
+          "relation_texts": [
+            "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+            "link",
+            "MAUD CHAWORTH"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mickey Rooney featured in the film as well as Bernard Lee and Lois Maxwell, stars of the James Bond films who appeared as M and Miss Moneypenny, respectively.\"",
+        "branch": "anchor",
+        "raw_score": 0.0,
+        "hyperedge_text": "Mickey Rooney featured in the film as well as Bernard Lee and Lois Maxwell, stars of the James Bond films who appeared as M and Miss Moneypenny, respectively.",
+        "entity_ids": [
+          "\"MICKEY ROONEY\"",
+          "\"BERNARD LEE\"",
+          "\"LOIS MAXWELL\"",
+          "\"M\"",
+          "\"MISS MONEYPENNY\""
+        ],
+        "chunk_ids": [
+          "chunk-4283759769b0da568440613fb45d44a4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mickey Rooney featured in the film as well as Bernard Lee and Lois Maxwell, stars of the James Bond films who appeared as M and Miss Moneypenny, respectively.",
+            "Bons Baisers de Hong Kong Bons Baisers de Hong Kong( also known as From Hong Kong with Love) is a 1975 French film directed by Yvan Chiffre. It is a parody of James Bond movies featuring Les Charlots with scenes shot in Hong Kong. Mickey Rooney featured in the film as well as Bernard Lee and Lois Maxwell, stars of the James Bond films who appeared as M and Miss Moneypenny, respectively. It was filmed at the Shaw Brothers studios in Hong Kong."
+          ],
+          "relation_texts": [
+            "Mickey Rooney featured in the film as well as Bernard Lee and Lois Maxwell, stars of the James Bond films who appeared as M and Miss Moneypenny, respectively.",
+            "link",
+            "MICKEY ROONEY",
+            "BERNARD LEE",
+            "LOIS MAXWELL",
+            "M",
+            "MISS MONEYPENNY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lang's most famous films include the groundbreaking futuristic 'Metropolis' (1927) and the also influential 'M' (1931), a film noir precursor that he made before he moved to the United States.\"",
+        "branch": "anchor",
+        "raw_score": 0.0,
+        "hyperedge_text": "Lang's most famous films include the groundbreaking futuristic 'Metropolis' (1927) and the also influential 'M' (1931), a film noir precursor that he made before he moved to the United States.",
+        "entity_ids": [
+          "\"UNITED STATES\"",
+          "\"FILM NOIR\"",
+          "\"M\"",
+          "\"METROPOLIS\""
+        ],
+        "chunk_ids": [
+          "chunk-9febfa9f4fd75046f7469c2adc2d3fd3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Lang's most famous films include the groundbreaking futuristic 'Metropolis' (1927) and the also influential 'M' (1931), a film noir precursor that he made before he moved to the United States.",
+            "Fritz Lang Friedrich Christian Anton\" Fritz\" Lang( December 5, 1890 – August 2, 1976) was an Austrian- German- American filmmaker, screenwriter, and occasional film producer and actor. One of the best- known\" émigrés\" from Germany's school of Expressionism, he was dubbed the\" Master of Darkness\" by the British Film Institute. Lang's most famous films include the groundbreaking futuristic\" Metropolis\"( 1927) and the also influential\" M\"( 1931), a film noir precursor that he made before he moved to the United States."
+          ],
+          "relation_texts": [
+            "Lang's most famous films include the groundbreaking futuristic 'Metropolis' (1927) and the also influential 'M' (1931), a film noir precursor that he made before he moved to the United States.",
+            "link",
+            "UNITED STATES",
+            "FILM NOIR",
+            "M",
+            "METROPOLIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary Jane Fairbrother, known as Mary Jane Warnes, MBE (18 July 1877 – 19 June 1959) was an Australian activist who in 1926 established the first South Australian branch of the Country Women's Association (CWA).\"",
+        "branch": "anchor",
+        "raw_score": 0.0,
+        "hyperedge_text": "Mary Jane Fairbrother, known as Mary Jane Warnes, MBE (18 July 1877 – 19 June 1959) was an Australian activist who in 1926 established the first South Australian branch of the Country Women's Association (CWA).",
+        "entity_ids": [
+          "\"SOUTH AUSTRALIA\"",
+          "\"1926\"",
+          "\"AUSTRALIA\"",
+          "\"COUNTRY WOMEN'S ASSOCIATION (CWA)\"",
+          "\"19 JUNE 1959\"",
+          "\"MBE\"",
+          "\"MARY JANE WARNES\"",
+          "\"18 JULY 1877\""
+        ],
+        "chunk_ids": [
+          "chunk-b4a6ce88b4716ca47ee9f5d854fdd9b8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary Jane Fairbrother, known as Mary Jane Warnes, MBE (18 July 1877 – 19 June 1959) was an Australian activist who in 1926 established the first South Australian branch of the Country Women's Association (CWA).",
+            "Mary Jane Warnes Mary Jane Fairbrother, known as Mary Jane Warnes, MBE (18 July 1877 – 19 June 1959) was an Australian activist who in 1926 established the first South Australian branch of the Country Women's Association (CWA)."
+          ],
+          "relation_texts": [
+            "Mary Jane Fairbrother, known as Mary Jane Warnes, MBE (18 July 1877 – 19 June 1959) was an Australian activist who in 1926 established the first South Australian branch of the Country Women's Association (CWA).",
+            "link",
+            "SOUTH AUSTRALIA",
+            "1926",
+            "AUSTRALIA",
+            "COUNTRY WOMEN'S ASSOCIATION (CWA)",
+            "19 JUNE 1959",
+            "MBE",
+            "MARY JANE WARNES",
+            "18 JULY 1877"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Following ELP's break-up at the end of the 1970s, Emerson pursued a solo career, composed several film soundtracks, and formed the bands Emerson, Lake & Powell and 3 to carry on in the style of ELP.\"",
+        "branch": "anchor",
+        "raw_score": 0.0,
+        "hyperedge_text": "Following ELP's break-up at the end of the 1970s, Emerson pursued a solo career, composed several film soundtracks, and formed the bands Emerson, Lake & Powell and 3 to carry on in the style of ELP.",
+        "entity_ids": [
+          "\"SOLO CAREER\"",
+          "\"FILM SOUNDTRACKS\"",
+          "\"EMERSON, LAKE & POWELL\"",
+          "\"3\""
+        ],
+        "chunk_ids": [
+          "chunk-978111d21c16f16972fa47bd8db5b1ab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Following ELP's break-up at the end of the 1970s, Emerson pursued a solo career, composed several film soundtracks, and formed the bands Emerson, Lake & Powell and 3 to carry on in the style of ELP.",
+            "Keith Emerson Keith Noel Emerson (2 November 1944 – 11 March 2016) was an English keyboardist, songwriter, and film composer. He played keyboards in a number of bands before finding his first commercial success with the Nice in the late 1960s. He became internationally famous for his work with the Nice, which included writing rock arrangements of classical music. After leaving the Nice in 1970, he was a founding member of Emerson, Lake & Palmer (ELP), one of the early progressive rock supergroups. Emerson, Lake & Palmer were commercially successful through much of the 1970s, becoming one of the best-known progressive rock groups of the era. Emerson wrote and arranged much of ELP's music on albums such as \"Tarkus\" (1971) and \"Brain Salad Surgery\" (1973), combining his own original compositions with classical or traditional pieces adapted into a rock format. Following ELP's break-up at..."
+          ],
+          "relation_texts": [
+            "Following ELP's break-up at the end of the 1970s, Emerson pursued a solo career, composed several film soundtracks, and formed the bands Emerson, Lake & Powell and 3 to carry on in the style of ELP.",
+            "link",
+            "SOLO CAREER",
+            "FILM SOUNDTRACKS",
+            "EMERSON, LAKE & POWELL",
+            "3"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His mother died five months after his birth, on 22 January 1686.\"",
+        "branch": "relation",
+        "raw_score": 0.5269079804420471,
+        "hyperedge_text": "His mother died five months after his birth, on 22 January 1686.",
+        "entity_ids": [
+          "\"DEATH\"",
+          "\"DATE OF DEATH\"",
+          "\"DATE OF BIRTH\"",
+          "\"BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-6e5d1e16316ab31eaf78f0c7b303db70"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His mother died five months after his birth, on 22 January 1686.",
+            "Johann Adolf II, Duke of Saxe-Weissenfels Johann Adolf II, Duke of Saxe- Weissenfels ( Weissenfels, 4 September 1685 – Leipzig, 16 May 1746), was the last duke of Saxe- Weissenfels- Querfurt and a member of the House of Wettin. He was also a commander in the Saxon army. Johann Adolf was the youngest of the eleven children of Johann Adolf I, Duke of Saxe- Weissenfels, and Johanna Magdalena of Saxe- Altenburg. His mother died five months after his birth, on 22 January 1686."
+          ],
+          "relation_texts": [
+            "His mother died five months after his birth, on 22 January 1686.",
+            "link",
+            "DEATH",
+            "DATE OF DEATH",
+            "DATE OF BIRTH",
+            "BIRTH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-458b5417da333bb6f44babcca24f0860",
+            "hyperedge_name": "<hyperedge>\"His mother died five months after his birth, on 22 January 1686.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She died aged 20, three days after giving birth to a daughter who died in 1748.\"",
+        "branch": "relation",
+        "raw_score": 0.4857233166694641,
+        "hyperedge_text": "She died aged 20, three days after giving birth to a daughter who died in 1748.",
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"DAUGHTER\"",
+          "\"20 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-ca25d0bdb189557349e18ee200d4b65c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She died aged 20, three days after giving birth to a daughter who died in 1748.",
+            "Maria Teresa Rafaela of Spain Maria Teresa Rafaela of Spain ( María Teresa Antonia Rafaela; 11 June 1726 – 22 July 1746) was an\" Infanta of Spain\" by birth and Dauphine of France by marriage to Louis, Dauphin of France, son of Louis XV of France. She died aged 20, three days after giving birth to a daughter who died in 1748."
+          ],
+          "relation_texts": [
+            "She died aged 20, three days after giving birth to a daughter who died in 1748.",
+            "link",
+            "BIRTH",
+            "DAUGHTER",
+            "20 YEARS OLD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-493cc31cb4cccb0ac6a96da807e120e2",
+            "hyperedge_name": "<hyperedge>\"She died aged 20, three days after giving birth to a daughter who died in 1748.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of death is December 13, 1940.\"",
+        "branch": "relation",
+        "raw_score": 0.4816444218158722,
+        "hyperedge_text": "His date of death is December 13, 1940.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of death is December 13, 1940.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of death is December 13, 1940."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7eedcb18bd8ff211e7d28e4b6f89376f",
+            "hyperedge_name": "<hyperedge>\"His date of death is December 13, 1940.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her birthdate is documented as 3 September 1673 and she passed away on 28 November 1726.\"",
+        "branch": "relation",
+        "raw_score": 0.4665626287460327,
+        "hyperedge_text": "Her birthdate is documented as 3 September 1673 and she passed away on 28 November 1726.",
+        "entity_ids": [
+          "\"3 SEPTEMBER 1673\"",
+          "\"28 NOVEMBER 1726\""
+        ],
+        "chunk_ids": [
+          "chunk-06c76b1e06f6469b5110d79b83228f6e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her birthdate is documented as 3 September 1673 and she passed away on 28 November 1726.",
+            "Magdalena Sibylla of Saxe-Weissenfels (1673–1726) Magdalene Sibylle of Saxe- Weissenfels ( 3 September 1673 – 28 November 1726), was a German noblewoman member of the House of Wettin( Albertine line) and by marriage Duchess of Saxe- Eisenach. Born in Halle, she was the oldest daughter and first child of Duke Johann Adolf I of Saxe- Weissenfels and his wife Johanna Magdalena, the daughter of Duke Frederick William II of Saxe- Altenburg. She was named after her paternal great- grandmother, Duchess Magdalene Sibylle of Prussia."
+          ],
+          "relation_texts": [
+            "Her birthdate is documented as 3 September 1673 and she passed away on 28 November 1726.",
+            "link",
+            "3 SEPTEMBER 1673",
+            "28 NOVEMBER 1726"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3989cd105bc991ffafae3d9666ef76ea",
+            "hyperedge_name": "<hyperedge>\"Her birthdate is documented as 3 September 1673 and she passed away on 28 November 1726.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her exact date of death remains unspecified, though it is estimated to be before the year 69.\"",
+        "branch": "relation",
+        "raw_score": 0.46169617772102356,
+        "hyperedge_text": "Her exact date of death remains unspecified, though it is estimated to be before the year 69.",
+        "entity_ids": [
+          "\"EXACT DATE OF DEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-8a899026112f02ddff716beb87859952"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her exact date of death remains unspecified, though it is estimated to be before the year 69.",
+            "Domitilla the Elder Flavia Domitilla Major(\" Major\", Latin for\" the elder\") Flavia Domitilla the Elder or Domitilla the Elder( died before 69, perhaps c. 65) was the wife of the Roman Emperor Vespasian."
+          ],
+          "relation_texts": [
+            "Her exact date of death remains unspecified, though it is estimated to be before the year 69.",
+            "link",
+            "EXACT DATE OF DEATH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-72adaf1042d0070ab8da3301cc8b2f48",
+            "hyperedge_name": "<hyperedge>\"Her exact date of death remains unspecified, though it is estimated to be before the year 69.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was born on 15 July 1845 and died on 8 October 1927.\"",
+        "branch": "relation",
+        "raw_score": 0.45818156003952026,
+        "hyperedge_text": "She was born on 15 July 1845 and died on 8 October 1927.",
+        "entity_ids": [
+          "\"15 JULY 1845\"",
+          "\"8 OCTOBER 1927\""
+        ],
+        "chunk_ids": [
+          "chunk-b7eab5c302df24f7492aa0c02eb56a51"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She was born on 15 July 1845 and died on 8 October 1927.",
+            "Archduchess Maria Theresa of Austria (1845–1927) Archduchess Maria Theresa of Austria (15 July 1845 – 8 October 1927) was a member of the Austrian house of Habsburg-Lorraine."
+          ],
+          "relation_texts": [
+            "She was born on 15 July 1845 and died on 8 October 1927.",
+            "link",
+            "15 JULY 1845",
+            "8 OCTOBER 1927"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-541a2bd840ab56a37b85890ce2652a11",
+            "hyperedge_name": "<hyperedge>\"She was born on 15 July 1845 and died on 8 October 1927.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was born on 27 February 1802 and passed away on 5 December 1864.\"",
+        "branch": "relation",
+        "raw_score": 0.45677614212036133,
+        "hyperedge_text": "She was born on 27 February 1802 and passed away on 5 December 1864.",
+        "entity_ids": [
+          "\"5 DECEMBER 1864\"",
+          "\"27 FEBRUARY 1802\""
+        ],
+        "chunk_ids": [
+          "chunk-c0d2299006c996b5837e84b56d2e41c1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She was born on 27 February 1802 and passed away on 5 December 1864.",
+            "Duchess Elisabeth Alexandrine of Württemberg Duchess Elisabeth Alexandrine Constance of Württemberg( 27 February 1802 in Würzau, Courland Governorate – 5 December 1864, in Karlsruhe) was a daughter of Duke Louis of Württemberg and Princess Henriette of Nassau- Weilburg."
+          ],
+          "relation_texts": [
+            "She was born on 27 February 1802 and passed away on 5 December 1864.",
+            "link",
+            "5 DECEMBER 1864",
+            "27 FEBRUARY 1802"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-09b1687a61b3fadab7553c5975f9831e",
+            "hyperedge_name": "<hyperedge>\"She was born on 27 February 1802 and passed away on 5 December 1864.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was born on 16 June 1908 and passed away on 11 December 1996.\"",
+        "branch": "relation",
+        "raw_score": 0.4533296525478363,
+        "hyperedge_text": "She was born on 16 June 1908 and passed away on 11 December 1996.",
+        "entity_ids": [
+          "\"16 JUNE 1908\"",
+          "\"11 DECEMBER 1996\""
+        ],
+        "chunk_ids": [
+          "chunk-110e58a5ec003065fcb7aa9dc06b034d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She was born on 16 June 1908 and passed away on 11 December 1996.",
+            "Marian Montagu Douglas Scott Marian Louisa, Lady Elmhirst( previously Ferguson; née Montagu Douglas Scott; 16 June 1908 – 11 December 1996) was the first daughter born to Lord Herbert Montagu Douglas Scott and Marie Edwards. She was the paternal grandmother of Sarah, Duchess of York, and the maternal great- grandmother of Princesses Beatrice and Eugenie of York. Elmhirst was also a first cousin of Lady Alice Montagu Douglas Scott, who became the Duchess of Gloucester after her wedding to Prince Henry, and an aunt- by- marriage of Queen Elizabeth II."
+          ],
+          "relation_texts": [
+            "She was born on 16 June 1908 and passed away on 11 December 1996.",
+            "link",
+            "16 JUNE 1908",
+            "11 DECEMBER 1996"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b408d15afca57b03ce8b0d86df5358bc",
+            "hyperedge_name": "<hyperedge>\"She was born on 16 June 1908 and passed away on 11 December 1996.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her daughter was born shortly before her mother’s untimely death.\"",
+        "branch": "relation",
+        "raw_score": 0.4527677893638611,
+        "hyperedge_text": "Her daughter was born shortly before her mother’s untimely death.",
+        "entity_ids": [
+          "\"FRANCE\"",
+          "\"DAUGHTER\"",
+          "\"TRAGIC END\""
+        ],
+        "chunk_ids": [
+          "chunk-ca25d0bdb189557349e18ee200d4b65c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her daughter was born shortly before her mother’s untimely death.",
+            "Maria Teresa Rafaela of Spain Maria Teresa Rafaela of Spain ( María Teresa Antonia Rafaela; 11 June 1726 – 22 July 1746) was an\" Infanta of Spain\" by birth and Dauphine of France by marriage to Louis, Dauphin of France, son of Louis XV of France. She died aged 20, three days after giving birth to a daughter who died in 1748."
+          ],
+          "relation_texts": [
+            "Her daughter was born shortly before her mother’s untimely death.",
+            "link",
+            "FRANCE",
+            "DAUGHTER",
+            "TRAGIC END"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3a99ba72c4aaf51262c80132e09e3365",
+            "hyperedge_name": "<hyperedge>\"Her daughter was born shortly before her mother’s untimely death.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in 1407, three years after his mother and without heirs.\"",
+        "branch": "relation",
+        "raw_score": 0.45216405391693115,
+        "hyperedge_text": "He died in 1407, three years after his mother and without heirs.",
+        "entity_ids": [
+          "\"HEIRS\""
+        ],
+        "chunk_ids": [
+          "chunk-9c6c96e5dc03ffb601f25b988f0e4d18"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died in 1407, three years after his mother and without heirs.",
+            "Marianus V of Arborea Marianus V (1378 or 1379 – 1407) was the Judge of Arborea from 1387 until his death. His surname was Doria, but since he belonged to the ruling house of Arborea he is often dynastically called Bas-Serra, or Doria-Bas. Younger brother and successor of Frederick, he was a minor upon his succession and was under the tutelage of his mother Eleanor. He was born at Castel Genovese (modern Castelsardo) between 1378 and 1379 to Eleanor and Brancaleone Doria, a Genoese nobleman. In 1383, he was proclaimed judge along with his brother, Frederick of Arborea. In 1387, his brother died under Aragonese captivity and Marianus became sole judge at a time when the Giudicato of Arborea was at war with the Crown of Aragon. On 24 January 1388, Eleanor signed a pact with Aragon which brought peace and safeguarded Marianus' rule. On 16 August 1391, Marianus accompanied his father at t..."
+          ],
+          "relation_texts": [
+            "He died in 1407, three years after his mother and without heirs.",
+            "link",
+            "HEIRS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5ef96c886dbf2f6f3a54146b6f4a5efd",
+            "hyperedge_name": "<hyperedge>\"He died in 1407, three years after his mother and without heirs.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.\"",
+        "branch": "semantic",
+        "raw_score": 0.5964087843894958,
+        "hyperedge_text": "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+        "entity_ids": [
+          "\"YOUNGEST SURVIVING CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+            "link",
+            "YOUNGEST SURVIVING CHILD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8790ae80d21fae6eac0073267cb0a2af",
+            "hyperedge_name": "<hyperedge>\"Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+        "branch": "semantic",
+        "raw_score": 0.5787408351898193,
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+        "entity_ids": [
+          "\"MARY OF LANCASTER\"",
+          "\"HENRY, 3RD EARL OF LANCASTER\"",
+          "\"MAUD CHAWORTH\"",
+          "\"HENRY III OF ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+            "link",
+            "MARY OF LANCASTER",
+            "HENRY, 3RD EARL OF LANCASTER",
+            "MAUD CHAWORTH",
+            "HENRY III OF ENGLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c92a5bbbe8e03d6c09ba892d713f17f9",
+            "hyperedge_name": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.\"",
+        "branch": "semantic",
+        "raw_score": 0.548035740852356,
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.",
+        "entity_ids": [
+          "\"BARONESS PERCY\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.",
+            "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+          ],
+          "relation_texts": [
+            "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.",
+            "link",
+            "BARONESS PERCY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d29df70660c40e3edca0dfdc8982b251",
+            "hyperedge_name": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children.\"",
+        "branch": "semantic",
+        "raw_score": 0.5426633358001709,
+        "hyperedge_text": "Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children.",
+        "entity_ids": [
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children.",
+            "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+          ],
+          "relation_texts": [
+            "Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children.",
+            "link",
+            "CHILDREN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1beb0fc3b9325e54853b6e44b5b2e10e",
+            "hyperedge_name": "<hyperedge>\"Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Elizabeth of Lancaster (b. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster.\"",
+        "branch": "semantic",
+        "raw_score": 0.5265776515007019,
+        "hyperedge_text": "Elizabeth of Lancaster (b. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster.",
+        "entity_ids": [
+          "\"FAMILY\"",
+          "\"FIRST WIFE\"",
+          "\"THIRD CHILD\"",
+          "\"FEBRUARY 21, 1363\"",
+          "\"NOVEMBER 24, 1426\"",
+          "\"DUKE OF LANCASTER\""
+        ],
+        "chunk_ids": [
+          "chunk-52cf2fd81a5d090cb527fb1951eb936d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Elizabeth of Lancaster (b. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster.",
+            "Elizabeth of Lancaster, Duchess of Exeter Elizabeth of Lancaster( bf. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster."
+          ],
+          "relation_texts": [
+            "Elizabeth of Lancaster (b. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster.",
+            "link",
+            "FAMILY",
+            "FIRST WIFE",
+            "THIRD CHILD",
+            "FEBRUARY 21, 1363",
+            "NOVEMBER 24, 1426",
+            "DUKE OF LANCASTER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cbe297a3155ec597a02304165f3baa23",
+            "hyperedge_name": "<hyperedge>\"Elizabeth of Lancaster (b. 21 February 1363 – 24 November 1426) was the third child of John of Gaunt, 1st Duke of Lancaster, and his first wife Blanche of Lancaster.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.\"",
+        "branch": "semantic",
+        "raw_score": 0.5157440900802612,
+        "hyperedge_text": "Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.",
+        "entity_ids": [
+          "\"1244\"",
+          "\"1253\"",
+          "\"CRUSADE\"",
+          "\"MARIE DE LUSIGNAN\"",
+          "\"1251\""
+        ],
+        "chunk_ids": [
+          "chunk-69f67d04468c670ab343874b99d379c7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.",
+            "Mary of Lusignan, Countess of Brienne Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244. Mary's parents were King Hugh I of Cyprus and Alice of Champagne, making her a maternal granddaughter of Queen Isabella I of Jerusalem. Her two surviving sons were John, Count of Brienne, and Hugh of Brienne."
+          ],
+          "relation_texts": [
+            "Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.",
+            "link",
+            "1244",
+            "1253",
+            "CRUSADE",
+            "MARIE DE LUSIGNAN",
+            "1251"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9d132554307da41276b18ee22bbb3a14",
+            "hyperedge_name": "<hyperedge>\"Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nancy Lancaster was born on 10 September 1897 and passed away on 19 August 1994.\"",
+        "branch": "semantic",
+        "raw_score": 0.4966127872467041,
+        "hyperedge_text": "Nancy Lancaster was born on 10 September 1897 and passed away on 19 August 1994.",
+        "entity_ids": [
+          "\"10 SEPTEMBER 1897\"",
+          "\"19 AUGUST 1994\""
+        ],
+        "chunk_ids": [
+          "chunk-ade6f64f34332a6a0c997983f44b7339"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Nancy Lancaster was born on 10 September 1897 and passed away on 19 August 1994.",
+            "Nancy Lancaster Nancy Lancaster( 10 September 1897 – 19 August 1994) was a 20th- century tastemaker and the owner of Sibyl Colefax& John Fowler, an influential British decorating firm that codified what is known as the English country house look."
+          ],
+          "relation_texts": [
+            "Nancy Lancaster was born on 10 September 1897 and passed away on 19 August 1994.",
+            "link",
+            "10 SEPTEMBER 1897",
+            "19 AUGUST 1994"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-462f2b11d604bf569276d4830065f996",
+            "hyperedge_name": "<hyperedge>\"Nancy Lancaster was born on 10 September 1897 and passed away on 19 August 1994.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary Proctor was born in 1862 and died on September 11, 1957.\"",
+        "branch": "semantic",
+        "raw_score": 0.48517313599586487,
+        "hyperedge_text": "Mary Proctor was born in 1862 and died on September 11, 1957.",
+        "entity_ids": [
+          "\"1862\"",
+          "\"SEPTEMBER 11, 1957\""
+        ],
+        "chunk_ids": [
+          "chunk-e300e3a0d08fd822eff2fe1876eceb54"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary Proctor was born in 1862 and died on September 11, 1957.",
+            "Mary Proctor Mary Proctor (1862 – September 11, 1957) was an American popularizer of astronomy. While not a professional astronomer, Proctor became well known for her books and articles written for the public – particularly her children's fiction. Despite various claims as being an American, there is a passenger list of about 1924 where she gives nationality as British."
+          ],
+          "relation_texts": [
+            "Mary Proctor was born in 1862 and died on September 11, 1957.",
+            "link",
+            "1862",
+            "SEPTEMBER 11, 1957"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b7e9bf1591b4d86ab6df6064251135be",
+            "hyperedge_name": "<hyperedge>\"Mary Proctor was born in 1862 and died on September 11, 1957.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Burgundy, Duchess of Cleves (1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good.\"",
+        "branch": "semantic",
+        "raw_score": 0.48223865032196045,
+        "hyperedge_text": "Mary of Burgundy, Duchess of Cleves (1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good.",
+        "entity_ids": [
+          "\"MARY OF BURGUNDY\"",
+          "\"MARGARET OF BAVARIA\"",
+          "\"JOHN THE FEARLESS\"",
+          "\"PHILIP THE GOOD\"",
+          "\"DUCHESS OF CLEVES\""
+        ],
+        "chunk_ids": [
+          "chunk-8415fe62c4d308afa9c62c528cdce2b2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mary of Burgundy, Duchess of Cleves (1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good.",
+            "Mary of Burgundy, Duchess of Cleves Mary of Burgundy, Duchess of Cleves( 1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good. Born in Dijon, she became the second wife of Adolph, Count of Mark in May 1406. He was made the 1st Duke of Cleves in 1417. They were the grandparents of King Louis XII of France and the great- grandparents of John III, Duke of Cleves, father of Anne of Cleves, who was fourth Queen consort of Henry VIII of England. By their daughter, Catherine, they were ancestors of Mary, Queen of Scots. The Duke and Duchess of Cleves lived at Wijnendale Castle in West Flanders. She died in Cleves in present- day Monterberg, Kalkar."
+          ],
+          "relation_texts": [
+            "Mary of Burgundy, Duchess of Cleves (1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good.",
+            "link",
+            "MARY OF BURGUNDY",
+            "MARGARET OF BAVARIA",
+            "JOHN THE FEARLESS",
+            "PHILIP THE GOOD",
+            "DUCHESS OF CLEVES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b1d522e5a8fb76eefd1def7d8e69d107",
+            "hyperedge_name": "<hyperedge>\"Mary of Burgundy, Duchess of Cleves (1393 – 30 October 1466) was the second child of John the Fearless and Margaret of Bavaria, and an elder sister of Philip the Good.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She died on 21 August 1715 in Hanau and is said to have been buried in St. Mary's Church.\"",
+        "branch": "semantic",
+        "raw_score": 0.48039859533309937,
+        "hyperedge_text": "She died on 21 August 1715 in Hanau and is said to have been buried in St. Mary's Church.",
+        "entity_ids": [
+          "\"DEATH\"",
+          "\"21 AUGUST 1715\""
+        ],
+        "chunk_ids": [
+          "chunk-997a2365696fab8ba29c28109307a873"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She died on 21 August 1715 in Hanau and is said to have been buried in St. Mary's Church.",
+            "Countess Johanna Magdalene of Hanau-Lichtenberg Countess Johanna Magdalene of Hanau-Lichtenberg (18 December 1660, Bischofsheim am Hohen Steg – 21 August 1715, Hanau) was a daughter of Johann Reinhard II of Hanau-Lichtenberg (1628–1666) and the Countess Palatine Anna Magdalena of Birkenfeld-Bischweiler (1640–1693). She died on 21 August 1715 and is said to have been buried in the St. Mary's Church in Hanau."
+          ],
+          "relation_texts": [
+            "She died on 21 August 1715 in Hanau and is said to have been buried in St. Mary's Church.",
+            "link",
+            "DEATH",
+            "21 AUGUST 1715"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-17ee842ec99b78028c8086883b1a2421",
+            "hyperedge_name": "<hyperedge>\"She died on 21 August 1715 in Hanau and is said to have been buried in St. Mary's Church.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+        "hyperedge_text": "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.5787408351898193,
+        "fusion_score": 0.38241483370463053,
+        "entity_ids": [
+          "\"MARY OF LANCASTER\"",
+          "\"HENRY, 3RD EARL OF LANCASTER\"",
+          "\"MAUD CHAWORTH\"",
+          "\"HENRY III OF ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "evidence_texts": [
+          "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+          "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.578741,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.382415
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.\"",
+        "hyperedge_text": "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.5964087843894958,
+        "fusion_score": 0.3859484235445658,
+        "entity_ids": [
+          "\"YOUNGEST SURVIVING CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-103f7351c3a95c97763f15c61e83eb88"
+        ],
+        "evidence_texts": [
+          "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+          "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.596409,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.385948
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.\"",
+        "hyperedge_text": "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.2,
+        "fusion_score": 0.30666666666666664,
+        "entity_ids": [
+          "\"MAUD CHAWORTH\""
+        ],
+        "chunk_ids": [
+          "chunk-addc8b6522e6930466fce27302cc264e"
+        ],
+        "evidence_texts": [
+          "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+          "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.306667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.\"",
+        "hyperedge_text": "Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5157440900802612,
+        "fusion_score": 0.30314881801605226,
+        "entity_ids": [
+          "\"1244\"",
+          "\"1253\"",
+          "\"CRUSADE\"",
+          "\"MARIE DE LUSIGNAN\"",
+          "\"1251\""
+        ],
+        "chunk_ids": [
+          "chunk-69f67d04468c670ab343874b99d379c7"
+        ],
+        "evidence_texts": [
+          "Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244.",
+          "Mary of Lusignan, Countess of Brienne Mary of Lusignan (French: Marie de Lusignan; before March 1215 – 5 July 1251 or 1253), was the wife of Count Walter IV of Brienne and Countess of Brienne from the time of her marriage in 1233 to her husband's death while on Crusade in 1244. Mary's parents were King Hugh I of Cyprus and Alice of Champagne, making her a maternal granddaughter of Queen Isabella I of Jerusalem. Her two surviving sons were John, Count of Brienne, and Hugh of Brienne."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.515744,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.303149
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She died on 21 August 1715 in Hanau and is said to have been buried in St. Mary's Church.\"",
+        "hyperedge_text": "She died on 21 August 1715 in Hanau and is said to have been buried in St. Mary's Church.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.48039859533309937,
+        "fusion_score": 0.2960797190666199,
+        "entity_ids": [
+          "\"DEATH\"",
+          "\"21 AUGUST 1715\""
+        ],
+        "chunk_ids": [
+          "chunk-997a2365696fab8ba29c28109307a873"
+        ],
+        "evidence_texts": [
+          "She died on 21 August 1715 in Hanau and is said to have been buried in St. Mary's Church.",
+          "Countess Johanna Magdalene of Hanau-Lichtenberg Countess Johanna Magdalene of Hanau-Lichtenberg (18 December 1660, Bischofsheim am Hohen Steg – 21 August 1715, Hanau) was a daughter of Johann Reinhard II of Hanau-Lichtenberg (1628–1666) and the Countess Palatine Anna Magdalena of Birkenfeld-Bischweiler (1640–1693). She died on 21 August 1715 and is said to have been buried in the St. Mary's Church in Hanau."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.480399,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.29608
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,173 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Angus Wagner born?",
+    "retrieval_question": "When was Angus Wagner born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Angus Wagner born?",
+      "retrieval_question": "When was Angus Wagner born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Angus Wagner"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "the birth date of a person",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Juan Carlos Falcón born?",
+    "retrieval_question": "When was Juan Carlos Falcón born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Juan Carlos Falcón born?",
+      "retrieval_question": "When was Juan Carlos Falcón born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Juan Carlos Falcón"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "the birth date of a person",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Was Angus Wagner born first?",
+    "retrieval_question": "Was Angus Wagner born first?",
+    "dependency_question_rewrite": {
+      "original_question": "Was Angus Wagner born first?",
+      "retrieval_question": "Was Angus Wagner born first?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "When was Angus Wagner born?",
+        "answer": "30 October 1997",
+        "confidence": 1.0,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence clearly states that Angus Wagner was born on 30 October 1997 in Australia.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Angus Wagner was born on 30 October 1997 in Australia.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.\"",
+            "fusion_score": 0.5368230104446412,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Angus Wagner, born 30 October 1997 in Australia, is an Australian rugby union player who plays for the Brumbies in Super Rugby.",
+              "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Angus Wagner was born on 30 October 1997 in Australia.\"",
+            "fusion_score": 0.5560107231140137,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Angus Wagner was born on 30 October 1997 in Australia.",
+              "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"In May 2019, Angus Wagner was signed as a replacement player.\"",
+            "fusion_score": 0.5288233280181885,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "In May 2019, Angus Wagner was signed as a replacement player.",
+              "Angus Wagner Angus Wagner( born 30 October 1997 in Australia) is an Australian rugby union player who plays for the Brumbies in Super Rugby. His playing position is prop. He was announced as a replacement signing in May 2019."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "When was Juan Carlos Falcón born?",
+        "answer": "19 November 1979",
+        "confidence": 1.0,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence clearly states that Juan Carlos Falcón was born on 19 November 1979.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Juan Carlos Falcón was born on 19 November 1979.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.\"",
+            "fusion_score": 0.5464717864990235,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Juan Carlos Falcón (born 19 November 1979) is an Argentine football midfielder.",
+              "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón was born on 19 November 1979.\"",
+            "fusion_score": 0.564122223854065,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Juan Carlos Falcón was born on 19 November 1979.",
+              "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Juan Carlos Falcón is an Argentine football midfielder.\"",
+            "fusion_score": 0.5354291200637817,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Juan Carlos Falcón is an Argentine football midfielder.",
+              "Juan Carlos Falcón Juan Carlos Falcón( born 19 November 1979) is an Argentine football midfielder."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Angus Wagner",
+        "Juan Carlos Falcón",
+        "30 October 1997",
+        "19 November 1979"
+      ],
+      "relations": [
+        "was born",
+        "comparison of birth dates"
+      ],
+      "relation_query": "which person was born earlier between two individuals with known birth dates",
+      "answer_type": "candidate selection"
+    }
+  }
+]

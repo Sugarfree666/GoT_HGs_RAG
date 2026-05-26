@@ -1,0 +1,2423 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Colierul De Turcoaze?",
+    "retrieval_question": "Who is the director of Colierul De Turcoaze?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Colierul De Turcoaze?",
+      "retrieval_question": "Who is the director of Colierul De Turcoaze?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5064207315444946,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5018224120140076,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49626192450523376,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4959556758403778,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.4941776394844055,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48419591784477234,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.482859343290329,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48214516043663025,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47926294803619385,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.477081298828125,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "semantic",
+        "raw_score": 0.6734359264373779,
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4e5b8918faf380deb1fd0d847ba177eb",
+            "hyperedge_name": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "semantic",
+        "raw_score": 0.6561688780784607,
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-447232b23b86f60b6cb8957c6dc4eac7",
+            "hyperedge_name": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Halit Refiğ.\"",
+        "branch": "semantic",
+        "raw_score": 0.46343758702278137,
+        "hyperedge_text": "The film was directed by Halit Refiğ.",
+        "entity_ids": [
+          "\"HALIT REFIĞ\""
+        ],
+        "chunk_ids": [
+          "chunk-5973ec83c6e70586d415ff341b8ad7af"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Halit Refiğ.",
+            "Teyzem Teyzem is a 1986 Turkish drama film, directed by Halit Refiğ and starring Müjde Ar, Yasar Alptekin, and Mehmet Akan."
+          ],
+          "relation_texts": [
+            "The film was directed by Halit Refiğ.",
+            "link",
+            "HALIT REFIĞ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-44461d3c93ebda529e7088ee340b032d",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Halit Refiğ.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The films directed by Gheorghe Vitanidis were produced in Romania.\"",
+        "branch": "semantic",
+        "raw_score": 0.4623292088508606,
+        "hyperedge_text": "The films directed by Gheorghe Vitanidis were produced in Romania.",
+        "entity_ids": [
+          "\"ROMANIA\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The films directed by Gheorghe Vitanidis were produced in Romania.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "The films directed by Gheorghe Vitanidis were produced in Romania.",
+            "link",
+            "ROMANIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-455f9970f2c216222a5fb327e83a1a81",
+            "hyperedge_name": "<hyperedge>\"The films directed by Gheorghe Vitanidis were produced in Romania.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.\"",
+        "branch": "semantic",
+        "raw_score": 0.457825243473053,
+        "hyperedge_text": "It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.",
+        "entity_ids": [
+          "\"STORY\"",
+          "\"ELISABETA BOSTAN\"",
+          "\"PETRE ISPIRESCU\"",
+          "\"TINEREȚE FĂRĂ BĂTRÂNEȚE\"",
+          "\"VIAȚĂ FĂRĂ DE MOARTE\""
+        ],
+        "chunk_ids": [
+          "chunk-3afac4f5f82fabcc15fcfef4ef6fa040"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.",
+            "Kingdom in the Clouds Kingdom in the Clouds( Romanian:\" Tinerețe fără bătrânețe\"- literal title:\" Youth Without Old Age\") is a Romanian fantasy film from 1969. Is directed and written by Elisabeta Bostan from a story by Petre Ispirescu(\" Tinerețe fără bătrânețe și viață fără de moarte\")."
+          ],
+          "relation_texts": [
+            "It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.",
+            "link",
+            "STORY",
+            "ELISABETA BOSTAN",
+            "PETRE ISPIRESCU",
+            "TINEREȚE FĂRĂ BĂTRÂNEȚE",
+            "VIAȚĂ FĂRĂ DE MOARTE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c49a04b6aa62e9672ea508d3c83614f1",
+            "hyperedge_name": "<hyperedge>\"It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has left a lasting impact on Turkish storytelling.\"",
+        "branch": "semantic",
+        "raw_score": 0.4533666968345642,
+        "hyperedge_text": "As a director, he has left a lasting impact on Turkish storytelling.",
+        "entity_ids": [
+          "\"IMPACT\""
+        ],
+        "chunk_ids": [
+          "chunk-afddd1564bf751c764e871c8befcbdf8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has left a lasting impact on Turkish storytelling.",
+            "Kartal Tibet Kartal Tibet( born 27 March 1938) is a Turkish actor and film director. Some of his famous films include\" Ölmeyen AşkDağlar KızıSenede Bir GünSultanZübük Gol Kralı\", and\" Şalvar Davası\". Tibet is also known for his action roles, especially that of the title series."
+          ],
+          "relation_texts": [
+            "As a director, he has left a lasting impact on Turkish storytelling.",
+            "link",
+            "IMPACT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fe183bfed5f8b456e718d70f78877263",
+            "hyperedge_name": "<hyperedge>\"As a director, he has left a lasting impact on Turkish storytelling.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Halit Refiğ.\"",
+        "branch": "semantic",
+        "raw_score": 0.4485013782978058,
+        "hyperedge_text": "It was directed by Halit Refiğ.",
+        "entity_ids": [
+          "\"HALIT REFIĞ\""
+        ],
+        "chunk_ids": [
+          "chunk-f009e6055255378682bbb84043a3f392"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was directed by Halit Refiğ.",
+            "Stranger in the City (film) Stranger in the City is a 1962 Turkish drama film directed by Halit Refiğ. It was entered into the 3rd Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "It was directed by Halit Refiğ.",
+            "link",
+            "HALIT REFIĞ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-117bbc62ed0f9b6f09c57d568a79b335",
+            "hyperedge_name": "<hyperedge>\"It was directed by Halit Refiğ.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.\"",
+        "branch": "semantic",
+        "raw_score": 0.4443959593772888,
+        "hyperedge_text": "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+        "entity_ids": [
+          "\"DINU COCEA\""
+        ],
+        "chunk_ids": [
+          "chunk-4dca11ed4daa89c6b795d4ebf6b716cd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+            "Dinu Cocea Constantin\" Dinu\" Cocea( 22 September 1929 – 26 December 2013) was a Romanian actor, film director and screenwriter. Dinu Cocea was born into a well- known theatrical family; his relatives included N. D. Cocea, Alice Cocéa, and Dina Cocea. He studied at the Institute of Theatre and Cinematographic Art in Bucharest, graduating in 1953. Cocea died from heart failure on 26 December 2013, aged 84, in Paris, France, where he had lived since 1986. He was survived by his daughter, Oana."
+          ],
+          "relation_texts": [
+            "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+            "link",
+            "DINU COCEA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-96cc1313636b59a3dd06c5de5697287c",
+            "hyperedge_name": "<hyperedge>\"Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Yeşim Ustaoğlu.\"",
+        "branch": "semantic",
+        "raw_score": 0.4382961392402649,
+        "hyperedge_text": "The film was directed by Yeşim Ustaoğlu.",
+        "entity_ids": [
+          "\"YEŞIM USTAOĞLU\""
+        ],
+        "chunk_ids": [
+          "chunk-a90d4ed8f25bfa991699eed6176057ce"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Yeşim Ustaoğlu.",
+            "Waiting for the Clouds Waiting for the Clouds( Bulutlari Beklerken) is a film from 2003, Turkey. The film was directed by Yeşim Ustaoğlu. It is based on a novel by Georgios Andreadis titled\" Tamama\". The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian. The film was nominated in Montréal World Film Festival 2004."
+          ],
+          "relation_texts": [
+            "The film was directed by Yeşim Ustaoğlu.",
+            "link",
+            "YEŞIM USTAOĞLU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3c172291c7e20e8019cab3b2c4bb6b0b",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Yeşim Ustaoğlu.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Known for his roles in 'The Paper Will Be Blue' and '4 Months, 3 Weeks and 2 Days,' Adi Cărăuleanu has made significant contributions to Romanian cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.42486387491226196,
+        "hyperedge_text": "Known for his roles in 'The Paper Will Be Blue' and '4 Months, 3 Weeks and 2 Days,' Adi Cărăuleanu has made significant contributions to Romanian cinema.",
+        "entity_ids": [
+          "\"CONTRIBUTIONS TO ROMANIAN CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-86c24c0af0228d15d6e475c49aeef5ed"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Known for his roles in 'The Paper Will Be Blue' and '4 Months, 3 Weeks and 2 Days,' Adi Cărăuleanu has made significant contributions to Romanian cinema.",
+            "Adi Cărăuleanu Adi Cărăuleanu( born 8 March 1957) is a Romanian actor known for his roles in\" The Paper Will Be Blue\"( 2006) and Cristian Mungiu's Palme d' Or-winning 2007 film\" 4 Months, 3 Weeks and 2 Days\". Born in Calafat, Cărăuleanu completed his studies at the Institute of Theatre and Cinema Art in Bucharest in 1981. From 1996 to 2015, he served as the artistic director at Iași National Theatre."
+          ],
+          "relation_texts": [
+            "Known for his roles in 'The Paper Will Be Blue' and '4 Months, 3 Weeks and 2 Days,' Adi Cărăuleanu has made significant contributions to Romanian cinema.",
+            "link",
+            "CONTRIBUTIONS TO ROMANIAN CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c68861adf3a3524e9170010d6da7fc1f",
+            "hyperedge_name": "<hyperedge>\"Known for his roles in 'The Paper Will Be Blue' and '4 Months, 3 Weeks and 2 Days,' Adi Cărăuleanu has made significant contributions to Romanian cinema.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6734359264373779,
+        "fusion_score": 0.5346871852874756,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.673436,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534687
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6561688780784607,
+        "fusion_score": 0.5312337756156922,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.656169,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531234
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has left a lasting impact on Turkish storytelling.\"",
+        "hyperedge_text": "As a director, he has left a lasting impact on Turkish storytelling.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4533666968345642,
+        "fusion_score": 0.4906733393669129,
+        "entity_ids": [
+          "\"IMPACT\""
+        ],
+        "chunk_ids": [
+          "chunk-afddd1564bf751c764e871c8befcbdf8"
+        ],
+        "evidence_texts": [
+          "As a director, he has left a lasting impact on Turkish storytelling.",
+          "Kartal Tibet Kartal Tibet( born 27 March 1938) is a Turkish actor and film director. Some of his famous films include\" Ölmeyen AşkDağlar KızıSenede Bir GünSultanZübük Gol Kralı\", and\" Şalvar Davası\". Tibet is also known for his action roles, especially that of the title series."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.453367,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.490673
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.\"",
+        "hyperedge_text": "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4443959593772888,
+        "fusion_score": 0.4888791918754578,
+        "entity_ids": [
+          "\"DINU COCEA\""
+        ],
+        "chunk_ids": [
+          "chunk-4dca11ed4daa89c6b795d4ebf6b716cd"
+        ],
+        "evidence_texts": [
+          "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+          "Dinu Cocea Constantin\" Dinu\" Cocea( 22 September 1929 – 26 December 2013) was a Romanian actor, film director and screenwriter. Dinu Cocea was born into a well- known theatrical family; his relatives included N. D. Cocea, Alice Cocéa, and Dina Cocea. He studied at the Institute of Theatre and Cinematographic Art in Bucharest, graduating in 1953. Cocea died from heart failure on 26 December 2013, aged 84, in Paris, France, where he had lived since 1986. He was survived by his daughter, Oana."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.444396,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.488879
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5064207315444946,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25256829261779784,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.506421,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.252568
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Leo And Loree?",
+    "retrieval_question": "Who is the director of Leo And Loree?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Leo And Loree?",
+      "retrieval_question": "Who is the director of Leo And Loree?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "link",
+            "LEO AND LOREE",
+            "DONNY MOST",
+            "JERRY PARIS",
+            "LINDA PURL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5064207315444946,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5018224120140076,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49626192450523376,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4959556758403778,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.4941776394844055,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48419591784477234,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.482859343290329,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48214516043663025,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47926294803619385,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.477081298828125,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "branch": "semantic",
+        "raw_score": 0.645437479019165,
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "link",
+            "LEO AND LOREE",
+            "DONNY MOST",
+            "JERRY PARIS",
+            "LINDA PURL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b2fd86cb3df6e1945060e8f3b15ce037",
+            "hyperedge_name": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film showcases the charm of its main characters, Leo and Loree.\"",
+        "branch": "semantic",
+        "raw_score": 0.6359657049179077,
+        "hyperedge_text": "The film showcases the charm of its main characters, Leo and Loree.",
+        "entity_ids": [
+          "\"MAIN CHARACTERS\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film showcases the charm of its main characters, Leo and Loree.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "The film showcases the charm of its main characters, Leo and Loree.",
+            "link",
+            "MAIN CHARACTERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8d7aa3a96dfa536c1412a5154cb24cec",
+            "hyperedge_name": "<hyperedge>\"The film showcases the charm of its main characters, Leo and Loree.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\"",
+        "branch": "semantic",
+        "raw_score": 0.5786985158920288,
+        "hyperedge_text": "The film Leo and Loree is classified as a romantic comedy.",
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Leo and Loree is classified as a romantic comedy.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "The film Leo and Loree is classified as a romantic comedy.",
+            "link",
+            "ROMANTIC COMEDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ca01db4d71b2442ceee64eac73073642",
+            "hyperedge_name": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Leo D. Maloney.\"",
+        "branch": "semantic",
+        "raw_score": 0.5297071933746338,
+        "hyperedge_text": "The film was directed by Leo D. Maloney.",
+        "entity_ids": [
+          "\"LEO D. MALONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-11670d51810457cc45b65cf742eb8854"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Leo D. Maloney.",
+            "The Boss of Rustler's Roost The Boss of Rustler's Roost is a 1928 American silent western film directed by Leo D. Maloney and starring Eugenia Gilbert, Ben Corbett and Tom London."
+          ],
+          "relation_texts": [
+            "The film was directed by Leo D. Maloney.",
+            "link",
+            "LEO D. MALONEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-223bccb5f7a3dbca5116d06259848f48",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Leo D. Maloney.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Leo D. Maloney.\"",
+        "branch": "semantic",
+        "raw_score": 0.5169077515602112,
+        "hyperedge_text": "It was directed by Leo D. Maloney.",
+        "entity_ids": [
+          "\"LEO D. MALONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-0638400ec1c0e2faff8010f5d1d50b86"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was directed by Leo D. Maloney.",
+            "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+          ],
+          "relation_texts": [
+            "It was directed by Leo D. Maloney.",
+            "link",
+            "LEO D. MALONEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6a56b3e4b9fd6517f6eb86f12dd5c3c1",
+            "hyperedge_name": "<hyperedge>\"It was directed by Leo D. Maloney.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.\"",
+        "branch": "semantic",
+        "raw_score": 0.45077306032180786,
+        "hyperedge_text": "Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.",
+        "entity_ids": [
+          "\"11 JANUARY 1932\"",
+          "\"2 DECEMBER 2003\""
+        ],
+        "chunk_ids": [
+          "chunk-4b6200f98f0955a42a753dcd5cac3589"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.",
+            "Fernando Di Leo Fernando Di Leo( 11 January 1932 – 2 December 2003) was an Italian film director and script writer born in San Ferdinando di Puglia, Italy. During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43. His films influenced many popular contemporary directors, such as Quentin Tarantino and John Woo. Di Leo started his career mostly writing scripts for spaghetti westerns. He worked on the script for\" Per un pugno di dollariA Fistful of Dollars\", 1964) and later as assistant director and assistant to Sergio Leone in\" Per qualche dollaro in più For a Few Dollars More\", 1965). Later, he wrote scripts for such westerns as\" Navajo Joe\"( 1966) and\" Johnny Yuma\"( 1967). Di Leo is now best remembered for his\" poliziotteschi\" films, especially the\" Milieu Trilogy\", which he both wrote and directed. The trilogy contains\" Caliber 9\"( 1..."
+          ],
+          "relation_texts": [
+            "Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.",
+            "link",
+            "11 JANUARY 1932",
+            "2 DECEMBER 2003"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bc263a7cf6c427d7a9874a09d01aaecf",
+            "hyperedge_name": "<hyperedge>\"Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo D. Maloney directed and starred in The Outlaw Express.\"",
+        "branch": "semantic",
+        "raw_score": 0.4444847106933594,
+        "hyperedge_text": "Leo D. Maloney directed and starred in The Outlaw Express.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"STAR\""
+        ],
+        "chunk_ids": [
+          "chunk-0638400ec1c0e2faff8010f5d1d50b86"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Leo D. Maloney directed and starred in The Outlaw Express.",
+            "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+          ],
+          "relation_texts": [
+            "Leo D. Maloney directed and starred in The Outlaw Express.",
+            "link",
+            "DIRECTOR",
+            "STAR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-70047a1e6238e6f7c8f6d71a51901ca9",
+            "hyperedge_name": "<hyperedge>\"Leo D. Maloney directed and starred in The Outlaw Express.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directors like Leo D. Maloney contributed significantly to the production of early westerns.\"",
+        "branch": "semantic",
+        "raw_score": 0.4427509605884552,
+        "hyperedge_text": "Directors like Leo D. Maloney contributed significantly to the production of early westerns.",
+        "entity_ids": [
+          "\"EARLY WESTERNS\""
+        ],
+        "chunk_ids": [
+          "chunk-11670d51810457cc45b65cf742eb8854"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Directors like Leo D. Maloney contributed significantly to the production of early westerns.",
+            "The Boss of Rustler's Roost The Boss of Rustler's Roost is a 1928 American silent western film directed by Leo D. Maloney and starring Eugenia Gilbert, Ben Corbett and Tom London."
+          ],
+          "relation_texts": [
+            "Directors like Leo D. Maloney contributed significantly to the production of early westerns.",
+            "link",
+            "EARLY WESTERNS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9b3650fae6f84e37e59f11dfa6ed0030",
+            "hyperedge_name": "<hyperedge>\"Directors like Leo D. Maloney contributed significantly to the production of early westerns.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Un giorno da leoni (internationally released as A Day for Lionhearts) is a 1961 Italian war-drama film directed by Nanni Loy.\"",
+        "branch": "semantic",
+        "raw_score": 0.44140660762786865,
+        "hyperedge_text": "Un giorno da leoni (internationally released as A Day for Lionhearts) is a 1961 Italian war-drama film directed by Nanni Loy.",
+        "entity_ids": [
+          "\"1961\"",
+          "\"NANNI LOY\"",
+          "\"ITALIAN\"",
+          "\"UN GIORNO DA LEONI\"",
+          "\"A DAY FOR LIONHEARTS\""
+        ],
+        "chunk_ids": [
+          "chunk-500ec85b3f97244bccdc2f959d0ef31d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Un giorno da leoni (internationally released as A Day for Lionhearts) is a 1961 Italian war-drama film directed by Nanni Loy.",
+            "A Day for Lionhearts Un giorno da leoni( internationally released as A Day for Lionhearts) is a 1961 Italian war- drama film directed by Nanni Loy. The film describes the gradual evolution towards anti-fascism of Italian people during the Second World War."
+          ],
+          "relation_texts": [
+            "Un giorno da leoni (internationally released as A Day for Lionhearts) is a 1961 Italian war-drama film directed by Nanni Loy.",
+            "link",
+            "1961",
+            "NANNI LOY",
+            "ITALIAN",
+            "UN GIORNO DA LEONI",
+            "A DAY FOR LIONHEARTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d548dac597c4563f928d18564e4d24a0",
+            "hyperedge_name": "<hyperedge>\"Un giorno da leoni (internationally released as A Day for Lionhearts) is a 1961 Italian war-drama film directed by Nanni Loy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Di Leo was involved in the writing process in 43 films, showing his extensive contribution to cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.43804073333740234,
+        "hyperedge_text": "Di Leo was involved in the writing process in 43 films, showing his extensive contribution to cinema.",
+        "entity_ids": [
+          "\"43 FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-4b6200f98f0955a42a753dcd5cac3589"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Di Leo was involved in the writing process in 43 films, showing his extensive contribution to cinema.",
+            "Fernando Di Leo Fernando Di Leo( 11 January 1932 – 2 December 2003) was an Italian film director and script writer born in San Ferdinando di Puglia, Italy. During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43. His films influenced many popular contemporary directors, such as Quentin Tarantino and John Woo. Di Leo started his career mostly writing scripts for spaghetti westerns. He worked on the script for\" Per un pugno di dollariA Fistful of Dollars\", 1964) and later as assistant director and assistant to Sergio Leone in\" Per qualche dollaro in più For a Few Dollars More\", 1965). Later, he wrote scripts for such westerns as\" Navajo Joe\"( 1966) and\" Johnny Yuma\"( 1967). Di Leo is now best remembered for his\" poliziotteschi\" films, especially the\" Milieu Trilogy\", which he both wrote and directed. The trilogy contains\" Caliber 9\"( 1..."
+          ],
+          "relation_texts": [
+            "Di Leo was involved in the writing process in 43 films, showing his extensive contribution to cinema.",
+            "link",
+            "43 FILMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f05e8c02be3581d965f83c31512ba64c",
+            "hyperedge_name": "<hyperedge>\"Di Leo was involved in the writing process in 43 films, showing his extensive contribution to cinema.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.645437479019165,
+        "fusion_score": 0.9290874958038331,
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.645437,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.929087
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film showcases the charm of its main characters, Leo and Loree.\"",
+        "hyperedge_text": "The film showcases the charm of its main characters, Leo and Loree.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6359657049179077,
+        "fusion_score": 0.5271931409835816,
+        "entity_ids": [
+          "\"MAIN CHARACTERS\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "The film showcases the charm of its main characters, Leo and Loree.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.635966,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527193
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\"",
+        "hyperedge_text": "The film Leo and Loree is classified as a romantic comedy.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5786985158920288,
+        "fusion_score": 0.5157397031784058,
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "The film Leo and Loree is classified as a romantic comedy.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578699,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51574
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Leo D. Maloney.\"",
+        "hyperedge_text": "The film was directed by Leo D. Maloney.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5297071933746338,
+        "fusion_score": 0.5059414386749268,
+        "entity_ids": [
+          "\"LEO D. MALONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-11670d51810457cc45b65cf742eb8854"
+        ],
+        "evidence_texts": [
+          "The film was directed by Leo D. Maloney.",
+          "The Boss of Rustler's Roost The Boss of Rustler's Roost is a 1928 American silent western film directed by Leo D. Maloney and starring Eugenia Gilbert, Ben Corbett and Tom London."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.529707,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505941
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Leo D. Maloney.\"",
+        "hyperedge_text": "It was directed by Leo D. Maloney.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5169077515602112,
+        "fusion_score": 0.5033815503120422,
+        "entity_ids": [
+          "\"LEO D. MALONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-0638400ec1c0e2faff8010f5d1d50b86"
+        ],
+        "evidence_texts": [
+          "It was directed by Leo D. Maloney.",
+          "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.516908,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503382
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Is the age of the director of Colierul De Turcoaze older than the age of the director of Leo And Loree?",
+    "retrieval_question": "Is the age of the director of Colierul De Turcoaze older than the age of the director of Leo And Loree?",
+    "dependency_question_rewrite": {
+      "original_question": "Is the age of the director of Colierul De Turcoaze older than the age of the director of Leo And Loree?",
+      "retrieval_question": "Is the age of the director of Colierul De Turcoaze older than the age of the director of Leo And Loree?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "link",
+            "LEO AND LOREE",
+            "DONNY MOST",
+            "JERRY PARIS",
+            "LINDA PURL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.5466084480285645,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He directed both his own films as well as films directed by others.\"",
+        "branch": "relation",
+        "raw_score": 0.47574543952941895,
+        "hyperedge_text": "He directed both his own films as well as films directed by others.",
+        "entity_ids": [
+          "\"HIS OWN FILMS\"",
+          "\"FILMS DIRECTED BY OTHERS\""
+        ],
+        "chunk_ids": [
+          "chunk-1622512e42b9fe00ff1ff6a93ac35761"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "Maurice Elvey Maurice Elvey( 11 November 1887 – 28 August 1967) was the most prolific film director in British history. He directed nearly 200 films between 1913 and 1957. During the silent film era he directed as many as twenty films per year. He also produced more than fifty films- his own as well as films directed by others."
+          ],
+          "relation_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "link",
+            "HIS OWN FILMS",
+            "FILMS DIRECTED BY OTHERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-427500c2d82019f242a873db4d43cbc1",
+            "hyperedge_name": "<hyperedge>\"He directed both his own films as well as films directed by others.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.46454566717147827,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His influence is apparent in the works of many modern directors.\"",
+        "branch": "relation",
+        "raw_score": 0.463844895362854,
+        "hyperedge_text": "His influence is apparent in the works of many modern directors.",
+        "entity_ids": [
+          "\"MODERN DIRECTORS\""
+        ],
+        "chunk_ids": [
+          "chunk-796f7c898a7b349e0ebd474787ac9939"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His influence is apparent in the works of many modern directors.",
+            "George Archainbaud George Archainbaud( May 7, 1890 – February 20, 1959) was a French- born American film and television director."
+          ],
+          "relation_texts": [
+            "His influence is apparent in the works of many modern directors.",
+            "link",
+            "MODERN DIRECTORS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7a1530fafb1dee56525def0b0cf2403c",
+            "hyperedge_name": "<hyperedge>\"His influence is apparent in the works of many modern directors.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has been in the film industry for more than twenty years, directing various projects.\"",
+        "branch": "relation",
+        "raw_score": 0.46030962467193604,
+        "hyperedge_text": "He has been in the film industry for more than twenty years, directing various projects.",
+        "entity_ids": [
+          "\"FILM INDUSTRY\""
+        ],
+        "chunk_ids": [
+          "chunk-2f3ca31cef21dffc1cb2a2b1cc962db7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has been in the film industry for more than twenty years, directing various projects.",
+            "Denys Desjardins Denys Desjardins (born 1966 in Montreal, Quebec), is a film director, screenwriter, cinematographer, editor and film historian for more than twenty years. After completing studies in literature, film and communications, he directed several acclaimed films."
+          ],
+          "relation_texts": [
+            "He has been in the film industry for more than twenty years, directing various projects.",
+            "link",
+            "FILM INDUSTRY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f52d373c6658f5a7b67d4a48108bcc99",
+            "hyperedge_name": "<hyperedge>\"He has been in the film industry for more than twenty years, directing various projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"From the 1960s onwards he worked as a freelance director in a career spanning almost 50 years.\"",
+        "branch": "relation",
+        "raw_score": 0.46003901958465576,
+        "hyperedge_text": "From the 1960s onwards he worked as a freelance director in a career spanning almost 50 years.",
+        "entity_ids": [
+          "\"CAREER\"",
+          "\"FREELANCE DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-f9070217611cd821139f1a77348cfc3f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "From the 1960s onwards he worked as a freelance director in a career spanning almost 50 years.",
+            "Robert Tronson Robert Tronson (18 May 1924 – 27 November 2008) was an English film and television director, born in Chilmark, Wiltshire. Educated at Churcher's College in Hampshire, followed by the Royal Naval College, Dartmouth, he served with the Royal Navy from 1941. After leaving the service at the end of the Second World War he determined to become a writer, but soon joined the BBC, where he produced children's television programmes. In 1955 he joined Associated-Rediffusion, and by the end of the decade he was working on television drama serials. From the 1960s onwards he worked as a freelance director in a career spanning almost 50 years. His final television credits were for directing five episodes of \"Hetty Wainthropp Investigates\" for the BBC, between 1996 and 1998. In 1965 Tronson married Nona Richards (died 1987). He died on 27 November 2008 and was survived by their son."
+          ],
+          "relation_texts": [
+            "From the 1960s onwards he worked as a freelance director in a career spanning almost 50 years.",
+            "link",
+            "CAREER",
+            "FREELANCE DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c61a3f5b7f571e269b4d161b689b5852",
+            "hyperedge_name": "<hyperedge>\"From the 1960s onwards he worked as a freelance director in a career spanning almost 50 years.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.4488745331764221,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He directed or was the assistant director on numerous films during the silent film era.\"",
+        "branch": "relation",
+        "raw_score": 0.44719576835632324,
+        "hyperedge_text": "He directed or was the assistant director on numerous films during the silent film era.",
+        "entity_ids": [
+          "\"ASSISTANT DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-6deebcce6aa9b8f19153432e0cdf8bfb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He directed or was the assistant director on numerous films during the silent film era.",
+            "Frank O'Connor (actor) Frank O'Connor( April 11, 1881 – November 22, 1959) was an American character actor and director, whose career spanned five decades and included appearances in over 600 films and television shows. Early in his career he was also billed as Frank A. Connor and Frank L.A. O'Connor. During the silent film era, he directed or was the assistant director on numerous films; he also penned several screenplays in both the silent and sound film eras. He is sometimes erroneously identified with the Frank O'Connor who was married to author Ayn Rand."
+          ],
+          "relation_texts": [
+            "He directed or was the assistant director on numerous films during the silent film era.",
+            "link",
+            "ASSISTANT DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b3bbebe98a10d04bada7ccc4766a150e",
+            "hyperedge_name": "<hyperedge>\"He directed or was the assistant director on numerous films during the silent film era.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker.\"",
+        "branch": "relation",
+        "raw_score": 0.4464871287345886,
+        "hyperedge_text": "The film was directed by a notable filmmaker.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-878081a5191725d702602749081a77c4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker.",
+            "California Winter California Winter is an American drama film from 2012."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c8914e7c16c6931f8328589f436a636c",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Since the early 1990s he has also been working as a film director.\"",
+        "branch": "relation",
+        "raw_score": 0.44631272554397583,
+        "hyperedge_text": "Since the early 1990s he has also been working as a film director.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-136b982fafae43011a399d9671234580"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Since the early 1990s he has also been working as a film director.",
+            "Oskar Roehler Oskar Roehler (born 21 January 1959) is a German film director, screenwriter and journalist. He was born in Starnberg as the son of writer Gisela Elsner and the writer Klaus Roehler. Since the mid-1980s he has been working as a screenwriter, for, among others, Niklaus Schilling, Christoph Schlingensief and Mark Schlichter. Since the early 1990s he has also been working as a film director. For his film No Place to Go he won the Deutscher Filmpreis. His 2010 film was nominated for the Golden Bear at the 60th Berlin International Film Festival."
+          ],
+          "relation_texts": [
+            "Since the early 1990s he has also been working as a film director.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-884faafd5884708b1fc6da517c0d903d",
+            "hyperedge_name": "<hyperedge>\"Since the early 1990s he has also been working as a film director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "semantic",
+        "raw_score": 0.5246962904930115,
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4e5b8918faf380deb1fd0d847ba177eb",
+            "hyperedge_name": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "semantic",
+        "raw_score": 0.5205214023590088,
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-447232b23b86f60b6cb8957c6dc4eac7",
+            "hyperedge_name": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is also known by the Romanian title 'Tinerețe fără bătrânețe' which translates to 'Youth Without Old Age'.\"",
+        "branch": "semantic",
+        "raw_score": 0.4719502329826355,
+        "hyperedge_text": "The film is also known by the Romanian title 'Tinerețe fără bătrânețe' which translates to 'Youth Without Old Age'.",
+        "entity_ids": [
+          "\"YOUTH WITHOUT OLD AGE\"",
+          "\"TINEREȚE FĂRĂ BĂTRÂNEȚE ȘI VIAȚĂ FĂRĂ DE MOARTE\""
+        ],
+        "chunk_ids": [
+          "chunk-3afac4f5f82fabcc15fcfef4ef6fa040"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is also known by the Romanian title 'Tinerețe fără bătrânețe' which translates to 'Youth Without Old Age'.",
+            "Kingdom in the Clouds Kingdom in the Clouds( Romanian:\" Tinerețe fără bătrânețe\"- literal title:\" Youth Without Old Age\") is a Romanian fantasy film from 1969. Is directed and written by Elisabeta Bostan from a story by Petre Ispirescu(\" Tinerețe fără bătrânețe și viață fără de moarte\")."
+          ],
+          "relation_texts": [
+            "The film is also known by the Romanian title 'Tinerețe fără bătrânețe' which translates to 'Youth Without Old Age'.",
+            "link",
+            "YOUTH WITHOUT OLD AGE",
+            "TINEREȚE FĂRĂ BĂTRÂNEȚE ȘI VIAȚĂ FĂRĂ DE MOARTE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9162b97dddcfee9311d1274062d75e29",
+            "hyperedge_name": "<hyperedge>\"The film is also known by the Romanian title 'Tinerețe fără bătrânețe' which translates to 'Youth Without Old Age'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The films directed by Gheorghe Vitanidis were produced in Romania.\"",
+        "branch": "semantic",
+        "raw_score": 0.44927650690078735,
+        "hyperedge_text": "The films directed by Gheorghe Vitanidis were produced in Romania.",
+        "entity_ids": [
+          "\"ROMANIA\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The films directed by Gheorghe Vitanidis were produced in Romania.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "The films directed by Gheorghe Vitanidis were produced in Romania.",
+            "link",
+            "ROMANIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-455f9970f2c216222a5fb327e83a1a81",
+            "hyperedge_name": "<hyperedge>\"The films directed by Gheorghe Vitanidis were produced in Romania.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released during 1969, a time reflecting specific cultural and cinematic trends in Romania.\"",
+        "branch": "semantic",
+        "raw_score": 0.4280279278755188,
+        "hyperedge_text": "The film was released during 1969, a time reflecting specific cultural and cinematic trends in Romania.",
+        "entity_ids": [
+          "\"1969 ROMANIAN CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-3afac4f5f82fabcc15fcfef4ef6fa040"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was released during 1969, a time reflecting specific cultural and cinematic trends in Romania.",
+            "Kingdom in the Clouds Kingdom in the Clouds( Romanian:\" Tinerețe fără bătrânețe\"- literal title:\" Youth Without Old Age\") is a Romanian fantasy film from 1969. Is directed and written by Elisabeta Bostan from a story by Petre Ispirescu(\" Tinerețe fără bătrânețe și viață fără de moarte\")."
+          ],
+          "relation_texts": [
+            "The film was released during 1969, a time reflecting specific cultural and cinematic trends in Romania.",
+            "link",
+            "1969 ROMANIAN CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7214381e99c34f566e2a6f7348259b90",
+            "hyperedge_name": "<hyperedge>\"The film was released during 1969, a time reflecting specific cultural and cinematic trends in Romania.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.\"",
+        "branch": "semantic",
+        "raw_score": 0.42552316188812256,
+        "hyperedge_text": "It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.",
+        "entity_ids": [
+          "\"STORY\"",
+          "\"ELISABETA BOSTAN\"",
+          "\"PETRE ISPIRESCU\"",
+          "\"TINEREȚE FĂRĂ BĂTRÂNEȚE\"",
+          "\"VIAȚĂ FĂRĂ DE MOARTE\""
+        ],
+        "chunk_ids": [
+          "chunk-3afac4f5f82fabcc15fcfef4ef6fa040"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.",
+            "Kingdom in the Clouds Kingdom in the Clouds( Romanian:\" Tinerețe fără bătrânețe\"- literal title:\" Youth Without Old Age\") is a Romanian fantasy film from 1969. Is directed and written by Elisabeta Bostan from a story by Petre Ispirescu(\" Tinerețe fără bătrânețe și viață fără de moarte\")."
+          ],
+          "relation_texts": [
+            "It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.",
+            "link",
+            "STORY",
+            "ELISABETA BOSTAN",
+            "PETRE ISPIRESCU",
+            "TINEREȚE FĂRĂ BĂTRÂNEȚE",
+            "VIAȚĂ FĂRĂ DE MOARTE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c49a04b6aa62e9672ea508d3c83614f1",
+            "hyperedge_name": "<hyperedge>\"It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\"",
+        "branch": "semantic",
+        "raw_score": 0.4251948595046997,
+        "hyperedge_text": "The film Leo and Loree is classified as a romantic comedy.",
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Leo and Loree is classified as a romantic comedy.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "The film Leo and Loree is classified as a romantic comedy.",
+            "link",
+            "ROMANTIC COMEDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ca01db4d71b2442ceee64eac73073642",
+            "hyperedge_name": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis directed films between the years 1958 and 1987.\"",
+        "branch": "semantic",
+        "raw_score": 0.4219265580177307,
+        "hyperedge_text": "Gheorghe Vitanidis directed films between the years 1958 and 1987.",
+        "entity_ids": [
+          "\"1987\"",
+          "\"1958\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gheorghe Vitanidis directed films between the years 1958 and 1987.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "Gheorghe Vitanidis directed films between the years 1958 and 1987.",
+            "link",
+            "1987",
+            "1958"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-22ff377798d721e67b7e4c4813ba9f37",
+            "hyperedge_name": "<hyperedge>\"Gheorghe Vitanidis directed films between the years 1958 and 1987.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "branch": "semantic",
+        "raw_score": 0.41869038343429565,
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "link",
+            "LEO AND LOREE",
+            "DONNY MOST",
+            "JERRY PARIS",
+            "LINDA PURL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b2fd86cb3df6e1945060e8f3b15ce037",
+            "hyperedge_name": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43.\"",
+        "branch": "semantic",
+        "raw_score": 0.4183078706264496,
+        "hyperedge_text": "During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43.",
+        "entity_ids": [
+          "\"CAREER\"",
+          "\"20 FILMS\"",
+          "\"43 SCRIPTS\""
+        ],
+        "chunk_ids": [
+          "chunk-4b6200f98f0955a42a753dcd5cac3589"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43.",
+            "Fernando Di Leo Fernando Di Leo( 11 January 1932 – 2 December 2003) was an Italian film director and script writer born in San Ferdinando di Puglia, Italy. During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43. His films influenced many popular contemporary directors, such as Quentin Tarantino and John Woo. Di Leo started his career mostly writing scripts for spaghetti westerns. He worked on the script for\" Per un pugno di dollariA Fistful of Dollars\", 1964) and later as assistant director and assistant to Sergio Leone in\" Per qualche dollaro in più For a Few Dollars More\", 1965). Later, he wrote scripts for such westerns as\" Navajo Joe\"( 1966) and\" Johnny Yuma\"( 1967). Di Leo is now best remembered for his\" poliziotteschi\" films, especially the\" Milieu Trilogy\", which he both wrote and directed. The trilogy contains\" Caliber 9\"( 1..."
+          ],
+          "relation_texts": [
+            "During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43.",
+            "link",
+            "CAREER",
+            "20 FILMS",
+            "43 SCRIPTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-269af288b3e90a1839f9c0bdc5a5dbe9",
+            "hyperedge_name": "<hyperedge>\"During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5246962904930115,
+        "fusion_score": 0.30493925809860234,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.524696,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.304939
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5205214023590088,
+        "fusion_score": 0.30410428047180177,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.520521,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.304104
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.41869038343429565,
+        "fusion_score": 0.28373807668685913,
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.41869,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.283738
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\"",
+        "hyperedge_text": "The film Leo and Loree is classified as a romantic comedy.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.4251948595046997,
+        "fusion_score": 0.28503897190093996,
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "The film Leo and Loree is classified as a romantic comedy.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.425195,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.285039
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5466084480285645,
+        "semantic_score": 0.1111111111111111,
+        "fusion_score": 0.24086560143364802,
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "evidence_texts": [
+          "His work as a director spanned over two decades.",
+          "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.546608,
+          "S": 0.111111,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.240866
+        }
+      }
+    ]
+  }
+]

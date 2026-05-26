@@ -1,0 +1,2359 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the birth date of Amir Temraz?",
+    "retrieval_question": "What is the birth date of Amir Temraz?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth date of Amir Temraz?",
+      "retrieval_question": "What is the birth date of Amir Temraz?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Amir Temraz is a rower born on 12 August 1977.",
+        "entity_ids": [
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz is a rower born on 12 August 1977.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz is a rower born on 12 August 1977.",
+            "link",
+            "AMIR TEMRAZ"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+        "entity_ids": [
+          "\"ROWER\"",
+          "\"EGYPTIAN\"",
+          "\"2000 SUMMER OLYMPICS\"",
+          "\"MEN'S COXLESS PAIR\"",
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+            "link",
+            "ROWER",
+            "EGYPTIAN",
+            "2000 SUMMER OLYMPICS",
+            "MEN'S COXLESS PAIR",
+            "AMIR TEMRAZ"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.5045208930969238,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.48608091473579407,
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has the birth date of 1 November 1982.",
+            "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+          ],
+          "relation_texts": [
+            "He has the birth date of 1 November 1982.",
+            "link",
+            "1 NOVEMBER 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e7ccd25dfeb68bf5e59c3683e27f9a72",
+            "hyperedge_name": "<hyperedge>\"He has the birth date of 1 November 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was April 1, 1883.\"",
+        "branch": "relation",
+        "raw_score": 0.483752965927124,
+        "hyperedge_text": "His birth date was April 1, 1883.",
+        "entity_ids": [
+          "\"APRIL 1, 1883\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was April 1, 1883.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His birth date was April 1, 1883.",
+            "link",
+            "APRIL 1, 1883"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-513618e3e9a5db9731bf910947f84866",
+            "hyperedge_name": "<hyperedge>\"His birth date was April 1, 1883.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\"",
+        "branch": "relation",
+        "raw_score": 0.47566238045692444,
+        "hyperedge_text": "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-68776c5ec312f8403508c9a611746b32"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "Jean-Pierre de Keyser Jean- Pierre de Keyser( born 13 April 1965) is a retired German football player."
+          ],
+          "relation_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-028758a1e84246436fa83f391bd7fc4c",
+            "hyperedge_name": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was on October 9, 1892.\"",
+        "branch": "relation",
+        "raw_score": 0.4737059473991394,
+        "hyperedge_text": "His birth date was on October 9, 1892.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0866c3f8d6fb59c7691bda418ca8c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was on October 9, 1892.",
+            "Robert P. Kerr Robert P. Kerr (October 9, 1892 – September 5, 1960) was an American film director, actor and screenwriter. He directed 41 films between 1917 and 1928. He was born in Burlington, Colorado and died in Porterville, California from a heart attack."
+          ],
+          "relation_texts": [
+            "His birth date was on October 9, 1892.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fe9b22788083ee137d022bf188d617cf",
+            "hyperedge_name": "<hyperedge>\"His birth date was on October 9, 1892.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\"",
+        "branch": "relation",
+        "raw_score": 0.47200220823287964,
+        "hyperedge_text": "The date of birth April 18, 1973, marks an important milestone in his life.",
+        "entity_ids": [
+          "\"MILESTONE\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "link",
+            "MILESTONE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d651f368d8e93791546127e4938cabb",
+            "hyperedge_name": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on February 18, 1989.\"",
+        "branch": "relation",
+        "raw_score": 0.4714605212211609,
+        "hyperedge_text": "He was born on February 18, 1989.",
+        "entity_ids": [
+          "\"FEBRUARY 18, 1989\""
+        ],
+        "chunk_ids": [
+          "chunk-355112d058d669aaa46c2d9424032c99"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on February 18, 1989.",
+            "Tony Jaye Tucker Jr. Tony J. Tucker Jr. or TJ( born February 18, 1989) is currently a free agent American defensive end football player. He is known for being\" quick off the ball\"."
+          ],
+          "relation_texts": [
+            "He was born on February 18, 1989.",
+            "link",
+            "FEBRUARY 18, 1989"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c6790d20e0568df4764f89e4b56183c0",
+            "hyperedge_name": "<hyperedge>\"He was born on February 18, 1989.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 16, 1993.\"",
+        "branch": "relation",
+        "raw_score": 0.4701583683490753,
+        "hyperedge_text": "He was born on December 16, 1993.",
+        "entity_ids": [
+          "\"DECEMBER 16, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-2434daa5d2e639dffeeacdeae7136b7e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 16, 1993.",
+            "Michael Rector Michael Rector( born December 16, 1993) is an American football wide receiver who is currently a free agent of the National Football League. He played college football at Stanford."
+          ],
+          "relation_texts": [
+            "He was born on December 16, 1993.",
+            "link",
+            "DECEMBER 16, 1993"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd47ba46ad7b16c6fa6f60940ac4bafe",
+            "hyperedge_name": "<hyperedge>\"He was born on December 16, 1993.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.469155877828598,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date is debated, with various sources giving dates from 763 to 766.\"",
+        "branch": "relation",
+        "raw_score": 0.46704360842704773,
+        "hyperedge_text": "His birth date is debated, with various sources giving dates from 763 to 766.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-977df3b46015f6ac577aea517c0266a2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date is debated, with various sources giving dates from 763 to 766.",
+            "Harun al-Rashid Harun al-Rashid (\"Hārūn Ar-RašīdAaron the Orthodox\" or \"Aaron the Rightly-Guided\", 17 March 763 or February 766 – 24 March 809 (148–193 Hijri)) was the fifth Abbasid Caliph. His birth date is debated, with various sources giving dates from 763 to 766. His epithet \"al-Rashid\" translates to \"the Orthodoxthe Justthe Upright\", or \"the Rightly-Guided\". Al-Rashid ruled from 786 to 809, during the peak of the Islamic Golden Age. He established the legendary library Bayt al-Hikma (\"House of Wisdom\") in Baghdad in present-day Iraq, and during his rule Baghdad began to flourish as a center of knowledge, culture and trade. During his rule, the family of Barmakids, which played a deciding role in establishing the Abbasid Caliphate, declined gradually. In 796, he moved his court and government to Raqqa in present-day Syria. A Frankish mission came to offer Harun friendship in 799...."
+          ],
+          "relation_texts": [
+            "His birth date is debated, with various sources giving dates from 763 to 766.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c5d59e94012e665b50a1b5ac567da9fe",
+            "hyperedge_name": "<hyperedge>\"His birth date is debated, with various sources giving dates from 763 to 766.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\"",
+        "branch": "semantic",
+        "raw_score": 0.679063081741333,
+        "hyperedge_text": "Amir Temraz is a rower born on 12 August 1977.",
+        "entity_ids": [
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz is a rower born on 12 August 1977.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz is a rower born on 12 August 1977.",
+            "link",
+            "AMIR TEMRAZ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-47bca9652781c3e6e6c655b024e764b0",
+            "hyperedge_name": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\"",
+        "branch": "semantic",
+        "raw_score": 0.6300976276397705,
+        "hyperedge_text": "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+        "entity_ids": [
+          "\"ROWER\"",
+          "\"EGYPTIAN\"",
+          "\"2000 SUMMER OLYMPICS\"",
+          "\"MEN'S COXLESS PAIR\"",
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+            "link",
+            "ROWER",
+            "EGYPTIAN",
+            "2000 SUMMER OLYMPICS",
+            "MEN'S COXLESS PAIR",
+            "AMIR TEMRAZ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5bc6466f32091d66fe888bf9c7cea3b7",
+            "hyperedge_name": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed at the Olympics representing Egypt.\"",
+        "branch": "semantic",
+        "raw_score": 0.5187807083129883,
+        "hyperedge_text": "Amir Temraz competed at the Olympics representing Egypt.",
+        "entity_ids": [
+          "\"OLYMPICS\"",
+          "\"EGYPT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz competed at the Olympics representing Egypt.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz competed at the Olympics representing Egypt.",
+            "link",
+            "OLYMPICS",
+            "EGYPT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8f5a8b8bbfb9e4d48566fec9f2d6825a",
+            "hyperedge_name": "<hyperedge>\"Amir Temraz competed at the Olympics representing Egypt.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz represents Egypt in rowing competitions.\"",
+        "branch": "semantic",
+        "raw_score": 0.4985537528991699,
+        "hyperedge_text": "Amir Temraz represents Egypt in rowing competitions.",
+        "entity_ids": [
+          "\"ROWING\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz represents Egypt in rowing competitions.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz represents Egypt in rowing competitions.",
+            "link",
+            "ROWING"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6fab479a1f3702aed0696a24a925e57c",
+            "hyperedge_name": "<hyperedge>\"Amir Temraz represents Egypt in rowing competitions.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed in the men's coxless pair event.\"",
+        "branch": "semantic",
+        "raw_score": 0.48106563091278076,
+        "hyperedge_text": "Amir Temraz competed in the men's coxless pair event.",
+        "entity_ids": [
+          "\"MEN'S COXLESS PAIR EVENT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz competed in the men's coxless pair event.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz competed in the men's coxless pair event.",
+            "link",
+            "MEN'S COXLESS PAIR EVENT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-405a9d3715720c3f00bda59c4b964d35",
+            "hyperedge_name": "<hyperedge>\"Amir Temraz competed in the men's coxless pair event.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdul Aziz bin Haji Tamit was born on September 7, 1989.\"",
+        "branch": "semantic",
+        "raw_score": 0.4357806444168091,
+        "hyperedge_text": "Abdul Aziz bin Haji Tamit was born on September 7, 1989.",
+        "entity_ids": [
+          "\"SEPTEMBER 7, 1989\""
+        ],
+        "chunk_ids": [
+          "chunk-341d78cb711cc22bb5bcc4550dd3f261"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Abdul Aziz bin Haji Tamit was born on September 7, 1989.",
+            "Abdul Aziz Tamit Abdul Aziz bin Haji Tamit( born 7 Sep 1989) is a Bruneian footballer who last played for DPMM FC as a defender."
+          ],
+          "relation_texts": [
+            "Abdul Aziz bin Haji Tamit was born on September 7, 1989.",
+            "link",
+            "SEPTEMBER 7, 1989"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-48c20ef7c67b6a22b3c4a2eb91fa22f8",
+            "hyperedge_name": "<hyperedge>\"Abdul Aziz bin Haji Tamit was born on September 7, 1989.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Muhammad Ashar Al Aafiz was born on 28 March 1995.\"",
+        "branch": "semantic",
+        "raw_score": 0.4337756037712097,
+        "hyperedge_text": "Muhammad Ashar Al Aafiz was born on 28 March 1995.",
+        "entity_ids": [
+          "\"28 MARCH 1995\""
+        ],
+        "chunk_ids": [
+          "chunk-00ed961cfbcf1eb3fa8b61de9d296928"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Muhammad Ashar Al Aafiz was born on 28 March 1995.",
+            "Ashar Al Aafiz Muhammad Ashar Al Aafiz bin Abdullah( born 28 March 1995) is a Malaysian association footballer who plays as a center back for Pahang in the Malaysia Super League."
+          ],
+          "relation_texts": [
+            "Muhammad Ashar Al Aafiz was born on 28 March 1995.",
+            "link",
+            "28 MARCH 1995"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-96a41e9342c075c3bc54a4a2478b1b55",
+            "hyperedge_name": "<hyperedge>\"Muhammad Ashar Al Aafiz was born on 28 March 1995.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdulrazzaq Murad was born on 29 June 1990.\"",
+        "branch": "semantic",
+        "raw_score": 0.42975449562072754,
+        "hyperedge_text": "Abdulrazzaq Murad was born on 29 June 1990.",
+        "entity_ids": [
+          "\"29 JUNE 1990\"",
+          "\"ABDULRAZZAQ MURAD\""
+        ],
+        "chunk_ids": [
+          "chunk-83bdcc7f3675d8345052eb013e29f5d6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Abdulrazzaq Murad was born on 29 June 1990.",
+            "Abdulrazzaq Murad Abdulrazzaq Murad( born 29 June 1990) is a Qatari handball player for Al- Gharafa and the Qatari national team."
+          ],
+          "relation_texts": [
+            "Abdulrazzaq Murad was born on 29 June 1990.",
+            "link",
+            "29 JUNE 1990",
+            "ABDULRAZZAQ MURAD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3ce951bf5dfb8e3c9224e22957f00184",
+            "hyperedge_name": "<hyperedge>\"Abdulrazzaq Murad was born on 29 June 1990.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Navíd Akhavan was born 9 June 1980 in Tehran.\"",
+        "branch": "semantic",
+        "raw_score": 0.4210374057292938,
+        "hyperedge_text": "Navíd Akhavan was born 9 June 1980 in Tehran.",
+        "entity_ids": [
+          "\"IRAN\"",
+          "\"9 JUNE 1980\""
+        ],
+        "chunk_ids": [
+          "chunk-cfb9ee6d575c33dcf74e016ce151703d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Navíd Akhavan was born 9 June 1980 in Tehran.",
+            "Navíd Akhavan Navíd Akhavan( born 9 June 1980, Tehran) is an Iranian- German actor best known for his role as Hakan in the German comedy television series\" König von Kreuzberg\". He is also known as Navid Navid. Navid Akhavan was born in Teheran, Iran. Due to the Iran- Iraq war the four- year Navid had to escape with his family from his native country. After living in the United States, Akhavan moved to Germany with his father, his mother and his younger brother. Akhavan grew up speaking English, German, and Persian. He performed on stage for the first time when he was eight years old. He has grown up with music. His mother, a composer, and his father, a concert organizer, let him participate in their working life. He has played in different theater, TV and film productions during and over this time. During 2003 Akhavan was nominated\" best actor\" for his role in the 2003 drama\" Fremder..."
+          ],
+          "relation_texts": [
+            "Navíd Akhavan was born 9 June 1980 in Tehran.",
+            "link",
+            "IRAN",
+            "9 JUNE 1980"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-829e192bacf3edc380cfb4680a65a785",
+            "hyperedge_name": "<hyperedge>\"Navíd Akhavan was born 9 June 1980 in Tehran.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guy Tzarfati was born on 28 April 1979.\"",
+        "branch": "semantic",
+        "raw_score": 0.41268622875213623,
+        "hyperedge_text": "Guy Tzarfati was born on 28 April 1979.",
+        "entity_ids": [
+          "\"RETIRED ISRAELI FOOTBALLER\"",
+          "\"28 APRIL 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-4555f691bf89edf4973134cef82d9418"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Guy Tzarfati was born on 28 April 1979.",
+            "Guy Tzarfati Guy Tzarfati( born 28 April 1979) is a retired Israeli footballer who now works as a manager. Tzarfati now works as the assistant manager of Hapoel Be'er Sheva. Guy's father Sami and older brother Jackie we're also professional footballers."
+          ],
+          "relation_texts": [
+            "Guy Tzarfati was born on 28 April 1979.",
+            "link",
+            "RETIRED ISRAELI FOOTBALLER",
+            "28 APRIL 1979"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6b00380b533b622f932b21ccb42cd67f",
+            "hyperedge_name": "<hyperedge>\"Guy Tzarfati was born on 28 April 1979.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\"",
+        "hyperedge_text": "Amir Temraz is a rower born on 12 August 1977.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.679063081741333,
+        "fusion_score": 0.5358126163482666,
+        "entity_ids": [
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz is a rower born on 12 August 1977.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.679063,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535813
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\"",
+        "hyperedge_text": "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6300976276397705,
+        "fusion_score": 0.5260195255279542,
+        "entity_ids": [
+          "\"ROWER\"",
+          "\"EGYPTIAN\"",
+          "\"2000 SUMMER OLYMPICS\"",
+          "\"MEN'S COXLESS PAIR\"",
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.630098,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52602
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed at the Olympics representing Egypt.\"",
+        "hyperedge_text": "Amir Temraz competed at the Olympics representing Egypt.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5187807083129883,
+        "fusion_score": 0.5037561416625977,
+        "entity_ids": [
+          "\"OLYMPICS\"",
+          "\"EGYPT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz competed at the Olympics representing Egypt.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.518781,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503756
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz represents Egypt in rowing competitions.\"",
+        "hyperedge_text": "Amir Temraz represents Egypt in rowing competitions.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4985537528991699,
+        "fusion_score": 0.499710750579834,
+        "entity_ids": [
+          "\"ROWING\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz represents Egypt in rowing competitions.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.498554,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499711
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed in the men's coxless pair event.\"",
+        "hyperedge_text": "Amir Temraz competed in the men's coxless pair event.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48106563091278076,
+        "fusion_score": 0.4962131261825562,
+        "entity_ids": [
+          "\"MEN'S COXLESS PAIR EVENT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz competed in the men's coxless pair event.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.481066,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496213
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the birth date of Sophie Ingle?",
+    "retrieval_question": "What is the birth date of Sophie Ingle?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth date of Sophie Ingle?",
+      "retrieval_question": "What is the birth date of Sophie Ingle?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+        "entity_ids": [
+          "\"MIDFIELDER\"",
+          "\"DEFENDER\"",
+          "\"CHELSEA\"",
+          "\"SOPHIE INGLE\"",
+          "\"WALES NATIONAL TEAM\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+            "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+          ],
+          "relation_texts": [
+            "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+            "link",
+            "MIDFIELDER",
+            "DEFENDER",
+            "CHELSEA",
+            "SOPHIE INGLE",
+            "WALES NATIONAL TEAM"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle was born on 2 September 1991.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Sophie Ingle was born on 2 September 1991.",
+        "entity_ids": [
+          "\"SOPHIE INGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Ingle was born on 2 September 1991.",
+            "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+          ],
+          "relation_texts": [
+            "Sophie Ingle was born on 2 September 1991.",
+            "link",
+            "SOPHIE INGLE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.5045208930969238,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.48608091473579407,
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has the birth date of 1 November 1982.",
+            "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+          ],
+          "relation_texts": [
+            "He has the birth date of 1 November 1982.",
+            "link",
+            "1 NOVEMBER 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e7ccd25dfeb68bf5e59c3683e27f9a72",
+            "hyperedge_name": "<hyperedge>\"He has the birth date of 1 November 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was April 1, 1883.\"",
+        "branch": "relation",
+        "raw_score": 0.483752965927124,
+        "hyperedge_text": "His birth date was April 1, 1883.",
+        "entity_ids": [
+          "\"APRIL 1, 1883\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was April 1, 1883.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His birth date was April 1, 1883.",
+            "link",
+            "APRIL 1, 1883"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-513618e3e9a5db9731bf910947f84866",
+            "hyperedge_name": "<hyperedge>\"His birth date was April 1, 1883.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\"",
+        "branch": "relation",
+        "raw_score": 0.47566238045692444,
+        "hyperedge_text": "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-68776c5ec312f8403508c9a611746b32"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "Jean-Pierre de Keyser Jean- Pierre de Keyser( born 13 April 1965) is a retired German football player."
+          ],
+          "relation_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-028758a1e84246436fa83f391bd7fc4c",
+            "hyperedge_name": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was on October 9, 1892.\"",
+        "branch": "relation",
+        "raw_score": 0.4737059473991394,
+        "hyperedge_text": "His birth date was on October 9, 1892.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0866c3f8d6fb59c7691bda418ca8c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was on October 9, 1892.",
+            "Robert P. Kerr Robert P. Kerr (October 9, 1892 – September 5, 1960) was an American film director, actor and screenwriter. He directed 41 films between 1917 and 1928. He was born in Burlington, Colorado and died in Porterville, California from a heart attack."
+          ],
+          "relation_texts": [
+            "His birth date was on October 9, 1892.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fe9b22788083ee137d022bf188d617cf",
+            "hyperedge_name": "<hyperedge>\"His birth date was on October 9, 1892.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\"",
+        "branch": "relation",
+        "raw_score": 0.47200220823287964,
+        "hyperedge_text": "The date of birth April 18, 1973, marks an important milestone in his life.",
+        "entity_ids": [
+          "\"MILESTONE\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "link",
+            "MILESTONE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d651f368d8e93791546127e4938cabb",
+            "hyperedge_name": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on February 18, 1989.\"",
+        "branch": "relation",
+        "raw_score": 0.4714605212211609,
+        "hyperedge_text": "He was born on February 18, 1989.",
+        "entity_ids": [
+          "\"FEBRUARY 18, 1989\""
+        ],
+        "chunk_ids": [
+          "chunk-355112d058d669aaa46c2d9424032c99"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on February 18, 1989.",
+            "Tony Jaye Tucker Jr. Tony J. Tucker Jr. or TJ( born February 18, 1989) is currently a free agent American defensive end football player. He is known for being\" quick off the ball\"."
+          ],
+          "relation_texts": [
+            "He was born on February 18, 1989.",
+            "link",
+            "FEBRUARY 18, 1989"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c6790d20e0568df4764f89e4b56183c0",
+            "hyperedge_name": "<hyperedge>\"He was born on February 18, 1989.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 16, 1993.\"",
+        "branch": "relation",
+        "raw_score": 0.4701583683490753,
+        "hyperedge_text": "He was born on December 16, 1993.",
+        "entity_ids": [
+          "\"DECEMBER 16, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-2434daa5d2e639dffeeacdeae7136b7e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 16, 1993.",
+            "Michael Rector Michael Rector( born December 16, 1993) is an American football wide receiver who is currently a free agent of the National Football League. He played college football at Stanford."
+          ],
+          "relation_texts": [
+            "He was born on December 16, 1993.",
+            "link",
+            "DECEMBER 16, 1993"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd47ba46ad7b16c6fa6f60940ac4bafe",
+            "hyperedge_name": "<hyperedge>\"He was born on December 16, 1993.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.469155877828598,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date is debated, with various sources giving dates from 763 to 766.\"",
+        "branch": "relation",
+        "raw_score": 0.46704360842704773,
+        "hyperedge_text": "His birth date is debated, with various sources giving dates from 763 to 766.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-977df3b46015f6ac577aea517c0266a2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date is debated, with various sources giving dates from 763 to 766.",
+            "Harun al-Rashid Harun al-Rashid (\"Hārūn Ar-RašīdAaron the Orthodox\" or \"Aaron the Rightly-Guided\", 17 March 763 or February 766 – 24 March 809 (148–193 Hijri)) was the fifth Abbasid Caliph. His birth date is debated, with various sources giving dates from 763 to 766. His epithet \"al-Rashid\" translates to \"the Orthodoxthe Justthe Upright\", or \"the Rightly-Guided\". Al-Rashid ruled from 786 to 809, during the peak of the Islamic Golden Age. He established the legendary library Bayt al-Hikma (\"House of Wisdom\") in Baghdad in present-day Iraq, and during his rule Baghdad began to flourish as a center of knowledge, culture and trade. During his rule, the family of Barmakids, which played a deciding role in establishing the Abbasid Caliphate, declined gradually. In 796, he moved his court and government to Raqqa in present-day Syria. A Frankish mission came to offer Harun friendship in 799...."
+          ],
+          "relation_texts": [
+            "His birth date is debated, with various sources giving dates from 763 to 766.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c5d59e94012e665b50a1b5ac567da9fe",
+            "hyperedge_name": "<hyperedge>\"His birth date is debated, with various sources giving dates from 763 to 766.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle was born on 2 September 1991.\"",
+        "branch": "semantic",
+        "raw_score": 0.7861984968185425,
+        "hyperedge_text": "Sophie Ingle was born on 2 September 1991.",
+        "entity_ids": [
+          "\"SOPHIE INGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Ingle was born on 2 September 1991.",
+            "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+          ],
+          "relation_texts": [
+            "Sophie Ingle was born on 2 September 1991.",
+            "link",
+            "SOPHIE INGLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7cb54c2af03eafa808bd363c6eb1c236",
+            "hyperedge_name": "<hyperedge>\"Sophie Ingle was born on 2 September 1991.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.\"",
+        "branch": "semantic",
+        "raw_score": 0.6442770957946777,
+        "hyperedge_text": "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+        "entity_ids": [
+          "\"MIDFIELDER\"",
+          "\"DEFENDER\"",
+          "\"CHELSEA\"",
+          "\"SOPHIE INGLE\"",
+          "\"WALES NATIONAL TEAM\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+            "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+          ],
+          "relation_texts": [
+            "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+            "link",
+            "MIDFIELDER",
+            "DEFENDER",
+            "CHELSEA",
+            "SOPHIE INGLE",
+            "WALES NATIONAL TEAM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1da199df081a45d3d350e65a4d067bd5",
+            "hyperedge_name": "<hyperedge>\"Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Desmarais was born on July 24, 1986.\"",
+        "branch": "semantic",
+        "raw_score": 0.5559296607971191,
+        "hyperedge_text": "Sophie Desmarais was born on July 24, 1986.",
+        "entity_ids": [
+          "\"JULY 24, 1986\""
+        ],
+        "chunk_ids": [
+          "chunk-7f7411826e0283de8594afe5ea0db956"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Desmarais was born on July 24, 1986.",
+            "Sophie Desmarais Sophie Desmarais( born July 24, 1986 in Montreal, Quebec) is a Canadian actress, best known for her role in the 2013 film\" Sarah Prefers to Run\", written and directed by Chloé Robichaud."
+          ],
+          "relation_texts": [
+            "Sophie Desmarais was born on July 24, 1986.",
+            "link",
+            "JULY 24, 1986"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dddaaf63a6caffc3be33fa47226ce833",
+            "hyperedge_name": "<hyperedge>\"Sophie Desmarais was born on July 24, 1986.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle is a Welsh footballer.\"",
+        "branch": "semantic",
+        "raw_score": 0.5437764525413513,
+        "hyperedge_text": "Sophie Ingle is a Welsh footballer.",
+        "entity_ids": [
+          "\"WELSH\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Ingle is a Welsh footballer.",
+            "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+          ],
+          "relation_texts": [
+            "Sophie Ingle is a Welsh footballer.",
+            "link",
+            "WELSH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-606e9efa7d83667e9bb18ab6d4583b4b",
+            "hyperedge_name": "<hyperedge>\"Sophie Ingle is a Welsh footballer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Wörishöffer was born on 6 October 1838 in Pinneberg.\"",
+        "branch": "semantic",
+        "raw_score": 0.521930456161499,
+        "hyperedge_text": "Sophie Wörishöffer was born on 6 October 1838 in Pinneberg.",
+        "entity_ids": [
+          "\"SOPHIE WÖRISHÖFFER\"",
+          "\"PINNEBERG\""
+        ],
+        "chunk_ids": [
+          "chunk-a2099431fe0979a6b8dd05aa369edd90"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Wörishöffer was born on 6 October 1838 in Pinneberg.",
+            "Sophie Wörishöffer Sophie Wörishöffer, or Sophie Andresen( 6 October 1838 in Pinneberg- 8 November 1890 in Altona, Hamburg) was a German writer of over a dozen adventure stories for young people."
+          ],
+          "relation_texts": [
+            "Sophie Wörishöffer was born on 6 October 1838 in Pinneberg.",
+            "link",
+            "SOPHIE WÖRISHÖFFER",
+            "PINNEBERG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-64dd5d5494673448ba91d6d17b087c0b",
+            "hyperedge_name": "<hyperedge>\"Sophie Wörishöffer was born on 6 October 1838 in Pinneberg.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Desmarais, born July 24, 1986 in Montreal, Quebec, is a Canadian actress.\"",
+        "branch": "semantic",
+        "raw_score": 0.5017765164375305,
+        "hyperedge_text": "Sophie Desmarais, born July 24, 1986 in Montreal, Quebec, is a Canadian actress.",
+        "entity_ids": [
+          "\"CANADA\"",
+          "\"QUEBEC\"",
+          "\"MONTREAL\"",
+          "\"SOPHIE DESMARAIS\"",
+          "\"CHLOÉ ROBICHAUD\"",
+          "\"SARAH PREFERS TO RUN\""
+        ],
+        "chunk_ids": [
+          "chunk-7f7411826e0283de8594afe5ea0db956"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Desmarais, born July 24, 1986 in Montreal, Quebec, is a Canadian actress.",
+            "Sophie Desmarais Sophie Desmarais( born July 24, 1986 in Montreal, Quebec) is a Canadian actress, best known for her role in the 2013 film\" Sarah Prefers to Run\", written and directed by Chloé Robichaud."
+          ],
+          "relation_texts": [
+            "Sophie Desmarais, born July 24, 1986 in Montreal, Quebec, is a Canadian actress.",
+            "link",
+            "CANADA",
+            "QUEBEC",
+            "MONTREAL",
+            "SOPHIE DESMARAIS",
+            "CHLOÉ ROBICHAUD",
+            "SARAH PREFERS TO RUN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-db82e8f4b53620554860e191ed71a178",
+            "hyperedge_name": "<hyperedge>\"Sophie Desmarais, born July 24, 1986 in Montreal, Quebec, is a Canadian actress.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Marceau was born on 17 November 1966.\"",
+        "branch": "semantic",
+        "raw_score": 0.4978376030921936,
+        "hyperedge_text": "Sophie Marceau was born on 17 November 1966.",
+        "entity_ids": [
+          "\"17 NOVEMBER 1966\""
+        ],
+        "chunk_ids": [
+          "chunk-a1668e7ff91fef3924245c7fa86a595e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Marceau was born on 17 November 1966.",
+            "Sophie Marceau Sophie Marceau( born Sophie Danièle Sylvie Maupu, 17 November 1966) is a French actress, director, screenwriter, and author. As a teenager, Marceau achieved popularity with her debut films\" La Boum\"( 1980) and\" La Boum 2\"( 1982), receiving a César Award for Most Promising Actress. She became a film star in Europe with a string of successful films, including\" L'Étudiante\"( 1988),\" Pacific Palisades\"( 1990),\" Fanfan\"( 1993), and\" Revenge of the Musketeers\"( 1994). Marceau became an international film star with her performances in\" Braveheart\"( 1995),\" Firelight\"( 1997), and the 19th James Bond film\" The World Is Not Enough\"( 1999)."
+          ],
+          "relation_texts": [
+            "Sophie Marceau was born on 17 November 1966.",
+            "link",
+            "17 NOVEMBER 1966"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1e6118ff222fd6eacf22ba17366fb044",
+            "hyperedge_name": "<hyperedge>\"Sophie Marceau was born on 17 November 1966.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Wörishöffer, or Sophie Andresen (6 October 1838 in Pinneberg - 8 November 1890 in Altona, Hamburg) was a German writer of over a dozen adventure stories for young people.\"",
+        "branch": "semantic",
+        "raw_score": 0.4773159623146057,
+        "hyperedge_text": "Sophie Wörishöffer, or Sophie Andresen (6 October 1838 in Pinneberg - 8 November 1890 in Altona, Hamburg) was a German writer of over a dozen adventure stories for young people.",
+        "entity_ids": [
+          "\"SOPHIE WÖRISHÖFFER\"",
+          "\"SOPHIE ANDRESEN\"",
+          "\"PINNEBERG\"",
+          "\"ALTONA, HAMBURG\"",
+          "\"GERMAN WRITER\"",
+          "\"ADVENTURE STORIES\""
+        ],
+        "chunk_ids": [
+          "chunk-a2099431fe0979a6b8dd05aa369edd90"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Wörishöffer, or Sophie Andresen (6 October 1838 in Pinneberg - 8 November 1890 in Altona, Hamburg) was a German writer of over a dozen adventure stories for young people.",
+            "Sophie Wörishöffer Sophie Wörishöffer, or Sophie Andresen( 6 October 1838 in Pinneberg- 8 November 1890 in Altona, Hamburg) was a German writer of over a dozen adventure stories for young people."
+          ],
+          "relation_texts": [
+            "Sophie Wörishöffer, or Sophie Andresen (6 October 1838 in Pinneberg - 8 November 1890 in Altona, Hamburg) was a German writer of over a dozen adventure stories for young people.",
+            "link",
+            "SOPHIE WÖRISHÖFFER",
+            "SOPHIE ANDRESEN",
+            "PINNEBERG",
+            "ALTONA, HAMBURG",
+            "GERMAN WRITER",
+            "ADVENTURE STORIES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8560b97a0b3a2b5d3a7d974291a1ea76",
+            "hyperedge_name": "<hyperedge>\"Sophie Wörishöffer, or Sophie Andresen (6 October 1838 in Pinneberg - 8 November 1890 in Altona, Hamburg) was a German writer of over a dozen adventure stories for young people.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Sophie of Hohenberg was born Sophie Marie Franziska Antonia Ignatia Alberta von Hohenberg.\"",
+        "branch": "semantic",
+        "raw_score": 0.47698208689689636,
+        "hyperedge_text": "Princess Sophie of Hohenberg was born Sophie Marie Franziska Antonia Ignatia Alberta von Hohenberg.",
+        "entity_ids": [
+          "\"SOPHIE MARIE FRANZISKA ANTONIA IGNATIA ALBERTA VON HOHENBERG\""
+        ],
+        "chunk_ids": [
+          "chunk-edfad6d454ebdebf653df9f8b7123e68"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Princess Sophie of Hohenberg was born Sophie Marie Franziska Antonia Ignatia Alberta von Hohenberg.",
+            "Princess Sophie of Hohenberg Princess Sophie of Hohenberg(\" Sophie Marie Franziska Antonia Ignatia Alberta von Hohenberg\"; –) was the only daughter of Archduke Franz Ferdinand of Austria and his morganatic wife Sophie, Duchess of Hohenberg, both of whom were assassinated at Sarajevo on 28 June 1914. Their assassination triggered the First World War, thus Sophie and her two brothers are sometimes described as the first orphans of the First World War."
+          ],
+          "relation_texts": [
+            "Princess Sophie of Hohenberg was born Sophie Marie Franziska Antonia Ignatia Alberta von Hohenberg.",
+            "link",
+            "SOPHIE MARIE FRANZISKA ANTONIA IGNATIA ALBERTA VON HOHENBERG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-96e1dad2b449a0c24976e813390201ed",
+            "hyperedge_name": "<hyperedge>\"Princess Sophie of Hohenberg was born Sophie Marie Franziska Antonia Ignatia Alberta von Hohenberg.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Antonie Luise Schröder was born on February 23, 1781, in Paderborn.\"",
+        "branch": "semantic",
+        "raw_score": 0.4637860357761383,
+        "hyperedge_text": "Sophie Antonie Luise Schröder was born on February 23, 1781, in Paderborn.",
+        "entity_ids": [
+          "\"PADERBORN\""
+        ],
+        "chunk_ids": [
+          "chunk-56fe2375afd70d0711e344efa69e8691"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sophie Antonie Luise Schröder was born on February 23, 1781, in Paderborn.",
+            "Sophie Schröder Sophie Antonie Luise Schröder( February 23, 1781- February 25, 1868), was a German actress. She was born at Paderborn, the daughter of an actor, Gottfried Bürger. She made her first appearance in opera at St Petersburg, in 1793. On Kotzebue's recommendation she was engaged for the Vienna Court theatre in 1798, and here and in Munich and Hamburg she won great successes in tragic roles like Marie Stuart, Phèdre, Merope, Lady Macbeth, and Isabella in\" The Bride of Messina\", which gave her the reputation of being\" the German Siddons.\" She retired in 1840 and lived in Augsburg and Munich until her death in 1868. She had married, in 1795, an actor, Stollmers( properly Smets), from whom she separated in 1799. In 1804 she married the tenor Friedrich Schröder, and on his death in 1825, an actor, Wilhelm Kunst. Schröder's eldest daughter was the opera singer, Wilhelmine Schröder..."
+          ],
+          "relation_texts": [
+            "Sophie Antonie Luise Schröder was born on February 23, 1781, in Paderborn.",
+            "link",
+            "PADERBORN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e0b808220a3db080afd913e638f97429",
+            "hyperedge_name": "<hyperedge>\"Sophie Antonie Luise Schröder was born on February 23, 1781, in Paderborn.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle was born on 2 September 1991.\"",
+        "hyperedge_text": "Sophie Ingle was born on 2 September 1991.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7861984968185425,
+        "fusion_score": 0.5572396993637085,
+        "entity_ids": [
+          "\"SOPHIE INGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "evidence_texts": [
+          "Sophie Ingle was born on 2 September 1991.",
+          "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.786198,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55724
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.\"",
+        "hyperedge_text": "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6442770957946777,
+        "fusion_score": 0.5288554191589356,
+        "entity_ids": [
+          "\"MIDFIELDER\"",
+          "\"DEFENDER\"",
+          "\"CHELSEA\"",
+          "\"SOPHIE INGLE\"",
+          "\"WALES NATIONAL TEAM\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "evidence_texts": [
+          "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+          "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.644277,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528855
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle is a Welsh footballer.\"",
+        "hyperedge_text": "Sophie Ingle is a Welsh footballer.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5437764525413513,
+        "fusion_score": 0.5087552905082703,
+        "entity_ids": [
+          "\"WELSH\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "evidence_texts": [
+          "Sophie Ingle is a Welsh footballer.",
+          "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.543776,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.508755
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5045208930969238,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30180835723876953,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "evidence_texts": [
+          "His date of birth is January 30, 1871.",
+          "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.504521,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.301808
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48608091473579407,
+        "semantic_score": 0.5,
+        "fusion_score": 0.29443236589431765,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.486081,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.294432
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the birth date of Amir Temraz?",
+    "retrieval_question": "What is the birth date of Amir Temraz?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth date of Amir Temraz?",
+      "retrieval_question": "What is the birth date of Amir Temraz?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Amir Temraz is a rower born on 12 August 1977.",
+        "entity_ids": [
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz is a rower born on 12 August 1977.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz is a rower born on 12 August 1977.",
+            "link",
+            "AMIR TEMRAZ"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+        "entity_ids": [
+          "\"ROWER\"",
+          "\"EGYPTIAN\"",
+          "\"2000 SUMMER OLYMPICS\"",
+          "\"MEN'S COXLESS PAIR\"",
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+            "link",
+            "ROWER",
+            "EGYPTIAN",
+            "2000 SUMMER OLYMPICS",
+            "MEN'S COXLESS PAIR",
+            "AMIR TEMRAZ"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.5045208930969238,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.48608091473579407,
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has the birth date of 1 November 1982.",
+            "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+          ],
+          "relation_texts": [
+            "He has the birth date of 1 November 1982.",
+            "link",
+            "1 NOVEMBER 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e7ccd25dfeb68bf5e59c3683e27f9a72",
+            "hyperedge_name": "<hyperedge>\"He has the birth date of 1 November 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was April 1, 1883.\"",
+        "branch": "relation",
+        "raw_score": 0.483752965927124,
+        "hyperedge_text": "His birth date was April 1, 1883.",
+        "entity_ids": [
+          "\"APRIL 1, 1883\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was April 1, 1883.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His birth date was April 1, 1883.",
+            "link",
+            "APRIL 1, 1883"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-513618e3e9a5db9731bf910947f84866",
+            "hyperedge_name": "<hyperedge>\"His birth date was April 1, 1883.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\"",
+        "branch": "relation",
+        "raw_score": 0.47566238045692444,
+        "hyperedge_text": "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-68776c5ec312f8403508c9a611746b32"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "Jean-Pierre de Keyser Jean- Pierre de Keyser( born 13 April 1965) is a retired German football player."
+          ],
+          "relation_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-028758a1e84246436fa83f391bd7fc4c",
+            "hyperedge_name": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was on October 9, 1892.\"",
+        "branch": "relation",
+        "raw_score": 0.4737059473991394,
+        "hyperedge_text": "His birth date was on October 9, 1892.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0866c3f8d6fb59c7691bda418ca8c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was on October 9, 1892.",
+            "Robert P. Kerr Robert P. Kerr (October 9, 1892 – September 5, 1960) was an American film director, actor and screenwriter. He directed 41 films between 1917 and 1928. He was born in Burlington, Colorado and died in Porterville, California from a heart attack."
+          ],
+          "relation_texts": [
+            "His birth date was on October 9, 1892.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fe9b22788083ee137d022bf188d617cf",
+            "hyperedge_name": "<hyperedge>\"His birth date was on October 9, 1892.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\"",
+        "branch": "relation",
+        "raw_score": 0.47200220823287964,
+        "hyperedge_text": "The date of birth April 18, 1973, marks an important milestone in his life.",
+        "entity_ids": [
+          "\"MILESTONE\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "link",
+            "MILESTONE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d651f368d8e93791546127e4938cabb",
+            "hyperedge_name": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on February 18, 1989.\"",
+        "branch": "relation",
+        "raw_score": 0.4714605212211609,
+        "hyperedge_text": "He was born on February 18, 1989.",
+        "entity_ids": [
+          "\"FEBRUARY 18, 1989\""
+        ],
+        "chunk_ids": [
+          "chunk-355112d058d669aaa46c2d9424032c99"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on February 18, 1989.",
+            "Tony Jaye Tucker Jr. Tony J. Tucker Jr. or TJ( born February 18, 1989) is currently a free agent American defensive end football player. He is known for being\" quick off the ball\"."
+          ],
+          "relation_texts": [
+            "He was born on February 18, 1989.",
+            "link",
+            "FEBRUARY 18, 1989"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c6790d20e0568df4764f89e4b56183c0",
+            "hyperedge_name": "<hyperedge>\"He was born on February 18, 1989.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 16, 1993.\"",
+        "branch": "relation",
+        "raw_score": 0.4701583683490753,
+        "hyperedge_text": "He was born on December 16, 1993.",
+        "entity_ids": [
+          "\"DECEMBER 16, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-2434daa5d2e639dffeeacdeae7136b7e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 16, 1993.",
+            "Michael Rector Michael Rector( born December 16, 1993) is an American football wide receiver who is currently a free agent of the National Football League. He played college football at Stanford."
+          ],
+          "relation_texts": [
+            "He was born on December 16, 1993.",
+            "link",
+            "DECEMBER 16, 1993"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd47ba46ad7b16c6fa6f60940ac4bafe",
+            "hyperedge_name": "<hyperedge>\"He was born on December 16, 1993.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.469155877828598,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date is debated, with various sources giving dates from 763 to 766.\"",
+        "branch": "relation",
+        "raw_score": 0.46704360842704773,
+        "hyperedge_text": "His birth date is debated, with various sources giving dates from 763 to 766.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-977df3b46015f6ac577aea517c0266a2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date is debated, with various sources giving dates from 763 to 766.",
+            "Harun al-Rashid Harun al-Rashid (\"Hārūn Ar-RašīdAaron the Orthodox\" or \"Aaron the Rightly-Guided\", 17 March 763 or February 766 – 24 March 809 (148–193 Hijri)) was the fifth Abbasid Caliph. His birth date is debated, with various sources giving dates from 763 to 766. His epithet \"al-Rashid\" translates to \"the Orthodoxthe Justthe Upright\", or \"the Rightly-Guided\". Al-Rashid ruled from 786 to 809, during the peak of the Islamic Golden Age. He established the legendary library Bayt al-Hikma (\"House of Wisdom\") in Baghdad in present-day Iraq, and during his rule Baghdad began to flourish as a center of knowledge, culture and trade. During his rule, the family of Barmakids, which played a deciding role in establishing the Abbasid Caliphate, declined gradually. In 796, he moved his court and government to Raqqa in present-day Syria. A Frankish mission came to offer Harun friendship in 799...."
+          ],
+          "relation_texts": [
+            "His birth date is debated, with various sources giving dates from 763 to 766.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c5d59e94012e665b50a1b5ac567da9fe",
+            "hyperedge_name": "<hyperedge>\"His birth date is debated, with various sources giving dates from 763 to 766.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\"",
+        "branch": "semantic",
+        "raw_score": 0.679063081741333,
+        "hyperedge_text": "Amir Temraz is a rower born on 12 August 1977.",
+        "entity_ids": [
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz is a rower born on 12 August 1977.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz is a rower born on 12 August 1977.",
+            "link",
+            "AMIR TEMRAZ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-47bca9652781c3e6e6c655b024e764b0",
+            "hyperedge_name": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\"",
+        "branch": "semantic",
+        "raw_score": 0.6300976276397705,
+        "hyperedge_text": "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+        "entity_ids": [
+          "\"ROWER\"",
+          "\"EGYPTIAN\"",
+          "\"2000 SUMMER OLYMPICS\"",
+          "\"MEN'S COXLESS PAIR\"",
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+            "link",
+            "ROWER",
+            "EGYPTIAN",
+            "2000 SUMMER OLYMPICS",
+            "MEN'S COXLESS PAIR",
+            "AMIR TEMRAZ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5bc6466f32091d66fe888bf9c7cea3b7",
+            "hyperedge_name": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed at the Olympics representing Egypt.\"",
+        "branch": "semantic",
+        "raw_score": 0.5187807083129883,
+        "hyperedge_text": "Amir Temraz competed at the Olympics representing Egypt.",
+        "entity_ids": [
+          "\"OLYMPICS\"",
+          "\"EGYPT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz competed at the Olympics representing Egypt.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz competed at the Olympics representing Egypt.",
+            "link",
+            "OLYMPICS",
+            "EGYPT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8f5a8b8bbfb9e4d48566fec9f2d6825a",
+            "hyperedge_name": "<hyperedge>\"Amir Temraz competed at the Olympics representing Egypt.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz represents Egypt in rowing competitions.\"",
+        "branch": "semantic",
+        "raw_score": 0.4985537528991699,
+        "hyperedge_text": "Amir Temraz represents Egypt in rowing competitions.",
+        "entity_ids": [
+          "\"ROWING\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz represents Egypt in rowing competitions.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz represents Egypt in rowing competitions.",
+            "link",
+            "ROWING"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6fab479a1f3702aed0696a24a925e57c",
+            "hyperedge_name": "<hyperedge>\"Amir Temraz represents Egypt in rowing competitions.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed in the men's coxless pair event.\"",
+        "branch": "semantic",
+        "raw_score": 0.48106563091278076,
+        "hyperedge_text": "Amir Temraz competed in the men's coxless pair event.",
+        "entity_ids": [
+          "\"MEN'S COXLESS PAIR EVENT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Amir Temraz competed in the men's coxless pair event.",
+            "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+          ],
+          "relation_texts": [
+            "Amir Temraz competed in the men's coxless pair event.",
+            "link",
+            "MEN'S COXLESS PAIR EVENT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-405a9d3715720c3f00bda59c4b964d35",
+            "hyperedge_name": "<hyperedge>\"Amir Temraz competed in the men's coxless pair event.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdul Aziz bin Haji Tamit was born on September 7, 1989.\"",
+        "branch": "semantic",
+        "raw_score": 0.4357806444168091,
+        "hyperedge_text": "Abdul Aziz bin Haji Tamit was born on September 7, 1989.",
+        "entity_ids": [
+          "\"SEPTEMBER 7, 1989\""
+        ],
+        "chunk_ids": [
+          "chunk-341d78cb711cc22bb5bcc4550dd3f261"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Abdul Aziz bin Haji Tamit was born on September 7, 1989.",
+            "Abdul Aziz Tamit Abdul Aziz bin Haji Tamit( born 7 Sep 1989) is a Bruneian footballer who last played for DPMM FC as a defender."
+          ],
+          "relation_texts": [
+            "Abdul Aziz bin Haji Tamit was born on September 7, 1989.",
+            "link",
+            "SEPTEMBER 7, 1989"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-48c20ef7c67b6a22b3c4a2eb91fa22f8",
+            "hyperedge_name": "<hyperedge>\"Abdul Aziz bin Haji Tamit was born on September 7, 1989.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Muhammad Ashar Al Aafiz was born on 28 March 1995.\"",
+        "branch": "semantic",
+        "raw_score": 0.4337756037712097,
+        "hyperedge_text": "Muhammad Ashar Al Aafiz was born on 28 March 1995.",
+        "entity_ids": [
+          "\"28 MARCH 1995\""
+        ],
+        "chunk_ids": [
+          "chunk-00ed961cfbcf1eb3fa8b61de9d296928"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Muhammad Ashar Al Aafiz was born on 28 March 1995.",
+            "Ashar Al Aafiz Muhammad Ashar Al Aafiz bin Abdullah( born 28 March 1995) is a Malaysian association footballer who plays as a center back for Pahang in the Malaysia Super League."
+          ],
+          "relation_texts": [
+            "Muhammad Ashar Al Aafiz was born on 28 March 1995.",
+            "link",
+            "28 MARCH 1995"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-96a41e9342c075c3bc54a4a2478b1b55",
+            "hyperedge_name": "<hyperedge>\"Muhammad Ashar Al Aafiz was born on 28 March 1995.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdulrazzaq Murad was born on 29 June 1990.\"",
+        "branch": "semantic",
+        "raw_score": 0.42975449562072754,
+        "hyperedge_text": "Abdulrazzaq Murad was born on 29 June 1990.",
+        "entity_ids": [
+          "\"29 JUNE 1990\"",
+          "\"ABDULRAZZAQ MURAD\""
+        ],
+        "chunk_ids": [
+          "chunk-83bdcc7f3675d8345052eb013e29f5d6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Abdulrazzaq Murad was born on 29 June 1990.",
+            "Abdulrazzaq Murad Abdulrazzaq Murad( born 29 June 1990) is a Qatari handball player for Al- Gharafa and the Qatari national team."
+          ],
+          "relation_texts": [
+            "Abdulrazzaq Murad was born on 29 June 1990.",
+            "link",
+            "29 JUNE 1990",
+            "ABDULRAZZAQ MURAD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3ce951bf5dfb8e3c9224e22957f00184",
+            "hyperedge_name": "<hyperedge>\"Abdulrazzaq Murad was born on 29 June 1990.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Navíd Akhavan was born 9 June 1980 in Tehran.\"",
+        "branch": "semantic",
+        "raw_score": 0.4210374057292938,
+        "hyperedge_text": "Navíd Akhavan was born 9 June 1980 in Tehran.",
+        "entity_ids": [
+          "\"IRAN\"",
+          "\"9 JUNE 1980\""
+        ],
+        "chunk_ids": [
+          "chunk-cfb9ee6d575c33dcf74e016ce151703d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Navíd Akhavan was born 9 June 1980 in Tehran.",
+            "Navíd Akhavan Navíd Akhavan( born 9 June 1980, Tehran) is an Iranian- German actor best known for his role as Hakan in the German comedy television series\" König von Kreuzberg\". He is also known as Navid Navid. Navid Akhavan was born in Teheran, Iran. Due to the Iran- Iraq war the four- year Navid had to escape with his family from his native country. After living in the United States, Akhavan moved to Germany with his father, his mother and his younger brother. Akhavan grew up speaking English, German, and Persian. He performed on stage for the first time when he was eight years old. He has grown up with music. His mother, a composer, and his father, a concert organizer, let him participate in their working life. He has played in different theater, TV and film productions during and over this time. During 2003 Akhavan was nominated\" best actor\" for his role in the 2003 drama\" Fremder..."
+          ],
+          "relation_texts": [
+            "Navíd Akhavan was born 9 June 1980 in Tehran.",
+            "link",
+            "IRAN",
+            "9 JUNE 1980"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-829e192bacf3edc380cfb4680a65a785",
+            "hyperedge_name": "<hyperedge>\"Navíd Akhavan was born 9 June 1980 in Tehran.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guy Tzarfati was born on 28 April 1979.\"",
+        "branch": "semantic",
+        "raw_score": 0.41268622875213623,
+        "hyperedge_text": "Guy Tzarfati was born on 28 April 1979.",
+        "entity_ids": [
+          "\"RETIRED ISRAELI FOOTBALLER\"",
+          "\"28 APRIL 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-4555f691bf89edf4973134cef82d9418"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Guy Tzarfati was born on 28 April 1979.",
+            "Guy Tzarfati Guy Tzarfati( born 28 April 1979) is a retired Israeli footballer who now works as a manager. Tzarfati now works as the assistant manager of Hapoel Be'er Sheva. Guy's father Sami and older brother Jackie we're also professional footballers."
+          ],
+          "relation_texts": [
+            "Guy Tzarfati was born on 28 April 1979.",
+            "link",
+            "RETIRED ISRAELI FOOTBALLER",
+            "28 APRIL 1979"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6b00380b533b622f932b21ccb42cd67f",
+            "hyperedge_name": "<hyperedge>\"Guy Tzarfati was born on 28 April 1979.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\"",
+        "hyperedge_text": "Amir Temraz is a rower born on 12 August 1977.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.679063081741333,
+        "fusion_score": 0.5358126163482666,
+        "entity_ids": [
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz is a rower born on 12 August 1977.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.679063,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535813
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\"",
+        "hyperedge_text": "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6300976276397705,
+        "fusion_score": 0.5260195255279542,
+        "entity_ids": [
+          "\"ROWER\"",
+          "\"EGYPTIAN\"",
+          "\"2000 SUMMER OLYMPICS\"",
+          "\"MEN'S COXLESS PAIR\"",
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.630098,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52602
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed at the Olympics representing Egypt.\"",
+        "hyperedge_text": "Amir Temraz competed at the Olympics representing Egypt.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5187807083129883,
+        "fusion_score": 0.5037561416625977,
+        "entity_ids": [
+          "\"OLYMPICS\"",
+          "\"EGYPT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz competed at the Olympics representing Egypt.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.518781,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503756
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz represents Egypt in rowing competitions.\"",
+        "hyperedge_text": "Amir Temraz represents Egypt in rowing competitions.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4985537528991699,
+        "fusion_score": 0.499710750579834,
+        "entity_ids": [
+          "\"ROWING\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz represents Egypt in rowing competitions.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.498554,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499711
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed in the men's coxless pair event.\"",
+        "hyperedge_text": "Amir Temraz competed in the men's coxless pair event.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48106563091278076,
+        "fusion_score": 0.4962131261825562,
+        "entity_ids": [
+          "\"MEN'S COXLESS PAIR EVENT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz competed in the men's coxless pair event.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.481066,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496213
+        }
+      }
+    ]
+  }
+]

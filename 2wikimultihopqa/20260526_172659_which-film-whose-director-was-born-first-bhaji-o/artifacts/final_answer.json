@@ -1,0 +1,42 @@
+{
+  "answer": "Bhaji On The Beach",
+  "candidate_answer": "Bhaji On The Beach",
+  "reasoning_summary": "Gurinder Chadha, the director of 'Bhaji On The Beach', was born on January 10, 1960, while Barry Levinson, the director of 'Bugsy', was born on April 6, 1942. Since 1942 is earlier than 1960, 'Bhaji On The Beach' is the film whose director was born first.",
+  "answer_span_reasoning": "The director of 'Bhaji On The Beach' was born later than the director of 'Bugsy'.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Bhaji On The Beach?",
+      "answer": "Gurinder Chadha",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of Bugsy?",
+      "answer": "Barry Levinson",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "When was the birth date of the director of Bhaji On The Beach?",
+      "answer": "10 January 1960",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Gurinder Chadha is an English film director of Indian origin.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "When was the director of Bugsy born?",
+      "answer": "April 6, 1942",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Barry Levinson (born April 6, 1942) is an American filmmaker, screenwriter, and actor.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

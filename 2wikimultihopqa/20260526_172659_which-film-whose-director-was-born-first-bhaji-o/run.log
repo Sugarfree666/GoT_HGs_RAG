@@ -1,0 +1,12 @@
+2026-05-26 17:26:59,914 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 17:28:56,163 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 17:28:56,163 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 17:29:10,141 | INFO | Starting HyperBranch pipeline for question: Which film whose director was born first, Bhaji On The Beach or Bugsy?
+2026-05-26 17:29:10,142 | INFO | Executing atomic DAG with 4 node(s)
+2026-05-26 17:29:16,240 | INFO | Atomic retrieval returned 22 hits for question=Who is the director of Bhaji On The Beach?
+2026-05-26 17:29:25,846 | INFO | Atomic retrieval returned 24 hits for question=Who is the director of Bugsy?
+2026-05-26 17:29:31,329 | INFO | Rewrote retrieval question for q2: When was the birth date of the director of Bhaji On The Beach? -> When was the birth date of Gurinder Chadha?
+2026-05-26 17:29:48,293 | INFO | Atomic retrieval returned 26 hits for question=When was the birth date of Gurinder Chadha?
+2026-05-26 17:30:05,448 | INFO | Rewrote retrieval question for q4: When was the director of Bugsy born? -> When was Barry Levinson born?
+2026-05-26 17:30:23,080 | INFO | Atomic retrieval returned 22 hits for question=When was Barry Levinson born?
+2026-05-26 17:31:12,243 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_172659_which-film-whose-director-was-born-first-bhaji-o

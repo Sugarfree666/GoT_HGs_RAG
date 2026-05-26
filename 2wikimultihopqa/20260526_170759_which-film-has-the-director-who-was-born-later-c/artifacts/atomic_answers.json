@@ -1,0 +1,561 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Complete Unknown?",
+    "analysis": {
+      "entities": [
+        "Complete Unknown"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.\"",
+        "hyperedge_text": "Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6111957430839539,
+        "fusion_score": 0.5222391486167908,
+        "entity_ids": [
+          "\"JOSHUA MARSTON\"",
+          "\"JULIAN SHEPPARD\"",
+          "\"COMPLETE UNKNOWN\""
+        ],
+        "chunk_ids": [
+          "chunk-7a5068632bef4ec8402b0f0391c52beb"
+        ],
+        "evidence_texts": [
+          "Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.",
+          "Complete Unknown Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard. It stars Rachel Weisz, Michael Shannon, Kathy Bates and Danny Glover. It had its world premiere at the Sundance Film Festival on January 25, 2016. The film was released on August 26, 2016, by Amazon Studios and IFC Films."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.611196,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522239
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Complete Unknown is a 2016 American-British drama mystery thriller film.\"",
+        "hyperedge_text": "Complete Unknown is a 2016 American-British drama mystery thriller film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5942522883415222,
+        "fusion_score": 0.5188504576683045,
+        "entity_ids": [
+          "\"COMPLETE UNKNOWN\""
+        ],
+        "chunk_ids": [
+          "chunk-7a5068632bef4ec8402b0f0391c52beb"
+        ],
+        "evidence_texts": [
+          "Complete Unknown is a 2016 American-British drama mystery thriller film.",
+          "Complete Unknown Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard. It stars Rachel Weisz, Michael Shannon, Kathy Bates and Danny Glover. It had its world premiere at the Sundance Film Festival on January 25, 2016. The film was released on August 26, 2016, by Amazon Studios and IFC Films."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.594252,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51885
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 2016, Marston made his English-language debut on 'Complete Unknown' starring Rachel Weisz and Michael Shannon.\"",
+        "hyperedge_text": "In 2016, Marston made his English-language debut on 'Complete Unknown' starring Rachel Weisz and Michael Shannon.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4901247024536133,
+        "fusion_score": 0.49802494049072266,
+        "entity_ids": [
+          "\"MICHAEL SHANNON\"",
+          "\"COMPLETE UNKNOWN\"",
+          "\"RACHEL WEISZ\""
+        ],
+        "chunk_ids": [
+          "chunk-60a6037065abd6e96111648ebd15f422"
+        ],
+        "evidence_texts": [
+          "In 2016, Marston made his English-language debut on 'Complete Unknown' starring Rachel Weisz and Michael Shannon.",
+          "Joshua Marston Joshua Jacob Marston( born August 13, 1968) is an American screenwriter and film director best known for the film\" Maria Full of Grace\". Born in Los Angeles County, California, he graduated from Beverly Hills High School. Marston worked in Paris as an intern for\" Life\", then for ABC News during the Gulf War. He returned to the United States and earned a master's degree in Political science from University of Chicago in 1994 before earning a Master of Fine Arts in film at New York University. Marston also directed an episode of\" Six Feet Under\", and Episode 7 of\" The Newsroom\" in 2012. Marston directed a segment of the collective film\" New York, I Love You\". His 2011 film\" The Forgiveness of Blood\" premiered in competition at the 61st Berlin International Film Festival and competed for the Golden Bear. Along with Andamion Murataj, Marston won the Silver Bear for Best Scr..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.490125,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.498025
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film 'Complete Unknown' features prominent actors and showcases Marston's directorial style.\"",
+        "hyperedge_text": "The film 'Complete Unknown' features prominent actors and showcases Marston's directorial style.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6330125331878662,
+        "fusion_score": 0.5266025066375732,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-60a6037065abd6e96111648ebd15f422"
+        ],
+        "evidence_texts": [
+          "The film 'Complete Unknown' features prominent actors and showcases Marston's directorial style.",
+          "Joshua Marston Joshua Jacob Marston( born August 13, 1968) is an American screenwriter and film director best known for the film\" Maria Full of Grace\". Born in Los Angeles County, California, he graduated from Beverly Hills High School. Marston worked in Paris as an intern for\" Life\", then for ABC News during the Gulf War. He returned to the United States and earned a master's degree in Political science from University of Chicago in 1994 before earning a Master of Fine Arts in film at New York University. Marston also directed an episode of\" Six Feet Under\", and Episode 7 of\" The Newsroom\" in 2012. Marston directed a segment of the collective film\" New York, I Love You\". His 2011 film\" The Forgiveness of Blood\" premiered in competition at the 61st Berlin International Film Festival and competed for the Golden Bear. Along with Andamion Murataj, Marston won the Silver Bear for Best Scr..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.633013,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.526603
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lucy Mulloy is the sole writer and director of Una Noche.\"",
+        "hyperedge_text": "Lucy Mulloy is the sole writer and director of Una Noche.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.44103842973709106,
+        "fusion_score": 0.48820768594741826,
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-2151217bdf2cea754b5f1dd2a7c69d67"
+        ],
+        "evidence_texts": [
+          "Lucy Mulloy is the sole writer and director of Una Noche.",
+          "Una Noche (film) Una Noche(\" One Night\") is a Cuban- set drama- thriller film written and directed by Lucy Mulloy and starring Dariel Arrechada, Anailín de la Rúa de la Torre, and Javier Nuñez Florián."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.441038,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.488208
+        }
+      }
+    ],
+    "answer": "Joshua Marston",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Complete Unknown' is directed by Joshua Marston.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Dr. Goldfoot And The Girl Bombs?",
+    "analysis": {
+      "entities": [
+        "Dr. Goldfoot And The Girl Bombs"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "Who is the director of a work?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The success of the film on its 1965 release led to a sequel, made the following year, entitled 'Dr. Goldfoot and the Girl Bombs'.\"",
+        "hyperedge_text": "The success of the film on its 1965 release led to a sequel, made the following year, entitled 'Dr. Goldfoot and the Girl Bombs'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7030750513076782,
+        "fusion_score": 0.5406150102615357,
+        "entity_ids": [
+          "\"SUCCESS\"",
+          "\"SEQUEL\"",
+          "\"DR. GOLDFOOT AND THE GIRL BOMBS\""
+        ],
+        "chunk_ids": [
+          "chunk-07552b689baf5a4257e56f9dbd19b9e3"
+        ],
+        "evidence_texts": [
+          "The success of the film on its 1965 release led to a sequel, made the following year, entitled 'Dr. Goldfoot and the Girl Bombs'.",
+          "Dr. Goldfoot and the Bikini Machine Dr. Goldfoot and the Bikini Machine is a 1965 American International Pictures comedy film, made in Pathécolor, directed by Norman Taurog. It stars Vincent Price, Frankie Avalon, Dwayne Hickman, Susan Hart and Jack Mullaney, and features Fred Clark. It is a parody of the then- popular spy film trend( the title is a spoof of two James Bond films: the 1962 film\" Dr. No\" and the 1964 hit\" Goldfinger\"), made using actors from AIP's beach party and Edgar Allan Poe films. Despite its low production values, the film has achieved a certain cult status for the appearance of horror legend Vincent Price and AIP's Beach Party film alumni, its in- jokes and over- the- top sexuality, the claymation title sequence designed by Art Clokey, and a title song performed by The Supremes. The movie was retitled\" Dr G. and the Bikini Machine\" in England: urban legend has it..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.703075,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540615
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dr. Goldfoot and the Girl Bombs (Italian: 'Le spie vengono dal semifreddo', lit. 'The spies who came in from the cool') is a 1966 Eurospy comedy film, made in Technicolor and directed by Mario Bava.\"",
+        "hyperedge_text": "Dr. Goldfoot and the Girl Bombs (Italian: 'Le spie vengono dal semifreddo', lit. 'The spies who came in from the cool') is a 1966 Eurospy comedy film, made in Technicolor and directed by Mario Bava.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7005122303962708,
+        "fusion_score": 0.5401024460792542,
+        "entity_ids": [
+          "\"TECHNICOLOR\"",
+          "\"MARIO BAVA\"",
+          "\"DR. GOLDFOOT AND THE GIRL BOMBS\""
+        ],
+        "chunk_ids": [
+          "chunk-2f750c393eca2167de8bb91bd2fda066"
+        ],
+        "evidence_texts": [
+          "Dr. Goldfoot and the Girl Bombs (Italian: 'Le spie vengono dal semifreddo', lit. 'The spies who came in from the cool') is a 1966 Eurospy comedy film, made in Technicolor and directed by Mario Bava.",
+          "Dr. Goldfoot and the Girl Bombs Dr. Goldfoot and the Girl Bombs( Italian:\" Le spie vengono dal semifreddo\", lit. \" The spies who came in from the cool\") is a 1966 Eurospy comedy film, made in Technicolor and directed by Mario Bava. Serving as a sequel to two unrelated films,\" Dr. Goldfoot and the Bikini Machine\" and\" Two Mafiosi Against Goldginger\", the film stars Vincent Price, Fabian, Francesco Mulé, Laura Antonelli, and the Italian comedy team Franco Franchi and Ciccio Ingrassia. The film was shot in Italy by cinematographer Antonio Rinaldi, and released in both English and Italian versions. The Italian release is markedly different from the English- language edition, with more screen time spent on the antics of Franco and Ciccio, and less on Vincent Price and the other cast members. Additionally, the film's Italian title is entirely different, spoofing the 1965 film\" The Spy Who C..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.700512,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540102
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked on films including 'Planet of the Vampires' (1965), 'Dr. Goldfoot and the Girl Bombs' (1966), and (1968).\"",
+        "hyperedge_text": "He worked on films including 'Planet of the Vampires' (1965), 'Dr. Goldfoot and the Girl Bombs' (1966), and (1968).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6454619765281677,
+        "fusion_score": 0.5290923953056336,
+        "entity_ids": [
+          "\"PLANET OF THE VAMPIRES\"",
+          "\"DR. GOLDFOOT AND THE GIRL BOMBS\"",
+          "\"(1968)\""
+        ],
+        "chunk_ids": [
+          "chunk-28f836b14fb64a1c6eff448021b9a466"
+        ],
+        "evidence_texts": [
+          "He worked on films including 'Planet of the Vampires' (1965), 'Dr. Goldfoot and the Girl Bombs' (1966), and (1968).",
+          "Antonio Rinaldi (cinematographer) Antonio Rinaldi was an Italian cinematographer and camera operator. He worked exclusively for director Mario Bava on several films, including\" Planet of the Vampires\"( 1965),\" Dr. Goldfoot and the Girl Bombs\"( 1966), and( 1968)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.645462,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.529092
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dr. Goldfoot and the Bikini Machine is a 1965 American International Pictures comedy film, made in Pathécolor, directed by Norman Taurog. It stars Vincent Price, Frankie Avalon, Dwayne Hickman, Susan Hart and Jack Mullaney, and features Fred Clark.\"",
+        "hyperedge_text": "Dr. Goldfoot and the Bikini Machine is a 1965 American International Pictures comedy film, made in Pathécolor, directed by Norman Taurog. It stars Vincent Price, Frankie Avalon, Dwayne Hickman, Susan Hart and Jack Mullaney, and features Fred Clark.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6379419565200806,
+        "fusion_score": 0.5275883913040161,
+        "entity_ids": [
+          "\"1965\"",
+          "\"SEQUEL\"",
+          "\"PARODY\"",
+          "\"VINCENT PRICE\"",
+          "\"CULT STATUS\"",
+          "\"EON\"",
+          "\"LAWSUIT\"",
+          "\"SPY FILM TREND\"",
+          "\"BEACH PARTY FILMS\"",
+          "\"EDGAR ALLAN POE\"",
+          "\"DR. GOLDFOOT AND THE GIRL BOMBS\"",
+          "\"1965 RELEASE\"",
+          "\"JAMES BOND\"",
+          "\"SUSAN HART\"",
+          "\"PATHÉCOLOR\"",
+          "\"FRANKIE AVALON\"",
+          "\"DWAYNE HICKMAN\"",
+          "\"JACK MULLANEY\"",
+          "\"FRED CLARK\""
+        ],
+        "chunk_ids": [
+          "chunk-07552b689baf5a4257e56f9dbd19b9e3"
+        ],
+        "evidence_texts": [
+          "Dr. Goldfoot and the Bikini Machine is a 1965 American International Pictures comedy film, made in Pathécolor, directed by Norman Taurog. It stars Vincent Price, Frankie Avalon, Dwayne Hickman, Susan Hart and Jack Mullaney, and features Fred Clark.",
+          "Dr. Goldfoot and the Bikini Machine Dr. Goldfoot and the Bikini Machine is a 1965 American International Pictures comedy film, made in Pathécolor, directed by Norman Taurog. It stars Vincent Price, Frankie Avalon, Dwayne Hickman, Susan Hart and Jack Mullaney, and features Fred Clark. It is a parody of the then- popular spy film trend( the title is a spoof of two James Bond films: the 1962 film\" Dr. No\" and the 1964 hit\" Goldfinger\"), made using actors from AIP's beach party and Edgar Allan Poe films. Despite its low production values, the film has achieved a certain cult status for the appearance of horror legend Vincent Price and AIP's Beach Party film alumni, its in- jokes and over- the- top sexuality, the claymation title sequence designed by Art Clokey, and a title song performed by The Supremes. The movie was retitled\" Dr G. and the Bikini Machine\" in England: urban legend has it..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.637942,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527588
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dr. Goldfoot and the Girl Bombs is a 1966 Eurospy comedy film.\"",
+        "hyperedge_text": "Dr. Goldfoot and the Girl Bombs is a 1966 Eurospy comedy film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7243236303329468,
+        "fusion_score": 0.5448647260665894,
+        "entity_ids": [
+          "\"EUROSPY COMEDY FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-2f750c393eca2167de8bb91bd2fda066"
+        ],
+        "evidence_texts": [
+          "Dr. Goldfoot and the Girl Bombs is a 1966 Eurospy comedy film.",
+          "Dr. Goldfoot and the Girl Bombs Dr. Goldfoot and the Girl Bombs( Italian:\" Le spie vengono dal semifreddo\", lit. \" The spies who came in from the cool\") is a 1966 Eurospy comedy film, made in Technicolor and directed by Mario Bava. Serving as a sequel to two unrelated films,\" Dr. Goldfoot and the Bikini Machine\" and\" Two Mafiosi Against Goldginger\", the film stars Vincent Price, Fabian, Francesco Mulé, Laura Antonelli, and the Italian comedy team Franco Franchi and Ciccio Ingrassia. The film was shot in Italy by cinematographer Antonio Rinaldi, and released in both English and Italian versions. The Italian release is markedly different from the English- language edition, with more screen time spent on the antics of Franco and Ciccio, and less on Vincent Price and the other cast members. Additionally, the film's Italian title is entirely different, spoofing the 1965 film\" The Spy Who C..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.724324,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.544865
+        }
+      }
+    ],
+    "answer": "Mario Bava",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'Dr. Goldfoot and the Girl Bombs' was directed by Mario Bava.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Dr. Goldfoot and the Girl Bombs (Italian: 'Le spie vengono dal semifreddo', lit. 'The spies who came in from the cool') is a 1966 Eurospy comedy film, made in Technicolor and directed by Mario Bava.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What film has the director of Complete Unknown?",
+    "analysis": {
+      "entities": [
+        "Joshua Marston",
+        "Complete Unknown"
+      ],
+      "relations": [
+        "directed"
+      ],
+      "relation_query": "Which film is directed by a person?",
+      "answer_type": "work"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"In 2016, Marston made his English-language debut on 'Complete Unknown' starring Rachel Weisz and Michael Shannon.\"",
+        "hyperedge_text": "In 2016, Marston made his English-language debut on 'Complete Unknown' starring Rachel Weisz and Michael Shannon.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.49109306931495667,
+        "fusion_score": 0.29821861386299137,
+        "entity_ids": [
+          "\"MICHAEL SHANNON\"",
+          "\"COMPLETE UNKNOWN\"",
+          "\"RACHEL WEISZ\""
+        ],
+        "chunk_ids": [
+          "chunk-60a6037065abd6e96111648ebd15f422"
+        ],
+        "evidence_texts": [
+          "In 2016, Marston made his English-language debut on 'Complete Unknown' starring Rachel Weisz and Michael Shannon.",
+          "Joshua Marston Joshua Jacob Marston( born August 13, 1968) is an American screenwriter and film director best known for the film\" Maria Full of Grace\". Born in Los Angeles County, California, he graduated from Beverly Hills High School. Marston worked in Paris as an intern for\" Life\", then for ABC News during the Gulf War. He returned to the United States and earned a master's degree in Political science from University of Chicago in 1994 before earning a Master of Fine Arts in film at New York University. Marston also directed an episode of\" Six Feet Under\", and Episode 7 of\" The Newsroom\" in 2012. Marston directed a segment of the collective film\" New York, I Love You\". His 2011 film\" The Forgiveness of Blood\" premiered in competition at the 61st Berlin International Film Festival and competed for the Golden Bear. Along with Andamion Murataj, Marston won the Silver Bear for Best Scr..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.491093,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.298219
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.\"",
+        "hyperedge_text": "Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 1.0,
+        "fusion_score": 1.0,
+        "entity_ids": [
+          "\"JOSHUA MARSTON\"",
+          "\"JULIAN SHEPPARD\"",
+          "\"COMPLETE UNKNOWN\""
+        ],
+        "chunk_ids": [
+          "chunk-7a5068632bef4ec8402b0f0391c52beb"
+        ],
+        "evidence_texts": [
+          "Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.",
+          "Complete Unknown Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard. It stars Rachel Weisz, Michael Shannon, Kathy Bates and Danny Glover. It had its world premiere at the Sundance Film Festival on January 25, 2016. The film was released on August 26, 2016, by Amazon Studios and IFC Films."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 1.0
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.\"",
+        "hyperedge_text": "The film is directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.6614969372749329,
+        "fusion_score": 0.7322993874549867,
+        "entity_ids": [
+          "\"FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-7a5068632bef4ec8402b0f0391c52beb"
+        ],
+        "evidence_texts": [
+          "The film is directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.",
+          "Complete Unknown Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard. It stars Rachel Weisz, Michael Shannon, Kathy Bates and Danny Glover. It had its world premiere at the Sundance Film Festival on January 25, 2016. The film was released on August 26, 2016, by Amazon Studios and IFC Films."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.661497,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.732299
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Complete Unknown is a 2016 American-British drama mystery thriller film.\"",
+        "hyperedge_text": "Complete Unknown is a 2016 American-British drama mystery thriller film.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 1.0,
+        "fusion_score": 0.5333333333333334,
+        "entity_ids": [
+          "\"COMPLETE UNKNOWN\""
+        ],
+        "chunk_ids": [
+          "chunk-7a5068632bef4ec8402b0f0391c52beb"
+        ],
+        "evidence_texts": [
+          "Complete Unknown is a 2016 American-British drama mystery thriller film.",
+          "Complete Unknown Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard. It stars Rachel Weisz, Michael Shannon, Kathy Bates and Danny Glover. It had its world premiere at the Sundance Film Festival on January 25, 2016. The film was released on August 26, 2016, by Amazon Studios and IFC Films."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film 'Complete Unknown' features prominent actors and showcases Marston's directorial style.\"",
+        "hyperedge_text": "The film 'Complete Unknown' features prominent actors and showcases Marston's directorial style.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.4663628041744232,
+        "fusion_score": 0.42660589416821804,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-60a6037065abd6e96111648ebd15f422"
+        ],
+        "evidence_texts": [
+          "The film 'Complete Unknown' features prominent actors and showcases Marston's directorial style.",
+          "Joshua Marston Joshua Jacob Marston( born August 13, 1968) is an American screenwriter and film director best known for the film\" Maria Full of Grace\". Born in Los Angeles County, California, he graduated from Beverly Hills High School. Marston worked in Paris as an intern for\" Life\", then for ABC News during the Gulf War. He returned to the United States and earned a master's degree in Political science from University of Chicago in 1994 before earning a Master of Fine Arts in film at New York University. Marston also directed an episode of\" Six Feet Under\", and Episode 7 of\" The Newsroom\" in 2012. Marston directed a segment of the collective film\" New York, I Love You\". His 2011 film\" The Forgiveness of Blood\" premiered in competition at the 61st Berlin International Film Festival and competed for the Golden Bear. Along with Andamion Murataj, Marston won the Silver Bear for Best Scr..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.466363,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.426606
+        }
+      }
+    ],
+    "answer": "Maria Full of Grace",
+    "confidence": 0.75,
+    "reasoning_summary": "Joshua Marston, the director of 'Complete Unknown', is best known for directing 'Maria Full of Grace'. This is supported by evidence regarding Marston's filmography.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"In 2016, Marston made his English-language debut on 'Complete Unknown' starring Rachel Weisz and Michael Shannon.\""
+    ]
+  }
+]

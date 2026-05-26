@@ -1,0 +1,9 @@
+2026-05-26 18:10:56,182 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 18:12:24,315 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 18:12:24,315 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 18:12:39,616 | INFO | Starting HyperBranch pipeline for question: Who was born later, Shawn Lewfatt or Ken Karpoff?
+2026-05-26 18:12:39,617 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-26 18:12:45,892 | INFO | Atomic retrieval returned 21 hits for question=When was Shawn Lewfatt born?
+2026-05-26 18:12:53,684 | INFO | Atomic retrieval returned 21 hits for question=When was Ken Karpoff born?
+2026-05-26 18:13:13,063 | INFO | Atomic retrieval returned 21 hits for question=What is the birth date of Shawn Lewfatt?
+2026-05-26 18:13:58,710 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_181056_who-was-born-later-shawn-lewfatt-or-ken-karpoff

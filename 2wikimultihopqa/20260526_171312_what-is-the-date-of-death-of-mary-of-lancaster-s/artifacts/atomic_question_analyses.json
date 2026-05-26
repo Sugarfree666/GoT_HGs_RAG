@@ -1,0 +1,180 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Mary Of Lancaster?",
+    "retrieval_question": "Who is the mother of Mary Of Lancaster?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the mother of Mary Of Lancaster?",
+      "retrieval_question": "Who is the mother of Mary Of Lancaster?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Mary Of Lancaster"
+      ],
+      "relations": [
+        "is the mother of"
+      ],
+      "relation_query": "who is the mother of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the mother of Mary Of Lancaster die?",
+    "retrieval_question": "When did Maud Chaworth die?",
+    "dependency_question_rewrite": {
+      "original_question": "When did the mother of Mary Of Lancaster die?",
+      "retrieval_question": "When did Maud Chaworth die?",
+      "whether_rewritten": true,
+      "replacement_span": "the mother of Mary Of Lancaster",
+      "replacement_answer": "Maud Chaworth",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the mother of Mary Of Lancaster",
+          "replacement_answer": "Maud Chaworth"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the mother of Mary Of Lancaster?",
+        "answer": "Maud Chaworth",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "Mary of Lancaster is identified as the youngest surviving child of Henry, 3rd Earl of Lancaster and his wife Maud Chaworth, which directly indicates that Maud Chaworth is her mother.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+            "fusion_score": 0.52534658908844,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+              "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.\"",
+            "fusion_score": 0.5320462107658387,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mary of Lancaster was the youngest surviving child of Henry, 3rd Earl of Lancaster and Maud Chaworth.",
+              "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.\"",
+            "fusion_score": 0.516609287261963,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child.",
+              "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Maud Chaworth"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of a person?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the date of death of the mother of Mary Of Lancaster?",
+    "retrieval_question": "What is the date of death of the mother of Mary Of Lancaster?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the date of death of the mother of Mary Of Lancaster?",
+      "retrieval_question": "What is the date of death of the mother of Mary Of Lancaster?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "When did the mother of Mary Of Lancaster die?",
+        "answer": "3 December 1322",
+        "confidence": 0.9,
+        "answer_type": "date",
+        "reasoning_summary": "Maud Chaworth, the mother of Mary of Lancaster, died on 3 December 1322, as stated in the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.\"",
+            "fusion_score": 0.5605324268341065,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Maud Chaworth was an English noblewoman and wealthy heiress, born on 2 February 1282 and died on 3 December 1322.",
+              "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.\"",
+            "fusion_score": 0.5034653067588807,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mary of Lancaster, Baroness Percy (1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth.",
+              "Mary of Lancaster Mary of Lancaster, Baroness Percy( 1320 – 1 September 1362), was the youngest surviving child of Henry, 3rd Earl of Lancaster by his wife Maud Chaworth. Through her father, she was a great- granddaughter of Henry III of England."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Born on 2 February 1282, Maud Chaworth's life was marked by her noble lineage and marriage to Henry.\"",
+            "fusion_score": 0.5316455483436585,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Born on 2 February 1282, Maud Chaworth's life was marked by her noble lineage and marriage to Henry.",
+              "Maud Chaworth Maud de Chaworth (2 February 1282 – 3 December 1322) was an English noblewoman and wealthy heiress. She was the only child of Patrick de Chaworth. Sometime before 2 March 1297, she married Henry, 3rd Earl of Lancaster, by whom she had seven children."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Mary Of Lancaster",
+        "Maud Chaworth",
+        "3 December 1322"
+      ],
+      "relations": [
+        "date of death",
+        "mother of"
+      ],
+      "relation_query": "What is the date of death of the mother of a person?",
+      "answer_type": "date"
+    }
+  }
+]

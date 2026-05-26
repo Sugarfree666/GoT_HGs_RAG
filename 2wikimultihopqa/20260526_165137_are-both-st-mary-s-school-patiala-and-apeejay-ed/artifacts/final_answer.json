@@ -1,0 +1,34 @@
+{
+  "answer": "yes",
+  "candidate_answer": "Yes",
+  "reasoning_summary": "Both St. Mary's School, Patiala and Apeejay Education Society are located in India, confirming they are in the same country.",
+  "answer_span_reasoning": "Both schools are located in India.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "In which country is St. Mary's School, Patiala located?",
+      "answer": "India",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "In which country is Apeejay Education Society located?",
+      "answer": "India",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "What is the country of St. Mary's School, Patiala?",
+      "answer": "India",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

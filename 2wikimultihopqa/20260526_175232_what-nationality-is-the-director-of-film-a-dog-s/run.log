@@ -1,0 +1,9 @@
+2026-05-26 17:52:32,372 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 17:53:39,298 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 17:53:39,299 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 17:53:54,172 | INFO | Starting HyperBranch pipeline for question: What nationality is the director of film A Dog'S Purpose (Film)?
+2026-05-26 17:53:54,172 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-26 17:54:12,505 | INFO | Atomic retrieval returned 25 hits for question=Who is the director of A Dog'S Purpose?
+2026-05-26 17:54:18,569 | INFO | Rewrote retrieval question for q2: What is the nationality of the director of A Dog'S Purpose? -> What is the nationality of Lasse Hallström?
+2026-05-26 17:54:23,801 | INFO | Atomic retrieval returned 24 hits for question=What is the nationality of Lasse Hallström?
+2026-05-26 17:54:52,884 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_175232_what-nationality-is-the-director-of-film-a-dog-s

@@ -1,0 +1,546 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Colierul De Turcoaze?",
+    "analysis": {
+      "entities": [
+        "Colierul De Turcoaze"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6734359264373779,
+        "fusion_score": 0.5346871852874756,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.673436,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534687
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6561688780784607,
+        "fusion_score": 0.5312337756156922,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.656169,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531234
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has left a lasting impact on Turkish storytelling.\"",
+        "hyperedge_text": "As a director, he has left a lasting impact on Turkish storytelling.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4533666968345642,
+        "fusion_score": 0.4906733393669129,
+        "entity_ids": [
+          "\"IMPACT\""
+        ],
+        "chunk_ids": [
+          "chunk-afddd1564bf751c764e871c8befcbdf8"
+        ],
+        "evidence_texts": [
+          "As a director, he has left a lasting impact on Turkish storytelling.",
+          "Kartal Tibet Kartal Tibet( born 27 March 1938) is a Turkish actor and film director. Some of his famous films include\" Ölmeyen AşkDağlar KızıSenede Bir GünSultanZübük Gol Kralı\", and\" Şalvar Davası\". Tibet is also known for his action roles, especially that of the title series."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.453367,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.490673
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.\"",
+        "hyperedge_text": "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4443959593772888,
+        "fusion_score": 0.4888791918754578,
+        "entity_ids": [
+          "\"DINU COCEA\""
+        ],
+        "chunk_ids": [
+          "chunk-4dca11ed4daa89c6b795d4ebf6b716cd"
+        ],
+        "evidence_texts": [
+          "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+          "Dinu Cocea Constantin\" Dinu\" Cocea( 22 September 1929 – 26 December 2013) was a Romanian actor, film director and screenwriter. Dinu Cocea was born into a well- known theatrical family; his relatives included N. D. Cocea, Alice Cocéa, and Dina Cocea. He studied at the Institute of Theatre and Cinematographic Art in Bucharest, graduating in 1953. Cocea died from heart failure on 26 December 2013, aged 84, in Paris, France, where he had lived since 1986. He was survived by his daughter, Oana."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.444396,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.488879
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5064207315444946,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25256829261779784,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.506421,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.252568
+        }
+      }
+    ],
+    "answer": "Gheorghe Vitanidis",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Leo And Loree?",
+    "analysis": {
+      "entities": [
+        "Leo And Loree"
+      ],
+      "relations": [
+        "is directed by"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.645437479019165,
+        "fusion_score": 0.9290874958038331,
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.645437,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.929087
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film showcases the charm of its main characters, Leo and Loree.\"",
+        "hyperedge_text": "The film showcases the charm of its main characters, Leo and Loree.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6359657049179077,
+        "fusion_score": 0.5271931409835816,
+        "entity_ids": [
+          "\"MAIN CHARACTERS\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "The film showcases the charm of its main characters, Leo and Loree.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.635966,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527193
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\"",
+        "hyperedge_text": "The film Leo and Loree is classified as a romantic comedy.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5786985158920288,
+        "fusion_score": 0.5157397031784058,
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "The film Leo and Loree is classified as a romantic comedy.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578699,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51574
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Leo D. Maloney.\"",
+        "hyperedge_text": "The film was directed by Leo D. Maloney.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5297071933746338,
+        "fusion_score": 0.5059414386749268,
+        "entity_ids": [
+          "\"LEO D. MALONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-11670d51810457cc45b65cf742eb8854"
+        ],
+        "evidence_texts": [
+          "The film was directed by Leo D. Maloney.",
+          "The Boss of Rustler's Roost The Boss of Rustler's Roost is a 1928 American silent western film directed by Leo D. Maloney and starring Eugenia Gilbert, Ben Corbett and Tom London."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.529707,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505941
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Leo D. Maloney.\"",
+        "hyperedge_text": "It was directed by Leo D. Maloney.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5169077515602112,
+        "fusion_score": 0.5033815503120422,
+        "entity_ids": [
+          "\"LEO D. MALONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-0638400ec1c0e2faff8010f5d1d50b86"
+        ],
+        "evidence_texts": [
+          "It was directed by Leo D. Maloney.",
+          "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.516908,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503382
+        }
+      }
+    ],
+    "answer": "Jerry Paris",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Is the age of the director of Colierul De Turcoaze older than the age of the director of Leo And Loree?",
+    "analysis": {
+      "entities": [
+        "Colierul De Turcoaze",
+        "Leo And Loree"
+      ],
+      "relations": [
+        "is older than"
+      ],
+      "relation_query": "Is the age of the director of a work older than the age of the director of another work?",
+      "answer_type": "boolean"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5246962904930115,
+        "fusion_score": 0.30493925809860234,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.524696,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.304939
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5205214023590088,
+        "fusion_score": 0.30410428047180177,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.520521,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.304104
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.41869038343429565,
+        "fusion_score": 0.28373807668685913,
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.41869,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.283738
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\"",
+        "hyperedge_text": "The film Leo and Loree is classified as a romantic comedy.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.4251948595046997,
+        "fusion_score": 0.28503897190093996,
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "The film Leo and Loree is classified as a romantic comedy.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.425195,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.285039
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5466084480285645,
+        "semantic_score": 0.1111111111111111,
+        "fusion_score": 0.24086560143364802,
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "evidence_texts": [
+          "His work as a director spanned over two decades.",
+          "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.546608,
+          "S": 0.111111,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.240866
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the ages of the directors of 'Colierul De Turcoaze' and 'Leo And Loree', making it impossible to determine if one is older than the other.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\""
+    ]
+  }
+]

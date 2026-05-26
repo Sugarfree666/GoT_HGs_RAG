@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Tabitha, Stand Up?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the director of Tabitha, Stand Up die?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

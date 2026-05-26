@@ -1,0 +1,75 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Colierul De Turcoaze?",
+    "retrieval_question": "Who is the director of Colierul De Turcoaze?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Colierul De Turcoaze?",
+      "retrieval_question": "Who is the director of Colierul De Turcoaze?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Colierul De Turcoaze"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Leo And Loree?",
+    "retrieval_question": "Who is the director of Leo And Loree?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Leo And Loree?",
+      "retrieval_question": "Who is the director of Leo And Loree?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Leo And Loree"
+      ],
+      "relations": [
+        "is directed by"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Is the age of the director of Colierul De Turcoaze older than the age of the director of Leo And Loree?",
+    "retrieval_question": "Is the age of the director of Colierul De Turcoaze older than the age of the director of Leo And Loree?",
+    "dependency_question_rewrite": {
+      "original_question": "Is the age of the director of Colierul De Turcoaze older than the age of the director of Leo And Loree?",
+      "retrieval_question": "Is the age of the director of Colierul De Turcoaze older than the age of the director of Leo And Loree?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Colierul De Turcoaze",
+        "Leo And Loree"
+      ],
+      "relations": [
+        "is older than"
+      ],
+      "relation_query": "Is the age of the director of a work older than the age of the director of another work?",
+      "answer_type": "boolean"
+    }
+  }
+]

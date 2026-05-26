@@ -1,0 +1,555 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Taming Of The Fire?",
+    "analysis": {
+      "entities": [
+        "Taming Of The Fire"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a film.\"",
+        "hyperedge_text": "Taming of the Fire is a film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6126147508621216,
+        "fusion_score": 0.5225229501724243,
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the Fire is a film.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.612615,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522523
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "hyperedge_text": "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5819730758666992,
+        "fusion_score": 0.5163946151733398,
+        "entity_ids": [
+          "\"KIRILL LAVROV\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.581973,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516395
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "hyperedge_text": "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5668813586235046,
+        "fusion_score": 0.513376271724701,
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"KIRILL LAVROV\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.566881,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.513376
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the fire is a film.\"",
+        "hyperedge_text": "Taming of the fire is a film.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the fire is a film.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film.\"",
+        "hyperedge_text": "Taming of the Fire is a 1972 film.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1972\"",
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the Fire is a 1972 film.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ],
+    "answer": "Daniil Khrabrovitsky",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'Taming of the Fire' is a 1972 film directed by Daniil Khrabrovitsky, providing clear support for the answer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of The Lady Takes A Flyer?",
+    "analysis": {
+      "entities": [
+        "The Lady Takes A Flyer"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\"",
+        "hyperedge_text": "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6625865697860718,
+        "fusion_score": 0.5325173139572144,
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"1958\"",
+          "\"THE LADY TAKES A FLYER\"",
+          "\"AMERICAN CINEMASCOPE EASTMANCOLOR\"",
+          "\"COMEDY-DRAMA ROMANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.662587,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532517
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.\"",
+        "hyperedge_text": "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6405764818191528,
+        "fusion_score": 0.5281152963638306,
+        "entity_ids": [
+          "\"COMEDY-DRAMA\"",
+          "\"ROMANCE\"",
+          "\"THE LADY TAKES A FLYER\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.640576,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528115
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.\"",
+        "hyperedge_text": "The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.75,
+        "fusion_score": 0.55,
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"THE LADY TAKES A FLYER\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.75,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.\"",
+        "hyperedge_text": "The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6362144351005554,
+        "fusion_score": 0.5272428870201111,
+        "entity_ids": [
+          "\"NARRATIVE\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.636214,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527243
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.\"",
+        "hyperedge_text": "The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.45951762795448303,
+        "fusion_score": 0.2919035255908966,
+        "entity_ids": [
+          "\"CLASSIC HOLLYWOOD CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-144d5b8caba0fb820b6e4cd73ab26cc5"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.",
+          "The Lady Takes a Sailor The Lady Takes a Sailor is a 1949 comedy film directed by Michael Curtiz, starring Jane Wyman, Eve Arden and Dennis Morgan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.459518,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.291904
+        }
+      }
+    ],
+    "answer": "Jack Arnold",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'The Lady Takes a Flyer' was directed by Jack Arnold, providing clear support for the answer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Is the age of the director of Taming Of The Fire greater than the age of the director of The Lady Takes A Flyer?",
+    "analysis": {
+      "entities": [
+        "Taming Of The Fire",
+        "The Lady Takes A Flyer"
+      ],
+      "relations": [
+        "age comparison",
+        "is greater than"
+      ],
+      "relation_query": "Is the age of the director of a work greater than the age of the director of another work?",
+      "answer_type": "boolean"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\"",
+        "hyperedge_text": "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.4977615773677826,
+        "fusion_score": 0.29955231547355654,
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"1958\"",
+          "\"THE LADY TAKES A FLYER\"",
+          "\"AMERICAN CINEMASCOPE EASTMANCOLOR\"",
+          "\"COMEDY-DRAMA ROMANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.497762,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.299552
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a film.\"",
+        "hyperedge_text": "Taming of the Fire is a film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.48461753129959106,
+        "fusion_score": 0.29692350625991826,
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the Fire is a film.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.484618,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.296924
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.\"",
+        "hyperedge_text": "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.4615797996520996,
+        "fusion_score": 0.2923159599304199,
+        "entity_ids": [
+          "\"COMEDY-DRAMA\"",
+          "\"ROMANCE\"",
+          "\"THE LADY TAKES A FLYER\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.46158,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.292316
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "hyperedge_text": "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.442547082901001,
+        "fusion_score": 0.28850941658020024,
+        "entity_ids": [
+          "\"KIRILL LAVROV\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.442547,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.288509
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "hyperedge_text": "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.43122029304504395,
+        "fusion_score": 0.2862440586090088,
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"KIRILL LAVROV\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.43122,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.286244
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the ages of the directors of 'Taming of the Fire' and 'The Lady Takes A Flyer'.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\""
+    ]
+  }
+]

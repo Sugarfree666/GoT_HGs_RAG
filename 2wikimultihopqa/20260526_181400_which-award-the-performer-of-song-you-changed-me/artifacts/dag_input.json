@@ -1,0 +1,16 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who performed the song You Changed Me?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "What award did the performer of You Changed Me win?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  }
+]

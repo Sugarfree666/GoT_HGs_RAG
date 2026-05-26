@@ -1,0 +1,100 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Dancing In The Rain?",
+    "retrieval_question": "Who is the director of Dancing In The Rain?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Dancing In The Rain?",
+      "retrieval_question": "Who is the director of Dancing In The Rain?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Dancing In The Rain"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the director of Dancing In The Rain die?",
+    "retrieval_question": "Where did the director of Dancing In The Rain die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the director of Dancing In The Rain die?",
+      "retrieval_question": "Where did the director of Dancing In The Rain die?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Dancing In The Rain?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "answer_type": "person",
+        "reasoning_summary": "There is no evidence provided that specifies the director of 'Dancing In The Rain'.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Dancing in the Rain\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Dancing in the Rain\"",
+            "fusion_score": 0.5116011142730713,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Dancing in the Rain",
+              "Dancing in the Rain Dancing in the Rain may refer to:"
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Dancing in the Rain may refer to:\"",
+            "fusion_score": 0.5102421045303345,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Dancing in the Rain may refer to:",
+              "Dancing in the Rain Dancing in the Rain may refer to:"
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.\"",
+            "fusion_score": 0.49665307998657227,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+              "Barry Levinson Barry Levinson( born April 6, 1942) is an American filmmaker, screenwriter, and actor. Levinson's best- known works are mid-budget comedy- drama and drama films such as\" Diner\"( 1982);\" The Natural\"( 1984);\" Good Morning, Vietnam\"( 1987);\" Bugsy\"( 1991); and\" Wag the Dog\"( 1997). He won the Academy Award for Best Director for\" Rain Man\"( 1988), which also won the Academy Award for Best Picture."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Dancing In The Rain"
+      ],
+      "relations": [
+        "director of",
+        "place of death"
+      ],
+      "relation_query": "Where did the director of a work die?",
+      "answer_type": "location"
+    }
+  }
+]

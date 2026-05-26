@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "What is the birth date of Amir Temraz?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the birth date of Sophie Ingle?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q3",
+      "question": "What is the birth date of Amir Temraz?",
+      "dependencies": [
+        "q1",
+        "q2"
+      ],
+      "metadata": {
+        "operator": "COMPARE_LESS"
+      }
+    }
+  ]
+}

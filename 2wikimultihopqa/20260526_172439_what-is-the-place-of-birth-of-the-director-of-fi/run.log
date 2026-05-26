@@ -1,0 +1,9 @@
+2026-05-26 17:24:39,405 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 17:25:59,915 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 17:25:59,915 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 17:26:12,288 | INFO | Starting HyperBranch pipeline for question: What is the place of birth of the director of film Thiruvannamalai (Film)?
+2026-05-26 17:26:12,288 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-26 17:26:18,185 | INFO | Atomic retrieval returned 22 hits for question=Who is the director of Thiruvannamalai?
+2026-05-26 17:26:26,441 | INFO | Rewrote retrieval question for q2: What is the birth place of the director of Thiruvannamalai? -> What is the birth place of Perarasu?
+2026-05-26 17:26:32,110 | INFO | Atomic retrieval returned 22 hits for question=What is the birth place of Perarasu?
+2026-05-26 17:26:58,894 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_172439_what-is-the-place-of-birth-of-the-director-of-fi

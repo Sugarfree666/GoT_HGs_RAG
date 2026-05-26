@@ -1,0 +1,9 @@
+2026-05-26 17:16:44,642 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 17:18:12,551 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 17:18:12,551 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 17:18:28,475 | INFO | Starting HyperBranch pipeline for question: Where did the composer of film Before Sunset study?
+2026-05-26 17:18:28,476 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-26 17:18:34,983 | INFO | Atomic retrieval returned 21 hits for question=What is the composer of Before Sunset?
+2026-05-26 17:18:41,990 | INFO | Rewrote retrieval question for q2: What is the study of the composer of Before Sunset? -> What is the study of Richard Linklater?
+2026-05-26 17:18:47,406 | INFO | Atomic retrieval returned 23 hits for question=What is the study of Richard Linklater?
+2026-05-26 17:19:30,559 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_171644_where-did-the-composer-of-film-before-sunset-stu

@@ -1,0 +1,381 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is Medan's father?",
+    "analysis": {
+      "entities": [
+        "Medan"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"According to the Bible, Medan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah.\"",
+        "hyperedge_text": "According to the Bible, Medan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5683284997940063,
+        "fusion_score": 0.5136656999588013,
+        "entity_ids": [
+          "\"KETURAH\"",
+          "\"ABRAHAM\"",
+          "\"MEDAN\""
+        ],
+        "chunk_ids": [
+          "chunk-aa89dec729870ad50b7f8e206d315d64"
+        ],
+        "evidence_texts": [
+          "According to the Bible, Medan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah.",
+          "Medan, son of Abraham According to the Bible, Medan (\"Məḏāncontention; to twist, conflict\"); also spelt Madan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah. Medan had five brothers, Zimran, Jokshan, Midian, Ishbak, and Shuah. Josephus tells us that \"Abraham contrived to settle them in colonies; and they took possession of Troglodytis and the country of Arabia Felix (Arabia the Happy), as far as it reaches to the Red Sea. \" Abraham, in all probability, tried to keep them apart from Isaac to avoid conflict while fulfilling God's commission to spread out and inhabit the globe. Little else is known about him. There is no known connection to the Madan people of Iran and Iraq."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.568328,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.513666
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Medan is defined as a name meaning 'contention; to twist, conflict'; also spelled Madan.\"",
+        "hyperedge_text": "Medan is defined as a name meaning 'contention; to twist, conflict'; also spelled Madan.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48707467317581177,
+        "fusion_score": 0.4974149346351624,
+        "entity_ids": [
+          "\"CONFLICT\"",
+          "\"TWIST\"",
+          "\"MEDAN\"",
+          "\"CONTENTION\""
+        ],
+        "chunk_ids": [
+          "chunk-aa89dec729870ad50b7f8e206d315d64"
+        ],
+        "evidence_texts": [
+          "Medan is defined as a name meaning 'contention; to twist, conflict'; also spelled Madan.",
+          "Medan, son of Abraham According to the Bible, Medan (\"Məḏāncontention; to twist, conflict\"); also spelt Madan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah. Medan had five brothers, Zimran, Jokshan, Midian, Ishbak, and Shuah. Josephus tells us that \"Abraham contrived to settle them in colonies; and they took possession of Troglodytis and the country of Arabia Felix (Arabia the Happy), as far as it reaches to the Red Sea. \" Abraham, in all probability, tried to keep them apart from Isaac to avoid conflict while fulfilling God's commission to spread out and inhabit the globe. Little else is known about him. There is no known connection to the Madan people of Iran and Iraq."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.487075,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.497415
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dzulmi Eldin, born July 4, 1960, is the mayor of Medan, North Sumatra.\"",
+        "hyperedge_text": "Dzulmi Eldin, born July 4, 1960, is the mayor of Medan, North Sumatra.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4779784083366394,
+        "fusion_score": 0.4955956816673279,
+        "entity_ids": [
+          "\"MEDAN\"",
+          "\"DZULMI ELDIN\"",
+          "\"NORTH SUMATRA\""
+        ],
+        "chunk_ids": [
+          "chunk-ebb0093b977950d0b851967dafb1bfda"
+        ],
+        "evidence_texts": [
+          "Dzulmi Eldin, born July 4, 1960, is the mayor of Medan, North Sumatra.",
+          "Dzulmi Eldin Dzulmi Eldin( born July 4, 1960) is the mayor of Medan, North Sumatra. A graduate of Satyagama University's Masters program, he started his career in the government as a section chief in Deli Serdang Regency administration in 1992, before slowly rising in rank to become the city secretary of Medan by 2007. In 2010, he was elected as deputy mayor prior the removal of sitting mayor in 2013, after which he was elevated to the mayor rank. He ran in the 2015 local elections, managing to secure 340,406 votes( 71.72%). He was arrested by the Corruption Eradication Commission on 16 October 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.477978,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.495596
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is located in the city of Medan.\"",
+        "hyperedge_text": "It is located in the city of Medan.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4743993878364563,
+        "fusion_score": 0.4948798775672913,
+        "entity_ids": [
+          "\"MEDAN\""
+        ],
+        "chunk_ids": [
+          "chunk-ea3c4b1f4a8e528d74fae8de46134890"
+        ],
+        "evidence_texts": [
+          "It is located in the city of Medan.",
+          "Roman Catholic Archdiocese of Medan The Roman Catholic Archdiocese of Medan is an archdiocese located in the city of Medan in Sumatra in Indonesia."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.474399,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.49488
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Medan had five brothers: Zimran, Jokshan, Midian, Ishbak, and Shuah.\"",
+        "hyperedge_text": "Medan had five brothers: Zimran, Jokshan, Midian, Ishbak, and Shuah.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5274176597595215,
+        "fusion_score": 0.5054835319519043,
+        "entity_ids": [
+          "\"SHUAH\"",
+          "\"ISHBAK\"",
+          "\"MIDIAN\"",
+          "\"JOKSHAN\"",
+          "\"ZIMRAN\""
+        ],
+        "chunk_ids": [
+          "chunk-aa89dec729870ad50b7f8e206d315d64"
+        ],
+        "evidence_texts": [
+          "Medan had five brothers: Zimran, Jokshan, Midian, Ishbak, and Shuah.",
+          "Medan, son of Abraham According to the Bible, Medan (\"Məḏāncontention; to twist, conflict\"); also spelt Madan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah. Medan had five brothers, Zimran, Jokshan, Midian, Ishbak, and Shuah. Josephus tells us that \"Abraham contrived to settle them in colonies; and they took possession of Troglodytis and the country of Arabia Felix (Arabia the Happy), as far as it reaches to the Red Sea. \" Abraham, in all probability, tried to keep them apart from Isaac to avoid conflict while fulfilling God's commission to spread out and inhabit the globe. Little else is known about him. There is no known connection to the Madan people of Iran and Iraq."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.527418,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505484
+        }
+      }
+    ],
+    "answer": "Abraham",
+    "confidence": 1.0,
+    "reasoning_summary": "Medan is identified as the third son of Abraham according to the Bible.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"According to the Bible, Medan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where is the burial place of the father of Medan?",
+    "analysis": {
+      "entities": [
+        "Abraham",
+        "Medan"
+      ],
+      "relations": [
+        "burial place of"
+      ],
+      "relation_query": "Where is the burial place of a person?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"According to the Bible, Medan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah.\"",
+        "hyperedge_text": "According to the Bible, Medan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5566776990890503,
+        "fusion_score": 0.5113355398178101,
+        "entity_ids": [
+          "\"KETURAH\"",
+          "\"ABRAHAM\"",
+          "\"MEDAN\""
+        ],
+        "chunk_ids": [
+          "chunk-aa89dec729870ad50b7f8e206d315d64"
+        ],
+        "evidence_texts": [
+          "According to the Bible, Medan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah.",
+          "Medan, son of Abraham According to the Bible, Medan (\"Məḏāncontention; to twist, conflict\"); also spelt Madan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah. Medan had five brothers, Zimran, Jokshan, Midian, Ishbak, and Shuah. Josephus tells us that \"Abraham contrived to settle them in colonies; and they took possession of Troglodytis and the country of Arabia Felix (Arabia the Happy), as far as it reaches to the Red Sea. \" Abraham, in all probability, tried to keep them apart from Isaac to avoid conflict while fulfilling God's commission to spread out and inhabit the globe. Little else is known about him. There is no known connection to the Madan people of Iran and Iraq."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.556678,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511336
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is located in the city of Medan.\"",
+        "hyperedge_text": "It is located in the city of Medan.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5411196947097778,
+        "fusion_score": 0.3082239389419556,
+        "entity_ids": [
+          "\"MEDAN\""
+        ],
+        "chunk_ids": [
+          "chunk-ea3c4b1f4a8e528d74fae8de46134890"
+        ],
+        "evidence_texts": [
+          "It is located in the city of Medan.",
+          "Roman Catholic Archdiocese of Medan The Roman Catholic Archdiocese of Medan is an archdiocese located in the city of Medan in Sumatra in Indonesia."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.54112,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.308224
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dzulmi Eldin, born July 4, 1960, is the mayor of Medan, North Sumatra.\"",
+        "hyperedge_text": "Dzulmi Eldin, born July 4, 1960, is the mayor of Medan, North Sumatra.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.4902949929237366,
+        "fusion_score": 0.2980589985847473,
+        "entity_ids": [
+          "\"MEDAN\"",
+          "\"DZULMI ELDIN\"",
+          "\"NORTH SUMATRA\""
+        ],
+        "chunk_ids": [
+          "chunk-ebb0093b977950d0b851967dafb1bfda"
+        ],
+        "evidence_texts": [
+          "Dzulmi Eldin, born July 4, 1960, is the mayor of Medan, North Sumatra.",
+          "Dzulmi Eldin Dzulmi Eldin( born July 4, 1960) is the mayor of Medan, North Sumatra. A graduate of Satyagama University's Masters program, he started his career in the government as a section chief in Deli Serdang Regency administration in 1992, before slowly rising in rank to become the city secretary of Medan by 2007. In 2010, he was elected as deputy mayor prior the removal of sitting mayor in 2013, after which he was elevated to the mayor rank. He ran in the 2015 local elections, managing to secure 340,406 votes( 71.72%). He was arrested by the Corruption Eradication Commission on 16 October 2019."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.490295,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.298059
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Medan is defined as a name meaning 'contention; to twist, conflict'; also spelled Madan.\"",
+        "hyperedge_text": "Medan is defined as a name meaning 'contention; to twist, conflict'; also spelled Madan.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.46973717212677,
+        "fusion_score": 0.29394743442535404,
+        "entity_ids": [
+          "\"CONFLICT\"",
+          "\"TWIST\"",
+          "\"MEDAN\"",
+          "\"CONTENTION\""
+        ],
+        "chunk_ids": [
+          "chunk-aa89dec729870ad50b7f8e206d315d64"
+        ],
+        "evidence_texts": [
+          "Medan is defined as a name meaning 'contention; to twist, conflict'; also spelled Madan.",
+          "Medan, son of Abraham According to the Bible, Medan (\"Məḏāncontention; to twist, conflict\"); also spelt Madan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah. Medan had five brothers, Zimran, Jokshan, Midian, Ishbak, and Shuah. Josephus tells us that \"Abraham contrived to settle them in colonies; and they took possession of Troglodytis and the country of Arabia Felix (Arabia the Happy), as far as it reaches to the Red Sea. \" Abraham, in all probability, tried to keep them apart from Isaac to avoid conflict while fulfilling God's commission to spread out and inhabit the globe. Little else is known about him. There is no known connection to the Madan people of Iran and Iraq."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.469737,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.293947
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Roman Catholic Archdiocese of Medan is an archdiocese located in the city of Medan in Sumatra in Indonesia.\"",
+        "hyperedge_text": "Roman Catholic Archdiocese of Medan is an archdiocese located in the city of Medan in Sumatra in Indonesia.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.46880042552948,
+        "fusion_score": 0.293760085105896,
+        "entity_ids": [
+          "\"INDONESIA\"",
+          "\"MEDAN\"",
+          "\"SUMATRA\"",
+          "\"ROMAN CATHOLIC ARCHDIOCESE OF MEDAN\""
+        ],
+        "chunk_ids": [
+          "chunk-ea3c4b1f4a8e528d74fae8de46134890"
+        ],
+        "evidence_texts": [
+          "Roman Catholic Archdiocese of Medan is an archdiocese located in the city of Medan in Sumatra in Indonesia.",
+          "Roman Catholic Archdiocese of Medan The Roman Catholic Archdiocese of Medan is an archdiocese located in the city of Medan in Sumatra in Indonesia."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.4688,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.29376
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "While it is established that Abraham is Medan's father, there is no evidence provided regarding the burial place of Abraham.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"According to the Bible, Medan was the third son of Abraham, the patriarch of the Israelites, and Keturah whom he wed after the death of Sarah.\""
+    ]
+  }
+]

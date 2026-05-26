@@ -1,0 +1,373 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Rufus Jones For President?",
+    "analysis": {
+      "entities": [
+        "Rufus Jones For President"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\"",
+        "hyperedge_text": "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6562132239341736,
+        "fusion_score": 0.5312426447868348,
+        "entity_ids": [
+          "\"1933\"",
+          "\"TITLE CHARACTER\"",
+          "\"ROY MACK\"",
+          "\"RUFUS JONES FOR PRESIDENT\"",
+          "\"SATIRICAL MUSICAL-COMEDY\"",
+          "\"ETHEL WATERS\"",
+          "\"SAMMY DAVIS JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-42df131e6cf1633a7131bf172c9292c5"
+        ],
+        "evidence_texts": [
+          "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+          "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.656213,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531243
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones for President is an American Pre-Code film.\"",
+        "hyperedge_text": "Rufus Jones for President is an American Pre-Code film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6316441893577576,
+        "fusion_score": 0.5263288378715516,
+        "entity_ids": [
+          "\"PRE-CODE\""
+        ],
+        "chunk_ids": [
+          "chunk-42df131e6cf1633a7131bf172c9292c5"
+        ],
+        "evidence_texts": [
+          "Rufus Jones for President is an American Pre-Code film.",
+          "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.631644,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.526329
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25314085483551024,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.253141
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5027865171432495,
+        "semantic_score": 0.25,
+        "fusion_score": 0.2511146068572998,
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "evidence_texts": [
+          "As a director, he has likely worked on a variety of projects spanning different genres.",
+          "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.502787,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.251115
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4973045885562897,
+        "semantic_score": 0.25,
+        "fusion_score": 0.2489218354225159,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this, he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.497305,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.248922
+        }
+      }
+    ],
+    "answer": "Roy Mack",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'the film was directed by Roy Mack', providing clear support for the answer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the birth place of the director of Rufus Jones For President?",
+    "analysis": {
+      "entities": [
+        "Roy Mack"
+      ],
+      "relations": [
+        "birth place of"
+      ],
+      "relation_query": "What is the birth place of a person?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.\"",
+        "hyperedge_text": "Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7107778787612915,
+        "fusion_score": 0.5421555757522584,
+        "entity_ids": [
+          "\"AMERICAN DIRECTOR\"",
+          "\"LOS ANGELES, CALIFORNIA\"",
+          "\"COMEDY FILMS\"",
+          "\"ROY MCCLURE\"",
+          "\"205 TITLES\"",
+          "\"NEW BRUNSWICK, NEW JERSEY\"",
+          "\"FILM SHORTS\"",
+          "\"ROY MACK\""
+        ],
+        "chunk_ids": [
+          "chunk-6660f1bddbe966e2c05bca0c0dd8ab0a"
+        ],
+        "evidence_texts": [
+          "Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.",
+          "Roy Mack (director) Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.710778,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542156
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Roy Mack had a significant impact on the genre of comedy films in the film industry.\"",
+        "hyperedge_text": "Roy Mack had a significant impact on the genre of comedy films in the film industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5785740613937378,
+        "fusion_score": 0.5157148122787476,
+        "entity_ids": [
+          "\"IMPACT ON COMEDY FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-6660f1bddbe966e2c05bca0c0dd8ab0a"
+        ],
+        "evidence_texts": [
+          "Roy Mack had a significant impact on the genre of comedy films in the film industry.",
+          "Roy Mack (director) Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578574,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515715
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Roy Mack directed mostly comedy films.\"",
+        "hyperedge_text": "Roy Mack directed mostly comedy films.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5491490364074707,
+        "fusion_score": 0.5098298072814942,
+        "entity_ids": [
+          "\"DIRECTOR OF FILM SHORTS\""
+        ],
+        "chunk_ids": [
+          "chunk-6660f1bddbe966e2c05bca0c0dd8ab0a"
+        ],
+        "evidence_texts": [
+          "Roy Mack directed mostly comedy films.",
+          "Roy Mack (director) Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.549149,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.50983
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\"",
+        "hyperedge_text": "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"1933\"",
+          "\"TITLE CHARACTER\"",
+          "\"ROY MACK\"",
+          "\"RUFUS JONES FOR PRESIDENT\"",
+          "\"SATIRICAL MUSICAL-COMEDY\"",
+          "\"ETHEL WATERS\"",
+          "\"SAMMY DAVIS JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-42df131e6cf1633a7131bf172c9292c5"
+        ],
+        "evidence_texts": [
+          "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+          "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.6214752793312073,
+        "semantic_score": 0.5,
+        "fusion_score": 0.3485901117324829,
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.621475,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.34859
+        }
+      }
+    ],
+    "answer": "New Brunswick, New Jersey",
+    "confidence": 0.9,
+    "reasoning_summary": "Roy Mack, the director of 'Rufus Jones For President', was born in New Brunswick, New Jersey, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.\""
+    ]
+  }
+]

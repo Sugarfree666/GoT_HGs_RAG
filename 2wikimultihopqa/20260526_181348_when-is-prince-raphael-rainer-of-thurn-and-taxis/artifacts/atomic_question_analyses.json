@@ -1,0 +1,106 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+    "retrieval_question": "Who is the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+      "retrieval_question": "Who is the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Prince Raphael Rainer Of Thurn And Taxis"
+      ],
+      "relations": [
+        "is the mother of"
+      ],
+      "relation_query": "who is the mother of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When is the birthday of the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+    "retrieval_question": "When is the birthday of Archduchess Margarethe Klementine of Austria?",
+    "dependency_question_rewrite": {
+      "original_question": "When is the birthday of the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+      "retrieval_question": "When is the birthday of Archduchess Margarethe Klementine of Austria?",
+      "whether_rewritten": true,
+      "replacement_span": "the mother of Prince Raphael Rainer Of Thurn And Taxis",
+      "replacement_answer": "Archduchess Margarethe Klementine of Austria",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the mother of Prince Raphael Rainer Of Thurn And Taxis",
+          "replacement_answer": "Archduchess Margarethe Klementine of Austria"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+        "answer": "Archduchess Margarethe Klementine of Austria",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that Raphael Rainer was the son of Albert, 8th Prince of Thurn and Taxis and his wife Archduchess Margarethe Klementine of Austria.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Raphael Rainer Karl Maria Joseph Antonius Ignatius Hubertus Lamoral Prince of Thurn and Taxis was the sixth son of Albert, 8th Prince of Thurn and Taxis and his wife Archduchess Margarethe Klementine of Austria.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Raphael Rainer Karl Maria Joseph Antonius Ignatius Hubertus Lamoral Prince of Thurn and Taxis was the sixth son of Albert, 8th Prince of Thurn and Taxis and his wife Archduchess Margarethe Klementine of Austria.\"",
+            "fusion_score": 0.13801727294921876,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Raphael Rainer Karl Maria Joseph Antonius Ignatius Hubertus Lamoral Prince of Thurn and Taxis was the sixth son of Albert, 8th Prince of Thurn and Taxis and his wife Archduchess Margarethe Klementine of Austria.",
+              "Prince Raphael Rainer of Thurn and Taxis \"Raphael Rainer\" Karl Maria Joseph Antonius Ignatius Hubertus Lamoral Prince of Thurn and Taxis (30 May 1906 at Regensburg, Germany - 8 June 1993 at Schwangau, Germany) was the sixth son of Albert, 8th Prince of Thurn and Taxis and his wife Archduchess Margarethe Klementine of Austria. He is the father of Prince Max Emanuel of Thurn and Taxis, the heir presumptive to Albert, 12th Prince of Thurn and Taxis."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Prince Nikolaus of Thurn and Taxis (1885–1919) was a member of the Princely House of Thurn and Taxis and a Prince of Thurn and Taxis.\"",
+            "fusion_score": 0.11123149394989014,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Prince Nikolaus of Thurn and Taxis (1885–1919) was a member of the Princely House of Thurn and Taxis and a Prince of Thurn and Taxis.",
+              "Prince Nikolaus of Thurn and Taxis (1885–1919) Prince Nikolaus of Thurn and Taxis( later Nikolaus, Baron of Hochstadt)( 21 January 1885 – 8 June 1919) was a member of the Princely House of Thurn and Taxis and a Prince of Thurn and Taxis. Nikolaus was a Lieutenant in the German Imperial Navy."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Eugen Alexander Franz, 1st Prince of Thurn and Taxis, full German name: 'Eugen Alexander Franz Fürst von Thurn und Taxis' (baptized 11 January 1652 – 21 February 1714) was the first Prince of Thurn and Taxis, Postmaster General of the Imperial Reichspost, and Head of the House of Thurn and Taxis from 13 September 1676 until his death.\"",
+            "fusion_score": 0.11100578308105469,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Eugen Alexander Franz, 1st Prince of Thurn and Taxis, full German name: 'Eugen Alexander Franz Fürst von Thurn und Taxis' (baptized 11 January 1652 – 21 February 1714) was the first Prince of Thurn and Taxis, Postmaster General of the Imperial Reichspost, and Head of the House of Thurn and Taxis from 13 September 1676 until his death.",
+              "Eugen Alexander Franz, 1st Prince of Thurn and Taxis Eugen Alexander Franz, 1st Prince of Thurn and Taxis, full German name: \"Eugen Alexander Franz Fürst von Thurn und Taxis\" (baptized 11 January 1652 – 21 February 1714) was the first Prince of Thurn and Taxis, Postmaster General of the Imperial Reichspost, and Head of the House of Thurn and Taxis from 13 September 1676 until his death."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Archduchess Margarethe Klementine of Austria"
+      ],
+      "relations": [
+        "birthday of"
+      ],
+      "relation_query": "What is the date of the birthday of a person?",
+      "answer_type": "date"
+    }
+  }
+]

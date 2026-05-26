@@ -1,0 +1,16 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Godfrey I?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "When was the mother of Godfrey I born?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  }
+]

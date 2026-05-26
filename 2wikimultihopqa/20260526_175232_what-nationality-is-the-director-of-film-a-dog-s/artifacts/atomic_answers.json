@@ -1,0 +1,380 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of A Dog'S Purpose?",
+    "analysis": {
+      "entities": [
+        "A Dog'S Purpose"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"A Dog's Purpose is a 2017 American comedy-drama adventure film directed by Lasse Hallström and written by W. Bruce Cameron, Cathryn Michon, Audrey Wells, Maya Forbes, and Wally Wolodarsky.\"",
+        "hyperedge_text": "A Dog's Purpose is a 2017 American comedy-drama adventure film directed by Lasse Hallström and written by W. Bruce Cameron, Cathryn Michon, Audrey Wells, Maya Forbes, and Wally Wolodarsky.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7482619285583496,
+        "fusion_score": 0.54965238571167,
+        "entity_ids": [
+          "\"LASSE HALLSTRÖM\"",
+          "\"W. BRUCE CAMERON\"",
+          "\"WALLY WOLODARSKY\"",
+          "\"MAYA FORBES\"",
+          "\"AUDREY WELLS\"",
+          "\"A DOG'S PURPOSE\"",
+          "\"CATHRYN MICHON\""
+        ],
+        "chunk_ids": [
+          "chunk-baee2fc83d218d82b1bd5d85cbdaa2f2"
+        ],
+        "evidence_texts": [
+          "A Dog's Purpose is a 2017 American comedy-drama adventure film directed by Lasse Hallström and written by W. Bruce Cameron, Cathryn Michon, Audrey Wells, Maya Forbes, and Wally Wolodarsky.",
+          "A Dog's Purpose (film) A Dog's Purpose is a 2017 American comedy-drama adventure film directed by Lasse Hallström and written by W. Bruce Cameron, Cathryn Michon, Audrey Wells, Maya Forbes, and Wally Wolodarsky, based on the 2010 novel of the same name by W. Bruce Cameron. The film stars Britt Robertson, KJ Apa, Juliet Rylance, John Ortiz, Kirby Howell-Baptiste, Peggy Lipton (in her final film before her death in 2019), Dennis Quaid, and Josh Gad. The film, like the book, tells the story of a devoted dog who is looking for his rightful purpose and wants to fulfill it. The film is a co-production between Amblin Entertainment, Reliance Entertainment, Walden Media and Pariah Entertainment Group. It was released by Universal Pictures on January 27, 2017, and grossed over $205 million worldwide. A sequel, titled \"A Dog's Journey\", was released on May 17, 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.748262,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549652
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is the sequel to the 2017 film 'A Dog's Purpose'.\"",
+        "hyperedge_text": "It is the sequel to the 2017 film 'A Dog's Purpose'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6526326537132263,
+        "fusion_score": 0.5305265307426453,
+        "entity_ids": [
+          "\"A DOG'S PURPOSE\""
+        ],
+        "chunk_ids": [
+          "chunk-6262df1b70fd1e3fc57766891ece4b95"
+        ],
+        "evidence_texts": [
+          "It is the sequel to the 2017 film 'A Dog's Purpose'.",
+          "Henry Lau Henry Lau( born October 11, 1989), commonly referred to as Henry, is a Canadian singer- songwriter, composer, actor, entertainer and music producer mostly active in South Korea and China. He debuted in 2008 as a member of Super Junior- M. In June 2013, Henry debuted as a solo artist with his first extended play,\" Trap\". It peaked at# 2 on South Korea's Gaon Album Chart and spawned the single with the same name, which peaked at# 18 on the Billboard Korea K- Pop Hot 100 Weekly singles. In 2014 and 2017, Henry joined the award- winning television programs\" Real Man\" and\" I Live Alone\" respectively as regular cast member and received the Best Newcomer Award( 2014) and Excellence Male Award( 2017) at the MBC Entertainment Awards. In March 2017, Henry released the self- composed single\" Girlfriend\", which peaked at# 1 on multiple South Korean daily digital charts. The original sou..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.652633,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530527
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is based on the 2012 novel of the same name by Cameron, and a sequel to the 2017 film 'A Dog's Purpose'.\"",
+        "hyperedge_text": "The film is based on the 2012 novel of the same name by Cameron, and a sequel to the 2017 film 'A Dog's Purpose'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6147996187210083,
+        "fusion_score": 0.5229599237442017,
+        "entity_ids": [
+          "\"2012 NOVEL\"",
+          "\"A DOG'S PURPOSE\""
+        ],
+        "chunk_ids": [
+          "chunk-860aecf5c1a99d71ed8be8df3026654c"
+        ],
+        "evidence_texts": [
+          "The film is based on the 2012 novel of the same name by Cameron, and a sequel to the 2017 film 'A Dog's Purpose'.",
+          "A Dog's Journey (film) A Dog's Journey is a 2019 American comedy-drama film directed by Gail Mancuso and written by W. Bruce Cameron, Cathryn Michon, Maya Forbes, and Wally Wolodarsky. The film is based on the 2012 novel of the same name by Cameron, and a sequel to the 2017 film \"A Dog's Purpose\". The film stars Josh Gad, Dennis Quaid, Marg Helgenberger, Betty Gilpin, Kathryn Prescott, and Henry Lau. The film is a co-production between Amblin Entertainment, Reliance Entertainment, Walden Media, and Alibaba Pictures and was released by Universal Pictures in the United States on May 17, 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.6148,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52296
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"KJ Apa, Keneti James Fitzgerald, is a New Zealand actor who was born on 17 June 1997.\"",
+        "hyperedge_text": "KJ Apa, Keneti James Fitzgerald, is a New Zealand actor who was born on 17 June 1997.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.75,
+        "fusion_score": 0.55,
+        "entity_ids": [
+          "\"NEW ZEALAND\"",
+          "\"KJ APA\"",
+          "\"KENETI JAMES FITZGERALD\"",
+          "\"RIVERDALE\"",
+          "\"ARCHIE ANDREWS\"",
+          "\"SHORTLAND STREET\"",
+          "\"KANE JENKINS\"",
+          "\"A DOG'S PURPOSE\"",
+          "\"ETHAN MONTGOMERY\""
+        ],
+        "chunk_ids": [
+          "chunk-05f1e771f32912846fe28b572bc484ab"
+        ],
+        "evidence_texts": [
+          "KJ Apa, Keneti James Fitzgerald, is a New Zealand actor who was born on 17 June 1997.",
+          "KJ Apa Keneti James Fitzgerald\" KJ\" Apa( born 17 June 1997) is a New Zealand actor. In 2017, he began starring as Archie Andrews in the CW drama series\" Riverdale\". Apa also starred as Kane Jenkins in the primetime soap opera\" Shortland Street\" and as teenage Ethan Montgomery in the comedy- drama film\" A Dog's Purpose\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.75,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cameron is most famous for his novel 'A Dog's Purpose', which spent 19 weeks on the 'New York Times' bestseller list.\"",
+        "hyperedge_text": "Cameron is most famous for his novel 'A Dog's Purpose', which spent 19 weeks on the 'New York Times' bestseller list.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.75,
+        "fusion_score": 0.55,
+        "entity_ids": [
+          "\"A DOG'S PURPOSE\""
+        ],
+        "chunk_ids": [
+          "chunk-dce282df5b92715216f3a3e7fa3a4298"
+        ],
+        "evidence_texts": [
+          "Cameron is most famous for his novel 'A Dog's Purpose', which spent 19 weeks on the 'New York Times' bestseller list.",
+          "W. Bruce Cameron William Bruce Cameron( born February 2, 1960) is an American author, columnist, and humorist. Cameron is most famous for his novel\" A Dog's Purpose\", which spent 19 weeks on the\" New York Times\" bestseller list. The book is the basis for the movie version starring Dennis Quaid, Britt Robertson, Peggy Lipton, K.J. Apa, Juliet Rylance, Luke Kirby, John Ortiz, and Pooch Hall, and released in theaters on January 27, 2017. \" A Dog's Purpose\" is followed by a sequel called\" A Dog's Journey,\" which Cameron, along with Cathryn Michon, adapted into a film of the same name due to be released in May 2019. His books have been translated into over 60 languages."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.75,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55
+        }
+      }
+    ],
+    "answer": "Lasse Hallström",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'A Dog's Purpose' is directed by Lasse Hallström.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"A Dog's Purpose is a 2017 American comedy-drama adventure film directed by Lasse Hallström and written by W. Bruce Cameron, Cathryn Michon, Audrey Wells, Maya Forbes, and Wally Wolodarsky.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the director of A Dog'S Purpose?",
+    "analysis": {
+      "entities": [
+        "Lasse Hallström"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Lasse Hallström is a Swedish film director.\"",
+        "hyperedge_text": "Lasse Hallström is a Swedish film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7229427099227905,
+        "fusion_score": 0.5445885419845582,
+        "entity_ids": [
+          "\"LASSE HALLSTRÖM\""
+        ],
+        "chunk_ids": [
+          "chunk-c8da7fe2d6726c81ef49a71538201ca4"
+        ],
+        "evidence_texts": [
+          "Lasse Hallström is a Swedish film director.",
+          "Lasse Hallström Lars Sven\" Lasse\" Hallström( born 2 June 1946) is a Swedish film director. He first became known for directing almost all music videos by pop group ABBA, and subsequently became a feature film director. He was nominated for an Academy Award for Best Director for\" My Life as a Dog( Mitt liv som hund)\"( 1985) and later for\" The Cider House Rules\"( 1999). His other celebrated directorial works include\" What's Eating Gilbert Grape\"( 1993) and\" Chocolat\"( 2000)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.722943,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.544589
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lars Sven 'Lasse' Hallström (born 2 June 1946) is a Swedish film director.\"",
+        "hyperedge_text": "Lars Sven 'Lasse' Hallström (born 2 June 1946) is a Swedish film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6902745962142944,
+        "fusion_score": 0.538054919242859,
+        "entity_ids": [
+          "\"SWEDISH FILM DIRECTOR\"",
+          "\"LASSE HALLSTRÖM\""
+        ],
+        "chunk_ids": [
+          "chunk-c8da7fe2d6726c81ef49a71538201ca4"
+        ],
+        "evidence_texts": [
+          "Lars Sven 'Lasse' Hallström (born 2 June 1946) is a Swedish film director.",
+          "Lasse Hallström Lars Sven\" Lasse\" Hallström( born 2 June 1946) is a Swedish film director. He first became known for directing almost all music videos by pop group ABBA, and subsequently became a feature film director. He was nominated for an Academy Award for Best Director for\" My Life as a Dog( Mitt liv som hund)\"( 1985) and later for\" The Cider House Rules\"( 1999). His other celebrated directorial works include\" What's Eating Gilbert Grape\"( 1993) and\" Chocolat\"( 2000)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.690275,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.538055
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Lasse Hallström, and is an adaptation of Nicholas Sparks' 2010 novel of the same name.\"",
+        "hyperedge_text": "The film was directed by Lasse Hallström, and is an adaptation of Nicholas Sparks' 2010 novel of the same name.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5107552409172058,
+        "fusion_score": 0.5021510481834413,
+        "entity_ids": [
+          "\"NICHOLAS SPARKS\"",
+          "\"2010 NOVEL\"",
+          "\"LASSE HALLSTRÖM\""
+        ],
+        "chunk_ids": [
+          "chunk-9a06187770c4f1fc6f1ec82e48310f77"
+        ],
+        "evidence_texts": [
+          "The film was directed by Lasse Hallström, and is an adaptation of Nicholas Sparks' 2010 novel of the same name.",
+          "Safe Haven (film) Safe Haven is a 2013 American romantic drama fantasy thriller film starring Julianne Hough, Josh Duhamel and Cobie Smulders. The film marks the final film role for actor Red West. It was released theatrically in North America on February 14, 2013. The film was directed by Lasse Hallström, and is an adaptation of Nicholas Sparks' 2010 novel of the same name. The film was originally set for a February 8 release."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.510755,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.502151
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"A Dog's Purpose is a 2017 American comedy-drama adventure film directed by Lasse Hallström and written by W. Bruce Cameron, Cathryn Michon, Audrey Wells, Maya Forbes, and Wally Wolodarsky.\"",
+        "hyperedge_text": "A Dog's Purpose is a 2017 American comedy-drama adventure film directed by Lasse Hallström and written by W. Bruce Cameron, Cathryn Michon, Audrey Wells, Maya Forbes, and Wally Wolodarsky.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.75,
+        "fusion_score": 0.55,
+        "entity_ids": [
+          "\"LASSE HALLSTRÖM\"",
+          "\"W. BRUCE CAMERON\"",
+          "\"WALLY WOLODARSKY\"",
+          "\"MAYA FORBES\"",
+          "\"AUDREY WELLS\"",
+          "\"A DOG'S PURPOSE\"",
+          "\"CATHRYN MICHON\""
+        ],
+        "chunk_ids": [
+          "chunk-baee2fc83d218d82b1bd5d85cbdaa2f2"
+        ],
+        "evidence_texts": [
+          "A Dog's Purpose is a 2017 American comedy-drama adventure film directed by Lasse Hallström and written by W. Bruce Cameron, Cathryn Michon, Audrey Wells, Maya Forbes, and Wally Wolodarsky.",
+          "A Dog's Purpose (film) A Dog's Purpose is a 2017 American comedy-drama adventure film directed by Lasse Hallström and written by W. Bruce Cameron, Cathryn Michon, Audrey Wells, Maya Forbes, and Wally Wolodarsky, based on the 2010 novel of the same name by W. Bruce Cameron. The film stars Britt Robertson, KJ Apa, Juliet Rylance, John Ortiz, Kirby Howell-Baptiste, Peggy Lipton (in her final film before her death in 2019), Dennis Quaid, and Josh Gad. The film, like the book, tells the story of a devoted dog who is looking for his rightful purpose and wants to fulfill it. The film is a co-production between Amblin Entertainment, Reliance Entertainment, Walden Media and Pariah Entertainment Group. It was released by Universal Pictures on January 27, 2017, and grossed over $205 million worldwide. A sequel, titled \"A Dog's Journey\", was released on May 17, 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.75,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lasse Hallström's impact on cinema is recognized through his nominations and awards.\"",
+        "hyperedge_text": "Lasse Hallström's impact on cinema is recognized through his nominations and awards.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6222612857818604,
+        "fusion_score": 0.5244522571563721,
+        "entity_ids": [
+          "\"IMPACT ON CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-c8da7fe2d6726c81ef49a71538201ca4"
+        ],
+        "evidence_texts": [
+          "Lasse Hallström's impact on cinema is recognized through his nominations and awards.",
+          "Lasse Hallström Lars Sven\" Lasse\" Hallström( born 2 June 1946) is a Swedish film director. He first became known for directing almost all music videos by pop group ABBA, and subsequently became a feature film director. He was nominated for an Academy Award for Best Director for\" My Life as a Dog( Mitt liv som hund)\"( 1985) and later for\" The Cider House Rules\"( 1999). His other celebrated directorial works include\" What's Eating Gilbert Grape\"( 1993) and\" Chocolat\"( 2000)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.622261,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524452
+        }
+      }
+    ],
+    "answer": "Swedish",
+    "confidence": 1.0,
+    "reasoning_summary": "Lasse Hallström is identified as a Swedish film director in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Lasse Hallström is a Swedish film director.\""
+    ]
+  }
+]

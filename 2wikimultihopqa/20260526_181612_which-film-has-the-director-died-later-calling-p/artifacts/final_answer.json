@@ -1,0 +1,50 @@
+{
+  "answer": "The Witch's Curse",
+  "candidate_answer": "The Witch's Curse",
+  "reasoning_summary": "William Clemens, the director of 'Calling Philo Vance', died on April 29, 1980, while Riccardo Freda, the director of 'The Witch's Curse', died later on December 20, 1999. Therefore, 'The Witch's Curse' has the director who died later.",
+  "answer_span_reasoning": "The Witch's Curse has the director who died later.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Calling Philo Vance?",
+      "answer": "William Clemens",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of The Witch'S Curse?",
+      "answer": "Riccardo Freda",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"The Witch's Curse is a 1962 peplum- fantasy film, directed by Riccardo Freda.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "When did the director of Calling Philo Vance die?",
+      "answer": "April 29, 1980",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"William Clemens was an American film director.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "When did the director of The Witch'S Curse die?",
+      "answer": "20 December 1999",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Riccardo Freda died on 20 December 1999 in Rome, Italy.\""
+      ]
+    },
+    {
+      "node_id": "q5",
+      "question": "When did the director of Calling Philo Vance die?",
+      "answer": "April 29, 1980",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"William Clemens was an American film director.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

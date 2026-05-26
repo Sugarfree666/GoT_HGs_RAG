@@ -1,0 +1,22 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Complete Unknown?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "What film has the director of Complete Unknown?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Dr. Goldfoot And The Girl Bombs?",
+    "dependencies": [],
+    "metadata": {}
+  }
+]

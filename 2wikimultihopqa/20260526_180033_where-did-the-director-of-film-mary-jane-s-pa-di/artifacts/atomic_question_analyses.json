@@ -1,0 +1,106 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Mary Jane's Pa?",
+    "retrieval_question": "Who is the director of Mary Jane's Pa?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Mary Jane's Pa?",
+      "retrieval_question": "Who is the director of Mary Jane's Pa?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Mary Jane's Pa"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the director of Mary Jane's Pa die?",
+    "retrieval_question": "Where did William Keighley die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the director of Mary Jane's Pa die?",
+      "retrieval_question": "Where did William Keighley die?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Mary Jane's Pa",
+      "replacement_answer": "William Keighley",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Mary Jane's Pa",
+          "replacement_answer": "William Keighley"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Mary Jane's Pa?",
+        "answer": "William Keighley",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Mary Jane's Pa is a 1935 American drama film directed by William Keighley.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Mary Jane's Pa is a 1935 American drama film directed by William Keighley and written by Tom Reed and Peter Milne.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Mary Jane's Pa is a 1935 American drama film directed by William Keighley and written by Tom Reed and Peter Milne.\"",
+            "fusion_score": 0.5268781185150146,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mary Jane's Pa is a 1935 American drama film directed by William Keighley and written by Tom Reed and Peter Milne.",
+              "Mary Jane's Pa Mary Jane's Pa is a 1935 American drama film directed by William Keighley and written by Tom Reed and Peter Milne. The film stars Aline MacMahon, Guy Kibbee, Tom Brown, Robert McWade, Minor Watson and Nan Grey. The film was released by Warner Bros. on April 27, 1935."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Mary Jane's Pa is a 1935 American drama film.\"",
+            "fusion_score": 0.524330234527588,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mary Jane's Pa is a 1935 American drama film.",
+              "Mary Jane's Pa Mary Jane's Pa is a 1935 American drama film directed by William Keighley and written by Tom Reed and Peter Milne. The film stars Aline MacMahon, Guy Kibbee, Tom Brown, Robert McWade, Minor Watson and Nan Grey. The film was released by Warner Bros. on April 27, 1935."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+            "fusion_score": 0.2824676990509033,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "As a director, Joseph Pennella interprets scripts and guides performers.",
+              "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "William Keighley"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

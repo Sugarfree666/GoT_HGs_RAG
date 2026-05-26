@@ -1,0 +1,542 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the birth date of Amir Temraz?",
+    "analysis": {
+      "entities": [
+        "Amir Temraz"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\"",
+        "hyperedge_text": "Amir Temraz is a rower born on 12 August 1977.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.679063081741333,
+        "fusion_score": 0.5358126163482666,
+        "entity_ids": [
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz is a rower born on 12 August 1977.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.679063,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535813
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\"",
+        "hyperedge_text": "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6300976276397705,
+        "fusion_score": 0.5260195255279542,
+        "entity_ids": [
+          "\"ROWER\"",
+          "\"EGYPTIAN\"",
+          "\"2000 SUMMER OLYMPICS\"",
+          "\"MEN'S COXLESS PAIR\"",
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.630098,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52602
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed at the Olympics representing Egypt.\"",
+        "hyperedge_text": "Amir Temraz competed at the Olympics representing Egypt.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5187807083129883,
+        "fusion_score": 0.5037561416625977,
+        "entity_ids": [
+          "\"OLYMPICS\"",
+          "\"EGYPT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz competed at the Olympics representing Egypt.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.518781,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503756
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz represents Egypt in rowing competitions.\"",
+        "hyperedge_text": "Amir Temraz represents Egypt in rowing competitions.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4985537528991699,
+        "fusion_score": 0.499710750579834,
+        "entity_ids": [
+          "\"ROWING\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz represents Egypt in rowing competitions.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.498554,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499711
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed in the men's coxless pair event.\"",
+        "hyperedge_text": "Amir Temraz competed in the men's coxless pair event.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48106563091278076,
+        "fusion_score": 0.4962131261825562,
+        "entity_ids": [
+          "\"MEN'S COXLESS PAIR EVENT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz competed in the men's coxless pair event.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.481066,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496213
+        }
+      }
+    ],
+    "answer": "12 August 1977",
+    "confidence": 1.0,
+    "reasoning_summary": "The birth date of Amir Temraz is explicitly stated in the evidence: 'Amir Temraz is a rower born on 12 August 1977.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the birth date of Sophie Ingle?",
+    "analysis": {
+      "entities": [
+        "Sophie Ingle"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle was born on 2 September 1991.\"",
+        "hyperedge_text": "Sophie Ingle was born on 2 September 1991.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7861984968185425,
+        "fusion_score": 0.5572396993637085,
+        "entity_ids": [
+          "\"SOPHIE INGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "evidence_texts": [
+          "Sophie Ingle was born on 2 September 1991.",
+          "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.786198,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55724
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.\"",
+        "hyperedge_text": "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6442770957946777,
+        "fusion_score": 0.5288554191589356,
+        "entity_ids": [
+          "\"MIDFIELDER\"",
+          "\"DEFENDER\"",
+          "\"CHELSEA\"",
+          "\"SOPHIE INGLE\"",
+          "\"WALES NATIONAL TEAM\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "evidence_texts": [
+          "Sophie Ingle, born 2 September 1991, is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team.",
+          "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.644277,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528855
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sophie Ingle is a Welsh footballer.\"",
+        "hyperedge_text": "Sophie Ingle is a Welsh footballer.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5437764525413513,
+        "fusion_score": 0.5087552905082703,
+        "entity_ids": [
+          "\"WELSH\""
+        ],
+        "chunk_ids": [
+          "chunk-55b11acb6f21baae59ef9b489726f42b"
+        ],
+        "evidence_texts": [
+          "Sophie Ingle is a Welsh footballer.",
+          "Sophie Ingle Sophie Ingle( born 2 September 1991) is a Welsh footballer who plays for the FA WSL club Chelsea and is the captain of the Wales national team. She has previously represented Bristol Academy, Cardiff City, and Liverpool. Ingle plays as either a defender or midfielder."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.543776,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.508755
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5045208930969238,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30180835723876953,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "evidence_texts": [
+          "His date of birth is January 30, 1871.",
+          "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.504521,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.301808
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48608091473579407,
+        "semantic_score": 0.5,
+        "fusion_score": 0.29443236589431765,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.486081,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.294432
+        }
+      }
+    ],
+    "answer": "2 September 1991",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that Sophie Ingle was born on 2 September 1991.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Sophie Ingle was born on 2 September 1991.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the birth date of Amir Temraz?",
+    "analysis": {
+      "entities": [
+        "Amir Temraz"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\"",
+        "hyperedge_text": "Amir Temraz is a rower born on 12 August 1977.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.679063081741333,
+        "fusion_score": 0.5358126163482666,
+        "entity_ids": [
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz is a rower born on 12 August 1977.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.679063,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535813
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz (born 12 August 1977) is an Egyptian rower.\"",
+        "hyperedge_text": "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6300976276397705,
+        "fusion_score": 0.5260195255279542,
+        "entity_ids": [
+          "\"ROWER\"",
+          "\"EGYPTIAN\"",
+          "\"2000 SUMMER OLYMPICS\"",
+          "\"MEN'S COXLESS PAIR\"",
+          "\"AMIR TEMRAZ\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz (born 12 August 1977) is an Egyptian rower.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.630098,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52602
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed at the Olympics representing Egypt.\"",
+        "hyperedge_text": "Amir Temraz competed at the Olympics representing Egypt.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5187807083129883,
+        "fusion_score": 0.5037561416625977,
+        "entity_ids": [
+          "\"OLYMPICS\"",
+          "\"EGYPT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz competed at the Olympics representing Egypt.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.518781,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503756
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz represents Egypt in rowing competitions.\"",
+        "hyperedge_text": "Amir Temraz represents Egypt in rowing competitions.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4985537528991699,
+        "fusion_score": 0.499710750579834,
+        "entity_ids": [
+          "\"ROWING\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz represents Egypt in rowing competitions.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.498554,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499711
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Amir Temraz competed in the men's coxless pair event.\"",
+        "hyperedge_text": "Amir Temraz competed in the men's coxless pair event.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48106563091278076,
+        "fusion_score": 0.4962131261825562,
+        "entity_ids": [
+          "\"MEN'S COXLESS PAIR EVENT\""
+        ],
+        "chunk_ids": [
+          "chunk-368b08fd2543f7965bdcca7e0ab0fcdb"
+        ],
+        "evidence_texts": [
+          "Amir Temraz competed in the men's coxless pair event.",
+          "Amir Temraz Amir Temraz( born 12 August 1977) is an Egyptian rower. He competed in the men's coxless pair event at the 2000 Summer Olympics."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.481066,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496213
+        }
+      }
+    ],
+    "answer": "12 August 1977",
+    "confidence": 1.0,
+    "reasoning_summary": "The birth date of Amir Temraz is explicitly stated in the evidence: 'Amir Temraz is a rower born on 12 August 1977.'",
+    "used_dependencies": [
+      "q1",
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Amir Temraz is a rower born on 12 August 1977.\""
+    ]
+  }
+]

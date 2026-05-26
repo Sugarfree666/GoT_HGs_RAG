@@ -1,0 +1,3187 @@
+[
+  {
+    "node_id": "q1",
+    "question": "In which country is Vasilyevsky Island located?",
+    "retrieval_question": "In which country is Vasilyevsky Island located?",
+    "dependency_question_rewrite": {
+      "original_question": "In which country is Vasilyevsky Island located?",
+      "retrieval_question": "In which country is Vasilyevsky Island located?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+        "entity_ids": [
+          "\"VASILYEVSKY ISLAND\"",
+          "\"BOLSHAYA NEVA RIVER\"",
+          "\"MALAYA NEVA RIVER\"",
+          "\"GULF OF FINLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+            "link",
+            "VASILYEVSKY ISLAND",
+            "BOLSHAYA NEVA RIVER",
+            "MALAYA NEVA RIVER",
+            "GULF OF FINLAND"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Poland is a country in Central Europe where these locations are found.\"",
+        "branch": "relation",
+        "raw_score": 0.45526841282844543,
+        "hyperedge_text": "Poland is a country in Central Europe where these locations are found.",
+        "entity_ids": [
+          "\"POLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-2c27210e1f4dd52ad64d02ec258181be"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Poland is a country in Central Europe where these locations are found.",
+            "Jawty Jawty is part of the name of two villages, both located in Gmina Susz, within Iława County, Warmian- Masurian Voivodeship, Poland:"
+          ],
+          "relation_texts": [
+            "Poland is a country in Central Europe where these locations are found.",
+            "link",
+            "POLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-abd31543743c66188e5d1ea02b5be449",
+            "hyperedge_name": "<hyperedge>\"Poland is a country in Central Europe where these locations are found.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Australia is a country that encompasses Central Queensland.\"",
+        "branch": "relation",
+        "raw_score": 0.4262130856513977,
+        "hyperedge_text": "Australia is a country that encompasses Central Queensland.",
+        "entity_ids": [
+          "\"AUSTRALIA\""
+        ],
+        "chunk_ids": [
+          "chunk-bee49d62ac737573981a9201faf38397"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Australia is a country that encompasses Central Queensland.",
+            "Dee River (Queensland) The Dee River is a river located in Central Queensland, Australia."
+          ],
+          "relation_texts": [
+            "Australia is a country that encompasses Central Queensland.",
+            "link",
+            "AUSTRALIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c4137b2ee99d93486efbfb56f0c1d908",
+            "hyperedge_name": "<hyperedge>\"Australia is a country that encompasses Central Queensland.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The United States is the country that includes Colorado.\"",
+        "branch": "relation",
+        "raw_score": 0.4112969934940338,
+        "hyperedge_text": "The United States is the country that includes Colorado.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-d2554d88e6d7cb93703af0b8d7c05a78"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The United States is the country that includes Colorado.",
+            "Cherry Creek, Colorado Cherry Creek is a census- designated place( CDP) in Arapahoe County, Colorado, United States. For the tributary of the South Platte River, see Cherry Creek( Colorado). The population as of the 2010 Census was 11,120."
+          ],
+          "relation_texts": [
+            "The United States is the country that includes Colorado.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fd3c3c64aec5acf2e65bb188412f4171",
+            "hyperedge_name": "<hyperedge>\"The United States is the country that includes Colorado.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Norway contains Østfold County.\"",
+        "branch": "relation",
+        "raw_score": 0.41035735607147217,
+        "hyperedge_text": "Norway contains Østfold County.",
+        "entity_ids": [
+          "\"NORWAY\""
+        ],
+        "chunk_ids": [
+          "chunk-d5d576462eeba3d54fb1bddabe8dcb67"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Norway contains Østfold County.",
+            "Jeløya Jeløya is an island located in the municipality of Moss in Østfold County, Norway."
+          ],
+          "relation_texts": [
+            "Norway contains Østfold County.",
+            "link",
+            "NORWAY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c58541b7297ea0680bb0c306906f0807",
+            "hyperedge_name": "<hyperedge>\"Norway contains Østfold County.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"England is a country in which Manchester is located.\"",
+        "branch": "relation",
+        "raw_score": 0.40702375769615173,
+        "hyperedge_text": "England is a country in which Manchester is located.",
+        "entity_ids": [
+          "\"ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-0409102287f5c600074bff7cfe1ef7dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "England is a country in which Manchester is located.",
+            "Manchester Mercury The Manchester Mercury was a Tory newspaper based in Manchester, England that published from 1752 until 1830."
+          ],
+          "relation_texts": [
+            "England is a country in which Manchester is located.",
+            "link",
+            "ENGLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d21f597dccd5101d1209438f8af48f53",
+            "hyperedge_name": "<hyperedge>\"England is a country in which Manchester is located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"United States is the country that includes Arkansas where Mountain View Airport is located.\"",
+        "branch": "relation",
+        "raw_score": 0.4060307741165161,
+        "hyperedge_text": "United States is the country that includes Arkansas where Mountain View Airport is located.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-24c0ba324cb1b28e0bd13ba8975aef0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "United States is the country that includes Arkansas where Mountain View Airport is located.",
+            "Mountain View Airport (Arkansas) Mountain View Airport, also known as Harry E. Wilcox Memorial Field, is a public airport located two miles( 3 km) east of the central business district of Mountain View, a city in Stone County, Arkansas, United States. It is owned by the City of Mountain View."
+          ],
+          "relation_texts": [
+            "United States is the country that includes Arkansas where Mountain View Airport is located.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f4cef9a2bc72baf311e5d08c6219d84a",
+            "hyperedge_name": "<hyperedge>\"United States is the country that includes Arkansas where Mountain View Airport is located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"United States is the country where Oregon is located.\"",
+        "branch": "relation",
+        "raw_score": 0.4047778844833374,
+        "hyperedge_text": "United States is the country where Oregon is located.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-824686815583696279f0b420f2ded85c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "United States is the country where Oregon is located.",
+            "Valley View Airport Valley View Airport, is a privately owned, public use airport located northeast of Estacada in Clackamas County, Oregon, United States."
+          ],
+          "relation_texts": [
+            "United States is the country where Oregon is located.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7f1003b74157823635f2df62cc68121e",
+            "hyperedge_name": "<hyperedge>\"United States is the country where Oregon is located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The USA is a country where Oregon is located.\"",
+        "branch": "relation",
+        "raw_score": 0.39752501249313354,
+        "hyperedge_text": "The USA is a country where Oregon is located.",
+        "entity_ids": [
+          "\"USA\"",
+          "\"OREGON\"",
+          "\"ADAMS\"",
+          "\"UMATILLA COUNTY\""
+        ],
+        "chunk_ids": [
+          "chunk-6e8ca1156fa4ca3ca2a7d720cac328c7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The USA is a country where Oregon is located.",
+            "Rothrock Field Airport Rothrock Field Airport is a private airport located 3 miles northeast of Adams in Umatilla County, Oregon, USA."
+          ],
+          "relation_texts": [
+            "The USA is a country where Oregon is located.",
+            "link",
+            "USA",
+            "OREGON",
+            "ADAMS",
+            "UMATILLA COUNTY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-47c265ce57a03eead9652e960830f47a",
+            "hyperedge_name": "<hyperedge>\"The USA is a country where Oregon is located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Canada is the country containing New Brunswick and Juniper.\"",
+        "branch": "relation",
+        "raw_score": 0.3958425521850586,
+        "hyperedge_text": "Canada is the country containing New Brunswick and Juniper.",
+        "entity_ids": [
+          "\"CANADA\""
+        ],
+        "chunk_ids": [
+          "chunk-6738db694a536d0df2c750876cf393ee"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Canada is the country containing New Brunswick and Juniper.",
+            "Juniper Airport Juniper Airport, is a private airfield located northeast of Juniper, New Brunswick Canada."
+          ],
+          "relation_texts": [
+            "Canada is the country containing New Brunswick and Juniper.",
+            "link",
+            "CANADA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2610c1ce026e49d625effe077259b3ba",
+            "hyperedge_name": "<hyperedge>\"Canada is the country containing New Brunswick and Juniper.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"United States is the country that comprises the state of Wisconsin.\"",
+        "branch": "relation",
+        "raw_score": 0.38540294766426086,
+        "hyperedge_text": "United States is the country that comprises the state of Wisconsin.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-771a351418fa1d0e6d3f7a45acc72688"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "United States is the country that comprises the state of Wisconsin.",
+            "New Hope (community), Wisconsin New Hope is an unincorporated community in the town of New Hope, Portage County, Wisconsin United States."
+          ],
+          "relation_texts": [
+            "United States is the country that comprises the state of Wisconsin.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fb452128725b008729e94592f6bc92b7",
+            "hyperedge_name": "<hyperedge>\"United States is the country that comprises the state of Wisconsin.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.\"",
+        "branch": "semantic",
+        "raw_score": 0.7326008677482605,
+        "hyperedge_text": "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+        "entity_ids": [
+          "\"VASILYEVSKY ISLAND\"",
+          "\"BOLSHAYA NEVA RIVER\"",
+          "\"MALAYA NEVA RIVER\"",
+          "\"GULF OF FINLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+            "link",
+            "VASILYEVSKY ISLAND",
+            "BOLSHAYA NEVA RIVER",
+            "MALAYA NEVA RIVER",
+            "GULF OF FINLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-21bbd4969ff14da9fb2fc8cce617e313",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.\"",
+        "branch": "semantic",
+        "raw_score": 0.7283214330673218,
+        "hyperedge_text": "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+        "entity_ids": [
+          "\"VASILYEVSKY OSTROV\"",
+          "\"NEVA RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+            "link",
+            "VASILYEVSKY OSTROV",
+            "NEVA RIVER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-252daea54ae564db44339c4a0c0e7805",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.\"",
+        "branch": "semantic",
+        "raw_score": 0.6245296001434326,
+        "hyperedge_text": "Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3124af43d0056ed55fb8f16cfb2f63af",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.\"",
+        "branch": "semantic",
+        "raw_score": 0.621757447719574,
+        "hyperedge_text": "Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.",
+        "entity_ids": [
+          "\"WINTER PALACE\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.",
+            "link",
+            "WINTER PALACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a3a67e751fc708944a017fce2d94002a",
+            "hyperedge_name": "<hyperedge>\"Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.\"",
+        "branch": "semantic",
+        "raw_score": 0.6127685904502869,
+        "hyperedge_text": "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+        "entity_ids": [
+          "\"DEKABRISTOV ISLAND\"",
+          "\"SMOLENKA RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+            "link",
+            "DEKABRISTOV ISLAND",
+            "SMOLENKA RIVER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-97b132447c13b6b5f9d893254462b3d6",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island constitutes a significant part of St. Petersburg's historic center, situated across from the Winter Palace.\"",
+        "branch": "semantic",
+        "raw_score": 0.6118272542953491,
+        "hyperedge_text": "Vasilyevsky Island constitutes a significant part of St. Petersburg's historic center, situated across from the Winter Palace.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island constitutes a significant part of St. Petersburg's historic center, situated across from the Winter Palace.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island constitutes a significant part of St. Petersburg's historic center, situated across from the Winter Palace."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8215ed978e6a5adcf7a94a175fdd96ed",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island constitutes a significant part of St. Petersburg's historic center, situated across from the Winter Palace.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro.\"",
+        "branch": "semantic",
+        "raw_score": 0.6038936376571655,
+        "hyperedge_text": "Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro.",
+        "entity_ids": [
+          "\"VASILEOSTROVSKAYA STATION\"",
+          "\"PRIMORSKAYA STATION\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro.",
+            "link",
+            "VASILEOSTROVSKAYA STATION",
+            "PRIMORSKAYA STATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-01efcea6b1fe3416494fe39aabc8b882",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\"",
+        "branch": "semantic",
+        "raw_score": 0.5550310611724854,
+        "hyperedge_text": "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+        "entity_ids": [
+          "\"PREOBRAZHENIYA ISLAND\"",
+          "\"LAPTEV SEA\"",
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+            "link",
+            "PREOBRAZHENIYA ISLAND",
+            "LAPTEV SEA",
+            "RUSSIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-db1cb9156378fe7ebac72a0d54684183",
+            "hyperedge_name": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.\"",
+        "branch": "semantic",
+        "raw_score": 0.5491986274719238,
+        "hyperedge_text": "The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.",
+        "entity_ids": [
+          "\"SAINT PETERSBURG\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.",
+            "link",
+            "SAINT PETERSBURG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f734c899b6ef237adf26b75133223137",
+            "hyperedge_name": "<hyperedge>\"The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"the Vilkitsky Islands are named after him.\"",
+        "branch": "semantic",
+        "raw_score": 0.5152463316917419,
+        "hyperedge_text": "the Vilkitsky Islands are named after him.",
+        "entity_ids": [
+          "\"ANDREY VILKITSKY\""
+        ],
+        "chunk_ids": [
+          "chunk-edeac17789a26052660bfb3e3bbf6054"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "the Vilkitsky Islands are named after him.",
+            "Andrey Vilkitsky Andrey Ippolitovich Vilkitsky was a Russian hydrographer and surveyor. He was born in the Minsk Governorate. His son, Boris Vilkitsky followed up his father's work; the Vilkitsky Islands are named after him."
+          ],
+          "relation_texts": [
+            "the Vilkitsky Islands are named after him.",
+            "link",
+            "ANDREY VILKITSKY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-44cea29c34b04ccad8631c4b1197c451",
+            "hyperedge_name": "<hyperedge>\"the Vilkitsky Islands are named after him.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.\"",
+        "hyperedge_text": "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7326008677482605,
+        "fusion_score": 0.5465201735496521,
+        "entity_ids": [
+          "\"VASILYEVSKY ISLAND\"",
+          "\"BOLSHAYA NEVA RIVER\"",
+          "\"MALAYA NEVA RIVER\"",
+          "\"GULF OF FINLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "evidence_texts": [
+          "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+          "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.732601,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.54652
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.\"",
+        "hyperedge_text": "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7283214330673218,
+        "fusion_score": 0.5456642866134644,
+        "entity_ids": [
+          "\"VASILYEVSKY OSTROV\"",
+          "\"NEVA RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "evidence_texts": [
+          "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+          "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.728321,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.545664
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.\"",
+        "hyperedge_text": "Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6245296001434326,
+        "fusion_score": 0.5249059200286865,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "evidence_texts": [
+          "Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.",
+          "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.62453,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524906
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.\"",
+        "hyperedge_text": "Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.621757447719574,
+        "fusion_score": 0.5243514895439149,
+        "entity_ids": [
+          "\"WINTER PALACE\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "evidence_texts": [
+          "Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.",
+          "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.621757,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524351
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.\"",
+        "hyperedge_text": "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6127685904502869,
+        "fusion_score": 0.5225537180900575,
+        "entity_ids": [
+          "\"DEKABRISTOV ISLAND\"",
+          "\"SMOLENKA RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "evidence_texts": [
+          "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+          "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.612769,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522554
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "In which country is Preobrazheniya Island located?",
+    "retrieval_question": "In which country is Preobrazheniya Island located?",
+    "dependency_question_rewrite": {
+      "original_question": "In which country is Preobrazheniya Island located?",
+      "retrieval_question": "In which country is Preobrazheniya Island located?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+        "entity_ids": [
+          "\"PREOBRAZHENIYA ISLAND\"",
+          "\"LAPTEV SEA\"",
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+            "link",
+            "PREOBRAZHENIYA ISLAND",
+            "LAPTEV SEA",
+            "RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"United States is the country where Oregon is located.\"",
+        "branch": "relation",
+        "raw_score": 0.4965081214904785,
+        "hyperedge_text": "United States is the country where Oregon is located.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-824686815583696279f0b420f2ded85c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "United States is the country where Oregon is located.",
+            "Valley View Airport Valley View Airport, is a privately owned, public use airport located northeast of Estacada in Clackamas County, Oregon, United States."
+          ],
+          "relation_texts": [
+            "United States is the country where Oregon is located.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7f1003b74157823635f2df62cc68121e",
+            "hyperedge_name": "<hyperedge>\"United States is the country where Oregon is located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The USA is a country where Oregon is located.\"",
+        "branch": "relation",
+        "raw_score": 0.45731914043426514,
+        "hyperedge_text": "The USA is a country where Oregon is located.",
+        "entity_ids": [
+          "\"USA\"",
+          "\"OREGON\"",
+          "\"ADAMS\"",
+          "\"UMATILLA COUNTY\""
+        ],
+        "chunk_ids": [
+          "chunk-6e8ca1156fa4ca3ca2a7d720cac328c7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The USA is a country where Oregon is located.",
+            "Rothrock Field Airport Rothrock Field Airport is a private airport located 3 miles northeast of Adams in Umatilla County, Oregon, USA."
+          ],
+          "relation_texts": [
+            "The USA is a country where Oregon is located.",
+            "link",
+            "USA",
+            "OREGON",
+            "ADAMS",
+            "UMATILLA COUNTY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-47c265ce57a03eead9652e960830f47a",
+            "hyperedge_name": "<hyperedge>\"The USA is a country where Oregon is located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"England is a country in which Manchester is located.\"",
+        "branch": "relation",
+        "raw_score": 0.4559003710746765,
+        "hyperedge_text": "England is a country in which Manchester is located.",
+        "entity_ids": [
+          "\"ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-0409102287f5c600074bff7cfe1ef7dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "England is a country in which Manchester is located.",
+            "Manchester Mercury The Manchester Mercury was a Tory newspaper based in Manchester, England that published from 1752 until 1830."
+          ],
+          "relation_texts": [
+            "England is a country in which Manchester is located.",
+            "link",
+            "ENGLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d21f597dccd5101d1209438f8af48f53",
+            "hyperedge_name": "<hyperedge>\"England is a country in which Manchester is located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Poland is a country in Central Europe where these locations are found.\"",
+        "branch": "relation",
+        "raw_score": 0.4511863589286804,
+        "hyperedge_text": "Poland is a country in Central Europe where these locations are found.",
+        "entity_ids": [
+          "\"POLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-2c27210e1f4dd52ad64d02ec258181be"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Poland is a country in Central Europe where these locations are found.",
+            "Jawty Jawty is part of the name of two villages, both located in Gmina Susz, within Iława County, Warmian- Masurian Voivodeship, Poland:"
+          ],
+          "relation_texts": [
+            "Poland is a country in Central Europe where these locations are found.",
+            "link",
+            "POLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-abd31543743c66188e5d1ea02b5be449",
+            "hyperedge_name": "<hyperedge>\"Poland is a country in Central Europe where these locations are found.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The United States is a country located in North America.\"",
+        "branch": "relation",
+        "raw_score": 0.4455493688583374,
+        "hyperedge_text": "The United States is a country located in North America.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-68b09b66646328d6a9cbb43a689ffe5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The United States is a country located in North America.",
+            "Fairbank Island (Michigan) Fairbank Island is an island located in Chippewa County, Michigan, United States."
+          ],
+          "relation_texts": [
+            "The United States is a country located in North America.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f78eb432e80f2a8e51bf4dd8e38e7e41",
+            "hyperedge_name": "<hyperedge>\"The United States is a country located in North America.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In Switzerland, the place of origin (literally 'home place' or 'citizen place') denotes where a Swiss citizen has their municipal citizenship.\"",
+        "branch": "relation",
+        "raw_score": 0.4446614384651184,
+        "hyperedge_text": "In Switzerland, the place of origin (literally 'home place' or 'citizen place') denotes where a Swiss citizen has their municipal citizenship.",
+        "entity_ids": [
+          "\"SWITZERLAND\"",
+          "\"PLACE OF ORIGIN\"",
+          "\"HOME PLACE\"",
+          "\"CITIZEN PLACE\""
+        ],
+        "chunk_ids": [
+          "chunk-1ce3735ca51311e37578f27d0613f4a2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In Switzerland, the place of origin (literally 'home place' or 'citizen place') denotes where a Swiss citizen has their municipal citizenship.",
+            "Place of origin In Switzerland, the place of origin( literally\" home place\" or\" citizen place\") denotes where a Swiss citizen has their municipal citizenship. It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances."
+          ],
+          "relation_texts": [
+            "In Switzerland, the place of origin (literally 'home place' or 'citizen place') denotes where a Swiss citizen has their municipal citizenship.",
+            "link",
+            "SWITZERLAND",
+            "PLACE OF ORIGIN",
+            "HOME PLACE",
+            "CITIZEN PLACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9d9cb39ccc50a800f641f2ca8b46b563",
+            "hyperedge_name": "<hyperedge>\"In Switzerland, the place of origin (literally 'home place' or 'citizen place') denotes where a Swiss citizen has their municipal citizenship.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\"",
+        "branch": "relation",
+        "raw_score": 0.4388546943664551,
+        "hyperedge_text": "Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+        "entity_ids": [
+          "\"MOTHERLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-90ef8b646c23d30cfdfe5eeaca1544c1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "Motherland (disambiguation) Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group. Motherland may also refer to:"
+          ],
+          "relation_texts": [
+            "Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "link",
+            "MOTHERLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f7659258daa9a6bfb34d9adb4e882053",
+            "hyperedge_name": "<hyperedge>\"Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a general rule with respect to passports, the place of birth is determined to be the country that currently has 'sovereignty' over the actual place of birth.\"",
+        "branch": "relation",
+        "raw_score": 0.4373064935207367,
+        "hyperedge_text": "As a general rule with respect to passports, the place of birth is determined to be the country that currently has 'sovereignty' over the actual place of birth.",
+        "entity_ids": [
+          "\"PASSPORT\"",
+          "\"SOVEREIGNTY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a general rule with respect to passports, the place of birth is determined to be the country that currently has 'sovereignty' over the actual place of birth.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "As a general rule with respect to passports, the place of birth is determined to be the country that currently has 'sovereignty' over the actual place of birth.",
+            "link",
+            "PASSPORT",
+            "SOVEREIGNTY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3a61f92bf17c47f3f4f2d82fa241194b",
+            "hyperedge_name": "<hyperedge>\"As a general rule with respect to passports, the place of birth is determined to be the country that currently has 'sovereignty' over the actual place of birth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He stated that it is oxymoronic to refer to a territory as a country.\"",
+        "branch": "relation",
+        "raw_score": 0.4337850511074066,
+        "hyperedge_text": "He stated that it is oxymoronic to refer to a territory as a country.",
+        "entity_ids": [
+          "\"OXYMORONIC COMPARISON\""
+        ],
+        "chunk_ids": [
+          "chunk-313f98956b47c4ed2ab661c11684ce3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He stated that it is oxymoronic to refer to a territory as a country.",
+            "Virgin Islands pledge The Virgin Islands pledge is a pledge of allegiance to the Virgin Islands, a British overseas territory. It was officially adopted by the territory's House of Assembly on 23 June 2016. It's intended to be commonly recited by Virgin Islanders in unison at public events, especially in schools, and during public celebrations. The pledge was first publicly recited on 1 July 2016 at Territory Day celebrations by Premier Dr. D. Orlando Smith and members of the government. The pledge reads: Adoption of the pledge was a project of Myron Walwyn, the territory's Minister for Education and Culture. He explained that its adoption was part of the government's efforts\" to build a nation of citizens and residents that understand and have deep reverence for our heritage as Virgin Islanders\". In the same vein the government adopted a territorial song and an official territorial u..."
+          ],
+          "relation_texts": [
+            "He stated that it is oxymoronic to refer to a territory as a country.",
+            "link",
+            "OXYMORONIC COMPARISON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-069ccccb77ccd9ab371e9616d31f3d24",
+            "hyperedge_name": "<hyperedge>\"He stated that it is oxymoronic to refer to a territory as a country.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"India is the country where Punjab and Jalandhar are located.\"",
+        "branch": "relation",
+        "raw_score": 0.43176841735839844,
+        "hyperedge_text": "India is the country where Punjab and Jalandhar are located.",
+        "entity_ids": [
+          "\"INDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-08b02cae993ab59ad2182c2bdedc6d35"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "India is the country where Punjab and Jalandhar are located.",
+            "Apeejay School, Mahavir Marg Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India. It was established in 1968 by Satya Paul and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+          ],
+          "relation_texts": [
+            "India is the country where Punjab and Jalandhar are located.",
+            "link",
+            "INDIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a121a34224a692c16b5ad3ebacca84e",
+            "hyperedge_name": "<hyperedge>\"India is the country where Punjab and Jalandhar are located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\"",
+        "branch": "semantic",
+        "raw_score": 0.6244800090789795,
+        "hyperedge_text": "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+        "entity_ids": [
+          "\"PREOBRAZHENIYA ISLAND\"",
+          "\"LAPTEV SEA\"",
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+            "link",
+            "PREOBRAZHENIYA ISLAND",
+            "LAPTEV SEA",
+            "RUSSIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-db1cb9156378fe7ebac72a0d54684183",
+            "hyperedge_name": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The remoteness of Preobrazheniya Island makes it less accessible for human activities.\"",
+        "branch": "semantic",
+        "raw_score": 0.5992064476013184,
+        "hyperedge_text": "The remoteness of Preobrazheniya Island makes it less accessible for human activities.",
+        "entity_ids": [
+          "\"REMOTENESS\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The remoteness of Preobrazheniya Island makes it less accessible for human activities.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "The remoteness of Preobrazheniya Island makes it less accessible for human activities.",
+            "link",
+            "REMOTENESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-07c17d60ac13df305ed0d23c69bb8766",
+            "hyperedge_name": "<hyperedge>\"The remoteness of Preobrazheniya Island makes it less accessible for human activities.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Preobrazheniya Island is part of the Russian Arctic and is subject to the region's environmental challenges.\"",
+        "branch": "semantic",
+        "raw_score": 0.5804916620254517,
+        "hyperedge_text": "Preobrazheniya Island is part of the Russian Arctic and is subject to the region's environmental challenges.",
+        "entity_ids": [
+          "\"RUSSIAN ARCTIC\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Preobrazheniya Island is part of the Russian Arctic and is subject to the region's environmental challenges.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "Preobrazheniya Island is part of the Russian Arctic and is subject to the region's environmental challenges.",
+            "link",
+            "RUSSIAN ARCTIC"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-00b72cda534f90cd7ae121a757470214",
+            "hyperedge_name": "<hyperedge>\"Preobrazheniya Island is part of the Russian Arctic and is subject to the region's environmental challenges.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The geographical position of Preobrazheniya Island in the Laptev Sea provides unique ecological features.\"",
+        "branch": "semantic",
+        "raw_score": 0.5591553449630737,
+        "hyperedge_text": "The geographical position of Preobrazheniya Island in the Laptev Sea provides unique ecological features.",
+        "entity_ids": [
+          "\"GEOGRAPHICAL POSITION\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The geographical position of Preobrazheniya Island in the Laptev Sea provides unique ecological features.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "The geographical position of Preobrazheniya Island in the Laptev Sea provides unique ecological features.",
+            "link",
+            "GEOGRAPHICAL POSITION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-eaeddd7279b99aa9793cd7e9b4970a3f",
+            "hyperedge_name": "<hyperedge>\"The geographical position of Preobrazheniya Island in the Laptev Sea provides unique ecological features.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The name 'Transfiguration Island' reflects the meaning behind Preobrazheniya Island.\"",
+        "branch": "semantic",
+        "raw_score": 0.5559837818145752,
+        "hyperedge_text": "The name 'Transfiguration Island' reflects the meaning behind Preobrazheniya Island.",
+        "entity_ids": [
+          "\"TRANSFIGURATION ISLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The name 'Transfiguration Island' reflects the meaning behind Preobrazheniya Island.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "The name 'Transfiguration Island' reflects the meaning behind Preobrazheniya Island.",
+            "link",
+            "TRANSFIGURATION ISLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c90cd51c1e9ea4e32b2de45e09d579c9",
+            "hyperedge_name": "<hyperedge>\"The name 'Transfiguration Island' reflects the meaning behind Preobrazheniya Island.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Preobrazheniya Island is surrounded by various marine species typical of the Arctic region.\"",
+        "branch": "semantic",
+        "raw_score": 0.545594334602356,
+        "hyperedge_text": "Preobrazheniya Island is surrounded by various marine species typical of the Arctic region.",
+        "entity_ids": [
+          "\"MARINE SPECIES\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Preobrazheniya Island is surrounded by various marine species typical of the Arctic region.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "Preobrazheniya Island is surrounded by various marine species typical of the Arctic region.",
+            "link",
+            "MARINE SPECIES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b8a11c7d319fc0f8a253ebeb84bab2e8",
+            "hyperedge_name": "<hyperedge>\"Preobrazheniya Island is surrounded by various marine species typical of the Arctic region.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The location of Preobrazheniya Island may hold significance for researchers studying Arctic ecosystems.\"",
+        "branch": "semantic",
+        "raw_score": 0.526655912399292,
+        "hyperedge_text": "The location of Preobrazheniya Island may hold significance for researchers studying Arctic ecosystems.",
+        "entity_ids": [
+          "\"RESEARCHERS\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The location of Preobrazheniya Island may hold significance for researchers studying Arctic ecosystems.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "The location of Preobrazheniya Island may hold significance for researchers studying Arctic ecosystems.",
+            "link",
+            "RESEARCHERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2a14e413c9f926ca77ab78bd66c06f60",
+            "hyperedge_name": "<hyperedge>\"The location of Preobrazheniya Island may hold significance for researchers studying Arctic ecosystems.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Laptev Sea is known for its severe Arctic climate, influencing the conditions on Preobrazheniya Island.\"",
+        "branch": "semantic",
+        "raw_score": 0.5210532546043396,
+        "hyperedge_text": "The Laptev Sea is known for its severe Arctic climate, influencing the conditions on Preobrazheniya Island.",
+        "entity_ids": [
+          "\"ARCTIC CLIMATE\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Laptev Sea is known for its severe Arctic climate, influencing the conditions on Preobrazheniya Island.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "The Laptev Sea is known for its severe Arctic climate, influencing the conditions on Preobrazheniya Island.",
+            "link",
+            "ARCTIC CLIMATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-94c0dacf273da6f25a1dcf3e7a35c4cc",
+            "hyperedge_name": "<hyperedge>\"The Laptev Sea is known for its severe Arctic climate, influencing the conditions on Preobrazheniya Island.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.\"",
+        "branch": "semantic",
+        "raw_score": 0.4700494706630707,
+        "hyperedge_text": "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+        "entity_ids": [
+          "\"VASILYEVSKY OSTROV\"",
+          "\"NEVA RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+            "link",
+            "VASILYEVSKY OSTROV",
+            "NEVA RIVER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-252daea54ae564db44339c4a0c0e7805",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.\"",
+        "branch": "semantic",
+        "raw_score": 0.4635962247848511,
+        "hyperedge_text": "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+        "entity_ids": [
+          "\"DEKABRISTOV ISLAND\"",
+          "\"SMOLENKA RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+            "link",
+            "DEKABRISTOV ISLAND",
+            "SMOLENKA RIVER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-97b132447c13b6b5f9d893254462b3d6",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\"",
+        "hyperedge_text": "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6244800090789795,
+        "fusion_score": 0.524896001815796,
+        "entity_ids": [
+          "\"PREOBRAZHENIYA ISLAND\"",
+          "\"LAPTEV SEA\"",
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "evidence_texts": [
+          "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+          "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.62448,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524896
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The location of Preobrazheniya Island may hold significance for researchers studying Arctic ecosystems.\"",
+        "hyperedge_text": "The location of Preobrazheniya Island may hold significance for researchers studying Arctic ecosystems.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.526655912399292,
+        "fusion_score": 0.9053311824798584,
+        "entity_ids": [
+          "\"RESEARCHERS\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "evidence_texts": [
+          "The location of Preobrazheniya Island may hold significance for researchers studying Arctic ecosystems.",
+          "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.526656,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.905331
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The remoteness of Preobrazheniya Island makes it less accessible for human activities.\"",
+        "hyperedge_text": "The remoteness of Preobrazheniya Island makes it less accessible for human activities.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5992064476013184,
+        "fusion_score": 0.5198412895202638,
+        "entity_ids": [
+          "\"REMOTENESS\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "evidence_texts": [
+          "The remoteness of Preobrazheniya Island makes it less accessible for human activities.",
+          "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.599206,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519841
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Preobrazheniya Island is part of the Russian Arctic and is subject to the region's environmental challenges.\"",
+        "hyperedge_text": "Preobrazheniya Island is part of the Russian Arctic and is subject to the region's environmental challenges.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5804916620254517,
+        "fusion_score": 0.5160983324050904,
+        "entity_ids": [
+          "\"RUSSIAN ARCTIC\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "evidence_texts": [
+          "Preobrazheniya Island is part of the Russian Arctic and is subject to the region's environmental challenges.",
+          "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.580492,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516098
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The geographical position of Preobrazheniya Island in the Laptev Sea provides unique ecological features.\"",
+        "hyperedge_text": "The geographical position of Preobrazheniya Island in the Laptev Sea provides unique ecological features.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5591553449630737,
+        "fusion_score": 0.5118310689926148,
+        "entity_ids": [
+          "\"GEOGRAPHICAL POSITION\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "evidence_texts": [
+          "The geographical position of Preobrazheniya Island in the Laptev Sea provides unique ecological features.",
+          "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.559155,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511831
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Are Vasilyevsky Island and Preobrazheniya Island located in the same country?",
+    "retrieval_question": "Are Vasilyevsky Island and Preobrazheniya Island located in the same country?",
+    "dependency_question_rewrite": {
+      "original_question": "Are Vasilyevsky Island and Preobrazheniya Island located in the same country?",
+      "retrieval_question": "Are Vasilyevsky Island and Preobrazheniya Island located in the same country?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.\"",
+        "branch": "anchor",
+        "raw_score": 0.6666666666666666,
+        "hyperedge_text": "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+        "entity_ids": [
+          "\"VASILYEVSKY ISLAND\"",
+          "\"BOLSHAYA NEVA RIVER\"",
+          "\"MALAYA NEVA RIVER\"",
+          "\"GULF OF FINLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+            "link",
+            "VASILYEVSKY ISLAND",
+            "BOLSHAYA NEVA RIVER",
+            "MALAYA NEVA RIVER",
+            "GULF OF FINLAND"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.6666666666666666,
+        "hyperedge_text": "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+        "entity_ids": [
+          "\"PREOBRAZHENIYA ISLAND\"",
+          "\"LAPTEV SEA\"",
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+            "link",
+            "PREOBRAZHENIYA ISLAND",
+            "LAPTEV SEA",
+            "RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was the Hungarian entry in the Eurovision Song Contest 2009 in Moscow, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "It was the Hungarian entry in the Eurovision Song Contest 2009 in Moscow, Russia.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"EUROVISION SONG CONTEST 2009\"",
+          "\"HUNGARY\"",
+          "\"MOSCOW\""
+        ],
+        "chunk_ids": [
+          "chunk-56a5d39204884b21940ad2547d80efcc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was the Hungarian entry in the Eurovision Song Contest 2009 in Moscow, Russia.",
+            "Dance with Me (Zoli Ádok song) \" Dance with Me\" is the debut single by Hungarian singer Zoli Ádok. It was the Hungarian entry in the Eurovision Song Contest 2009 in Moscow, Russia."
+          ],
+          "relation_texts": [
+            "It was the Hungarian entry in the Eurovision Song Contest 2009 in Moscow, Russia.",
+            "link",
+            "RUSSIA",
+            "EUROVISION SONG CONTEST 2009",
+            "HUNGARY",
+            "MOSCOW"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Catherine I was the second wife of Peter the Great and Empress of Russia from 1725 until her death.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Catherine I was the second wife of Peter the Great and Empress of Russia from 1725 until her death.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"CATHERINE I\"",
+          "\"PETER THE GREAT\"",
+          "\"EMPRESS\""
+        ],
+        "chunk_ids": [
+          "chunk-9950ff9a227778936bc53520c35060ac"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Catherine I was the second wife of Peter the Great and Empress of Russia from 1725 until her death.",
+            "Catherine I of Russia Catherine I( born, later known as Marta Samuilovna Skavronskaya; –) was the second wife of Peter the Great and Empress of Russia from 1725 until her death."
+          ],
+          "relation_texts": [
+            "Catherine I was the second wife of Peter the Great and Empress of Russia from 1725 until her death.",
+            "link",
+            "RUSSIA",
+            "CATHERINE I",
+            "PETER THE GREAT",
+            "EMPRESS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leningrad is the birthplace of Dmitri Varfolomeyev.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Leningrad is the birthplace of Dmitri Varfolomeyev.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"BROTHERHOOD\""
+        ],
+        "chunk_ids": [
+          "chunk-e7be9eb66e7c1054dc0a44fd2a15a33c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Leningrad is the birthplace of Dmitri Varfolomeyev.",
+            "Dmitri Varfolomeyev (footballer, born 1978) Dmitri Nikolayevich Varfolomeyev( born 15 March 1978 in Leningrad) is a former Russian football player. He is a younger brother of Sergei Varfolomeyev."
+          ],
+          "relation_texts": [
+            "Leningrad is the birthplace of Dmitri Varfolomeyev.",
+            "link",
+            "RUSSIA",
+            "BROTHERHOOD"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was also a Prussian 'Generalfeldmarschall', but is best known for being the father of Catherine the Great of Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "He was also a Prussian 'Generalfeldmarschall', but is best known for being the father of Catherine the Great of Russia.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"GENERALFELDMARSCHALL\"",
+          "\"CATHERINE THE GREAT\""
+        ],
+        "chunk_ids": [
+          "chunk-f060ded95f6a90bd0299d81ae73684f4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was also a Prussian 'Generalfeldmarschall', but is best known for being the father of Catherine the Great of Russia.",
+            "Christian August, Prince of Anhalt-Zerbst Christian August, Prince of Anhalt-Zerbst (29 November 1690, in Dornburg – 16 March 1747, in Zerbst) was a German prince of the House of Ascania. He was a ruler of the Principality of Anhalt-Dornburg, then, from 1742, a ruler of the entire Principality of Anhalt-Zerbst. He was also a Prussian \"Generalfeldmarschall\", but is best known for being the father of Catherine the Great of Russia."
+          ],
+          "relation_texts": [
+            "He was also a Prussian 'Generalfeldmarschall', but is best known for being the father of Catherine the Great of Russia.",
+            "link",
+            "RUSSIA",
+            "GENERALFELDMARSCHALL",
+            "CATHERINE THE GREAT"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Branches of Inayat Khan's movement can be found in the Netherlands, France, England, Germany, the United States, Canada, Russia, and Australia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Branches of Inayat Khan's movement can be found in the Netherlands, France, England, Germany, the United States, Canada, Russia, and Australia.",
+        "entity_ids": [
+          "\"GERMANY\"",
+          "\"UNITED STATES\"",
+          "\"AUSTRALIA\"",
+          "\"NETHERLANDS\"",
+          "\"ENGLAND\"",
+          "\"CANADA\"",
+          "\"RUSSIA\"",
+          "\"FRANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-00a1505164cad04063940ebb9747cff8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Branches of Inayat Khan's movement can be found in the Netherlands, France, England, Germany, the United States, Canada, Russia, and Australia.",
+            "Inayat Khan Inayat Rehmat Khan Pathan (Urdu:) (5 July 1882 – 5 February 1927) was the founder of the Sufi Order in the West in 1914 (London) and teacher of Universal Sufism. He initially came to the West as a Northern Indian classical musician, having received the honorific \"Tansen\" from the Nizam of Hyderabad, but he soon turned to the introduction and transmission of Sufi thought and practice. Later, in 1923, the Sufi Order of the London period was dissolved into a new organization, formed under Swiss law, called the \"International Sufi Movement\". His message of divine unity (Tawhid) focused on the themes of love, harmony, and beauty. He taught that blind adherence to any book rendered religion devoid of spirit. Branches of Inayat Khan's movement can be found in the Netherlands, France, England, Germany, the United States, Canada, Russia and Australia. In his various written works,..."
+          ],
+          "relation_texts": [
+            "Branches of Inayat Khan's movement can be found in the Netherlands, France, England, Germany, the United States, Canada, Russia, and Australia.",
+            "link",
+            "GERMANY",
+            "UNITED STATES",
+            "AUSTRALIA",
+            "NETHERLANDS",
+            "ENGLAND",
+            "CANADA",
+            "RUSSIA",
+            "FRANCE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sandunov's family emigrated from Georgia to Russia proper as part of an entourage accompanying the exiled Georgian monarch Vakhtang VI.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Sandunov's family emigrated from Georgia to Russia proper as part of an entourage accompanying the exiled Georgian monarch Vakhtang VI.",
+        "entity_ids": [
+          "\"GEORGIA\"",
+          "\"RUSSIA\"",
+          "\"SANDUNOV'S FAMILY\"",
+          "\"VAKHTANG VI\""
+        ],
+        "chunk_ids": [
+          "chunk-7f57599bce7a0e6fcc25116801626324"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sandunov's family emigrated from Georgia to Russia proper as part of an entourage accompanying the exiled Georgian monarch Vakhtang VI.",
+            "Sila Zandukeli-Sandunov Sila Nikolaevich Sandunov , born Silovan Nikolozis dze Zandukeli , (born 1756— Died 1820) was a businessman and actor of Georgian origin active at the court of Catherine the Great. Sandunov's family emigrated from Georgia to Russia proper as part of an entourage accompanying the exiled Georgian monarch Vakhtang VI. Sandunov is best remembered today as the founder of the eponymous Sanduny Baths, an architectural and cultural landmark of downtown Moscow. The businessman started his investment in the baths by selling diamonds he had received as a wedding gift from Empress Catherine, who personally attended the wedding ceremony at the royal chapel. Sandunov was married to mezzo-soprano Elizabeth Sandunova."
+          ],
+          "relation_texts": [
+            "Sandunov's family emigrated from Georgia to Russia proper as part of an entourage accompanying the exiled Georgian monarch Vakhtang VI.",
+            "link",
+            "GEORGIA",
+            "RUSSIA",
+            "SANDUNOV'S FAMILY",
+            "VAKHTANG VI"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdul-Vahed Niyazov of Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Abdul-Vahed Niyazov of Russia.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"ABDUL-VAHED NIYAZOV\""
+        ],
+        "chunk_ids": [
+          "chunk-5d1784e6bbfc771fe02717f1d5caa233"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Abdul-Vahed Niyazov of Russia.",
+            "Abdul-Vahed Niyazov ' of Russia."
+          ],
+          "relation_texts": [
+            "Abdul-Vahed Niyazov of Russia.",
+            "link",
+            "RUSSIA",
+            "ABDUL-VAHED NIYAZOV"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Moscow Pride '06 sheds light on the challenges faced by LGBTQ+ individuals in Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Moscow Pride '06 sheds light on the challenges faced by LGBTQ+ individuals in Russia.",
+        "entity_ids": [
+          "\"CHALLENGES\"",
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-9ebf15895b5ce65e0133907266248580"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Moscow Pride '06 sheds light on the challenges faced by LGBTQ+ individuals in Russia.",
+            "Moscow Pride '06 Moscow Pride'06 is a documentary movie of the 2006 Gay pride parade in Moscow."
+          ],
+          "relation_texts": [
+            "Moscow Pride '06 sheds light on the challenges faced by LGBTQ+ individuals in Russia.",
+            "link",
+            "CHALLENGES",
+            "RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dmitri Kudryashov (born 13 May 1983) is a Russian football player and coach.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Dmitri Kudryashov (born 13 May 1983) is a Russian football player and coach.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"FOOTBALL PLAYER\"",
+          "\"ASSISTANT COACH\"",
+          "\"FC MUROM\"",
+          "\"DMITRI KUDRYASHOV\""
+        ],
+        "chunk_ids": [
+          "chunk-5a22ca578d519510bcb637e1320d4487"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dmitri Kudryashov (born 13 May 1983) is a Russian football player and coach.",
+            "Dmitri Kudryashov Dmitri Alexandrovich Kudryashov( born 13 May 1983) is a Russian football player and coach. He plays for FC Murom and also acts as the team's assistant coach."
+          ],
+          "relation_texts": [
+            "Dmitri Kudryashov (born 13 May 1983) is a Russian football player and coach.",
+            "link",
+            "RUSSIA",
+            "FOOTBALL PLAYER",
+            "ASSISTANT COACH",
+            "FC MUROM",
+            "DMITRI KUDRYASHOV"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Grand Duchess Olga Pavlovna of Russia was a Grand Duchess of Russia as the second youngest daughter and seventh child of Emperor Paul I of Russia and his empress consort, Sophie Dorothea of Württemberg.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Grand Duchess Olga Pavlovna of Russia was a Grand Duchess of Russia as the second youngest daughter and seventh child of Emperor Paul I of Russia and his empress consort, Sophie Dorothea of Württemberg.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"GRAND DUCHESS\"",
+          "\"WÜRTTEMBERG\"",
+          "\"EMPEROR PAUL I\"",
+          "\"OLGA PAVLOVNA\"",
+          "\"SOPHIE DOROTHEA OF WÜRTTEMBERG\"",
+          "\"GRAND DUCHESS OLGA PAVLOVNA OF RUSSIA\"",
+          "\"SOPHIE DOROTHEA\"",
+          "\"SECOND YOUNGEST DAUGHTER\"",
+          "\"SEVENTH CHILD\"",
+          "\"GRAND DUCHESS OF RUSSIA\"",
+          "\"EMPEROR PAUL I OF RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-8f6f189062b5644ad32e5a3b5aedd400"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Grand Duchess Olga Pavlovna of Russia was a Grand Duchess of Russia as the second youngest daughter and seventh child of Emperor Paul I of Russia and his empress consort, Sophie Dorothea of Württemberg.",
+            "Grand Duchess Olga Pavlovna of Russia Grand Duchess Olga Pavlovna of Russia was a \"Grand Duchess of Russia\" as the second youngest daughter and seventh child of Emperor Paul I of Russia and his empress consort, Sophie Dorothea of Württemberg."
+          ],
+          "relation_texts": [
+            "Grand Duchess Olga Pavlovna of Russia was a Grand Duchess of Russia as the second youngest daughter and seventh child of Emperor Paul I of Russia and his empress consort, Sophie Dorothea of Württemberg.",
+            "link",
+            "RUSSIA",
+            "GRAND DUCHESS",
+            "WÜRTTEMBERG",
+            "EMPEROR PAUL I",
+            "OLGA PAVLOVNA",
+            "SOPHIE DOROTHEA OF WÜRTTEMBERG",
+            "GRAND DUCHESS OLGA PAVLOVNA OF RUSSIA",
+            "SOPHIE DOROTHEA",
+            "SECOND YOUNGEST DAUGHTER",
+            "SEVENTH CHILD",
+            "GRAND DUCHESS OF RUSSIA",
+            "EMPEROR PAUL I OF RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Grand Duchess Elena Pavlovna of Russia was a daughter of Grand Duke, later Tsar Paul I of Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Grand Duchess Elena Pavlovna of Russia was a daughter of Grand Duke, later Tsar Paul I of Russia.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"MECKLENBURG\"",
+          "\"GRAND DUCHESS ELENA PAVLOVNA\"",
+          "\"GRAND DUKE\""
+        ],
+        "chunk_ids": [
+          "chunk-73fa737e6e527fb7c96b79001e14cef1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Grand Duchess Elena Pavlovna of Russia was a daughter of Grand Duke, later Tsar Paul I of Russia.",
+            "Grand Duchess Elena Pavlovna of Russia Grand Duchess Elena Pavlovna of Russia, Hereditary Grand Duchess of Mecklenburg( 24 December 1784[ OS 13 December] – 24 September 1803) was a daughter of Grand Duke, later Tsar Paul I of Russia and his second wife Sophie Dorothea of Württemberg. After marrying the son and heir of the Grand Duke of Mecklenburg- Schwerin she ceased to use her Russian title."
+          ],
+          "relation_texts": [
+            "Grand Duchess Elena Pavlovna of Russia was a daughter of Grand Duke, later Tsar Paul I of Russia.",
+            "link",
+            "RUSSIA",
+            "MECKLENBURG",
+            "GRAND DUCHESS ELENA PAVLOVNA",
+            "GRAND DUKE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Grand Duke Nicholas Konstantinovich of Russia (14 February 1850 – 26 January 1918) was the first-born son of Grand Duke Konstantin Nikolayevich and Grand Duchess Alexandra Iosifovna of Russia and a grandson of Nicholas I of Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Grand Duke Nicholas Konstantinovich of Russia (14 February 1850 – 26 January 1918) was the first-born son of Grand Duke Konstantin Nikolayevich and Grand Duchess Alexandra Iosifovna of Russia and a grandson of Nicholas I of Russia.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"GRAND DUCHESS ALEXANDRA IOSIFOVNA\"",
+          "\"NICHOLAS I OF RUSSIA\"",
+          "\"GRAND DUKE NICHOLAS KONSTANTINOVICH\"",
+          "\"GRAND DUKE KONSTANTIN NIKOLAYEVICH\""
+        ],
+        "chunk_ids": [
+          "chunk-ebc3ab835bb3b469c4690847948f4d48"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Grand Duke Nicholas Konstantinovich of Russia (14 February 1850 – 26 January 1918) was the first-born son of Grand Duke Konstantin Nikolayevich and Grand Duchess Alexandra Iosifovna of Russia and a grandson of Nicholas I of Russia.",
+            "Grand Duke Nicholas Konstantinovich of Russia Grand Duke Nicholas Constantinovich of Russia( 14 February 1850 – 26 January 1918) was the first- born son of Grand Duke Konstantin Nikolayevich and Grand Duchess Alexandra Iosifovna of Russia and a grandson of Nicholas I of Russia."
+          ],
+          "relation_texts": [
+            "Grand Duke Nicholas Konstantinovich of Russia (14 February 1850 – 26 January 1918) was the first-born son of Grand Duke Konstantin Nikolayevich and Grand Duchess Alexandra Iosifovna of Russia and a grandson of Nicholas I of Russia.",
+            "link",
+            "RUSSIA",
+            "GRAND DUCHESS ALEXANDRA IOSIFOVNA",
+            "NICHOLAS I OF RUSSIA",
+            "GRAND DUKE NICHOLAS KONSTANTINOVICH",
+            "GRAND DUKE KONSTANTIN NIKOLAYEVICH"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Grand Duke Nicholas Konstantinovich is associated with Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Grand Duke Nicholas Konstantinovich is associated with Russia.",
+        "entity_ids": [
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-ebc3ab835bb3b469c4690847948f4d48"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Grand Duke Nicholas Konstantinovich is associated with Russia.",
+            "Grand Duke Nicholas Konstantinovich of Russia Grand Duke Nicholas Constantinovich of Russia( 14 February 1850 – 26 January 1918) was the first- born son of Grand Duke Konstantin Nikolayevich and Grand Duchess Alexandra Iosifovna of Russia and a grandson of Nicholas I of Russia."
+          ],
+          "relation_texts": [
+            "Grand Duke Nicholas Konstantinovich is associated with Russia.",
+            "link",
+            "RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Léonide Moguy (14 July 1899 – 21 April 1976) was a Russian born French film director, screenwriter and film editor.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Léonide Moguy (14 July 1899 – 21 April 1976) was a Russian born French film director, screenwriter and film editor.",
+        "entity_ids": [
+          "\"UNITED STATES\"",
+          "\"FILM\"",
+          "\"RUSSIA\"",
+          "\"ITALY\"",
+          "\"QUENTIN TARANTINO\"",
+          "\"DJANGO UNCHAINED\"",
+          "\"LÉONIDE MOGUY\"",
+          "\"LEONID MOGILEVSKY\"",
+          "\"INGLOURIOUS BASTERDS\""
+        ],
+        "chunk_ids": [
+          "chunk-1564841674fbde854a4f9a71acbb9d9f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Léonide Moguy (14 July 1899 – 21 April 1976) was a Russian born French film director, screenwriter and film editor.",
+            "Léonide Moguy Léonide Moguy( 14 July 1899 – 21 April 1976) was a Russian born French film director, screenwriter and film editor. Moguy was born Leonid Mogilevsky in Russia in 1899. He lived in Russia until 1928, in the United States in the 1940s, and in Italy from 1949 until his death. He was active in film between 1936 and 1961. His work has influenced American director Quentin Tarantino, who discovered him while writing the script for\" Inglourious Basterds\", and named a character after him in\" Django Unchained\"."
+          ],
+          "relation_texts": [
+            "Léonide Moguy (14 July 1899 – 21 April 1976) was a Russian born French film director, screenwriter and film editor.",
+            "link",
+            "UNITED STATES",
+            "FILM",
+            "RUSSIA",
+            "ITALY",
+            "QUENTIN TARANTINO",
+            "DJANGO UNCHAINED",
+            "LÉONIDE MOGUY",
+            "LEONID MOGILEVSKY",
+            "INGLOURIOUS BASTERDS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He lived in Russia until 1928.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "He lived in Russia until 1928.",
+        "entity_ids": [
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-1564841674fbde854a4f9a71acbb9d9f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He lived in Russia until 1928.",
+            "Léonide Moguy Léonide Moguy( 14 July 1899 – 21 April 1976) was a Russian born French film director, screenwriter and film editor. Moguy was born Leonid Mogilevsky in Russia in 1899. He lived in Russia until 1928, in the United States in the 1940s, and in Italy from 1949 until his death. He was active in film between 1936 and 1961. His work has influenced American director Quentin Tarantino, who discovered him while writing the script for\" Inglourious Basterds\", and named a character after him in\" Django Unchained\"."
+          ],
+          "relation_texts": [
+            "He lived in Russia until 1928.",
+            "link",
+            "RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Milestone was a Russian-born American, indicating his national origins.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Milestone was a Russian-born American, indicating his national origins.",
+        "entity_ids": [
+          "\"AMERICA\"",
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-041e96c0777623dc13b788d007e8c3f0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Milestone was a Russian-born American, indicating his national origins.",
+            "Lewis Milestone Lewis Milestone( born Leib Milstein; September 30, 1895 – September 25, 1980) was a Russian- born American motion picture director. He is known for directing\" Two Arabian Knights\"( 1927) and\" All Quiet on the Western Front\"( 1930), both of which received Academy Awards for Best Director. He also directed\" The Front Page\"( 1931 – nomination),\" The General Died at Dawn\"( 1936),\" Of Mice and Men\"( 1939),\" Ocean's 11\"( 1960), and received the directing credit for\" Mutiny on the Bounty\"( 1962), though Marlon Brando largely appropriated his responsibilities during its production."
+          ],
+          "relation_texts": [
+            "Milestone was a Russian-born American, indicating his national origins.",
+            "link",
+            "AMERICA",
+            "RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Moulin rouge was a gloss men's magazine in Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Moulin rouge was a gloss men's magazine in Russia.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"MOULIN ROUGE\"",
+          "\"MEN'S MAGAZINE\""
+        ],
+        "chunk_ids": [
+          "chunk-6da3c29a3947a5b172559b5a16bcb42d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Moulin rouge was a gloss men's magazine in Russia.",
+            "Moulin rouge (magazine) Moulin rouge was a gloss men's magazine in Russia. It was published by Rodionov Publishing House from 2003 to 2008."
+          ],
+          "relation_texts": [
+            "Moulin rouge was a gloss men's magazine in Russia.",
+            "link",
+            "RUSSIA",
+            "MOULIN ROUGE",
+            "MEN'S MAGAZINE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"By 1802, he had moved to Glasgow and his trade now extended to the Baltic, Russia, and Norway.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "By 1802, he had moved to Glasgow and his trade now extended to the Baltic, Russia, and Norway.",
+        "entity_ids": [
+          "\"NORWAY\"",
+          "\"RUSSIA\"",
+          "\"GLASGOW\"",
+          "\"BALTIC\""
+        ],
+        "chunk_ids": [
+          "chunk-759d6712aa4cdc65b5842de8d0e4c990"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "By 1802, he had moved to Glasgow and his trade now extended to the Baltic, Russia, and Norway.",
+            "Allan Gilmour Sr. Allan Gilmour Sr.( October 1775 – 4 March 1849) was a prominent Scottish- born lumber merchant and shipowner. Born in 1775, Allan Gilmour Sr. was the son of Allan Gilmour and Elizabeth Pollok. He attended the Mearns parish school in the 1780s and early 1790s, and by 1795 ran a small timber business there. By 1802, he had moved to Glasgow and his trade now extended to the Baltic, Russia, and Norway. In 1804, he co-founded the Glasgow- based firm Pollok, Gilmour and Company, together with the brothers John Pollok and Arthur Pollok. Gilmour took charge of pursuing increased international trade for the business, making several trips to North America and Norway to open additional lines of trade. At its peak, and as a result of Gilmour's enterprises, Pollok, Gilmour& Company controlled one of the largest fleets of ships in the world, commanding over 100 vessels. Suffering..."
+          ],
+          "relation_texts": [
+            "By 1802, he had moved to Glasgow and his trade now extended to the Baltic, Russia, and Norway.",
+            "link",
+            "NORWAY",
+            "RUSSIA",
+            "GLASGOW",
+            "BALTIC"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced in Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "The film was produced in Russia.",
+        "entity_ids": [
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-83c2f9210680f1e34e57e7aae115fc3b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was produced in Russia.",
+            "For Happiness For Happiness is a 1917 Russian drama film directed by Yevgeny Bauer."
+          ],
+          "relation_texts": [
+            "The film was produced in Russia.",
+            "link",
+            "RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Areas of many countries drain into the Black Sea, including Germany, Russia, Turkey and Ukraine.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Areas of many countries drain into the Black Sea, including Germany, Russia, Turkey and Ukraine.",
+        "entity_ids": [
+          "\"GERMANY\"",
+          "\"UKRAINE\"",
+          "\"RUSSIA\"",
+          "\"TURKEY\""
+        ],
+        "chunk_ids": [
+          "chunk-490c61d9570406a995fa555c0ed01cbb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Areas of many countries drain into the Black Sea, including Germany, Russia, Turkey and Ukraine.",
+            "Black Sea The Black Sea is a body of water and marginal sea of the Atlantic Ocean between Eastern Europe, the Caucasus, and Western Asia. It is supplied by a number of major rivers, such as the Danube, Dnieper, Southern Bug, Dniester, Don, and the Rioni. Areas of many countries drain into the Black Sea, including Germany, Russia, Turkey and Ukraine. The Black Sea has an area of( not including the Sea of Azov), a maximum depth of, and a volume of. It is constrained by the Pontic Mountains to the south, Caucasus Mountains to the east, Crimean Mountains to the north, Strandzha to the southwest, Balkan Mountains to the west, Dobrogea Plateau to the northwest, and features a wide shelf to the northwest. The longest east – west extent is about. Important cities along the coast include Odessa, Sevastopol, Samsun, and Istanbul. The Black Sea is bordered by Ukraine, Romania, Bulgaria, Turkey,..."
+          ],
+          "relation_texts": [
+            "Areas of many countries drain into the Black Sea, including Germany, Russia, Turkey and Ukraine.",
+            "link",
+            "GERMANY",
+            "UKRAINE",
+            "RUSSIA",
+            "TURKEY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Khlevnoye is a rural locality (a 'selo') and the administrative center of Khlevensky District, Lipetsk Oblast, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Khlevnoye is a rural locality (a 'selo') and the administrative center of Khlevensky District, Lipetsk Oblast, Russia.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"KHLEVNOYE\"",
+          "\"KHLEVENSKY DISTRICT\"",
+          "\"LIPETSK OBLAST\""
+        ],
+        "chunk_ids": [
+          "chunk-b7e4c51e049538a0ce1c1e001e052a3a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Khlevnoye is a rural locality (a 'selo') and the administrative center of Khlevensky District, Lipetsk Oblast, Russia.",
+            "Khlevnoye, Lipetsk Oblast Khlevnoye is a rural locality( a\" selo\") and the administrative center of Khlevensky District, Lipetsk Oblast, Russia. Population:"
+          ],
+          "relation_texts": [
+            "Khlevnoye is a rural locality (a 'selo') and the administrative center of Khlevensky District, Lipetsk Oblast, Russia.",
+            "link",
+            "RUSSIA",
+            "KHLEVNOYE",
+            "KHLEVENSKY DISTRICT",
+            "LIPETSK OBLAST"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Selo sanatoriya imeni Chekhova is a rural locality in Alsheyevsky District, Bashkortostan, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Selo sanatoriya imeni Chekhova is a rural locality in Alsheyevsky District, Bashkortostan, Russia.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"SELO SANATORIYA IMENI CHEKHOVA\"",
+          "\"ALSHEYEVSKY DISTRICT\"",
+          "\"BASHKORTOSTAN\""
+        ],
+        "chunk_ids": [
+          "chunk-2aaf5a9d41a42416cbb1b5914dc95416"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Selo sanatoriya imeni Chekhova is a rural locality in Alsheyevsky District, Bashkortostan, Russia.",
+            "Selo sanatoriya imeni Chekhova Selo sanatoriya imeni Chekhova is a rural locality( a selo) in Alsheyevsky District, Bashkortostan, Russia. The population was 168 as of 2010. There are 5 streets."
+          ],
+          "relation_texts": [
+            "Selo sanatoriya imeni Chekhova is a rural locality in Alsheyevsky District, Bashkortostan, Russia.",
+            "link",
+            "RUSSIA",
+            "SELO SANATORIYA IMENI CHEKHOVA",
+            "ALSHEYEVSKY DISTRICT",
+            "BASHKORTOSTAN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dobroye is a rural locality (a 'selo') and the administrative center of Dobrovsky District, Lipetsk Oblast, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Dobroye is a rural locality (a 'selo') and the administrative center of Dobrovsky District, Lipetsk Oblast, Russia.",
+        "entity_ids": [
+          "\"POPULATION\"",
+          "\"RUSSIA\"",
+          "\"LIPETSK OBLAST\"",
+          "\"DOBROVSKY DISTRICT\"",
+          "\"DOBROYE\""
+        ],
+        "chunk_ids": [
+          "chunk-e2d27d181b4650c7d882c29406d41846"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dobroye is a rural locality (a 'selo') and the administrative center of Dobrovsky District, Lipetsk Oblast, Russia.",
+            "Dobroye, Lipetsk Oblast Dobroye is a rural locality( a\" selo\") and the administrative center of Dobrovsky District, Lipetsk Oblast, Russia. Population:"
+          ],
+          "relation_texts": [
+            "Dobroye is a rural locality (a 'selo') and the administrative center of Dobrovsky District, Lipetsk Oblast, Russia.",
+            "link",
+            "POPULATION",
+            "RUSSIA",
+            "LIPETSK OBLAST",
+            "DOBROVSKY DISTRICT",
+            "DOBROYE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Russia is identified as the country containing Lipetsk Oblast and Dobroye.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Russia is identified as the country containing Lipetsk Oblast and Dobroye.",
+        "entity_ids": [
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-e2d27d181b4650c7d882c29406d41846"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Russia is identified as the country containing Lipetsk Oblast and Dobroye.",
+            "Dobroye, Lipetsk Oblast Dobroye is a rural locality( a\" selo\") and the administrative center of Dobrovsky District, Lipetsk Oblast, Russia. Population:"
+          ],
+          "relation_texts": [
+            "Russia is identified as the country containing Lipetsk Oblast and Dobroye.",
+            "link",
+            "RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Volovo is located in Lipetsk Oblast, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Volovo is located in Lipetsk Oblast, Russia.",
+        "entity_ids": [
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-06f106b92ce0b48dd54ca7cc52a18987"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Volovo is located in Lipetsk Oblast, Russia.",
+            "Volovo, Lipetsk Oblast Volovo is a rural locality( a selo) and the administrative center of Volovsky District of Lipetsk Oblast, Russia. Population:"
+          ],
+          "relation_texts": [
+            "Volovo is located in Lipetsk Oblast, Russia.",
+            "link",
+            "RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Krasnoye is a rural locality (a selo) and the administrative center of Krasninsky District, Lipetsk Oblast, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Krasnoye is a rural locality (a selo) and the administrative center of Krasninsky District, Lipetsk Oblast, Russia.",
+        "entity_ids": [
+          "\"POPULATION\"",
+          "\"RUSSIA\"",
+          "\"KRASNOYE\"",
+          "\"KRASNINSKY DISTRICT\"",
+          "\"LIPETSK OBLAST\""
+        ],
+        "chunk_ids": [
+          "chunk-5bbc571959492533e6034afa1c16ae50"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Krasnoye is a rural locality (a selo) and the administrative center of Krasninsky District, Lipetsk Oblast, Russia.",
+            "Krasnoye, Krasninsky District, Lipetsk Oblast Krasnoye is a rural locality( a\" selo\") and the administrative center of Krasninsky District, Lipetsk Oblast, Russia. Population:"
+          ],
+          "relation_texts": [
+            "Krasnoye is a rural locality (a selo) and the administrative center of Krasninsky District, Lipetsk Oblast, Russia.",
+            "link",
+            "POPULATION",
+            "RUSSIA",
+            "KRASNOYE",
+            "KRASNINSKY DISTRICT",
+            "LIPETSK OBLAST"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Krasnoye is located in Lipetsk Oblast, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Krasnoye is located in Lipetsk Oblast, Russia.",
+        "entity_ids": [
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-5bbc571959492533e6034afa1c16ae50"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Krasnoye is located in Lipetsk Oblast, Russia.",
+            "Krasnoye, Krasninsky District, Lipetsk Oblast Krasnoye is a rural locality( a\" selo\") and the administrative center of Krasninsky District, Lipetsk Oblast, Russia. Population:"
+          ],
+          "relation_texts": [
+            "Krasnoye is located in Lipetsk Oblast, Russia.",
+            "link",
+            "RUSSIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Donskoye is a rural locality (a 'selo') in Zadonsky District of Lipetsk Oblast, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Donskoye is a rural locality (a 'selo') in Zadonsky District of Lipetsk Oblast, Russia.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"LIPETSK OBLAST\"",
+          "\"DONSKOYE\"",
+          "\"ZADONSKY DISTRICT\""
+        ],
+        "chunk_ids": [
+          "chunk-a848e70b93f1d856f8b2bc6c46443c20"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Donskoye is a rural locality (a 'selo') in Zadonsky District of Lipetsk Oblast, Russia.",
+            "Donskoye, Lipetsk Oblast Donskoye is a rural locality( a\" selo\") in Zadonsky District of Lipetsk Oblast, Russia."
+          ],
+          "relation_texts": [
+            "Donskoye is a rural locality (a 'selo') in Zadonsky District of Lipetsk Oblast, Russia.",
+            "link",
+            "RUSSIA",
+            "LIPETSK OBLAST",
+            "DONSKOYE",
+            "ZADONSKY DISTRICT"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Irina Pavlovna Paley was the daughter of Grand Duke Paul Alexandrovich of Russia and his second wife, Olga Valerianovna Karnovich.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Princess Irina Pavlovna Paley was the daughter of Grand Duke Paul Alexandrovich of Russia and his second wife, Olga Valerianovna Karnovich.",
+        "entity_ids": [
+          "\"DATE OF DEATH\"",
+          "\"DATE OF BIRTH\"",
+          "\"RUSSIA\"",
+          "\"GRAND DUKE PAUL ALEXANDROVICH\"",
+          "\"IRINA PAVLOVNA PALEY\"",
+          "\"OLGA VALERIANOVNA KARNOVICH\""
+        ],
+        "chunk_ids": [
+          "chunk-fd15bcab87d235c788daec2ccaff7986"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Princess Irina Pavlovna Paley was the daughter of Grand Duke Paul Alexandrovich of Russia and his second wife, Olga Valerianovna Karnovich.",
+            "Irina Paley Princess Irina Pavlovna Paley( 21 December 1903 – 15 November 1990) was the daughter of Grand Duke Paul Alexandrovich of Russia and his second wife, Olga Valerianovna Karnovich."
+          ],
+          "relation_texts": [
+            "Princess Irina Pavlovna Paley was the daughter of Grand Duke Paul Alexandrovich of Russia and his second wife, Olga Valerianovna Karnovich.",
+            "link",
+            "DATE OF DEATH",
+            "DATE OF BIRTH",
+            "RUSSIA",
+            "GRAND DUKE PAUL ALEXANDROVICH",
+            "IRINA PAVLOVNA PALEY",
+            "OLGA VALERIANOVNA KARNOVICH"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Selo sanatoriya Glukhovskogo is a rural locality (a selo) in Belebeyevsky District, Bashkortostan, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Selo sanatoriya Glukhovskogo is a rural locality (a selo) in Belebeyevsky District, Bashkortostan, Russia.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"BELEBEYEVSKY DISTRICT\"",
+          "\"SELO SANATORIYA GLUKHOVSKOGO\"",
+          "\"BASHKORTOSTAN\""
+        ],
+        "chunk_ids": [
+          "chunk-3398b70130341a4ef14761dcdb079d05"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Selo sanatoriya Glukhovskogo is a rural locality (a selo) in Belebeyevsky District, Bashkortostan, Russia.",
+            "Selo sanatoriya Glukhovskogo Selo sanatoriya Glukhovskogo is a rural locality (a selo) in Belebeyevsky District, Bashkortostan, Russia. The population was 657 as of 2010. There are 8 streets."
+          ],
+          "relation_texts": [
+            "Selo sanatoriya Glukhovskogo is a rural locality (a selo) in Belebeyevsky District, Bashkortostan, Russia.",
+            "link",
+            "RUSSIA",
+            "BELEBEYEVSKY DISTRICT",
+            "SELO SANATORIYA GLUKHOVSKOGO",
+            "BASHKORTOSTAN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dolgorukovo is a rural locality (a 'selo') and the administrative center of Dolgorukovsky District, Lipetsk Oblast, Russia.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Dolgorukovo is a rural locality (a 'selo') and the administrative center of Dolgorukovsky District, Lipetsk Oblast, Russia.",
+        "entity_ids": [
+          "\"POPULATION\"",
+          "\"RUSSIA\"",
+          "\"DOLGORUKOVO\"",
+          "\"DOLGORUKOVSKY DISTRICT\"",
+          "\"LIPETSK OBLAST\"",
+          "\"RURAL LOCALITY\""
+        ],
+        "chunk_ids": [
+          "chunk-c59a08f232d26b4d20c5a04f8bf421f3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dolgorukovo is a rural locality (a 'selo') and the administrative center of Dolgorukovsky District, Lipetsk Oblast, Russia.",
+            "Dolgorukovo, Lipetsk Oblast Dolgorukovo is a rural locality( a\" selo\") and the administrative center of Dolgorukovsky District, Lipetsk Oblast, Russia. Population:"
+          ],
+          "relation_texts": [
+            "Dolgorukovo is a rural locality (a 'selo') and the administrative center of Dolgorukovsky District, Lipetsk Oblast, Russia.",
+            "link",
+            "POPULATION",
+            "RUSSIA",
+            "DOLGORUKOVO",
+            "DOLGORUKOVSKY DISTRICT",
+            "LIPETSK OBLAST",
+            "RURAL LOCALITY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Other islands include Snake Island and the Island of the Blue Water.\"",
+        "branch": "relation",
+        "raw_score": 0.4467969536781311,
+        "hyperedge_text": "Other islands include Snake Island and the Island of the Blue Water.",
+        "entity_ids": [
+          "\"SNAKE ISLAND\"",
+          "\"ISLAND OF THE BLUE WATER\""
+        ],
+        "chunk_ids": [
+          "chunk-6d82857489a665965146e90f0909c446"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Other islands include Snake Island and the Island of the Blue Water.",
+            "List of islands in the Black Sea This is a list of islands in the Black Sea."
+          ],
+          "relation_texts": [
+            "Other islands include Snake Island and the Island of the Blue Water.",
+            "link",
+            "SNAKE ISLAND",
+            "ISLAND OF THE BLUE WATER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-acaabf97b2f04ad1f8197119753d56bb",
+            "hyperedge_name": "<hyperedge>\"Other islands include Snake Island and the Island of the Blue Water.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ascension Island does not share the same country code (+290) with the rest of St Helena.\"",
+        "branch": "relation",
+        "raw_score": 0.4455002546310425,
+        "hyperedge_text": "Ascension Island does not share the same country code (+290) with the rest of St Helena.",
+        "entity_ids": [
+          "\"DIFFERENT COUNTRY CODE\""
+        ],
+        "chunk_ids": [
+          "chunk-be50516ce6cb28506679c4c9ca5c2f9a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ascension Island does not share the same country code (+290) with the rest of St Helena.",
+            "Telephone numbers in Ascension Island Country Code:+ 247< br> International Call Prefix: 00 Ascension Island does not share the same country code( +290) with the rest of St Helena."
+          ],
+          "relation_texts": [
+            "Ascension Island does not share the same country code (+290) with the rest of St Helena.",
+            "link",
+            "DIFFERENT COUNTRY CODE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-15aff5fe604ddad67569748b459a475b",
+            "hyperedge_name": "<hyperedge>\"Ascension Island does not share the same country code (+290) with the rest of St Helena.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tonga is an island nation in the South Pacific Ocean.\"",
+        "branch": "relation",
+        "raw_score": 0.41349151730537415,
+        "hyperedge_text": "Tonga is an island nation in the South Pacific Ocean.",
+        "entity_ids": [
+          "\"SOUTH PACIFIC OCEAN\""
+        ],
+        "chunk_ids": [
+          "chunk-26a0bb99c1de9a0ef47b99975d1c15f4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tonga is an island nation in the South Pacific Ocean.",
+            "George Tupou V George Tupou V (Tongan: Siaosi Tupou, full name: Siaosi Tāufaʻāhau Manumataongo Tukuʻaho Tupou; 4 May 194818 March 2012) was the King of Tonga from the death of his father Tāufaʻāhau Tupou IV in 2006 until his own death six years later."
+          ],
+          "relation_texts": [
+            "Tonga is an island nation in the South Pacific Ocean.",
+            "link",
+            "SOUTH PACIFIC OCEAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82e1c5d18a7d4ab3b0a06f2f541a2697",
+            "hyperedge_name": "<hyperedge>\"Tonga is an island nation in the South Pacific Ocean.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The unique Country Code of +247 specifies calls to Ascension Island from other countries.\"",
+        "branch": "relation",
+        "raw_score": 0.40654799342155457,
+        "hyperedge_text": "The unique Country Code of +247 specifies calls to Ascension Island from other countries.",
+        "entity_ids": [
+          "\"+247\""
+        ],
+        "chunk_ids": [
+          "chunk-be50516ce6cb28506679c4c9ca5c2f9a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The unique Country Code of +247 specifies calls to Ascension Island from other countries.",
+            "Telephone numbers in Ascension Island Country Code:+ 247< br> International Call Prefix: 00 Ascension Island does not share the same country code( +290) with the rest of St Helena."
+          ],
+          "relation_texts": [
+            "The unique Country Code of +247 specifies calls to Ascension Island from other countries.",
+            "link",
+            "+247"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9b27bfc860ccc624221ca08d82a38d05",
+            "hyperedge_name": "<hyperedge>\"The unique Country Code of +247 specifies calls to Ascension Island from other countries.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Goat Island is an island.\"",
+        "branch": "relation",
+        "raw_score": 0.40246421098709106,
+        "hyperedge_text": "Goat Island is an island.",
+        "entity_ids": [
+          "\"GOAT ISLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-8bd3f7c9fafd135a9d18f526c924bf90"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Goat Island is an island.",
+            "Goat Island (Tarrant County, Texas) Goat Island is an island located in Lake Worth, in Tarrant County, Texas."
+          ],
+          "relation_texts": [
+            "Goat Island is an island.",
+            "link",
+            "GOAT ISLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d8c86cfcc02358a61dfc2343bc2d3903",
+            "hyperedge_name": "<hyperedge>\"Goat Island is an island.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thomas D'Arcy was born in Guernsey, which is part of the Channel Islands.\"",
+        "branch": "relation",
+        "raw_score": 0.3972902297973633,
+        "hyperedge_text": "Thomas D'Arcy was born in Guernsey, which is part of the Channel Islands.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-676f91850a40c1adc5788faee4939d8b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Thomas D'Arcy was born in Guernsey, which is part of the Channel Islands.",
+            "Thomas D'Arcy Thomas D'Arcy is a Canadian singer and songwriter born in Guernsey, Channel Islands. D'Arcy's family immigrated to Toronto, Ontario in 1981. He has been a member of indie rock bands The Carnations, All Systems Go!, Small Sins, Another Blue Door, The I- Spies, BROS., k-os and Major Maker, among others. He is a graduate of philosophy from the University of Toronto."
+          ],
+          "relation_texts": [
+            "Thomas D'Arcy was born in Guernsey, which is part of the Channel Islands."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6e94c83aaed633ddb1fe0044e80cd025",
+            "hyperedge_name": "<hyperedge>\"Thomas D'Arcy was born in Guernsey, which is part of the Channel Islands.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The unique regulations for Ascension Island help distinguish it from St Helena.\"",
+        "branch": "relation",
+        "raw_score": 0.39554697275161743,
+        "hyperedge_text": "The unique regulations for Ascension Island help distinguish it from St Helena.",
+        "entity_ids": [
+          "\"REGULATIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-be50516ce6cb28506679c4c9ca5c2f9a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The unique regulations for Ascension Island help distinguish it from St Helena.",
+            "Telephone numbers in Ascension Island Country Code:+ 247< br> International Call Prefix: 00 Ascension Island does not share the same country code( +290) with the rest of St Helena."
+          ],
+          "relation_texts": [
+            "The unique regulations for Ascension Island help distinguish it from St Helena.",
+            "link",
+            "REGULATIONS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9cf56d3d2528449688cd094d281a30a0",
+            "hyperedge_name": "<hyperedge>\"The unique regulations for Ascension Island help distinguish it from St Helena.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He stated that it is oxymoronic to refer to a territory as a country.\"",
+        "branch": "relation",
+        "raw_score": 0.39183923602104187,
+        "hyperedge_text": "He stated that it is oxymoronic to refer to a territory as a country.",
+        "entity_ids": [
+          "\"OXYMORONIC COMPARISON\""
+        ],
+        "chunk_ids": [
+          "chunk-313f98956b47c4ed2ab661c11684ce3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He stated that it is oxymoronic to refer to a territory as a country.",
+            "Virgin Islands pledge The Virgin Islands pledge is a pledge of allegiance to the Virgin Islands, a British overseas territory. It was officially adopted by the territory's House of Assembly on 23 June 2016. It's intended to be commonly recited by Virgin Islanders in unison at public events, especially in schools, and during public celebrations. The pledge was first publicly recited on 1 July 2016 at Territory Day celebrations by Premier Dr. D. Orlando Smith and members of the government. The pledge reads: Adoption of the pledge was a project of Myron Walwyn, the territory's Minister for Education and Culture. He explained that its adoption was part of the government's efforts\" to build a nation of citizens and residents that understand and have deep reverence for our heritage as Virgin Islanders\". In the same vein the government adopted a territorial song and an official territorial u..."
+          ],
+          "relation_texts": [
+            "He stated that it is oxymoronic to refer to a territory as a country.",
+            "link",
+            "OXYMORONIC COMPARISON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-069ccccb77ccd9ab371e9616d31f3d24",
+            "hyperedge_name": "<hyperedge>\"He stated that it is oxymoronic to refer to a territory as a country.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry Island is situated just east of Prince Edward Island.\"",
+        "branch": "relation",
+        "raw_score": 0.3858726918697357,
+        "hyperedge_text": "Henry Island is situated just east of Prince Edward Island.",
+        "entity_ids": [
+          "\"PRINCE EDWARD ISLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-cc2e81b18c6b00ac887f8e2773f1aa93"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Henry Island is situated just east of Prince Edward Island.",
+            "Henry Island (Nova Scotia) Henry Island is an island located in the Gulf of Saint Lawrence in the Northumberland Strait of Nova Scotia, Canada, just east of Prince Edward Island and southwest of Port Hood Island."
+          ],
+          "relation_texts": [
+            "Henry Island is situated just east of Prince Edward Island.",
+            "link",
+            "PRINCE EDWARD ISLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7fc7184f7f7987a66435ad2dc850eb86",
+            "hyperedge_name": "<hyperedge>\"Henry Island is situated just east of Prince Edward Island.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry Island is part of the Northumberland Strait.\"",
+        "branch": "relation",
+        "raw_score": 0.3824540972709656,
+        "hyperedge_text": "Henry Island is part of the Northumberland Strait.",
+        "entity_ids": [
+          "\"NORTHUMBERLAND STRAIT\""
+        ],
+        "chunk_ids": [
+          "chunk-cc2e81b18c6b00ac887f8e2773f1aa93"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Henry Island is part of the Northumberland Strait.",
+            "Henry Island (Nova Scotia) Henry Island is an island located in the Gulf of Saint Lawrence in the Northumberland Strait of Nova Scotia, Canada, just east of Prince Edward Island and southwest of Port Hood Island."
+          ],
+          "relation_texts": [
+            "Henry Island is part of the Northumberland Strait.",
+            "link",
+            "NORTHUMBERLAND STRAIT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-15d67e7069a91a504f9bbe4823014ab5",
+            "hyperedge_name": "<hyperedge>\"Henry Island is part of the Northumberland Strait.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.\"",
+        "branch": "semantic",
+        "raw_score": 0.6223481297492981,
+        "hyperedge_text": "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+        "entity_ids": [
+          "\"VASILYEVSKY OSTROV\"",
+          "\"NEVA RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+            "link",
+            "VASILYEVSKY OSTROV",
+            "NEVA RIVER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-252daea54ae564db44339c4a0c0e7805",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.\"",
+        "branch": "semantic",
+        "raw_score": 0.622085690498352,
+        "hyperedge_text": "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+        "entity_ids": [
+          "\"VASILYEVSKY ISLAND\"",
+          "\"BOLSHAYA NEVA RIVER\"",
+          "\"MALAYA NEVA RIVER\"",
+          "\"GULF OF FINLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+            "link",
+            "VASILYEVSKY ISLAND",
+            "BOLSHAYA NEVA RIVER",
+            "MALAYA NEVA RIVER",
+            "GULF OF FINLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-21bbd4969ff14da9fb2fc8cce617e313",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.\"",
+        "branch": "semantic",
+        "raw_score": 0.5970004796981812,
+        "hyperedge_text": "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+        "entity_ids": [
+          "\"DEKABRISTOV ISLAND\"",
+          "\"SMOLENKA RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.",
+            "link",
+            "DEKABRISTOV ISLAND",
+            "SMOLENKA RIVER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-97b132447c13b6b5f9d893254462b3d6",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.\"",
+        "branch": "semantic",
+        "raw_score": 0.5779982209205627,
+        "hyperedge_text": "Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.",
+        "entity_ids": [
+          "\"WINTER PALACE\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.",
+            "link",
+            "WINTER PALACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a3a67e751fc708944a017fce2d94002a",
+            "hyperedge_name": "<hyperedge>\"Situated just across the river from the Winter Palace, Vasilyevsky Island constitutes a large portion of the city's historic center.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.\"",
+        "branch": "semantic",
+        "raw_score": 0.5662002563476562,
+        "hyperedge_text": "Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3124af43d0056ed55fb8f16cfb2f63af",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island is bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro.\"",
+        "branch": "semantic",
+        "raw_score": 0.5643793344497681,
+        "hyperedge_text": "Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro.",
+        "entity_ids": [
+          "\"VASILEOSTROVSKAYA STATION\"",
+          "\"PRIMORSKAYA STATION\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro.",
+            "link",
+            "VASILEOSTROVSKAYA STATION",
+            "PRIMORSKAYA STATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-01efcea6b1fe3416494fe39aabc8b882",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island constitutes a significant part of St. Petersburg's historic center, situated across from the Winter Palace.\"",
+        "branch": "semantic",
+        "raw_score": 0.5605112314224243,
+        "hyperedge_text": "Vasilyevsky Island constitutes a significant part of St. Petersburg's historic center, situated across from the Winter Palace.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vasilyevsky Island constitutes a significant part of St. Petersburg's historic center, situated across from the Winter Palace.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "Vasilyevsky Island constitutes a significant part of St. Petersburg's historic center, situated across from the Winter Palace."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8215ed978e6a5adcf7a94a175fdd96ed",
+            "hyperedge_name": "<hyperedge>\"Vasilyevsky Island constitutes a significant part of St. Petersburg's historic center, situated across from the Winter Palace.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.\"",
+        "branch": "semantic",
+        "raw_score": 0.5510891079902649,
+        "hyperedge_text": "The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.",
+        "entity_ids": [
+          "\"SAINT PETERSBURG\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.",
+            "link",
+            "SAINT PETERSBURG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f734c899b6ef237adf26b75133223137",
+            "hyperedge_name": "<hyperedge>\"The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\"",
+        "branch": "semantic",
+        "raw_score": 0.5418844819068909,
+        "hyperedge_text": "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+        "entity_ids": [
+          "\"PREOBRAZHENIYA ISLAND\"",
+          "\"LAPTEV SEA\"",
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+            "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+          ],
+          "relation_texts": [
+            "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+            "link",
+            "PREOBRAZHENIYA ISLAND",
+            "LAPTEV SEA",
+            "RUSSIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-db1cb9156378fe7ebac72a0d54684183",
+            "hyperedge_name": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect Vasilyevsky Island with Petrogradsky Island.\"",
+        "branch": "semantic",
+        "raw_score": 0.5240005254745483,
+        "hyperedge_text": "The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect Vasilyevsky Island with Petrogradsky Island.",
+        "entity_ids": [
+          "\"EXCHANGE BRIDGE\"",
+          "\"TUCHKOV BRIDGE\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect Vasilyevsky Island with Petrogradsky Island.",
+            "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+          ],
+          "relation_texts": [
+            "The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect Vasilyevsky Island with Petrogradsky Island.",
+            "link",
+            "EXCHANGE BRIDGE",
+            "TUCHKOV BRIDGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a8f171f9dfe9f4f20c832fbd7be54edb",
+            "hyperedge_name": "<hyperedge>\"The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect Vasilyevsky Island with Petrogradsky Island.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.\"",
+        "hyperedge_text": "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.622085690498352,
+        "fusion_score": 0.3910838047663371,
+        "entity_ids": [
+          "\"VASILYEVSKY ISLAND\"",
+          "\"BOLSHAYA NEVA RIVER\"",
+          "\"MALAYA NEVA RIVER\"",
+          "\"GULF OF FINLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "evidence_texts": [
+          "Vasilyevsky Island is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the south and northeast, and by the Gulf of Finland in the west.",
+          "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.622086,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.391084
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.\"",
+        "hyperedge_text": "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.5418844819068909,
+        "fusion_score": 0.37504356304804487,
+        "entity_ids": [
+          "\"PREOBRAZHENIYA ISLAND\"",
+          "\"LAPTEV SEA\"",
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-6806fc4c7bfac5a44a7fde1a67046cf7"
+        ],
+        "evidence_texts": [
+          "Preobrazheniya Island, meaning 'Transfiguration Island', is an island in the Laptev Sea, Russia.",
+          "Preobrazheniya Island Preobrazheniya Island, meaning' Transfiguration Island', is an island in the Laptev Sea, Russia."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.541884,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.375044
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.\"",
+        "hyperedge_text": "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.6223481297492981,
+        "fusion_score": 0.39113629261652627,
+        "entity_ids": [
+          "\"VASILYEVSKY OSTROV\"",
+          "\"NEVA RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "evidence_texts": [
+          "Vasilyevsky Island (Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers in the delta of the Neva River.",
+          "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.622348,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.391136
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.\"",
+        "hyperedge_text": "The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 0.2,
+        "semantic_score": 0.5510891079902649,
+        "fusion_score": 0.3235511549313863,
+        "entity_ids": [
+          "\"SAINT PETERSBURG\""
+        ],
+        "chunk_ids": [
+          "chunk-a368160586a10780de68f17d508fbbb4"
+        ],
+        "evidence_texts": [
+          "The territory of Vasilyevsky Island includes two key bridges that enhance connectivity with mainland Saint Petersburg.",
+          "Vasilyevsky Island Vasilyevsky Island( Vasilyevsky Ostrov, V.O.) is an island in St. Petersburg, Russia, bordered by the Bolshaya Neva and Malaya Neva Rivers( in the delta of the Neva River) in the south and northeast, and by the Gulf of Finland in the west. Vasilyevsky Island is separated from Dekabristov Island by the Smolenka River. Together they form the territory of Vasileostrovsky District, an administrative division of Saint Petersburg. Situated just across the river from the Winter Palace, it constitutes a large portion of the city's historic center. Two of the most famous St. Petersburg bridges, Palace Bridge and Blagoveshchensky Bridge, connect it with the mainland to the south. The Exchange Bridge and Tuchkov Bridge across the Malaya Neva connect it with Petrogradsky Island. Vasilyevsky Island is served by Vasileostrovskaya and Primorskaya stations of Saint Petersburg Metro..."
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 0.2,
+          "S": 0.551089,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.323551
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Russia is identified as the country containing Lipetsk Oblast and Dobroye.\"",
+        "hyperedge_text": "Russia is identified as the country containing Lipetsk Oblast and Dobroye.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.3,
+        "entity_ids": [
+          "\"RUSSIA\""
+        ],
+        "chunk_ids": [
+          "chunk-e2d27d181b4650c7d882c29406d41846"
+        ],
+        "evidence_texts": [
+          "Russia is identified as the country containing Lipetsk Oblast and Dobroye.",
+          "Dobroye, Lipetsk Oblast Dobroye is a rural locality( a\" selo\") and the administrative center of Dobrovsky District, Lipetsk Oblast, Russia. Population:"
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 0.333333,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.3
+        }
+      }
+    ]
+  }
+]

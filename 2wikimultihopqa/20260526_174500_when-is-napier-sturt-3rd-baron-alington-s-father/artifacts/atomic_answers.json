@@ -1,0 +1,537 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When is the birthday of Napier Sturt?",
+    "analysis": {
+      "entities": [
+        "Napier Sturt"
+      ],
+      "relations": [
+        "birthday of"
+      ],
+      "relation_query": "the date of the birthday of an entity",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.\"",
+        "hyperedge_text": "Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6168155670166016,
+        "fusion_score": 0.5233631134033203,
+        "entity_ids": [
+          "\"1ST BARON ALINGTON\"",
+          "\"BRITISH PEER\"",
+          "\"2ND BARON ALINGTON\"",
+          "\"HUMPHREY NAPIER STURT\"",
+          "\"KCVO\"",
+          "\"20 AUGUST 1859\"",
+          "\"HENRY STURT\"",
+          "\"30 JULY 1919\""
+        ],
+        "chunk_ids": [
+          "chunk-a0e7bfbbbb93050222d767570f77bb5a"
+        ],
+        "evidence_texts": [
+          "Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.",
+          "Humphrey Sturt, 2nd Baron Alington Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington. He succeeded to the Barony on 17 February 1904."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.616816,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523363
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Napier Sturt, the 2nd Baron Alington, succeeded to the Barony from his father Henry Sturt.\"",
+        "hyperedge_text": "Humphrey Napier Sturt, the 2nd Baron Alington, succeeded to the Barony from his father Henry Sturt.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6067591309547424,
+        "fusion_score": 0.5213518261909486,
+        "entity_ids": [
+          "\"BARONY\""
+        ],
+        "chunk_ids": [
+          "chunk-a0e7bfbbbb93050222d767570f77bb5a"
+        ],
+        "evidence_texts": [
+          "Humphrey Napier Sturt, the 2nd Baron Alington, succeeded to the Barony from his father Henry Sturt.",
+          "Humphrey Sturt, 2nd Baron Alington Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington. He succeeded to the Barony on 17 February 1904."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.606759,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.521352
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birthday is on 9 July 1965, marking a significant point in his timeline.\"",
+        "hyperedge_text": "His birthday is on 9 July 1965, marking a significant point in his timeline.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.456870973110199,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.24941505591074625,
+        "entity_ids": [
+          "\"9 JULY 1965\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "evidence_texts": [
+          "His birthday is on 9 July 1965, marking a significant point in his timeline.",
+          "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.456871,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.249415
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birthday, 11 September 1950, marks an important date in his life history.\"",
+        "hyperedge_text": "His birthday, 11 September 1950, marks an important date in his life history.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.44437599182128906,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.24441706339518232,
+        "entity_ids": [
+          "\"11 SEPTEMBER 1950\""
+        ],
+        "chunk_ids": [
+          "chunk-d7d54656d29c47185e86ade084ddb3cb"
+        ],
+        "evidence_texts": [
+          "His birthday, 11 September 1950, marks an important date in his life history.",
+          "Michel Le Denmat Michel Le Denmat( born 11 September 1950) is a French former professional racing cyclist. He rode in three editions of the Tour de France."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.444376,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.244417
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46502745151519775,
+        "semantic_score": 0.0,
+        "fusion_score": 0.18601098060607912,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "evidence_texts": [
+          "His date of birth is January 30, 1871.",
+          "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.465027,
+          "S": 0.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.186011
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that specifies the birthday of Napier Sturt.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the father of Napier Sturt?",
+    "analysis": {
+      "entities": [
+        "Napier Sturt"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.\"",
+        "hyperedge_text": "Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5955832600593567,
+        "fusion_score": 0.5191166520118714,
+        "entity_ids": [
+          "\"1ST BARON ALINGTON\"",
+          "\"BRITISH PEER\"",
+          "\"2ND BARON ALINGTON\"",
+          "\"HUMPHREY NAPIER STURT\"",
+          "\"KCVO\"",
+          "\"20 AUGUST 1859\"",
+          "\"HENRY STURT\"",
+          "\"30 JULY 1919\""
+        ],
+        "chunk_ids": [
+          "chunk-a0e7bfbbbb93050222d767570f77bb5a"
+        ],
+        "evidence_texts": [
+          "Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.",
+          "Humphrey Sturt, 2nd Baron Alington Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington. He succeeded to the Barony on 17 February 1904."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.595583,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519117
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Napier Sturt, the 2nd Baron Alington, succeeded to the Barony from his father Henry Sturt.\"",
+        "hyperedge_text": "Humphrey Napier Sturt, the 2nd Baron Alington, succeeded to the Barony from his father Henry Sturt.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.6287200450897217,
+        "fusion_score": 0.9257440090179444,
+        "entity_ids": [
+          "\"BARONY\""
+        ],
+        "chunk_ids": [
+          "chunk-a0e7bfbbbb93050222d767570f77bb5a"
+        ],
+        "evidence_texts": [
+          "Humphrey Napier Sturt, the 2nd Baron Alington, succeeded to the Barony from his father Henry Sturt.",
+          "Humphrey Sturt, 2nd Baron Alington Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington. He succeeded to the Barony on 17 February 1904."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.62872,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.925744
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Succeeding his father, Henry Sturt was part of a noble lineage.\"",
+        "hyperedge_text": "Succeeding his father, Henry Sturt was part of a noble lineage.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5071043968200684,
+        "fusion_score": 0.5014208793640137,
+        "entity_ids": [
+          "\"NOBLE LINEAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-97150612a2550bc2dbe2e3c644abed25"
+        ],
+        "evidence_texts": [
+          "Succeeding his father, Henry Sturt was part of a noble lineage.",
+          "Henry Sturt, 1st Baron Alington Henry Gerard Sturt, 1st Baron Alington( 16 May 1825 – 17 February 1904) was a British peer and Conservative Party politician. The son of Henry Sturt, he was created 1st Baron Alington of Crichel on 15 January 1876. Sturt was twice married. On 10 September 1853, he wed Lady Augusta Bingham, the daughter of George Charles Bingham, 3rd Earl of Lucan. They had three children :- On 10 February 1892, Sturt wed Evelyn Henrietta Leigh."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.507104,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.501421
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father.\"",
+        "hyperedge_text": "He was the father.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4803299903869629,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2587986628214518,
+        "entity_ids": [
+          "\"FATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "evidence_texts": [
+          "He was the father.",
+          "Obata Toramori He was the father of Obata Masamori."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.48033,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.258799
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of Imran Farhat.\"",
+        "hyperedge_text": "He is the father-in-law of Imran Farhat.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43570590019226074,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.240949026743571,
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-10333be7c973d42a00364ad277052021"
+        ],
+        "evidence_texts": [
+          "He is the father-in-law of Imran Farhat.",
+          "Mohammad Ilyas (cricketer) Mohammad Ilyas Mahmood( born March 19, 1946, Lahore, Punjab) is a former Pakistani cricketer who played in ten Tests from 1964 to 1969. He is the father- in- law of Imran Farhat."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.435706,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.240949
+        }
+      }
+    ],
+    "answer": "Henry Sturt",
+    "confidence": 0.95,
+    "reasoning_summary": "The evidence clearly states that Humphrey Napier Sturt, 2nd Baron Alington, is the son of Henry Sturt, 1st Baron Alington.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the father of 3Rd Baron Alington?",
+    "analysis": {
+      "entities": [
+        "3Rd Baron Alington"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a title holder",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Major General William Alington, 3rd Baron Alington LL( bef. 1641 – 1 February 1685) was an Irish peer.\"",
+        "hyperedge_text": "Major General William Alington, 3rd Baron Alington LL( bef. 1641 – 1 February 1685) was an Irish peer.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7035074234008789,
+        "fusion_score": 0.5407014846801759,
+        "entity_ids": [
+          "\"WILLIAM ALINGTON\"",
+          "\"3RD BARON ALINGTON\""
+        ],
+        "chunk_ids": [
+          "chunk-98e21cadb5b074a0a8681790b4b3087f"
+        ],
+        "evidence_texts": [
+          "Major General William Alington, 3rd Baron Alington LL( bef. 1641 – 1 February 1685) was an Irish peer.",
+          "William Alington, 3rd Baron Alington Major General William Alington, 3rd Baron Alington LL( bef. 1641 – 1 February 1685) was an Irish peer. Alington was the son of William Alington, 1st Baron Alington and Elizabeth Tollemache. He succeeded to the title of 3rd Baron Alington of Killard, Co. Cork circa March 1660, on the death of his brother the 2nd Baron who died without male issue. In 1664, he was elected Member of Parliament for Cambridge in a by-election to the Cavalier Parliament and was re-elected for the same constituency in 1679 and 1681. He was created 1st Baron Alington of Wymondley, Hertfordshire on 5 December 1682. He served as Constable of the Tower from 1679 to his death and as Lord- Lieutenant of Cambridgeshire from 1681 to his death."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.703507,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540701
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"William Alington, 3rd Baron Alington was born bef. 1641.\"",
+        "hyperedge_text": "William Alington, 3rd Baron Alington was born bef. 1641.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7286100387573242,
+        "fusion_score": 0.5457220077514648,
+        "entity_ids": [
+          "\"WILLIAM ALINGTON\""
+        ],
+        "chunk_ids": [
+          "chunk-98e21cadb5b074a0a8681790b4b3087f"
+        ],
+        "evidence_texts": [
+          "William Alington, 3rd Baron Alington was born bef. 1641.",
+          "William Alington, 3rd Baron Alington Major General William Alington, 3rd Baron Alington LL( bef. 1641 – 1 February 1685) was an Irish peer. Alington was the son of William Alington, 1st Baron Alington and Elizabeth Tollemache. He succeeded to the title of 3rd Baron Alington of Killard, Co. Cork circa March 1660, on the death of his brother the 2nd Baron who died without male issue. In 1664, he was elected Member of Parliament for Cambridge in a by-election to the Cavalier Parliament and was re-elected for the same constituency in 1679 and 1681. He was created 1st Baron Alington of Wymondley, Hertfordshire on 5 December 1682. He served as Constable of the Tower from 1679 to his death and as Lord- Lieutenant of Cambridgeshire from 1681 to his death."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.72861,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.545722
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Captain Napier George Henry Sturt, 3rd Baron Alington (1 November 1896 – 17 September 1940) was a British peer, the son of Humphrey Sturt, 2nd Baron Alington.\"",
+        "hyperedge_text": "Captain Napier George Henry Sturt, 3rd Baron Alington (1 November 1896 – 17 September 1940) was a British peer, the son of Humphrey Sturt, 2nd Baron Alington.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6613761186599731,
+        "fusion_score": 0.5322752237319947,
+        "entity_ids": [
+          "\"NAPIER GEORGE HENRY STURT\"",
+          "\"HUMPHREY STURT\"",
+          "\"BARON ALINGTON\""
+        ],
+        "chunk_ids": [
+          "chunk-5daaa806014cef8a0ef0833e96d49481"
+        ],
+        "evidence_texts": [
+          "Captain Napier George Henry Sturt, 3rd Baron Alington (1 November 1896 – 17 September 1940) was a British peer, the son of Humphrey Sturt, 2nd Baron Alington.",
+          "Napier Sturt, 3rd Baron Alington Captain Napier George Henry Sturt, 3rd Baron Alington (1 November 1896 – 17 September 1940) was a British peer, the son of Humphrey Sturt, 2nd Baron Alington. He was born in November 1896 in St. Marylebone district of London. He succeeded to the Barony on 30 July 1919 on the death of his father. He owned the Crichel House estate in Dorset. He married Lady Mary Sibell Ashley-Cooper, daughter of Anthony Ashley-Cooper, 9th Earl of Shaftesbury, on 27 November 1928. They had one child: Hon. Mary Anna Sibell Elizabeth Sturt (b. 1929, d. 2010) who later fought the Government and won, leading to the resignation of a Minister, in the Crichel Down Affair. Alington may well be most notable for having dated Tallulah Bankhead in the 1920s. Alington was described as \"well cultivated, bisexual, with sensuous, meaty lips, a distant, antic charm, a history of mysteriou..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.661376,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532275
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He inherited his title on the death of his father.\"",
+        "hyperedge_text": "He inherited his title on the death of his father.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.516087532043457,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30643501281738283,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-eb1282e32db62a8f2f205f6632f3b235"
+        ],
+        "evidence_texts": [
+          "He inherited his title on the death of his father.",
+          "Henry Tuchet, 10th Baron Audley Henry Tuchet, 10th Baron Audley, 7th Baron Tuchet( died 30 December 1563) was an English peer. Henry Tuchet was the son of George Tuchet, 9th Baron Audley( died 1560). He married Elizabeth Sneyd, daughter of Sir William Sneyd( or Suede). He inherited his title on the death of his father. In 1585 he went with Leicester to the Netherlands. He died on 30 December 1563 and was buried in Betley, Staffordshire. He was succeeded by his son, George Tuchet, 11th Baron Audley( c. 1561- 1616), who was made 1st Earl of Castlehaven at the end of his life."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.516088,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.306435
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He succeeded to his title, at the age of 17, upon the death of his father.\"",
+        "hyperedge_text": "He succeeded to his title, at the age of 17, upon the death of his father.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43981683254241943,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2759267330169678,
+        "entity_ids": [
+          "\"BARON PETRE TITLE\""
+        ],
+        "chunk_ids": [
+          "chunk-f74367fa93434b63f0a12aff84898669"
+        ],
+        "evidence_texts": [
+          "He succeeded to his title, at the age of 17, upon the death of his father.",
+          "Robert Petre, 7th Baron Petre Robert Petre, 7th Baron Petre( 1689 – 22 March 1713) was a British peer, the son of Thomas Petre, 6th Baron Petre( 1633 – 1706) and his wife Mary Clifton, daughter of Sir Thomas Clifton. He succeeded to his title, at the age of 17, upon the death of his father. Robert is said to have spurned wearing a wig in the conventional way, spending instead six hours every day dressing his own hair. He caused an uproar of indignation and outrage in the family when, in 1711, being then only 21, in a freak of gallantry cut off a lock of hair from the head of a celebrated beauty, his distant cousin, Arabella Fermor, daughter of Henry Fermor of Tusmore, Oxfordshire."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.439817,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.275927
+        }
+      }
+    ],
+    "answer": "William Alington, 1st Baron Alington",
+    "confidence": 0.9,
+    "reasoning_summary": "William Alington, 3rd Baron Alington was the son of William Alington, 1st Baron Alington, as stated in the evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Major General William Alington, 3rd Baron Alington LL( bef. 1641 – 1 February 1685) was an Irish peer.\""
+    ]
+  }
+]

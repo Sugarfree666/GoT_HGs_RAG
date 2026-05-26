@@ -1,0 +1,36 @@
+{
+  "answer": "Raymond Balze",
+  "candidate_answer": "Louis Ncamiso Ndlovu lived longer than Raymond Balze.",
+  "reasoning_summary": "Louis Ncamiso Ndlovu lived from March 15, 1945, to August 27, 2012, which is 67 years. Raymond Balze lived from May 4, 1818, to February 26, 1909, which is 90 years. Therefore, Raymond Balze lived longer than Louis Ncamiso Ndlovu.",
+  "answer_span_reasoning": "Raymond Balze lived longer than Louis Ncamiso Ndlovu.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "What is the life span of Louis Ncamiso Ndlovu?",
+      "answer": "March 15, 1945 – August 27, 2012",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.\"",
+        "<hyperedge>\"Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the life span of Raymond Balze?",
+      "answer": "4 May 1818 to 26 February 1909",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Raymond Balze lived from 4 May 1818 to 26 February 1909.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "What is the life span of Louis Ncamiso Ndlovu?",
+      "answer": "March 15, 1945 – August 27, 2012",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.\"",
+        "<hyperedge>\"Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

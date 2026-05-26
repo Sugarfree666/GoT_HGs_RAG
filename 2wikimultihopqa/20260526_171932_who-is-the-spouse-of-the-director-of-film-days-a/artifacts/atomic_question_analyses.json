@@ -1,0 +1,104 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of the film Days And Hours?",
+    "retrieval_question": "Who is the director of the film Days And Hours?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of the film Days And Hours?",
+      "retrieval_question": "Who is the director of the film Days And Hours?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Days And Hours"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a film",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the spouse of the director of Days And Hours?",
+    "retrieval_question": "Who is the spouse of Pjer Žalica?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the spouse of the director of Days And Hours?",
+      "retrieval_question": "Who is the spouse of Pjer Žalica?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Days And Hours",
+      "replacement_answer": "Pjer Žalica",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Days And Hours",
+          "replacement_answer": "Pjer Žalica"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of the film Days And Hours?",
+        "answer": "Pjer Žalica",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Days and Hours' is directed by Pjer Žalica.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.\"",
+            "fusion_score": 0.700274419784546,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil.",
+              "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.\"",
+            "fusion_score": 0.6993664503097535,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Days and Hours (Bosnian version title: 'Kod amidže Idriza') is a 2004 Bosnian film.",
+              "Days and Hours Days and Hours (Bosnian version title: \"Kod amidže Idriza\") is a 2004 Bosnian film directed by Pjer Žalica and written by Namik Kabil. It was Bosnia and Herzegovina's submission to the 77th Academy Awards for the Academy Award for Best Foreign Language Film, but it was not nominated. The film was released on 20 August 2004."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'\"",
+            "fusion_score": 0.4906706273555756,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Director Walsh remade the film in 1948 as 'One Sunday Afternoon.'",
+              "The Strawberry Blonde The Strawberry Blonde is a 1941 American romantic comedy film directed by Raoul Walsh, starring James Cagney and Olivia de Havilland, and featuring Rita Hayworth, Alan Hale, Jack Carson, and George Tobias. The picture was nominated for an Academy Award in 1941 for Best Scoring of a Musical Picture and features songs such as\" The Band Played OnBill Bailey Meet Me in St. Louis, Louie, Wait Till The Sun Shines Nellie,\" and\" Love Me and the World Is Mine.\" The title is most often listed beginning with the word The, but the film's posters and promotional materials call it simply Strawberry Blonde. Director Walsh remade the film in 1948 as\" One Sunday Afternoon\". It was a remake of\" One Sunday Afternoon\"( 1933) with Gary Cooper."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Pjer Žalica"
+      ],
+      "relations": [
+        "is the spouse of"
+      ],
+      "relation_query": "Who is the spouse of a person?",
+      "answer_type": "person"
+    }
+  }
+]

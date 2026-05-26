@@ -1,0 +1,930 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Calling Philo Vance?",
+    "analysis": {
+      "entities": [
+        "Calling Philo Vance"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character.\"",
+        "hyperedge_text": "Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7497351765632629,
+        "fusion_score": 0.5499470353126527,
+        "entity_ids": [
+          "\"JAMES STEPHENSON\"",
+          "\"CALLING PHILO VANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-073c380af5f6c538507570b8fb8fd622"
+        ],
+        "evidence_texts": [
+          "Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character.",
+          "Calling Philo Vance Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character; Margot Stevenson co-stars. The film also features Henry O'Neill, Edward Brophy, Sheila Bromley and Ralph Forbes. It was directed by William Clemens from a screenplay by Tom Reed, based on the 1933 novel \"The Kennel Murder Case\" by S. S. Van Dine, which had previously been made into a film in 1933, starring William Powell and Mary Astor. For this adaptation of the story, Vance is on international assignment from the United States government to investigate traffic in wartime aircraft designs. The original story dealt with art world double-dealing, but the solution to the mystery is the same in each film."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.749735,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549947
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance.\"",
+        "hyperedge_text": "Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7496798038482666,
+        "fusion_score": 0.5499359607696533,
+        "entity_ids": [
+          "\"WARNER BROS.\"",
+          "\"JAMES STEPHENSON\"",
+          "\"PHILO VANCE\"",
+          "\"CALLING PHILO VANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-073c380af5f6c538507570b8fb8fd622"
+        ],
+        "evidence_texts": [
+          "Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance.",
+          "Calling Philo Vance Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character; Margot Stevenson co-stars. The film also features Henry O'Neill, Edward Brophy, Sheila Bromley and Ralph Forbes. It was directed by William Clemens from a screenplay by Tom Reed, based on the 1933 novel \"The Kennel Murder Case\" by S. S. Van Dine, which had previously been made into a film in 1933, starring William Powell and Mary Astor. For this adaptation of the story, Vance is on international assignment from the United States government to investigate traffic in wartime aircraft designs. The original story dealt with art world double-dealing, but the solution to the mystery is the same in each film."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.74968,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549936
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His major credits include 'On Dress Parade' with the Dead End Kids, two Perry Mason mysteries ('The Case of the Velvet Claws' and 'The Case of the Stuttering Bishop'), three films featuring detective Tom Lawrence, a.k.a. 'The Falcon,' four films based on the Nancy Drew series, and 'Calling Philo Vance' in 1940.\"",
+        "hyperedge_text": "His major credits include 'On Dress Parade' with the Dead End Kids, two Perry Mason mysteries ('The Case of the Velvet Claws' and 'The Case of the Stuttering Bishop'), three films featuring detective Tom Lawrence, a.k.a. 'The Falcon,' four films based on the Nancy Drew series, and 'Calling Philo Vance' in 1940.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 1.0,
+        "fusion_score": 0.6000000000000001,
+        "entity_ids": [
+          "\"THE FALCON\"",
+          "\"DEAD END KIDS\"",
+          "\"PERRY MASON MYSTERIES\"",
+          "\"NANCY DREW SERIES\"",
+          "\"THE CASE OF THE STUTTERING BISHOP\"",
+          "\"THE CASE OF THE VELVET CLAWS\"",
+          "\"CALLING PHILO VANCE\"",
+          "\"TOM LAWRENCE\"",
+          "\"ON DRESS PARADE\""
+        ],
+        "chunk_ids": [
+          "chunk-c0a86f7250e4d6bcf0de7a2c537d5b95"
+        ],
+        "evidence_texts": [
+          "His major credits include 'On Dress Parade' with the Dead End Kids, two Perry Mason mysteries ('The Case of the Velvet Claws' and 'The Case of the Stuttering Bishop'), three films featuring detective Tom Lawrence, a.k.a. 'The Falcon,' four films based on the Nancy Drew series, and 'Calling Philo Vance' in 1940.",
+          "William Clemens (film director) William Clemens( September 10, 1905 – April 29, 1980) was an American film director. Born in Saginaw, Michigan, Clemens began his Hollywood career as a film editor in 1931. His first directing project was\" Man Hunt\" in 1936. His major credits include\" On Dress Parade\" with the Dead End Kids, two Perry Mason mysteries(\" The Case of the Velvet Claws\" and\" The Case of the Stuttering Bishop\"), three films featuring detective Tom Lawrence, a.k.a. \" The Falcon,\" four films based on the Nancy Drew series, and\" Calling Philo Vance\" in 1940. Clemens' final project was\" The Thirteenth Hour\" in 1947. He died in Los Angeles, California in 1980."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.6
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Margot Stevenson co-stars in the film Calling Philo Vance.\"",
+        "hyperedge_text": "Margot Stevenson co-stars in the film Calling Philo Vance.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7222780585289001,
+        "fusion_score": 0.54445561170578,
+        "entity_ids": [
+          "\"MARGOT STEVENSON\""
+        ],
+        "chunk_ids": [
+          "chunk-073c380af5f6c538507570b8fb8fd622"
+        ],
+        "evidence_texts": [
+          "Margot Stevenson co-stars in the film Calling Philo Vance.",
+          "Calling Philo Vance Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character; Margot Stevenson co-stars. The film also features Henry O'Neill, Edward Brophy, Sheila Bromley and Ralph Forbes. It was directed by William Clemens from a screenplay by Tom Reed, based on the 1933 novel \"The Kennel Murder Case\" by S. S. Van Dine, which had previously been made into a film in 1933, starring William Powell and Mary Astor. For this adaptation of the story, Vance is on international assignment from the United States government to investigate traffic in wartime aircraft designs. The original story dealt with art world double-dealing, but the solution to the mystery is the same in each film."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.722278,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.544456
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25314085483551024,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.253141
+        }
+      }
+    ],
+    "answer": "William Clemens",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'Calling Philo Vance' was directed by William Clemens, providing direct support for the answer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of The Witch'S Curse?",
+    "analysis": {
+      "entities": [
+        "The Witch'S Curse"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Witch's Curse is a 1962 peplum- fantasy film, directed by Riccardo Freda.\"",
+        "hyperedge_text": "The Witch's Curse is a 1962 peplum- fantasy film, directed by Riccardo Freda.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5989916324615479,
+        "fusion_score": 0.5197983264923096,
+        "entity_ids": [
+          "\"RICCARDO FREDA\"",
+          "\"THE WITCH'S CURSE\""
+        ],
+        "chunk_ids": [
+          "chunk-12f612a92193af1e8a9735ee7100b1c5"
+        ],
+        "evidence_texts": [
+          "The Witch's Curse is a 1962 peplum- fantasy film, directed by Riccardo Freda.",
+          "The Witch's Curse The Witch's Curse is a 1962 peplum- fantasy film, directed by Riccardo Freda."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.598992,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519798
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film, The Witch's Curse, is categorized in the peplum-fantasy genre.\"",
+        "hyperedge_text": "The film, The Witch's Curse, is categorized in the peplum-fantasy genre.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5296813249588013,
+        "fusion_score": 0.5059362649917603,
+        "entity_ids": [
+          "\"PEPLUM-FANTASY\"",
+          "\"THE WITCH'S CURSE\""
+        ],
+        "chunk_ids": [
+          "chunk-12f612a92193af1e8a9735ee7100b1c5"
+        ],
+        "evidence_texts": [
+          "The film, The Witch's Curse, is categorized in the peplum-fantasy genre.",
+          "The Witch's Curse The Witch's Curse is a 1962 peplum- fantasy film, directed by Riccardo Freda."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.529681,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505936
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He subsequently starred in several other peplum films, including 'The Witch's Curse' by Riccardo Freda.\"",
+        "hyperedge_text": "He subsequently starred in several other peplum films, including 'The Witch's Curse' by Riccardo Freda.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 1.0,
+        "fusion_score": 0.6000000000000001,
+        "entity_ids": [
+          "\"RICCARDO FREDA\"",
+          "\"PEPLUM FILMS\"",
+          "\"THE WITCH'S CURSE\""
+        ],
+        "chunk_ids": [
+          "chunk-c979c66c2df3c43b95f4b624b8830a99"
+        ],
+        "evidence_texts": [
+          "He subsequently starred in several other peplum films, including 'The Witch's Curse' by Riccardo Freda.",
+          "Kirk Morris Kirk Morris( born 26 August 1942) is an Italian Bodybuilder and actor. Winner of\" Mr. Italia Bodybuilding contest 1961 ” Born in Venice as Adriano Bellini, while at university Morris devoted himself to bodybuilding and thanks to his physique he was chosen by the director Tanio Boccia to play the title role in\" The Triumph of Maciste\". He subsequently starred in several other peplum films, including\" The Witch's Curse\" by Riccardo Freda. After the decline of the genre, he appeared in several adventure films, then he retired in the early 1970s. He was also an actor of Fotoromanzi."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.6
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Witch's Curse was released in 1962.\"",
+        "hyperedge_text": "The Witch's Curse was released in 1962.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5488028526306152,
+        "fusion_score": 0.5097605705261231,
+        "entity_ids": [
+          "\"1962\""
+        ],
+        "chunk_ids": [
+          "chunk-12f612a92193af1e8a9735ee7100b1c5"
+        ],
+        "evidence_texts": [
+          "The Witch's Curse was released in 1962.",
+          "The Witch's Curse The Witch's Curse is a 1962 peplum- fantasy film, directed by Riccardo Freda."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.548803,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.509761
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Kevin S. Tenney (born October 16, 1955) is an American film director, producer and screenwriter, best known for directing horror movies such as 'Witchboard' (1986) and 'Night of the Demons' (1988).\"",
+        "hyperedge_text": "Kevin S. Tenney (born October 16, 1955) is an American film director, producer and screenwriter, best known for directing horror movies such as 'Witchboard' (1986) and 'Night of the Demons' (1988).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4666255712509155,
+        "fusion_score": 0.4933251142501831,
+        "entity_ids": [
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\"",
+          "\"AMERICAN FILM DIRECTOR\"",
+          "\"KEVIN S. TENNEY\"",
+          "\"WITCHBOARD\"",
+          "\"OCTOBER 16, 1955\"",
+          "\"HORROR MOVIES\"",
+          "\"NIGHT OF THE DEMONS\""
+        ],
+        "chunk_ids": [
+          "chunk-001c810f7629d4319d33a2c15afcfac4"
+        ],
+        "evidence_texts": [
+          "Kevin S. Tenney (born October 16, 1955) is an American film director, producer and screenwriter, best known for directing horror movies such as 'Witchboard' (1986) and 'Night of the Demons' (1988).",
+          "Kevin S. Tenney Kevin S. Tenney( born October 16, 1955) is an American film director, producer and screenwriter, best known for directing horror movies such as\" Witchboard\"( 1986) and\" Night of the Demons\"( 1988)."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.466626,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.493325
+        }
+      }
+    ],
+    "answer": "Riccardo Freda",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'The Witch's Curse' is directed by Riccardo Freda.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Witch's Curse is a 1962 peplum- fantasy film, directed by Riccardo Freda.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the director of Calling Philo Vance die?",
+    "analysis": {
+      "entities": [
+        "William Clemens"
+      ],
+      "relations": [
+        "died on"
+      ],
+      "relation_query": "When did a person die?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"William Clemens was an American film director.\"",
+        "hyperedge_text": "William Clemens was an American film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6387583017349243,
+        "fusion_score": 0.527751660346985,
+        "entity_ids": [
+          "\"WILLIAM CLEMENS\""
+        ],
+        "chunk_ids": [
+          "chunk-c0a86f7250e4d6bcf0de7a2c537d5b95"
+        ],
+        "evidence_texts": [
+          "William Clemens was an American film director.",
+          "William Clemens (film director) William Clemens( September 10, 1905 – April 29, 1980) was an American film director. Born in Saginaw, Michigan, Clemens began his Hollywood career as a film editor in 1931. His first directing project was\" Man Hunt\" in 1936. His major credits include\" On Dress Parade\" with the Dead End Kids, two Perry Mason mysteries(\" The Case of the Velvet Claws\" and\" The Case of the Stuttering Bishop\"), three films featuring detective Tom Lawrence, a.k.a. \" The Falcon,\" four films based on the Nancy Drew series, and\" Calling Philo Vance\" in 1940. Clemens' final project was\" The Thirteenth Hour\" in 1947. He died in Los Angeles, California in 1980."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.638758,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527752
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by William Clemens.\"",
+        "hyperedge_text": "The film was directed by William Clemens.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5541715621948242,
+        "fusion_score": 0.5108343124389649,
+        "entity_ids": [
+          "\"WILLIAM CLEMENS\""
+        ],
+        "chunk_ids": [
+          "chunk-95ec274712981bd259c385aa6e055bde",
+          "chunk-7797f39b2ad4a632b40b7fb31db1f43a"
+        ],
+        "evidence_texts": [
+          "The film was directed by William Clemens.",
+          "Nancy Drew… Trouble Shooter Nancy Drew ... Trouble Shooter is a 1939 American comedy film directed by William Clemens and written by Kenneth Gamet. The film stars Bonita Granville, Frankie Thomas, John Litel, Aldrich Bowker, Charlotte Wynters and Edgar Edwards. The film was released by Warner Bros. on June 17, 1939.",
+          "Nancy Drew... Reporter Nancy Drew ... Reporter is a 1939 American mystery film directed by William Clemens and written by Kenneth Gamet. The film stars Bonita Granville as Nancy Drew, John Litel, Frankie Thomas, Mary Lee, Dickie Jones and Larry Williams. The film was released by Warner Bros. on February 18, 1939."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.554172,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510834
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"William Clemens (film director) was born on September 10, 1905, in Saginaw, Michigan.\"",
+        "hyperedge_text": "William Clemens (film director) was born on September 10, 1905, in Saginaw, Michigan.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6910214424133301,
+        "fusion_score": 0.5382042884826661,
+        "entity_ids": [
+          "\"SAGINAW, MICHIGAN\""
+        ],
+        "chunk_ids": [
+          "chunk-c0a86f7250e4d6bcf0de7a2c537d5b95"
+        ],
+        "evidence_texts": [
+          "William Clemens (film director) was born on September 10, 1905, in Saginaw, Michigan.",
+          "William Clemens (film director) William Clemens( September 10, 1905 – April 29, 1980) was an American film director. Born in Saginaw, Michigan, Clemens began his Hollywood career as a film editor in 1931. His first directing project was\" Man Hunt\" in 1936. His major credits include\" On Dress Parade\" with the Dead End Kids, two Perry Mason mysteries(\" The Case of the Velvet Claws\" and\" The Case of the Stuttering Bishop\"), three films featuring detective Tom Lawrence, a.k.a. \" The Falcon,\" four films based on the Nancy Drew series, and\" Calling Philo Vance\" in 1940. Clemens' final project was\" The Thirteenth Hour\" in 1947. He died in Los Angeles, California in 1980."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.691021,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.538204
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable director, William Clemens.\"",
+        "hyperedge_text": "The film was directed by a notable director, William Clemens.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"WILLIAM CLEMENS\""
+        ],
+        "chunk_ids": [
+          "chunk-95ec274712981bd259c385aa6e055bde"
+        ],
+        "evidence_texts": [
+          "The film was directed by a notable director, William Clemens.",
+          "Nancy Drew… Trouble Shooter Nancy Drew ... Trouble Shooter is a 1939 American comedy film directed by William Clemens and written by Kenneth Gamet. The film stars Bonita Granville, Frankie Thomas, John Litel, Aldrich Bowker, Charlotte Wynters and Edgar Edwards. The film was released by Warner Bros. on June 17, 1939."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nancy Drew ... Trouble Shooter is a 1939 American comedy film directed by William Clemens and written by Kenneth Gamet.\"",
+        "hyperedge_text": "Nancy Drew ... Trouble Shooter is a 1939 American comedy film directed by William Clemens and written by Kenneth Gamet.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"KENNETH GAMET\"",
+          "\"WILLIAM CLEMENS\"",
+          "\"NANCY DREW ... TROUBLE SHOOTER\""
+        ],
+        "chunk_ids": [
+          "chunk-95ec274712981bd259c385aa6e055bde"
+        ],
+        "evidence_texts": [
+          "Nancy Drew ... Trouble Shooter is a 1939 American comedy film directed by William Clemens and written by Kenneth Gamet.",
+          "Nancy Drew… Trouble Shooter Nancy Drew ... Trouble Shooter is a 1939 American comedy film directed by William Clemens and written by Kenneth Gamet. The film stars Bonita Granville, Frankie Thomas, John Litel, Aldrich Bowker, Charlotte Wynters and Edgar Edwards. The film was released by Warner Bros. on June 17, 1939."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ],
+    "answer": "April 29, 1980",
+    "confidence": 0.9,
+    "reasoning_summary": "William Clemens, the director of 'Calling Philo Vance', died on April 29, 1980, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"William Clemens was an American film director.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "When did the director of The Witch'S Curse die?",
+    "analysis": {
+      "entities": [
+        "Riccardo Freda"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Riccardo Freda (Alexandria, Egypt, 24 February 1909 – Rome, Italy, 20 December 1999) was an Italian film director.\"",
+        "hyperedge_text": "Riccardo Freda (Alexandria, Egypt, 24 February 1909 – Rome, Italy, 20 December 1999) was an Italian film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7463884353637695,
+        "fusion_score": 0.5492776870727539,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"ITALY\"",
+          "\"ALEXANDRIA\"",
+          "\"RICCARDO FREDA\""
+        ],
+        "chunk_ids": [
+          "chunk-618439fd731e9dcbcafcd0f4a4dce842"
+        ],
+        "evidence_texts": [
+          "Riccardo Freda (Alexandria, Egypt, 24 February 1909 – Rome, Italy, 20 December 1999) was an Italian film director.",
+          "Riccardo Freda Riccardo Freda( Alexandria, Egypt, 24 February 1909 – Rome, Italy, 20 December 1999) was an Italian film director. He worked in a variety of genres, including sword- and- sandal, horror,\" giallo\" and spy films. Freda began directing\" I Vampiri\" in 1956 but left the production midway to have it completed by Mario Bava. The film became the first Italian sound horror film production."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.746388,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549278
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"During the late 1950s, his eventual career trajectory as a director began when he was relied upon to complete projects begun by or credited to his colleague Riccardo Freda and other filmmakers.\"",
+        "hyperedge_text": "During the late 1950s, his eventual career trajectory as a director began when he was relied upon to complete projects begun by or credited to his colleague Riccardo Freda and other filmmakers.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49773573875427246,
+        "fusion_score": 0.4995471477508545,
+        "entity_ids": [
+          "\"RICCARDO FREDA\""
+        ],
+        "chunk_ids": [
+          "chunk-27a319f243422ddebd49130ce909f09b"
+        ],
+        "evidence_texts": [
+          "During the late 1950s, his eventual career trajectory as a director began when he was relied upon to complete projects begun by or credited to his colleague Riccardo Freda and other filmmakers.",
+          "Mario Bava Mario Bava( 31 July 1914 – 27 April 1980) was an Italian cinematographer, director, special effects artist and screenwriter, frequently referred to as the\" Master of Italian Horror\" and the\" Master of the Macabre\". His low- budget genre films, known for their distinctive visual flair and technical ingenuity, feature recurring themes and imagery concerning the conflict between illusion and reality, and the destructive capacity of human nature. Born to sculptor, cinematographer and special effects pioneer Eugenio Bava, the younger Bava followed his father into the film industry, and eventually earned a reputation as one of Italy's foremost cameramen, lighting and providing the special effects for such films as\" Hercules\"( 1958) and its sequel\" Hercules Unchained\"( 1959)( each were lampooned on\" Mystery Science Theater 3000\"). During the late 1950s, his eventual career traject..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.497736,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499547
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Riccardo Freda died on 20 December 1999 in Rome, Italy.\"",
+        "hyperedge_text": "Riccardo Freda died on 20 December 1999 in Rome, Italy.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8018982410430908,
+        "fusion_score": 0.5603796482086182,
+        "entity_ids": [
+          "\"20 DECEMBER 1999\""
+        ],
+        "chunk_ids": [
+          "chunk-618439fd731e9dcbcafcd0f4a4dce842"
+        ],
+        "evidence_texts": [
+          "Riccardo Freda died on 20 December 1999 in Rome, Italy.",
+          "Riccardo Freda Riccardo Freda( Alexandria, Egypt, 24 February 1909 – Rome, Italy, 20 December 1999) was an Italian film director. He worked in a variety of genres, including sword- and- sandal, horror,\" giallo\" and spy films. Freda began directing\" I Vampiri\" in 1956 but left the production midway to have it completed by Mario Bava. The film became the first Italian sound horror film production."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.801898,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.56038
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Riccardo Freda was born on 24 February 1909 in Alexandria, Egypt.\"",
+        "hyperedge_text": "Riccardo Freda was born on 24 February 1909 in Alexandria, Egypt.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6986548900604248,
+        "fusion_score": 0.539730978012085,
+        "entity_ids": [
+          "\"24 FEBRUARY 1909\""
+        ],
+        "chunk_ids": [
+          "chunk-618439fd731e9dcbcafcd0f4a4dce842"
+        ],
+        "evidence_texts": [
+          "Riccardo Freda was born on 24 February 1909 in Alexandria, Egypt.",
+          "Riccardo Freda Riccardo Freda( Alexandria, Egypt, 24 February 1909 – Rome, Italy, 20 December 1999) was an Italian film director. He worked in a variety of genres, including sword- and- sandal, horror,\" giallo\" and spy films. Freda began directing\" I Vampiri\" in 1956 but left the production midway to have it completed by Mario Bava. The film became the first Italian sound horror film production."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.698655,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.539731
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He subsequently starred in several other peplum films, including 'The Witch's Curse' by Riccardo Freda.\"",
+        "hyperedge_text": "He subsequently starred in several other peplum films, including 'The Witch's Curse' by Riccardo Freda.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"RICCARDO FREDA\"",
+          "\"PEPLUM FILMS\"",
+          "\"THE WITCH'S CURSE\""
+        ],
+        "chunk_ids": [
+          "chunk-c979c66c2df3c43b95f4b624b8830a99"
+        ],
+        "evidence_texts": [
+          "He subsequently starred in several other peplum films, including 'The Witch's Curse' by Riccardo Freda.",
+          "Kirk Morris Kirk Morris( born 26 August 1942) is an Italian Bodybuilder and actor. Winner of\" Mr. Italia Bodybuilding contest 1961 ” Born in Venice as Adriano Bellini, while at university Morris devoted himself to bodybuilding and thanks to his physique he was chosen by the director Tanio Boccia to play the title role in\" The Triumph of Maciste\". He subsequently starred in several other peplum films, including\" The Witch's Curse\" by Riccardo Freda. After the decline of the genre, he appeared in several adventure films, then he retired in the early 1970s. He was also an actor of Fotoromanzi."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ],
+    "answer": "20 December 1999",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence states that Riccardo Freda died on 20 December 1999 in Rome, Italy.",
+    "used_dependencies": [
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Riccardo Freda died on 20 December 1999 in Rome, Italy.\""
+    ]
+  },
+  {
+    "node_id": "q5",
+    "question": "When did the director of Calling Philo Vance die?",
+    "analysis": {
+      "entities": [
+        "Calling Philo Vance",
+        "William Clemens"
+      ],
+      "relations": [
+        "director of",
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of the director of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character.\"",
+        "hyperedge_text": "Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.6817407608032227,
+        "fusion_score": 0.3363481521606445,
+        "entity_ids": [
+          "\"JAMES STEPHENSON\"",
+          "\"CALLING PHILO VANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-073c380af5f6c538507570b8fb8fd622"
+        ],
+        "evidence_texts": [
+          "Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character.",
+          "Calling Philo Vance Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character; Margot Stevenson co-stars. The film also features Henry O'Neill, Edward Brophy, Sheila Bromley and Ralph Forbes. It was directed by William Clemens from a screenplay by Tom Reed, based on the 1933 novel \"The Kennel Murder Case\" by S. S. Van Dine, which had previously been made into a film in 1933, starring William Powell and Mary Astor. For this adaptation of the story, Vance is on international assignment from the United States government to investigate traffic in wartime aircraft designs. The original story dealt with art world double-dealing, but the solution to the mystery is the same in each film."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.681741,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.336348
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance.\"",
+        "hyperedge_text": "Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.6769422292709351,
+        "fusion_score": 0.33538844585418703,
+        "entity_ids": [
+          "\"WARNER BROS.\"",
+          "\"JAMES STEPHENSON\"",
+          "\"PHILO VANCE\"",
+          "\"CALLING PHILO VANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-073c380af5f6c538507570b8fb8fd622"
+        ],
+        "evidence_texts": [
+          "Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance.",
+          "Calling Philo Vance Calling Philo Vance is a 1940 American mystery/comedy released by Warner Bros. and starring James Stephenson as the dilettante detective Philo Vance, his only appearance as the character; Margot Stevenson co-stars. The film also features Henry O'Neill, Edward Brophy, Sheila Bromley and Ralph Forbes. It was directed by William Clemens from a screenplay by Tom Reed, based on the 1933 novel \"The Kennel Murder Case\" by S. S. Van Dine, which had previously been made into a film in 1933, starring William Powell and Mary Astor. For this adaptation of the story, Vance is on international assignment from the United States government to investigate traffic in wartime aircraft designs. The original story dealt with art world double-dealing, but the solution to the mystery is the same in each film."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.676942,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.335388
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"William Clemens was an American film director.\"",
+        "hyperedge_text": "William Clemens was an American film director.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.8,
+        "fusion_score": 0.7600000000000001,
+        "entity_ids": [
+          "\"WILLIAM CLEMENS\""
+        ],
+        "chunk_ids": [
+          "chunk-c0a86f7250e4d6bcf0de7a2c537d5b95"
+        ],
+        "evidence_texts": [
+          "William Clemens was an American film director.",
+          "William Clemens (film director) William Clemens( September 10, 1905 – April 29, 1980) was an American film director. Born in Saginaw, Michigan, Clemens began his Hollywood career as a film editor in 1931. His first directing project was\" Man Hunt\" in 1936. His major credits include\" On Dress Parade\" with the Dead End Kids, two Perry Mason mysteries(\" The Case of the Velvet Claws\" and\" The Case of the Stuttering Bishop\"), three films featuring detective Tom Lawrence, a.k.a. \" The Falcon,\" four films based on the Nancy Drew series, and\" Calling Philo Vance\" in 1940. Clemens' final project was\" The Thirteenth Hour\" in 1947. He died in Los Angeles, California in 1980."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.8,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.76
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable director, William Clemens.\"",
+        "hyperedge_text": "The film was directed by a notable director, William Clemens.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.2,
+        "fusion_score": 0.6400000000000001,
+        "entity_ids": [
+          "\"WILLIAM CLEMENS\""
+        ],
+        "chunk_ids": [
+          "chunk-95ec274712981bd259c385aa6e055bde"
+        ],
+        "evidence_texts": [
+          "The film was directed by a notable director, William Clemens.",
+          "Nancy Drew… Trouble Shooter Nancy Drew ... Trouble Shooter is a 1939 American comedy film directed by William Clemens and written by Kenneth Gamet. The film stars Bonita Granville, Frankie Thomas, John Litel, Aldrich Bowker, Charlotte Wynters and Edgar Edwards. The film was released by Warner Bros. on June 17, 1939."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.64
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His major credits include 'On Dress Parade' with the Dead End Kids, two Perry Mason mysteries ('The Case of the Velvet Claws' and 'The Case of the Stuttering Bishop'), three films featuring detective Tom Lawrence, a.k.a. 'The Falcon,' four films based on the Nancy Drew series, and 'Calling Philo Vance' in 1940.\"",
+        "hyperedge_text": "His major credits include 'On Dress Parade' with the Dead End Kids, two Perry Mason mysteries ('The Case of the Velvet Claws' and 'The Case of the Stuttering Bishop'), three films featuring detective Tom Lawrence, a.k.a. 'The Falcon,' four films based on the Nancy Drew series, and 'Calling Philo Vance' in 1940.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.8,
+        "fusion_score": 0.36000000000000004,
+        "entity_ids": [
+          "\"THE FALCON\"",
+          "\"DEAD END KIDS\"",
+          "\"PERRY MASON MYSTERIES\"",
+          "\"NANCY DREW SERIES\"",
+          "\"THE CASE OF THE STUTTERING BISHOP\"",
+          "\"THE CASE OF THE VELVET CLAWS\"",
+          "\"CALLING PHILO VANCE\"",
+          "\"TOM LAWRENCE\"",
+          "\"ON DRESS PARADE\""
+        ],
+        "chunk_ids": [
+          "chunk-c0a86f7250e4d6bcf0de7a2c537d5b95"
+        ],
+        "evidence_texts": [
+          "His major credits include 'On Dress Parade' with the Dead End Kids, two Perry Mason mysteries ('The Case of the Velvet Claws' and 'The Case of the Stuttering Bishop'), three films featuring detective Tom Lawrence, a.k.a. 'The Falcon,' four films based on the Nancy Drew series, and 'Calling Philo Vance' in 1940.",
+          "William Clemens (film director) William Clemens( September 10, 1905 – April 29, 1980) was an American film director. Born in Saginaw, Michigan, Clemens began his Hollywood career as a film editor in 1931. His first directing project was\" Man Hunt\" in 1936. His major credits include\" On Dress Parade\" with the Dead End Kids, two Perry Mason mysteries(\" The Case of the Velvet Claws\" and\" The Case of the Stuttering Bishop\"), three films featuring detective Tom Lawrence, a.k.a. \" The Falcon,\" four films based on the Nancy Drew series, and\" Calling Philo Vance\" in 1940. Clemens' final project was\" The Thirteenth Hour\" in 1947. He died in Los Angeles, California in 1980."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.8,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.36
+        }
+      }
+    ],
+    "answer": "April 29, 1980",
+    "confidence": 0.9,
+    "reasoning_summary": "William Clemens, the director of 'Calling Philo Vance', died on April 29, 1980, as stated in the evidence.",
+    "used_dependencies": [
+      "q2",
+      "q4"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"William Clemens was an American film director.\""
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "node_id": "q1",
+    "question": "In which country is St. Mary's School, Patiala located?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "In which country is Apeejay Education Society located?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the country of St. Mary's School, Patiala?",
+    "dependencies": [
+      "q1",
+      "q2"
+    ],
+    "metadata": {
+      "operator": "COMPARE_SAME"
+    }
+  }
+]

@@ -1,0 +1,3532 @@
+[
+  {
+    "node_id": "q1",
+    "question": "In which country is St. Mary's School, Patiala located?",
+    "retrieval_question": "In which country is St. Mary's School, Patiala located?",
+    "dependency_question_rewrite": {
+      "original_question": "In which country is St. Mary's School, Patiala located?",
+      "retrieval_question": "In which country is St. Mary's School, Patiala located?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+        "entity_ids": [
+          "\"ST. MARY'S SCHOOL\"",
+          "\"SOCIETY OF JESUS\"",
+          "\"SANGAMNER\"",
+          "\"ST. MARY'S PARISH\"",
+          "\"MAHARASHTRA STATE BOARD FOR SECONDARY AND HIGHER EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-bf7e1b91972e00b82242d3b95f28cfcd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+            "St. Mary's School, Sangamner St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations. The school is affiliated to the Maharashtra State Board for Secondary and Higher Education."
+          ],
+          "relation_texts": [
+            "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+            "link",
+            "ST. MARY'S SCHOOL",
+            "SOCIETY OF JESUS",
+            "SANGAMNER",
+            "ST. MARY'S PARISH",
+            "MAHARASHTRA STATE BOARD FOR SECONDARY AND HIGHER EDUCATION"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The school is affiliated to the Maharashtra State Board for Secondary and Higher Education.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "The school is affiliated to the Maharashtra State Board for Secondary and Higher Education.",
+        "entity_ids": [
+          "\"ST. MARY'S SCHOOL\"",
+          "\"MAHARASHTRA STATE BOARD FOR SECONDARY AND HIGHER EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-bf7e1b91972e00b82242d3b95f28cfcd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The school is affiliated to the Maharashtra State Board for Secondary and Higher Education.",
+            "St. Mary's School, Sangamner St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations. The school is affiliated to the Maharashtra State Board for Secondary and Higher Education."
+          ],
+          "relation_texts": [
+            "The school is affiliated to the Maharashtra State Board for Secondary and Higher Education.",
+            "link",
+            "ST. MARY'S SCHOOL",
+            "MAHARASHTRA STATE BOARD FOR SECONDARY AND HIGHER EDUCATION"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School was opened by the Society of Jesus in 1892.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "St. Mary's School was opened by the Society of Jesus in 1892.",
+        "entity_ids": [
+          "\"ST. MARY'S SCHOOL\"",
+          "\"SOCIETY OF JESUS\""
+        ],
+        "chunk_ids": [
+          "chunk-bf7e1b91972e00b82242d3b95f28cfcd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School was opened by the Society of Jesus in 1892.",
+            "St. Mary's School, Sangamner St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations. The school is affiliated to the Maharashtra State Board for Secondary and Higher Education."
+          ],
+          "relation_texts": [
+            "St. Mary's School was opened by the Society of Jesus in 1892.",
+            "link",
+            "ST. MARY'S SCHOOL",
+            "SOCIETY OF JESUS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"2000\"",
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"CAREER ACADEMY SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-62fee97dc4810e3df9ce75e49142c5fe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "Career Academy, Patiala Career Academy School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2000 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "2000",
+            "PUNJAB",
+            "INDIA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION",
+            "CAREER ACADEMY SCHOOL",
+            "PATIALA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"ST. MARY'S SCHOOL, PATIALA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA\"",
+          "\"PATIALA\"",
+          "\"HIGHER-SECONDARY CO-EDUCATION PRIVATE SCHOOL\""
+        ],
+        "chunk_ids": [
+          "chunk-f9b6af81e8be7956f6e09f64490f2e12"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "St. Mary's School, Patiala St. Mary's School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2004 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "ST. MARY'S SCHOOL, PATIALA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA",
+            "PATIALA",
+            "HIGHER-SECONDARY CO-EDUCATION PRIVATE SCHOOL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Patiala city is located in Punjab, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Patiala city is located in Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-f9b6af81e8be7956f6e09f64490f2e12"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Patiala city is located in Punjab, India.",
+            "St. Mary's School, Patiala St. Mary's School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2004 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Patiala city is located in Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "PATIALA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"GURU HARKRISHAN PUBLIC SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION",
+            "GURU HARKRISHAN PUBLIC SCHOOL",
+            "PATIALA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Calvary Christian High School is in the United States.\"",
+        "branch": "relation",
+        "raw_score": 0.46553438901901245,
+        "hyperedge_text": "Calvary Christian High School is in the United States.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-47217eeed4cd3faacb167b4fe60aecc6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Calvary Christian High School is in the United States.",
+            "Calvary Christian High School (Florida) Calvary Christian High School is a private, college preparatory Christian high school in Clearwater, Florida, in the United States."
+          ],
+          "relation_texts": [
+            "Calvary Christian High School is in the United States.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-05345ee32fcae37408923d2c428171d5",
+            "hyperedge_name": "<hyperedge>\"Calvary Christian High School is in the United States.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The school is located in the Patiala city of Punjab, India.\"",
+        "branch": "relation",
+        "raw_score": 0.4611220359802246,
+        "hyperedge_text": "The school is located in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PATIALA CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The school is located in the Patiala city of Punjab, India.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "The school is located in the Patiala city of Punjab, India.",
+            "link",
+            "PATIALA CITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7f4283649088fa0c2c486ea176ca75d3",
+            "hyperedge_name": "<hyperedge>\"The school is located in the Patiala city of Punjab, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St Mary's School's location details illustrate its diverse geographic context within England.\"",
+        "branch": "relation",
+        "raw_score": 0.43707579374313354,
+        "hyperedge_text": "St Mary's School's location details illustrate its diverse geographic context within England.",
+        "entity_ids": [
+          "\"GEOGRAPHIC CONTEXT\""
+        ],
+        "chunk_ids": [
+          "chunk-f35164ce685de3d445b2c2089ac1941f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St Mary's School's location details illustrate its diverse geographic context within England.",
+            "St Mary's School, Shaftesbury St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England. St Mary's School has a sixth form and is a member of the Girls' Schools Association. Although the school's postal address is in Dorset, its site lies just over the county border in Wiltshire, within the parish of Donhead St Mary."
+          ],
+          "relation_texts": [
+            "St Mary's School's location details illustrate its diverse geographic context within England.",
+            "link",
+            "GEOGRAPHIC CONTEXT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-74a13f0f4f18aa1170c29f1b7e1b6937",
+            "hyperedge_name": "<hyperedge>\"St Mary's School's location details illustrate its diverse geographic context within England.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The United States is the country where Thornwood High School is located.\"",
+        "branch": "relation",
+        "raw_score": 0.433388352394104,
+        "hyperedge_text": "The United States is the country where Thornwood High School is located.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-731ad25932d6d464407da7b8549a559a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The United States is the country where Thornwood High School is located.",
+            "Thornwood High School Thornwood High School is a public high school located in South Holland, Illinois, United States. It was built as part of Thornton Township High School District 205."
+          ],
+          "relation_texts": [
+            "The United States is the country where Thornwood High School is located.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4190134f91ea0756e68d185c04620173",
+            "hyperedge_name": "<hyperedge>\"The United States is the country where Thornwood High School is located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"El Salvador is the country where the university operates.\"",
+        "branch": "relation",
+        "raw_score": 0.41380810737609863,
+        "hyperedge_text": "El Salvador is the country where the university operates.",
+        "entity_ids": [
+          "\"EL SALVADOR\""
+        ],
+        "chunk_ids": [
+          "chunk-c9bfe3d72c25784a2e49c1b10bb7e87e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "El Salvador is the country where the university operates.",
+            "Universidad Autónoma de Santa Ana The Universidad Autónoma de Santa Ana is a university in Santa Ana, El Salvador."
+          ],
+          "relation_texts": [
+            "El Salvador is the country where the university operates.",
+            "link",
+            "EL SALVADOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2e5124059d5fb380dd20745c4842207a",
+            "hyperedge_name": "<hyperedge>\"El Salvador is the country where the university operates.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.\"",
+        "branch": "relation",
+        "raw_score": 0.40318822860717773,
+        "hyperedge_text": "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+        "entity_ids": [
+          "\"ENGLAND\"",
+          "\"ST MARY'S SCHOOL\"",
+          "\"RURAL SETTING\"",
+          "\"INDEPENDENT ROMAN CATHOLIC DAY AND BOARDING SCHOOL\"",
+          "\"SHAFTESBURY\"",
+          "\"GIRLS\""
+        ],
+        "chunk_ids": [
+          "chunk-f35164ce685de3d445b2c2089ac1941f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+            "St Mary's School, Shaftesbury St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England. St Mary's School has a sixth form and is a member of the Girls' Schools Association. Although the school's postal address is in Dorset, its site lies just over the county border in Wiltshire, within the parish of Donhead St Mary."
+          ],
+          "relation_texts": [
+            "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+            "link",
+            "ENGLAND",
+            "ST MARY'S SCHOOL",
+            "RURAL SETTING",
+            "INDEPENDENT ROMAN CATHOLIC DAY AND BOARDING SCHOOL",
+            "SHAFTESBURY",
+            "GIRLS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3754c2ecde5f158790f255f90c909f4f",
+            "hyperedge_name": "<hyperedge>\"St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Free school may refer to different educational approaches around the world.\"",
+        "branch": "relation",
+        "raw_score": 0.4027101695537567,
+        "hyperedge_text": "Free school may refer to different educational approaches around the world.",
+        "entity_ids": [
+          "\"WORLD\"",
+          "\"EDUCATIONAL APPROACHES\""
+        ],
+        "chunk_ids": [
+          "chunk-2aa6e064a7f4014088b4794a01d500e8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Free school may refer to different educational approaches around the world.",
+            "Free school Free school may refer to:"
+          ],
+          "relation_texts": [
+            "Free school may refer to different educational approaches around the world.",
+            "link",
+            "WORLD",
+            "EDUCATIONAL APPROACHES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-53e769f5df1148d02ee670028038a96b",
+            "hyperedge_name": "<hyperedge>\"Free school may refer to different educational approaches around the world.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The school is affiliated to the Central Board of Secondary Education of India.\"",
+        "branch": "relation",
+        "raw_score": 0.39743244647979736,
+        "hyperedge_text": "The school is affiliated to the Central Board of Secondary Education of India.",
+        "entity_ids": [
+          "\"AFFILIATION\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The school is affiliated to the Central Board of Secondary Education of India.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "The school is affiliated to the Central Board of Secondary Education of India.",
+            "link",
+            "AFFILIATION",
+            "CENTRAL BOARD OF SECONDARY EDUCATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-732e47f13e7e12e4f65877d843dc6b3a",
+            "hyperedge_name": "<hyperedge>\"The school is affiliated to the Central Board of Secondary Education of India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Covenant Christian High School is part of the larger educational landscape of the United States.\"",
+        "branch": "relation",
+        "raw_score": 0.39414602518081665,
+        "hyperedge_text": "Covenant Christian High School is part of the larger educational landscape of the United States.",
+        "entity_ids": [
+          "\"EDUCATIONAL LANDSCAPE\""
+        ],
+        "chunk_ids": [
+          "chunk-3ddda9a1dbf0929a81c368a62b56d2c3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Covenant Christian High School is part of the larger educational landscape of the United States.",
+            "Covenant Christian High School (DeMotte, Indiana) Covenant Christian High School is a private Christian high school located in DeMotte, Indiana, United States."
+          ],
+          "relation_texts": [
+            "Covenant Christian High School is part of the larger educational landscape of the United States.",
+            "link",
+            "EDUCATIONAL LANDSCAPE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f63da50f2ead303b325e83641d458f63",
+            "hyperedge_name": "<hyperedge>\"Covenant Christian High School is part of the larger educational landscape of the United States.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Penang Free School, located at Green Lane in George Town, Penang, Malaysia, is the oldest English-medium school in Southeast Asia.\"",
+        "branch": "relation",
+        "raw_score": 0.39072829484939575,
+        "hyperedge_text": "Penang Free School, located at Green Lane in George Town, Penang, Malaysia, is the oldest English-medium school in Southeast Asia.",
+        "entity_ids": [
+          "\"MALAYSIA\"",
+          "\"PENANG FREE SCHOOL\"",
+          "\"GREEN LANE\"",
+          "\"GEORGE TOWN\"",
+          "\"PENANG\""
+        ],
+        "chunk_ids": [
+          "chunk-885fa70a762370cfc83b9d9f7719adf3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Penang Free School, located at Green Lane in George Town, Penang, Malaysia, is the oldest English-medium school in Southeast Asia.",
+            "Penang Free School Penang Free School, located at Green Lane in George Town, Penang, Malaysia, is the oldest English- medium school in Southeast Asia. Founded in 1816, it is notable for its academic achievements, leading to its inclusion in the Malaysian Ministry of Education's Cluster School and High Performance School systems. This secondary school has been an all- boys school since its inception, although girls are now admitted for Form 6. In addition, the school is renowned for producing several notable Malaysian and Singaporean personalities, including Tunku Abdul Rahman, P. Ramlee, Wu Lien- teh and Wee Chong Jin; its alumni are known as the\"' Old Frees\"'. To this day, Penang Free School maintains its historical rivalry with St. Xavier's Institution, another premier school in George Town which also claims the honour of being Malaysia's oldest school."
+          ],
+          "relation_texts": [
+            "Penang Free School, located at Green Lane in George Town, Penang, Malaysia, is the oldest English-medium school in Southeast Asia.",
+            "link",
+            "MALAYSIA",
+            "PENANG FREE SCHOOL",
+            "GREEN LANE",
+            "GEORGE TOWN",
+            "PENANG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-612205671abf060e9ba315e7e1e70cb4",
+            "hyperedge_name": "<hyperedge>\"Penang Free School, located at Green Lane in George Town, Penang, Malaysia, is the oldest English-medium school in Southeast Asia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "semantic",
+        "raw_score": 0.8155009746551514,
+        "hyperedge_text": "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"ST. MARY'S SCHOOL, PATIALA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA\"",
+          "\"PATIALA\"",
+          "\"HIGHER-SECONDARY CO-EDUCATION PRIVATE SCHOOL\""
+        ],
+        "chunk_ids": [
+          "chunk-f9b6af81e8be7956f6e09f64490f2e12"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "St. Mary's School, Patiala St. Mary's School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2004 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "ST. MARY'S SCHOOL, PATIALA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA",
+            "PATIALA",
+            "HIGHER-SECONDARY CO-EDUCATION PRIVATE SCHOOL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4946a6c1529ecb1375080b19fe442377",
+            "hyperedge_name": "<hyperedge>\"St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Patiala is affiliated to the Central Board of Secondary Education of India.\"",
+        "branch": "semantic",
+        "raw_score": 0.7423173189163208,
+        "hyperedge_text": "St. Mary's School, Patiala is affiliated to the Central Board of Secondary Education of India.",
+        "entity_ids": [
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-f9b6af81e8be7956f6e09f64490f2e12"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School, Patiala is affiliated to the Central Board of Secondary Education of India.",
+            "St. Mary's School, Patiala St. Mary's School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2004 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "St. Mary's School, Patiala is affiliated to the Central Board of Secondary Education of India.",
+            "link",
+            "CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c1b18f232b7a73ff02f7306bb2a6bf8c",
+            "hyperedge_name": "<hyperedge>\"St. Mary's School, Patiala is affiliated to the Central Board of Secondary Education of India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The school is located in the Patiala city of Punjab, India.\"",
+        "branch": "semantic",
+        "raw_score": 0.6270732879638672,
+        "hyperedge_text": "The school is located in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PATIALA CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The school is located in the Patiala city of Punjab, India.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "The school is located in the Patiala city of Punjab, India.",
+            "link",
+            "PATIALA CITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7f4283649088fa0c2c486ea176ca75d3",
+            "hyperedge_name": "<hyperedge>\"The school is located in the Patiala city of Punjab, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "semantic",
+        "raw_score": 0.5858312845230103,
+        "hyperedge_text": "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"GURU HARKRISHAN PUBLIC SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION",
+            "GURU HARKRISHAN PUBLIC SCHOOL",
+            "PATIALA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-53ec825b909ee6766d07e5aefcb03f9a",
+            "hyperedge_name": "<hyperedge>\"Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.\"",
+        "branch": "semantic",
+        "raw_score": 0.5817878246307373,
+        "hyperedge_text": "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+        "entity_ids": [
+          "\"ST. MARY'S SCHOOL\"",
+          "\"SOCIETY OF JESUS\"",
+          "\"SANGAMNER\"",
+          "\"ST. MARY'S PARISH\"",
+          "\"MAHARASHTRA STATE BOARD FOR SECONDARY AND HIGHER EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-bf7e1b91972e00b82242d3b95f28cfcd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+            "St. Mary's School, Sangamner St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations. The school is affiliated to the Maharashtra State Board for Secondary and Higher Education."
+          ],
+          "relation_texts": [
+            "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+            "link",
+            "ST. MARY'S SCHOOL",
+            "SOCIETY OF JESUS",
+            "SANGAMNER",
+            "ST. MARY'S PARISH",
+            "MAHARASHTRA STATE BOARD FOR SECONDARY AND HIGHER EDUCATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6f137224cab77a2909aac4f6f1d3950e",
+            "hyperedge_name": "<hyperedge>\"St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "semantic",
+        "raw_score": 0.5766948461532593,
+        "hyperedge_text": "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"2000\"",
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"CAREER ACADEMY SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-62fee97dc4810e3df9ce75e49142c5fe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "Career Academy, Patiala Career Academy School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2000 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "2000",
+            "PUNJAB",
+            "INDIA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION",
+            "CAREER ACADEMY SCHOOL",
+            "PATIALA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3dba38b0b5f6ac0229feaae0dfe95dc4",
+            "hyperedge_name": "<hyperedge>\"Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school.\"",
+        "branch": "semantic",
+        "raw_score": 0.5488016605377197,
+        "hyperedge_text": "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school.",
+        "entity_ids": [
+          "\"GURU HARKRISHAN PUBLIC SCHOOL\"",
+          "\"CO-EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school.",
+            "link",
+            "GURU HARKRISHAN PUBLIC SCHOOL",
+            "CO-EDUCATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4487bdba4f53af80bf3833090a07207b",
+            "hyperedge_name": "<hyperedge>\"Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.\"",
+        "branch": "semantic",
+        "raw_score": 0.544489860534668,
+        "hyperedge_text": "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+        "entity_ids": [
+          "\"ENGLAND\"",
+          "\"ST MARY'S SCHOOL\"",
+          "\"RURAL SETTING\"",
+          "\"INDEPENDENT ROMAN CATHOLIC DAY AND BOARDING SCHOOL\"",
+          "\"SHAFTESBURY\"",
+          "\"GIRLS\""
+        ],
+        "chunk_ids": [
+          "chunk-f35164ce685de3d445b2c2089ac1941f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+            "St Mary's School, Shaftesbury St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England. St Mary's School has a sixth form and is a member of the Girls' Schools Association. Although the school's postal address is in Dorset, its site lies just over the county border in Wiltshire, within the parish of Donhead St Mary."
+          ],
+          "relation_texts": [
+            "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+            "link",
+            "ENGLAND",
+            "ST MARY'S SCHOOL",
+            "RURAL SETTING",
+            "INDEPENDENT ROMAN CATHOLIC DAY AND BOARDING SCHOOL",
+            "SHAFTESBURY",
+            "GIRLS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3754c2ecde5f158790f255f90c909f4f",
+            "hyperedge_name": "<hyperedge>\"St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Patiala is a city in the Punjab state of India.\"",
+        "branch": "semantic",
+        "raw_score": 0.5286129713058472,
+        "hyperedge_text": "Patiala is a city in the Punjab state of India.",
+        "entity_ids": [
+          "\"CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-62fee97dc4810e3df9ce75e49142c5fe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Patiala is a city in the Punjab state of India.",
+            "Career Academy, Patiala Career Academy School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2000 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Patiala is a city in the Punjab state of India.",
+            "link",
+            "CITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7d0a197b44960093978e2d0e02004f9c",
+            "hyperedge_name": "<hyperedge>\"Patiala is a city in the Punjab state of India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Career Academy School is a higher-secondary co-education private school in Patiala.\"",
+        "branch": "semantic",
+        "raw_score": 0.5259830355644226,
+        "hyperedge_text": "Career Academy School is a higher-secondary co-education private school in Patiala.",
+        "entity_ids": [
+          "\"CAREER ACADEMY\"",
+          "\"HIGHER-SECONDARY\""
+        ],
+        "chunk_ids": [
+          "chunk-62fee97dc4810e3df9ce75e49142c5fe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Career Academy School is a higher-secondary co-education private school in Patiala.",
+            "Career Academy, Patiala Career Academy School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2000 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Career Academy School is a higher-secondary co-education private school in Patiala.",
+            "link",
+            "CAREER ACADEMY",
+            "HIGHER-SECONDARY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5d5f6161cb9631ff379e09a84dee9d6a",
+            "hyperedge_name": "<hyperedge>\"Career Academy School is a higher-secondary co-education private school in Patiala.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "hyperedge_text": "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.8155009746551514,
+        "fusion_score": 0.6964335282643637,
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"ST. MARY'S SCHOOL, PATIALA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA\"",
+          "\"PATIALA\"",
+          "\"HIGHER-SECONDARY CO-EDUCATION PRIVATE SCHOOL\""
+        ],
+        "chunk_ids": [
+          "chunk-f9b6af81e8be7956f6e09f64490f2e12"
+        ],
+        "evidence_texts": [
+          "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+          "St. Mary's School, Patiala St. Mary's School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2004 and is affiliated to the Central Board of Secondary Education of India."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.333333,
+          "S": 0.815501,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.696434
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The school is located in the Patiala city of Punjab, India.\"",
+        "hyperedge_text": "The school is located in the Patiala city of Punjab, India.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.4611220359802246,
+        "semantic_score": 0.6270732879638672,
+        "fusion_score": 0.5098634719848634,
+        "entity_ids": [
+          "\"PATIALA CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "evidence_texts": [
+          "The school is located in the Patiala city of Punjab, India.",
+          "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.461122,
+          "S": 0.627073,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.509863
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "hyperedge_text": "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.5858312845230103,
+        "fusion_score": 0.4504995902379354,
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"GURU HARKRISHAN PUBLIC SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "evidence_texts": [
+          "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+          "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.585831,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.4505
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.\"",
+        "hyperedge_text": "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.5817878246307373,
+        "fusion_score": 0.44969089825948083,
+        "entity_ids": [
+          "\"ST. MARY'S SCHOOL\"",
+          "\"SOCIETY OF JESUS\"",
+          "\"SANGAMNER\"",
+          "\"ST. MARY'S PARISH\"",
+          "\"MAHARASHTRA STATE BOARD FOR SECONDARY AND HIGHER EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-bf7e1b91972e00b82242d3b95f28cfcd"
+        ],
+        "evidence_texts": [
+          "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+          "St. Mary's School, Sangamner St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations. The school is affiliated to the Maharashtra State Board for Secondary and Higher Education."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.581788,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.449691
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "hyperedge_text": "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.5766948461532593,
+        "fusion_score": 0.4486723025639852,
+        "entity_ids": [
+          "\"2000\"",
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"CAREER ACADEMY SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-62fee97dc4810e3df9ce75e49142c5fe"
+        ],
+        "evidence_texts": [
+          "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+          "Career Academy, Patiala Career Academy School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2000 and is affiliated to the Central Board of Secondary Education of India."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.576695,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.448672
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "In which country is Apeejay Education Society located?",
+    "retrieval_question": "In which country is Apeejay Education Society located?",
+    "dependency_question_rewrite": {
+      "original_question": "In which country is Apeejay Education Society located?",
+      "retrieval_question": "In which country is Apeejay Education Society located?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.",
+        "entity_ids": [
+          "\"APEEJAY EDUCATION SOCIETY\"",
+          "\"DR. STYA PAUL\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.",
+            "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+          ],
+          "relation_texts": [
+            "Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.",
+            "link",
+            "APEEJAY EDUCATION SOCIETY",
+            "DR. STYA PAUL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"APEEJAY SCHOOL, MAHAVIR MARG\"",
+          "\"JALANDHAR\"",
+          "\"SATYA PAUL\"",
+          "\"APEEJAY EDUCATION SOCIETY\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-08b02cae993ab59ad2182c2bdedc6d35"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India.",
+            "Apeejay School, Mahavir Marg Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India. It was established in 1968 by Satya Paul and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+          ],
+          "relation_texts": [
+            "Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "APEEJAY SCHOOL, MAHAVIR MARG",
+            "JALANDHAR",
+            "SATYA PAUL",
+            "APEEJAY EDUCATION SOCIETY",
+            "CENTRAL BOARD OF SECONDARY EDUCATION"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay School is part of the Apeejay Education Society.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Apeejay School is part of the Apeejay Education Society.",
+        "entity_ids": [
+          "\"APEEJAY EDUCATION SOCIETY\""
+        ],
+        "chunk_ids": [
+          "chunk-08b02cae993ab59ad2182c2bdedc6d35"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay School is part of the Apeejay Education Society.",
+            "Apeejay School, Mahavir Marg Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India. It was established in 1968 by Satya Paul and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+          ],
+          "relation_texts": [
+            "Apeejay School is part of the Apeejay Education Society.",
+            "link",
+            "APEEJAY EDUCATION SOCIETY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.",
+        "entity_ids": [
+          "\"1975\"",
+          "\"APEEJAY EDUCATION SOCIETY\"",
+          "\"SUSHMA BERLIA\""
+        ],
+        "chunk_ids": [
+          "chunk-8710a5eebd1c818c7506b42c0ac0aafa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.",
+            "Apeejay School, Sheikh Sarai Apeejay School, Sheikh Sarai is a Nursery – 12, co-educational private school in New Delhi, Delhi, India. It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+          ],
+          "relation_texts": [
+            "It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.",
+            "link",
+            "1975",
+            "APEEJAY EDUCATION SOCIETY",
+            "SUSHMA BERLIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The organization focuses on imparting education in India.\"",
+        "branch": "relation",
+        "raw_score": 0.4062435030937195,
+        "hyperedge_text": "The organization focuses on imparting education in India.",
+        "entity_ids": [
+          "\"EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The organization focuses on imparting education in India.",
+            "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+          ],
+          "relation_texts": [
+            "The organization focuses on imparting education in India.",
+            "link",
+            "EDUCATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f6cdc916c16119987525c1031446c023",
+            "hyperedge_name": "<hyperedge>\"The organization focuses on imparting education in India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The society is based in the United Kingdom but has members throughout the world; particularly in the United States of America and Australia.\"",
+        "branch": "relation",
+        "raw_score": 0.3934367597103119,
+        "hyperedge_text": "The society is based in the United Kingdom but has members throughout the world; particularly in the United States of America and Australia.",
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"UNITED KINGDOM\"",
+          "\"UNITED STATES OF AMERICA\""
+        ],
+        "chunk_ids": [
+          "chunk-c10e9dc813f3ee7240652c43338838ed"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The society is based in the United Kingdom but has members throughout the world; particularly in the United States of America and Australia.",
+            "Friends of Dorothy Society The Friends of Dorothy Society( commonly abbreviated\" fods\") is a bell ringing society for LGBT people and their friends. The society is based in the United Kingdom but has members throughout the world; particularly in the United States of America and Australia. The Society takes its name from the euphemism Friend of Dorothy, meaning gay man."
+          ],
+          "relation_texts": [
+            "The society is based in the United Kingdom but has members throughout the world; particularly in the United States of America and Australia.",
+            "link",
+            "AUSTRALIA",
+            "UNITED KINGDOM",
+            "UNITED STATES OF AMERICA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-54e8761ea958a6e709b34ceb3b334220",
+            "hyperedge_name": "<hyperedge>\"The society is based in the United Kingdom but has members throughout the world; particularly in the United States of America and Australia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is located in Kinshasa, Democratic Republic of the Congo, though it was originally located in Zomba, Malawi.\"",
+        "branch": "relation",
+        "raw_score": 0.39244168996810913,
+        "hyperedge_text": "It is located in Kinshasa, Democratic Republic of the Congo, though it was originally located in Zomba, Malawi.",
+        "entity_ids": [
+          "\"MALAWI\"",
+          "\"ZOMBA\"",
+          "\"KINSHASA\"",
+          "\"FUTURE STUDIES\""
+        ],
+        "chunk_ids": [
+          "chunk-d450ddb6b588b18aa5cccac2e19550b7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is located in Kinshasa, Democratic Republic of the Congo, though it was originally located in Zomba, Malawi.",
+            "African Institute for Future Studies The African Institute for Future Studies, also known as Panafrican Institute for Future Studies or INADEP, is a research institution and university founded in 1989 by the President of Zaire( present day Democratic Republic of the Congo)( Ordinance 89–287 of 9 November 1989). It is located in Kinshasa, Democratic Republic of the Congo, though it was originally located in Zomba, Malawi. In addition to subsidiary departments that are funded for the future studies or for the exploration of the future, INADEP has funded a Centre for the exploration of the past, named Diop's Center for Egyptology. INADEP is a member of the National Research Council of Congo and one of the National Government Organizations devoted exclusively to scientific research and to the training of new researchers."
+          ],
+          "relation_texts": [
+            "It is located in Kinshasa, Democratic Republic of the Congo, though it was originally located in Zomba, Malawi.",
+            "link",
+            "MALAWI",
+            "ZOMBA",
+            "KINSHASA",
+            "FUTURE STUDIES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-91a7c40437425e5d6597bdd5a46cb9d8",
+            "hyperedge_name": "<hyperedge>\"It is located in Kinshasa, Democratic Republic of the Congo, though it was originally located in Zomba, Malawi.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"United States is the country where Oregon is located.\"",
+        "branch": "relation",
+        "raw_score": 0.38149625062942505,
+        "hyperedge_text": "United States is the country where Oregon is located.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-824686815583696279f0b420f2ded85c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "United States is the country where Oregon is located.",
+            "Valley View Airport Valley View Airport, is a privately owned, public use airport located northeast of Estacada in Clackamas County, Oregon, United States."
+          ],
+          "relation_texts": [
+            "United States is the country where Oregon is located.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7f1003b74157823635f2df62cc68121e",
+            "hyperedge_name": "<hyperedge>\"United States is the country where Oregon is located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The United Nations in Geneva is another organization where Eleni Gabre-Madhin has contributed her expertise.\"",
+        "branch": "relation",
+        "raw_score": 0.37020841240882874,
+        "hyperedge_text": "The United Nations in Geneva is another organization where Eleni Gabre-Madhin has contributed her expertise.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-128d3f1785f74020763f8eaefb44dafe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The United Nations in Geneva is another organization where Eleni Gabre-Madhin has contributed her expertise.",
+            "Eleni Gabre-Madhin Eleni Zaude Gabre- Madhin, an Ethiopian economist with Swiss nationality, is a former Chief Executive Officer of the Ethiopia Commodity Exchange( ECX). She has had many years of experience working on agricultural markets – particularly in Sub- Saharan Africa – and has held senior positions in the World Bank, the International Food Policy Research Institute( Washington), and United Nations( Geneva)."
+          ],
+          "relation_texts": [
+            "The United Nations in Geneva is another organization where Eleni Gabre-Madhin has contributed her expertise."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2a8f20b6c83ebf22e0ba9189f4e18651",
+            "hyperedge_name": "<hyperedge>\"The United Nations in Geneva is another organization where Eleni Gabre-Madhin has contributed her expertise.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand.\"",
+        "branch": "relation",
+        "raw_score": 0.3649475574493408,
+        "hyperedge_text": "Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand.",
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"NEW ZEALAND\"",
+          "\"THAILAND\"",
+          "\"CHINA\"",
+          "\"MALAYSIA\"",
+          "\"SINGAPORE\"",
+          "\"TAIWAN\"",
+          "\"OFFICES\"",
+          "\"VIETNAM\""
+        ],
+        "chunk_ids": [
+          "chunk-f8f8824b1a3b987fabf8d24168d438b5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand.",
+            "Shriro Shriro Group is a private company headquartered in Hong Kong. It is an international marketing and distribution company with over 3,500 employees around the world. Shriro was founded in 1906 as a family business in Harbin, Northern China. The first international office was set up in 1917 in Yokohama, Japan. From the early days, the business was mainly commodities and expanded rapidly after 1945 as the product line expanded and new subsidiaries opened in many South East Asian countries and Canada. Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand. Shriro is a major distributor of medium- format camera equipment in Asia, including Hasselblad and Linhof."
+          ],
+          "relation_texts": [
+            "Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand.",
+            "link",
+            "AUSTRALIA",
+            "NEW ZEALAND",
+            "THAILAND",
+            "CHINA",
+            "MALAYSIA",
+            "SINGAPORE",
+            "TAIWAN",
+            "OFFICES",
+            "VIETNAM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a9a417627e15e0c4319cdc2bc80d0a1a",
+            "hyperedge_name": "<hyperedge>\"Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The United States is a country located in North America.\"",
+        "branch": "relation",
+        "raw_score": 0.3623642027378082,
+        "hyperedge_text": "The United States is a country located in North America.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-68b09b66646328d6a9cbb43a689ffe5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The United States is a country located in North America.",
+            "Fairbank Island (Michigan) Fairbank Island is an island located in Chippewa County, Michigan, United States."
+          ],
+          "relation_texts": [
+            "The United States is a country located in North America.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f78eb432e80f2a8e51bf4dd8e38e7e41",
+            "hyperedge_name": "<hyperedge>\"The United States is a country located in North America.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Unified Film Organization operates in both America and Bulgaria.\"",
+        "branch": "relation",
+        "raw_score": 0.3611305356025696,
+        "hyperedge_text": "The Unified Film Organization operates in both America and Bulgaria.",
+        "entity_ids": [
+          "\"AMERICA\"",
+          "\"BULGARIA\""
+        ],
+        "chunk_ids": [
+          "chunk-57cbbb42215f6279507774d44e1167d3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Unified Film Organization operates in both America and Bulgaria.",
+            "Phillip J. Roth Phillip J. Roth( born June 10, 1959) is an American film producer, director and screenwriter who is known for making low- budget films. He is the founder of the Unified Film Organization( UFO) in America and Bulgaria, which have released various action and science fiction films for television and home video markets."
+          ],
+          "relation_texts": [
+            "The Unified Film Organization operates in both America and Bulgaria.",
+            "link",
+            "AMERICA",
+            "BULGARIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b3af512c48c8eb1e466b64609eb4458a",
+            "hyperedge_name": "<hyperedge>\"The Unified Film Organization operates in both America and Bulgaria.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Industrial Scientific has major operations in Shanghai, China; Arras, France; Sherwood Park, Canada, and Dortmund, Germany.\"",
+        "branch": "relation",
+        "raw_score": 0.35796353220939636,
+        "hyperedge_text": "Industrial Scientific has major operations in Shanghai, China; Arras, France; Sherwood Park, Canada, and Dortmund, Germany.",
+        "entity_ids": [
+          "\"SHANGHAI\"",
+          "\"DORTMUND\"",
+          "\"ARRAS\"",
+          "\"SHERWOOD PARK\""
+        ],
+        "chunk_ids": [
+          "chunk-82856e16c5c62fad205aa3ace53c5b9f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Industrial Scientific has major operations in Shanghai, China; Arras, France; Sherwood Park, Canada, and Dortmund, Germany.",
+            "Industrial Scientific Corporation Industrial Scientific Corporation, headquartered in Pittsburgh, Pennsylvania, designs and manufactures gas detection products that protect workers from hazardous conditions around the world. Key markets include utilities, chemical production, oil and gas, steel and coke, paper industry, fire service, construction, military, insurance companies, food service, and general industry. Industrial Scientific has major operations in Shanghai, China; Arras, France; Sherwood Park, Canada, and Dortmund, Germany. Manufacturing, product development, and repairs are based in their Pittsburgh headquarters. The company ’s competitors include Mine Safety Appliances, RAE Systems, and Dräger."
+          ],
+          "relation_texts": [
+            "Industrial Scientific has major operations in Shanghai, China; Arras, France; Sherwood Park, Canada, and Dortmund, Germany.",
+            "link",
+            "SHANGHAI",
+            "DORTMUND",
+            "ARRAS",
+            "SHERWOOD PARK"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ab01fc3a2e0fd1511a3ee70c84c40d48",
+            "hyperedge_name": "<hyperedge>\"Industrial Scientific has major operations in Shanghai, China; Arras, France; Sherwood Park, Canada, and Dortmund, Germany.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"These may be in the same country, in companies, and in cultural or international institutions where one must use multiple languages.\"",
+        "branch": "relation",
+        "raw_score": 0.34816014766693115,
+        "hyperedge_text": "These may be in the same country, in companies, and in cultural or international institutions where one must use multiple languages.",
+        "entity_ids": [
+          "\"CULTURAL INSTITUTIONS\"",
+          "\"DISCIPLINE\"",
+          "\"SAME COUNTRY\"",
+          "\"INTERNATIONAL INSTITUTIONS\"",
+          "\"SATISFACTION OF NEEDS\"",
+          "\"USING MULTIPLE LANGUAGES\"",
+          "\"MULTIPLE LANGUAGES\"",
+          "\"COMPANIES\""
+        ],
+        "chunk_ids": [
+          "chunk-1735c1397f3b374738a8e7c4e8837da3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "These may be in the same country, in companies, and in cultural or international institutions where one must use multiple languages.",
+            "Language Management Language management is a discipline that consists of satisfying the needs of people who speak multiple different languages. These may be in the same country, in companies, and in cultural or international institutions where one must use multiple languages."
+          ],
+          "relation_texts": [
+            "These may be in the same country, in companies, and in cultural or international institutions where one must use multiple languages.",
+            "link",
+            "CULTURAL INSTITUTIONS",
+            "DISCIPLINE",
+            "SAME COUNTRY",
+            "INTERNATIONAL INSTITUTIONS",
+            "SATISFACTION OF NEEDS",
+            "USING MULTIPLE LANGUAGES",
+            "MULTIPLE LANGUAGES",
+            "COMPANIES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1e4081bb8a7671246b5af83f1e4c99da",
+            "hyperedge_name": "<hyperedge>\"These may be in the same country, in companies, and in cultural or international institutions where one must use multiple languages.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay School is part of the Apeejay Education Society.\"",
+        "branch": "semantic",
+        "raw_score": 0.7770487070083618,
+        "hyperedge_text": "Apeejay School is part of the Apeejay Education Society.",
+        "entity_ids": [
+          "\"APEEJAY EDUCATION SOCIETY\""
+        ],
+        "chunk_ids": [
+          "chunk-08b02cae993ab59ad2182c2bdedc6d35"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay School is part of the Apeejay Education Society.",
+            "Apeejay School, Mahavir Marg Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India. It was established in 1968 by Satya Paul and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+          ],
+          "relation_texts": [
+            "Apeejay School is part of the Apeejay Education Society.",
+            "link",
+            "APEEJAY EDUCATION SOCIETY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-64e4faceeba156600faed726493b8994",
+            "hyperedge_name": "<hyperedge>\"Apeejay School is part of the Apeejay Education Society.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay Education Society is a private educational society.\"",
+        "branch": "semantic",
+        "raw_score": 0.7757425904273987,
+        "hyperedge_text": "Apeejay Education Society is a private educational society.",
+        "entity_ids": [
+          "\"PRIVATE EDUCATIONAL SOCIETY\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay Education Society is a private educational society.",
+            "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+          ],
+          "relation_texts": [
+            "Apeejay Education Society is a private educational society.",
+            "link",
+            "PRIVATE EDUCATIONAL SOCIETY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0201e740ace47d4514088d05a76ad3e5",
+            "hyperedge_name": "<hyperedge>\"Apeejay Education Society is a private educational society.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay Education Society (AES) was established in 1967 in India.\"",
+        "branch": "semantic",
+        "raw_score": 0.758999764919281,
+        "hyperedge_text": "Apeejay Education Society (AES) was established in 1967 in India.",
+        "entity_ids": [
+          "\"1967\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay Education Society (AES) was established in 1967 in India.",
+            "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+          ],
+          "relation_texts": [
+            "Apeejay Education Society (AES) was established in 1967 in India.",
+            "link",
+            "1967"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cb4421d3a07fca56866518bfe83b8227",
+            "hyperedge_name": "<hyperedge>\"Apeejay Education Society (AES) was established in 1967 in India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.\"",
+        "branch": "semantic",
+        "raw_score": 0.738796591758728,
+        "hyperedge_text": "Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.",
+        "entity_ids": [
+          "\"APEEJAY EDUCATION SOCIETY\"",
+          "\"DR. STYA PAUL\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.",
+            "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+          ],
+          "relation_texts": [
+            "Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.",
+            "link",
+            "APEEJAY EDUCATION SOCIETY",
+            "DR. STYA PAUL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ef88e09c87f427ff073ea3ccc79d0519",
+            "hyperedge_name": "<hyperedge>\"Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay Education Society has multiple schools under its administration.\"",
+        "branch": "semantic",
+        "raw_score": 0.7189552783966064,
+        "hyperedge_text": "Apeejay Education Society has multiple schools under its administration.",
+        "entity_ids": [
+          "\"MULTIPLE SCHOOLS\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay Education Society has multiple schools under its administration.",
+            "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+          ],
+          "relation_texts": [
+            "Apeejay Education Society has multiple schools under its administration.",
+            "link",
+            "MULTIPLE SCHOOLS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-49d3cad07edf8963551fb312c06da587",
+            "hyperedge_name": "<hyperedge>\"Apeejay Education Society has multiple schools under its administration.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay Education Society is focused on a curriculum that prepares students for various examinations.\"",
+        "branch": "semantic",
+        "raw_score": 0.6994128823280334,
+        "hyperedge_text": "Apeejay Education Society is focused on a curriculum that prepares students for various examinations.",
+        "entity_ids": [
+          "\"CURRICULUM\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay Education Society is focused on a curriculum that prepares students for various examinations.",
+            "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+          ],
+          "relation_texts": [
+            "Apeejay Education Society is focused on a curriculum that prepares students for various examinations.",
+            "link",
+            "CURRICULUM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-650b4956c80f50d34e0cbc6aa91cbb03",
+            "hyperedge_name": "<hyperedge>\"Apeejay Education Society is focused on a curriculum that prepares students for various examinations.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 2010 Apeejay Education Society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana.\"",
+        "branch": "semantic",
+        "raw_score": 0.6923964023590088,
+        "hyperedge_text": "In 2010 Apeejay Education Society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana.",
+        "entity_ids": [
+          "\"GURGAON\"",
+          "\"APEEJAY STYA UNIVERSITY\"",
+          "\"HARYANA\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In 2010 Apeejay Education Society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana.",
+            "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+          ],
+          "relation_texts": [
+            "In 2010 Apeejay Education Society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana.",
+            "link",
+            "GURGAON",
+            "APEEJAY STYA UNIVERSITY",
+            "HARYANA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-17b3f99a97225a50b57ae88f348f767c",
+            "hyperedge_name": "<hyperedge>\"In 2010 Apeejay Education Society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was established in 1968 by Satya Paul and is part of the Apeejay Education Society.\"",
+        "branch": "semantic",
+        "raw_score": 0.6888859272003174,
+        "hyperedge_text": "It was established in 1968 by Satya Paul and is part of the Apeejay Education Society.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-08b02cae993ab59ad2182c2bdedc6d35"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was established in 1968 by Satya Paul and is part of the Apeejay Education Society.",
+            "Apeejay School, Mahavir Marg Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India. It was established in 1968 by Satya Paul and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+          ],
+          "relation_texts": [
+            "It was established in 1968 by Satya Paul and is part of the Apeejay Education Society."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4c3ec478725fe44872b4b6244ec8424b",
+            "hyperedge_name": "<hyperedge>\"It was established in 1968 by Satya Paul and is part of the Apeejay Education Society.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.\"",
+        "branch": "semantic",
+        "raw_score": 0.6883304119110107,
+        "hyperedge_text": "It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.",
+        "entity_ids": [
+          "\"1975\"",
+          "\"APEEJAY EDUCATION SOCIETY\"",
+          "\"SUSHMA BERLIA\""
+        ],
+        "chunk_ids": [
+          "chunk-8710a5eebd1c818c7506b42c0ac0aafa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.",
+            "Apeejay School, Sheikh Sarai Apeejay School, Sheikh Sarai is a Nursery – 12, co-educational private school in New Delhi, Delhi, India. It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+          ],
+          "relation_texts": [
+            "It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.",
+            "link",
+            "1975",
+            "APEEJAY EDUCATION SOCIETY",
+            "SUSHMA BERLIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8420830edcb413e8926107c23bb21621",
+            "hyperedge_name": "<hyperedge>\"It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The organization collaborates with Apeejay Education Society to run Apeejay Stya University.\"",
+        "branch": "semantic",
+        "raw_score": 0.659048318862915,
+        "hyperedge_text": "The organization collaborates with Apeejay Education Society to run Apeejay Stya University.",
+        "entity_ids": [
+          "\"COLLABORATION\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The organization collaborates with Apeejay Education Society to run Apeejay Stya University.",
+            "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+          ],
+          "relation_texts": [
+            "The organization collaborates with Apeejay Education Society to run Apeejay Stya University.",
+            "link",
+            "COLLABORATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-11480955bbae35f3daed7e04bf06e6fb",
+            "hyperedge_name": "<hyperedge>\"The organization collaborates with Apeejay Education Society to run Apeejay Stya University.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay School is part of the Apeejay Education Society.\"",
+        "hyperedge_text": "Apeejay School is part of the Apeejay Education Society.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7770487070083618,
+        "fusion_score": 0.5554097414016724,
+        "entity_ids": [
+          "\"APEEJAY EDUCATION SOCIETY\""
+        ],
+        "chunk_ids": [
+          "chunk-08b02cae993ab59ad2182c2bdedc6d35"
+        ],
+        "evidence_texts": [
+          "Apeejay School is part of the Apeejay Education Society.",
+          "Apeejay School, Mahavir Marg Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India. It was established in 1968 by Satya Paul and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.777049,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55541
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.\"",
+        "hyperedge_text": "Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.738796591758728,
+        "fusion_score": 0.5477593183517456,
+        "entity_ids": [
+          "\"APEEJAY EDUCATION SOCIETY\"",
+          "\"DR. STYA PAUL\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "evidence_texts": [
+          "Apeejay Education Society (AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society.",
+          "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.738797,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.547759
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.\"",
+        "hyperedge_text": "It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6883304119110107,
+        "fusion_score": 0.5376660823822021,
+        "entity_ids": [
+          "\"1975\"",
+          "\"APEEJAY EDUCATION SOCIETY\"",
+          "\"SUSHMA BERLIA\""
+        ],
+        "chunk_ids": [
+          "chunk-8710a5eebd1c818c7506b42c0ac0aafa"
+        ],
+        "evidence_texts": [
+          "It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society.",
+          "Apeejay School, Sheikh Sarai Apeejay School, Sheikh Sarai is a Nursery – 12, co-educational private school in New Delhi, Delhi, India. It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.68833,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.537666
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The organization collaborates with Apeejay Education Society to run Apeejay Stya University.\"",
+        "hyperedge_text": "The organization collaborates with Apeejay Education Society to run Apeejay Stya University.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.659048318862915,
+        "fusion_score": 0.6651429971059164,
+        "entity_ids": [
+          "\"COLLABORATION\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "evidence_texts": [
+          "The organization collaborates with Apeejay Education Society to run Apeejay Stya University.",
+          "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.333333,
+          "S": 0.659048,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.665143
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay Education Society is a private educational society.\"",
+        "hyperedge_text": "Apeejay Education Society is a private educational society.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7757425904273987,
+        "fusion_score": 0.5551485180854798,
+        "entity_ids": [
+          "\"PRIVATE EDUCATIONAL SOCIETY\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7008c587cbf631485e15bb2a1054dd"
+        ],
+        "evidence_texts": [
+          "Apeejay Education Society is a private educational society.",
+          "Apeejay Education Society Apeejay Education Society( AES), established in India in 1967 by late Dr. Stya Paul, is a private educational society. It consists of 14 Schools and 13 Institutions of higher learning imparting education in India. Currently Sushma Berlia is running this organization. All the Apeejay schools are members of the progressive Schools Conference( NPSC) and are affiliated to the Central Board of Secondary Education( CBSE). It has been accredited to the British Council for London Examination Qualifications( for both GCE' O'&' A' level courses). In 2010 Apeejay education society started Apeejay Stya University in collaboration with the Apeejay Education Society in Gurgaon, Haryana."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.775743,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.555149
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the country of St. Mary's School, Patiala?",
+    "retrieval_question": "What is the country of St. Mary's School, Patiala?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the country of St. Mary's School, Patiala?",
+      "retrieval_question": "What is the country of St. Mary's School, Patiala?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"ST. MARY'S SCHOOL, PATIALA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA\"",
+          "\"PATIALA\"",
+          "\"HIGHER-SECONDARY CO-EDUCATION PRIVATE SCHOOL\""
+        ],
+        "chunk_ids": [
+          "chunk-f9b6af81e8be7956f6e09f64490f2e12"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "St. Mary's School, Patiala St. Mary's School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2004 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "ST. MARY'S SCHOOL, PATIALA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA",
+            "PATIALA",
+            "HIGHER-SECONDARY CO-EDUCATION PRIVATE SCHOOL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Swapan Saha was born on 10 January 1930 in Ajmer, Rajasthan, India and is known for his work as a film director, producer, story writer and score composer.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Swapan Saha was born on 10 January 1930 in Ajmer, Rajasthan, India and is known for his work as a film director, producer, story writer and score composer.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"PRODUCER\"",
+          "\"AJMER\"",
+          "\"RAJASTHAN\"",
+          "\"INDIA\"",
+          "\"BENGALI\"",
+          "\"STORY WRITER\"",
+          "\"SCORE COMPOSER\"",
+          "\"SWAPAN SAHA\""
+        ],
+        "chunk_ids": [
+          "chunk-9089cb310858addca9d1f825fd2df077"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Swapan Saha was born on 10 January 1930 in Ajmer, Rajasthan, India and is known for his work as a film director, producer, story writer and score composer.",
+            "Swapan Saha Swapan Saha( born 10 January 1930 in Ajmer, Rajasthan, India) is an Indian Bengali film director, producer, story writer and score composer."
+          ],
+          "relation_texts": [
+            "Swapan Saha was born on 10 January 1930 in Ajmer, Rajasthan, India and is known for his work as a film director, producer, story writer and score composer.",
+            "link",
+            "FILM DIRECTOR",
+            "PRODUCER",
+            "AJMER",
+            "RAJASTHAN",
+            "INDIA",
+            "BENGALI",
+            "STORY WRITER",
+            "SCORE COMPOSER",
+            "SWAPAN SAHA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Saif Ali Khan (born Sajid Ali Khan on 16 August 1970) is an Indian film actor and producer.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Saif Ali Khan (born Sajid Ali Khan on 16 August 1970) is an Indian film actor and producer.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"SAJID ALI KHAN\"",
+          "\"SAIF ALI KHAN\""
+        ],
+        "chunk_ids": [
+          "chunk-53b4520b4b3eee4367cb49d497c8ee08"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Saif Ali Khan (born Sajid Ali Khan on 16 August 1970) is an Indian film actor and producer.",
+            "Saif Ali Khan Saif Ali Khan (born Sajid Ali Khan on 16 August 1970) is an Indian film actor and producer. The son of actress Sharmila Tagore and cricketer Mansoor Ali Khan Pataudi, Khan made his acting debut in Yash Chopra's unsuccessful drama \"Parampara\" (1993), but achieved success with his roles in the romantic drama \"Yeh Dillagi\" and the action film \"Main Khiladi Tu Anari\" (both 1994). Khan's career prospect declined through much of the 1990s, and his biggest commercial success of the decade came with the ensemble drama \"Hum Saath-Saath Hain\" (1999). He rose to prominence with roles in two ensemble comedy-dramas\"Dil Chahta Hai\" (2001) and \"Kal Ho Naa Ho\" (2003). The 2004 romantic comedy \"Hum Tum\" proved to be Khan's first success in which he played the sole male lead, earning him the National Film Award for Best Actor, and starring roles in the drama \"Parineeta\" and the romantic c..."
+          ],
+          "relation_texts": [
+            "Saif Ali Khan (born Sajid Ali Khan on 16 August 1970) is an Indian film actor and producer.",
+            "link",
+            "INDIA",
+            "SAJID ALI KHAN",
+            "SAIF ALI KHAN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raj Kanwar (c. 28 June 1961 – 3 February 2012) was a Bollywood film director, writer and film producer based in Mumbai, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Raj Kanwar (c. 28 June 1961 – 3 February 2012) was a Bollywood film director, writer and film producer based in Mumbai, India.",
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"FILM DIRECTOR\"",
+          "\"FILM PRODUCER\"",
+          "\"INDIA\"",
+          "\"MUMBAI\"",
+          "\"BOLLYWOOD\"",
+          "\"RAJ KANWAR\""
+        ],
+        "chunk_ids": [
+          "chunk-6e14e73a511cad850e0ccf1332671fb3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raj Kanwar (c. 28 June 1961 – 3 February 2012) was a Bollywood film director, writer and film producer based in Mumbai, India.",
+            "Raj Kanwar Raj Kanwar( c. 28 June 1961 – 3 February 2012) was a Bollywood film director, writer and film producer based in Mumbai, India."
+          ],
+          "relation_texts": [
+            "Raj Kanwar (c. 28 June 1961 – 3 February 2012) was a Bollywood film director, writer and film producer based in Mumbai, India.",
+            "link",
+            "WRITER",
+            "FILM DIRECTOR",
+            "FILM PRODUCER",
+            "INDIA",
+            "MUMBAI",
+            "BOLLYWOOD",
+            "RAJ KANWAR"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bharat Kala Bhavan is a University museum located in Banaras Hindu University, Varanasi, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Bharat Kala Bhavan is a University museum located in Banaras Hindu University, Varanasi, India.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"BANARAS HINDU UNIVERSITY\"",
+          "\"VARANASI\"",
+          "\"BHARAT KALA BHAVAN\""
+        ],
+        "chunk_ids": [
+          "chunk-8a9dfba8041a905477d1acebf1bfa228"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bharat Kala Bhavan is a University museum located in Banaras Hindu University, Varanasi, India.",
+            "Bharat Kala Bhavan Bharat Kala Bhavan is a University museum located in Banaras Hindu University, Varanasi, India. It has been instrumental in the dissemination of knowledge on Indian art and culture. It is one of the important touristic attractions in the Banaras Hindu University and in Varanasi city."
+          ],
+          "relation_texts": [
+            "Bharat Kala Bhavan is a University museum located in Banaras Hindu University, Varanasi, India.",
+            "link",
+            "INDIA",
+            "BANARAS HINDU UNIVERSITY",
+            "VARANASI",
+            "BHARAT KALA BHAVAN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Alam Ara was released earlier the same year and was the first Indian film with sound.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Alam Ara was released earlier the same year and was the first Indian film with sound.",
+        "entity_ids": [
+          "\"FILM INDUSTRY\"",
+          "\"MUSICAL FILM\"",
+          "\"1931\"",
+          "\"HINDI\"",
+          "\"INDIA\"",
+          "\"ALAM ARA\"",
+          "\"FIRST INDIAN FILM WITH SOUND\"",
+          "\"NIZAMI GANJAVI\""
+        ],
+        "chunk_ids": [
+          "chunk-2b4ea42d2ac98146f542068d241f8cad"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Alam Ara was released earlier the same year and was the first Indian film with sound.",
+            "Shirin Farhad (1931 film) Shirin Farhad is a 1931 Hindi language musical film. It was the second Indian film with sound. It was based on the love story from the\" Shahnameh\" of Farhad and Shirin by Nizami Ganjavi. The film was directed by J.J. Madan and starred Nissar and Jehanara Kajjan. \" Alam Ara\" was released earlier the same year and was the first Indian film with sound."
+          ],
+          "relation_texts": [
+            "Alam Ara was released earlier the same year and was the first Indian film with sound.",
+            "link",
+            "FILM INDUSTRY",
+            "MUSICAL FILM",
+            "1931",
+            "HINDI",
+            "INDIA",
+            "ALAM ARA",
+            "FIRST INDIAN FILM WITH SOUND",
+            "NIZAMI GANJAVI"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Khan went on to release movie scores and albums in Europe, India, Japan, Pakistan and the U.S.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Khan went on to release movie scores and albums in Europe, India, Japan, Pakistan and the U.S.",
+        "entity_ids": [
+          "\"JAPAN\"",
+          "\"EUROPE\"",
+          "\"U.S.\"",
+          "\"PAKISTAN\"",
+          "\"INDIA\"",
+          "\"MOVIE SCORES AND ALBUMS\""
+        ],
+        "chunk_ids": [
+          "chunk-ec08a5a3855f94f52ef99d0a442149ec"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Khan went on to release movie scores and albums in Europe, India, Japan, Pakistan and the U.S.",
+            "Nusrat Fateh Ali Khan Nusrat Fateh Ali Khan (Urdu/), born Pervez Fateh Ali Khan (13 October 1948 – 16 August 1997), was a Pakistani vocalist and musician, primarily a singer of Qawwali, a form of Sufi Islamic devotional music. Widely considered one of the greatest voices ever recorded, he possessed an extraordinary range of vocal abilities and could perform at a high level of intensity for several hours. He belonged to the Patiala gharana extending the 600-year old Qawwali tradition of his family, Khan is widely credited with introducing Qawwali music to international audiences. He is popularly known as \"Shehnshah-e-Qawwali\", meaning \"The King of Kings of Qawwali\". Born in Faisalabad, Khan had his first public performance at the age of 15, at his father's chelum. He became the head of the family qawwali party in 1971. He was signed by Oriental Star Agencies, Birmingham, England in the..."
+          ],
+          "relation_texts": [
+            "Khan went on to release movie scores and albums in Europe, India, Japan, Pakistan and the U.S.",
+            "link",
+            "JAPAN",
+            "EUROPE",
+            "U.S.",
+            "PAKISTAN",
+            "INDIA",
+            "MOVIE SCORES AND ALBUMS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 1845, he was appointed aide-de-camp and military secretary to Sir Hugh Gough in India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "In 1845, he was appointed aide-de-camp and military secretary to Sir Hugh Gough in India.",
+        "entity_ids": [
+          "\"INDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0b9985f862f2b3929e14ae70a0bba0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In 1845, he was appointed aide-de-camp and military secretary to Sir Hugh Gough in India.",
+            "Charles Sackville-West, 6th Earl De La Warr Major- General Charles Richard Sackville- West, 6th Earl De La Warr( 13 November 1815 – 23 April 1873), styled Lord West between 1850 and 1869, was a British soldier. Sackville- West was the second son of George Sackville- West, 5th Earl De La Warr, and Lady Elizabeth Sackville, daughter of John Sackville, 3rd Duke of Dorset. He was the brother of George West, Viscount Cantelupe, Reginald Sackville, 7th Earl De La Warr, Elizabeth Russell, Duchess of Bedford, Mortimer Sackville- West, 1st Baron Sackville, and Lionel Sackville- West, 2nd Baron Sackville. He was educated at Harrow. Sackville- West served in the British Army and was appointed aide- de- camp and military secretary to Sir Hugh Gough in India in 1845. He fought at the Battle of Sobraon in 1846 during the First Anglo- Sikh War. In 1850 he became known by the courtesy title Lord West..."
+          ],
+          "relation_texts": [
+            "In 1845, he was appointed aide-de-camp and military secretary to Sir Hugh Gough in India.",
+            "link",
+            "INDIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Telangana State Archeology Museum or Hyderabad Museum is a museum located in Hyderabad, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Telangana State Archeology Museum or Hyderabad Museum is a museum located in Hyderabad, India.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"HYDERABAD\"",
+          "\"TELANGANA STATE ARCHAEOLOGY MUSEUM\"",
+          "\"HYDERABAD MUSEUM\"",
+          "\"OLDEST MUSEUM\""
+        ],
+        "chunk_ids": [
+          "chunk-0d686ee2cdef228ed8c53b5a048dacc6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Telangana State Archeology Museum or Hyderabad Museum is a museum located in Hyderabad, India.",
+            "Telangana State Archaeology Museum Telangana State Archeology Museum or Hyderabad Museum is a museum located in Hyderabad, India. It is the oldest museum in Hyderabad."
+          ],
+          "relation_texts": [
+            "Telangana State Archeology Museum or Hyderabad Museum is a museum located in Hyderabad, India.",
+            "link",
+            "INDIA",
+            "HYDERABAD",
+            "TELANGANA STATE ARCHAEOLOGY MUSEUM",
+            "HYDERABAD MUSEUM",
+            "OLDEST MUSEUM"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sanal Kumar Sasidharan was born in India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Sanal Kumar Sasidharan was born in India.",
+        "entity_ids": [
+          "\"INDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-a530b6646f4ab951f5b795b683cb70db"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sanal Kumar Sasidharan was born in India.",
+            "Sanal Kumar Sasidharan Sanal Kumar Sasidharan( born 8 April 1977) is an Indian film director and poet."
+          ],
+          "relation_texts": [
+            "Sanal Kumar Sasidharan was born in India.",
+            "link",
+            "INDIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Islam Shah Suri (reigned: 1545–1554) was the second ruler of the Suri dynasty which ruled part of India in the mid-16th century.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Islam Shah Suri (reigned: 1545–1554) was the second ruler of the Suri dynasty which ruled part of India in the mid-16th century.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"SURI DYNASTY\"",
+          "\"ISLAM SHAH SURI\""
+        ],
+        "chunk_ids": [
+          "chunk-a45d77e6443d5667cffd3718126d657f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Islam Shah Suri (reigned: 1545–1554) was the second ruler of the Suri dynasty which ruled part of India in the mid-16th century.",
+            "Islam Shah Suri Islam Shah Suri (reigned: 1545–1554) was the second ruler of the Suri dynasty which ruled part of India in the mid-16th century. His original name was Jalal Khan and he was the second son of Sher Shah Suri."
+          ],
+          "relation_texts": [
+            "Islam Shah Suri (reigned: 1545–1554) was the second ruler of the Suri dynasty which ruled part of India in the mid-16th century.",
+            "link",
+            "INDIA",
+            "SURI DYNASTY",
+            "ISLAM SHAH SURI"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was said to have dominated trade between India and Turan in this period.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "He was said to have dominated trade between India and Turan in this period.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"TRADE\"",
+          "\"TURAN\""
+        ],
+        "chunk_ids": [
+          "chunk-3769895961095067f64111d6b961f788"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was said to have dominated trade between India and Turan in this period.",
+            "Atma Ram Atma Ram was a Hindu minister in Afghanistan during the early 19th century. He was said to have dominated trade between India and Turan in this period."
+          ],
+          "relation_texts": [
+            "He was said to have dominated trade between India and Turan in this period.",
+            "link",
+            "INDIA",
+            "TRADE",
+            "TURAN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Pink Pages was an Indian LGBT magazine that published online and print issues from 2009 to 2017.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Pink Pages was an Indian LGBT magazine that published online and print issues from 2009 to 2017.",
+        "entity_ids": [
+          "\"2009\"",
+          "\"2017\"",
+          "\"INDIA\"",
+          "\"PINK PAGES\"",
+          "\"LGBT MAGAZINE\""
+        ],
+        "chunk_ids": [
+          "chunk-6076edda599b511a93073721884f9e8a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Pink Pages was an Indian LGBT magazine that published online and print issues from 2009 to 2017.",
+            "Pink Pages Pink Pages was an Indian LGBT magazine that published online and print issues from 2009 to 2017."
+          ],
+          "relation_texts": [
+            "Pink Pages was an Indian LGBT magazine that published online and print issues from 2009 to 2017.",
+            "link",
+            "2009",
+            "2017",
+            "INDIA",
+            "PINK PAGES",
+            "LGBT MAGAZINE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"APEEJAY SCHOOL, MAHAVIR MARG\"",
+          "\"JALANDHAR\"",
+          "\"SATYA PAUL\"",
+          "\"APEEJAY EDUCATION SOCIETY\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-08b02cae993ab59ad2182c2bdedc6d35"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India.",
+            "Apeejay School, Mahavir Marg Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India. It was established in 1968 by Satya Paul and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+          ],
+          "relation_texts": [
+            "Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "APEEJAY SCHOOL, MAHAVIR MARG",
+            "JALANDHAR",
+            "SATYA PAUL",
+            "APEEJAY EDUCATION SOCIETY",
+            "CENTRAL BOARD OF SECONDARY EDUCATION"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"India is the country where Punjab and Jalandhar are located.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "India is the country where Punjab and Jalandhar are located.",
+        "entity_ids": [
+          "\"INDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-08b02cae993ab59ad2182c2bdedc6d35"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "India is the country where Punjab and Jalandhar are located.",
+            "Apeejay School, Mahavir Marg Apeejay School, Mahavir Marg is a Nursery – 12, English- medium, co-educational private school in Jalandhar, Punjab, India. It was established in 1968 by Satya Paul and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+          ],
+          "relation_texts": [
+            "India is the country where Punjab and Jalandhar are located.",
+            "link",
+            "INDIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"GURU HARKRISHAN PUBLIC SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION",
+            "GURU HARKRISHAN PUBLIC SCHOOL",
+            "PATIALA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"2000\"",
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"CAREER ACADEMY SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-62fee97dc4810e3df9ce75e49142c5fe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "Career Academy, Patiala Career Academy School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2000 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "2000",
+            "PUNJAB",
+            "INDIA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION",
+            "CAREER ACADEMY SCHOOL",
+            "PATIALA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Patiala city is located in Punjab, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Patiala city is located in Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-f9b6af81e8be7956f6e09f64490f2e12"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Patiala city is located in Punjab, India.",
+            "St. Mary's School, Patiala St. Mary's School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2004 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Patiala city is located in Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "PATIALA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Apeejay School, Sheikh Sarai is a Nursery – 12, co-educational private school in New Delhi, Delhi, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Apeejay School, Sheikh Sarai is a Nursery – 12, co-educational private school in New Delhi, Delhi, India.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"APEEJAY SCHOOL, SHEIKH SARAI\"",
+          "\"NEW DELHI\"",
+          "\"DELHI\"",
+          "\"NURSERY – 12\""
+        ],
+        "chunk_ids": [
+          "chunk-8710a5eebd1c818c7506b42c0ac0aafa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Apeejay School, Sheikh Sarai is a Nursery – 12, co-educational private school in New Delhi, Delhi, India.",
+            "Apeejay School, Sheikh Sarai Apeejay School, Sheikh Sarai is a Nursery – 12, co-educational private school in New Delhi, Delhi, India. It was established in 1975 by Sushma Berlia and is part of the Apeejay Education Society. It is affiliated to the Central Board of Secondary Education."
+          ],
+          "relation_texts": [
+            "Apeejay School, Sheikh Sarai is a Nursery – 12, co-educational private school in New Delhi, Delhi, India.",
+            "link",
+            "INDIA",
+            "APEEJAY SCHOOL, SHEIKH SARAI",
+            "NEW DELHI",
+            "DELHI",
+            "NURSERY – 12"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Aruna Mishra represents India in various international competitions.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Aruna Mishra represents India in various international competitions.",
+        "entity_ids": [
+          "\"INDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-c6ce79e5a23a1efb5841c0c69f3ad82e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Aruna Mishra represents India in various international competitions.",
+            "Aruna Mishra Aruna Mishra is a female Indian boxer. Her career highlights include gold medals in the 2003 Asian Championships, 2004 World Cup and the 2011 World Police and Fire Games."
+          ],
+          "relation_texts": [
+            "Aruna Mishra represents India in various international competitions.",
+            "link",
+            "INDIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vijay Krishna is an Indian American economist who is a Distinguished Professor of Economics and Job Market Placement Director at the Pennsylvania State University.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Vijay Krishna is an Indian American economist who is a Distinguished Professor of Economics and Job Market Placement Director at the Pennsylvania State University.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"PENNSYLVANIA STATE UNIVERSITY\"",
+          "\"DELHI\"",
+          "\"ECONOMIST\"",
+          "\"DISTINGUISHED PROFESSOR OF ECONOMICS\"",
+          "\"VIJAY KRISHNA\"",
+          "\"JOB MARKET PLACEMENT DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-a886f3a5f0698ce7d09ca49b4fd823f7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vijay Krishna is an Indian American economist who is a Distinguished Professor of Economics and Job Market Placement Director at the Pennsylvania State University.",
+            "Vijay Krishna (economist) Vijay Krishna( born 7 February 1956 in Delhi, India) is an Indian American economist who is a Distinguished Professor of Economics and Job Market Placement Director of the Department of Economics at the Pennsylvania State University."
+          ],
+          "relation_texts": [
+            "Vijay Krishna is an Indian American economist who is a Distinguished Professor of Economics and Job Market Placement Director at the Pennsylvania State University.",
+            "link",
+            "INDIA",
+            "PENNSYLVANIA STATE UNIVERSITY",
+            "DELHI",
+            "ECONOMIST",
+            "DISTINGUISHED PROFESSOR OF ECONOMICS",
+            "VIJAY KRISHNA",
+            "JOB MARKET PLACEMENT DIRECTOR"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Praveen Agrawal was born in India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Praveen Agrawal was born in India.",
+        "entity_ids": [
+          "\"INDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-829257e6438f7f4fb0e3e6d90bd9b120"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Praveen Agrawal was born in India.",
+            "Praveen Agrawal Praveen Agrawal( born 20 November 1969) is an Indian politician and a member of the Bharatiya Janata Party."
+          ],
+          "relation_texts": [
+            "Praveen Agrawal was born in India.",
+            "link",
+            "INDIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is the first co-production between Brazil and India, and the film debut of Beatriz Seigner as director.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "It is the first co-production between Brazil and India, and the film debut of Beatriz Seigner as director.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"BRAZIL\""
+        ],
+        "chunk_ids": [
+          "chunk-50eca5f5bbb735c1599080d7384280c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is the first co-production between Brazil and India, and the film debut of Beatriz Seigner as director.",
+            "Bollywood Dream Bollywood Dream (Portuguese: \"Bollywood Dream - O Sonho Bollywoodiano\") is a 2010 Brazilian–Indian adventure-comedy film written and directed by Beatriz Seigner. It is the first co-production between Brazil and India, and the film debut of Beatriz Seigner as director. The film follows the story of three Brazilian actresses who decide to try their luck in Bollywood, India's film industry, but once entered into the heart of Indian culture and mythology, their dreams are modified by the contrast between East and West."
+          ],
+          "relation_texts": [
+            "It is the first co-production between Brazil and India, and the film debut of Beatriz Seigner as director.",
+            "link",
+            "INDIA",
+            "BRAZIL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is the first co-production between Brazil and India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "It is the first co-production between Brazil and India.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"BRAZIL\""
+        ],
+        "chunk_ids": [
+          "chunk-50eca5f5bbb735c1599080d7384280c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is the first co-production between Brazil and India.",
+            "Bollywood Dream Bollywood Dream (Portuguese: \"Bollywood Dream - O Sonho Bollywoodiano\") is a 2010 Brazilian–Indian adventure-comedy film written and directed by Beatriz Seigner. It is the first co-production between Brazil and India, and the film debut of Beatriz Seigner as director. The film follows the story of three Brazilian actresses who decide to try their luck in Bollywood, India's film industry, but once entered into the heart of Indian culture and mythology, their dreams are modified by the contrast between East and West."
+          ],
+          "relation_texts": [
+            "It is the first co-production between Brazil and India.",
+            "link",
+            "INDIA",
+            "BRAZIL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released in Maharashtra, India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "The film was released in Maharashtra, India.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"MAHARASHTRA\""
+        ],
+        "chunk_ids": [
+          "chunk-37949e007f2ae88cdb161db56332ba2e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was released in Maharashtra, India.",
+            "Prem Mhanje Prem Mhanje Prem Asta Prem Mhanje Prem Mhanje Prem Asta( Marathi: प्रेम म्हणजे प्रेम म्हणजे प्रेम असतं) is a Marathi drama film released on 19 April 2013. Produced by Sachin Parekar and directed by Mrinal Dev- Kulkarni. The film stars Mrinal Dev- Kulkarni, Sachin Khedekar, Pallavi Joshi, Sunil Barve, Suhas Joshi, Mohan Agashe and Smita Talwalkar. The film's music is by Milind Ingle and Surel Ingle. The film is based on a very important question which is faced by almost everyone, connection between love and marriage."
+          ],
+          "relation_texts": [
+            "The film was released in Maharashtra, India.",
+            "link",
+            "INDIA",
+            "MAHARASHTRA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was shot in several locations including Fujairah and Dubai, in the United Arab Emirates, Mumbai, India and Bangkok, Thailand.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "It was shot in several locations including Fujairah and Dubai, in the United Arab Emirates, Mumbai, India and Bangkok, Thailand.",
+        "entity_ids": [
+          "\"THAILAND\"",
+          "\"INDIA\"",
+          "\"UNITED ARAB EMIRATES\"",
+          "\"MUMBAI\"",
+          "\"FUJAIRAH\"",
+          "\"DUBAI\"",
+          "\"BANGKOK\""
+        ],
+        "chunk_ids": [
+          "chunk-182880e636fcb70b44e833926beca077"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was shot in several locations including Fujairah and Dubai, in the United Arab Emirates, Mumbai, India and Bangkok, Thailand.",
+            "Will You Marry Me? (film) Will You Marry Me? is a Hindi romantic comedy starring Shreyas Talpade, Rajeev Khandelwal, Mugdha Godse and Muzamil Ibrahim in lead roles. The film is about a beach wedding. It was shot in several locations including Fujairah and Dubai, in the United Arab Emirates, Mumbai, India and Bangkok, Thailand. The film is a copy of the Hollywood movie\" Tomcats\"."
+          ],
+          "relation_texts": [
+            "It was shot in several locations including Fujairah and Dubai, in the United Arab Emirates, Mumbai, India and Bangkok, Thailand.",
+            "link",
+            "THAILAND",
+            "INDIA",
+            "UNITED ARAB EMIRATES",
+            "MUMBAI",
+            "FUJAIRAH",
+            "DUBAI",
+            "BANGKOK"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"More than 800 union members attended this event, with media coverage from Beverly Hills to India.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "More than 800 union members attended this event, with media coverage from Beverly Hills to India.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"MEDIA COVERAGE\"",
+          "\"BEVERLY HILLS\"",
+          "\"800 UNION MEMBERS\""
+        ],
+        "chunk_ids": [
+          "chunk-53f77e05d0766282477e21c0d023d206"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "More than 800 union members attended this event, with media coverage from Beverly Hills to India.",
+            "Vivicca Whitsett Vivicca A. Whitsett is an American actress, comedian, and labor activist. Whitsett has appeared on several television shows and on standup stages across the country. In 2000- 2004, Whitsett was elected to the Screen Actors Guild's National Board of Directors. She currently serves as a local Los Angeles SAG board member. During her time serving on SAG's Board, Whitsett was named the National Chair of the EEO Committee, was named a Trustee on the IACF Trust Fund, served on the Communications, Executive and Legislative Committees. In 2011, Vivicca was named the National Co- Chair of SAG's EEO Committee, where they had the most successful Black History Month panel featuring Tarji P. Henson, Marla Gibbs, John Singleton moderated by Wayne Brady More than 800 union members attended this event, with media coverage from Beverly Hills to India."
+          ],
+          "relation_texts": [
+            "More than 800 union members attended this event, with media coverage from Beverly Hills to India.",
+            "link",
+            "INDIA",
+            "MEDIA COVERAGE",
+            "BEVERLY HILLS",
+            "800 UNION MEMBERS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced in India, contributing to the Kannada cinema landscape.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "The film was produced in India, contributing to the Kannada cinema landscape.",
+        "entity_ids": [
+          "\"INDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-5e9f21ac623ff29ce330a4c49caa31b9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was produced in India, contributing to the Kannada cinema landscape.",
+            "Mungarina Minchu Mungarina Minchu is a 1997 Indian Kannada language film directed by Rajendra Singh Babu starring Ramesh Arvind and Shilpa. The film is inspired from the 1942 Italian film\" Quattro passi fra le nuvole Four Steps in the Clouds\") and its 1995 American remake\" A Walk in the Clouds\". The music for the film was composed by V. Manohar. The film was considered as one of the best movies by Rajendra Singh Babu. The film was awarded the Best Feature Film in Kannada at the 45th National Film Awards."
+          ],
+          "relation_texts": [
+            "The film was produced in India, contributing to the Kannada cinema landscape.",
+            "link",
+            "INDIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Captain Ralph Dominic Gamble was born in Simla, India in 1897.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Captain Ralph Dominic Gamble was born in Simla, India in 1897.",
+        "entity_ids": [
+          "\"INDIA\"",
+          "\"RALPH DOMINIC GAMBLE\"",
+          "\"SIMLA\""
+        ],
+        "chunk_ids": [
+          "chunk-19cc348d2950e5327d3c1dde56659e6d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Captain Ralph Dominic Gamble was born in Simla, India in 1897.",
+            "Ralph Dominic Gamble Captain Ralph Dominic Gamble was born in Simla, India in 1897. The second child and the only son of Sir Reginald Arthur Gamble. His grandfather had been Dominic Jacotin Gamble, a veteran of the Crimean War and campaigns in New Zealand. Eventually, he had become the Director of Military Education prior to his death in 1887. His sister married Kenneth Arthur Noel Anderson. Gamble was educated in England at Summer Fields, a prep school in Oxford 1906- 1912 and as a King's Scholar at Eton College 1912- 1916. There, he was one of the top academics at the school despite the fact that he was far more interested in sports. He was talented at cricket, all of the school variations of football, as well as at Eton Fives. On leaving school, he joined the 1st Battalion Coldstream Guards. Having served through the Battle of the Somme and then Cambrai he was promoted to the rank..."
+          ],
+          "relation_texts": [
+            "Captain Ralph Dominic Gamble was born in Simla, India in 1897.",
+            "link",
+            "INDIA",
+            "RALPH DOMINIC GAMBLE",
+            "SIMLA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Calvary Christian High School is in the United States.\"",
+        "branch": "relation",
+        "raw_score": 0.47377827763557434,
+        "hyperedge_text": "Calvary Christian High School is in the United States.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-47217eeed4cd3faacb167b4fe60aecc6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Calvary Christian High School is in the United States.",
+            "Calvary Christian High School (Florida) Calvary Christian High School is a private, college preparatory Christian high school in Clearwater, Florida, in the United States."
+          ],
+          "relation_texts": [
+            "Calvary Christian High School is in the United States.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-05345ee32fcae37408923d2c428171d5",
+            "hyperedge_name": "<hyperedge>\"Calvary Christian High School is in the United States.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The school is located in the Patiala city of Punjab, India.\"",
+        "branch": "relation",
+        "raw_score": 0.4712584614753723,
+        "hyperedge_text": "The school is located in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PATIALA CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The school is located in the Patiala city of Punjab, India.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "The school is located in the Patiala city of Punjab, India.",
+            "link",
+            "PATIALA CITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7f4283649088fa0c2c486ea176ca75d3",
+            "hyperedge_name": "<hyperedge>\"The school is located in the Patiala city of Punjab, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.\"",
+        "branch": "relation",
+        "raw_score": 0.45936858654022217,
+        "hyperedge_text": "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+        "entity_ids": [
+          "\"ENGLAND\"",
+          "\"ST MARY'S SCHOOL\"",
+          "\"RURAL SETTING\"",
+          "\"INDEPENDENT ROMAN CATHOLIC DAY AND BOARDING SCHOOL\"",
+          "\"SHAFTESBURY\"",
+          "\"GIRLS\""
+        ],
+        "chunk_ids": [
+          "chunk-f35164ce685de3d445b2c2089ac1941f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+            "St Mary's School, Shaftesbury St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England. St Mary's School has a sixth form and is a member of the Girls' Schools Association. Although the school's postal address is in Dorset, its site lies just over the county border in Wiltshire, within the parish of Donhead St Mary."
+          ],
+          "relation_texts": [
+            "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+            "link",
+            "ENGLAND",
+            "ST MARY'S SCHOOL",
+            "RURAL SETTING",
+            "INDEPENDENT ROMAN CATHOLIC DAY AND BOARDING SCHOOL",
+            "SHAFTESBURY",
+            "GIRLS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3754c2ecde5f158790f255f90c909f4f",
+            "hyperedge_name": "<hyperedge>\"St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St Mary's School's location details illustrate its diverse geographic context within England.\"",
+        "branch": "relation",
+        "raw_score": 0.44907471537590027,
+        "hyperedge_text": "St Mary's School's location details illustrate its diverse geographic context within England.",
+        "entity_ids": [
+          "\"GEOGRAPHIC CONTEXT\""
+        ],
+        "chunk_ids": [
+          "chunk-f35164ce685de3d445b2c2089ac1941f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St Mary's School's location details illustrate its diverse geographic context within England.",
+            "St Mary's School, Shaftesbury St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England. St Mary's School has a sixth form and is a member of the Girls' Schools Association. Although the school's postal address is in Dorset, its site lies just over the county border in Wiltshire, within the parish of Donhead St Mary."
+          ],
+          "relation_texts": [
+            "St Mary's School's location details illustrate its diverse geographic context within England.",
+            "link",
+            "GEOGRAPHIC CONTEXT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-74a13f0f4f18aa1170c29f1b7e1b6937",
+            "hyperedge_name": "<hyperedge>\"St Mary's School's location details illustrate its diverse geographic context within England.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The United States is the country where Thornwood High School is located.\"",
+        "branch": "relation",
+        "raw_score": 0.43766215443611145,
+        "hyperedge_text": "The United States is the country where Thornwood High School is located.",
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-731ad25932d6d464407da7b8549a559a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The United States is the country where Thornwood High School is located.",
+            "Thornwood High School Thornwood High School is a public high school located in South Holland, Illinois, United States. It was built as part of Thornton Township High School District 205."
+          ],
+          "relation_texts": [
+            "The United States is the country where Thornwood High School is located.",
+            "link",
+            "UNITED STATES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4190134f91ea0756e68d185c04620173",
+            "hyperedge_name": "<hyperedge>\"The United States is the country where Thornwood High School is located.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Free school may refer to different educational approaches around the world.\"",
+        "branch": "relation",
+        "raw_score": 0.43452298641204834,
+        "hyperedge_text": "Free school may refer to different educational approaches around the world.",
+        "entity_ids": [
+          "\"WORLD\"",
+          "\"EDUCATIONAL APPROACHES\""
+        ],
+        "chunk_ids": [
+          "chunk-2aa6e064a7f4014088b4794a01d500e8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Free school may refer to different educational approaches around the world.",
+            "Free school Free school may refer to:"
+          ],
+          "relation_texts": [
+            "Free school may refer to different educational approaches around the world.",
+            "link",
+            "WORLD",
+            "EDUCATIONAL APPROACHES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-53e769f5df1148d02ee670028038a96b",
+            "hyperedge_name": "<hyperedge>\"Free school may refer to different educational approaches around the world.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The school is affiliated to the Central Board of Secondary Education of India.\"",
+        "branch": "relation",
+        "raw_score": 0.4219268560409546,
+        "hyperedge_text": "The school is affiliated to the Central Board of Secondary Education of India.",
+        "entity_ids": [
+          "\"AFFILIATION\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The school is affiliated to the Central Board of Secondary Education of India.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "The school is affiliated to the Central Board of Secondary Education of India.",
+            "link",
+            "AFFILIATION",
+            "CENTRAL BOARD OF SECONDARY EDUCATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-732e47f13e7e12e4f65877d843dc6b3a",
+            "hyperedge_name": "<hyperedge>\"The school is affiliated to the Central Board of Secondary Education of India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The location of St Mary's School is in a rural setting near Shaftesbury.\"",
+        "branch": "relation",
+        "raw_score": 0.4194144904613495,
+        "hyperedge_text": "The location of St Mary's School is in a rural setting near Shaftesbury.",
+        "entity_ids": [
+          "\"ENGLAND\"",
+          "\"RURAL SETTING\"",
+          "\"SHAFTESBURY\""
+        ],
+        "chunk_ids": [
+          "chunk-f35164ce685de3d445b2c2089ac1941f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The location of St Mary's School is in a rural setting near Shaftesbury.",
+            "St Mary's School, Shaftesbury St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England. St Mary's School has a sixth form and is a member of the Girls' Schools Association. Although the school's postal address is in Dorset, its site lies just over the county border in Wiltshire, within the parish of Donhead St Mary."
+          ],
+          "relation_texts": [
+            "The location of St Mary's School is in a rural setting near Shaftesbury.",
+            "link",
+            "ENGLAND",
+            "RURAL SETTING",
+            "SHAFTESBURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-eaadc45cc050a5924f1baee75982b9ce",
+            "hyperedge_name": "<hyperedge>\"The location of St Mary's School is in a rural setting near Shaftesbury.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Covenant Christian High School is part of the larger educational landscape of the United States.\"",
+        "branch": "relation",
+        "raw_score": 0.4186711311340332,
+        "hyperedge_text": "Covenant Christian High School is part of the larger educational landscape of the United States.",
+        "entity_ids": [
+          "\"EDUCATIONAL LANDSCAPE\""
+        ],
+        "chunk_ids": [
+          "chunk-3ddda9a1dbf0929a81c368a62b56d2c3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Covenant Christian High School is part of the larger educational landscape of the United States.",
+            "Covenant Christian High School (DeMotte, Indiana) Covenant Christian High School is a private Christian high school located in DeMotte, Indiana, United States."
+          ],
+          "relation_texts": [
+            "Covenant Christian High School is part of the larger educational landscape of the United States.",
+            "link",
+            "EDUCATIONAL LANDSCAPE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f63da50f2ead303b325e83641d458f63",
+            "hyperedge_name": "<hyperedge>\"Covenant Christian High School is part of the larger educational landscape of the United States.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The school is part of the Clinton Public School District, providing education to the local community.\"",
+        "branch": "relation",
+        "raw_score": 0.4171918034553528,
+        "hyperedge_text": "The school is part of the Clinton Public School District, providing education to the local community.",
+        "entity_ids": [
+          "\"CLINTON PUBLIC SCHOOL DISTRICT\""
+        ],
+        "chunk_ids": [
+          "chunk-05f06a30f64045e1516c9c0c8c038de6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The school is part of the Clinton Public School District, providing education to the local community.",
+            "Clinton High School (Clinton, Mississippi) Clinton High School is a secondary school located in Clinton, Mississippi."
+          ],
+          "relation_texts": [
+            "The school is part of the Clinton Public School District, providing education to the local community.",
+            "link",
+            "CLINTON PUBLIC SCHOOL DISTRICT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-576a6b45122e2e585637475b7c5fbb10",
+            "hyperedge_name": "<hyperedge>\"The school is part of the Clinton Public School District, providing education to the local community.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "semantic",
+        "raw_score": 0.8248059153556824,
+        "hyperedge_text": "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"ST. MARY'S SCHOOL, PATIALA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA\"",
+          "\"PATIALA\"",
+          "\"HIGHER-SECONDARY CO-EDUCATION PRIVATE SCHOOL\""
+        ],
+        "chunk_ids": [
+          "chunk-f9b6af81e8be7956f6e09f64490f2e12"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "St. Mary's School, Patiala St. Mary's School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2004 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "ST. MARY'S SCHOOL, PATIALA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA",
+            "PATIALA",
+            "HIGHER-SECONDARY CO-EDUCATION PRIVATE SCHOOL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4946a6c1529ecb1375080b19fe442377",
+            "hyperedge_name": "<hyperedge>\"St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Patiala is affiliated to the Central Board of Secondary Education of India.\"",
+        "branch": "semantic",
+        "raw_score": 0.7632420659065247,
+        "hyperedge_text": "St. Mary's School, Patiala is affiliated to the Central Board of Secondary Education of India.",
+        "entity_ids": [
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-f9b6af81e8be7956f6e09f64490f2e12"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School, Patiala is affiliated to the Central Board of Secondary Education of India.",
+            "St. Mary's School, Patiala St. Mary's School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2004 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "St. Mary's School, Patiala is affiliated to the Central Board of Secondary Education of India.",
+            "link",
+            "CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c1b18f232b7a73ff02f7306bb2a6bf8c",
+            "hyperedge_name": "<hyperedge>\"St. Mary's School, Patiala is affiliated to the Central Board of Secondary Education of India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.\"",
+        "branch": "semantic",
+        "raw_score": 0.6055915355682373,
+        "hyperedge_text": "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+        "entity_ids": [
+          "\"ST. MARY'S SCHOOL\"",
+          "\"SOCIETY OF JESUS\"",
+          "\"SANGAMNER\"",
+          "\"ST. MARY'S PARISH\"",
+          "\"MAHARASHTRA STATE BOARD FOR SECONDARY AND HIGHER EDUCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-bf7e1b91972e00b82242d3b95f28cfcd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+            "St. Mary's School, Sangamner St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations. The school is affiliated to the Maharashtra State Board for Secondary and Higher Education."
+          ],
+          "relation_texts": [
+            "St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.",
+            "link",
+            "ST. MARY'S SCHOOL",
+            "SOCIETY OF JESUS",
+            "SANGAMNER",
+            "ST. MARY'S PARISH",
+            "MAHARASHTRA STATE BOARD FOR SECONDARY AND HIGHER EDUCATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6f137224cab77a2909aac4f6f1d3950e",
+            "hyperedge_name": "<hyperedge>\"St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The school is located in the Patiala city of Punjab, India.\"",
+        "branch": "semantic",
+        "raw_score": 0.5852062702178955,
+        "hyperedge_text": "The school is located in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PATIALA CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The school is located in the Patiala city of Punjab, India.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "The school is located in the Patiala city of Punjab, India.",
+            "link",
+            "PATIALA CITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7f4283649088fa0c2c486ea176ca75d3",
+            "hyperedge_name": "<hyperedge>\"The school is located in the Patiala city of Punjab, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "semantic",
+        "raw_score": 0.5718318819999695,
+        "hyperedge_text": "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"2000\"",
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"CAREER ACADEMY SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-62fee97dc4810e3df9ce75e49142c5fe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "Career Academy, Patiala Career Academy School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2000 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "2000",
+            "PUNJAB",
+            "INDIA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION",
+            "CAREER ACADEMY SCHOOL",
+            "PATIALA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3dba38b0b5f6ac0229feaae0dfe95dc4",
+            "hyperedge_name": "<hyperedge>\"Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "branch": "semantic",
+        "raw_score": 0.5687201023101807,
+        "hyperedge_text": "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"GURU HARKRISHAN PUBLIC SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+          ],
+          "relation_texts": [
+            "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+            "link",
+            "PUNJAB",
+            "INDIA",
+            "CENTRAL BOARD OF SECONDARY EDUCATION",
+            "GURU HARKRISHAN PUBLIC SCHOOL",
+            "PATIALA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-53ec825b909ee6766d07e5aefcb03f9a",
+            "hyperedge_name": "<hyperedge>\"Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.\"",
+        "branch": "semantic",
+        "raw_score": 0.5660637617111206,
+        "hyperedge_text": "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+        "entity_ids": [
+          "\"ENGLAND\"",
+          "\"ST MARY'S SCHOOL\"",
+          "\"RURAL SETTING\"",
+          "\"INDEPENDENT ROMAN CATHOLIC DAY AND BOARDING SCHOOL\"",
+          "\"SHAFTESBURY\"",
+          "\"GIRLS\""
+        ],
+        "chunk_ids": [
+          "chunk-f35164ce685de3d445b2c2089ac1941f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+            "St Mary's School, Shaftesbury St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England. St Mary's School has a sixth form and is a member of the Girls' Schools Association. Although the school's postal address is in Dorset, its site lies just over the county border in Wiltshire, within the parish of Donhead St Mary."
+          ],
+          "relation_texts": [
+            "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+            "link",
+            "ENGLAND",
+            "ST MARY'S SCHOOL",
+            "RURAL SETTING",
+            "INDEPENDENT ROMAN CATHOLIC DAY AND BOARDING SCHOOL",
+            "SHAFTESBURY",
+            "GIRLS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3754c2ecde5f158790f255f90c909f4f",
+            "hyperedge_name": "<hyperedge>\"St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Saint Mary's School is a private independent Episcopal college-preparatory, boarding and day school for girls in grades 9-12.\"",
+        "branch": "semantic",
+        "raw_score": 0.5494333505630493,
+        "hyperedge_text": "Saint Mary's School is a private independent Episcopal college-preparatory, boarding and day school for girls in grades 9-12.",
+        "entity_ids": [
+          "\"EPISCOPAL CHURCH\"",
+          "\"NORTH CAROLINA\"",
+          "\"RALEIGH\"",
+          "\"SAINT MARY'S SCHOOL\"",
+          "\"ST. MARY'S CHAPEL\""
+        ],
+        "chunk_ids": [
+          "chunk-5d20f3516906f5dfe71bf7949d46b546"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Saint Mary's School is a private independent Episcopal college-preparatory, boarding and day school for girls in grades 9-12.",
+            "Saint Mary's School (Raleigh, North Carolina) Saint Mary's School is a private independent Episcopal college- preparatory, boarding and day school for girls in grades 9- 12. Located in Raleigh, North Carolina, Saint Mary's School operates as an independent school with a historic association with the Episcopal Church including an Episcopal chapel, St. Mary's Chapel, on the school's grounds. The school formerly operated as Saint Mary's College and for many decades educated young women in grades 11- 12 and their freshman and sophomore years in college. The school changed to a four year high school in 1998, at which point the name reverted to Saint Mary's School, the original name of the institution when it was founded in 1842."
+          ],
+          "relation_texts": [
+            "Saint Mary's School is a private independent Episcopal college-preparatory, boarding and day school for girls in grades 9-12.",
+            "link",
+            "EPISCOPAL CHURCH",
+            "NORTH CAROLINA",
+            "RALEIGH",
+            "SAINT MARY'S SCHOOL",
+            "ST. MARY'S CHAPEL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-582857210bd959dfee0ce80f7b507869",
+            "hyperedge_name": "<hyperedge>\"Saint Mary's School is a private independent Episcopal college-preparatory, boarding and day school for girls in grades 9-12.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St Mary's School is affiliated with the Girls' Schools Association, promoting girls' education.\"",
+        "branch": "semantic",
+        "raw_score": 0.5489121079444885,
+        "hyperedge_text": "St Mary's School is affiliated with the Girls' Schools Association, promoting girls' education.",
+        "entity_ids": [
+          "\"GIRLS' SCHOOLS ASSOCIATION\""
+        ],
+        "chunk_ids": [
+          "chunk-f35164ce685de3d445b2c2089ac1941f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St Mary's School is affiliated with the Girls' Schools Association, promoting girls' education.",
+            "St Mary's School, Shaftesbury St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England. St Mary's School has a sixth form and is a member of the Girls' Schools Association. Although the school's postal address is in Dorset, its site lies just over the county border in Wiltshire, within the parish of Donhead St Mary."
+          ],
+          "relation_texts": [
+            "St Mary's School is affiliated with the Girls' Schools Association, promoting girls' education.",
+            "link",
+            "GIRLS' SCHOOLS ASSOCIATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7d8bc56268b8ad05ea0c5eb357864bc7",
+            "hyperedge_name": "<hyperedge>\"St Mary's School is affiliated with the Girls' Schools Association, promoting girls' education.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School was opened in conjunction with St. Mary's parish and its mission stations.\"",
+        "branch": "semantic",
+        "raw_score": 0.5479791760444641,
+        "hyperedge_text": "St. Mary's School was opened in conjunction with St. Mary's parish and its mission stations.",
+        "entity_ids": [
+          "\"ST. MARY'S PARISH\"",
+          "\"MISSION STATIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-bf7e1b91972e00b82242d3b95f28cfcd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. Mary's School was opened in conjunction with St. Mary's parish and its mission stations.",
+            "St. Mary's School, Sangamner St. Mary's School, Sangamner was opened by the Society of Jesus in 1892, in conjunction with St. Mary's parish and its mission stations. The school is affiliated to the Maharashtra State Board for Secondary and Higher Education."
+          ],
+          "relation_texts": [
+            "St. Mary's School was opened in conjunction with St. Mary's parish and its mission stations.",
+            "link",
+            "ST. MARY'S PARISH",
+            "MISSION STATIONS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e48d54c3578063d05d7ec562d3e09a11",
+            "hyperedge_name": "<hyperedge>\"St. Mary's School was opened in conjunction with St. Mary's parish and its mission stations.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "hyperedge_text": "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.8248059153556824,
+        "fusion_score": 0.6982945164044698,
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"ST. MARY'S SCHOOL, PATIALA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION OF INDIA\"",
+          "\"PATIALA\"",
+          "\"HIGHER-SECONDARY CO-EDUCATION PRIVATE SCHOOL\""
+        ],
+        "chunk_ids": [
+          "chunk-f9b6af81e8be7956f6e09f64490f2e12"
+        ],
+        "evidence_texts": [
+          "St. Mary's School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+          "St. Mary's School, Patiala St. Mary's School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2004 and is affiliated to the Central Board of Secondary Education of India."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.333333,
+          "S": 0.824806,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.698295
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The school is located in the Patiala city of Punjab, India.\"",
+        "hyperedge_text": "The school is located in the Patiala city of Punjab, India.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.4712584614753723,
+        "semantic_score": 0.5852062702178955,
+        "fusion_score": 0.505544638633728,
+        "entity_ids": [
+          "\"PATIALA CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "evidence_texts": [
+          "The school is located in the Patiala city of Punjab, India.",
+          "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.471258,
+          "S": 0.585206,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505545
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "hyperedge_text": "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.5718318819999695,
+        "fusion_score": 0.4476997097333273,
+        "entity_ids": [
+          "\"2000\"",
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"CAREER ACADEMY SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-62fee97dc4810e3df9ce75e49142c5fe"
+        ],
+        "evidence_texts": [
+          "Career Academy School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+          "Career Academy, Patiala Career Academy School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2000 and is affiliated to the Central Board of Secondary Education of India."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.571832,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.4477
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.\"",
+        "hyperedge_text": "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.5687201023101807,
+        "fusion_score": 0.4470773537953695,
+        "entity_ids": [
+          "\"PUNJAB\"",
+          "\"INDIA\"",
+          "\"CENTRAL BOARD OF SECONDARY EDUCATION\"",
+          "\"GURU HARKRISHAN PUBLIC SCHOOL\"",
+          "\"PATIALA\""
+        ],
+        "chunk_ids": [
+          "chunk-b26c09c8f71e739a0d129edef82a37ae"
+        ],
+        "evidence_texts": [
+          "Guru Harkrishan Public School, Patiala is a higher-secondary co-education private school in the Patiala city of Punjab, India.",
+          "Guru Harkrishan Public School, Patiala Guru Harkrishan Public School, Patiala is a higher- secondary co-education private school in the Patiala city of Punjab, India. The school was founded in 2006 and is affiliated to the Central Board of Secondary Education of India."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.56872,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.447077
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.\"",
+        "hyperedge_text": "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45936858654022217,
+        "semantic_score": 0.5660637617111206,
+        "fusion_score": 0.296960186958313,
+        "entity_ids": [
+          "\"ENGLAND\"",
+          "\"ST MARY'S SCHOOL\"",
+          "\"RURAL SETTING\"",
+          "\"INDEPENDENT ROMAN CATHOLIC DAY AND BOARDING SCHOOL\"",
+          "\"SHAFTESBURY\"",
+          "\"GIRLS\""
+        ],
+        "chunk_ids": [
+          "chunk-f35164ce685de3d445b2c2089ac1941f"
+        ],
+        "evidence_texts": [
+          "St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England.",
+          "St Mary's School, Shaftesbury St Mary's School is an independent Roman Catholic day and boarding school for girls located in a rural setting near Shaftesbury, England. St Mary's School has a sixth form and is a member of the Girls' Schools Association. Although the school's postal address is in Dorset, its site lies just over the county border in Wiltshire, within the parish of Donhead St Mary."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.459369,
+          "S": 0.566064,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.29696
+        }
+      }
+    ]
+  }
+]

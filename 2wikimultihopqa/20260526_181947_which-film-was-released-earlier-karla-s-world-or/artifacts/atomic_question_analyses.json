@@ -1,0 +1,171 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Karla'S World released?",
+    "retrieval_question": "When was Karla'S World released?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Karla'S World released?",
+      "retrieval_question": "When was Karla'S World released?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Karla'S World"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Dharti?",
+    "retrieval_question": "What is the release date of Dharti?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Dharti?",
+      "retrieval_question": "What is the release date of Dharti?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Dharti"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Karla'S World?",
+    "retrieval_question": "What is the release date of Karla'S World?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Karla'S World?",
+      "retrieval_question": "What is the release date of Karla'S World?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "When was Karla'S World released?",
+        "answer": "2007",
+        "confidence": 1.0,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence clearly states that 'Karla's World is a 2007 Danish movie'.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.\"",
+            "fusion_score": 0.5196183562278748,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup.",
+              "Karla's World Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Karla's World is a movie based on a book written by Renée Simonsen.\"",
+            "fusion_score": 0.5116783142089845,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Karla's World is a movie based on a book written by Renée Simonsen.",
+              "Karla's World Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen.\"",
+            "fusion_score": 0.55,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen.",
+              "Karla's World Karla's World is a 2007 Danish movie based on the 2003 book of the same title written by Renée Simonsen, the film is directed by Charlotte Sachs Bostrup."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "What is the release date of Dharti?",
+        "answer": "1970",
+        "confidence": 0.9,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence states that 'Dharti (Earth) is a 1970 Bollywood action film directed by C.V. Sridhar.' This directly supports the release date as 1970.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Dharti (Earth) is a 1970 Bollywood action film directed by C.V. Sridhar.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Dharti (Earth) is a 1970 Bollywood action film directed by C.V. Sridhar.\"",
+            "fusion_score": 0.4996702790260315,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Dharti (Earth) is a 1970 Bollywood action film directed by C.V. Sridhar.",
+              "Dharti Dharti(\" Earth\") is a 1970 Bollywood action film directed by C.V. Sridhar. The film stars Rajendra Kumar and Waheeda Rehman. It is a remake of the 1969 Tamil language film\" Sivandha Mann\" that starred Sivaji Ganesan."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The release date of Rakka was 14 June 2017.\"",
+            "fusion_score": 0.26424636840820315,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The release date of Rakka was 14 June 2017.",
+              "Rakka (film) The film was released on YouTube and Steam on 14 June 2017."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The action film Dharti features a storyline that incorporates elements of heroism, romance, and drama typical of the genre.\"",
+            "fusion_score": 0.5017526149749756,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The action film Dharti features a storyline that incorporates elements of heroism, romance, and drama typical of the genre.",
+              "Dharti Dharti(\" Earth\") is a 1970 Bollywood action film directed by C.V. Sridhar. The film stars Rajendra Kumar and Waheeda Rehman. It is a remake of the 1969 Tamil language film\" Sivandha Mann\" that starred Sivaji Ganesan."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Karla's World"
+      ],
+      "relations": [
+        "release date of"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  }
+]

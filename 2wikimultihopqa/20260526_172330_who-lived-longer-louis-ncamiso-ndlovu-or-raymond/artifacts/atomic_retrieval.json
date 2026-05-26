@@ -1,0 +1,2372 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the life span of Louis Ncamiso Ndlovu?",
+    "retrieval_question": "What is the life span of Louis Ncamiso Ndlovu?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the life span of Louis Ncamiso Ndlovu?",
+      "retrieval_question": "What is the life span of Louis Ncamiso Ndlovu?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+        "entity_ids": [
+          "\"LOUIS NCAMISO NDLOVU\"",
+          "\"SWAZILAND\"",
+          "\"ROMAN CATHOLIC BISHOP\"",
+          "\"ROMAN CATHOLIC DIOCESE OF MANZINI\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+            "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+          ],
+          "relation_texts": [
+            "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+            "link",
+            "LOUIS NCAMISO NDLOVU",
+            "SWAZILAND",
+            "ROMAN CATHOLIC BISHOP",
+            "ROMAN CATHOLIC DIOCESE OF MANZINI"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned from his birth in the early 20th century to his death towards the end of the century.\"",
+        "branch": "relation",
+        "raw_score": 0.4037705063819885,
+        "hyperedge_text": "His life spanned from his birth in the early 20th century to his death towards the end of the century.",
+        "entity_ids": [
+          "\"LATE 20TH CENTURY\"",
+          "\"20TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-7a57f9297ac91dd37eab71d6b383f699"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned from his birth in the early 20th century to his death towards the end of the century.",
+            "Prince Max Emanuel of Thurn and Taxis Father\" Emmeram\" of Thurn and Taxis OSB, until his profession Prince\" Max Emanuel\" Maria Siegfried Joseph Antonius Ignatius Lamoral of Thurn and Taxis( 1 March 1902, Regensburg, Kingdom of Bavaria – 3 October 1994, Regensburg, Bavaria, Germany) was a German Benedictine and member of the Princely House of Thurn and Taxis."
+          ],
+          "relation_texts": [
+            "His life spanned from his birth in the early 20th century to his death towards the end of the century.",
+            "link",
+            "LATE 20TH CENTURY",
+            "20TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-61c1017046afc7bb9c1b13338778d3c7",
+            "hyperedge_name": "<hyperedge>\"His life spanned from his birth in the early 20th century to his death towards the end of the century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned from January 30, 1871, to December 13, 1940.\"",
+        "branch": "relation",
+        "raw_score": 0.38995397090911865,
+        "hyperedge_text": "His life spanned from January 30, 1871, to December 13, 1940.",
+        "entity_ids": [
+          "\"JANUARY 30, 1871\"",
+          "\"DECEMBER 13, 1940\""
+        ],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned from January 30, 1871, to December 13, 1940.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His life spanned from January 30, 1871, to December 13, 1940.",
+            "link",
+            "JANUARY 30, 1871",
+            "DECEMBER 13, 1940"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0d92fa04edd26b6389d2cc448f519045",
+            "hyperedge_name": "<hyperedge>\"His life spanned from January 30, 1871, to December 13, 1940.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"John Lyon (– 1558) indicates the lifespan of the individual.\"",
+        "branch": "relation",
+        "raw_score": 0.3856067657470703,
+        "hyperedge_text": "John Lyon (– 1558) indicates the lifespan of the individual.",
+        "entity_ids": [
+          "\"1558\""
+        ],
+        "chunk_ids": [
+          "chunk-52aa1f0c2ac131829d19c868749e3dfc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "John Lyon (– 1558) indicates the lifespan of the individual.",
+            "John Lyon, 7th Lord Glamis John Lyon, 7th Lord Glamis( – 1558) was a Scottish nobleman."
+          ],
+          "relation_texts": [
+            "John Lyon (– 1558) indicates the lifespan of the individual.",
+            "link",
+            "1558"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7613abc922c432a37a8852f21e0a2c19",
+            "hyperedge_name": "<hyperedge>\"John Lyon (– 1558) indicates the lifespan of the individual.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.\"",
+        "branch": "relation",
+        "raw_score": 0.3844623565673828,
+        "hyperedge_text": "Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.",
+        "entity_ids": [
+          "\"AUTHOR\"",
+          "\"UNITED STATES\"",
+          "\"PHYSICIAN\"",
+          "\"JEFFRY LIFE\"",
+          "\"YOUTHFUL BODY\"",
+          "\"OLD AGE\""
+        ],
+        "chunk_ids": [
+          "chunk-949fe1beab29358bedae4f361251915f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.",
+            "Jeffry Life Jeffry Life( born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age."
+          ],
+          "relation_texts": [
+            "Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.",
+            "link",
+            "AUTHOR",
+            "UNITED STATES",
+            "PHYSICIAN",
+            "JEFFRY LIFE",
+            "YOUTHFUL BODY",
+            "OLD AGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cc7235b3c45b13b1aabd3a2dd95aded6",
+            "hyperedge_name": "<hyperedge>\"Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her life spanned from the mid-19th century to the early 20th century.\"",
+        "branch": "relation",
+        "raw_score": 0.3820486068725586,
+        "hyperedge_text": "Her life spanned from the mid-19th century to the early 20th century.",
+        "entity_ids": [
+          "\"EARLY 20TH CENTURY\"",
+          "\"MID-19TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-b7eab5c302df24f7492aa0c02eb56a51"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her life spanned from the mid-19th century to the early 20th century.",
+            "Archduchess Maria Theresa of Austria (1845–1927) Archduchess Maria Theresa of Austria (15 July 1845 – 8 October 1927) was a member of the Austrian house of Habsburg-Lorraine."
+          ],
+          "relation_texts": [
+            "Her life spanned from the mid-19th century to the early 20th century.",
+            "link",
+            "EARLY 20TH CENTURY",
+            "MID-19TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f73a861ff41d11ba335e734c99c62ae",
+            "hyperedge_name": "<hyperedge>\"Her life spanned from the mid-19th century to the early 20th century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"George Charles's life spanned from 1691 to 1755.\"",
+        "branch": "relation",
+        "raw_score": 0.3787603974342346,
+        "hyperedge_text": "George Charles's life spanned from 1691 to 1755.",
+        "entity_ids": [
+          "\"LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-e1904eb81c3a22c82c151f421c421d59"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "George Charles's life spanned from 1691 to 1755.",
+            "George Charles of Hesse-Kassel George Charles of Hesse-Kassel (8 January 1691 – 5 March 1755) was a prince of Hesse-Kassel and a Prussian General."
+          ],
+          "relation_texts": [
+            "George Charles's life spanned from 1691 to 1755.",
+            "link",
+            "LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c1020854fd14f2911fd92516b733dd4a",
+            "hyperedge_name": "<hyperedge>\"George Charles's life spanned from 1691 to 1755.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned the latter half of the 20th century.\"",
+        "branch": "relation",
+        "raw_score": 0.375488817691803,
+        "hyperedge_text": "His life spanned the latter half of the 20th century.",
+        "entity_ids": [
+          "\"20TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-a0dbe8a482c56a896cb4e55e800d5de8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned the latter half of the 20th century.",
+            "Juan Carlos Gumucio Juan Carlos Gumucio Quiroga (November 7, 1949 – February 25, 2002) was a Bolivian-born journalist and writer, and the second husband of Marie Colvin."
+          ],
+          "relation_texts": [
+            "His life spanned the latter half of the 20th century.",
+            "link",
+            "20TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a7cbc632fa1b962b442e6540fc41b317",
+            "hyperedge_name": "<hyperedge>\"His life spanned the latter half of the 20th century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The time frame of her life spans from 1638 to 1683.\"",
+        "branch": "relation",
+        "raw_score": 0.3732181191444397,
+        "hyperedge_text": "The time frame of her life spans from 1638 to 1683.",
+        "entity_ids": [
+          "\"TIME FRAME\""
+        ],
+        "chunk_ids": [
+          "chunk-63cbcf18fee5a16b00c7fcb07da19e7d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The time frame of her life spans from 1638 to 1683.",
+            "Anna Sophia II, Abbess of Quedlinburg Landgravine Anna Sophia of Hesse- Darmstadt( 17 December 1638 – 13 December 1683) was a German noblewoman who reigned as Princess- Abbess of Quedlinburg under the name Anna Sophia II."
+          ],
+          "relation_texts": [
+            "The time frame of her life spans from 1638 to 1683.",
+            "link",
+            "TIME FRAME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-151f83d167aa265587c0c9620af3c443",
+            "hyperedge_name": "<hyperedge>\"The time frame of her life spans from 1638 to 1683.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\"",
+        "branch": "relation",
+        "raw_score": 0.3719028830528259,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+        "entity_ids": [
+          "\"OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "link",
+            "OLDEST MEN",
+            "AVERAGE LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b352c56b67b43287a6b2ccb0ecb90f76",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Bertrand is noted as 1258 to 6 June 1350.\"",
+        "branch": "relation",
+        "raw_score": 0.37029868364334106,
+        "hyperedge_text": "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+        "entity_ids": [
+          "\"1258\"",
+          "\"6 JUNE 1350\""
+        ],
+        "chunk_ids": [
+          "chunk-f11246269523e123bd54efb90adcd938"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+            "Bertrand of Saint-Geniès Bertrand( or Bertram) of Saint- Geniès( 1258 – 6 June 1350) was the patriarch of Aquileia from 1334 until his death."
+          ],
+          "relation_texts": [
+            "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+            "link",
+            "1258",
+            "6 JUNE 1350"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-321c1a0717e0fe62bfe45245ed51064a",
+            "hyperedge_name": "<hyperedge>\"The life span of Bertrand is noted as 1258 to 6 June 1350.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.\"",
+        "branch": "semantic",
+        "raw_score": 0.6114654541015625,
+        "hyperedge_text": "Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.",
+        "entity_ids": [
+          "\"AUGUST 27, 2012\"",
+          "\"MARCH 15, 1945\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.",
+            "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+          ],
+          "relation_texts": [
+            "Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.",
+            "link",
+            "AUGUST 27, 2012",
+            "MARCH 15, 1945"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1f0c032a97ab6513cc8641801610b8b5",
+            "hyperedge_name": "<hyperedge>\"Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.\"",
+        "branch": "semantic",
+        "raw_score": 0.5771963596343994,
+        "hyperedge_text": "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+        "entity_ids": [
+          "\"LOUIS NCAMISO NDLOVU\"",
+          "\"SWAZILAND\"",
+          "\"ROMAN CATHOLIC BISHOP\"",
+          "\"ROMAN CATHOLIC DIOCESE OF MANZINI\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+            "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+          ],
+          "relation_texts": [
+            "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+            "link",
+            "LOUIS NCAMISO NDLOVU",
+            "SWAZILAND",
+            "ROMAN CATHOLIC BISHOP",
+            "ROMAN CATHOLIC DIOCESE OF MANZINI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-774c671915ef41a22354ceaa8125d375",
+            "hyperedge_name": "<hyperedge>\"Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office.\"",
+        "branch": "semantic",
+        "raw_score": 0.4867895245552063,
+        "hyperedge_text": "Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office.",
+        "entity_ids": [
+          "\"1985\"",
+          "\"PRIESTHOOD\"",
+          "\"DEATH IN OFFICE\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office.",
+            "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+          ],
+          "relation_texts": [
+            "Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office.",
+            "link",
+            "1985",
+            "PRIESTHOOD",
+            "DEATH IN OFFICE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-224208bfa1d9255c7a40d70fa5506cdd",
+            "hyperedge_name": "<hyperedge>\"Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The dates of birth and death for Louis I indicate he lived to be 55 years old.\"",
+        "branch": "semantic",
+        "raw_score": 0.4141540825366974,
+        "hyperedge_text": "The dates of birth and death for Louis I indicate he lived to be 55 years old.",
+        "entity_ids": [
+          "\"55 YEARS\""
+        ],
+        "chunk_ids": [
+          "chunk-2b316167bc8c02f37351f726fb764283"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The dates of birth and death for Louis I indicate he lived to be 55 years old.",
+            "Louis I, Landgrave of Hesse Louis I of Hesse (6 February 1402, Spangenberg - 17 January 1458), called \"the Peaceful\" was Landgrave of Lower Hesse (Hesse) from 1413-1458. He was the son of Hermann II, Landgrave of Hesse and Margaret, the daughter of Frederick V of Nuremberg. He married Anna (5 June 1420 - 17 September 1462) daughter of Frederick I, Elector of Saxony on 13 September 1436. Their children were: After 1425 a conflict with the Electorate of Mainz over claims to power in Hesse broke out into open conflict and Archbishop Conrad III of Mainz suffered a decisive defeat at Fulda in 1427."
+          ],
+          "relation_texts": [
+            "The dates of birth and death for Louis I indicate he lived to be 55 years old.",
+            "link",
+            "55 YEARS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6c452c2675b7cc576cf79fa40bc82f89",
+            "hyperedge_name": "<hyperedge>\"The dates of birth and death for Louis I indicate he lived to be 55 years old.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.\"",
+        "branch": "semantic",
+        "raw_score": 0.3973633050918579,
+        "hyperedge_text": "Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.",
+        "entity_ids": [
+          "\"17TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-54cfce452b6bc694a90c6c2e74894920"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.",
+            "Louis of Nassau, Lord of De Lek and Beverweerd Louis of Nassau, Lord of De Lek and Beverweerd (1602 – The Hague, 28 February 1665) was a Dutch soldier. He was the illegitimate son of Margaretha van Mechelen and Maurice, Prince of Orange, and so a collateral member of the House of Orange-Nassau. He was a Lord of the heerlijkheid De Lek and . From his father he inherited the estate of Beverweerd; and when his older brother Willem died in 1627 he inherited his estate as well."
+          ],
+          "relation_texts": [
+            "Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.",
+            "link",
+            "17TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-21f9e71c2f397f772346ba9fb8c0d36d",
+            "hyperedge_name": "<hyperedge>\"Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ndlovu's work as a bishop included leading religious services and supporting community initiatives.\"",
+        "branch": "semantic",
+        "raw_score": 0.38456055521965027,
+        "hyperedge_text": "Ndlovu's work as a bishop included leading religious services and supporting community initiatives.",
+        "entity_ids": [
+          "\"COMMUNITY INITIATIVES\"",
+          "\"RELIGIOUS SERVICES\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ndlovu's work as a bishop included leading religious services and supporting community initiatives.",
+            "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+          ],
+          "relation_texts": [
+            "Ndlovu's work as a bishop included leading religious services and supporting community initiatives.",
+            "link",
+            "COMMUNITY INITIATIVES",
+            "RELIGIOUS SERVICES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-29f3a42721760b22c9dc229befd493b3",
+            "hyperedge_name": "<hyperedge>\"Ndlovu's work as a bishop included leading religious services and supporting community initiatives.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Archduke Leopold Salvator lived from 15 October 1863 until 4 September 1931, marking his lifespan of nearly 68 years.\"",
+        "branch": "semantic",
+        "raw_score": 0.3792356550693512,
+        "hyperedge_text": "Archduke Leopold Salvator lived from 15 October 1863 until 4 September 1931, marking his lifespan of nearly 68 years.",
+        "entity_ids": [
+          "\"LIFESPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-da6bfe4aa50947eb95c11fcdb976c032"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Archduke Leopold Salvator lived from 15 October 1863 until 4 September 1931, marking his lifespan of nearly 68 years.",
+            "Archduke Leopold Salvator of Austria Archduke Leopold Salvator, Prince of Tuscany (Leopold Salvator Maria Joseph Ferdinand Franz von Assisi Karl Anton von Padua Johann Baptist Januarius Aloys Gonzaga Rainer Wenzel Galius von Österreich-Toskana) (15 October 1863 – 4 September 1931), was the son of Archduke Karl Salvator of Austria and Princess Maria Immaculata of Bourbon-Two Sicilies."
+          ],
+          "relation_texts": [
+            "Archduke Leopold Salvator lived from 15 October 1863 until 4 September 1931, marking his lifespan of nearly 68 years.",
+            "link",
+            "LIFESPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f8e97e6f2ecf3677f917b896a7849f93",
+            "hyperedge_name": "<hyperedge>\"Archduke Leopold Salvator lived from 15 October 1863 until 4 September 1931, marking his lifespan of nearly 68 years.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.\"",
+        "branch": "semantic",
+        "raw_score": 0.3745037317276001,
+        "hyperedge_text": "The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.",
+        "entity_ids": [
+          "\"5 APRIL 1824\"",
+          "\"7 APRIL 1901\""
+        ],
+        "chunk_ids": [
+          "chunk-fd8f59e454a811e024460353f571bdbf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.",
+            "Ladislav Pejačević Count Ladislav Pejačević of Virovitica (Sopron, 5 April 1824 – Našice, 7 April 1901) was a Croatian aristocrat and statesman, a member of the Pejačević noble family, remarkable and influential in the Kingdom of Croatia-Slavonia within the Austro-Hungarian Empire. He was the Ban (viceroy) of Croatia between 1880 and 1883."
+          ],
+          "relation_texts": [
+            "The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.",
+            "link",
+            "5 APRIL 1824",
+            "7 APRIL 1901"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-de29ef38ad22b435d5e9dfca1a1d9fe1",
+            "hyperedge_name": "<hyperedge>\"The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.\"",
+        "branch": "semantic",
+        "raw_score": 0.37129712104797363,
+        "hyperedge_text": "Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.",
+        "entity_ids": [
+          "\"POLITICAL CHANGES\"",
+          "\"CULTURAL CHANGES\""
+        ],
+        "chunk_ids": [
+          "chunk-3993b6782c17aebb6ccb446cba22adf9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.",
+            "Louis Henry, Count Palatine of Simmern-Kaiserslautern Louis Henry( German: Ludwig Heinrich)( 11 October 1640- 3 January 1674) was the Count Palatine of Simmern- Kaiserslautern from 1653 until 1673."
+          ],
+          "relation_texts": [
+            "Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.",
+            "link",
+            "POLITICAL CHANGES",
+            "CULTURAL CHANGES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-80a7d67b312acf78cd1f0149707e6011",
+            "hyperedge_name": "<hyperedge>\"Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Huc-Mazelet Luquiens lived from 1881 to 1961, indicating a lifetime of 80 years.\"",
+        "branch": "semantic",
+        "raw_score": 0.3694472014904022,
+        "hyperedge_text": "Huc-Mazelet Luquiens lived from 1881 to 1961, indicating a lifetime of 80 years.",
+        "entity_ids": [
+          "\"LIFETIME\""
+        ],
+        "chunk_ids": [
+          "chunk-1b21d63ea6fcda1853940177e9405402"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Huc-Mazelet Luquiens lived from 1881 to 1961, indicating a lifetime of 80 years.",
+            "Huc-Mazelet Luquiens Huc- Mazelet Luquiens( 1881 — 1961) was an American printmaker, painter and art educator who was born June 30, 1881 in Massachusetts to Jules Luquiens a French- speaking Swiss and Emma Clark who was born in Ohio."
+          ],
+          "relation_texts": [
+            "Huc-Mazelet Luquiens lived from 1881 to 1961, indicating a lifetime of 80 years.",
+            "link",
+            "LIFETIME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd60b8d3fe1970b89ae8475d81774f99",
+            "hyperedge_name": "<hyperedge>\"Huc-Mazelet Luquiens lived from 1881 to 1961, indicating a lifetime of 80 years.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.\"",
+        "hyperedge_text": "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5771963596343994,
+        "fusion_score": 0.5154392719268799,
+        "entity_ids": [
+          "\"LOUIS NCAMISO NDLOVU\"",
+          "\"SWAZILAND\"",
+          "\"ROMAN CATHOLIC BISHOP\"",
+          "\"ROMAN CATHOLIC DIOCESE OF MANZINI\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "evidence_texts": [
+          "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+          "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.577196,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515439
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.\"",
+        "hyperedge_text": "The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.3745037317276001,
+        "fusion_score": 0.47490074634552004,
+        "entity_ids": [
+          "\"5 APRIL 1824\"",
+          "\"7 APRIL 1901\""
+        ],
+        "chunk_ids": [
+          "chunk-fd8f59e454a811e024460353f571bdbf"
+        ],
+        "evidence_texts": [
+          "The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.",
+          "Ladislav Pejačević Count Ladislav Pejačević of Virovitica (Sopron, 5 April 1824 – Našice, 7 April 1901) was a Croatian aristocrat and statesman, a member of the Pejačević noble family, remarkable and influential in the Kingdom of Croatia-Slavonia within the Austro-Hungarian Empire. He was the Ban (viceroy) of Croatia between 1880 and 1883."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.374504,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.474901
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.\"",
+        "hyperedge_text": "Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6114654541015625,
+        "fusion_score": 0.32229309082031254,
+        "entity_ids": [
+          "\"AUGUST 27, 2012\"",
+          "\"MARCH 15, 1945\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "evidence_texts": [
+          "Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.",
+          "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.611465,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.322293
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.\"",
+        "hyperedge_text": "Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.3973633050918579,
+        "fusion_score": 0.2794726610183716,
+        "entity_ids": [
+          "\"17TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-54cfce452b6bc694a90c6c2e74894920"
+        ],
+        "evidence_texts": [
+          "Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.",
+          "Louis of Nassau, Lord of De Lek and Beverweerd Louis of Nassau, Lord of De Lek and Beverweerd (1602 – The Hague, 28 February 1665) was a Dutch soldier. He was the illegitimate son of Margaretha van Mechelen and Maurice, Prince of Orange, and so a collateral member of the House of Orange-Nassau. He was a Lord of the heerlijkheid De Lek and . From his father he inherited the estate of Beverweerd; and when his older brother Willem died in 1627 he inherited his estate as well."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.397363,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.279473
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.\"",
+        "hyperedge_text": "Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.37129712104797363,
+        "fusion_score": 0.27425942420959476,
+        "entity_ids": [
+          "\"POLITICAL CHANGES\"",
+          "\"CULTURAL CHANGES\""
+        ],
+        "chunk_ids": [
+          "chunk-3993b6782c17aebb6ccb446cba22adf9"
+        ],
+        "evidence_texts": [
+          "Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.",
+          "Louis Henry, Count Palatine of Simmern-Kaiserslautern Louis Henry( German: Ludwig Heinrich)( 11 October 1640- 3 January 1674) was the Count Palatine of Simmern- Kaiserslautern from 1653 until 1673."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.371297,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.274259
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the life span of Raymond Balze?",
+    "retrieval_question": "What is the life span of Raymond Balze?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the life span of Raymond Balze?",
+      "retrieval_question": "What is the life span of Raymond Balze?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.",
+        "entity_ids": [
+          "\"19TH CENTURY\"",
+          "\"FRENCH PAINTER\"",
+          "\"ART COPYIST\"",
+          "\"RAYMOND BALZE\""
+        ],
+        "chunk_ids": [
+          "chunk-244dbeee226ee8a6314ed4b57e67a1d4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.",
+            "Raymond Balze Raymond Balze( 4 May 1818 – 26 February 1909) was a French painter and art copyist."
+          ],
+          "relation_texts": [
+            "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.",
+            "link",
+            "19TH CENTURY",
+            "FRENCH PAINTER",
+            "ART COPYIST",
+            "RAYMOND BALZE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.",
+        "entity_ids": [
+          "\"FRENCH PAINTER\"",
+          "\"RAYMOND BALZE\""
+        ],
+        "chunk_ids": [
+          "chunk-244dbeee226ee8a6314ed4b57e67a1d4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.",
+            "Raymond Balze Raymond Balze( 4 May 1818 – 26 February 1909) was a French painter and art copyist."
+          ],
+          "relation_texts": [
+            "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.",
+            "link",
+            "FRENCH PAINTER",
+            "RAYMOND BALZE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned from his birth in the early 20th century to his death towards the end of the century.\"",
+        "branch": "relation",
+        "raw_score": 0.4037705063819885,
+        "hyperedge_text": "His life spanned from his birth in the early 20th century to his death towards the end of the century.",
+        "entity_ids": [
+          "\"LATE 20TH CENTURY\"",
+          "\"20TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-7a57f9297ac91dd37eab71d6b383f699"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned from his birth in the early 20th century to his death towards the end of the century.",
+            "Prince Max Emanuel of Thurn and Taxis Father\" Emmeram\" of Thurn and Taxis OSB, until his profession Prince\" Max Emanuel\" Maria Siegfried Joseph Antonius Ignatius Lamoral of Thurn and Taxis( 1 March 1902, Regensburg, Kingdom of Bavaria – 3 October 1994, Regensburg, Bavaria, Germany) was a German Benedictine and member of the Princely House of Thurn and Taxis."
+          ],
+          "relation_texts": [
+            "His life spanned from his birth in the early 20th century to his death towards the end of the century.",
+            "link",
+            "LATE 20TH CENTURY",
+            "20TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-61c1017046afc7bb9c1b13338778d3c7",
+            "hyperedge_name": "<hyperedge>\"His life spanned from his birth in the early 20th century to his death towards the end of the century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned from January 30, 1871, to December 13, 1940.\"",
+        "branch": "relation",
+        "raw_score": 0.38995397090911865,
+        "hyperedge_text": "His life spanned from January 30, 1871, to December 13, 1940.",
+        "entity_ids": [
+          "\"JANUARY 30, 1871\"",
+          "\"DECEMBER 13, 1940\""
+        ],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned from January 30, 1871, to December 13, 1940.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His life spanned from January 30, 1871, to December 13, 1940.",
+            "link",
+            "JANUARY 30, 1871",
+            "DECEMBER 13, 1940"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0d92fa04edd26b6389d2cc448f519045",
+            "hyperedge_name": "<hyperedge>\"His life spanned from January 30, 1871, to December 13, 1940.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"John Lyon (– 1558) indicates the lifespan of the individual.\"",
+        "branch": "relation",
+        "raw_score": 0.3856067657470703,
+        "hyperedge_text": "John Lyon (– 1558) indicates the lifespan of the individual.",
+        "entity_ids": [
+          "\"1558\""
+        ],
+        "chunk_ids": [
+          "chunk-52aa1f0c2ac131829d19c868749e3dfc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "John Lyon (– 1558) indicates the lifespan of the individual.",
+            "John Lyon, 7th Lord Glamis John Lyon, 7th Lord Glamis( – 1558) was a Scottish nobleman."
+          ],
+          "relation_texts": [
+            "John Lyon (– 1558) indicates the lifespan of the individual.",
+            "link",
+            "1558"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7613abc922c432a37a8852f21e0a2c19",
+            "hyperedge_name": "<hyperedge>\"John Lyon (– 1558) indicates the lifespan of the individual.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.\"",
+        "branch": "relation",
+        "raw_score": 0.3844623565673828,
+        "hyperedge_text": "Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.",
+        "entity_ids": [
+          "\"AUTHOR\"",
+          "\"UNITED STATES\"",
+          "\"PHYSICIAN\"",
+          "\"JEFFRY LIFE\"",
+          "\"YOUTHFUL BODY\"",
+          "\"OLD AGE\""
+        ],
+        "chunk_ids": [
+          "chunk-949fe1beab29358bedae4f361251915f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.",
+            "Jeffry Life Jeffry Life( born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age."
+          ],
+          "relation_texts": [
+            "Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.",
+            "link",
+            "AUTHOR",
+            "UNITED STATES",
+            "PHYSICIAN",
+            "JEFFRY LIFE",
+            "YOUTHFUL BODY",
+            "OLD AGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cc7235b3c45b13b1aabd3a2dd95aded6",
+            "hyperedge_name": "<hyperedge>\"Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her life spanned from the mid-19th century to the early 20th century.\"",
+        "branch": "relation",
+        "raw_score": 0.3820486068725586,
+        "hyperedge_text": "Her life spanned from the mid-19th century to the early 20th century.",
+        "entity_ids": [
+          "\"EARLY 20TH CENTURY\"",
+          "\"MID-19TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-b7eab5c302df24f7492aa0c02eb56a51"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her life spanned from the mid-19th century to the early 20th century.",
+            "Archduchess Maria Theresa of Austria (1845–1927) Archduchess Maria Theresa of Austria (15 July 1845 – 8 October 1927) was a member of the Austrian house of Habsburg-Lorraine."
+          ],
+          "relation_texts": [
+            "Her life spanned from the mid-19th century to the early 20th century.",
+            "link",
+            "EARLY 20TH CENTURY",
+            "MID-19TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f73a861ff41d11ba335e734c99c62ae",
+            "hyperedge_name": "<hyperedge>\"Her life spanned from the mid-19th century to the early 20th century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"George Charles's life spanned from 1691 to 1755.\"",
+        "branch": "relation",
+        "raw_score": 0.3787603974342346,
+        "hyperedge_text": "George Charles's life spanned from 1691 to 1755.",
+        "entity_ids": [
+          "\"LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-e1904eb81c3a22c82c151f421c421d59"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "George Charles's life spanned from 1691 to 1755.",
+            "George Charles of Hesse-Kassel George Charles of Hesse-Kassel (8 January 1691 – 5 March 1755) was a prince of Hesse-Kassel and a Prussian General."
+          ],
+          "relation_texts": [
+            "George Charles's life spanned from 1691 to 1755.",
+            "link",
+            "LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c1020854fd14f2911fd92516b733dd4a",
+            "hyperedge_name": "<hyperedge>\"George Charles's life spanned from 1691 to 1755.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned the latter half of the 20th century.\"",
+        "branch": "relation",
+        "raw_score": 0.375488817691803,
+        "hyperedge_text": "His life spanned the latter half of the 20th century.",
+        "entity_ids": [
+          "\"20TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-a0dbe8a482c56a896cb4e55e800d5de8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned the latter half of the 20th century.",
+            "Juan Carlos Gumucio Juan Carlos Gumucio Quiroga (November 7, 1949 – February 25, 2002) was a Bolivian-born journalist and writer, and the second husband of Marie Colvin."
+          ],
+          "relation_texts": [
+            "His life spanned the latter half of the 20th century.",
+            "link",
+            "20TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a7cbc632fa1b962b442e6540fc41b317",
+            "hyperedge_name": "<hyperedge>\"His life spanned the latter half of the 20th century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The time frame of her life spans from 1638 to 1683.\"",
+        "branch": "relation",
+        "raw_score": 0.3732181191444397,
+        "hyperedge_text": "The time frame of her life spans from 1638 to 1683.",
+        "entity_ids": [
+          "\"TIME FRAME\""
+        ],
+        "chunk_ids": [
+          "chunk-63cbcf18fee5a16b00c7fcb07da19e7d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The time frame of her life spans from 1638 to 1683.",
+            "Anna Sophia II, Abbess of Quedlinburg Landgravine Anna Sophia of Hesse- Darmstadt( 17 December 1638 – 13 December 1683) was a German noblewoman who reigned as Princess- Abbess of Quedlinburg under the name Anna Sophia II."
+          ],
+          "relation_texts": [
+            "The time frame of her life spans from 1638 to 1683.",
+            "link",
+            "TIME FRAME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-151f83d167aa265587c0c9620af3c443",
+            "hyperedge_name": "<hyperedge>\"The time frame of her life spans from 1638 to 1683.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\"",
+        "branch": "relation",
+        "raw_score": 0.3719028830528259,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+        "entity_ids": [
+          "\"OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "link",
+            "OLDEST MEN",
+            "AVERAGE LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b352c56b67b43287a6b2ccb0ecb90f76",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Bertrand is noted as 1258 to 6 June 1350.\"",
+        "branch": "relation",
+        "raw_score": 0.37029868364334106,
+        "hyperedge_text": "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+        "entity_ids": [
+          "\"1258\"",
+          "\"6 JUNE 1350\""
+        ],
+        "chunk_ids": [
+          "chunk-f11246269523e123bd54efb90adcd938"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+            "Bertrand of Saint-Geniès Bertrand( or Bertram) of Saint- Geniès( 1258 – 6 June 1350) was the patriarch of Aquileia from 1334 until his death."
+          ],
+          "relation_texts": [
+            "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+            "link",
+            "1258",
+            "6 JUNE 1350"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-321c1a0717e0fe62bfe45245ed51064a",
+            "hyperedge_name": "<hyperedge>\"The life span of Bertrand is noted as 1258 to 6 June 1350.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Balze lived from 4 May 1818 to 26 February 1909.\"",
+        "branch": "semantic",
+        "raw_score": 0.6936827898025513,
+        "hyperedge_text": "Raymond Balze lived from 4 May 1818 to 26 February 1909.",
+        "entity_ids": [
+          "\"4 MAY 1818\"",
+          "\"26 FEBRUARY 1909\""
+        ],
+        "chunk_ids": [
+          "chunk-244dbeee226ee8a6314ed4b57e67a1d4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raymond Balze lived from 4 May 1818 to 26 February 1909.",
+            "Raymond Balze Raymond Balze( 4 May 1818 – 26 February 1909) was a French painter and art copyist."
+          ],
+          "relation_texts": [
+            "Raymond Balze lived from 4 May 1818 to 26 February 1909.",
+            "link",
+            "4 MAY 1818",
+            "26 FEBRUARY 1909"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f6ae74caaeb5408f8cb5962f348a3d9a",
+            "hyperedge_name": "<hyperedge>\"Raymond Balze lived from 4 May 1818 to 26 February 1909.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.\"",
+        "branch": "semantic",
+        "raw_score": 0.6140182018280029,
+        "hyperedge_text": "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.",
+        "entity_ids": [
+          "\"FRENCH PAINTER\"",
+          "\"RAYMOND BALZE\""
+        ],
+        "chunk_ids": [
+          "chunk-244dbeee226ee8a6314ed4b57e67a1d4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.",
+            "Raymond Balze Raymond Balze( 4 May 1818 – 26 February 1909) was a French painter and art copyist."
+          ],
+          "relation_texts": [
+            "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.",
+            "link",
+            "FRENCH PAINTER",
+            "RAYMOND BALZE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c411f50525f93ce859439574187a6a7d",
+            "hyperedge_name": "<hyperedge>\"Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.\"",
+        "branch": "semantic",
+        "raw_score": 0.5847555994987488,
+        "hyperedge_text": "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.",
+        "entity_ids": [
+          "\"19TH CENTURY\"",
+          "\"FRENCH PAINTER\"",
+          "\"ART COPYIST\"",
+          "\"RAYMOND BALZE\""
+        ],
+        "chunk_ids": [
+          "chunk-244dbeee226ee8a6314ed4b57e67a1d4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.",
+            "Raymond Balze Raymond Balze( 4 May 1818 – 26 February 1909) was a French painter and art copyist."
+          ],
+          "relation_texts": [
+            "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.",
+            "link",
+            "19TH CENTURY",
+            "FRENCH PAINTER",
+            "ART COPYIST",
+            "RAYMOND BALZE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7c0e263b8632ee6c611840b9af13441c",
+            "hyperedge_name": "<hyperedge>\"Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Bertrand is noted as 1258 to 6 June 1350.\"",
+        "branch": "semantic",
+        "raw_score": 0.41369426250457764,
+        "hyperedge_text": "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+        "entity_ids": [
+          "\"1258\"",
+          "\"6 JUNE 1350\""
+        ],
+        "chunk_ids": [
+          "chunk-f11246269523e123bd54efb90adcd938"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+            "Bertrand of Saint-Geniès Bertrand( or Bertram) of Saint- Geniès( 1258 – 6 June 1350) was the patriarch of Aquileia from 1334 until his death."
+          ],
+          "relation_texts": [
+            "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+            "link",
+            "1258",
+            "6 JUNE 1350"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-321c1a0717e0fe62bfe45245ed51064a",
+            "hyperedge_name": "<hyperedge>\"The life span of Bertrand is noted as 1258 to 6 June 1350.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Rognoni died on 26 September 1965 in Paris.\"",
+        "branch": "semantic",
+        "raw_score": 0.4127671420574188,
+        "hyperedge_text": "Raymond Rognoni died on 26 September 1965 in Paris.",
+        "entity_ids": [
+          "\"26 SEPTEMBER 1965\""
+        ],
+        "chunk_ids": [
+          "chunk-95823ed26ccdece0727cb5305961269a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raymond Rognoni died on 26 September 1965 in Paris.",
+            "Raymond Rognoni Raymond Rognoni (Paris, 16 August 1892 – Paris, 26 September 1965) was a French actor and comedian. He worked in the theatre and in film (\"Sylvie et le fantômeLes Enfants du Paradis\"), sometimes credited as Rognoni."
+          ],
+          "relation_texts": [
+            "Raymond Rognoni died on 26 September 1965 in Paris.",
+            "link",
+            "26 SEPTEMBER 1965"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-56c02bee353d2413193eba19d35504f8",
+            "hyperedge_name": "<hyperedge>\"Raymond Rognoni died on 26 September 1965 in Paris.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Monta Bell was from February 5, 1891, to February 4, 1958.\"",
+        "branch": "semantic",
+        "raw_score": 0.41148459911346436,
+        "hyperedge_text": "The life span of Monta Bell was from February 5, 1891, to February 4, 1958.",
+        "entity_ids": [
+          "\"LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-1a3fe92cd7478024a88d41623be2d011"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The life span of Monta Bell was from February 5, 1891, to February 4, 1958.",
+            "Monta Bell Monta Bell( February 5, 1891 – February 4, 1958) was an American film director, producer and screenwriter."
+          ],
+          "relation_texts": [
+            "The life span of Monta Bell was from February 5, 1891, to February 4, 1958.",
+            "link",
+            "LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d559f02267b5330251f1ed0777c1876f",
+            "hyperedge_name": "<hyperedge>\"The life span of Monta Bell was from February 5, 1891, to February 4, 1958.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Rognoni (Paris, 16 August 1892 – Paris, 26 September 1965) was a French actor and comedian.\"",
+        "branch": "semantic",
+        "raw_score": 0.4109884798526764,
+        "hyperedge_text": "Raymond Rognoni (Paris, 16 August 1892 – Paris, 26 September 1965) was a French actor and comedian.",
+        "entity_ids": [
+          "\"COMEDIAN\"",
+          "\"FRENCH ACTOR\"",
+          "\"RAYMOND ROGNONI\""
+        ],
+        "chunk_ids": [
+          "chunk-95823ed26ccdece0727cb5305961269a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raymond Rognoni (Paris, 16 August 1892 – Paris, 26 September 1965) was a French actor and comedian.",
+            "Raymond Rognoni Raymond Rognoni (Paris, 16 August 1892 – Paris, 26 September 1965) was a French actor and comedian. He worked in the theatre and in film (\"Sylvie et le fantômeLes Enfants du Paradis\"), sometimes credited as Rognoni."
+          ],
+          "relation_texts": [
+            "Raymond Rognoni (Paris, 16 August 1892 – Paris, 26 September 1965) was a French actor and comedian.",
+            "link",
+            "COMEDIAN",
+            "FRENCH ACTOR",
+            "RAYMOND ROGNONI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1bee9607744e865ad82be51f8c4e7bd1",
+            "hyperedge_name": "<hyperedge>\"Raymond Rognoni (Paris, 16 August 1892 – Paris, 26 September 1965) was a French actor and comedian.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Rognoni's career included working in theatre and films.\"",
+        "branch": "semantic",
+        "raw_score": 0.40681758522987366,
+        "hyperedge_text": "Raymond Rognoni's career included working in theatre and films.",
+        "entity_ids": [
+          "\"THEATRE AND FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-95823ed26ccdece0727cb5305961269a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raymond Rognoni's career included working in theatre and films.",
+            "Raymond Rognoni Raymond Rognoni (Paris, 16 August 1892 – Paris, 26 September 1965) was a French actor and comedian. He worked in the theatre and in film (\"Sylvie et le fantômeLes Enfants du Paradis\"), sometimes credited as Rognoni."
+          ],
+          "relation_texts": [
+            "Raymond Rognoni's career included working in theatre and films.",
+            "link",
+            "THEATRE AND FILMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-13eaa4792ce0fc06e2ded202d6cb321d",
+            "hyperedge_name": "<hyperedge>\"Raymond Rognoni's career included working in theatre and films.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After the premature death of both his parents, Raymond studied at a commercial academy and trained as a banker.\"",
+        "branch": "semantic",
+        "raw_score": 0.4044874906539917,
+        "hyperedge_text": "After the premature death of both his parents, Raymond studied at a commercial academy and trained as a banker.",
+        "entity_ids": [
+          "\"BANKER\"",
+          "\"COMMERCIAL ACADEMY\""
+        ],
+        "chunk_ids": [
+          "chunk-03600d531e4a3cad7a9d14fae35137d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After the premature death of both his parents, Raymond studied at a commercial academy and trained as a banker.",
+            "Fred Raymond Fred Raymond aka Raimund Friedrich Vesely (20 April 1900 – 10 January 1954) was an Austrian composer. Raymond, born in Vienna, was the third child (after two daughters) of Vinzenz Vesely, an employee of the Austrian state railway system, and his wife Henriette, née Dluhos. Both parents were of Czech descent. They intended their son to study mining after high school, and pursure a career in the civil service. After the premature death of both his parents, Raymond studied at a commercial academy and trained as a banker. Raymond composed operetta music as well as copious pieces for films and Schlager, which were very successful in the 1920s and 1930s and were commonly heard being sung and whistled in the streets. He became world-famous with his 1925 composition (\"I Lost My Heart in Heidelberg\"), and his pieces were considered to be very much in the typical style of the 1920s..."
+          ],
+          "relation_texts": [
+            "After the premature death of both his parents, Raymond studied at a commercial academy and trained as a banker.",
+            "link",
+            "BANKER",
+            "COMMERCIAL ACADEMY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-24ac8bdd6323a0760a683cb212a1984b",
+            "hyperedge_name": "<hyperedge>\"After the premature death of both his parents, Raymond studied at a commercial academy and trained as a banker.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Rognoni was born on 16 August 1892 in Paris.\"",
+        "branch": "semantic",
+        "raw_score": 0.40144574642181396,
+        "hyperedge_text": "Raymond Rognoni was born on 16 August 1892 in Paris.",
+        "entity_ids": [
+          "\"PARIS\""
+        ],
+        "chunk_ids": [
+          "chunk-95823ed26ccdece0727cb5305961269a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raymond Rognoni was born on 16 August 1892 in Paris.",
+            "Raymond Rognoni Raymond Rognoni (Paris, 16 August 1892 – Paris, 26 September 1965) was a French actor and comedian. He worked in the theatre and in film (\"Sylvie et le fantômeLes Enfants du Paradis\"), sometimes credited as Rognoni."
+          ],
+          "relation_texts": [
+            "Raymond Rognoni was born on 16 August 1892 in Paris.",
+            "link",
+            "PARIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d32a1dcdc9776c2568a50a4390e2d13d",
+            "hyperedge_name": "<hyperedge>\"Raymond Rognoni was born on 16 August 1892 in Paris.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.\"",
+        "hyperedge_text": "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6140182018280029,
+        "fusion_score": 0.5228036403656007,
+        "entity_ids": [
+          "\"FRENCH PAINTER\"",
+          "\"RAYMOND BALZE\""
+        ],
+        "chunk_ids": [
+          "chunk-244dbeee226ee8a6314ed4b57e67a1d4"
+        ],
+        "evidence_texts": [
+          "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter.",
+          "Raymond Balze Raymond Balze( 4 May 1818 – 26 February 1909) was a French painter and art copyist."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.614018,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522804
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.\"",
+        "hyperedge_text": "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5847555994987488,
+        "fusion_score": 0.5169511198997498,
+        "entity_ids": [
+          "\"19TH CENTURY\"",
+          "\"FRENCH PAINTER\"",
+          "\"ART COPYIST\"",
+          "\"RAYMOND BALZE\""
+        ],
+        "chunk_ids": [
+          "chunk-244dbeee226ee8a6314ed4b57e67a1d4"
+        ],
+        "evidence_texts": [
+          "Raymond Balze (4 May 1818 – 26 February 1909) was a French painter and art copyist.",
+          "Raymond Balze Raymond Balze( 4 May 1818 – 26 February 1909) was a French painter and art copyist."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.584756,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516951
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Bertrand is noted as 1258 to 6 June 1350.\"",
+        "hyperedge_text": "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.37029868364334106,
+        "semantic_score": 0.41369426250457764,
+        "fusion_score": 0.23085832595825195,
+        "entity_ids": [
+          "\"1258\"",
+          "\"6 JUNE 1350\""
+        ],
+        "chunk_ids": [
+          "chunk-f11246269523e123bd54efb90adcd938"
+        ],
+        "evidence_texts": [
+          "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+          "Bertrand of Saint-Geniès Bertrand( or Bertram) of Saint- Geniès( 1258 – 6 June 1350) was the patriarch of Aquileia from 1334 until his death."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.370299,
+          "S": 0.413694,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.230858
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raymond Balze lived from 4 May 1818 to 26 February 1909.\"",
+        "hyperedge_text": "Raymond Balze lived from 4 May 1818 to 26 February 1909.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6936827898025513,
+        "fusion_score": 0.5387365579605103,
+        "entity_ids": [
+          "\"4 MAY 1818\"",
+          "\"26 FEBRUARY 1909\""
+        ],
+        "chunk_ids": [
+          "chunk-244dbeee226ee8a6314ed4b57e67a1d4"
+        ],
+        "evidence_texts": [
+          "Raymond Balze lived from 4 May 1818 to 26 February 1909.",
+          "Raymond Balze Raymond Balze( 4 May 1818 – 26 February 1909) was a French painter and art copyist."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.693683,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.538737
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Monta Bell was from February 5, 1891, to February 4, 1958.\"",
+        "hyperedge_text": "The life span of Monta Bell was from February 5, 1891, to February 4, 1958.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.41148459911346436,
+        "fusion_score": 0.4822969198226929,
+        "entity_ids": [
+          "\"LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-1a3fe92cd7478024a88d41623be2d011"
+        ],
+        "evidence_texts": [
+          "The life span of Monta Bell was from February 5, 1891, to February 4, 1958.",
+          "Monta Bell Monta Bell( February 5, 1891 – February 4, 1958) was an American film director, producer and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.411485,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.482297
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the life span of Louis Ncamiso Ndlovu?",
+    "retrieval_question": "What is the life span of Louis Ncamiso Ndlovu?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the life span of Louis Ncamiso Ndlovu?",
+      "retrieval_question": "What is the life span of Louis Ncamiso Ndlovu?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+        "entity_ids": [
+          "\"LOUIS NCAMISO NDLOVU\"",
+          "\"SWAZILAND\"",
+          "\"ROMAN CATHOLIC BISHOP\"",
+          "\"ROMAN CATHOLIC DIOCESE OF MANZINI\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+            "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+          ],
+          "relation_texts": [
+            "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+            "link",
+            "LOUIS NCAMISO NDLOVU",
+            "SWAZILAND",
+            "ROMAN CATHOLIC BISHOP",
+            "ROMAN CATHOLIC DIOCESE OF MANZINI"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned from his birth in the early 20th century to his death towards the end of the century.\"",
+        "branch": "relation",
+        "raw_score": 0.4037705063819885,
+        "hyperedge_text": "His life spanned from his birth in the early 20th century to his death towards the end of the century.",
+        "entity_ids": [
+          "\"LATE 20TH CENTURY\"",
+          "\"20TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-7a57f9297ac91dd37eab71d6b383f699"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned from his birth in the early 20th century to his death towards the end of the century.",
+            "Prince Max Emanuel of Thurn and Taxis Father\" Emmeram\" of Thurn and Taxis OSB, until his profession Prince\" Max Emanuel\" Maria Siegfried Joseph Antonius Ignatius Lamoral of Thurn and Taxis( 1 March 1902, Regensburg, Kingdom of Bavaria – 3 October 1994, Regensburg, Bavaria, Germany) was a German Benedictine and member of the Princely House of Thurn and Taxis."
+          ],
+          "relation_texts": [
+            "His life spanned from his birth in the early 20th century to his death towards the end of the century.",
+            "link",
+            "LATE 20TH CENTURY",
+            "20TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-61c1017046afc7bb9c1b13338778d3c7",
+            "hyperedge_name": "<hyperedge>\"His life spanned from his birth in the early 20th century to his death towards the end of the century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned from January 30, 1871, to December 13, 1940.\"",
+        "branch": "relation",
+        "raw_score": 0.38995397090911865,
+        "hyperedge_text": "His life spanned from January 30, 1871, to December 13, 1940.",
+        "entity_ids": [
+          "\"JANUARY 30, 1871\"",
+          "\"DECEMBER 13, 1940\""
+        ],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned from January 30, 1871, to December 13, 1940.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His life spanned from January 30, 1871, to December 13, 1940.",
+            "link",
+            "JANUARY 30, 1871",
+            "DECEMBER 13, 1940"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0d92fa04edd26b6389d2cc448f519045",
+            "hyperedge_name": "<hyperedge>\"His life spanned from January 30, 1871, to December 13, 1940.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"John Lyon (– 1558) indicates the lifespan of the individual.\"",
+        "branch": "relation",
+        "raw_score": 0.3856067657470703,
+        "hyperedge_text": "John Lyon (– 1558) indicates the lifespan of the individual.",
+        "entity_ids": [
+          "\"1558\""
+        ],
+        "chunk_ids": [
+          "chunk-52aa1f0c2ac131829d19c868749e3dfc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "John Lyon (– 1558) indicates the lifespan of the individual.",
+            "John Lyon, 7th Lord Glamis John Lyon, 7th Lord Glamis( – 1558) was a Scottish nobleman."
+          ],
+          "relation_texts": [
+            "John Lyon (– 1558) indicates the lifespan of the individual.",
+            "link",
+            "1558"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7613abc922c432a37a8852f21e0a2c19",
+            "hyperedge_name": "<hyperedge>\"John Lyon (– 1558) indicates the lifespan of the individual.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.\"",
+        "branch": "relation",
+        "raw_score": 0.3844623565673828,
+        "hyperedge_text": "Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.",
+        "entity_ids": [
+          "\"AUTHOR\"",
+          "\"UNITED STATES\"",
+          "\"PHYSICIAN\"",
+          "\"JEFFRY LIFE\"",
+          "\"YOUTHFUL BODY\"",
+          "\"OLD AGE\""
+        ],
+        "chunk_ids": [
+          "chunk-949fe1beab29358bedae4f361251915f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.",
+            "Jeffry Life Jeffry Life( born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age."
+          ],
+          "relation_texts": [
+            "Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.",
+            "link",
+            "AUTHOR",
+            "UNITED STATES",
+            "PHYSICIAN",
+            "JEFFRY LIFE",
+            "YOUTHFUL BODY",
+            "OLD AGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cc7235b3c45b13b1aabd3a2dd95aded6",
+            "hyperedge_name": "<hyperedge>\"Jeffry Life (born 1938) is a physician and author from the United States, known for maintaining a youthful body in old age.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her life spanned from the mid-19th century to the early 20th century.\"",
+        "branch": "relation",
+        "raw_score": 0.3820486068725586,
+        "hyperedge_text": "Her life spanned from the mid-19th century to the early 20th century.",
+        "entity_ids": [
+          "\"EARLY 20TH CENTURY\"",
+          "\"MID-19TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-b7eab5c302df24f7492aa0c02eb56a51"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her life spanned from the mid-19th century to the early 20th century.",
+            "Archduchess Maria Theresa of Austria (1845–1927) Archduchess Maria Theresa of Austria (15 July 1845 – 8 October 1927) was a member of the Austrian house of Habsburg-Lorraine."
+          ],
+          "relation_texts": [
+            "Her life spanned from the mid-19th century to the early 20th century.",
+            "link",
+            "EARLY 20TH CENTURY",
+            "MID-19TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f73a861ff41d11ba335e734c99c62ae",
+            "hyperedge_name": "<hyperedge>\"Her life spanned from the mid-19th century to the early 20th century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"George Charles's life spanned from 1691 to 1755.\"",
+        "branch": "relation",
+        "raw_score": 0.3787603974342346,
+        "hyperedge_text": "George Charles's life spanned from 1691 to 1755.",
+        "entity_ids": [
+          "\"LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-e1904eb81c3a22c82c151f421c421d59"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "George Charles's life spanned from 1691 to 1755.",
+            "George Charles of Hesse-Kassel George Charles of Hesse-Kassel (8 January 1691 – 5 March 1755) was a prince of Hesse-Kassel and a Prussian General."
+          ],
+          "relation_texts": [
+            "George Charles's life spanned from 1691 to 1755.",
+            "link",
+            "LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c1020854fd14f2911fd92516b733dd4a",
+            "hyperedge_name": "<hyperedge>\"George Charles's life spanned from 1691 to 1755.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned the latter half of the 20th century.\"",
+        "branch": "relation",
+        "raw_score": 0.375488817691803,
+        "hyperedge_text": "His life spanned the latter half of the 20th century.",
+        "entity_ids": [
+          "\"20TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-a0dbe8a482c56a896cb4e55e800d5de8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned the latter half of the 20th century.",
+            "Juan Carlos Gumucio Juan Carlos Gumucio Quiroga (November 7, 1949 – February 25, 2002) was a Bolivian-born journalist and writer, and the second husband of Marie Colvin."
+          ],
+          "relation_texts": [
+            "His life spanned the latter half of the 20th century.",
+            "link",
+            "20TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a7cbc632fa1b962b442e6540fc41b317",
+            "hyperedge_name": "<hyperedge>\"His life spanned the latter half of the 20th century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The time frame of her life spans from 1638 to 1683.\"",
+        "branch": "relation",
+        "raw_score": 0.3732181191444397,
+        "hyperedge_text": "The time frame of her life spans from 1638 to 1683.",
+        "entity_ids": [
+          "\"TIME FRAME\""
+        ],
+        "chunk_ids": [
+          "chunk-63cbcf18fee5a16b00c7fcb07da19e7d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The time frame of her life spans from 1638 to 1683.",
+            "Anna Sophia II, Abbess of Quedlinburg Landgravine Anna Sophia of Hesse- Darmstadt( 17 December 1638 – 13 December 1683) was a German noblewoman who reigned as Princess- Abbess of Quedlinburg under the name Anna Sophia II."
+          ],
+          "relation_texts": [
+            "The time frame of her life spans from 1638 to 1683.",
+            "link",
+            "TIME FRAME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-151f83d167aa265587c0c9620af3c443",
+            "hyperedge_name": "<hyperedge>\"The time frame of her life spans from 1638 to 1683.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\"",
+        "branch": "relation",
+        "raw_score": 0.3719028830528259,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+        "entity_ids": [
+          "\"OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "link",
+            "OLDEST MEN",
+            "AVERAGE LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b352c56b67b43287a6b2ccb0ecb90f76",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Bertrand is noted as 1258 to 6 June 1350.\"",
+        "branch": "relation",
+        "raw_score": 0.37029868364334106,
+        "hyperedge_text": "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+        "entity_ids": [
+          "\"1258\"",
+          "\"6 JUNE 1350\""
+        ],
+        "chunk_ids": [
+          "chunk-f11246269523e123bd54efb90adcd938"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+            "Bertrand of Saint-Geniès Bertrand( or Bertram) of Saint- Geniès( 1258 – 6 June 1350) was the patriarch of Aquileia from 1334 until his death."
+          ],
+          "relation_texts": [
+            "The life span of Bertrand is noted as 1258 to 6 June 1350.",
+            "link",
+            "1258",
+            "6 JUNE 1350"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-321c1a0717e0fe62bfe45245ed51064a",
+            "hyperedge_name": "<hyperedge>\"The life span of Bertrand is noted as 1258 to 6 June 1350.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.\"",
+        "branch": "semantic",
+        "raw_score": 0.6114654541015625,
+        "hyperedge_text": "Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.",
+        "entity_ids": [
+          "\"AUGUST 27, 2012\"",
+          "\"MARCH 15, 1945\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.",
+            "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+          ],
+          "relation_texts": [
+            "Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.",
+            "link",
+            "AUGUST 27, 2012",
+            "MARCH 15, 1945"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1f0c032a97ab6513cc8641801610b8b5",
+            "hyperedge_name": "<hyperedge>\"Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.\"",
+        "branch": "semantic",
+        "raw_score": 0.5771963596343994,
+        "hyperedge_text": "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+        "entity_ids": [
+          "\"LOUIS NCAMISO NDLOVU\"",
+          "\"SWAZILAND\"",
+          "\"ROMAN CATHOLIC BISHOP\"",
+          "\"ROMAN CATHOLIC DIOCESE OF MANZINI\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+            "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+          ],
+          "relation_texts": [
+            "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+            "link",
+            "LOUIS NCAMISO NDLOVU",
+            "SWAZILAND",
+            "ROMAN CATHOLIC BISHOP",
+            "ROMAN CATHOLIC DIOCESE OF MANZINI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-774c671915ef41a22354ceaa8125d375",
+            "hyperedge_name": "<hyperedge>\"Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office.\"",
+        "branch": "semantic",
+        "raw_score": 0.4867895245552063,
+        "hyperedge_text": "Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office.",
+        "entity_ids": [
+          "\"1985\"",
+          "\"PRIESTHOOD\"",
+          "\"DEATH IN OFFICE\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office.",
+            "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+          ],
+          "relation_texts": [
+            "Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office.",
+            "link",
+            "1985",
+            "PRIESTHOOD",
+            "DEATH IN OFFICE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-224208bfa1d9255c7a40d70fa5506cdd",
+            "hyperedge_name": "<hyperedge>\"Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The dates of birth and death for Louis I indicate he lived to be 55 years old.\"",
+        "branch": "semantic",
+        "raw_score": 0.4141540825366974,
+        "hyperedge_text": "The dates of birth and death for Louis I indicate he lived to be 55 years old.",
+        "entity_ids": [
+          "\"55 YEARS\""
+        ],
+        "chunk_ids": [
+          "chunk-2b316167bc8c02f37351f726fb764283"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The dates of birth and death for Louis I indicate he lived to be 55 years old.",
+            "Louis I, Landgrave of Hesse Louis I of Hesse (6 February 1402, Spangenberg - 17 January 1458), called \"the Peaceful\" was Landgrave of Lower Hesse (Hesse) from 1413-1458. He was the son of Hermann II, Landgrave of Hesse and Margaret, the daughter of Frederick V of Nuremberg. He married Anna (5 June 1420 - 17 September 1462) daughter of Frederick I, Elector of Saxony on 13 September 1436. Their children were: After 1425 a conflict with the Electorate of Mainz over claims to power in Hesse broke out into open conflict and Archbishop Conrad III of Mainz suffered a decisive defeat at Fulda in 1427."
+          ],
+          "relation_texts": [
+            "The dates of birth and death for Louis I indicate he lived to be 55 years old.",
+            "link",
+            "55 YEARS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6c452c2675b7cc576cf79fa40bc82f89",
+            "hyperedge_name": "<hyperedge>\"The dates of birth and death for Louis I indicate he lived to be 55 years old.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.\"",
+        "branch": "semantic",
+        "raw_score": 0.3973633050918579,
+        "hyperedge_text": "Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.",
+        "entity_ids": [
+          "\"17TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-54cfce452b6bc694a90c6c2e74894920"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.",
+            "Louis of Nassau, Lord of De Lek and Beverweerd Louis of Nassau, Lord of De Lek and Beverweerd (1602 – The Hague, 28 February 1665) was a Dutch soldier. He was the illegitimate son of Margaretha van Mechelen and Maurice, Prince of Orange, and so a collateral member of the House of Orange-Nassau. He was a Lord of the heerlijkheid De Lek and . From his father he inherited the estate of Beverweerd; and when his older brother Willem died in 1627 he inherited his estate as well."
+          ],
+          "relation_texts": [
+            "Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.",
+            "link",
+            "17TH CENTURY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-21f9e71c2f397f772346ba9fb8c0d36d",
+            "hyperedge_name": "<hyperedge>\"Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ndlovu's work as a bishop included leading religious services and supporting community initiatives.\"",
+        "branch": "semantic",
+        "raw_score": 0.38456055521965027,
+        "hyperedge_text": "Ndlovu's work as a bishop included leading religious services and supporting community initiatives.",
+        "entity_ids": [
+          "\"COMMUNITY INITIATIVES\"",
+          "\"RELIGIOUS SERVICES\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ndlovu's work as a bishop included leading religious services and supporting community initiatives.",
+            "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+          ],
+          "relation_texts": [
+            "Ndlovu's work as a bishop included leading religious services and supporting community initiatives.",
+            "link",
+            "COMMUNITY INITIATIVES",
+            "RELIGIOUS SERVICES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-29f3a42721760b22c9dc229befd493b3",
+            "hyperedge_name": "<hyperedge>\"Ndlovu's work as a bishop included leading religious services and supporting community initiatives.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Archduke Leopold Salvator lived from 15 October 1863 until 4 September 1931, marking his lifespan of nearly 68 years.\"",
+        "branch": "semantic",
+        "raw_score": 0.3792356550693512,
+        "hyperedge_text": "Archduke Leopold Salvator lived from 15 October 1863 until 4 September 1931, marking his lifespan of nearly 68 years.",
+        "entity_ids": [
+          "\"LIFESPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-da6bfe4aa50947eb95c11fcdb976c032"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Archduke Leopold Salvator lived from 15 October 1863 until 4 September 1931, marking his lifespan of nearly 68 years.",
+            "Archduke Leopold Salvator of Austria Archduke Leopold Salvator, Prince of Tuscany (Leopold Salvator Maria Joseph Ferdinand Franz von Assisi Karl Anton von Padua Johann Baptist Januarius Aloys Gonzaga Rainer Wenzel Galius von Österreich-Toskana) (15 October 1863 – 4 September 1931), was the son of Archduke Karl Salvator of Austria and Princess Maria Immaculata of Bourbon-Two Sicilies."
+          ],
+          "relation_texts": [
+            "Archduke Leopold Salvator lived from 15 October 1863 until 4 September 1931, marking his lifespan of nearly 68 years.",
+            "link",
+            "LIFESPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f8e97e6f2ecf3677f917b896a7849f93",
+            "hyperedge_name": "<hyperedge>\"Archduke Leopold Salvator lived from 15 October 1863 until 4 September 1931, marking his lifespan of nearly 68 years.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.\"",
+        "branch": "semantic",
+        "raw_score": 0.3745037317276001,
+        "hyperedge_text": "The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.",
+        "entity_ids": [
+          "\"5 APRIL 1824\"",
+          "\"7 APRIL 1901\""
+        ],
+        "chunk_ids": [
+          "chunk-fd8f59e454a811e024460353f571bdbf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.",
+            "Ladislav Pejačević Count Ladislav Pejačević of Virovitica (Sopron, 5 April 1824 – Našice, 7 April 1901) was a Croatian aristocrat and statesman, a member of the Pejačević noble family, remarkable and influential in the Kingdom of Croatia-Slavonia within the Austro-Hungarian Empire. He was the Ban (viceroy) of Croatia between 1880 and 1883."
+          ],
+          "relation_texts": [
+            "The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.",
+            "link",
+            "5 APRIL 1824",
+            "7 APRIL 1901"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-de29ef38ad22b435d5e9dfca1a1d9fe1",
+            "hyperedge_name": "<hyperedge>\"The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.\"",
+        "branch": "semantic",
+        "raw_score": 0.37129712104797363,
+        "hyperedge_text": "Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.",
+        "entity_ids": [
+          "\"POLITICAL CHANGES\"",
+          "\"CULTURAL CHANGES\""
+        ],
+        "chunk_ids": [
+          "chunk-3993b6782c17aebb6ccb446cba22adf9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.",
+            "Louis Henry, Count Palatine of Simmern-Kaiserslautern Louis Henry( German: Ludwig Heinrich)( 11 October 1640- 3 January 1674) was the Count Palatine of Simmern- Kaiserslautern from 1653 until 1673."
+          ],
+          "relation_texts": [
+            "Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.",
+            "link",
+            "POLITICAL CHANGES",
+            "CULTURAL CHANGES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-80a7d67b312acf78cd1f0149707e6011",
+            "hyperedge_name": "<hyperedge>\"Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Huc-Mazelet Luquiens lived from 1881 to 1961, indicating a lifetime of 80 years.\"",
+        "branch": "semantic",
+        "raw_score": 0.3694472014904022,
+        "hyperedge_text": "Huc-Mazelet Luquiens lived from 1881 to 1961, indicating a lifetime of 80 years.",
+        "entity_ids": [
+          "\"LIFETIME\""
+        ],
+        "chunk_ids": [
+          "chunk-1b21d63ea6fcda1853940177e9405402"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Huc-Mazelet Luquiens lived from 1881 to 1961, indicating a lifetime of 80 years.",
+            "Huc-Mazelet Luquiens Huc- Mazelet Luquiens( 1881 — 1961) was an American printmaker, painter and art educator who was born June 30, 1881 in Massachusetts to Jules Luquiens a French- speaking Swiss and Emma Clark who was born in Ohio."
+          ],
+          "relation_texts": [
+            "Huc-Mazelet Luquiens lived from 1881 to 1961, indicating a lifetime of 80 years.",
+            "link",
+            "LIFETIME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd60b8d3fe1970b89ae8475d81774f99",
+            "hyperedge_name": "<hyperedge>\"Huc-Mazelet Luquiens lived from 1881 to 1961, indicating a lifetime of 80 years.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.\"",
+        "hyperedge_text": "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5771963596343994,
+        "fusion_score": 0.5154392719268799,
+        "entity_ids": [
+          "\"LOUIS NCAMISO NDLOVU\"",
+          "\"SWAZILAND\"",
+          "\"ROMAN CATHOLIC BISHOP\"",
+          "\"ROMAN CATHOLIC DIOCESE OF MANZINI\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "evidence_texts": [
+          "Louis Ncamiso Ndlovu (March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland.",
+          "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.577196,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515439
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.\"",
+        "hyperedge_text": "The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.3745037317276001,
+        "fusion_score": 0.47490074634552004,
+        "entity_ids": [
+          "\"5 APRIL 1824\"",
+          "\"7 APRIL 1901\""
+        ],
+        "chunk_ids": [
+          "chunk-fd8f59e454a811e024460353f571bdbf"
+        ],
+        "evidence_texts": [
+          "The life span of Count Ladislav Pejačević was from 5 April 1824 to 7 April 1901.",
+          "Ladislav Pejačević Count Ladislav Pejačević of Virovitica (Sopron, 5 April 1824 – Našice, 7 April 1901) was a Croatian aristocrat and statesman, a member of the Pejačević noble family, remarkable and influential in the Kingdom of Croatia-Slavonia within the Austro-Hungarian Empire. He was the Ban (viceroy) of Croatia between 1880 and 1883."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.374504,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.474901
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.\"",
+        "hyperedge_text": "Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6114654541015625,
+        "fusion_score": 0.32229309082031254,
+        "entity_ids": [
+          "\"AUGUST 27, 2012\"",
+          "\"MARCH 15, 1945\""
+        ],
+        "chunk_ids": [
+          "chunk-af4da49a52c9842542018b1a6aea6aa3"
+        ],
+        "evidence_texts": [
+          "Ndlovu's life spanned from March 15, 1945, to August 27, 2012, during which he greatly impacted his diocese.",
+          "Louis Ncamiso Ndlovu Louis Ncamiso Ndlovu( March 15, 1945 – August 27, 2012) was the Roman Catholic bishop of the Roman Catholic Diocese of Manzini, Swaziland. Ordained to the priesthood in 1975, Ndlovu was named a bishop in 1985; he died in office."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.611465,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.322293
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.\"",
+        "hyperedge_text": "Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.3973633050918579,
+        "fusion_score": 0.2794726610183716,
+        "entity_ids": [
+          "\"17TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-54cfce452b6bc694a90c6c2e74894920"
+        ],
+        "evidence_texts": [
+          "Louis's life spanned a significant period, marking the transition in the Netherlands during the 17th century.",
+          "Louis of Nassau, Lord of De Lek and Beverweerd Louis of Nassau, Lord of De Lek and Beverweerd (1602 – The Hague, 28 February 1665) was a Dutch soldier. He was the illegitimate son of Margaretha van Mechelen and Maurice, Prince of Orange, and so a collateral member of the House of Orange-Nassau. He was a Lord of the heerlijkheid De Lek and . From his father he inherited the estate of Beverweerd; and when his older brother Willem died in 1627 he inherited his estate as well."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.397363,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.279473
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.\"",
+        "hyperedge_text": "Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.37129712104797363,
+        "fusion_score": 0.27425942420959476,
+        "entity_ids": [
+          "\"POLITICAL CHANGES\"",
+          "\"CULTURAL CHANGES\""
+        ],
+        "chunk_ids": [
+          "chunk-3993b6782c17aebb6ccb446cba22adf9"
+        ],
+        "evidence_texts": [
+          "Louis Henry's life spanned from 1640 to 1674, during which he witnessed various cultural and political changes in Europe.",
+          "Louis Henry, Count Palatine of Simmern-Kaiserslautern Louis Henry( German: Ludwig Heinrich)( 11 October 1640- 3 January 1674) was the Count Palatine of Simmern- Kaiserslautern from 1653 until 1673."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.371297,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.274259
+        }
+      }
+    ]
+  }
+]

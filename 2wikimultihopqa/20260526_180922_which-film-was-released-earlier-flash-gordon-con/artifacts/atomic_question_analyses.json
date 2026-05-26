@@ -1,0 +1,175 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Flash Gordon Conquers The Universe released?",
+    "retrieval_question": "When was Flash Gordon Conquers The Universe released?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Flash Gordon Conquers The Universe released?",
+      "retrieval_question": "When was Flash Gordon Conquers The Universe released?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Flash Gordon Conquers The Universe"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Siti Noerbaja?",
+    "retrieval_question": "What is the release date of Siti Noerbaja?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Siti Noerbaja?",
+      "retrieval_question": "What is the release date of Siti Noerbaja?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Siti Noerbaja"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Flash Gordon Conquers The Universe?",
+    "retrieval_question": "What is the release date of Flash Gordon Conquers The Universe?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Flash Gordon Conquers The Universe?",
+      "retrieval_question": "What is the release date of Flash Gordon Conquers The Universe?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "When was Flash Gordon Conquers The Universe released?",
+        "answer": "1940",
+        "confidence": 1.0,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence clearly states that 'Flash Gordon Conquers the Universe' was released in 1940.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.\"",
+          "<hyperedge>\"The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.\"",
+          "<hyperedge>\"The serial was followed by 'Flash Gordon Conquers the Universe' (1940).\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.\"",
+            "fusion_score": 0.5479368209838867,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor.",
+              "Flash Gordon Conquers the Universe Flash Gordon Conquers the Universe is a 1940 American black-and-white science fiction movie serial from Universal Pictures, produced by Henry MacRae and co-directed by Ford Beebe and Ray Taylor. The serial stars Buster Crabbe, Carol Hughes, Charles B. Middleton, Frank Shannon, and Roland Drew. It was written by George H. Plympton, Basil Dickey, and Barry Shipman and was adapted from Alex Raymond's syndicated newspaper comic strip of the same name from King Features Syndicate. Shown theatrically in 12 separate weekly \"chapters\", it was the last of the three Universal Flash Gordon serials made between 1936 and 1940. During the 1950s, all three Flash Gordon serials were syndicated to television by Motion Pictures for Television, along with many of Universal's other serial output. To avoid confusion with the imported Flash Gordon TV series airing around..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.\"",
+            "fusion_score": 0.5393592357635498,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The movie precedes the Flash Gordon Conquers the Universe which was released in 1940.",
+              "Flash Gordon's Trip to Mars Flash Gordon's Trip to Mars is a 1938 Universal Pictures 15 – chapter superhero movie serial, based on the syndicated newspaper comic strip\" Flash Gordon\". It is the second of the three Flash Gordon serials made by Universal between 1936 and 1940. The main cast from the first serial reprise their roles: Buster Crabbe as Flash Gordon, Jean Rogers as Dale Arden, Frank Shannon as Dr. Alexis Zarkov, Charles B. Middleton as Ming the Merciless, and Richard Alexander as Prince Barin. Also in the principal cast are Beatrice Roberts as Queen Azura, Donald Kerr as Happy Hapgood, Montague Shaw as the Clay King, and Wheeler Oakman as Ming's chief henchman. The serial was followed by\" Flash Gordon Conquers the Universe\"( 1940)."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The serial was followed by 'Flash Gordon Conquers the Universe' (1940).\"",
+            "fusion_score": 0.5195354938507081,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The serial was followed by 'Flash Gordon Conquers the Universe' (1940).",
+              "Flash Gordon's Trip to Mars Flash Gordon's Trip to Mars is a 1938 Universal Pictures 15 – chapter superhero movie serial, based on the syndicated newspaper comic strip\" Flash Gordon\". It is the second of the three Flash Gordon serials made by Universal between 1936 and 1940. The main cast from the first serial reprise their roles: Buster Crabbe as Flash Gordon, Jean Rogers as Dale Arden, Frank Shannon as Dr. Alexis Zarkov, Charles B. Middleton as Ming the Merciless, and Richard Alexander as Prince Barin. Also in the principal cast are Beatrice Roberts as Queen Azura, Donald Kerr as Happy Hapgood, Montague Shaw as the Clay King, and Wheeler Oakman as Ming's chief henchman. The serial was followed by\" Flash Gordon Conquers the Universe\"( 1940)."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "What is the release date of Siti Noerbaja?",
+        "answer": "1941",
+        "confidence": 0.9,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence states that 'Siti Noerbaja is a 1941 film from the Dutch East Indies,' which directly provides the release date.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Siti Noerbaja is a 1941 film from the Dutch East Indies, directed by Lie Tek Swie, and is the first film adaptation of Marah Roesli's 1922 novel.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Siti Noerbaja is a 1941 film from the Dutch East Indies, directed by Lie Tek Swie, and is the first film adaptation of Marah Roesli's 1922 novel.\"",
+            "fusion_score": 0.5211713790893555,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Siti Noerbaja is a 1941 film from the Dutch East Indies, directed by Lie Tek Swie, and is the first film adaptation of Marah Roesli's 1922 novel.",
+              "Siti Noerbaja Siti Noerbaja( Perfected Spelling: Siti Nurbaya) is a 1941 film from the Dutch East Indies. Directed by Lie Tek Swie, it was the first film adaptation of Marah Roesli's 1922 novel of the same name. Starring Asmanah, Momo, and Soerjono, it follows two star- crossed teenage lovers."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The release date of Rakka was 14 June 2017.\"",
+            "fusion_score": 0.25916370153427126,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The release date of Rakka was 14 June 2017.",
+              "Rakka (film) The film was released on YouTube and Steam on 14 June 2017."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+            "fusion_score": 0.2590104699134827,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The release date was on 10 October 2009.",
+              "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Flash Gordon Conquers The Universe"
+      ],
+      "relations": [
+        "release date of"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Calling Philo Vance?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the director of Calling Philo Vance die?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of The Witch'S Curse?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q4",
+    "question": "When did the director of The Witch'S Curse die?",
+    "dependencies": [
+      "q3"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q5",
+    "question": "When did the director of Calling Philo Vance die?",
+    "dependencies": [
+      "q2",
+      "q4"
+    ],
+    "metadata": {
+      "operator": "COMPARE_GREATER",
+      "candidates": [
+        {
+          "label": "Calling Philo Vance",
+          "source_node_id": "q2"
+        },
+        {
+          "label": "The Witch'S Curse",
+          "source_node_id": "q4"
+        }
+      ]
+    }
+  }
+]

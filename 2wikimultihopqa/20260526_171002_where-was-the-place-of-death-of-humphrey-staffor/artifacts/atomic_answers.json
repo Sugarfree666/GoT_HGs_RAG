@@ -1,0 +1,378 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Humphrey Stafford?",
+    "analysis": {
+      "entities": [
+        "Humphrey Stafford"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Stafford, Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.\"",
+        "hyperedge_text": "Humphrey Stafford, Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7320176362991333,
+        "fusion_score": 0.5464035272598267,
+        "entity_ids": [
+          "\"HUMPHREY STAFFORD\"",
+          "\"EARL OF STAFFORD\"",
+          "\"HUMPHREY STAFFORD, 1ST DUKE OF BUCKINGHAM\"",
+          "\"LADY ANNE NEVILLE\"",
+          "\"DUKE OF BUCKINGHAM\"",
+          "\"1458\"",
+          "\"1480\""
+        ],
+        "chunk_ids": [
+          "chunk-09a9865e68d1a4a6ef96d3e67e5e05eb"
+        ],
+        "evidence_texts": [
+          "Humphrey Stafford, Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.",
+          "Humphrey Stafford, Earl of Stafford Humphrey Stafford( – 1458), generally known by his courtesy title of Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville( d. 1480)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.732018,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.546404
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford (December 1402 – 10 July 1460), was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses.\"",
+        "hyperedge_text": "Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford (December 1402 – 10 July 1460), was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.717502772808075,
+        "fusion_score": 0.5435005545616151,
+        "entity_ids": [
+          "\"HUMPHREY STAFFORD\"",
+          "\"1ST DUKE OF BUCKINGHAM\"",
+          "\"6TH EARL OF STAFFORD\""
+        ],
+        "chunk_ids": [
+          "chunk-e7afe06a2303780afa62c2c8a93441a3"
+        ],
+        "evidence_texts": [
+          "Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford (December 1402 – 10 July 1460), was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses.",
+          "Humphrey Stafford, 1st Duke of Buckingham Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford, (December 1402 – 10 July 1460) was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses. Through his mother he had royal descent from King Edward III, his great-grandfather, and from his father, he inherited, at an early age, the earldom of Stafford. By his marriage to a daughter of Ralph, Earl of Westmorland, Humphrey was related to the powerful Neville family and to many of the leading aristocratic houses of the time. He joined the English campaign in France with King Henry V in 1420 and following Henry V's death two years later he became a councillor for the new King, the nine-month-old Henry VI. Stafford acted as a peacemaker during the partisan, factional politics of the 1430s, when Humphrey, Duke of Gloucester, vied with Cardinal..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.717503,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.543501
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Stafford was a dominant magnate in south-western England in the mid-15th century.\"",
+        "hyperedge_text": "Humphrey Stafford was a dominant magnate in south-western England in the mid-15th century.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7026245594024658,
+        "fusion_score": 0.5405249118804932,
+        "entity_ids": [
+          "\"SOUTH-WESTERN ENGLAND\"",
+          "\"HUMPHREY STAFFORD\""
+        ],
+        "chunk_ids": [
+          "chunk-5d8c1069c527cdb1945d5092037b6306"
+        ],
+        "evidence_texts": [
+          "Humphrey Stafford was a dominant magnate in south-western England in the mid-15th century.",
+          "Humphrey Stafford, 1st Earl of Devon Humphrey Stafford, 1st Earl of Devon(\" ca.\" 143917 August 1469) was a dominant magnate in south- western England in the mid-15th century, and a participant in the Wars of the Roses. A distant relative of the earls of Stafford, Humphrey Stafford became the greatest landowner in the county of Dorset through fortunes of inheritance. Later, Stafford was one of several men promoted rapidly through the nobility by King Edward IV, to fill the power vacuum left by dead or forfeit Lancastrians. In the West Country it was particularly the forfeitures of the Lancastrian Courtenay family that benefited Stafford. In 1469 he received the Courtenay title of Earl of Devon. Stafford held the comital title for only three months. In July he was sent north to quell a rebellion instigated by the discontented Earl of Warwick. Even though he escaped the disastrous Battle..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.702625,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540525
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"John Stafford, 1st Earl of Wiltshire, was an English nobleman, the youngest son of Humphrey Stafford, 1st Duke of Buckingham.\"",
+        "hyperedge_text": "John Stafford, 1st Earl of Wiltshire, was an English nobleman, the youngest son of Humphrey Stafford, 1st Duke of Buckingham.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6794329285621643,
+        "fusion_score": 0.5358865857124329,
+        "entity_ids": [
+          "\"HUMPHREY STAFFORD\"",
+          "\"1ST DUKE OF BUCKINGHAM\"",
+          "\"JOHN STAFFORD\"",
+          "\"1ST EARL OF WILTSHIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-66747eeb94fefa368e321fcbf4288b28"
+        ],
+        "evidence_texts": [
+          "John Stafford, 1st Earl of Wiltshire, was an English nobleman, the youngest son of Humphrey Stafford, 1st Duke of Buckingham.",
+          "John Stafford, 1st Earl of Wiltshire John Stafford, 1st Earl of Wiltshire , (24 November 1427 – 8 May 1473) was an English nobleman, the youngest son of Humphrey Stafford, 1st Duke of Buckingham. In 1461 he was appointed Knight of the Order of the Bath."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.679433,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535887
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Stafford was born to Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.\"",
+        "hyperedge_text": "Humphrey Stafford was born to Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7440242767333984,
+        "fusion_score": 0.5488048553466798,
+        "entity_ids": [
+          "\"BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-09a9865e68d1a4a6ef96d3e67e5e05eb"
+        ],
+        "evidence_texts": [
+          "Humphrey Stafford was born to Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.",
+          "Humphrey Stafford, Earl of Stafford Humphrey Stafford( – 1458), generally known by his courtesy title of Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville( d. 1480)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.744024,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.548805
+        }
+      }
+    ],
+    "answer": "Humphrey Stafford, 1st Duke of Buckingham",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that Humphrey Stafford, Earl of Stafford, is the eldest son of Humphrey Stafford, 1st Duke of Buckingham, confirming the relationship.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Humphrey Stafford, Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Humphrey Stafford die?",
+    "analysis": {
+      "entities": [
+        "Humphrey Stafford, 1st Duke of Buckingham"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Stafford, Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.\"",
+        "hyperedge_text": "Humphrey Stafford, Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6968939900398254,
+        "fusion_score": 0.5393787980079652,
+        "entity_ids": [
+          "\"HUMPHREY STAFFORD\"",
+          "\"EARL OF STAFFORD\"",
+          "\"HUMPHREY STAFFORD, 1ST DUKE OF BUCKINGHAM\"",
+          "\"LADY ANNE NEVILLE\"",
+          "\"DUKE OF BUCKINGHAM\"",
+          "\"1458\"",
+          "\"1480\""
+        ],
+        "chunk_ids": [
+          "chunk-09a9865e68d1a4a6ef96d3e67e5e05eb"
+        ],
+        "evidence_texts": [
+          "Humphrey Stafford, Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.",
+          "Humphrey Stafford, Earl of Stafford Humphrey Stafford( – 1458), generally known by his courtesy title of Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville( d. 1480)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.696894,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.539379
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford (December 1402 – 10 July 1460), was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses.\"",
+        "hyperedge_text": "Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford (December 1402 – 10 July 1460), was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7499185800552368,
+        "fusion_score": 0.5499837160110475,
+        "entity_ids": [
+          "\"HUMPHREY STAFFORD\"",
+          "\"1ST DUKE OF BUCKINGHAM\"",
+          "\"6TH EARL OF STAFFORD\""
+        ],
+        "chunk_ids": [
+          "chunk-e7afe06a2303780afa62c2c8a93441a3"
+        ],
+        "evidence_texts": [
+          "Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford (December 1402 – 10 July 1460), was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses.",
+          "Humphrey Stafford, 1st Duke of Buckingham Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford, (December 1402 – 10 July 1460) was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses. Through his mother he had royal descent from King Edward III, his great-grandfather, and from his father, he inherited, at an early age, the earldom of Stafford. By his marriage to a daughter of Ralph, Earl of Westmorland, Humphrey was related to the powerful Neville family and to many of the leading aristocratic houses of the time. He joined the English campaign in France with King Henry V in 1420 and following Henry V's death two years later he became a councillor for the new King, the nine-month-old Henry VI. Stafford acted as a peacemaker during the partisan, factional politics of the 1430s, when Humphrey, Duke of Gloucester, vied with Cardinal..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.749919,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549984
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Stafford was born to Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.\"",
+        "hyperedge_text": "Humphrey Stafford was born to Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.703090488910675,
+        "fusion_score": 0.5406180977821351,
+        "entity_ids": [
+          "\"BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-09a9865e68d1a4a6ef96d3e67e5e05eb"
+        ],
+        "evidence_texts": [
+          "Humphrey Stafford was born to Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.",
+          "Humphrey Stafford, Earl of Stafford Humphrey Stafford( – 1458), generally known by his courtesy title of Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville( d. 1480)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.70309,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540618
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"John Stafford was the youngest son of Humphrey Stafford, 1st Duke of Buckingham.\"",
+        "hyperedge_text": "John Stafford was the youngest son of Humphrey Stafford, 1st Duke of Buckingham.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6825718879699707,
+        "fusion_score": 0.5365143775939942,
+        "entity_ids": [
+          "\"YOUNGEST SON\""
+        ],
+        "chunk_ids": [
+          "chunk-66747eeb94fefa368e321fcbf4288b28"
+        ],
+        "evidence_texts": [
+          "John Stafford was the youngest son of Humphrey Stafford, 1st Duke of Buckingham.",
+          "John Stafford, 1st Earl of Wiltshire John Stafford, 1st Earl of Wiltshire , (24 November 1427 – 8 May 1473) was an English nobleman, the youngest son of Humphrey Stafford, 1st Duke of Buckingham. In 1461 he was appointed Knight of the Order of the Bath."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.682572,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536514
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"John Stafford, 1st Earl of Wiltshire, was an English nobleman, the youngest son of Humphrey Stafford, 1st Duke of Buckingham.\"",
+        "hyperedge_text": "John Stafford, 1st Earl of Wiltshire, was an English nobleman, the youngest son of Humphrey Stafford, 1st Duke of Buckingham.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6525537967681885,
+        "fusion_score": 0.5305107593536378,
+        "entity_ids": [
+          "\"HUMPHREY STAFFORD\"",
+          "\"1ST DUKE OF BUCKINGHAM\"",
+          "\"JOHN STAFFORD\"",
+          "\"1ST EARL OF WILTSHIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-66747eeb94fefa368e321fcbf4288b28"
+        ],
+        "evidence_texts": [
+          "John Stafford, 1st Earl of Wiltshire, was an English nobleman, the youngest son of Humphrey Stafford, 1st Duke of Buckingham.",
+          "John Stafford, 1st Earl of Wiltshire John Stafford, 1st Earl of Wiltshire , (24 November 1427 – 8 May 1473) was an English nobleman, the youngest son of Humphrey Stafford, 1st Duke of Buckingham. In 1461 he was appointed Knight of the Order of the Bath."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.652554,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530511
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the place of death for Humphrey Stafford, 1st Duke of Buckingham.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Humphrey Stafford, Earl of Stafford, was the eldest son of Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.\""
+    ]
+  }
+]

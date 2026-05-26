@@ -1,0 +1,361 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Way...Way Out?",
+    "analysis": {
+      "entities": [
+        "Way...Way Out"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Walter West (director)\"",
+        "hyperedge_text": "Walter West (director)",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.43956276774406433,
+        "fusion_score": 0.4879125535488129,
+        "entity_ids": [
+          "\"WALTER WEST\""
+        ],
+        "chunk_ids": [
+          "chunk-1052210133d7874da537943cba3ca52b"
+        ],
+        "evidence_texts": [
+          "Walter West (director)",
+          "Walter West (director) Walter Alabaster West( 9 November 1885 – 3 July 1958) was an English film director and producer. He was a partner in the film production company Broadwest Films."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.439563,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.487913
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2698075215021769,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.269808
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5027865171432495,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.26778127352396647,
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "evidence_texts": [
+          "As a director, he has likely worked on a variety of projects spanning different genres.",
+          "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.502787,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.267781
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4973045885562897,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.26558850208918255,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this, he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.497305,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.265589
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.49680250883102417,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.26538767019907633,
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "evidence_texts": [
+          "His work as a director spanned over two decades.",
+          "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.496803,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.265388
+        }
+      }
+    ],
+    "answer": "Walter West",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that Walter West is the director, providing direct support for the answer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Walter West (director)\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of The Biggest Show On Earth?",
+    "analysis": {
+      "entities": [
+        "The Biggest Show On Earth"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Biggest Show on Earth is a surviving 1918 American silent drama film directed by Jerome Storm and written by Julien Josephson and Florence Vincent.\"",
+        "hyperedge_text": "The Biggest Show on Earth is a surviving 1918 American silent drama film directed by Jerome Storm and written by Julien Josephson and Florence Vincent.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5678902268409729,
+        "fusion_score": 0.5135780453681946,
+        "entity_ids": [
+          "\"MELBOURNE MACDOWELL\"",
+          "\"THE BIGGEST SHOW ON EARTH\"",
+          "\"JULIEN JOSEPHSON\"",
+          "\"FLORENCE VINCENT\"",
+          "\"ENID BENNETT\"",
+          "\"BLISS CHEVALIER\"",
+          "\"ETHEL LYNNE\"",
+          "\"JACK NELSON\"",
+          "\"EARLE RODNEY\"",
+          "\"JEROME STORM\""
+        ],
+        "chunk_ids": [
+          "chunk-fcc1b579a051a23179c350e244cde1fe"
+        ],
+        "evidence_texts": [
+          "The Biggest Show on Earth is a surviving 1918 American silent drama film directed by Jerome Storm and written by Julien Josephson and Florence Vincent.",
+          "The Biggest Show on Earth The Biggest Show on Earth is a surviving 1918 American silent drama film directed by Jerome Storm and written by Julien Josephson and Florence Vincent. The film stars Enid Bennett, Bliss Chevalier, Ethel Lynne, Melbourne MacDowell, Jack Nelson, and Earle Rodney. The film was released on April 28, 1918, by Paramount Pictures."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.56789,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.513578
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Biggest Show on Earth is directed by Jerome Storm.\"",
+        "hyperedge_text": "The Biggest Show on Earth is directed by Jerome Storm.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.6737890243530273,
+        "fusion_score": 0.9347578048706056,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-fcc1b579a051a23179c350e244cde1fe"
+        ],
+        "evidence_texts": [
+          "The Biggest Show on Earth is directed by Jerome Storm.",
+          "The Biggest Show on Earth The Biggest Show on Earth is a surviving 1918 American silent drama film directed by Jerome Storm and written by Julien Josephson and Florence Vincent. The film stars Enid Bennett, Bliss Chevalier, Ethel Lynne, Melbourne MacDowell, Jack Nelson, and Earle Rodney. The film was released on April 28, 1918, by Paramount Pictures."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.673789,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.934758
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Paramount Pictures distributed The Biggest Show on Earth.\"",
+        "hyperedge_text": "Paramount Pictures distributed The Biggest Show on Earth.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6258807182312012,
+        "fusion_score": 0.5251761436462403,
+        "entity_ids": [
+          "\"PARAMOUNT PICTURES\""
+        ],
+        "chunk_ids": [
+          "chunk-fcc1b579a051a23179c350e244cde1fe"
+        ],
+        "evidence_texts": [
+          "Paramount Pictures distributed The Biggest Show on Earth.",
+          "The Biggest Show on Earth The Biggest Show on Earth is a surviving 1918 American silent drama film directed by Jerome Storm and written by Julien Josephson and Florence Vincent. The film stars Enid Bennett, Bliss Chevalier, Ethel Lynne, Melbourne MacDowell, Jack Nelson, and Earle Rodney. The film was released on April 28, 1918, by Paramount Pictures."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.625881,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525176
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Biggest Show on Earth was directed by Jerome Storm in 1918.\"",
+        "hyperedge_text": "The Biggest Show on Earth was directed by Jerome Storm in 1918.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6082162857055664,
+        "fusion_score": 0.5216432571411134,
+        "entity_ids": [
+          "\"JEROME STORM\""
+        ],
+        "chunk_ids": [
+          "chunk-fcc1b579a051a23179c350e244cde1fe"
+        ],
+        "evidence_texts": [
+          "The Biggest Show on Earth was directed by Jerome Storm in 1918.",
+          "The Biggest Show on Earth The Biggest Show on Earth is a surviving 1918 American silent drama film directed by Jerome Storm and written by Julien Josephson and Florence Vincent. The film stars Enid Bennett, Bliss Chevalier, Ethel Lynne, Melbourne MacDowell, Jack Nelson, and Earle Rodney. The film was released on April 28, 1918, by Paramount Pictures."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.608216,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.521643
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is best known for being the producer and director of the 2012 feature film, Broadway's Finest.\"",
+        "hyperedge_text": "He is best known for being the producer and director of the 2012 feature film, Broadway's Finest.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.36884307861328125,
+        "fusion_score": 0.47376861572265627,
+        "entity_ids": [
+          "\"BROADWAY'S FINEST\"",
+          "\"2012 FEATURE FILM\"",
+          "\"PRODUCER AND DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-2463097699314a8ef3aedfbc459618b7"
+        ],
+        "evidence_texts": [
+          "He is best known for being the producer and director of the 2012 feature film, Broadway's Finest.",
+          "Stephen Marro Stephen Marro is a film director, writer, producer based in New York. He is best known for being the producer and director of the 2012 feature film, Broadway's Finest."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.368843,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.473769
+        }
+      }
+    ],
+    "answer": "Jerome Storm",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that The Biggest Show on Earth is directed by Jerome Storm.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Biggest Show on Earth is directed by Jerome Storm.\""
+    ]
+  }
+]

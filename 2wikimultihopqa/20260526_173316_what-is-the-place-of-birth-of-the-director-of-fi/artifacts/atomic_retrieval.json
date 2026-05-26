@@ -1,0 +1,1666 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Rufus Jones For President?",
+    "retrieval_question": "Who is the director of Rufus Jones For President?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Rufus Jones For President?",
+      "retrieval_question": "Who is the director of Rufus Jones For President?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+        "entity_ids": [
+          "\"1933\"",
+          "\"TITLE CHARACTER\"",
+          "\"ROY MACK\"",
+          "\"RUFUS JONES FOR PRESIDENT\"",
+          "\"SATIRICAL MUSICAL-COMEDY\"",
+          "\"ETHEL WATERS\"",
+          "\"SAMMY DAVIS JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-42df131e6cf1633a7131bf172c9292c5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+            "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+          ],
+          "relation_texts": [
+            "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+            "link",
+            "1933",
+            "TITLE CHARACTER",
+            "ROY MACK",
+            "RUFUS JONES FOR PRESIDENT",
+            "SATIRICAL MUSICAL-COMEDY",
+            "ETHEL WATERS",
+            "SAMMY DAVIS JR."
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078521370887756,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027865171432495,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4973045885562897,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49680250883102417,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49399447441101074,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48563748598098755,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4840206205844879,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48202356696128845,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47992169857025146,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.4777419865131378,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\"",
+        "branch": "semantic",
+        "raw_score": 0.6562132239341736,
+        "hyperedge_text": "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+        "entity_ids": [
+          "\"1933\"",
+          "\"TITLE CHARACTER\"",
+          "\"ROY MACK\"",
+          "\"RUFUS JONES FOR PRESIDENT\"",
+          "\"SATIRICAL MUSICAL-COMEDY\"",
+          "\"ETHEL WATERS\"",
+          "\"SAMMY DAVIS JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-42df131e6cf1633a7131bf172c9292c5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+            "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+          ],
+          "relation_texts": [
+            "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+            "link",
+            "1933",
+            "TITLE CHARACTER",
+            "ROY MACK",
+            "RUFUS JONES FOR PRESIDENT",
+            "SATIRICAL MUSICAL-COMEDY",
+            "ETHEL WATERS",
+            "SAMMY DAVIS JR."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-01d6c81ba8422d0a2f2ea6238de89d63",
+            "hyperedge_name": "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones for President is an American Pre-Code film.\"",
+        "branch": "semantic",
+        "raw_score": 0.6316441893577576,
+        "hyperedge_text": "Rufus Jones for President is an American Pre-Code film.",
+        "entity_ids": [
+          "\"PRE-CODE\""
+        ],
+        "chunk_ids": [
+          "chunk-42df131e6cf1633a7131bf172c9292c5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus Jones for President is an American Pre-Code film.",
+            "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+          ],
+          "relation_texts": [
+            "Rufus Jones for President is an American Pre-Code film.",
+            "link",
+            "PRE-CODE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ef834eaac592dd2a276d142b729d7d8f",
+            "hyperedge_name": "<hyperedge>\"Rufus Jones for President is an American Pre-Code film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus E. Jones (August 21, 1940 – October 20, 2019) was an American politician and businessman.\"",
+        "branch": "semantic",
+        "raw_score": 0.6115696430206299,
+        "hyperedge_text": "Rufus E. Jones (August 21, 1940 – October 20, 2019) was an American politician and businessman.",
+        "entity_ids": [
+          "\"AMERICAN POLITICIAN\"",
+          "\"BUSINESSMAN\"",
+          "\"OCTOBER 20, 2019\"",
+          "\"RUFUS E. JONES\"",
+          "\"AUGUST 21, 1940\""
+        ],
+        "chunk_ids": [
+          "chunk-1591f345cad88724f97278102ca5ed3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus E. Jones (August 21, 1940 – October 20, 2019) was an American politician and businessman.",
+            "Rufus E. Jones Rufus E. Jones( August 21, 1940 – October 20, 2019) was an American politician and businessman."
+          ],
+          "relation_texts": [
+            "Rufus E. Jones (August 21, 1940 – October 20, 2019) was an American politician and businessman.",
+            "link",
+            "AMERICAN POLITICIAN",
+            "BUSINESSMAN",
+            "OCTOBER 20, 2019",
+            "RUFUS E. JONES",
+            "AUGUST 21, 1940"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cbf88972ea01d0ee09ddd968e91cf890",
+            "hyperedge_name": "<hyperedge>\"Rufus E. Jones (August 21, 1940 – October 20, 2019) was an American politician and businessman.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus E. Jones was a prominent figure in American politics.\"",
+        "branch": "semantic",
+        "raw_score": 0.5918765068054199,
+        "hyperedge_text": "Rufus E. Jones was a prominent figure in American politics.",
+        "entity_ids": [
+          "\"RUFUS E. JONES\""
+        ],
+        "chunk_ids": [
+          "chunk-1591f345cad88724f97278102ca5ed3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus E. Jones was a prominent figure in American politics.",
+            "Rufus E. Jones Rufus E. Jones( August 21, 1940 – October 20, 2019) was an American politician and businessman."
+          ],
+          "relation_texts": [
+            "Rufus E. Jones was a prominent figure in American politics.",
+            "link",
+            "RUFUS E. JONES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7b2db7e530a194591c14b4bbf3ba2baf",
+            "hyperedge_name": "<hyperedge>\"Rufus E. Jones was a prominent figure in American politics.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones (actor) Rufus Jones (born 17 May 1975) is an English actor and writer.\"",
+        "branch": "semantic",
+        "raw_score": 0.5805996656417847,
+        "hyperedge_text": "Rufus Jones (actor) Rufus Jones (born 17 May 1975) is an English actor and writer.",
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"ENGLISH\"",
+          "\"ACTOR\"",
+          "\"17 MAY 1975\"",
+          "\"RUFUS JONES\""
+        ],
+        "chunk_ids": [
+          "chunk-c9432d0534df04ba81dd4d4f7a795e01"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus Jones (actor) Rufus Jones (born 17 May 1975) is an English actor and writer.",
+            "Rufus Jones (actor) Rufus Jones( born 17 May 1975) is an English actor and writer."
+          ],
+          "relation_texts": [
+            "Rufus Jones (actor) Rufus Jones (born 17 May 1975) is an English actor and writer.",
+            "link",
+            "WRITER",
+            "ENGLISH",
+            "ACTOR",
+            "17 MAY 1975",
+            "RUFUS JONES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2440663b3ad7913d3680af6a11355fe0",
+            "hyperedge_name": "<hyperedge>\"Rufus Jones (actor) Rufus Jones (born 17 May 1975) is an English actor and writer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Throughout his career, Rufus E. Jones balanced his duties as a politician and businessman.\"",
+        "branch": "semantic",
+        "raw_score": 0.5795536637306213,
+        "hyperedge_text": "Throughout his career, Rufus E. Jones balanced his duties as a politician and businessman.",
+        "entity_ids": [
+          "\"CAREER\""
+        ],
+        "chunk_ids": [
+          "chunk-1591f345cad88724f97278102ca5ed3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Throughout his career, Rufus E. Jones balanced his duties as a politician and businessman.",
+            "Rufus E. Jones Rufus E. Jones( August 21, 1940 – October 20, 2019) was an American politician and businessman."
+          ],
+          "relation_texts": [
+            "Throughout his career, Rufus E. Jones balanced his duties as a politician and businessman.",
+            "link",
+            "CAREER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-368892ab2ce46675f93da73031a7620e",
+            "hyperedge_name": "<hyperedge>\"Throughout his career, Rufus E. Jones balanced his duties as a politician and businessman.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus E. Jones made significant contributions as a politician and businessman.\"",
+        "branch": "semantic",
+        "raw_score": 0.5733678936958313,
+        "hyperedge_text": "Rufus E. Jones made significant contributions as a politician and businessman.",
+        "entity_ids": [
+          "\"CONTRIBUTIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-1591f345cad88724f97278102ca5ed3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus E. Jones made significant contributions as a politician and businessman.",
+            "Rufus E. Jones Rufus E. Jones( August 21, 1940 – October 20, 2019) was an American politician and businessman."
+          ],
+          "relation_texts": [
+            "Rufus E. Jones made significant contributions as a politician and businessman.",
+            "link",
+            "CONTRIBUTIONS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cb5eb301cde17e15def67076d3344093",
+            "hyperedge_name": "<hyperedge>\"Rufus E. Jones made significant contributions as a politician and businessman.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus E. Jones's entrepreneurial ventures aided his political career.\"",
+        "branch": "semantic",
+        "raw_score": 0.5694987773895264,
+        "hyperedge_text": "Rufus E. Jones's entrepreneurial ventures aided his political career.",
+        "entity_ids": [
+          "\"ENTREPRENEURIAL VENTURES\""
+        ],
+        "chunk_ids": [
+          "chunk-1591f345cad88724f97278102ca5ed3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus E. Jones's entrepreneurial ventures aided his political career.",
+            "Rufus E. Jones Rufus E. Jones( August 21, 1940 – October 20, 2019) was an American politician and businessman."
+          ],
+          "relation_texts": [
+            "Rufus E. Jones's entrepreneurial ventures aided his political career.",
+            "link",
+            "ENTREPRENEURIAL VENTURES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0144036e4d7bace68133ea9597671028",
+            "hyperedge_name": "<hyperedge>\"Rufus E. Jones's entrepreneurial ventures aided his political career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus E. Jones was an American politician and businessman with notable contributions.\"",
+        "branch": "semantic",
+        "raw_score": 0.5679314136505127,
+        "hyperedge_text": "Rufus E. Jones was an American politician and businessman with notable contributions.",
+        "entity_ids": [
+          "\"BUSINESSMAN\"",
+          "\"POLITICIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-1591f345cad88724f97278102ca5ed3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus E. Jones was an American politician and businessman with notable contributions.",
+            "Rufus E. Jones Rufus E. Jones( August 21, 1940 – October 20, 2019) was an American politician and businessman."
+          ],
+          "relation_texts": [
+            "Rufus E. Jones was an American politician and businessman with notable contributions.",
+            "link",
+            "BUSINESSMAN",
+            "POLITICIAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd4988fd031d748e7b4e1848944eb886",
+            "hyperedge_name": "<hyperedge>\"Rufus E. Jones was an American politician and businessman with notable contributions.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones (actor) Rufus Jones was born on 17 May 1975.\"",
+        "branch": "semantic",
+        "raw_score": 0.5654036402702332,
+        "hyperedge_text": "Rufus Jones (actor) Rufus Jones was born on 17 May 1975.",
+        "entity_ids": [
+          "\"RUFUS JONES\""
+        ],
+        "chunk_ids": [
+          "chunk-c9432d0534df04ba81dd4d4f7a795e01"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus Jones (actor) Rufus Jones was born on 17 May 1975.",
+            "Rufus Jones (actor) Rufus Jones( born 17 May 1975) is an English actor and writer."
+          ],
+          "relation_texts": [
+            "Rufus Jones (actor) Rufus Jones was born on 17 May 1975.",
+            "link",
+            "RUFUS JONES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-711b6dea70c5f9a935036e8fda17d787",
+            "hyperedge_name": "<hyperedge>\"Rufus Jones (actor) Rufus Jones was born on 17 May 1975.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\"",
+        "hyperedge_text": "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6562132239341736,
+        "fusion_score": 0.5312426447868348,
+        "entity_ids": [
+          "\"1933\"",
+          "\"TITLE CHARACTER\"",
+          "\"ROY MACK\"",
+          "\"RUFUS JONES FOR PRESIDENT\"",
+          "\"SATIRICAL MUSICAL-COMEDY\"",
+          "\"ETHEL WATERS\"",
+          "\"SAMMY DAVIS JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-42df131e6cf1633a7131bf172c9292c5"
+        ],
+        "evidence_texts": [
+          "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+          "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.656213,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531243
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones for President is an American Pre-Code film.\"",
+        "hyperedge_text": "Rufus Jones for President is an American Pre-Code film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6316441893577576,
+        "fusion_score": 0.5263288378715516,
+        "entity_ids": [
+          "\"PRE-CODE\""
+        ],
+        "chunk_ids": [
+          "chunk-42df131e6cf1633a7131bf172c9292c5"
+        ],
+        "evidence_texts": [
+          "Rufus Jones for President is an American Pre-Code film.",
+          "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.631644,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.526329
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25314085483551024,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.253141
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5027865171432495,
+        "semantic_score": 0.25,
+        "fusion_score": 0.2511146068572998,
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "evidence_texts": [
+          "As a director, he has likely worked on a variety of projects spanning different genres.",
+          "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.502787,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.251115
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4973045885562897,
+        "semantic_score": 0.25,
+        "fusion_score": 0.2489218354225159,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this, he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.497305,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.248922
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the birth place of the director of Rufus Jones For President?",
+    "retrieval_question": "What is the birth place of Roy Mack?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth place of the director of Rufus Jones For President?",
+      "retrieval_question": "What is the birth place of Roy Mack?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Rufus Jones For President",
+      "replacement_answer": "Roy Mack",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Rufus Jones For President",
+          "replacement_answer": "Roy Mack"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+        "entity_ids": [
+          "\"1933\"",
+          "\"TITLE CHARACTER\"",
+          "\"ROY MACK\"",
+          "\"RUFUS JONES FOR PRESIDENT\"",
+          "\"SATIRICAL MUSICAL-COMEDY\"",
+          "\"ETHEL WATERS\"",
+          "\"SAMMY DAVIS JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-42df131e6cf1633a7131bf172c9292c5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+            "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+          ],
+          "relation_texts": [
+            "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+            "link",
+            "1933",
+            "TITLE CHARACTER",
+            "ROY MACK",
+            "RUFUS JONES FOR PRESIDENT",
+            "SATIRICAL MUSICAL-COMEDY",
+            "ETHEL WATERS",
+            "SAMMY DAVIS JR."
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.",
+        "entity_ids": [
+          "\"AMERICAN DIRECTOR\"",
+          "\"LOS ANGELES, CALIFORNIA\"",
+          "\"COMEDY FILMS\"",
+          "\"ROY MCCLURE\"",
+          "\"205 TITLES\"",
+          "\"NEW BRUNSWICK, NEW JERSEY\"",
+          "\"FILM SHORTS\"",
+          "\"ROY MACK\""
+        ],
+        "chunk_ids": [
+          "chunk-6660f1bddbe966e2c05bca0c0dd8ab0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.",
+            "Roy Mack (director) Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit."
+          ],
+          "relation_texts": [
+            "Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.",
+            "link",
+            "AMERICAN DIRECTOR",
+            "LOS ANGELES, CALIFORNIA",
+            "COMEDY FILMS",
+            "ROY MCCLURE",
+            "205 TITLES",
+            "NEW BRUNSWICK, NEW JERSEY",
+            "FILM SHORTS",
+            "ROY MACK"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "branch": "relation",
+        "raw_score": 0.6214752793312073,
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth (POB) or birthplace is the place where a person was born.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth (POB) or birthplace is the place where a person was born.",
+            "link",
+            "BIRTH",
+            "PLACE OF BIRTH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d5eff26d110559cc075b3378c12f50e3",
+            "hyperedge_name": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "branch": "relation",
+        "raw_score": 0.6069682836532593,
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "link",
+            "TERRITORIAL WATERS",
+            "LAW OF THE COUNTRIES INVOLVED",
+            "NATIONALITY OF THE PLANE OR SHIP",
+            "LAW",
+            "AIRSPACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e736e546ef2766fb6eee3ec329d43975",
+            "hyperedge_name": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\"",
+        "branch": "relation",
+        "raw_score": 0.5803025364875793,
+        "hyperedge_text": "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+        "entity_ids": [
+          "\"ETHNIC GROUP\"",
+          "\"PLACE OF ORIGIN\""
+        ],
+        "chunk_ids": [
+          "chunk-90ef8b646c23d30cfdfe5eeaca1544c1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "Motherland (disambiguation) Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group. Motherland may also refer to:"
+          ],
+          "relation_texts": [
+            "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "link",
+            "ETHNIC GROUP",
+            "PLACE OF ORIGIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f3f41e1fb657d16e75bd85ffccfeaeb",
+            "hyperedge_name": "<hyperedge>\"The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.\"",
+        "branch": "relation",
+        "raw_score": 0.5395703315734863,
+        "hyperedge_text": "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+        "entity_ids": [
+          "\"NATIONALITY\"",
+          "\"AMERICAS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+            "link",
+            "NATIONALITY",
+            "AMERICAS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9533e282d05fe0ed1aae66ae544046ce",
+            "hyperedge_name": "<hyperedge>\"In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth is not necessarily the place where the parents of the new baby live.\"",
+        "branch": "relation",
+        "raw_score": 0.5362969040870667,
+        "hyperedge_text": "The place of birth is not necessarily the place where the parents of the new baby live.",
+        "entity_ids": [
+          "\"PARENTS\"",
+          "\"NEW BABY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth is not necessarily the place where the parents of the new baby live.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth is not necessarily the place where the parents of the new baby live.",
+            "link",
+            "PARENTS",
+            "NEW BABY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c2f00fbd2ed64c5e26a5f01350457df0",
+            "hyperedge_name": "<hyperedge>\"The place of birth is not necessarily the place where the parents of the new baby live.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.\"",
+        "branch": "relation",
+        "raw_score": 0.5135664939880371,
+        "hyperedge_text": "It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.",
+        "entity_ids": [
+          "\"PLACE OF BIRTH\"",
+          "\"PLACE OF RESIDENCE\"",
+          "\"CIRCUMSTANCES\""
+        ],
+        "chunk_ids": [
+          "chunk-1ce3735ca51311e37578f27d0613f4a2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.",
+            "Place of origin In Switzerland, the place of origin( literally\" home place\" or\" citizen place\") denotes where a Swiss citizen has their municipal citizenship. It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances."
+          ],
+          "relation_texts": [
+            "It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.",
+            "link",
+            "PLACE OF BIRTH",
+            "PLACE OF RESIDENCE",
+            "CIRCUMSTANCES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-55706a83d1361720d261cfbc0feda0ce",
+            "hyperedge_name": "<hyperedge>\"It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\"",
+        "branch": "relation",
+        "raw_score": 0.49738308787345886,
+        "hyperedge_text": "Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+        "entity_ids": [
+          "\"MOTHERLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-90ef8b646c23d30cfdfe5eeaca1544c1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "Motherland (disambiguation) Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group. Motherland may also refer to:"
+          ],
+          "relation_texts": [
+            "Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "link",
+            "MOTHERLAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f7659258daa9a6bfb34d9adb4e882053",
+            "hyperedge_name": "<hyperedge>\"Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"If the baby is born in a hospital in another place, that place is the place of birth.\"",
+        "branch": "relation",
+        "raw_score": 0.4914357662200928,
+        "hyperedge_text": "If the baby is born in a hospital in another place, that place is the place of birth.",
+        "entity_ids": [
+          "\"HOSPITAL\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "If the baby is born in a hospital in another place, that place is the place of birth.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "If the baby is born in a hospital in another place, that place is the place of birth.",
+            "link",
+            "HOSPITAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b4a5e47f76dca3a3ae2699b9d644d7e5",
+            "hyperedge_name": "<hyperedge>\"If the baby is born in a hospital in another place, that place is the place of birth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.\"",
+        "branch": "relation",
+        "raw_score": 0.48358631134033203,
+        "hyperedge_text": "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+        "entity_ids": [
+          "\"COUNTRY\"",
+          "\"US CITIZENS\"",
+          "\"US CONSTITUTION\"",
+          "\"USA\"",
+          "\"US CITIZENSHIP\"",
+          "\"ACTUAL BIRTH LOCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+            "link",
+            "COUNTRY",
+            "US CITIZENS",
+            "US CONSTITUTION",
+            "USA",
+            "US CITIZENSHIP",
+            "ACTUAL BIRTH LOCATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-46faca6a891180adb3d5dc8164abade8",
+            "hyperedge_name": "<hyperedge>\"For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth.\"",
+        "branch": "relation",
+        "raw_score": 0.4769519865512848,
+        "hyperedge_text": "In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth.",
+        "entity_ids": [
+          "\"SWISS PASSPORT\"",
+          "\"IDENTITY CARD\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth.",
+            "link",
+            "SWISS PASSPORT",
+            "IDENTITY CARD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f59554ad62fdf0cac95c36d52163a39d",
+            "hyperedge_name": "<hyperedge>\"In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.\"",
+        "branch": "semantic",
+        "raw_score": 0.7107778787612915,
+        "hyperedge_text": "Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.",
+        "entity_ids": [
+          "\"AMERICAN DIRECTOR\"",
+          "\"LOS ANGELES, CALIFORNIA\"",
+          "\"COMEDY FILMS\"",
+          "\"ROY MCCLURE\"",
+          "\"205 TITLES\"",
+          "\"NEW BRUNSWICK, NEW JERSEY\"",
+          "\"FILM SHORTS\"",
+          "\"ROY MACK\""
+        ],
+        "chunk_ids": [
+          "chunk-6660f1bddbe966e2c05bca0c0dd8ab0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.",
+            "Roy Mack (director) Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit."
+          ],
+          "relation_texts": [
+            "Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.",
+            "link",
+            "AMERICAN DIRECTOR",
+            "LOS ANGELES, CALIFORNIA",
+            "COMEDY FILMS",
+            "ROY MCCLURE",
+            "205 TITLES",
+            "NEW BRUNSWICK, NEW JERSEY",
+            "FILM SHORTS",
+            "ROY MACK"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0acf4a5170da34dc46fb9af5f6ed14b4",
+            "hyperedge_name": "<hyperedge>\"Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Roy Mack had a significant impact on the genre of comedy films in the film industry.\"",
+        "branch": "semantic",
+        "raw_score": 0.5785740613937378,
+        "hyperedge_text": "Roy Mack had a significant impact on the genre of comedy films in the film industry.",
+        "entity_ids": [
+          "\"IMPACT ON COMEDY FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-6660f1bddbe966e2c05bca0c0dd8ab0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Roy Mack had a significant impact on the genre of comedy films in the film industry.",
+            "Roy Mack (director) Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit."
+          ],
+          "relation_texts": [
+            "Roy Mack had a significant impact on the genre of comedy films in the film industry.",
+            "link",
+            "IMPACT ON COMEDY FILMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6fe2d7fbc543d884b6360d526b7faef4",
+            "hyperedge_name": "<hyperedge>\"Roy Mack had a significant impact on the genre of comedy films in the film industry.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Roy Mack directed mostly comedy films.\"",
+        "branch": "semantic",
+        "raw_score": 0.5491490364074707,
+        "hyperedge_text": "Roy Mack directed mostly comedy films.",
+        "entity_ids": [
+          "\"DIRECTOR OF FILM SHORTS\""
+        ],
+        "chunk_ids": [
+          "chunk-6660f1bddbe966e2c05bca0c0dd8ab0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Roy Mack directed mostly comedy films.",
+            "Roy Mack (director) Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit."
+          ],
+          "relation_texts": [
+            "Roy Mack directed mostly comedy films.",
+            "link",
+            "DIRECTOR OF FILM SHORTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9c9be5cd445d9754dd9d48661a14279c",
+            "hyperedge_name": "<hyperedge>\"Roy Mack directed mostly comedy films.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born at Cumberland House, in the Hudson's Bay Company territories, Mackenzie was the son of Jane and Roderick Mackenzie.\"",
+        "branch": "semantic",
+        "raw_score": 0.5163769125938416,
+        "hyperedge_text": "Born at Cumberland House, in the Hudson's Bay Company territories, Mackenzie was the son of Jane and Roderick Mackenzie.",
+        "entity_ids": [
+          "\"CUMBERLAND HOUSE\"",
+          "\"RODERICK MACKENZIE\"",
+          "\"HUDSON'S BAY COMPANY TERRITORIES\"",
+          "\"JANE MACKENZIE\""
+        ],
+        "chunk_ids": [
+          "chunk-74a26bc89ed2747a327054ca513f53da"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born at Cumberland House, in the Hudson's Bay Company territories, Mackenzie was the son of Jane and Roderick Mackenzie.",
+            "Peter Samuel George Mackenzie Peter Samuel George Mackenzie (19 December 1862 – 1 November 1914) was a Canadian lawyer and politician. Born at Cumberland House, in the Hudson's Bay Company territories, Mackenzie was the son of Jane and Roderick Mackenzie. His father, a cousin of the explorer Sir Alexander Mackenzie, was an agent of the Company. He was educated at Upper Canada College, Toronto, the High School of Montreal, the St. Francis College at Richmond, and McGill University at Montreal, then articled in Montreal to Melbourne Tait and John Joseph Caldwell Abbott, the second of whom later became Prime Minister of Canada. On 4 February 1884 Mackenzie was called to the bar of Quebec and opened his own office at Richmond, later going into partnership with Henry Aylmer, who had been a member of the House of Commons from 1874 to 1878, and with Auguste-Maurice Tessier. Later he practise..."
+          ],
+          "relation_texts": [
+            "Born at Cumberland House, in the Hudson's Bay Company territories, Mackenzie was the son of Jane and Roderick Mackenzie.",
+            "link",
+            "CUMBERLAND HOUSE",
+            "RODERICK MACKENZIE",
+            "HUDSON'S BAY COMPANY TERRITORIES",
+            "JANE MACKENZIE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a42c2e1f43e9f0fd090aca64b02fa92b",
+            "hyperedge_name": "<hyperedge>\"Born at Cumberland House, in the Hudson's Bay Company territories, Mackenzie was the son of Jane and Roderick Mackenzie.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"John Mackay is the grandfather of William Ross.\"",
+        "branch": "semantic",
+        "raw_score": 0.4549776315689087,
+        "hyperedge_text": "John Mackay is the grandfather of William Ross.",
+        "entity_ids": [
+          "\"GRANDFATHER OF WILLIAM ROSS\""
+        ],
+        "chunk_ids": [
+          "chunk-2deb731c6ef300d6911bfedba6bd1db5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "John Mackay is the grandfather of William Ross.",
+            "John Mackay (poet) John Mackay( 1656–1754), known as( The Blind Piper), was a Scottish Gaelic poet and composer, and the grandfather of William Ross."
+          ],
+          "relation_texts": [
+            "John Mackay is the grandfather of William Ross.",
+            "link",
+            "GRANDFATHER OF WILLIAM ROSS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-932760c2e7f2e08003325dec65092665",
+            "hyperedge_name": "<hyperedge>\"John Mackay is the grandfather of William Ross.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mackenzie died in office at Melbourne, Richmond, on 1 November 1914, aged 51, and was buried in St Ann's Cemetery, Richmond, three days later.\"",
+        "branch": "semantic",
+        "raw_score": 0.4538742005825043,
+        "hyperedge_text": "Mackenzie died in office at Melbourne, Richmond, on 1 November 1914, aged 51, and was buried in St Ann's Cemetery, Richmond, three days later.",
+        "entity_ids": [
+          "\"MELBOURNE\"",
+          "\"1 NOVEMBER 1914\"",
+          "\"ST ANN'S CEMETERY\"",
+          "\"RICHMOND\""
+        ],
+        "chunk_ids": [
+          "chunk-74a26bc89ed2747a327054ca513f53da"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mackenzie died in office at Melbourne, Richmond, on 1 November 1914, aged 51, and was buried in St Ann's Cemetery, Richmond, three days later.",
+            "Peter Samuel George Mackenzie Peter Samuel George Mackenzie (19 December 1862 – 1 November 1914) was a Canadian lawyer and politician. Born at Cumberland House, in the Hudson's Bay Company territories, Mackenzie was the son of Jane and Roderick Mackenzie. His father, a cousin of the explorer Sir Alexander Mackenzie, was an agent of the Company. He was educated at Upper Canada College, Toronto, the High School of Montreal, the St. Francis College at Richmond, and McGill University at Montreal, then articled in Montreal to Melbourne Tait and John Joseph Caldwell Abbott, the second of whom later became Prime Minister of Canada. On 4 February 1884 Mackenzie was called to the bar of Quebec and opened his own office at Richmond, later going into partnership with Henry Aylmer, who had been a member of the House of Commons from 1874 to 1878, and with Auguste-Maurice Tessier. Later he practise..."
+          ],
+          "relation_texts": [
+            "Mackenzie died in office at Melbourne, Richmond, on 1 November 1914, aged 51, and was buried in St Ann's Cemetery, Richmond, three days later.",
+            "link",
+            "MELBOURNE",
+            "1 NOVEMBER 1914",
+            "ST ANN'S CEMETERY",
+            "RICHMOND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-25b7833c9add88034a2d99cbdd47e78a",
+            "hyperedge_name": "<hyperedge>\"Mackenzie died in office at Melbourne, Richmond, on 1 November 1914, aged 51, and was buried in St Ann's Cemetery, Richmond, three days later.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"On 4 February 1884 Mackenzie was called to the bar of Quebec and opened his own office at Richmond.\"",
+        "branch": "semantic",
+        "raw_score": 0.4472939372062683,
+        "hyperedge_text": "On 4 February 1884 Mackenzie was called to the bar of Quebec and opened his own office at Richmond.",
+        "entity_ids": [
+          "\"QUEBEC\"",
+          "\"OFFICE\"",
+          "\"RICHMOND\""
+        ],
+        "chunk_ids": [
+          "chunk-74a26bc89ed2747a327054ca513f53da"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "On 4 February 1884 Mackenzie was called to the bar of Quebec and opened his own office at Richmond.",
+            "Peter Samuel George Mackenzie Peter Samuel George Mackenzie (19 December 1862 – 1 November 1914) was a Canadian lawyer and politician. Born at Cumberland House, in the Hudson's Bay Company territories, Mackenzie was the son of Jane and Roderick Mackenzie. His father, a cousin of the explorer Sir Alexander Mackenzie, was an agent of the Company. He was educated at Upper Canada College, Toronto, the High School of Montreal, the St. Francis College at Richmond, and McGill University at Montreal, then articled in Montreal to Melbourne Tait and John Joseph Caldwell Abbott, the second of whom later became Prime Minister of Canada. On 4 February 1884 Mackenzie was called to the bar of Quebec and opened his own office at Richmond, later going into partnership with Henry Aylmer, who had been a member of the House of Commons from 1874 to 1878, and with Auguste-Maurice Tessier. Later he practise..."
+          ],
+          "relation_texts": [
+            "On 4 February 1884 Mackenzie was called to the bar of Quebec and opened his own office at Richmond.",
+            "link",
+            "QUEBEC",
+            "OFFICE",
+            "RICHMOND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-00613c3b32a2ea1fa5abba96bc6c4f94",
+            "hyperedge_name": "<hyperedge>\"On 4 February 1884 Mackenzie was called to the bar of Quebec and opened his own office at Richmond.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maclean Rogers was born on 13 July 1899.\"",
+        "branch": "semantic",
+        "raw_score": 0.444261759519577,
+        "hyperedge_text": "Maclean Rogers was born on 13 July 1899.",
+        "entity_ids": [
+          "\"MACLEAN ROGERS\""
+        ],
+        "chunk_ids": [
+          "chunk-ac78976a2145b3b9dca30f511180c455"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maclean Rogers was born on 13 July 1899.",
+            "Maclean Rogers Maclean Rogers( 13 July 1899 – 4 January 1962) was a British film director and screenwriter."
+          ],
+          "relation_texts": [
+            "Maclean Rogers was born on 13 July 1899.",
+            "link",
+            "MACLEAN ROGERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c524de8120e71654f6b750823f4dcd17",
+            "hyperedge_name": "<hyperedge>\"Maclean Rogers was born on 13 July 1899.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ida May Mack recorded in 1928.\"",
+        "branch": "semantic",
+        "raw_score": 0.43199029564857483,
+        "hyperedge_text": "Ida May Mack recorded in 1928.",
+        "entity_ids": [
+          "\"RECORDINGS\""
+        ],
+        "chunk_ids": [
+          "chunk-d38fac02788561111aef790fa9a02945"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ida May Mack recorded in 1928.",
+            "Ida May Mack Ida May Mack or Ida Mae Mack was an American classic female blues, country blues, and Texas blues singer and songwriter. She recorded eight songs in 1928, four of which she recorded twice. Six of these tracks were released at the time. Little is known of her life outside the music industry."
+          ],
+          "relation_texts": [
+            "Ida May Mack recorded in 1928.",
+            "link",
+            "RECORDINGS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-34adc5ef10f89f2a1f7307db813fb2d9",
+            "hyperedge_name": "<hyperedge>\"Ida May Mack recorded in 1928.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"John Mackay, known as The Blind Piper, was a Scottish Gaelic poet and composer, and the grandfather of William Ross.\"",
+        "branch": "semantic",
+        "raw_score": 0.41476958990097046,
+        "hyperedge_text": "John Mackay, known as The Blind Piper, was a Scottish Gaelic poet and composer, and the grandfather of William Ross.",
+        "entity_ids": [
+          "\"GRANDFATHER\"",
+          "\"COMPOSER\"",
+          "\"JOHN MACKAY\"",
+          "\"THE BLIND PIPER\"",
+          "\"WILLIAM ROSS\"",
+          "\"SCOTTISH GAELIC POET\""
+        ],
+        "chunk_ids": [
+          "chunk-2deb731c6ef300d6911bfedba6bd1db5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "John Mackay, known as The Blind Piper, was a Scottish Gaelic poet and composer, and the grandfather of William Ross.",
+            "John Mackay (poet) John Mackay( 1656–1754), known as( The Blind Piper), was a Scottish Gaelic poet and composer, and the grandfather of William Ross."
+          ],
+          "relation_texts": [
+            "John Mackay, known as The Blind Piper, was a Scottish Gaelic poet and composer, and the grandfather of William Ross.",
+            "link",
+            "GRANDFATHER",
+            "COMPOSER",
+            "JOHN MACKAY",
+            "THE BLIND PIPER",
+            "WILLIAM ROSS",
+            "SCOTTISH GAELIC POET"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2ddf2be04c1c5932f1ae86e1bd16c97",
+            "hyperedge_name": "<hyperedge>\"John Mackay, known as The Blind Piper, was a Scottish Gaelic poet and composer, and the grandfather of William Ross.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.\"",
+        "hyperedge_text": "Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7107778787612915,
+        "fusion_score": 0.5421555757522584,
+        "entity_ids": [
+          "\"AMERICAN DIRECTOR\"",
+          "\"LOS ANGELES, CALIFORNIA\"",
+          "\"COMEDY FILMS\"",
+          "\"ROY MCCLURE\"",
+          "\"205 TITLES\"",
+          "\"NEW BRUNSWICK, NEW JERSEY\"",
+          "\"FILM SHORTS\"",
+          "\"ROY MACK\""
+        ],
+        "chunk_ids": [
+          "chunk-6660f1bddbe966e2c05bca0c0dd8ab0a"
+        ],
+        "evidence_texts": [
+          "Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit.",
+          "Roy Mack (director) Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.710778,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542156
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Roy Mack had a significant impact on the genre of comedy films in the film industry.\"",
+        "hyperedge_text": "Roy Mack had a significant impact on the genre of comedy films in the film industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5785740613937378,
+        "fusion_score": 0.5157148122787476,
+        "entity_ids": [
+          "\"IMPACT ON COMEDY FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-6660f1bddbe966e2c05bca0c0dd8ab0a"
+        ],
+        "evidence_texts": [
+          "Roy Mack had a significant impact on the genre of comedy films in the film industry.",
+          "Roy Mack (director) Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578574,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515715
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Roy Mack directed mostly comedy films.\"",
+        "hyperedge_text": "Roy Mack directed mostly comedy films.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5491490364074707,
+        "fusion_score": 0.5098298072814942,
+        "entity_ids": [
+          "\"DIRECTOR OF FILM SHORTS\""
+        ],
+        "chunk_ids": [
+          "chunk-6660f1bddbe966e2c05bca0c0dd8ab0a"
+        ],
+        "evidence_texts": [
+          "Roy Mack directed mostly comedy films.",
+          "Roy Mack (director) Roy Mack (December 14, 1889, New Brunswick, New Jersey - January 16, 1962, Los Angeles, California), born Roy McClure, was an American director of film shorts, mostly comedy films, with 205 titles to his credit."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.549149,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.50983
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\"",
+        "hyperedge_text": "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"1933\"",
+          "\"TITLE CHARACTER\"",
+          "\"ROY MACK\"",
+          "\"RUFUS JONES FOR PRESIDENT\"",
+          "\"SATIRICAL MUSICAL-COMEDY\"",
+          "\"ETHEL WATERS\"",
+          "\"SAMMY DAVIS JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-42df131e6cf1633a7131bf172c9292c5"
+        ],
+        "evidence_texts": [
+          "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+          "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.6214752793312073,
+        "semantic_score": 0.5,
+        "fusion_score": 0.3485901117324829,
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.621475,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.34859
+        }
+      }
+    ]
+  }
+]

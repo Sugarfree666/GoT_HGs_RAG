@@ -1,0 +1,26 @@
+{
+  "answer": "Australian",
+  "candidate_answer": "Australian",
+  "reasoning_summary": "The director of 'Two For Texas' is Rod Hardy, who is identified as an Australian television and film director, confirming his nationality as Australian.",
+  "answer_span_reasoning": "The candidate answer directly states the director's nationality.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Two For Texas?",
+      "answer": "Rod Hardy",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Two for Texas is a 1998 American Western film directed by Rod Hardy, written by Larry Brothers, and starring Kris Kristofferson, Scott Bairstow, Irene Bedard, Tom Skerritt, Peter Coyote and Victor Rivers.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the nationality of the director of Two For Texas?",
+      "answer": "Australian",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Rod Hardy (born in Melbourne, Australia) is an Australian television and film director.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

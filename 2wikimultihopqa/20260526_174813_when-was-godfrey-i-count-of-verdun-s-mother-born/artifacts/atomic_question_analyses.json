@@ -1,0 +1,103 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Godfrey I?",
+    "retrieval_question": "Who is the mother of Godfrey I?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the mother of Godfrey I?",
+      "retrieval_question": "Who is the mother of Godfrey I?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Godfrey I"
+      ],
+      "relations": [
+        "mother of"
+      ],
+      "relation_query": "who is the mother of a historical figure",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was the mother of Godfrey I born?",
+    "retrieval_question": "When was Oda of Metz born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was the mother of Godfrey I born?",
+      "retrieval_question": "When was Oda of Metz born?",
+      "whether_rewritten": true,
+      "replacement_span": "the mother of Godfrey I",
+      "replacement_answer": "Oda of Metz",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the mother of Godfrey I",
+          "replacement_answer": "Oda of Metz"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the mother of Godfrey I?",
+        "answer": "Oda of Metz",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "Godfrey I was the son of Oda of Metz, as stated in the evidence about his lineage.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The historical context of Godfrey I's life reveals the dynamics of power during his era.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The historical context of Godfrey I's life reveals the dynamics of power during his era.\"",
+            "fusion_score": 0.6423629840215047,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The historical context of Godfrey I's life reveals the dynamics of power during his era.",
+              "Godfrey I, Count of Verdun Godfrey I (died 1002), called the Prisoner or the Captive (\"le Captif\"), sometimes the Old (\"le Vieux\"), was the count of Bidgau and Methingau from 959 and the count of Verdun from 963 to his death. In 969, he obtained the Margraviate of Antwerp and Ename. Between 974 and 998, he was also the count of Hainault and Mons. He was the son of Gozlin, Count of Bidgau and Methingau, and Oda of Metz. He was the brother of Adalberon, Archbishop of Reims, who crowned Hugh Capet the king of France. He was the founder of the House of Ardennes-Verdun, a cadet branch of the House of Ardennes. He was always loyal to the Ottonians, whom he was related through his maternal grandmother."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Godfrey I, Count of Verdun died in 1002, known as the Prisoner or the Captive, and sometimes as the Old.\"",
+            "fusion_score": 0.5333333333333333,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Godfrey I, Count of Verdun died in 1002, known as the Prisoner or the Captive, and sometimes as the Old.",
+              "Godfrey I, Count of Verdun Godfrey I (died 1002), called the Prisoner or the Captive (\"le Captif\"), sometimes the Old (\"le Vieux\"), was the count of Bidgau and Methingau from 959 and the count of Verdun from 963 to his death. In 969, he obtained the Margraviate of Antwerp and Ename. Between 974 and 998, he was also the count of Hainault and Mons. He was the son of Gozlin, Count of Bidgau and Methingau, and Oda of Metz. He was the brother of Adalberon, Archbishop of Reims, who crowned Hugh Capet the king of France. He was the founder of the House of Ardennes-Verdun, a cadet branch of the House of Ardennes. He was always loyal to the Ottonians, whom he was related through his maternal grandmother."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Gothelo was the youngest son of Godfrey I, Count of Verdun, and Matilda Billung, daughter of Herman, Duke of Saxony.\"",
+            "fusion_score": 0.5333333333333333,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Gothelo was the youngest son of Godfrey I, Count of Verdun, and Matilda Billung, daughter of Herman, Duke of Saxony.",
+              "Gothelo I, Duke of Lorraine Gothelo( or Gozelo)( – 19 April 1044), called the Great, was the duke of Lower Lorraine from 1023 and of Upper Lorraine from 1033. He was also the margrave of Antwerp from 1005( or 1008) and count of Verdun. Gothelo was the youngest son of Godfrey I, Count of Verdun, and Matilda Billung, daughter of Herman, Duke of Saxony. On his father's death, he received the march of Antwerp and became a vassal of his brother, Godfrey II, who became duke of Lower Lorraine in 1012. He succeeded his brother in 1023 with the support of the Emperor Henry II, but was opposed until Conrad II forced the rebels to submit in 1025. When the House of Bar, which ruled in Upper Lorraine, became extinct in 1033, with the death of his cousin Frederick III, Conrad made him duke of both duchies, so that he could assist in the defence of the territory against Odo II, count of Blois, Meaux..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Oda of Metz"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    }
+  }
+]

@@ -1,0 +1,9 @@
+2026-05-26 17:05:01,466 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 17:06:37,355 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 17:06:37,357 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 17:07:02,776 | INFO | Starting HyperBranch pipeline for question: Where does Louisa Charlotte Tyndall's husband work at?
+2026-05-26 17:07:02,776 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-26 17:07:08,569 | INFO | Atomic retrieval returned 21 hits for question=Who is the husband of Louisa Charlotte Tyndall?
+2026-05-26 17:07:15,167 | INFO | Rewrote retrieval question for q2: Where does the husband of Louisa Charlotte Tyndall work? -> Where does John Tyndall work?
+2026-05-26 17:07:21,539 | INFO | Atomic retrieval returned 24 hits for question=Where does John Tyndall work?
+2026-05-26 17:07:57,822 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_170501_where-does-louisa-charlotte-tyndall-s-husband-wo

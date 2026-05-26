@@ -1,0 +1,34 @@
+{
+  "answer": "Complete Unknown",
+  "candidate_answer": "Complete Unknown",
+  "reasoning_summary": "Joshua Marston, the director of 'Complete Unknown', was born on August 13, 1968, while Mario Bava, the director of 'Dr. Goldfoot and the Girl Bombs', was active in the 1960s and passed away in 1980. Therefore, Marston was born later than Bava, making 'Complete Unknown' the film with the later-born director.",
+  "answer_span_reasoning": "The film 'Complete Unknown' has the director who was born later.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Complete Unknown?",
+      "answer": "Joshua Marston",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Complete Unknown is a 2016 American- British drama mystery thriller film, directed by Joshua Marston, from a screenplay by Marston and Julian Sheppard.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of Dr. Goldfoot And The Girl Bombs?",
+      "answer": "Mario Bava",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Dr. Goldfoot and the Girl Bombs (Italian: 'Le spie vengono dal semifreddo', lit. 'The spies who came in from the cool') is a 1966 Eurospy comedy film, made in Technicolor and directed by Mario Bava.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What film has the director of Complete Unknown?",
+      "answer": "Maria Full of Grace",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"In 2016, Marston made his English-language debut on 'Complete Unknown' starring Rachel Weisz and Michael Shannon.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

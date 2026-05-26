@@ -1,0 +1,16 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the composer from the country?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "Which song is composed by the composer of country?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  }
+]

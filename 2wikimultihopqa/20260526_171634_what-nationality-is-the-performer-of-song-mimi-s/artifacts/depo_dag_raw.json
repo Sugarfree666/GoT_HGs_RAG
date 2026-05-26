@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the performer of the song Mimi (Song)?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the nationality of the performer of Mimi (Song)?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

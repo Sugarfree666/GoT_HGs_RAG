@@ -1,0 +1,9 @@
+2026-05-26 17:47:28,837 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 17:49:19,977 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 17:49:19,977 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 17:49:33,189 | INFO | Starting HyperBranch pipeline for question: Was Angus Wagner or Juan Carlos Falcón born first?
+2026-05-26 17:49:33,190 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-26 17:49:38,291 | INFO | Atomic retrieval returned 21 hits for question=When was Angus Wagner born?
+2026-05-26 17:49:46,285 | INFO | Atomic retrieval returned 21 hits for question=When was Juan Carlos Falcón born?
+2026-05-26 17:49:57,890 | INFO | Atomic retrieval returned 24 hits for question=Was Angus Wagner born first?
+2026-05-26 17:50:19,528 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_174728_was-angus-wagner-or-juan-carlos-falcon-born-firs

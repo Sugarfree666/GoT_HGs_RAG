@@ -1,0 +1,32 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of The Pit And The Pendulum (1913 Film)?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the nationality of the director of The Pit And The Pendulum (1913 Film)?",
+      "dependencies": [
+        "q1"
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "What is the nationality of the director?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q4",
+      "question": "What is the nationality of the director?",
+      "dependencies": [
+        "q2",
+        "q3"
+      ],
+      "metadata": {
+        "operator": "COMPARE_SAME"
+      }
+    }
+  ]
+}

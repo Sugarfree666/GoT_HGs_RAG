@@ -1,0 +1,25 @@
+[
+  {
+    "node_id": "q1",
+    "question": "In which country is Vasilyevsky Island located?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "In which country is Preobrazheniya Island located?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "Are Vasilyevsky Island and Preobrazheniya Island located in the same country?",
+    "dependencies": [
+      "q1",
+      "q2"
+    ],
+    "metadata": {
+      "operator": "COMPARE_SAME"
+    }
+  }
+]

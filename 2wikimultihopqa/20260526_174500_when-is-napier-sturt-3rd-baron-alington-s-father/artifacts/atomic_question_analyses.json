@@ -1,0 +1,74 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When is the birthday of Napier Sturt?",
+    "retrieval_question": "When is the birthday of Napier Sturt?",
+    "dependency_question_rewrite": {
+      "original_question": "When is the birthday of Napier Sturt?",
+      "retrieval_question": "When is the birthday of Napier Sturt?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Napier Sturt"
+      ],
+      "relations": [
+        "birthday of"
+      ],
+      "relation_query": "the date of the birthday of an entity",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the father of Napier Sturt?",
+    "retrieval_question": "Who is the father of Napier Sturt?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of Napier Sturt?",
+      "retrieval_question": "Who is the father of Napier Sturt?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Napier Sturt"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the father of 3Rd Baron Alington?",
+    "retrieval_question": "Who is the father of 3Rd Baron Alington?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of 3Rd Baron Alington?",
+      "retrieval_question": "Who is the father of 3Rd Baron Alington?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "3Rd Baron Alington"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a title holder",
+      "answer_type": "person"
+    }
+  }
+]

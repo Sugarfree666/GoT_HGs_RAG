@@ -1,0 +1,370 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Archduchess Maria Immakulata Of Austria?",
+    "analysis": {
+      "entities": [
+        "Archduchess Maria Immakulata Of Austria"
+      ],
+      "relations": [
+        "is the mother of"
+      ],
+      "relation_query": "who is the mother of an entity",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Archduchess Maria Immakulata of Austria was a member of the House of Habsburg-Tuscany and Archduchess of Austria, Princess of Tuscany by birth.\"",
+        "hyperedge_text": "Archduchess Maria Immakulata of Austria was a member of the House of Habsburg-Tuscany and Archduchess of Austria, Princess of Tuscany by birth.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7610901594161987,
+        "fusion_score": 0.5522180318832398,
+        "entity_ids": [
+          "\"AUSTRIA\"",
+          "\"PRINCESS OF TUSCANY\"",
+          "\"HOUSE OF HABSBURG-TUSCANY\"",
+          "\"MARIA IMMAKULATA\""
+        ],
+        "chunk_ids": [
+          "chunk-d38d4374d115b46c77229df3243d7d25"
+        ],
+        "evidence_texts": [
+          "Archduchess Maria Immakulata of Austria was a member of the House of Habsburg-Tuscany and Archduchess of Austria, Princess of Tuscany by birth.",
+          "Archduchess Maria Immakulata of Austria Archduchess Maria Immakulata of Austria (3 September 1878, Baden bei Wien, Lower Austria, Austria–Hungary – 25 November 1968, Schloss Altshausen, Altshausen, Baden-Württemberg, Germany) was a member of the House of Habsburg-Tuscany and Archduchess of Austria, Princess of Tuscany by birth. Maria Immakulata was the seventh child and fifth eldest daughter of Archduke Karl Salvator of Austria and his wife Princess Maria Immaculata of Bourbon-Two Sicilies."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.76109,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.552218
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maria Immakulata was a member of the House of Habsburg-Tuscany and Archduchess of Austria, Princess of Tuscany by birth.\"",
+        "hyperedge_text": "Maria Immakulata was a member of the House of Habsburg-Tuscany and Archduchess of Austria, Princess of Tuscany by birth.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7039074897766113,
+        "fusion_score": 0.14078149795532227,
+        "entity_ids": [
+          "\"ARCHDUCHESS OF AUSTRIA\"",
+          "\"PRINCESS OF TUSCANY\"",
+          "\"MARIA IMMAKULATA\""
+        ],
+        "chunk_ids": [
+          "chunk-d38d4374d115b46c77229df3243d7d25"
+        ],
+        "evidence_texts": [
+          "Maria Immakulata was a member of the House of Habsburg-Tuscany and Archduchess of Austria, Princess of Tuscany by birth.",
+          "Archduchess Maria Immakulata of Austria Archduchess Maria Immakulata of Austria (3 September 1878, Baden bei Wien, Lower Austria, Austria–Hungary – 25 November 1968, Schloss Altshausen, Altshausen, Baden-Württemberg, Germany) was a member of the House of Habsburg-Tuscany and Archduchess of Austria, Princess of Tuscany by birth. Maria Immakulata was the seventh child and fifth eldest daughter of Archduke Karl Salvator of Austria and his wife Princess Maria Immaculata of Bourbon-Two Sicilies."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.703907,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.140781
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As he did not have a legitimate child, the succession passed to his sisters: Mathilde (also, Machteld), who was married to John II, Count of Blois, and Maria, wife of William II of Jülich and mother to William I of Guelders and Jülich.\"",
+        "hyperedge_text": "As he did not have a legitimate child, the succession passed to his sisters: Mathilde (also, Machteld), who was married to John II, Count of Blois, and Maria, wife of William II of Jülich and mother to William I of Guelders and Jülich.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4,
+        "fusion_score": 0.48000000000000004,
+        "entity_ids": [
+          "\"MARIA\"",
+          "\"MATHILDE\"",
+          "\"JOHN II, COUNT OF BLOIS\"",
+          "\"WILLIAM II OF JÜLICH\"",
+          "\"WILLIAM I OF GUELDERS AND JÜLICH\""
+        ],
+        "chunk_ids": [
+          "chunk-d47ed467643a4b42f913696089c12445"
+        ],
+        "evidence_texts": [
+          "As he did not have a legitimate child, the succession passed to his sisters: Mathilde (also, Machteld), who was married to John II, Count of Blois, and Maria, wife of William II of Jülich and mother to William I of Guelders and Jülich.",
+          "Reginald III, Duke of Guelders Reginald III of Guelders( or\" Renaud\", known as\" The Fat\")( 13 May 1333 – 4 December 1371) was Duke of Guelders and Count of Zutphen from 1343 to 1361, and again in 1371. He was the son of Reginald II of Guelders and of Eleanor of Woodstock, daughter of Edward II of England. With the death of his father in 1343, his mother held the regency until 1344. From 1350, his brother Edward asserted his rights and a quarrel of succession broke out between the two brothers until 1361. Reginald was overcome in Tiel and was imprisoned in the castle of Nijenbeek. There he became so large that he could not have left, even if the door had remained open—hence his appellation\" The Fat\". Edward died on 24 August 1371, having been mortally wounded in the Battle of Baesweiler, and Reginald was released( according to the legend, the walls had to be cut away so he could leave)..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.4,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.48
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her identity as a mother contributed to her recognition in historical texts and lineage discussions.\"",
+        "hyperedge_text": "Her identity as a mother contributed to her recognition in historical texts and lineage discussions.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45471882820129395,
+        "semantic_score": 0.2,
+        "fusion_score": 0.2218875312805176,
+        "entity_ids": [
+          "\"HISTORICAL TEXTS\""
+        ],
+        "chunk_ids": [
+          "chunk-48f0efae8a4f5fe8d7c54b402d353bb4"
+        ],
+        "evidence_texts": [
+          "Her identity as a mother contributed to her recognition in historical texts and lineage discussions.",
+          "Minamoto no Chikako She was the mother of Prince Morinaga."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.454719,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.221888
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is the mother of queen Tiye.\"",
+        "hyperedge_text": "She is the mother of queen Tiye.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4060937762260437,
+        "semantic_score": 0.2,
+        "fusion_score": 0.2024375104904175,
+        "entity_ids": [
+          "\"QUEEN TIYE\""
+        ],
+        "chunk_ids": [
+          "chunk-23a01f624a62c2966228c9018b2159b8"
+        ],
+        "evidence_texts": [
+          "She is the mother of queen Tiye.",
+          "Tjuyu Tjuyu( sometimes transliterated as Thuya or Thuyu) was an Egyptian noblewoman and the mother of queen Tiye, and the wife of Yuya. She is the grandmother of Akhenaten, and great grandmother of Tutankhamun."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.406094,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.202438
+        }
+      }
+    ],
+    "answer": "Princess Maria Immaculata of Bourbon-Two Sicilies",
+    "confidence": 0.9,
+    "reasoning_summary": "Archduchess Maria Immakulata of Austria was the daughter of Archduke Karl Salvator of Austria and his wife Princess Maria Immaculata of Bourbon-Two Sicilies, as stated in the evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Archduchess Maria Immakulata of Austria was a member of the House of Habsburg-Tuscany and Archduchess of Austria, Princess of Tuscany by birth.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the place of birth of the mother of Archduchess Maria Immakulata Of Austria?",
+    "analysis": {
+      "entities": [
+        "Princess Maria Immaculata of Bourbon-Two Sicilies"
+      ],
+      "relations": [
+        "place of birth"
+      ],
+      "relation_query": "What is the place of birth of a person?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Maria Immaculata of Bourbon-Two Sicilies (1844–1899) was the fifth child and second-eldest daughter of Ferdinand II of the Two Sicilies and his wife Maria Theresa of Austria.\"",
+        "hyperedge_text": "Princess Maria Immaculata of Bourbon-Two Sicilies (1844–1899) was the fifth child and second-eldest daughter of Ferdinand II of the Two Sicilies and his wife Maria Theresa of Austria.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7822855114936829,
+        "fusion_score": 0.5564571022987366,
+        "entity_ids": [
+          "\"PRINCESS MARIA IMMACULATA OF BOURBON-TWO SICILIES\"",
+          "\"FERDINAND II OF THE TWO SICILIES\"",
+          "\"MARIA THERESA OF AUSTRIA\""
+        ],
+        "chunk_ids": [
+          "chunk-7a45e9a220f1498b814830c76269f7c1"
+        ],
+        "evidence_texts": [
+          "Princess Maria Immaculata of Bourbon-Two Sicilies (1844–1899) was the fifth child and second-eldest daughter of Ferdinand II of the Two Sicilies and his wife Maria Theresa of Austria.",
+          "Princess Maria Immaculata of Bourbon-Two Sicilies (1844–1899) Princess Maria Immaculata of Bourbon-Two Sicilies (Full Italian name: \"Maria Immacolata Clementina, Principessa di Borbone delle Due Sicilie\") (14 April 1844, Naples, Kingdom of the Two Sicilies – 18 February 1899, Vienna, Austria) was fifth child and second-eldest daughter of Ferdinand II of the Two Sicilies and his wife Maria Theresa of Austria. Through her marriage to Archduke Karl Salvator of Austria, Maria Immaculata became an Austrian Archduchess."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.782286,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.556457
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maria Immakulata was the seventh child and fifth eldest daughter of Archduke Karl Salvator of Austria and Princess Maria Immaculata of Bourbon-Two Sicilies.\"",
+        "hyperedge_text": "Maria Immakulata was the seventh child and fifth eldest daughter of Archduke Karl Salvator of Austria and Princess Maria Immaculata of Bourbon-Two Sicilies.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.634848952293396,
+        "fusion_score": 0.5269697904586792,
+        "entity_ids": [
+          "\"ARCHDUKE KARL SALVATOR\"",
+          "\"PRINCESS MARIA IMMACULATA OF BOURBON-TWO SICILIES\"",
+          "\"SEVENTH CHILD\"",
+          "\"FIFTH ELDEST DAUGHTER\""
+        ],
+        "chunk_ids": [
+          "chunk-d38d4374d115b46c77229df3243d7d25"
+        ],
+        "evidence_texts": [
+          "Maria Immakulata was the seventh child and fifth eldest daughter of Archduke Karl Salvator of Austria and Princess Maria Immaculata of Bourbon-Two Sicilies.",
+          "Archduchess Maria Immakulata of Austria Archduchess Maria Immakulata of Austria (3 September 1878, Baden bei Wien, Lower Austria, Austria–Hungary – 25 November 1968, Schloss Altshausen, Altshausen, Baden-Württemberg, Germany) was a member of the House of Habsburg-Tuscany and Archduchess of Austria, Princess of Tuscany by birth. Maria Immakulata was the seventh child and fifth eldest daughter of Archduke Karl Salvator of Austria and his wife Princess Maria Immaculata of Bourbon-Two Sicilies."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.634849,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52697
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Maria Immaculata of Bourbon-Two Sicilies (Full Italian name: 'Maria Immacolata Clementina, Principessa di Borbone delle Due Sicilie') was born in Naples, Kingdom of the Two Sicilies.\"",
+        "hyperedge_text": "Princess Maria Immaculata of Bourbon-Two Sicilies (Full Italian name: 'Maria Immacolata Clementina, Principessa di Borbone delle Due Sicilie') was born in Naples, Kingdom of the Two Sicilies.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8127214908599854,
+        "fusion_score": 0.5625442981719971,
+        "entity_ids": [
+          "\"BOURBON\"",
+          "\"MARIA IMMACOLATA CLEMENTINA\""
+        ],
+        "chunk_ids": [
+          "chunk-7a45e9a220f1498b814830c76269f7c1"
+        ],
+        "evidence_texts": [
+          "Princess Maria Immaculata of Bourbon-Two Sicilies (Full Italian name: 'Maria Immacolata Clementina, Principessa di Borbone delle Due Sicilie') was born in Naples, Kingdom of the Two Sicilies.",
+          "Princess Maria Immaculata of Bourbon-Two Sicilies (1844–1899) Princess Maria Immaculata of Bourbon-Two Sicilies (Full Italian name: \"Maria Immacolata Clementina, Principessa di Borbone delle Due Sicilie\") (14 April 1844, Naples, Kingdom of the Two Sicilies – 18 February 1899, Vienna, Austria) was fifth child and second-eldest daughter of Ferdinand II of the Two Sicilies and his wife Maria Theresa of Austria. Through her marriage to Archduke Karl Salvator of Austria, Maria Immaculata became an Austrian Archduchess."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.812721,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.562544
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maria Carolina was a member of the House of Bourbon-Two Sicilies and a Princess of Bourbon-Two Sicilies by birth.\"",
+        "hyperedge_text": "Maria Carolina was a member of the House of Bourbon-Two Sicilies and a Princess of Bourbon-Two Sicilies by birth.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6628741025924683,
+        "fusion_score": 0.33257482051849363,
+        "entity_ids": [
+          "\"PRINCESS OF BOURBON-TWO SICILIES\""
+        ],
+        "chunk_ids": [
+          "chunk-5990f0b56f585ee57dd02df6aa26472d"
+        ],
+        "evidence_texts": [
+          "Maria Carolina was a member of the House of Bourbon-Two Sicilies and a Princess of Bourbon-Two Sicilies by birth.",
+          "Princess Maria Carolina of Bourbon-Two Sicilies (1856–1941) Princess \"Maria Carolina\" Giuseppina Ferdinanda of Bourbon-Two Sicilies, full Italian name: \" Maria Carolina Giuseppina Ferdinanda di Borbone, Principessa delle Due Sicilie\" (21 February 1856, Naples, Kingdom of the Two Sicilies – 7 April 1941 , Warsaw, Greater German Reich) was a member of the House of Bourbon-Two Sicilies and a Princess of Bourbon-Two Sicilies by birth and a member of the House of Zamoyski and Countess Zamoyska through her marriage to Polish nobleman Count Andrzej Przemysław Zamoyski."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.662874,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.332575
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.6505764126777649,
+        "semantic_score": 0.25,
+        "fusion_score": 0.31023056507110597,
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.650576,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.310231
+        }
+      }
+    ],
+    "answer": "Naples",
+    "confidence": 0.9,
+    "reasoning_summary": "Princess Maria Immaculata of Bourbon-Two Sicilies, the mother of Archduchess Maria Immakulata, was born in Naples, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Princess Maria Immaculata of Bourbon-Two Sicilies (Full Italian name: 'Maria Immacolata Clementina, Principessa di Borbone delle Due Sicilie') was born in Naples, Kingdom of the Two Sicilies.\""
+    ]
+  }
+]

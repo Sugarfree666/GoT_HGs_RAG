@@ -1,0 +1,104 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Rufus Jones For President?",
+    "retrieval_question": "Who is the director of Rufus Jones For President?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Rufus Jones For President?",
+      "retrieval_question": "Who is the director of Rufus Jones For President?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Rufus Jones For President"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the birth place of the director of Rufus Jones For President?",
+    "retrieval_question": "What is the birth place of Roy Mack?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth place of the director of Rufus Jones For President?",
+      "retrieval_question": "What is the birth place of Roy Mack?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Rufus Jones For President",
+      "replacement_answer": "Roy Mack",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Rufus Jones For President",
+          "replacement_answer": "Roy Mack"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Rufus Jones For President?",
+        "answer": "Roy Mack",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that 'the film was directed by Roy Mack', providing clear support for the answer.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.\"",
+            "fusion_score": 0.5312426447868348,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes.",
+              "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Rufus Jones for President is an American Pre-Code film.\"",
+            "fusion_score": 0.5263288378715516,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Rufus Jones for President is an American Pre-Code film.",
+              "Rufus Jones for President Rufus Jones for President is a 1933 American Pre-Code satirical musical-comedy, clocking in at 21 minutes. The film was directed by Roy Mack, and starred Ethel Waters and Sammy Davis Jr., in his first onscreen appearance, as the title character. Despite a tone that appears to today's audience as racist, it is still considered an important musical short."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+            "fusion_score": 0.25314085483551024,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "After this he went on to become a director himself.",
+              "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Roy Mack"
+      ],
+      "relations": [
+        "birth place of"
+      ],
+      "relation_query": "What is the birth place of a person?",
+      "answer_type": "location"
+    }
+  }
+]

@@ -1,0 +1,105 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Sarah Silverman: Jesus Is Magic?",
+    "retrieval_question": "Who is the director of Sarah Silverman: Jesus Is Magic?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Sarah Silverman: Jesus Is Magic?",
+      "retrieval_question": "Who is the director of Sarah Silverman: Jesus Is Magic?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Sarah Silverman: Jesus Is Magic"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What country is the director of Sarah Silverman: Jesus Is Magic from?",
+    "retrieval_question": "What country is Liam Lynch from?",
+    "dependency_question_rewrite": {
+      "original_question": "What country is the director of Sarah Silverman: Jesus Is Magic from?",
+      "retrieval_question": "What country is Liam Lynch from?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Sarah Silverman: Jesus Is Magic",
+      "replacement_answer": "Liam Lynch",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Sarah Silverman: Jesus Is Magic",
+          "replacement_answer": "Liam Lynch"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Sarah Silverman: Jesus Is Magic?",
+        "answer": "Liam Lynch",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Sarah Silverman: Jesus Is Magic' was directed by Liam Lynch.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Sarah Silverman: Jesus Is Magic is a 2005 stand-up comedy film written by and starring Sarah Silverman, directed by Liam Lynch, and distributed by Roadside Attractions.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Sarah Silverman: Jesus Is Magic is a 2005 stand-up comedy film written by and starring Sarah Silverman, directed by Liam Lynch, and distributed by Roadside Attractions.\"",
+            "fusion_score": 0.5551095008850098,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Sarah Silverman: Jesus Is Magic is a 2005 stand-up comedy film written by and starring Sarah Silverman, directed by Liam Lynch, and distributed by Roadside Attractions.",
+              "Sarah Silverman: Jesus Is Magic Sarah Silverman: Jesus Is Magic is a 2005 stand-up comedy film written by and starring Sarah Silverman, directed by Liam Lynch, and distributed by Roadside Attractions. The movie is a concert film consisting of 72 minutes of clips taken from Silverman's previous stand-up show of the same name, interspersed with flashbacks and comedic sketches. Silverman addresses a number of topics, including religion, AIDS, the Holocaust, race, sexism, political parties, people with disabilities, homeless people, and dwarves. Silverman also performs several original songs in the film."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+            "fusion_score": 0.24256829261779786,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "After this he went on to become a director himself.",
+              "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+            "fusion_score": 0.24072896480560305,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "As a director, he has likely worked on a variety of projects spanning different genres.",
+              "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Liam Lynch"
+      ],
+      "relations": [
+        "origin",
+        "nationality"
+      ],
+      "relation_query": "What country is a person from?",
+      "answer_type": "country"
+    }
+  }
+]

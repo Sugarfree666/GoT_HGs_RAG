@@ -1,0 +1,172 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the release date of Two Brides And A Baby?",
+    "retrieval_question": "What is the release date of Two Brides And A Baby?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Two Brides And A Baby?",
+      "retrieval_question": "What is the release date of Two Brides And A Baby?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Two Brides And A Baby"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Dinner At The Ritz?",
+    "retrieval_question": "What is the release date of Dinner At The Ritz?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Dinner At The Ritz?",
+      "retrieval_question": "What is the release date of Dinner At The Ritz?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Dinner At The Ritz"
+      ],
+      "relations": [
+        "release date of"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Two Brides And A Baby?",
+    "retrieval_question": "What is the release date of Two Brides And A Baby?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Two Brides And A Baby?",
+      "retrieval_question": "What is the release date of Two Brides And A Baby?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "What is the release date of Two Brides And A Baby?",
+        "answer": "November 17, 2011",
+        "confidence": 0.9,
+        "answer_type": "date",
+        "reasoning_summary": "The release date of 'Two Brides and a Baby' is explicitly stated as November 17, 2011, in the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Two Brides and a Baby is a 2011 Nigerian romantic drama film directed by Teco Benson and starring Keira Hewatch, Kalu Ikeagwu, OC Ukeje, Chelsea Eze, Stella Damasus-Aboderin and Okey Uzoeshi.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Two Brides and a Baby is a 2011 Nigerian romantic drama film directed by Teco Benson and starring Keira Hewatch, Kalu Ikeagwu, OC Ukeje, Chelsea Eze, Stella Damasus-Aboderin and Okey Uzoeshi.\"",
+            "fusion_score": 0.5109147191047669,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Two Brides and a Baby is a 2011 Nigerian romantic drama film directed by Teco Benson and starring Keira Hewatch, Kalu Ikeagwu, OC Ukeje, Chelsea Eze, Stella Damasus-Aboderin and Okey Uzoeshi.",
+              "Two Brides and a Baby Two Brides and a Baby is a 2011 Nigerian romantic drama film directed by Teco Benson and starring Keira Hewatch, Kalu Ikeagwu, OC Ukeje, Chelsea Eze, Stella Damasus- Aboderin and Okey Uzoeshi. It premiered on November 17, 2011. It received awards and nominations at Africa Movie Academy Awards, Best of Nollywood Awards and Africa Magic Viewers Choice Awards."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"In 2012 she won the award for Best Actress for the movie Two Brides and a Baby at the Golden Icons Academy Awards in Houston, Texas.\"",
+            "fusion_score": 0.4924183547496796,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "In 2012 she won the award for Best Actress for the movie Two Brides and a Baby at the Golden Icons Academy Awards in Houston, Texas.",
+              "Stella Damasus Stella Damasus( born April 24, 1978) is a Nigerian actress and singer. She was nominated for\" Best Actress in a Leading Role\" at the Africa Movie Academy Awards in 2009. She won the Award for Best Actress at the Nigeria Entertainment Awards in 2007 In 2012 she won the award for Best Actress for the movie Two Brides and a Baby at the Golden Icons Academy Awards in Houston, Texas."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"She is best known for her role as ‘Keche’ in the movie 'Two Brides and a Baby'.\"",
+            "fusion_score": 0.4891866207122803,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "She is best known for her role as ‘Keche’ in the movie 'Two Brides and a Baby'.",
+              "Keira Hewatch Keira Hewatch,( born November 8, 1985) is a Nigerian actress, singer, songwriter and writer, best known for her role as ‘ Keche ’ in the movie;\" Two Brides and a Baby\", as well as her role as ‘ Peace Nwosu ’ in the television series;\" Lekki Wives\" Hewatch won the Best of Nollywood award( BON) for ‘ Best Breakout Performance ’ in 2011 and has been nominated twice for the Golden Icon Academy Awards( GIAMA)."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "What is the release date of Dinner At The Ritz?",
+        "answer": "1937",
+        "confidence": 0.9,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence states that 'Dinner at the Ritz is a 1937 British mystery romance film,' indicating the release year.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Dinner at the Ritz is a 1937 British mystery romance film.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Dinner at the Ritz is a 1937 British mystery romance film.\"",
+            "fusion_score": 0.5242070674896241,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Dinner at the Ritz is a 1937 British mystery romance film.",
+              "Dinner at the Ritz Dinner at the Ritz is a 1937 British mystery romance film directed by Harold D. Schuster and starring David Niven, Annabella and Paul Lukas It was produced by the British branch of 20th Century Fox, and shot at Denham Studios."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Dinner at the Ritz is a 1937 British mystery romance film directed by Harold D. Schuster and starring David Niven, Annabella and Paul Lukas.\"",
+            "fusion_score": 0.5175666213035583,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Dinner at the Ritz is a 1937 British mystery romance film directed by Harold D. Schuster and starring David Niven, Annabella and Paul Lukas.",
+              "Dinner at the Ritz Dinner at the Ritz is a 1937 British mystery romance film directed by Harold D. Schuster and starring David Niven, Annabella and Paul Lukas It was produced by the British branch of 20th Century Fox, and shot at Denham Studios."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\"",
+            "fusion_score": 0.296729850769043,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "After setting an initial release date in the same month, casting took place between April and June 2015.",
+              "The Fate of the Furious The Fate of the Furious( alternatively known as Fast& Furious 8 and Fast 8 and often stylized as F8) is a 2017 American action film directed by F. Gary Gray and written by Chris Morgan. A sequel to 2015's\" Furious 7\", it is the eighth installment in the\" Fast& Furious\" franchise and stars Vin Diesel, Dwayne Johnson, Jason Statham, Michelle Rodriguez, Tyrese Gibson, Chris\" Ludacris\" Bridges, Scott Eastwood, Nathalie Emmanuel, Elsa Pataky, Kurt Russell and Charlize Theron. \" The Fate of the Furious\" follows Dominic Toretto( Diesel), who has settled down with his wife Letty Ortiz( Rodriguez), until cyberterrorist Cipher( Theron) coerces him into working for her and turns him against his team, forcing them to find Dom and take down Cipher. \" The Fate of the Furious\" marks the first installment in the franchise since( 2006) not to feature either Paul Walker, who die..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Two Brides And A Baby"
+      ],
+      "relations": [
+        "release date of"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  }
+]

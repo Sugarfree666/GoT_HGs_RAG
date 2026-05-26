@@ -1,0 +1,35 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the release date of Jazz Boat?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Her Husband's Trademark?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Jazz Boat?",
+    "dependencies": [
+      "q1",
+      "q2"
+    ],
+    "metadata": {
+      "operator": "COMPARE_LESS",
+      "candidates": [
+        {
+          "label": "Jazz Boat",
+          "source_node_id": "q1"
+        },
+        {
+          "label": "Her Husband's Trademark",
+          "source_node_id": "q2"
+        }
+      ]
+    }
+  }
+]
