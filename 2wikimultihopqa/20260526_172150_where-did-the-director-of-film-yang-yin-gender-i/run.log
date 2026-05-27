@@ -1,9 +1,0 @@
-2026-05-26 17:21:50,695 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 17:23:20,808 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 17:23:20,808 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 17:23:36,846 | INFO | Starting HyperBranch pipeline for question: Where did the director of film Yang ± Yin: Gender In Chinese Cinema study?
-2026-05-26 17:23:36,847 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 17:23:44,888 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of Yang ± Yin: Gender In Chinese Cinema?
-2026-05-26 17:23:55,425 | INFO | Rewrote retrieval question for q2: Where did the director of Yang ± Yin: Gender In Chinese Cinema study? -> Where did Stanley Kwan study?
-2026-05-26 17:24:05,778 | INFO | Atomic retrieval returned 22 hits for question=Where did Stanley Kwan study?
-2026-05-26 17:24:38,379 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_172150_where-did-the-director-of-film-yang-yin-gender-i

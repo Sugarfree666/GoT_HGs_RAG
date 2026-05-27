@@ -1,9 +1,0 @@
-2026-05-26 17:19:32,640 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 17:20:51,361 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 17:20:51,361 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 17:21:05,750 | INFO | Starting HyperBranch pipeline for question: Who is the spouse of the director of film Days And Hours?
-2026-05-26 17:21:05,751 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 17:21:10,804 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of the film Days And Hours?
-2026-05-26 17:21:16,677 | INFO | Rewrote retrieval question for q2: Who is the spouse of the director of Days And Hours? -> Who is the spouse of Pjer Žalica?
-2026-05-26 17:21:22,094 | INFO | Atomic retrieval returned 22 hits for question=Who is the spouse of Pjer Žalica?
-2026-05-26 17:21:48,423 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_171932_who-is-the-spouse-of-the-director-of-film-days-a

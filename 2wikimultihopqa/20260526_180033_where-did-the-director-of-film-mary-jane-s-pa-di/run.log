@@ -1,9 +1,0 @@
-2026-05-26 18:00:33,033 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 18:02:12,003 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 18:02:12,003 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 18:02:34,984 | INFO | Starting HyperBranch pipeline for question: Where did the director of film Mary Jane'S Pa die?
-2026-05-26 18:02:34,986 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 18:02:40,808 | INFO | Atomic retrieval returned 22 hits for question=Who is the director of Mary Jane's Pa?
-2026-05-26 18:03:00,511 | INFO | Rewrote retrieval question for q2: Where did the director of Mary Jane's Pa die? -> Where did William Keighley die?
-2026-05-26 18:04:11,181 | INFO | Atomic retrieval returned 24 hits for question=Where did William Keighley die?
-2026-05-26 18:04:47,681 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_180033_where-did-the-director-of-film-mary-jane-s-pa-di

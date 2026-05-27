@@ -1,9 +1,0 @@
-2026-05-26 17:42:10,894 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 17:43:33,566 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 17:43:33,567 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 17:43:47,690 | INFO | Starting HyperBranch pipeline for question: What is the place of birth of Archduchess Maria Immakulata Of Austria's mother?
-2026-05-26 17:43:47,690 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 17:43:53,668 | INFO | Atomic retrieval returned 72 hits for question=Who is the mother of Archduchess Maria Immakulata Of Austria?
-2026-05-26 17:43:59,284 | INFO | Rewrote retrieval question for q2: What is the place of birth of the mother of Archduchess Maria Immakulata Of Austria? -> What is the place of birth of Princess Maria Immaculata of Bourbon-Two Sicilies?
-2026-05-26 17:44:05,187 | INFO | Atomic retrieval returned 22 hits for question=What is the place of birth of Princess Maria Immaculata of Bourbon-Two Sicilies?
-2026-05-26 17:44:47,699 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_174210_what-is-the-place-of-birth-of-archduchess-maria

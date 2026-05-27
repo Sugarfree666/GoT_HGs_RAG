@@ -1,9 +1,0 @@
-2026-05-26 17:10:02,406 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 17:11:33,800 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 17:11:33,801 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 17:11:59,291 | INFO | Starting HyperBranch pipeline for question: Where was the place of death of Humphrey Stafford, Earl Of Stafford's father?
-2026-05-26 17:11:59,292 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 17:12:05,493 | INFO | Atomic retrieval returned 25 hits for question=Who is the father of Humphrey Stafford?
-2026-05-26 17:12:14,667 | INFO | Rewrote retrieval question for q2: Where did the father of Humphrey Stafford die? -> Where did Humphrey Stafford, 1st Duke of Buckingham die?
-2026-05-26 17:12:21,070 | INFO | Atomic retrieval returned 21 hits for question=Where did Humphrey Stafford, 1st Duke of Buckingham die?
-2026-05-26 17:13:10,625 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_171002_where-was-the-place-of-death-of-humphrey-staffor

@@ -1,9 +1,0 @@
-2026-05-26 17:57:34,936 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 17:59:14,700 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 17:59:14,701 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 17:59:49,100 | INFO | Starting HyperBranch pipeline for question: Where was the place of death of Aleksandr Aleksandrovich Bibikov's father?
-2026-05-26 17:59:49,101 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 17:59:54,707 | INFO | Atomic retrieval returned 22 hits for question=Who is the father of Aleksandr Aleksandrovich Bibikov?
-2026-05-26 18:00:01,563 | INFO | Rewrote retrieval question for q2: Where did the father of Aleksandr Aleksandrovich Bibikov die? -> Where did Aleksandr Ilyich Bibikov die?
-2026-05-26 18:00:08,082 | INFO | Atomic retrieval returned 21 hits for question=Where did Aleksandr Ilyich Bibikov die?
-2026-05-26 18:00:44,193 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_175734_where-was-the-place-of-death-of-aleksandr-aleksa

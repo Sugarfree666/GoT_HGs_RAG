@@ -1,9 +1,0 @@
-2026-05-26 17:54:53,891 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 17:56:22,610 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 17:56:22,610 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 17:56:43,211 | INFO | Starting HyperBranch pipeline for question: Where was the place of death of the director of film Tabitha, Stand Up?
-2026-05-26 17:56:43,212 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 17:56:48,474 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of Tabitha, Stand Up?
-2026-05-26 17:57:06,853 | INFO | Rewrote retrieval question for q2: Where did the director of Tabitha, Stand Up die? -> Where did Robert Dinesen die?
-2026-05-26 17:57:12,671 | INFO | Atomic retrieval returned 22 hits for question=Where did Robert Dinesen die?
-2026-05-26 17:57:33,240 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_175453_where-was-the-place-of-death-of-the-director-of

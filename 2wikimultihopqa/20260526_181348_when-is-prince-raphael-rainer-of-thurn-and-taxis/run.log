@@ -1,9 +1,0 @@
-2026-05-26 18:13:48,509 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 18:14:40,517 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 18:14:40,518 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 18:15:02,658 | INFO | Starting HyperBranch pipeline for question: When is Prince Raphael Rainer Of Thurn And Taxis's mother's birthday?
-2026-05-26 18:15:02,659 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 18:15:10,141 | INFO | Atomic retrieval returned 45 hits for question=Who is the mother of Prince Raphael Rainer Of Thurn And Taxis?
-2026-05-26 18:15:20,651 | INFO | Rewrote retrieval question for q2: When is the birthday of the mother of Prince Raphael Rainer Of Thurn And Taxis? -> When is the birthday of Archduchess Margarethe Klementine of Austria?
-2026-05-26 18:15:29,020 | INFO | Atomic retrieval returned 21 hits for question=When is the birthday of Archduchess Margarethe Klementine of Austria?
-2026-05-26 18:16:11,141 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_181348_when-is-prince-raphael-rainer-of-thurn-and-taxis

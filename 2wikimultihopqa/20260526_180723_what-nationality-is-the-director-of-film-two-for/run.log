@@ -1,9 +1,0 @@
-2026-05-26 18:07:23,523 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 18:08:15,544 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 18:08:15,544 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 18:08:30,470 | INFO | Starting HyperBranch pipeline for question: What nationality is the director of film Two For Texas?
-2026-05-26 18:08:30,471 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 18:08:37,092 | INFO | Atomic retrieval returned 22 hits for question=Who is the director of Two For Texas?
-2026-05-26 18:08:42,965 | INFO | Rewrote retrieval question for q2: What is the nationality of the director of Two For Texas? -> What is the nationality of Rod Hardy?
-2026-05-26 18:08:48,726 | INFO | Atomic retrieval returned 24 hits for question=What is the nationality of Rod Hardy?
-2026-05-26 18:09:21,633 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_180723_what-nationality-is-the-director-of-film-two-for
