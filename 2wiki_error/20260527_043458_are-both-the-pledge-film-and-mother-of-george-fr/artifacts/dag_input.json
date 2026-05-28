@@ -1,0 +1,25 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the country of The Pledge (Film)?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the country of Mother Of George?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "Do The Pledge (Film) and Mother Of George come from the same country?",
+    "dependencies": [
+      "q1",
+      "q2"
+    ],
+    "metadata": {
+      "operator": "COMPARE_SAME"
+    }
+  }
+]

@@ -1,0 +1,9 @@
+2026-05-27 01:38:38,130 | INFO | Generating atomic question DAG with DEPO.
+2026-05-27 01:40:53,312 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-27 01:40:53,312 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-27 01:41:05,792 | INFO | Starting HyperBranch pipeline for question: Which film has the director who is older than the other, The Inside Man (Film) or Dog'S Heart?
+2026-05-27 01:41:05,792 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-27 01:41:11,631 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of The Inside Man?
+2026-05-27 01:41:19,361 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of Dog'S Heart?
+2026-05-27 01:41:31,091 | INFO | Atomic retrieval returned 424 hits for question=Is the age of the director of the source greater than the age of the director of the ot...
+2026-05-27 01:42:14,304 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_013838_which-film-has-the-director-who-is-older-than-th

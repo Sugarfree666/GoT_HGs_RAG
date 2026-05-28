@@ -1,0 +1,52 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Which song is the composer from the country?",
+    "retrieval_question": "Which song is the composer from the country?",
+    "dependency_question_rewrite": {
+      "original_question": "Which song is the composer from the country?",
+      "retrieval_question": "Which song is the composer from the country?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "song",
+        "composer",
+        "country"
+      ],
+      "relations": [
+        "is from"
+      ],
+      "relation_query": "Which song is composed by an entity from a country?",
+      "answer_type": "work"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the song composed by the composer?",
+    "retrieval_question": "What is the song composed by the composer?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the song composed by the composer?",
+      "retrieval_question": "What is the song composed by the composer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "the composer"
+      ],
+      "relations": [
+        "composed"
+      ],
+      "relation_query": "What is the work composed by a composer?",
+      "answer_type": "work"
+    }
+  }
+]

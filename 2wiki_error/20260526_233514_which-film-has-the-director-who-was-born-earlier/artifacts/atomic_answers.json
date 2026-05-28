@@ -1,0 +1,915 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was the birth date of the director of Holiday In Tyrol?",
+    "analysis": {
+      "entities": [
+        "Holiday In Tyrol"
+      ],
+      "relations": [
+        "birth date of the director"
+      ],
+      "relation_query": "What is the birth date of the director of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.\"",
+        "hyperedge_text": "Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6191155910491943,
+        "fusion_score": 0.523823118209839,
+        "entity_ids": [
+          "\"WOLFGANG SCHLEIF\"",
+          "\"HANS SÖHNKER\"",
+          "\"HOLIDAY IN TYROL\"",
+          "\"EDITH MILL\"",
+          "\"MICHAEL ANDE\""
+        ],
+        "chunk_ids": [
+          "chunk-d10d47c4630956658d0a4cd56f09bcf4"
+        ],
+        "evidence_texts": [
+          "Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.",
+          "Holiday in Tyrol Holiday in Tyrol( or) is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande. The film's sets were designed by the art directors Hans Ledersteger and Ernst Richter. It was shot at the Bavaria Studios in Munich and on location in Bavaria, Austria and Switzerland."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.619116,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523823
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Holiday in Tyrol (or) is a 1956 West German drama film.\"",
+        "hyperedge_text": "Holiday in Tyrol (or) is a 1956 West German drama film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6106016635894775,
+        "fusion_score": 0.5221203327178956,
+        "entity_ids": [
+          "\"DRAMA FILM\"",
+          "\"WEST GERMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-d10d47c4630956658d0a4cd56f09bcf4"
+        ],
+        "evidence_texts": [
+          "Holiday in Tyrol (or) is a 1956 West German drama film.",
+          "Holiday in Tyrol Holiday in Tyrol( or) is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande. The film's sets were designed by the art directors Hans Ledersteger and Ernst Richter. It was shot at the Bavaria Studios in Munich and on location in Bavaria, Austria and Switzerland."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.610602,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52212
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.\"",
+        "hyperedge_text": "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4520295560359955,
+        "semantic_score": 0.6,
+        "fusion_score": 0.3008118224143982,
+        "entity_ids": [
+          "\"1 JULY 1960\""
+        ],
+        "chunk_ids": [
+          "chunk-aa56f51397106aa3cdfbda911c04958d"
+        ],
+        "evidence_texts": [
+          "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+          "Mikael Håfström Jan Mikael Håfström( born 1 July 1960) is a Swedish film director and screenwriter. He is best known for the 2003 film\" Evil\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.45203,
+          "S": 0.6,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.300812
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Castellari's birth date is significant to his biographical information.\"",
+        "hyperedge_text": "Castellari's birth date is significant to his biographical information.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43624192476272583,
+        "semantic_score": 0.6,
+        "fusion_score": 0.2944967699050903,
+        "entity_ids": [
+          "\"BIOGRAPHICAL INFORMATION\""
+        ],
+        "chunk_ids": [
+          "chunk-4efeb20de34816861256f308734cb4fd"
+        ],
+        "evidence_texts": [
+          "Castellari's birth date is significant to his biographical information.",
+          "Enzo G. Castellari Enzo Girolami Castellari( born 29 July 1938) is an Italian director, screenwriter and actor."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.436242,
+          "S": 0.6,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.294497
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 1 April 1931, marks the beginning of an influential life in the arts.\"",
+        "hyperedge_text": "His birth date, 1 April 1931, marks the beginning of an influential life in the arts.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.47004473209381104,
+        "semantic_score": 0.4,
+        "fusion_score": 0.2680178928375244,
+        "entity_ids": [
+          "\"INFLUENTIAL LIFE IN THE ARTS\""
+        ],
+        "chunk_ids": [
+          "chunk-d98c2e48b61989662dcddca18b5926b8"
+        ],
+        "evidence_texts": [
+          "His birth date, 1 April 1931, marks the beginning of an influential life in the arts.",
+          "Per Kleiva Per Kleiva (1 April 1931 – 17 September 2017) was a Norwegian painter and graphic artist. He was born in Torsken to schoolteacher Ivar Kleiva and Frida Pettersen, and was married to Ida Drage. His works are represented in the National Museum of Art, Architecture and Design. From 1987 to 1993 he was appointed professor at the Norwegian National Academy of Fine Arts."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.470045,
+          "S": 0.4,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268018
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "The evidence provides information about the film 'Holiday in Tyrol' and its director Wolfgang Schleif, but does not include his birth date. Therefore, there is insufficient evidence to answer the question.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "When was Las Aventuras De Pito Pérez born?",
+    "analysis": {
+      "entities": [
+        "Las Aventuras De Pito Pérez"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Las aventuras de Pito Pérez is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés.\"",
+        "hyperedge_text": "Las aventuras de Pito Pérez is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6936860680580139,
+        "fusion_score": 0.5387372136116029,
+        "entity_ids": [
+          "\"GERMÁN VALDÉS\"",
+          "\"FERNANDO DE FUENTES\"",
+          "\"JUAN BUSTILLO ORO\"",
+          "\"LAS AVENTURAS DE PITO PÉREZ\""
+        ],
+        "chunk_ids": [
+          "chunk-698f9413af1a34a8f4babef18eb443d3"
+        ],
+        "evidence_texts": [
+          "Las aventuras de Pito Pérez is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés.",
+          "Las aventuras de Pito Pérez Las aventuras de Pito Pérez(\" The Adventures of Pito Pérez\") is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés. It is based on the 1938 novel\" La vida inútil de Pito Pérez\" by José Rubén Romero. In 2012, in the 60th anniversary of José Rubén Romero's death, the film was shown in the Manuel M. Ponce Hall of the Palacio de Bellas Artes in Mexico City."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.693686,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.538737
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Las aventuras de Pito Pérez is a 1957 Mexican film.\"",
+        "hyperedge_text": "Las aventuras de Pito Pérez is a 1957 Mexican film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6849179863929749,
+        "fusion_score": 0.536983597278595,
+        "entity_ids": [
+          "\"1957\"",
+          "\"MEXICAN\"",
+          "\"LAS AVENTURAS DE PITO PÉREZ\""
+        ],
+        "chunk_ids": [
+          "chunk-698f9413af1a34a8f4babef18eb443d3"
+        ],
+        "evidence_texts": [
+          "Las aventuras de Pito Pérez is a 1957 Mexican film.",
+          "Las aventuras de Pito Pérez Las aventuras de Pito Pérez(\" The Adventures of Pito Pérez\") is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés. It is based on the 1938 novel\" La vida inútil de Pito Pérez\" by José Rubén Romero. In 2012, in the 60th anniversary of José Rubén Romero's death, the film was shown in the Manuel M. Ponce Hall of the Palacio de Bellas Artes in Mexico City."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.684918,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536984
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Las aventuras de Pito Pérez is a Mexican film directed by Juan Bustillo Oro and based on a novel by José Rubén Romero.\"",
+        "hyperedge_text": "Las aventuras de Pito Pérez is a Mexican film directed by Juan Bustillo Oro and based on a novel by José Rubén Romero.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6659095287322998,
+        "fusion_score": 0.53318190574646,
+        "entity_ids": [
+          "\"FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-698f9413af1a34a8f4babef18eb443d3"
+        ],
+        "evidence_texts": [
+          "Las aventuras de Pito Pérez is a Mexican film directed by Juan Bustillo Oro and based on a novel by José Rubén Romero.",
+          "Las aventuras de Pito Pérez Las aventuras de Pito Pérez(\" The Adventures of Pito Pérez\") is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés. It is based on the 1938 novel\" La vida inútil de Pito Pérez\" by José Rubén Romero. In 2012, in the 60th anniversary of José Rubén Romero's death, the film was shown in the Manuel M. Ponce Hall of the Palacio de Bellas Artes in Mexico City."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.66591,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533182
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Germán Valdés starred in the film Las aventuras de Pito Pérez.\"",
+        "hyperedge_text": "Germán Valdés starred in the film Las aventuras de Pito Pérez.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6394233107566833,
+        "fusion_score": 0.5278846621513367,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-698f9413af1a34a8f4babef18eb443d3"
+        ],
+        "evidence_texts": [
+          "Germán Valdés starred in the film Las aventuras de Pito Pérez.",
+          "Las aventuras de Pito Pérez Las aventuras de Pito Pérez(\" The Adventures of Pito Pérez\") is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés. It is based on the 1938 novel\" La vida inútil de Pito Pérez\" by José Rubén Romero. In 2012, in the 60th anniversary of José Rubén Romero's death, the film was shown in the Manuel M. Ponce Hall of the Palacio de Bellas Artes in Mexico City."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.639423,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527885
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\"",
+        "hyperedge_text": "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45977842807769775,
+        "semantic_score": 0.2857142857142857,
+        "fusion_score": 0.24105422837393625,
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-68776c5ec312f8403508c9a611746b32"
+        ],
+        "evidence_texts": [
+          "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+          "Jean-Pierre de Keyser Jean- Pierre de Keyser( born 13 April 1965) is a retired German football player."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.459778,
+          "S": 0.285714,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.241054
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that specifies the birth date of 'Las Aventuras De Pito Pérez'. The available evidence only discusses the film's release date and details about its production.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Las aventuras de Pito Pérez is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Holiday In Tyrol?",
+    "analysis": {
+      "entities": [
+        "Holiday In Tyrol",
+        "Wolfgang Schleif"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "Who is the director of a film?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.\"",
+        "hyperedge_text": "Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6908062696456909,
+        "fusion_score": 0.7381612539291382,
+        "entity_ids": [
+          "\"WOLFGANG SCHLEIF\"",
+          "\"HANS SÖHNKER\"",
+          "\"HOLIDAY IN TYROL\"",
+          "\"EDITH MILL\"",
+          "\"MICHAEL ANDE\""
+        ],
+        "chunk_ids": [
+          "chunk-d10d47c4630956658d0a4cd56f09bcf4"
+        ],
+        "evidence_texts": [
+          "Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.",
+          "Holiday in Tyrol Holiday in Tyrol( or) is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande. The film's sets were designed by the art directors Hans Ledersteger and Ernst Richter. It was shot at the Bavaria Studios in Munich and on location in Bavaria, Austria and Switzerland."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.690806,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.738161
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wolfgang Schleif (14 May 1912 – 21 August 1984) was a German editor, film director and screenwriter.\"",
+        "hyperedge_text": "Wolfgang Schleif (14 May 1912 – 21 August 1984) was a German editor, film director and screenwriter.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.6666666666666667,
+        "entity_ids": [
+          "\"GERMAN\"",
+          "\"WOLFGANG SCHLEIF\""
+        ],
+        "chunk_ids": [
+          "chunk-f30af021e58e40b0bc93e1680a47a27e"
+        ],
+        "evidence_texts": [
+          "Wolfgang Schleif (14 May 1912 – 21 August 1984) was a German editor, film director and screenwriter.",
+          "Wolfgang Schleif Wolfgang Schleif (14 May 1912 – 21 August 1984) was a German editor, film director and screenwriter. He studied philosophy, psychology and pedagogy at the University of Leipzig. In 1934 he passed the State Examination for teachers at the Volksschule. But then he took classes at the Acting School of the Deutsches Theater in Berlin, where he was trained in directing. Schleif began working in film in 1935. By 1938, he was an assistant director. In 1939, he became a screenwriter and eventually an editor. Among his assignments, he was one of the editors of the propaganda films \"Jud Süß\" (1940) and \"Kolberg\" (1945). In 1947, Schleif was joined the DEFA film studio, making his directorial debut in 1948 with the anti-capitalist production . This was followed by the 1949 film biography of Johann Friedrich Böttger, \"The Blue Swords\". After 17 June 1953, Schleif emigrated to Wes..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.666667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Holiday in Tyrol (or) is a 1956 West German drama film.\"",
+        "hyperedge_text": "Holiday in Tyrol (or) is a 1956 West German drama film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.5,
+        "semantic_score": 0.6731311082839966,
+        "fusion_score": 0.5346262216567994,
+        "entity_ids": [
+          "\"DRAMA FILM\"",
+          "\"WEST GERMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-d10d47c4630956658d0a4cd56f09bcf4"
+        ],
+        "evidence_texts": [
+          "Holiday in Tyrol (or) is a 1956 West German drama film.",
+          "Holiday in Tyrol Holiday in Tyrol( or) is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande. The film's sets were designed by the art directors Hans Ledersteger and Ernst Richter. It was shot at the Bavaria Studios in Munich and on location in Bavaria, Austria and Switzerland."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.5,
+          "S": 0.673131,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534626
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was guided by German director Tom Tykwer.\"",
+        "hyperedge_text": "The film was guided by German director Tom Tykwer.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.47752881050109863,
+        "fusion_score": 0.49550576210021974,
+        "entity_ids": [
+          "\"GERMAN DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-6c0e2e31a84578922d8768417c1e00ff"
+        ],
+        "evidence_texts": [
+          "The film was guided by German director Tom Tykwer.",
+          "Soul Boy Soul Boy is a 2010 Kenyan drama film, written by Billy Kahora and directed by Hawa Essuman. It developed under the mentorship of German director and producer Tom Tykwer in Kibera, one of the largest slums in the African continent, in the middle of Nairobi, Kenya. The film has received five nominations at the 2011 African Movie Academy Awards. The film originated in a workshop for young film enthusiasts from Nairobi, guided by German director Tom Tykwer."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.477529,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.495506
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was written and directed by Oskar Roehler and produced by Oliver Berben and Bernd Eichinger.\"",
+        "hyperedge_text": "The film was written and directed by Oskar Roehler and produced by Oliver Berben and Bernd Eichinger.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.4640204906463623,
+        "fusion_score": 0.2928040981292725,
+        "entity_ids": [
+          "\"OSKAR ROEHLER\"",
+          "\"OLIVER BERBEN\"",
+          "\"BERND EICHINGER\""
+        ],
+        "chunk_ids": [
+          "chunk-d30b788f2520b0bda1f88fa5d301c6bc"
+        ],
+        "evidence_texts": [
+          "The film was written and directed by Oskar Roehler and produced by Oliver Berben and Bernd Eichinger.",
+          "Atomised (film) Atomised (also known as The Elementary Particles) is a 2006 German film based on the novel \"Les Particules élémentaires\" by Michel Houellebecq. The film was written and directed by Oskar Roehler and produced by Oliver Berben and Bernd Eichinger. It stars Moritz Bleibtreu as Bruno, Christian Ulmen as Michael, Martina Gedeck as Christiane, Franka Potente as Annabelle, and Nina Hoss as Jane. The film had its premiere at the Berlin Film Festival in Germany in February 2006. In contrast to the book setting in Paris, the film was shot entirely and is mainly situated in various places in Germany. Cities and states in Germany used for filming included Thuringia and Berlin. Contrary to the book, the film does not have cultural pessimism as a main theme, and it has an alternative ending."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.46402,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.292804
+        }
+      }
+    ],
+    "answer": "Wolfgang Schleif",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'Holiday in Tyrol' is directed by Wolfgang Schleif.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "Who is the director of Las Aventuras De Pito Pérez?",
+    "analysis": {
+      "entities": [
+        "Las Aventuras De Pito Pérez",
+        "Juan Bustillo Oro"
+      ],
+      "relations": [
+        "is directed by"
+      ],
+      "relation_query": "Who is the director of a film titled 'Las Aventuras De Pito Pérez'?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Las aventuras de Pito Pérez is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés.\"",
+        "hyperedge_text": "Las aventuras de Pito Pérez is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.7492026686668396,
+        "semantic_score": 0.726154625415802,
+        "fusion_score": 0.8449119925498962,
+        "entity_ids": [
+          "\"GERMÁN VALDÉS\"",
+          "\"FERNANDO DE FUENTES\"",
+          "\"JUAN BUSTILLO ORO\"",
+          "\"LAS AVENTURAS DE PITO PÉREZ\""
+        ],
+        "chunk_ids": [
+          "chunk-698f9413af1a34a8f4babef18eb443d3"
+        ],
+        "evidence_texts": [
+          "Las aventuras de Pito Pérez is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés.",
+          "Las aventuras de Pito Pérez Las aventuras de Pito Pérez(\" The Adventures of Pito Pérez\") is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés. It is based on the 1938 novel\" La vida inútil de Pito Pérez\" by José Rubén Romero. In 2012, in the 60th anniversary of José Rubén Romero's death, the film was shown in the Manuel M. Ponce Hall of the Palacio de Bellas Artes in Mexico City."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.749203,
+          "S": 0.726155,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.844912
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Las aventuras de Pito Pérez is a 1957 Mexican film.\"",
+        "hyperedge_text": "Las aventuras de Pito Pérez is a 1957 Mexican film.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.7215832471847534,
+        "semantic_score": 0.6920811533927917,
+        "fusion_score": 0.6270495295524597,
+        "entity_ids": [
+          "\"1957\"",
+          "\"MEXICAN\"",
+          "\"LAS AVENTURAS DE PITO PÉREZ\""
+        ],
+        "chunk_ids": [
+          "chunk-698f9413af1a34a8f4babef18eb443d3"
+        ],
+        "evidence_texts": [
+          "Las aventuras de Pito Pérez is a 1957 Mexican film.",
+          "Las aventuras de Pito Pérez Las aventuras de Pito Pérez(\" The Adventures of Pito Pérez\") is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés. It is based on the 1938 novel\" La vida inútil de Pito Pérez\" by José Rubén Romero. In 2012, in the 60th anniversary of José Rubén Romero's death, the film was shown in the Manuel M. Ponce Hall of the Palacio de Bellas Artes in Mexico City."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.721583,
+          "S": 0.692081,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.62705
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Las aventuras de Pito Pérez is a Mexican film directed by Juan Bustillo Oro and based on a novel by José Rubén Romero.\"",
+        "hyperedge_text": "Las aventuras de Pito Pérez is a Mexican film directed by Juan Bustillo Oro and based on a novel by José Rubén Romero.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.7254290580749512,
+        "semantic_score": 0.6924250721931458,
+        "fusion_score": 0.8286566376686096,
+        "entity_ids": [
+          "\"FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-698f9413af1a34a8f4babef18eb443d3"
+        ],
+        "evidence_texts": [
+          "Las aventuras de Pito Pérez is a Mexican film directed by Juan Bustillo Oro and based on a novel by José Rubén Romero.",
+          "Las aventuras de Pito Pérez Las aventuras de Pito Pérez(\" The Adventures of Pito Pérez\") is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés. It is based on the 1938 novel\" La vida inútil de Pito Pérez\" by José Rubén Romero. In 2012, in the 60th anniversary of José Rubén Romero's death, the film was shown in the Manuel M. Ponce Hall of the Palacio de Bellas Artes in Mexico City."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.725429,
+          "S": 0.692425,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.828657
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Germán Valdés starred in the film Las aventuras de Pito Pérez.\"",
+        "hyperedge_text": "Germán Valdés starred in the film Las aventuras de Pito Pérez.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.7264920473098755,
+        "semantic_score": 0.6922626495361328,
+        "fusion_score": 0.6290493488311768,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-698f9413af1a34a8f4babef18eb443d3"
+        ],
+        "evidence_texts": [
+          "Germán Valdés starred in the film Las aventuras de Pito Pérez.",
+          "Las aventuras de Pito Pérez Las aventuras de Pito Pérez(\" The Adventures of Pito Pérez\") is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés. It is based on the 1938 novel\" La vida inútil de Pito Pérez\" by José Rubén Romero. In 2012, in the 60th anniversary of José Rubén Romero's death, the film was shown in the Manuel M. Ponce Hall of the Palacio de Bellas Artes in Mexico City."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.726492,
+          "S": 0.692263,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.629049
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Las Aventuras de Pikín is a 1977 Argentine family adventure film directed and written by Alberto Abdala with Jorge Falcón.\"",
+        "hyperedge_text": "Las Aventuras de Pikín is a 1977 Argentine family adventure film directed and written by Alberto Abdala with Jorge Falcón.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.6040805578231812,
+        "semantic_score": 0.5607021450996399,
+        "fusion_score": 0.35377265214920045,
+        "entity_ids": [
+          "\"LAS AVENTURAS DE PIKÍN\"",
+          "\"ALBERTO ABDALA\"",
+          "\"JORGE FALCÓN\"",
+          "\"AMÉRICO HOSS\""
+        ],
+        "chunk_ids": [
+          "chunk-8f9d8bc182dd372093740d03b66850ba"
+        ],
+        "evidence_texts": [
+          "Las Aventuras de Pikín is a 1977 Argentine family adventure film directed and written by Alberto Abdala with Jorge Falcón.",
+          "Las Aventuras de Pikín Las Aventuras de Pikín is a 1977 Argentine family adventure film directed and written by Alberto Abdala with Jorge Falcón. The cinematography was performed by Américo Hoss."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.604081,
+          "S": 0.560702,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.353773
+        }
+      }
+    ],
+    "answer": "Juan Bustillo Oro",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'Las aventuras de Pito Pérez' is directed by Juan Bustillo Oro.",
+    "used_dependencies": [
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Las aventuras de Pito Pérez is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés.\""
+    ]
+  },
+  {
+    "node_id": "q5",
+    "question": "What is the birth date of Holiday In Tyrol?",
+    "analysis": {
+      "entities": [
+        "Holiday In Tyrol"
+      ],
+      "relations": [
+        "has birth date"
+      ],
+      "relation_query": "What is the birth date of a film?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.\"",
+        "hyperedge_text": "Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.5698249340057373,
+        "fusion_score": 0.6472983201344809,
+        "entity_ids": [
+          "\"WOLFGANG SCHLEIF\"",
+          "\"HANS SÖHNKER\"",
+          "\"HOLIDAY IN TYROL\"",
+          "\"EDITH MILL\"",
+          "\"MICHAEL ANDE\""
+        ],
+        "chunk_ids": [
+          "chunk-d10d47c4630956658d0a4cd56f09bcf4"
+        ],
+        "evidence_texts": [
+          "Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.",
+          "Holiday in Tyrol Holiday in Tyrol( or) is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande. The film's sets were designed by the art directors Hans Ledersteger and Ernst Richter. It was shot at the Bavaria Studios in Munich and on location in Bavaria, Austria and Switzerland."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.333333,
+          "S": 0.569825,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.647298
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Holiday in Tyrol (or) is a 1956 West German drama film.\"",
+        "hyperedge_text": "Holiday in Tyrol (or) is a 1956 West German drama film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.5770833492279053,
+        "fusion_score": 0.6487500031789144,
+        "entity_ids": [
+          "\"DRAMA FILM\"",
+          "\"WEST GERMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-d10d47c4630956658d0a4cd56f09bcf4"
+        ],
+        "evidence_texts": [
+          "Holiday in Tyrol (or) is a 1956 West German drama film.",
+          "Holiday in Tyrol Holiday in Tyrol( or) is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande. The film's sets were designed by the art directors Hans Ledersteger and Ernst Richter. It was shot at the Bavaria Studios in Munich and on location in Bavaria, Austria and Switzerland."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.333333,
+          "S": 0.577083,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.64875
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The birth date of Princess Elisabeth on 31 December 1940 marks an important point in Bavarian history.\"",
+        "hyperedge_text": "The birth date of Princess Elisabeth on 31 December 1940 marks an important point in Bavarian history.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4750012457370758,
+        "fusion_score": 0.4950002491474152,
+        "entity_ids": [
+          "\"31 DECEMBER 1940\""
+        ],
+        "chunk_ids": [
+          "chunk-6663305912e732c1d7c481163c7fc5ff"
+        ],
+        "evidence_texts": [
+          "The birth date of Princess Elisabeth on 31 December 1940 marks an important point in Bavarian history.",
+          "Princess Elisabeth, Duchess in Bavaria Princess Elisabeth, Duchess in Bavaria( born 31 December 1940) is the wife of Prince Max, Duke in Bavaria, heir presumptive to both the former Bavarian Royal House and the Jacobite Succession."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.475001,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.495
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release date was May 13, 1928.\"",
+        "hyperedge_text": "The film's release date was May 13, 1928.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5581492185592651,
+        "semantic_score": 0.25,
+        "fusion_score": 0.27325968742370604,
+        "entity_ids": [
+          "\"MAY 13, 1928\""
+        ],
+        "chunk_ids": [
+          "chunk-70a14f3273387066fb43f8f8b36f081c"
+        ],
+        "evidence_texts": [
+          "The film's release date was May 13, 1928.",
+          "Vamping Venus Vamping Venus is a 1928 American comedy film directed by Edward F. Cline, written by Howard J. Green and Ralph Spence, and starring Charles Murray, Louise Fazenda, Thelma Todd, Russ Powell, Joe Bonomo and Guinn\" Big Boy\" Williams. It was released on May 13, 1928, by First National Pictures."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.558149,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.27326
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5464140176773071,
+        "semantic_score": 0.25,
+        "fusion_score": 0.26856560707092286,
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "evidence_texts": [
+          "The film's release occurred on a specific date.",
+          "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.546414,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268566
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that specifies the birth date of 'Holiday In Tyrol'. The available evidence only discusses the film's release date and details about its production.",
+    "used_dependencies": [
+      "q1",
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.\""
+    ]
+  }
+]

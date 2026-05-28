@@ -1,0 +1,3189 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Christ Walking On The Water?",
+    "retrieval_question": "Who is the director of Christ Walking On The Water?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Christ Walking On The Water?",
+      "retrieval_question": "Who is the director of Christ Walking On The Water?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "entity_ids": [
+          "\"1899\"",
+          "\"FRENCH\"",
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+          ],
+          "relation_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "link",
+            "1899",
+            "FRENCH",
+            "CHRIST WALKING ON THE WATER",
+            "GEORGES MÉLIÈS",
+            "SHORT SILENT FILM"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5064207315444946,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5018224120140076,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49626192450523376,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4959556758403778,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.4941776394844055,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48419591784477234,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.482859343290329,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48214516043663025,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47926294803619385,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.477081298828125,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.\"",
+        "branch": "semantic",
+        "raw_score": 0.6701449155807495,
+        "hyperedge_text": "The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.",
+        "entity_ids": [
+          "\"BIBLICAL NARRATIVE\"",
+          "\"WATER\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.",
+            "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+          ],
+          "relation_texts": [
+            "The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.",
+            "link",
+            "BIBLICAL NARRATIVE",
+            "WATER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-388a00ef785c33cf70fb6b4512b84a7d",
+            "hyperedge_name": "<hyperedge>\"The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "branch": "semantic",
+        "raw_score": 0.5459430813789368,
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "entity_ids": [
+          "\"1899\"",
+          "\"FRENCH\"",
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+          ],
+          "relation_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "link",
+            "1899",
+            "FRENCH",
+            "CHRIST WALKING ON THE WATER",
+            "GEORGES MÉLIÈS",
+            "SHORT SILENT FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8043afbecc2a391cc7866b5fe67e4ad0",
+            "hyperedge_name": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Christy Cabanne.\"",
+        "branch": "semantic",
+        "raw_score": 0.4549420475959778,
+        "hyperedge_text": "The film was directed by Christy Cabanne.",
+        "entity_ids": [
+          "\"CHRISTY CABANNE\""
+        ],
+        "chunk_ids": [
+          "chunk-aedf310dfe670c844b34a3e40e6623d8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Christy Cabanne.",
+            "Daphne and the Pirate Daphne and the Pirate is a 1916 American drama film directed by Christy Cabanne and starring Lillian Gish."
+          ],
+          "relation_texts": [
+            "The film was directed by Christy Cabanne.",
+            "link",
+            "CHRISTY CABANNE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-df4b9e4cb1556717c21387e2d6c38d86",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Christy Cabanne.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"William Christy Cabanne’s film contributions include directing, writing, and acting.\"",
+        "branch": "semantic",
+        "raw_score": 0.4398139715194702,
+        "hyperedge_text": "William Christy Cabanne’s film contributions include directing, writing, and acting.",
+        "entity_ids": [
+          "\"ACTING\"",
+          "\"DIRECTING\"",
+          "\"WRITING\""
+        ],
+        "chunk_ids": [
+          "chunk-d58f3d9a1ab3de6c667a006d82b7e6bc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "William Christy Cabanne’s film contributions include directing, writing, and acting.",
+            "Christy Cabanne William Christy Cabanne( April 16, 1888 – October 15, 1950) was an American film director, screenwriter and silent film actor."
+          ],
+          "relation_texts": [
+            "William Christy Cabanne’s film contributions include directing, writing, and acting.",
+            "link",
+            "ACTING",
+            "DIRECTING",
+            "WRITING"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-083a74684d4cc3fe3f377df7001e4502",
+            "hyperedge_name": "<hyperedge>\"William Christy Cabanne’s film contributions include directing, writing, and acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wilhelm Thiele is the director of The Last Pedestrian.\"",
+        "branch": "semantic",
+        "raw_score": 0.42198145389556885,
+        "hyperedge_text": "Wilhelm Thiele is the director of The Last Pedestrian.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-82c5c88dc85438d59d54b31170cd9cce"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Wilhelm Thiele is the director of The Last Pedestrian.",
+            "The Last Pedestrian The Last Pedestrian is a 1960 West German comedy film directed by Wilhelm Thiele and starring Heinz Erhardt, Christine Kaufmann and Käthe Haack. It was shot at the Gottingen Studios. The film's art direction was by Walter Haag."
+          ],
+          "relation_texts": [
+            "Wilhelm Thiele is the director of The Last Pedestrian."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-aee127e7ce1260bbce414db9ead66430",
+            "hyperedge_name": "<hyperedge>\"Wilhelm Thiele is the director of The Last Pedestrian.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christian E. Christiansen has directed several notable films throughout his career.\"",
+        "branch": "semantic",
+        "raw_score": 0.4167488217353821,
+        "hyperedge_text": "Christian E. Christiansen has directed several notable films throughout his career.",
+        "entity_ids": [
+          "\"NOTABLE FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-e399102b98b20754ec736c82439fe8f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Christian E. Christiansen has directed several notable films throughout his career.",
+            "Christian E. Christiansen Christian E. Christiansen( born 14 December 1972) is a Danish filmmaker."
+          ],
+          "relation_texts": [
+            "Christian E. Christiansen has directed several notable films throughout his career.",
+            "link",
+            "NOTABLE FILMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b1e9769a7a6946986f4a7032039f4fb6",
+            "hyperedge_name": "<hyperedge>\"Christian E. Christiansen has directed several notable films throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Sam Wanamaker.\"",
+        "branch": "semantic",
+        "raw_score": 0.4125911295413971,
+        "hyperedge_text": "The film is directed by Sam Wanamaker.",
+        "entity_ids": [
+          "\"SAM WANAMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-d59ab20a023a483900522911a8c9dcb4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed by Sam Wanamaker.",
+            "Sinbad and the Eye of the Tiger Sinbad and the Eye of the Tiger is a 1977 fantasy film directed by Sam Wanamaker and featuring stop motion effects by Ray Harryhausen. The film stars Patrick Wayne, Taryn Power, Margaret Whiting, Jane Seymour, and Patrick Troughton. It is the third and final\" Sinbad\" film released by Columbia Pictures."
+          ],
+          "relation_texts": [
+            "The film is directed by Sam Wanamaker.",
+            "link",
+            "SAM WANAMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-87fc2549be711a1637d338abb28d62f2",
+            "hyperedge_name": "<hyperedge>\"The film is directed by Sam Wanamaker.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Half a Sinner was directed by Al Christie.\"",
+        "branch": "semantic",
+        "raw_score": 0.4124777317047119,
+        "hyperedge_text": "Half a Sinner was directed by Al Christie.",
+        "entity_ids": [
+          "\"AL CHRISTIE\""
+        ],
+        "chunk_ids": [
+          "chunk-17c4904baf01226d84c4e0f4955f7590"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Half a Sinner was directed by Al Christie.",
+            "Half a Sinner (1940 film) Half a Sinner is a 1940 American film directed by Al Christie. It stars Heather Angel as a schoolteacher who in one day becomes Public Enemy Number One in Pennsylvania. The film is based on Dalton Trumbo's short story\" Lady Takes a Chance\". The working titles of this film were\" Everything Happens to Ann\" and\" The Lady Takes a Chance\"."
+          ],
+          "relation_texts": [
+            "Half a Sinner was directed by Al Christie.",
+            "link",
+            "AL CHRISTIE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d5d5eaeb8ccdda6b395d3873be0c7ee7",
+            "hyperedge_name": "<hyperedge>\"Half a Sinner was directed by Al Christie.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is categorized as a Christian drama, highlighting themes of faith and resilience.\"",
+        "branch": "semantic",
+        "raw_score": 0.4104548692703247,
+        "hyperedge_text": "The film is categorized as a Christian drama, highlighting themes of faith and resilience.",
+        "entity_ids": [
+          "\"CHRISTIAN DRAMA\""
+        ],
+        "chunk_ids": [
+          "chunk-5779db46f2615bb842a985e00b17e624"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is categorized as a Christian drama, highlighting themes of faith and resilience.",
+            "Run the Race Run the Race is a 2018 American Christian drama film directed by Chris Dowling. It follows two young brothers who use football to cope with their mother's death and father's abandonment of them. Tim Tebow acts as an executive producer on the film. It was released in the United States on February 22, 2019, by Roadside Attractions."
+          ],
+          "relation_texts": [
+            "The film is categorized as a Christian drama, highlighting themes of faith and resilience.",
+            "link",
+            "CHRISTIAN DRAMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dbfbbb62e7a539415385d9d58b1ae648",
+            "hyperedge_name": "<hyperedge>\"The film is categorized as a Christian drama, highlighting themes of faith and resilience.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by John Krish, the film is produced by Jack Carruthers, with Anne Balfour-Fraser serving as the executive producer.\"",
+        "branch": "semantic",
+        "raw_score": 0.400118887424469,
+        "hyperedge_text": "Directed by John Krish, the film is produced by Jack Carruthers, with Anne Balfour-Fraser serving as the executive producer.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-648777381500675b2da02eb94df881c3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Directed by John Krish, the film is produced by Jack Carruthers, with Anne Balfour-Fraser serving as the executive producer.",
+            "I Think They Call Him John I Think They Call Him John is a British short film, written and directed by John Krish and produced by Jack Carruthers, with Anne Balfour-Fraser serving as the film's executive producer, for Samaritan Films. Made in 1964, it is a narrated observation of an elderly, lonely man during one day of his life. It was released at the Polish Film Festival in Warsaw."
+          ],
+          "relation_texts": [
+            "Directed by John Krish, the film is produced by Jack Carruthers, with Anne Balfour-Fraser serving as the executive producer."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5ed8b8f7576861c8b508673e9f0fb08c",
+            "hyperedge_name": "<hyperedge>\"Directed by John Krish, the film is produced by Jack Carruthers, with Anne Balfour-Fraser serving as the executive producer.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5459430813789368,
+        "fusion_score": 0.5091886162757874,
+        "entity_ids": [
+          "\"1899\"",
+          "\"FRENCH\"",
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.545943,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.509189
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.\"",
+        "hyperedge_text": "The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6701449155807495,
+        "fusion_score": 0.53402898311615,
+        "entity_ids": [
+          "\"BIBLICAL NARRATIVE\"",
+          "\"WATER\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.",
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.670145,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534029
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wilhelm Thiele is the director of The Last Pedestrian.\"",
+        "hyperedge_text": "Wilhelm Thiele is the director of The Last Pedestrian.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.42198145389556885,
+        "fusion_score": 0.4843962907791138,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-82c5c88dc85438d59d54b31170cd9cce"
+        ],
+        "evidence_texts": [
+          "Wilhelm Thiele is the director of The Last Pedestrian.",
+          "The Last Pedestrian The Last Pedestrian is a 1960 West German comedy film directed by Wilhelm Thiele and starring Heinz Erhardt, Christine Kaufmann and Käthe Haack. It was shot at the Gottingen Studios. The film's art direction was by Walter Haag."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.421981,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.484396
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5064207315444946,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25256829261779784,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.506421,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.252568
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5018224120140076,
+        "semantic_score": 0.25,
+        "fusion_score": 0.250728964805603,
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "evidence_texts": [
+          "As a director, he has likely worked on a variety of projects spanning different genres.",
+          "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.501822,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.250729
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of 45 Fathers?",
+    "retrieval_question": "Who is the director of 45 Fathers?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of 45 Fathers?",
+      "retrieval_question": "Who is the director of 45 Fathers?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+        "entity_ids": [
+          "\"JAMES TINLING\"",
+          "\"45 FATHERS\"",
+          "\"FRANCES HYLAND\"",
+          "\"ALBERT RAY\"",
+          "\"JANE WITHERS\"",
+          "\"THOMAS BECK\"",
+          "\"LOUISE HENRY\"",
+          "\"RICHARD CARLE\"",
+          "\"NELLA WALKER\"",
+          "\"ANDREW TOMBES\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+            "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+          ],
+          "relation_texts": [
+            "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+            "link",
+            "JAMES TINLING",
+            "45 FATHERS",
+            "FRANCES HYLAND",
+            "ALBERT RAY",
+            "JANE WITHERS",
+            "THOMAS BECK",
+            "LOUISE HENRY",
+            "RICHARD CARLE",
+            "NELLA WALKER",
+            "ANDREW TOMBES"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5064207315444946,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5018224120140076,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49626192450523376,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4959556758403778,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.4941776394844055,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48419591784477234,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.482859343290329,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48214516043663025,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47926294803619385,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.477081298828125,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"45 Fathers is a comedy film directed by James Tinling.\"",
+        "branch": "semantic",
+        "raw_score": 0.6760731935501099,
+        "hyperedge_text": "45 Fathers is a comedy film directed by James Tinling.",
+        "entity_ids": [
+          "\"COMEDY FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "45 Fathers is a comedy film directed by James Tinling.",
+            "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+          ],
+          "relation_texts": [
+            "45 Fathers is a comedy film directed by James Tinling.",
+            "link",
+            "COMEDY FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a24cd7b088f9da04b242cde9cda601f8",
+            "hyperedge_name": "<hyperedge>\"45 Fathers is a comedy film directed by James Tinling.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.\"",
+        "branch": "semantic",
+        "raw_score": 0.6156403422355652,
+        "hyperedge_text": "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+        "entity_ids": [
+          "\"JAMES TINLING\"",
+          "\"45 FATHERS\"",
+          "\"FRANCES HYLAND\"",
+          "\"ALBERT RAY\"",
+          "\"JANE WITHERS\"",
+          "\"THOMAS BECK\"",
+          "\"LOUISE HENRY\"",
+          "\"RICHARD CARLE\"",
+          "\"NELLA WALKER\"",
+          "\"ANDREW TOMBES\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+            "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+          ],
+          "relation_texts": [
+            "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+            "link",
+            "JAMES TINLING",
+            "45 FATHERS",
+            "FRANCES HYLAND",
+            "ALBERT RAY",
+            "JANE WITHERS",
+            "THOMAS BECK",
+            "LOUISE HENRY",
+            "RICHARD CARLE",
+            "NELLA WALKER",
+            "ANDREW TOMBES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b9426f743a78b93ed4468459f5c4499d",
+            "hyperedge_name": "<hyperedge>\"45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"45 Fathers was produced in 1937.\"",
+        "branch": "semantic",
+        "raw_score": 0.6023674607276917,
+        "hyperedge_text": "45 Fathers was produced in 1937.",
+        "entity_ids": [
+          "\"1937\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "45 Fathers was produced in 1937.",
+            "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+          ],
+          "relation_texts": [
+            "45 Fathers was produced in 1937.",
+            "link",
+            "1937"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fb4745cbdc1b3a445197046cb431af37",
+            "hyperedge_name": "<hyperedge>\"45 Fathers was produced in 1937.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Gianni Franciolini and features a compelling story about maternal guilt.\"",
+        "branch": "semantic",
+        "raw_score": 0.3986137807369232,
+        "hyperedge_text": "The film was directed by Gianni Franciolini and features a compelling story about maternal guilt.",
+        "entity_ids": [
+          "\"GIANNI FRANCIOLINI\"",
+          "\"MATERNAL GUILT\""
+        ],
+        "chunk_ids": [
+          "chunk-8904a01bf99064b6d5a69ae835f24335"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Gianni Franciolini and features a compelling story about maternal guilt.",
+            "La colpa di una madre La colpa di una madre is a 1952 Italian melodrama film."
+          ],
+          "relation_texts": [
+            "The film was directed by Gianni Franciolini and features a compelling story about maternal guilt.",
+            "link",
+            "GIANNI FRANCIOLINI",
+            "MATERNAL GUILT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3bb7debddf80e0cbc96cc2a00d772151",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Gianni Franciolini and features a compelling story about maternal guilt.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"My Baby's Daddy is a comedy film that follows humorous and entertaining situations related to becoming a parent.\"",
+        "branch": "semantic",
+        "raw_score": 0.3910907506942749,
+        "hyperedge_text": "My Baby's Daddy is a comedy film that follows humorous and entertaining situations related to becoming a parent.",
+        "entity_ids": [
+          "\"HUMOR\"",
+          "\"ENTERTAINING SITUATIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-a269ccd9b57934012d6f3afe949740c3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "My Baby's Daddy is a comedy film that follows humorous and entertaining situations related to becoming a parent.",
+            "My Baby's Daddy My Baby's Daddy is a 2004 American comedy film, directed by Cheryl Dunye."
+          ],
+          "relation_texts": [
+            "My Baby's Daddy is a comedy film that follows humorous and entertaining situations related to becoming a parent.",
+            "link",
+            "HUMOR",
+            "ENTERTAINING SITUATIONS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5b261fbc3f97328d8f228456770dac85",
+            "hyperedge_name": "<hyperedge>\"My Baby's Daddy is a comedy film that follows humorous and entertaining situations related to becoming a parent.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sidney J. Furie directed the film Partners in Action.\"",
+        "branch": "semantic",
+        "raw_score": 0.38986703753471375,
+        "hyperedge_text": "Sidney J. Furie directed the film Partners in Action.",
+        "entity_ids": [
+          "\"FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-e3d00af840e537d96c5ec0579c520ea8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sidney J. Furie directed the film Partners in Action.",
+            "Partners in Action Partners in Action is a 2002 film directed by Sidney J. Furie and starring Armand Assante."
+          ],
+          "relation_texts": [
+            "Sidney J. Furie directed the film Partners in Action.",
+            "link",
+            "FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bbef884c3c7c64c22d18c2b4e5ff2902",
+            "hyperedge_name": "<hyperedge>\"Sidney J. Furie directed the film Partners in Action.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"St. John's International Women's Film Festival: Obviously strongly autobiographical, A Kiss on the Nose evokes that awkward combination of love and rage we often feel about our dads.\"",
+        "branch": "semantic",
+        "raw_score": 0.3857923150062561,
+        "hyperedge_text": "St. John's International Women's Film Festival: Obviously strongly autobiographical, A Kiss on the Nose evokes that awkward combination of love and rage we often feel about our dads.",
+        "entity_ids": [
+          "\"ST. JOHN'S INTERNATIONAL WOMEN'S FILM FESTIVAL\""
+        ],
+        "chunk_ids": [
+          "chunk-c902d81d409fb8d303409c56fa057984"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "St. John's International Women's Film Festival: Obviously strongly autobiographical, A Kiss on the Nose evokes that awkward combination of love and rage we often feel about our dads.",
+            "A Kiss on the Nose A Kiss on the Nose is a short film first released in the United States on August 15, 2004 during the Rhode Island International Film Festival, written and directed by Laura Neri. It stars Azita Ghanizada, Gianfranco Russo, Elena Fabri, Maeva Cifuentes, Monica Cortes, Svilena Kidess, Pat Lach and Warren Sweeney. St. John's International Women's Film Festival: Obviously strongly autobiographical , A Kiss on the Nose evokes that awkward combination of love and rage we often feel about our dads. This powerful little drama captures the essence of those feelings quite brilliantly. Some have identified this entry as \"the best short\" they have ever seen. That sure tells you a lot. Heartland Film festival press Release: Producer, director and writer Laura Neri received a Jimmy Stewart Memorial Crystal Heart Award for her student dramatic short “A Kiss on the Nose”. For the f..."
+          ],
+          "relation_texts": [
+            "St. John's International Women's Film Festival: Obviously strongly autobiographical, A Kiss on the Nose evokes that awkward combination of love and rage we often feel about our dads.",
+            "link",
+            "ST. JOHN'S INTERNATIONAL WOMEN'S FILM FESTIVAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5dd85150753dc676906431587f1e763c",
+            "hyperedge_name": "<hyperedge>\"St. John's International Women's Film Festival: Obviously strongly autobiographical, A Kiss on the Nose evokes that awkward combination of love and rage we often feel about our dads.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Who's Your Daddy? is a 2002 American comedy film directed (and co-scripted) by Andy Fickman.\"",
+        "branch": "semantic",
+        "raw_score": 0.3763101100921631,
+        "hyperedge_text": "Who's Your Daddy? is a 2002 American comedy film directed (and co-scripted) by Andy Fickman.",
+        "entity_ids": [
+          "\"COMEDY\"",
+          "\"2002\"",
+          "\"WHO'S YOUR DADDY?\"",
+          "\"ANDY FICKMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-58b485b2d2a138dac9fd67aaa6151bae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Who's Your Daddy? is a 2002 American comedy film directed (and co-scripted) by Andy Fickman.",
+            "Who's Your Daddy? (film) Who's Your Daddy? is a 2002 American comedy film directed( and co-scripted) by Andy Fickman."
+          ],
+          "relation_texts": [
+            "Who's Your Daddy? is a 2002 American comedy film directed (and co-scripted) by Andy Fickman.",
+            "link",
+            "COMEDY",
+            "2002",
+            "WHO'S YOUR DADDY?",
+            "ANDY FICKMAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3a9b3750c7f78cceaa9fbbb655f646d4",
+            "hyperedge_name": "<hyperedge>\"Who's Your Daddy? is a 2002 American comedy film directed (and co-scripted) by Andy Fickman.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial effort in 2015 was described as a reunion with David Winters.\"<",
+        "branch": "semantic",
+        "raw_score": 0.37248164415359497,
+        "hyperedge_text": "\"His directorial effort in 2015 was described as a reunion with David Winters.\"<",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-13e5bcb5e110d6775060359cd01efc34"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "\"His directorial effort in 2015 was described as a reunion with David Winters.\"<",
+            "David A. Prior David A. Prior( October 5, 1955 – August 16, 2015) was an American director, screenwriter, producer and co-founder of the Action International Pictures( AIP). Prior started his career with the horror film\" Sledgehammer\"( 1983), and the action film\" Killzone\"( 1985), both of them with his brother Ted in lead roles. Shortly after he went into a partnership with veteran producer David Winters, and started directing film many of them with his brother as the star, some of these cult classics includes\" Deadly PreyAerobicide\", and\" Mankillers.\" Prior continued working with Winters producing until the mid 1990s. Some these efforts include the David Carradine futuristic action vehicle'\" Future Zone\" and its sequel,\" Raw Nerve\", starring Glenn Ford, Jan- Michael Vincent, Sandahl Bergman and Traci Lords,\" Night Trap\" Gold Award winner at the World Fest Houston for best Fantasy/ Ho..."
+          ],
+          "relation_texts": [
+            "\"His directorial effort in 2015 was described as a reunion with David Winters.\"<"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6e88e0178cafc4bf27302d2a390b9da7",
+            "hyperedge_name": "<hyperedge>\"His directorial effort in 2015 was described as a reunion with David Winters.\"<"
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film portrays the struggles of the father-son duo as they navigate life's challenges and aspirations.\"",
+        "branch": "semantic",
+        "raw_score": 0.3716345429420471,
+        "hyperedge_text": "The film portrays the struggles of the father-son duo as they navigate life's challenges and aspirations.",
+        "entity_ids": [
+          "\"STRUGGLES\"",
+          "\"FATHER-SON DUO\""
+        ],
+        "chunk_ids": [
+          "chunk-984962ac49a0a79a49ef85e0f2de2993"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film portrays the struggles of the father-son duo as they navigate life's challenges and aspirations.",
+            "Harry & Son Harry& Son is a 1984 American drama film directed by Paul Newman, who also stars. The screenplay by Newman and Ronald Buck focuses on the relationship between a blue- collar worker and his son( Robby Benson), who fails at various odd jobs while aspiring to be a writer. Joanne Woodward, Ellen Barkin, Ossie Davis, Wilford Brimley and Judith Ivey also star. The film also features Morgan Freeman in an early role."
+          ],
+          "relation_texts": [
+            "The film portrays the struggles of the father-son duo as they navigate life's challenges and aspirations.",
+            "link",
+            "STRUGGLES",
+            "FATHER-SON DUO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8452a0882389c8b192ce7d4b2bcc5731",
+            "hyperedge_name": "<hyperedge>\"The film portrays the struggles of the father-son duo as they navigate life's challenges and aspirations.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.\"",
+        "hyperedge_text": "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6156403422355652,
+        "fusion_score": 0.5231280684471131,
+        "entity_ids": [
+          "\"JAMES TINLING\"",
+          "\"45 FATHERS\"",
+          "\"FRANCES HYLAND\"",
+          "\"ALBERT RAY\"",
+          "\"JANE WITHERS\"",
+          "\"THOMAS BECK\"",
+          "\"LOUISE HENRY\"",
+          "\"RICHARD CARLE\"",
+          "\"NELLA WALKER\"",
+          "\"ANDREW TOMBES\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "evidence_texts": [
+          "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+          "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.61564,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523128
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"45 Fathers is a comedy film directed by James Tinling.\"",
+        "hyperedge_text": "45 Fathers is a comedy film directed by James Tinling.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6760731935501099,
+        "fusion_score": 0.5352146387100221,
+        "entity_ids": [
+          "\"COMEDY FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "evidence_texts": [
+          "45 Fathers is a comedy film directed by James Tinling.",
+          "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.676073,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535215
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"45 Fathers was produced in 1937.\"",
+        "hyperedge_text": "45 Fathers was produced in 1937.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6023674607276917,
+        "fusion_score": 0.5204734921455384,
+        "entity_ids": [
+          "\"1937\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "evidence_texts": [
+          "45 Fathers was produced in 1937.",
+          "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.602367,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.520473
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5064207315444946,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2692349592844645,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.506421,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.269235
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5018224120140076,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2673956314722697,
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "evidence_texts": [
+          "As a director, he has likely worked on a variety of projects spanning different genres.",
+          "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.501822,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.267396
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When was the director of Christ Walking On The Water born?",
+    "retrieval_question": "When was Georges Méliès born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was the director of Christ Walking On The Water born?",
+      "retrieval_question": "When was Georges Méliès born?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Christ Walking On The Water",
+      "replacement_answer": "Georges Méliès",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Christ Walking On The Water",
+          "replacement_answer": "Georges Méliès"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"ILLUSIONIST\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+            "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+          ],
+          "relation_texts": [
+            "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+            "link",
+            "FILM DIRECTOR",
+            "GEORGES MÉLIÈS",
+            "ILLUSIONIST"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "entity_ids": [
+          "\"1899\"",
+          "\"FRENCH\"",
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+          ],
+          "relation_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "link",
+            "1899",
+            "FRENCH",
+            "CHRIST WALKING ON THE WATER",
+            "GEORGES MÉLIÈS",
+            "SHORT SILENT FILM"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.5044424533843994,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.4859986901283264,
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has the birth date of 1 November 1982.",
+            "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+          ],
+          "relation_texts": [
+            "He has the birth date of 1 November 1982.",
+            "link",
+            "1 NOVEMBER 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e7ccd25dfeb68bf5e59c3683e27f9a72",
+            "hyperedge_name": "<hyperedge>\"He has the birth date of 1 November 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was April 1, 1883.\"",
+        "branch": "relation",
+        "raw_score": 0.483661025762558,
+        "hyperedge_text": "His birth date was April 1, 1883.",
+        "entity_ids": [
+          "\"APRIL 1, 1883\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was April 1, 1883.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His birth date was April 1, 1883.",
+            "link",
+            "APRIL 1, 1883"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-513618e3e9a5db9731bf910947f84866",
+            "hyperedge_name": "<hyperedge>\"His birth date was April 1, 1883.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\"",
+        "branch": "relation",
+        "raw_score": 0.47554200887680054,
+        "hyperedge_text": "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-68776c5ec312f8403508c9a611746b32"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "Jean-Pierre de Keyser Jean- Pierre de Keyser( born 13 April 1965) is a retired German football player."
+          ],
+          "relation_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-028758a1e84246436fa83f391bd7fc4c",
+            "hyperedge_name": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was on October 9, 1892.\"",
+        "branch": "relation",
+        "raw_score": 0.47361624240875244,
+        "hyperedge_text": "His birth date was on October 9, 1892.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0866c3f8d6fb59c7691bda418ca8c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was on October 9, 1892.",
+            "Robert P. Kerr Robert P. Kerr (October 9, 1892 – September 5, 1960) was an American film director, actor and screenwriter. He directed 41 films between 1917 and 1928. He was born in Burlington, Colorado and died in Porterville, California from a heart attack."
+          ],
+          "relation_texts": [
+            "His birth date was on October 9, 1892.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fe9b22788083ee137d022bf188d617cf",
+            "hyperedge_name": "<hyperedge>\"His birth date was on October 9, 1892.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\"",
+        "branch": "relation",
+        "raw_score": 0.4718781113624573,
+        "hyperedge_text": "The date of birth April 18, 1973, marks an important milestone in his life.",
+        "entity_ids": [
+          "\"MILESTONE\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "link",
+            "MILESTONE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d651f368d8e93791546127e4938cabb",
+            "hyperedge_name": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on February 18, 1989.\"",
+        "branch": "relation",
+        "raw_score": 0.4713641405105591,
+        "hyperedge_text": "He was born on February 18, 1989.",
+        "entity_ids": [
+          "\"FEBRUARY 18, 1989\""
+        ],
+        "chunk_ids": [
+          "chunk-355112d058d669aaa46c2d9424032c99"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on February 18, 1989.",
+            "Tony Jaye Tucker Jr. Tony J. Tucker Jr. or TJ( born February 18, 1989) is currently a free agent American defensive end football player. He is known for being\" quick off the ball\"."
+          ],
+          "relation_texts": [
+            "He was born on February 18, 1989.",
+            "link",
+            "FEBRUARY 18, 1989"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c6790d20e0568df4764f89e4b56183c0",
+            "hyperedge_name": "<hyperedge>\"He was born on February 18, 1989.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 16, 1993.\"",
+        "branch": "relation",
+        "raw_score": 0.47004371881484985,
+        "hyperedge_text": "He was born on December 16, 1993.",
+        "entity_ids": [
+          "\"DECEMBER 16, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-2434daa5d2e639dffeeacdeae7136b7e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 16, 1993.",
+            "Michael Rector Michael Rector( born December 16, 1993) is an American football wide receiver who is currently a free agent of the National Football League. He played college football at Stanford."
+          ],
+          "relation_texts": [
+            "He was born on December 16, 1993.",
+            "link",
+            "DECEMBER 16, 1993"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd47ba46ad7b16c6fa6f60940ac4bafe",
+            "hyperedge_name": "<hyperedge>\"He was born on December 16, 1993.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.4690505266189575,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date is debated, with various sources giving dates from 763 to 766.\"",
+        "branch": "relation",
+        "raw_score": 0.4669952988624573,
+        "hyperedge_text": "His birth date is debated, with various sources giving dates from 763 to 766.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-977df3b46015f6ac577aea517c0266a2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date is debated, with various sources giving dates from 763 to 766.",
+            "Harun al-Rashid Harun al-Rashid (\"Hārūn Ar-RašīdAaron the Orthodox\" or \"Aaron the Rightly-Guided\", 17 March 763 or February 766 – 24 March 809 (148–193 Hijri)) was the fifth Abbasid Caliph. His birth date is debated, with various sources giving dates from 763 to 766. His epithet \"al-Rashid\" translates to \"the Orthodoxthe Justthe Upright\", or \"the Rightly-Guided\". Al-Rashid ruled from 786 to 809, during the peak of the Islamic Golden Age. He established the legendary library Bayt al-Hikma (\"House of Wisdom\") in Baghdad in present-day Iraq, and during his rule Baghdad began to flourish as a center of knowledge, culture and trade. During his rule, the family of Barmakids, which played a deciding role in establishing the Abbasid Caliphate, declined gradually. In 796, he moved his court and government to Raqqa in present-day Syria. A Frankish mission came to offer Harun friendship in 799...."
+          ],
+          "relation_texts": [
+            "His birth date is debated, with various sources giving dates from 763 to 766.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c5d59e94012e665b50a1b5ac567da9fe",
+            "hyperedge_name": "<hyperedge>\"His birth date is debated, with various sources giving dates from 763 to 766.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Méliès (8 December 1861 – 21 January 1938) was a French illusionist and film director.\"",
+        "branch": "semantic",
+        "raw_score": 0.7928413152694702,
+        "hyperedge_text": "Georges Méliès (8 December 1861 – 21 January 1938) was a French illusionist and film director.",
+        "entity_ids": [
+          "\"FRENCH\"",
+          "\"8 DECEMBER 1861 – 21 JANUARY 1938\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Georges Méliès (8 December 1861 – 21 January 1938) was a French illusionist and film director.",
+            "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+          ],
+          "relation_texts": [
+            "Georges Méliès (8 December 1861 – 21 January 1938) was a French illusionist and film director.",
+            "link",
+            "FRENCH",
+            "8 DECEMBER 1861 – 21 JANUARY 1938"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a446eeeac42aa400d639abe4cc903bf3",
+            "hyperedge_name": "<hyperedge>\"Georges Méliès (8 December 1861 – 21 January 1938) was a French illusionist and film director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.6957424283027649,
+        "hyperedge_text": "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"ILLUSIONIST\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+            "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+          ],
+          "relation_texts": [
+            "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+            "link",
+            "FILM DIRECTOR",
+            "GEORGES MÉLIÈS",
+            "ILLUSIONIST"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-485d77a9216341f6fa93a0d174bd681e",
+            "hyperedge_name": "<hyperedge>\"Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by Georges Méliès, known for his pioneering work in visual effects and storytelling in film.\"",
+        "branch": "semantic",
+        "raw_score": 0.6359970569610596,
+        "hyperedge_text": "Directed by Georges Méliès, known for his pioneering work in visual effects and storytelling in film.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Directed by Georges Méliès, known for his pioneering work in visual effects and storytelling in film.",
+            "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+          ],
+          "relation_texts": [
+            "Directed by Georges Méliès, known for his pioneering work in visual effects and storytelling in film.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dabb16b2aa3ff5ee962e74978e66dd63",
+            "hyperedge_name": "<hyperedge>\"Directed by Georges Méliès, known for his pioneering work in visual effects and storytelling in film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Méliès led many technical and narrative developments in the earliest days of cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.5826761722564697,
+        "hyperedge_text": "Méliès led many technical and narrative developments in the earliest days of cinema.",
+        "entity_ids": [
+          "\"TECHNICAL DEVELOPMENTS\"",
+          "\"NARRATIVE DEVELOPMENTS\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Méliès led many technical and narrative developments in the earliest days of cinema.",
+            "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+          ],
+          "relation_texts": [
+            "Méliès led many technical and narrative developments in the earliest days of cinema.",
+            "link",
+            "TECHNICAL DEVELOPMENTS",
+            "NARRATIVE DEVELOPMENTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dbcca61f02e018cf422e0423dacbbe6c",
+            "hyperedge_name": "<hyperedge>\"Méliès led many technical and narrative developments in the earliest days of cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Méliès was well-known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time-lapse photography, dissolves, and hand-painted colour.\"",
+        "branch": "semantic",
+        "raw_score": 0.5415884852409363,
+        "hyperedge_text": "Méliès was well-known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time-lapse photography, dissolves, and hand-painted colour.",
+        "entity_ids": [
+          "\"SPECIAL EFFECTS\"",
+          "\"SUBSTITUTION SPLICES\"",
+          "\"MULTIPLE EXPOSURES\"",
+          "\"TIME-LAPSE PHOTOGRAPHY\"",
+          "\"DISSOLVES\"",
+          "\"HAND-PAINTED COLOUR\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Méliès was well-known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time-lapse photography, dissolves, and hand-painted colour.",
+            "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+          ],
+          "relation_texts": [
+            "Méliès was well-known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time-lapse photography, dissolves, and hand-painted colour.",
+            "link",
+            "SPECIAL EFFECTS",
+            "SUBSTITUTION SPLICES",
+            "MULTIPLE EXPOSURES",
+            "TIME-LAPSE PHOTOGRAPHY",
+            "DISSOLVES",
+            "HAND-PAINTED COLOUR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-134b1cda8a8fad5f22d3d0410edcb169",
+            "hyperedge_name": "<hyperedge>\"Méliès was well-known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time-lapse photography, dissolves, and hand-painted colour.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Méliès' films feature surreal journeys somewhat in the style of Jules Verne.\"",
+        "branch": "semantic",
+        "raw_score": 0.5410057306289673,
+        "hyperedge_text": "Méliès' films feature surreal journeys somewhat in the style of Jules Verne.",
+        "entity_ids": [
+          "\"SURREAL JOURNEYS\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Méliès' films feature surreal journeys somewhat in the style of Jules Verne.",
+            "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+          ],
+          "relation_texts": [
+            "Méliès' films feature surreal journeys somewhat in the style of Jules Verne.",
+            "link",
+            "SURREAL JOURNEYS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-301c843cd19e88da80f41ed52b348440",
+            "hyperedge_name": "<hyperedge>\"Méliès' films feature surreal journeys somewhat in the style of Jules Verne.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "branch": "semantic",
+        "raw_score": 0.5183416604995728,
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "entity_ids": [
+          "\"1899\"",
+          "\"FRENCH\"",
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+          ],
+          "relation_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "link",
+            "1899",
+            "FRENCH",
+            "CHRIST WALKING ON THE WATER",
+            "GEORGES MÉLIÈS",
+            "SHORT SILENT FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8043afbecc2a391cc7866b5fe67e4ad0",
+            "hyperedge_name": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Méliès is considered a pioneer in the use of narrative structures in film.\"",
+        "branch": "semantic",
+        "raw_score": 0.5059923529624939,
+        "hyperedge_text": "Méliès is considered a pioneer in the use of narrative structures in film.",
+        "entity_ids": [
+          "\"PIONEER\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Méliès is considered a pioneer in the use of narrative structures in film.",
+            "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+          ],
+          "relation_texts": [
+            "Méliès is considered a pioneer in the use of narrative structures in film.",
+            "link",
+            "PIONEER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fa28f0a51a04c4fbde2a207b260b57e1",
+            "hyperedge_name": "<hyperedge>\"Méliès is considered a pioneer in the use of narrative structures in film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"François Leterrier was born on 26 May 1929.\"",
+        "branch": "semantic",
+        "raw_score": 0.47199127078056335,
+        "hyperedge_text": "François Leterrier was born on 26 May 1929.",
+        "entity_ids": [
+          "\"26 MAY 1929\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "François Leterrier was born on 26 May 1929.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "François Leterrier was born on 26 May 1929.",
+            "link",
+            "26 MAY 1929"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3184520e1a638a6c42cf076d47c5114e",
+            "hyperedge_name": "<hyperedge>\"François Leterrier was born on 26 May 1929.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Méliès was one of the first filmmakers to use storyboards.\"",
+        "branch": "semantic",
+        "raw_score": 0.4687502980232239,
+        "hyperedge_text": "Méliès was one of the first filmmakers to use storyboards.",
+        "entity_ids": [
+          "\"STORYBOARDS\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Méliès was one of the first filmmakers to use storyboards.",
+            "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+          ],
+          "relation_texts": [
+            "Méliès was one of the first filmmakers to use storyboards.",
+            "link",
+            "STORYBOARDS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0c37232dd0d3501e61428b1dc68ac872",
+            "hyperedge_name": "<hyperedge>\"Méliès was one of the first filmmakers to use storyboards.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.\"",
+        "hyperedge_text": "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6957424283027649,
+        "fusion_score": 0.5391484856605531,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"ILLUSIONIST\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "evidence_texts": [
+          "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+          "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.695742,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.539148
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5183416604995728,
+        "fusion_score": 0.5036683320999146,
+        "entity_ids": [
+          "\"1899\"",
+          "\"FRENCH\"",
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.518342,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503668
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Méliès (8 December 1861 – 21 January 1938) was a French illusionist and film director.\"",
+        "hyperedge_text": "Georges Méliès (8 December 1861 – 21 January 1938) was a French illusionist and film director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7928413152694702,
+        "fusion_score": 0.5585682630538941,
+        "entity_ids": [
+          "\"FRENCH\"",
+          "\"8 DECEMBER 1861 – 21 JANUARY 1938\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "evidence_texts": [
+          "Georges Méliès (8 December 1861 – 21 January 1938) was a French illusionist and film director.",
+          "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.792841,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.558568
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by Georges Méliès, known for his pioneering work in visual effects and storytelling in film.\"",
+        "hyperedge_text": "Directed by Georges Méliès, known for his pioneering work in visual effects and storytelling in film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6359970569610596,
+        "fusion_score": 0.5271994113922119,
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "Directed by Georges Méliès, known for his pioneering work in visual effects and storytelling in film.",
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.635997,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527199
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4859986901283264,
+        "semantic_score": 0.2,
+        "fusion_score": 0.23439947605133057,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.485999,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.234399
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the birth date of the director of Christ Walking On The Water?",
+    "retrieval_question": "What is the birth date of the director of Christ Walking On The Water?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth date of the director of Christ Walking On The Water?",
+      "retrieval_question": "What is the birth date of the director of Christ Walking On The Water?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "entity_ids": [
+          "\"1899\"",
+          "\"FRENCH\"",
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+          ],
+          "relation_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "link",
+            "1899",
+            "FRENCH",
+            "CHRIST WALKING ON THE WATER",
+            "GEORGES MÉLIÈS",
+            "SHORT SILENT FILM"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"ILLUSIONIST\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+            "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+          ],
+          "relation_texts": [
+            "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+            "link",
+            "FILM DIRECTOR",
+            "GEORGES MÉLIÈS",
+            "ILLUSIONIST"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on February 9, 1976, and is recognized for his contributions in multiple entertainment fields including acting, writing, and directing.\"",
+        "branch": "relation",
+        "raw_score": 0.4784224033355713,
+        "hyperedge_text": "He was born on February 9, 1976, and is recognized for his contributions in multiple entertainment fields including acting, writing, and directing.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"MUSICIAN\"",
+          "\"ACTOR\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\"",
+          "\"FEBRUARY 9, 1976\""
+        ],
+        "chunk_ids": [
+          "chunk-40c9c1487a61b2650f718d315736c2ba"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on February 9, 1976, and is recognized for his contributions in multiple entertainment fields including acting, writing, and directing.",
+            "Charlie Day Charles Peckham Day( born February 9, 1976) is an American actor, screenwriter, producer, director and musician. He is best known for playing Charlie Kelly on\" It's Always Sunny in Philadelphia\" for which he was nominated for the Critics' Choice Television Award for Best Actor in a Comedy Series in 2011. In film, he is known for his role as Dale in the films\" Horrible Bosses\"( 2011) and its 2014 sequel, as well as for his roles in\" Monsters University\"( 2013),\" Pacific Rim\"( 2013),\" The Lego Movie\"( 2014),\" Fist Fight\"( 2017),( 2018), and( 2019). From 2018 to 2019, Day was the executive producer on the Fox comedy\" The Cool Kids.\""
+          ],
+          "relation_texts": [
+            "He was born on February 9, 1976, and is recognized for his contributions in multiple entertainment fields including acting, writing, and directing.",
+            "link",
+            "DIRECTOR",
+            "MUSICIAN",
+            "ACTOR",
+            "SCREENWRITER",
+            "PRODUCER",
+            "FEBRUARY 9, 1976"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ad7a0de560a32ad4fba3438a88e41dfa",
+            "hyperedge_name": "<hyperedge>\"He was born on February 9, 1976, and is recognized for his contributions in multiple entertainment fields including acting, writing, and directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 1 April 1931, marks the beginning of an influential life in the arts.\"",
+        "branch": "relation",
+        "raw_score": 0.47004473209381104,
+        "hyperedge_text": "His birth date, 1 April 1931, marks the beginning of an influential life in the arts.",
+        "entity_ids": [
+          "\"INFLUENTIAL LIFE IN THE ARTS\""
+        ],
+        "chunk_ids": [
+          "chunk-d98c2e48b61989662dcddca18b5926b8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date, 1 April 1931, marks the beginning of an influential life in the arts.",
+            "Per Kleiva Per Kleiva (1 April 1931 – 17 September 2017) was a Norwegian painter and graphic artist. He was born in Torsken to schoolteacher Ivar Kleiva and Frida Pettersen, and was married to Ida Drage. His works are represented in the National Museum of Art, Architecture and Design. From 1987 to 1993 he was appointed professor at the Norwegian National Academy of Fine Arts."
+          ],
+          "relation_texts": [
+            "His birth date, 1 April 1931, marks the beginning of an influential life in the arts.",
+            "link",
+            "INFLUENTIAL LIFE IN THE ARTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c2fa0256ae0413c378d129a55d22f213",
+            "hyperedge_name": "<hyperedge>\"His birth date, 1 April 1931, marks the beginning of an influential life in the arts.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.\"",
+        "branch": "relation",
+        "raw_score": 0.4520295560359955,
+        "hyperedge_text": "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+        "entity_ids": [
+          "\"1 JULY 1960\""
+        ],
+        "chunk_ids": [
+          "chunk-aa56f51397106aa3cdfbda911c04958d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+            "Mikael Håfström Jan Mikael Håfström( born 1 July 1960) is a Swedish film director and screenwriter. He is best known for the 2003 film\" Evil\"."
+          ],
+          "relation_texts": [
+            "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+            "link",
+            "1 JULY 1960"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-851a87571a4d299f7697654a2b8a1bb3",
+            "hyperedge_name": "<hyperedge>\"His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.4473828673362732,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "branch": "relation",
+        "raw_score": 0.44457024335861206,
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+          ],
+          "relation_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "link",
+            "CAREER TIMELINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f292719350c455f48b3bb7d98ae9f7f2",
+            "hyperedge_name": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\"",
+        "branch": "relation",
+        "raw_score": 0.44289320707321167,
+        "hyperedge_text": "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-68776c5ec312f8403508c9a611746b32"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "Jean-Pierre de Keyser Jean- Pierre de Keyser( born 13 April 1965) is a retired German football player."
+          ],
+          "relation_texts": [
+            "His birth date, 13 April 1965, marks the beginning of his life and subsequent career.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-028758a1e84246436fa83f391bd7fc4c",
+            "hyperedge_name": "<hyperedge>\"His birth date, 13 April 1965, marks the beginning of his life and subsequent career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Alexander Singer, born 18 April 1928, in New York City, New York, is an American director.\"",
+        "branch": "relation",
+        "raw_score": 0.4416314959526062,
+        "hyperedge_text": "Alexander Singer, born 18 April 1928, in New York City, New York, is an American director.",
+        "entity_ids": [
+          "\"ALEXANDER SINGER\""
+        ],
+        "chunk_ids": [
+          "chunk-d835b29e2a0ee37103997165350c3b23"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Alexander Singer, born 18 April 1928, in New York City, New York, is an American director.",
+            "Alexander Singer Alexander Singer( born 18 April 1928, in New York City, New York) is an American director. He began his career behind the camera in 1951 as a cinematographer on the short documentary\" Day of the Fight\", directed by his high school friend, Stanley Kubrick. Singer himself turned to directing a decade later with the film,\" A Cold Wind in August\". Although he would direct other feature films, such as the Lee Van Cleef western,\" Captain Apache\"( 1971), and\" Glass Houses\"( 1972), a film of the book which his wife, Judith Singer, wrote, the bulk of Singer's credits are in television. The long list of series to which Singer has lent his directorial talents include\" Dr. Kildare The F.B.I.Alias Smith and JonesNakiaPolice WomanCagney& LaceyMacGyver\", six episodes of\" The Monkees\", and three\" Star Trek\" series:,, and."
+          ],
+          "relation_texts": [
+            "Alexander Singer, born 18 April 1928, in New York City, New York, is an American director.",
+            "link",
+            "ALEXANDER SINGER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7fb6bf5a514d65d89cb4cd4bcd4ed3d0",
+            "hyperedge_name": "<hyperedge>\"Alexander Singer, born 18 April 1928, in New York City, New York, is an American director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He made his directorial debut in 1943.\"",
+        "branch": "relation",
+        "raw_score": 0.43686792254447937,
+        "hyperedge_text": "He made his directorial debut in 1943.",
+        "entity_ids": [
+          "\"DIRECTORIAL DEBUT\""
+        ],
+        "chunk_ids": [
+          "chunk-4bca9bc3902010a89a5ddc50d54a0679"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He made his directorial debut in 1943.",
+            "Hugo Fregonese Hugo Geronimo Fregonese( April 8, 1908 in Mendoza – January 11, 1987 in Tigre) was an Argentine film director and screenwriter who worked both in Hollywood and his home country. He made his directorial debut in 1943. In 1949, he directed\" Apenas un delincuente\". Most of Fregonese's American films were Westerns and crime melodramas, like\" Man in the Attic\"( 1953)\" and Black Tuesday\"( 1954). He worked with such Hollywood actors as Gary Cooper, Barbara Stanwyck, Anthony Quinn, Edward G. Robinson, Luisa Vehil, Víctor Laplace, Soledad Silveyra, Paul Naschy and Joel McCrea, among others. For directing the now- almost forgotten film\" My Six Convicts\"( 1952), Fregonese was nominated for the Directors Guild of America Award for Outstanding Directing- Feature Film."
+          ],
+          "relation_texts": [
+            "He made his directorial debut in 1943.",
+            "link",
+            "DIRECTORIAL DEBUT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a6946747d73ecd8d545f2f47da556e6a",
+            "hyperedge_name": "<hyperedge>\"He made his directorial debut in 1943.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Castellari's birth date is significant to his biographical information.\"",
+        "branch": "relation",
+        "raw_score": 0.43624192476272583,
+        "hyperedge_text": "Castellari's birth date is significant to his biographical information.",
+        "entity_ids": [
+          "\"BIOGRAPHICAL INFORMATION\""
+        ],
+        "chunk_ids": [
+          "chunk-4efeb20de34816861256f308734cb4fd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Castellari's birth date is significant to his biographical information.",
+            "Enzo G. Castellari Enzo Girolami Castellari( born 29 July 1938) is an Italian director, screenwriter and actor."
+          ],
+          "relation_texts": [
+            "Castellari's birth date is significant to his biographical information.",
+            "link",
+            "BIOGRAPHICAL INFORMATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-70e9addbe37cf5a169bfdfceafb0cd70",
+            "hyperedge_name": "<hyperedge>\"Castellari's birth date is significant to his biographical information.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The dates associated with his notable films highlight his active years in filmmaking.\"",
+        "branch": "relation",
+        "raw_score": 0.4344612956047058,
+        "hyperedge_text": "The dates associated with his notable films highlight his active years in filmmaking.",
+        "entity_ids": [
+          "\"1955\"",
+          "\"1951\"",
+          "\"1958\""
+        ],
+        "chunk_ids": [
+          "chunk-d8f0fe9af4e923c27006ffac413a8198"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The dates associated with his notable films highlight his active years in filmmaking.",
+            "Werner Jacobs Werner Jacobs (1909–1999) was a German film director. . He was born in Berlin on the 24 April, 1990. He is best known for his contributions to Modebummel (1951), Der Stern von Santa Clara (1958) and André und Ursula (1955). ."
+          ],
+          "relation_texts": [
+            "The dates associated with his notable films highlight his active years in filmmaking.",
+            "link",
+            "1955",
+            "1951",
+            "1958"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2a504f451267c754c89c992fd532943c",
+            "hyperedge_name": "<hyperedge>\"The dates associated with his notable films highlight his active years in filmmaking.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.\"",
+        "branch": "semantic",
+        "raw_score": 0.5666463375091553,
+        "hyperedge_text": "The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.",
+        "entity_ids": [
+          "\"BIBLICAL NARRATIVE\"",
+          "\"WATER\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.",
+            "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+          ],
+          "relation_texts": [
+            "The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.",
+            "link",
+            "BIBLICAL NARRATIVE",
+            "WATER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-388a00ef785c33cf70fb6b4512b84a7d",
+            "hyperedge_name": "<hyperedge>\"The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "branch": "semantic",
+        "raw_score": 0.4822123646736145,
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "entity_ids": [
+          "\"1899\"",
+          "\"FRENCH\"",
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+          ],
+          "relation_texts": [
+            "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+            "link",
+            "1899",
+            "FRENCH",
+            "CHRIST WALKING ON THE WATER",
+            "GEORGES MÉLIÈS",
+            "SHORT SILENT FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8043afbecc2a391cc7866b5fe67e4ad0",
+            "hyperedge_name": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"William Christy Cabanne (April 16, 1888 – October 15, 1950) was an American film director, screenwriter and silent film actor.\"",
+        "branch": "semantic",
+        "raw_score": 0.43176591396331787,
+        "hyperedge_text": "William Christy Cabanne (April 16, 1888 – October 15, 1950) was an American film director, screenwriter and silent film actor.",
+        "entity_ids": [
+          "\"SCREENWRITER\"",
+          "\"AMERICAN FILM DIRECTOR\"",
+          "\"WILLIAM CHRISTY CABANNE\"",
+          "\"SILENT FILM ACTOR\"",
+          "\"APRIL 16, 1888\"",
+          "\"OCTOBER 15, 1950\""
+        ],
+        "chunk_ids": [
+          "chunk-d58f3d9a1ab3de6c667a006d82b7e6bc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "William Christy Cabanne (April 16, 1888 – October 15, 1950) was an American film director, screenwriter and silent film actor.",
+            "Christy Cabanne William Christy Cabanne( April 16, 1888 – October 15, 1950) was an American film director, screenwriter and silent film actor."
+          ],
+          "relation_texts": [
+            "William Christy Cabanne (April 16, 1888 – October 15, 1950) was an American film director, screenwriter and silent film actor.",
+            "link",
+            "SCREENWRITER",
+            "AMERICAN FILM DIRECTOR",
+            "WILLIAM CHRISTY CABANNE",
+            "SILENT FILM ACTOR",
+            "APRIL 16, 1888",
+            "OCTOBER 15, 1950"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6eb13f69e7882c8864270908fad9b32d",
+            "hyperedge_name": "<hyperedge>\"William Christy Cabanne (April 16, 1888 – October 15, 1950) was an American film director, screenwriter and silent film actor.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born August 13, 1968, Joshua Jacob Marston is an American screenwriter and film director best known for the film 'Maria Full of Grace'. \"",
+        "branch": "semantic",
+        "raw_score": 0.43078598380088806,
+        "hyperedge_text": "Born August 13, 1968, Joshua Jacob Marston is an American screenwriter and film director best known for the film 'Maria Full of Grace'.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-60a6037065abd6e96111648ebd15f422"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born August 13, 1968, Joshua Jacob Marston is an American screenwriter and film director best known for the film 'Maria Full of Grace'.",
+            "Joshua Marston Joshua Jacob Marston( born August 13, 1968) is an American screenwriter and film director best known for the film\" Maria Full of Grace\". Born in Los Angeles County, California, he graduated from Beverly Hills High School. Marston worked in Paris as an intern for\" Life\", then for ABC News during the Gulf War. He returned to the United States and earned a master's degree in Political science from University of Chicago in 1994 before earning a Master of Fine Arts in film at New York University. Marston also directed an episode of\" Six Feet Under\", and Episode 7 of\" The Newsroom\" in 2012. Marston directed a segment of the collective film\" New York, I Love You\". His 2011 film\" The Forgiveness of Blood\" premiered in competition at the 61st Berlin International Film Festival and competed for the Golden Bear. Along with Andamion Murataj, Marston won the Silver Bear for Best Scr..."
+          ],
+          "relation_texts": [
+            "Born August 13, 1968, Joshua Jacob Marston is an American screenwriter and film director best known for the film 'Maria Full of Grace'."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cccf137cfaa9e7805950a6555ae250b8",
+            "hyperedge_name": "<hyperedge>\"Born August 13, 1968, Joshua Jacob Marston is an American screenwriter and film director best known for the film 'Maria Full of Grace'. \""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He made his directorial debut in 1992 with his first movie 'Praying with Anger.'\"",
+        "branch": "semantic",
+        "raw_score": 0.42554205656051636,
+        "hyperedge_text": "He made his directorial debut in 1992 with his first movie 'Praying with Anger.'",
+        "entity_ids": [
+          "\"PRAYING WITH ANGER\""
+        ],
+        "chunk_ids": [
+          "chunk-a4687c9f3d4e08e2f0971e8433ecdd86"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He made his directorial debut in 1992 with his first movie 'Praying with Anger.'",
+            "M. Night Shyamalan Manoj Nelliyattu\" M. Night\" Shyamalan( born August 6, 1970) is an American filmmaker and actor. He is known for making films with contemporary supernatural plots and twist endings. He was born in Mahé, Puducherry, India, and raised in Penn Valley, Pennsylvania. The cumulative gross of his films exceeds$ 3 billion globally. He made his directorial debut in 1992 with his first movie\" Praying with Anger\". His second movie was the comedy- drama film\" Wide Awake\"( 1998). His most well- received films include the supernatural thriller\" The Sixth Sense\"( 1999), the superhero thriller\" Unbreakable\"( 2000), the science fiction thriller\" Signs\"( 2002) and the period- piece thriller\" The Village\"( 2004). For\" The Sixth Sense\", Shyamalan received a nomination for the Academy Award for Best Director and the Academy Award for Best Original Screenplay. Afterward, Shyamalan release..."
+          ],
+          "relation_texts": [
+            "He made his directorial debut in 1992 with his first movie 'Praying with Anger.'",
+            "link",
+            "PRAYING WITH ANGER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b20a294765ff3d2eaa2737bb52887646",
+            "hyperedge_name": "<hyperedge>\"He made his directorial debut in 1992 with his first movie 'Praying with Anger.'\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Christensen (28 September 1879 – 2 April 1959) was a Danish film director, screenwriter and an actor both in film and on the stage.\"",
+        "branch": "semantic",
+        "raw_score": 0.4225694537162781,
+        "hyperedge_text": "Benjamin Christensen (28 September 1879 – 2 April 1959) was a Danish film director, screenwriter and an actor both in film and on the stage.",
+        "entity_ids": [
+          "\"DANISH\"",
+          "\"FILM DIRECTOR\"",
+          "\"SCREENWRITER\"",
+          "\"ACTOR\"",
+          "\"BENJAMIN CHRISTENSEN\""
+        ],
+        "chunk_ids": [
+          "chunk-3b6ef5df695c0323f4cd84e9a5cc4083"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Christensen (28 September 1879 – 2 April 1959) was a Danish film director, screenwriter and an actor both in film and on the stage.",
+            "Benjamin Christensen Benjamin Christensen( 28 September 1879 – 2 April 1959) was a Danish film director, screenwriter and an actor both in film and on the stage. As a director he is most well known for the 1922 film\" Häxan\" and as an actor, he is best known for his performance in the film\" Michael\"( 1924), in which he plays Claude Zoret, the jilted lover of the film's title character."
+          ],
+          "relation_texts": [
+            "Benjamin Christensen (28 September 1879 – 2 April 1959) was a Danish film director, screenwriter and an actor both in film and on the stage.",
+            "link",
+            "DANISH",
+            "FILM DIRECTOR",
+            "SCREENWRITER",
+            "ACTOR",
+            "BENJAMIN CHRISTENSEN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-94192377f974a0459971c4247305f6fd",
+            "hyperedge_name": "<hyperedge>\"Benjamin Christensen (28 September 1879 – 2 April 1959) was a Danish film director, screenwriter and an actor both in film and on the stage.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Chris Matheson (born December 11, 1960) is an American film director and screenwriter.\"",
+        "branch": "semantic",
+        "raw_score": 0.4224989414215088,
+        "hyperedge_text": "Chris Matheson (born December 11, 1960) is an American film director and screenwriter.",
+        "entity_ids": [
+          "\"SCREENWRITER\"",
+          "\"AMERICAN FILM DIRECTOR\"",
+          "\"CHRIS MATHESON\"",
+          "\"DECEMBER 11, 1960\""
+        ],
+        "chunk_ids": [
+          "chunk-a110bbdf22a2c2201196587e28a5b8ee"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Chris Matheson (born December 11, 1960) is an American film director and screenwriter.",
+            "Chris Matheson (screenwriter) Chris Matheson (born December 11, 1960) is an American film director and screenwriter. Matheson is best known for his collaborations with fellow screenwriter Ed Solomon, together creating the \"Bill & Ted\" franchise, writing the three films \"Bill & Ted's Excellent AdventureBill & Ted's Bogus Journey\", and \"Bill & Ted Face the Music\". Together they also wrote the films \" Mom and Dad Save the World\" and \"Imagine That\". His 2015 book \"The Story of God: A Biblical Comedy about Love (and Hate)\" is an alternative interpretation of the Christian Bible as seen through the eyes of an atheist. He is the son of author Richard Matheson, as well as the younger brother of fellow screenwriter Richard Christian Matheson and the brother of Ali Marie Matheson. He is a graduate of University of California, Los Angeles."
+          ],
+          "relation_texts": [
+            "Chris Matheson (born December 11, 1960) is an American film director and screenwriter.",
+            "link",
+            "SCREENWRITER",
+            "AMERICAN FILM DIRECTOR",
+            "CHRIS MATHESON",
+            "DECEMBER 11, 1960"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-baa102a96a94883a403f13c6b5f9620e",
+            "hyperedge_name": "<hyperedge>\"Chris Matheson (born December 11, 1960) is an American film director and screenwriter.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Christy Cabanne.\"",
+        "branch": "semantic",
+        "raw_score": 0.4123786389827728,
+        "hyperedge_text": "The film was directed by Christy Cabanne.",
+        "entity_ids": [
+          "\"CHRISTY CABANNE\""
+        ],
+        "chunk_ids": [
+          "chunk-aedf310dfe670c844b34a3e40e6623d8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Christy Cabanne.",
+            "Daphne and the Pirate Daphne and the Pirate is a 1916 American drama film directed by Christy Cabanne and starring Lillian Gish."
+          ],
+          "relation_texts": [
+            "The film was directed by Christy Cabanne.",
+            "link",
+            "CHRISTY CABANNE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-df4b9e4cb1556717c21387e2d6c38d86",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Christy Cabanne.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"William Christy Cabanne’s film contributions include directing, writing, and acting.\"",
+        "branch": "semantic",
+        "raw_score": 0.4062706232070923,
+        "hyperedge_text": "William Christy Cabanne’s film contributions include directing, writing, and acting.",
+        "entity_ids": [
+          "\"ACTING\"",
+          "\"DIRECTING\"",
+          "\"WRITING\""
+        ],
+        "chunk_ids": [
+          "chunk-d58f3d9a1ab3de6c667a006d82b7e6bc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "William Christy Cabanne’s film contributions include directing, writing, and acting.",
+            "Christy Cabanne William Christy Cabanne( April 16, 1888 – October 15, 1950) was an American film director, screenwriter and silent film actor."
+          ],
+          "relation_texts": [
+            "William Christy Cabanne’s film contributions include directing, writing, and acting.",
+            "link",
+            "ACTING",
+            "DIRECTING",
+            "WRITING"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-083a74684d4cc3fe3f377df7001e4502",
+            "hyperedge_name": "<hyperedge>\"William Christy Cabanne’s film contributions include directing, writing, and acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christian E. Christiansen (born 14 December 1972) is a Danish filmmaker.\"",
+        "branch": "semantic",
+        "raw_score": 0.40157127380371094,
+        "hyperedge_text": "Christian E. Christiansen (born 14 December 1972) is a Danish filmmaker.",
+        "entity_ids": [
+          "\"14 DECEMBER 1972\"",
+          "\"DANISH FILMMAKER\"",
+          "\"CHRISTIAN E. CHRISTIANSEN\""
+        ],
+        "chunk_ids": [
+          "chunk-e399102b98b20754ec736c82439fe8f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Christian E. Christiansen (born 14 December 1972) is a Danish filmmaker.",
+            "Christian E. Christiansen Christian E. Christiansen( born 14 December 1972) is a Danish filmmaker."
+          ],
+          "relation_texts": [
+            "Christian E. Christiansen (born 14 December 1972) is a Danish filmmaker.",
+            "link",
+            "14 DECEMBER 1972",
+            "DANISH FILMMAKER",
+            "CHRISTIAN E. CHRISTIANSEN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-67f8a5363fcfd5c37331f95d7d392c0a",
+            "hyperedge_name": "<hyperedge>\"Christian E. Christiansen (born 14 December 1972) is a Danish filmmaker.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4822123646736145,
+        "fusion_score": 0.49644247293472293,
+        "entity_ids": [
+          "\"1899\"",
+          "\"FRENCH\"",
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.482212,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496442
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.\"",
+        "hyperedge_text": "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.3666666666666667,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"ILLUSIONIST\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "evidence_texts": [
+          "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+          "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.366667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.\"",
+        "hyperedge_text": "The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5666463375091553,
+        "fusion_score": 0.3133292675018311,
+        "entity_ids": [
+          "\"BIBLICAL NARRATIVE\"",
+          "\"WATER\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "The film Christ Walking on the Water is about a biblical narrative of Christ walking on water.",
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.566646,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.313329
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.\"",
+        "hyperedge_text": "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4520295560359955,
+        "semantic_score": 0.5,
+        "fusion_score": 0.28081182241439817,
+        "entity_ids": [
+          "\"1 JULY 1960\""
+        ],
+        "chunk_ids": [
+          "chunk-aa56f51397106aa3cdfbda911c04958d"
+        ],
+        "evidence_texts": [
+          "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+          "Mikael Håfström Jan Mikael Håfström( born 1 July 1960) is a Swedish film director and screenwriter. He is best known for the 2003 film\" Evil\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.45203,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.280812
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Castellari's birth date is significant to his biographical information.\"",
+        "hyperedge_text": "Castellari's birth date is significant to his biographical information.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43624192476272583,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2744967699050903,
+        "entity_ids": [
+          "\"BIOGRAPHICAL INFORMATION\""
+        ],
+        "chunk_ids": [
+          "chunk-4efeb20de34816861256f308734cb4fd"
+        ],
+        "evidence_texts": [
+          "Castellari's birth date is significant to his biographical information.",
+          "Enzo G. Castellari Enzo Girolami Castellari( born 29 July 1938) is an Italian director, screenwriter and actor."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.436242,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.274497
+        }
+      }
+    ]
+  }
+]

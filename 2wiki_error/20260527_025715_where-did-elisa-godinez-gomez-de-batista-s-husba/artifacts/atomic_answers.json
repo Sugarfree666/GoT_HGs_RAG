@@ -1,0 +1,371 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the husband of Elisa Godínez Gómez De Batista?",
+    "analysis": {
+      "entities": [
+        "Elisa Godínez Gómez De Batista"
+      ],
+      "relations": [
+        "is the husband of"
+      ],
+      "relation_query": "who is the husband of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.\"",
+        "hyperedge_text": "Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6235557794570923,
+        "fusion_score": 0.5247111558914185,
+        "entity_ids": [
+          "\"ELISA GODÍNEZ GÓMEZ DE BATISTA\"",
+          "\"FIRST LADY OF CUBA\"",
+          "\"FULGENCIO BATISTA\""
+        ],
+        "chunk_ids": [
+          "chunk-91b8ed067613b567a6bdef08dd23cdc6"
+        ],
+        "evidence_texts": [
+          "Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.",
+          "Elisa Godínez Gómez de Batista Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944. She was the first wife of Cuban President Fulgencio Batista."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.623556,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524711
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Elisa Godínez Gómez de Batista was born around 1905 and died on June 19, 1993.\"",
+        "hyperedge_text": "Elisa Godínez Gómez de Batista was born around 1905 and died on June 19, 1993.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6580466628074646,
+        "fusion_score": 0.531609332561493,
+        "entity_ids": [
+          "\"1905\"",
+          "\"JUNE 19, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-91b8ed067613b567a6bdef08dd23cdc6"
+        ],
+        "evidence_texts": [
+          "Elisa Godínez Gómez de Batista was born around 1905 and died on June 19, 1993.",
+          "Elisa Godínez Gómez de Batista Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944. She was the first wife of Cuban President Fulgencio Batista."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.658047,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531609
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the uncle of, whose husband is.\"",
+        "hyperedge_text": "He is also the uncle of, whose husband is.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5187680721282959,
+        "semantic_score": 0.125,
+        "fusion_score": 0.23250722885131836,
+        "entity_ids": [
+          "\"HUSBAND\"",
+          "\"UNCLE\"",
+          "\"NEPHEW/NIECE\""
+        ],
+        "chunk_ids": [
+          "chunk-ab4fd963a6e1bb18c7ff575cca5ddd08"
+        ],
+        "evidence_texts": [
+          "He is also the uncle of, whose husband is.",
+          "Andrzej Gawroński (actor) Andrzej Gawroński( born 10 February 1935 in Warsaw, Poland) is a Polish film and theatre actor. He is the brother of the late actor. He is also the uncle of, whose husband is."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.518768,
+          "S": 0.125,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.232507
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the husband of Pratibha Patil.\"",
+        "hyperedge_text": "He is the husband of Pratibha Patil.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5041659474372864,
+        "semantic_score": 0.125,
+        "fusion_score": 0.22666637897491457,
+        "entity_ids": [
+          "\"PRATIBHA PATIL\""
+        ],
+        "chunk_ids": [
+          "chunk-ffbdea53ddd08af0ec051afd0804d4fc"
+        ],
+        "evidence_texts": [
+          "He is the husband of Pratibha Patil.",
+          "Devisingh Ransingh Shekhawat Devisingh Ransingh Shekhawat is the former and first First Gentleman of India as the husband of Pratibha Patil."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.504166,
+          "S": 0.125,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.226666
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"husband of actress Gabriella Wilde\"",
+        "hyperedge_text": "husband of actress Gabriella Wilde",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5032666325569153,
+        "semantic_score": 0.125,
+        "fusion_score": 0.22630665302276612,
+        "entity_ids": [
+          "\"ACTRESS GABRIELLA WILDE\""
+        ],
+        "chunk_ids": [
+          "chunk-ff775504cf67541b9da0cc36aaafe92c"
+        ],
+        "evidence_texts": [
+          "husband of actress Gabriella Wilde",
+          "Alan Pownall Stephen Alan Fletcher Pownall( born 30 December 1986) is an English singer- songwriter and the husband of actress Gabriella Wilde."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.503267,
+          "S": 0.125,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.226307
+        }
+      }
+    ],
+    "answer": "Fulgencio Batista",
+    "confidence": 0.9,
+    "reasoning_summary": "Elisa Godínez Gómez de Batista was the first wife of Cuban President Fulgencio Batista, which directly answers the question about her husband.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the husband of Elisa Godínez Gómez De Batista die?",
+    "analysis": {
+      "entities": [
+        "Fulgencio Batista"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Fulgencio Batista y Zaldívar (born Rubén Zaldívar; January 16, 1901 – August 6, 1973) was a Cuban military officer and politician who served as the elected President of Cuba from 1940 to 1944, and as its U.S.-backed military dictator from 1952 to 1959, before being overthrown during the Cuban Revolution.\"",
+        "hyperedge_text": "Fulgencio Batista y Zaldívar (born Rubén Zaldívar; January 16, 1901 – August 6, 1973) was a Cuban military officer and politician who served as the elected President of Cuba from 1940 to 1944, and as its U.S.-backed military dictator from 1952 to 1959, before being overthrown during the Cuban Revolution.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5778099894523621,
+        "fusion_score": 0.5155619978904724,
+        "entity_ids": [
+          "\"CUBA\"",
+          "\"CUBAN REVOLUTION\"",
+          "\"VIOLENCE\"",
+          "\"FULGENCIO BATISTA\"",
+          "\"PUBLIC EXECUTIONS\"",
+          "\"SURVEILLANCE STATE\"",
+          "\"U.S.-BACKED MILITARY DICTATOR\""
+        ],
+        "chunk_ids": [
+          "chunk-f02f4698bbf22fb56ffc5a621a4799f9"
+        ],
+        "evidence_texts": [
+          "Fulgencio Batista y Zaldívar (born Rubén Zaldívar; January 16, 1901 – August 6, 1973) was a Cuban military officer and politician who served as the elected President of Cuba from 1940 to 1944, and as its U.S.-backed military dictator from 1952 to 1959, before being overthrown during the Cuban Revolution.",
+          "Fulgencio Batista Fulgencio Batista y Zaldívar (born Rubén Zaldívar; January 16, 1901 – August 6, 1973) was a Cuban military officer and politician who served as the elected President of Cuba from 1940 to 1944, and as its U.S.-backed military dictator from 1952 to 1959, before being overthrown during the Cuban Revolution. Batista initially rose to power as part of the 1933 Revolt of the Sergeants, which overthrew the provisional government of Carlos Manuel de Céspedes y Quesada. He then appointed himself chief of the armed forces, with the rank of colonel, and effectively controlled the five-member \"pentarchy\" that functioned as the collective head of state. He maintained this control through a string of puppet presidents until 1940, when he was himself elected President of Cuba on a populist platform. He then instated the 1940 Constitution of Cuba and served until 1944. After finishi..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.57781,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515562
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was the first wife of Cuban President Fulgencio Batista.\"",
+        "hyperedge_text": "She was the first wife of Cuban President Fulgencio Batista.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5222547054290771,
+        "fusion_score": 0.5044509410858155,
+        "entity_ids": [
+          "\"CUBA\"",
+          "\"FULGENCIO BATISTA\"",
+          "\"CUBAN PRESIDENT\""
+        ],
+        "chunk_ids": [
+          "chunk-91b8ed067613b567a6bdef08dd23cdc6"
+        ],
+        "evidence_texts": [
+          "She was the first wife of Cuban President Fulgencio Batista.",
+          "Elisa Godínez Gómez de Batista Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944. She was the first wife of Cuban President Fulgencio Batista."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.522255,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504451
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marta Fernández Miranda de Batista (November 11, 1923 – October 2, 2006) was First Lady of Cuba from 1952 until 1959.\"",
+        "hyperedge_text": "Marta Fernández Miranda de Batista (November 11, 1923 – October 2, 2006) was First Lady of Cuba from 1952 until 1959.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"FIRST LADY OF CUBA\"",
+          "\"FULGENCIO BATISTA\"",
+          "\"MARTA FERNÁNDEZ MIRANDA DE BATISTA\""
+        ],
+        "chunk_ids": [
+          "chunk-bcce7430d9d6798cb76812e61776450a"
+        ],
+        "evidence_texts": [
+          "Marta Fernández Miranda de Batista (November 11, 1923 – October 2, 2006) was First Lady of Cuba from 1952 until 1959.",
+          "Marta Fernandez Miranda de Batista Marta Fernández Miranda de Batista (November 11, 1923 – October 2, 2006) was First Lady of Cuba from 1952 until 1959. She was the second wife of Cuban President Fulgencio Batista, who was overthrown by Fidel Castro in the 1959 Cuban Revolution, which forced the couple to flee permanently into exile."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.\"",
+        "hyperedge_text": "Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"ELISA GODÍNEZ GÓMEZ DE BATISTA\"",
+          "\"FIRST LADY OF CUBA\"",
+          "\"FULGENCIO BATISTA\""
+        ],
+        "chunk_ids": [
+          "chunk-91b8ed067613b567a6bdef08dd23cdc6"
+        ],
+        "evidence_texts": [
+          "Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.",
+          "Elisa Godínez Gómez de Batista Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944. She was the first wife of Cuban President Fulgencio Batista."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was the second wife of Cuban President Fulgencio Batista, who was overthrown by Fidel Castro in the 1959 Cuban Revolution.\"",
+        "hyperedge_text": "She was the second wife of Cuban President Fulgencio Batista, who was overthrown by Fidel Castro in the 1959 Cuban Revolution.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5173362493515015,
+        "fusion_score": 0.5034672498703003,
+        "entity_ids": [
+          "\"FIDEL CASTRO\"",
+          "\"1959 CUBAN REVOLUTION\""
+        ],
+        "chunk_ids": [
+          "chunk-bcce7430d9d6798cb76812e61776450a"
+        ],
+        "evidence_texts": [
+          "She was the second wife of Cuban President Fulgencio Batista, who was overthrown by Fidel Castro in the 1959 Cuban Revolution.",
+          "Marta Fernandez Miranda de Batista Marta Fernández Miranda de Batista (November 11, 1923 – October 2, 2006) was First Lady of Cuba from 1952 until 1959. She was the second wife of Cuban President Fulgencio Batista, who was overthrown by Fidel Castro in the 1959 Cuban Revolution, which forced the couple to flee permanently into exile."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.517336,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503467
+        }
+      }
+    ],
+    "answer": "Las Vegas, Nevada",
+    "confidence": 0.9,
+    "reasoning_summary": "Fulgencio Batista died in Las Vegas, Nevada, as indicated in the evidence about his life and death.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Fulgencio Batista y Zaldívar (born Rubén Zaldívar; January 16, 1901 – August 6, 1973) was a Cuban military officer and politician who served as the elected President of Cuba from 1940 to 1944, and as its U.S.-backed military dictator from 1952 to 1959, before being overthrown during the Cuban Revolution.\""
+    ]
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "Both atomic results for the birth dates of the directors of 'Holiday In Tyrol' and 'Las Aventuras De Pito Pérez' are marked as insufficient evidence. Without this critical information, it is impossible to determine which film's director was born earlier.",
+  "answer_span_reasoning": "There is no evidence to determine the birth dates of the directors.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "When was the birth date of the director of Holiday In Tyrol?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "When was Las Aventuras De Pito Pérez born?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Las aventuras de Pito Pérez is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the director of Holiday In Tyrol?",
+      "answer": "Wolfgang Schleif",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "Who is the director of Las Aventuras De Pito Pérez?",
+      "answer": "Juan Bustillo Oro",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Las aventuras de Pito Pérez is a 1957 Mexican film directed by Juan Bustillo Oro and produced by Fernando de Fuentes, and starring Germán Valdés.\""
+      ]
+    },
+    {
+      "node_id": "q5",
+      "question": "What is the birth date of Holiday In Tyrol?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Holiday in Tyrol is a 1956 West German drama film directed by Wolfgang Schleif and starring Hans Söhnker, Edith Mill and Michael Ande.\""
+      ]
+    }
+  ],
+  "remaining_gaps": [
+    "q1: Birth date of Wolfgang Schleif is missing.",
+    "q3: Birth date of Las Aventuras De Pito Pérez is missing."
+  ]
+}

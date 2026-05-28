@@ -1,0 +1,545 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Man'S Search For Happiness released?",
+    "analysis": {
+      "entities": [
+        "Man'S Search For Happiness"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\"",
+        "hyperedge_text": "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6404526233673096,
+        "fusion_score": 0.528090524673462,
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"MAN'S SEARCH FOR HAPPINESS\"",
+          "\"PLAN OF SALVATION\""
+        ],
+        "chunk_ids": [
+          "chunk-359d96db46bd898849663ef9f48a24e5"
+        ],
+        "evidence_texts": [
+          "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+          "Man's Search for Happiness Man's Search for Happiness is a 13- minute film produced by The Church of Jesus Christ of Latter- day Saints( LDS Church). It explains the role of the Plan of Salvation in LDS theology, with questions like\" Who am I? Where did I come from?\", and\" Where am I going?\" being explored from an LDS perspective. This film was produced by the BYU Motion Picture Studio for the Mormon Pavilion at the 1964 World's Fair in New York City, and was viewed by over five million people, many of whom were not LDS. It was later remade in Japanese for Expo'70 in Japan. In 1986, the visuals and background music were updated, while retaining the original narration by Richard L. Evans, who served as a member of the church's of the Quorum of the Twelve Apostles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.640453,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528091
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.\"",
+        "hyperedge_text": "The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.39934688806533813,
+        "fusion_score": 0.2798693776130676,
+        "entity_ids": [
+          "\"1962 RELEASE\""
+        ],
+        "chunk_ids": [
+          "chunk-90d70bd8b0be3ce6b556e48c47ff8f8e"
+        ],
+        "evidence_texts": [
+          "The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.",
+          "Boy or Girl? Boy or Girl? ( Spanish: ¿ Chico o chica?) is a 1962 Mexican- Spanish musical comedy film directed by Antonio del Amo."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.399347,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.279869
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4723891019821167,
+        "semantic_score": 0.4,
+        "fusion_score": 0.26895564079284673,
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "evidence_texts": [
+          "The film's release occurred on a specific date.",
+          "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.472389,
+          "S": 0.4,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268956
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\"",
+        "hyperedge_text": "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4294666647911072,
+        "semantic_score": 0.4,
+        "fusion_score": 0.2517866659164429,
+        "entity_ids": [
+          "\"PORTFOLIO\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "evidence_texts": [
+          "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+          "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.429467,
+          "S": 0.4,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.251787
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\"",
+        "hyperedge_text": "After setting an initial release date in the same month, casting took place between April and June 2015.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4918246269226074,
+        "semantic_score": 0.2,
+        "fusion_score": 0.236729850769043,
+        "entity_ids": [
+          "\"APRIL 2015\"",
+          "\"JUNE 2015\""
+        ],
+        "chunk_ids": [
+          "chunk-b877a56c3c1803c310d3092526abfa76"
+        ],
+        "evidence_texts": [
+          "After setting an initial release date in the same month, casting took place between April and June 2015.",
+          "The Fate of the Furious The Fate of the Furious( alternatively known as Fast& Furious 8 and Fast 8 and often stylized as F8) is a 2017 American action film directed by F. Gary Gray and written by Chris Morgan. A sequel to 2015's\" Furious 7\", it is the eighth installment in the\" Fast& Furious\" franchise and stars Vin Diesel, Dwayne Johnson, Jason Statham, Michelle Rodriguez, Tyrese Gibson, Chris\" Ludacris\" Bridges, Scott Eastwood, Nathalie Emmanuel, Elsa Pataky, Kurt Russell and Charlize Theron. \" The Fate of the Furious\" follows Dominic Toretto( Diesel), who has settled down with his wife Letty Ortiz( Rodriguez), until cyberterrorist Cipher( Theron) coerces him into working for her and turns him against his team, forcing them to find Dom and take down Cipher. \" The Fate of the Furious\" marks the first installment in the franchise since( 2006) not to feature either Paul Walker, who die..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.491825,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.23673
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that specifies the release date of 'Man's Search for Happiness'.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Tell It To The Bees?",
+    "analysis": {
+      "entities": [
+        "Tell It To The Bees"
+      ],
+      "relations": [
+        "release date of"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.\"",
+        "hyperedge_text": "Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5863131284713745,
+        "fusion_score": 0.517262625694275,
+        "entity_ids": [
+          "\"ANNABEL JANKEL\"",
+          "\"TELL IT TO THE BEES\"",
+          "\"ANNA PAQUIN\"",
+          "\"HOLLIDAY GRAINGER\"",
+          "\"HENRIETTA ASHWORTH\"",
+          "\"JESSICA ASHWORTH\"",
+          "\"FIONA SHAW\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "evidence_texts": [
+          "Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.",
+          "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.586313,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517263
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a film directed by Annabel Jankel.\"",
+        "hyperedge_text": "Tell It to the Bees is a film directed by Annabel Jankel.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5515991449356079,
+        "fusion_score": 0.5103198289871216,
+        "entity_ids": [
+          "\"TELL IT TO THE BEES\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "evidence_texts": [
+          "Tell It to the Bees is a film directed by Annabel Jankel.",
+          "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.551599,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51032
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "hyperedge_text": "The release date on CD was September 22.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4368012547492981,
+        "semantic_score": 0.4670717120170593,
+        "fusion_score": 0.2681348443031311,
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "evidence_texts": [
+          "The release date on CD was September 22.",
+          "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.436801,
+          "S": 0.467072,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268135
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees opened in limited release in the United States on 3 May 2019.\"",
+        "hyperedge_text": "Tell It to the Bees opened in limited release in the United States on 3 May 2019.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.7224242687225342,
+        "fusion_score": 0.7444848537445069,
+        "entity_ids": [
+          "\"3 MAY 2019\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "evidence_texts": [
+          "Tell It to the Bees opened in limited release in the United States on 3 May 2019.",
+          "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.722424,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.744485
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a film that explores themes of love and connection between characters.\"",
+        "hyperedge_text": "Tell It to the Bees is a film that explores themes of love and connection between characters.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5641125440597534,
+        "fusion_score": 0.5128225088119507,
+        "entity_ids": [
+          "\"THEMES\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "evidence_texts": [
+          "Tell It to the Bees is a film that explores themes of love and connection between characters.",
+          "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.564113,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.512823
+        }
+      }
+    ],
+    "answer": "3 May 2019",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'Tell It to the Bees' opened in limited release in the United States on 3 May 2019, which directly answers the question about its release date.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Tell It to the Bees opened in limited release in the United States on 3 May 2019.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Man'S Search For Happiness?",
+    "analysis": {
+      "entities": [
+        "Man'S Search For Happiness",
+        "The Church of Jesus Christ of Latter-day Saints"
+      ],
+      "relations": [
+        "has release date"
+      ],
+      "relation_query": "What is the release date of a film produced by an organization?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\"",
+        "hyperedge_text": "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.4,
+        "semantic_score": 0.5697433948516846,
+        "fusion_score": 0.673948678970337,
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"MAN'S SEARCH FOR HAPPINESS\"",
+          "\"PLAN OF SALVATION\""
+        ],
+        "chunk_ids": [
+          "chunk-359d96db46bd898849663ef9f48a24e5"
+        ],
+        "evidence_texts": [
+          "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+          "Man's Search for Happiness Man's Search for Happiness is a 13- minute film produced by The Church of Jesus Christ of Latter- day Saints( LDS Church). It explains the role of the Plan of Salvation in LDS theology, with questions like\" Who am I? Where did I come from?\", and\" Where am I going?\" being explored from an LDS perspective. This film was produced by the BYU Motion Picture Studio for the Mormon Pavilion at the 1964 World's Fair in New York City, and was viewed by over five million people, many of whom were not LDS. It was later remade in Japanese for Expo'70 in Japan. In 1986, the visuals and background music were updated, while retaining the original narration by Richard L. Evans, who served as a member of the church's of the Quorum of the Twelve Apostles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.4,
+          "S": 0.569743,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.673949
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.49020853638648987,
+        "semantic_score": 0.4121553897857666,
+        "fusion_score": 0.2785144925117493,
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "evidence_texts": [
+          "The release date of the film is July 25, 1920.",
+          "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.490209,
+          "S": 0.412155,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.278514
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is November 15, 1955.\"",
+        "hyperedge_text": "The release date of the film is November 15, 1955.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4143112897872925,
+        "fusion_score": 0.4828622579574585,
+        "entity_ids": [
+          "\"NOVEMBER 15, 1955\""
+        ],
+        "chunk_ids": [
+          "chunk-a49ee799ce6a7193f132ce150feefe35"
+        ],
+        "evidence_texts": [
+          "The release date of the film is November 15, 1955.",
+          "Target Zero Target Zero is a 1955 American drama film directed by Harmon Jones and written by James Warner Bellah and Sam Rolfe. The film stars Richard Conte, Peggie Castle, Charles Bronson, Richard Wyler, L. Q. Jones and Chuck Connors. The film was released by Warner Bros. on November 15, 1955."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.414311,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.482862
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5484181642532349,
+        "semantic_score": 0.5,
+        "fusion_score": 0.3193672657012939,
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "evidence_texts": [
+          "The film's release occurred on a specific date.",
+          "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.548418,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.319367
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Anstis Elmina Shepard Taylor (September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter-day Saints and was a founding member of the National Council of Women.\"",
+        "hyperedge_text": "Anstis Elmina Shepard Taylor (September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter-day Saints and was a founding member of the National Council of Women.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.2,
+        "semantic_score": 0.0,
+        "fusion_score": 0.28,
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"ELMINA SHEPARD TAYLOR\"",
+          "\"YOUNG WOMEN ORGANIZATION\"",
+          "\"NATIONAL COUNCIL OF WOMEN\""
+        ],
+        "chunk_ids": [
+          "chunk-8013aa10207376b232a28dd51175753c"
+        ],
+        "evidence_texts": [
+          "Anstis Elmina Shepard Taylor (September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter-day Saints and was a founding member of the National Council of Women.",
+          "Elmina Shepard Taylor Anstis Elmina Shepard Taylor( September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter- day Saints( LDS Church) and was a founding member of the National Council of Women."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.2,
+          "S": 0.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.28
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that specifies the release date of 'Man's Search for Happiness'.",
+    "used_dependencies": [
+      "q1",
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\""
+    ]
+  }
+]

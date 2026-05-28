@@ -1,0 +1,372 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Lamprocles?",
+    "analysis": {
+      "entities": [
+        "Lamprocles"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Lamprocles was the son of Socrates and Xanthippe.\"",
+        "hyperedge_text": "Lamprocles was the son of Socrates and Xanthippe.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7114711403846741,
+        "fusion_score": 0.5422942280769348,
+        "entity_ids": [
+          "\"SOCRATES\"",
+          "\"XANTHIPPE\"",
+          "\"LAMPROCLES\""
+        ],
+        "chunk_ids": [
+          "chunk-1bb619ca634b619a266ed1e211a73cdc"
+        ],
+        "evidence_texts": [
+          "Lamprocles was the son of Socrates and Xanthippe.",
+          "Lamprocles Lamprocles was Socrates' and Xanthippe's eldest son. His two brothers were Menexenus and Sophroniscus. Lamprocles was only a boy (μειράκιον \"meirakion\") at the time of Socrates' trial and death. According to Aristotle, Socrates' descendants as a whole turned out to be unremarkable \"fools and dullards\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.711471,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542294
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lamprocles was Socrates' and Xanthippe's eldest son.\"",
+        "hyperedge_text": "Lamprocles was Socrates' and Xanthippe's eldest son.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6724202632904053,
+        "fusion_score": 0.5344840526580811,
+        "entity_ids": [
+          "\"SOCRATES\"",
+          "\"XANTHIPPE\"",
+          "\"LAMPROCLES\""
+        ],
+        "chunk_ids": [
+          "chunk-1bb619ca634b619a266ed1e211a73cdc"
+        ],
+        "evidence_texts": [
+          "Lamprocles was Socrates' and Xanthippe's eldest son.",
+          "Lamprocles Lamprocles was Socrates' and Xanthippe's eldest son. His two brothers were Menexenus and Sophroniscus. Lamprocles was only a boy (μειράκιον \"meirakion\") at the time of Socrates' trial and death. According to Aristotle, Socrates' descendants as a whole turned out to be unremarkable \"fools and dullards\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.67242,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534484
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lamprocles had two brothers named Menexenus and Sophroniscus.\"",
+        "hyperedge_text": "Lamprocles had two brothers named Menexenus and Sophroniscus.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6392967104911804,
+        "fusion_score": 0.5278593420982362,
+        "entity_ids": [
+          "\"SOPHRONISCUS\"",
+          "\"MENEXENUS\""
+        ],
+        "chunk_ids": [
+          "chunk-1bb619ca634b619a266ed1e211a73cdc"
+        ],
+        "evidence_texts": [
+          "Lamprocles had two brothers named Menexenus and Sophroniscus.",
+          "Lamprocles Lamprocles was Socrates' and Xanthippe's eldest son. His two brothers were Menexenus and Sophroniscus. Lamprocles was only a boy (μειράκιον \"meirakion\") at the time of Socrates' trial and death. According to Aristotle, Socrates' descendants as a whole turned out to be unremarkable \"fools and dullards\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.639297,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527859
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"During the time of Socrates' trial and death, Lamprocles was considered only a boy (μειράκιον 'meirakion').\"",
+        "hyperedge_text": "During the time of Socrates' trial and death, Lamprocles was considered only a boy (μειράκιον 'meirakion').",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6162864565849304,
+        "fusion_score": 0.5232572913169862,
+        "entity_ids": [
+          "\"DEATH\"",
+          "\"TRIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-1bb619ca634b619a266ed1e211a73cdc"
+        ],
+        "evidence_texts": [
+          "During the time of Socrates' trial and death, Lamprocles was considered only a boy (μειράκιον 'meirakion').",
+          "Lamprocles Lamprocles was Socrates' and Xanthippe's eldest son. His two brothers were Menexenus and Sophroniscus. Lamprocles was only a boy (μειράκιον \"meirakion\") at the time of Socrates' trial and death. According to Aristotle, Socrates' descendants as a whole turned out to be unremarkable \"fools and dullards\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.616286,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523257
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lamprocles was only a boy (μειράκιον 'meirakion') at the time of Socrates' trial and death.\"",
+        "hyperedge_text": "Lamprocles was only a boy (μειράκιον 'meirakion') at the time of Socrates' trial and death.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6151983737945557,
+        "fusion_score": 0.5230396747589112,
+        "entity_ids": [
+          "\"BOY\""
+        ],
+        "chunk_ids": [
+          "chunk-1bb619ca634b619a266ed1e211a73cdc"
+        ],
+        "evidence_texts": [
+          "Lamprocles was only a boy (μειράκιον 'meirakion') at the time of Socrates' trial and death.",
+          "Lamprocles Lamprocles was Socrates' and Xanthippe's eldest son. His two brothers were Menexenus and Sophroniscus. Lamprocles was only a boy (μειράκιον \"meirakion\") at the time of Socrates' trial and death. According to Aristotle, Socrates' descendants as a whole turned out to be unremarkable \"fools and dullards\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.615198,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52304
+        }
+      }
+    ],
+    "answer": "Socrates",
+    "confidence": 1.0,
+    "reasoning_summary": "Lamprocles is identified as the son of Socrates in the evidence provided.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Lamprocles was the son of Socrates and Xanthippe.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the father of Lamprocles?",
+    "analysis": {
+      "entities": [
+        "Socrates"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher of the Western ethical tradition of thought.\"",
+        "hyperedge_text": "Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher of the Western ethical tradition of thought.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5948169231414795,
+        "fusion_score": 0.5189633846282959,
+        "entity_ids": [
+          "\"WESTERN PHILOSOPHY\"",
+          "\"MORAL PHILOSOPHER\"",
+          "\"SOCRATES\""
+        ],
+        "chunk_ids": [
+          "chunk-0e4bf051119942ad79d350952e1f0790"
+        ],
+        "evidence_texts": [
+          "Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher of the Western ethical tradition of thought.",
+          "Socrates Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher of the Western ethical tradition of thought. An enigmatic figure, he made no writings, and is known chiefly through the accounts of classical writers writing after his lifetime, particularly his students Plato and Xenophon. Other sources include the contemporaneous Antisthenes, Aristippus, and Aeschines of Sphettos. Aristophanes, a playwright, is the main contemporary author to have written plays mentioning Socrates during Socrates' lifetime, though a fragment of Ion of Chios' \"Travel Journal\" provides important information about Socrates' youth. Plato's dialogues are among the most comprehensive accounts of Socrates to survive from antiquity, from which Socrates has become renowned for his contributions to the fields..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.594817,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518963
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy.\"",
+        "hyperedge_text": "Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5884900689125061,
+        "fusion_score": 0.5176980137825012,
+        "entity_ids": [
+          "\"SOCRATES\"",
+          "\"CLASSICAL GREEK\"",
+          "\"ATHENIAN PHILOSOPHER\""
+        ],
+        "chunk_ids": [
+          "chunk-0e4bf051119942ad79d350952e1f0790"
+        ],
+        "evidence_texts": [
+          "Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy.",
+          "Socrates Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher of the Western ethical tradition of thought. An enigmatic figure, he made no writings, and is known chiefly through the accounts of classical writers writing after his lifetime, particularly his students Plato and Xenophon. Other sources include the contemporaneous Antisthenes, Aristippus, and Aeschines of Sphettos. Aristophanes, a playwright, is the main contemporary author to have written plays mentioning Socrates during Socrates' lifetime, though a fragment of Ion of Chios' \"Travel Journal\" provides important information about Socrates' youth. Plato's dialogues are among the most comprehensive accounts of Socrates to survive from antiquity, from which Socrates has become renowned for his contributions to the fields..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.58849,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517698
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Socrates is renowned for his contributions to ethics and epistemology.\"",
+        "hyperedge_text": "Socrates is renowned for his contributions to ethics and epistemology.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5754348635673523,
+        "fusion_score": 0.5150869727134705,
+        "entity_ids": [
+          "\"CONTRIBUTIONS TO ETHICS\"",
+          "\"CONTRIBUTIONS TO EPISTEMOLOGY\""
+        ],
+        "chunk_ids": [
+          "chunk-0e4bf051119942ad79d350952e1f0790"
+        ],
+        "evidence_texts": [
+          "Socrates is renowned for his contributions to ethics and epistemology.",
+          "Socrates Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher of the Western ethical tradition of thought. An enigmatic figure, he made no writings, and is known chiefly through the accounts of classical writers writing after his lifetime, particularly his students Plato and Xenophon. Other sources include the contemporaneous Antisthenes, Aristippus, and Aeschines of Sphettos. Aristophanes, a playwright, is the main contemporary author to have written plays mentioning Socrates during Socrates' lifetime, though a fragment of Ion of Chios' \"Travel Journal\" provides important information about Socrates' youth. Plato's dialogues are among the most comprehensive accounts of Socrates to survive from antiquity, from which Socrates has become renowned for his contributions to the fields..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.575435,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515087
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Socrates is depicted in art, literature, and popular culture.\"",
+        "hyperedge_text": "Socrates is depicted in art, literature, and popular culture.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5728025436401367,
+        "fusion_score": 0.5145605087280274,
+        "entity_ids": [
+          "\"DEPICTIONS IN ART\"",
+          "\"DEPICTIONS IN LITERATURE\"",
+          "\"DEPICTIONS IN POPULAR CULTURE\""
+        ],
+        "chunk_ids": [
+          "chunk-0e4bf051119942ad79d350952e1f0790"
+        ],
+        "evidence_texts": [
+          "Socrates is depicted in art, literature, and popular culture.",
+          "Socrates Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher of the Western ethical tradition of thought. An enigmatic figure, he made no writings, and is known chiefly through the accounts of classical writers writing after his lifetime, particularly his students Plato and Xenophon. Other sources include the contemporaneous Antisthenes, Aristippus, and Aeschines of Sphettos. Aristophanes, a playwright, is the main contemporary author to have written plays mentioning Socrates during Socrates' lifetime, though a fragment of Ion of Chios' \"Travel Journal\" provides important information about Socrates' youth. Plato's dialogues are among the most comprehensive accounts of Socrates to survive from antiquity, from which Socrates has become renowned for his contributions to the fields..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.572803,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.514561
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Depictions of Socrates in art, literature and popular culture have made him one of the most widely known figures in the Western philosophical tradition.\"",
+        "hyperedge_text": "Depictions of Socrates in art, literature and popular culture have made him one of the most widely known figures in the Western philosophical tradition.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5521142482757568,
+        "fusion_score": 0.5104228496551514,
+        "entity_ids": [
+          "\"POPULAR CULTURE\"",
+          "\"LITERATURE\"",
+          "\"ART\"",
+          "\"DEPICTIONS OF SOCRATES\"",
+          "\"WIDELY KNOWN FIGURE\"",
+          "\"WESTERN PHILOSOPHICAL TRADITION\""
+        ],
+        "chunk_ids": [
+          "chunk-0e4bf051119942ad79d350952e1f0790"
+        ],
+        "evidence_texts": [
+          "Depictions of Socrates in art, literature and popular culture have made him one of the most widely known figures in the Western philosophical tradition.",
+          "Socrates Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher of the Western ethical tradition of thought. An enigmatic figure, he made no writings, and is known chiefly through the accounts of classical writers writing after his lifetime, particularly his students Plato and Xenophon. Other sources include the contemporaneous Antisthenes, Aristippus, and Aeschines of Sphettos. Aristophanes, a playwright, is the main contemporary author to have written plays mentioning Socrates during Socrates' lifetime, though a fragment of Ion of Chios' \"Travel Journal\" provides important information about Socrates' youth. Plato's dialogues are among the most comprehensive accounts of Socrates to survive from antiquity, from which Socrates has become renowned for his contributions to the fields..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.552114,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510423
+        }
+      }
+    ],
+    "answer": "Greek",
+    "confidence": 1.0,
+    "reasoning_summary": "Socrates, the father of Lamprocles, was a classical Greek philosopher, indicating his nationality.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Socrates (– 399 BC) was a classical Greek (Athenian) philosopher credited as one of the founders of Western philosophy.\""
+    ]
+  }
+]

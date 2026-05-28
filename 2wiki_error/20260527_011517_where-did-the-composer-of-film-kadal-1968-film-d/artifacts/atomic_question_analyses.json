@@ -1,0 +1,101 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the composer of Kadal (1968 Film)?",
+    "retrieval_question": "Who is the composer of Kadal (1968 Film)?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the composer of Kadal (1968 Film)?",
+      "retrieval_question": "Who is the composer of Kadal (1968 Film)?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Kadal",
+        "1968 Film"
+      ],
+      "relations": [
+        "is the composer of"
+      ],
+      "relation_query": "who is the composer of a work released in a specific year",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the composer of Kadal (1968 Film) die?",
+    "retrieval_question": "Where did the composer of Kadal (1968 Film) die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the composer of Kadal (1968 Film) die?",
+      "retrieval_question": "Where did the composer of Kadal (1968 Film) die?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the composer of Kadal (1968 Film)?",
+        "answer": "M. B. Sreenivasan",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The film 'Kadal' had a musical score by M. B. Sreenivasan, indicating he is the composer.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Kadal is a 1968 Indian Malayalam film, directed by M. Krishnan Nair and produced by P. Subramaniam.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Kadal is a 1968 Indian Malayalam film.\"",
+            "fusion_score": 0.32657709121704104,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Kadal is a 1968 Indian Malayalam film.",
+              "Kadal (1968 film) Kadal is a 1968 Indian Malayalam film, directed by M. Krishnan Nair and produced by P. Subramaniam. The film stars Madhu, Sharada, Thikkurissi Sukumaran Nair and Shobha in the lead roles. The film had musical score by M. B. Sreenivasan."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Kadal is a 1968 Indian Malayalam film, directed by M. Krishnan Nair and produced by P. Subramaniam.\"",
+            "fusion_score": 0.3265726089477539,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Kadal is a 1968 Indian Malayalam film, directed by M. Krishnan Nair and produced by P. Subramaniam.",
+              "Kadal (1968 film) Kadal is a 1968 Indian Malayalam film, directed by M. Krishnan Nair and produced by P. Subramaniam. The film stars Madhu, Sharada, Thikkurissi Sukumaran Nair and Shobha in the lead roles. The film had musical score by M. B. Sreenivasan."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Alexander Mair 'Sandy' Courage Jr. was an American orchestrator, arranger, and composer of music, primarily for television and film.\"",
+            "fusion_score": 0.5,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Alexander Mair 'Sandy' Courage Jr. was an American orchestrator, arranger, and composer of music, primarily for television and film.",
+              "Alexander Courage Alexander Mair\" Sandy\" Courage Jr.( December 10, 1919 May 15, 2008) was an American orchestrator, arranger, and composer of music, primarily for television and film. He is best known as the composer of the theme music for the original\" Star Trek\" series."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Kadal (1968 Film)",
+        "M. B. Sreenivasan"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did the composer of a work die?",
+      "answer_type": "location"
+    }
+  }
+]

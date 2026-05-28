@@ -1,0 +1,754 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father-in-law of Từ Dụ?",
+    "retrieval_question": "Who is the father-in-law of Từ Dụ?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father-in-law of Từ Dụ?",
+      "retrieval_question": "Who is the father-in-law of Từ Dụ?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.",
+        "entity_ids": [
+          "\"TỪ DỤ\"",
+          "\"TỰ ĐỨC\"",
+          "\"PHẠM THỊ HẰNG\"",
+          "\"THIỆU TRỊ\""
+        ],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.",
+            "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+          ],
+          "relation_texts": [
+            "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.",
+            "link",
+            "TỪ DỤ",
+            "TỰ ĐỨC",
+            "PHẠM THỊ HẰNG",
+            "THIỆU TRỊ"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of Imran Farhat.\"",
+        "branch": "relation",
+        "raw_score": 0.5865020751953125,
+        "hyperedge_text": "He is the father-in-law of Imran Farhat.",
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-10333be7c973d42a00364ad277052021"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "Mohammad Ilyas (cricketer) Mohammad Ilyas Mahmood( born March 19, 1946, Lahore, Punjab) is a former Pakistani cricketer who played in ten Tests from 1964 to 1969. He is the father- in- law of Imran Farhat."
+          ],
+          "relation_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "link",
+            "FATHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dfb75f61e308d9f2ded0e2f2dc62859e",
+            "hyperedge_name": "<hyperedge>\"He is the father-in-law of Imran Farhat.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of actor and TV presenter Warwick Davis.\"",
+        "branch": "relation",
+        "raw_score": 0.4975300431251526,
+        "hyperedge_text": "He is the father-in-law of actor and TV presenter Warwick Davis.",
+        "entity_ids": [
+          "\"WARWICK DAVIS\"",
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-8415c56614547b6b806a4164bba8e4d1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father-in-law of actor and TV presenter Warwick Davis.",
+            "Peter Burroughs Peter Burroughs( born 27 January 1947) is a British television and film actor, the director of Willow Management. He is the father- in- law of actor and TV presenter Warwick Davis."
+          ],
+          "relation_texts": [
+            "He is the father-in-law of actor and TV presenter Warwick Davis.",
+            "link",
+            "WARWICK DAVIS",
+            "FATHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-75855ff18e9b2568de60a43305677e8f",
+            "hyperedge_name": "<hyperedge>\"He is the father-in-law of actor and TV presenter Warwick Davis.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father-in-law of John F. Kennedy.\"",
+        "branch": "relation",
+        "raw_score": 0.47823989391326904,
+        "hyperedge_text": "He was the father-in-law of John F. Kennedy.",
+        "entity_ids": [
+          "\"FATHER-IN-LAW\"",
+          "\"JOHN F. KENNEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-5d8779123df46e89eb6928d92f57f279"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father-in-law of John F. Kennedy.",
+            "John Vernou Bouvier III John Vernou\" Black Jack\" Bouvier III( May 19, 1891 – August 3, 1957) was an American Wall Street stockbroker and socialite. He was the father of First Lady Jacqueline Kennedy Onassis and of socialite Lee Radziwill, and was the father- in- law of John F. Kennedy."
+          ],
+          "relation_texts": [
+            "He was the father-in-law of John F. Kennedy.",
+            "link",
+            "FATHER-IN-LAW",
+            "JOHN F. KENNEDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-703045a80253695a70d0f60fff19c1c1",
+            "hyperedge_name": "<hyperedge>\"He was the father-in-law of John F. Kennedy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father-in-law of Henry Newton (politician).\"",
+        "branch": "relation",
+        "raw_score": 0.4777774214744568,
+        "hyperedge_text": "He was the father-in-law of Henry Newton (politician).",
+        "entity_ids": [
+          "\"HENRY NEWTON\""
+        ],
+        "chunk_ids": [
+          "chunk-0dc73f6d7948fe1ff8594b56625fd37e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father-in-law of Henry Newton (politician).",
+            "John Adams (merchant) John Adams( 1672 or 1673 – 1745) was an American- born Canadian merchant and member of the Nova Scotia Council. He was the father- in- law of Henry Newton( politician)."
+          ],
+          "relation_texts": [
+            "He was the father-in-law of Henry Newton (politician).",
+            "link",
+            "HENRY NEWTON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6c291266363e7edd0cf6d6ccf7f27cfb",
+            "hyperedge_name": "<hyperedge>\"He was the father-in-law of Henry Newton (politician).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the uncle of, whose husband is.\"",
+        "branch": "relation",
+        "raw_score": 0.47422564029693604,
+        "hyperedge_text": "He is also the uncle of, whose husband is.",
+        "entity_ids": [
+          "\"HUSBAND\"",
+          "\"UNCLE\"",
+          "\"NEPHEW/NIECE\""
+        ],
+        "chunk_ids": [
+          "chunk-ab4fd963a6e1bb18c7ff575cca5ddd08"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is also the uncle of, whose husband is.",
+            "Andrzej Gawroński (actor) Andrzej Gawroński( born 10 February 1935 in Warsaw, Poland) is a Polish film and theatre actor. He is the brother of the late actor. He is also the uncle of, whose husband is."
+          ],
+          "relation_texts": [
+            "He is also the uncle of, whose husband is.",
+            "link",
+            "HUSBAND",
+            "UNCLE",
+            "NEPHEW/NIECE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a679e373fd231056e13421459e53e0cd",
+            "hyperedge_name": "<hyperedge>\"He is also the uncle of, whose husband is.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.\"",
+        "branch": "relation",
+        "raw_score": 0.45826566219329834,
+        "hyperedge_text": "Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.",
+        "entity_ids": [
+          "\"MARIE CLAUDINE\"",
+          "\"JOAKIM LEHMKUHL\""
+        ],
+        "chunk_ids": [
+          "chunk-bd104fa2041daef047dcf8d8b9637f0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.",
+            "Barthold A. Butenschøn Sr. Hans Barthold Andresen Butenschøn( 27 December 1877 – 28 November 1971) was a Norwegian businessperson. He was born in Kristiania as a son of Nils August Andresen Butenschøn and Hanna Butenschøn, and grandson of Nicolay Andresen. Together with Mabel Anette Plahte( 1877 – 1973, a daughter of Frithjof M. Plahte) he had the son Hans Barthold Andresen Butenschøn Jr. and was through him the father- in- law of Ragnhild Butenschøn and grandfather of Peter Butenschøn. Through his daughter Marie Claudine he was the father- in- law of Joakim Lehmkuhl, through his daughter Mabel Anette he was the father- in- law of Harald Astrup( a son of Sigurd Astrup) and through his daughter Nini Augusta he was the father- in- law of Ernst Torp. He took commerce school and agricultural school. He was hired in the family company N. A. Andresen& Co, and became a co-owner in 1910. He e..."
+          ],
+          "relation_texts": [
+            "Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.",
+            "link",
+            "MARIE CLAUDINE",
+            "JOAKIM LEHMKUHL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-41d8d76a9facfaec716017057cabd996",
+            "hyperedge_name": "<hyperedge>\"Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father-in-law of Albert Bacon Fall.\"",
+        "branch": "relation",
+        "raw_score": 0.45011764764785767,
+        "hyperedge_text": "He was the father-in-law of Albert Bacon Fall.",
+        "entity_ids": [
+          "\"ALBERT BACON FALL\""
+        ],
+        "chunk_ids": [
+          "chunk-e23dbc1235e3623996b6314deaa32b29"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father-in-law of Albert Bacon Fall.",
+            "Simpson Harris Morgan Simpson Harris Morgan (1821 – December 15, 1864) was a prominent Confederate politician who represented Texas in the Second Confederate Congress in 1864. He was the father-in-law of Albert Bacon Fall."
+          ],
+          "relation_texts": [
+            "He was the father-in-law of Albert Bacon Fall.",
+            "link",
+            "ALBERT BACON FALL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a5538445efdfd6401e865233ad4cd8a5",
+            "hyperedge_name": "<hyperedge>\"He was the father-in-law of Albert Bacon Fall.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.\"",
+        "branch": "relation",
+        "raw_score": 0.44934970140457153,
+        "hyperedge_text": "He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.",
+        "entity_ids": [
+          "\"RAHUL GANDHI\"",
+          "\"RAJIV GANDHI\"",
+          "\"SONIA GANDHI\""
+        ],
+        "chunk_ids": [
+          "chunk-87dcaf39187f4ea031241f8385eaa982"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.",
+            "Robert Vadra Robert Vadra is an Indian businessman, entrepreneur and the husband of Priyanka Gandhi. He is the son -in- law of Sonia Gandhi and Rajiv Gandhi, and the brother- in- law of Rahul Gandhi."
+          ],
+          "relation_texts": [
+            "He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.",
+            "link",
+            "RAHUL GANDHI",
+            "RAJIV GANDHI",
+            "SONIA GANDHI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2f27884004f85f3597cf9aa7ec2ecb1",
+            "hyperedge_name": "<hyperedge>\"He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"through his daughter Mabel Anette he was the father-in-law of Harald Astrup (a son of Sigurd Astrup).\"",
+        "branch": "relation",
+        "raw_score": 0.44800347089767456,
+        "hyperedge_text": "through his daughter Mabel Anette he was the father-in-law of Harald Astrup (a son of Sigurd Astrup).",
+        "entity_ids": [
+          "\"HARALD ASTRUP\"",
+          "\"SIGURD ASTRUP\""
+        ],
+        "chunk_ids": [
+          "chunk-bd104fa2041daef047dcf8d8b9637f0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "through his daughter Mabel Anette he was the father-in-law of Harald Astrup (a son of Sigurd Astrup).",
+            "Barthold A. Butenschøn Sr. Hans Barthold Andresen Butenschøn( 27 December 1877 – 28 November 1971) was a Norwegian businessperson. He was born in Kristiania as a son of Nils August Andresen Butenschøn and Hanna Butenschøn, and grandson of Nicolay Andresen. Together with Mabel Anette Plahte( 1877 – 1973, a daughter of Frithjof M. Plahte) he had the son Hans Barthold Andresen Butenschøn Jr. and was through him the father- in- law of Ragnhild Butenschøn and grandfather of Peter Butenschøn. Through his daughter Marie Claudine he was the father- in- law of Joakim Lehmkuhl, through his daughter Mabel Anette he was the father- in- law of Harald Astrup( a son of Sigurd Astrup) and through his daughter Nini Augusta he was the father- in- law of Ernst Torp. He took commerce school and agricultural school. He was hired in the family company N. A. Andresen& Co, and became a co-owner in 1910. He e..."
+          ],
+          "relation_texts": [
+            "through his daughter Mabel Anette he was the father-in-law of Harald Astrup (a son of Sigurd Astrup).",
+            "link",
+            "HARALD ASTRUP",
+            "SIGURD ASTRUP"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cba23da1d6ea5d411d53e37dd65582db",
+            "hyperedge_name": "<hyperedge>\"through his daughter Mabel Anette he was the father-in-law of Harald Astrup (a son of Sigurd Astrup).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn.\"",
+        "branch": "relation",
+        "raw_score": 0.4457644820213318,
+        "hyperedge_text": "Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn.",
+        "entity_ids": [
+          "\"DAUGHTER\"",
+          "\"GRUFFYDD AP LLYWELYN\""
+        ],
+        "chunk_ids": [
+          "chunk-a413dcf8db69aed7dd24693022a87600"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn.",
+            "Ælfgar, Earl of Mercia Ælfgar (died c. 1060) was the son of Leofric, Earl of Mercia, by his famous mother Godgifu (Lady Godiva). He succeeded to his father's title and responsibilities on the latter's death in 1057. He gained the additional title of Earl of East Anglia, but also was exiled for a time. Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn; a few years after his death, his daughter would become a widow and marry English King Harold."
+          ],
+          "relation_texts": [
+            "Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn.",
+            "link",
+            "DAUGHTER",
+            "GRUFFYDD AP LLYWELYN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b9ec6911d4305c2d4ccfd0ab0a5b89cb",
+            "hyperedge_name": "<hyperedge>\"Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Từ Dụ's royal lineage includes her husband, Thiệu Trị, and their notable children, including Tự Đức.\"",
+        "branch": "semantic",
+        "raw_score": 0.5147269368171692,
+        "hyperedge_text": "Từ Dụ's royal lineage includes her husband, Thiệu Trị, and their notable children, including Tự Đức.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Từ Dụ's royal lineage includes her husband, Thiệu Trị, and their notable children, including Tự Đức.",
+            "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+          ],
+          "relation_texts": [
+            "Từ Dụ's royal lineage includes her husband, Thiệu Trị, and their notable children, including Tự Đức."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4c884073c853d87566482a6c5386b2e4",
+            "hyperedge_name": "<hyperedge>\"Từ Dụ's royal lineage includes her husband, Thiệu Trị, and their notable children, including Tự Đức.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.\"",
+        "branch": "semantic",
+        "raw_score": 0.5089112520217896,
+        "hyperedge_text": "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.",
+        "entity_ids": [
+          "\"TỪ DỤ\"",
+          "\"TỰ ĐỨC\"",
+          "\"PHẠM THỊ HẰNG\"",
+          "\"THIỆU TRỊ\""
+        ],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.",
+            "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+          ],
+          "relation_texts": [
+            "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.",
+            "link",
+            "TỪ DỤ",
+            "TỰ ĐỨC",
+            "PHẠM THỊ HẰNG",
+            "THIỆU TRỊ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7a7cc9e18bb5e64c8839d0ac326593e0",
+            "hyperedge_name": "<hyperedge>\"Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Từ Dụ was the mother of Tự Đức, highlighting her maternal role in the Nguyen dynasty.\"",
+        "branch": "semantic",
+        "raw_score": 0.4916430115699768,
+        "hyperedge_text": "Từ Dụ was the mother of Tự Đức, highlighting her maternal role in the Nguyen dynasty.",
+        "entity_ids": [
+          "\"MOTHER\""
+        ],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Từ Dụ was the mother of Tự Đức, highlighting her maternal role in the Nguyen dynasty.",
+            "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+          ],
+          "relation_texts": [
+            "Từ Dụ was the mother of Tự Đức, highlighting her maternal role in the Nguyen dynasty.",
+            "link",
+            "MOTHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b16e8733118316ac41d95a7492ea31d9",
+            "hyperedge_name": "<hyperedge>\"Từ Dụ was the mother of Tự Đức, highlighting her maternal role in the Nguyen dynasty.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The timeline of Từ Dụ's life reflects the context of changing political authority in Vietnam.\"",
+        "branch": "semantic",
+        "raw_score": 0.4589856266975403,
+        "hyperedge_text": "The timeline of Từ Dụ's life reflects the context of changing political authority in Vietnam.",
+        "entity_ids": [
+          "\"CHANGING POLITICAL AUTHORITY\""
+        ],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The timeline of Từ Dụ's life reflects the context of changing political authority in Vietnam.",
+            "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+          ],
+          "relation_texts": [
+            "The timeline of Từ Dụ's life reflects the context of changing political authority in Vietnam.",
+            "link",
+            "CHANGING POLITICAL AUTHORITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-78b249f75aebc53faaeda7ac43096358",
+            "hyperedge_name": "<hyperedge>\"The timeline of Từ Dụ's life reflects the context of changing political authority in Vietnam.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The title Empress Dowager was granted to Từ Dụ, showing her elevation due to her son's ascension to the throne.\"",
+        "branch": "semantic",
+        "raw_score": 0.4473220705986023,
+        "hyperedge_text": "The title Empress Dowager was granted to Từ Dụ, showing her elevation due to her son's ascension to the throne.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The title Empress Dowager was granted to Từ Dụ, showing her elevation due to her son's ascension to the throne.",
+            "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+          ],
+          "relation_texts": [
+            "The title Empress Dowager was granted to Từ Dụ, showing her elevation due to her son's ascension to the throne."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c49ff1caac4a2d642125db25f0ebe4e9",
+            "hyperedge_name": "<hyperedge>\"The title Empress Dowager was granted to Từ Dụ, showing her elevation due to her son's ascension to the throne.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thành Thái was the son of Emperor Dục Đức and Empress Dowager Từ Minh.\"",
+        "branch": "semantic",
+        "raw_score": 0.44527381658554077,
+        "hyperedge_text": "Thành Thái was the son of Emperor Dục Đức and Empress Dowager Từ Minh.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-c562b41666df0097fa470c4de74e7ce5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Thành Thái was the son of Emperor Dục Đức and Empress Dowager Từ Minh.",
+            "Thành Thái Thành Thái( 14 March 1869 – 20 March 1954) born Nguyễn Phúc Bửu Lân( 阮福寶嶙), was the son of Emperor Dục Đức and Empress Dowager Từ Minh. He reigned for 18 years, from 1889 to 1907."
+          ],
+          "relation_texts": [
+            "Thành Thái was the son of Emperor Dục Đức and Empress Dowager Từ Minh."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-786b8ecceb8222cf38c1571f1bf20451",
+            "hyperedge_name": "<hyperedge>\"Thành Thái was the son of Emperor Dục Đức and Empress Dowager Từ Minh.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thành Thái, born Nguyễn Phúc Bửu Lân, was the son of Emperor Dục Đức and Empress Dowager Từ Minh.\"",
+        "branch": "semantic",
+        "raw_score": 0.435895174741745,
+        "hyperedge_text": "Thành Thái, born Nguyễn Phúc Bửu Lân, was the son of Emperor Dục Đức and Empress Dowager Từ Minh.",
+        "entity_ids": [
+          "\"EMPRESS DOWAGER TỪ MINH\"",
+          "\"THÀNH THÁI\"",
+          "\"NGUYỄN PHÚC BỬU LÂN\"",
+          "\"EMPEROR DỤC ĐỨC\""
+        ],
+        "chunk_ids": [
+          "chunk-c562b41666df0097fa470c4de74e7ce5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Thành Thái, born Nguyễn Phúc Bửu Lân, was the son of Emperor Dục Đức and Empress Dowager Từ Minh.",
+            "Thành Thái Thành Thái( 14 March 1869 – 20 March 1954) born Nguyễn Phúc Bửu Lân( 阮福寶嶙), was the son of Emperor Dục Đức and Empress Dowager Từ Minh. He reigned for 18 years, from 1889 to 1907."
+          ],
+          "relation_texts": [
+            "Thành Thái, born Nguyễn Phúc Bửu Lân, was the son of Emperor Dục Đức and Empress Dowager Từ Minh.",
+            "link",
+            "EMPRESS DOWAGER TỪ MINH",
+            "THÀNH THÁI",
+            "NGUYỄN PHÚC BỬU LÂN",
+            "EMPEROR DỤC ĐỨC"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-11f47e2ac0b09b5107f69fc6edf491ce",
+            "hyperedge_name": "<hyperedge>\"Thành Thái, born Nguyễn Phúc Bửu Lân, was the son of Emperor Dục Đức and Empress Dowager Từ Minh.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 1885, she was granted the title Grand Empress Dowager Từ Dụ.\"",
+        "branch": "semantic",
+        "raw_score": 0.422715425491333,
+        "hyperedge_text": "In 1885, she was granted the title Grand Empress Dowager Từ Dụ.",
+        "entity_ids": [
+          "\"GRAND EMPRESS DOWAGER TỪ DỤ\""
+        ],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In 1885, she was granted the title Grand Empress Dowager Từ Dụ.",
+            "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+          ],
+          "relation_texts": [
+            "In 1885, she was granted the title Grand Empress Dowager Từ Dụ.",
+            "link",
+            "GRAND EMPRESS DOWAGER TỪ DỤ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-57303751edabb0bbfbef1568387abcd7",
+            "hyperedge_name": "<hyperedge>\"In 1885, she was granted the title Grand Empress Dowager Từ Dụ.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The role of Từ Dụ in the succession of emperors indicates her influence in court politics.\"",
+        "branch": "semantic",
+        "raw_score": 0.41300028562545776,
+        "hyperedge_text": "The role of Từ Dụ in the succession of emperors indicates her influence in court politics.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The role of Từ Dụ in the succession of emperors indicates her influence in court politics.",
+            "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+          ],
+          "relation_texts": [
+            "The role of Từ Dụ in the succession of emperors indicates her influence in court politics."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a859a69961cf0e19d1b9bffc01f5e729",
+            "hyperedge_name": "<hyperedge>\"The role of Từ Dụ in the succession of emperors indicates her influence in court politics.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902) was born on a specific date and died on another, indicating her lifetime.\"",
+        "branch": "semantic",
+        "raw_score": 0.4114837646484375,
+        "hyperedge_text": "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902) was born on a specific date and died on another, indicating her lifetime.",
+        "entity_ids": [
+          "\"20 JUNE 1810\"",
+          "\"12 MAY 1902\""
+        ],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902) was born on a specific date and died on another, indicating her lifetime.",
+            "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+          ],
+          "relation_texts": [
+            "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902) was born on a specific date and died on another, indicating her lifetime.",
+            "link",
+            "20 JUNE 1810",
+            "12 MAY 1902"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e56b01f353558f68fe074f1d738c7e6a",
+            "hyperedge_name": "<hyperedge>\"Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902) was born on a specific date and died on another, indicating her lifetime.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.\"",
+        "hyperedge_text": "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5089112520217896,
+        "fusion_score": 0.501782250404358,
+        "entity_ids": [
+          "\"TỪ DỤ\"",
+          "\"TỰ ĐỨC\"",
+          "\"PHẠM THỊ HẰNG\"",
+          "\"THIỆU TRỊ\""
+        ],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "evidence_texts": [
+          "Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức.",
+          "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.508911,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.501782
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Từ Dụ's royal lineage includes her husband, Thiệu Trị, and their notable children, including Tự Đức.\"",
+        "hyperedge_text": "Từ Dụ's royal lineage includes her husband, Thiệu Trị, and their notable children, including Tự Đức.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5147269368171692,
+        "fusion_score": 0.5029453873634339,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "evidence_texts": [
+          "Từ Dụ's royal lineage includes her husband, Thiệu Trị, and their notable children, including Tự Đức.",
+          "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.514727,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.502945
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Từ Dụ was the mother of Tự Đức, highlighting her maternal role in the Nguyen dynasty.\"",
+        "hyperedge_text": "Từ Dụ was the mother of Tự Đức, highlighting her maternal role in the Nguyen dynasty.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4916430115699768,
+        "fusion_score": 0.4983286023139954,
+        "entity_ids": [
+          "\"MOTHER\""
+        ],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "evidence_texts": [
+          "Từ Dụ was the mother of Tự Đức, highlighting her maternal role in the Nguyen dynasty.",
+          "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.491643,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.498329
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The timeline of Từ Dụ's life reflects the context of changing political authority in Vietnam.\"",
+        "hyperedge_text": "The timeline of Từ Dụ's life reflects the context of changing political authority in Vietnam.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4589856266975403,
+        "fusion_score": 0.4917971253395081,
+        "entity_ids": [
+          "\"CHANGING POLITICAL AUTHORITY\""
+        ],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "evidence_texts": [
+          "The timeline of Từ Dụ's life reflects the context of changing political authority in Vietnam.",
+          "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.458986,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.491797
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The title Empress Dowager was granted to Từ Dụ, showing her elevation due to her son's ascension to the throne.\"",
+        "hyperedge_text": "The title Empress Dowager was granted to Từ Dụ, showing her elevation due to her son's ascension to the throne.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4473220705986023,
+        "fusion_score": 0.48946441411972047,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-fe1b24e8bc95a375007614f726716bb6"
+        ],
+        "evidence_texts": [
+          "The title Empress Dowager was granted to Từ Dụ, showing her elevation due to her son's ascension to the throne.",
+          "Từ Dụ Từ Dụ or Từ Dũ (20 June 1810 – 12 May 1902), born Phạm Thị Hằng (范氏姮), was the wife of Thiệu Trị and mother of Tự Đức. Hằng was a daughter of Phạm Đăng Hưng. She was granted the title Empress Dowager Từ Dụ after Tự Đức ascended the throne. Tự Đức died in 1883. Three regents, Nguyễn Văn Tường, Tôn Thất Thuyết and Trần Tiễn Thành, declared Dục Đức, the eldest adoptive-son of Tự Đức, as the new emperor. Three days later, they deposed Dục Đức and enthroned Hiệp Hòa. Từ Dụ was elevated to the position of one of the \"Tam Cung\" (三宮) together with Trang Ý and Học phi. Từ Dụ played a significant role in the dethronement of Hiệp Hòa, whom was a pro-French emperor, and enthroned Kiến Phúc. In 1885, she was granted the title Grand Empress Dowager Từ Dụ . Tôn Thất Thuyết decided to launch the Cần Vương movement against French colonists. \" Tam Cung\" fled to Tomb of Tự Đức together with Empero..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.447322,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.489464
+        }
+      }
+    ]
+  }
+]

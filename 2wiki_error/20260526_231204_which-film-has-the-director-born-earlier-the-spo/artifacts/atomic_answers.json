@@ -1,0 +1,738 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Spooky Bunch?",
+    "analysis": {
+      "entities": [
+        "The Spooky Bunch"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.\"",
+        "hyperedge_text": "The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5511165857315063,
+        "fusion_score": 0.5102233171463013,
+        "entity_ids": [
+          "\"THE SPOOKY BUNCH\"",
+          "\"ANN HUI\""
+        ],
+        "chunk_ids": [
+          "chunk-238e96bf21c6d271fe4d7e58a642f078"
+        ],
+        "evidence_texts": [
+          "The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.",
+          "The Spooky Bunch The Spooky Bunch( 小姐撞到鬼 a.k.a. 撞到正) is a 1980 Hong Kong movie directed by Ann Hui. The film is about a Cantonese opera troupe arrives on Cheung Chau Island to perform a show under the request by a wealthy man, Mr Ma who insists that and Ah Chi( Josephine Siao), their second rate supporting actress, takes the leading role in the performance. Mr Ma also invites his nephew Dick Ma( Kenny Bee) to the island to watch the show. He hopes by arranging this his nephew will marry Ah Chi so that his family curse being done by Ah Chi's her grandfather placed on this grandfather can be released."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.551117,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510223
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Bill Rebane, the same director of 'Monster A Go-Go' (1965), and 'The Giant Spider Invasion' (1975).\"",
+        "hyperedge_text": "The film was directed by Bill Rebane, the same director of 'Monster A Go-Go' (1965), and 'The Giant Spider Invasion' (1975).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4707303047180176,
+        "fusion_score": 0.4941460609436035,
+        "entity_ids": [
+          "\"BILL REBANE\"",
+          "\"MONSTER A GO-GO\"",
+          "\"THE GIANT SPIDER INVASION\""
+        ],
+        "chunk_ids": [
+          "chunk-b9cc2f94b2503e370b034d610fe2e15b"
+        ],
+        "evidence_texts": [
+          "The film was directed by Bill Rebane, the same director of 'Monster A Go-Go' (1965), and 'The Giant Spider Invasion' (1975).",
+          "Invasion from Inner Earth Invasion from Inner Earth( 1974) is an apocalyptic science fiction film, starring Paul Bentzen and Debbi Pick. The film was directed by Bill Rebane, the same director of\" Monster A Go- Go\"( 1965), and\" The Giant Spider Invasion\"( 1975). The film, also known as Hell Fire and They, was inspired by the British film\" The Strange World of Planet X\"( 1957), and filmed in the style of thrillers directed by Alfred Hitchcock."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.47073,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.494146
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Kevin S. Tenney (born October 16, 1955) is an American film director, producer and screenwriter, best known for directing horror movies such as 'Witchboard' (1986) and 'Night of the Demons' (1988).\"",
+        "hyperedge_text": "Kevin S. Tenney (born October 16, 1955) is an American film director, producer and screenwriter, best known for directing horror movies such as 'Witchboard' (1986) and 'Night of the Demons' (1988).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4372291564941406,
+        "fusion_score": 0.4874458312988281,
+        "entity_ids": [
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\"",
+          "\"AMERICAN FILM DIRECTOR\"",
+          "\"KEVIN S. TENNEY\"",
+          "\"WITCHBOARD\"",
+          "\"OCTOBER 16, 1955\"",
+          "\"HORROR MOVIES\"",
+          "\"NIGHT OF THE DEMONS\""
+        ],
+        "chunk_ids": [
+          "chunk-001c810f7629d4319d33a2c15afcfac4"
+        ],
+        "evidence_texts": [
+          "Kevin S. Tenney (born October 16, 1955) is an American film director, producer and screenwriter, best known for directing horror movies such as 'Witchboard' (1986) and 'Night of the Demons' (1988).",
+          "Kevin S. Tenney Kevin S. Tenney( born October 16, 1955) is an American film director, producer and screenwriter, best known for directing horror movies such as\" Witchboard\"( 1986) and\" Night of the Demons\"( 1988)."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.437229,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.487446
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Spooky Bunch is often referred to by its alternate title, 小姐撞到鬼 a.k.a. 撞到正.\"",
+        "hyperedge_text": "The Spooky Bunch is often referred to by its alternate title, 小姐撞到鬼 a.k.a. 撞到正.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4270671606063843,
+        "fusion_score": 0.48541343212127686,
+        "entity_ids": [
+          "\"撞到正\"",
+          "\"小姐撞到鬼\""
+        ],
+        "chunk_ids": [
+          "chunk-238e96bf21c6d271fe4d7e58a642f078"
+        ],
+        "evidence_texts": [
+          "The Spooky Bunch is often referred to by its alternate title, 小姐撞到鬼 a.k.a. 撞到正.",
+          "The Spooky Bunch The Spooky Bunch( 小姐撞到鬼 a.k.a. 撞到正) is a 1980 Hong Kong movie directed by Ann Hui. The film is about a Cantonese opera troupe arrives on Cheung Chau Island to perform a show under the request by a wealthy man, Mr Ma who insists that and Ah Chi( Josephine Siao), their second rate supporting actress, takes the leading role in the performance. Mr Ma also invites his nephew Dick Ma( Kenny Bee) to the island to watch the show. He hopes by arranging this his nephew will marry Ah Chi so that his family curse being done by Ah Chi's her grandfather placed on this grandfather can be released."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.427067,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.485413
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2698075215021769,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.269808
+        }
+      }
+    ],
+    "answer": "Ann Hui",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'The Spooky Bunch' is directed by Ann Hui.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "Who is the director of His Name Is Nobody?",
+    "analysis": {
+      "entities": [
+        "His Name Is Nobody"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"His Name Is Nobody is a 1979 Hong Kong martial arts comedy film written and directed by Karl Maka and starring Lau Kar- wing, Dean Shek and Bryan Leung.\"",
+        "hyperedge_text": "His Name Is Nobody is a 1979 Hong Kong martial arts comedy film written and directed by Karl Maka and starring Lau Kar- wing, Dean Shek and Bryan Leung.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6482288837432861,
+        "fusion_score": 0.5296457767486573,
+        "entity_ids": [
+          "\"1979\"",
+          "\"HONG KONG\"",
+          "\"DEAN SHEK\"",
+          "\"HIS NAME IS NOBODY\"",
+          "\"KARL MAKA\"",
+          "\"LAU KAR-WING\"",
+          "\"BRYAN LEUNG\"",
+          "\"MARTIAL ARTS COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-36b6dc1e8e480ba46638659d7245ad75"
+        ],
+        "evidence_texts": [
+          "His Name Is Nobody is a 1979 Hong Kong martial arts comedy film written and directed by Karl Maka and starring Lau Kar- wing, Dean Shek and Bryan Leung.",
+          "His Name Is Nobody His Name Is Nobody is a 1979 Hong Kong martial arts comedy film written and directed by Karl Maka and starring Lau Kar- wing, Dean Shek and Bryan Leung."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.648229,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.529646
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Upon its release, His Name Is Nobody garnered attention and led to discussions about its influence in the genre.\"",
+        "hyperedge_text": "Upon its release, His Name Is Nobody garnered attention and led to discussions about its influence in the genre.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5541880130767822,
+        "fusion_score": 0.5108376026153565,
+        "entity_ids": [
+          "\"INFLUENCE\"",
+          "\"GENRE\""
+        ],
+        "chunk_ids": [
+          "chunk-36b6dc1e8e480ba46638659d7245ad75"
+        ],
+        "evidence_texts": [
+          "Upon its release, His Name Is Nobody garnered attention and led to discussions about its influence in the genre.",
+          "His Name Is Nobody His Name Is Nobody is a 1979 Hong Kong martial arts comedy film written and directed by Karl Maka and starring Lau Kar- wing, Dean Shek and Bryan Leung."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.554188,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510838
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His Name Is Nobody remains a reference point for discussions about the evolution of the genre.\"",
+        "hyperedge_text": "His Name Is Nobody remains a reference point for discussions about the evolution of the genre.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5319942235946655,
+        "fusion_score": 0.5063988447189331,
+        "entity_ids": [
+          "\"REFERENCE POINT\"",
+          "\"EVOLUTION OF THE GENRE\""
+        ],
+        "chunk_ids": [
+          "chunk-36b6dc1e8e480ba46638659d7245ad75"
+        ],
+        "evidence_texts": [
+          "His Name Is Nobody remains a reference point for discussions about the evolution of the genre.",
+          "His Name Is Nobody His Name Is Nobody is a 1979 Hong Kong martial arts comedy film written and directed by Karl Maka and starring Lau Kar- wing, Dean Shek and Bryan Leung."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.531994,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.506399
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His Name Is Nobody showcases a distinctive style that blends Western motifs with traditional martial arts themes.\"",
+        "hyperedge_text": "His Name Is Nobody showcases a distinctive style that blends Western motifs with traditional martial arts themes.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5205225944519043,
+        "fusion_score": 0.5041045188903809,
+        "entity_ids": [
+          "\"STYLE\"",
+          "\"WESTERN MOTIFS\"",
+          "\"TRADITIONAL MARTIAL ARTS THEMES\""
+        ],
+        "chunk_ids": [
+          "chunk-36b6dc1e8e480ba46638659d7245ad75"
+        ],
+        "evidence_texts": [
+          "His Name Is Nobody showcases a distinctive style that blends Western motifs with traditional martial arts themes.",
+          "His Name Is Nobody His Name Is Nobody is a 1979 Hong Kong martial arts comedy film written and directed by Karl Maka and starring Lau Kar- wing, Dean Shek and Bryan Leung."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.520523,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504105
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the director of 'Alone Among The Taliban'. \"",
+        "hyperedge_text": "He is the director of 'Alone Among The Taliban'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.44475895166397095,
+        "fusion_score": 0.48895179033279423,
+        "entity_ids": [
+          "\"ALONE AMONG THE TALIBAN\""
+        ],
+        "chunk_ids": [
+          "chunk-cbbb167608e3d3460719215f1e5f9a3f"
+        ],
+        "evidence_texts": [
+          "He is the director of 'Alone Among The Taliban'.",
+          "Mohsen Eslamzadeh Mohsen Eslamzadeh is an Iranian documentary filmmaker. He is the director of\" Alone Among The Taliban\". This film has won the best documentary award at the 44th Athens International Film and Video Festival in the United States. This film has won the best documentary award at the 12th Marbella International Film Festival in Spain. This film has won the Shahid Avini Award offers."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.444759,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.488952
+        }
+      }
+    ],
+    "answer": "Karl Maka",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'His Name Is Nobody' was written and directed by Karl Maka.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"His Name Is Nobody is a 1979 Hong Kong martial arts comedy film written and directed by Karl Maka and starring Lau Kar- wing, Dean Shek and Bryan Leung.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When was the director of The Spooky Bunch born?",
+    "analysis": {
+      "entities": [
+        "Ann Hui"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.\"",
+        "hyperedge_text": "The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49885293841362,
+        "fusion_score": 0.49977058768272403,
+        "entity_ids": [
+          "\"THE SPOOKY BUNCH\"",
+          "\"ANN HUI\""
+        ],
+        "chunk_ids": [
+          "chunk-238e96bf21c6d271fe4d7e58a642f078"
+        ],
+        "evidence_texts": [
+          "The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.",
+          "The Spooky Bunch The Spooky Bunch( 小姐撞到鬼 a.k.a. 撞到正) is a 1980 Hong Kong movie directed by Ann Hui. The film is about a Cantonese opera troupe arrives on Cheung Chau Island to perform a show under the request by a wealthy man, Mr Ma who insists that and Ah Chi( Josephine Siao), their second rate supporting actress, takes the leading role in the performance. Mr Ma also invites his nephew Dick Ma( Kenny Bee) to the island to watch the show. He hopes by arranging this his nephew will marry Ah Chi so that his family curse being done by Ah Chi's her grandfather placed on this grandfather can be released."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.498853,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499771
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ann Hui On-wah, MBE, BBS, (Hepburn: Kyo Anka; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress.\"",
+        "hyperedge_text": "Ann Hui On-wah, MBE, BBS, (Hepburn: Kyo Anka; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7363631725311279,
+        "fusion_score": 0.5472726345062257,
+        "entity_ids": [
+          "\"ACTRESS\"",
+          "\"FILM DIRECTOR\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\"",
+          "\"HONG KONG\"",
+          "\"ANN HUI ON-WAH\""
+        ],
+        "chunk_ids": [
+          "chunk-572d1beb875e616f9d03813f46b05d3d"
+        ],
+        "evidence_texts": [
+          "Ann Hui On-wah, MBE, BBS, (Hepburn: Kyo Anka; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress.",
+          "Ann Hui Ann Hui On-wah, MBE, BBS,( Hepburn:\" Kyo Anka\"; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress. She is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in 1970s and 80s. She is known for her films about social issues in Hong Kong. Her film works cover different categories, including: literary adaptation, martial arts masterpieces, semi-autobiographical works, female issues, social phenomena, political changes, and also thrillers. She served as the president of the Hong Kong Film Director's Guild from 2004 to 2006. Hui has won numerous awards for her films. She won Golden Horse Awards( GHA) for Best Director three times( 1999, 2011, 2014); Best Film at the Asia Pacific Film Festival; Hong Kong Film Awards for Best Director six times( 1983, 1996, 2009, 2012, 2015, 2018). There are only two films won Grand Slam for..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.736363,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.547273
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ann Hui is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in the 1970s and 80s.\"",
+        "hyperedge_text": "Ann Hui is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in the 1970s and 80s.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6103425025939941,
+        "fusion_score": 0.5220685005187988,
+        "entity_ids": [
+          "\"1970S\"",
+          "\"1980S\""
+        ],
+        "chunk_ids": [
+          "chunk-572d1beb875e616f9d03813f46b05d3d"
+        ],
+        "evidence_texts": [
+          "Ann Hui is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in the 1970s and 80s.",
+          "Ann Hui Ann Hui On-wah, MBE, BBS,( Hepburn:\" Kyo Anka\"; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress. She is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in 1970s and 80s. She is known for her films about social issues in Hong Kong. Her film works cover different categories, including: literary adaptation, martial arts masterpieces, semi-autobiographical works, female issues, social phenomena, political changes, and also thrillers. She served as the president of the Hong Kong Film Director's Guild from 2004 to 2006. Hui has won numerous awards for her films. She won Golden Horse Awards( GHA) for Best Director three times( 1999, 2011, 2014); Best Film at the Asia Pacific Film Festival; Hong Kong Film Awards for Best Director six times( 1983, 1996, 2009, 2012, 2015, 2018). There are only two films won Grand Slam for..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.610343,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522069
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ann Hui has been involved in various international film festivals, showcasing her work to a global audience.\"",
+        "hyperedge_text": "Ann Hui has been involved in various international film festivals, showcasing her work to a global audience.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5886249542236328,
+        "fusion_score": 0.5177249908447266,
+        "entity_ids": [
+          "\"INTERNATIONAL FILM FESTIVALS\""
+        ],
+        "chunk_ids": [
+          "chunk-572d1beb875e616f9d03813f46b05d3d"
+        ],
+        "evidence_texts": [
+          "Ann Hui has been involved in various international film festivals, showcasing her work to a global audience.",
+          "Ann Hui Ann Hui On-wah, MBE, BBS,( Hepburn:\" Kyo Anka\"; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress. She is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in 1970s and 80s. She is known for her films about social issues in Hong Kong. Her film works cover different categories, including: literary adaptation, martial arts masterpieces, semi-autobiographical works, female issues, social phenomena, political changes, and also thrillers. She served as the president of the Hong Kong Film Director's Guild from 2004 to 2006. Hui has won numerous awards for her films. She won Golden Horse Awards( GHA) for Best Director three times( 1999, 2011, 2014); Best Film at the Asia Pacific Film Festival; Hong Kong Film Awards for Best Director six times( 1983, 1996, 2009, 2012, 2015, 2018). There are only two films won Grand Slam for..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.588625,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517725
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The recognition of Ann Hui's work has had a lasting influence on the Hong Kong film industry.\"",
+        "hyperedge_text": "The recognition of Ann Hui's work has had a lasting influence on the Hong Kong film industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5767337679862976,
+        "fusion_score": 0.5153467535972596,
+        "entity_ids": [
+          "\"LASTING INFLUENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-572d1beb875e616f9d03813f46b05d3d"
+        ],
+        "evidence_texts": [
+          "The recognition of Ann Hui's work has had a lasting influence on the Hong Kong film industry.",
+          "Ann Hui Ann Hui On-wah, MBE, BBS,( Hepburn:\" Kyo Anka\"; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress. She is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in 1970s and 80s. She is known for her films about social issues in Hong Kong. Her film works cover different categories, including: literary adaptation, martial arts masterpieces, semi-autobiographical works, female issues, social phenomena, political changes, and also thrillers. She served as the president of the Hong Kong Film Director's Guild from 2004 to 2006. Hui has won numerous awards for her films. She won Golden Horse Awards( GHA) for Best Director three times( 1999, 2011, 2014); Best Film at the Asia Pacific Film Festival; Hong Kong Film Awards for Best Director six times( 1983, 1996, 2009, 2012, 2015, 2018). There are only two films won Grand Slam for..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.576734,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515347
+        }
+      }
+    ],
+    "answer": "23 May 1947",
+    "confidence": 1.0,
+    "reasoning_summary": "Ann Hui, the director of The Spooky Bunch, was born on 23 May 1947, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Ann Hui On-wah, MBE, BBS, (Hepburn: Kyo Anka; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of The Spooky Bunch born?",
+    "analysis": {
+      "entities": [
+        "Ann Hui"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.\"",
+        "hyperedge_text": "The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49885293841362,
+        "fusion_score": 0.49977058768272403,
+        "entity_ids": [
+          "\"THE SPOOKY BUNCH\"",
+          "\"ANN HUI\""
+        ],
+        "chunk_ids": [
+          "chunk-238e96bf21c6d271fe4d7e58a642f078"
+        ],
+        "evidence_texts": [
+          "The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.",
+          "The Spooky Bunch The Spooky Bunch( 小姐撞到鬼 a.k.a. 撞到正) is a 1980 Hong Kong movie directed by Ann Hui. The film is about a Cantonese opera troupe arrives on Cheung Chau Island to perform a show under the request by a wealthy man, Mr Ma who insists that and Ah Chi( Josephine Siao), their second rate supporting actress, takes the leading role in the performance. Mr Ma also invites his nephew Dick Ma( Kenny Bee) to the island to watch the show. He hopes by arranging this his nephew will marry Ah Chi so that his family curse being done by Ah Chi's her grandfather placed on this grandfather can be released."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.498853,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499771
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ann Hui On-wah, MBE, BBS, (Hepburn: Kyo Anka; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress.\"",
+        "hyperedge_text": "Ann Hui On-wah, MBE, BBS, (Hepburn: Kyo Anka; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7363631725311279,
+        "fusion_score": 0.5472726345062257,
+        "entity_ids": [
+          "\"ACTRESS\"",
+          "\"FILM DIRECTOR\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\"",
+          "\"HONG KONG\"",
+          "\"ANN HUI ON-WAH\""
+        ],
+        "chunk_ids": [
+          "chunk-572d1beb875e616f9d03813f46b05d3d"
+        ],
+        "evidence_texts": [
+          "Ann Hui On-wah, MBE, BBS, (Hepburn: Kyo Anka; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress.",
+          "Ann Hui Ann Hui On-wah, MBE, BBS,( Hepburn:\" Kyo Anka\"; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress. She is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in 1970s and 80s. She is known for her films about social issues in Hong Kong. Her film works cover different categories, including: literary adaptation, martial arts masterpieces, semi-autobiographical works, female issues, social phenomena, political changes, and also thrillers. She served as the president of the Hong Kong Film Director's Guild from 2004 to 2006. Hui has won numerous awards for her films. She won Golden Horse Awards( GHA) for Best Director three times( 1999, 2011, 2014); Best Film at the Asia Pacific Film Festival; Hong Kong Film Awards for Best Director six times( 1983, 1996, 2009, 2012, 2015, 2018). There are only two films won Grand Slam for..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.736363,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.547273
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ann Hui is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in the 1970s and 80s.\"",
+        "hyperedge_text": "Ann Hui is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in the 1970s and 80s.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6103425025939941,
+        "fusion_score": 0.5220685005187988,
+        "entity_ids": [
+          "\"1970S\"",
+          "\"1980S\""
+        ],
+        "chunk_ids": [
+          "chunk-572d1beb875e616f9d03813f46b05d3d"
+        ],
+        "evidence_texts": [
+          "Ann Hui is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in the 1970s and 80s.",
+          "Ann Hui Ann Hui On-wah, MBE, BBS,( Hepburn:\" Kyo Anka\"; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress. She is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in 1970s and 80s. She is known for her films about social issues in Hong Kong. Her film works cover different categories, including: literary adaptation, martial arts masterpieces, semi-autobiographical works, female issues, social phenomena, political changes, and also thrillers. She served as the president of the Hong Kong Film Director's Guild from 2004 to 2006. Hui has won numerous awards for her films. She won Golden Horse Awards( GHA) for Best Director three times( 1999, 2011, 2014); Best Film at the Asia Pacific Film Festival; Hong Kong Film Awards for Best Director six times( 1983, 1996, 2009, 2012, 2015, 2018). There are only two films won Grand Slam for..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.610343,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522069
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ann Hui has been involved in various international film festivals, showcasing her work to a global audience.\"",
+        "hyperedge_text": "Ann Hui has been involved in various international film festivals, showcasing her work to a global audience.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5886249542236328,
+        "fusion_score": 0.5177249908447266,
+        "entity_ids": [
+          "\"INTERNATIONAL FILM FESTIVALS\""
+        ],
+        "chunk_ids": [
+          "chunk-572d1beb875e616f9d03813f46b05d3d"
+        ],
+        "evidence_texts": [
+          "Ann Hui has been involved in various international film festivals, showcasing her work to a global audience.",
+          "Ann Hui Ann Hui On-wah, MBE, BBS,( Hepburn:\" Kyo Anka\"; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress. She is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in 1970s and 80s. She is known for her films about social issues in Hong Kong. Her film works cover different categories, including: literary adaptation, martial arts masterpieces, semi-autobiographical works, female issues, social phenomena, political changes, and also thrillers. She served as the president of the Hong Kong Film Director's Guild from 2004 to 2006. Hui has won numerous awards for her films. She won Golden Horse Awards( GHA) for Best Director three times( 1999, 2011, 2014); Best Film at the Asia Pacific Film Festival; Hong Kong Film Awards for Best Director six times( 1983, 1996, 2009, 2012, 2015, 2018). There are only two films won Grand Slam for..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.588625,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517725
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The recognition of Ann Hui's work has had a lasting influence on the Hong Kong film industry.\"",
+        "hyperedge_text": "The recognition of Ann Hui's work has had a lasting influence on the Hong Kong film industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5767337679862976,
+        "fusion_score": 0.5153467535972596,
+        "entity_ids": [
+          "\"LASTING INFLUENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-572d1beb875e616f9d03813f46b05d3d"
+        ],
+        "evidence_texts": [
+          "The recognition of Ann Hui's work has had a lasting influence on the Hong Kong film industry.",
+          "Ann Hui Ann Hui On-wah, MBE, BBS,( Hepburn:\" Kyo Anka\"; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress. She is one of the most critically acclaimed Hong Kong New Wave filmmakers especially in 1970s and 80s. She is known for her films about social issues in Hong Kong. Her film works cover different categories, including: literary adaptation, martial arts masterpieces, semi-autobiographical works, female issues, social phenomena, political changes, and also thrillers. She served as the president of the Hong Kong Film Director's Guild from 2004 to 2006. Hui has won numerous awards for her films. She won Golden Horse Awards( GHA) for Best Director three times( 1999, 2011, 2014); Best Film at the Asia Pacific Film Festival; Hong Kong Film Awards for Best Director six times( 1983, 1996, 2009, 2012, 2015, 2018). There are only two films won Grand Slam for..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.576734,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515347
+        }
+      }
+    ],
+    "answer": "23 May 1947",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence states that Ann Hui was born on 23 May 1947.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Ann Hui On-wah, MBE, BBS, (Hepburn: Kyo Anka; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress.\""
+    ]
+  }
+]

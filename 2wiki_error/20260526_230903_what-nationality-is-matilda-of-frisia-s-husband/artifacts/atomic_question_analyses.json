@@ -1,0 +1,104 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the husband of Matilda Of Frisia?",
+    "retrieval_question": "Who is the husband of Matilda Of Frisia?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the husband of Matilda Of Frisia?",
+      "retrieval_question": "Who is the husband of Matilda Of Frisia?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Matilda Of Frisia"
+      ],
+      "relations": [
+        "is the husband of"
+      ],
+      "relation_query": "who is the husband of a historical figure",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the husband of Matilda Of Frisia?",
+    "retrieval_question": "What is the nationality of Henry I?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the nationality of the husband of Matilda Of Frisia?",
+      "retrieval_question": "What is the nationality of Henry I?",
+      "whether_rewritten": true,
+      "replacement_span": "the husband of Matilda Of Frisia",
+      "replacement_answer": "Henry I",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the husband of Matilda Of Frisia",
+          "replacement_answer": "Henry I"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the husband of Matilda Of Frisia?",
+        "answer": "Henry I",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "Matilda of Frisia was the first queen of Henry I, King of the Franks, as stated in the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks.\"",
+            "fusion_score": 0.528860354423523,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks.",
+              "Matilda of Frisia Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks. Her date of birth is unknown. She was the daughter of Liudolf, Margrave of Frisia, and Gertrude of Egisheim. Matilda and Henry were married in 1034 after the death of his fiancée Matilda of Franconia. Around 1040, Matilda of Frisia gave birth to a daughter via Caesarian section, but four years later in 1044 both she and her daughter died only weeks apart. Matilda was buried in St Denis Abbey, but her tomb is not preserved. Henry married Anne of Kiev after her death."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Matilda of Frisia was a prominent historical figure in the 11th century.\"",
+            "fusion_score": 0.7980581442515056,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Matilda of Frisia was a prominent historical figure in the 11th century.",
+              "Matilda of Frisia Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks. Her date of birth is unknown. She was the daughter of Liudolf, Margrave of Frisia, and Gertrude of Egisheim. Matilda and Henry were married in 1034 after the death of his fiancée Matilda of Franconia. Around 1040, Matilda of Frisia gave birth to a daughter via Caesarian section, but four years later in 1044 both she and her daughter died only weeks apart. Matilda was buried in St Denis Abbey, but her tomb is not preserved. Henry married Anne of Kiev after her death."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Matilda of Frisia's legacy is reflected in historical accounts and royal lineage.\"",
+            "fusion_score": 0.6612213929494222,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Matilda of Frisia's legacy is reflected in historical accounts and royal lineage.",
+              "Matilda of Frisia Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks. Her date of birth is unknown. She was the daughter of Liudolf, Margrave of Frisia, and Gertrude of Egisheim. Matilda and Henry were married in 1034 after the death of his fiancée Matilda of Franconia. Around 1040, Matilda of Frisia gave birth to a daughter via Caesarian section, but four years later in 1044 both she and her daughter died only weeks apart. Matilda was buried in St Denis Abbey, but her tomb is not preserved. Henry married Anne of Kiev after her death."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Henry I"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    }
+  }
+]

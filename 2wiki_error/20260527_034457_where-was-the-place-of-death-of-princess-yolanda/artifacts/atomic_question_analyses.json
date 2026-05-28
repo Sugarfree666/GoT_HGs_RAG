@@ -1,0 +1,105 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Princess Yolanda Of Savoy?",
+    "retrieval_question": "Who is the father of Princess Yolanda Of Savoy?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of Princess Yolanda Of Savoy?",
+      "retrieval_question": "Who is the father of Princess Yolanda Of Savoy?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Princess Yolanda Of Savoy"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a royal figure",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was the father of Princess Yolanda Of Savoy buried?",
+    "retrieval_question": "Where was King Victor Emmanuel III buried?",
+    "dependency_question_rewrite": {
+      "original_question": "Where was the father of Princess Yolanda Of Savoy buried?",
+      "retrieval_question": "Where was King Victor Emmanuel III buried?",
+      "whether_rewritten": true,
+      "replacement_span": "the father of Princess Yolanda Of Savoy",
+      "replacement_answer": "King Victor Emmanuel III",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the father of Princess Yolanda Of Savoy",
+          "replacement_answer": "King Victor Emmanuel III"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the father of Princess Yolanda Of Savoy?",
+        "answer": "King Victor Emmanuel III",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy, as stated in the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy.\"",
+          "<hyperedge>\"Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy.\"",
+            "fusion_score": 0.5486016988754273,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy.",
+              "Princess Yolanda of Savoy Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy.\"",
+            "fusion_score": 0.55,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy.",
+              "Princess Yolanda of Savoy Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III.\"",
+            "fusion_score": 0.5429034233093262,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III.",
+              "Princess Yolanda of Savoy Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "King Victor Emmanuel III"
+      ],
+      "relations": [
+        "burial location"
+      ],
+      "relation_query": "Where is the burial location of a person?",
+      "answer_type": "location"
+    }
+  }
+]

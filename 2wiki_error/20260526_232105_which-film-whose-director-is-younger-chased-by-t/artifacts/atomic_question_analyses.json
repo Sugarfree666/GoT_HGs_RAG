@@ -1,0 +1,331 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Chased By The Dogs?",
+    "retrieval_question": "Who is the director of Chased By The Dogs?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Chased By The Dogs?",
+      "retrieval_question": "Who is the director of Chased By The Dogs?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Chased By The Dogs"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of The Demise Of Herman Durer?",
+    "retrieval_question": "Who is the director of The Demise Of Herman Durer?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of The Demise Of Herman Durer?",
+      "retrieval_question": "Who is the director of The Demise Of Herman Durer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "The Demise Of Herman Durer"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Chased By The Dogs?",
+    "retrieval_question": "What is the age of Kamal El Sheikh?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of Chased By The Dogs?",
+      "retrieval_question": "What is the age of Kamal El Sheikh?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Chased By The Dogs",
+      "replacement_answer": "Kamal El Sheikh",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Chased By The Dogs",
+          "replacement_answer": "Kamal El Sheikh"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Chased By The Dogs?",
+        "answer": "Kamal El Sheikh",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Chased by the Dogs' is directed by Kamal El Sheikh.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Chased by the Dogs or The Thief and the Dogs (translit. El less wal kilab) is a 1962 Egyptian film directed by Kamal El Sheikh.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Chased by the Dogs or The Thief and the Dogs (translit. El less wal kilab) is a 1962 Egyptian film directed by Kamal El Sheikh.\"",
+            "fusion_score": 0.5124597430229187,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Chased by the Dogs or The Thief and the Dogs (translit. El less wal kilab) is a 1962 Egyptian film directed by Kamal El Sheikh.",
+              "Chased by the Dogs Chased by the Dogs or The Thief and the Dogs( translit. El less wal kilab) is a 1962 Egyptian film directed by Kamal El Sheikh, based on the novel The Thief and the Dogs by Naguib Mahfouz. It was entered into the 13th Berlin International Film Festival. The film was also selected as the Egyptian entry for the Best Foreign Language Film at the 35th Academy Awards, but was not accepted as a nominee."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Chased by the Dogs or The Thief and the Dogs (translit. El less wal kilab) is a film based on the novel by Naguib Mahfouz.\"",
+            "fusion_score": 0.5039214611053467,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Chased by the Dogs or The Thief and the Dogs (translit. El less wal kilab) is a film based on the novel by Naguib Mahfouz.",
+              "Chased by the Dogs Chased by the Dogs or The Thief and the Dogs( translit. El less wal kilab) is a 1962 Egyptian film directed by Kamal El Sheikh, based on the novel The Thief and the Dogs by Naguib Mahfouz. It was entered into the 13th Berlin International Film Festival. The film was also selected as the Egyptian entry for the Best Foreign Language Film at the 35th Academy Awards, but was not accepted as a nominee."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Speaking later about his difficulty in trying to work under the Dogme restrictions, he described himself as a 'visual director' and Dogme as a movement where 'the camera follows the [actors] and choice means nothing'.\"",
+            "fusion_score": 0.49043023586273193,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Speaking later about his difficulty in trying to work under the Dogme restrictions, he described himself as a 'visual director' and Dogme as a movement where 'the camera follows the [actors] and choice means nothing'.",
+              "Henrik Ruben Genz Henrik Ruben Genz (born 7 November 1959 in Gram, Denmark) is a Danish film director. Before becoming involved with film, Genz attended Designskolen Kolding, where he studied graphic design, after giving up on an earlier dream of being a painter. While there, he did some work with video, and a chance meeting with director Arne Bro encouraged him to pursue film as a career. Genz was then accepted into the National Film School of Denmark at the age of 31, graduating after completing the well-regarded short film \"Cross Roads\" (Danish title: Omveje, \"Detours\") in 1995. Genz's next work, the short film \"Theis and Nico\" (Danish title: Bror, min bror, \"Brother, my brother\"), released in 1999, was nominated for an Academy Award for Best Live Action Short Film. He then became involved with the Dogme 95 movement, but was unable to produce any quality work after six months of ef..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Kamal El Sheikh"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of The Demise Of Herman Durer?",
+    "retrieval_question": "What is the age of Leon de Winter?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of The Demise Of Herman Durer?",
+      "retrieval_question": "What is the age of Leon de Winter?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of The Demise Of Herman Durer",
+      "replacement_answer": "Leon de Winter",
+      "replacements": [
+        {
+          "dependency_node_id": "q3",
+          "replacement_span": "the director of The Demise Of Herman Durer",
+          "replacement_answer": "Leon de Winter"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q3",
+        "question": "Who is the director of The Demise Of Herman Durer?",
+        "answer": "Leon de Winter",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence explicitly states that 'The Demise of Herman Durer' is a 1979 Dutch film directed by Leon de Winter.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The Demise of Herman Durer (Dutch: 'De Verwording van Herman Dürer') is a 1979 Dutch film directed by Leon de Winter.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The title 'The Demise of Herman Durer' suggests a focus on the downfall or transformation of its central character.\"",
+            "fusion_score": 0.5332505464553834,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The title 'The Demise of Herman Durer' suggests a focus on the downfall or transformation of its central character.",
+              "The Demise of Herman Durer The Demise of Herman Durer( Dutch:\" De Verwording van Herman Dürer\") is a 1979 Dutch film directed by Leon de Winter."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The Demise of Herman Durer (Dutch: 'De Verwording van Herman Dürer') is a 1979 Dutch film directed by Leon de Winter.\"",
+            "fusion_score": 0.5398910999298097,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Demise of Herman Durer (Dutch: 'De Verwording van Herman Dürer') is a 1979 Dutch film directed by Leon de Winter.",
+              "The Demise of Herman Durer The Demise of Herman Durer( Dutch:\" De Verwording van Herman Dürer\") is a 1979 Dutch film directed by Leon de Winter."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+            "fusion_score": 0.25314085483551024,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "After this he went on to become a director himself.",
+              "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Leon de Winter"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    }
+  },
+  {
+    "node_id": "q5",
+    "question": "What is the age of the director of Chased By The Dogs?",
+    "retrieval_question": "What is the age of the director of Chased By The Dogs?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of Chased By The Dogs?",
+      "retrieval_question": "What is the age of the director of Chased By The Dogs?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "What is the age of the director of Chased By The Dogs?",
+        "answer": "104",
+        "confidence": 0.9,
+        "answer_type": "number",
+        "reasoning_summary": "Kamal El Sheikh was born on 2 February 1919, and he passed away on 2 January 2004, making him 104 years old at the time of his death.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Kamal El Sheikh was born on 2 February 1919.\"",
+          "<hyperedge>\"Kamal El Sheikh passed away on 2 January 2004.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Kamal El Sheikh was born on 2 February 1919.\"",
+            "fusion_score": 0.5518657922744752,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Kamal El Sheikh was born on 2 February 1919.",
+              "Kamal El Sheikh Kamal El Sheikh( 2 February 1919 – 2 January 2004) was an Egyptian film director. He directed 28 films between 1952 and 1987."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Kamal El Sheikh (2 February 1919 – 2 January 2004) was an Egyptian film director.\"",
+            "fusion_score": 0.5413266301155091,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Kamal El Sheikh (2 February 1919 – 2 January 2004) was an Egyptian film director.",
+              "Kamal El Sheikh Kamal El Sheikh( 2 February 1919 – 2 January 2004) was an Egyptian film director. He directed 28 films between 1952 and 1987."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Kamal El Sheikh passed away on 2 January 2004.\"",
+            "fusion_score": 0.5300770998001099,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Kamal El Sheikh passed away on 2 January 2004.",
+              "Kamal El Sheikh Kamal El Sheikh( 2 February 1919 – 2 January 2004) was an Egyptian film director. He directed 28 films between 1952 and 1987."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q4",
+        "question": "What is the age of the director of The Demise Of Herman Durer?",
+        "answer": "69",
+        "confidence": 0.9,
+        "answer_type": "number",
+        "reasoning_summary": "Leon de Winter, the director of 'The Demise Of Herman Durer', was born on 24 February 1954, making him 69 years old as of now.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Leon de Winter is a Dutch writer and columnist.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Leon de Winter is a Dutch writer.\"",
+            "fusion_score": 0.5251213312149048,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Leon de Winter is a Dutch writer.",
+              "Leon de Winter Leon de Winter( born 24 February 1954) is a Dutch writer and columnist."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Leon de Winter is a Dutch writer and columnist.\"",
+            "fusion_score": 0.5210903048515321,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Leon de Winter is a Dutch writer and columnist.",
+              "Leon de Winter Leon de Winter( born 24 February 1954) is a Dutch writer and columnist."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Leon de Winter may be known for his contributions to Dutch cinema and storytelling.\"",
+            "fusion_score": 0.5122971415519715,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Leon de Winter may be known for his contributions to Dutch cinema and storytelling.",
+              "The Demise of Herman Durer The Demise of Herman Durer( Dutch:\" De Verwording van Herman Dürer\") is a 1979 Dutch film directed by Leon de Winter."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Chased By The Dogs",
+        "Kamal El Sheikh"
+      ],
+      "relations": [
+        "age of the director"
+      ],
+      "relation_query": "What is the age of the director of a work?",
+      "answer_type": "number"
+    }
+  }
+]

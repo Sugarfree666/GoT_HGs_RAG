@@ -1,0 +1,1759 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Bhaji On The Beach?",
+    "retrieval_question": "Who is the director of Bhaji On The Beach?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Bhaji On The Beach?",
+      "retrieval_question": "Who is the director of Bhaji On The Beach?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+        "entity_ids": [
+          "\"BHAJI ON THE BEACH\"",
+          "\"BEND IT LIKE BECKHAM\"",
+          "\"BRIDE AND PREJUDICE\"",
+          "\"ANGUS, THONGS AND PERFECT SNOGGING\"",
+          "\"IT'S A WONDERFUL AFTERLIFE\"",
+          "\"VICEROY'S HOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-925d1e5e4bf757498552ef7540d75ea8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+            "Gurinder Chadha Gurinder Chadha,( born 10 January 1960) is an English film director of Indian origin. Most of her films explore the lives of Indians living in England. The common theme among her work showcases the trials of Indian women living in England and how they must reconcile their converging traditional and modern cultures. Although many of her films seem like simple quirky comedies about Indian women, they actually address many social and emotional issues, especially ones faced by immigrants caught between two worlds. Much of her work also consists of adaptations from book to film, but with a different flair. She is best known for the hit films\" Bhaji on the Beach\"( 1993),\" Bend It Like Beckham\"( 2002),\" Bride and Prejudice\"( 2004),\" Angus, Thongs and Perfect Snogging\"( 2008),\" It's a Wonderful Afterlife\"( 2010) and\" Viceroy's House\"( 2017). Her latest features are the biograp..."
+          ],
+          "relation_texts": [
+            "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+            "link",
+            "BHAJI ON THE BEACH",
+            "BEND IT LIKE BECKHAM",
+            "BRIDE AND PREJUDICE",
+            "ANGUS, THONGS AND PERFECT SNOGGING",
+            "IT'S A WONDERFUL AFTERLIFE",
+            "VICEROY'S HOUSE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.",
+        "entity_ids": [
+          "\"COMEDY-DRAMA\"",
+          "\"1993\"",
+          "\"BHAJI ON THE BEACH\"",
+          "\"GURINDER CHADHA\"",
+          "\"MEERA SYAL\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.",
+            "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+          ],
+          "relation_texts": [
+            "Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.",
+            "link",
+            "COMEDY-DRAMA",
+            "1993",
+            "BHAJI ON THE BEACH",
+            "GURINDER CHADHA",
+            "MEERA SYAL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078437924385071,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027617812156677,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.49729883670806885,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.4967820644378662,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49395090341567993,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.4855998158454895,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4839867651462555,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48199886083602905,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47989267110824585,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.47769442200660706,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.\"",
+        "branch": "semantic",
+        "raw_score": 0.6908137798309326,
+        "hyperedge_text": "Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.",
+        "entity_ids": [
+          "\"COMEDY-DRAMA\"",
+          "\"1993\"",
+          "\"BHAJI ON THE BEACH\"",
+          "\"GURINDER CHADHA\"",
+          "\"MEERA SYAL\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.",
+            "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+          ],
+          "relation_texts": [
+            "Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.",
+            "link",
+            "COMEDY-DRAMA",
+            "1993",
+            "BHAJI ON THE BEACH",
+            "GURINDER CHADHA",
+            "MEERA SYAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d9812cc359705130e33140e76c48317b",
+            "hyperedge_name": "<hyperedge>\"Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.\"",
+        "branch": "semantic",
+        "raw_score": 0.6289924383163452,
+        "hyperedge_text": "Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.",
+        "entity_ids": [
+          "\"CHARACTERS\"",
+          "\"CULTURAL IDENTITY\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.",
+            "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+          ],
+          "relation_texts": [
+            "Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.",
+            "link",
+            "CHARACTERS",
+            "CULTURAL IDENTITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-17b7a76920f4910705c488ccba0f92d6",
+            "hyperedge_name": "<hyperedge>\"Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.\"",
+        "branch": "semantic",
+        "raw_score": 0.614122748374939,
+        "hyperedge_text": "Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.",
+        "entity_ids": [
+          "\"भाजी ऑन द बीच\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.",
+            "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+          ],
+          "relation_texts": [
+            "Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.",
+            "link",
+            "भाजी ऑन द बीच"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-56873d3d71c7e5edd485199fc56e27c6",
+            "hyperedge_name": "<hyperedge>\"Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Bhaji on the Beach was released in 1993 in the United Kingdom.\"",
+        "branch": "semantic",
+        "raw_score": 0.577032744884491,
+        "hyperedge_text": "The film Bhaji on the Beach was released in 1993 in the United Kingdom.",
+        "entity_ids": [
+          "\"UNITED KINGDOM\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Bhaji on the Beach was released in 1993 in the United Kingdom.",
+            "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+          ],
+          "relation_texts": [
+            "The film Bhaji on the Beach was released in 1993 in the United Kingdom.",
+            "link",
+            "UNITED KINGDOM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bb01989503188ee64eb5d521189138de",
+            "hyperedge_name": "<hyperedge>\"The film Bhaji on the Beach was released in 1993 in the United Kingdom.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach has garnered acclaim for its relatable themes and engaging storytelling.\"",
+        "branch": "semantic",
+        "raw_score": 0.5633730888366699,
+        "hyperedge_text": "Bhaji on the Beach has garnered acclaim for its relatable themes and engaging storytelling.",
+        "entity_ids": [
+          "\"ACCLAIM\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bhaji on the Beach has garnered acclaim for its relatable themes and engaging storytelling.",
+            "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+          ],
+          "relation_texts": [
+            "Bhaji on the Beach has garnered acclaim for its relatable themes and engaging storytelling.",
+            "link",
+            "ACCLAIM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b9e5d1bfbbc484227e99221e8582bdaf",
+            "hyperedge_name": "<hyperedge>\"Bhaji on the Beach has garnered acclaim for its relatable themes and engaging storytelling.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).\"",
+        "branch": "semantic",
+        "raw_score": 0.5297690629959106,
+        "hyperedge_text": "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+        "entity_ids": [
+          "\"BHAJI ON THE BEACH\"",
+          "\"BEND IT LIKE BECKHAM\"",
+          "\"BRIDE AND PREJUDICE\"",
+          "\"ANGUS, THONGS AND PERFECT SNOGGING\"",
+          "\"IT'S A WONDERFUL AFTERLIFE\"",
+          "\"VICEROY'S HOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-925d1e5e4bf757498552ef7540d75ea8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+            "Gurinder Chadha Gurinder Chadha,( born 10 January 1960) is an English film director of Indian origin. Most of her films explore the lives of Indians living in England. The common theme among her work showcases the trials of Indian women living in England and how they must reconcile their converging traditional and modern cultures. Although many of her films seem like simple quirky comedies about Indian women, they actually address many social and emotional issues, especially ones faced by immigrants caught between two worlds. Much of her work also consists of adaptations from book to film, but with a different flair. She is best known for the hit films\" Bhaji on the Beach\"( 1993),\" Bend It Like Beckham\"( 2002),\" Bride and Prejudice\"( 2004),\" Angus, Thongs and Perfect Snogging\"( 2008),\" It's a Wonderful Afterlife\"( 2010) and\" Viceroy's House\"( 2017). Her latest features are the biograp..."
+          ],
+          "relation_texts": [
+            "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+            "link",
+            "BHAJI ON THE BEACH",
+            "BEND IT LIKE BECKHAM",
+            "BRIDE AND PREJUDICE",
+            "ANGUS, THONGS AND PERFECT SNOGGING",
+            "IT'S A WONDERFUL AFTERLIFE",
+            "VICEROY'S HOUSE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bcdafbdd9795fa9ae3eb3e52efc8ce52",
+            "hyperedge_name": "<hyperedge>\"She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bollywood Dream (Portuguese: 'Bollywood Dream - O Sonho Bollywoodiano') is a 2010 Brazilian–Indian adventure-comedy film written and directed by Beatriz Seigner.\"",
+        "branch": "semantic",
+        "raw_score": 0.5085774660110474,
+        "hyperedge_text": "Bollywood Dream (Portuguese: 'Bollywood Dream - O Sonho Bollywoodiano') is a 2010 Brazilian–Indian adventure-comedy film written and directed by Beatriz Seigner.",
+        "entity_ids": [
+          "\"BOLLYWOOD DREAM\"",
+          "\"BEATRIZ SEIGNER\""
+        ],
+        "chunk_ids": [
+          "chunk-50eca5f5bbb735c1599080d7384280c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bollywood Dream (Portuguese: 'Bollywood Dream - O Sonho Bollywoodiano') is a 2010 Brazilian–Indian adventure-comedy film written and directed by Beatriz Seigner.",
+            "Bollywood Dream Bollywood Dream (Portuguese: \"Bollywood Dream - O Sonho Bollywoodiano\") is a 2010 Brazilian–Indian adventure-comedy film written and directed by Beatriz Seigner. It is the first co-production between Brazil and India, and the film debut of Beatriz Seigner as director. The film follows the story of three Brazilian actresses who decide to try their luck in Bollywood, India's film industry, but once entered into the heart of Indian culture and mythology, their dreams are modified by the contrast between East and West."
+          ],
+          "relation_texts": [
+            "Bollywood Dream (Portuguese: 'Bollywood Dream - O Sonho Bollywoodiano') is a 2010 Brazilian–Indian adventure-comedy film written and directed by Beatriz Seigner.",
+            "link",
+            "BOLLYWOOD DREAM",
+            "BEATRIZ SEIGNER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9bc690f1d46414451281552ed57b0836",
+            "hyperedge_name": "<hyperedge>\"Bollywood Dream (Portuguese: 'Bollywood Dream - O Sonho Bollywoodiano') is a 2010 Brazilian–Indian adventure-comedy film written and directed by Beatriz Seigner.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Mehboob Khan.\"",
+        "branch": "semantic",
+        "raw_score": 0.49309825897216797,
+        "hyperedge_text": "The film was directed by Mehboob Khan.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-9471f2ee832b6b17bab65310a1399d0f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Mehboob Khan.",
+            "Huma Gun Anmogaldi Huma Gun Anmogaldi is a Bollywood film directed by Mehboob Khan. It was released in 1942."
+          ],
+          "relation_texts": [
+            "The film was directed by Mehboob Khan."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-83c179e8aee6cddfe66e5b86714779f1",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Mehboob Khan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Chaturbhuj Doshi for Ranjit Studios.\"",
+        "branch": "semantic",
+        "raw_score": 0.48832622170448303,
+        "hyperedge_text": "The film was directed by Chaturbhuj Doshi for Ranjit Studios.",
+        "entity_ids": [
+          "\"CHATURBHUJ DOSHI\"",
+          "\"RANJIT STUDIOS\""
+        ],
+        "chunk_ids": [
+          "chunk-8952949b5fac2a2f6934e75b9cc7cc0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Chaturbhuj Doshi for Ranjit Studios.",
+            "Phoolwari Phoolwari( The Bower) is a 1946 Indian Bollywood film. It was the third highest grossing Indian film of 1946. The film was directed by Chaturbhuj Doshi for Ranjit Studios and is cited as one of the important films of actor Motilal. Music was composed by Hansraj Behl, while the lyricist was Pandit Indra. Motilal's co-stars in the film were Khursheed, Madhubala, Dixit, Nazira and Tiwari."
+          ],
+          "relation_texts": [
+            "The film was directed by Chaturbhuj Doshi for Ranjit Studios.",
+            "link",
+            "CHATURBHUJ DOSHI",
+            "RANJIT STUDIOS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c3e6c1fe0f988de7debe369b6e982d0f",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Chaturbhuj Doshi for Ranjit Studios.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sanjay Leela Bhansali (born 24 February 1963) is a Bollywood director, producer, screenwriter, and music director.\"",
+        "branch": "semantic",
+        "raw_score": 0.4805435538291931,
+        "hyperedge_text": "Sanjay Leela Bhansali (born 24 February 1963) is a Bollywood director, producer, screenwriter, and music director.",
+        "entity_ids": [
+          "\"SANJAY LEELA BHANSALI\""
+        ],
+        "chunk_ids": [
+          "chunk-10c48dc3c456196cc3b4295340f79203"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sanjay Leela Bhansali (born 24 February 1963) is a Bollywood director, producer, screenwriter, and music director.",
+            "Sanjay Leela Bhansali Sanjay Leela Bhansali (born 24 February 1963) is a Bollywood director, producer, screenwriter, and music director. One of the most acclaimed filmmakers in Hindi cinema, Bhansali is the recipient of several awards, including five National Film Awards, eleven Filmfare Awards and a BAFTA nomination. In 2015, the Government of India honoured him with the Padma Shri, the fourth highest civilian award. Bhansali made his directorial debut with (1996), for which he received the Filmfare Critics Award for Best Film. He rose to prominence in Hindi-language cinema with the commercially successful and widely acclaimed romantic drama \"Hum Dil De Chuke Sanam\" (1999), the romantic drama \"Devdas\" (2002) — for which he received nomination for the Best Film Not in the English Language at British Academy of Film & Television Awards (BAFTA) — and the drama \"Black\" (2005), for all of..."
+          ],
+          "relation_texts": [
+            "Sanjay Leela Bhansali (born 24 February 1963) is a Bollywood director, producer, screenwriter, and music director.",
+            "link",
+            "SANJAY LEELA BHANSALI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2a7617eff4fb79bc6d3ae48867f94a1f",
+            "hyperedge_name": "<hyperedge>\"Sanjay Leela Bhansali (born 24 February 1963) is a Bollywood director, producer, screenwriter, and music director.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.\"",
+        "hyperedge_text": "Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6908137798309326,
+        "fusion_score": 0.5381627559661866,
+        "entity_ids": [
+          "\"COMEDY-DRAMA\"",
+          "\"1993\"",
+          "\"BHAJI ON THE BEACH\"",
+          "\"GURINDER CHADHA\"",
+          "\"MEERA SYAL\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "evidence_texts": [
+          "Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.",
+          "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.690814,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.538163
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).\"",
+        "hyperedge_text": "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5297690629959106,
+        "fusion_score": 0.5059538125991822,
+        "entity_ids": [
+          "\"BHAJI ON THE BEACH\"",
+          "\"BEND IT LIKE BECKHAM\"",
+          "\"BRIDE AND PREJUDICE\"",
+          "\"ANGUS, THONGS AND PERFECT SNOGGING\"",
+          "\"IT'S A WONDERFUL AFTERLIFE\"",
+          "\"VICEROY'S HOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-925d1e5e4bf757498552ef7540d75ea8"
+        ],
+        "evidence_texts": [
+          "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+          "Gurinder Chadha Gurinder Chadha,( born 10 January 1960) is an English film director of Indian origin. Most of her films explore the lives of Indians living in England. The common theme among her work showcases the trials of Indian women living in England and how they must reconcile their converging traditional and modern cultures. Although many of her films seem like simple quirky comedies about Indian women, they actually address many social and emotional issues, especially ones faced by immigrants caught between two worlds. Much of her work also consists of adaptations from book to film, but with a different flair. She is best known for the hit films\" Bhaji on the Beach\"( 1993),\" Bend It Like Beckham\"( 2002),\" Bride and Prejudice\"( 2004),\" Angus, Thongs and Perfect Snogging\"( 2008),\" It's a Wonderful Afterlife\"( 2010) and\" Viceroy's House\"( 2017). Her latest features are the biograp..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.529769,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505954
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.\"",
+        "hyperedge_text": "Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6289924383163452,
+        "fusion_score": 0.5257984876632691,
+        "entity_ids": [
+          "\"CHARACTERS\"",
+          "\"CULTURAL IDENTITY\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "evidence_texts": [
+          "Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.",
+          "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.628992,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525798
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.\"",
+        "hyperedge_text": "Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.614122748374939,
+        "fusion_score": 0.5228245496749878,
+        "entity_ids": [
+          "\"भाजी ऑन द बीच\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "evidence_texts": [
+          "Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.",
+          "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.614123,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522825
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Bhaji on the Beach was released in 1993 in the United Kingdom.\"",
+        "hyperedge_text": "The film Bhaji on the Beach was released in 1993 in the United Kingdom.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.577032744884491,
+        "fusion_score": 0.5154065489768982,
+        "entity_ids": [
+          "\"UNITED KINGDOM\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "evidence_texts": [
+          "The film Bhaji on the Beach was released in 1993 in the United Kingdom.",
+          "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.577033,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515407
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Bugsy?",
+    "retrieval_question": "Who is the director of Bugsy?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Bugsy?",
+      "retrieval_question": "Who is the director of Bugsy?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Albert Wolsky is an American costume designer born on November 24, 1930.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Albert Wolsky is an American costume designer born on November 24, 1930.",
+        "entity_ids": [
+          "\"FILM\"",
+          "\"ACADEMY AWARDS\"",
+          "\"ALL THAT JAZZ\"",
+          "\"STAGE SHOWS\"",
+          "\"COSTUME DESIGNER\"",
+          "\"ALBERT WOLSKY\"",
+          "\"BUGSY\""
+        ],
+        "chunk_ids": [
+          "chunk-c7ba91446a8ac8476113af366a9c3b0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Albert Wolsky is an American costume designer born on November 24, 1930.",
+            "Albert Wolsky Albert Wolsky( born November 24, 1930) is an American costume designer. He has worked both on stage shows as well as for film, and has received two Academy Awards, for his work on the films\" All That Jazz\" and\" Bugsy\"."
+          ],
+          "relation_texts": [
+            "Albert Wolsky is an American costume designer born on November 24, 1930.",
+            "link",
+            "FILM",
+            "ACADEMY AWARDS",
+            "ALL THAT JAZZ",
+            "STAGE SHOWS",
+            "COSTUME DESIGNER",
+            "ALBERT WOLSKY",
+            "BUGSY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.",
+        "entity_ids": [
+          "\"ALL THAT JAZZ\"",
+          "\"BUGSY\""
+        ],
+        "chunk_ids": [
+          "chunk-c7ba91446a8ac8476113af366a9c3b0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.",
+            "Albert Wolsky Albert Wolsky( born November 24, 1930) is an American costume designer. He has worked both on stage shows as well as for film, and has received two Academy Awards, for his work on the films\" All That Jazz\" and\" Bugsy\"."
+          ],
+          "relation_texts": [
+            "His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.",
+            "link",
+            "ALL THAT JAZZ",
+            "BUGSY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Levinson's best-known works are mid-budget comedy-drama and drama films such as 'Diner' (1982), 'The Natural' (1984), 'Good Morning, Vietnam' (1987), 'Bugsy' (1991), and 'Wag the Dog' (1997).\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Levinson's best-known works are mid-budget comedy-drama and drama films such as 'Diner' (1982), 'The Natural' (1984), 'Good Morning, Vietnam' (1987), 'Bugsy' (1991), and 'Wag the Dog' (1997).",
+        "entity_ids": [
+          "\"BUGSY\"",
+          "\"DINER\"",
+          "\"THE NATURAL\"",
+          "\"GOOD MORNING, VIETNAM\"",
+          "\"WAG THE DOG\""
+        ],
+        "chunk_ids": [
+          "chunk-05b05506ca70485c32c5fa0212b82406"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Levinson's best-known works are mid-budget comedy-drama and drama films such as 'Diner' (1982), 'The Natural' (1984), 'Good Morning, Vietnam' (1987), 'Bugsy' (1991), and 'Wag the Dog' (1997).",
+            "Barry Levinson Barry Levinson( born April 6, 1942) is an American filmmaker, screenwriter, and actor. Levinson's best- known works are mid-budget comedy- drama and drama films such as\" Diner\"( 1982);\" The Natural\"( 1984);\" Good Morning, Vietnam\"( 1987);\" Bugsy\"( 1991); and\" Wag the Dog\"( 1997). He won the Academy Award for Best Director for\" Rain Man\"( 1988), which also won the Academy Award for Best Picture."
+          ],
+          "relation_texts": [
+            "Levinson's best-known works are mid-budget comedy-drama and drama films such as 'Diner' (1982), 'The Natural' (1984), 'Good Morning, Vietnam' (1987), 'Bugsy' (1991), and 'Wag the Dog' (1997).",
+            "link",
+            "BUGSY",
+            "DINER",
+            "THE NATURAL",
+            "GOOD MORNING, VIETNAM",
+            "WAG THE DOG"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.",
+        "entity_ids": [
+          "\"1991\"",
+          "\"RELATIONSHIP\"",
+          "\"JOE MANTEGNA\"",
+          "\"BEN KINGSLEY\"",
+          "\"BUGSY\"",
+          "\"HARVEY KEITEL\"",
+          "\"ANNETTE BENING\"",
+          "\"ELLIOTT GOULD\"",
+          "\"BEBE NEUWIRTH\"",
+          "\"BIOGRAPHICAL CRIME DRAMA\"",
+          "\"MOBSTER\"",
+          "\"BARRY LEVINSON\"",
+          "\"BUGSY SIEGEL\"",
+          "\"VIRGINIA HILL\"",
+          "\"WARREN BEATTY\""
+        ],
+        "chunk_ids": [
+          "chunk-a7f4e4fbfe8dfe8a5e285e0316f82b95"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.",
+            "Bugsy Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill. It stars Warren Beatty as Siegel and Annette Bening as Hill, as well as Harvey Keitel, Ben Kingsley, Elliott Gould, Bebe Neuwirth, and Joe Mantegna. The screenplay was written by James Toback from research material by Dean Jennings' 1967 book\" We Only Kill Each Other\". The film received acclaim from critics, including Roger Ebert, and was nominated for ten Oscars at the 64th Academy Awards, winning two for Best Art Direction- Set Decoration and Best Costume Design. A director's cut was released on DVD, containing an additional 13 minutes not seen in the theatrical version."
+          ],
+          "relation_texts": [
+            "Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.",
+            "link",
+            "1991",
+            "RELATIONSHIP",
+            "JOE MANTEGNA",
+            "BEN KINGSLEY",
+            "BUGSY",
+            "HARVEY KEITEL",
+            "ANNETTE BENING",
+            "ELLIOTT GOULD",
+            "BEBE NEUWIRTH",
+            "BIOGRAPHICAL CRIME DRAMA",
+            "MOBSTER",
+            "BARRY LEVINSON",
+            "BUGSY SIEGEL",
+            "VIRGINIA HILL",
+            "WARREN BEATTY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078437924385071,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027617812156677,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.49729883670806885,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.4967820644378662,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49395090341567993,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.4855998158454895,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4839867651462555,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48199886083602905,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47989267110824585,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.47769442200660706,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.\"",
+        "branch": "semantic",
+        "raw_score": 0.6971750855445862,
+        "hyperedge_text": "Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.",
+        "entity_ids": [
+          "\"1991\"",
+          "\"RELATIONSHIP\"",
+          "\"JOE MANTEGNA\"",
+          "\"BEN KINGSLEY\"",
+          "\"BUGSY\"",
+          "\"HARVEY KEITEL\"",
+          "\"ANNETTE BENING\"",
+          "\"ELLIOTT GOULD\"",
+          "\"BEBE NEUWIRTH\"",
+          "\"BIOGRAPHICAL CRIME DRAMA\"",
+          "\"MOBSTER\"",
+          "\"BARRY LEVINSON\"",
+          "\"BUGSY SIEGEL\"",
+          "\"VIRGINIA HILL\"",
+          "\"WARREN BEATTY\""
+        ],
+        "chunk_ids": [
+          "chunk-a7f4e4fbfe8dfe8a5e285e0316f82b95"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.",
+            "Bugsy Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill. It stars Warren Beatty as Siegel and Annette Bening as Hill, as well as Harvey Keitel, Ben Kingsley, Elliott Gould, Bebe Neuwirth, and Joe Mantegna. The screenplay was written by James Toback from research material by Dean Jennings' 1967 book\" We Only Kill Each Other\". The film received acclaim from critics, including Roger Ebert, and was nominated for ten Oscars at the 64th Academy Awards, winning two for Best Art Direction- Set Decoration and Best Costume Design. A director's cut was released on DVD, containing an additional 13 minutes not seen in the theatrical version."
+          ],
+          "relation_texts": [
+            "Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.",
+            "link",
+            "1991",
+            "RELATIONSHIP",
+            "JOE MANTEGNA",
+            "BEN KINGSLEY",
+            "BUGSY",
+            "HARVEY KEITEL",
+            "ANNETTE BENING",
+            "ELLIOTT GOULD",
+            "BEBE NEUWIRTH",
+            "BIOGRAPHICAL CRIME DRAMA",
+            "MOBSTER",
+            "BARRY LEVINSON",
+            "BUGSY SIEGEL",
+            "VIRGINIA HILL",
+            "WARREN BEATTY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7a832bfa0eb9e734a95f53b61b1629c4",
+            "hyperedge_name": "<hyperedge>\"Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.\"",
+        "branch": "semantic",
+        "raw_score": 0.5501066446304321,
+        "hyperedge_text": "His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.",
+        "entity_ids": [
+          "\"ALL THAT JAZZ\"",
+          "\"BUGSY\""
+        ],
+        "chunk_ids": [
+          "chunk-c7ba91446a8ac8476113af366a9c3b0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.",
+            "Albert Wolsky Albert Wolsky( born November 24, 1930) is an American costume designer. He has worked both on stage shows as well as for film, and has received two Academy Awards, for his work on the films\" All That Jazz\" and\" Bugsy\"."
+          ],
+          "relation_texts": [
+            "His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.",
+            "link",
+            "ALL THAT JAZZ",
+            "BUGSY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e4f5d3ef50e1c97dbc9a3c9c534e82bf",
+            "hyperedge_name": "<hyperedge>\"His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"and a director for the film 'Umpa' in 1933.\"",
+        "branch": "semantic",
+        "raw_score": 0.44508853554725647,
+        "hyperedge_text": "and a director for the film 'Umpa' in 1933.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-049847bc152483b80aaca825c8124e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "and a director for the film 'Umpa' in 1933.",
+            "Sidney D. Mitchell Sidney D. Mitchell( June 15, 1888 in Baltimore, Maryland – February 25, 1942 in Los Angeles, California) was a Hollywood film industry lyricist and composer. He is best known for his collaborations with Lew Pollack on movie scores at Twentieth Century Fox in the 1930s and 1940s. Together with Louis Alter, Mitchell was nominated for an Oscar in 1937 for the song\" A Melody from the Sky\" which was in the 1936 motion picture\" The Trail of the Lonesome Pine\". He contributed many songs to other films, and his work continues to be featured to the present day. He also served as a screenwriter for three movies and a director for the film\" Umpa\" in 1933."
+          ],
+          "relation_texts": [
+            "and a director for the film 'Umpa' in 1933."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d4b5756e87a8f51439a5b450de09bdc3",
+            "hyperedge_name": "<hyperedge>\"and a director for the film 'Umpa' in 1933.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Frank Borzage (April 23, 1894 – June 19, 1962) was an Academy Award-winning American film director and actor, most remembered for directing several notable films.\"",
+        "branch": "semantic",
+        "raw_score": 0.44306665658950806,
+        "hyperedge_text": "Frank Borzage (April 23, 1894 – June 19, 1962) was an Academy Award-winning American film director and actor, most remembered for directing several notable films.",
+        "entity_ids": [
+          "\"AMERICAN FILM DIRECTOR\"",
+          "\"ACTOR\"",
+          "\"ACADEMY AWARD\"",
+          "\"FRANK BORZAGE\"",
+          "\"7TH HEAVEN\"",
+          "\"STREET ANGEL\"",
+          "\"BAD GIRL\"",
+          "\"MAN'S CASTLE\"",
+          "\"THE MORTAL STORM\"",
+          "\"MOONRISE\""
+        ],
+        "chunk_ids": [
+          "chunk-aef0a97e4dfafbdbbbe8d0d345708b7f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Frank Borzage (April 23, 1894 – June 19, 1962) was an Academy Award-winning American film director and actor, most remembered for directing several notable films.",
+            "Frank Borzage Frank Borzage( April 23, 1894 – June 19, 1962) was an Academy Award- winning American film director and actor, most remembered for directing\" 7th Heaven\"( 1927),\" Street Angel\"( 1928),\" Bad Girl\"( 1931),\" Man's Castle\"( 1933),\" The Mortal Storm\"( 1940) and\" Moonrise\"( 1948)."
+          ],
+          "relation_texts": [
+            "Frank Borzage (April 23, 1894 – June 19, 1962) was an Academy Award-winning American film director and actor, most remembered for directing several notable films.",
+            "link",
+            "AMERICAN FILM DIRECTOR",
+            "ACTOR",
+            "ACADEMY AWARD",
+            "FRANK BORZAGE",
+            "7TH HEAVEN",
+            "STREET ANGEL",
+            "BAD GIRL",
+            "MAN'S CASTLE",
+            "THE MORTAL STORM",
+            "MOONRISE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1689d44ed0ede84f55c8b1481f738043",
+            "hyperedge_name": "<hyperedge>\"Frank Borzage (April 23, 1894 – June 19, 1962) was an Academy Award-winning American film director and actor, most remembered for directing several notable films.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Michael Curtiz.\"",
+        "branch": "semantic",
+        "raw_score": 0.43484407663345337,
+        "hyperedge_text": "The film is directed by Michael Curtiz.",
+        "entity_ids": [
+          "\"MICHAEL CURTIZ\""
+        ],
+        "chunk_ids": [
+          "chunk-9ef99626d5b09971648bd6ebd47d9976",
+          "chunk-3fa79602e3f2e1a9882cd95e58740d4b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed by Michael Curtiz.",
+            "God's Gift to Women God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell. The film, based on the play\" The Devil Was Sick\" by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints. The full film was released intact in other countries, where there was no such decline in popularity.",
+            "Bright Leaf Bright Leaf is a 1950 American drama film directed by Michael Curtiz and starring Gary Cooper, Lauren Bacall and Patricia Neal. It is based on a 1948 novel of the same name by Foster Fitz- Simons. The title comes from the type of tobacco grown in North Carolina after the American Civil War. The plot is loosely based on the rivalry of tobacco tycoons Washington Duke and John Harvey McElwee, according to\" Bright Leaves\", a 2003 documentary by Ross McElwee."
+          ],
+          "relation_texts": [
+            "The film is directed by Michael Curtiz.",
+            "link",
+            "MICHAEL CURTIZ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ceadce96119301f6a3243c4504f489bd",
+            "hyperedge_name": "<hyperedge>\"The film is directed by Michael Curtiz.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Often thought of as primarily a director of comedies, he also directed several drama, musical, and detective films.\"",
+        "branch": "semantic",
+        "raw_score": 0.4318104386329651,
+        "hyperedge_text": "Often thought of as primarily a director of comedies, he also directed several drama, musical, and detective films.",
+        "entity_ids": [
+          "\"COMEDIES\"",
+          "\"MUSICAL FILMS\"",
+          "\"DETECTIVE FILMS\"",
+          "\"DRAMA FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-a79bc05ab940ea131d3ec01b2050bbf5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Often thought of as primarily a director of comedies, he also directed several drama, musical, and detective films.",
+            "Blake Edwards William Blake Crump( July 26, 1922 – December 15, 2010), better known by his stage name, Blake Edwards, was an American filmmaker. Edwards began his career in the 1940s as an actor, but he soon began writing screenplays and radio scripts before turning to producing and directing in television and films. His best- known films include\" Breakfast at Tiffany' s Days of Wine and Roses10Victor/ Victoria\", and the hugely successful Pink Panther film series with British actor Peter Sellers. Often thought of as primarily a director of comedies, he also directed several drama, musical, and detective films. Late in his career, he transitioned to writing, producing, and directing for theater. In 2004, he received an Honorary Academy Award in recognition of his writing, directing, and producing an extraordinary body of work for the screen."
+          ],
+          "relation_texts": [
+            "Often thought of as primarily a director of comedies, he also directed several drama, musical, and detective films.",
+            "link",
+            "COMEDIES",
+            "MUSICAL FILMS",
+            "DETECTIVE FILMS",
+            "DRAMA FILMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a7dc7fdb65ff7702d3c1b2eebd4e4844",
+            "hyperedge_name": "<hyperedge>\"Often thought of as primarily a director of comedies, he also directed several drama, musical, and detective films.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Gentle Rain was directed by Burt Balaban.\"",
+        "branch": "semantic",
+        "raw_score": 0.4315122663974762,
+        "hyperedge_text": "The Gentle Rain was directed by Burt Balaban.",
+        "entity_ids": [
+          "\"BURT BALABAN\""
+        ],
+        "chunk_ids": [
+          "chunk-7eeb7f84d964c589eb326e3200c2b660"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Gentle Rain was directed by Burt Balaban.",
+            "The Gentle Rain (film) The Gentle Rain is a 1966 American-Brazilian drama film directed by Burt Balaban and starring Christopher George, Lynda Day George and Fay Spain. It became best known for its theme tune The Gentle Rain."
+          ],
+          "relation_texts": [
+            "The Gentle Rain was directed by Burt Balaban.",
+            "link",
+            "BURT BALABAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-52399756d8f85fbf9f60dd5539250a91",
+            "hyperedge_name": "<hyperedge>\"The Gentle Rain was directed by Burt Balaban.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by S. Roy Luby.\"",
+        "branch": "semantic",
+        "raw_score": 0.42968297004699707,
+        "hyperedge_text": "The film was directed by S. Roy Luby.",
+        "entity_ids": [
+          "\"S. ROY LUBY\""
+        ],
+        "chunk_ids": [
+          "chunk-0416161f642bf3c4e3f0241af360f53d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by S. Roy Luby.",
+            "Tough to Handle Tough to Handle is a 1937 American film directed by S. Roy Luby."
+          ],
+          "relation_texts": [
+            "The film was directed by S. Roy Luby.",
+            "link",
+            "S. ROY LUBY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3b0f073a83afc34f443dadf24e6b7087",
+            "hyperedge_name": "<hyperedge>\"The film was directed by S. Roy Luby.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His first directing project was 'Man Hunt' in 1936.\"",
+        "branch": "semantic",
+        "raw_score": 0.4288564622402191,
+        "hyperedge_text": "His first directing project was 'Man Hunt' in 1936.",
+        "entity_ids": [
+          "\"MAN HUNT\""
+        ],
+        "chunk_ids": [
+          "chunk-c0a86f7250e4d6bcf0de7a2c537d5b95"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His first directing project was 'Man Hunt' in 1936.",
+            "William Clemens (film director) William Clemens( September 10, 1905 – April 29, 1980) was an American film director. Born in Saginaw, Michigan, Clemens began his Hollywood career as a film editor in 1931. His first directing project was\" Man Hunt\" in 1936. His major credits include\" On Dress Parade\" with the Dead End Kids, two Perry Mason mysteries(\" The Case of the Velvet Claws\" and\" The Case of the Stuttering Bishop\"), three films featuring detective Tom Lawrence, a.k.a. \" The Falcon,\" four films based on the Nancy Drew series, and\" Calling Philo Vance\" in 1940. Clemens' final project was\" The Thirteenth Hour\" in 1947. He died in Los Angeles, California in 1980."
+          ],
+          "relation_texts": [
+            "His first directing project was 'Man Hunt' in 1936.",
+            "link",
+            "MAN HUNT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-21d7e9939777303317a0488efacd7a15",
+            "hyperedge_name": "<hyperedge>\"His first directing project was 'Man Hunt' in 1936.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Ray Nazarro.\"",
+        "branch": "semantic",
+        "raw_score": 0.42742255330085754,
+        "hyperedge_text": "The film was directed by Ray Nazarro.",
+        "entity_ids": [
+          "\"RAY NAZARRO\""
+        ],
+        "chunk_ids": [
+          "chunk-3b6bec52e759394f9e4d4406b76839bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Ray Nazarro.",
+            "Buckaroo from Powder River Buckaroo from Powder River is a 1947 American Western film directed by Ray Nazarro and written by Norman S. Hall. The film stars Charles Starrett, Eve Miller, Forrest Taylor, Paul Campbell and Smiley Burnette. The film was released on October 14, 1947, by Columbia Pictures."
+          ],
+          "relation_texts": [
+            "The film was directed by Ray Nazarro.",
+            "link",
+            "RAY NAZARRO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cda7ffffde9a6b22f90f39b5b1d925ef",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Ray Nazarro.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.\"",
+        "hyperedge_text": "Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.6971750855445862,
+        "fusion_score": 0.9394350171089173,
+        "entity_ids": [
+          "\"1991\"",
+          "\"RELATIONSHIP\"",
+          "\"JOE MANTEGNA\"",
+          "\"BEN KINGSLEY\"",
+          "\"BUGSY\"",
+          "\"HARVEY KEITEL\"",
+          "\"ANNETTE BENING\"",
+          "\"ELLIOTT GOULD\"",
+          "\"BEBE NEUWIRTH\"",
+          "\"BIOGRAPHICAL CRIME DRAMA\"",
+          "\"MOBSTER\"",
+          "\"BARRY LEVINSON\"",
+          "\"BUGSY SIEGEL\"",
+          "\"VIRGINIA HILL\"",
+          "\"WARREN BEATTY\""
+        ],
+        "chunk_ids": [
+          "chunk-a7f4e4fbfe8dfe8a5e285e0316f82b95"
+        ],
+        "evidence_texts": [
+          "Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.",
+          "Bugsy Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill. It stars Warren Beatty as Siegel and Annette Bening as Hill, as well as Harvey Keitel, Ben Kingsley, Elliott Gould, Bebe Neuwirth, and Joe Mantegna. The screenplay was written by James Toback from research material by Dean Jennings' 1967 book\" We Only Kill Each Other\". The film received acclaim from critics, including Roger Ebert, and was nominated for ten Oscars at the 64th Academy Awards, winning two for Best Art Direction- Set Decoration and Best Costume Design. A director's cut was released on DVD, containing an additional 13 minutes not seen in the theatrical version."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.697175,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.939435
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.\"",
+        "hyperedge_text": "His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5501066446304321,
+        "fusion_score": 0.7100213289260865,
+        "entity_ids": [
+          "\"ALL THAT JAZZ\"",
+          "\"BUGSY\""
+        ],
+        "chunk_ids": [
+          "chunk-c7ba91446a8ac8476113af366a9c3b0a"
+        ],
+        "evidence_texts": [
+          "His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.",
+          "Albert Wolsky Albert Wolsky( born November 24, 1930) is an American costume designer. He has worked both on stage shows as well as for film, and has received two Academy Awards, for his work on the films\" All That Jazz\" and\" Bugsy\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.550107,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.710021
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Levinson's best-known works are mid-budget comedy-drama and drama films such as 'Diner' (1982), 'The Natural' (1984), 'Good Morning, Vietnam' (1987), 'Bugsy' (1991), and 'Wag the Dog' (1997).\"",
+        "hyperedge_text": "Levinson's best-known works are mid-budget comedy-drama and drama films such as 'Diner' (1982), 'The Natural' (1984), 'Good Morning, Vietnam' (1987), 'Bugsy' (1991), and 'Wag the Dog' (1997).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 1.0,
+        "fusion_score": 0.6000000000000001,
+        "entity_ids": [
+          "\"BUGSY\"",
+          "\"DINER\"",
+          "\"THE NATURAL\"",
+          "\"GOOD MORNING, VIETNAM\"",
+          "\"WAG THE DOG\""
+        ],
+        "chunk_ids": [
+          "chunk-05b05506ca70485c32c5fa0212b82406"
+        ],
+        "evidence_texts": [
+          "Levinson's best-known works are mid-budget comedy-drama and drama films such as 'Diner' (1982), 'The Natural' (1984), 'Good Morning, Vietnam' (1987), 'Bugsy' (1991), and 'Wag the Dog' (1997).",
+          "Barry Levinson Barry Levinson( born April 6, 1942) is an American filmmaker, screenwriter, and actor. Levinson's best- known works are mid-budget comedy- drama and drama films such as\" Diner\"( 1982);\" The Natural\"( 1984);\" Good Morning, Vietnam\"( 1987);\" Bugsy\"( 1991); and\" Wag the Dog\"( 1997). He won the Academy Award for Best Director for\" Rain Man\"( 1988), which also won the Academy Award for Best Picture."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.6
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Albert Wolsky is an American costume designer born on November 24, 1930.\"",
+        "hyperedge_text": "Albert Wolsky is an American costume designer born on November 24, 1930.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"FILM\"",
+          "\"ACADEMY AWARDS\"",
+          "\"ALL THAT JAZZ\"",
+          "\"STAGE SHOWS\"",
+          "\"COSTUME DESIGNER\"",
+          "\"ALBERT WOLSKY\"",
+          "\"BUGSY\""
+        ],
+        "chunk_ids": [
+          "chunk-c7ba91446a8ac8476113af366a9c3b0a"
+        ],
+        "evidence_texts": [
+          "Albert Wolsky is an American costume designer born on November 24, 1930.",
+          "Albert Wolsky Albert Wolsky( born November 24, 1930) is an American costume designer. He has worked both on stage shows as well as for film, and has received two Academy Awards, for his work on the films\" All That Jazz\" and\" Bugsy\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Michael Curtiz.\"",
+        "hyperedge_text": "The film is directed by Michael Curtiz.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.43484407663345337,
+        "fusion_score": 0.4869688153266907,
+        "entity_ids": [
+          "\"MICHAEL CURTIZ\""
+        ],
+        "chunk_ids": [
+          "chunk-9ef99626d5b09971648bd6ebd47d9976",
+          "chunk-3fa79602e3f2e1a9882cd95e58740d4b"
+        ],
+        "evidence_texts": [
+          "The film is directed by Michael Curtiz.",
+          "God's Gift to Women God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell. The film, based on the play\" The Devil Was Sick\" by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints. The full film was released intact in other countries, where there was no such decline in popularity.",
+          "Bright Leaf Bright Leaf is a 1950 American drama film directed by Michael Curtiz and starring Gary Cooper, Lauren Bacall and Patricia Neal. It is based on a 1948 novel of the same name by Foster Fitz- Simons. The title comes from the type of tobacco grown in North Carolina after the American Civil War. The plot is loosely based on the rivalry of tobacco tycoons Washington Duke and John Harvey McElwee, according to\" Bright Leaves\", a 2003 documentary by Ross McElwee."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.434844,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.486969
+        }
+      }
+    ]
+  }
+]

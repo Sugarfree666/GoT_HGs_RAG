@@ -1,0 +1,35 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "When was Man'S Search For Happiness released?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the release date of Tell It To The Bees?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q3",
+      "question": "What is the release date of Man'S Search For Happiness?",
+      "dependencies": [
+        "q1",
+        "q2"
+      ],
+      "metadata": {
+        "operator": "COMPARE_LESS",
+        "candidates": [
+          {
+            "label": "Man'S Search For Happiness",
+            "source_node_id": "q1"
+          },
+          {
+            "label": "Tell It To The Bees",
+            "source_node_id": "q2"
+          }
+        ]
+      }
+    }
+  ]
+}

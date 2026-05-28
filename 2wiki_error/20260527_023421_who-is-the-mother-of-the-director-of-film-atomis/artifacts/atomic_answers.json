@@ -1,0 +1,185 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of the director?",
+    "analysis": {
+      "entities": [
+        "the director"
+      ],
+      "relations": [
+        "is the mother of"
+      ],
+      "relation_query": "who is the mother of a director",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\"",
+        "hyperedge_text": "The director's vision shaped the film's narrative style and storytelling.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.4610639214515686,
+        "fusion_score": 0.6922127842903139,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"NARRATIVE STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-bc89e6fb4b1d4bc13f12b778e185493c"
+        ],
+        "evidence_texts": [
+          "The director's vision shaped the film's narrative style and storytelling.",
+          "The Law and Mr. Lee The Law and Mr Lee is a 2003 American TV film."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.461064,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.692213
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is the mother of Amy Irving, therefore making her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto and the mother-in-law of documentary filmmaker Kenneth Bowser, Jr.\"",
+        "hyperedge_text": "She is the mother of Amy Irving, therefore making her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto and the mother-in-law of documentary filmmaker Kenneth Bowser, Jr.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5421319603919983,
+        "semantic_score": 0.5379613041877747,
+        "fusion_score": 0.3244450449943542,
+        "entity_ids": [
+          "\"AMY IRVING\"",
+          "\"STEVEN SPIELBERG\"",
+          "\"BRUNO BARRETO\"",
+          "\"KENNETH BOWSER, JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-f7cdfdbee3ce98054a94e28973dcbf5c"
+        ],
+        "evidence_texts": [
+          "She is the mother of Amy Irving, therefore making her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto and the mother-in-law of documentary filmmaker Kenneth Bowser, Jr.",
+          "Priscilla Pointer Priscilla Marie Pointer( born May 18, 1924) is an American stage, film and television character actress. She began her career in the theater, including productions on Broadway. Later, Pointer moved to Hollywood to act in films and on television. She is the mother of Amy Irving, therefore making her the former mother- in- law of filmmakers Steven Spielberg and Bruno Barreto and the mother- in- law of documentary filmmaker Kenneth Bowser, Jr."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.542132,
+          "S": 0.537961,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.324445
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her relationship with Amy Irving makes her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto.\"",
+        "hyperedge_text": "Her relationship with Amy Irving makes her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.497310072183609,
+        "semantic_score": 0.49108001589775085,
+        "fusion_score": 0.2971400320529938,
+        "entity_ids": [
+          "\"FORMER MOTHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-f7cdfdbee3ce98054a94e28973dcbf5c"
+        ],
+        "evidence_texts": [
+          "Her relationship with Amy Irving makes her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto.",
+          "Priscilla Pointer Priscilla Marie Pointer( born May 18, 1924) is an American stage, film and television character actress. She began her career in the theater, including productions on Broadway. Later, Pointer moved to Hollywood to act in films and on television. She is the mother of Amy Irving, therefore making her the former mother- in- law of filmmakers Steven Spielberg and Bruno Barreto and the mother- in- law of documentary filmmaker Kenneth Bowser, Jr."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.49731,
+          "S": 0.49108,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.29714
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Gianni Franciolini and features a compelling story about maternal guilt.\"",
+        "hyperedge_text": "The film was directed by Gianni Franciolini and features a compelling story about maternal guilt.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4916263818740845,
+        "semantic_score": 0.5005375146865845,
+        "fusion_score": 0.2967580556869507,
+        "entity_ids": [
+          "\"GIANNI FRANCIOLINI\"",
+          "\"MATERNAL GUILT\""
+        ],
+        "chunk_ids": [
+          "chunk-8904a01bf99064b6d5a69ae835f24335"
+        ],
+        "evidence_texts": [
+          "The film was directed by Gianni Franciolini and features a compelling story about maternal guilt.",
+          "La colpa di una madre La colpa di una madre is a 1952 Italian melodrama film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.491626,
+          "S": 0.500538,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.296758
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "anchor",
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4778701961040497,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2911480784416199,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.47787,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.291148
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that identifies the mother of the director.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\""
+    ]
+  }
+]

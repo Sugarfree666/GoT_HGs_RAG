@@ -1,0 +1,184 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Where was the director's place of death?",
+    "analysis": {
+      "entities": [
+        "director"
+      ],
+      "relations": [
+        "place of death"
+      ],
+      "relation_query": "the location of a director's death",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The music director died before the release of the film.\"",
+        "hyperedge_text": "The music director died before the release of the film.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5442084074020386,
+        "semantic_score": 0.4857385456562042,
+        "fusion_score": 0.7148310720920563,
+        "entity_ids": [
+          "\"SAMPATH SELVAM\""
+        ],
+        "chunk_ids": [
+          "chunk-7b18343d2c0ab9d855df8ec895675e28"
+        ],
+        "evidence_texts": [
+          "The music director died before the release of the film.",
+          "Thulasi (1987 film) Thulasi is a 1987 Tamil romantic drama film directed by Ameerjan. The film features Murali and Seetha in lead roles. The film, produced by P. S. V. Hariharan, had musical score by Sampath Selvam and was released on 27 November 1987. The music director died before the release of the film."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.544208,
+          "S": 0.485739,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.714831
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in Los Angeles, California, a city central to the film industry.\"",
+        "hyperedge_text": "He died in Los Angeles, California, a city central to the film industry.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5306784510612488,
+        "semantic_score": 0.5196430683135986,
+        "fusion_score": 0.31619999408721927,
+        "entity_ids": [
+          "\"LOS ANGELES\""
+        ],
+        "chunk_ids": [
+          "chunk-a9fbe1f9029ffab6525ebbf461b9d90c"
+        ],
+        "evidence_texts": [
+          "He died in Los Angeles, California, a city central to the film industry.",
+          "William Berke William A. Berke( October 3, 1903 – February 15, 1958) was an American film director, producer and screenwriter. He directed nearly 90 films between 1934 and 1958. He also produced nearly 80 films between 1933 and 1958. He was born in Milwaukee, Wisconsin and died in Los Angeles, California. Richard Fleischer later recalled Berke\" was known as King of the B's. For years and years he had made nothing but pictures with ten or twelve day shooting schedules, minuscule budgets of about$ 100,000 and no stars. Without bothering with editing or any postproduction chores and with short shooting schedules, he was able to squeeze in eight or ten pictures a year. And he was going nuts\". According to Fleischer, Berke eventually pestered RKO executives enough to be assigned an A picture with a long shooting schedule and stars and he still shot it in twelve days."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.530678,
+          "S": 0.519643,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.3162
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in a car accident on his way back from a private showing of the film, and the subsequent party.\"",
+        "hyperedge_text": "He died in a car accident on his way back from a private showing of the film, and the subsequent party.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5001112222671509,
+        "semantic_score": 0.48443716764450073,
+        "fusion_score": 0.2969319224357605,
+        "entity_ids": [
+          "\"CAR ACCIDENT\""
+        ],
+        "chunk_ids": [
+          "chunk-02a52542c94e57645bba14c742c8d6e1"
+        ],
+        "evidence_texts": [
+          "He died in a car accident on his way back from a private showing of the film, and the subsequent party.",
+          "Risto Jarva Risto Antero Jarva( 15 July 1934, Helsinki – 16 December 1977, Helsinki) was a Finnish filmmaker. His last film was\" Jäniksen vuosi The Year of the Hare\"). He died in a car accident on his way back from a private showing of the film, and the subsequent party. Jarva usually approached his long films and short documentary films from some social problem and from one or more possible ways to solve it. Such problems included the widespread use of cars, the position of women, city planning, pollution, the role of gossip magazines' journalists, and the Finnish society's remaining ideological divides. His 1967 film\" The Diary of a Worker\" was entered into the 5th Moscow International Film Festival. Jarva worked as an artistic professor of the film from 1970 to 1975 and as the Helsinki Applied Arts and Industry College's senior teacher from 1975 to 1977."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.500111,
+          "S": 0.484437,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.296932
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born in New York City and died from a heart attack in San Diego, California, where he was professor and film maker in residence at San Diego State University.\"",
+        "hyperedge_text": "He was born in New York City and died from a heart attack in San Diego, California, where he was professor and film maker in residence at San Diego State University.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48733431100845337,
+        "semantic_score": 0.48722776770591736,
+        "fusion_score": 0.29237927794456486,
+        "entity_ids": [
+          "\"NEW YORK CITY\"",
+          "\"HEART ATTACK\"",
+          "\"SAN DIEGO\"",
+          "\"FILM MAKER IN RESIDENCE\"",
+          "\"SAN DIEGO STATE UNIVERSITY\""
+        ],
+        "chunk_ids": [
+          "chunk-a6cd4f451075d5f53be118c077b219bf"
+        ],
+        "evidence_texts": [
+          "He was born in New York City and died from a heart attack in San Diego, California, where he was professor and film maker in residence at San Diego State University.",
+          "Denis Sanders Denis Sanders (January 21, 1929 – December 10, 1987) was an American film director, screenwriter and producer who directed the debut performances of Robert Redford, George Hamilton, Sydney Pollack and Tom Skerritt in the 1962 film \"War Hunt\". He won two Academy Awards, the first for Best Short Subject in 1955 for \"A Time Out of War\" that had served as his master's degree thesis at UCLA and which he co-scripted with his brother Terry Sanders ; and the second for Best Documentary in 1970 for \"Czechoslovakia 1968\". In 1958, he teamed up again with Terry Sanders to adapt Norman Mailer's World War II novel \"The Naked and the Dead\". He was born in New York City and died from a heart attack in San Diego, California, where he was professor and film maker in residence at San Diego State University. His daughter, Victoria Sanders, is a literary agent and film producer."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.487334,
+          "S": 0.487228,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.292379
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Los Angeles, California, where he died, is known as the heart of the film industry.\"",
+        "hyperedge_text": "Los Angeles, California, where he died, is known as the heart of the film industry.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4880005419254303,
+        "semantic_score": 0.48173385858535767,
+        "fusion_score": 0.2915469884872437,
+        "entity_ids": [
+          "\"HEART OF THE FILM INDUSTRY\""
+        ],
+        "chunk_ids": [
+          "chunk-a57f999142ae6f0783fb350110c57cb1"
+        ],
+        "evidence_texts": [
+          "Los Angeles, California, where he died, is known as the heart of the film industry.",
+          "William C. McGann William C. McGann( April 15, 1893 – November 15, 1977) was an American film director. He directed 52 films between 1930 and 1942. He was born in Pittsburgh, Pennsylvania and died in Los Angeles, California."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.488001,
+          "S": 0.481734,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.291547
+        }
+      }
+    ],
+    "answer": "Los Angeles, California",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that he died in Los Angeles, California, which is central to the film industry.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"He died in Los Angeles, California, a city central to the film industry.\""
+    ]
+  }
+]

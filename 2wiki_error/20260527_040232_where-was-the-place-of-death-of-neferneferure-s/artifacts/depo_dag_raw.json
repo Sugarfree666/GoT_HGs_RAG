@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the mother of Neferneferure?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the mother of Neferneferure die?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

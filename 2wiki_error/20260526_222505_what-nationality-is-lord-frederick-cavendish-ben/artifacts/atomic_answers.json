@@ -1,0 +1,364 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Lord Frederick Cavendish-Bentinck?",
+    "analysis": {
+      "entities": [
+        "Lord Frederick Cavendish-Bentinck"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Major-General Lord Frederick Cavendish-Bentinck (2 November 1781 – 10 February 1828) known as Lord Frederick Bentinck was a British soldier and politician.\"",
+        "hyperedge_text": "Major-General Lord Frederick Cavendish-Bentinck (2 November 1781 – 10 February 1828) known as Lord Frederick Bentinck was a British soldier and politician.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7551612854003906,
+        "fusion_score": 0.5510322570800782,
+        "entity_ids": [
+          "\"POLITICIAN\"",
+          "\"BRITISH SOLDIER\"",
+          "\"LORD FREDERICK CAVENDISH-BENTINCK\""
+        ],
+        "chunk_ids": [
+          "chunk-b666e4e4cc6981905289019e2fde1156"
+        ],
+        "evidence_texts": [
+          "Major-General Lord Frederick Cavendish-Bentinck (2 November 1781 – 10 February 1828) known as Lord Frederick Bentinck was a British soldier and politician.",
+          "Lord Frederick Cavendish-Bentinck Major-General Lord Frederick Cavendish-Bentinck (2 November 1781 – 10 February 1828) known as Lord Frederick Bentinck was a British soldier and politician. The youngest child and fourth son of William Cavendish-Bentinck, 3rd Duke of Portland and Lady Dorothy Cavendish, Cavendish-Bentinck attended Westminster School before joining the army."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.755161,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.551032
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The son of Frederick W. Cavendish-Bentinck and Ruth Cavendish-Bentinck, grandson of George Cavendish-Bentinck, and great-grandson of Major General Lord Frederick Cavendish-Bentinck, fourth son of the 3rd Duke of Portland.\"",
+        "hyperedge_text": "The son of Frederick W. Cavendish-Bentinck and Ruth Cavendish-Bentinck, grandson of George Cavendish-Bentinck, and great-grandson of Major General Lord Frederick Cavendish-Bentinck, fourth son of the 3rd Duke of Portland.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7429773211479187,
+        "fusion_score": 0.5485954642295838,
+        "entity_ids": [
+          "\"RUTH CAVENDISH-BENTINCK\"",
+          "\"4TH DUKE OF PORTLAND\"",
+          "\"MAJOR GENERAL LORD FREDERICK CAVENDISH-BENTINCK\"",
+          "\"FREDERICK W. CAVENDISH-BENTINCK\"",
+          "\"3RD DUKE OF PORTLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-a5e66f6bc055434e89e29a3f75b978aa"
+        ],
+        "evidence_texts": [
+          "The son of Frederick W. Cavendish-Bentinck and Ruth Cavendish-Bentinck, grandson of George Cavendish-Bentinck, and great-grandson of Major General Lord Frederick Cavendish-Bentinck, fourth son of the 3rd Duke of Portland.",
+          "Ferdinand Cavendish-Bentinck, 8th Duke of Portland Ferdinand William Cavendish- Bentinck, 8th Duke of Portland( 4 July 1889 – 13 December 1980) was a British peer and grandson of George Cavendish- Bentinck. The son of Frederick W. Cavendish- Bentinck and Ruth Cavendish- Bentinck, grandson of George Cavendish- Bentinck, and great- grandson of Major General Lord Frederick Cavendish- Bentinck, fourth son of the 3rd Duke of Portland, the young Cavendish- Bentinck was educated at Eton and the Royal Military College, Sandhurst, passing out in 1910. He was commissioned into the 60th Rifles and was posted to Malta and British India before seeing active service in the European theatre of the First World War, which left him severely wounded. He then took up a posting as assistant adjutant at the Royal Military College. After the war, his main sphere of activity was in East Africa, where he serv..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.742977,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.548595
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father.\"",
+        "hyperedge_text": "He was the father.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4803299903869629,
+        "semantic_score": 0.2,
+        "fusion_score": 0.23213199615478516,
+        "entity_ids": [
+          "\"FATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "evidence_texts": [
+          "He was the father.",
+          "Obata Toramori He was the father of Obata Masamori."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.48033,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.232132
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of Imran Farhat.\"",
+        "hyperedge_text": "He is the father-in-law of Imran Farhat.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43570590019226074,
+        "semantic_score": 0.2,
+        "fusion_score": 0.21428236007690432,
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-10333be7c973d42a00364ad277052021"
+        ],
+        "evidence_texts": [
+          "He is the father-in-law of Imran Farhat.",
+          "Mohammad Ilyas (cricketer) Mohammad Ilyas Mahmood( born March 19, 1946, Lahore, Punjab) is a former Pakistani cricketer who played in ten Tests from 1964 to 1969. He is the father- in- law of Imran Farhat."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.435706,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.214282
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He fathered fourteen children, eleven males and three females.\"",
+        "hyperedge_text": "He fathered fourteen children, eleven males and three females.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.42616283893585205,
+        "semantic_score": 0.2,
+        "fusion_score": 0.21046513557434085,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-cde3891c82b4f51558496b9d1a64567d"
+        ],
+        "evidence_texts": [
+          "He fathered fourteen children, eleven males and three females.",
+          "Tlilpotoncatzin Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second \"cihuacoatlpresident\") of Mexico-Tenochtitlan. Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin. His father was a son of the second \"tlatoaniruler\" or \"king\") of Tenochtitlan, Huitzilihuitl. While Tlacaelel never became \"tlatoani\" himself, as \"cihuacoatl\" he played a significant role in the creation of the Aztec Empire. His mother was the daughter of Huehue Quetzalmacatzin, king of Itztlacozauhcan in Amaquemecan Chalco. Tlilpotoncatzin succeeded his father as \"cihuacoatl\" upon his death in the year 8 Reed (1487). According to the \"Crónica mexicayotl\" of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior. In battle he wore the \"quetzalpatzactli\", a crest of quetzal feathers. Tlilpotoncatzin took at least two wives, both from Amaquemecan..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.426163,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.210465
+        }
+      }
+    ],
+    "answer": "William Cavendish-Bentinck, 3rd Duke of Portland",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that Lord Frederick Cavendish-Bentinck was the fourth son of William Cavendish-Bentinck, 3rd Duke of Portland, which directly identifies him as the father.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Major-General Lord Frederick Cavendish-Bentinck (2 November 1781 – 10 February 1828) known as Lord Frederick Bentinck was a British soldier and politician.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the father of Lord Frederick Cavendish-Bentinck?",
+    "analysis": {
+      "entities": [
+        "William Cavendish-Bentinck, 3rd Duke of Portland"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The youngest child and fourth son of William Cavendish-Bentinck, 3rd Duke of Portland and Lady Dorothy Cavendish.\"",
+        "hyperedge_text": "The youngest child and fourth son of William Cavendish-Bentinck, 3rd Duke of Portland and Lady Dorothy Cavendish.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7013710737228394,
+        "fusion_score": 0.5402742147445679,
+        "entity_ids": [
+          "\"WILLIAM CAVENDISH-BENTINCK, 3RD DUKE OF PORTLAND\"",
+          "\"LADY DOROTHY CAVENDISH\""
+        ],
+        "chunk_ids": [
+          "chunk-b666e4e4cc6981905289019e2fde1156"
+        ],
+        "evidence_texts": [
+          "The youngest child and fourth son of William Cavendish-Bentinck, 3rd Duke of Portland and Lady Dorothy Cavendish.",
+          "Lord Frederick Cavendish-Bentinck Major-General Lord Frederick Cavendish-Bentinck (2 November 1781 – 10 February 1828) known as Lord Frederick Bentinck was a British soldier and politician. The youngest child and fourth son of William Cavendish-Bentinck, 3rd Duke of Portland and Lady Dorothy Cavendish, Cavendish-Bentinck attended Westminster School before joining the army."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.701371,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540274
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cavendish-Bentinck was the youngest child and fourth son of William Cavendish-Bentinck, 3rd Duke of Portland.\"",
+        "hyperedge_text": "Cavendish-Bentinck was the youngest child and fourth son of William Cavendish-Bentinck, 3rd Duke of Portland.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6953915357589722,
+        "fusion_score": 0.5390783071517945,
+        "entity_ids": [
+          "\"FOURTH SON\"",
+          "\"YOUNGEST CHILD\"",
+          "\"3RD DUKE OF PORTLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-b666e4e4cc6981905289019e2fde1156"
+        ],
+        "evidence_texts": [
+          "Cavendish-Bentinck was the youngest child and fourth son of William Cavendish-Bentinck, 3rd Duke of Portland.",
+          "Lord Frederick Cavendish-Bentinck Major-General Lord Frederick Cavendish-Bentinck (2 November 1781 – 10 February 1828) known as Lord Frederick Bentinck was a British soldier and politician. The youngest child and fourth son of William Cavendish-Bentinck, 3rd Duke of Portland and Lady Dorothy Cavendish, Cavendish-Bentinck attended Westminster School before joining the army."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.695392,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.539078
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').\"",
+        "hyperedge_text": "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48665884137153625,
+        "semantic_score": 0.14285714285714285,
+        "fusion_score": 0.2232349651200431,
+        "entity_ids": [
+          "\"JUS SANGUINIS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.486659,
+          "S": 0.142857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.223235
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4700366258621216,
+        "semantic_score": 0.14285714285714285,
+        "fusion_score": 0.21658607891627724,
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.470037,
+          "S": 0.142857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.216586
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.\"",
+        "hyperedge_text": "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46737200021743774,
+        "semantic_score": 0.14285714285714285,
+        "fusion_score": 0.2155202286584037,
+        "entity_ids": [
+          "\"NATIONALITY\"",
+          "\"AMERICAS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.467372,
+          "S": 0.142857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.21552
+        }
+      }
+    ],
+    "answer": "British",
+    "confidence": 0.9,
+    "reasoning_summary": "William Cavendish-Bentinck, 3rd Duke of Portland, is identified as the father of Lord Frederick Cavendish-Bentinck, and he was British, which supports the nationality.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The youngest child and fourth son of William Cavendish-Bentinck, 3rd Duke of Portland and Lady Dorothy Cavendish.\""
+    ]
+  }
+]

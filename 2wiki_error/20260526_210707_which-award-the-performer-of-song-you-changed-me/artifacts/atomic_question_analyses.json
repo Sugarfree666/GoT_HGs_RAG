@@ -1,0 +1,179 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song You Changed Me?",
+    "retrieval_question": "Who is the performer of the song You Changed Me?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the performer of the song You Changed Me?",
+      "retrieval_question": "Who is the performer of the song You Changed Me?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "You Changed Me"
+      ],
+      "relations": [
+        "performer of"
+      ],
+      "relation_query": "who is the performer of a song",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What award did the performer of You Changed Me win?",
+    "retrieval_question": "What award did Jamie Foxx win?",
+    "dependency_question_rewrite": {
+      "original_question": "What award did the performer of You Changed Me win?",
+      "retrieval_question": "What award did Jamie Foxx win?",
+      "whether_rewritten": true,
+      "replacement_span": "the performer of You Changed Me",
+      "replacement_answer": "Jamie Foxx",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the performer of You Changed Me",
+          "replacement_answer": "Jamie Foxx"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the performer of the song You Changed Me?",
+        "answer": "Jamie Foxx",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that 'You Changed Me' is a song by American recording artist Jamie Foxx featuring Chris Brown, clearly identifying Jamie Foxx as the performer.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\"",
+            "fusion_score": 0.7224942684173585,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+              "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.\"",
+            "fusion_score": 0.7159407019615174,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.",
+              "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"'You Changed Me' combines elements of R&B and pop, appealing to a variety of listeners.\"",
+            "fusion_score": 0.5061737537384033,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "'You Changed Me' combines elements of R&B and pop, appealing to a variety of listeners.",
+              "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Jamie Foxx"
+      ],
+      "relations": [
+        "won an award"
+      ],
+      "relation_query": "What award did a person win?",
+      "answer_type": "award"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What award did the performer of You Changed Me win?",
+    "retrieval_question": "What award did the performer of You Changed Me win?",
+    "dependency_question_rewrite": {
+      "original_question": "What award did the performer of You Changed Me win?",
+      "retrieval_question": "What award did the performer of You Changed Me win?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "What award did the performer of You Changed Me win?",
+        "answer": "Academy Award",
+        "confidence": 0.9,
+        "answer_type": "award",
+        "reasoning_summary": "Jamie Foxx, the performer of 'You Changed Me', won the Academy Award for his role in the film 'Ray'.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer.\"",
+            "fusion_score": 0.5267335653305054,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer.",
+              "Jamie Foxx Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer. Foxx became widely known for his portrayal of Ray Charles in the 2004 biographical film \"Ray\", for which he won the Academy Award, BAFTA, Screen Actors Guild Award, Critics' Choice Movie Award and Golden Globe Award for Best Actor. That same year, he was nominated for the Academy Award for Best Supporting Actor for his role in the crime film \"Collateral\". Since spring 2017, Foxx has served as the host and executive producer of the Fox game show \"Beat Shazam\". Other acting roles include Staff Sergeant Sykes in \"Jarhead\" (2005), record executive Curtis Taylor Jr. in \"Dreamgirls\" (2006), Detective Ricardo Tubbs in the 2006 film adaptation of TV series \"Miami Vice\", the title role in the film \" Django Unchained\" (2012), the supervilla..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\"",
+            "fusion_score": 0.49882588982582093,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+              "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.\"",
+            "fusion_score": 0.5191022276878358,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.",
+              "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "You Changed Me",
+        "Jamie Foxx",
+        "Academy Award"
+      ],
+      "relations": [
+        "won"
+      ],
+      "relation_query": "What award did a performer of a work win?",
+      "answer_type": "award"
+    }
+  }
+]

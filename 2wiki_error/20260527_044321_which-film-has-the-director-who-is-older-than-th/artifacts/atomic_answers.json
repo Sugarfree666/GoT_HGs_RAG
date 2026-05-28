@@ -1,0 +1,736 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Ven Mi Corazón Te Llama?",
+    "analysis": {
+      "entities": [
+        "Ven Mi Corazón Te Llama"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero.\"",
+        "hyperedge_text": "Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.578731894493103,
+        "fusion_score": 0.5157463788986206,
+        "entity_ids": [
+          "\"ARGENTINA\"",
+          "\"1942\"",
+          "\"MANUEL ROMERO\"",
+          "\"VEN MI CORAZÓN TE LLAMA\""
+        ],
+        "chunk_ids": [
+          "chunk-f9daf88da18c4472d3e6f9608c1a28d8"
+        ],
+        "evidence_texts": [
+          "Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero.",
+          "Ven mi corazón te llama Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578732,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515746
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The reception of Ven mi corazón te llama helped to propel the careers of its cast and crew.\"",
+        "hyperedge_text": "The reception of Ven mi corazón te llama helped to propel the careers of its cast and crew.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5551890730857849,
+        "fusion_score": 0.511037814617157,
+        "entity_ids": [
+          "\"RECEPTION\""
+        ],
+        "chunk_ids": [
+          "chunk-f9daf88da18c4472d3e6f9608c1a28d8"
+        ],
+        "evidence_texts": [
+          "The reception of Ven mi corazón te llama helped to propel the careers of its cast and crew.",
+          "Ven mi corazón te llama Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.555189,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511038
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Manuel Romero's direction in Ven mi corazón te llama showcases his unique filmmaking style.\"",
+        "hyperedge_text": "Manuel Romero's direction in Ven mi corazón te llama showcases his unique filmmaking style.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5533725619316101,
+        "fusion_score": 0.5106745123863221,
+        "entity_ids": [
+          "\"FILMMAKING STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-f9daf88da18c4472d3e6f9608c1a28d8"
+        ],
+        "evidence_texts": [
+          "Manuel Romero's direction in Ven mi corazón te llama showcases his unique filmmaking style.",
+          "Ven mi corazón te llama Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.553373,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510675
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Ven mi corazón te llama is considered a notable contribution to Argentine cinema.\"",
+        "hyperedge_text": "The film Ven mi corazón te llama is considered a notable contribution to Argentine cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5467318892478943,
+        "fusion_score": 0.5093463778495789,
+        "entity_ids": [
+          "\"ARGENTINE CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-f9daf88da18c4472d3e6f9608c1a28d8"
+        ],
+        "evidence_texts": [
+          "The film Ven mi corazón te llama is considered a notable contribution to Argentine cinema.",
+          "Ven mi corazón te llama Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.546732,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.509346
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ven mi corazón te llama features themes that resonate with audiences across generations.\"",
+        "hyperedge_text": "Ven mi corazón te llama features themes that resonate with audiences across generations.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4310895800590515,
+        "fusion_score": 0.4862179160118103,
+        "entity_ids": [
+          "\"THEMES\""
+        ],
+        "chunk_ids": [
+          "chunk-f9daf88da18c4472d3e6f9608c1a28d8"
+        ],
+        "evidence_texts": [
+          "Ven mi corazón te llama features themes that resonate with audiences across generations.",
+          "Ven mi corazón te llama Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.43109,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.486218
+        }
+      }
+    ],
+    "answer": "Manuel Romero",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Ven mi corazón te llama' is directed by Manuel Romero.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Waking The Dead?",
+    "analysis": {
+      "entities": [
+        "Waking The Dead"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Waking the Dead is a 2000 drama film directed by Keith Gordon.\"",
+        "hyperedge_text": "Waking the Dead is a 2000 drama film directed by Keith Gordon.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6221457123756409,
+        "fusion_score": 0.5244291424751282,
+        "entity_ids": [
+          "\"2000\"",
+          "\"WAKING THE DEAD\""
+        ],
+        "chunk_ids": [
+          "chunk-939238b454af75a2a9c2af53a25d46d8"
+        ],
+        "evidence_texts": [
+          "Waking the Dead is a 2000 drama film directed by Keith Gordon.",
+          "Waking the Dead (film) Waking the Dead is a 2000 drama film directed by Keith Gordon and starring Billy Crudup and Jennifer Connelly. The screenplay by Robert Dillon is based on the 1986 novel of the same name by Scott Spencer."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.622146,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524429
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Waking the Dead is a 2000 drama film directed by Keith Gordon and starring Billy Crudup and Jennifer Connelly.\"",
+        "hyperedge_text": "Waking the Dead is a 2000 drama film directed by Keith Gordon and starring Billy Crudup and Jennifer Connelly.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5827476978302002,
+        "fusion_score": 0.5165495395660401,
+        "entity_ids": [
+          "\"WAKING THE DEAD\"",
+          "\"KEITH GORDON\"",
+          "\"BILLY CRUDUP\"",
+          "\"JENNIFER CONNELLY\"",
+          "\"ROBERT DILLON\"",
+          "\"1986 NOVEL\"",
+          "\"SCOTT SPENCER\""
+        ],
+        "chunk_ids": [
+          "chunk-939238b454af75a2a9c2af53a25d46d8"
+        ],
+        "evidence_texts": [
+          "Waking the Dead is a 2000 drama film directed by Keith Gordon and starring Billy Crudup and Jennifer Connelly.",
+          "Waking the Dead (film) Waking the Dead is a 2000 drama film directed by Keith Gordon and starring Billy Crudup and Jennifer Connelly. The screenplay by Robert Dillon is based on the 1986 novel of the same name by Scott Spencer."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.582748,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51655
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is best known for her role as DC Stella Goodman in the BBC drama 'Waking the Dead'.\"",
+        "hyperedge_text": "She is best known for her role as DC Stella Goodman in the BBC drama 'Waking the Dead'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5250928997993469,
+        "fusion_score": 0.5050185799598694,
+        "entity_ids": [
+          "\"BBC\"",
+          "\"DC STELLA GOODMAN\"",
+          "\"WAKING THE DEAD\""
+        ],
+        "chunk_ids": [
+          "chunk-f3250a2651439409ed54d9ce8a1c3c3c"
+        ],
+        "evidence_texts": [
+          "She is best known for her role as DC Stella Goodman in the BBC drama 'Waking the Dead'.",
+          "Félicité Du Jeu Félicité Du Jeu is a French actress. She is best known for her role as DC Stella Goodman in the BBC drama\" Waking the Dead\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.525093,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505019
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Félicité Du Jeu is a French actress. She is best known for her role as DC Stella Goodman in the BBC drama 'Waking the Dead'.\"",
+        "hyperedge_text": "Félicité Du Jeu is a French actress. She is best known for her role as DC Stella Goodman in the BBC drama 'Waking the Dead'.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"BBC\"",
+          "\"FÉLICITÉ DU JEU\"",
+          "\"DC STELLA GOODMAN\"",
+          "\"WAKING THE DEAD\""
+        ],
+        "chunk_ids": [
+          "chunk-f3250a2651439409ed54d9ce8a1c3c3c"
+        ],
+        "evidence_texts": [
+          "Félicité Du Jeu is a French actress. She is best known for her role as DC Stella Goodman in the BBC drama 'Waking the Dead'.",
+          "Félicité Du Jeu Félicité Du Jeu is a French actress. She is best known for her role as DC Stella Goodman in the BBC drama\" Waking the Dead\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'Waking the Dead' aired on BBC and received critical acclaim.\"",
+        "hyperedge_text": "'Waking the Dead' aired on BBC and received critical acclaim.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5446467399597168,
+        "fusion_score": 0.5089293479919434,
+        "entity_ids": [
+          "\"CRITICAL ACCLAIM\"",
+          "\"BBC\""
+        ],
+        "chunk_ids": [
+          "chunk-f3250a2651439409ed54d9ce8a1c3c3c"
+        ],
+        "evidence_texts": [
+          "'Waking the Dead' aired on BBC and received critical acclaim.",
+          "Félicité Du Jeu Félicité Du Jeu is a French actress. She is best known for her role as DC Stella Goodman in the BBC drama\" Waking the Dead\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.544647,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.508929
+        }
+      }
+    ],
+    "answer": "Keith Gordon",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Waking the Dead' is directed by Keith Gordon.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Waking the Dead is a 2000 drama film directed by Keith Gordon.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Ven Mi Corazón Te Llama?",
+    "analysis": {
+      "entities": [
+        "Manuel Romero"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Muchachas que estudian was directed by Manuel Romero.\"",
+        "hyperedge_text": "Muchachas que estudian was directed by Manuel Romero.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4515858292579651,
+        "fusion_score": 0.490317165851593,
+        "entity_ids": [
+          "\"MANUEL ROMERO\""
+        ],
+        "chunk_ids": [
+          "chunk-1b975a310de3c32d15e0af86acc1b29f"
+        ],
+        "evidence_texts": [
+          "Muchachas que estudian was directed by Manuel Romero.",
+          "Muchachas que estudian Muchachas que estudian is a Argentine comedy film directed and written by Manuel Romero. The film premiered on September 6, 1939 in Buenos Aires and starred Sofía Bozán, Enrique Serrano and Delia Garcés."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.451586,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.490317
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero.\"",
+        "hyperedge_text": "Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"ARGENTINA\"",
+          "\"1942\"",
+          "\"MANUEL ROMERO\"",
+          "\"VEN MI CORAZÓN TE LLAMA\""
+        ],
+        "chunk_ids": [
+          "chunk-f9daf88da18c4472d3e6f9608c1a28d8"
+        ],
+        "evidence_texts": [
+          "Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero.",
+          "Ven mi corazón te llama Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Muchachas que estudian is an Argentine comedy film directed and written by Manuel Romero.\"",
+        "hyperedge_text": "Muchachas que estudian is an Argentine comedy film directed and written by Manuel Romero.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"MANUEL ROMERO\"",
+          "\"MUCHACHAS QUE ESTUDIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-1b975a310de3c32d15e0af86acc1b29f"
+        ],
+        "evidence_texts": [
+          "Muchachas que estudian is an Argentine comedy film directed and written by Manuel Romero.",
+          "Muchachas que estudian Muchachas que estudian is a Argentine comedy film directed and written by Manuel Romero. The film premiered on September 6, 1939 in Buenos Aires and starred Sofía Bozán, Enrique Serrano and Delia Garcés."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Manuel Romero.\"",
+        "hyperedge_text": "The film was directed by Manuel Romero.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5338239669799805,
+        "fusion_score": 0.5067647933959961,
+        "entity_ids": [
+          "\"DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-1b975a310de3c32d15e0af86acc1b29f"
+        ],
+        "evidence_texts": [
+          "The film was directed by Manuel Romero.",
+          "Muchachas que estudian Muchachas que estudian is a Argentine comedy film directed and written by Manuel Romero. The film premiered on September 6, 1939 in Buenos Aires and starred Sofía Bozán, Enrique Serrano and Delia Garcés."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.533824,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.506765
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was written by Manuel Romero.\"",
+        "hyperedge_text": "The film was written by Manuel Romero.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5209254026412964,
+        "fusion_score": 0.5041850805282593,
+        "entity_ids": [
+          "\"WRITING\""
+        ],
+        "chunk_ids": [
+          "chunk-1b975a310de3c32d15e0af86acc1b29f"
+        ],
+        "evidence_texts": [
+          "The film was written by Manuel Romero.",
+          "Muchachas que estudian Muchachas que estudian is a Argentine comedy film directed and written by Manuel Romero. The film premiered on September 6, 1939 in Buenos Aires and starred Sofía Bozán, Enrique Serrano and Delia Garcés."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.520925,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504185
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "While the director of 'Ven Mi Corazón Te Llama' is identified as Manuel Romero, there is no evidence provided regarding his age.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Muchachas que estudian was directed by Manuel Romero.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of Waking The Dead?",
+    "analysis": {
+      "entities": [
+        "Keith Gordon"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Keith Gordon (born February 3, 1961) is an American actor and film director.\"",
+        "hyperedge_text": "Keith Gordon (born February 3, 1961) is an American actor and film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7222779989242554,
+        "fusion_score": 0.5444555997848511,
+        "entity_ids": [
+          "\"AMERICAN\"",
+          "\"FILM DIRECTOR\"",
+          "\"ACTOR\"",
+          "\"FEBRUARY 3, 1961\"",
+          "\"KEITH GORDON\""
+        ],
+        "chunk_ids": [
+          "chunk-349bd50325290039ff0fc8adc0b42b16"
+        ],
+        "evidence_texts": [
+          "Keith Gordon (born February 3, 1961) is an American actor and film director.",
+          "Keith Gordon Keith Gordon( born February 3, 1961) is an American actor and film director."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.722278,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.544456
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by Keith Gordon.\"",
+        "hyperedge_text": "Directed by Keith Gordon.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5848569273948669,
+        "fusion_score": 0.5169713854789735,
+        "entity_ids": [
+          "\"KEITH GORDON\""
+        ],
+        "chunk_ids": [
+          "chunk-939238b454af75a2a9c2af53a25d46d8"
+        ],
+        "evidence_texts": [
+          "Directed by Keith Gordon.",
+          "Waking the Dead (film) Waking the Dead is a 2000 drama film directed by Keith Gordon and starring Billy Crudup and Jennifer Connelly. The screenplay by Robert Dillon is based on the 1986 novel of the same name by Scott Spencer."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.584857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516971
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Waking the Dead is a 2000 drama film directed by Keith Gordon and starring Billy Crudup and Jennifer Connelly.\"",
+        "hyperedge_text": "Waking the Dead is a 2000 drama film directed by Keith Gordon and starring Billy Crudup and Jennifer Connelly.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"WAKING THE DEAD\"",
+          "\"KEITH GORDON\"",
+          "\"BILLY CRUDUP\"",
+          "\"JENNIFER CONNELLY\"",
+          "\"ROBERT DILLON\"",
+          "\"1986 NOVEL\"",
+          "\"SCOTT SPENCER\""
+        ],
+        "chunk_ids": [
+          "chunk-939238b454af75a2a9c2af53a25d46d8"
+        ],
+        "evidence_texts": [
+          "Waking the Dead is a 2000 drama film directed by Keith Gordon and starring Billy Crudup and Jennifer Connelly.",
+          "Waking the Dead (film) Waking the Dead is a 2000 drama film directed by Keith Gordon and starring Billy Crudup and Jennifer Connelly. The screenplay by Robert Dillon is based on the 1986 novel of the same name by Scott Spencer."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Keith Gordon is known for his work in the film industry.\"",
+        "hyperedge_text": "Keith Gordon is known for his work in the film industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6160181760787964,
+        "fusion_score": 0.5232036352157593,
+        "entity_ids": [
+          "\"FILM INDUSTRY\""
+        ],
+        "chunk_ids": [
+          "chunk-349bd50325290039ff0fc8adc0b42b16"
+        ],
+        "evidence_texts": [
+          "Keith Gordon is known for his work in the film industry.",
+          "Keith Gordon Keith Gordon( born February 3, 1961) is an American actor and film director."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.616018,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523204
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Keith Gordon has gained recognition and accolades for his performances.\"",
+        "hyperedge_text": "Keith Gordon has gained recognition and accolades for his performances.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5803564786911011,
+        "fusion_score": 0.5160712957382203,
+        "entity_ids": [
+          "\"ACCOLADES\"",
+          "\"RECOGNITION\""
+        ],
+        "chunk_ids": [
+          "chunk-349bd50325290039ff0fc8adc0b42b16"
+        ],
+        "evidence_texts": [
+          "Keith Gordon has gained recognition and accolades for his performances.",
+          "Keith Gordon Keith Gordon( born February 3, 1961) is an American actor and film director."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.580356,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516071
+        }
+      }
+    ],
+    "answer": "62",
+    "confidence": 0.9,
+    "reasoning_summary": "Keith Gordon was born on February 3, 1961, making him 62 years old as of now.",
+    "used_dependencies": [
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Keith Gordon (born February 3, 1961) is an American actor and film director.\""
+    ]
+  }
+]

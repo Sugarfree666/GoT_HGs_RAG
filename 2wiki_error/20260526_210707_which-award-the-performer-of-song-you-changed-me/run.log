@@ -1,0 +1,10 @@
+2026-05-26 21:07:07,053 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 21:08:24,968 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 21:08:24,969 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 21:08:38,518 | INFO | Starting HyperBranch pipeline for question: Which award the performer of song You Changed Me won?
+2026-05-26 21:08:38,519 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-26 21:08:45,545 | INFO | Atomic retrieval returned 21 hits for question=Who is the performer of the song You Changed Me?
+2026-05-26 21:08:56,198 | INFO | Rewrote retrieval question for q2: What award did the performer of You Changed Me win? -> What award did Jamie Foxx win?
+2026-05-26 21:09:02,023 | INFO | Atomic retrieval returned 22 hits for question=What award did Jamie Foxx win?
+2026-05-26 21:09:28,841 | INFO | Atomic retrieval returned 67 hits for question=What award did the performer of You Changed Me win?
+2026-05-26 21:10:09,889 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_210707_which-award-the-performer-of-song-you-changed-me

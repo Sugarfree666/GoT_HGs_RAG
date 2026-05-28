@@ -1,0 +1,30 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Spooky Bunch?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "When was the director of The Spooky Bunch born?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of The Spooky Bunch born?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q4",
+    "question": "Who is the director of His Name Is Nobody?",
+    "dependencies": [],
+    "metadata": {}
+  }
+]

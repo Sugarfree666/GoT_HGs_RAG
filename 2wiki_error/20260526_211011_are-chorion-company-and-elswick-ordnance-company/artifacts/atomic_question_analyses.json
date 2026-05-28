@@ -1,0 +1,170 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What country is Chorion (Company) located in?",
+    "retrieval_question": "What country is Chorion (Company) located in?",
+    "dependency_question_rewrite": {
+      "original_question": "What country is Chorion (Company) located in?",
+      "retrieval_question": "What country is Chorion (Company) located in?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Chorion (Company)"
+      ],
+      "relations": [
+        "is located in"
+      ],
+      "relation_query": "What country is an organization located in?",
+      "answer_type": "country"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What country is the Elswick Ordnance Company located in?",
+    "retrieval_question": "What country is the Elswick Ordnance Company located in?",
+    "dependency_question_rewrite": {
+      "original_question": "What country is the Elswick Ordnance Company located in?",
+      "retrieval_question": "What country is the Elswick Ordnance Company located in?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Elswick Ordnance Company"
+      ],
+      "relations": [
+        "is located in"
+      ],
+      "relation_query": "which country is associated with a specific organization",
+      "answer_type": "country"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the country of Chorion (Company)?",
+    "retrieval_question": "What is the country of Chorion (Company)?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the country of Chorion (Company)?",
+      "retrieval_question": "What is the country of Chorion (Company)?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "What country is Chorion (Company) located in?",
+        "answer": "United States",
+        "confidence": 0.85,
+        "answer_type": "country",
+        "reasoning_summary": "Chorion (Company) is located in Bend, Oregon, which is in the United States. This is supported by the evidence stating that Oregon is located in the United States.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The company is located in Bend, Oregon.\"",
+          "<hyperedge>\"United States is the country where Oregon is located.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The company is located in Bend, Oregon.\"",
+            "fusion_score": 0.5,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "The company is located in Bend, Oregon.",
+              "Bend Radio Group Bend Radio Group is a local radio station company located in the Bend, Oregon."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"United States is the country where Oregon is located.\"",
+            "fusion_score": 0.2529507279396057,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "United States is the country where Oregon is located.",
+              "Valley View Airport Valley View Airport, is a privately owned, public use airport located northeast of Estacada in Clackamas County, Oregon, United States."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The United States is a country located in North America.\"",
+            "fusion_score": 0.2507174611091614,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "The United States is a country located in North America.",
+              "Fairbank Island (Michigan) Fairbank Island is an island located in Chippewa County, Michigan, United States."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "What country is the Elswick Ordnance Company located in?",
+        "answer": "United Kingdom",
+        "confidence": 0.9,
+        "answer_type": "country",
+        "reasoning_summary": "The Elswick Ordnance Company was identified as a British armaments manufacturing company, indicating its location in the United Kingdom.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The Elswick Ordnance Company (sometimes referred to as Elswick Ordnance Works, but usually as 'EOC') was a British armaments manufacturing company of the late 19th and early 20th century.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The Elswick Ordnance Company (sometimes referred to as Elswick Ordnance Works, but usually as 'EOC') was a British armaments manufacturing company of the late 19th and early 20th century.\"",
+            "fusion_score": 0.5414168596267701,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Elswick Ordnance Company (sometimes referred to as Elswick Ordnance Works, but usually as 'EOC') was a British armaments manufacturing company of the late 19th and early 20th century.",
+              "Elswick Ordnance Company The Elswick Ordnance Company( sometimes referred to as Elswick Ordnance Works, but usually as\" EOC\") was a British armaments manufacturing company of the late 19th and early 20th century"
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Camperdown, Tyne and Wear is located in North East England.\"",
+            "fusion_score": 0.47298645973205566,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Camperdown, Tyne and Wear is located in North East England.",
+              "Camperdown, Tyne and Wear Camperdown, Tyne and Wear is a village in the Metropolitan Borough of North Tyneside in North East England. Camperdown is just south of Burradon, and the two villages are closely linked. Both villages had coal mines."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The countries were paired as follows:\"",
+            "fusion_score": 0.1978978776931763,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "The countries were paired as follows:",
+              "1992 Copa Libertadores The 1992 Copa Libertadores was the 33rd edition of the Copa Libertadores, CONMEBOL's annual international club tournament. São Paulo won the competition. The participating teams were divided into five groups, in which teams of the same country were placed in the same group. Each country was represented by two teams. The countries were paired as follows:"
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Chorion (Company)",
+        "United States"
+      ],
+      "relations": [
+        "is located in"
+      ],
+      "relation_query": "What country is a company located in?",
+      "answer_type": "country"
+    }
+  }
+]

@@ -1,0 +1,187 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the uncle of Eustace Iii, Count Of Boulogne?",
+    "analysis": {
+      "entities": [
+        "Eustace III",
+        "Count of Boulogne"
+      ],
+      "relations": [
+        "is the uncle of"
+      ],
+      "relation_query": "who is the uncle of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"He succeeded as Count of Boulogne in 964 after the death of his uncle Arnulf I, and held it until his own death.\"",
+        "hyperedge_text": "He succeeded as Count of Boulogne in 964 after the death of his uncle Arnulf I, and held it until his own death.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.594118058681488,
+        "fusion_score": 0.7188236117362977,
+        "entity_ids": [
+          "\"COUNT OF BOULOGNE\"",
+          "\"ARNULF I\""
+        ],
+        "chunk_ids": [
+          "chunk-9980c68267603a24dc00615ecd10d6a1"
+        ],
+        "evidence_texts": [
+          "He succeeded as Count of Boulogne in 964 after the death of his uncle Arnulf I, and held it until his own death.",
+          "Arnulf II, Count of Boulogne Arnulf II of Boulogne( † 972) was a son of Count Adalolf. He succeeded as Count of Boulogne in 964 after the death of his uncle Arnulf I, and held it until his own death. He was the father of Arnulf III, Count of Boulogne. He is the ancestor of Ruler of Jerusalem Godfrey of Bouillon."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.594118,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.718824
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eustace III (died c. 1125) was the count of Boulogne from 1087, succeeding his father Count Eustace II.\"",
+        "hyperedge_text": "Eustace III (died c. 1125) was the count of Boulogne from 1087, succeeding his father Count Eustace II.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8005155324935913,
+        "fusion_score": 0.5601031064987183,
+        "entity_ids": [
+          "\"COUNT OF BOULOGNE\"",
+          "\"EUSTACE III\"",
+          "\"EUSTACE II\""
+        ],
+        "chunk_ids": [
+          "chunk-f8818859b2acb9eb9fd755816da763a9"
+        ],
+        "evidence_texts": [
+          "Eustace III (died c. 1125) was the count of Boulogne from 1087, succeeding his father Count Eustace II.",
+          "Eustace III, Count of Boulogne Eustace III (died c. 1125) was the count of Boulogne from 1087, succeeding his father Count Eustace II. His mother was Ida of Lorraine. In 1088, Eustace supported the rebellion against William II of England in favour of Robert Curthose. Eustace participated in the First Crusade of 1096 along with his brothers Godfrey of Bouillon (duke of Lower Lotharingia) and Baldwin of Boulogne. It is unclear whether he travelled eastward with his brother Godfrey's or Robert Curthose's army. His contingent included Hugh II of Saint-Pol and his son Engelrand, Eustace I Granarius, lord of Sidon and Caesarea, Fulk of Guînes, and Hugh of Robecq (Rebecques), lord of Hebron. Throughout the crusade Eustace assisted Godfrey. Eustace was present at the Siege of Nicaea (May–June 1097), helped rescue Bohemund of Taranto's beleaguered troops at the Battle of Dorylaeum (July 1, 109..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.800516,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.560103
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eustace III, Count of Boulogne.\"",
+        "hyperedge_text": "Eustace III, Count of Boulogne.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7807870507240295,
+        "fusion_score": 0.5561574101448059,
+        "entity_ids": [
+          "\"EUSTACE III\""
+        ],
+        "chunk_ids": [
+          "chunk-f8818859b2acb9eb9fd755816da763a9"
+        ],
+        "evidence_texts": [
+          "Eustace III, Count of Boulogne.",
+          "Eustace III, Count of Boulogne Eustace III (died c. 1125) was the count of Boulogne from 1087, succeeding his father Count Eustace II. His mother was Ida of Lorraine. In 1088, Eustace supported the rebellion against William II of England in favour of Robert Curthose. Eustace participated in the First Crusade of 1096 along with his brothers Godfrey of Bouillon (duke of Lower Lotharingia) and Baldwin of Boulogne. It is unclear whether he travelled eastward with his brother Godfrey's or Robert Curthose's army. His contingent included Hugh II of Saint-Pol and his son Engelrand, Eustace I Granarius, lord of Sidon and Caesarea, Fulk of Guînes, and Hugh of Robecq (Rebecques), lord of Hebron. Throughout the crusade Eustace assisted Godfrey. Eustace was present at the Siege of Nicaea (May–June 1097), helped rescue Bohemund of Taranto's beleaguered troops at the Battle of Dorylaeum (July 1, 109..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.780787,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.556157
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eustace III (died c. 1125) was the count of Boulogne from 1087.\"",
+        "hyperedge_text": "Eustace III (died c. 1125) was the count of Boulogne from 1087.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.773391604423523,
+        "fusion_score": 0.5546783208847046,
+        "entity_ids": [
+          "\"COUNT OF BOULOGNE\""
+        ],
+        "chunk_ids": [
+          "chunk-f8818859b2acb9eb9fd755816da763a9"
+        ],
+        "evidence_texts": [
+          "Eustace III (died c. 1125) was the count of Boulogne from 1087.",
+          "Eustace III, Count of Boulogne Eustace III (died c. 1125) was the count of Boulogne from 1087, succeeding his father Count Eustace II. His mother was Ida of Lorraine. In 1088, Eustace supported the rebellion against William II of England in favour of Robert Curthose. Eustace participated in the First Crusade of 1096 along with his brothers Godfrey of Bouillon (duke of Lower Lotharingia) and Baldwin of Boulogne. It is unclear whether he travelled eastward with his brother Godfrey's or Robert Curthose's army. His contingent included Hugh II of Saint-Pol and his son Engelrand, Eustace I Granarius, lord of Sidon and Caesarea, Fulk of Guînes, and Hugh of Robecq (Rebecques), lord of Hebron. Throughout the crusade Eustace assisted Godfrey. Eustace was present at the Siege of Nicaea (May–June 1097), helped rescue Bohemund of Taranto's beleaguered troops at the Battle of Dorylaeum (July 1, 109..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.773392,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.554678
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eustace I, Count of Boulogne, was a nobleman and founder of the Boulogne branch of the House of Flanders.\"",
+        "hyperedge_text": "Eustace I, Count of Boulogne, was a nobleman and founder of the Boulogne branch of the House of Flanders.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.7279982566833496,
+        "fusion_score": 0.3455996513366699,
+        "entity_ids": [
+          "\"BOULOGNE\"",
+          "\"EUSTACE I\"",
+          "\"HOUSE OF FLANDERS\"",
+          "\"COUNT OF BOULOGNE\""
+        ],
+        "chunk_ids": [
+          "chunk-a8991053b850680a945365cf84d7d883"
+        ],
+        "evidence_texts": [
+          "Eustace I, Count of Boulogne, was a nobleman and founder of the Boulogne branch of the House of Flanders.",
+          "Eustace I, Count of Boulogne Eustace I, Count of Boulogne, was a nobleman and founder of the Boulogne branch of the House of Flanders. He held the county of Boulogne from 1024 until his death in 1049."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.727998,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.3456
+        }
+      }
+    ],
+    "answer": "Arnulf I",
+    "confidence": 0.9,
+    "reasoning_summary": "Eustace III succeeded as Count of Boulogne after the death of his uncle Arnulf I, which directly identifies Arnulf I as his uncle.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"He succeeded as Count of Boulogne in 964 after the death of his uncle Arnulf I, and held it until his own death.\""
+    ]
+  }
+]

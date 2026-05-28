@@ -1,0 +1,45 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "The evidence does not provide sufficient information to identify Theodore Salisbury Woolsey's father or where he studied, leading to an inability to answer the original question.",
+  "answer_span_reasoning": "There is no information available about Theodore Salisbury Woolsey's father or his studies.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Theodore?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"There was now reason to expect a more bloody war, and more lasting enmity between those kings and their fierce nations; but Theodore, the bishop, beloved of God, relying on the Divine aid, by his wholesome admonitions wholly extinguished the dangerous fire that was breaking out; so that the kings and their people on both sides were appeased.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the father of Salisbury?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"She was born in Salisbury, England but grew up in Nottingham where she still lives.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "Who is the father of Woolsey?",
+      "answer": "Theodore Dwight Woolsey",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Theodore Salisbury Woolsey was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the father of Theodore study?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"He studied at the University of Greifswald at the age of 14.\""
+      ]
+    }
+  ],
+  "remaining_gaps": [
+    "q1: Insufficient evidence to identify Theodore's father.",
+    "q2: Unable to determine where Theodore's father studied due to lack of information."
+  ]
+}

@@ -1,0 +1,1611 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Licinia Eudoxia?",
+    "retrieval_question": "Who is the father of Licinia Eudoxia?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of Licinia Eudoxia?",
+      "retrieval_question": "Who is the father of Licinia Eudoxia?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Anicia Juliana (Constantinople, 462 – 527/528) was a Roman imperial princess, the daughter of the Western Roman Emperor Olybrius.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Anicia Juliana (Constantinople, 462 – 527/528) was a Roman imperial princess, the daughter of the Western Roman Emperor Olybrius.",
+        "entity_ids": [
+          "\"CONSTANTINOPLE\"",
+          "\"LICINIA EUDOXIA\"",
+          "\"VALENTINIAN III\"",
+          "\"ANICIA JULIANA\"",
+          "\"ROMAN IMPERIAL PRINCESS\"",
+          "\"OLYBRIUS\"",
+          "\"ANICII\"",
+          "\"PLACIDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-8179b160c16a0df664e730f6d721f3e4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Anicia Juliana (Constantinople, 462 – 527/528) was a Roman imperial princess, the daughter of the Western Roman Emperor Olybrius.",
+            "Anicia Juliana Anicia Juliana( Constantinople, 462 – 527/528) was a Roman imperial princess, the daughter of the Western Roman Emperor Olybrius, of the\" Anicii\", by Placidia the younger daughter of Emperor Valentinian III and Licinia Eudoxia."
+          ],
+          "relation_texts": [
+            "Anicia Juliana (Constantinople, 462 – 527/528) was a Roman imperial princess, the daughter of the Western Roman Emperor Olybrius.",
+            "link",
+            "CONSTANTINOPLE",
+            "LICINIA EUDOXIA",
+            "VALENTINIAN III",
+            "ANICIA JULIANA",
+            "ROMAN IMPERIAL PRINCESS",
+            "OLYBRIUS",
+            "ANICII",
+            "PLACIDIA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+        "entity_ids": [
+          "\"LICINIA EUDOXIA\"",
+          "\"THEODOSIUS II\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+            "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+          ],
+          "relation_texts": [
+            "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+            "link",
+            "LICINIA EUDOXIA",
+            "THEODOSIUS II"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father.\"",
+        "branch": "relation",
+        "raw_score": 0.48036035895347595,
+        "hyperedge_text": "He was the father.",
+        "entity_ids": [
+          "\"FATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father.",
+            "Obata Toramori He was the father of Obata Masamori."
+          ],
+          "relation_texts": [
+            "He was the father.",
+            "link",
+            "FATHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ccea16dffbc4d38bcd051c761cb747b2",
+            "hyperedge_name": "<hyperedge>\"He was the father.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of Imran Farhat.\"",
+        "branch": "relation",
+        "raw_score": 0.43573564291000366,
+        "hyperedge_text": "He is the father-in-law of Imran Farhat.",
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-10333be7c973d42a00364ad277052021"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "Mohammad Ilyas (cricketer) Mohammad Ilyas Mahmood( born March 19, 1946, Lahore, Punjab) is a former Pakistani cricketer who played in ten Tests from 1964 to 1969. He is the father- in- law of Imran Farhat."
+          ],
+          "relation_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "link",
+            "FATHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dfb75f61e308d9f2ded0e2f2dc62859e",
+            "hyperedge_name": "<hyperedge>\"He is the father-in-law of Imran Farhat.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "branch": "relation",
+        "raw_score": 0.4295836091041565,
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "link",
+            "TERRITORIAL WATERS",
+            "LAW OF THE COUNTRIES INVOLVED",
+            "NATIONALITY OF THE PLANE OR SHIP",
+            "LAW",
+            "AIRSPACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e736e546ef2766fb6eee3ec329d43975",
+            "hyperedge_name": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He fathered fourteen children, eleven males and three females.\"",
+        "branch": "relation",
+        "raw_score": 0.4262092411518097,
+        "hyperedge_text": "He fathered fourteen children, eleven males and three females.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-cde3891c82b4f51558496b9d1a64567d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He fathered fourteen children, eleven males and three females.",
+            "Tlilpotoncatzin Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second \"cihuacoatlpresident\") of Mexico-Tenochtitlan. Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin. His father was a son of the second \"tlatoaniruler\" or \"king\") of Tenochtitlan, Huitzilihuitl. While Tlacaelel never became \"tlatoani\" himself, as \"cihuacoatl\" he played a significant role in the creation of the Aztec Empire. His mother was the daughter of Huehue Quetzalmacatzin, king of Itztlacozauhcan in Amaquemecan Chalco. Tlilpotoncatzin succeeded his father as \"cihuacoatl\" upon his death in the year 8 Reed (1487). According to the \"Crónica mexicayotl\" of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior. In battle he wore the \"quetzalpatzactli\", a crest of quetzal feathers. Tlilpotoncatzin took at least two wives, both from Amaquemecan..."
+          ],
+          "relation_texts": [
+            "He fathered fourteen children, eleven males and three females."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-706c8f3af642bec4c8143cb34884260a",
+            "hyperedge_name": "<hyperedge>\"He fathered fourteen children, eleven males and three females.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Alfred 'Freddie' Lennon is known as the father of musician John Lennon.\"",
+        "branch": "relation",
+        "raw_score": 0.4207149147987366,
+        "hyperedge_text": "Alfred 'Freddie' Lennon is known as the father of musician John Lennon.",
+        "entity_ids": [
+          "\"MUSICIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-1f035d23e047e0fdbff4c5c4a97928bd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Alfred 'Freddie' Lennon is known as the father of musician John Lennon.",
+            "That's My Life (My Love and My Home) \" That's My Life( My Love and My Home)\" is a 1965 single by Alfred\" Freddie\" Lennon, the father of musician John Lennon of the Beatles."
+          ],
+          "relation_texts": [
+            "Alfred 'Freddie' Lennon is known as the father of musician John Lennon.",
+            "link",
+            "MUSICIAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8a115ed3a0b8a7bb6c2049c41b93dde8",
+            "hyperedge_name": "<hyperedge>\"Alfred 'Freddie' Lennon is known as the father of musician John Lennon.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father of T. Ajay Kumar and Salena's mom.\"",
+        "branch": "relation",
+        "raw_score": 0.4203075170516968,
+        "hyperedge_text": "He is the father of T. Ajay Kumar and Salena's mom.",
+        "entity_ids": [
+          "\"T. AJAY KUMAR\"",
+          "\"SALENA\""
+        ],
+        "chunk_ids": [
+          "chunk-36566cec73be419450988a783a5492f6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father of T. Ajay Kumar and Salena's mom.",
+            "Tatineni Rama Rao Rama Rao Tatineni( born 1938), also known as T. Rama Rao, is a prolific Indian filmmaker. He has directed 65 Hindi and Telugu feature films between 1966 and 2000. Tatineni started his work in the film industry in the late 1950s as the assistant director of his cousin T. Prakash Rao and Kotayya Pratyagatma, before making his directorial debut with 1966 Telugu film\" Navarathri\". According to\" Encyclopædia Britannica\", Rao was\" the man who established the' Madras movie', or Hindi films funded primarily by southern capital, as a viable commercial option in the all- India market ...\" He is the father of T. Ajay Kumar and Salena's mom."
+          ],
+          "relation_texts": [
+            "He is the father of T. Ajay Kumar and Salena's mom.",
+            "link",
+            "T. AJAY KUMAR",
+            "SALENA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0a33aaf8e0ea1a29e252a87760095ab8",
+            "hyperedge_name": "<hyperedge>\"He is the father of T. Ajay Kumar and Salena's mom.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father of Efren Reyes Jr.\"",
+        "branch": "relation",
+        "raw_score": 0.41665953397750854,
+        "hyperedge_text": "He was the father of Efren Reyes Jr.",
+        "entity_ids": [
+          "\"FATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-2cf68ecf000240200dba77027f010fd3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father of Efren Reyes Jr.",
+            "Efren Reyes Sr. Efren Ongpin Reyes Sr.( June 18, 1924 – February 11, 1968) was a Filipino actor and director. He was the father of Efren Reyes Jr."
+          ],
+          "relation_texts": [
+            "He was the father of Efren Reyes Jr.",
+            "link",
+            "FATHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6798dcd81704162f7b70ceafdc4266a1",
+            "hyperedge_name": "<hyperedge>\"He was the father of Efren Reyes Jr.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the father of two children: Rebecca and Joseph.\"",
+        "branch": "relation",
+        "raw_score": 0.4127999544143677,
+        "hyperedge_text": "He is also the father of two children: Rebecca and Joseph.",
+        "entity_ids": [
+          "\"REBECCA\"",
+          "\"JOSEPH\""
+        ],
+        "chunk_ids": [
+          "chunk-271971fab2bf8cf9d39db8bc9a4842cd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is also the father of two children: Rebecca and Joseph.",
+            "Jeff Fabry Jeff Fabry (born April 14, 1973 in Hanford, California) is an American amputee and Paralympic archer. He won bronze medals at the 2004 Summer Paralympics and the 2008 Summer Paralympics, and a gold medal at the United States at the 2012 Summer Paralympics. He became disabled after he lost most of his right arm and right leg in a motorcycle accident when he was 15. He credits his wife, Crystal for getting him into the sport. He is also the father of two children: Rebecca & Joseph."
+          ],
+          "relation_texts": [
+            "He is also the father of two children: Rebecca and Joseph.",
+            "link",
+            "REBECCA",
+            "JOSEPH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f838f654326098cc5ff39aec1173e0ff",
+            "hyperedge_name": "<hyperedge>\"He is also the father of two children: Rebecca and Joseph.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Obata Toramori is the father of Obata Masamori.\"",
+        "branch": "relation",
+        "raw_score": 0.41055411100387573,
+        "hyperedge_text": "Obata Toramori is the father of Obata Masamori.",
+        "entity_ids": [
+          "\"RELATIONSHIP\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Obata Toramori is the father of Obata Masamori.",
+            "Obata Toramori He was the father of Obata Masamori."
+          ],
+          "relation_texts": [
+            "Obata Toramori is the father of Obata Masamori.",
+            "link",
+            "RELATIONSHIP"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b41860a8ba0ad078d69f07db081dc4bc",
+            "hyperedge_name": "<hyperedge>\"Obata Toramori is the father of Obata Masamori.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father of Obata Masamori.\"",
+        "branch": "relation",
+        "raw_score": 0.4100795388221741,
+        "hyperedge_text": "He was the father of Obata Masamori.",
+        "entity_ids": [
+          "\"OBATA TORAMORI\"",
+          "\"OBATA MASAMORI\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father of Obata Masamori.",
+            "Obata Toramori He was the father of Obata Masamori."
+          ],
+          "relation_texts": [
+            "He was the father of Obata Masamori.",
+            "link",
+            "OBATA TORAMORI",
+            "OBATA MASAMORI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-27dd474cf1ee15b324209a1673d53a71",
+            "hyperedge_name": "<hyperedge>\"He was the father of Obata Masamori.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia was the daughter of Eastern Roman Emperor Theodosius II.\"",
+        "branch": "semantic",
+        "raw_score": 0.745654284954071,
+        "hyperedge_text": "Licinia Eudoxia was the daughter of Eastern Roman Emperor Theodosius II.",
+        "entity_ids": [
+          "\"EASTERN ROMAN EMPIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Licinia Eudoxia was the daughter of Eastern Roman Emperor Theodosius II.",
+            "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+          ],
+          "relation_texts": [
+            "Licinia Eudoxia was the daughter of Eastern Roman Emperor Theodosius II.",
+            "link",
+            "EASTERN ROMAN EMPIRE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7a44092ae30313828dfc6f47d518c8db",
+            "hyperedge_name": "<hyperedge>\"Licinia Eudoxia was the daughter of Eastern Roman Emperor Theodosius II.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.\"",
+        "branch": "semantic",
+        "raw_score": 0.7415480613708496,
+        "hyperedge_text": "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+        "entity_ids": [
+          "\"LICINIA EUDOXIA\"",
+          "\"THEODOSIUS II\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+            "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+          ],
+          "relation_texts": [
+            "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+            "link",
+            "LICINIA EUDOXIA",
+            "THEODOSIUS II"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5cb86d5abda755bab378ff112dc11704",
+            "hyperedge_name": "<hyperedge>\"Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia was born in 422 and died around 493.\"",
+        "branch": "semantic",
+        "raw_score": 0.7361972332000732,
+        "hyperedge_text": "Licinia Eudoxia was born in 422 and died around 493.",
+        "entity_ids": [
+          "\"422\"",
+          "\"493\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Licinia Eudoxia was born in 422 and died around 493.",
+            "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+          ],
+          "relation_texts": [
+            "Licinia Eudoxia was born in 422 and died around 493.",
+            "link",
+            "422",
+            "493"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-10a5d374e4106fe96dc267f06da76375",
+            "hyperedge_name": "<hyperedge>\"Licinia Eudoxia was born in 422 and died around 493.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia was the grandmother of Anicia Juliana and wife of Valentinian III.\"",
+        "branch": "semantic",
+        "raw_score": 0.7131795287132263,
+        "hyperedge_text": "Licinia Eudoxia was the grandmother of Anicia Juliana and wife of Valentinian III.",
+        "entity_ids": [
+          "\"WIFE OF VALENTINIAN III\""
+        ],
+        "chunk_ids": [
+          "chunk-8179b160c16a0df664e730f6d721f3e4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Licinia Eudoxia was the grandmother of Anicia Juliana and wife of Valentinian III.",
+            "Anicia Juliana Anicia Juliana( Constantinople, 462 – 527/528) was a Roman imperial princess, the daughter of the Western Roman Emperor Olybrius, of the\" Anicii\", by Placidia the younger daughter of Emperor Valentinian III and Licinia Eudoxia."
+          ],
+          "relation_texts": [
+            "Licinia Eudoxia was the grandmother of Anicia Juliana and wife of Valentinian III.",
+            "link",
+            "WIFE OF VALENTINIAN III"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f25137909a2d2dc67f47972f55c4db06",
+            "hyperedge_name": "<hyperedge>\"Licinia Eudoxia was the grandmother of Anicia Juliana and wife of Valentinian III.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia was an important figure in the context of the Western Roman Empire through her marriages.\"",
+        "branch": "semantic",
+        "raw_score": 0.7105967402458191,
+        "hyperedge_text": "Licinia Eudoxia was an important figure in the context of the Western Roman Empire through her marriages.",
+        "entity_ids": [
+          "\"WESTERN ROMAN EMPIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Licinia Eudoxia was an important figure in the context of the Western Roman Empire through her marriages.",
+            "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+          ],
+          "relation_texts": [
+            "Licinia Eudoxia was an important figure in the context of the Western Roman Empire through her marriages.",
+            "link",
+            "WESTERN ROMAN EMPIRE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-147ddb60b08a8e611e61d47dc8e97cc5",
+            "hyperedge_name": "<hyperedge>\"Licinia Eudoxia was an important figure in the context of the Western Roman Empire through her marriages.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The marriages of Licinia Eudoxia to two Western Roman Emperors reflect her political significance.\"",
+        "branch": "semantic",
+        "raw_score": 0.6441673040390015,
+        "hyperedge_text": "The marriages of Licinia Eudoxia to two Western Roman Emperors reflect her political significance.",
+        "entity_ids": [
+          "\"POLITICAL SIGNIFICANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The marriages of Licinia Eudoxia to two Western Roman Emperors reflect her political significance.",
+            "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+          ],
+          "relation_texts": [
+            "The marriages of Licinia Eudoxia to two Western Roman Emperors reflect her political significance.",
+            "link",
+            "POLITICAL SIGNIFICANCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-eac18d4b5443ecbefccd9b1ed8671d0e",
+            "hyperedge_name": "<hyperedge>\"The marriages of Licinia Eudoxia to two Western Roman Emperors reflect her political significance.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Anicia Juliana was the daughter of Western Roman Emperor Olybrius, of the 'Anicii', by Placidia, the younger daughter of Emperor Valentinian III and Licinia Eudoxia.\"",
+        "branch": "semantic",
+        "raw_score": 0.5610182285308838,
+        "hyperedge_text": "Anicia Juliana was the daughter of Western Roman Emperor Olybrius, of the 'Anicii', by Placidia, the younger daughter of Emperor Valentinian III and Licinia Eudoxia.",
+        "entity_ids": [
+          "\"DAUGHTER\"",
+          "\"YOUNGER DAUGHTER\"",
+          "\"FAMILY LINE\""
+        ],
+        "chunk_ids": [
+          "chunk-8179b160c16a0df664e730f6d721f3e4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Anicia Juliana was the daughter of Western Roman Emperor Olybrius, of the 'Anicii', by Placidia, the younger daughter of Emperor Valentinian III and Licinia Eudoxia.",
+            "Anicia Juliana Anicia Juliana( Constantinople, 462 – 527/528) was a Roman imperial princess, the daughter of the Western Roman Emperor Olybrius, of the\" Anicii\", by Placidia the younger daughter of Emperor Valentinian III and Licinia Eudoxia."
+          ],
+          "relation_texts": [
+            "Anicia Juliana was the daughter of Western Roman Emperor Olybrius, of the 'Anicii', by Placidia, the younger daughter of Emperor Valentinian III and Licinia Eudoxia.",
+            "link",
+            "DAUGHTER",
+            "YOUNGER DAUGHTER",
+            "FAMILY LINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bab6fdafa5426c22d4f4841b3933c4b5",
+            "hyperedge_name": "<hyperedge>\"Anicia Juliana was the daughter of Western Roman Emperor Olybrius, of the 'Anicii', by Placidia, the younger daughter of Emperor Valentinian III and Licinia Eudoxia.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Publius Licinius Egnatius Marinianus (c. 249-268) was the third and youngest son of Roman Emperor Gallienus and 'Augusta' Cornelia Salonina.\"",
+        "branch": "semantic",
+        "raw_score": 0.5269578695297241,
+        "hyperedge_text": "Publius Licinius Egnatius Marinianus (c. 249-268) was the third and youngest son of Roman Emperor Gallienus and 'Augusta' Cornelia Salonina.",
+        "entity_ids": [
+          "\"PUBLIUS LICINIUS EGNATIUS MARINIANUS\"",
+          "\"GALLIENUS\"",
+          "\"CORNELIA SALONINA\""
+        ],
+        "chunk_ids": [
+          "chunk-198f54bdee9044743fe530d872ee764e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Publius Licinius Egnatius Marinianus (c. 249-268) was the third and youngest son of Roman Emperor Gallienus and 'Augusta' Cornelia Salonina.",
+            "Publius Licinius Egnatius Marinianus Publius Licinius Egnatius Marinianus( c. 249-268) was the third and youngest son of Roman Emperor Gallienus and\" Augusta\" Cornelia Salonina. Gallienus appointed him together with Paternus as Consul in early 268. His two older brothers, Valerianus and Saloninus, had died earlier, and thus he was the successor to the throne. Marinianus, along with his uncle Valerianus Minor, perished during the autumn of 268 in a purge of Gallienus' partisans."
+          ],
+          "relation_texts": [
+            "Publius Licinius Egnatius Marinianus (c. 249-268) was the third and youngest son of Roman Emperor Gallienus and 'Augusta' Cornelia Salonina.",
+            "link",
+            "PUBLIUS LICINIUS EGNATIUS MARINIANUS",
+            "GALLIENUS",
+            "CORNELIA SALONINA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cba3f2ca3eeb9079fbae3142f49ae1d6",
+            "hyperedge_name": "<hyperedge>\"Publius Licinius Egnatius Marinianus (c. 249-268) was the third and youngest son of Roman Emperor Gallienus and 'Augusta' Cornelia Salonina.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eutropia was the daughter of Flavia Maximiana Theodora.\"",
+        "branch": "semantic",
+        "raw_score": 0.5134543180465698,
+        "hyperedge_text": "Eutropia was the daughter of Flavia Maximiana Theodora.",
+        "entity_ids": [
+          "\"FLAVIA MAXIMIANA THEODORA\""
+        ],
+        "chunk_ids": [
+          "chunk-70177ba1e016bc43e672b90a3848eb4b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Eutropia was the daughter of Flavia Maximiana Theodora.",
+            "Eutropia (princess) Eutropia( died 350) was the daughter of Emperor Constantius Chlorus and of Flavia Maximiana Theodora, and therefore half- sister of Emperor Constantine the Great."
+          ],
+          "relation_texts": [
+            "Eutropia was the daughter of Flavia Maximiana Theodora.",
+            "link",
+            "FLAVIA MAXIMIANA THEODORA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1d5253cad04dc93e45a4699c08180ceb",
+            "hyperedge_name": "<hyperedge>\"Eutropia was the daughter of Flavia Maximiana Theodora.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eutropia (died 350) was the daughter of Emperor Constantius Chlorus and of Flavia Maximiana Theodora, and therefore half-sister of Emperor Constantine the Great.\"",
+        "branch": "semantic",
+        "raw_score": 0.5015571117401123,
+        "hyperedge_text": "Eutropia (died 350) was the daughter of Emperor Constantius Chlorus and of Flavia Maximiana Theodora, and therefore half-sister of Emperor Constantine the Great.",
+        "entity_ids": [
+          "\"EUTROPIA\"",
+          "\"CONSTANTIUS CHLORUS\"",
+          "\"FLAVIA MAXIMIANA THEODORA\"",
+          "\"EMPEROR CONSTANTINE THE GREAT\""
+        ],
+        "chunk_ids": [
+          "chunk-70177ba1e016bc43e672b90a3848eb4b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Eutropia (died 350) was the daughter of Emperor Constantius Chlorus and of Flavia Maximiana Theodora, and therefore half-sister of Emperor Constantine the Great.",
+            "Eutropia (princess) Eutropia( died 350) was the daughter of Emperor Constantius Chlorus and of Flavia Maximiana Theodora, and therefore half- sister of Emperor Constantine the Great."
+          ],
+          "relation_texts": [
+            "Eutropia (died 350) was the daughter of Emperor Constantius Chlorus and of Flavia Maximiana Theodora, and therefore half-sister of Emperor Constantine the Great.",
+            "link",
+            "EUTROPIA",
+            "CONSTANTIUS CHLORUS",
+            "FLAVIA MAXIMIANA THEODORA",
+            "EMPEROR CONSTANTINE THE GREAT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b991a36d1227ec11e21839c4a9ea0841",
+            "hyperedge_name": "<hyperedge>\"Eutropia (died 350) was the daughter of Emperor Constantius Chlorus and of Flavia Maximiana Theodora, and therefore half-sister of Emperor Constantine the Great.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.\"",
+        "hyperedge_text": "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7415480613708496,
+        "fusion_score": 0.54830961227417,
+        "entity_ids": [
+          "\"LICINIA EUDOXIA\"",
+          "\"THEODOSIUS II\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "evidence_texts": [
+          "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+          "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.741548,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.54831
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia was the daughter of Eastern Roman Emperor Theodosius II.\"",
+        "hyperedge_text": "Licinia Eudoxia was the daughter of Eastern Roman Emperor Theodosius II.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.745654284954071,
+        "fusion_score": 0.5491308569908142,
+        "entity_ids": [
+          "\"EASTERN ROMAN EMPIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "evidence_texts": [
+          "Licinia Eudoxia was the daughter of Eastern Roman Emperor Theodosius II.",
+          "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.745654,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549131
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia was born in 422 and died around 493.\"",
+        "hyperedge_text": "Licinia Eudoxia was born in 422 and died around 493.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7361972332000732,
+        "fusion_score": 0.5472394466400147,
+        "entity_ids": [
+          "\"422\"",
+          "\"493\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "evidence_texts": [
+          "Licinia Eudoxia was born in 422 and died around 493.",
+          "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.736197,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.547239
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia was the grandmother of Anicia Juliana and wife of Valentinian III.\"",
+        "hyperedge_text": "Licinia Eudoxia was the grandmother of Anicia Juliana and wife of Valentinian III.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7131795287132263,
+        "fusion_score": 0.5426359057426453,
+        "entity_ids": [
+          "\"WIFE OF VALENTINIAN III\""
+        ],
+        "chunk_ids": [
+          "chunk-8179b160c16a0df664e730f6d721f3e4"
+        ],
+        "evidence_texts": [
+          "Licinia Eudoxia was the grandmother of Anicia Juliana and wife of Valentinian III.",
+          "Anicia Juliana Anicia Juliana( Constantinople, 462 – 527/528) was a Roman imperial princess, the daughter of the Western Roman Emperor Olybrius, of the\" Anicii\", by Placidia the younger daughter of Emperor Valentinian III and Licinia Eudoxia."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.71318,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542636
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia was an important figure in the context of the Western Roman Empire through her marriages.\"",
+        "hyperedge_text": "Licinia Eudoxia was an important figure in the context of the Western Roman Empire through her marriages.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7105967402458191,
+        "fusion_score": 0.5421193480491638,
+        "entity_ids": [
+          "\"WESTERN ROMAN EMPIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "evidence_texts": [
+          "Licinia Eudoxia was an important figure in the context of the Western Roman Empire through her marriages.",
+          "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.710597,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542119
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Licinia Eudoxia die?",
+    "retrieval_question": "Where did Theodosius II die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the father of Licinia Eudoxia die?",
+      "retrieval_question": "Where did Theodosius II die?",
+      "whether_rewritten": true,
+      "replacement_span": "the father of Licinia Eudoxia",
+      "replacement_answer": "Theodosius II",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the father of Licinia Eudoxia",
+          "replacement_answer": "Theodosius II"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+        "entity_ids": [
+          "\"LICINIA EUDOXIA\"",
+          "\"THEODOSIUS II\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+            "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+          ],
+          "relation_texts": [
+            "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+            "link",
+            "LICINIA EUDOXIA",
+            "THEODOSIUS II"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.",
+        "entity_ids": [
+          "\"THRONE\"",
+          "\"EASTERN ROMAN EMPEROR\"",
+          "\"THEODOSIUS II\"",
+          "\"ARCADIUS\""
+        ],
+        "chunk_ids": [
+          "chunk-a90afa3973d6f9c9112eed98f652bdc4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.",
+            "Theodosius II Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life, taking the throne as an infant in 402 and ruling as the Eastern Empire's sole emperor after the death of his father Arcadius in 408. He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople. He also presided over the outbreak of two great Christological controversies, Nestorianism and Eutychianism."
+          ],
+          "relation_texts": [
+            "Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.",
+            "link",
+            "THRONE",
+            "EASTERN ROMAN EMPEROR",
+            "THEODOSIUS II",
+            "ARCADIUS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died at his home in Elmwood Park, Illinois.\"",
+        "branch": "relation",
+        "raw_score": 0.5405766367912292,
+        "hyperedge_text": "He died at his home in Elmwood Park, Illinois.",
+        "entity_ids": [
+          "\"HOME\""
+        ],
+        "chunk_ids": [
+          "chunk-17402c1d18ba0c82a2682dde9b86b873"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died at his home in Elmwood Park, Illinois.",
+            "Elmer W. Conti Elmer W. Conti( April 9, 1921 – January 4, 1988) was an American politician and businessman. Born in Elmwood Park, Illinois, Conti went to Proviso High School. He served in the United States Navy during World War II. Conti went to Western Illinois University. He was in the real estate and insurance business. Conti served on the Elmwood Park Village Board and was the village board president. In 1966 he was the target of a political assassination attempt involving a massive black powder bomb placed at his home at 2211 North 77th Ave, which left a 6- inch deep impression on the concrete floor of his garage. Conti was involved with the Republican Party. Conti served in the Illinois House of Representatives from 1957 until 1983. Conti died at his home in Elmwood Park, Illinois."
+          ],
+          "relation_texts": [
+            "He died at his home in Elmwood Park, Illinois.",
+            "link",
+            "HOME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f87bc77e04fe4373903b68fbf892a5f0",
+            "hyperedge_name": "<hyperedge>\"He died at his home in Elmwood Park, Illinois.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died on December 2, 1945, in New York City, New York, USA.\"",
+        "branch": "relation",
+        "raw_score": 0.5390771627426147,
+        "hyperedge_text": "He died on December 2, 1945, in New York City, New York, USA.",
+        "entity_ids": [
+          "\"NEW YORK CITY\"",
+          "\"NEW YORK\"",
+          "\"USA\"",
+          "\"DECEMBER 2, 1945\""
+        ],
+        "chunk_ids": [
+          "chunk-fe311566b185829f73284ae39d680e90"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died on December 2, 1945, in New York City, New York, USA.",
+            "Joseph W. Smiley Joseph W. Smiley was born on June 18, 1870 in Boston, Massachusetts, USA. He was an actor and director, known for \"The Gray Horror\" (1915), \"The Other Sister\" (1915) and \"The Living Fear\" (1914), as well as many other films. He was married to the Scottish actress Lila Leslie. He died on December 2, 1945, in New York City, New York, USA."
+          ],
+          "relation_texts": [
+            "He died on December 2, 1945, in New York City, New York, USA.",
+            "link",
+            "NEW YORK CITY",
+            "NEW YORK",
+            "USA",
+            "DECEMBER 2, 1945"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-25859914b2d49061b1af6cbc3063d266",
+            "hyperedge_name": "<hyperedge>\"He died on December 2, 1945, in New York City, New York, USA.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in Toluca Lake, California.\"",
+        "branch": "relation",
+        "raw_score": 0.5348694920539856,
+        "hyperedge_text": "He died in Toluca Lake, California.",
+        "entity_ids": [
+          "\"TOLUCA LAKE, CALIFORNIA\""
+        ],
+        "chunk_ids": [
+          "chunk-f125c14a3d274d3110dc0b22601f55e2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died in Toluca Lake, California.",
+            "Crane Wilbur Crane Wilbur (November 17, 1886 – October 18, 1973) was an American writer, actor and director for stage, radio and screen. He was born in Athens, New York. Wilbur is best remembered for playing Harry Marvin in \"The Perils of Pauline\". He died in Toluca Lake, California. He was a prolific writer and director of at least 67 films from the silent era into the sound era, but it was as an actor that he found lasting recognition, particularly playing opposite Pearl White in the iconoclastic serial \"The Perils of Pauline\". He brought to the first motion pictures merry eyes, a great, thick crop of wavy, black hair and an athlete's interest in swimming and horseback riding. Twelve years of stage experience prepared him for his venture into the new art of silent motion pictures."
+          ],
+          "relation_texts": [
+            "He died in Toluca Lake, California.",
+            "link",
+            "TOLUCA LAKE, CALIFORNIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8083b620d5ae0bdbda84f72009ab1fec",
+            "hyperedge_name": "<hyperedge>\"He died in Toluca Lake, California.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died as a resident of Albuquerque, New Mexico in 1964 and was buried in Fairview Park Cemetery.\"",
+        "branch": "relation",
+        "raw_score": 0.5273812413215637,
+        "hyperedge_text": "He died as a resident of Albuquerque, New Mexico in 1964 and was buried in Fairview Park Cemetery.",
+        "entity_ids": [
+          "\"DEATH\"",
+          "\"FAIRVIEW PARK CEMETERY\"",
+          "\"ALBUQUERQUE\""
+        ],
+        "chunk_ids": [
+          "chunk-64dd49841c92d6a8f48f44d5e5740055"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died as a resident of Albuquerque, New Mexico in 1964 and was buried in Fairview Park Cemetery.",
+            "Albert G. Simms Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico. He was the husband of Ruth Hanna McCormick, who served as a United States Representative from Illinois. He was born in Washington, Arkansas, where he attended private schools. He attended the University of Arkansas at Fayetteville. He moved to Monterrey, Mexico in 1906 and was employed as an accountant. In 1912, he moved to Silver City, New Mexico. He studied law, was admitted to the bar in 1915, and practiced law at Albuquerque, New Mexico until 1919. Simms was a member of the city council 1920–1922. He was also a member and chairman of the board of county commissioners of Bernalillo County, New Mexico 1920–1922. He engaged in banking, serving as president of a national bank in Albuquerque, 1920–1924, and as president of a mortgage company in 1924. He served..."
+          ],
+          "relation_texts": [
+            "He died as a resident of Albuquerque, New Mexico in 1964 and was buried in Fairview Park Cemetery.",
+            "link",
+            "DEATH",
+            "FAIRVIEW PARK CEMETERY",
+            "ALBUQUERQUE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d67064ad26ccdb0e6b67bd2c83149edf",
+            "hyperedge_name": "<hyperedge>\"He died as a resident of Albuquerque, New Mexico in 1964 and was buried in Fairview Park Cemetery.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in Los Angeles, California.\"",
+        "branch": "relation",
+        "raw_score": 0.52277010679245,
+        "hyperedge_text": "He died in Los Angeles, California.",
+        "entity_ids": [
+          "\"LOS ANGELES, CALIFORNIA\""
+        ],
+        "chunk_ids": [
+          "chunk-91d0c69e6b97e639fb511a8ca6d8a2cd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died in Los Angeles, California.",
+            "Philip Ford (film director) Philip Ford( October 16, 1900 – January 12, 1976) was an American film director and actor. He directed 43 films between 1945 and 1964. He also appeared 16 in films between 1916 and 1926. He was the son of actor/ director Francis Ford and the nephew of director John Ford. He was born with the family name Feeney in Portland, Maine, and only later took on the family name of\" Ford\" after his father and uncle had. He died in Los Angeles, California."
+          ],
+          "relation_texts": [
+            "He died in Los Angeles, California.",
+            "link",
+            "LOS ANGELES, CALIFORNIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5aac4638e4a522ba78aadcccf6bbe34e",
+            "hyperedge_name": "<hyperedge>\"He died in Los Angeles, California.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in Ukiah, California.\"",
+        "branch": "relation",
+        "raw_score": 0.5222276449203491,
+        "hyperedge_text": "He died in Ukiah, California.",
+        "entity_ids": [
+          "\"UKIAH, CALIFORNIA\""
+        ],
+        "chunk_ids": [
+          "chunk-dd34784c73c16d9b11a7497d3c85bd5d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died in Ukiah, California.",
+            "William Axt William Axt (April 19, 1888 – February 13, 1959) was an American composer of nearly two hundred film scores. Born in New York City, Axt graduated from DeWitt Clinton High School in The Bronx and studied at the National Conservatory of Music of America. He served as an assistant conductor for the Hammerstein Grand Opera Company and was the musical director for the Capitol Theatre in Manhattan before joining the music department at Metro-Goldwyn-Mayer in 1929. He earned a Doctor of Musical Arts degree from the University of Chicago in 1922. Axt retired from the film industry to raise cattle and breed horses in Laytonville, California. He died in Ukiah, California."
+          ],
+          "relation_texts": [
+            "He died in Ukiah, California.",
+            "link",
+            "UKIAH, CALIFORNIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3e0a23b7e4107738fc1a3b72caff5bef",
+            "hyperedge_name": "<hyperedge>\"He died in Ukiah, California.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in Neuilly-sur-Seine, France.\"",
+        "branch": "relation",
+        "raw_score": 0.5167968273162842,
+        "hyperedge_text": "He died in Neuilly-sur-Seine, France.",
+        "entity_ids": [
+          "\"FRANCE\"",
+          "\"NEUILLY-SUR-SEINE\""
+        ],
+        "chunk_ids": [
+          "chunk-5ccebf71b9b929e008cbb1bc0daf14e8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died in Neuilly-sur-Seine, France.",
+            "Louis Mercanton Louis Mercanton (4 May 1879 – 29 April 1932) was a Swiss film director, screenwriter and actor. Mercanton was born in Nyon, Canton of Vaud, Switzerland and died Neuilly-sur-Seine, France."
+          ],
+          "relation_texts": [
+            "He died in Neuilly-sur-Seine, France.",
+            "link",
+            "FRANCE",
+            "NEUILLY-SUR-SEINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dccd430b826bbc3bf3cc2952dc9452bc",
+            "hyperedge_name": "<hyperedge>\"He died in Neuilly-sur-Seine, France.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in Porterville, California from a heart attack.\"",
+        "branch": "relation",
+        "raw_score": 0.5162345767021179,
+        "hyperedge_text": "He died in Porterville, California from a heart attack.",
+        "entity_ids": [
+          "\"DEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0866c3f8d6fb59c7691bda418ca8c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died in Porterville, California from a heart attack.",
+            "Robert P. Kerr Robert P. Kerr (October 9, 1892 – September 5, 1960) was an American film director, actor and screenwriter. He directed 41 films between 1917 and 1928. He was born in Burlington, Colorado and died in Porterville, California from a heart attack."
+          ],
+          "relation_texts": [
+            "He died in Porterville, California from a heart attack.",
+            "link",
+            "DEATH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-aeb867f80b877c4706545b077d852f06",
+            "hyperedge_name": "<hyperedge>\"He died in Porterville, California from a heart attack.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died on 19 December 1877.\"",
+        "branch": "relation",
+        "raw_score": 0.5154126882553101,
+        "hyperedge_text": "He died on 19 December 1877.",
+        "entity_ids": [
+          "\"19 DECEMBER 1877\""
+        ],
+        "chunk_ids": [
+          "chunk-2a2660871424c7222383f81094967383"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died on 19 December 1877.",
+            "Sir William Geary, 3rd Baronet Sir William Richard Powlett Geary, 3rd Baronet( 13 November 1810 – 19 December 1877) was an English Conservative Party politician. He sat in the House of Commons from 1835 to 1838. He was the eldest son of Sir William Geary, 2nd Baronet, whom he succeeded in 1825. Geary contested the 1832 general election in the newly created Western division of Kent, without success, but won the seat at the 1835 general election. He was re-elected in 1837, and held the seat until his resignation in 1838 by taking the Chiltern Hundreds. On his death he was buried in St Peter and St Paul Church, Tonbridge. He had married Louisa Charlotte Bruce. The baronetcy passed to his brother Francis."
+          ],
+          "relation_texts": [
+            "He died on 19 December 1877.",
+            "link",
+            "19 DECEMBER 1877"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b8c562860b36aff860270e57dc55d21b",
+            "hyperedge_name": "<hyperedge>\"He died on 19 December 1877.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in Naples, Italy on 2 June 1738.\"",
+        "branch": "relation",
+        "raw_score": 0.5145763158798218,
+        "hyperedge_text": "He died in Naples, Italy on 2 June 1738.",
+        "entity_ids": [
+          "\"NAPLES\"",
+          "\"2 JUNE 1738\""
+        ],
+        "chunk_ids": [
+          "chunk-ba8376589f260aecd55d704032c26110"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died in Naples, Italy on 2 June 1738.",
+            "James Fitz-James Stuart, 2nd Duke of Berwick James Francis( Jacobo Francisco) Fitz- James Stuart, 2nd Duke of Berwick, 2nd Duke of Liria and Xérica( Saint- Germain- en- Laye, France, 21 October 1696 – Naples, Italy, 2 June 1738) was a Jacobite and Spanish nobleman. He inherited titles in the Jacobite and Spanish nobility on the death of his father in battle in 1734 at Philippsburg, during the War of the Polish Succession. He was also Consort Duke of Veragua and of la Vega and a Consort- Marquis of four further titles by his Spanish marriage in 1716. His full title was 2nd Duke of Berwick, 2nd Earl of Tinmouth, 2nd Baron Bosworth, 2nd Duke of Liria and Xerica, Grandee of Spain 1st class( from 1716), Knight of the Order of the Golden Fleece( from 29 September 1714), as well as the holder of several earldoms."
+          ],
+          "relation_texts": [
+            "He died in Naples, Italy on 2 June 1738.",
+            "link",
+            "NAPLES",
+            "2 JUNE 1738"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-276e923b1730fade10ead782edd83910",
+            "hyperedge_name": "<hyperedge>\"He died in Naples, Italy on 2 June 1738.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodosius II (10 April 401 – 28 July 450) is commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher.\"",
+        "branch": "semantic",
+        "raw_score": 0.6789699792861938,
+        "hyperedge_text": "Theodosius II (10 April 401 – 28 July 450) is commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher.",
+        "entity_ids": [
+          "\"THEODOSIUS THE YOUNGER\"",
+          "\"THEODOSIUS THE CALLIGRAPHER\""
+        ],
+        "chunk_ids": [
+          "chunk-a90afa3973d6f9c9112eed98f652bdc4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Theodosius II (10 April 401 – 28 July 450) is commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher.",
+            "Theodosius II Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life, taking the throne as an infant in 402 and ruling as the Eastern Empire's sole emperor after the death of his father Arcadius in 408. He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople. He also presided over the outbreak of two great Christological controversies, Nestorianism and Eutychianism."
+          ],
+          "relation_texts": [
+            "Theodosius II (10 April 401 – 28 July 450) is commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher.",
+            "link",
+            "THEODOSIUS THE YOUNGER",
+            "THEODOSIUS THE CALLIGRAPHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d421185523acef8f81196ecd65d7e57c",
+            "hyperedge_name": "<hyperedge>\"Theodosius II (10 April 401 – 28 July 450) is commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.\"",
+        "branch": "semantic",
+        "raw_score": 0.6650689840316772,
+        "hyperedge_text": "Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.",
+        "entity_ids": [
+          "\"THRONE\"",
+          "\"EASTERN ROMAN EMPEROR\"",
+          "\"THEODOSIUS II\"",
+          "\"ARCADIUS\""
+        ],
+        "chunk_ids": [
+          "chunk-a90afa3973d6f9c9112eed98f652bdc4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.",
+            "Theodosius II Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life, taking the throne as an infant in 402 and ruling as the Eastern Empire's sole emperor after the death of his father Arcadius in 408. He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople. He also presided over the outbreak of two great Christological controversies, Nestorianism and Eutychianism."
+          ],
+          "relation_texts": [
+            "Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.",
+            "link",
+            "THRONE",
+            "EASTERN ROMAN EMPEROR",
+            "THEODOSIUS II",
+            "ARCADIUS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-43b23ab995252e20570d4a71fdac8838",
+            "hyperedge_name": "<hyperedge>\"Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodosius II is known for his impact on legal codes and religious debates.\"",
+        "branch": "semantic",
+        "raw_score": 0.6094125509262085,
+        "hyperedge_text": "Theodosius II is known for his impact on legal codes and religious debates.",
+        "entity_ids": [
+          "\"IMPACT\""
+        ],
+        "chunk_ids": [
+          "chunk-a90afa3973d6f9c9112eed98f652bdc4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Theodosius II is known for his impact on legal codes and religious debates.",
+            "Theodosius II Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life, taking the throne as an infant in 402 and ruling as the Eastern Empire's sole emperor after the death of his father Arcadius in 408. He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople. He also presided over the outbreak of two great Christological controversies, Nestorianism and Eutychianism."
+          ],
+          "relation_texts": [
+            "Theodosius II is known for his impact on legal codes and religious debates.",
+            "link",
+            "IMPACT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d13f2e991bd47493bd7eb8fc303266cc",
+            "hyperedge_name": "<hyperedge>\"Theodosius II is known for his impact on legal codes and religious debates.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of Theodred's consecration is unknown, but the date of his death was sometime between 995 and 997.\"",
+        "branch": "semantic",
+        "raw_score": 0.5117377042770386,
+        "hyperedge_text": "The date of Theodred's consecration is unknown, but the date of his death was sometime between 995 and 997.",
+        "entity_ids": [
+          "\"CONSECRATION\"",
+          "\"995-997\"",
+          "\"DEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-cd071c5fd6bf8548dcc1d826634087bd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of Theodred's consecration is unknown, but the date of his death was sometime between 995 and 997.",
+            "Theodred II (Bishop of Elmham) Theodred II was a medieval Bishop of Elmham. The date of Theodred's consecration unknown, but the date of his death was sometime between 995 and 997."
+          ],
+          "relation_texts": [
+            "The date of Theodred's consecration is unknown, but the date of his death was sometime between 995 and 997.",
+            "link",
+            "CONSECRATION",
+            "995-997",
+            "DEATH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e3fdd5f76c79fe8660fd904ab3826270",
+            "hyperedge_name": "<hyperedge>\"The date of Theodred's consecration is unknown, but the date of his death was sometime between 995 and 997.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He then went into exile to Alexandria, Egypt, where he died and was buried the following year in Saint Catherines's Cathedral of Alexandria.\"",
+        "branch": "semantic",
+        "raw_score": 0.500438928604126,
+        "hyperedge_text": "He then went into exile to Alexandria, Egypt, where he died and was buried the following year in Saint Catherines's Cathedral of Alexandria.",
+        "entity_ids": [
+          "\"EXILE\"",
+          "\"ALEXANDRIA\"",
+          "\"SAINT CATHERINE'S CATHEDRAL\""
+        ],
+        "chunk_ids": [
+          "chunk-ff567b5fc898ebd760fb22a84db96481"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He then went into exile to Alexandria, Egypt, where he died and was buried the following year in Saint Catherines's Cathedral of Alexandria.",
+            "Victor Emmanuel III of Italy Victor Emmanuel III (Vittorio Emanuele Ferdinando Maria Gennaro di Savoia; , , ; 11 November 1869 – 28 December 1947) was the King of Italy from 29 July 1900 until his abdication on 9 May 1946. In addition, he held the thrones of Ethiopia and Albania as Emperor of Ethiopia (1936–1943) and King of the Albanians (1939–1943). During his reign of nearly 46 years, which began after the assassination of his father Umberto I, the Kingdom of Italy became involved in two world wars. His reign also encompassed the birth, rise, and fall of Italian Fascism and its regime. During World War I, Victor Emmanuel III accepted the resignation of Prime Minister Paolo Boselli and named Vittorio Emanuele Orlando (the \"premier of victory\") in his place. Following the March on Rome, he appointed Benito Mussolini as Prime Minister and later deposed him in 1943 during World War II...."
+          ],
+          "relation_texts": [
+            "He then went into exile to Alexandria, Egypt, where he died and was buried the following year in Saint Catherines's Cathedral of Alexandria.",
+            "link",
+            "EXILE",
+            "ALEXANDRIA",
+            "SAINT CATHERINE'S CATHEDRAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5ddff85caddec6e7bfc29e1d9f7720c9",
+            "hyperedge_name": "<hyperedge>\"He then went into exile to Alexandria, Egypt, where he died and was buried the following year in Saint Catherines's Cathedral of Alexandria.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodred II's legacy may be reflected in the ecclesiastical structures that continued to evolve after his death.\"",
+        "branch": "semantic",
+        "raw_score": 0.485702782869339,
+        "hyperedge_text": "Theodred II's legacy may be reflected in the ecclesiastical structures that continued to evolve after his death.",
+        "entity_ids": [
+          "\"LEGACY\""
+        ],
+        "chunk_ids": [
+          "chunk-cd071c5fd6bf8548dcc1d826634087bd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Theodred II's legacy may be reflected in the ecclesiastical structures that continued to evolve after his death.",
+            "Theodred II (Bishop of Elmham) Theodred II was a medieval Bishop of Elmham. The date of Theodred's consecration unknown, but the date of his death was sometime between 995 and 997."
+          ],
+          "relation_texts": [
+            "Theodred II's legacy may be reflected in the ecclesiastical structures that continued to evolve after his death.",
+            "link",
+            "LEGACY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ec713bf54b0cf28037a7083d625e1439",
+            "hyperedge_name": "<hyperedge>\"Theodred II's legacy may be reflected in the ecclesiastical structures that continued to evolve after his death.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Theodora of Greece and Denmark died on 16 October 1969.\"",
+        "branch": "semantic",
+        "raw_score": 0.4850842356681824,
+        "hyperedge_text": "Princess Theodora of Greece and Denmark died on 16 October 1969.",
+        "entity_ids": [
+          "\"16 OCTOBER 1969\""
+        ],
+        "chunk_ids": [
+          "chunk-1b143decfc86c931f5fbf5eef7419ca6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Princess Theodora of Greece and Denmark died on 16 October 1969.",
+            "Princess Theodora of Greece and Denmark (1906–1969) Princess Theodora of Greece and Denmark( 30 May 1906 – 16 October 1969) was the second child and daughter of Prince Andrew of Greece and Denmark and Princess Alice of Battenberg, and the second eldest sister of Prince Philip, Duke of Edinburgh."
+          ],
+          "relation_texts": [
+            "Princess Theodora of Greece and Denmark died on 16 October 1969.",
+            "link",
+            "16 OCTOBER 1969"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-597097692f20e40df9cda0a22b612180",
+            "hyperedge_name": "<hyperedge>\"Princess Theodora of Greece and Denmark died on 16 October 1969.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in Cyprus on 15 January 1249 during the Seventh Crusade.\"",
+        "branch": "semantic",
+        "raw_score": 0.4785091280937195,
+        "hyperedge_text": "He died in Cyprus on 15 January 1249 during the Seventh Crusade.",
+        "entity_ids": [
+          "\"CYPRUS\"",
+          "\"SEVENTH CRUSADE\""
+        ],
+        "chunk_ids": [
+          "chunk-a9b4df6aafd4d807d3acbaf608f2ae5b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died in Cyprus on 15 January 1249 during the Seventh Crusade.",
+            "Archambaud IX of Bourbon Archambaud IX of Bourbon( died 15 January 1249), called Le Jeune(\" The Young\"), was a ruler( sire) of Bourbonnais in the modern region of Auvergne, France. He was the son of Archambaud VIII of Bourbon. He married Yolande I, Countess of Nevers. They had: He died in Cyprus on 15 January 1249 during the Seventh Crusade."
+          ],
+          "relation_texts": [
+            "He died in Cyprus on 15 January 1249 during the Seventh Crusade.",
+            "link",
+            "CYPRUS",
+            "SEVENTH CRUSADE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e84b3ddbb7f3c45d097879a1fa5f2881",
+            "hyperedge_name": "<hyperedge>\"He died in Cyprus on 15 January 1249 during the Seventh Crusade.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople.\"",
+        "branch": "semantic",
+        "raw_score": 0.47009849548339844,
+        "hyperedge_text": "He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople.",
+        "entity_ids": [
+          "\"THEODOSIAN LAW CODE\"",
+          "\"THEODOSIAN WALLS\""
+        ],
+        "chunk_ids": [
+          "chunk-a90afa3973d6f9c9112eed98f652bdc4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople.",
+            "Theodosius II Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life, taking the throne as an infant in 402 and ruling as the Eastern Empire's sole emperor after the death of his father Arcadius in 408. He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople. He also presided over the outbreak of two great Christological controversies, Nestorianism and Eutychianism."
+          ],
+          "relation_texts": [
+            "He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople.",
+            "link",
+            "THEODOSIAN LAW CODE",
+            "THEODOSIAN WALLS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4d11d241228da102f68ff933cb14397f",
+            "hyperedge_name": "<hyperedge>\"He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodred II's tenure may also be connected to other notable figures in the church during that time.\"",
+        "branch": "semantic",
+        "raw_score": 0.4697970449924469,
+        "hyperedge_text": "Theodred II's tenure may also be connected to other notable figures in the church during that time.",
+        "entity_ids": [
+          "\"NOTABLE FIGURES\""
+        ],
+        "chunk_ids": [
+          "chunk-cd071c5fd6bf8548dcc1d826634087bd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Theodred II's tenure may also be connected to other notable figures in the church during that time.",
+            "Theodred II (Bishop of Elmham) Theodred II was a medieval Bishop of Elmham. The date of Theodred's consecration unknown, but the date of his death was sometime between 995 and 997."
+          ],
+          "relation_texts": [
+            "Theodred II's tenure may also be connected to other notable figures in the church during that time.",
+            "link",
+            "NOTABLE FIGURES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-230fc4fbae7ec33b983e0be2c26e26c9",
+            "hyperedge_name": "<hyperedge>\"Theodred II's tenure may also be connected to other notable figures in the church during that time.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.\"",
+        "hyperedge_text": "Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6650689840316772,
+        "fusion_score": 0.5330137968063355,
+        "entity_ids": [
+          "\"THRONE\"",
+          "\"EASTERN ROMAN EMPEROR\"",
+          "\"THEODOSIUS II\"",
+          "\"ARCADIUS\""
+        ],
+        "chunk_ids": [
+          "chunk-a90afa3973d6f9c9112eed98f652bdc4"
+        ],
+        "evidence_texts": [
+          "Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life.",
+          "Theodosius II Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life, taking the throne as an infant in 402 and ruling as the Eastern Empire's sole emperor after the death of his father Arcadius in 408. He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople. He also presided over the outbreak of two great Christological controversies, Nestorianism and Eutychianism."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.665069,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533014
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodosius II (10 April 401 – 28 July 450) is commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher.\"",
+        "hyperedge_text": "Theodosius II (10 April 401 – 28 July 450) is commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6789699792861938,
+        "fusion_score": 0.5357939958572389,
+        "entity_ids": [
+          "\"THEODOSIUS THE YOUNGER\"",
+          "\"THEODOSIUS THE CALLIGRAPHER\""
+        ],
+        "chunk_ids": [
+          "chunk-a90afa3973d6f9c9112eed98f652bdc4"
+        ],
+        "evidence_texts": [
+          "Theodosius II (10 April 401 – 28 July 450) is commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher.",
+          "Theodosius II Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life, taking the throne as an infant in 402 and ruling as the Eastern Empire's sole emperor after the death of his father Arcadius in 408. He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople. He also presided over the outbreak of two great Christological controversies, Nestorianism and Eutychianism."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.67897,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535794
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.\"",
+        "hyperedge_text": "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"LICINIA EUDOXIA\"",
+          "\"THEODOSIUS II\""
+        ],
+        "chunk_ids": [
+          "chunk-105617ad428eb1d455f63875d991d1dd"
+        ],
+        "evidence_texts": [
+          "Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.",
+          "Licinia Eudoxia Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II. Her husbands included the Western Roman Emperors Valentinian III and Petronius Maximus."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodosius II is known for his impact on legal codes and religious debates.\"",
+        "hyperedge_text": "Theodosius II is known for his impact on legal codes and religious debates.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6094125509262085,
+        "fusion_score": 0.5218825101852418,
+        "entity_ids": [
+          "\"IMPACT\""
+        ],
+        "chunk_ids": [
+          "chunk-a90afa3973d6f9c9112eed98f652bdc4"
+        ],
+        "evidence_texts": [
+          "Theodosius II is known for his impact on legal codes and religious debates.",
+          "Theodosius II Theodosius II (10 April 401 – 28 July 450), commonly surnamed Theodosius the Younger, or Theodosius the Calligrapher, was the Eastern Roman Emperor for most of his life, taking the throne as an infant in 402 and ruling as the Eastern Empire's sole emperor after the death of his father Arcadius in 408. He is mostly known for promulgating the Theodosian law code, and for the construction of the Theodosian Walls of Constantinople. He also presided over the outbreak of two great Christological controversies, Nestorianism and Eutychianism."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.609413,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.521883
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He then went into exile to Alexandria, Egypt, where he died and was buried the following year in Saint Catherines's Cathedral of Alexandria.\"",
+        "hyperedge_text": "He then went into exile to Alexandria, Egypt, where he died and was buried the following year in Saint Catherines's Cathedral of Alexandria.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.500438928604126,
+        "fusion_score": 0.5000877857208252,
+        "entity_ids": [
+          "\"EXILE\"",
+          "\"ALEXANDRIA\"",
+          "\"SAINT CATHERINE'S CATHEDRAL\""
+        ],
+        "chunk_ids": [
+          "chunk-ff567b5fc898ebd760fb22a84db96481"
+        ],
+        "evidence_texts": [
+          "He then went into exile to Alexandria, Egypt, where he died and was buried the following year in Saint Catherines's Cathedral of Alexandria.",
+          "Victor Emmanuel III of Italy Victor Emmanuel III (Vittorio Emanuele Ferdinando Maria Gennaro di Savoia; , , ; 11 November 1869 – 28 December 1947) was the King of Italy from 29 July 1900 until his abdication on 9 May 1946. In addition, he held the thrones of Ethiopia and Albania as Emperor of Ethiopia (1936–1943) and King of the Albanians (1939–1943). During his reign of nearly 46 years, which began after the assassination of his father Umberto I, the Kingdom of Italy became involved in two world wars. His reign also encompassed the birth, rise, and fall of Italian Fascism and its regime. During World War I, Victor Emmanuel III accepted the resignation of Prime Minister Paolo Boselli and named Vittorio Emanuele Orlando (the \"premier of victory\") in his place. Following the March on Rome, he appointed Benito Mussolini as Prime Minister and later deposed him in 1943 during World War II...."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.500439,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.500088
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,104 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Humphrey?",
+    "retrieval_question": "Who is the father of Humphrey?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of Humphrey?",
+      "retrieval_question": "Who is the father of Humphrey?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Humphrey"
+      ],
+      "relations": [
+        "father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Humphrey die?",
+    "retrieval_question": "Where did Humphrey Stafford, 1st Duke of Buckingham die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the father of Humphrey die?",
+      "retrieval_question": "Where did Humphrey Stafford, 1st Duke of Buckingham die?",
+      "whether_rewritten": true,
+      "replacement_span": "the father of Humphrey",
+      "replacement_answer": "Humphrey Stafford, 1st Duke of Buckingham",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the father of Humphrey",
+          "replacement_answer": "Humphrey Stafford, 1st Duke of Buckingham"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the father of Humphrey?",
+        "answer": "Humphrey Stafford, 1st Duke of Buckingham",
+        "confidence": 0.75,
+        "answer_type": "person",
+        "reasoning_summary": "Humphrey Stafford, 1st Duke of Buckingham, is identified as the father of Humphrey Stafford based on the evidence stating he was born to him and Lady Anne Neville.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Humphrey Stafford was born to Humphrey Stafford, 1st Duke of Buckingham and Lady Anne Neville.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"He was the grandson of Humphrey de Bohun, 4th Earl of Hereford by Elizabeth of Rhuddlan.\"",
+            "fusion_score": 0.5104004263877869,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "He was the grandson of Humphrey de Bohun, 4th Earl of Hereford by Elizabeth of Rhuddlan.",
+              "Humphrey de Bohun, 7th Earl of Hereford Humphrey de Bohun, 7th Earl of Hereford, 6th Earl of Essex, 2nd Earl of Northampton, KG( 25 March 1341 – 16 January 1373) was the son of William de Bohun, 1st Earl of Northampton and Elizabeth de Badlesmere, and grandson of Humphrey de Bohun, 4th Earl of Hereford by Elizabeth of Rhuddlan, daughter of King Edward I. He became heir to the Earldom of Hereford after the death of his childless uncle Humphrey de Bohun, 6th Earl of Hereford. Following King Peter I's visit to England, Humphrey participated in the sack of Alexandria in 1365. His wife and the mother of his daughters was Joan Fitzalan, daughter of Richard Fitzalan, 10th Earl of Arundel and Eleanor of Lancaster, whom he married after 9 September 1359. On his death, his great estates were divided between his two surviving daughters:"
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Captain Napier George Henry Sturt, 3rd Baron Alington (1 November 1896 – 17 September 1940) was a British peer, the son of Humphrey Sturt, 2nd Baron Alington.\"",
+            "fusion_score": 0.6000000000000001,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Captain Napier George Henry Sturt, 3rd Baron Alington (1 November 1896 – 17 September 1940) was a British peer, the son of Humphrey Sturt, 2nd Baron Alington.",
+              "Napier Sturt, 3rd Baron Alington Captain Napier George Henry Sturt, 3rd Baron Alington (1 November 1896 – 17 September 1940) was a British peer, the son of Humphrey Sturt, 2nd Baron Alington. He was born in November 1896 in St. Marylebone district of London. He succeeded to the Barony on 30 July 1919 on the death of his father. He owned the Crichel House estate in Dorset. He married Lady Mary Sibell Ashley-Cooper, daughter of Anthony Ashley-Cooper, 9th Earl of Shaftesbury, on 27 November 1928. They had one child: Hon. Mary Anna Sibell Elizabeth Sturt (b. 1929, d. 2010) who later fought the Government and won, leading to the resignation of a Minister, in the Crichel Down Affair. Alington may well be most notable for having dated Tallulah Bankhead in the 1920s. Alington was described as \"well cultivated, bisexual, with sensuous, meaty lips, a distant, antic charm, a history of mysteriou..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford (December 1402 – 10 July 1460), was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses.\"",
+            "fusion_score": 0.6000000000000001,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford (December 1402 – 10 July 1460), was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses.",
+              "Humphrey Stafford, 1st Duke of Buckingham Humphrey Stafford, 1st Duke of Buckingham, 6th Earl of Stafford, (December 1402 – 10 July 1460) was an English nobleman and a military commander in the Hundred Years' War and the Wars of the Roses. Through his mother he had royal descent from King Edward III, his great-grandfather, and from his father, he inherited, at an early age, the earldom of Stafford. By his marriage to a daughter of Ralph, Earl of Westmorland, Humphrey was related to the powerful Neville family and to many of the leading aristocratic houses of the time. He joined the English campaign in France with King Henry V in 1420 and following Henry V's death two years later he became a councillor for the new King, the nine-month-old Henry VI. Stafford acted as a peacemaker during the partisan, factional politics of the 1430s, when Humphrey, Duke of Gloucester, vied with Cardinal..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Humphrey Stafford, 1st Duke of Buckingham"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

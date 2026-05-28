@@ -1,0 +1,16 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the name of the wife of Juan Carlos Gumucio?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "Where does the wife of Juan Carlos Gumucio work?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  }
+]

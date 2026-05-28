@@ -1,0 +1,9 @@
+2026-05-27 04:54:01,525 | INFO | Generating atomic question DAG with DEPO.
+2026-05-27 04:55:17,438 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-27 04:55:17,438 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-27 04:55:29,806 | INFO | Starting HyperBranch pipeline for question: Where did Binyamin Ze'Ev Kahane's father die?
+2026-05-27 04:55:29,806 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-27 04:55:41,498 | INFO | Atomic retrieval returned 21 hits for question=Who is the father of Binyamin Ze'Ev Kahane?
+2026-05-27 04:55:46,825 | INFO | Rewrote retrieval question for q2: Where did the father of Binyamin Ze'Ev Kahane die? -> Where did Rabbi Meir Kahane die?
+2026-05-27 04:55:58,610 | INFO | Atomic retrieval returned 21 hits for question=Where did Rabbi Meir Kahane die?
+2026-05-27 04:56:28,060 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_045401_where-did-binyamin-ze-ev-kahane-s-father-die

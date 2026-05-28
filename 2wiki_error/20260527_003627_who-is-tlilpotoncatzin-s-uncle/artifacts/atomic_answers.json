@@ -1,0 +1,181 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the uncle of Tlilpotoncatzin?",
+    "analysis": {
+      "entities": [
+        "Tlilpotoncatzin"
+      ],
+      "relations": [
+        "is the uncle of"
+      ],
+      "relation_query": "who is the uncle of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second 'cihuacoatl' of Mexico-Tenochtitlan.\"",
+        "hyperedge_text": "Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second 'cihuacoatl' of Mexico-Tenochtitlan.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6436352729797363,
+        "fusion_score": 0.5287270545959473,
+        "entity_ids": [
+          "\"TLILPOTONCATZIN\"",
+          "\"MEXICO-TENOCHTITLAN\""
+        ],
+        "chunk_ids": [
+          "chunk-cde3891c82b4f51558496b9d1a64567d"
+        ],
+        "evidence_texts": [
+          "Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second 'cihuacoatl' of Mexico-Tenochtitlan.",
+          "Tlilpotoncatzin Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second \"cihuacoatlpresident\") of Mexico-Tenochtitlan. Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin. His father was a son of the second \"tlatoaniruler\" or \"king\") of Tenochtitlan, Huitzilihuitl. While Tlacaelel never became \"tlatoani\" himself, as \"cihuacoatl\" he played a significant role in the creation of the Aztec Empire. His mother was the daughter of Huehue Quetzalmacatzin, king of Itztlacozauhcan in Amaquemecan Chalco. Tlilpotoncatzin succeeded his father as \"cihuacoatl\" upon his death in the year 8 Reed (1487). According to the \"Crónica mexicayotl\" of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior. In battle he wore the \"quetzalpatzactli\", a crest of quetzal feathers. Tlilpotoncatzin took at least two wives, both from Amaquemecan..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.643635,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528727
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin.\"",
+        "hyperedge_text": "Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7150832414627075,
+        "fusion_score": 0.5430166482925416,
+        "entity_ids": [
+          "\"MAQUIZTZIN\"",
+          "\"TLACAELEL\""
+        ],
+        "chunk_ids": [
+          "chunk-cde3891c82b4f51558496b9d1a64567d"
+        ],
+        "evidence_texts": [
+          "Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin.",
+          "Tlilpotoncatzin Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second \"cihuacoatlpresident\") of Mexico-Tenochtitlan. Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin. His father was a son of the second \"tlatoaniruler\" or \"king\") of Tenochtitlan, Huitzilihuitl. While Tlacaelel never became \"tlatoani\" himself, as \"cihuacoatl\" he played a significant role in the creation of the Aztec Empire. His mother was the daughter of Huehue Quetzalmacatzin, king of Itztlacozauhcan in Amaquemecan Chalco. Tlilpotoncatzin succeeded his father as \"cihuacoatl\" upon his death in the year 8 Reed (1487). According to the \"Crónica mexicayotl\" of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior. In battle he wore the \"quetzalpatzactli\", a crest of quetzal feathers. Tlilpotoncatzin took at least two wives, both from Amaquemecan..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.715083,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.543017
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tlilpotoncatzin took at least two wives, both from Amaquemecan: Xiuhtoztzin, the daughter of Yaopaintzin, 'quauhtlatoani' of Tequanipan Huixtoco; and Quauhtlamiyahualtzin, a noblewoman from Acxotlan Cihuateopan.\"",
+        "hyperedge_text": "Tlilpotoncatzin took at least two wives, both from Amaquemecan: Xiuhtoztzin, the daughter of Yaopaintzin, 'quauhtlatoani' of Tequanipan Huixtoco; and Quauhtlamiyahualtzin, a noblewoman from Acxotlan Cihuateopan.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6262905597686768,
+        "fusion_score": 0.5252581119537354,
+        "entity_ids": [
+          "\"XIUHTOZTZIN\"",
+          "\"YAOPAINTZIN\"",
+          "\"QUAUHTLAMIYAHUALTZIN\""
+        ],
+        "chunk_ids": [
+          "chunk-cde3891c82b4f51558496b9d1a64567d"
+        ],
+        "evidence_texts": [
+          "Tlilpotoncatzin took at least two wives, both from Amaquemecan: Xiuhtoztzin, the daughter of Yaopaintzin, 'quauhtlatoani' of Tequanipan Huixtoco; and Quauhtlamiyahualtzin, a noblewoman from Acxotlan Cihuateopan.",
+          "Tlilpotoncatzin Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second \"cihuacoatlpresident\") of Mexico-Tenochtitlan. Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin. His father was a son of the second \"tlatoaniruler\" or \"king\") of Tenochtitlan, Huitzilihuitl. While Tlacaelel never became \"tlatoani\" himself, as \"cihuacoatl\" he played a significant role in the creation of the Aztec Empire. His mother was the daughter of Huehue Quetzalmacatzin, king of Itztlacozauhcan in Amaquemecan Chalco. Tlilpotoncatzin succeeded his father as \"cihuacoatl\" upon his death in the year 8 Reed (1487). According to the \"Crónica mexicayotl\" of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior. In battle he wore the \"quetzalpatzactli\", a crest of quetzal feathers. Tlilpotoncatzin took at least two wives, both from Amaquemecan..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.626291,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525258
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"According to the 'Crónica mexicayotl' of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior.\"",
+        "hyperedge_text": "According to the 'Crónica mexicayotl' of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6204190254211426,
+        "fusion_score": 0.5240838050842286,
+        "entity_ids": [
+          "\"CRÓNICA MEXICAYOTL\"",
+          "\"FERNANDO ALVARADO TEZOZOMOC\""
+        ],
+        "chunk_ids": [
+          "chunk-cde3891c82b4f51558496b9d1a64567d"
+        ],
+        "evidence_texts": [
+          "According to the 'Crónica mexicayotl' of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior.",
+          "Tlilpotoncatzin Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second \"cihuacoatlpresident\") of Mexico-Tenochtitlan. Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin. His father was a son of the second \"tlatoaniruler\" or \"king\") of Tenochtitlan, Huitzilihuitl. While Tlacaelel never became \"tlatoani\" himself, as \"cihuacoatl\" he played a significant role in the creation of the Aztec Empire. His mother was the daughter of Huehue Quetzalmacatzin, king of Itztlacozauhcan in Amaquemecan Chalco. Tlilpotoncatzin succeeded his father as \"cihuacoatl\" upon his death in the year 8 Reed (1487). According to the \"Crónica mexicayotl\" of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior. In battle he wore the \"quetzalpatzactli\", a crest of quetzal feathers. Tlilpotoncatzin took at least two wives, both from Amaquemecan..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.620419,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524084
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tlilpotoncatzin was often referred to by the term 'cihuacoatl', which translates to 'serpent woman' in Nahuatl.\"",
+        "hyperedge_text": "Tlilpotoncatzin was often referred to by the term 'cihuacoatl', which translates to 'serpent woman' in Nahuatl.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6172347068786621,
+        "fusion_score": 0.5234469413757324,
+        "entity_ids": [
+          "\"CIHUACOATL\""
+        ],
+        "chunk_ids": [
+          "chunk-cde3891c82b4f51558496b9d1a64567d"
+        ],
+        "evidence_texts": [
+          "Tlilpotoncatzin was often referred to by the term 'cihuacoatl', which translates to 'serpent woman' in Nahuatl.",
+          "Tlilpotoncatzin Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second \"cihuacoatlpresident\") of Mexico-Tenochtitlan. Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin. His father was a son of the second \"tlatoaniruler\" or \"king\") of Tenochtitlan, Huitzilihuitl. While Tlacaelel never became \"tlatoani\" himself, as \"cihuacoatl\" he played a significant role in the creation of the Aztec Empire. His mother was the daughter of Huehue Quetzalmacatzin, king of Itztlacozauhcan in Amaquemecan Chalco. Tlilpotoncatzin succeeded his father as \"cihuacoatl\" upon his death in the year 8 Reed (1487). According to the \"Crónica mexicayotl\" of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior. In battle he wore the \"quetzalpatzactli\", a crest of quetzal feathers. Tlilpotoncatzin took at least two wives, both from Amaquemecan..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.617235,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523447
+        }
+      }
+    ],
+    "answer": "Tlacaelel",
+    "confidence": 0.75,
+    "reasoning_summary": "Tlilpotoncatzin is identified as the second son of Tlacaelel, which implies that Tlacaelel is his father and thus his uncle would be a brother of Tlacaelel. However, the evidence does not provide the name of Tlacaelel's brother, leading to some uncertainty.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin.\""
+    ]
+  }
+]

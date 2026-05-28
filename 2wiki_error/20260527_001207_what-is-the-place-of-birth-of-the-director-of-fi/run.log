@@ -1,0 +1,9 @@
+2026-05-27 00:12:07,620 | INFO | Generating atomic question DAG with DEPO.
+2026-05-27 00:13:45,412 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-27 00:13:45,413 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-27 00:14:00,608 | INFO | Starting HyperBranch pipeline for question: What is the place of birth of the director of film God Of War (Film)?
+2026-05-27 00:14:00,609 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-27 00:14:05,163 | INFO | Atomic retrieval returned 24 hits for question=Who is the director of God Of War?
+2026-05-27 00:14:10,367 | INFO | Rewrote retrieval question for q2: What is the birth place of the director of God Of War? -> What is the birth place of Cory Barlog?
+2026-05-27 00:14:18,105 | INFO | Atomic retrieval returned 22 hits for question=What is the birth place of Cory Barlog?
+2026-05-27 00:14:56,398 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_001207_what-is-the-place-of-birth-of-the-director-of-fi

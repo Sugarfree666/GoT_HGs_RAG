@@ -1,0 +1,178 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Destination: Dewsbury?",
+    "retrieval_question": "Who is the director of Destination: Dewsbury?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Destination: Dewsbury?",
+      "retrieval_question": "Who is the director of Destination: Dewsbury?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Destination: Dewsbury"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the cause of death of the director of Destination: Dewsbury?",
+    "retrieval_question": "What is the cause of death of Jack Spring?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the cause of death of the director of Destination: Dewsbury?",
+      "retrieval_question": "What is the cause of death of Jack Spring?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Destination: Dewsbury",
+      "replacement_answer": "Jack Spring",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Destination: Dewsbury",
+          "replacement_answer": "Jack Spring"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Destination: Dewsbury?",
+        "answer": "Jack Spring",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Destination: Dewsbury is directed by Jack Spring.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Destination: Dewsbury is directed by Jack Spring.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Destination: Dewsbury is a 2018 British comedy film directed by Jack Spring.\"",
+            "fusion_score": 0.5405991315841675,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Destination: Dewsbury is a 2018 British comedy film directed by Jack Spring.",
+              "Destination: Dewsbury Destination : Dewsbury is a 2018 British comedy film directed by Jack Spring."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Destination: Dewsbury is directed by Jack Spring.\"",
+            "fusion_score": 0.9452354907989502,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Destination: Dewsbury is directed by Jack Spring.",
+              "Destination: Dewsbury Destination : Dewsbury is a 2018 British comedy film directed by Jack Spring."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Destination: Dewsbury is a 2018 British comedy film.\"",
+            "fusion_score": 0.5358393669128418,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Destination: Dewsbury is a 2018 British comedy film.",
+              "Destination: Dewsbury Destination : Dewsbury is a 2018 British comedy film directed by Jack Spring."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Jack Spring"
+      ],
+      "relations": [
+        "cause of death"
+      ],
+      "relation_query": "What is the cause of death of a person?",
+      "answer_type": "short phrase"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the cause of death of the director of Destination: Dewsbury?",
+    "retrieval_question": "What is the cause of death of the director of Destination: Dewsbury?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the cause of death of the director of Destination: Dewsbury?",
+      "retrieval_question": "What is the cause of death of the director of Destination: Dewsbury?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "What is the cause of death of the director of Destination: Dewsbury?",
+        "answer": "pneumonia",
+        "confidence": 0.75,
+        "answer_type": "short phrase",
+        "reasoning_summary": "The evidence states that 'His death was attributed to pneumonia,' which is likely relevant to the director Jack Spring, although it is not explicitly confirmed that this refers to him.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"His death was attributed to pneumonia.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"His death was attributed to pneumonia.\"",
+            "fusion_score": 0.25242998600006106,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "His death was attributed to pneumonia.",
+              "Prince Joseph Ferdinand of Saxe-Coburg and Gotha Prince Joseph Ferdinand of Saxe- Coburg and Gotha( full name\" Joseph Ferdinand Maria Michael Gabriel Raphael Gonzaga\"; 21 May 1869 – 13 August 1888), known in Brazil as Dom José Fernando, was a prince of the House of Saxe- Coburg and Gotha- Koháry. Born in Leopoldina Palace, Rio de Janeiro, he was the third son of Prince Ludwig August of Saxe- Coburg and Gotha and his wife Princess Leopoldina of Brazil. He died of pneumonia in Wiener Neustadt and is buried at St. Augustin, Coburg."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"He died from a cardiac arrest on March 24, 2019.\"",
+            "fusion_score": 0.2389800548553467,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "He died from a cardiac arrest on March 24, 2019.",
+              "Reynaldo Aguinaldo Reynaldo B. Aguinaldo( born September 28, 1946 – March 24, 2019) was a Filipino politician who served as mayor of Kawit, Cavite from 2007 to 2016. He had previously served as vice mayor for three consecutive terms, from 1998 to 2007. Aguinaldo was a grandson( son of Emilio Aguinaldo, Jr) of Emilio Aguinaldo, the first President of the Philippines. He died from a cardiac arrest on March 24, 2019."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Destination: Dewsbury is a 2018 British comedy film directed by Jack Spring.\"",
+            "fusion_score": 0.5,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Destination: Dewsbury is a 2018 British comedy film directed by Jack Spring.",
+              "Destination: Dewsbury Destination : Dewsbury is a 2018 British comedy film directed by Jack Spring."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Destination: Dewsbury",
+        "Jack Spring"
+      ],
+      "relations": [
+        "cause of death"
+      ],
+      "relation_query": "What is the cause of death of the director of a work?",
+      "answer_type": "short phrase"
+    }
+  }
+]

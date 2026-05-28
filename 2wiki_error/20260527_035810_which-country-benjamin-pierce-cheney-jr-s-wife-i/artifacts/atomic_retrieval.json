@@ -1,0 +1,1562 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the name of Benjamin Pierce Cheney Jr.'s wife?",
+    "retrieval_question": "What is the name of Benjamin Pierce Cheney Jr.'s wife?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the name of Benjamin Pierce Cheney Jr.'s wife?",
+      "retrieval_question": "What is the name of Benjamin Pierce Cheney Jr.'s wife?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+        "entity_ids": [
+          "\"BENJAMIN PIERCE CHENEY JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+            "link",
+            "BENJAMIN PIERCE CHENEY JR."
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.\"",
+        "branch": "relation",
+        "raw_score": 0.5057476758956909,
+        "hyperedge_text": "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+        "entity_ids": [
+          "\"MORGANATIC MARRIAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-0092baaf76dc583f3ca640f254f9f6cc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+            "Maria Chiara Spinucci Maria Chiara Spinucci( 1741–1792), was an Italian aristocrat, courtier of Duchess Maria Antonia of Bavaria and the morganatic spouse of Prince Francis Xavier of Saxony."
+          ],
+          "relation_texts": [
+            "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+            "link",
+            "MORGANATIC MARRIAGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-44cf4f5245a347aec5ae9c32df739078",
+            "hyperedge_name": "<hyperedge>\"Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maria Teresa is the spouse of Grand Duke Henri.\"",
+        "branch": "relation",
+        "raw_score": 0.44231846928596497,
+        "hyperedge_text": "Maria Teresa is the spouse of Grand Duke Henri.",
+        "entity_ids": [
+          "\"SPOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-e35022991097fdd609155ded14b2d96b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maria Teresa is the spouse of Grand Duke Henri.",
+            "Maria Teresa, Grand Duchess of Luxembourg Maria Teresa, Grand Duchess of Luxembourg( born María Teresa Mestre y Batista; on 22 March 1956), is the spouse of Grand Duke Henri."
+          ],
+          "relation_texts": [
+            "Maria Teresa is the spouse of Grand Duke Henri.",
+            "link",
+            "SPOUSE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b79087ec707525ef62aacd868c640e1b",
+            "hyperedge_name": "<hyperedge>\"Maria Teresa is the spouse of Grand Duke Henri.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the husband of Pratibha Patil.\"",
+        "branch": "relation",
+        "raw_score": 0.4414861798286438,
+        "hyperedge_text": "He is the husband of Pratibha Patil.",
+        "entity_ids": [
+          "\"PRATIBHA PATIL\""
+        ],
+        "chunk_ids": [
+          "chunk-ffbdea53ddd08af0ec051afd0804d4fc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the husband of Pratibha Patil.",
+            "Devisingh Ransingh Shekhawat Devisingh Ransingh Shekhawat is the former and first First Gentleman of India as the husband of Pratibha Patil."
+          ],
+          "relation_texts": [
+            "He is the husband of Pratibha Patil.",
+            "link",
+            "PRATIBHA PATIL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-652b38e2ca76c243866d87632dc1bc9f",
+            "hyperedge_name": "<hyperedge>\"He is the husband of Pratibha Patil.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the uncle of, whose husband is.\"",
+        "branch": "relation",
+        "raw_score": 0.43723902106285095,
+        "hyperedge_text": "He is also the uncle of, whose husband is.",
+        "entity_ids": [
+          "\"HUSBAND\"",
+          "\"UNCLE\"",
+          "\"NEPHEW/NIECE\""
+        ],
+        "chunk_ids": [
+          "chunk-ab4fd963a6e1bb18c7ff575cca5ddd08"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is also the uncle of, whose husband is.",
+            "Andrzej Gawroński (actor) Andrzej Gawroński( born 10 February 1935 in Warsaw, Poland) is a Polish film and theatre actor. He is the brother of the late actor. He is also the uncle of, whose husband is."
+          ],
+          "relation_texts": [
+            "He is also the uncle of, whose husband is.",
+            "link",
+            "HUSBAND",
+            "UNCLE",
+            "NEPHEW/NIECE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a679e373fd231056e13421459e53e0cd",
+            "hyperedge_name": "<hyperedge>\"He is also the uncle of, whose husband is.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maryam Rajavi is now the spouse of Massoud Rajavi.\"",
+        "branch": "relation",
+        "raw_score": 0.4369855523109436,
+        "hyperedge_text": "Maryam Rajavi is now the spouse of Massoud Rajavi.",
+        "entity_ids": [
+          "\"SPOUSE OF MASSOUD RAJAVI\""
+        ],
+        "chunk_ids": [
+          "chunk-bcc25aab891d91cd91b0922f44d42c9a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Maryam Rajavi is now the spouse of Massoud Rajavi.",
+            "Mehdi Abrishamchi Mehdi Abrishamchi is an Iranian People's Mujahedin of Iran( MEK) politician who has been described as\" the right hand man of Massoud Rajavi\". He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi."
+          ],
+          "relation_texts": [
+            "Maryam Rajavi is now the spouse of Massoud Rajavi.",
+            "link",
+            "SPOUSE OF MASSOUD RAJAVI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b9d30f6b45503435670321bb1cebee75",
+            "hyperedge_name": "<hyperedge>\"Maryam Rajavi is now the spouse of Massoud Rajavi.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His wife's name is unknown, but she was likely from the family of the Poitiers.\"",
+        "branch": "relation",
+        "raw_score": 0.43370145559310913,
+        "hyperedge_text": "His wife's name is unknown, but she was likely from the family of the Poitiers.",
+        "entity_ids": [
+          "\"WIFE\""
+        ],
+        "chunk_ids": [
+          "chunk-3e4bed6ab4da378c38588402a4941c0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His wife's name is unknown, but she was likely from the family of the Poitiers.",
+            "Gilbert of Roucy Gilbert( also Giselbert or Gislebert), Count of Reims& Roucy, was the son of Renaud, Count of Reims and Alberade of Lorraine, daughter of Gilbert, Duke of Lorraine. Although his wife's name is unknown, she was likely from the family of the Poitiers. He was Count of Roucy from 967 until his death, and Viscount of Reims. He was probably still a child when his father died. He inherited the County of Roucy from his father, but the County of Reims was entrusted to Herbert “ le Vieux ” III of Osmois. Later, Eudes I, Count of Blois, and the successor to Herbert le Vieux, entrusted Giselbert with the Viscouncy of Reims. In 987, upon the death of King Louis V, Giselbert rallied without difficulty to his successor Hugh Capet, but nevertheless agreed to take an oath of allegiance in 990 to Charles of Lorraine, when the latter pressed his claims to the throne. He died on April 19..."
+          ],
+          "relation_texts": [
+            "His wife's name is unknown, but she was likely from the family of the Poitiers.",
+            "link",
+            "WIFE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3657ec8dcd06eb6c89fe439be6dc012c",
+            "hyperedge_name": "<hyperedge>\"His wife's name is unknown, but she was likely from the family of the Poitiers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.\"",
+        "branch": "relation",
+        "raw_score": 0.4307270050048828,
+        "hyperedge_text": "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+        "entity_ids": [
+          "\"SPOUSE\"",
+          "\"DIVORCE\""
+        ],
+        "chunk_ids": [
+          "chunk-bcc25aab891d91cd91b0922f44d42c9a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+            "Mehdi Abrishamchi Mehdi Abrishamchi is an Iranian People's Mujahedin of Iran( MEK) politician who has been described as\" the right hand man of Massoud Rajavi\". He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi."
+          ],
+          "relation_texts": [
+            "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+            "link",
+            "SPOUSE",
+            "DIVORCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-813b98a1ef692af07f9f193554c67846",
+            "hyperedge_name": "<hyperedge>\"He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The marriage occurred on 18 July 1546 as his second wife.\"",
+        "branch": "relation",
+        "raw_score": 0.42993271350860596,
+        "hyperedge_text": "The marriage occurred on 18 July 1546 as his second wife.",
+        "entity_ids": [
+          "\"SECOND WIFE\""
+        ],
+        "chunk_ids": [
+          "chunk-0e977299f5de871c26d60e6802fd09fb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The marriage occurred on 18 July 1546 as his second wife.",
+            "Maria of Austria, Duchess of Jülich-Cleves-Berg Archduchess Maria of Austria (15 May 1531 – 11 December 1581) was the daughter of Emperor Ferdinand I from the House of Habsburg and Anna Jagiello. She married William, Duke of Jülich-Cleves-Berg on 18 July 1546 as his second wife. Their children were:"
+          ],
+          "relation_texts": [
+            "The marriage occurred on 18 July 1546 as his second wife.",
+            "link",
+            "SECOND WIFE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b5bb953c9b9e5ec842005b58380b4f02",
+            "hyperedge_name": "<hyperedge>\"The marriage occurred on 18 July 1546 as his second wife.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.\"",
+        "branch": "relation",
+        "raw_score": 0.42774397134780884,
+        "hyperedge_text": "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+        "entity_ids": [
+          "\"POLITICAL INFLUENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-5bda47c753bf133f277d071017097db0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+            "Amalia of Solms-Braunfels Amalia of Solms- Braunfels( 31 August 1602, Braunfels – 8 September 1675, The Hague), was Princess consort of Orange by marriage to Frederick Henry, Prince of Orange. She acted as the political adviser of her spouse during his reign, and acted as his de facto deputy and regent during his infirmity from 1640 – 47. She also served as chair of the regency council during the minority of her grandson William III, Prince of Orange from 1650 until 1672. She was the daughter of count John Albert I of Solms- Braunfels and countess Agnes of Sayn- Wittgenstein."
+          ],
+          "relation_texts": [
+            "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+            "link",
+            "POLITICAL INFLUENCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cb438ea26c41c09c3379943cb8558715",
+            "hyperedge_name": "<hyperedge>\"She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is the spouse of Euclid Tsakalotos, former Greek Minister of Finance.\"",
+        "branch": "relation",
+        "raw_score": 0.4272124171257019,
+        "hyperedge_text": "She is the spouse of Euclid Tsakalotos, former Greek Minister of Finance.",
+        "entity_ids": [
+          "\"EUCLID TSAKALOTOS\"",
+          "\"GREEK MINISTER OF FINANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-56bb73568ef1188b68a1d504f7b4a5cc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She is the spouse of Euclid Tsakalotos, former Greek Minister of Finance.",
+            "Heather D. Gibson Heather Denise Gibson is a Scottish economist currently serving as Director- Advisor to the Bank of Greece( since 2011). She is the spouse of Euclid Tsakalotos, former Greek Minister of Finance."
+          ],
+          "relation_texts": [
+            "She is the spouse of Euclid Tsakalotos, former Greek Minister of Finance.",
+            "link",
+            "EUCLID TSAKALOTOS",
+            "GREEK MINISTER OF FINANCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-afcb1af208ec1c452e13fddce4e15ca7",
+            "hyperedge_name": "<hyperedge>\"She is the spouse of Euclid Tsakalotos, former Greek Minister of Finance.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The youngest child of Benjamin Pierce Cheney was Cheney Jr., who was born on April 8, 1866.\"",
+        "branch": "semantic",
+        "raw_score": 0.7205467820167542,
+        "hyperedge_text": "The youngest child of Benjamin Pierce Cheney was Cheney Jr., who was born on April 8, 1866.",
+        "entity_ids": [
+          "\"YOUNGEST CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The youngest child of Benjamin Pierce Cheney was Cheney Jr., who was born on April 8, 1866.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "The youngest child of Benjamin Pierce Cheney was Cheney Jr., who was born on April 8, 1866.",
+            "link",
+            "YOUNGEST CHILD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c538b23dbe557e0dc20f9225da8048e9",
+            "hyperedge_name": "<hyperedge>\"The youngest child of Benjamin Pierce Cheney was Cheney Jr., who was born on April 8, 1866.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.\"",
+        "branch": "semantic",
+        "raw_score": 0.6959821581840515,
+        "hyperedge_text": "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+        "entity_ids": [
+          "\"BENJAMIN PIERCE CHENEY JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+            "link",
+            "BENJAMIN PIERCE CHENEY JR."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4d6840a3495bcafd3db68469e169b295",
+            "hyperedge_name": "<hyperedge>\"Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cheney was the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney, who both were influential figures in his life.\"",
+        "branch": "semantic",
+        "raw_score": 0.6772537231445312,
+        "hyperedge_text": "Cheney was the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney, who both were influential figures in his life.",
+        "entity_ids": [
+          "\"INFLUENTIAL FIGURES\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Cheney was the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney, who both were influential figures in his life.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "Cheney was the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney, who both were influential figures in his life.",
+            "link",
+            "INFLUENTIAL FIGURES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e0614e2bf5db8b67d8082dae07b82a70",
+            "hyperedge_name": "<hyperedge>\"Cheney was the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney, who both were influential figures in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney was born on August 12, 1815.\"",
+        "branch": "semantic",
+        "raw_score": 0.6695176362991333,
+        "hyperedge_text": "Benjamin Pierce Cheney was born on August 12, 1815.",
+        "entity_ids": [
+          "\"AUGUST 12, 1815\"",
+          "\"BENJAMIN PIERCE CHENEY\""
+        ],
+        "chunk_ids": [
+          "chunk-5c9258c4630d6381e95add20f61897e1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Pierce Cheney was born on August 12, 1815.",
+            "Benjamin Pierce Cheney Benjamin Pierce Cheney( August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express."
+          ],
+          "relation_texts": [
+            "Benjamin Pierce Cheney was born on August 12, 1815.",
+            "link",
+            "AUGUST 12, 1815",
+            "BENJAMIN PIERCE CHENEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-825d3b29f2b210e1b7ca3dbbbd8120ff",
+            "hyperedge_name": "<hyperedge>\"Benjamin Pierce Cheney was born on August 12, 1815.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney.\"",
+        "branch": "semantic",
+        "raw_score": 0.6576673984527588,
+        "hyperedge_text": "Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney.",
+        "entity_ids": [
+          "\"BOSTON\"",
+          "\"ELIZABETH STICKNEY (CLAPP) CHENEY\"",
+          "\"BENJAMIN PIERCE CHENEY\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney.",
+            "link",
+            "BOSTON",
+            "ELIZABETH STICKNEY (CLAPP) CHENEY",
+            "BENJAMIN PIERCE CHENEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c6a86368cb82defbafa0a4659ab69bd3",
+            "hyperedge_name": "<hyperedge>\"Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney died on July 23, 1895.\"",
+        "branch": "semantic",
+        "raw_score": 0.6303117275238037,
+        "hyperedge_text": "Benjamin Pierce Cheney died on July 23, 1895.",
+        "entity_ids": [
+          "\"BUSINESSMAN\"",
+          "\"JULY 23, 1895\""
+        ],
+        "chunk_ids": [
+          "chunk-5c9258c4630d6381e95add20f61897e1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Pierce Cheney died on July 23, 1895.",
+            "Benjamin Pierce Cheney Benjamin Pierce Cheney( August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express."
+          ],
+          "relation_texts": [
+            "Benjamin Pierce Cheney died on July 23, 1895.",
+            "link",
+            "BUSINESSMAN",
+            "JULY 23, 1895"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-11e208d54d55e869df6b61d7a7d3f774",
+            "hyperedge_name": "<hyperedge>\"Benjamin Pierce Cheney died on July 23, 1895.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney (August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express.\"",
+        "branch": "semantic",
+        "raw_score": 0.5893242955207825,
+        "hyperedge_text": "Benjamin Pierce Cheney (August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express.",
+        "entity_ids": [
+          "\"BUSINESSMAN\"",
+          "\"FOUNDER\"",
+          "\"AMERICAN EXPRESS\"",
+          "\"AUGUST 12, 1815\"",
+          "\"JULY 23, 1895\"",
+          "\"BENJAMIN PIERCE CHENEY\""
+        ],
+        "chunk_ids": [
+          "chunk-5c9258c4630d6381e95add20f61897e1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Pierce Cheney (August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express.",
+            "Benjamin Pierce Cheney Benjamin Pierce Cheney( August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express."
+          ],
+          "relation_texts": [
+            "Benjamin Pierce Cheney (August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express.",
+            "link",
+            "BUSINESSMAN",
+            "FOUNDER",
+            "AMERICAN EXPRESS",
+            "AUGUST 12, 1815",
+            "JULY 23, 1895",
+            "BENJAMIN PIERCE CHENEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-804b595d4f3e279620774dad026e4093",
+            "hyperedge_name": "<hyperedge>\"Benjamin Pierce Cheney (August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a young man Cheney had taken part in amateur theatricals, and after his marriage he financed a number of professional productions, including a number that starred his wife at venues in Boston, New York City and elsewhere in the Northeast.\"",
+        "branch": "semantic",
+        "raw_score": 0.5761009454727173,
+        "hyperedge_text": "As a young man Cheney had taken part in amateur theatricals, and after his marriage he financed a number of professional productions, including a number that starred his wife at venues in Boston, New York City and elsewhere in the Northeast.",
+        "entity_ids": [
+          "\"NEW YORK CITY\"",
+          "\"AMATEUR THEATRICALS\"",
+          "\"PROFESSIONAL PRODUCTIONS\"",
+          "\"VENUES IN BOSTON\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a young man Cheney had taken part in amateur theatricals, and after his marriage he financed a number of professional productions, including a number that starred his wife at venues in Boston, New York City and elsewhere in the Northeast.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "As a young man Cheney had taken part in amateur theatricals, and after his marriage he financed a number of professional productions, including a number that starred his wife at venues in Boston, New York City and elsewhere in the Northeast.",
+            "link",
+            "NEW YORK CITY",
+            "AMATEUR THEATRICALS",
+            "PROFESSIONAL PRODUCTIONS",
+            "VENUES IN BOSTON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-177efee9855c8c4845374196fa006bc2",
+            "hyperedge_name": "<hyperedge>\"As a young man Cheney had taken part in amateur theatricals, and after his marriage he financed a number of professional productions, including a number that starred his wife at venues in Boston, New York City and elsewhere in the Northeast.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The legacy of Cheney and his wife is preserved through their contributions to business and the arts, making them notable figures in history.\"",
+        "branch": "semantic",
+        "raw_score": 0.5212967395782471,
+        "hyperedge_text": "The legacy of Cheney and his wife is preserved through their contributions to business and the arts, making them notable figures in history.",
+        "entity_ids": [
+          "\"LEGACY\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The legacy of Cheney and his wife is preserved through their contributions to business and the arts, making them notable figures in history.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "The legacy of Cheney and his wife is preserved through their contributions to business and the arts, making them notable figures in history.",
+            "link",
+            "LEGACY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1751b76b10dfcfa0dc63db239d2220d0",
+            "hyperedge_name": "<hyperedge>\"The legacy of Cheney and his wife is preserved through their contributions to business and the arts, making them notable figures in history.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce.\"",
+        "branch": "semantic",
+        "raw_score": 0.47637462615966797,
+        "hyperedge_text": "He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce.",
+        "entity_ids": [
+          "\"NEW HAMPSHIRE GOVERNOR BENJAMIN PIERCE\"",
+          "\"PRESIDENT FRANKLIN PIERCE\""
+        ],
+        "chunk_ids": [
+          "chunk-8eee7f4b2e756525bc8d4d6deb1e22c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce.",
+            "Benjamin Kendrick Pierce Benjamin Kendrick Pierce (August 29, 1790 – April 1, 1850) was a career officer in the United States Army. He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce. Benjamin K. Pierce was a veteran of the War of 1812, the Second Seminole War, and the Mexican–American War, and rose to the rank of Lieutenant Colonel in the Army and Colonel in the Florida Militia."
+          ],
+          "relation_texts": [
+            "He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce.",
+            "link",
+            "NEW HAMPSHIRE GOVERNOR BENJAMIN PIERCE",
+            "PRESIDENT FRANKLIN PIERCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cbb4d03cedd371d8572807e1a161ca53",
+            "hyperedge_name": "<hyperedge>\"He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.\"",
+        "hyperedge_text": "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6959821581840515,
+        "fusion_score": 0.5391964316368103,
+        "entity_ids": [
+          "\"BENJAMIN PIERCE CHENEY JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "evidence_texts": [
+          "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+          "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.695982,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.539196
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His wife's name is unknown, but she was likely from the family of the Poitiers.\"",
+        "hyperedge_text": "His wife's name is unknown, but she was likely from the family of the Poitiers.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43370145559310913,
+        "semantic_score": 0.42857142857142855,
+        "fusion_score": 0.25919486795152935,
+        "entity_ids": [
+          "\"WIFE\""
+        ],
+        "chunk_ids": [
+          "chunk-3e4bed6ab4da378c38588402a4941c0a"
+        ],
+        "evidence_texts": [
+          "His wife's name is unknown, but she was likely from the family of the Poitiers.",
+          "Gilbert of Roucy Gilbert( also Giselbert or Gislebert), Count of Reims& Roucy, was the son of Renaud, Count of Reims and Alberade of Lorraine, daughter of Gilbert, Duke of Lorraine. Although his wife's name is unknown, she was likely from the family of the Poitiers. He was Count of Roucy from 967 until his death, and Viscount of Reims. He was probably still a child when his father died. He inherited the County of Roucy from his father, but the County of Reims was entrusted to Herbert “ le Vieux ” III of Osmois. Later, Eudes I, Count of Blois, and the successor to Herbert le Vieux, entrusted Giselbert with the Viscouncy of Reims. In 987, upon the death of King Louis V, Giselbert rallied without difficulty to his successor Hugh Capet, but nevertheless agreed to take an oath of allegiance in 990 to Charles of Lorraine, when the latter pressed his claims to the throne. He died on April 19..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.433701,
+          "S": 0.428571,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.259195
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.\"",
+        "hyperedge_text": "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5057476758956909,
+        "semantic_score": 0.14285714285714285,
+        "fusion_score": 0.23087049892970496,
+        "entity_ids": [
+          "\"MORGANATIC MARRIAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-0092baaf76dc583f3ca640f254f9f6cc"
+        ],
+        "evidence_texts": [
+          "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+          "Maria Chiara Spinucci Maria Chiara Spinucci( 1741–1792), was an Italian aristocrat, courtier of Duchess Maria Antonia of Bavaria and the morganatic spouse of Prince Francis Xavier of Saxony."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.505748,
+          "S": 0.142857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.23087
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Maryam Rajavi is now the spouse of Massoud Rajavi.\"",
+        "hyperedge_text": "Maryam Rajavi is now the spouse of Massoud Rajavi.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4369855523109436,
+        "semantic_score": 0.14285714285714285,
+        "fusion_score": 0.20336564949580604,
+        "entity_ids": [
+          "\"SPOUSE OF MASSOUD RAJAVI\""
+        ],
+        "chunk_ids": [
+          "chunk-bcc25aab891d91cd91b0922f44d42c9a"
+        ],
+        "evidence_texts": [
+          "Maryam Rajavi is now the spouse of Massoud Rajavi.",
+          "Mehdi Abrishamchi Mehdi Abrishamchi is an Iranian People's Mujahedin of Iran( MEK) politician who has been described as\" the right hand man of Massoud Rajavi\". He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.436986,
+          "S": 0.142857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.203366
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.\"",
+        "hyperedge_text": "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4307270050048828,
+        "semantic_score": 0.14285714285714285,
+        "fusion_score": 0.2008622305733817,
+        "entity_ids": [
+          "\"SPOUSE\"",
+          "\"DIVORCE\""
+        ],
+        "chunk_ids": [
+          "chunk-bcc25aab891d91cd91b0922f44d42c9a"
+        ],
+        "evidence_texts": [
+          "He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi.",
+          "Mehdi Abrishamchi Mehdi Abrishamchi is an Iranian People's Mujahedin of Iran( MEK) politician who has been described as\" the right hand man of Massoud Rajavi\". He is the former spouse of the group's current leader, Maryam Rajavi, whom he divorced so that she could become the spouse of Massoud Rajavi."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.430727,
+          "S": 0.142857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.200862
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What country is the wife of Benjamin Pierce Cheney Jr. from?",
+    "retrieval_question": "What country is the wife of Benjamin Pierce Cheney Jr. from?",
+    "dependency_question_rewrite": {
+      "original_question": "What country is the wife of Benjamin Pierce Cheney Jr. from?",
+      "retrieval_question": "What country is the wife of Benjamin Pierce Cheney Jr. from?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+        "entity_ids": [
+          "\"BENJAMIN PIERCE CHENEY JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+            "link",
+            "BENJAMIN PIERCE CHENEY JR."
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He completed his studies at Poitiers in 1695 to 1699.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "He completed his studies at Poitiers in 1695 to 1699.",
+        "entity_ids": [
+          "\"POITIERS\""
+        ],
+        "chunk_ids": [
+          "chunk-f444b5b5cfead58afde3a4626557c6ca"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He completed his studies at Poitiers in 1695 to 1699.",
+            "Jean-Baptiste Chardon Jean- Baptiste Chardon( April 27, 1672( some sources say April 27, 1671) in Bordeaux, France – April 11, 1743 in Quebec City) was a French Jesuit missionary to the Indians in Canada and in Louisiana territory. Chardon entered the noviciate in the Society of Jesus at Bordeaux on September 7, 1687. He studied at Pau in 1689 and 1690 and taught at the Jesuit college in La Rochelle from 1690 to 1695. He completed his studies at Poitiers in 1695 to 1699. He arrived in New France( Canada) in summer 1699 and learned amerindian languages until the end of that year. In 1700 he traveled to the Saguenay country. He soon was named missionary to the Ottawa. In the following year he joined the western mission headquartered at Mackinac, although he traveled widely. He visited the Foxes, Menominees, Mascoutens, Kickapoos, Ottawas, Potawatomis, and Miamis. In September 1701 he we..."
+          ],
+          "relation_texts": [
+            "He completed his studies at Poitiers in 1695 to 1699.",
+            "link",
+            "POITIERS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"An American who has spent a good part of his life out of America, and married to a European.\"",
+        "branch": "relation",
+        "raw_score": 0.4858328104019165,
+        "hyperedge_text": "An American who has spent a good part of his life out of America, and married to a European.",
+        "entity_ids": [
+          "\"AMERICAN\"",
+          "\"EUROPE\""
+        ],
+        "chunk_ids": [
+          "chunk-e6f23bf81c27b80e22e1ebf954301254"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "An American who has spent a good part of his life out of America, and married to a European.",
+            "Carl Haber Carl Haber( born 1956) is an American filmmaker and professor of film. Haber has had a career as a writer, director and producer in independent film. An American who has spent a good part of his life out of America, and married to a European, he is also a professor of film courses and has recently founded the Rome International Film School."
+          ],
+          "relation_texts": [
+            "An American who has spent a good part of his life out of America, and married to a European.",
+            "link",
+            "AMERICAN",
+            "EUROPE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1cffbd9b8d9e19154a36e4b8ad104157",
+            "hyperedge_name": "<hyperedge>\"An American who has spent a good part of his life out of America, and married to a European.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His marriage to a European reflects his international lifestyle.\"",
+        "branch": "relation",
+        "raw_score": 0.46126919984817505,
+        "hyperedge_text": "His marriage to a European reflects his international lifestyle.",
+        "entity_ids": [
+          "\"MARRIAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-e6f23bf81c27b80e22e1ebf954301254"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His marriage to a European reflects his international lifestyle.",
+            "Carl Haber Carl Haber( born 1956) is an American filmmaker and professor of film. Haber has had a career as a writer, director and producer in independent film. An American who has spent a good part of his life out of America, and married to a European, he is also a professor of film courses and has recently founded the Rome International Film School."
+          ],
+          "relation_texts": [
+            "His marriage to a European reflects his international lifestyle.",
+            "link",
+            "MARRIAGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2b0df75ae9460bb78dcd9f9d417aff13",
+            "hyperedge_name": "<hyperedge>\"His marriage to a European reflects his international lifestyle.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent.\"",
+        "branch": "relation",
+        "raw_score": 0.41920197010040283,
+        "hyperedge_text": "A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent.",
+        "entity_ids": [
+          "\"FOREIGN PARENT\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent.",
+            "link",
+            "FOREIGN PARENT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6c0bc0a563df70c0169b488ab2f04916",
+            "hyperedge_name": "<hyperedge>\"A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.\"",
+        "branch": "relation",
+        "raw_score": 0.4161793887615204,
+        "hyperedge_text": "A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.",
+        "entity_ids": [
+          "\"CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.",
+            "link",
+            "CHILD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d521599f59b95ad9251950b41f3cacf",
+            "hyperedge_name": "<hyperedge>\"A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After marrying an Italian she principally settled in that country.\"",
+        "branch": "relation",
+        "raw_score": 0.4154151976108551,
+        "hyperedge_text": "After marrying an Italian she principally settled in that country.",
+        "entity_ids": [
+          "\"ITALY\""
+        ],
+        "chunk_ids": [
+          "chunk-0749cfde49184555ffcbf0e101b1d7e6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After marrying an Italian she principally settled in that country.",
+            "Clara Tabody Clara Tabody( 1915–1986) was a Hungarian actress, singer and dancer. She starred in both the stage version of the operetta\" Mask in Blue\" and its 1943 film adaptation. She worked for many years in Germany where at one point the studio Tobis Film briefly tried to build her up as a rival to her fellow Hungarian Marika Rökk, then working for UFA. After marrying an Italian she principally settled in that country. Her sister Ida Turay was also an actress, knowng for her starring roles in Hungarian films."
+          ],
+          "relation_texts": [
+            "After marrying an Italian she principally settled in that country.",
+            "link",
+            "ITALY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ec9a111eb2797bf017f5307ffe44bd3f",
+            "hyperedge_name": "<hyperedge>\"After marrying an Italian she principally settled in that country.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.\"",
+        "branch": "relation",
+        "raw_score": 0.4149920344352722,
+        "hyperedge_text": "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+        "entity_ids": [
+          "\"MORGANATIC MARRIAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-0092baaf76dc583f3ca640f254f9f6cc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+            "Maria Chiara Spinucci Maria Chiara Spinucci( 1741–1792), was an Italian aristocrat, courtier of Duchess Maria Antonia of Bavaria and the morganatic spouse of Prince Francis Xavier of Saxony."
+          ],
+          "relation_texts": [
+            "Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.",
+            "link",
+            "MORGANATIC MARRIAGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-44cf4f5245a347aec5ae9c32df739078",
+            "hyperedge_name": "<hyperedge>\"Being a morganatic spouse implies a marriage that does not confer titles or rights to the spouse's family.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her husband Chris Walker whose nationality is English is also a professional squash player.\"",
+        "branch": "relation",
+        "raw_score": 0.400819331407547,
+        "hyperedge_text": "Her husband Chris Walker whose nationality is English is also a professional squash player.",
+        "entity_ids": [
+          "\"ENGLISH\"",
+          "\"CHRIS WALKER\""
+        ],
+        "chunk_ids": [
+          "chunk-e4fa0792bef2d741abd882118ab30cfc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her husband Chris Walker whose nationality is English is also a professional squash player.",
+            "Nayelly Hernández Nayelly Hernández( born 23 February 1986) is a former Mexican female professional squash player. She has represented Mexico internationally in several international competitions including the Central American and Caribbean Games, Pan American Games, Women's World Team Squash Championships. Nayelly achieved her highest career ranking of 57 in October 2011 during the 2011 PSA World Tour. Her husband Chris Walker whose nationality is English is also a professional squash player. She joined the Trinity College in 2008 as the first Mexican female to join a US college for squash and graduated in 2010."
+          ],
+          "relation_texts": [
+            "Her husband Chris Walker whose nationality is English is also a professional squash player.",
+            "link",
+            "ENGLISH",
+            "CHRIS WALKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ad7f37708b86f70bf42be5608ebe9563",
+            "hyperedge_name": "<hyperedge>\"Her husband Chris Walker whose nationality is English is also a professional squash player.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "branch": "relation",
+        "raw_score": 0.3964621424674988,
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "link",
+            "TERRITORIAL WATERS",
+            "LAW OF THE COUNTRIES INVOLVED",
+            "NATIONALITY OF THE PLANE OR SHIP",
+            "LAW",
+            "AIRSPACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e736e546ef2766fb6eee3ec329d43975",
+            "hyperedge_name": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His maternal family country is Japan.\"",
+        "branch": "relation",
+        "raw_score": 0.3853291869163513,
+        "hyperedge_text": "His maternal family country is Japan.",
+        "entity_ids": [
+          "\"MATERNAL FAMILY\"",
+          "\"CITIZENSHIP\""
+        ],
+        "chunk_ids": [
+          "chunk-0c8243a0fee19b106783ef41ab0108af"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His maternal family country is Japan.",
+            "Bruno Suzuki Bruno Junichi Suzuki Castanheira or commonly referred to as Bruno Suzuki( 鈴木 ブルーノ) or Bruno Castanheira( born 20 May 1990) is a Brazilian footballer who plays for Malaysia Super League club Terengganu II. Born in Brazil, Castanheira was raised in Japan, his maternal family country. He also holds Japanese citizenship."
+          ],
+          "relation_texts": [
+            "His maternal family country is Japan.",
+            "link",
+            "MATERNAL FAMILY",
+            "CITIZENSHIP"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5c4e25ce97d366ce3fc3f094c598ad6e",
+            "hyperedge_name": "<hyperedge>\"His maternal family country is Japan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As the spouse of Håkon V of Norway, she held a significant status in the royal hierarchy.\"",
+        "branch": "relation",
+        "raw_score": 0.38248834013938904,
+        "hyperedge_text": "As the spouse of Håkon V of Norway, she held a significant status in the royal hierarchy.",
+        "entity_ids": [
+          "\"HÅKON V OF NORWAY\""
+        ],
+        "chunk_ids": [
+          "chunk-c9afa13907ea48683656ead40d943fe1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As the spouse of Håkon V of Norway, she held a significant status in the royal hierarchy.",
+            "Euphemia of Rügen Euphemia of Rügen( c. 1280 – May 1312) was the Queen consort of Norway as the spouse of Håkon V of Norway. She is famous in history as a literary person, and known for commissioning translations of romances."
+          ],
+          "relation_texts": [
+            "As the spouse of Håkon V of Norway, she held a significant status in the royal hierarchy.",
+            "link",
+            "HÅKON V OF NORWAY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-da0c398e5ef23fdc5588621478a566dc",
+            "hyperedge_name": "<hyperedge>\"As the spouse of Håkon V of Norway, she held a significant status in the royal hierarchy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The youngest child of Benjamin Pierce Cheney was Cheney Jr., who was born on April 8, 1866.\"",
+        "branch": "semantic",
+        "raw_score": 0.6964914798736572,
+        "hyperedge_text": "The youngest child of Benjamin Pierce Cheney was Cheney Jr., who was born on April 8, 1866.",
+        "entity_ids": [
+          "\"YOUNGEST CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The youngest child of Benjamin Pierce Cheney was Cheney Jr., who was born on April 8, 1866.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "The youngest child of Benjamin Pierce Cheney was Cheney Jr., who was born on April 8, 1866.",
+            "link",
+            "YOUNGEST CHILD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c538b23dbe557e0dc20f9225da8048e9",
+            "hyperedge_name": "<hyperedge>\"The youngest child of Benjamin Pierce Cheney was Cheney Jr., who was born on April 8, 1866.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney.\"",
+        "branch": "semantic",
+        "raw_score": 0.6825740337371826,
+        "hyperedge_text": "Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney.",
+        "entity_ids": [
+          "\"BOSTON\"",
+          "\"ELIZABETH STICKNEY (CLAPP) CHENEY\"",
+          "\"BENJAMIN PIERCE CHENEY\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney.",
+            "link",
+            "BOSTON",
+            "ELIZABETH STICKNEY (CLAPP) CHENEY",
+            "BENJAMIN PIERCE CHENEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c6a86368cb82defbafa0a4659ab69bd3",
+            "hyperedge_name": "<hyperedge>\"Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.\"",
+        "branch": "semantic",
+        "raw_score": 0.6796513795852661,
+        "hyperedge_text": "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+        "entity_ids": [
+          "\"BENJAMIN PIERCE CHENEY JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+            "link",
+            "BENJAMIN PIERCE CHENEY JR."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4d6840a3495bcafd3db68469e169b295",
+            "hyperedge_name": "<hyperedge>\"Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cheney was the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney, who both were influential figures in his life.\"",
+        "branch": "semantic",
+        "raw_score": 0.6673600077629089,
+        "hyperedge_text": "Cheney was the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney, who both were influential figures in his life.",
+        "entity_ids": [
+          "\"INFLUENTIAL FIGURES\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Cheney was the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney, who both were influential figures in his life.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "Cheney was the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney, who both were influential figures in his life.",
+            "link",
+            "INFLUENTIAL FIGURES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e0614e2bf5db8b67d8082dae07b82a70",
+            "hyperedge_name": "<hyperedge>\"Cheney was the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney, who both were influential figures in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney was born on August 12, 1815.\"",
+        "branch": "semantic",
+        "raw_score": 0.663729727268219,
+        "hyperedge_text": "Benjamin Pierce Cheney was born on August 12, 1815.",
+        "entity_ids": [
+          "\"AUGUST 12, 1815\"",
+          "\"BENJAMIN PIERCE CHENEY\""
+        ],
+        "chunk_ids": [
+          "chunk-5c9258c4630d6381e95add20f61897e1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Pierce Cheney was born on August 12, 1815.",
+            "Benjamin Pierce Cheney Benjamin Pierce Cheney( August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express."
+          ],
+          "relation_texts": [
+            "Benjamin Pierce Cheney was born on August 12, 1815.",
+            "link",
+            "AUGUST 12, 1815",
+            "BENJAMIN PIERCE CHENEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-825d3b29f2b210e1b7ca3dbbbd8120ff",
+            "hyperedge_name": "<hyperedge>\"Benjamin Pierce Cheney was born on August 12, 1815.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney died on July 23, 1895.\"",
+        "branch": "semantic",
+        "raw_score": 0.602928876876831,
+        "hyperedge_text": "Benjamin Pierce Cheney died on July 23, 1895.",
+        "entity_ids": [
+          "\"BUSINESSMAN\"",
+          "\"JULY 23, 1895\""
+        ],
+        "chunk_ids": [
+          "chunk-5c9258c4630d6381e95add20f61897e1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Pierce Cheney died on July 23, 1895.",
+            "Benjamin Pierce Cheney Benjamin Pierce Cheney( August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express."
+          ],
+          "relation_texts": [
+            "Benjamin Pierce Cheney died on July 23, 1895.",
+            "link",
+            "BUSINESSMAN",
+            "JULY 23, 1895"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-11e208d54d55e869df6b61d7a7d3f774",
+            "hyperedge_name": "<hyperedge>\"Benjamin Pierce Cheney died on July 23, 1895.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney (August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express.\"",
+        "branch": "semantic",
+        "raw_score": 0.5807461738586426,
+        "hyperedge_text": "Benjamin Pierce Cheney (August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express.",
+        "entity_ids": [
+          "\"BUSINESSMAN\"",
+          "\"FOUNDER\"",
+          "\"AMERICAN EXPRESS\"",
+          "\"AUGUST 12, 1815\"",
+          "\"JULY 23, 1895\"",
+          "\"BENJAMIN PIERCE CHENEY\""
+        ],
+        "chunk_ids": [
+          "chunk-5c9258c4630d6381e95add20f61897e1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Benjamin Pierce Cheney (August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express.",
+            "Benjamin Pierce Cheney Benjamin Pierce Cheney( August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express."
+          ],
+          "relation_texts": [
+            "Benjamin Pierce Cheney (August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express.",
+            "link",
+            "BUSINESSMAN",
+            "FOUNDER",
+            "AMERICAN EXPRESS",
+            "AUGUST 12, 1815",
+            "JULY 23, 1895",
+            "BENJAMIN PIERCE CHENEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-804b595d4f3e279620774dad026e4093",
+            "hyperedge_name": "<hyperedge>\"Benjamin Pierce Cheney (August 12, 1815 – July 23, 1895) was an American businessman, and a founder of the firm that became American Express.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a young man Cheney had taken part in amateur theatricals, and after his marriage he financed a number of professional productions, including a number that starred his wife at venues in Boston, New York City and elsewhere in the Northeast.\"",
+        "branch": "semantic",
+        "raw_score": 0.5503324270248413,
+        "hyperedge_text": "As a young man Cheney had taken part in amateur theatricals, and after his marriage he financed a number of professional productions, including a number that starred his wife at venues in Boston, New York City and elsewhere in the Northeast.",
+        "entity_ids": [
+          "\"NEW YORK CITY\"",
+          "\"AMATEUR THEATRICALS\"",
+          "\"PROFESSIONAL PRODUCTIONS\"",
+          "\"VENUES IN BOSTON\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a young man Cheney had taken part in amateur theatricals, and after his marriage he financed a number of professional productions, including a number that starred his wife at venues in Boston, New York City and elsewhere in the Northeast.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "As a young man Cheney had taken part in amateur theatricals, and after his marriage he financed a number of professional productions, including a number that starred his wife at venues in Boston, New York City and elsewhere in the Northeast.",
+            "link",
+            "NEW YORK CITY",
+            "AMATEUR THEATRICALS",
+            "PROFESSIONAL PRODUCTIONS",
+            "VENUES IN BOSTON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-177efee9855c8c4845374196fa006bc2",
+            "hyperedge_name": "<hyperedge>\"As a young man Cheney had taken part in amateur theatricals, and after his marriage he financed a number of professional productions, including a number that starred his wife at venues in Boston, New York City and elsewhere in the Northeast.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce.\"",
+        "branch": "semantic",
+        "raw_score": 0.4942288398742676,
+        "hyperedge_text": "He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce.",
+        "entity_ids": [
+          "\"NEW HAMPSHIRE GOVERNOR BENJAMIN PIERCE\"",
+          "\"PRESIDENT FRANKLIN PIERCE\""
+        ],
+        "chunk_ids": [
+          "chunk-8eee7f4b2e756525bc8d4d6deb1e22c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce.",
+            "Benjamin Kendrick Pierce Benjamin Kendrick Pierce (August 29, 1790 – April 1, 1850) was a career officer in the United States Army. He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce. Benjamin K. Pierce was a veteran of the War of 1812, the Second Seminole War, and the Mexican–American War, and rose to the rank of Lieutenant Colonel in the Army and Colonel in the Florida Militia."
+          ],
+          "relation_texts": [
+            "He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce.",
+            "link",
+            "NEW HAMPSHIRE GOVERNOR BENJAMIN PIERCE",
+            "PRESIDENT FRANKLIN PIERCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cbb4d03cedd371d8572807e1a161ca53",
+            "hyperedge_name": "<hyperedge>\"He was a son of New Hampshire Governor Benjamin Pierce and brother of President Franklin Pierce.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The legacy of Cheney and his wife is preserved through their contributions to business and the arts, making them notable figures in history.\"",
+        "branch": "semantic",
+        "raw_score": 0.48752832412719727,
+        "hyperedge_text": "The legacy of Cheney and his wife is preserved through their contributions to business and the arts, making them notable figures in history.",
+        "entity_ids": [
+          "\"LEGACY\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The legacy of Cheney and his wife is preserved through their contributions to business and the arts, making them notable figures in history.",
+            "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+          ],
+          "relation_texts": [
+            "The legacy of Cheney and his wife is preserved through their contributions to business and the arts, making them notable figures in history.",
+            "link",
+            "LEGACY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1751b76b10dfcfa0dc63db239d2220d0",
+            "hyperedge_name": "<hyperedge>\"The legacy of Cheney and his wife is preserved through their contributions to business and the arts, making them notable figures in history.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.\"",
+        "hyperedge_text": "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.6796513795852661,
+        "fusion_score": 0.33593027591705327,
+        "entity_ids": [
+          "\"BENJAMIN PIERCE CHENEY JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-a912bebfe7d7a013a267e9ba50907816"
+        ],
+        "evidence_texts": [
+          "Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive.",
+          "Benjamin Pierce Cheney Jr. Benjamin Pierce Cheney Jr. (April 8, 1866 – June 5, 1942), was an American business executive. He had extensive investments in railroad securities and served as a director of Wells Fargo & Company and the Atchison, Topeka & Santa Fe Railroad. Cheney was born in Boston in 1866, the eldest child of Benjamin Pierce Cheney and Elizabeth Stickney (Clapp) Cheney. His father was one of the pioneer expressmen of the United States. The younger Cheney prepared for college at English High School in Boston and with a private tutor. He received his BA degree from Harvard University in 1890. Until the death of his father in 1895 Cheney aided him in the management of his interests, which included the largest portfolio of railroad securities held in the Boston area. Upon his father's death, he was elected to succeed him as a director of Wells Fargo & Company. Having extensi..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.679651,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.33593
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He completed his studies at Poitiers in 1695 to 1699.\"",
+        "hyperedge_text": "He completed his studies at Poitiers in 1695 to 1699.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.23333333333333334,
+        "entity_ids": [
+          "\"POITIERS\""
+        ],
+        "chunk_ids": [
+          "chunk-f444b5b5cfead58afde3a4626557c6ca"
+        ],
+        "evidence_texts": [
+          "He completed his studies at Poitiers in 1695 to 1699.",
+          "Jean-Baptiste Chardon Jean- Baptiste Chardon( April 27, 1672( some sources say April 27, 1671) in Bordeaux, France – April 11, 1743 in Quebec City) was a French Jesuit missionary to the Indians in Canada and in Louisiana territory. Chardon entered the noviciate in the Society of Jesus at Bordeaux on September 7, 1687. He studied at Pau in 1689 and 1690 and taught at the Jesuit college in La Rochelle from 1690 to 1695. He completed his studies at Poitiers in 1695 to 1699. He arrived in New France( Canada) in summer 1699 and learned amerindian languages until the end of that year. In 1700 he traveled to the Saguenay country. He soon was named missionary to the Ottawa. In the following year he joined the western mission headquartered at Mackinac, although he traveled widely. He visited the Foxes, Menominees, Mascoutens, Kickapoos, Ottawas, Potawatomis, and Miamis. In September 1701 he we..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.233333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent.\"",
+        "hyperedge_text": "A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.41920197010040283,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.20101412137349448,
+        "entity_ids": [
+          "\"FOREIGN PARENT\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.419202,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.201014
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.\"",
+        "hyperedge_text": "A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4161793887615204,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.19980508883794149,
+        "entity_ids": [
+          "\"CHILD\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.416179,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.199805
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After marrying an Italian she principally settled in that country.\"",
+        "hyperedge_text": "After marrying an Italian she principally settled in that country.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4154151976108551,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.19949941237767538,
+        "entity_ids": [
+          "\"ITALY\""
+        ],
+        "chunk_ids": [
+          "chunk-0749cfde49184555ffcbf0e101b1d7e6"
+        ],
+        "evidence_texts": [
+          "After marrying an Italian she principally settled in that country.",
+          "Clara Tabody Clara Tabody( 1915–1986) was a Hungarian actress, singer and dancer. She starred in both the stage version of the operetta\" Mask in Blue\" and its 1943 film adaptation. She worked for many years in Germany where at one point the studio Tobis Film briefly tried to build her up as a rival to her fellow Hungarian Marika Rökk, then working for UFA. After marrying an Italian she principally settled in that country. Her sister Ida Turay was also an actress, knowng for her starring roles in Hungarian films."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.415415,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.199499
+        }
+      }
+    ]
+  }
+]

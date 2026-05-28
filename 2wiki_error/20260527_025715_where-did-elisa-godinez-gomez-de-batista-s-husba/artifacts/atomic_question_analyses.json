@@ -1,0 +1,104 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the husband of Elisa Godínez Gómez De Batista?",
+    "retrieval_question": "Who is the husband of Elisa Godínez Gómez De Batista?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the husband of Elisa Godínez Gómez De Batista?",
+      "retrieval_question": "Who is the husband of Elisa Godínez Gómez De Batista?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Elisa Godínez Gómez De Batista"
+      ],
+      "relations": [
+        "is the husband of"
+      ],
+      "relation_query": "who is the husband of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the husband of Elisa Godínez Gómez De Batista die?",
+    "retrieval_question": "Where did Fulgencio Batista die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the husband of Elisa Godínez Gómez De Batista die?",
+      "retrieval_question": "Where did Fulgencio Batista die?",
+      "whether_rewritten": true,
+      "replacement_span": "the husband of Elisa Godínez Gómez De Batista",
+      "replacement_answer": "Fulgencio Batista",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the husband of Elisa Godínez Gómez De Batista",
+          "replacement_answer": "Fulgencio Batista"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the husband of Elisa Godínez Gómez De Batista?",
+        "answer": "Fulgencio Batista",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "Elisa Godínez Gómez de Batista was the first wife of Cuban President Fulgencio Batista, which directly answers the question about her husband.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.\"",
+            "fusion_score": 0.5247111558914185,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.",
+              "Elisa Godínez Gómez de Batista Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944. She was the first wife of Cuban President Fulgencio Batista."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Elisa Godínez Gómez de Batista was born around 1905 and died on June 19, 1993.\"",
+            "fusion_score": 0.531609332561493,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Elisa Godínez Gómez de Batista was born around 1905 and died on June 19, 1993.",
+              "Elisa Godínez Gómez de Batista Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944. She was the first wife of Cuban President Fulgencio Batista."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"He is also the uncle of, whose husband is.\"",
+            "fusion_score": 0.23250722885131836,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "He is also the uncle of, whose husband is.",
+              "Andrzej Gawroński (actor) Andrzej Gawroński( born 10 February 1935 in Warsaw, Poland) is a Polish film and theatre actor. He is the brother of the late actor. He is also the uncle of, whose husband is."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Fulgencio Batista"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

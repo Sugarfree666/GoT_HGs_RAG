@@ -1,0 +1,26 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "The evidence provides the names of the directors but does not specify their spouses, leading to insufficient information to answer the question.",
+  "answer_span_reasoning": "There is no information about the spouse of the director.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of The Glass Boat?",
+      "answer": "Constantin J. David and Jacqueline Milliet",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the spouse of the director of The Glass Boat?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

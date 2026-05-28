@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of God Of War?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the birth place of the director of God Of War?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

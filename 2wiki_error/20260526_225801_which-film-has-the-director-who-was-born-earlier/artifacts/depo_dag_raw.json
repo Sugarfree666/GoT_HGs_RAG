@@ -1,0 +1,35 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "When was The Red Eagle born?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the director of The Red Eagle?",
+      "dependencies": [
+        "q1"
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "What film has the director of the birth date of The Red Eagle?",
+      "dependencies": [
+        "q2"
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "When was Vishukkani born?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q5",
+      "question": "Who is the director of Vishukkani?",
+      "dependencies": [
+        "q4"
+      ]
+    }
+  ]
+}

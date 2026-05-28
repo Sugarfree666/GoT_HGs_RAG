@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of The Circus Cyclone?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where was the director of The Circus Cyclone born?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

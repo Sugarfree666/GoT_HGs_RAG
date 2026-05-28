@@ -1,0 +1,330 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Playing It Wild?",
+    "retrieval_question": "Who is the director of Playing It Wild?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Playing It Wild?",
+      "retrieval_question": "Who is the director of Playing It Wild?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Playing It Wild"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of I'Ll Be Going Now?",
+    "retrieval_question": "Who is the director of I'Ll Be Going Now?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of I'Ll Be Going Now?",
+      "retrieval_question": "Who is the director of I'Ll Be Going Now?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "I'Ll Be Going Now"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was the director of Playing It Wild born?",
+    "retrieval_question": "When was William Duncan born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was the director of Playing It Wild born?",
+      "retrieval_question": "When was William Duncan born?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Playing It Wild",
+      "replacement_answer": "William Duncan",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Playing It Wild",
+          "replacement_answer": "William Duncan"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Playing It Wild?",
+        "answer": "William Duncan",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Playing It Wild' is directed by William Duncan, confirming him as the director.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers.\"",
+          "<hyperedge>\"William Duncan is not only the director, but also a starring actor in the film Playing It Wild.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers.\"",
+            "fusion_score": 0.5023294687271118,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers.",
+              "Playing It Wild Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"William Duncan is not only the director, but also a starring actor in the film Playing It Wild.\"",
+            "fusion_score": 0.9212118268013001,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "William Duncan is not only the director, but also a starring actor in the film Playing It Wild.",
+              "Playing It Wild Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Playing It Wild showcases the work of notable early cinema personalities.\"",
+            "fusion_score": 0.7034337759017946,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Playing It Wild showcases the work of notable early cinema personalities.",
+              "Playing It Wild Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "William Duncan"
+      ],
+      "relations": [
+        "born"
+      ],
+      "relation_query": "When was a person born?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of I'Ll Be Going Now born?",
+    "retrieval_question": "When was Dino Risi born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was the director of I'Ll Be Going Now born?",
+      "retrieval_question": "When was Dino Risi born?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of I'Ll Be Going Now",
+      "replacement_answer": "Dino Risi",
+      "replacements": [
+        {
+          "dependency_node_id": "q3",
+          "replacement_span": "the director of I'Ll Be Going Now",
+          "replacement_answer": "Dino Risi"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q3",
+        "question": "Who is the director of I'Ll Be Going Now?",
+        "answer": "Dino Risi",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'I'll Be Going Now' is directed by Dino Risi.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Tolgo il disturbo, internationally released as I'll Be Going Now, is a 1990 Italian comedy-drama film directed by Dino Risi.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Tolgo il disturbo, internationally released as I'll Be Going Now, is a 1990 Italian comedy-drama film directed by Dino Risi.\"",
+            "fusion_score": 0.5027899980545044,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Tolgo il disturbo, internationally released as I'll Be Going Now, is a 1990 Italian comedy-drama film directed by Dino Risi.",
+              "I'll Be Going Now Tolgo il disturbo, internationally released as I'll Be Going Now, is a 1990 Italian comedy- drama film directed by Dino Risi."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+            "fusion_score": 0.28121039271354675,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "After this he went on to become a director himself.",
+              "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+            "fusion_score": 0.27623064517974855,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "After this, he went on to become a director himself.",
+              "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Dino Risi"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q5",
+    "question": "What is the birth date of the director of Playing It Wild?",
+    "retrieval_question": "What is the birth date of the director of Playing It Wild?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the birth date of the director of Playing It Wild?",
+      "retrieval_question": "What is the birth date of the director of Playing It Wild?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "When was the director of Playing It Wild born?",
+        "answer": "December 16, 1879",
+        "confidence": 1.0,
+        "answer_type": "date",
+        "reasoning_summary": "William Duncan, the director of 'Playing It Wild', was born on December 16, 1879, as confirmed by the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"William Duncan was born on December 16, 1879, and passed away on February 7, 1961.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"William Duncan (December 16, 1879 – February 7, 1961), born in Dundee, Scotland was an actor, producer, writer, and director of film serials.\"",
+            "fusion_score": 0.9482831597328186,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "William Duncan (December 16, 1879 – February 7, 1961), born in Dundee, Scotland was an actor, producer, writer, and director of film serials.",
+              "William Duncan (actor) William Duncan (December 16, 1879 – February 7, 1961), born in Dundee, Scotland was an actor, producer, writer, and director of film serials. He was a leading star, becoming one of the highest paid actors in the early film industry. Many of the films he starred in did not survive to the present day. Duncan, who was Hollywood's first Scottish movie star, worked with the major studios of the day including the Selig Polyscope Company and Vitagraph."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"William Duncan was born on December 16, 1879, and passed away on February 7, 1961.\"",
+            "fusion_score": 0.9552345991134644,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "William Duncan was born on December 16, 1879, and passed away on February 7, 1961.",
+              "William Duncan (actor) William Duncan (December 16, 1879 – February 7, 1961), born in Dundee, Scotland was an actor, producer, writer, and director of film serials. He was a leading star, becoming one of the highest paid actors in the early film industry. Many of the films he starred in did not survive to the present day. Duncan, who was Hollywood's first Scottish movie star, worked with the major studios of the day including the Selig Polyscope Company and Vitagraph."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers.\"",
+            "fusion_score": 0.5333333333333333,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers.",
+              "Playing It Wild Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q4",
+        "question": "When was the director of I'Ll Be Going Now born?",
+        "answer": "23 December 1916",
+        "confidence": 1.0,
+        "answer_type": "date",
+        "reasoning_summary": "Dino Risi, the director of 'I'll Be Going Now', was born on 23 December 1916, as stated in the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Dino Risi (23 December 1916 – 7 June 2008) was an Italian film director.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Dino Risi was an Italian film director.\"",
+            "fusion_score": 0.5480180859565735,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Dino Risi was an Italian film director.",
+              "Dino Risi Dino Risi( 23 December 1916 – 7 June 2008) was an Italian film director. With Mario Monicelli, Luigi Comencini, Nanni Loy and Ettore Scola, he was one of the masters of\" commedia all'italiana\"."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film is directed by Dino Risi.\"",
+            "fusion_score": 0.5213139414787293,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film is directed by Dino Risi.",
+              "I'll Be Going Now Tolgo il disturbo, internationally released as I'll Be Going Now, is a 1990 Italian comedy- drama film directed by Dino Risi."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Dino Risi (23 December 1916 – 7 June 2008) was an Italian film director.\"",
+            "fusion_score": 0.5574442863464356,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Dino Risi (23 December 1916 – 7 June 2008) was an Italian film director.",
+              "Dino Risi Dino Risi( 23 December 1916 – 7 June 2008) was an Italian film director. With Mario Monicelli, Luigi Comencini, Nanni Loy and Ettore Scola, he was one of the masters of\" commedia all'italiana\"."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Playing It Wild",
+        "William Duncan"
+      ],
+      "relations": [
+        "birth date of the director"
+      ],
+      "relation_query": "What is the birth date of the director of a work?",
+      "answer_type": "date"
+    }
+  }
+]

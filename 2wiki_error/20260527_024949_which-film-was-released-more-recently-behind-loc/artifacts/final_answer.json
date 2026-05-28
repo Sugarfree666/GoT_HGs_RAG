@@ -1,0 +1,35 @@
+{
+  "answer": "Behind Locked Doors",
+  "candidate_answer": "Behind Locked Doors",
+  "reasoning_summary": "The release date of 'Behind Locked Doors' is 1991, while 'Crossing Delancey' was released in 1988. Therefore, 'Behind Locked Doors' was released more recently.",
+  "answer_span_reasoning": "'Behind Locked Doors' was released more recently than 'Crossing Delancey'.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "When was Behind Locked Doors released?",
+      "answer": "1991",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the release date of Crossing Delancey?",
+      "answer": "1988",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert.\"",
+        "<hyperedge>\"The film Crossing Delancey is an American romantic comedy released in 1988.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "What is the release date of Behind Locked Doors?",
+      "answer": "1991",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

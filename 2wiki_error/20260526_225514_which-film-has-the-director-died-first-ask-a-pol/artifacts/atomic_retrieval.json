@@ -1,0 +1,1672 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Ask A Policeman?",
+    "retrieval_question": "Who is the director of Ask A Policeman?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Ask A Policeman?",
+      "retrieval_question": "Who is the director of Ask A Policeman?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+        "entity_ids": [
+          "\"WILL HAY\"",
+          "\"MARCEL VARNEL\"",
+          "\"ASK A POLICEMAN\"",
+          "\"MOORE MARRIOTT\"",
+          "\"GRAHAM MOFFATT\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+            "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+          ],
+          "relation_texts": [
+            "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+            "link",
+            "WILL HAY",
+            "MARCEL VARNEL",
+            "ASK A POLICEMAN",
+            "MOORE MARRIOTT",
+            "GRAHAM MOFFATT"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078312158584595,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027340650558472,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.49728286266326904,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.4967505931854248,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49394840002059937,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.4855967164039612,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.483969122171402,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.4819785952568054,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47987908124923706,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.4776857793331146,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\"",
+        "branch": "semantic",
+        "raw_score": 0.6436264514923096,
+        "hyperedge_text": "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+        "entity_ids": [
+          "\"WILL HAY\"",
+          "\"MARCEL VARNEL\"",
+          "\"ASK A POLICEMAN\"",
+          "\"MOORE MARRIOTT\"",
+          "\"GRAHAM MOFFATT\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+            "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+          ],
+          "relation_texts": [
+            "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+            "link",
+            "WILL HAY",
+            "MARCEL VARNEL",
+            "ASK A POLICEMAN",
+            "MOORE MARRIOTT",
+            "GRAHAM MOFFATT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-555ff3438fcd7abe21002926c4670473",
+            "hyperedge_name": "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.\"",
+        "branch": "semantic",
+        "raw_score": 0.6262600421905518,
+        "hyperedge_text": "Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.",
+        "entity_ids": [
+          "\"SATIRE\"",
+          "\"SOCIETY'S VIEW ON LAW ENFORCEMENT\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.",
+            "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+          ],
+          "relation_texts": [
+            "Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.",
+            "link",
+            "SATIRE",
+            "SOCIETY'S VIEW ON LAW ENFORCEMENT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b5e4c287ded3b304b7f2cf58694dd4f8",
+            "hyperedge_name": "<hyperedge>\"Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.\"",
+        "branch": "semantic",
+        "raw_score": 0.5904468297958374,
+        "hyperedge_text": "In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.",
+        "entity_ids": [
+          "\"MUNDANE DUTIES\"",
+          "\"ABSURDITY\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.",
+            "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+          ],
+          "relation_texts": [
+            "In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.",
+            "link",
+            "MUNDANE DUTIES",
+            "ABSURDITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5efcf4c84eaa36fa2f46287abdfb96d7",
+            "hyperedge_name": "<hyperedge>\"In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The title comes from the popular music hall song 'Ask a Policeman'.",
+        "branch": "semantic",
+        "raw_score": 0.5503140687942505,
+        "hyperedge_text": "\"The title comes from the popular music hall song 'Ask a Policeman'.",
+        "entity_ids": [
+          "\"TITLE\"",
+          "\"POPULAR MUSIC HALL SONG\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "\"The title comes from the popular music hall song 'Ask a Policeman'.",
+            "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+          ],
+          "relation_texts": [
+            "\"The title comes from the popular music hall song 'Ask a Policeman'.",
+            "link",
+            "TITLE",
+            "POPULAR MUSIC HALL SONG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6cf2085a99ddf331e900c227494696d8",
+            "hyperedge_name": "<hyperedge>\"The title comes from the popular music hall song 'Ask a Policeman'."
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"La polizia è al servizio del cittadino? ( internationally released as The Police Serve the Citizens?) is a 1973 Italian giallo- poliziottesco film directed by Romolo Guerrieri.\"",
+        "branch": "semantic",
+        "raw_score": 0.5094449520111084,
+        "hyperedge_text": "La polizia è al servizio del cittadino? ( internationally released as The Police Serve the Citizens?) is a 1973 Italian giallo- poliziottesco film directed by Romolo Guerrieri.",
+        "entity_ids": [
+          "\"1973\"",
+          "\"GENOVA\"",
+          "\"ROMOLO GUERRIERI\"",
+          "\"LA POLIZIA È AL SERVIZIO DEL CITTADINO?\"",
+          "\"THE POLICE SERVE THE CITIZENS?\""
+        ],
+        "chunk_ids": [
+          "chunk-5f7e0c033fc5224de6a2a228ee2ed722"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "La polizia è al servizio del cittadino? ( internationally released as The Police Serve the Citizens?) is a 1973 Italian giallo- poliziottesco film directed by Romolo Guerrieri.",
+            "The Police Serve the Citizens? La polizia è al servizio del cittadino? ( internationally released as The Police Serve the Citizens?) is a 1973 Italian giallo- poliziottesco film directed by Romolo Guerrieri. The film is set in Genova."
+          ],
+          "relation_texts": [
+            "La polizia è al servizio del cittadino? ( internationally released as The Police Serve the Citizens?) is a 1973 Italian giallo- poliziottesco film directed by Romolo Guerrieri.",
+            "link",
+            "1973",
+            "GENOVA",
+            "ROMOLO GUERRIERI",
+            "LA POLIZIA È AL SERVIZIO DEL CITTADINO?",
+            "THE POLICE SERVE THE CITIZENS?"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2382827e89a5d96712ec12b14c27234d",
+            "hyperedge_name": "<hyperedge>\"La polizia è al servizio del cittadino? ( internationally released as The Police Serve the Citizens?) is a 1973 Italian giallo- poliziottesco film directed by Romolo Guerrieri.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Laughing Policeman (film) is an American police procedural film loosely based on the novel 'The Laughing Policeman' by Maj Sjöwall and Per Wahlöö.\"",
+        "branch": "semantic",
+        "raw_score": 0.49699437618255615,
+        "hyperedge_text": "The Laughing Policeman (film) is an American police procedural film loosely based on the novel 'The Laughing Policeman' by Maj Sjöwall and Per Wahlöö.",
+        "entity_ids": [
+          "\"MAJ SJÖWALL\"",
+          "\"PER WAHLÖÖ\"",
+          "\"DETECTIVE JAKE MARTIN\"",
+          "\"WALTER MATTHAU\"",
+          "\"STUART ROSENBERG\"",
+          "\"THE LAUGHING POLICEMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-e43631bbcdf535b168379ed9173d59cd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Laughing Policeman (film) is an American police procedural film loosely based on the novel 'The Laughing Policeman' by Maj Sjöwall and Per Wahlöö.",
+            "The Laughing Policeman (film) The Laughing Policeman( 1973) is an American police procedural film loosely based on the novel\" The Laughing Policeman\" by Maj Sjöwall and Per Wahlöö. The setting of the story is transplanted from Stockholm to San Francisco. It was directed by Stuart Rosenberg and features Walter Matthau as Detective Jake Martin."
+          ],
+          "relation_texts": [
+            "The Laughing Policeman (film) is an American police procedural film loosely based on the novel 'The Laughing Policeman' by Maj Sjöwall and Per Wahlöö.",
+            "link",
+            "MAJ SJÖWALL",
+            "PER WAHLÖÖ",
+            "DETECTIVE JAKE MARTIN",
+            "WALTER MATTHAU",
+            "STUART ROSENBERG",
+            "THE LAUGHING POLICEMAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f4c48a17ce8a4fdfc1fb2851559d023d",
+            "hyperedge_name": "<hyperedge>\"The Laughing Policeman (film) is an American police procedural film loosely based on the novel 'The Laughing Policeman' by Maj Sjöwall and Per Wahlöö.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Policeman of the 16th Precinct is a 1959 Greek comedy film directed by Alekos Sakellarios.\"",
+        "branch": "semantic",
+        "raw_score": 0.49313074350357056,
+        "hyperedge_text": "The Policeman of the 16th Precinct is a 1959 Greek comedy film directed by Alekos Sakellarios.",
+        "entity_ids": [
+          "\"1959\"",
+          "\"ALEKOS SAKELLARIOS\"",
+          "\"THE POLICEMAN OF THE 16TH PRECINCT\"",
+          "\"GREEK COMEDY FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-dc86b5be5128b4c49a18521a0e993763"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Policeman of the 16th Precinct is a 1959 Greek comedy film directed by Alekos Sakellarios.",
+            "The Policeman of the 16th Precinct The Policeman of the 16th Precinct is a 1959 Greek comedy film directed by Alekos Sakellarios."
+          ],
+          "relation_texts": [
+            "The Policeman of the 16th Precinct is a 1959 Greek comedy film directed by Alekos Sakellarios.",
+            "link",
+            "1959",
+            "ALEKOS SAKELLARIOS",
+            "THE POLICEMAN OF THE 16TH PRECINCT",
+            "GREEK COMEDY FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1cc6419d921f9bb15964832a9a656e4b",
+            "hyperedge_name": "<hyperedge>\"The Policeman of the 16th Precinct is a 1959 Greek comedy film directed by Alekos Sakellarios.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As Director General of Police, he dealt with various administrative and operational issues.\"",
+        "branch": "semantic",
+        "raw_score": 0.46658098697662354,
+        "hyperedge_text": "As Director General of Police, he dealt with various administrative and operational issues.",
+        "entity_ids": [
+          "\"ADMINISTRATIVE ISSUES\"",
+          "\"OPERATIONAL ISSUES\""
+        ],
+        "chunk_ids": [
+          "chunk-ebb600d80a026678ab405d580746470f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As Director General of Police, he dealt with various administrative and operational issues.",
+            "S. N. Mathur S.N. Mathur was the Director of the Indian Intelligence Bureau between September 1975 and February 1980. He was also the Director General of Police in Punjab."
+          ],
+          "relation_texts": [
+            "As Director General of Police, he dealt with various administrative and operational issues.",
+            "link",
+            "ADMINISTRATIVE ISSUES",
+            "OPERATIONAL ISSUES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-25d600266904c8372c90d3b8888bd9ba",
+            "hyperedge_name": "<hyperedge>\"As Director General of Police, he dealt with various administrative and operational issues.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The title of the movie is The Policeman of the 16th Precinct.\"",
+        "branch": "semantic",
+        "raw_score": 0.45532068610191345,
+        "hyperedge_text": "The title of the movie is The Policeman of the 16th Precinct.",
+        "entity_ids": [
+          "\"THE POLICEMAN OF THE 16TH PRECINCT\""
+        ],
+        "chunk_ids": [
+          "chunk-dc86b5be5128b4c49a18521a0e993763"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The title of the movie is The Policeman of the 16th Precinct.",
+            "The Policeman of the 16th Precinct The Policeman of the 16th Precinct is a 1959 Greek comedy film directed by Alekos Sakellarios."
+          ],
+          "relation_texts": [
+            "The title of the movie is The Policeman of the 16th Precinct.",
+            "link",
+            "THE POLICEMAN OF THE 16TH PRECINCT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a7a488e5705d8ed62972e4aaf9f10069",
+            "hyperedge_name": "<hyperedge>\"The title of the movie is The Policeman of the 16th Precinct.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film explores moral dilemmas faced by police officers, such as balancing duty and personal ethics.\"",
+        "branch": "semantic",
+        "raw_score": 0.44603997468948364,
+        "hyperedge_text": "The film explores moral dilemmas faced by police officers, such as balancing duty and personal ethics.",
+        "entity_ids": [
+          "\"DUTY\"",
+          "\"MORAL DILEMMAS\"",
+          "\"PERSONAL ETHICS\""
+        ],
+        "chunk_ids": [
+          "chunk-8f8c23f827f3b4246b2ca17fbddde641"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film explores moral dilemmas faced by police officers, such as balancing duty and personal ethics.",
+            "End of Watch End of Watch is a 2012 American action thriller film written and directed by David Ayer. It stars Jake Gyllenhaal and Michael Peña as Brian Taylor and Miguel Zavala, two Los Angeles Police Department officers who work in South Los Angeles. The film focuses on their day- to- day police work, their dealings with a certain group of gang members, their friendship with each other, and their personal relationships. Ayer, who had written several police procedural films previously, wanted the film to focus more on the friendship between partners and honest police work rather than corruption. Gyllenhaal, Peña, and other cast members underwent an intensive training program to prepare for their roles as police officers. Filming took place in Los Angeles in August 2011 with a budget of$ 7 million. \" End of Watch\" premiered on September 8, 2012 at the Toronto International Film Festiv..."
+          ],
+          "relation_texts": [
+            "The film explores moral dilemmas faced by police officers, such as balancing duty and personal ethics.",
+            "link",
+            "DUTY",
+            "MORAL DILEMMAS",
+            "PERSONAL ETHICS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fa044d7d3dbf1ef9066a16f1da17b5d1",
+            "hyperedge_name": "<hyperedge>\"The film explores moral dilemmas faced by police officers, such as balancing duty and personal ethics.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\"",
+        "hyperedge_text": "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6436264514923096,
+        "fusion_score": 0.5287252902984619,
+        "entity_ids": [
+          "\"WILL HAY\"",
+          "\"MARCEL VARNEL\"",
+          "\"ASK A POLICEMAN\"",
+          "\"MOORE MARRIOTT\"",
+          "\"GRAHAM MOFFATT\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "evidence_texts": [
+          "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+          "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.643626,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528725
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.\"",
+        "hyperedge_text": "Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6262600421905518,
+        "fusion_score": 0.7252520084381104,
+        "entity_ids": [
+          "\"SATIRE\"",
+          "\"SOCIETY'S VIEW ON LAW ENFORCEMENT\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "evidence_texts": [
+          "Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.",
+          "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.62626,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.725252
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.\"",
+        "hyperedge_text": "In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5904468297958374,
+        "fusion_score": 0.5180893659591675,
+        "entity_ids": [
+          "\"MUNDANE DUTIES\"",
+          "\"ABSURDITY\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "evidence_texts": [
+          "In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.",
+          "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.590447,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518089
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The title comes from the popular music hall song 'Ask a Policeman'.",
+        "hyperedge_text": "\"The title comes from the popular music hall song 'Ask a Policeman'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5503140687942505,
+        "fusion_score": 0.5100628137588501,
+        "entity_ids": [
+          "\"TITLE\"",
+          "\"POPULAR MUSIC HALL SONG\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "evidence_texts": [
+          "\"The title comes from the popular music hall song 'Ask a Policeman'.",
+          "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.550314,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510063
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As Director General of Police, he dealt with various administrative and operational issues.\"",
+        "hyperedge_text": "As Director General of Police, he dealt with various administrative and operational issues.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.46658098697662354,
+        "fusion_score": 0.49331619739532473,
+        "entity_ids": [
+          "\"ADMINISTRATIVE ISSUES\"",
+          "\"OPERATIONAL ISSUES\""
+        ],
+        "chunk_ids": [
+          "chunk-ebb600d80a026678ab405d580746470f"
+        ],
+        "evidence_texts": [
+          "As Director General of Police, he dealt with various administrative and operational issues.",
+          "S. N. Mathur S.N. Mathur was the Director of the Indian Intelligence Bureau between September 1975 and February 1980. He was also the Director General of Police in Punjab."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.466581,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.493316
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the director of Ask A Policeman die?",
+    "retrieval_question": "When did Marcel Varnel die?",
+    "dependency_question_rewrite": {
+      "original_question": "When did the director of Ask A Policeman die?",
+      "retrieval_question": "When did Marcel Varnel die?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Ask A Policeman",
+      "replacement_answer": "Marcel Varnel",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Ask A Policeman",
+          "replacement_answer": "Marcel Varnel"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role.",
+        "entity_ids": [
+          "\"1941\"",
+          "\"LINDEN TRAVERS\"",
+          "\"ENID STAMP-TAYLOR\"",
+          "\"FELIX AYLMER\"",
+          "\"RONALD SHINER\"",
+          "\"MARCEL VARNEL\"",
+          "\"MAVIS VILLIERS\"",
+          "\"SOUTH AMERICAN GEORGE\"",
+          "\"GEORGE FORMBY\"",
+          "\"HERBERT LOMAS\"",
+          "\"COLUMBIA (BRITISH) PRODUCTIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-f8a766f30e8e11597bb81a8f5e4654ad"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role.",
+            "South American George South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role, Linden Travers, Enid Stamp- Taylor, Felix Aylmer, Ronald Shiner as Swifty, Mavis Villiers and Herbert Lomas. It was produced by Columbia( British) Productions."
+          ],
+          "relation_texts": [
+            "South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role.",
+            "link",
+            "1941",
+            "LINDEN TRAVERS",
+            "ENID STAMP-TAYLOR",
+            "FELIX AYLMER",
+            "RONALD SHINER",
+            "MARCEL VARNEL",
+            "MAVIS VILLIERS",
+            "SOUTH AMERICAN GEORGE",
+            "GEORGE FORMBY",
+            "HERBERT LOMAS",
+            "COLUMBIA (BRITISH) PRODUCTIONS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel directed the film South American George.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Marcel Varnel directed the film South American George.",
+        "entity_ids": [
+          "\"MARCEL VARNEL\""
+        ],
+        "chunk_ids": [
+          "chunk-f8a766f30e8e11597bb81a8f5e4654ad"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Marcel Varnel directed the film South American George.",
+            "South American George South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role, Linden Travers, Enid Stamp- Taylor, Felix Aylmer, Ronald Shiner as Swifty, Mavis Villiers and Herbert Lomas. It was produced by Columbia( British) Productions."
+          ],
+          "relation_texts": [
+            "Marcel Varnel directed the film South American George.",
+            "link",
+            "MARCEL VARNEL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.",
+        "entity_ids": [
+          "\"PARIS\"",
+          "\"MARCEL VARNEL\"",
+          "\"MARCEL HYACINTHE LE BOZEC\""
+        ],
+        "chunk_ids": [
+          "chunk-4808ab08f97d603225189feecdb87ba5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.",
+            "Marcel Varnel Marcel Varnel (16 October 1892 – 13 July 1947) was a film director. He was born Marcel Hyacinthe le Bozec in Paris, France. Varnel started his working life on the Paris stage, soon becoming a director of musical comedies. In 1925 he moved to New York City working as director in several Broadway operettas, musicals and dramas for the Shubert family. This was followed by a move to Hollywood where he directed three low budget thrillers. In 1934, he moved to England and it was as director of British comedies initially working at British International Pictures , Elstree then in 1936 moving to Gainsborough Pictures where he produced his best films. Among the performers he worked with were Will Hay, The Crazy Gang, Arthur Askey and George Formby. He died in a car crash near Rake, West Sussex."
+          ],
+          "relation_texts": [
+            "Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.",
+            "link",
+            "PARIS",
+            "MARCEL VARNEL",
+            "MARCEL HYACINTHE LE BOZEC"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+        "entity_ids": [
+          "\"WILL HAY\"",
+          "\"MARCEL VARNEL\"",
+          "\"ASK A POLICEMAN\"",
+          "\"MOORE MARRIOTT\"",
+          "\"GRAHAM MOFFATT\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+            "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+          ],
+          "relation_texts": [
+            "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+            "link",
+            "WILL HAY",
+            "MARCEL VARNEL",
+            "ASK A POLICEMAN",
+            "MOORE MARRIOTT",
+            "GRAHAM MOFFATT"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of death is December 13, 1940.\"",
+        "branch": "relation",
+        "raw_score": 0.5866867303848267,
+        "hyperedge_text": "His date of death is December 13, 1940.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of death is December 13, 1940.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of death is December 13, 1940."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7eedcb18bd8ff211e7d28e4b6f89376f",
+            "hyperedge_name": "<hyperedge>\"His date of death is December 13, 1940.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of his death is recorded as 1 February 1685.\"",
+        "branch": "relation",
+        "raw_score": 0.5306836366653442,
+        "hyperedge_text": "The date of his death is recorded as 1 February 1685.",
+        "entity_ids": [
+          "\"1 FEBRUARY 1685\""
+        ],
+        "chunk_ids": [
+          "chunk-98e21cadb5b074a0a8681790b4b3087f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of his death is recorded as 1 February 1685.",
+            "William Alington, 3rd Baron Alington Major General William Alington, 3rd Baron Alington LL( bef. 1641 – 1 February 1685) was an Irish peer. Alington was the son of William Alington, 1st Baron Alington and Elizabeth Tollemache. He succeeded to the title of 3rd Baron Alington of Killard, Co. Cork circa March 1660, on the death of his brother the 2nd Baron who died without male issue. In 1664, he was elected Member of Parliament for Cambridge in a by-election to the Cavalier Parliament and was re-elected for the same constituency in 1679 and 1681. He was created 1st Baron Alington of Wymondley, Hertfordshire on 5 December 1682. He served as Constable of the Tower from 1679 to his death and as Lord- Lieutenant of Cambridgeshire from 1681 to his death."
+          ],
+          "relation_texts": [
+            "The date of his death is recorded as 1 February 1685.",
+            "link",
+            "1 FEBRUARY 1685"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-92f15181b6fdfab6e0e01d9a235d18df",
+            "hyperedge_name": "<hyperedge>\"The date of his death is recorded as 1 February 1685.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His death date was on September 5, 1960.\"",
+        "branch": "relation",
+        "raw_score": 0.5209023356437683,
+        "hyperedge_text": "His death date was on September 5, 1960.",
+        "entity_ids": [
+          "\"DEATH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0866c3f8d6fb59c7691bda418ca8c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His death date was on September 5, 1960.",
+            "Robert P. Kerr Robert P. Kerr (October 9, 1892 – September 5, 1960) was an American film director, actor and screenwriter. He directed 41 films between 1917 and 1928. He was born in Burlington, Colorado and died in Porterville, California from a heart attack."
+          ],
+          "relation_texts": [
+            "His death date was on September 5, 1960.",
+            "link",
+            "DEATH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf495e8cde0a4a19ab39b565836fdf64",
+            "hyperedge_name": "<hyperedge>\"His death date was on September 5, 1960.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of death for Frederick Light is unknown.\"",
+        "branch": "relation",
+        "raw_score": 0.5120664238929749,
+        "hyperedge_text": "The date of death for Frederick Light is unknown.",
+        "entity_ids": [
+          "\"UNKNOWN\""
+        ],
+        "chunk_ids": [
+          "chunk-a637ab3330339abbb2d2352bdddb2acd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of death for Frederick Light is unknown.",
+            "Frederick Light Frederick Light( born 1905, date of death unknown) was a British long- distance runner. He competed in the men's 5000 metres at the 1928 Summer Olympics."
+          ],
+          "relation_texts": [
+            "The date of death for Frederick Light is unknown.",
+            "link",
+            "UNKNOWN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b95dc8df4c81099f8148595f2d78c4bc",
+            "hyperedge_name": "<hyperedge>\"The date of death for Frederick Light is unknown.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His death date was March 29, 1966.\"",
+        "branch": "relation",
+        "raw_score": 0.5059401988983154,
+        "hyperedge_text": "His death date was March 29, 1966.",
+        "entity_ids": [
+          "\"MARCH 29, 1966\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His death date was March 29, 1966.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His death date was March 29, 1966.",
+            "link",
+            "MARCH 29, 1966"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8234e150aa284e1661396a7be23b7017",
+            "hyperedge_name": "<hyperedge>\"His death date was March 29, 1966.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her exact date of death remains unspecified, though it is estimated to be before the year 69.\"",
+        "branch": "relation",
+        "raw_score": 0.5058091878890991,
+        "hyperedge_text": "Her exact date of death remains unspecified, though it is estimated to be before the year 69.",
+        "entity_ids": [
+          "\"EXACT DATE OF DEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-8a899026112f02ddff716beb87859952"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her exact date of death remains unspecified, though it is estimated to be before the year 69.",
+            "Domitilla the Elder Flavia Domitilla Major(\" Major\", Latin for\" the elder\") Flavia Domitilla the Elder or Domitilla the Elder( died before 69, perhaps c. 65) was the wife of the Roman Emperor Vespasian."
+          ],
+          "relation_texts": [
+            "Her exact date of death remains unspecified, though it is estimated to be before the year 69.",
+            "link",
+            "EXACT DATE OF DEATH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-72adaf1042d0070ab8da3301cc8b2f48",
+            "hyperedge_name": "<hyperedge>\"Her exact date of death remains unspecified, though it is estimated to be before the year 69.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His life spanned from January 30, 1871, to December 13, 1940.\"",
+        "branch": "relation",
+        "raw_score": 0.49772846698760986,
+        "hyperedge_text": "His life spanned from January 30, 1871, to December 13, 1940.",
+        "entity_ids": [
+          "\"JANUARY 30, 1871\"",
+          "\"DECEMBER 13, 1940\""
+        ],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His life spanned from January 30, 1871, to December 13, 1940.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His life spanned from January 30, 1871, to December 13, 1940.",
+            "link",
+            "JANUARY 30, 1871",
+            "DECEMBER 13, 1940"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0d92fa04edd26b6389d2cc448f519045",
+            "hyperedge_name": "<hyperedge>\"His life spanned from January 30, 1871, to December 13, 1940.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The dates of his birth and death, 9 January 1759 and 20 March 1837 respectively, highlight his lifetime.\"",
+        "branch": "relation",
+        "raw_score": 0.4938068091869354,
+        "hyperedge_text": "The dates of his birth and death, 9 January 1759 and 20 March 1837 respectively, highlight his lifetime.",
+        "entity_ids": [
+          "\"LIFETIME\""
+        ],
+        "chunk_ids": [
+          "chunk-8ce9287b50c0e8bc7b988d910276a726"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The dates of his birth and death, 9 January 1759 and 20 March 1837 respectively, highlight his lifetime.",
+            "William, Prince of Solms-Braunfels Wilhelm Christian Karl, 3rd Prince of Solms Braunfels (9 January 1759, in Braunfels – 20 March 1837, in Braunfels) was by succession an immediate Prince, then a nobleman and head of the Princely House of Solms-Braunfels, a Prussian major general and Hessian deputy."
+          ],
+          "relation_texts": [
+            "The dates of his birth and death, 9 January 1759 and 20 March 1837 respectively, highlight his lifetime.",
+            "link",
+            "LIFETIME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ffe3e6e96eab82f67de36641fc45ccb9",
+            "hyperedge_name": "<hyperedge>\"The dates of his birth and death, 9 January 1759 and 20 March 1837 respectively, highlight his lifetime.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died on 29 December 1820.\"",
+        "branch": "relation",
+        "raw_score": 0.49185192584991455,
+        "hyperedge_text": "He died on 29 December 1820.",
+        "entity_ids": [
+          "\"29 DECEMBER 1820\""
+        ],
+        "chunk_ids": [
+          "chunk-e72247916f0167075e7ef05d53032345"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died on 29 December 1820.",
+            "Jean Baptiste Antoine Auget de Montyon Antoine Jean Baptiste Robert Auget, Baron de Montyon( 23 December 173329 December 1820) was a French philanthropist, born in Paris."
+          ],
+          "relation_texts": [
+            "He died on 29 December 1820.",
+            "link",
+            "29 DECEMBER 1820"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a6e31ec45556aeb4f63a0e57535f8ec8",
+            "hyperedge_name": "<hyperedge>\"He died on 29 December 1820.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He passed away on 28 April 1910.\"",
+        "branch": "relation",
+        "raw_score": 0.48948007822036743,
+        "hyperedge_text": "He passed away on 28 April 1910.",
+        "entity_ids": [
+          "\"28 APRIL 1910\""
+        ],
+        "chunk_ids": [
+          "chunk-c9e607b6ae63847d9e03697c9485128b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He passed away on 28 April 1910.",
+            "Arthur Beauchamp Arthur Beauchamp( 1827 – 28 April 1910) was a Member of Parliament from New Zealand. He is remembered as the father of Harold Beauchamp, who rose to fame as chairman of the Bank of New Zealand and was the father of writer Katherine Mansfield."
+          ],
+          "relation_texts": [
+            "He passed away on 28 April 1910.",
+            "link",
+            "28 APRIL 1910"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0c554170e00fb4d95ccd434c1cabeb6b",
+            "hyperedge_name": "<hyperedge>\"He passed away on 28 April 1910.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.\"",
+        "branch": "semantic",
+        "raw_score": 0.8209437131881714,
+        "hyperedge_text": "Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.",
+        "entity_ids": [
+          "\"16 OCTOBER 1892\"",
+          "\"13 JULY 1947\""
+        ],
+        "chunk_ids": [
+          "chunk-4808ab08f97d603225189feecdb87ba5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.",
+            "Marcel Varnel Marcel Varnel (16 October 1892 – 13 July 1947) was a film director. He was born Marcel Hyacinthe le Bozec in Paris, France. Varnel started his working life on the Paris stage, soon becoming a director of musical comedies. In 1925 he moved to New York City working as director in several Broadway operettas, musicals and dramas for the Shubert family. This was followed by a move to Hollywood where he directed three low budget thrillers. In 1934, he moved to England and it was as director of British comedies initially working at British International Pictures , Elstree then in 1936 moving to Gainsborough Pictures where he produced his best films. Among the performers he worked with were Will Hay, The Crazy Gang, Arthur Askey and George Formby. He died in a car crash near Rake, West Sussex."
+          ],
+          "relation_texts": [
+            "Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.",
+            "link",
+            "16 OCTOBER 1892",
+            "13 JULY 1947"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-40fe828805714efec0b443359cffb90a",
+            "hyperedge_name": "<hyperedge>\"Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.\"",
+        "branch": "semantic",
+        "raw_score": 0.6980879306793213,
+        "hyperedge_text": "Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.",
+        "entity_ids": [
+          "\"PARIS\"",
+          "\"MARCEL VARNEL\"",
+          "\"MARCEL HYACINTHE LE BOZEC\""
+        ],
+        "chunk_ids": [
+          "chunk-4808ab08f97d603225189feecdb87ba5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.",
+            "Marcel Varnel Marcel Varnel (16 October 1892 – 13 July 1947) was a film director. He was born Marcel Hyacinthe le Bozec in Paris, France. Varnel started his working life on the Paris stage, soon becoming a director of musical comedies. In 1925 he moved to New York City working as director in several Broadway operettas, musicals and dramas for the Shubert family. This was followed by a move to Hollywood where he directed three low budget thrillers. In 1934, he moved to England and it was as director of British comedies initially working at British International Pictures , Elstree then in 1936 moving to Gainsborough Pictures where he produced his best films. Among the performers he worked with were Will Hay, The Crazy Gang, Arthur Askey and George Formby. He died in a car crash near Rake, West Sussex."
+          ],
+          "relation_texts": [
+            "Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.",
+            "link",
+            "PARIS",
+            "MARCEL VARNEL",
+            "MARCEL HYACINTHE LE BOZEC"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-05d2061b5a8f86632e5c641c74b20419",
+            "hyperedge_name": "<hyperedge>\"Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel's career included directing several Broadway operettas and musicals.\"",
+        "branch": "semantic",
+        "raw_score": 0.5717458724975586,
+        "hyperedge_text": "Marcel Varnel's career included directing several Broadway operettas and musicals.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-4808ab08f97d603225189feecdb87ba5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Marcel Varnel's career included directing several Broadway operettas and musicals.",
+            "Marcel Varnel Marcel Varnel (16 October 1892 – 13 July 1947) was a film director. He was born Marcel Hyacinthe le Bozec in Paris, France. Varnel started his working life on the Paris stage, soon becoming a director of musical comedies. In 1925 he moved to New York City working as director in several Broadway operettas, musicals and dramas for the Shubert family. This was followed by a move to Hollywood where he directed three low budget thrillers. In 1934, he moved to England and it was as director of British comedies initially working at British International Pictures , Elstree then in 1936 moving to Gainsborough Pictures where he produced his best films. Among the performers he worked with were Will Hay, The Crazy Gang, Arthur Askey and George Formby. He died in a car crash near Rake, West Sussex."
+          ],
+          "relation_texts": [
+            "Marcel Varnel's career included directing several Broadway operettas and musicals."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-81db81fc3c04161fb424b2bfb7ce9dbd",
+            "hyperedge_name": "<hyperedge>\"Marcel Varnel's career included directing several Broadway operettas and musicals.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Robert Vernay (May 30, 1907 in Paris – October 17, 1979 in Paris) was a French director and screenwriter.\"",
+        "branch": "semantic",
+        "raw_score": 0.5305052995681763,
+        "hyperedge_text": "Robert Vernay (May 30, 1907 in Paris – October 17, 1979 in Paris) was a French director and screenwriter.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"SCREENWRITER\"",
+          "\"PARIS\"",
+          "\"FRANCE\"",
+          "\"ROBERT VERNAY\""
+        ],
+        "chunk_ids": [
+          "chunk-e8069afbe3f7e90c07a856302e878380"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Robert Vernay (May 30, 1907 in Paris – October 17, 1979 in Paris) was a French director and screenwriter.",
+            "Robert Vernay Robert Vernay (May 30, 1907 in Paris – October 17, 1979 in Paris) was a French director and screenwriter."
+          ],
+          "relation_texts": [
+            "Robert Vernay (May 30, 1907 in Paris – October 17, 1979 in Paris) was a French director and screenwriter.",
+            "link",
+            "DIRECTOR",
+            "SCREENWRITER",
+            "PARIS",
+            "FRANCE",
+            "ROBERT VERNAY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8609f96b2febc28f3aecfd1468d307ac",
+            "hyperedge_name": "<hyperedge>\"Robert Vernay (May 30, 1907 in Paris – October 17, 1979 in Paris) was a French director and screenwriter.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Varnel started his working life on the Paris stage, soon becoming a director of musical comedies.\"",
+        "branch": "semantic",
+        "raw_score": 0.5218842029571533,
+        "hyperedge_text": "Varnel started his working life on the Paris stage, soon becoming a director of musical comedies.",
+        "entity_ids": [
+          "\"PARIS STAGE\"",
+          "\"MUSICAL COMEDIES\""
+        ],
+        "chunk_ids": [
+          "chunk-4808ab08f97d603225189feecdb87ba5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Varnel started his working life on the Paris stage, soon becoming a director of musical comedies.",
+            "Marcel Varnel Marcel Varnel (16 October 1892 – 13 July 1947) was a film director. He was born Marcel Hyacinthe le Bozec in Paris, France. Varnel started his working life on the Paris stage, soon becoming a director of musical comedies. In 1925 he moved to New York City working as director in several Broadway operettas, musicals and dramas for the Shubert family. This was followed by a move to Hollywood where he directed three low budget thrillers. In 1934, he moved to England and it was as director of British comedies initially working at British International Pictures , Elstree then in 1936 moving to Gainsborough Pictures where he produced his best films. Among the performers he worked with were Will Hay, The Crazy Gang, Arthur Askey and George Formby. He died in a car crash near Rake, West Sussex."
+          ],
+          "relation_texts": [
+            "Varnel started his working life on the Paris stage, soon becoming a director of musical comedies.",
+            "link",
+            "PARIS STAGE",
+            "MUSICAL COMEDIES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4054bd3892483ccd364fcf1de7d078d0",
+            "hyperedge_name": "<hyperedge>\"Varnel started his working life on the Paris stage, soon becoming a director of musical comedies.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Varnel started his working life on the Paris stage, directing musical comedies.\"",
+        "branch": "semantic",
+        "raw_score": 0.5146448612213135,
+        "hyperedge_text": "Varnel started his working life on the Paris stage, directing musical comedies.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-4808ab08f97d603225189feecdb87ba5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Varnel started his working life on the Paris stage, directing musical comedies.",
+            "Marcel Varnel Marcel Varnel (16 October 1892 – 13 July 1947) was a film director. He was born Marcel Hyacinthe le Bozec in Paris, France. Varnel started his working life on the Paris stage, soon becoming a director of musical comedies. In 1925 he moved to New York City working as director in several Broadway operettas, musicals and dramas for the Shubert family. This was followed by a move to Hollywood where he directed three low budget thrillers. In 1934, he moved to England and it was as director of British comedies initially working at British International Pictures , Elstree then in 1936 moving to Gainsborough Pictures where he produced his best films. Among the performers he worked with were Will Hay, The Crazy Gang, Arthur Askey and George Formby. He died in a car crash near Rake, West Sussex."
+          ],
+          "relation_texts": [
+            "Varnel started his working life on the Paris stage, directing musical comedies."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-090902187658fde4c0f0e87973331e11",
+            "hyperedge_name": "<hyperedge>\"Varnel started his working life on the Paris stage, directing musical comedies.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Reymond was born on 7 July 1911, date of death unknown.\"",
+        "branch": "semantic",
+        "raw_score": 0.5003424882888794,
+        "hyperedge_text": "Marcel Reymond was born on 7 July 1911, date of death unknown.",
+        "entity_ids": [
+          "\"DATE OF DEATH UNKNOWN\"",
+          "\"7 JULY 1911\""
+        ],
+        "chunk_ids": [
+          "chunk-f5977191348d3f71becdb03617dd35ae"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Marcel Reymond was born on 7 July 1911, date of death unknown.",
+            "Marcel Reymond Marcel Reymond( or Raymond, born 7 July 1911, date of death unknown) was a Swiss ski jumper who competed in the early 1930s. He won a gold medal in the individual large hill at the 1933 FIS Nordic World Ski Championships in Innsbruck."
+          ],
+          "relation_texts": [
+            "Marcel Reymond was born on 7 July 1911, date of death unknown.",
+            "link",
+            "DATE OF DEATH UNKNOWN",
+            "7 JULY 1911"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-97a7a83483902f8969ed4b37dd03e9c9",
+            "hyperedge_name": "<hyperedge>\"Marcel Reymond was born on 7 July 1911, date of death unknown.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Corneau died in Paris on 30 August 2010 from cancer, aged 67.\"",
+        "branch": "semantic",
+        "raw_score": 0.4763757586479187,
+        "hyperedge_text": "Corneau died in Paris on 30 August 2010 from cancer, aged 67.",
+        "entity_ids": [
+          "\"PARIS\"",
+          "\"CANCER\""
+        ],
+        "chunk_ids": [
+          "chunk-fcd9e9345fd84c564ff6fda688545bea"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Corneau died in Paris on 30 August 2010 from cancer, aged 67.",
+            "Alain Corneau Alain Corneau (7 August 1943 – 30 August 2010) was a French film director and writer. Corneau was born in Meung-sur-Loire, Loiret. Originally a musician, he worked with Costa-Gavras as an assistant, which was also his first opportunity to work with the actor Yves Montand, with whom he would collaborate three times later in his career, including \"Police Python 357 \" (1976) and \"La Menace\" (1977). He directed Gérard Depardieu in the screen adaptation of \"Tous les matins du monde\" in 1991. Corneau died in Paris on 30 August 2010 from cancer, aged 67 and was interred at Père Lachaise Cemetery."
+          ],
+          "relation_texts": [
+            "Corneau died in Paris on 30 August 2010 from cancer, aged 67.",
+            "link",
+            "PARIS",
+            "CANCER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-227305ac1d11e68571aca63b7884e81b",
+            "hyperedge_name": "<hyperedge>\"Corneau died in Paris on 30 August 2010 from cancer, aged 67.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Charles Vidor was born on July 27, 1900 and passed away on June 4, 1959.\"",
+        "branch": "semantic",
+        "raw_score": 0.4733726978302002,
+        "hyperedge_text": "Charles Vidor was born on July 27, 1900 and passed away on June 4, 1959.",
+        "entity_ids": [
+          "\"JULY 27, 1900\"",
+          "\"JUNE 4, 1959\""
+        ],
+        "chunk_ids": [
+          "chunk-bc31dbe86295a7c2da9f0176b48179f9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Charles Vidor was born on July 27, 1900 and passed away on June 4, 1959.",
+            "Charles Vidor Charles Vidor( July 27, 1900 June 4, 1959) was a Hungarian film director. Among his film successes are\" The Bridge\"( 1929),\" Cover Girl\"( 1944),\" A Song to Remember\"( 1945),\" Gilda\"( 1946),\" The Loves of Carmen\"( 1948),\" Love Me or Leave Me\"( 1955),\" The Swan\"( 1956),\" The Joker Is Wild\"( 1957), and\" A Farewell to Arms\"( 1957)."
+          ],
+          "relation_texts": [
+            "Charles Vidor was born on July 27, 1900 and passed away on June 4, 1959.",
+            "link",
+            "JULY 27, 1900",
+            "JUNE 4, 1959"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a75e4c224cb31ed956a022ff66491ebc",
+            "hyperedge_name": "<hyperedge>\"Charles Vidor was born on July 27, 1900 and passed away on June 4, 1959.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Charles Marie Louis Joseph Sarrabezolles died on February 11, 1971.\"",
+        "branch": "semantic",
+        "raw_score": 0.4700119197368622,
+        "hyperedge_text": "Charles Marie Louis Joseph Sarrabezolles died on February 11, 1971.",
+        "entity_ids": [
+          "\"FEBRUARY 11, 1971\""
+        ],
+        "chunk_ids": [
+          "chunk-0aeb5a6564841127c0e29c42c6ddf223"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Charles Marie Louis Joseph Sarrabezolles died on February 11, 1971.",
+            "Charles Marie Louis Joseph Sarrabezolles Charles Marie Louis Joseph Sarrabezolles( December 27, 1888 – February 11, 1971), also known as\" Carlo Sarrabezolles\"( or Charles or Charles- Marie), was a French sculptor."
+          ],
+          "relation_texts": [
+            "Charles Marie Louis Joseph Sarrabezolles died on February 11, 1971.",
+            "link",
+            "FEBRUARY 11, 1971"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6b0c3ea41a830d8096b93e9ef57cf93d",
+            "hyperedge_name": "<hyperedge>\"Charles Marie Louis Joseph Sarrabezolles died on February 11, 1971.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.\"",
+        "hyperedge_text": "Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6980879306793213,
+        "fusion_score": 0.5396175861358643,
+        "entity_ids": [
+          "\"PARIS\"",
+          "\"MARCEL VARNEL\"",
+          "\"MARCEL HYACINTHE LE BOZEC\""
+        ],
+        "chunk_ids": [
+          "chunk-4808ab08f97d603225189feecdb87ba5"
+        ],
+        "evidence_texts": [
+          "Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.",
+          "Marcel Varnel Marcel Varnel (16 October 1892 – 13 July 1947) was a film director. He was born Marcel Hyacinthe le Bozec in Paris, France. Varnel started his working life on the Paris stage, soon becoming a director of musical comedies. In 1925 he moved to New York City working as director in several Broadway operettas, musicals and dramas for the Shubert family. This was followed by a move to Hollywood where he directed three low budget thrillers. In 1934, he moved to England and it was as director of British comedies initially working at British International Pictures , Elstree then in 1936 moving to Gainsborough Pictures where he produced his best films. Among the performers he worked with were Will Hay, The Crazy Gang, Arthur Askey and George Formby. He died in a car crash near Rake, West Sussex."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.698088,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.539618
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.\"",
+        "hyperedge_text": "Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8209437131881714,
+        "fusion_score": 0.5641887426376343,
+        "entity_ids": [
+          "\"16 OCTOBER 1892\"",
+          "\"13 JULY 1947\""
+        ],
+        "chunk_ids": [
+          "chunk-4808ab08f97d603225189feecdb87ba5"
+        ],
+        "evidence_texts": [
+          "Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.",
+          "Marcel Varnel Marcel Varnel (16 October 1892 – 13 July 1947) was a film director. He was born Marcel Hyacinthe le Bozec in Paris, France. Varnel started his working life on the Paris stage, soon becoming a director of musical comedies. In 1925 he moved to New York City working as director in several Broadway operettas, musicals and dramas for the Shubert family. This was followed by a move to Hollywood where he directed three low budget thrillers. In 1934, he moved to England and it was as director of British comedies initially working at British International Pictures , Elstree then in 1936 moving to Gainsborough Pictures where he produced his best films. Among the performers he worked with were Will Hay, The Crazy Gang, Arthur Askey and George Formby. He died in a car crash near Rake, West Sussex."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.820944,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.564189
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role.\"",
+        "hyperedge_text": "South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1941\"",
+          "\"LINDEN TRAVERS\"",
+          "\"ENID STAMP-TAYLOR\"",
+          "\"FELIX AYLMER\"",
+          "\"RONALD SHINER\"",
+          "\"MARCEL VARNEL\"",
+          "\"MAVIS VILLIERS\"",
+          "\"SOUTH AMERICAN GEORGE\"",
+          "\"GEORGE FORMBY\"",
+          "\"HERBERT LOMAS\"",
+          "\"COLUMBIA (BRITISH) PRODUCTIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-f8a766f30e8e11597bb81a8f5e4654ad"
+        ],
+        "evidence_texts": [
+          "South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role.",
+          "South American George South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role, Linden Travers, Enid Stamp- Taylor, Felix Aylmer, Ronald Shiner as Swifty, Mavis Villiers and Herbert Lomas. It was produced by Columbia( British) Productions."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel directed the film South American George.\"",
+        "hyperedge_text": "Marcel Varnel directed the film South American George.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"MARCEL VARNEL\""
+        ],
+        "chunk_ids": [
+          "chunk-f8a766f30e8e11597bb81a8f5e4654ad"
+        ],
+        "evidence_texts": [
+          "Marcel Varnel directed the film South American George.",
+          "South American George South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role, Linden Travers, Enid Stamp- Taylor, Felix Aylmer, Ronald Shiner as Swifty, Mavis Villiers and Herbert Lomas. It was produced by Columbia( British) Productions."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\"",
+        "hyperedge_text": "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"WILL HAY\"",
+          "\"MARCEL VARNEL\"",
+          "\"ASK A POLICEMAN\"",
+          "\"MOORE MARRIOTT\"",
+          "\"GRAHAM MOFFATT\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "evidence_texts": [
+          "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+          "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ]
+  }
+]

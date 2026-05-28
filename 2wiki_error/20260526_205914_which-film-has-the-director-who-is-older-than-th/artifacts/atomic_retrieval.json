@@ -1,0 +1,3279 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Colierul De Turcoaze?",
+    "retrieval_question": "Who is the director of Colierul De Turcoaze?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Colierul De Turcoaze?",
+      "retrieval_question": "Who is the director of Colierul De Turcoaze?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078521370887756,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027865171432495,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4973045885562897,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49680250883102417,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49399447441101074,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48563748598098755,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4840206205844879,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48202356696128845,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47992169857025146,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.4777419865131378,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "semantic",
+        "raw_score": 0.6734473705291748,
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4e5b8918faf380deb1fd0d847ba177eb",
+            "hyperedge_name": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "semantic",
+        "raw_score": 0.656187891960144,
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-447232b23b86f60b6cb8957c6dc4eac7",
+            "hyperedge_name": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Halit Refiğ.\"",
+        "branch": "semantic",
+        "raw_score": 0.46341556310653687,
+        "hyperedge_text": "The film was directed by Halit Refiğ.",
+        "entity_ids": [
+          "\"HALIT REFIĞ\""
+        ],
+        "chunk_ids": [
+          "chunk-5973ec83c6e70586d415ff341b8ad7af"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Halit Refiğ.",
+            "Teyzem Teyzem is a 1986 Turkish drama film, directed by Halit Refiğ and starring Müjde Ar, Yasar Alptekin, and Mehmet Akan."
+          ],
+          "relation_texts": [
+            "The film was directed by Halit Refiğ.",
+            "link",
+            "HALIT REFIĞ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-44461d3c93ebda529e7088ee340b032d",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Halit Refiğ.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The films directed by Gheorghe Vitanidis were produced in Romania.\"",
+        "branch": "semantic",
+        "raw_score": 0.4623352885246277,
+        "hyperedge_text": "The films directed by Gheorghe Vitanidis were produced in Romania.",
+        "entity_ids": [
+          "\"ROMANIA\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The films directed by Gheorghe Vitanidis were produced in Romania.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "The films directed by Gheorghe Vitanidis were produced in Romania.",
+            "link",
+            "ROMANIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-455f9970f2c216222a5fb327e83a1a81",
+            "hyperedge_name": "<hyperedge>\"The films directed by Gheorghe Vitanidis were produced in Romania.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.\"",
+        "branch": "semantic",
+        "raw_score": 0.4578532576560974,
+        "hyperedge_text": "It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.",
+        "entity_ids": [
+          "\"STORY\"",
+          "\"ELISABETA BOSTAN\"",
+          "\"PETRE ISPIRESCU\"",
+          "\"TINEREȚE FĂRĂ BĂTRÂNEȚE\"",
+          "\"VIAȚĂ FĂRĂ DE MOARTE\""
+        ],
+        "chunk_ids": [
+          "chunk-3afac4f5f82fabcc15fcfef4ef6fa040"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.",
+            "Kingdom in the Clouds Kingdom in the Clouds( Romanian:\" Tinerețe fără bătrânețe\"- literal title:\" Youth Without Old Age\") is a Romanian fantasy film from 1969. Is directed and written by Elisabeta Bostan from a story by Petre Ispirescu(\" Tinerețe fără bătrânețe și viață fără de moarte\")."
+          ],
+          "relation_texts": [
+            "It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.",
+            "link",
+            "STORY",
+            "ELISABETA BOSTAN",
+            "PETRE ISPIRESCU",
+            "TINEREȚE FĂRĂ BĂTRÂNEȚE",
+            "VIAȚĂ FĂRĂ DE MOARTE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c49a04b6aa62e9672ea508d3c83614f1",
+            "hyperedge_name": "<hyperedge>\"It is directed and written by Elisabeta Bostan from a story by Petre Ispirescu.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has left a lasting impact on Turkish storytelling.\"",
+        "branch": "semantic",
+        "raw_score": 0.45327675342559814,
+        "hyperedge_text": "As a director, he has left a lasting impact on Turkish storytelling.",
+        "entity_ids": [
+          "\"IMPACT\""
+        ],
+        "chunk_ids": [
+          "chunk-afddd1564bf751c764e871c8befcbdf8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has left a lasting impact on Turkish storytelling.",
+            "Kartal Tibet Kartal Tibet( born 27 March 1938) is a Turkish actor and film director. Some of his famous films include\" Ölmeyen AşkDağlar KızıSenede Bir GünSultanZübük Gol Kralı\", and\" Şalvar Davası\". Tibet is also known for his action roles, especially that of the title series."
+          ],
+          "relation_texts": [
+            "As a director, he has left a lasting impact on Turkish storytelling.",
+            "link",
+            "IMPACT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fe183bfed5f8b456e718d70f78877263",
+            "hyperedge_name": "<hyperedge>\"As a director, he has left a lasting impact on Turkish storytelling.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Halit Refiğ.\"",
+        "branch": "semantic",
+        "raw_score": 0.448469340801239,
+        "hyperedge_text": "It was directed by Halit Refiğ.",
+        "entity_ids": [
+          "\"HALIT REFIĞ\""
+        ],
+        "chunk_ids": [
+          "chunk-f009e6055255378682bbb84043a3f392"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was directed by Halit Refiğ.",
+            "Stranger in the City (film) Stranger in the City is a 1962 Turkish drama film directed by Halit Refiğ. It was entered into the 3rd Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "It was directed by Halit Refiğ.",
+            "link",
+            "HALIT REFIĞ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-117bbc62ed0f9b6f09c57d568a79b335",
+            "hyperedge_name": "<hyperedge>\"It was directed by Halit Refiğ.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.\"",
+        "branch": "semantic",
+        "raw_score": 0.44440171122550964,
+        "hyperedge_text": "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+        "entity_ids": [
+          "\"DINU COCEA\""
+        ],
+        "chunk_ids": [
+          "chunk-4dca11ed4daa89c6b795d4ebf6b716cd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+            "Dinu Cocea Constantin\" Dinu\" Cocea( 22 September 1929 – 26 December 2013) was a Romanian actor, film director and screenwriter. Dinu Cocea was born into a well- known theatrical family; his relatives included N. D. Cocea, Alice Cocéa, and Dina Cocea. He studied at the Institute of Theatre and Cinematographic Art in Bucharest, graduating in 1953. Cocea died from heart failure on 26 December 2013, aged 84, in Paris, France, where he had lived since 1986. He was survived by his daughter, Oana."
+          ],
+          "relation_texts": [
+            "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+            "link",
+            "DINU COCEA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-96cc1313636b59a3dd06c5de5697287c",
+            "hyperedge_name": "<hyperedge>\"Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Yeşim Ustaoğlu.\"",
+        "branch": "semantic",
+        "raw_score": 0.43828797340393066,
+        "hyperedge_text": "The film was directed by Yeşim Ustaoğlu.",
+        "entity_ids": [
+          "\"YEŞIM USTAOĞLU\""
+        ],
+        "chunk_ids": [
+          "chunk-a90d4ed8f25bfa991699eed6176057ce"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Yeşim Ustaoğlu.",
+            "Waiting for the Clouds Waiting for the Clouds( Bulutlari Beklerken) is a film from 2003, Turkey. The film was directed by Yeşim Ustaoğlu. It is based on a novel by Georgios Andreadis titled\" Tamama\". The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian. The film was nominated in Montréal World Film Festival 2004."
+          ],
+          "relation_texts": [
+            "The film was directed by Yeşim Ustaoğlu.",
+            "link",
+            "YEŞIM USTAOĞLU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3c172291c7e20e8019cab3b2c4bb6b0b",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Yeşim Ustaoğlu.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Known for his roles in 'The Paper Will Be Blue' and '4 Months, 3 Weeks and 2 Days,' Adi Cărăuleanu has made significant contributions to Romanian cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.42486244440078735,
+        "hyperedge_text": "Known for his roles in 'The Paper Will Be Blue' and '4 Months, 3 Weeks and 2 Days,' Adi Cărăuleanu has made significant contributions to Romanian cinema.",
+        "entity_ids": [
+          "\"CONTRIBUTIONS TO ROMANIAN CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-86c24c0af0228d15d6e475c49aeef5ed"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Known for his roles in 'The Paper Will Be Blue' and '4 Months, 3 Weeks and 2 Days,' Adi Cărăuleanu has made significant contributions to Romanian cinema.",
+            "Adi Cărăuleanu Adi Cărăuleanu( born 8 March 1957) is a Romanian actor known for his roles in\" The Paper Will Be Blue\"( 2006) and Cristian Mungiu's Palme d' Or-winning 2007 film\" 4 Months, 3 Weeks and 2 Days\". Born in Calafat, Cărăuleanu completed his studies at the Institute of Theatre and Cinema Art in Bucharest in 1981. From 1996 to 2015, he served as the artistic director at Iași National Theatre."
+          ],
+          "relation_texts": [
+            "Known for his roles in 'The Paper Will Be Blue' and '4 Months, 3 Weeks and 2 Days,' Adi Cărăuleanu has made significant contributions to Romanian cinema.",
+            "link",
+            "CONTRIBUTIONS TO ROMANIAN CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c68861adf3a3524e9170010d6da7fc1f",
+            "hyperedge_name": "<hyperedge>\"Known for his roles in 'The Paper Will Be Blue' and '4 Months, 3 Weeks and 2 Days,' Adi Cărăuleanu has made significant contributions to Romanian cinema.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6734473705291748,
+        "fusion_score": 0.534689474105835,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.673447,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534689
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.656187891960144,
+        "fusion_score": 0.5312375783920289,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.656188,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531238
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has left a lasting impact on Turkish storytelling.\"",
+        "hyperedge_text": "As a director, he has left a lasting impact on Turkish storytelling.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.45327675342559814,
+        "fusion_score": 0.4906553506851197,
+        "entity_ids": [
+          "\"IMPACT\""
+        ],
+        "chunk_ids": [
+          "chunk-afddd1564bf751c764e871c8befcbdf8"
+        ],
+        "evidence_texts": [
+          "As a director, he has left a lasting impact on Turkish storytelling.",
+          "Kartal Tibet Kartal Tibet( born 27 March 1938) is a Turkish actor and film director. Some of his famous films include\" Ölmeyen AşkDağlar KızıSenede Bir GünSultanZübük Gol Kralı\", and\" Şalvar Davası\". Tibet is also known for his action roles, especially that of the title series."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.453277,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.490655
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.\"",
+        "hyperedge_text": "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.44440171122550964,
+        "fusion_score": 0.48888034224510196,
+        "entity_ids": [
+          "\"DINU COCEA\""
+        ],
+        "chunk_ids": [
+          "chunk-4dca11ed4daa89c6b795d4ebf6b716cd"
+        ],
+        "evidence_texts": [
+          "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+          "Dinu Cocea Constantin\" Dinu\" Cocea( 22 September 1929 – 26 December 2013) was a Romanian actor, film director and screenwriter. Dinu Cocea was born into a well- known theatrical family; his relatives included N. D. Cocea, Alice Cocéa, and Dina Cocea. He studied at the Institute of Theatre and Cinematographic Art in Bucharest, graduating in 1953. Cocea died from heart failure on 26 December 2013, aged 84, in Paris, France, where he had lived since 1986. He was survived by his daughter, Oana."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.444402,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.48888
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25314085483551024,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.253141
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Leo And Loree?",
+    "retrieval_question": "Who is the director of Leo And Loree?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Leo And Loree?",
+      "retrieval_question": "Who is the director of Leo And Loree?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "link",
+            "LEO AND LOREE",
+            "DONNY MOST",
+            "JERRY PARIS",
+            "LINDA PURL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078521370887756,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027865171432495,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4973045885562897,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49680250883102417,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49399447441101074,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48563748598098755,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4840206205844879,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48202356696128845,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47992169857025146,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.4777419865131378,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "branch": "semantic",
+        "raw_score": 0.6454430818557739,
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "link",
+            "LEO AND LOREE",
+            "DONNY MOST",
+            "JERRY PARIS",
+            "LINDA PURL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b2fd86cb3df6e1945060e8f3b15ce037",
+            "hyperedge_name": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film showcases the charm of its main characters, Leo and Loree.\"",
+        "branch": "semantic",
+        "raw_score": 0.6359765529632568,
+        "hyperedge_text": "The film showcases the charm of its main characters, Leo and Loree.",
+        "entity_ids": [
+          "\"MAIN CHARACTERS\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film showcases the charm of its main characters, Leo and Loree.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "The film showcases the charm of its main characters, Leo and Loree.",
+            "link",
+            "MAIN CHARACTERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8d7aa3a96dfa536c1412a5154cb24cec",
+            "hyperedge_name": "<hyperedge>\"The film showcases the charm of its main characters, Leo and Loree.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\"",
+        "branch": "semantic",
+        "raw_score": 0.5787108540534973,
+        "hyperedge_text": "The film Leo and Loree is classified as a romantic comedy.",
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Leo and Loree is classified as a romantic comedy.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "The film Leo and Loree is classified as a romantic comedy.",
+            "link",
+            "ROMANTIC COMEDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ca01db4d71b2442ceee64eac73073642",
+            "hyperedge_name": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Leo D. Maloney.\"",
+        "branch": "semantic",
+        "raw_score": 0.5297304391860962,
+        "hyperedge_text": "The film was directed by Leo D. Maloney.",
+        "entity_ids": [
+          "\"LEO D. MALONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-11670d51810457cc45b65cf742eb8854"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Leo D. Maloney.",
+            "The Boss of Rustler's Roost The Boss of Rustler's Roost is a 1928 American silent western film directed by Leo D. Maloney and starring Eugenia Gilbert, Ben Corbett and Tom London."
+          ],
+          "relation_texts": [
+            "The film was directed by Leo D. Maloney.",
+            "link",
+            "LEO D. MALONEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-223bccb5f7a3dbca5116d06259848f48",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Leo D. Maloney.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Leo D. Maloney.\"",
+        "branch": "semantic",
+        "raw_score": 0.5169179439544678,
+        "hyperedge_text": "It was directed by Leo D. Maloney.",
+        "entity_ids": [
+          "\"LEO D. MALONEY\""
+        ],
+        "chunk_ids": [
+          "chunk-0638400ec1c0e2faff8010f5d1d50b86"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was directed by Leo D. Maloney.",
+            "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+          ],
+          "relation_texts": [
+            "It was directed by Leo D. Maloney.",
+            "link",
+            "LEO D. MALONEY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6a56b3e4b9fd6517f6eb86f12dd5c3c1",
+            "hyperedge_name": "<hyperedge>\"It was directed by Leo D. Maloney.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.\"",
+        "branch": "semantic",
+        "raw_score": 0.45080214738845825,
+        "hyperedge_text": "Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.",
+        "entity_ids": [
+          "\"11 JANUARY 1932\"",
+          "\"2 DECEMBER 2003\""
+        ],
+        "chunk_ids": [
+          "chunk-4b6200f98f0955a42a753dcd5cac3589"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.",
+            "Fernando Di Leo Fernando Di Leo( 11 January 1932 – 2 December 2003) was an Italian film director and script writer born in San Ferdinando di Puglia, Italy. During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43. His films influenced many popular contemporary directors, such as Quentin Tarantino and John Woo. Di Leo started his career mostly writing scripts for spaghetti westerns. He worked on the script for\" Per un pugno di dollariA Fistful of Dollars\", 1964) and later as assistant director and assistant to Sergio Leone in\" Per qualche dollaro in più For a Few Dollars More\", 1965). Later, he wrote scripts for such westerns as\" Navajo Joe\"( 1966) and\" Johnny Yuma\"( 1967). Di Leo is now best remembered for his\" poliziotteschi\" films, especially the\" Milieu Trilogy\", which he both wrote and directed. The trilogy contains\" Caliber 9\"( 1..."
+          ],
+          "relation_texts": [
+            "Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.",
+            "link",
+            "11 JANUARY 1932",
+            "2 DECEMBER 2003"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bc263a7cf6c427d7a9874a09d01aaecf",
+            "hyperedge_name": "<hyperedge>\"Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo D. Maloney directed and starred in The Outlaw Express.\"",
+        "branch": "semantic",
+        "raw_score": 0.4444691836833954,
+        "hyperedge_text": "Leo D. Maloney directed and starred in The Outlaw Express.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"STAR\""
+        ],
+        "chunk_ids": [
+          "chunk-0638400ec1c0e2faff8010f5d1d50b86"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Leo D. Maloney directed and starred in The Outlaw Express.",
+            "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+          ],
+          "relation_texts": [
+            "Leo D. Maloney directed and starred in The Outlaw Express.",
+            "link",
+            "DIRECTOR",
+            "STAR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-70047a1e6238e6f7c8f6d71a51901ca9",
+            "hyperedge_name": "<hyperedge>\"Leo D. Maloney directed and starred in The Outlaw Express.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directors like Leo D. Maloney contributed significantly to the production of early westerns.\"",
+        "branch": "semantic",
+        "raw_score": 0.44276103377342224,
+        "hyperedge_text": "Directors like Leo D. Maloney contributed significantly to the production of early westerns.",
+        "entity_ids": [
+          "\"EARLY WESTERNS\""
+        ],
+        "chunk_ids": [
+          "chunk-11670d51810457cc45b65cf742eb8854"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Directors like Leo D. Maloney contributed significantly to the production of early westerns.",
+            "The Boss of Rustler's Roost The Boss of Rustler's Roost is a 1928 American silent western film directed by Leo D. Maloney and starring Eugenia Gilbert, Ben Corbett and Tom London."
+          ],
+          "relation_texts": [
+            "Directors like Leo D. Maloney contributed significantly to the production of early westerns.",
+            "link",
+            "EARLY WESTERNS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9b3650fae6f84e37e59f11dfa6ed0030",
+            "hyperedge_name": "<hyperedge>\"Directors like Leo D. Maloney contributed significantly to the production of early westerns.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Un giorno da leoni (internationally released as A Day for Lionhearts) is a 1961 Italian war-drama film directed by Nanni Loy.\"",
+        "branch": "semantic",
+        "raw_score": 0.4414110779762268,
+        "hyperedge_text": "Un giorno da leoni (internationally released as A Day for Lionhearts) is a 1961 Italian war-drama film directed by Nanni Loy.",
+        "entity_ids": [
+          "\"1961\"",
+          "\"NANNI LOY\"",
+          "\"ITALIAN\"",
+          "\"UN GIORNO DA LEONI\"",
+          "\"A DAY FOR LIONHEARTS\""
+        ],
+        "chunk_ids": [
+          "chunk-500ec85b3f97244bccdc2f959d0ef31d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Un giorno da leoni (internationally released as A Day for Lionhearts) is a 1961 Italian war-drama film directed by Nanni Loy.",
+            "A Day for Lionhearts Un giorno da leoni( internationally released as A Day for Lionhearts) is a 1961 Italian war- drama film directed by Nanni Loy. The film describes the gradual evolution towards anti-fascism of Italian people during the Second World War."
+          ],
+          "relation_texts": [
+            "Un giorno da leoni (internationally released as A Day for Lionhearts) is a 1961 Italian war-drama film directed by Nanni Loy.",
+            "link",
+            "1961",
+            "NANNI LOY",
+            "ITALIAN",
+            "UN GIORNO DA LEONI",
+            "A DAY FOR LIONHEARTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d548dac597c4563f928d18564e4d24a0",
+            "hyperedge_name": "<hyperedge>\"Un giorno da leoni (internationally released as A Day for Lionhearts) is a 1961 Italian war-drama film directed by Nanni Loy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Di Leo was involved in the writing process in 43 films, showing his extensive contribution to cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.4380669891834259,
+        "hyperedge_text": "Di Leo was involved in the writing process in 43 films, showing his extensive contribution to cinema.",
+        "entity_ids": [
+          "\"43 FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-4b6200f98f0955a42a753dcd5cac3589"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Di Leo was involved in the writing process in 43 films, showing his extensive contribution to cinema.",
+            "Fernando Di Leo Fernando Di Leo( 11 January 1932 – 2 December 2003) was an Italian film director and script writer born in San Ferdinando di Puglia, Italy. During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43. His films influenced many popular contemporary directors, such as Quentin Tarantino and John Woo. Di Leo started his career mostly writing scripts for spaghetti westerns. He worked on the script for\" Per un pugno di dollariA Fistful of Dollars\", 1964) and later as assistant director and assistant to Sergio Leone in\" Per qualche dollaro in più For a Few Dollars More\", 1965). Later, he wrote scripts for such westerns as\" Navajo Joe\"( 1966) and\" Johnny Yuma\"( 1967). Di Leo is now best remembered for his\" poliziotteschi\" films, especially the\" Milieu Trilogy\", which he both wrote and directed. The trilogy contains\" Caliber 9\"( 1..."
+          ],
+          "relation_texts": [
+            "Di Leo was involved in the writing process in 43 films, showing his extensive contribution to cinema.",
+            "link",
+            "43 FILMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f05e8c02be3581d965f83c31512ba64c",
+            "hyperedge_name": "<hyperedge>\"Di Leo was involved in the writing process in 43 films, showing his extensive contribution to cinema.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6454430818557739,
+        "fusion_score": 0.5290886163711548,
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.645443,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.529089
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film showcases the charm of its main characters, Leo and Loree.\"",
+        "hyperedge_text": "The film showcases the charm of its main characters, Leo and Loree.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6359765529632568,
+        "fusion_score": 0.5271953105926515,
+        "entity_ids": [
+          "\"MAIN CHARACTERS\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "The film showcases the charm of its main characters, Leo and Loree.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.635977,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527195
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\"",
+        "hyperedge_text": "The film Leo and Loree is classified as a romantic comedy.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5787108540534973,
+        "fusion_score": 0.5157421708106995,
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "The film Leo and Loree is classified as a romantic comedy.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578711,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515742
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.\"",
+        "hyperedge_text": "Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.45080214738845825,
+        "fusion_score": 0.4901604294776917,
+        "entity_ids": [
+          "\"11 JANUARY 1932\"",
+          "\"2 DECEMBER 2003\""
+        ],
+        "chunk_ids": [
+          "chunk-4b6200f98f0955a42a753dcd5cac3589"
+        ],
+        "evidence_texts": [
+          "Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.",
+          "Fernando Di Leo Fernando Di Leo( 11 January 1932 – 2 December 2003) was an Italian film director and script writer born in San Ferdinando di Puglia, Italy. During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43. His films influenced many popular contemporary directors, such as Quentin Tarantino and John Woo. Di Leo started his career mostly writing scripts for spaghetti westerns. He worked on the script for\" Per un pugno di dollariA Fistful of Dollars\", 1964) and later as assistant director and assistant to Sergio Leone in\" Per qualche dollaro in più For a Few Dollars More\", 1965). Later, he wrote scripts for such westerns as\" Navajo Joe\"( 1966) and\" Johnny Yuma\"( 1967). Di Leo is now best remembered for his\" poliziotteschi\" films, especially the\" Milieu Trilogy\", which he both wrote and directed. The trilogy contains\" Caliber 9\"( 1..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.450802,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.49016
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo D. Maloney directed and starred in The Outlaw Express.\"",
+        "hyperedge_text": "Leo D. Maloney directed and starred in The Outlaw Express.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4444691836833954,
+        "fusion_score": 0.4888938367366791,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"STAR\""
+        ],
+        "chunk_ids": [
+          "chunk-0638400ec1c0e2faff8010f5d1d50b86"
+        ],
+        "evidence_texts": [
+          "Leo D. Maloney directed and starred in The Outlaw Express.",
+          "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.444469,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.488894
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Colierul De Turcoaze?",
+    "retrieval_question": "What is the age of Gheorghe Vitanidis?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of Colierul De Turcoaze?",
+      "retrieval_question": "What is the age of Gheorghe Vitanidis?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Colierul De Turcoaze",
+      "replacement_answer": "Gheorghe Vitanidis",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Colierul De Turcoaze",
+          "replacement_answer": "Gheorghe Vitanidis"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+          ],
+          "relation_texts": [
+            "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+            "link",
+            "1986",
+            "ROMANIA",
+            "COLIERUL DE TURCOAZE",
+            "GHEORGHE VITANIDIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.",
+        "entity_ids": [
+          "\"GHEORGHE VITANIDIS\"",
+          "\"ROMANIAN FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.",
+            "link",
+            "GHEORGHE VITANIDIS",
+            "ROMANIAN FILM DIRECTOR"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis was born on 1 October 1929.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Gheorghe Vitanidis was born on 1 October 1929.",
+        "entity_ids": [
+          "\"GHEORGHE VITANIDIS\"",
+          "\"1 OCTOBER 1929\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gheorghe Vitanidis was born on 1 October 1929.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "Gheorghe Vitanidis was born on 1 October 1929.",
+            "link",
+            "GHEORGHE VITANIDIS",
+            "1 OCTOBER 1929"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\"",
+        "branch": "relation",
+        "raw_score": 0.4382716417312622,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+        "entity_ids": [
+          "\"OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "link",
+            "OLDEST MEN",
+            "AVERAGE LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b352c56b67b43287a6b2ccb0ecb90f76",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth.\"",
+        "branch": "relation",
+        "raw_score": 0.4044809937477112,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth.",
+        "entity_ids": [
+          "\"ONE OF THE OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN OF PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth.",
+            "link",
+            "ONE OF THE OLDEST MEN",
+            "AVERAGE LIFE SPAN OF PEOPLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-89de7ae2efdac3db8323101fa0ca1bc6",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ou Ya's birthdate indicates he is 37 years old as of 2023.\"",
+        "branch": "relation",
+        "raw_score": 0.39624837040901184,
+        "hyperedge_text": "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+        "entity_ids": [
+          "\"37 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2013d0a1c4248a598513d667f5a48c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+            "Ou Ya Ou Ya( born 14 February 1986 in Baoding) is a Chinese footballer."
+          ],
+          "relation_texts": [
+            "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+            "link",
+            "37 YEARS OLD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4bc4191e4371f75c657230d13ac0cc2d",
+            "hyperedge_name": "<hyperedge>\"Ou Ya's birthdate indicates he is 37 years old as of 2023.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The term 'old soul' is often used to describe someone who is wise beyond their years.\"",
+        "branch": "relation",
+        "raw_score": 0.39539650082588196,
+        "hyperedge_text": "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+        "entity_ids": [
+          "\"WISE PERSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b5802b8cb99b1a4c5bd61bd2f766c8c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+            "Old soul Old soul or variants may refer to:"
+          ],
+          "relation_texts": [
+            "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+            "link",
+            "WISE PERSON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e5d6986df486768ddc1a49cdb4f63374",
+            "hyperedge_name": "<hyperedge>\"The term 'old soul' is often used to describe someone who is wise beyond their years.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tony Owen is currently 36 years old, having been born in 1987.\"",
+        "branch": "relation",
+        "raw_score": 0.38443484902381897,
+        "hyperedge_text": "Tony Owen is currently 36 years old, having been born in 1987.",
+        "entity_ids": [
+          "\"36 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-9cc93a8204624c3fa71242d3063e92d7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tony Owen is currently 36 years old, having been born in 1987.",
+            "Tony Owen Tony Owen( born 18 February 1987) is a British professional boxer from Carshalton who is currently competing in the light welterweight division. Owen is managed by London- based promoter Michael Helliet( MD of the Mayfair Sporting Club). Due to the technical ability that Owen possesses as well as the fact that he is a tall rangy southpaw he is considered to be a future prospect and will pose difficulties to opponents in the division."
+          ],
+          "relation_texts": [
+            "Tony Owen is currently 36 years old, having been born in 1987.",
+            "link",
+            "36 YEARS OLD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf0657b8d2e5cc0595f058511a7ea0b4",
+            "hyperedge_name": "<hyperedge>\"Tony Owen is currently 36 years old, having been born in 1987.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.37144312262535095,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\"",
+        "branch": "relation",
+        "raw_score": 0.36966270208358765,
+        "hyperedge_text": "The date of birth April 18, 1973, marks an important milestone in his life.",
+        "entity_ids": [
+          "\"MILESTONE\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "link",
+            "MILESTONE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d651f368d8e93791546127e4938cabb",
+            "hyperedge_name": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 17 January 2000.\"",
+        "branch": "relation",
+        "raw_score": 0.3656916618347168,
+        "hyperedge_text": "He was born on 17 January 2000.",
+        "entity_ids": [
+          "\"17 JANUARY 2000\""
+        ],
+        "chunk_ids": [
+          "chunk-b9ee9d48f93d5f27240b7311333e2375"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 17 January 2000.",
+            "Sam Dalby Samuel George Dalby( born 17 January 2000) is an English professional footballer who plays for English Premier League side Watford as a striker."
+          ],
+          "relation_texts": [
+            "He was born on 17 January 2000.",
+            "link",
+            "17 JANUARY 2000"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5e88644e8e65ad3dc410284955ebc098",
+            "hyperedge_name": "<hyperedge>\"He was born on 17 January 2000.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 21 October 1969.\"",
+        "branch": "relation",
+        "raw_score": 0.36307036876678467,
+        "hyperedge_text": "He was born on 21 October 1969.",
+        "entity_ids": [
+          "\"21 OCTOBER 1969\""
+        ],
+        "chunk_ids": [
+          "chunk-40042efadad5032bcce12ff669e5103d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 21 October 1969.",
+            "Salman, Crown Prince of Bahrain Prince Salman bin Hamad bin Isa Al Khalifa, Deputy King, Crown Prince of Bahrain( born 21 October 1969) is the heir apparent and first deputy prime minister of the Kingdom of Bahrain. He is also the deputy supreme commander of the Bahrain Defense Force."
+          ],
+          "relation_texts": [
+            "He was born on 21 October 1969.",
+            "link",
+            "21 OCTOBER 1969"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0519ffa5846a05a6559f7dc2692c0923",
+            "hyperedge_name": "<hyperedge>\"He was born on 21 October 1969.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.3618030548095703,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis was born on 1 October 1929.\"",
+        "branch": "semantic",
+        "raw_score": 0.7493227124214172,
+        "hyperedge_text": "Gheorghe Vitanidis was born on 1 October 1929.",
+        "entity_ids": [
+          "\"GHEORGHE VITANIDIS\"",
+          "\"1 OCTOBER 1929\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gheorghe Vitanidis was born on 1 October 1929.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "Gheorghe Vitanidis was born on 1 October 1929.",
+            "link",
+            "GHEORGHE VITANIDIS",
+            "1 OCTOBER 1929"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ecdb92de9ce72eae8957a2d4e9e60447",
+            "hyperedge_name": "<hyperedge>\"Gheorghe Vitanidis was born on 1 October 1929.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.\"",
+        "branch": "semantic",
+        "raw_score": 0.6778258085250854,
+        "hyperedge_text": "Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.",
+        "entity_ids": [
+          "\"GHEORGHE VITANIDIS\"",
+          "\"ROMANIAN FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.",
+            "link",
+            "GHEORGHE VITANIDIS",
+            "ROMANIAN FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-13c13162dcdc40fafc80aa5cc39225fa",
+            "hyperedge_name": "<hyperedge>\"Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis passed away on 25 November 1994.\"",
+        "branch": "semantic",
+        "raw_score": 0.6535838842391968,
+        "hyperedge_text": "Gheorghe Vitanidis passed away on 25 November 1994.",
+        "entity_ids": [
+          "\"25 NOVEMBER 1994\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gheorghe Vitanidis passed away on 25 November 1994.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "Gheorghe Vitanidis passed away on 25 November 1994.",
+            "link",
+            "25 NOVEMBER 1994"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7385d4f8c7f8464b5f86b4baa19e4ed8",
+            "hyperedge_name": "<hyperedge>\"Gheorghe Vitanidis passed away on 25 November 1994.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis directed films between the years 1958 and 1987.\"",
+        "branch": "semantic",
+        "raw_score": 0.5877386331558228,
+        "hyperedge_text": "Gheorghe Vitanidis directed films between the years 1958 and 1987.",
+        "entity_ids": [
+          "\"1987\"",
+          "\"1958\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gheorghe Vitanidis directed films between the years 1958 and 1987.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "Gheorghe Vitanidis directed films between the years 1958 and 1987.",
+            "link",
+            "1987",
+            "1958"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-22ff377798d721e67b7e4c4813ba9f37",
+            "hyperedge_name": "<hyperedge>\"Gheorghe Vitanidis directed films between the years 1958 and 1987.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis was recognized for his contributions to the Romanian film industry.\"",
+        "branch": "semantic",
+        "raw_score": 0.5593047142028809,
+        "hyperedge_text": "Gheorghe Vitanidis was recognized for his contributions to the Romanian film industry.",
+        "entity_ids": [
+          "\"ROMANIAN FILM INDUSTRY\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gheorghe Vitanidis was recognized for his contributions to the Romanian film industry.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "Gheorghe Vitanidis was recognized for his contributions to the Romanian film industry.",
+            "link",
+            "ROMANIAN FILM INDUSTRY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d6c44f2057aca55f6b37f58fbad86a49",
+            "hyperedge_name": "<hyperedge>\"Gheorghe Vitanidis was recognized for his contributions to the Romanian film industry.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis's directorial style evolved throughout his career.\"",
+        "branch": "semantic",
+        "raw_score": 0.5254714488983154,
+        "hyperedge_text": "Gheorghe Vitanidis's directorial style evolved throughout his career.",
+        "entity_ids": [
+          "\"DIRECTORIAL STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gheorghe Vitanidis's directorial style evolved throughout his career.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "Gheorghe Vitanidis's directorial style evolved throughout his career.",
+            "link",
+            "DIRECTORIAL STYLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4ee712f0e4fc15dc6273dd1e75f7e821",
+            "hyperedge_name": "<hyperedge>\"Gheorghe Vitanidis's directorial style evolved throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The accolades received by Gheorghe Vitanidis indicate his impact on cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.5129938721656799,
+        "hyperedge_text": "The accolades received by Gheorghe Vitanidis indicate his impact on cinema.",
+        "entity_ids": [
+          "\"ACCOLADES\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The accolades received by Gheorghe Vitanidis indicate his impact on cinema.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "The accolades received by Gheorghe Vitanidis indicate his impact on cinema.",
+            "link",
+            "ACCOLADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-44886ef5bf4599daeb2858c00066f56d",
+            "hyperedge_name": "<hyperedge>\"The accolades received by Gheorghe Vitanidis indicate his impact on cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The cultural significance of Gheorghe Vitanidis's films extends beyond Romania.\"",
+        "branch": "semantic",
+        "raw_score": 0.49628445506095886,
+        "hyperedge_text": "The cultural significance of Gheorghe Vitanidis's films extends beyond Romania.",
+        "entity_ids": [
+          "\"CULTURAL SIGNIFICANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The cultural significance of Gheorghe Vitanidis's films extends beyond Romania.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "The cultural significance of Gheorghe Vitanidis's films extends beyond Romania.",
+            "link",
+            "CULTURAL SIGNIFICANCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d6543f2b348410d73a3ba1f785b80e7c",
+            "hyperedge_name": "<hyperedge>\"The cultural significance of Gheorghe Vitanidis's films extends beyond Romania.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The films directed by Gheorghe Vitanidis were produced in Romania.\"",
+        "branch": "semantic",
+        "raw_score": 0.4744530916213989,
+        "hyperedge_text": "The films directed by Gheorghe Vitanidis were produced in Romania.",
+        "entity_ids": [
+          "\"ROMANIA\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The films directed by Gheorghe Vitanidis were produced in Romania.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "The films directed by Gheorghe Vitanidis were produced in Romania.",
+            "link",
+            "ROMANIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-455f9970f2c216222a5fb327e83a1a81",
+            "hyperedge_name": "<hyperedge>\"The films directed by Gheorghe Vitanidis were produced in Romania.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film 'A Woman for a Season' was notable in Gheorghe Vitanidis's career.\"",
+        "branch": "semantic",
+        "raw_score": 0.4610421657562256,
+        "hyperedge_text": "The film 'A Woman for a Season' was notable in Gheorghe Vitanidis's career.",
+        "entity_ids": [
+          "\"NOTABLE FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film 'A Woman for a Season' was notable in Gheorghe Vitanidis's career.",
+            "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "The film 'A Woman for a Season' was notable in Gheorghe Vitanidis's career.",
+            "link",
+            "NOTABLE FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-714438785784f8e351e0097ee56a5d15",
+            "hyperedge_name": "<hyperedge>\"The film 'A Woman for a Season' was notable in Gheorghe Vitanidis's career.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis was born on 1 October 1929.\"",
+        "hyperedge_text": "Gheorghe Vitanidis was born on 1 October 1929.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7493227124214172,
+        "fusion_score": 0.5498645424842835,
+        "entity_ids": [
+          "\"GHEORGHE VITANIDIS\"",
+          "\"1 OCTOBER 1929\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "evidence_texts": [
+          "Gheorghe Vitanidis was born on 1 October 1929.",
+          "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.749323,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549865
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.\"",
+        "hyperedge_text": "Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6778258085250854,
+        "fusion_score": 0.5355651617050171,
+        "entity_ids": [
+          "\"GHEORGHE VITANIDIS\"",
+          "\"ROMANIAN FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "evidence_texts": [
+          "Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.",
+          "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.677826,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535565
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis passed away on 25 November 1994.\"",
+        "hyperedge_text": "Gheorghe Vitanidis passed away on 25 November 1994.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6535838842391968,
+        "fusion_score": 0.5307167768478394,
+        "entity_ids": [
+          "\"25 NOVEMBER 1994\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "evidence_texts": [
+          "Gheorghe Vitanidis passed away on 25 November 1994.",
+          "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.653584,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530717
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of Leo And Loree?",
+    "retrieval_question": "What is the age of Jerry Paris?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of Leo And Loree?",
+      "retrieval_question": "What is the age of Jerry Paris?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Leo And Loree",
+      "replacement_answer": "Jerry Paris",
+      "replacements": [
+        {
+          "dependency_node_id": "q3",
+          "replacement_span": "the director of Leo And Loree",
+          "replacement_answer": "Jerry Paris"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.",
+        "entity_ids": [
+          "\"NEIGHBOR\"",
+          "\"LAURA PETRIE\"",
+          "\"JERRY HELPER\"",
+          "\"THE DICK VAN DYKE SHOW\"",
+          "\"DENTIST\"",
+          "\"ROB PETRIE\"",
+          "\"WILLIAM GERALD PARIS\"",
+          "\"JERRY PARIS\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.",
+            "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+          ],
+          "relation_texts": [
+            "William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.",
+            "link",
+            "NEIGHBOR",
+            "LAURA PETRIE",
+            "JERRY HELPER",
+            "THE DICK VAN DYKE SHOW",
+            "DENTIST",
+            "ROB PETRIE",
+            "WILLIAM GERALD PARIS",
+            "JERRY PARIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+          ],
+          "relation_texts": [
+            "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+            "link",
+            "LEO AND LOREE",
+            "DONNY MOST",
+            "JERRY PARIS",
+            "LINDA PURL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Jerry Paris.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The film was directed by Jerry Paris.",
+        "entity_ids": [
+          "\"JERRY PARIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1fdc3036dc04bdc7ce73dbd87dc8d1e7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Jerry Paris.",
+            "How Sweet It Is! How Sweet It Is! is a 1968 comedy film starring James Garner and Debbie Reynolds, with a supporting cast including Terry- Thomas and Paul Lynde. Garner plays a photographer who accompanies his wife and teenage son on an assignment in Paris, with both husband and wife struggling to stay faithful under extreme temptation. The film was written by producers Garry Marshall and Jerry Belson( adapting Muriel Resnik's novel\" The Girl in the Turqoise Bikini\") and directed by Jerry Paris. Jimmy Webb wrote the title song, and Patrick Williams scored the sound track."
+          ],
+          "relation_texts": [
+            "The film was directed by Jerry Paris.",
+            "link",
+            "JERRY PARIS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\"",
+        "branch": "relation",
+        "raw_score": 0.4382716417312622,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+        "entity_ids": [
+          "\"OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "link",
+            "OLDEST MEN",
+            "AVERAGE LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b352c56b67b43287a6b2ccb0ecb90f76",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth.\"",
+        "branch": "relation",
+        "raw_score": 0.4044809937477112,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth.",
+        "entity_ids": [
+          "\"ONE OF THE OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN OF PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth.",
+            "link",
+            "ONE OF THE OLDEST MEN",
+            "AVERAGE LIFE SPAN OF PEOPLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-89de7ae2efdac3db8323101fa0ca1bc6",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ou Ya's birthdate indicates he is 37 years old as of 2023.\"",
+        "branch": "relation",
+        "raw_score": 0.39624837040901184,
+        "hyperedge_text": "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+        "entity_ids": [
+          "\"37 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2013d0a1c4248a598513d667f5a48c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+            "Ou Ya Ou Ya( born 14 February 1986 in Baoding) is a Chinese footballer."
+          ],
+          "relation_texts": [
+            "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+            "link",
+            "37 YEARS OLD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4bc4191e4371f75c657230d13ac0cc2d",
+            "hyperedge_name": "<hyperedge>\"Ou Ya's birthdate indicates he is 37 years old as of 2023.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The term 'old soul' is often used to describe someone who is wise beyond their years.\"",
+        "branch": "relation",
+        "raw_score": 0.39539650082588196,
+        "hyperedge_text": "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+        "entity_ids": [
+          "\"WISE PERSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b5802b8cb99b1a4c5bd61bd2f766c8c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+            "Old soul Old soul or variants may refer to:"
+          ],
+          "relation_texts": [
+            "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+            "link",
+            "WISE PERSON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e5d6986df486768ddc1a49cdb4f63374",
+            "hyperedge_name": "<hyperedge>\"The term 'old soul' is often used to describe someone who is wise beyond their years.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tony Owen is currently 36 years old, having been born in 1987.\"",
+        "branch": "relation",
+        "raw_score": 0.38443484902381897,
+        "hyperedge_text": "Tony Owen is currently 36 years old, having been born in 1987.",
+        "entity_ids": [
+          "\"36 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-9cc93a8204624c3fa71242d3063e92d7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tony Owen is currently 36 years old, having been born in 1987.",
+            "Tony Owen Tony Owen( born 18 February 1987) is a British professional boxer from Carshalton who is currently competing in the light welterweight division. Owen is managed by London- based promoter Michael Helliet( MD of the Mayfair Sporting Club). Due to the technical ability that Owen possesses as well as the fact that he is a tall rangy southpaw he is considered to be a future prospect and will pose difficulties to opponents in the division."
+          ],
+          "relation_texts": [
+            "Tony Owen is currently 36 years old, having been born in 1987.",
+            "link",
+            "36 YEARS OLD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf0657b8d2e5cc0595f058511a7ea0b4",
+            "hyperedge_name": "<hyperedge>\"Tony Owen is currently 36 years old, having been born in 1987.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.37144312262535095,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\"",
+        "branch": "relation",
+        "raw_score": 0.36966270208358765,
+        "hyperedge_text": "The date of birth April 18, 1973, marks an important milestone in his life.",
+        "entity_ids": [
+          "\"MILESTONE\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "link",
+            "MILESTONE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d651f368d8e93791546127e4938cabb",
+            "hyperedge_name": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 17 January 2000.\"",
+        "branch": "relation",
+        "raw_score": 0.3656916618347168,
+        "hyperedge_text": "He was born on 17 January 2000.",
+        "entity_ids": [
+          "\"17 JANUARY 2000\""
+        ],
+        "chunk_ids": [
+          "chunk-b9ee9d48f93d5f27240b7311333e2375"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 17 January 2000.",
+            "Sam Dalby Samuel George Dalby( born 17 January 2000) is an English professional footballer who plays for English Premier League side Watford as a striker."
+          ],
+          "relation_texts": [
+            "He was born on 17 January 2000.",
+            "link",
+            "17 JANUARY 2000"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5e88644e8e65ad3dc410284955ebc098",
+            "hyperedge_name": "<hyperedge>\"He was born on 17 January 2000.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 21 October 1969.\"",
+        "branch": "relation",
+        "raw_score": 0.36307036876678467,
+        "hyperedge_text": "He was born on 21 October 1969.",
+        "entity_ids": [
+          "\"21 OCTOBER 1969\""
+        ],
+        "chunk_ids": [
+          "chunk-40042efadad5032bcce12ff669e5103d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 21 October 1969.",
+            "Salman, Crown Prince of Bahrain Prince Salman bin Hamad bin Isa Al Khalifa, Deputy King, Crown Prince of Bahrain( born 21 October 1969) is the heir apparent and first deputy prime minister of the Kingdom of Bahrain. He is also the deputy supreme commander of the Bahrain Defense Force."
+          ],
+          "relation_texts": [
+            "He was born on 21 October 1969.",
+            "link",
+            "21 OCTOBER 1969"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0519ffa5846a05a6559f7dc2692c0923",
+            "hyperedge_name": "<hyperedge>\"He was born on 21 October 1969.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.3618030548095703,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.\"",
+        "branch": "semantic",
+        "raw_score": 0.6375032663345337,
+        "hyperedge_text": "William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.",
+        "entity_ids": [
+          "\"NEIGHBOR\"",
+          "\"LAURA PETRIE\"",
+          "\"JERRY HELPER\"",
+          "\"THE DICK VAN DYKE SHOW\"",
+          "\"DENTIST\"",
+          "\"ROB PETRIE\"",
+          "\"WILLIAM GERALD PARIS\"",
+          "\"JERRY PARIS\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.",
+            "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+          ],
+          "relation_texts": [
+            "William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.",
+            "link",
+            "NEIGHBOR",
+            "LAURA PETRIE",
+            "JERRY HELPER",
+            "THE DICK VAN DYKE SHOW",
+            "DENTIST",
+            "ROB PETRIE",
+            "WILLIAM GERALD PARIS",
+            "JERRY PARIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f108e284593884611f48481d7d82b025",
+            "hyperedge_name": "<hyperedge>\"William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"William Gerald Paris was born on July 25, 1925, in the United States and passed away on March 31, 1986.\"",
+        "branch": "semantic",
+        "raw_score": 0.6045314073562622,
+        "hyperedge_text": "William Gerald Paris was born on July 25, 1925, in the United States and passed away on March 31, 1986.",
+        "entity_ids": [
+          "\"UNITED STATES\"",
+          "\"MARCH 31, 1986\"",
+          "\"JULY 25, 1925\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "William Gerald Paris was born on July 25, 1925, in the United States and passed away on March 31, 1986.",
+            "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+          ],
+          "relation_texts": [
+            "William Gerald Paris was born on July 25, 1925, in the United States and passed away on March 31, 1986.",
+            "link",
+            "UNITED STATES",
+            "MARCH 31, 1986",
+            "JULY 25, 1925"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a5e491c0882e93a6abcd064060497fb1",
+            "hyperedge_name": "<hyperedge>\"William Gerald Paris was born on July 25, 1925, in the United States and passed away on March 31, 1986.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Jerry Paris.\"",
+        "branch": "semantic",
+        "raw_score": 0.5595872402191162,
+        "hyperedge_text": "The film was directed by Jerry Paris.",
+        "entity_ids": [
+          "\"JERRY PARIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1fdc3036dc04bdc7ce73dbd87dc8d1e7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Jerry Paris.",
+            "How Sweet It Is! How Sweet It Is! is a 1968 comedy film starring James Garner and Debbie Reynolds, with a supporting cast including Terry- Thomas and Paul Lynde. Garner plays a photographer who accompanies his wife and teenage son on an assignment in Paris, with both husband and wife struggling to stay faithful under extreme temptation. The film was written by producers Garry Marshall and Jerry Belson( adapting Muriel Resnik's novel\" The Girl in the Turqoise Bikini\") and directed by Jerry Paris. Jimmy Webb wrote the title song, and Patrick Williams scored the sound track."
+          ],
+          "relation_texts": [
+            "The film was directed by Jerry Paris.",
+            "link",
+            "JERRY PARIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-35c3497c9b2a5fa7f078bc00a0f00665",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Jerry Paris.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.\"",
+        "branch": "semantic",
+        "raw_score": 0.557462215423584,
+        "hyperedge_text": "Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"ACTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.",
+            "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+          ],
+          "relation_texts": [
+            "Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.",
+            "link",
+            "DIRECTOR",
+            "ACTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4b287ec4f08e06d54582a5150886f937",
+            "hyperedge_name": "<hyperedge>\"Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.\"",
+        "branch": "semantic",
+        "raw_score": 0.5215414762496948,
+        "hyperedge_text": "Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.",
+        "entity_ids": [
+          "\"PORTRAYAL\"",
+          "\"CHARM AND APPEAL\"",
+          "\"CLASSIC SITCOM\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.",
+            "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+          ],
+          "relation_texts": [
+            "Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.",
+            "link",
+            "PORTRAYAL",
+            "CHARM AND APPEAL",
+            "CLASSIC SITCOM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-19395679a0645e1de909034e3744f62b",
+            "hyperedge_name": "<hyperedge>\"Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jerry Gray (July 3, 1915 – August 10, 1976) was an American violinist, arranger, composer, and leader of swing dance orchestras (big bands) bearing his name.\"",
+        "branch": "semantic",
+        "raw_score": 0.4597717523574829,
+        "hyperedge_text": "Jerry Gray (July 3, 1915 – August 10, 1976) was an American violinist, arranger, composer, and leader of swing dance orchestras (big bands) bearing his name.",
+        "entity_ids": [
+          "\"COMPOSER\"",
+          "\"SWING ERA\"",
+          "\"ARRANGER\"",
+          "\"JERRY GRAY\"",
+          "\"VIOLINIST\"",
+          "\"BAND LEADER\""
+        ],
+        "chunk_ids": [
+          "chunk-8fd43f01ae1ef414974defaa11c0e975"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jerry Gray (July 3, 1915 – August 10, 1976) was an American violinist, arranger, composer, and leader of swing dance orchestras (big bands) bearing his name.",
+            "Jerry Gray (arranger) Jerry Gray (July 3, 1915 – August 10, 1976) was an American violinist, arranger, composer, and leader of swing dance orchestras (big bands) bearing his name. He is widely known for his work with popular music during the Swing era. His name is inextricably linked to two of the most famous bandleaders of the time, Artie Shaw and Glenn Miller. Gray, along with Bill Finegan, wrote many of Miller's arrangements during the late 1930s and early 1940s. In the latter part of Gray's career, his orchestra served as the house band at the Venetian Room of the Fairmont Hotel, Dallas."
+          ],
+          "relation_texts": [
+            "Jerry Gray (July 3, 1915 – August 10, 1976) was an American violinist, arranger, composer, and leader of swing dance orchestras (big bands) bearing his name.",
+            "link",
+            "COMPOSER",
+            "SWING ERA",
+            "ARRANGER",
+            "JERRY GRAY",
+            "VIOLINIST",
+            "BAND LEADER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-77e7206b024dfaded8121b1a9c1ddf8f",
+            "hyperedge_name": "<hyperedge>\"Jerry Gray (July 3, 1915 – August 10, 1976) was an American violinist, arranger, composer, and leader of swing dance orchestras (big bands) bearing his name.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The character Jerry Helper provided comic relief and was famously known for his interactions with the main characters, Rob and Laura Petrie.\"",
+        "branch": "semantic",
+        "raw_score": 0.43510234355926514,
+        "hyperedge_text": "The character Jerry Helper provided comic relief and was famously known for his interactions with the main characters, Rob and Laura Petrie.",
+        "entity_ids": [
+          "\"INTERACTIONS\"",
+          "\"MAIN CHARACTERS\"",
+          "\"COMIC RELIEF\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The character Jerry Helper provided comic relief and was famously known for his interactions with the main characters, Rob and Laura Petrie.",
+            "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+          ],
+          "relation_texts": [
+            "The character Jerry Helper provided comic relief and was famously known for his interactions with the main characters, Rob and Laura Petrie.",
+            "link",
+            "INTERACTIONS",
+            "MAIN CHARACTERS",
+            "COMIC RELIEF"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82fe96d9ad69cabf9516ed13fd91b792",
+            "hyperedge_name": "<hyperedge>\"The character Jerry Helper provided comic relief and was famously known for his interactions with the main characters, Rob and Laura Petrie.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He died in Paris, on January 1, 1972, aged 83.\"",
+        "branch": "semantic",
+        "raw_score": 0.4177100658416748,
+        "hyperedge_text": "He died in Paris, on January 1, 1972, aged 83.",
+        "entity_ids": [
+          "\"DEATH\"",
+          "\"AGED 83\""
+        ],
+        "chunk_ids": [
+          "chunk-dd4147feacc984f701043c59ef5be1f6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He died in Paris, on January 1, 1972, aged 83.",
+            "Maurice Chevalier Maurice Auguste Chevalier (September 12, 1888 – January 1, 1972) was a French actor, cabaret singer and entertainer. He is perhaps best known for his signature songs, including \"Livin' In The SunlightValentineLouiseMimi\", and \"Thank Heaven for Little Girls\" and for his films, including \"The Love ParadeThe Big PondThe Smiling LieutenantOne Hour with You\" and \"Love Me Tonight\". His trademark attire was a boater hat and tuxedo. Chevalier was born in Paris. He made his name as a star of musical comedy, appearing in public as a singer and dancer at an early age before working in menial jobs as a teenager. In 1909, he became the partner of the biggest female star in France at the time, Fréhel. Although their relationship was brief, she secured him his first major engagement, as a mimic and a singer in \"l'Alcazar\" in Marseille, for which he received critical acclaim by Fren..."
+          ],
+          "relation_texts": [
+            "He died in Paris, on January 1, 1972, aged 83.",
+            "link",
+            "DEATH",
+            "AGED 83"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-38b620ba540613efb1715764a7d78782",
+            "hyperedge_name": "<hyperedge>\"He died in Paris, on January 1, 1972, aged 83.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jerry Warren (March 10, 1925 – August 21, 1988) was an American film director, producer, editor, screenwriter, cinematographer, and actor.\"",
+        "branch": "semantic",
+        "raw_score": 0.41480809450149536,
+        "hyperedge_text": "Jerry Warren (March 10, 1925 – August 21, 1988) was an American film director, producer, editor, screenwriter, cinematographer, and actor.",
+        "entity_ids": [
+          "\"JERRY WARREN\"",
+          "\"AMERICAN FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-4e87c5f7705097a2caaeda04bd9ce9a0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jerry Warren (March 10, 1925 – August 21, 1988) was an American film director, producer, editor, screenwriter, cinematographer, and actor.",
+            "Jerry Warren Jerry Warren( March 10, 1925 – August 21, 1988) was an American film director, producer, editor, screenwriter, cinematographer, and actor. Warren grew up wanting to get into the film business in Los Angeles, California. He appeared in small parts in a few 1940s films such as\" Ghost CatchersAnchors Aweigh\", and\" Unconquered\". After meeting with producers, Warren took on his first film as a director and producer with\" Man Beast\" in 1956. He initially created his own films, although relying heavily on stock footage. Later, he would just buy foreign films that already existed and re-edit them, dubbing some scenes in English and inserting new footage which he shot with American actors such as John Carradine and Katherine Victor. Warren even wrote some screenplays for his films under the\" nom de plumeJacques Lecoutier\", which he sometimes misspelled in the credits."
+          ],
+          "relation_texts": [
+            "Jerry Warren (March 10, 1925 – August 21, 1988) was an American film director, producer, editor, screenwriter, cinematographer, and actor.",
+            "link",
+            "JERRY WARREN",
+            "AMERICAN FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6a6c3a4a3e4db21f7ff7429cdbbd8473",
+            "hyperedge_name": "<hyperedge>\"Jerry Warren (March 10, 1925 – August 21, 1988) was an American film director, producer, editor, screenwriter, cinematographer, and actor.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gerhart 'Gerry' Neugebauer (3 September 1932 – 26 September 2014) was an American astronomer known for his pioneering work in infrared astronomy.\"",
+        "branch": "semantic",
+        "raw_score": 0.39035555720329285,
+        "hyperedge_text": "Gerhart 'Gerry' Neugebauer (3 September 1932 – 26 September 2014) was an American astronomer known for his pioneering work in infrared astronomy.",
+        "entity_ids": [
+          "\"GERHART 'GERRY' NEUGEBAUER\""
+        ],
+        "chunk_ids": [
+          "chunk-861a05d1408ea813ea812df47d1f0e51"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gerhart 'Gerry' Neugebauer (3 September 1932 – 26 September 2014) was an American astronomer known for his pioneering work in infrared astronomy.",
+            "Gerry Neugebauer Gerhart \"Gerry\" Neugebauer (3 September 1932 – 26 September 2014) was an American astronomer known for his pioneering work in infrared astronomy. Neugebauer was born in Göttingen, Germany and is the son of Otto Neugebauer, an Austrian-American mathematician and historian of science, and Grete Bruck. After moving to the United States at age seven, he received his A.B. in physics from Cornell University in 1954 and his Ph.D. in physics from Caltech in 1960, with a thesis on the photoproduction of negative and positive pions from deuterium. During his military service with the U.S. Army he was stationed at the Jet Propulsion Laboratory and worked for the Ordnance Corps until 1962. He joined the Caltech faculty in 1962 as an assistant professor, becoming a full professor of physics in 1970. He was named Howard Hughes Professor in 1985 and Chairman of the Division of Physi..."
+          ],
+          "relation_texts": [
+            "Gerhart 'Gerry' Neugebauer (3 September 1932 – 26 September 2014) was an American astronomer known for his pioneering work in infrared astronomy.",
+            "link",
+            "GERHART 'GERRY' NEUGEBAUER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c943ad77696779406453297323cc8c90",
+            "hyperedge_name": "<hyperedge>\"Gerhart 'Gerry' Neugebauer (3 September 1932 – 26 September 2014) was an American astronomer known for his pioneering work in infrared astronomy.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.\"",
+        "hyperedge_text": "William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6375032663345337,
+        "fusion_score": 0.5275006532669068,
+        "entity_ids": [
+          "\"NEIGHBOR\"",
+          "\"LAURA PETRIE\"",
+          "\"JERRY HELPER\"",
+          "\"THE DICK VAN DYKE SHOW\"",
+          "\"DENTIST\"",
+          "\"ROB PETRIE\"",
+          "\"WILLIAM GERALD PARIS\"",
+          "\"JERRY PARIS\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "evidence_texts": [
+          "William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.",
+          "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.637503,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527501
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Jerry Paris.\"",
+        "hyperedge_text": "The film was directed by Jerry Paris.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5595872402191162,
+        "fusion_score": 0.5119174480438233,
+        "entity_ids": [
+          "\"JERRY PARIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1fdc3036dc04bdc7ce73dbd87dc8d1e7"
+        ],
+        "evidence_texts": [
+          "The film was directed by Jerry Paris.",
+          "How Sweet It Is! How Sweet It Is! is a 1968 comedy film starring James Garner and Debbie Reynolds, with a supporting cast including Terry- Thomas and Paul Lynde. Garner plays a photographer who accompanies his wife and teenage son on an assignment in Paris, with both husband and wife struggling to stay faithful under extreme temptation. The film was written by producers Garry Marshall and Jerry Belson( adapting Muriel Resnik's novel\" The Girl in the Turqoise Bikini\") and directed by Jerry Paris. Jimmy Webb wrote the title song, and Patrick Williams scored the sound track."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.559587,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511917
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.\"",
+        "hyperedge_text": "Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.557462215423584,
+        "fusion_score": 0.5114924430847169,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"ACTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "evidence_texts": [
+          "Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.",
+          "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.557462,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511492
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.\"",
+        "hyperedge_text": "Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5215414762496948,
+        "fusion_score": 0.504308295249939,
+        "entity_ids": [
+          "\"PORTRAYAL\"",
+          "\"CHARM AND APPEAL\"",
+          "\"CLASSIC SITCOM\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "evidence_texts": [
+          "Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.",
+          "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.521541,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504308
+        }
+      }
+    ]
+  }
+]

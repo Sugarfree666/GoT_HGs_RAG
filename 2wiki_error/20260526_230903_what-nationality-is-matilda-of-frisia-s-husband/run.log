@@ -1,0 +1,9 @@
+2026-05-26 23:09:03,412 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 23:10:42,712 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 23:10:42,712 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 23:11:12,791 | INFO | Starting HyperBranch pipeline for question: What nationality is Matilda Of Frisia's husband?
+2026-05-26 23:11:12,792 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-26 23:11:20,670 | INFO | Atomic retrieval returned 21 hits for question=Who is the husband of Matilda Of Frisia?
+2026-05-26 23:11:25,672 | INFO | Rewrote retrieval question for q2: What is the nationality of the husband of Matilda Of Frisia? -> What is the nationality of Henry I?
+2026-05-26 23:11:34,360 | INFO | Atomic retrieval returned 27 hits for question=What is the nationality of Henry I?
+2026-05-26 23:12:02,190 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_230903_what-nationality-is-matilda-of-frisia-s-husband

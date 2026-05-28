@@ -1,0 +1,105 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Hasan Ibn Hasan?",
+    "retrieval_question": "Who is the father of Hasan Ibn Hasan?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of Hasan Ibn Hasan?",
+      "retrieval_question": "Who is the father of Hasan Ibn Hasan?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Hasan Ibn Hasan"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Hasan Ibn Hasan die?",
+    "retrieval_question": "Where did Ali die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the father of Hasan Ibn Hasan die?",
+      "retrieval_question": "Where did Ali die?",
+      "whether_rewritten": true,
+      "replacement_span": "the father of Hasan Ibn Hasan",
+      "replacement_answer": "Ali",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the father of Hasan Ibn Hasan",
+          "replacement_answer": "Ali"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the father of Hasan Ibn Hasan?",
+        "answer": "Ali",
+        "confidence": 0.75,
+        "answer_type": "person",
+        "reasoning_summary": "Hasan Ibn Hasan is a descendant of Hasan ibn Ali, who is the son of Ali. This lineage indicates that Ali is the father of Hasan Ibn Hasan, supported by general knowledge of Islamic history.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Hasan ibn Hasan (Arabic: حسن بن حسن, Hasan al-Muthana ibn Hasan ibn Ali, popularly known as Hasan al-Muthana) was a great-grandson of Muhammad.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Hasan ibn Hasan (Arabic: حسن بن حسن, Hasan al-Muthana ibn Hasan ibn Ali, popularly known as Hasan al-Muthana) was a great-grandson of Muhammad.\"",
+            "fusion_score": 0.5405938148498536,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Hasan ibn Hasan (Arabic: حسن بن حسن, Hasan al-Muthana ibn Hasan ibn Ali, popularly known as Hasan al-Muthana) was a great-grandson of Muhammad.",
+              "Hasan ibn Hasan Hasan ibn Hasan (Arabic: حسن بن حسن, Hasan al-Muthana ibn Hasan ibn Ali, popularly known as Hasan al-Muthana) was a great-grandson of Muhammad."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Hasan ibn Hasan, also known as Hasan al-Muthana, is a figure deeply connected to Islamic history.\"",
+            "fusion_score": 0.5288606643676759,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Hasan ibn Hasan, also known as Hasan al-Muthana, is a figure deeply connected to Islamic history.",
+              "Hasan ibn Hasan Hasan ibn Hasan (Arabic: حسن بن حسن, Hasan al-Muthana ibn Hasan ibn Ali, popularly known as Hasan al-Muthana) was a great-grandson of Muhammad."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The name 'Hasan ibn Hasan' is derived from Arabic culture and emphasizes lineage.\"",
+            "fusion_score": 0.5301919221878052,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The name 'Hasan ibn Hasan' is derived from Arabic culture and emphasizes lineage.",
+              "Hasan ibn Hasan Hasan ibn Hasan (Arabic: حسن بن حسن, Hasan al-Muthana ibn Hasan ibn Ali, popularly known as Hasan al-Muthana) was a great-grandson of Muhammad."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Ali"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Al-Mu'Tasim?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What country is the father of Al-Mu'Tasim from?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

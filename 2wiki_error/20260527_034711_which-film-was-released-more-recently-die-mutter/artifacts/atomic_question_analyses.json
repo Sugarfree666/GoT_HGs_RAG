@@ -1,0 +1,26 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Die Mutter released?",
+    "retrieval_question": "When was Die Mutter released?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Die Mutter released?",
+      "retrieval_question": "When was Die Mutter released?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Die Mutter"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  }
+]

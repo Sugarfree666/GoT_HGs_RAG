@@ -1,0 +1,9 @@
+2026-05-27 00:08:35,114 | INFO | Generating atomic question DAG with DEPO.
+2026-05-27 00:10:32,309 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-27 00:10:32,309 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-27 00:10:56,396 | INFO | Starting HyperBranch pipeline for question: Which film was released earlier, Man'S Search For Happiness or Tell It To The Bees?
+2026-05-27 00:10:56,397 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-27 00:11:01,114 | INFO | Atomic retrieval returned 21 hits for question=When was Man'S Search For Happiness released?
+2026-05-27 00:11:20,573 | INFO | Atomic retrieval returned 22 hits for question=What is the release date of Tell It To The Bees?
+2026-05-27 00:11:31,235 | INFO | Atomic retrieval returned 23 hits for question=What is the release date of Man'S Search For Happiness?
+2026-05-27 00:12:06,212 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_000835_which-film-was-released-earlier-man-s-search-for

@@ -1,0 +1,9 @@
+2026-05-26 21:30:31,175 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 21:31:42,773 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 21:31:42,773 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 21:32:02,979 | INFO | Starting HyperBranch pipeline for question: Where did Sigrid Sture's father die?
+2026-05-26 21:32:02,979 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-26 21:32:15,636 | INFO | Atomic retrieval returned 28 hits for question=Who is the father of Sigrid?
+2026-05-26 21:32:36,042 | INFO | Rewrote retrieval question for q2: Where did the father of Sigrid die? -> Where did King Eric XIV of Sweden die?
+2026-05-26 21:32:42,932 | INFO | Atomic retrieval returned 21 hits for question=Where did King Eric XIV of Sweden die?
+2026-05-26 21:33:36,873 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_213031_where-did-sigrid-sture-s-father-die

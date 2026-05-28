@@ -1,0 +1,28 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "While it is established that Ali is the father of Hasan Ibn Hasan, there is no evidence regarding the location of Ali's death, which is essential to answer the question about Hasan Ibn Hasan's father.",
+  "answer_span_reasoning": "There is no evidence regarding the location of Ali's death.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Hasan Ibn Hasan?",
+      "answer": "Ali",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Hasan ibn Hasan (Arabic: حسن بن حسن, Hasan al-Muthana ibn Hasan ibn Ali, popularly known as Hasan al-Muthana) was a great-grandson of Muhammad.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the father of Hasan Ibn Hasan die?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Rukn al-Dawla later died in 976 and was succeeded by his son Fakhr al-Dawla, who had Ali executed.\""
+      ]
+    }
+  ],
+  "remaining_gaps": [
+    "Location of Ali's death"
+  ]
+}

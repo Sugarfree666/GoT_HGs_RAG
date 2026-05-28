@@ -1,0 +1,51 @@
+{
+  "answer": "Playing It Wild",
+  "candidate_answer": "Playing It Wild",
+  "reasoning_summary": "William Duncan, the director of 'Playing It Wild', was born on December 16, 1879, while Dino Risi, the director of 'I'll Be Going Now', was born on December 23, 1916. Since Risi was born later than Duncan, the film directed by Duncan, 'Playing It Wild', is the answer.",
+  "answer_span_reasoning": "The film directed by the later-born director is 'Playing It Wild'.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Playing It Wild?",
+      "answer": "William Duncan",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers.\"",
+        "<hyperedge>\"William Duncan is not only the director, but also a starring actor in the film Playing It Wild.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of I'Ll Be Going Now?",
+      "answer": "Dino Risi",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Tolgo il disturbo, internationally released as I'll Be Going Now, is a 1990 Italian comedy-drama film directed by Dino Risi.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "When was the director of Playing It Wild born?",
+      "answer": "December 16, 1879",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"William Duncan was born on December 16, 1879, and passed away on February 7, 1961.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "When was the director of I'Ll Be Going Now born?",
+      "answer": "23 December 1916",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Dino Risi (23 December 1916 – 7 June 2008) was an Italian film director.\""
+      ]
+    },
+    {
+      "node_id": "q5",
+      "question": "What is the birth date of the director of Playing It Wild?",
+      "answer": "December 16, 1879",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

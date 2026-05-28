@@ -1,0 +1,26 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "While it is confirmed that Meek Mill is the performer of 'B Boy', there is no evidence regarding where he was detained, leading to insufficient information to provide a specific location.",
+  "answer_span_reasoning": "There is no information available about the location of Meek Mill's detention.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the performer of the song B Boy (Song)?",
+      "answer": "Meek Mill",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"B Boy is a hip hop song performed by Meek Mill.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where was the performer of B Boy (Song) detained?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Robert Rihmeek Williams (born May 6, 1987), known professionally as Meek Mill, is an American rapper, songwriter, and activist.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

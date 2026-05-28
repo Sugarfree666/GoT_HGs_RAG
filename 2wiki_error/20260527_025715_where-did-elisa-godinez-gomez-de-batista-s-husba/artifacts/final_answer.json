@@ -1,0 +1,26 @@
+{
+  "answer": "Las Vegas, Nevada",
+  "candidate_answer": "Las Vegas, Nevada",
+  "reasoning_summary": "Elisa Godínez Gómez De Batista's husband, Fulgencio Batista, died in Las Vegas, Nevada, as confirmed by the evidence regarding his life and death.",
+  "answer_span_reasoning": "The answer directly states the location of Elisa Godínez Gómez De Batista's husband's death.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the husband of Elisa Godínez Gómez De Batista?",
+      "answer": "Fulgencio Batista",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Elisa Godínez Gómez de Batista (c. 1905 – June 19, 1993) was the First Lady of Cuba from 1940 to 1944.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the husband of Elisa Godínez Gómez De Batista die?",
+      "answer": "Las Vegas, Nevada",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Fulgencio Batista y Zaldívar (born Rubén Zaldívar; January 16, 1901 – August 6, 1973) was a Cuban military officer and politician who served as the elected President of Cuba from 1940 to 1944, and as its U.S.-backed military dictator from 1952 to 1959, before being overthrown during the Cuban Revolution.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

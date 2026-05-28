@@ -1,0 +1,9 @@
+2026-05-27 02:44:28,136 | INFO | Generating atomic question DAG with DEPO.
+2026-05-27 02:45:37,492 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-27 02:45:37,492 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-27 02:45:49,921 | INFO | Starting HyperBranch pipeline for question: Which country the director of film Hardcase (1972 Film) is from?
+2026-05-27 02:45:49,921 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-27 02:45:54,883 | INFO | Atomic retrieval returned 240 hits for question=Who is the director of Hardcase (1972 Film)?
+2026-05-27 02:45:58,045 | INFO | Rewrote retrieval question for q2: Which country is the director of Hardcase (1972 Film) from? -> Which country is John Llewellyn Moxey from?
+2026-05-27 02:46:02,914 | INFO | Atomic retrieval returned 22 hits for question=Which country is John Llewellyn Moxey from?
+2026-05-27 02:46:37,212 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_024428_which-country-the-director-of-film-hardcase-1972

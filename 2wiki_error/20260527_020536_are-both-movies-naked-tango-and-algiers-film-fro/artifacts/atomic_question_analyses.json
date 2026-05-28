@@ -1,0 +1,172 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the country of Naked Tango?",
+    "retrieval_question": "What is the country of Naked Tango?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the country of Naked Tango?",
+      "retrieval_question": "What is the country of Naked Tango?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Naked Tango"
+      ],
+      "relations": [
+        "country of"
+      ],
+      "relation_query": "What is the country of a work?",
+      "answer_type": "country"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the country of Algiers (Film)?",
+    "retrieval_question": "What is the country of Algiers (Film)?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the country of Algiers (Film)?",
+      "retrieval_question": "What is the country of Algiers (Film)?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Algiers",
+        "Film"
+      ],
+      "relations": [
+        "country of"
+      ],
+      "relation_query": "What is the country of a film?",
+      "answer_type": "country"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the country of Naked Tango?",
+    "retrieval_question": "What is the country of Naked Tango?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the country of Naked Tango?",
+      "retrieval_question": "What is the country of Naked Tango?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "What is the country of Naked Tango?",
+        "answer": "Argentina",
+        "confidence": 0.9,
+        "answer_type": "country",
+        "reasoning_summary": "The evidence states that 'Naked Tango' is a 1991 American-Argentine film, indicating that Argentina is one of the countries associated with it.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Naked Tango is a 1991 American-Argentine erotic drama film.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Naked Tango is a 1991 American- Argentine erotic drama film written and directed by Leonard Schrader and starring Vincent D'Onofrio, Mathilda May, Esai Morales and Fernando Rey.\"",
+            "fusion_score": 0.5199632525444031,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Naked Tango is a 1991 American- Argentine erotic drama film written and directed by Leonard Schrader and starring Vincent D'Onofrio, Mathilda May, Esai Morales and Fernando Rey.",
+              "Naked Tango Naked Tango is a 1991 American- Argentine erotic drama film written and directed by Leonard Schrader and starring Vincent D'Onofrio, Mathilda May, Esai Morales and Fernando Rey. The choreography was created by Carlos Rivarola."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Naked Tango is a 1991 American-Argentine erotic drama film.\"",
+            "fusion_score": 0.5264333248138429,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Naked Tango is a 1991 American-Argentine erotic drama film.",
+              "Naked Tango Naked Tango is a 1991 American- Argentine erotic drama film written and directed by Leonard Schrader and starring Vincent D'Onofrio, Mathilda May, Esai Morales and Fernando Rey. The choreography was created by Carlos Rivarola."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Naked Tango was written and directed by Leonard Schrader.\"",
+            "fusion_score": 0.4931672513484955,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Naked Tango was written and directed by Leonard Schrader.",
+              "Naked Tango Naked Tango is a 1991 American- Argentine erotic drama film written and directed by Leonard Schrader and starring Vincent D'Onofrio, Mathilda May, Esai Morales and Fernando Rey. The choreography was created by Carlos Rivarola."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "What is the country of Algiers (Film)?",
+        "answer": "United States",
+        "confidence": 0.9,
+        "answer_type": "country",
+        "reasoning_summary": "The film 'Algiers' is identified as a 1938 American drama film, indicating that it was produced in the United States.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Algiers is a 1938 American drama film directed by John Cromwell and starring Charles Boyer, Sigrid Gurie, and Hedy Lamarr.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Algiers is a 1938 American drama film directed by John Cromwell and starring Charles Boyer, Sigrid Gurie, and Hedy Lamarr.\"",
+            "fusion_score": 0.7247746229171754,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Algiers is a 1938 American drama film directed by John Cromwell and starring Charles Boyer, Sigrid Gurie, and Hedy Lamarr.",
+              "Algiers (film) Algiers is a 1938 American drama film directed by John Cromwell and starring Charles Boyer, Sigrid Gurie, and Hedy Lamarr. Written by John Howard Lawson, the film is about a notorious French jewel thief hiding in the labyrinthine native quarter of Algiers known as the Casbah. Feeling imprisoned by his self- imposed exile, he is drawn out of hiding by a beautiful French tourist who reminds him of happier times in Paris. The Walter Wanger production was a remake of the successful 1937 French film\" Pépé le Moko\", which derived its plot from the Henri La Barthe novel of the same name. \" Algiers\" was a sensation because it was the first Hollywood film starring Hedy Lamarr, whose beauty became the main attraction for film audiences. The film is notable as one of the sources of inspiration to the screenwriters of the 1942 Warner Bros. film\" Casablanca\", who wrote it with Hedy..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Algiers is a 1938 American drama film directed by John Cromwell.\"",
+            "fusion_score": 0.7200541138648988,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Algiers is a 1938 American drama film directed by John Cromwell.",
+              "Algiers (film) Algiers is a 1938 American drama film directed by John Cromwell and starring Charles Boyer, Sigrid Gurie, and Hedy Lamarr. Written by John Howard Lawson, the film is about a notorious French jewel thief hiding in the labyrinthine native quarter of Algiers known as the Casbah. Feeling imprisoned by his self- imposed exile, he is drawn out of hiding by a beautiful French tourist who reminds him of happier times in Paris. The Walter Wanger production was a remake of the successful 1937 French film\" Pépé le Moko\", which derived its plot from the Henri La Barthe novel of the same name. \" Algiers\" was a sensation because it was the first Hollywood film starring Hedy Lamarr, whose beauty became the main attraction for film audiences. The film is notable as one of the sources of inspiration to the screenwriters of the 1942 Warner Bros. film\" Casablanca\", who wrote it with Hedy..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film is about a notorious French jewel thief hiding in the labyrinthine native quarter of Algiers known as the Casbah.\"",
+            "fusion_score": 0.717896056175232,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film is about a notorious French jewel thief hiding in the labyrinthine native quarter of Algiers known as the Casbah.",
+              "Algiers (film) Algiers is a 1938 American drama film directed by John Cromwell and starring Charles Boyer, Sigrid Gurie, and Hedy Lamarr. Written by John Howard Lawson, the film is about a notorious French jewel thief hiding in the labyrinthine native quarter of Algiers known as the Casbah. Feeling imprisoned by his self- imposed exile, he is drawn out of hiding by a beautiful French tourist who reminds him of happier times in Paris. The Walter Wanger production was a remake of the successful 1937 French film\" Pépé le Moko\", which derived its plot from the Henri La Barthe novel of the same name. \" Algiers\" was a sensation because it was the first Hollywood film starring Hedy Lamarr, whose beauty became the main attraction for film audiences. The film is notable as one of the sources of inspiration to the screenwriters of the 1942 Warner Bros. film\" Casablanca\", who wrote it with Hedy..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Naked Tango",
+        "Argentina"
+      ],
+      "relations": [
+        "country of"
+      ],
+      "relation_query": "What is the country of a work?",
+      "answer_type": "country"
+    }
+  }
+]

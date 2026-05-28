@@ -1,0 +1,760 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father-in-law of Albert G. Simms?",
+    "retrieval_question": "Who is the father-in-law of Albert G. Simms?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father-in-law of Albert G. Simms?",
+      "retrieval_question": "Who is the father-in-law of Albert G. Simms?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.",
+        "entity_ids": [
+          "\"UNITED STATES REPRESENTATIVE\"",
+          "\"NEW MEXICO\"",
+          "\"ALBERT G. SIMMS\""
+        ],
+        "chunk_ids": [
+          "chunk-64dd49841c92d6a8f48f44d5e5740055"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.",
+            "Albert G. Simms Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico. He was the husband of Ruth Hanna McCormick, who served as a United States Representative from Illinois. He was born in Washington, Arkansas, where he attended private schools. He attended the University of Arkansas at Fayetteville. He moved to Monterrey, Mexico in 1906 and was employed as an accountant. In 1912, he moved to Silver City, New Mexico. He studied law, was admitted to the bar in 1915, and practiced law at Albuquerque, New Mexico until 1919. Simms was a member of the city council 1920–1922. He was also a member and chairman of the board of county commissioners of Bernalillo County, New Mexico 1920–1922. He engaged in banking, serving as president of a national bank in Albuquerque, 1920–1924, and as president of a mortgage company in 1924. He served..."
+          ],
+          "relation_texts": [
+            "Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.",
+            "link",
+            "UNITED STATES REPRESENTATIVE",
+            "NEW MEXICO",
+            "ALBERT G. SIMMS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of Imran Farhat.\"",
+        "branch": "relation",
+        "raw_score": 0.5864666104316711,
+        "hyperedge_text": "He is the father-in-law of Imran Farhat.",
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-10333be7c973d42a00364ad277052021"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "Mohammad Ilyas (cricketer) Mohammad Ilyas Mahmood( born March 19, 1946, Lahore, Punjab) is a former Pakistani cricketer who played in ten Tests from 1964 to 1969. He is the father- in- law of Imran Farhat."
+          ],
+          "relation_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "link",
+            "FATHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dfb75f61e308d9f2ded0e2f2dc62859e",
+            "hyperedge_name": "<hyperedge>\"He is the father-in-law of Imran Farhat.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of actor and TV presenter Warwick Davis.\"",
+        "branch": "relation",
+        "raw_score": 0.4975167512893677,
+        "hyperedge_text": "He is the father-in-law of actor and TV presenter Warwick Davis.",
+        "entity_ids": [
+          "\"WARWICK DAVIS\"",
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-8415c56614547b6b806a4164bba8e4d1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father-in-law of actor and TV presenter Warwick Davis.",
+            "Peter Burroughs Peter Burroughs( born 27 January 1947) is a British television and film actor, the director of Willow Management. He is the father- in- law of actor and TV presenter Warwick Davis."
+          ],
+          "relation_texts": [
+            "He is the father-in-law of actor and TV presenter Warwick Davis.",
+            "link",
+            "WARWICK DAVIS",
+            "FATHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-75855ff18e9b2568de60a43305677e8f",
+            "hyperedge_name": "<hyperedge>\"He is the father-in-law of actor and TV presenter Warwick Davis.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father-in-law of John F. Kennedy.\"",
+        "branch": "relation",
+        "raw_score": 0.47824496030807495,
+        "hyperedge_text": "He was the father-in-law of John F. Kennedy.",
+        "entity_ids": [
+          "\"FATHER-IN-LAW\"",
+          "\"JOHN F. KENNEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-5d8779123df46e89eb6928d92f57f279"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father-in-law of John F. Kennedy.",
+            "John Vernou Bouvier III John Vernou\" Black Jack\" Bouvier III( May 19, 1891 – August 3, 1957) was an American Wall Street stockbroker and socialite. He was the father of First Lady Jacqueline Kennedy Onassis and of socialite Lee Radziwill, and was the father- in- law of John F. Kennedy."
+          ],
+          "relation_texts": [
+            "He was the father-in-law of John F. Kennedy.",
+            "link",
+            "FATHER-IN-LAW",
+            "JOHN F. KENNEDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-703045a80253695a70d0f60fff19c1c1",
+            "hyperedge_name": "<hyperedge>\"He was the father-in-law of John F. Kennedy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father-in-law of Henry Newton (politician).\"",
+        "branch": "relation",
+        "raw_score": 0.47779104113578796,
+        "hyperedge_text": "He was the father-in-law of Henry Newton (politician).",
+        "entity_ids": [
+          "\"HENRY NEWTON\""
+        ],
+        "chunk_ids": [
+          "chunk-0dc73f6d7948fe1ff8594b56625fd37e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father-in-law of Henry Newton (politician).",
+            "John Adams (merchant) John Adams( 1672 or 1673 – 1745) was an American- born Canadian merchant and member of the Nova Scotia Council. He was the father- in- law of Henry Newton( politician)."
+          ],
+          "relation_texts": [
+            "He was the father-in-law of Henry Newton (politician).",
+            "link",
+            "HENRY NEWTON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6c291266363e7edd0cf6d6ccf7f27cfb",
+            "hyperedge_name": "<hyperedge>\"He was the father-in-law of Henry Newton (politician).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the uncle of, whose husband is.\"",
+        "branch": "relation",
+        "raw_score": 0.4741773009300232,
+        "hyperedge_text": "He is also the uncle of, whose husband is.",
+        "entity_ids": [
+          "\"HUSBAND\"",
+          "\"UNCLE\"",
+          "\"NEPHEW/NIECE\""
+        ],
+        "chunk_ids": [
+          "chunk-ab4fd963a6e1bb18c7ff575cca5ddd08"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is also the uncle of, whose husband is.",
+            "Andrzej Gawroński (actor) Andrzej Gawroński( born 10 February 1935 in Warsaw, Poland) is a Polish film and theatre actor. He is the brother of the late actor. He is also the uncle of, whose husband is."
+          ],
+          "relation_texts": [
+            "He is also the uncle of, whose husband is.",
+            "link",
+            "HUSBAND",
+            "UNCLE",
+            "NEPHEW/NIECE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a679e373fd231056e13421459e53e0cd",
+            "hyperedge_name": "<hyperedge>\"He is also the uncle of, whose husband is.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.\"",
+        "branch": "relation",
+        "raw_score": 0.4582873582839966,
+        "hyperedge_text": "Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.",
+        "entity_ids": [
+          "\"MARIE CLAUDINE\"",
+          "\"JOAKIM LEHMKUHL\""
+        ],
+        "chunk_ids": [
+          "chunk-bd104fa2041daef047dcf8d8b9637f0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.",
+            "Barthold A. Butenschøn Sr. Hans Barthold Andresen Butenschøn( 27 December 1877 – 28 November 1971) was a Norwegian businessperson. He was born in Kristiania as a son of Nils August Andresen Butenschøn and Hanna Butenschøn, and grandson of Nicolay Andresen. Together with Mabel Anette Plahte( 1877 – 1973, a daughter of Frithjof M. Plahte) he had the son Hans Barthold Andresen Butenschøn Jr. and was through him the father- in- law of Ragnhild Butenschøn and grandfather of Peter Butenschøn. Through his daughter Marie Claudine he was the father- in- law of Joakim Lehmkuhl, through his daughter Mabel Anette he was the father- in- law of Harald Astrup( a son of Sigurd Astrup) and through his daughter Nini Augusta he was the father- in- law of Ernst Torp. He took commerce school and agricultural school. He was hired in the family company N. A. Andresen& Co, and became a co-owner in 1910. He e..."
+          ],
+          "relation_texts": [
+            "Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.",
+            "link",
+            "MARIE CLAUDINE",
+            "JOAKIM LEHMKUHL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-41d8d76a9facfaec716017057cabd996",
+            "hyperedge_name": "<hyperedge>\"Through his daughter Marie Claudine he was the father-in-law of Joakim Lehmkuhl.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father-in-law of Albert Bacon Fall.\"",
+        "branch": "relation",
+        "raw_score": 0.4501110315322876,
+        "hyperedge_text": "He was the father-in-law of Albert Bacon Fall.",
+        "entity_ids": [
+          "\"ALBERT BACON FALL\""
+        ],
+        "chunk_ids": [
+          "chunk-e23dbc1235e3623996b6314deaa32b29"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father-in-law of Albert Bacon Fall.",
+            "Simpson Harris Morgan Simpson Harris Morgan (1821 – December 15, 1864) was a prominent Confederate politician who represented Texas in the Second Confederate Congress in 1864. He was the father-in-law of Albert Bacon Fall."
+          ],
+          "relation_texts": [
+            "He was the father-in-law of Albert Bacon Fall.",
+            "link",
+            "ALBERT BACON FALL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a5538445efdfd6401e865233ad4cd8a5",
+            "hyperedge_name": "<hyperedge>\"He was the father-in-law of Albert Bacon Fall.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.\"",
+        "branch": "relation",
+        "raw_score": 0.449292927980423,
+        "hyperedge_text": "He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.",
+        "entity_ids": [
+          "\"RAHUL GANDHI\"",
+          "\"RAJIV GANDHI\"",
+          "\"SONIA GANDHI\""
+        ],
+        "chunk_ids": [
+          "chunk-87dcaf39187f4ea031241f8385eaa982"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.",
+            "Robert Vadra Robert Vadra is an Indian businessman, entrepreneur and the husband of Priyanka Gandhi. He is the son -in- law of Sonia Gandhi and Rajiv Gandhi, and the brother- in- law of Rahul Gandhi."
+          ],
+          "relation_texts": [
+            "He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.",
+            "link",
+            "RAHUL GANDHI",
+            "RAJIV GANDHI",
+            "SONIA GANDHI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2f27884004f85f3597cf9aa7ec2ecb1",
+            "hyperedge_name": "<hyperedge>\"He is the son-in-law of Sonia Gandhi and Rajiv Gandhi, and the brother-in-law of Rahul Gandhi.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"through his daughter Mabel Anette he was the father-in-law of Harald Astrup (a son of Sigurd Astrup).\"",
+        "branch": "relation",
+        "raw_score": 0.4479868412017822,
+        "hyperedge_text": "through his daughter Mabel Anette he was the father-in-law of Harald Astrup (a son of Sigurd Astrup).",
+        "entity_ids": [
+          "\"HARALD ASTRUP\"",
+          "\"SIGURD ASTRUP\""
+        ],
+        "chunk_ids": [
+          "chunk-bd104fa2041daef047dcf8d8b9637f0a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "through his daughter Mabel Anette he was the father-in-law of Harald Astrup (a son of Sigurd Astrup).",
+            "Barthold A. Butenschøn Sr. Hans Barthold Andresen Butenschøn( 27 December 1877 – 28 November 1971) was a Norwegian businessperson. He was born in Kristiania as a son of Nils August Andresen Butenschøn and Hanna Butenschøn, and grandson of Nicolay Andresen. Together with Mabel Anette Plahte( 1877 – 1973, a daughter of Frithjof M. Plahte) he had the son Hans Barthold Andresen Butenschøn Jr. and was through him the father- in- law of Ragnhild Butenschøn and grandfather of Peter Butenschøn. Through his daughter Marie Claudine he was the father- in- law of Joakim Lehmkuhl, through his daughter Mabel Anette he was the father- in- law of Harald Astrup( a son of Sigurd Astrup) and through his daughter Nini Augusta he was the father- in- law of Ernst Torp. He took commerce school and agricultural school. He was hired in the family company N. A. Andresen& Co, and became a co-owner in 1910. He e..."
+          ],
+          "relation_texts": [
+            "through his daughter Mabel Anette he was the father-in-law of Harald Astrup (a son of Sigurd Astrup).",
+            "link",
+            "HARALD ASTRUP",
+            "SIGURD ASTRUP"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cba23da1d6ea5d411d53e37dd65582db",
+            "hyperedge_name": "<hyperedge>\"through his daughter Mabel Anette he was the father-in-law of Harald Astrup (a son of Sigurd Astrup).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn.\"",
+        "branch": "relation",
+        "raw_score": 0.4457547068595886,
+        "hyperedge_text": "Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn.",
+        "entity_ids": [
+          "\"DAUGHTER\"",
+          "\"GRUFFYDD AP LLYWELYN\""
+        ],
+        "chunk_ids": [
+          "chunk-a413dcf8db69aed7dd24693022a87600"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn.",
+            "Ælfgar, Earl of Mercia Ælfgar (died c. 1060) was the son of Leofric, Earl of Mercia, by his famous mother Godgifu (Lady Godiva). He succeeded to his father's title and responsibilities on the latter's death in 1057. He gained the additional title of Earl of East Anglia, but also was exiled for a time. Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn; a few years after his death, his daughter would become a widow and marry English King Harold."
+          ],
+          "relation_texts": [
+            "Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn.",
+            "link",
+            "DAUGHTER",
+            "GRUFFYDD AP LLYWELYN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b9ec6911d4305c2d4ccfd0ab0a5b89cb",
+            "hyperedge_name": "<hyperedge>\"Through the first marriage of his daughter he would become father-in-law of the Welsh king Gruffydd ap Llywelyn.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.\"",
+        "branch": "semantic",
+        "raw_score": 0.5823864340782166,
+        "hyperedge_text": "Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.",
+        "entity_ids": [
+          "\"UNITED STATES REPRESENTATIVE\"",
+          "\"NEW MEXICO\"",
+          "\"ALBERT G. SIMMS\""
+        ],
+        "chunk_ids": [
+          "chunk-64dd49841c92d6a8f48f44d5e5740055"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.",
+            "Albert G. Simms Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico. He was the husband of Ruth Hanna McCormick, who served as a United States Representative from Illinois. He was born in Washington, Arkansas, where he attended private schools. He attended the University of Arkansas at Fayetteville. He moved to Monterrey, Mexico in 1906 and was employed as an accountant. In 1912, he moved to Silver City, New Mexico. He studied law, was admitted to the bar in 1915, and practiced law at Albuquerque, New Mexico until 1919. Simms was a member of the city council 1920–1922. He was also a member and chairman of the board of county commissioners of Bernalillo County, New Mexico 1920–1922. He engaged in banking, serving as president of a national bank in Albuquerque, 1920–1924, and as president of a mortgage company in 1924. He served..."
+          ],
+          "relation_texts": [
+            "Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.",
+            "link",
+            "UNITED STATES REPRESENTATIVE",
+            "NEW MEXICO",
+            "ALBERT G. SIMMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bc1efd301c70e2023bdec594c03970f4",
+            "hyperedge_name": "<hyperedge>\"Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She also married two politicians, Senator Joseph Medill McCormick and Congressman Albert Gallatin Simms.\"",
+        "branch": "semantic",
+        "raw_score": 0.5090663433074951,
+        "hyperedge_text": "She also married two politicians, Senator Joseph Medill McCormick and Congressman Albert Gallatin Simms.",
+        "entity_ids": [
+          "\"SENATOR JOSEPH MEDILL MCCORMICK\"",
+          "\"CONGRESSMAN ALBERT GALLATIN SIMMS\""
+        ],
+        "chunk_ids": [
+          "chunk-c94c304e97c8d1540f93c99a0167bc5b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She also married two politicians, Senator Joseph Medill McCormick and Congressman Albert Gallatin Simms.",
+            "Ruth Hanna McCormick Ruth Hanna McCormick (née Ruth Hanna, also known as Ruth Hanna McCormick Simms; March 27, 1880 – December 31, 1944), was an American politician, activist, and publisher. She served one term in the United States House of Representatives, winning an at-large seat in Illinois in 1928. She gave up the chance to run for re-election to seek a United States Senate seat from Illinois. She defeated the incumbent, Senator Charles S. Deneen, in the Republican primary, becoming the first female Senate candidate for a major party. McCormick lost the general election. A decade later, she became the first woman to manage a presidential campaign, although her candidate, Thomas E. Dewey, failed to capture his party's nomination. Politics was a part of McCormick's life from an early age. She was the daughter of Mark Hanna, a Senator and politician who was instrumental in the electi..."
+          ],
+          "relation_texts": [
+            "She also married two politicians, Senator Joseph Medill McCormick and Congressman Albert Gallatin Simms.",
+            "link",
+            "SENATOR JOSEPH MEDILL MCCORMICK",
+            "CONGRESSMAN ALBERT GALLATIN SIMMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b8fdf521c4785deca1697ad6641e518a",
+            "hyperedge_name": "<hyperedge>\"She also married two politicians, Senator Joseph Medill McCormick and Congressman Albert Gallatin Simms.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ruth Hanna McCormick, also a member of Congress at the time, married Albert G. Simms in 1931.\"",
+        "branch": "semantic",
+        "raw_score": 0.49892547726631165,
+        "hyperedge_text": "Ruth Hanna McCormick, also a member of Congress at the time, married Albert G. Simms in 1931.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-64dd49841c92d6a8f48f44d5e5740055"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ruth Hanna McCormick, also a member of Congress at the time, married Albert G. Simms in 1931.",
+            "Albert G. Simms Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico. He was the husband of Ruth Hanna McCormick, who served as a United States Representative from Illinois. He was born in Washington, Arkansas, where he attended private schools. He attended the University of Arkansas at Fayetteville. He moved to Monterrey, Mexico in 1906 and was employed as an accountant. In 1912, he moved to Silver City, New Mexico. He studied law, was admitted to the bar in 1915, and practiced law at Albuquerque, New Mexico until 1919. Simms was a member of the city council 1920–1922. He was also a member and chairman of the board of county commissioners of Bernalillo County, New Mexico 1920–1922. He engaged in banking, serving as president of a national bank in Albuquerque, 1920–1924, and as president of a mortgage company in 1924. He served..."
+          ],
+          "relation_texts": [
+            "Ruth Hanna McCormick, also a member of Congress at the time, married Albert G. Simms in 1931."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6004cbc58c0ee96247d2e1aa067467a1",
+            "hyperedge_name": "<hyperedge>\"Ruth Hanna McCormick, also a member of Congress at the time, married Albert G. Simms in 1931.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Simms was a member of the Republican National Committee 1932-1934.\"",
+        "branch": "semantic",
+        "raw_score": 0.49807822704315186,
+        "hyperedge_text": "Simms was a member of the Republican National Committee 1932-1934.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-64dd49841c92d6a8f48f44d5e5740055"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Simms was a member of the Republican National Committee 1932-1934.",
+            "Albert G. Simms Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico. He was the husband of Ruth Hanna McCormick, who served as a United States Representative from Illinois. He was born in Washington, Arkansas, where he attended private schools. He attended the University of Arkansas at Fayetteville. He moved to Monterrey, Mexico in 1906 and was employed as an accountant. In 1912, he moved to Silver City, New Mexico. He studied law, was admitted to the bar in 1915, and practiced law at Albuquerque, New Mexico until 1919. Simms was a member of the city council 1920–1922. He was also a member and chairman of the board of county commissioners of Bernalillo County, New Mexico 1920–1922. He engaged in banking, serving as president of a national bank in Albuquerque, 1920–1924, and as president of a mortgage company in 1924. He served..."
+          ],
+          "relation_texts": [
+            "Simms was a member of the Republican National Committee 1932-1934."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a51ddf98d773813034d2fa7ca94f9f14",
+            "hyperedge_name": "<hyperedge>\"Simms was a member of the Republican National Committee 1932-1934.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Simms was a member of the city council 1920–1922.\"",
+        "branch": "semantic",
+        "raw_score": 0.4955953359603882,
+        "hyperedge_text": "Simms was a member of the city council 1920–1922.",
+        "entity_ids": [
+          "\"CITY COUNCIL\""
+        ],
+        "chunk_ids": [
+          "chunk-64dd49841c92d6a8f48f44d5e5740055"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Simms was a member of the city council 1920–1922.",
+            "Albert G. Simms Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico. He was the husband of Ruth Hanna McCormick, who served as a United States Representative from Illinois. He was born in Washington, Arkansas, where he attended private schools. He attended the University of Arkansas at Fayetteville. He moved to Monterrey, Mexico in 1906 and was employed as an accountant. In 1912, he moved to Silver City, New Mexico. He studied law, was admitted to the bar in 1915, and practiced law at Albuquerque, New Mexico until 1919. Simms was a member of the city council 1920–1922. He was also a member and chairman of the board of county commissioners of Bernalillo County, New Mexico 1920–1922. He engaged in banking, serving as president of a national bank in Albuquerque, 1920–1924, and as president of a mortgage company in 1924. He served..."
+          ],
+          "relation_texts": [
+            "Simms was a member of the city council 1920–1922.",
+            "link",
+            "CITY COUNCIL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ac151883ec5ce4ad3cdba9c4d94aa8a5",
+            "hyperedge_name": "<hyperedge>\"Simms was a member of the city council 1920–1922.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Simms was an unsuccessful candidate for reelection in 1930.\"",
+        "branch": "semantic",
+        "raw_score": 0.49065813422203064,
+        "hyperedge_text": "Simms was an unsuccessful candidate for reelection in 1930.",
+        "entity_ids": [
+          "\"SEVENTY-SECOND CONGRESS\""
+        ],
+        "chunk_ids": [
+          "chunk-64dd49841c92d6a8f48f44d5e5740055"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Simms was an unsuccessful candidate for reelection in 1930.",
+            "Albert G. Simms Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico. He was the husband of Ruth Hanna McCormick, who served as a United States Representative from Illinois. He was born in Washington, Arkansas, where he attended private schools. He attended the University of Arkansas at Fayetteville. He moved to Monterrey, Mexico in 1906 and was employed as an accountant. In 1912, he moved to Silver City, New Mexico. He studied law, was admitted to the bar in 1915, and practiced law at Albuquerque, New Mexico until 1919. Simms was a member of the city council 1920–1922. He was also a member and chairman of the board of county commissioners of Bernalillo County, New Mexico 1920–1922. He engaged in banking, serving as president of a national bank in Albuquerque, 1920–1924, and as president of a mortgage company in 1924. He served..."
+          ],
+          "relation_texts": [
+            "Simms was an unsuccessful candidate for reelection in 1930.",
+            "link",
+            "SEVENTY-SECOND CONGRESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9a633438d433b2637874ccc2f2fffd3d",
+            "hyperedge_name": "<hyperedge>\"Simms was an unsuccessful candidate for reelection in 1930.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father-in-law of Albert Bacon Fall.\"",
+        "branch": "semantic",
+        "raw_score": 0.4687913656234741,
+        "hyperedge_text": "He was the father-in-law of Albert Bacon Fall.",
+        "entity_ids": [
+          "\"ALBERT BACON FALL\""
+        ],
+        "chunk_ids": [
+          "chunk-e23dbc1235e3623996b6314deaa32b29"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father-in-law of Albert Bacon Fall.",
+            "Simpson Harris Morgan Simpson Harris Morgan (1821 – December 15, 1864) was a prominent Confederate politician who represented Texas in the Second Confederate Congress in 1864. He was the father-in-law of Albert Bacon Fall."
+          ],
+          "relation_texts": [
+            "He was the father-in-law of Albert Bacon Fall.",
+            "link",
+            "ALBERT BACON FALL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a5538445efdfd6401e865233ad4cd8a5",
+            "hyperedge_name": "<hyperedge>\"He was the father-in-law of Albert Bacon Fall.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father-in-law of Henry Newton (politician).\"",
+        "branch": "semantic",
+        "raw_score": 0.4681544303894043,
+        "hyperedge_text": "He was the father-in-law of Henry Newton (politician).",
+        "entity_ids": [
+          "\"HENRY NEWTON\""
+        ],
+        "chunk_ids": [
+          "chunk-0dc73f6d7948fe1ff8594b56625fd37e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father-in-law of Henry Newton (politician).",
+            "John Adams (merchant) John Adams( 1672 or 1673 – 1745) was an American- born Canadian merchant and member of the Nova Scotia Council. He was the father- in- law of Henry Newton( politician)."
+          ],
+          "relation_texts": [
+            "He was the father-in-law of Henry Newton (politician).",
+            "link",
+            "HENRY NEWTON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6c291266363e7edd0cf6d6ccf7f27cfb",
+            "hyperedge_name": "<hyperedge>\"He was the father-in-law of Henry Newton (politician).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Simona, who wed George II Ghisi, was one of the daughters of Alfonso.\"",
+        "branch": "semantic",
+        "raw_score": 0.4502286911010742,
+        "hyperedge_text": "Simona, who wed George II Ghisi, was one of the daughters of Alfonso.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-9cc4003c95204c833e519d0bbdf55403"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Simona, who wed George II Ghisi, was one of the daughters of Alfonso.",
+            "Alfonso Fadrique Don Alfonso Fadrique (died 1338) was the eldest and illegitimate son of Frederick II of Sicily. He served as vicar general of the Duchy of Athens from 1317 to 1330. He was first proclaimed vicar general by his father in 1317 and sent off to govern Athens on behalf of his younger half-brother Manfred. He arrived in Piraeus with ten galleys later that year, but Manfred had died and was succeeded by another brother, William II. In the year of his arrival, Fadrique married Marulla, the daughter of Boniface of Verona, thus allying himself with the chief lord of Euboea. By this marriage, also, he acquired rights to the castles of Larmena, Karystos, Zetouni, and Gardiki. Over the next two years, Fadrique warred with the Republic of Venice and stormed the city of Negroponte with Turks after Boniface of Verona died. In 1318, John II Ducas, the \"sebastokrator\" of Neopatras, die..."
+          ],
+          "relation_texts": [
+            "Simona, who wed George II Ghisi, was one of the daughters of Alfonso."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1d1fd01158b5e9b6ee7c3d1f5acc31dd",
+            "hyperedge_name": "<hyperedge>\"Simona, who wed George II Ghisi, was one of the daughters of Alfonso.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was also the father-in-law of Jean-Baptiste Guimet and grandfather of Émile Étienne Guimet.\"",
+        "branch": "semantic",
+        "raw_score": 0.44840341806411743,
+        "hyperedge_text": "He was also the father-in-law of Jean-Baptiste Guimet and grandfather of Émile Étienne Guimet.",
+        "entity_ids": [
+          "\"GRANDFATHER\"",
+          "\"FATHER-IN-LAW\"",
+          "\"JEAN-BAPTISTE GUIMET\"",
+          "\"ÉMILE ÉTIENNE GUIMET\""
+        ],
+        "chunk_ids": [
+          "chunk-ae4b93a62ff5c1402a0375db5c8eb7bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was also the father-in-law of Jean-Baptiste Guimet and grandfather of Émile Étienne Guimet.",
+            "Jean-Pierre-Xavier Bidauld Jean- Pierre- Xavier Bidauld( 30 June 1743 – 1 November 1813) was a French painter, mainly of landscapes and still lifes. Born in Carpentras, he died in Lyon. He was the older brother, and first teacher, of Jean- Joseph- Xavier Bidauld; he was also the father- in- law of Jean- Baptiste Guimet and grandfather of Émile Étienne Guimet."
+          ],
+          "relation_texts": [
+            "He was also the father-in-law of Jean-Baptiste Guimet and grandfather of Émile Étienne Guimet.",
+            "link",
+            "GRANDFATHER",
+            "FATHER-IN-LAW",
+            "JEAN-BAPTISTE GUIMET",
+            "ÉMILE ÉTIENNE GUIMET"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e8297c3d42a257b6160d98ff1e7c844a",
+            "hyperedge_name": "<hyperedge>\"He was also the father-in-law of Jean-Baptiste Guimet and grandfather of Émile Étienne Guimet.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.\"",
+        "hyperedge_text": "Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5823864340782166,
+        "fusion_score": 0.5164772868156433,
+        "entity_ids": [
+          "\"UNITED STATES REPRESENTATIVE\"",
+          "\"NEW MEXICO\"",
+          "\"ALBERT G. SIMMS\""
+        ],
+        "chunk_ids": [
+          "chunk-64dd49841c92d6a8f48f44d5e5740055"
+        ],
+        "evidence_texts": [
+          "Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico.",
+          "Albert G. Simms Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico. He was the husband of Ruth Hanna McCormick, who served as a United States Representative from Illinois. He was born in Washington, Arkansas, where he attended private schools. He attended the University of Arkansas at Fayetteville. He moved to Monterrey, Mexico in 1906 and was employed as an accountant. In 1912, he moved to Silver City, New Mexico. He studied law, was admitted to the bar in 1915, and practiced law at Albuquerque, New Mexico until 1919. Simms was a member of the city council 1920–1922. He was also a member and chairman of the board of county commissioners of Bernalillo County, New Mexico 1920–1922. He engaged in banking, serving as president of a national bank in Albuquerque, 1920–1924, and as president of a mortgage company in 1924. He served..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.582386,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516477
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father-in-law of Henry Newton (politician).\"",
+        "hyperedge_text": "He was the father-in-law of Henry Newton (politician).",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.47779104113578796,
+        "semantic_score": 0.4681544303894043,
+        "fusion_score": 0.28474730253219604,
+        "entity_ids": [
+          "\"HENRY NEWTON\""
+        ],
+        "chunk_ids": [
+          "chunk-0dc73f6d7948fe1ff8594b56625fd37e"
+        ],
+        "evidence_texts": [
+          "He was the father-in-law of Henry Newton (politician).",
+          "John Adams (merchant) John Adams( 1672 or 1673 – 1745) was an American- born Canadian merchant and member of the Nova Scotia Council. He was the father- in- law of Henry Newton( politician)."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.477791,
+          "S": 0.468154,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.284747
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father-in-law of Albert Bacon Fall.\"",
+        "hyperedge_text": "He was the father-in-law of Albert Bacon Fall.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4501110315322876,
+        "semantic_score": 0.4687913656234741,
+        "fusion_score": 0.27380268573760985,
+        "entity_ids": [
+          "\"ALBERT BACON FALL\""
+        ],
+        "chunk_ids": [
+          "chunk-e23dbc1235e3623996b6314deaa32b29"
+        ],
+        "evidence_texts": [
+          "He was the father-in-law of Albert Bacon Fall.",
+          "Simpson Harris Morgan Simpson Harris Morgan (1821 – December 15, 1864) was a prominent Confederate politician who represented Texas in the Second Confederate Congress in 1864. He was the father-in-law of Albert Bacon Fall."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.450111,
+          "S": 0.468791,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.273803
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ruth Hanna McCormick, also a member of Congress at the time, married Albert G. Simms in 1931.\"",
+        "hyperedge_text": "Ruth Hanna McCormick, also a member of Congress at the time, married Albert G. Simms in 1931.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49892547726631165,
+        "fusion_score": 0.49978509545326233,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-64dd49841c92d6a8f48f44d5e5740055"
+        ],
+        "evidence_texts": [
+          "Ruth Hanna McCormick, also a member of Congress at the time, married Albert G. Simms in 1931.",
+          "Albert G. Simms Albert Gallatin Simms (October 8, 1882 – December 29, 1964) was a United States Representative from New Mexico. He was the husband of Ruth Hanna McCormick, who served as a United States Representative from Illinois. He was born in Washington, Arkansas, where he attended private schools. He attended the University of Arkansas at Fayetteville. He moved to Monterrey, Mexico in 1906 and was employed as an accountant. In 1912, he moved to Silver City, New Mexico. He studied law, was admitted to the bar in 1915, and practiced law at Albuquerque, New Mexico until 1919. Simms was a member of the city council 1920–1922. He was also a member and chairman of the board of county commissioners of Bernalillo County, New Mexico 1920–1922. He engaged in banking, serving as president of a national bank in Albuquerque, 1920–1924, and as president of a mortgage company in 1924. He served..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.498925,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499785
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was also the father-in-law of Jean-Baptiste Guimet and grandfather of Émile Étienne Guimet.\"",
+        "hyperedge_text": "He was also the father-in-law of Jean-Baptiste Guimet and grandfather of Émile Étienne Guimet.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.44840341806411743,
+        "fusion_score": 0.4896806836128235,
+        "entity_ids": [
+          "\"GRANDFATHER\"",
+          "\"FATHER-IN-LAW\"",
+          "\"JEAN-BAPTISTE GUIMET\"",
+          "\"ÉMILE ÉTIENNE GUIMET\""
+        ],
+        "chunk_ids": [
+          "chunk-ae4b93a62ff5c1402a0375db5c8eb7bf"
+        ],
+        "evidence_texts": [
+          "He was also the father-in-law of Jean-Baptiste Guimet and grandfather of Émile Étienne Guimet.",
+          "Jean-Pierre-Xavier Bidauld Jean- Pierre- Xavier Bidauld( 30 June 1743 – 1 November 1813) was a French painter, mainly of landscapes and still lifes. Born in Carpentras, he died in Lyon. He was the older brother, and first teacher, of Jean- Joseph- Xavier Bidauld; he was also the father- in- law of Jean- Baptiste Guimet and grandfather of Émile Étienne Guimet."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.448403,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.489681
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+2026-05-27 02:49:49,990 | INFO | Generating atomic question DAG with DEPO.
+2026-05-27 02:50:47,231 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-27 02:50:47,232 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-27 02:50:59,732 | INFO | Starting HyperBranch pipeline for question: Which film was released more recently, Behind Locked Doors or Crossing Delancey?
+2026-05-27 02:50:59,732 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-27 02:51:04,706 | INFO | Atomic retrieval returned 24 hits for question=When was Behind Locked Doors released?
+2026-05-27 02:51:12,550 | INFO | Atomic retrieval returned 21 hits for question=What is the release date of Crossing Delancey?
+2026-05-27 02:51:18,653 | INFO | Atomic retrieval returned 24 hits for question=What is the release date of Behind Locked Doors?
+2026-05-27 02:51:33,886 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_024949_which-film-was-released-more-recently-behind-loc

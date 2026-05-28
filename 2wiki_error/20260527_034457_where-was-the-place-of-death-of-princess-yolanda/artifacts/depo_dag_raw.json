@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Princess Yolanda Of Savoy?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where was the father of Princess Yolanda Of Savoy buried?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

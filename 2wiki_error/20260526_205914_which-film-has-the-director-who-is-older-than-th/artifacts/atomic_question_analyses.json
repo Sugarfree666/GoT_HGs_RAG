@@ -1,0 +1,207 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Colierul De Turcoaze?",
+    "retrieval_question": "Who is the director of Colierul De Turcoaze?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Colierul De Turcoaze?",
+      "retrieval_question": "Who is the director of Colierul De Turcoaze?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Colierul De Turcoaze"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Leo And Loree?",
+    "retrieval_question": "Who is the director of Leo And Loree?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Leo And Loree?",
+      "retrieval_question": "Who is the director of Leo And Loree?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Leo And Loree"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Colierul De Turcoaze?",
+    "retrieval_question": "What is the age of Gheorghe Vitanidis?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of Colierul De Turcoaze?",
+      "retrieval_question": "What is the age of Gheorghe Vitanidis?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Colierul De Turcoaze",
+      "replacement_answer": "Gheorghe Vitanidis",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Colierul De Turcoaze",
+          "replacement_answer": "Gheorghe Vitanidis"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Colierul De Turcoaze?",
+        "answer": "Gheorghe Vitanidis",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+            "fusion_score": 0.534689474105835,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+              "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+            "fusion_score": 0.5312375783920289,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+              "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"As a director, he has left a lasting impact on Turkish storytelling.\"",
+            "fusion_score": 0.4906553506851197,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "As a director, he has left a lasting impact on Turkish storytelling.",
+              "Kartal Tibet Kartal Tibet( born 27 March 1938) is a Turkish actor and film director. Some of his famous films include\" Ölmeyen AşkDağlar KızıSenede Bir GünSultanZübük Gol Kralı\", and\" Şalvar Davası\". Tibet is also known for his action roles, especially that of the title series."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Gheorghe Vitanidis"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of Leo And Loree?",
+    "retrieval_question": "What is the age of Jerry Paris?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of Leo And Loree?",
+      "retrieval_question": "What is the age of Jerry Paris?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Leo And Loree",
+      "replacement_answer": "Jerry Paris",
+      "replacements": [
+        {
+          "dependency_node_id": "q3",
+          "replacement_span": "the director of Leo And Loree",
+          "replacement_answer": "Jerry Paris"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q3",
+        "question": "Who is the director of Leo And Loree?",
+        "answer": "Jerry Paris",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+            "fusion_score": 0.5290886163711548,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+              "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film showcases the charm of its main characters, Leo and Loree.\"",
+            "fusion_score": 0.5271953105926515,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film showcases the charm of its main characters, Leo and Loree.",
+              "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\"",
+            "fusion_score": 0.5157421708106995,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film Leo and Loree is classified as a romantic comedy.",
+              "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Jerry Paris"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    }
+  }
+]

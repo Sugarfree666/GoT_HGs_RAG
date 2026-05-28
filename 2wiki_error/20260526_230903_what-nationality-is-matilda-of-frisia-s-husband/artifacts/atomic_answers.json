@@ -1,0 +1,367 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the husband of Matilda Of Frisia?",
+    "analysis": {
+      "entities": [
+        "Matilda Of Frisia"
+      ],
+      "relations": [
+        "is the husband of"
+      ],
+      "relation_query": "who is the husband of a historical figure",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks.\"",
+        "hyperedge_text": "Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6443017721176147,
+        "fusion_score": 0.528860354423523,
+        "entity_ids": [
+          "\"HENRY I\"",
+          "\"MATILDA OF FRISIA\""
+        ],
+        "chunk_ids": [
+          "chunk-f22302dbf0d63fb550b8da0eb7203dc0"
+        ],
+        "evidence_texts": [
+          "Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks.",
+          "Matilda of Frisia Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks. Her date of birth is unknown. She was the daughter of Liudolf, Margrave of Frisia, and Gertrude of Egisheim. Matilda and Henry were married in 1034 after the death of his fiancée Matilda of Franconia. Around 1040, Matilda of Frisia gave birth to a daughter via Caesarian section, but four years later in 1044 both she and her daughter died only weeks apart. Matilda was buried in St Denis Abbey, but her tomb is not preserved. Henry married Anne of Kiev after her death."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.644302,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52886
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Matilda of Frisia was a prominent historical figure in the 11th century.\"",
+        "hyperedge_text": "Matilda of Frisia was a prominent historical figure in the 11th century.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.6666666666666666,
+        "semantic_score": 0.6569573879241943,
+        "fusion_score": 0.7980581442515056,
+        "entity_ids": [
+          "\"11TH CENTURY\""
+        ],
+        "chunk_ids": [
+          "chunk-f22302dbf0d63fb550b8da0eb7203dc0"
+        ],
+        "evidence_texts": [
+          "Matilda of Frisia was a prominent historical figure in the 11th century.",
+          "Matilda of Frisia Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks. Her date of birth is unknown. She was the daughter of Liudolf, Margrave of Frisia, and Gertrude of Egisheim. Matilda and Henry were married in 1034 after the death of his fiancée Matilda of Franconia. Around 1040, Matilda of Frisia gave birth to a daughter via Caesarian section, but four years later in 1044 both she and her daughter died only weeks apart. Matilda was buried in St Denis Abbey, but her tomb is not preserved. Henry married Anne of Kiev after her death."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.666667,
+          "S": 0.656957,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.798058
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Matilda of Frisia's legacy is reflected in historical accounts and royal lineage.\"",
+        "hyperedge_text": "Matilda of Frisia's legacy is reflected in historical accounts and royal lineage.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.6394402980804443,
+        "fusion_score": 0.6612213929494222,
+        "entity_ids": [
+          "\"LEGACY\""
+        ],
+        "chunk_ids": [
+          "chunk-f22302dbf0d63fb550b8da0eb7203dc0"
+        ],
+        "evidence_texts": [
+          "Matilda of Frisia's legacy is reflected in historical accounts and royal lineage.",
+          "Matilda of Frisia Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks. Her date of birth is unknown. She was the daughter of Liudolf, Margrave of Frisia, and Gertrude of Egisheim. Matilda and Henry were married in 1034 after the death of his fiancée Matilda of Franconia. Around 1040, Matilda of Frisia gave birth to a daughter via Caesarian section, but four years later in 1044 both she and her daughter died only weeks apart. Matilda was buried in St Denis Abbey, but her tomb is not preserved. Henry married Anne of Kiev after her death."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.333333,
+          "S": 0.63944,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.661221
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Matilda of Frisia's marriage to Henry I came after the tragedy involving his first fiancée.\"",
+        "hyperedge_text": "Matilda of Frisia's marriage to Henry I came after the tragedy involving his first fiancée.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7091529965400696,
+        "fusion_score": 0.5418305993080139,
+        "entity_ids": [
+          "\"TRAGEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-f22302dbf0d63fb550b8da0eb7203dc0"
+        ],
+        "evidence_texts": [
+          "Matilda of Frisia's marriage to Henry I came after the tragedy involving his first fiancée.",
+          "Matilda of Frisia Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks. Her date of birth is unknown. She was the daughter of Liudolf, Margrave of Frisia, and Gertrude of Egisheim. Matilda and Henry were married in 1034 after the death of his fiancée Matilda of Franconia. Around 1040, Matilda of Frisia gave birth to a daughter via Caesarian section, but four years later in 1044 both she and her daughter died only weeks apart. Matilda was buried in St Denis Abbey, but her tomb is not preserved. Henry married Anne of Kiev after her death."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.709153,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.541831
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After the death of Matilda of Franconia, Henry I sought to marry Matilda of Frisia to consolidate power.\"",
+        "hyperedge_text": "After the death of Matilda of Franconia, Henry I sought to marry Matilda of Frisia to consolidate power.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6949425935745239,
+        "fusion_score": 0.5389885187149048,
+        "entity_ids": [
+          "\"POWER CONSOLIDATION\""
+        ],
+        "chunk_ids": [
+          "chunk-f22302dbf0d63fb550b8da0eb7203dc0"
+        ],
+        "evidence_texts": [
+          "After the death of Matilda of Franconia, Henry I sought to marry Matilda of Frisia to consolidate power.",
+          "Matilda of Frisia Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks. Her date of birth is unknown. She was the daughter of Liudolf, Margrave of Frisia, and Gertrude of Egisheim. Matilda and Henry were married in 1034 after the death of his fiancée Matilda of Franconia. Around 1040, Matilda of Frisia gave birth to a daughter via Caesarian section, but four years later in 1044 both she and her daughter died only weeks apart. Matilda was buried in St Denis Abbey, but her tomb is not preserved. Henry married Anne of Kiev after her death."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.694943,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.538989
+        }
+      }
+    ],
+    "answer": "Henry I",
+    "confidence": 0.9,
+    "reasoning_summary": "Matilda of Frisia was the first queen of Henry I, King of the Franks, as stated in the evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the husband of Matilda Of Frisia?",
+    "analysis": {
+      "entities": [
+        "Henry I"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Henry I (4 May 1008 – 4 August 1060) was a king who reigned during a significant period for the French monarchy.\"",
+        "hyperedge_text": "Henry I (4 May 1008 – 4 August 1060) was a king who reigned during a significant period for the French monarchy.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6526029109954834,
+        "fusion_score": 0.5305205821990967,
+        "entity_ids": [
+          "\"HENRY I\""
+        ],
+        "chunk_ids": [
+          "chunk-f119dd2202e4fcef9d9c2feadefc2b4a"
+        ],
+        "evidence_texts": [
+          "Henry I (4 May 1008 – 4 August 1060) was a king who reigned during a significant period for the French monarchy.",
+          "Henry I of France Henry I (4 May 1008 – 4 August 1060) was King of the Franks from 1031 to 1060. The royal demesne of France reached its smallest size during his reign, and for this reason he is often seen as emblematic of the weakness of the early Capetians. This is not entirely agreed upon, however, as other historians regard him as a strong but realistic king, who was forced to conduct a policy mindful of the limitations of the French monarchy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.652603,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530521
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry I (4 May 1008 – 4 August 1060) was King of the Franks from 1031 to 1060.\"",
+        "hyperedge_text": "Henry I (4 May 1008 – 4 August 1060) was King of the Franks from 1031 to 1060.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6125162243843079,
+        "fusion_score": 0.5225032448768616,
+        "entity_ids": [
+          "\"HENRY I\"",
+          "\"KING OF THE FRANKS\"",
+          "\"ROYAL DEMESNE OF FRANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-f119dd2202e4fcef9d9c2feadefc2b4a"
+        ],
+        "evidence_texts": [
+          "Henry I (4 May 1008 – 4 August 1060) was King of the Franks from 1031 to 1060.",
+          "Henry I of France Henry I (4 May 1008 – 4 August 1060) was King of the Franks from 1031 to 1060. The royal demesne of France reached its smallest size during his reign, and for this reason he is often seen as emblematic of the weakness of the early Capetians. This is not entirely agreed upon, however, as other historians regard him as a strong but realistic king, who was forced to conduct a policy mindful of the limitations of the French monarchy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.612516,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522503
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry I of Werle\"",
+        "hyperedge_text": "Henry I of Werle",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.58733069896698,
+        "fusion_score": 0.5174661397933961,
+        "entity_ids": [
+          "\"HENRY I\"",
+          "\"MECKLENBURG-WERLE\"",
+          "\"MECKLENBURG-GÜSTROW\""
+        ],
+        "chunk_ids": [
+          "chunk-ecca302ef4cd54f8f9b27e412a1ed14f"
+        ],
+        "evidence_texts": [
+          "Henry I of Werle",
+          "Henry I of Werle Henry I( died 8 October 1291) was a Prince of Mecklenburg- Werle and Mecklenburg- Güstrow."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.587331,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517466
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry, Count of Looz, was the son of Gérard II, Count of Looz, and Adelaide of Gelderland.\"",
+        "hyperedge_text": "Henry, Count of Looz, was the son of Gérard II, Count of Looz, and Adelaide of Gelderland.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"HENRY\"",
+          "\"GÉRARD II\"",
+          "\"HENRY I\"",
+          "\"COUNT OF GUELDERS\"",
+          "\"AGNES OF ARNSTEIN\"",
+          "\"ADELAIDE OF GELDERLAND\"",
+          "\"LOUIS III OF ARNSTEIN\""
+        ],
+        "chunk_ids": [
+          "chunk-3736433f7c8510208c9b1e4b87e974ee"
+        ],
+        "evidence_texts": [
+          "Henry, Count of Looz, was the son of Gérard II, Count of Looz, and Adelaide of Gelderland.",
+          "Henry, Count of Looz Henry( d. 2 August 1218), Count of Looz and Count of Duras, son of Gérard II, Count of Looz, and Adelaide of Gelderland, daughter of Henry I, Count of Guelders, and Agnes of Arnstein, daughter of Louis III of Arnstein. Henry was Canon of St. Lambert in Liège, Provost of the Franciscans in Maastricht, and Provost of St. Alexander in Aschaffenburg. Henry was Count of Looz for a few days in 1218, but died of poisoning. He married Mechtild, daughter of Frederick III, Count of Vlanden. Henry and Mechtild had one daughter: He was succeeded as Count of Looz by his brother Arnold, and was the last recorded Count of Duras."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry I (died 8 October 1291) was a Prince of Mecklenburg-Werle and Mecklenburg-Güstrow.\"",
+        "hyperedge_text": "Henry I (died 8 October 1291) was a Prince of Mecklenburg-Werle and Mecklenburg-Güstrow.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"HENRY I\"",
+          "\"MECKLENBURG-WERLE\"",
+          "\"MECKLENBURG-GÜSTROW\""
+        ],
+        "chunk_ids": [
+          "chunk-ecca302ef4cd54f8f9b27e412a1ed14f"
+        ],
+        "evidence_texts": [
+          "Henry I (died 8 October 1291) was a Prince of Mecklenburg-Werle and Mecklenburg-Güstrow.",
+          "Henry I of Werle Henry I( died 8 October 1291) was a Prince of Mecklenburg- Werle and Mecklenburg- Güstrow."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ],
+    "answer": "French",
+    "confidence": 0.9,
+    "reasoning_summary": "Henry I, the husband of Matilda of Frisia, was King of the Franks, indicating his French nationality.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Henry I (4 May 1008 – 4 August 1060) was King of the Franks from 1031 to 1060.\""
+    ]
+  }
+]

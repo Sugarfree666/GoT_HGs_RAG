@@ -1,0 +1,12 @@
+2026-05-26 23:12:04,548 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 23:14:05,841 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 23:14:05,841 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 23:14:34,165 | INFO | Starting HyperBranch pipeline for question: Which film has the director born earlier, The Spooky Bunch or His Name Is Nobody?
+2026-05-26 23:14:34,166 | INFO | Executing atomic DAG with 4 node(s)
+2026-05-26 23:14:42,195 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of The Spooky Bunch?
+2026-05-26 23:14:55,563 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of His Name Is Nobody?
+2026-05-26 23:15:00,532 | INFO | Rewrote retrieval question for q2: When was the director of The Spooky Bunch born? -> When was Ann Hui born?
+2026-05-26 23:15:15,324 | INFO | Atomic retrieval returned 21 hits for question=When was Ann Hui born?
+2026-05-26 23:15:21,696 | INFO | Rewrote retrieval question for q3: When was the director of The Spooky Bunch born? -> When was Ann Hui born?
+2026-05-26 23:15:24,739 | INFO | Atomic retrieval returned 21 hits for question=When was Ann Hui born?
+2026-05-26 23:16:15,198 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_231204_which-film-has-the-director-born-earlier-the-spo

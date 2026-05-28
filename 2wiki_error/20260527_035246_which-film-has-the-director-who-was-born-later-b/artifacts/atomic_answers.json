@@ -1,0 +1,546 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Bárbara Atómica?",
+    "analysis": {
+      "entities": [
+        "Bárbara Atómica"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\"",
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7062029838562012,
+        "fusion_score": 0.5412405967712403,
+        "entity_ids": [
+          "\"JULIO SARACENI\"",
+          "\"ABEL SANTA CRUZ\"",
+          "\"MICHEL DURAN\"",
+          "\"MAY 23, 1952\"",
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.706203,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.541241
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film.\"",
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6870623826980591,
+        "fusion_score": 0.5374124765396119,
+        "entity_ids": [
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica is a 1952 Argentine film.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.687062,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.537412
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica showcases themes of love, conflict, and Argentine identity.\"",
+        "hyperedge_text": "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6409659385681152,
+        "fusion_score": 0.5281931877136231,
+        "entity_ids": [
+          "\"ARGENTINE IDENTITY\"",
+          "\"THEMES OF LOVE AND CONFLICT\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.640966,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528193
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.\"",
+        "hyperedge_text": "The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.43074551224708557,
+        "fusion_score": 0.4861491024494171,
+        "entity_ids": [
+          "\"ARGENTINE CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-b3a7c1d9cc2687bd5eb3269e28bd9287"
+        ],
+        "evidence_texts": [
+          "The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.",
+          "Modern Husbands Modern Husbands( Spanish: Maridos modernos) is a 1948 Argentine comedy film directed by Luis Bayón Herrera and starring Olinda Bozán, Francisco Álvarez and Oscar Valicelli. The film's art direction was by Juan Manuel Concado."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.430746,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.486149
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.47926294803619385,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2917051792144776,
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "evidence_texts": [
+          "As a visual effects artist, he contributed to various film projects before directing.",
+          "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.479263,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.291705
+        }
+      }
+    ],
+    "answer": "Julio Saraceni",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'Bárbara atómica' was directed by Julio Saraceni.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Three Lucky Fools?",
+    "analysis": {
+      "entities": [
+        "Three Lucky Fools"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.\"",
+        "hyperedge_text": "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6155170202255249,
+        "fusion_score": 0.523103404045105,
+        "entity_ids": [
+          "\"EDUARDO DE FILIPPO\"",
+          "\"MARIO BONNARD\"",
+          "\"ASSIA NORIS\"",
+          "\"THREE LUCKY FOOLS\"",
+          "\"TITO SCHIPA\"",
+          "\"FRED PASQUALI\""
+        ],
+        "chunk_ids": [
+          "chunk-2f55903ca60f3365f409badc0dfcc259"
+        ],
+        "evidence_texts": [
+          "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+          "Three Lucky Fools Three Lucky Fools( Italian: Tre uomini in frack) is a 1933 French- Italian comedy film directed by Mario Bonnard and starring Tito Schipa, Eduardo De Filippo and Fred Pasquali. It marked the film debut of Assia Noris who went on to be a leading Italian star. It was released in two separate versions one in French and the other in Italian."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.615517,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523103
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.\"",
+        "hyperedge_text": "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5970155000686646,
+        "fusion_score": 0.5194031000137329,
+        "entity_ids": [
+          "\"1933\"",
+          "\"THREE LUCKY FOOLS\""
+        ],
+        "chunk_ids": [
+          "chunk-2f55903ca60f3365f409badc0dfcc259"
+        ],
+        "evidence_texts": [
+          "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+          "Three Lucky Fools Three Lucky Fools( Italian: Tre uomini in frack) is a 1933 French- Italian comedy film directed by Mario Bonnard and starring Tito Schipa, Eduardo De Filippo and Fred Pasquali. It marked the film debut of Assia Noris who went on to be a leading Italian star. It was released in two separate versions one in French and the other in Italian."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.597016,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519403
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Johnnie To takes the helm as director for A Moment of Romance III.\"",
+        "hyperedge_text": "Johnnie To takes the helm as director for A Moment of Romance III.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.43872129917144775,
+        "fusion_score": 0.4877442598342896,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-a26f424785d79d7014a72a70d8df13fb"
+        ],
+        "evidence_texts": [
+          "Johnnie To takes the helm as director for A Moment of Romance III.",
+          "A Moment of Romance II A Moment of Romance II is a 1993 Hong Kong action romance film directed by Benny Chan and starring Aaron Kwok and Jacklyn Wu. It is the second installment of the\" A Moment of Romance\" trilogy, featuring a new storyline. The film is followed by a final installment,\" A Moment of Romance III\"( 1996), with producer Johnnie To taking the helm as director and features the return of Andy Lau, the star of the first installment."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.438721,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.487744
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.47926294803619385,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2917051792144776,
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "evidence_texts": [
+          "As a visual effects artist, he contributed to various film projects before directing.",
+          "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.479263,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.291705
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5064207315444946,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25256829261779784,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.506421,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.252568
+        }
+      }
+    ],
+    "answer": "Mario Bonnard",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Three Lucky Fools' is directed by Mario Bonnard.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Is the birth date of the director of Bárbara Atómica later than the birth date of the director of Three Lucky Fools?",
+    "analysis": {
+      "entities": [
+        "Bárbara Atómica",
+        "Three Lucky Fools"
+      ],
+      "relations": [
+        "is later than",
+        "birth date of the director"
+      ],
+      "relation_query": "Is the birth date of the director of a work later than the birth date of the director of another work?",
+      "answer_type": "boolean"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\"",
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5524497628211975,
+        "fusion_score": 0.3104899525642395,
+        "entity_ids": [
+          "\"JULIO SARACENI\"",
+          "\"ABEL SANTA CRUZ\"",
+          "\"MICHEL DURAN\"",
+          "\"MAY 23, 1952\"",
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.55245,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.31049
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film.\"",
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5256851315498352,
+        "fusion_score": 0.3051370263099671,
+        "entity_ids": [
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica is a 1952 Argentine film.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.525685,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.305137
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Conflicting release dates indicate possible variations in historical records surrounding the film.\"",
+        "hyperedge_text": "Conflicting release dates indicate possible variations in historical records surrounding the film.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4617064297199249,
+        "semantic_score": 0.39613431692123413,
+        "fusion_score": 0.26390943527221683,
+        "entity_ids": [
+          "\"HISTORICAL RECORDS\""
+        ],
+        "chunk_ids": [
+          "chunk-b27dcdff6c12af0f1181ad3859999869"
+        ],
+        "evidence_texts": [
+          "Conflicting release dates indicate possible variations in historical records surrounding the film.",
+          "Pirates of the Sky Pirates of the Sky is a 1926 American silent adventure melodrama film directed by Charles Andrews. The film stars Charles Hutchison, Wanda Hawley and Crauford Kent. In different sources,\" Pirates of the Sky\" distributed by Pathé Exchange has conflicting release dates of February 20, 1926 and March 21, 1927."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.461706,
+          "S": 0.396134,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.263909
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Castellari's birth date is significant to his biographical information.\"",
+        "hyperedge_text": "Castellari's birth date is significant to his biographical information.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.6666666666666666,
+        "semantic_score": 0.40697595477104187,
+        "fusion_score": 0.34806185762087505,
+        "entity_ids": [
+          "\"BIOGRAPHICAL INFORMATION\""
+        ],
+        "chunk_ids": [
+          "chunk-4efeb20de34816861256f308734cb4fd"
+        ],
+        "evidence_texts": [
+          "Castellari's birth date is significant to his biographical information.",
+          "Enzo G. Castellari Enzo Girolami Castellari( born 29 July 1938) is an Italian director, screenwriter and actor."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.666667,
+          "S": 0.406976,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.348062
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica showcases themes of love, conflict, and Argentine identity.\"",
+        "hyperedge_text": "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.43350592255592346,
+        "fusion_score": 0.2867011845111847,
+        "entity_ids": [
+          "\"ARGENTINE IDENTITY\"",
+          "\"THEMES OF LOVE AND CONFLICT\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.433506,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.286701
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the birth dates of the directors of 'Bárbara Atómica' and 'Three Lucky Fools', making it impossible to determine the comparison.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\""
+    ]
+  }
+]

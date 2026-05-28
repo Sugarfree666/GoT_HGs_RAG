@@ -1,0 +1,1576 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Ștefan I. Nenițescu?",
+    "retrieval_question": "Who is the father of Ștefan I. Nenițescu?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of Ștefan I. Nenițescu?",
+      "retrieval_question": "Who is the father of Ștefan I. Nenițescu?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+        "entity_ids": [
+          "\"ȘTEFAN I. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+            "link",
+            "ȘTEFAN I. NENIȚESCU"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father.\"",
+        "branch": "relation",
+        "raw_score": 0.48036035895347595,
+        "hyperedge_text": "He was the father.",
+        "entity_ids": [
+          "\"FATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father.",
+            "Obata Toramori He was the father of Obata Masamori."
+          ],
+          "relation_texts": [
+            "He was the father.",
+            "link",
+            "FATHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ccea16dffbc4d38bcd051c761cb747b2",
+            "hyperedge_name": "<hyperedge>\"He was the father.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of Imran Farhat.\"",
+        "branch": "relation",
+        "raw_score": 0.43573564291000366,
+        "hyperedge_text": "He is the father-in-law of Imran Farhat.",
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-10333be7c973d42a00364ad277052021"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "Mohammad Ilyas (cricketer) Mohammad Ilyas Mahmood( born March 19, 1946, Lahore, Punjab) is a former Pakistani cricketer who played in ten Tests from 1964 to 1969. He is the father- in- law of Imran Farhat."
+          ],
+          "relation_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "link",
+            "FATHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dfb75f61e308d9f2ded0e2f2dc62859e",
+            "hyperedge_name": "<hyperedge>\"He is the father-in-law of Imran Farhat.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "branch": "relation",
+        "raw_score": 0.4295836091041565,
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "link",
+            "TERRITORIAL WATERS",
+            "LAW OF THE COUNTRIES INVOLVED",
+            "NATIONALITY OF THE PLANE OR SHIP",
+            "LAW",
+            "AIRSPACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e736e546ef2766fb6eee3ec329d43975",
+            "hyperedge_name": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He fathered fourteen children, eleven males and three females.\"",
+        "branch": "relation",
+        "raw_score": 0.4262092411518097,
+        "hyperedge_text": "He fathered fourteen children, eleven males and three females.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-cde3891c82b4f51558496b9d1a64567d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He fathered fourteen children, eleven males and three females.",
+            "Tlilpotoncatzin Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second \"cihuacoatlpresident\") of Mexico-Tenochtitlan. Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin. His father was a son of the second \"tlatoaniruler\" or \"king\") of Tenochtitlan, Huitzilihuitl. While Tlacaelel never became \"tlatoani\" himself, as \"cihuacoatl\" he played a significant role in the creation of the Aztec Empire. His mother was the daughter of Huehue Quetzalmacatzin, king of Itztlacozauhcan in Amaquemecan Chalco. Tlilpotoncatzin succeeded his father as \"cihuacoatl\" upon his death in the year 8 Reed (1487). According to the \"Crónica mexicayotl\" of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior. In battle he wore the \"quetzalpatzactli\", a crest of quetzal feathers. Tlilpotoncatzin took at least two wives, both from Amaquemecan..."
+          ],
+          "relation_texts": [
+            "He fathered fourteen children, eleven males and three females."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-706c8f3af642bec4c8143cb34884260a",
+            "hyperedge_name": "<hyperedge>\"He fathered fourteen children, eleven males and three females.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Alfred 'Freddie' Lennon is known as the father of musician John Lennon.\"",
+        "branch": "relation",
+        "raw_score": 0.4207149147987366,
+        "hyperedge_text": "Alfred 'Freddie' Lennon is known as the father of musician John Lennon.",
+        "entity_ids": [
+          "\"MUSICIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-1f035d23e047e0fdbff4c5c4a97928bd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Alfred 'Freddie' Lennon is known as the father of musician John Lennon.",
+            "That's My Life (My Love and My Home) \" That's My Life( My Love and My Home)\" is a 1965 single by Alfred\" Freddie\" Lennon, the father of musician John Lennon of the Beatles."
+          ],
+          "relation_texts": [
+            "Alfred 'Freddie' Lennon is known as the father of musician John Lennon.",
+            "link",
+            "MUSICIAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8a115ed3a0b8a7bb6c2049c41b93dde8",
+            "hyperedge_name": "<hyperedge>\"Alfred 'Freddie' Lennon is known as the father of musician John Lennon.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father of T. Ajay Kumar and Salena's mom.\"",
+        "branch": "relation",
+        "raw_score": 0.4203075170516968,
+        "hyperedge_text": "He is the father of T. Ajay Kumar and Salena's mom.",
+        "entity_ids": [
+          "\"T. AJAY KUMAR\"",
+          "\"SALENA\""
+        ],
+        "chunk_ids": [
+          "chunk-36566cec73be419450988a783a5492f6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father of T. Ajay Kumar and Salena's mom.",
+            "Tatineni Rama Rao Rama Rao Tatineni( born 1938), also known as T. Rama Rao, is a prolific Indian filmmaker. He has directed 65 Hindi and Telugu feature films between 1966 and 2000. Tatineni started his work in the film industry in the late 1950s as the assistant director of his cousin T. Prakash Rao and Kotayya Pratyagatma, before making his directorial debut with 1966 Telugu film\" Navarathri\". According to\" Encyclopædia Britannica\", Rao was\" the man who established the' Madras movie', or Hindi films funded primarily by southern capital, as a viable commercial option in the all- India market ...\" He is the father of T. Ajay Kumar and Salena's mom."
+          ],
+          "relation_texts": [
+            "He is the father of T. Ajay Kumar and Salena's mom.",
+            "link",
+            "T. AJAY KUMAR",
+            "SALENA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0a33aaf8e0ea1a29e252a87760095ab8",
+            "hyperedge_name": "<hyperedge>\"He is the father of T. Ajay Kumar and Salena's mom.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father of Efren Reyes Jr.\"",
+        "branch": "relation",
+        "raw_score": 0.41665953397750854,
+        "hyperedge_text": "He was the father of Efren Reyes Jr.",
+        "entity_ids": [
+          "\"FATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-2cf68ecf000240200dba77027f010fd3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father of Efren Reyes Jr.",
+            "Efren Reyes Sr. Efren Ongpin Reyes Sr.( June 18, 1924 – February 11, 1968) was a Filipino actor and director. He was the father of Efren Reyes Jr."
+          ],
+          "relation_texts": [
+            "He was the father of Efren Reyes Jr.",
+            "link",
+            "FATHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6798dcd81704162f7b70ceafdc4266a1",
+            "hyperedge_name": "<hyperedge>\"He was the father of Efren Reyes Jr.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the father of two children: Rebecca and Joseph.\"",
+        "branch": "relation",
+        "raw_score": 0.4127999544143677,
+        "hyperedge_text": "He is also the father of two children: Rebecca and Joseph.",
+        "entity_ids": [
+          "\"REBECCA\"",
+          "\"JOSEPH\""
+        ],
+        "chunk_ids": [
+          "chunk-271971fab2bf8cf9d39db8bc9a4842cd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is also the father of two children: Rebecca and Joseph.",
+            "Jeff Fabry Jeff Fabry (born April 14, 1973 in Hanford, California) is an American amputee and Paralympic archer. He won bronze medals at the 2004 Summer Paralympics and the 2008 Summer Paralympics, and a gold medal at the United States at the 2012 Summer Paralympics. He became disabled after he lost most of his right arm and right leg in a motorcycle accident when he was 15. He credits his wife, Crystal for getting him into the sport. He is also the father of two children: Rebecca & Joseph."
+          ],
+          "relation_texts": [
+            "He is also the father of two children: Rebecca and Joseph.",
+            "link",
+            "REBECCA",
+            "JOSEPH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f838f654326098cc5ff39aec1173e0ff",
+            "hyperedge_name": "<hyperedge>\"He is also the father of two children: Rebecca and Joseph.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Obata Toramori is the father of Obata Masamori.\"",
+        "branch": "relation",
+        "raw_score": 0.41055411100387573,
+        "hyperedge_text": "Obata Toramori is the father of Obata Masamori.",
+        "entity_ids": [
+          "\"RELATIONSHIP\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Obata Toramori is the father of Obata Masamori.",
+            "Obata Toramori He was the father of Obata Masamori."
+          ],
+          "relation_texts": [
+            "Obata Toramori is the father of Obata Masamori.",
+            "link",
+            "RELATIONSHIP"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b41860a8ba0ad078d69f07db081dc4bc",
+            "hyperedge_name": "<hyperedge>\"Obata Toramori is the father of Obata Masamori.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father of Obata Masamori.\"",
+        "branch": "relation",
+        "raw_score": 0.4100795388221741,
+        "hyperedge_text": "He was the father of Obata Masamori.",
+        "entity_ids": [
+          "\"OBATA TORAMORI\"",
+          "\"OBATA MASAMORI\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father of Obata Masamori.",
+            "Obata Toramori He was the father of Obata Masamori."
+          ],
+          "relation_texts": [
+            "He was the father of Obata Masamori.",
+            "link",
+            "OBATA TORAMORI",
+            "OBATA MASAMORI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-27dd474cf1ee15b324209a1673d53a71",
+            "hyperedge_name": "<hyperedge>\"He was the father of Obata Masamori.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.\"",
+        "branch": "semantic",
+        "raw_score": 0.6608830690383911,
+        "hyperedge_text": "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+        "entity_ids": [
+          "\"ȘTEFAN I. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+            "link",
+            "ȘTEFAN I. NENIȚESCU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f67a5c65fb9870f58b3d71104845297f",
+            "hyperedge_name": "<hyperedge>\"Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.\"",
+        "branch": "semantic",
+        "raw_score": 0.6555933952331543,
+        "hyperedge_text": "Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.",
+        "entity_ids": [
+          "\"ROMANIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.",
+            "link",
+            "ROMANIAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2a0ff2252d1504d28caf122f66d777f2",
+            "hyperedge_name": "<hyperedge>\"Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).\"",
+        "branch": "semantic",
+        "raw_score": 0.6344989538192749,
+        "hyperedge_text": "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+        "entity_ids": [
+          "\"ELENA\"",
+          "\"BUCHAREST\"",
+          "\"IOAN S. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+            "link",
+            "ELENA",
+            "BUCHAREST",
+            "IOAN S. NENIȚESCU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7f5885653f5c776467eff886579cd093",
+            "hyperedge_name": "<hyperedge>\"Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nenițescu's son, Ștefan, continued the literary legacy as a poet.\"",
+        "branch": "semantic",
+        "raw_score": 0.5874733328819275,
+        "hyperedge_text": "Nenițescu's son, Ștefan, continued the literary legacy as a poet.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Nenițescu's son, Ștefan, continued the literary legacy as a poet.",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "Nenițescu's son, Ștefan, continued the literary legacy as a poet."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3eb84c337cbc504073721da7440c320b",
+            "hyperedge_name": "<hyperedge>\"Nenițescu's son, Ștefan, continued the literary legacy as a poet.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His parents were the poet Ioan S. Nenițescu and his wife Elena, née Ștefan.\"",
+        "branch": "semantic",
+        "raw_score": 0.5861750841140747,
+        "hyperedge_text": "His parents were the poet Ioan S. Nenițescu and his wife Elena, née Ștefan.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His parents were the poet Ioan S. Nenițescu and his wife Elena, née Ștefan.",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "His parents were the poet Ioan S. Nenițescu and his wife Elena, née Ștefan."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-aae175d1e82d2c3a9b0211e49e8e8d9e",
+            "hyperedge_name": "<hyperedge>\"His parents were the poet Ioan S. Nenițescu and his wife Elena, née Ștefan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.\"",
+        "branch": "semantic",
+        "raw_score": 0.5474072694778442,
+        "hyperedge_text": "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+        "entity_ids": [
+          "\"ROMANIAN\"",
+          "\"IOAN S. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+            "link",
+            "ROMANIAN",
+            "IOAN S. NENIȚESCU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a42962072deacb334b222d14af042d42",
+            "hyperedge_name": "<hyperedge>\"Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (née Zaharia).\"",
+        "branch": "semantic",
+        "raw_score": 0.5133088827133179,
+        "hyperedge_text": "Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (née Zaharia).",
+        "entity_ids": [
+          "\"GALAȚI\"",
+          "\"ȘTEFAN VASILIU\"",
+          "\"ELISABETA\""
+        ],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (née Zaharia).",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (née Zaharia).",
+            "link",
+            "GALAȚI",
+            "ȘTEFAN VASILIU",
+            "ELISABETA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-75d9032900f433074f9ee64c58efa8f1",
+            "hyperedge_name": "<hyperedge>\"Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (née Zaharia).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nenițescu was born on April 11, 1854, and died on February 23, 1901.\"",
+        "branch": "semantic",
+        "raw_score": 0.4970566928386688,
+        "hyperedge_text": "Nenițescu was born on April 11, 1854, and died on February 23, 1901.",
+        "entity_ids": [
+          "\"APRIL 11, 1854\"",
+          "\"FEBRUARY 23, 1901\""
+        ],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Nenițescu was born on April 11, 1854, and died on February 23, 1901.",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "Nenițescu was born on April 11, 1854, and died on February 23, 1901.",
+            "link",
+            "APRIL 11, 1854",
+            "FEBRUARY 23, 1901"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7e9c66ed914c084ee7a53e17ecc2087c",
+            "hyperedge_name": "<hyperedge>\"Nenițescu was born on April 11, 1854, and died on February 23, 1901.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 1896, Nenițescu was elected a corresponding member of the Romanian Academy.\"",
+        "branch": "semantic",
+        "raw_score": 0.4933698773384094,
+        "hyperedge_text": "In 1896, Nenițescu was elected a corresponding member of the Romanian Academy.",
+        "entity_ids": [
+          "\"ROMANIAN ACADEMY\""
+        ],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In 1896, Nenițescu was elected a corresponding member of the Romanian Academy.",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "In 1896, Nenițescu was elected a corresponding member of the Romanian Academy.",
+            "link",
+            "ROMANIAN ACADEMY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cfd59220697103c3aa477425738a1b0e",
+            "hyperedge_name": "<hyperedge>\"In 1896, Nenițescu was elected a corresponding member of the Romanian Academy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Stefan was the eldest child and son of Archduke Anton of Austria and his wife Princess Ileana of Romania.\"",
+        "branch": "semantic",
+        "raw_score": 0.4795539379119873,
+        "hyperedge_text": "Stefan was the eldest child and son of Archduke Anton of Austria and his wife Princess Ileana of Romania.",
+        "entity_ids": [
+          "\"SON\"",
+          "\"ELDEST CHILD\"",
+          "\"ARCHDUKE ANTON OF AUSTRIA\"",
+          "\"PRINCESS ILEANA OF ROMANIA\""
+        ],
+        "chunk_ids": [
+          "chunk-fb6867b94b41ce1c41afcc57776fc762"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Stefan was the eldest child and son of Archduke Anton of Austria and his wife Princess Ileana of Romania.",
+            "Archduke Stefan of Austria Archduke Stefan of Austria, Prince of Tuscany( 15 August 1932 in Mödling, Lower Austria, Austria – 12 November 1998 in Brighton, Michigan, United States) was a member of the House of Habsburg an Archduke and Prince of Tuscany by birth. Stefan was the eldest child and son of Archduke Anton of Austria and his wife Princess Ileana of Romania."
+          ],
+          "relation_texts": [
+            "Stefan was the eldest child and son of Archduke Anton of Austria and his wife Princess Ileana of Romania.",
+            "link",
+            "SON",
+            "ELDEST CHILD",
+            "ARCHDUKE ANTON OF AUSTRIA",
+            "PRINCESS ILEANA OF ROMANIA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-84000d5315f3ec2b7c7101671344975c",
+            "hyperedge_name": "<hyperedge>\"Stefan was the eldest child and son of Archduke Anton of Austria and his wife Princess Ileana of Romania.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.\"",
+        "hyperedge_text": "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6608830690383911,
+        "fusion_score": 0.5321766138076782,
+        "entity_ids": [
+          "\"ȘTEFAN I. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "evidence_texts": [
+          "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+          "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.660883,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532177
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.\"",
+        "hyperedge_text": "Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6555933952331543,
+        "fusion_score": 0.5311186790466309,
+        "entity_ids": [
+          "\"ROMANIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "evidence_texts": [
+          "Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.",
+          "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.655593,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531119
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father.\"",
+        "hyperedge_text": "He was the father.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48036035895347595,
+        "semantic_score": 0.2,
+        "fusion_score": 0.2321441435813904,
+        "entity_ids": [
+          "\"FATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "evidence_texts": [
+          "He was the father.",
+          "Obata Toramori He was the father of Obata Masamori."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.48036,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.232144
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of Imran Farhat.\"",
+        "hyperedge_text": "He is the father-in-law of Imran Farhat.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43573564291000366,
+        "semantic_score": 0.2,
+        "fusion_score": 0.2142942571640015,
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-10333be7c973d42a00364ad277052021"
+        ],
+        "evidence_texts": [
+          "He is the father-in-law of Imran Farhat.",
+          "Mohammad Ilyas (cricketer) Mohammad Ilyas Mahmood( born March 19, 1946, Lahore, Punjab) is a former Pakistani cricketer who played in ten Tests from 1964 to 1969. He is the father- in- law of Imran Farhat."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.435736,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.214294
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He fathered fourteen children, eleven males and three females.\"",
+        "hyperedge_text": "He fathered fourteen children, eleven males and three females.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4262092411518097,
+        "semantic_score": 0.2,
+        "fusion_score": 0.2104836964607239,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-cde3891c82b4f51558496b9d1a64567d"
+        ],
+        "evidence_texts": [
+          "He fathered fourteen children, eleven males and three females.",
+          "Tlilpotoncatzin Tlilpotonqui or Tlilpotoncatzin (died in the year 11 Reed/1503) was the second \"cihuacoatlpresident\") of Mexico-Tenochtitlan. Tlilpotoncatzin was the second son of Tlacaelel and Maquiztzin. His father was a son of the second \"tlatoaniruler\" or \"king\") of Tenochtitlan, Huitzilihuitl. While Tlacaelel never became \"tlatoani\" himself, as \"cihuacoatl\" he played a significant role in the creation of the Aztec Empire. His mother was the daughter of Huehue Quetzalmacatzin, king of Itztlacozauhcan in Amaquemecan Chalco. Tlilpotoncatzin succeeded his father as \"cihuacoatl\" upon his death in the year 8 Reed (1487). According to the \"Crónica mexicayotl\" of Fernando Alvarado Tezozomoc, composed around 1598, Tlilpotoncatzin was a great, brave warrior. In battle he wore the \"quetzalpatzactli\", a crest of quetzal feathers. Tlilpotoncatzin took at least two wives, both from Amaquemecan..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.426209,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.210484
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Ștefan I. Nenițescu study?",
+    "retrieval_question": "Where did the father of Ștefan I. Nenițescu study?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the father of Ștefan I. Nenițescu study?",
+      "retrieval_question": "Where did the father of Ștefan I. Nenițescu study?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.\"",
+        "branch": "anchor",
+        "raw_score": 0.25,
+        "hyperedge_text": "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+        "entity_ids": [
+          "\"ȘTEFAN I. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+            "link",
+            "ȘTEFAN I. NENIȚESCU"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).\"",
+        "branch": "anchor",
+        "raw_score": 0.25,
+        "hyperedge_text": "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+        "entity_ids": [
+          "\"ELENA\"",
+          "\"BUCHAREST\"",
+          "\"IOAN S. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+            "link",
+            "ELENA",
+            "BUCHAREST",
+            "IOAN S. NENIȚESCU"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.\"",
+        "branch": "anchor",
+        "raw_score": 0.25,
+        "hyperedge_text": "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+        "entity_ids": [
+          "\"ROMANIAN\"",
+          "\"IOAN S. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+            "link",
+            "ROMANIAN",
+            "IOAN S. NENIȚESCU"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University.",
+        "entity_ids": [
+          "\"SAPIENZA UNIVERSITY OF ROME\"",
+          "\"BUCHAREST UNIVERSITY\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University.",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University.",
+            "link",
+            "SAPIENZA UNIVERSITY OF ROME",
+            "BUCHAREST UNIVERSITY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The expression 'the father of the Zaporozhians' reflects his pivotal role in Zaporozhian studies.\"",
+        "branch": "relation",
+        "raw_score": 0.44821697473526,
+        "hyperedge_text": "The expression 'the father of the Zaporozhians' reflects his pivotal role in Zaporozhian studies.",
+        "entity_ids": [
+          "\"PIVOTAL ROLE\""
+        ],
+        "chunk_ids": [
+          "chunk-4060eee1b4df34a00c11b015a8a86319"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The expression 'the father of the Zaporozhians' reflects his pivotal role in Zaporozhian studies.",
+            "Dmytro Yavornytsky Dmytro Ivanovych Yavornytsky or Dmitry Ivanovich Yavornitsky( November 6, 1855, Kharkov Governorate, Russian Empire – August 5, 1940, Dnipropetrovsk, Soviet Union) was a Russian, Ukrainian and Soviet academician, historian, archeologist, ethnographer, folklorist, and lexicographer. Yavornytsky was a member of Moscow Archaeological Society( from 1885), of St. Petersburg Russian Archaeological Society( from 1886) and academician of Ukrainian Academy of Sciences( from 1929). He was one of the most prominent researchers of the Zaporozhian Cossacks from the time of the Hetmanate, and the author of their first general history. In recognition of his many contributions to the preservation of Zaporozhian history and culture, he is widely known as\" the father of the Zaporozhians\"."
+          ],
+          "relation_texts": [
+            "The expression 'the father of the Zaporozhians' reflects his pivotal role in Zaporozhian studies.",
+            "link",
+            "PIVOTAL ROLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-796041b8db9a70a37ebd2b679b1a42dc",
+            "hyperedge_name": "<hyperedge>\"The expression 'the father of the Zaporozhians' reflects his pivotal role in Zaporozhian studies.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"John II is noted for his notable title derived from his prolific fathering.\"",
+        "branch": "relation",
+        "raw_score": 0.4308609664440155,
+        "hyperedge_text": "John II is noted for his notable title derived from his prolific fathering.",
+        "entity_ids": [
+          "\"NOTABLE TITLE\""
+        ],
+        "chunk_ids": [
+          "chunk-455d49a776bacbdad27c5c1086e23cd6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "John II is noted for his notable title derived from his prolific fathering.",
+            "John II, Duke of Cleves John II, \"The Babymaker\", Duke of Cleves, Count of Mark, (German: Johann II. \" der Kindermacher\", Herzog von Kleve, Graf von Mark) (13 April 1458 – 15 March 1521) was a son of John I, Duke of Cleves and Elizabeth of Nevers. He ruled Cleves from 1481 to his death in 1521. He was called \"The Babymaker\" since he fathered sixty-three illegitimate children before his marriage with Mathilde of Hesse in 1490. She was the daughter of Henry III, Landgrave of Upper Hesse and his wife Anna of Katzenelnbogen. They had three children :"
+          ],
+          "relation_texts": [
+            "John II is noted for his notable title derived from his prolific fathering.",
+            "link",
+            "NOTABLE TITLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-25fcaecc1fe18df00f6b63fb152687d4",
+            "hyperedge_name": "<hyperedge>\"John II is noted for his notable title derived from his prolific fathering.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father.\"",
+        "branch": "relation",
+        "raw_score": 0.4234026372432709,
+        "hyperedge_text": "He was the father.",
+        "entity_ids": [
+          "\"FATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father.",
+            "Obata Toramori He was the father of Obata Masamori."
+          ],
+          "relation_texts": [
+            "He was the father.",
+            "link",
+            "FATHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ccea16dffbc4d38bcd051c761cb747b2",
+            "hyperedge_name": "<hyperedge>\"He was the father.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The ancestry of John III can be traced to significant historical figures in French nobility.\"",
+        "branch": "relation",
+        "raw_score": 0.4190743565559387,
+        "hyperedge_text": "The ancestry of John III can be traced to significant historical figures in French nobility.",
+        "entity_ids": [
+          "\"FRENCH NOBILITY\""
+        ],
+        "chunk_ids": [
+          "chunk-fef7d11951edbfc5d1d6b2518c5a8a50"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The ancestry of John III can be traced to significant historical figures in French nobility.",
+            "John III, Count of Dreux John III( – 1331), Count of Dreux, was the second son of John II of Dreux and of Jeanne of Beaujeu."
+          ],
+          "relation_texts": [
+            "The ancestry of John III can be traced to significant historical figures in French nobility.",
+            "link",
+            "FRENCH NOBILITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b1687051774a3959ade417c5bcc06afc",
+            "hyperedge_name": "<hyperedge>\"The ancestry of John III can be traced to significant historical figures in French nobility.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father of Obata Masamori.\"",
+        "branch": "relation",
+        "raw_score": 0.4183894991874695,
+        "hyperedge_text": "He was the father of Obata Masamori.",
+        "entity_ids": [
+          "\"OBATA TORAMORI\"",
+          "\"OBATA MASAMORI\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the father of Obata Masamori.",
+            "Obata Toramori He was the father of Obata Masamori."
+          ],
+          "relation_texts": [
+            "He was the father of Obata Masamori.",
+            "link",
+            "OBATA TORAMORI",
+            "OBATA MASAMORI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-27dd474cf1ee15b324209a1673d53a71",
+            "hyperedge_name": "<hyperedge>\"He was the father of Obata Masamori.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"John Adams is known for being the father-in-law of Henry Newton, highlighting his family connections.\"",
+        "branch": "relation",
+        "raw_score": 0.40992140769958496,
+        "hyperedge_text": "John Adams is known for being the father-in-law of Henry Newton, highlighting his family connections.",
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-0dc73f6d7948fe1ff8594b56625fd37e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "John Adams is known for being the father-in-law of Henry Newton, highlighting his family connections.",
+            "John Adams (merchant) John Adams( 1672 or 1673 – 1745) was an American- born Canadian merchant and member of the Nova Scotia Council. He was the father- in- law of Henry Newton( politician)."
+          ],
+          "relation_texts": [
+            "John Adams is known for being the father-in-law of Henry Newton, highlighting his family connections.",
+            "link",
+            "FATHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6e10b773cbbb6637bc2923b27dd2e252",
+            "hyperedge_name": "<hyperedge>\"John Adams is known for being the father-in-law of Henry Newton, highlighting his family connections.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was named after his maternal grandfather.\"",
+        "branch": "relation",
+        "raw_score": 0.4080427885055542,
+        "hyperedge_text": "He was named after his maternal grandfather.",
+        "entity_ids": [
+          "\"MATERNAL GRANDFATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-78deb20abf02f71ec479252503972862"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was named after his maternal grandfather.",
+            "Rudolf of Żagań Rudolf of Żagań( ca. 1418 – 18 September 1454) was a Duke of Żagań- Przewóz since 1439( with his brothers as co-rulers until 1449), from 1449 Duke of Żagań( as co-ruler of his older brother). He was the second son of Duke Jan I of Żagań by his wife Scholastika, daughter of Rudolf III, Duke of Saxe- Wittemberg and Elector of Saxony. He was named after his maternal grandfather."
+          ],
+          "relation_texts": [
+            "He was named after his maternal grandfather.",
+            "link",
+            "MATERNAL GRANDFATHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-183d766a0333fc773a1b4a3442917dc4",
+            "hyperedge_name": "<hyperedge>\"He was named after his maternal grandfather.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Trained first by his father, he obtained a law degree and then chose to study medicine.\"",
+        "branch": "relation",
+        "raw_score": 0.4079359173774719,
+        "hyperedge_text": "Trained first by his father, he obtained a law degree and then chose to study medicine.",
+        "entity_ids": [
+          "\"LAW DEGREE\"",
+          "\"MEDICINE\""
+        ],
+        "chunk_ids": [
+          "chunk-1cd9fe5c184a8d2e77834c7194d2f49a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Trained first by his father, he obtained a law degree and then chose to study medicine.",
+            "Charles Patin Charles Patin (23 February 1633 - 10 October 1693) was a French physician and numismatist. He was the son of Guy Patin, dean of the school of medicine in Paris, and a friend of Jacob Spon. Trained first by his father, he obtained a law degree and then chose to study medicine. He became best known for his numismatic work. He married the moralist author Madeleine Patin: their daughter Gabrielle-Charlotte Patin became a painter and numismatist, and his daughter Charlotte-Catherine Patin became a writer."
+          ],
+          "relation_texts": [
+            "Trained first by his father, he obtained a law degree and then chose to study medicine.",
+            "link",
+            "LAW DEGREE",
+            "MEDICINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ac7de121676e756ca53c47254b471735",
+            "hyperedge_name": "<hyperedge>\"Trained first by his father, he obtained a law degree and then chose to study medicine.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His father is Benjamin Bederson, Sr., a Professor of Physics Emeritus, New York University.\"",
+        "branch": "relation",
+        "raw_score": 0.4062749445438385,
+        "hyperedge_text": "His father is Benjamin Bederson, Sr., a Professor of Physics Emeritus, New York University.",
+        "entity_ids": [
+          "\"NEW YORK UNIVERSITY\"",
+          "\"BENJAMIN BEDERSON, SR.\"",
+          "\"PHYSICS EMERITUS\""
+        ],
+        "chunk_ids": [
+          "chunk-46c272ae2ab21d7f4ca63918f7569439"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His father is Benjamin Bederson, Sr., a Professor of Physics Emeritus, New York University.",
+            "Ben Bederson Benjamin\" Ben\" Bederson is a Computer Science professor at the University of Maryland, College Park, a member of the University of Maryland Human- Computer Interaction Lab, and a co-founder of Zumobi. His father is Benjamin Bederson, Sr., a Professor of Physics Emeritus, New York University."
+          ],
+          "relation_texts": [
+            "His father is Benjamin Bederson, Sr., a Professor of Physics Emeritus, New York University.",
+            "link",
+            "NEW YORK UNIVERSITY",
+            "BENJAMIN BEDERSON, SR.",
+            "PHYSICS EMERITUS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-afbc4c916245e21e329d55774b809f15",
+            "hyperedge_name": "<hyperedge>\"His father is Benjamin Bederson, Sr., a Professor of Physics Emeritus, New York University.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His interest in understanding the origins of the personalities of Latin America people took him to the study of heritage and genetics.\"",
+        "branch": "relation",
+        "raw_score": 0.40616583824157715,
+        "hyperedge_text": "His interest in understanding the origins of the personalities of Latin America people took him to the study of heritage and genetics.",
+        "entity_ids": [
+          "\"HERITAGE\"",
+          "\"GENETICS\""
+        ],
+        "chunk_ids": [
+          "chunk-75753e1fc2669e58b786973a0f5daefa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His interest in understanding the origins of the personalities of Latin America people took him to the study of heritage and genetics.",
+            "Francisco Herrera Luque Francisco José Herrera Luque( Caracas, 14 December 1927 – Caracas, 15 April, 1991) was a Venezuelan writer, psychiatrist and diplomat. He is the author of several well- known historical novels, including:\" Boves, el Urogallo\"( 1972),\" Los Amos del Valle\"( 1979) and\" La Luna de Fausto\"( 1983). He was the son of Francisco Herrera Guerrero and María Luisa Luque Carvallo. In 1956, he married to Maria Margarita Terán Austria, with whom he had five children. Herrera Luque studied in the Central University of Venezuela( UCV) and later at the University of Salamanca( 1952), where he obtained his title of physician. In Madrid he specialized in psychiatry, a field on which he wrote several scientific papers. His PhD thesis served as basis for his book:\" Los Viajeros de Indias\"( 1961), about the psychopathic loads left on the Venezuelan population by the Spanish conquista..."
+          ],
+          "relation_texts": [
+            "His interest in understanding the origins of the personalities of Latin America people took him to the study of heritage and genetics.",
+            "link",
+            "HERITAGE",
+            "GENETICS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5c96b804a702bc00a5100147d759cd48",
+            "hyperedge_name": "<hyperedge>\"His interest in understanding the origins of the personalities of Latin America people took him to the study of heritage and genetics.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.\"",
+        "branch": "semantic",
+        "raw_score": 0.6059470176696777,
+        "hyperedge_text": "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+        "entity_ids": [
+          "\"ȘTEFAN I. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+            "link",
+            "ȘTEFAN I. NENIȚESCU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f67a5c65fb9870f58b3d71104845297f",
+            "hyperedge_name": "<hyperedge>\"Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).\"",
+        "branch": "semantic",
+        "raw_score": 0.6026909351348877,
+        "hyperedge_text": "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+        "entity_ids": [
+          "\"ELENA\"",
+          "\"BUCHAREST\"",
+          "\"IOAN S. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+            "link",
+            "ELENA",
+            "BUCHAREST",
+            "IOAN S. NENIȚESCU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7f5885653f5c776467eff886579cd093",
+            "hyperedge_name": "<hyperedge>\"Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.\"",
+        "branch": "semantic",
+        "raw_score": 0.5968250036239624,
+        "hyperedge_text": "Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.",
+        "entity_ids": [
+          "\"ROMANIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.",
+            "link",
+            "ROMANIAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2a0ff2252d1504d28caf122f66d777f2",
+            "hyperedge_name": "<hyperedge>\"Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His parents were the poet Ioan S. Nenițescu and his wife Elena, née Ștefan.\"",
+        "branch": "semantic",
+        "raw_score": 0.5539693832397461,
+        "hyperedge_text": "His parents were the poet Ioan S. Nenițescu and his wife Elena, née Ștefan.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His parents were the poet Ioan S. Nenițescu and his wife Elena, née Ștefan.",
+            "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+          ],
+          "relation_texts": [
+            "His parents were the poet Ioan S. Nenițescu and his wife Elena, née Ștefan."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-aae175d1e82d2c3a9b0211e49e8e8d9e",
+            "hyperedge_name": "<hyperedge>\"His parents were the poet Ioan S. Nenițescu and his wife Elena, née Ștefan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nenițescu's son, Ștefan, continued the literary legacy as a poet.\"",
+        "branch": "semantic",
+        "raw_score": 0.5445846319198608,
+        "hyperedge_text": "Nenițescu's son, Ștefan, continued the literary legacy as a poet.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Nenițescu's son, Ștefan, continued the literary legacy as a poet.",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "Nenițescu's son, Ștefan, continued the literary legacy as a poet."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3eb84c337cbc504073721da7440c320b",
+            "hyperedge_name": "<hyperedge>\"Nenițescu's son, Ștefan, continued the literary legacy as a poet.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 1896, Nenițescu was elected a corresponding member of the Romanian Academy.\"",
+        "branch": "semantic",
+        "raw_score": 0.5359153747558594,
+        "hyperedge_text": "In 1896, Nenițescu was elected a corresponding member of the Romanian Academy.",
+        "entity_ids": [
+          "\"ROMANIAN ACADEMY\""
+        ],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In 1896, Nenițescu was elected a corresponding member of the Romanian Academy.",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "In 1896, Nenițescu was elected a corresponding member of the Romanian Academy.",
+            "link",
+            "ROMANIAN ACADEMY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cfd59220697103c3aa477425738a1b0e",
+            "hyperedge_name": "<hyperedge>\"In 1896, Nenițescu was elected a corresponding member of the Romanian Academy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.\"",
+        "branch": "semantic",
+        "raw_score": 0.5047668218612671,
+        "hyperedge_text": "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+        "entity_ids": [
+          "\"ROMANIAN\"",
+          "\"IOAN S. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+            "link",
+            "ROMANIAN",
+            "IOAN S. NENIȚESCU"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a42962072deacb334b222d14af042d42",
+            "hyperedge_name": "<hyperedge>\"Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (née Zaharia).\"",
+        "branch": "semantic",
+        "raw_score": 0.4872204065322876,
+        "hyperedge_text": "Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (née Zaharia).",
+        "entity_ids": [
+          "\"GALAȚI\"",
+          "\"ȘTEFAN VASILIU\"",
+          "\"ELISABETA\""
+        ],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (née Zaharia).",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (née Zaharia).",
+            "link",
+            "GALAȚI",
+            "ȘTEFAN VASILIU",
+            "ELISABETA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-75d9032900f433074f9ee64c58efa8f1",
+            "hyperedge_name": "<hyperedge>\"Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (née Zaharia).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nenițescu's contributions were recognized with his election to the Romanian Academy.\"",
+        "branch": "semantic",
+        "raw_score": 0.48137784004211426,
+        "hyperedge_text": "Nenițescu's contributions were recognized with his election to the Romanian Academy.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Nenițescu's contributions were recognized with his election to the Romanian Academy.",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "Nenițescu's contributions were recognized with his election to the Romanian Academy."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c27330029bca4576e91ac84379838deb",
+            "hyperedge_name": "<hyperedge>\"Nenițescu's contributions were recognized with his election to the Romanian Academy.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nenițescu was born on April 11, 1854, and died on February 23, 1901.\"",
+        "branch": "semantic",
+        "raw_score": 0.46350520849227905,
+        "hyperedge_text": "Nenițescu was born on April 11, 1854, and died on February 23, 1901.",
+        "entity_ids": [
+          "\"APRIL 11, 1854\"",
+          "\"FEBRUARY 23, 1901\""
+        ],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Nenițescu was born on April 11, 1854, and died on February 23, 1901.",
+            "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+          ],
+          "relation_texts": [
+            "Nenițescu was born on April 11, 1854, and died on February 23, 1901.",
+            "link",
+            "APRIL 11, 1854",
+            "FEBRUARY 23, 1901"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7e9c66ed914c084ee7a53e17ecc2087c",
+            "hyperedge_name": "<hyperedge>\"Nenițescu was born on April 11, 1854, and died on February 23, 1901.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.\"",
+        "hyperedge_text": "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.25,
+        "relation_score": 0.0,
+        "semantic_score": 0.6059470176696777,
+        "fusion_score": 0.22118940353393557,
+        "entity_ids": [
+          "\"ȘTEFAN I. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "evidence_texts": [
+          "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+          "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+        ],
+        "score_breakdown": {
+          "A": 0.25,
+          "R": 0.0,
+          "S": 0.605947,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.221189
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).\"",
+        "hyperedge_text": "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.25,
+        "relation_score": 0.0,
+        "semantic_score": 0.6026909351348877,
+        "fusion_score": 0.22053818702697756,
+        "entity_ids": [
+          "\"ELENA\"",
+          "\"BUCHAREST\"",
+          "\"IOAN S. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "evidence_texts": [
+          "Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena ('née' Ștefan).",
+          "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+        ],
+        "score_breakdown": {
+          "A": 0.25,
+          "R": 0.0,
+          "S": 0.602691,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.220538
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.\"",
+        "hyperedge_text": "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.25,
+        "relation_score": 0.0,
+        "semantic_score": 0.5047668218612671,
+        "fusion_score": 0.20095336437225342,
+        "entity_ids": [
+          "\"ROMANIAN\"",
+          "\"IOAN S. NENIȚESCU\""
+        ],
+        "chunk_ids": [
+          "chunk-aa1ce688000b056b55496dc86cf32bc0"
+        ],
+        "evidence_texts": [
+          "Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright.",
+          "Ioan S. Nenițescu Ioan S. Nenițescu (April 11, 1854–February 23, 1901) was a Romanian poet and playwright. Born in Galați, his parents were Ștefan Vasiliu, a manual laborer, and his wife Elisabeta (\"née\" Zaharia). After completing the Alexandru Ioan I commercial school in his native town , he finished high school, passing the exit examination at Iași. He also audited courses at Iași University's literature faculty. Nenițescu attended an officers' school, volunteered in the Romanian War of Independence and was wounded at Grivitsa. He then studied at the philosophy faculty of Berlin University, taking a doctorate in 1887 at Leipzig University with a thesis on Baruch Spinoza. He worked as a schoolteacher and inspector in Bucharest. He traveled south of the Danube, a trip that resulted in an ample \"ethnic and statistical study of the AromaniansDe la românii din Turcia Europeană\", 1895). H..."
+        ],
+        "score_breakdown": {
+          "A": 0.25,
+          "R": 0.0,
+          "S": 0.504767,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.200953
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University.\"",
+        "hyperedge_text": "He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.33333333333333337,
+        "entity_ids": [
+          "\"SAPIENZA UNIVERSITY OF ROME\"",
+          "\"BUCHAREST UNIVERSITY\""
+        ],
+        "chunk_ids": [
+          "chunk-343b4aa29403f0f9d12bb47e336b6f96"
+        ],
+        "evidence_texts": [
+          "He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University.",
+          "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.333333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Trained first by his father, he obtained a law degree and then chose to study medicine.\"",
+        "hyperedge_text": "Trained first by his father, he obtained a law degree and then chose to study medicine.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4079359173774719,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.22984103361765545,
+        "entity_ids": [
+          "\"LAW DEGREE\"",
+          "\"MEDICINE\""
+        ],
+        "chunk_ids": [
+          "chunk-1cd9fe5c184a8d2e77834c7194d2f49a"
+        ],
+        "evidence_texts": [
+          "Trained first by his father, he obtained a law degree and then chose to study medicine.",
+          "Charles Patin Charles Patin (23 February 1633 - 10 October 1693) was a French physician and numismatist. He was the son of Guy Patin, dean of the school of medicine in Paris, and a friend of Jacob Spon. Trained first by his father, he obtained a law degree and then chose to study medicine. He became best known for his numismatic work. He married the moralist author Madeleine Patin: their daughter Gabrielle-Charlotte Patin became a painter and numismatist, and his daughter Charlotte-Catherine Patin became a writer."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.407936,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.229841
+        }
+      }
+    ]
+  }
+]

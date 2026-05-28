@@ -1,0 +1,44 @@
+{
+  "answer": "Waking The Dead",
+  "candidate_answer": "Waking The Dead",
+  "reasoning_summary": "The director of 'Ven Mi Corazón Te Llama', Manuel Romero, has an unknown age, while the director of 'Waking The Dead', Keith Gordon, is 62 years old. Since we cannot determine if Romero is older, we conclude that 'Waking The Dead' is the film with the known older director.",
+  "answer_span_reasoning": "The answer is based on the known age of the director of 'Waking The Dead'.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Ven Mi Corazón Te Llama?",
+      "answer": "Manuel Romero",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Ven mi corazón te llama is a 1942 Argentine film directed by Manuel Romero.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of Waking The Dead?",
+      "answer": "Keith Gordon",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Waking the Dead is a 2000 drama film directed by Keith Gordon.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the age of the director of Ven Mi Corazón Te Llama?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Muchachas que estudian was directed by Manuel Romero.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "What is the age of the director of Waking The Dead?",
+      "answer": "62",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Keith Gordon (born February 3, 1961) is an American actor and film director.\""
+      ]
+    }
+  ],
+  "remaining_gaps": [
+    "q2"
+  ]
+}

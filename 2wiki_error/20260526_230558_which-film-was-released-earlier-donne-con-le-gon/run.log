@@ -1,0 +1,9 @@
+2026-05-26 23:05:58,524 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 23:07:33,425 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 23:07:33,426 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 23:07:47,321 | INFO | Starting HyperBranch pipeline for question: Which film was released earlier, Donne Con Le Gonne or Hot Saturday?
+2026-05-26 23:07:47,322 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-26 23:07:54,011 | INFO | Atomic retrieval returned 21 hits for question=What is the release date of Donne Con Le Gonne?
+2026-05-26 23:08:15,335 | INFO | Atomic retrieval returned 21 hits for question=What is the release date of Hot Saturday?
+2026-05-26 23:08:26,168 | INFO | Atomic retrieval returned 21 hits for question=What is the release date of Donne Con Le Gonne?
+2026-05-26 23:09:00,473 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_230558_which-film-was-released-earlier-donne-con-le-gon

@@ -1,0 +1,76 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Bárbara Atómica?",
+    "retrieval_question": "Who is the director of Bárbara Atómica?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Bárbara Atómica?",
+      "retrieval_question": "Who is the director of Bárbara Atómica?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Bárbara Atómica"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Three Lucky Fools?",
+    "retrieval_question": "Who is the director of Three Lucky Fools?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Three Lucky Fools?",
+      "retrieval_question": "Who is the director of Three Lucky Fools?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Three Lucky Fools"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Is the birth date of the director of Bárbara Atómica later than the birth date of the director of Three Lucky Fools?",
+    "retrieval_question": "Is the birth date of the director of Bárbara Atómica later than the birth date of the director of Three Lucky Fools?",
+    "dependency_question_rewrite": {
+      "original_question": "Is the birth date of the director of Bárbara Atómica later than the birth date of the director of Three Lucky Fools?",
+      "retrieval_question": "Is the birth date of the director of Bárbara Atómica later than the birth date of the director of Three Lucky Fools?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Bárbara Atómica",
+        "Three Lucky Fools"
+      ],
+      "relations": [
+        "is later than",
+        "birth date of the director"
+      ],
+      "relation_query": "Is the birth date of the director of a work later than the birth date of the director of another work?",
+      "answer_type": "boolean"
+    }
+  }
+]

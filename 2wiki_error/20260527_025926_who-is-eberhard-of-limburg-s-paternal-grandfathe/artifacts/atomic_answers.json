@@ -1,0 +1,185 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the paternal grandfather of Eberhard Of Limburg?",
+    "analysis": {
+      "entities": [
+        "Eberhard Of Limburg"
+      ],
+      "relations": [
+        "is the paternal grandfather of"
+      ],
+      "relation_query": "who is the paternal grandfather of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Eberhard of Limburg, count of Limburg, died before 1426, son of Dietrich III of Limburg, count of Limburg.\"",
+        "hyperedge_text": "Eberhard of Limburg, count of Limburg, died before 1426, son of Dietrich III of Limburg, count of Limburg.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7269194722175598,
+        "fusion_score": 0.545383894443512,
+        "entity_ids": [
+          "\"ISSUE\"",
+          "\"LIMBURG\"",
+          "\"EBERHARD OF LIMBURG\"",
+          "\"DIETRICH III OF LIMBURG\"",
+          "\"PONZETTA VON SAFFENBERG\""
+        ],
+        "chunk_ids": [
+          "chunk-4b9306f16acc56c93366715eb1c827d2"
+        ],
+        "evidence_texts": [
+          "Eberhard of Limburg, count of Limburg, died before 1426, son of Dietrich III of Limburg, count of Limburg.",
+          "Eberhard of Limburg Eberhard of Limburg, count of Limburg( died before 1426), son of Dietrich III of Limburg, count of Limburg. He married Ponzetta von Saffenberg and they had issue:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.726919,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.545384
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wilhelm I of Limburg, count of Limburg (fl. 1422–1498), son of Eberhard of Limburg.\"",
+        "hyperedge_text": "Wilhelm I of Limburg, count of Limburg (fl. 1422–1498), son of Eberhard of Limburg.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6878702044487,
+        "fusion_score": 0.53757404088974,
+        "entity_ids": [
+          "\"WILHELM I OF LIMBURG\"",
+          "\"EBERHARD OF LIMBURG\"",
+          "\"COUNT OF LIMBURG\""
+        ],
+        "chunk_ids": [
+          "chunk-582deb4d96fc5fa67e8d188f55cbfd98"
+        ],
+        "evidence_texts": [
+          "Wilhelm I of Limburg, count of Limburg (fl. 1422–1498), son of Eberhard of Limburg.",
+          "Wilhelm I of Limburg Wilhelm I of Limburg, count of Limburg( fl. 1422–1498), son of Eberhard of Limburg. He married Agnes von Limburg and they had issue:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.68787,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.537574
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eberhard of Limburg was the son of Dietrich III of Limburg, indicating a familial relationship.\"",
+        "hyperedge_text": "Eberhard of Limburg was the son of Dietrich III of Limburg, indicating a familial relationship.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7422559261322021,
+        "fusion_score": 0.5484511852264404,
+        "entity_ids": [
+          "\"SON\""
+        ],
+        "chunk_ids": [
+          "chunk-4b9306f16acc56c93366715eb1c827d2"
+        ],
+        "evidence_texts": [
+          "Eberhard of Limburg was the son of Dietrich III of Limburg, indicating a familial relationship.",
+          "Eberhard of Limburg Eberhard of Limburg, count of Limburg( died before 1426), son of Dietrich III of Limburg, count of Limburg. He married Ponzetta von Saffenberg and they had issue:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.742256,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.548451
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eberhard of Limburg was the count of Limburg, a title held by his father Dietrich III, and he died before 1426.\"",
+        "hyperedge_text": "Eberhard of Limburg was the count of Limburg, a title held by his father Dietrich III, and he died before 1426.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7168333530426025,
+        "fusion_score": 0.5433666706085205,
+        "entity_ids": [
+          "\"COUNT OF LIMBURG\""
+        ],
+        "chunk_ids": [
+          "chunk-4b9306f16acc56c93366715eb1c827d2"
+        ],
+        "evidence_texts": [
+          "Eberhard of Limburg was the count of Limburg, a title held by his father Dietrich III, and he died before 1426.",
+          "Eberhard of Limburg Eberhard of Limburg, count of Limburg( died before 1426), son of Dietrich III of Limburg, count of Limburg. He married Ponzetta von Saffenberg and they had issue:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.716833,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.543367
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wilhelm I of Limburg, count of Limburg (fl. 1422–1498), was born as the son of Eberhard of Limburg.\"",
+        "hyperedge_text": "Wilhelm I of Limburg, count of Limburg (fl. 1422–1498), was born as the son of Eberhard of Limburg.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6934875845909119,
+        "fusion_score": 0.5386975169181825,
+        "entity_ids": [
+          "\"SON\"",
+          "\"COUNT OF LIMBURG\""
+        ],
+        "chunk_ids": [
+          "chunk-582deb4d96fc5fa67e8d188f55cbfd98"
+        ],
+        "evidence_texts": [
+          "Wilhelm I of Limburg, count of Limburg (fl. 1422–1498), was born as the son of Eberhard of Limburg.",
+          "Wilhelm I of Limburg Wilhelm I of Limburg, count of Limburg( fl. 1422–1498), son of Eberhard of Limburg. He married Agnes von Limburg and they had issue:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.693488,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.538698
+        }
+      }
+    ],
+    "answer": "Dietrich III of Limburg",
+    "confidence": 0.75,
+    "reasoning_summary": "Eberhard of Limburg is identified as the son of Dietrich III of Limburg, which implies that Dietrich III is Eberhard's father. However, the evidence does not explicitly state who Dietrich III's father is, so the answer is based on strong but indirect evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Eberhard of Limburg, count of Limburg, died before 1426, son of Dietrich III of Limburg, count of Limburg.\"",
+      "<hyperedge>\"Eberhard of Limburg was the son of Dietrich III of Limburg, indicating a familial relationship.\""
+    ]
+  }
+]

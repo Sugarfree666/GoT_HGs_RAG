@@ -1,0 +1,818 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother-in-law of Edith Of Wessex?",
+    "retrieval_question": "Who is the mother-in-law of Edith Of Wessex?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the mother-in-law of Edith Of Wessex?",
+      "retrieval_question": "Who is the mother-in-law of Edith Of Wessex?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.",
+        "entity_ids": [
+          "\"HAROLD GODWINSON\"",
+          "\"KING EDWARD THE CONFESSOR\"",
+          "\"EDITH OF WESSEX\""
+        ],
+        "chunk_ids": [
+          "chunk-d71a8909376ddae95c6edc929f158b4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.",
+            "Godwin, Earl of Wessex Godwin of Wessex( died 15 April 1053) became one of the most powerful earls in England under the Danish king Cnut the Great( King of England from 1016 to 1035) and his successors. Cnut made Godwin the first Earl of Wessex. Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor."
+          ],
+          "relation_texts": [
+            "Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.",
+            "link",
+            "HAROLD GODWINSON",
+            "KING EDWARD THE CONFESSOR",
+            "EDITH OF WESSEX"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edith of Wessex (1025 – 18 December 1075) was a Queen of England.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Edith of Wessex (1025 – 18 December 1075) was a Queen of England.",
+        "entity_ids": [
+          "\"QUEEN OF ENGLAND\"",
+          "\"EDITH OF WESSEX\""
+        ],
+        "chunk_ids": [
+          "chunk-70e142f4cca1d9b5994221582c6b005d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Edith of Wessex (1025 – 18 December 1075) was a Queen of England.",
+            "Edith of Wessex Edith of Wessex (1025 – 18 December 1075) was a Queen of England. Her husband was Edward the Confessor, whom she married on 23 January 1045. Unlike most English queens in the 10th and 11th centuries, she was crowned. The principal source on her life is a work she herself commissioned, the \"Vita Ædwardi Regis\" or the \"Life of King Edward who rests at Westminster\", which is inevitably biased."
+          ],
+          "relation_texts": [
+            "Edith of Wessex (1025 – 18 December 1075) was a Queen of England.",
+            "link",
+            "QUEEN OF ENGLAND",
+            "EDITH OF WESSEX"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.",
+        "entity_ids": [
+          "\"KING HAROLD GODWINSON\"",
+          "\"KING EDWARD THE CONFESSOR\"",
+          "\"EDITH OF WESSEX\""
+        ],
+        "chunk_ids": [
+          "chunk-37bdc5345979f4b9b7f83fa30d09deb1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.",
+            "Gytha Thorkelsdóttir Gytha Thorkelsdóttir( 997 – c. 1069), also called Githa, was a Danish noblewoman. She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England."
+          ],
+          "relation_texts": [
+            "She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.",
+            "link",
+            "KING HAROLD GODWINSON",
+            "KING EDWARD THE CONFESSOR",
+            "EDITH OF WESSEX"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Margaret's relationships at court were complicated by her mother-in-law's dominant presence.\"",
+        "branch": "relation",
+        "raw_score": 0.5139508247375488,
+        "hyperedge_text": "Margaret's relationships at court were complicated by her mother-in-law's dominant presence.",
+        "entity_ids": [
+          "\"DOMINANT PRESENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-2ae66a4cf9940d926fcbc1d980ee9ca4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Margaret's relationships at court were complicated by her mother-in-law's dominant presence.",
+            "Margaret of Bavaria, Marchioness of Mantua Margaret of Bavaria (1442–1479), was a Marchioness consort of Mantua, married in 1463 to Federico I Gonzaga, Marquess of Mantua. She was the daughter of Albert III, Duke of Bavaria and Anna of Brunswick-Grubenhagen-Einbeck. The marriage between Margaret and Frederico helped trading relations between the two states. Margaret was hunch-backed and was not able to speak or read Italian when she arrived, but the relationship with Frederico was described as happy. The court was dominated by her mother-in-law, but Margaret avoided all conflicts. During his war against Aragon, Frederico appointed Margaret as regent in his absence during the spring and summer of 1479. She died during her reign."
+          ],
+          "relation_texts": [
+            "Margaret's relationships at court were complicated by her mother-in-law's dominant presence.",
+            "link",
+            "DOMINANT PRESENCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-10a5371e9eef5422dbb4af441179aba1",
+            "hyperedge_name": "<hyperedge>\"Margaret's relationships at court were complicated by her mother-in-law's dominant presence.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"thus making her the mother-in-law of the former Dutch Queen.\"",
+        "branch": "relation",
+        "raw_score": 0.502230167388916,
+        "hyperedge_text": "thus making her the mother-in-law of the former Dutch Queen.",
+        "entity_ids": [
+          "\"QUEEN BEATRIX OF THE NETHERLANDS\""
+        ],
+        "chunk_ids": [
+          "chunk-a15378694c4c8098ae6bca022ae28472"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "thus making her the mother-in-law of the former Dutch Queen.",
+            "Baroness Gösta von dem Bussche-Haddenhausen Baroness Gösta von dem Bussche- Haddenhausen( 26 January 1902 – 13 June 1996) was the mother of Prince Claus of the Netherlands, who was the Prince Consort of Queen Beatrix of the Netherlands, thus making her the mother- in- law of the former Dutch Queen. She is also the paternal grandmother of King Willem- Alexander of the Netherlands, who is the current Dutch King."
+          ],
+          "relation_texts": [
+            "thus making her the mother-in-law of the former Dutch Queen.",
+            "link",
+            "QUEEN BEATRIX OF THE NETHERLANDS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d27ec0120c86734b0fe0521584bedbb3",
+            "hyperedge_name": "<hyperedge>\"thus making her the mother-in-law of the former Dutch Queen.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is the mother-in-law of actress and model Herfiza Novianti.\"",
+        "branch": "relation",
+        "raw_score": 0.5005167722702026,
+        "hyperedge_text": "She is the mother-in-law of actress and model Herfiza Novianti.",
+        "entity_ids": [
+          "\"MOTHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-836fdf45a1c2bb637ca0d34966a643ad"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She is the mother-in-law of actress and model Herfiza Novianti.",
+            "Donna Harun Donna Harun( born February 21, 1968) is an Indonesian actress and model of Dutch- Indonesian descent. She is the mother of actor Ricky Harun and mother- in- law of the actress and model Herfiza Novianti."
+          ],
+          "relation_texts": [
+            "She is the mother-in-law of actress and model Herfiza Novianti.",
+            "link",
+            "MOTHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f7a8a96a79326958d91e075b6d068274",
+            "hyperedge_name": "<hyperedge>\"She is the mother-in-law of actress and model Herfiza Novianti.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The court was dominated by her mother-in-law, but Margaret avoided all conflicts.\"",
+        "branch": "relation",
+        "raw_score": 0.48150041699409485,
+        "hyperedge_text": "The court was dominated by her mother-in-law, but Margaret avoided all conflicts.",
+        "entity_ids": [
+          "\"MOTHER-IN-LAW\"",
+          "\"CONFLICTS\""
+        ],
+        "chunk_ids": [
+          "chunk-2ae66a4cf9940d926fcbc1d980ee9ca4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The court was dominated by her mother-in-law, but Margaret avoided all conflicts.",
+            "Margaret of Bavaria, Marchioness of Mantua Margaret of Bavaria (1442–1479), was a Marchioness consort of Mantua, married in 1463 to Federico I Gonzaga, Marquess of Mantua. She was the daughter of Albert III, Duke of Bavaria and Anna of Brunswick-Grubenhagen-Einbeck. The marriage between Margaret and Frederico helped trading relations between the two states. Margaret was hunch-backed and was not able to speak or read Italian when she arrived, but the relationship with Frederico was described as happy. The court was dominated by her mother-in-law, but Margaret avoided all conflicts. During his war against Aragon, Frederico appointed Margaret as regent in his absence during the spring and summer of 1479. She died during her reign."
+          ],
+          "relation_texts": [
+            "The court was dominated by her mother-in-law, but Margaret avoided all conflicts.",
+            "link",
+            "MOTHER-IN-LAW",
+            "CONFLICTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8c9e0c6d8e297ff75d6bd3160fb8554b",
+            "hyperedge_name": "<hyperedge>\"The court was dominated by her mother-in-law, but Margaret avoided all conflicts.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Doria L. Ragland is the mother-in-law of Prince Harry.\"",
+        "branch": "relation",
+        "raw_score": 0.4660256505012512,
+        "hyperedge_text": "Doria L. Ragland is the mother-in-law of Prince Harry.",
+        "entity_ids": [
+          "\"PRINCE HARRY\""
+        ],
+        "chunk_ids": [
+          "chunk-4d6cd86c0f35c1fa12023b26c78be9f3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Doria L. Ragland is the mother-in-law of Prince Harry.",
+            "Doria Ragland Doria L. Ragland( born September 2, 1956) is the mother of Meghan, Duchess of Sussex, the mother- in- law of Prince Harry, and the maternal grandmother of Archie Mountbatten- Windsor, who is seventh in line to the British throne. She is a former makeup artist, business owner, yoga instructor, and former social worker who worked in the mental health sector from 2015 to 2018."
+          ],
+          "relation_texts": [
+            "Doria L. Ragland is the mother-in-law of Prince Harry.",
+            "link",
+            "PRINCE HARRY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2039bd5e77db360d8c6d8fd394e8cbf6",
+            "hyperedge_name": "<hyperedge>\"Doria L. Ragland is the mother-in-law of Prince Harry.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Doria L. Ragland is the mother of Meghan, Duchess of Sussex, the mother-in-law of Prince Harry, and the maternal grandmother of Archie Mountbatten-Windsor.\"",
+        "branch": "relation",
+        "raw_score": 0.4587875008583069,
+        "hyperedge_text": "Doria L. Ragland is the mother of Meghan, Duchess of Sussex, the mother-in-law of Prince Harry, and the maternal grandmother of Archie Mountbatten-Windsor.",
+        "entity_ids": [
+          "\"DORIA L. RAGLAND\"",
+          "\"MEGHAN, DUCHESS OF SUSSEX\"",
+          "\"PRINCE HARRY\"",
+          "\"ARCHIE MOUNTBATTEN-WINDSOR\""
+        ],
+        "chunk_ids": [
+          "chunk-4d6cd86c0f35c1fa12023b26c78be9f3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Doria L. Ragland is the mother of Meghan, Duchess of Sussex, the mother-in-law of Prince Harry, and the maternal grandmother of Archie Mountbatten-Windsor.",
+            "Doria Ragland Doria L. Ragland( born September 2, 1956) is the mother of Meghan, Duchess of Sussex, the mother- in- law of Prince Harry, and the maternal grandmother of Archie Mountbatten- Windsor, who is seventh in line to the British throne. She is a former makeup artist, business owner, yoga instructor, and former social worker who worked in the mental health sector from 2015 to 2018."
+          ],
+          "relation_texts": [
+            "Doria L. Ragland is the mother of Meghan, Duchess of Sussex, the mother-in-law of Prince Harry, and the maternal grandmother of Archie Mountbatten-Windsor.",
+            "link",
+            "DORIA L. RAGLAND",
+            "MEGHAN, DUCHESS OF SUSSEX",
+            "PRINCE HARRY",
+            "ARCHIE MOUNTBATTEN-WINDSOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1cd4f9d1e9191a49e3b9d309d07bf736",
+            "hyperedge_name": "<hyperedge>\"Doria L. Ragland is the mother of Meghan, Duchess of Sussex, the mother-in-law of Prince Harry, and the maternal grandmother of Archie Mountbatten-Windsor.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thus she is the maternal grandmother of George II.\"",
+        "branch": "relation",
+        "raw_score": 0.45636042952537537,
+        "hyperedge_text": "Thus she is the maternal grandmother of George II.",
+        "entity_ids": [
+          "\"GEORGE II\""
+        ],
+        "chunk_ids": [
+          "chunk-836f44fb604829f64c6c986092c22541"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Thus she is the maternal grandmother of George II.",
+            "Éléonore Desmier d'Olbreuse Éléonore Marie Desmier d'Olbreuse (3 January 1639 – 5 February 1722) was the wife of George William, Duke of Lauenburg and Prince of Celle. She was the mother of Sophia Dorothea of Celle, who was the wife of George I of Great Britain. Thus she is the maternal grandmother of George II."
+          ],
+          "relation_texts": [
+            "Thus she is the maternal grandmother of George II.",
+            "link",
+            "GEORGE II"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1927a9c5da221154fed904bcd9b13f04",
+            "hyperedge_name": "<hyperedge>\"Thus she is the maternal grandmother of George II.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is the mother of Amy Irving, therefore making her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto and the mother-in-law of documentary filmmaker Kenneth Bowser, Jr.\"",
+        "branch": "relation",
+        "raw_score": 0.4551073908805847,
+        "hyperedge_text": "She is the mother of Amy Irving, therefore making her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto and the mother-in-law of documentary filmmaker Kenneth Bowser, Jr.",
+        "entity_ids": [
+          "\"AMY IRVING\"",
+          "\"STEVEN SPIELBERG\"",
+          "\"BRUNO BARRETO\"",
+          "\"KENNETH BOWSER, JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-f7cdfdbee3ce98054a94e28973dcbf5c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She is the mother of Amy Irving, therefore making her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto and the mother-in-law of documentary filmmaker Kenneth Bowser, Jr.",
+            "Priscilla Pointer Priscilla Marie Pointer( born May 18, 1924) is an American stage, film and television character actress. She began her career in the theater, including productions on Broadway. Later, Pointer moved to Hollywood to act in films and on television. She is the mother of Amy Irving, therefore making her the former mother- in- law of filmmakers Steven Spielberg and Bruno Barreto and the mother- in- law of documentary filmmaker Kenneth Bowser, Jr."
+          ],
+          "relation_texts": [
+            "She is the mother of Amy Irving, therefore making her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto and the mother-in-law of documentary filmmaker Kenneth Bowser, Jr.",
+            "link",
+            "AMY IRVING",
+            "STEVEN SPIELBERG",
+            "BRUNO BARRETO",
+            "KENNETH BOWSER, JR."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f4c775d8725064fa553691048ebe2aeb",
+            "hyperedge_name": "<hyperedge>\"She is the mother of Amy Irving, therefore making her the former mother-in-law of filmmakers Steven Spielberg and Bruno Barreto and the mother-in-law of documentary filmmaker Kenneth Bowser, Jr.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was notable for being the mother of Mira Marković, posthumously making her the mother-in-law of Serbian president Slobodan Milošević.\"",
+        "branch": "relation",
+        "raw_score": 0.4390332102775574,
+        "hyperedge_text": "She was notable for being the mother of Mira Marković, posthumously making her the mother-in-law of Serbian president Slobodan Milošević.",
+        "entity_ids": [
+          "\"MOTHER\"",
+          "\"MOTHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-4b182845c9cd25e8b4237f5fb02264a9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She was notable for being the mother of Mira Marković, posthumously making her the mother-in-law of Serbian president Slobodan Milošević.",
+            "Vera Miletić Vera Miletić (Serbian Cyrillic: Вера Милетић; 8 March 1920 – 7 September 1944) was a Serbian student and soldier. She was notable for being the mother of Mira Marković, posthumously making her the mother-in-law of Serbian president Slobodan Milošević."
+          ],
+          "relation_texts": [
+            "She was notable for being the mother of Mira Marković, posthumously making her the mother-in-law of Serbian president Slobodan Milošević.",
+            "link",
+            "MOTHER",
+            "MOTHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a8df340dd6154f584fbf21fb92a84158",
+            "hyperedge_name": "<hyperedge>\"She was notable for being the mother of Mira Marković, posthumously making her the mother-in-law of Serbian president Slobodan Milošević.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of Imran Farhat.\"",
+        "branch": "relation",
+        "raw_score": 0.4381076693534851,
+        "hyperedge_text": "He is the father-in-law of Imran Farhat.",
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-10333be7c973d42a00364ad277052021"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "Mohammad Ilyas (cricketer) Mohammad Ilyas Mahmood( born March 19, 1946, Lahore, Punjab) is a former Pakistani cricketer who played in ten Tests from 1964 to 1969. He is the father- in- law of Imran Farhat."
+          ],
+          "relation_texts": [
+            "He is the father-in-law of Imran Farhat.",
+            "link",
+            "FATHER-IN-LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dfb75f61e308d9f2ded0e2f2dc62859e",
+            "hyperedge_name": "<hyperedge>\"He is the father-in-law of Imran Farhat.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.\"",
+        "branch": "semantic",
+        "raw_score": 0.6944605112075806,
+        "hyperedge_text": "She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.",
+        "entity_ids": [
+          "\"KING HAROLD GODWINSON\"",
+          "\"KING EDWARD THE CONFESSOR\"",
+          "\"EDITH OF WESSEX\""
+        ],
+        "chunk_ids": [
+          "chunk-37bdc5345979f4b9b7f83fa30d09deb1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.",
+            "Gytha Thorkelsdóttir Gytha Thorkelsdóttir( 997 – c. 1069), also called Githa, was a Danish noblewoman. She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England."
+          ],
+          "relation_texts": [
+            "She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.",
+            "link",
+            "KING HAROLD GODWINSON",
+            "KING EDWARD THE CONFESSOR",
+            "EDITH OF WESSEX"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-97daadde24f147fb86921ecb5ac703d7",
+            "hyperedge_name": "<hyperedge>\"She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edith of Wessex (1025 – 18 December 1075) was a Queen of England.\"",
+        "branch": "semantic",
+        "raw_score": 0.6848565340042114,
+        "hyperedge_text": "Edith of Wessex (1025 – 18 December 1075) was a Queen of England.",
+        "entity_ids": [
+          "\"QUEEN OF ENGLAND\"",
+          "\"EDITH OF WESSEX\""
+        ],
+        "chunk_ids": [
+          "chunk-70e142f4cca1d9b5994221582c6b005d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Edith of Wessex (1025 – 18 December 1075) was a Queen of England.",
+            "Edith of Wessex Edith of Wessex (1025 – 18 December 1075) was a Queen of England. Her husband was Edward the Confessor, whom she married on 23 January 1045. Unlike most English queens in the 10th and 11th centuries, she was crowned. The principal source on her life is a work she herself commissioned, the \"Vita Ædwardi Regis\" or the \"Life of King Edward who rests at Westminster\", which is inevitably biased."
+          ],
+          "relation_texts": [
+            "Edith of Wessex (1025 – 18 December 1075) was a Queen of England.",
+            "link",
+            "QUEEN OF ENGLAND",
+            "EDITH OF WESSEX"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4d48e1dbcdcf6c05f8c231df02e3a9dc",
+            "hyperedge_name": "<hyperedge>\"Edith of Wessex (1025 – 18 December 1075) was a Queen of England.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gytha Thorkelsdóttir was the mother of Edith of Wessex, who was queen consort of King Edward the Confessor of England.\"",
+        "branch": "semantic",
+        "raw_score": 0.6800628304481506,
+        "hyperedge_text": "Gytha Thorkelsdóttir was the mother of Edith of Wessex, who was queen consort of King Edward the Confessor of England.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-37bdc5345979f4b9b7f83fa30d09deb1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gytha Thorkelsdóttir was the mother of Edith of Wessex, who was queen consort of King Edward the Confessor of England.",
+            "Gytha Thorkelsdóttir Gytha Thorkelsdóttir( 997 – c. 1069), also called Githa, was a Danish noblewoman. She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England."
+          ],
+          "relation_texts": [
+            "Gytha Thorkelsdóttir was the mother of Edith of Wessex, who was queen consort of King Edward the Confessor of England."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-30fc5f1e8df483f15993d1ce69fc9fda",
+            "hyperedge_name": "<hyperedge>\"Gytha Thorkelsdóttir was the mother of Edith of Wessex, who was queen consort of King Edward the Confessor of England.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edith of Wessex was the queen consort of King Edward the Confessor.\"",
+        "branch": "semantic",
+        "raw_score": 0.6691265106201172,
+        "hyperedge_text": "Edith of Wessex was the queen consort of King Edward the Confessor.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-37bdc5345979f4b9b7f83fa30d09deb1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Edith of Wessex was the queen consort of King Edward the Confessor.",
+            "Gytha Thorkelsdóttir Gytha Thorkelsdóttir( 997 – c. 1069), also called Githa, was a Danish noblewoman. She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England."
+          ],
+          "relation_texts": [
+            "Edith of Wessex was the queen consort of King Edward the Confessor."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b343c803b8a097a4f3d5be438fbefce3",
+            "hyperedge_name": "<hyperedge>\"Edith of Wessex was the queen consort of King Edward the Confessor.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The title of queen consort indicates Edith of Wessex's marriage to King Edward the Confessor.\"",
+        "branch": "semantic",
+        "raw_score": 0.6684411764144897,
+        "hyperedge_text": "The title of queen consort indicates Edith of Wessex's marriage to King Edward the Confessor.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-37bdc5345979f4b9b7f83fa30d09deb1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The title of queen consort indicates Edith of Wessex's marriage to King Edward the Confessor.",
+            "Gytha Thorkelsdóttir Gytha Thorkelsdóttir( 997 – c. 1069), also called Githa, was a Danish noblewoman. She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England."
+          ],
+          "relation_texts": [
+            "The title of queen consort indicates Edith of Wessex's marriage to King Edward the Confessor."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d40c01cb38296b23249bcead7dc7d76",
+            "hyperedge_name": "<hyperedge>\"The title of queen consort indicates Edith of Wessex's marriage to King Edward the Confessor.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edith of Wessex is the daughter of Gytha Thorkelsdóttir.\"",
+        "branch": "semantic",
+        "raw_score": 0.6557424068450928,
+        "hyperedge_text": "Edith of Wessex is the daughter of Gytha Thorkelsdóttir.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-37bdc5345979f4b9b7f83fa30d09deb1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Edith of Wessex is the daughter of Gytha Thorkelsdóttir.",
+            "Gytha Thorkelsdóttir Gytha Thorkelsdóttir( 997 – c. 1069), also called Githa, was a Danish noblewoman. She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England."
+          ],
+          "relation_texts": [
+            "Edith of Wessex is the daughter of Gytha Thorkelsdóttir."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-04408d73bde5da2097d3e069d39f9a14",
+            "hyperedge_name": "<hyperedge>\"Edith of Wessex is the daughter of Gytha Thorkelsdóttir.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edith of Wessex's life was marked by her role as a Queen.\"",
+        "branch": "semantic",
+        "raw_score": 0.6379614472389221,
+        "hyperedge_text": "Edith of Wessex's life was marked by her role as a Queen.",
+        "entity_ids": [
+          "\"ROLE AS A QUEEN\""
+        ],
+        "chunk_ids": [
+          "chunk-70e142f4cca1d9b5994221582c6b005d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Edith of Wessex's life was marked by her role as a Queen.",
+            "Edith of Wessex Edith of Wessex (1025 – 18 December 1075) was a Queen of England. Her husband was Edward the Confessor, whom she married on 23 January 1045. Unlike most English queens in the 10th and 11th centuries, she was crowned. The principal source on her life is a work she herself commissioned, the \"Vita Ædwardi Regis\" or the \"Life of King Edward who rests at Westminster\", which is inevitably biased."
+          ],
+          "relation_texts": [
+            "Edith of Wessex's life was marked by her role as a Queen.",
+            "link",
+            "ROLE AS A QUEEN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0cb21d53057ff15e57e92884ae17781a",
+            "hyperedge_name": "<hyperedge>\"Edith of Wessex's life was marked by her role as a Queen.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edith of Wessex lived from 1025 to 18 December 1075.\"",
+        "branch": "semantic",
+        "raw_score": 0.6359039545059204,
+        "hyperedge_text": "Edith of Wessex lived from 1025 to 18 December 1075.",
+        "entity_ids": [
+          "\"1025\"",
+          "\"18 DECEMBER 1075\""
+        ],
+        "chunk_ids": [
+          "chunk-70e142f4cca1d9b5994221582c6b005d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Edith of Wessex lived from 1025 to 18 December 1075.",
+            "Edith of Wessex Edith of Wessex (1025 – 18 December 1075) was a Queen of England. Her husband was Edward the Confessor, whom she married on 23 January 1045. Unlike most English queens in the 10th and 11th centuries, she was crowned. The principal source on her life is a work she herself commissioned, the \"Vita Ædwardi Regis\" or the \"Life of King Edward who rests at Westminster\", which is inevitably biased."
+          ],
+          "relation_texts": [
+            "Edith of Wessex lived from 1025 to 18 December 1075.",
+            "link",
+            "1025",
+            "18 DECEMBER 1075"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5fd6cb88fd140fb2cb5e65ddb524d857",
+            "hyperedge_name": "<hyperedge>\"Edith of Wessex lived from 1025 to 18 December 1075.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eadgyth, also spelt Edith of England or Ædgyth, was a member of the House of Wessex and became German queen from 936 by her marriage with King Otto I.\"",
+        "branch": "semantic",
+        "raw_score": 0.6309463381767273,
+        "hyperedge_text": "Eadgyth, also spelt Edith of England or Ædgyth, was a member of the House of Wessex and became German queen from 936 by her marriage with King Otto I.",
+        "entity_ids": [
+          "\"MARRIAGE\"",
+          "\"GERMAN QUEEN\"",
+          "\"KING OTTO I\"",
+          "\"946\"",
+          "\"910\"",
+          "\"EADGYTH\"",
+          "\"EDITH OF ENGLAND\"",
+          "\"HOUSE OF WESSEX\""
+        ],
+        "chunk_ids": [
+          "chunk-d9f6dd1be222ddb2483d838981055499"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Eadgyth, also spelt Edith of England or Ædgyth, was a member of the House of Wessex and became German queen from 936 by her marriage with King Otto I.",
+            "Eadgyth Edith of England, also spelt Eadgyth or Ædgyth( 910 – 26 January 946), a member of the House of Wessex, was German queen from 936, by her marriage with King Otto I."
+          ],
+          "relation_texts": [
+            "Eadgyth, also spelt Edith of England or Ædgyth, was a member of the House of Wessex and became German queen from 936 by her marriage with King Otto I.",
+            "link",
+            "MARRIAGE",
+            "GERMAN QUEEN",
+            "KING OTTO I",
+            "946",
+            "910",
+            "EADGYTH",
+            "EDITH OF ENGLAND",
+            "HOUSE OF WESSEX"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-590a026221a8d34727e02e4fc02e222d",
+            "hyperedge_name": "<hyperedge>\"Eadgyth, also spelt Edith of England or Ædgyth, was a member of the House of Wessex and became German queen from 936 by her marriage with King Otto I.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.\"",
+        "branch": "semantic",
+        "raw_score": 0.5994662046432495,
+        "hyperedge_text": "Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.",
+        "entity_ids": [
+          "\"HAROLD GODWINSON\"",
+          "\"KING EDWARD THE CONFESSOR\"",
+          "\"EDITH OF WESSEX\""
+        ],
+        "chunk_ids": [
+          "chunk-d71a8909376ddae95c6edc929f158b4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.",
+            "Godwin, Earl of Wessex Godwin of Wessex( died 15 April 1053) became one of the most powerful earls in England under the Danish king Cnut the Great( King of England from 1016 to 1035) and his successors. Cnut made Godwin the first Earl of Wessex. Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor."
+          ],
+          "relation_texts": [
+            "Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.",
+            "link",
+            "HAROLD GODWINSON",
+            "KING EDWARD THE CONFESSOR",
+            "EDITH OF WESSEX"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-96341f12adc2a0f42a8b8a8a2a272e50",
+            "hyperedge_name": "<hyperedge>\"Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.\"",
+        "hyperedge_text": "She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6944605112075806,
+        "fusion_score": 0.7388921022415162,
+        "entity_ids": [
+          "\"KING HAROLD GODWINSON\"",
+          "\"KING EDWARD THE CONFESSOR\"",
+          "\"EDITH OF WESSEX\""
+        ],
+        "chunk_ids": [
+          "chunk-37bdc5345979f4b9b7f83fa30d09deb1"
+        ],
+        "evidence_texts": [
+          "She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England.",
+          "Gytha Thorkelsdóttir Gytha Thorkelsdóttir( 997 – c. 1069), also called Githa, was a Danish noblewoman. She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.694461,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.738892
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edith of Wessex (1025 – 18 December 1075) was a Queen of England.\"",
+        "hyperedge_text": "Edith of Wessex (1025 – 18 December 1075) was a Queen of England.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6848565340042114,
+        "fusion_score": 0.5369713068008424,
+        "entity_ids": [
+          "\"QUEEN OF ENGLAND\"",
+          "\"EDITH OF WESSEX\""
+        ],
+        "chunk_ids": [
+          "chunk-70e142f4cca1d9b5994221582c6b005d"
+        ],
+        "evidence_texts": [
+          "Edith of Wessex (1025 – 18 December 1075) was a Queen of England.",
+          "Edith of Wessex Edith of Wessex (1025 – 18 December 1075) was a Queen of England. Her husband was Edward the Confessor, whom she married on 23 January 1045. Unlike most English queens in the 10th and 11th centuries, she was crowned. The principal source on her life is a work she herself commissioned, the \"Vita Ædwardi Regis\" or the \"Life of King Edward who rests at Westminster\", which is inevitably biased."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.684857,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536971
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.\"",
+        "hyperedge_text": "Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5994662046432495,
+        "fusion_score": 0.51989324092865,
+        "entity_ids": [
+          "\"HAROLD GODWINSON\"",
+          "\"KING EDWARD THE CONFESSOR\"",
+          "\"EDITH OF WESSEX\""
+        ],
+        "chunk_ids": [
+          "chunk-d71a8909376ddae95c6edc929f158b4f"
+        ],
+        "evidence_texts": [
+          "Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor.",
+          "Godwin, Earl of Wessex Godwin of Wessex( died 15 April 1053) became one of the most powerful earls in England under the Danish king Cnut the Great( King of England from 1016 to 1035) and his successors. Cnut made Godwin the first Earl of Wessex. Godwin was the father of King Harold Godwinson and of Edith of Wessex, who married in 1045 King Edward the Confessor."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.599466,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519893
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gytha Thorkelsdóttir was the mother of Edith of Wessex, who was queen consort of King Edward the Confessor of England.\"",
+        "hyperedge_text": "Gytha Thorkelsdóttir was the mother of Edith of Wessex, who was queen consort of King Edward the Confessor of England.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6800628304481506,
+        "fusion_score": 0.7360125660896302,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-37bdc5345979f4b9b7f83fa30d09deb1"
+        ],
+        "evidence_texts": [
+          "Gytha Thorkelsdóttir was the mother of Edith of Wessex, who was queen consort of King Edward the Confessor of England.",
+          "Gytha Thorkelsdóttir Gytha Thorkelsdóttir( 997 – c. 1069), also called Githa, was a Danish noblewoman. She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.680063,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.736013
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edith of Wessex was the queen consort of King Edward the Confessor.\"",
+        "hyperedge_text": "Edith of Wessex was the queen consort of King Edward the Confessor.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6691265106201172,
+        "fusion_score": 0.5338253021240235,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-37bdc5345979f4b9b7f83fa30d09deb1"
+        ],
+        "evidence_texts": [
+          "Edith of Wessex was the queen consort of King Edward the Confessor.",
+          "Gytha Thorkelsdóttir Gytha Thorkelsdóttir( 997 – c. 1069), also called Githa, was a Danish noblewoman. She was the mother of King Harold Godwinson and of Edith of Wessex, queen consort of King Edward the Confessor of England."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.669127,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533825
+        }
+      }
+    ]
+  }
+]

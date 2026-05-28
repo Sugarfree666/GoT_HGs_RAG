@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the composer of Kadal (1968 Film)?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the composer of Kadal (1968 Film) die?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

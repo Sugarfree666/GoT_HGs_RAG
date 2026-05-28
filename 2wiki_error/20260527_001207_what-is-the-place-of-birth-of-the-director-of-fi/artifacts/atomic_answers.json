@@ -1,0 +1,367 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of God Of War?",
+    "analysis": {
+      "entities": [
+        "God Of War"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Cory Barlog is known for his work on 'God of War' (2005), 'God of War II', and 'God of War' (2018).\"",
+        "hyperedge_text": "Cory Barlog is known for his work on 'God of War' (2005), 'God of War II', and 'God of War' (2018).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6379809379577637,
+        "fusion_score": 0.7275961875915529,
+        "entity_ids": [
+          "\"GOD OF WAR (2018)\"",
+          "\"GOD OF WAR II\"",
+          "\"GOD OF WAR\""
+        ],
+        "chunk_ids": [
+          "chunk-15cd5de9e79951b7f83c64ac71446a7f"
+        ],
+        "evidence_texts": [
+          "Cory Barlog is known for his work on 'God of War' (2005), 'God of War II', and 'God of War' (2018).",
+          "Cory Barlog Cory Barlog( born September 2, 1975) is the creative director at SIE Santa Monica Studio. He is a video game director and writer, known for his work on\" God of War\"( 2005),\" God of War II\", and\" God of War\"( 2018)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.637981,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.727596
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gerard Kendrick Marino (born April 1, 1968) is a film and video game score composer, most notably contributing heavily to the God of War series.\"",
+        "hyperedge_text": "Gerard Kendrick Marino (born April 1, 1968) is a film and video game score composer, most notably contributing heavily to the God of War series.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6173345446586609,
+        "fusion_score": 0.5234669089317322,
+        "entity_ids": [
+          "\"GOD OF WAR\"",
+          "\"GERARD KENDRICK MARINO\""
+        ],
+        "chunk_ids": [
+          "chunk-80d235fc6ceeef109a89cd2773f9ca52"
+        ],
+        "evidence_texts": [
+          "Gerard Kendrick Marino (born April 1, 1968) is a film and video game score composer, most notably contributing heavily to the God of War series.",
+          "Gerard Marino Gerard Kendrick Marino( born April 1, 1968) is a film and video game score composer, most notably contributing heavily to the\" God of War\" series. His work is featured on the soundtracks of the\" God of War\" series, including\" God of WarGod of War IIGod of War III\", and. For\" God of War II\", he was nominated for a BAFTA Award. He also worked on Activision games like\" Gun\" and\" The Amazing Spider- Man\". He has worked on several film and television series since 2000, generally listed as composing additional music for the soundtracks."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.617335,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523467
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The title of the film is God of War, which signifies its thematic focus.\"",
+        "hyperedge_text": "The title of the film is God of War, which signifies its thematic focus.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5607340335845947,
+        "fusion_score": 0.512146806716919,
+        "entity_ids": [
+          "\"GOD OF WAR\""
+        ],
+        "chunk_ids": [
+          "chunk-2a78f00ac1490002c2da8031fba26ea0"
+        ],
+        "evidence_texts": [
+          "The title of the film is God of War, which signifies its thematic focus.",
+          "God of War (film) God of War is a 2017 Chinese historical war film directed by Gordon Chan and starring Vincent Zhao, Sammo Hung, and Yasuaki Kurata. It was released in the United States in Mandarin and Japanese with English subtitles on June 2, 2017. The plot is based on general Qi Jiguang's suppression of the \"wokou\" pirates during the Ming dynasty."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.560734,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.512147
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"God of War is a 2017 Chinese historical war film directed by Gordon Chan and starring Vincent Zhao, Sammo Hung, and Yasuaki Kurata.\"",
+        "hyperedge_text": "God of War is a 2017 Chinese historical war film directed by Gordon Chan and starring Vincent Zhao, Sammo Hung, and Yasuaki Kurata.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5256907939910889,
+        "fusion_score": 0.5051381587982178,
+        "entity_ids": [
+          "\"SAMMO HUNG\"",
+          "\"GOD OF WAR\"",
+          "\"GORDON CHAN\"",
+          "\"VINCENT ZHAO\"",
+          "\"YASUAKI KURATA\""
+        ],
+        "chunk_ids": [
+          "chunk-2a78f00ac1490002c2da8031fba26ea0"
+        ],
+        "evidence_texts": [
+          "God of War is a 2017 Chinese historical war film directed by Gordon Chan and starring Vincent Zhao, Sammo Hung, and Yasuaki Kurata.",
+          "God of War (film) God of War is a 2017 Chinese historical war film directed by Gordon Chan and starring Vincent Zhao, Sammo Hung, and Yasuaki Kurata. It was released in the United States in Mandarin and Japanese with English subtitles on June 2, 2017. The plot is based on general Qi Jiguang's suppression of the \"wokou\" pirates during the Ming dynasty."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.525691,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505138
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cory Barlog's work on 'God of War' has been highly influential in the gaming community.\"",
+        "hyperedge_text": "Cory Barlog's work on 'God of War' has been highly influential in the gaming community.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6015216112136841,
+        "fusion_score": 0.7203043222427369,
+        "entity_ids": [
+          "\"INFLUENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-15cd5de9e79951b7f83c64ac71446a7f"
+        ],
+        "evidence_texts": [
+          "Cory Barlog's work on 'God of War' has been highly influential in the gaming community.",
+          "Cory Barlog Cory Barlog( born September 2, 1975) is the creative director at SIE Santa Monica Studio. He is a video game director and writer, known for his work on\" God of War\"( 2005),\" God of War II\", and\" God of War\"( 2018)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.601522,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.720304
+        }
+      }
+    ],
+    "answer": "Cory Barlog",
+    "confidence": 0.9,
+    "reasoning_summary": "Cory Barlog is known for his work on 'God of War' (2005) and 'God of War' (2018), indicating his role as director.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Cory Barlog is known for his work on 'God of War' (2005), 'God of War II', and 'God of War' (2018).\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the birth place of the director of God Of War?",
+    "analysis": {
+      "entities": [
+        "Cory Barlog"
+      ],
+      "relations": [
+        "birth place of"
+      ],
+      "relation_query": "What is the birth place of a person?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Cory Barlog was born on September 2, 1975.\"",
+        "hyperedge_text": "Cory Barlog was born on September 2, 1975.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7541567087173462,
+        "fusion_score": 0.5508313417434693,
+        "entity_ids": [
+          "\"CORY BARLOG\""
+        ],
+        "chunk_ids": [
+          "chunk-15cd5de9e79951b7f83c64ac71446a7f"
+        ],
+        "evidence_texts": [
+          "Cory Barlog was born on September 2, 1975.",
+          "Cory Barlog Cory Barlog( born September 2, 1975) is the creative director at SIE Santa Monica Studio. He is a video game director and writer, known for his work on\" God of War\"( 2005),\" God of War II\", and\" God of War\"( 2018)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.754157,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.550831
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cory Barlog is the creative director at SIE Santa Monica Studio.\"",
+        "hyperedge_text": "Cory Barlog is the creative director at SIE Santa Monica Studio.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6726555228233337,
+        "fusion_score": 0.5345311045646668,
+        "entity_ids": [
+          "\"SIE SANTA MONICA STUDIO\"",
+          "\"CORY BARLOG\""
+        ],
+        "chunk_ids": [
+          "chunk-15cd5de9e79951b7f83c64ac71446a7f"
+        ],
+        "evidence_texts": [
+          "Cory Barlog is the creative director at SIE Santa Monica Studio.",
+          "Cory Barlog Cory Barlog( born September 2, 1975) is the creative director at SIE Santa Monica Studio. He is a video game director and writer, known for his work on\" God of War\"( 2005),\" God of War II\", and\" God of War\"( 2018)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.672656,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534531
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cory Barlog is a video game director and writer.\"",
+        "hyperedge_text": "Cory Barlog is a video game director and writer.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7064121961593628,
+        "fusion_score": 0.5412824392318726,
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"VIDEO GAME DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-15cd5de9e79951b7f83c64ac71446a7f"
+        ],
+        "evidence_texts": [
+          "Cory Barlog is a video game director and writer.",
+          "Cory Barlog Cory Barlog( born September 2, 1975) is the creative director at SIE Santa Monica Studio. He is a video game director and writer, known for his work on\" God of War\"( 2005),\" God of War II\", and\" God of War\"( 2018)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.706412,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.541282
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cory Barlog's work on 'God of War' has been highly influential in the gaming community.\"",
+        "hyperedge_text": "Cory Barlog's work on 'God of War' has been highly influential in the gaming community.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6025043725967407,
+        "fusion_score": 0.5205008745193482,
+        "entity_ids": [
+          "\"INFLUENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-15cd5de9e79951b7f83c64ac71446a7f"
+        ],
+        "evidence_texts": [
+          "Cory Barlog's work on 'God of War' has been highly influential in the gaming community.",
+          "Cory Barlog Cory Barlog( born September 2, 1975) is the creative director at SIE Santa Monica Studio. He is a video game director and writer, known for his work on\" God of War\"( 2005),\" God of War II\", and\" God of War\"( 2018)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.602504,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.520501
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cory Barlog is known for his work on 'God of War' (2005), 'God of War II', and 'God of War' (2018).\"",
+        "hyperedge_text": "Cory Barlog is known for his work on 'God of War' (2005), 'God of War II', and 'God of War' (2018).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5708292722702026,
+        "fusion_score": 0.5141658544540406,
+        "entity_ids": [
+          "\"GOD OF WAR (2018)\"",
+          "\"GOD OF WAR II\"",
+          "\"GOD OF WAR\""
+        ],
+        "chunk_ids": [
+          "chunk-15cd5de9e79951b7f83c64ac71446a7f"
+        ],
+        "evidence_texts": [
+          "Cory Barlog is known for his work on 'God of War' (2005), 'God of War II', and 'God of War' (2018).",
+          "Cory Barlog Cory Barlog( born September 2, 1975) is the creative director at SIE Santa Monica Studio. He is a video game director and writer, known for his work on\" God of War\"( 2005),\" God of War II\", and\" God of War\"( 2018)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.570829,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.514166
+        }
+      }
+    ],
+    "answer": "Los Angeles, California",
+    "confidence": 0.75,
+    "reasoning_summary": "Cory Barlog, the director of God of War, was born in Los Angeles, California, which is a well-known fact about him, though not explicitly stated in the provided evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Cory Barlog was born on September 2, 1975.\""
+    ]
+  }
+]

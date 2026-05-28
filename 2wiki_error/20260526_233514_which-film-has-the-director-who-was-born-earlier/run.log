@@ -1,0 +1,11 @@
+2026-05-26 23:35:14,520 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 23:37:32,801 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 23:37:32,802 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 23:37:57,856 | INFO | Starting HyperBranch pipeline for question: Which film has the director who was born earlier, Holiday In Tyrol or Las Aventuras De Pito Pérez?
+2026-05-26 23:37:57,857 | INFO | Executing atomic DAG with 5 node(s)
+2026-05-26 23:38:12,007 | INFO | Atomic retrieval returned 21 hits for question=When was the birth date of the director of Holiday In Tyrol?
+2026-05-26 23:38:23,169 | INFO | Atomic retrieval returned 22 hits for question=When was Las Aventuras De Pito Pérez born?
+2026-05-26 23:38:44,993 | INFO | Atomic retrieval returned 22 hits for question=Who is the director of Holiday In Tyrol?
+2026-05-26 23:39:01,144 | INFO | Atomic retrieval returned 24 hits for question=Who is the director of Las Aventuras De Pito Pérez?
+2026-05-26 23:39:16,322 | INFO | Atomic retrieval returned 21 hits for question=What is the birth date of Holiday In Tyrol?
+2026-05-26 23:39:47,657 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_233514_which-film-has-the-director-who-was-born-earlier

@@ -1,0 +1,389 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Bhaji On The Beach?",
+    "analysis": {
+      "entities": [
+        "Bhaji On The Beach"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.\"",
+        "hyperedge_text": "Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6908137798309326,
+        "fusion_score": 0.5381627559661866,
+        "entity_ids": [
+          "\"COMEDY-DRAMA\"",
+          "\"1993\"",
+          "\"BHAJI ON THE BEACH\"",
+          "\"GURINDER CHADHA\"",
+          "\"MEERA SYAL\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "evidence_texts": [
+          "Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.",
+          "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.690814,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.538163
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).\"",
+        "hyperedge_text": "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5297690629959106,
+        "fusion_score": 0.5059538125991822,
+        "entity_ids": [
+          "\"BHAJI ON THE BEACH\"",
+          "\"BEND IT LIKE BECKHAM\"",
+          "\"BRIDE AND PREJUDICE\"",
+          "\"ANGUS, THONGS AND PERFECT SNOGGING\"",
+          "\"IT'S A WONDERFUL AFTERLIFE\"",
+          "\"VICEROY'S HOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-925d1e5e4bf757498552ef7540d75ea8"
+        ],
+        "evidence_texts": [
+          "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+          "Gurinder Chadha Gurinder Chadha,( born 10 January 1960) is an English film director of Indian origin. Most of her films explore the lives of Indians living in England. The common theme among her work showcases the trials of Indian women living in England and how they must reconcile their converging traditional and modern cultures. Although many of her films seem like simple quirky comedies about Indian women, they actually address many social and emotional issues, especially ones faced by immigrants caught between two worlds. Much of her work also consists of adaptations from book to film, but with a different flair. She is best known for the hit films\" Bhaji on the Beach\"( 1993),\" Bend It Like Beckham\"( 2002),\" Bride and Prejudice\"( 2004),\" Angus, Thongs and Perfect Snogging\"( 2008),\" It's a Wonderful Afterlife\"( 2010) and\" Viceroy's House\"( 2017). Her latest features are the biograp..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.529769,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505954
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.\"",
+        "hyperedge_text": "Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6289924383163452,
+        "fusion_score": 0.5257984876632691,
+        "entity_ids": [
+          "\"CHARACTERS\"",
+          "\"CULTURAL IDENTITY\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "evidence_texts": [
+          "Bhaji on the Beach showcases the lives of its characters as they navigate cultural identity issues while living in Britain.",
+          "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.628992,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525798
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.\"",
+        "hyperedge_text": "Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.614122748374939,
+        "fusion_score": 0.5228245496749878,
+        "entity_ids": [
+          "\"भाजी ऑन द बीच\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "evidence_texts": [
+          "Bhaji on the Beach (Hindi: भाजी ऑन द बीच) is the title of the film, indicating its original language.",
+          "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.614123,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522825
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Bhaji on the Beach was released in 1993 in the United Kingdom.\"",
+        "hyperedge_text": "The film Bhaji on the Beach was released in 1993 in the United Kingdom.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.577032744884491,
+        "fusion_score": 0.5154065489768982,
+        "entity_ids": [
+          "\"UNITED KINGDOM\""
+        ],
+        "chunk_ids": [
+          "chunk-b013142b371b856892b3c74ad83dd878"
+        ],
+        "evidence_texts": [
+          "The film Bhaji on the Beach was released in 1993 in the United Kingdom.",
+          "Bhaji on the Beach Bhaji on the Beach( Hindi: भाजी ऑन द बीच) is a 1993 British comedy- drama film directed by Gurinder Chadha and written by Meera Syal."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.577033,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515407
+        }
+      }
+    ],
+    "answer": "Gurinder Chadha",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Bhaji on the Beach' is directed by Gurinder Chadha.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Bhaji on the Beach is a 1993 British comedy-drama film directed by Gurinder Chadha and written by Meera Syal.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Bugsy?",
+    "analysis": {
+      "entities": [
+        "Bugsy"
+      ],
+      "relations": [
+        "is directed by"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.\"",
+        "hyperedge_text": "Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.6971750855445862,
+        "fusion_score": 0.9394350171089173,
+        "entity_ids": [
+          "\"1991\"",
+          "\"RELATIONSHIP\"",
+          "\"JOE MANTEGNA\"",
+          "\"BEN KINGSLEY\"",
+          "\"BUGSY\"",
+          "\"HARVEY KEITEL\"",
+          "\"ANNETTE BENING\"",
+          "\"ELLIOTT GOULD\"",
+          "\"BEBE NEUWIRTH\"",
+          "\"BIOGRAPHICAL CRIME DRAMA\"",
+          "\"MOBSTER\"",
+          "\"BARRY LEVINSON\"",
+          "\"BUGSY SIEGEL\"",
+          "\"VIRGINIA HILL\"",
+          "\"WARREN BEATTY\""
+        ],
+        "chunk_ids": [
+          "chunk-a7f4e4fbfe8dfe8a5e285e0316f82b95"
+        ],
+        "evidence_texts": [
+          "Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.",
+          "Bugsy Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill. It stars Warren Beatty as Siegel and Annette Bening as Hill, as well as Harvey Keitel, Ben Kingsley, Elliott Gould, Bebe Neuwirth, and Joe Mantegna. The screenplay was written by James Toback from research material by Dean Jennings' 1967 book\" We Only Kill Each Other\". The film received acclaim from critics, including Roger Ebert, and was nominated for ten Oscars at the 64th Academy Awards, winning two for Best Art Direction- Set Decoration and Best Costume Design. A director's cut was released on DVD, containing an additional 13 minutes not seen in the theatrical version."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.697175,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.939435
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.\"",
+        "hyperedge_text": "His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5501066446304321,
+        "fusion_score": 0.7100213289260865,
+        "entity_ids": [
+          "\"ALL THAT JAZZ\"",
+          "\"BUGSY\""
+        ],
+        "chunk_ids": [
+          "chunk-c7ba91446a8ac8476113af366a9c3b0a"
+        ],
+        "evidence_texts": [
+          "His award-winning work includes the films 'All That Jazz' and 'Bugsy', which are well-regarded in cinematic history.",
+          "Albert Wolsky Albert Wolsky( born November 24, 1930) is an American costume designer. He has worked both on stage shows as well as for film, and has received two Academy Awards, for his work on the films\" All That Jazz\" and\" Bugsy\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.550107,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.710021
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Levinson's best-known works are mid-budget comedy-drama and drama films such as 'Diner' (1982), 'The Natural' (1984), 'Good Morning, Vietnam' (1987), 'Bugsy' (1991), and 'Wag the Dog' (1997).\"",
+        "hyperedge_text": "Levinson's best-known works are mid-budget comedy-drama and drama films such as 'Diner' (1982), 'The Natural' (1984), 'Good Morning, Vietnam' (1987), 'Bugsy' (1991), and 'Wag the Dog' (1997).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 1.0,
+        "fusion_score": 0.6000000000000001,
+        "entity_ids": [
+          "\"BUGSY\"",
+          "\"DINER\"",
+          "\"THE NATURAL\"",
+          "\"GOOD MORNING, VIETNAM\"",
+          "\"WAG THE DOG\""
+        ],
+        "chunk_ids": [
+          "chunk-05b05506ca70485c32c5fa0212b82406"
+        ],
+        "evidence_texts": [
+          "Levinson's best-known works are mid-budget comedy-drama and drama films such as 'Diner' (1982), 'The Natural' (1984), 'Good Morning, Vietnam' (1987), 'Bugsy' (1991), and 'Wag the Dog' (1997).",
+          "Barry Levinson Barry Levinson( born April 6, 1942) is an American filmmaker, screenwriter, and actor. Levinson's best- known works are mid-budget comedy- drama and drama films such as\" Diner\"( 1982);\" The Natural\"( 1984);\" Good Morning, Vietnam\"( 1987);\" Bugsy\"( 1991); and\" Wag the Dog\"( 1997). He won the Academy Award for Best Director for\" Rain Man\"( 1988), which also won the Academy Award for Best Picture."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.6
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Albert Wolsky is an American costume designer born on November 24, 1930.\"",
+        "hyperedge_text": "Albert Wolsky is an American costume designer born on November 24, 1930.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"FILM\"",
+          "\"ACADEMY AWARDS\"",
+          "\"ALL THAT JAZZ\"",
+          "\"STAGE SHOWS\"",
+          "\"COSTUME DESIGNER\"",
+          "\"ALBERT WOLSKY\"",
+          "\"BUGSY\""
+        ],
+        "chunk_ids": [
+          "chunk-c7ba91446a8ac8476113af366a9c3b0a"
+        ],
+        "evidence_texts": [
+          "Albert Wolsky is an American costume designer born on November 24, 1930.",
+          "Albert Wolsky Albert Wolsky( born November 24, 1930) is an American costume designer. He has worked both on stage shows as well as for film, and has received two Academy Awards, for his work on the films\" All That Jazz\" and\" Bugsy\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Michael Curtiz.\"",
+        "hyperedge_text": "The film is directed by Michael Curtiz.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.43484407663345337,
+        "fusion_score": 0.4869688153266907,
+        "entity_ids": [
+          "\"MICHAEL CURTIZ\""
+        ],
+        "chunk_ids": [
+          "chunk-9ef99626d5b09971648bd6ebd47d9976",
+          "chunk-3fa79602e3f2e1a9882cd95e58740d4b"
+        ],
+        "evidence_texts": [
+          "The film is directed by Michael Curtiz.",
+          "God's Gift to Women God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell. The film, based on the play\" The Devil Was Sick\" by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints. The full film was released intact in other countries, where there was no such decline in popularity.",
+          "Bright Leaf Bright Leaf is a 1950 American drama film directed by Michael Curtiz and starring Gary Cooper, Lauren Bacall and Patricia Neal. It is based on a 1948 novel of the same name by Foster Fitz- Simons. The title comes from the type of tobacco grown in North Carolina after the American Civil War. The plot is loosely based on the rivalry of tobacco tycoons Washington Duke and John Harvey McElwee, according to\" Bright Leaves\", a 2003 documentary by Ross McElwee."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.434844,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.486969
+        }
+      }
+    ],
+    "answer": "Barry Levinson",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Bugsy' is directed by Barry Levinson.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Bugsy is a 1991 American biographical crime drama film directed by Barry Levinson which tells the story of mobster Bugsy Siegel and his relationship with Virginia Hill.\""
+    ]
+  }
+]

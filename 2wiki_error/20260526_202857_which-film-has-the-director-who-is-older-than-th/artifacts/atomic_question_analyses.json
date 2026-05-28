@@ -1,0 +1,206 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Mektoub?",
+    "retrieval_question": "Who is the director of Mektoub?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Mektoub?",
+      "retrieval_question": "Who is the director of Mektoub?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Mektoub"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Sail A Crooked Ship?",
+    "retrieval_question": "Who is the director of Sail A Crooked Ship?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Sail A Crooked Ship?",
+      "retrieval_question": "Who is the director of Sail A Crooked Ship?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Sail A Crooked Ship"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Mektoub?",
+    "retrieval_question": "What is the age of Nabil Ayouch?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of Mektoub?",
+      "retrieval_question": "What is the age of Nabil Ayouch?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Mektoub",
+      "replacement_answer": "Nabil Ayouch",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Mektoub",
+          "replacement_answer": "Nabil Ayouch"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Mektoub?",
+        "answer": "Nabil Ayouch",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.\"",
+            "fusion_score": 0.5380834579467774,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mektoub is a 1997 French-Moroccan drama film directed by Nabil Ayouch.",
+              "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.\"",
+            "fusion_score": 0.536987590789795,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Nabil Ayouch's direction of Mektoub reflects his unique storytelling style and vision.",
+              "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Mektoub is a French-Moroccan drama film, emphasizing its cultural and geographical significance.\"",
+            "fusion_score": 0.5303104162216187,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mektoub is a French-Moroccan drama film, emphasizing its cultural and geographical significance.",
+              "Mektoub Mektoub is a 1997 French- Moroccan drama film directed by Nabil Ayouch. The film was selected as the Moroccan entry for the Best Foreign Language Film at the 71st Academy Awards, but was not accepted as a nominee."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Nabil Ayouch"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of Sail A Crooked Ship?",
+    "retrieval_question": "What is the age of Irving Brecher?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of Sail A Crooked Ship?",
+      "retrieval_question": "What is the age of Irving Brecher?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Sail A Crooked Ship",
+      "replacement_answer": "Irving Brecher",
+      "replacements": [
+        {
+          "dependency_node_id": "q3",
+          "replacement_span": "the director of Sail A Crooked Ship",
+          "replacement_answer": "Irving Brecher"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q3",
+        "question": "Who is the director of Sail A Crooked Ship?",
+        "answer": "Irving Brecher",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Sail a Crooked Ship' was directed by Irving Brecher.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin.\"",
+            "fusion_score": 0.520026433467865,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin.",
+              "Sail a Crooked Ship Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin. It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960. \"Sail a Crooked Ship\" was Kovacs' last movie, released shortly before he was killed in a car crash. Hart's other 1961 film, \"Francis of Assisi\", inspired her to retire from acting two years later and become a Roman Catholic nun."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film Sail a Crooked Ship is a comedy heist film released in 1961.\"",
+            "fusion_score": 0.5197031736373902,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film Sail a Crooked Ship is a comedy heist film released in 1961.",
+              "Sail a Crooked Ship Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin. It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960. \"Sail a Crooked Ship\" was Kovacs' last movie, released shortly before he was killed in a car crash. Hart's other 1961 film, \"Francis of Assisi\", inspired her to retire from acting two years later and become a Roman Catholic nun."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Sail a Crooked Ship was based on the novel published in 1960.\"",
+            "fusion_score": 0.5085840225219727,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Sail a Crooked Ship was based on the novel published in 1960.",
+              "Sail a Crooked Ship Sail a Crooked Ship is a 1961 American black-and-white comedy heist film starring Robert Wagner, Dolores Hart, Carolyn Jones, Frankie Avalon, Ernie Kovacs and Frank Gorshin. It was directed by Irving Brecher and was based on the novel of the same name by Nathaniel Benchley, published in 1960. \"Sail a Crooked Ship\" was Kovacs' last movie, released shortly before he was killed in a car crash. Hart's other 1961 film, \"Francis of Assisi\", inspired her to retire from acting two years later and become a Roman Catholic nun."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Irving Brecher"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    }
+  }
+]

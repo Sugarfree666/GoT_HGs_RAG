@@ -1,0 +1,26 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "While the identity of Prince Raphael Rainer's mother, Archduchess Margarethe Klementine of Austria, is confirmed, there is no available evidence regarding her birthday. Therefore, the answer cannot be determined.",
+  "answer_span_reasoning": "There is no available evidence regarding her birthday.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+      "answer": "Archduchess Margarethe Klementine of Austria",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Raphael Rainer Karl Maria Joseph Antonius Ignatius Hubertus Lamoral Prince of Thurn and Taxis was the sixth son of Albert, 8th Prince of Thurn and Taxis and his wife Archduchess Margarethe Klementine of Austria.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "When is the birthday of the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Raphael Rainer Karl Maria Joseph Antonius Ignatius Hubertus Lamoral Prince of Thurn and Taxis was the sixth son of Albert, 8th Prince of Thurn and Taxis and his wife Archduchess Margarethe Klementine of Austria.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

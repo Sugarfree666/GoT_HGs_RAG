@@ -1,0 +1,3489 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Taming Of The Fire?",
+    "retrieval_question": "Who is the director of Taming Of The Fire?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Taming Of The Fire?",
+      "retrieval_question": "Who is the director of Taming Of The Fire?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "entity_ids": [
+          "\"KIRILL LAVROV\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "link",
+            "KIRILL LAVROV",
+            "DANIIL KHRABROVITSKY",
+            "TAMING OF THE FIRE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the fire is a film.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Taming of the fire is a film.",
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the fire is a film.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the fire is a film.",
+            "link",
+            "TAMING OF THE FIRE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Taming of the Fire is a 1972 film.",
+        "entity_ids": [
+          "\"1972\"",
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the Fire is a 1972 film.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the Fire is a 1972 film.",
+            "link",
+            "1972",
+            "TAMING OF THE FIRE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a film.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Taming of the Fire is a film.",
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the Fire is a film.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the Fire is a film.",
+            "link",
+            "TAMING OF THE FIRE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"KIRILL LAVROV\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "link",
+            "TAMING OF THE FIRE",
+            "DANIIL KHRABROVITSKY",
+            "KIRILL LAVROV"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078521370887756,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027865171432495,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4973045885562897,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49680250883102417,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49399447441101074,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48563748598098755,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4840206205844879,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48202356696128845,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47992169857025146,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.4777419865131378,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a film.\"",
+        "branch": "semantic",
+        "raw_score": 0.6126147508621216,
+        "hyperedge_text": "Taming of the Fire is a film.",
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the Fire is a film.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the Fire is a film.",
+            "link",
+            "TAMING OF THE FIRE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f60536d772d93b426d21f6d97eef35e3",
+            "hyperedge_name": "<hyperedge>\"Taming of the Fire is a film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "branch": "semantic",
+        "raw_score": 0.5819730758666992,
+        "hyperedge_text": "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "entity_ids": [
+          "\"KIRILL LAVROV\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "link",
+            "KIRILL LAVROV",
+            "DANIIL KHRABROVITSKY",
+            "TAMING OF THE FIRE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cb14b69e2b47a94c1aa0ad6f135c742a",
+            "hyperedge_name": "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "branch": "semantic",
+        "raw_score": 0.5668813586235046,
+        "hyperedge_text": "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"KIRILL LAVROV\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "link",
+            "TAMING OF THE FIRE",
+            "DANIIL KHRABROVITSKY",
+            "KIRILL LAVROV"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-57d4254d9234b65e6bb182373f929196",
+            "hyperedge_name": "<hyperedge>\"Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire received attention for its artistic direction and storytelling.\"",
+        "branch": "semantic",
+        "raw_score": 0.5409090518951416,
+        "hyperedge_text": "Taming of the Fire received attention for its artistic direction and storytelling.",
+        "entity_ids": [
+          "\"ARTISTIC DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the Fire received attention for its artistic direction and storytelling.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the Fire received attention for its artistic direction and storytelling.",
+            "link",
+            "ARTISTIC DIRECTION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd8ef8617a0c265c106a3b164d4ee61a",
+            "hyperedge_name": "<hyperedge>\"Taming of the Fire received attention for its artistic direction and storytelling.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is part of the broader context of Soviet-era cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.4774041473865509,
+        "hyperedge_text": "Taming of the Fire is part of the broader context of Soviet-era cinema.",
+        "entity_ids": [
+          "\"SOVIET-ERA CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the Fire is part of the broader context of Soviet-era cinema.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the Fire is part of the broader context of Soviet-era cinema.",
+            "link",
+            "SOVIET-ERA CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2f40ddeffb8c703dd23c079cc1258a93",
+            "hyperedge_name": "<hyperedge>\"Taming of the Fire is part of the broader context of Soviet-era cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director duo, Arthur J. Flaven and Harry Revier, work collaboratively to bring the story to life.\"",
+        "branch": "semantic",
+        "raw_score": 0.41159963607788086,
+        "hyperedge_text": "The director duo, Arthur J. Flaven and Harry Revier, work collaboratively to bring the story to life.",
+        "entity_ids": [
+          "\"DIRECTOR DUO\""
+        ],
+        "chunk_ids": [
+          "chunk-8ececf54f8191ec6f3f9954290a3240b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director duo, Arthur J. Flaven and Harry Revier, work collaboratively to bring the story to life.",
+            "The Son of Tarzan (film) The Son of Tarzan is a 1920 15- chapter American film serial which focuses on the coming of age of Jack Clayton, also known as Korak, the son of Tarzan and Jane. The serial was produced by David P. Howells, written by Roy Somerville( based on the 1915 novel\" The Son of Tarzan\" by Edgar Rice Burroughs), and directed by Arthur J. Flaven and Harry Revier. The film was released starting in the summer of 1920, with the final chapter released in January 1921."
+          ],
+          "relation_texts": [
+            "The director duo, Arthur J. Flaven and Harry Revier, work collaboratively to bring the story to life.",
+            "link",
+            "DIRECTOR DUO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-08f28de69d71fbcaabc5ce603ef95c74",
+            "hyperedge_name": "<hyperedge>\"The director duo, Arthur J. Flaven and Harry Revier, work collaboratively to bring the story to life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sharon Tiller is an American film maker who has numerous film and television credits as a writer, director, and producer.\"",
+        "branch": "semantic",
+        "raw_score": 0.4084676206111908,
+        "hyperedge_text": "Sharon Tiller is an American film maker who has numerous film and television credits as a writer, director, and producer.",
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"DIRECTOR\"",
+          "\"PRODUCER\"",
+          "\"FILM MAKER\"",
+          "\"SHARON TILLER\""
+        ],
+        "chunk_ids": [
+          "chunk-87f704eb8704efdf22b82033b024149d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sharon Tiller is an American film maker who has numerous film and television credits as a writer, director, and producer.",
+            "Sharon Tiller Sharon Tiller is an American film maker who has numerous film and television credits as a writer, director, and producer. She is the WGBH-TV executive-in-charge for the American documentary television series \"Frontline\", which she first joined in 1995 as a senior producer for special projects. She is married to journalist and news producer Lowell Bergman."
+          ],
+          "relation_texts": [
+            "Sharon Tiller is an American film maker who has numerous film and television credits as a writer, director, and producer.",
+            "link",
+            "WRITER",
+            "DIRECTOR",
+            "PRODUCER",
+            "FILM MAKER",
+            "SHARON TILLER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ee4e7eecb4340b87e2ba8d57c74e9768",
+            "hyperedge_name": "<hyperedge>\"Sharon Tiller is an American film maker who has numerous film and television credits as a writer, director, and producer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wolves of the North is directed by William Duncan.\"",
+        "branch": "semantic",
+        "raw_score": 0.40669023990631104,
+        "hyperedge_text": "Wolves of the North is directed by William Duncan.",
+        "entity_ids": [
+          "\"WILLIAM DUNCAN\""
+        ],
+        "chunk_ids": [
+          "chunk-ad6f44f3bbc99825755aec33a7c6626b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Wolves of the North is directed by William Duncan.",
+            "Wolves of the North Wolves of the North is a 1924 American Northern drama film serial directed by and starring William Duncan. This serial is considered to be a lost film."
+          ],
+          "relation_texts": [
+            "Wolves of the North is directed by William Duncan.",
+            "link",
+            "WILLIAM DUNCAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6be789c478132fc82b70e8eeb20f2ad9",
+            "hyperedge_name": "<hyperedge>\"Wolves of the North is directed by William Duncan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sam Newfield, a notable director in the film industry, directed Wolves of the Range, enhancing his reputation in the genre.\"",
+        "branch": "semantic",
+        "raw_score": 0.40624141693115234,
+        "hyperedge_text": "Sam Newfield, a notable director in the film industry, directed Wolves of the Range, enhancing his reputation in the genre.",
+        "entity_ids": [
+          "\"FILM INDUSTRY\"",
+          "\"SAM NEWFIELD\""
+        ],
+        "chunk_ids": [
+          "chunk-446adc8486e6d59d5021624e648c6418"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sam Newfield, a notable director in the film industry, directed Wolves of the Range, enhancing his reputation in the genre.",
+            "Wolves of the Range Wolves of the Range is a 1943 American western film directed by Sam Newfield."
+          ],
+          "relation_texts": [
+            "Sam Newfield, a notable director in the film industry, directed Wolves of the Range, enhancing his reputation in the genre.",
+            "link",
+            "FILM INDUSTRY",
+            "SAM NEWFIELD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-32588f0d9d6d876a949cb17a266b05ad",
+            "hyperedge_name": "<hyperedge>\"Sam Newfield, a notable director in the film industry, directed Wolves of the Range, enhancing his reputation in the genre.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the director of many of their feature films, such as 'The Toxic Avenger' and 'Tromeo and Juliet.'\"",
+        "branch": "semantic",
+        "raw_score": 0.4045066237449646,
+        "hyperedge_text": "He is the director of many of their feature films, such as 'The Toxic Avenger' and 'Tromeo and Juliet.'",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"THE TOXIC AVENGER\"",
+          "\"TROMEO AND JULIET\""
+        ],
+        "chunk_ids": [
+          "chunk-c93cd5d3109c4d8be2aad9ec26bc0e52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is the director of many of their feature films, such as 'The Toxic Avenger' and 'Tromeo and Juliet.'",
+            "Lloyd Kaufman Stanley Lloyd Kaufman Jr.( born December 30, 1945) is an American film director, producer, screenwriter, and actor. With producer Michael Herz, he is the co-founder of Troma Entertainment film studio, and the director of many of their feature films, such as\" The Toxic Avenger\" and\" Tromeo and Juliet\"."
+          ],
+          "relation_texts": [
+            "He is the director of many of their feature films, such as 'The Toxic Avenger' and 'Tromeo and Juliet.'",
+            "link",
+            "DIRECTOR",
+            "THE TOXIC AVENGER",
+            "TROMEO AND JULIET"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-af02bf04b734be3213c382622ae82100",
+            "hyperedge_name": "<hyperedge>\"He is the director of many of their feature films, such as 'The Toxic Avenger' and 'Tromeo and Juliet.'\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a film.\"",
+        "hyperedge_text": "Taming of the Fire is a film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6126147508621216,
+        "fusion_score": 0.5225229501724243,
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the Fire is a film.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.612615,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522523
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "hyperedge_text": "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5819730758666992,
+        "fusion_score": 0.5163946151733398,
+        "entity_ids": [
+          "\"KIRILL LAVROV\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.581973,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516395
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "hyperedge_text": "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5668813586235046,
+        "fusion_score": 0.513376271724701,
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"KIRILL LAVROV\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.566881,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.513376
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the fire is a film.\"",
+        "hyperedge_text": "Taming of the fire is a film.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the fire is a film.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film.\"",
+        "hyperedge_text": "Taming of the Fire is a 1972 film.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1972\"",
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the Fire is a 1972 film.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of The Lady Takes A Flyer?",
+    "retrieval_question": "Who is the director of The Lady Takes A Flyer?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of The Lady Takes A Flyer?",
+      "retrieval_question": "Who is the director of The Lady Takes A Flyer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"1958\"",
+          "\"THE LADY TAKES A FLYER\"",
+          "\"AMERICAN CINEMASCOPE EASTMANCOLOR\"",
+          "\"COMEDY-DRAMA ROMANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+            "link",
+            "UNIVERSAL PICTURES",
+            "1958",
+            "THE LADY TAKES A FLYER",
+            "AMERICAN CINEMASCOPE EASTMANCOLOR",
+            "COMEDY-DRAMA ROMANCE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.",
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"THE LADY TAKES A FLYER\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.",
+            "link",
+            "UNIVERSAL PICTURES",
+            "THE LADY TAKES A FLYER"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+        "entity_ids": [
+          "\"COMEDY-DRAMA\"",
+          "\"ROMANCE\"",
+          "\"THE LADY TAKES A FLYER\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+            "link",
+            "COMEDY-DRAMA",
+            "ROMANCE",
+            "THE LADY TAKES A FLYER"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078521370887756,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027865171432495,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4973045885562897,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49680250883102417,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49399447441101074,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48563748598098755,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4840206205844879,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48202356696128845,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47992169857025146,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.4777419865131378,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\"",
+        "branch": "semantic",
+        "raw_score": 0.6625865697860718,
+        "hyperedge_text": "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"1958\"",
+          "\"THE LADY TAKES A FLYER\"",
+          "\"AMERICAN CINEMASCOPE EASTMANCOLOR\"",
+          "\"COMEDY-DRAMA ROMANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+            "link",
+            "UNIVERSAL PICTURES",
+            "1958",
+            "THE LADY TAKES A FLYER",
+            "AMERICAN CINEMASCOPE EASTMANCOLOR",
+            "COMEDY-DRAMA ROMANCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8f285011e0cd3d11fec069bbf8b32e9b",
+            "hyperedge_name": "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.6405764818191528,
+        "hyperedge_text": "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+        "entity_ids": [
+          "\"COMEDY-DRAMA\"",
+          "\"ROMANCE\"",
+          "\"THE LADY TAKES A FLYER\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+            "link",
+            "COMEDY-DRAMA",
+            "ROMANCE",
+            "THE LADY TAKES A FLYER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9905936ad0bf1784cbfb4bf28670537c",
+            "hyperedge_name": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.\"",
+        "branch": "semantic",
+        "raw_score": 0.6362144351005554,
+        "hyperedge_text": "The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.",
+        "entity_ids": [
+          "\"NARRATIVE\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.",
+            "link",
+            "NARRATIVE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-776787600b6d9f198a21cfa4e49c3bdd",
+            "hyperedge_name": "<hyperedge>\"The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The screenplay of 'The Wife Takes a Flyer' was written by Jay Dratler, Gina Kaus and Harry Segall.\"",
+        "branch": "semantic",
+        "raw_score": 0.5606490969657898,
+        "hyperedge_text": "The screenplay of 'The Wife Takes a Flyer' was written by Jay Dratler, Gina Kaus and Harry Segall.",
+        "entity_ids": [
+          "\"SCREENPLAY\"",
+          "\"JAY DRATLER\"",
+          "\"GINA KAUS\"",
+          "\"HARRY SEGALL\""
+        ],
+        "chunk_ids": [
+          "chunk-284a38db89bddbf2197b77aaf8f5adc2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The screenplay of 'The Wife Takes a Flyer' was written by Jay Dratler, Gina Kaus and Harry Segall.",
+            "The Wife Takes a Flyer The Wife Takes a Flyer( aka Highly Irregular, UK title: A Yank in Dutch) is a 1942 romantic comedy film made by Columbia Pictures, directed by Richard Wallace. The film stars Joan Bennett and Franchot Tone. The screenplay of\" The Wife Takes a Flyer\" was written by Jay Dratler, Gina Kaus and Harry Segall. The film's music score is by Werner R. Heymann."
+          ],
+          "relation_texts": [
+            "The screenplay of 'The Wife Takes a Flyer' was written by Jay Dratler, Gina Kaus and Harry Segall.",
+            "link",
+            "SCREENPLAY",
+            "JAY DRATLER",
+            "GINA KAUS",
+            "HARRY SEGALL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b706749da8ad1b879a135d8105bad097",
+            "hyperedge_name": "<hyperedge>\"The screenplay of 'The Wife Takes a Flyer' was written by Jay Dratler, Gina Kaus and Harry Segall.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Wife Takes a Flyer (aka Highly Irregular, UK title: A Yank in Dutch) is a 1942 romantic comedy film made by Columbia Pictures, directed by Richard Wallace.\"",
+        "branch": "semantic",
+        "raw_score": 0.540155827999115,
+        "hyperedge_text": "The Wife Takes a Flyer (aka Highly Irregular, UK title: A Yank in Dutch) is a 1942 romantic comedy film made by Columbia Pictures, directed by Richard Wallace.",
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\"",
+          "\"1942\"",
+          "\"COLUMBIA PICTURES\"",
+          "\"RICHARD WALLACE\"",
+          "\"THE WIFE TAKES A FLYER\"",
+          "\"HIGHLY IRREGULAR\"",
+          "\"A YANK IN DUTCH\""
+        ],
+        "chunk_ids": [
+          "chunk-284a38db89bddbf2197b77aaf8f5adc2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Wife Takes a Flyer (aka Highly Irregular, UK title: A Yank in Dutch) is a 1942 romantic comedy film made by Columbia Pictures, directed by Richard Wallace.",
+            "The Wife Takes a Flyer The Wife Takes a Flyer( aka Highly Irregular, UK title: A Yank in Dutch) is a 1942 romantic comedy film made by Columbia Pictures, directed by Richard Wallace. The film stars Joan Bennett and Franchot Tone. The screenplay of\" The Wife Takes a Flyer\" was written by Jay Dratler, Gina Kaus and Harry Segall. The film's music score is by Werner R. Heymann."
+          ],
+          "relation_texts": [
+            "The Wife Takes a Flyer (aka Highly Irregular, UK title: A Yank in Dutch) is a 1942 romantic comedy film made by Columbia Pictures, directed by Richard Wallace.",
+            "link",
+            "ROMANTIC COMEDY",
+            "1942",
+            "COLUMBIA PICTURES",
+            "RICHARD WALLACE",
+            "THE WIFE TAKES A FLYER",
+            "HIGHLY IRREGULAR",
+            "A YANK IN DUTCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f283581ac0d040756dcf65900f11a39f",
+            "hyperedge_name": "<hyperedge>\"The Wife Takes a Flyer (aka Highly Irregular, UK title: A Yank in Dutch) is a 1942 romantic comedy film made by Columbia Pictures, directed by Richard Wallace.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Wife Takes a Flyer (aka Highly Irregular, UK title: A Yank in Dutch) is a romantic comedy film made by Columbia Pictures.\"",
+        "branch": "semantic",
+        "raw_score": 0.5205444693565369,
+        "hyperedge_text": "The Wife Takes a Flyer (aka Highly Irregular, UK title: A Yank in Dutch) is a romantic comedy film made by Columbia Pictures.",
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-284a38db89bddbf2197b77aaf8f5adc2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Wife Takes a Flyer (aka Highly Irregular, UK title: A Yank in Dutch) is a romantic comedy film made by Columbia Pictures.",
+            "The Wife Takes a Flyer The Wife Takes a Flyer( aka Highly Irregular, UK title: A Yank in Dutch) is a 1942 romantic comedy film made by Columbia Pictures, directed by Richard Wallace. The film stars Joan Bennett and Franchot Tone. The screenplay of\" The Wife Takes a Flyer\" was written by Jay Dratler, Gina Kaus and Harry Segall. The film's music score is by Werner R. Heymann."
+          ],
+          "relation_texts": [
+            "The Wife Takes a Flyer (aka Highly Irregular, UK title: A Yank in Dutch) is a romantic comedy film made by Columbia Pictures.",
+            "link",
+            "ROMANTIC COMEDY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd8b665ee68c6c2d0ddbeff5871e5284",
+            "hyperedge_name": "<hyperedge>\"The Wife Takes a Flyer (aka Highly Irregular, UK title: A Yank in Dutch) is a romantic comedy film made by Columbia Pictures.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Charles J. Hunt directed The Dixie Flyer.\"",
+        "branch": "semantic",
+        "raw_score": 0.4899939298629761,
+        "hyperedge_text": "Charles J. Hunt directed The Dixie Flyer.",
+        "entity_ids": [
+          "\"CULLEN LANDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-3b8b876cdbbba2a67efdeb5ce9606729"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Charles J. Hunt directed The Dixie Flyer.",
+            "The Dixie Flyer The Dixie Flyer is a 1926 American silent action film directed by Charles J. Hunt and starring Cullen Landis, Eva Novak and Ferdinand Munier."
+          ],
+          "relation_texts": [
+            "Charles J. Hunt directed The Dixie Flyer.",
+            "link",
+            "CULLEN LANDIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8221d10324a9afc69269d04d71892993",
+            "hyperedge_name": "<hyperedge>\"Charles J. Hunt directed The Dixie Flyer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eva Novak starred in The Dixie Flyer.\"",
+        "branch": "semantic",
+        "raw_score": 0.479000985622406,
+        "hyperedge_text": "Eva Novak starred in The Dixie Flyer.",
+        "entity_ids": [
+          "\"EVA NOVAK\""
+        ],
+        "chunk_ids": [
+          "chunk-3b8b876cdbbba2a67efdeb5ce9606729"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Eva Novak starred in The Dixie Flyer.",
+            "The Dixie Flyer The Dixie Flyer is a 1926 American silent action film directed by Charles J. Hunt and starring Cullen Landis, Eva Novak and Ferdinand Munier."
+          ],
+          "relation_texts": [
+            "Eva Novak starred in The Dixie Flyer.",
+            "link",
+            "EVA NOVAK"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4817f2929d841adb8e8cacbce3fe0e11",
+            "hyperedge_name": "<hyperedge>\"Eva Novak starred in The Dixie Flyer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Sailor is a 1949 comedy film directed by Michael Curtiz.\"",
+        "branch": "semantic",
+        "raw_score": 0.46379154920578003,
+        "hyperedge_text": "The Lady Takes a Sailor is a 1949 comedy film directed by Michael Curtiz.",
+        "entity_ids": [
+          "\"MICHAEL CURTIZ\"",
+          "\"JANE WYMAN\"",
+          "\"DENNIS MORGAN\"",
+          "\"THE LADY TAKES A SAILOR\"",
+          "\"EVE ARDEN\""
+        ],
+        "chunk_ids": [
+          "chunk-144d5b8caba0fb820b6e4cd73ab26cc5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Lady Takes a Sailor is a 1949 comedy film directed by Michael Curtiz.",
+            "The Lady Takes a Sailor The Lady Takes a Sailor is a 1949 comedy film directed by Michael Curtiz, starring Jane Wyman, Eve Arden and Dennis Morgan."
+          ],
+          "relation_texts": [
+            "The Lady Takes a Sailor is a 1949 comedy film directed by Michael Curtiz.",
+            "link",
+            "MICHAEL CURTIZ",
+            "JANE WYMAN",
+            "DENNIS MORGAN",
+            "THE LADY TAKES A SAILOR",
+            "EVE ARDEN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e87e0e8bfb6d1b2ce809237022bebadb",
+            "hyperedge_name": "<hyperedge>\"The Lady Takes a Sailor is a 1949 comedy film directed by Michael Curtiz.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.45951762795448303,
+        "hyperedge_text": "The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.",
+        "entity_ids": [
+          "\"CLASSIC HOLLYWOOD CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-144d5b8caba0fb820b6e4cd73ab26cc5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.",
+            "The Lady Takes a Sailor The Lady Takes a Sailor is a 1949 comedy film directed by Michael Curtiz, starring Jane Wyman, Eve Arden and Dennis Morgan."
+          ],
+          "relation_texts": [
+            "The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.",
+            "link",
+            "CLASSIC HOLLYWOOD CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-765dc6e69cff0c7df148734b20d032b1",
+            "hyperedge_name": "<hyperedge>\"The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\"",
+        "hyperedge_text": "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6625865697860718,
+        "fusion_score": 0.5325173139572144,
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"1958\"",
+          "\"THE LADY TAKES A FLYER\"",
+          "\"AMERICAN CINEMASCOPE EASTMANCOLOR\"",
+          "\"COMEDY-DRAMA ROMANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.662587,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532517
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.\"",
+        "hyperedge_text": "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6405764818191528,
+        "fusion_score": 0.5281152963638306,
+        "entity_ids": [
+          "\"COMEDY-DRAMA\"",
+          "\"ROMANCE\"",
+          "\"THE LADY TAKES A FLYER\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.640576,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528115
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.\"",
+        "hyperedge_text": "The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.75,
+        "fusion_score": 0.55,
+        "entity_ids": [
+          "\"UNIVERSAL PICTURES\"",
+          "\"THE LADY TAKES A FLYER\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.75,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.\"",
+        "hyperedge_text": "The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6362144351005554,
+        "fusion_score": 0.5272428870201111,
+        "entity_ids": [
+          "\"NARRATIVE\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Flyer features a narrative that navigates complex relationships amongst its characters.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.636214,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527243
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.\"",
+        "hyperedge_text": "The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.45951762795448303,
+        "fusion_score": 0.2919035255908966,
+        "entity_ids": [
+          "\"CLASSIC HOLLYWOOD CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-144d5b8caba0fb820b6e4cd73ab26cc5"
+        ],
+        "evidence_texts": [
+          "The Lady Takes a Sailor is directed by Michael Curtiz, who is known for his work in classic Hollywood cinema.",
+          "The Lady Takes a Sailor The Lady Takes a Sailor is a 1949 comedy film directed by Michael Curtiz, starring Jane Wyman, Eve Arden and Dennis Morgan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.459518,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.291904
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Taming Of The Fire?",
+    "retrieval_question": "What is the age of Daniil Khrabrovitsky?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of Taming Of The Fire?",
+      "retrieval_question": "What is the age of Daniil Khrabrovitsky?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Taming Of The Fire",
+      "replacement_answer": "Daniil Khrabrovitsky",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Taming Of The Fire",
+          "replacement_answer": "Daniil Khrabrovitsky"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "entity_ids": [
+          "\"KIRILL LAVROV\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "link",
+            "KIRILL LAVROV",
+            "DANIIL KHRABROVITSKY",
+            "TAMING OF THE FIRE"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Daniil Khrabrovitsky.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The film was directed by Daniil Khrabrovitsky.",
+        "entity_ids": [
+          "\"DANIIL KHRABROVITSKY\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Daniil Khrabrovitsky.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "The film was directed by Daniil Khrabrovitsky.",
+            "link",
+            "DANIIL KHRABROVITSKY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"SCRIPTWRITER\"",
+          "\"MOSCOW\"",
+          "\"ROSTOV-ON-DON\"",
+          "\"JUNE 28, 1923\"",
+          "\"MARCH 1, 1980\"",
+          "\"DANIIL KHRABROVITSKY\""
+        ],
+        "chunk_ids": [
+          "chunk-e5d224864fcb8dea35ad5ddf62626341"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.",
+            "Daniil Khrabrovitsky Daniil Yakovlevich Khrabrovitsky (June 28, 1923, Rostov-on-Don – March 1, 1980, Moscow) was a Soviet scriptwriter and film director."
+          ],
+          "relation_texts": [
+            "Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.",
+            "link",
+            "FILM DIRECTOR",
+            "SCRIPTWRITER",
+            "MOSCOW",
+            "ROSTOV-ON-DON",
+            "JUNE 28, 1923",
+            "MARCH 1, 1980",
+            "DANIIL KHRABROVITSKY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Daniil Khrabrovitsky directed the film.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Daniil Khrabrovitsky directed the film.",
+        "entity_ids": [
+          "\"DANIIL KHRABROVITSKY\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Daniil Khrabrovitsky directed the film.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Daniil Khrabrovitsky directed the film.",
+            "link",
+            "DANIIL KHRABROVITSKY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"KIRILL LAVROV\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+            "link",
+            "TAMING OF THE FIRE",
+            "DANIIL KHRABROVITSKY",
+            "KIRILL LAVROV"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\"",
+        "branch": "relation",
+        "raw_score": 0.43825972080230713,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+        "entity_ids": [
+          "\"OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "link",
+            "OLDEST MEN",
+            "AVERAGE LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b352c56b67b43287a6b2ccb0ecb90f76",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth.\"",
+        "branch": "relation",
+        "raw_score": 0.40447139739990234,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth.",
+        "entity_ids": [
+          "\"ONE OF THE OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN OF PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth.",
+            "link",
+            "ONE OF THE OLDEST MEN",
+            "AVERAGE LIFE SPAN OF PEOPLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-89de7ae2efdac3db8323101fa0ca1bc6",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ou Ya's birthdate indicates he is 37 years old as of 2023.\"",
+        "branch": "relation",
+        "raw_score": 0.3962658643722534,
+        "hyperedge_text": "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+        "entity_ids": [
+          "\"37 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2013d0a1c4248a598513d667f5a48c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+            "Ou Ya Ou Ya( born 14 February 1986 in Baoding) is a Chinese footballer."
+          ],
+          "relation_texts": [
+            "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+            "link",
+            "37 YEARS OLD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4bc4191e4371f75c657230d13ac0cc2d",
+            "hyperedge_name": "<hyperedge>\"Ou Ya's birthdate indicates he is 37 years old as of 2023.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The term 'old soul' is often used to describe someone who is wise beyond their years.\"",
+        "branch": "relation",
+        "raw_score": 0.39544975757598877,
+        "hyperedge_text": "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+        "entity_ids": [
+          "\"WISE PERSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b5802b8cb99b1a4c5bd61bd2f766c8c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+            "Old soul Old soul or variants may refer to:"
+          ],
+          "relation_texts": [
+            "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+            "link",
+            "WISE PERSON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e5d6986df486768ddc1a49cdb4f63374",
+            "hyperedge_name": "<hyperedge>\"The term 'old soul' is often used to describe someone who is wise beyond their years.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tony Owen is currently 36 years old, having been born in 1987.\"",
+        "branch": "relation",
+        "raw_score": 0.38447338342666626,
+        "hyperedge_text": "Tony Owen is currently 36 years old, having been born in 1987.",
+        "entity_ids": [
+          "\"36 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-9cc93a8204624c3fa71242d3063e92d7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tony Owen is currently 36 years old, having been born in 1987.",
+            "Tony Owen Tony Owen( born 18 February 1987) is a British professional boxer from Carshalton who is currently competing in the light welterweight division. Owen is managed by London- based promoter Michael Helliet( MD of the Mayfair Sporting Club). Due to the technical ability that Owen possesses as well as the fact that he is a tall rangy southpaw he is considered to be a future prospect and will pose difficulties to opponents in the division."
+          ],
+          "relation_texts": [
+            "Tony Owen is currently 36 years old, having been born in 1987.",
+            "link",
+            "36 YEARS OLD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf0657b8d2e5cc0595f058511a7ea0b4",
+            "hyperedge_name": "<hyperedge>\"Tony Owen is currently 36 years old, having been born in 1987.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.37145116925239563,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\"",
+        "branch": "relation",
+        "raw_score": 0.36969193816185,
+        "hyperedge_text": "The date of birth April 18, 1973, marks an important milestone in his life.",
+        "entity_ids": [
+          "\"MILESTONE\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "link",
+            "MILESTONE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d651f368d8e93791546127e4938cabb",
+            "hyperedge_name": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 17 January 2000.\"",
+        "branch": "relation",
+        "raw_score": 0.36570411920547485,
+        "hyperedge_text": "He was born on 17 January 2000.",
+        "entity_ids": [
+          "\"17 JANUARY 2000\""
+        ],
+        "chunk_ids": [
+          "chunk-b9ee9d48f93d5f27240b7311333e2375"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 17 January 2000.",
+            "Sam Dalby Samuel George Dalby( born 17 January 2000) is an English professional footballer who plays for English Premier League side Watford as a striker."
+          ],
+          "relation_texts": [
+            "He was born on 17 January 2000.",
+            "link",
+            "17 JANUARY 2000"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5e88644e8e65ad3dc410284955ebc098",
+            "hyperedge_name": "<hyperedge>\"He was born on 17 January 2000.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 21 October 1969.\"",
+        "branch": "relation",
+        "raw_score": 0.3630942106246948,
+        "hyperedge_text": "He was born on 21 October 1969.",
+        "entity_ids": [
+          "\"21 OCTOBER 1969\""
+        ],
+        "chunk_ids": [
+          "chunk-40042efadad5032bcce12ff669e5103d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 21 October 1969.",
+            "Salman, Crown Prince of Bahrain Prince Salman bin Hamad bin Isa Al Khalifa, Deputy King, Crown Prince of Bahrain( born 21 October 1969) is the heir apparent and first deputy prime minister of the Kingdom of Bahrain. He is also the deputy supreme commander of the Bahrain Defense Force."
+          ],
+          "relation_texts": [
+            "He was born on 21 October 1969.",
+            "link",
+            "21 OCTOBER 1969"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0519ffa5846a05a6559f7dc2692c0923",
+            "hyperedge_name": "<hyperedge>\"He was born on 21 October 1969.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.36178576946258545,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Daniil Yakovlevich Khrabrovitsky was born on June 28, 1923, in Rostov-on-Don.\"",
+        "branch": "semantic",
+        "raw_score": 0.7383406162261963,
+        "hyperedge_text": "Daniil Yakovlevich Khrabrovitsky was born on June 28, 1923, in Rostov-on-Don.",
+        "entity_ids": [
+          "\"DANIIL YAKOVLEVICH KHRABROVITSKY\""
+        ],
+        "chunk_ids": [
+          "chunk-e5d224864fcb8dea35ad5ddf62626341"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Daniil Yakovlevich Khrabrovitsky was born on June 28, 1923, in Rostov-on-Don.",
+            "Daniil Khrabrovitsky Daniil Yakovlevich Khrabrovitsky (June 28, 1923, Rostov-on-Don – March 1, 1980, Moscow) was a Soviet scriptwriter and film director."
+          ],
+          "relation_texts": [
+            "Daniil Yakovlevich Khrabrovitsky was born on June 28, 1923, in Rostov-on-Don.",
+            "link",
+            "DANIIL YAKOVLEVICH KHRABROVITSKY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c59fa12ced9a3cac05e2787c3136f628",
+            "hyperedge_name": "<hyperedge>\"Daniil Yakovlevich Khrabrovitsky was born on June 28, 1923, in Rostov-on-Don.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.\"",
+        "branch": "semantic",
+        "raw_score": 0.5931086540222168,
+        "hyperedge_text": "Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"SCRIPTWRITER\"",
+          "\"MOSCOW\"",
+          "\"ROSTOV-ON-DON\"",
+          "\"JUNE 28, 1923\"",
+          "\"MARCH 1, 1980\"",
+          "\"DANIIL KHRABROVITSKY\""
+        ],
+        "chunk_ids": [
+          "chunk-e5d224864fcb8dea35ad5ddf62626341"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.",
+            "Daniil Khrabrovitsky Daniil Yakovlevich Khrabrovitsky (June 28, 1923, Rostov-on-Don – March 1, 1980, Moscow) was a Soviet scriptwriter and film director."
+          ],
+          "relation_texts": [
+            "Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.",
+            "link",
+            "FILM DIRECTOR",
+            "SCRIPTWRITER",
+            "MOSCOW",
+            "ROSTOV-ON-DON",
+            "JUNE 28, 1923",
+            "MARCH 1, 1980",
+            "DANIIL KHRABROVITSKY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8430fdacb6f0ac9b8d63bdc6ea728c9d",
+            "hyperedge_name": "<hyperedge>\"Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Daniil Khrabrovitsky directed the film.\"",
+        "branch": "semantic",
+        "raw_score": 0.524544358253479,
+        "hyperedge_text": "Daniil Khrabrovitsky directed the film.",
+        "entity_ids": [
+          "\"DANIIL KHRABROVITSKY\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Daniil Khrabrovitsky directed the film.",
+            "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+          ],
+          "relation_texts": [
+            "Daniil Khrabrovitsky directed the film.",
+            "link",
+            "DANIIL KHRABROVITSKY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6c3b3f00a7a9b8dd8850bd6906e605bc",
+            "hyperedge_name": "<hyperedge>\"Daniil Khrabrovitsky directed the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dmitri Kudryashov (born 13 May 1983) is a Russian football player and coach.\"",
+        "branch": "semantic",
+        "raw_score": 0.4680870771408081,
+        "hyperedge_text": "Dmitri Kudryashov (born 13 May 1983) is a Russian football player and coach.",
+        "entity_ids": [
+          "\"RUSSIA\"",
+          "\"FOOTBALL PLAYER\"",
+          "\"ASSISTANT COACH\"",
+          "\"FC MUROM\"",
+          "\"DMITRI KUDRYASHOV\""
+        ],
+        "chunk_ids": [
+          "chunk-5a22ca578d519510bcb637e1320d4487"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dmitri Kudryashov (born 13 May 1983) is a Russian football player and coach.",
+            "Dmitri Kudryashov Dmitri Alexandrovich Kudryashov( born 13 May 1983) is a Russian football player and coach. He plays for FC Murom and also acts as the team's assistant coach."
+          ],
+          "relation_texts": [
+            "Dmitri Kudryashov (born 13 May 1983) is a Russian football player and coach.",
+            "link",
+            "RUSSIA",
+            "FOOTBALL PLAYER",
+            "ASSISTANT COACH",
+            "FC MUROM",
+            "DMITRI KUDRYASHOV"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5e554dc8b45948efe7c4ec712bb54cea",
+            "hyperedge_name": "<hyperedge>\"Dmitri Kudryashov (born 13 May 1983) is a Russian football player and coach.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dmitri Alexandrovich Kudryashov (born 13 May 1983) is a Russian football player and coach.\"",
+        "branch": "semantic",
+        "raw_score": 0.45279017090797424,
+        "hyperedge_text": "Dmitri Alexandrovich Kudryashov (born 13 May 1983) is a Russian football player and coach.",
+        "entity_ids": [
+          "\"FOOTBALL PLAYER\"",
+          "\"ASSISTANT COACH\"",
+          "\"FC MUROM\"",
+          "\"DMITRI KUDRYASHOV\""
+        ],
+        "chunk_ids": [
+          "chunk-5a22ca578d519510bcb637e1320d4487"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dmitri Alexandrovich Kudryashov (born 13 May 1983) is a Russian football player and coach.",
+            "Dmitri Kudryashov Dmitri Alexandrovich Kudryashov( born 13 May 1983) is a Russian football player and coach. He plays for FC Murom and also acts as the team's assistant coach."
+          ],
+          "relation_texts": [
+            "Dmitri Alexandrovich Kudryashov (born 13 May 1983) is a Russian football player and coach.",
+            "link",
+            "FOOTBALL PLAYER",
+            "ASSISTANT COACH",
+            "FC MUROM",
+            "DMITRI KUDRYASHOV"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b0985c5881725d95223a95b82cb2110e",
+            "hyperedge_name": "<hyperedge>\"Dmitri Alexandrovich Kudryashov (born 13 May 1983) is a Russian football player and coach.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Danial Ashraf's birth date is noted as January 8, 1997, marking his age and experience in the sport.\"",
+        "branch": "semantic",
+        "raw_score": 0.4426701068878174,
+        "hyperedge_text": "Danial Ashraf's birth date is noted as January 8, 1997, marking his age and experience in the sport.",
+        "entity_ids": [
+          "\"JANUARY 8, 1997\""
+        ],
+        "chunk_ids": [
+          "chunk-88f4ad0d1bf9c5e5950bd68877b134f8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Danial Ashraf's birth date is noted as January 8, 1997, marking his age and experience in the sport.",
+            "Danial Ashraf Muhammad Danial Ashraf bin Abdullah( born 8 January 1997) is a Malaysian professional footballer who plays as an attacking midfielder for Malaysian Malaysia Premier League side Kelantan."
+          ],
+          "relation_texts": [
+            "Danial Ashraf's birth date is noted as January 8, 1997, marking his age and experience in the sport.",
+            "link",
+            "JANUARY 8, 1997"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b1db400860ba8bf5f445e296212701b5",
+            "hyperedge_name": "<hyperedge>\"Danial Ashraf's birth date is noted as January 8, 1997, marking his age and experience in the sport.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dmitry Grigorieff was born on May 14, 1919 and passed away on December 8, 2007.\"",
+        "branch": "semantic",
+        "raw_score": 0.4105556607246399,
+        "hyperedge_text": "Dmitry Grigorieff was born on May 14, 1919 and passed away on December 8, 2007.",
+        "entity_ids": [
+          "\"MAY 14, 1919\"",
+          "\"DECEMBER 8, 2007\""
+        ],
+        "chunk_ids": [
+          "chunk-753fa6c648547ce69648825d6e85f4f1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dmitry Grigorieff was born on May 14, 1919 and passed away on December 8, 2007.",
+            "Dmitry Grigorieff Archpriest Dmitry Grigorieff (May 14, 1919 – December 8, 2007) was the dean emeritus of the Saint Nicholas Russian Orthodox Cathedral of Washington D.C.. Grigorieff was also an academic scholar and was a retired Professor of Russian language and literature at Georgetown University."
+          ],
+          "relation_texts": [
+            "Dmitry Grigorieff was born on May 14, 1919 and passed away on December 8, 2007.",
+            "link",
+            "MAY 14, 1919",
+            "DECEMBER 8, 2007"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b76f0c0f10e642e35d93e574e917c422",
+            "hyperedge_name": "<hyperedge>\"Dmitry Grigorieff was born on May 14, 1919 and passed away on December 8, 2007.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vadim Nikolayevich Vlasov (born 19 December 1980) is a younger brother of Dmitri Vlasov.\"",
+        "branch": "semantic",
+        "raw_score": 0.3868003785610199,
+        "hyperedge_text": "Vadim Nikolayevich Vlasov (born 19 December 1980) is a younger brother of Dmitri Vlasov.",
+        "entity_ids": [
+          "\"DMITRI VLASOV\"",
+          "\"VADIM NIKOLAYEVICH VLASOV\"",
+          "\"19 DECEMBER 1980\"",
+          "\"YOUNGER BROTHER\""
+        ],
+        "chunk_ids": [
+          "chunk-8ed4c4578d357a086c06c4ab49820da4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vadim Nikolayevich Vlasov (born 19 December 1980) is a younger brother of Dmitri Vlasov.",
+            "Vadim Vlasov Vadim Nikolayevich Vlasov( born 19 December 1980) is a former Russian football player. He is a younger brother of Dmitri Vlasov."
+          ],
+          "relation_texts": [
+            "Vadim Nikolayevich Vlasov (born 19 December 1980) is a younger brother of Dmitri Vlasov.",
+            "link",
+            "DMITRI VLASOV",
+            "VADIM NIKOLAYEVICH VLASOV",
+            "19 DECEMBER 1980",
+            "YOUNGER BROTHER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3e8ce646aff5ee3d6822af6271a14574",
+            "hyperedge_name": "<hyperedge>\"Vadim Nikolayevich Vlasov (born 19 December 1980) is a younger brother of Dmitri Vlasov.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ivan Petrovich Novoseltsev was born on January 23, 1979.\"",
+        "branch": "semantic",
+        "raw_score": 0.3783276081085205,
+        "hyperedge_text": "Ivan Petrovich Novoseltsev was born on January 23, 1979.",
+        "entity_ids": [
+          "\"JANUARY 23, 1979\""
+        ],
+        "chunk_ids": [
+          "chunk-8c9afda7ee3a8805ccf5e937dc7785f3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ivan Petrovich Novoseltsev was born on January 23, 1979.",
+            "Ivan Novoseltsev Ivan Petrovich Novoseltsev( born January 23, 1979) is a Russian former professional ice hockey winger. He is the uncle of Vladislav Namestnikov."
+          ],
+          "relation_texts": [
+            "Ivan Petrovich Novoseltsev was born on January 23, 1979.",
+            "link",
+            "JANUARY 23, 1979"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-625c9dc8d8691a85f9f92ae9bfc42823",
+            "hyperedge_name": "<hyperedge>\"Ivan Petrovich Novoseltsev was born on January 23, 1979.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dmitry of Uglich was born on 19 October 1582 and died on 15 May 1591.\"",
+        "branch": "semantic",
+        "raw_score": 0.377654492855072,
+        "hyperedge_text": "Dmitry of Uglich was born on 19 October 1582 and died on 15 May 1591.",
+        "entity_ids": [
+          "\"19 OCTOBER 1582\"",
+          "\"15 MAY 1591\""
+        ],
+        "chunk_ids": [
+          "chunk-2670460e3d5d3151923bd1c530e1f121"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dmitry of Uglich was born on 19 October 1582 and died on 15 May 1591.",
+            "Dmitry of Uglich Tsarevich Dmitry or Dmitri Ivanovich( 19 October 1582 – 15 May 1591), also known as Dmitry of Uglich(\" Uglichskii\") or Dmitry of Moscow(\" Moskovskii\"), was a Russian tsarevich famously impersonated by a series of pretenders after the death of his father Ivan the Terrible."
+          ],
+          "relation_texts": [
+            "Dmitry of Uglich was born on 19 October 1582 and died on 15 May 1591.",
+            "link",
+            "19 OCTOBER 1582",
+            "15 MAY 1591"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5bdf878530e0697fdeb6170021cc760d",
+            "hyperedge_name": "<hyperedge>\"Dmitry of Uglich was born on 19 October 1582 and died on 15 May 1591.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.\"",
+        "hyperedge_text": "Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5931086540222168,
+        "fusion_score": 0.5186217308044434,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"SCRIPTWRITER\"",
+          "\"MOSCOW\"",
+          "\"ROSTOV-ON-DON\"",
+          "\"JUNE 28, 1923\"",
+          "\"MARCH 1, 1980\"",
+          "\"DANIIL KHRABROVITSKY\""
+        ],
+        "chunk_ids": [
+          "chunk-e5d224864fcb8dea35ad5ddf62626341"
+        ],
+        "evidence_texts": [
+          "Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.",
+          "Daniil Khrabrovitsky Daniil Yakovlevich Khrabrovitsky (June 28, 1923, Rostov-on-Don – March 1, 1980, Moscow) was a Soviet scriptwriter and film director."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.593109,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518622
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Daniil Khrabrovitsky directed the film.\"",
+        "hyperedge_text": "Daniil Khrabrovitsky directed the film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.524544358253479,
+        "fusion_score": 0.5049088716506959,
+        "entity_ids": [
+          "\"DANIIL KHRABROVITSKY\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Daniil Khrabrovitsky directed the film.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.524544,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504909
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "hyperedge_text": "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"KIRILL LAVROV\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"TAMING OF THE FIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Daniil Khrabrovitsky.\"",
+        "hyperedge_text": "The film was directed by Daniil Khrabrovitsky.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"DANIIL KHRABROVITSKY\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "The film was directed by Daniil Khrabrovitsky.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+        "hyperedge_text": "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"TAMING OF THE FIRE\"",
+          "\"DANIIL KHRABROVITSKY\"",
+          "\"KIRILL LAVROV\""
+        ],
+        "chunk_ids": [
+          "chunk-b5e6f977379bdd78bdfb2d33aaed7943"
+        ],
+        "evidence_texts": [
+          "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+          "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of The Lady Takes A Flyer?",
+    "retrieval_question": "What is the age of Jack Arnold?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of The Lady Takes A Flyer?",
+      "retrieval_question": "What is the age of Jack Arnold?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of The Lady Takes A Flyer",
+      "replacement_answer": "Jack Arnold",
+      "replacements": [
+        {
+          "dependency_node_id": "q3",
+          "replacement_span": "the director of The Lady Takes A Flyer",
+          "replacement_answer": "Jack Arnold"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"AMERICAN\"",
+          "\"ACTOR\"",
+          "\"FILM AND TELEVISION DIRECTOR\"",
+          "\"JACK ARNOLD\"",
+          "\"1950S SCIENCE FICTION FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.",
+            "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+          ],
+          "relation_texts": [
+            "Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.",
+            "link",
+            "DIRECTOR",
+            "AMERICAN",
+            "ACTOR",
+            "FILM AND TELEVISION DIRECTOR",
+            "JACK ARNOLD",
+            "1950S SCIENCE FICTION FILMS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Jack Arnold.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "It was directed by Jack Arnold.",
+        "entity_ids": [
+          "\"JACK ARNOLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was directed by Jack Arnold.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "It was directed by Jack Arnold.",
+            "link",
+            "JACK ARNOLD"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Jack Arnold and written by Danny Arnold.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "It was directed by Jack Arnold and written by Danny Arnold.",
+        "entity_ids": [
+          "\"JACK ARNOLD\"",
+          "\"DANNY ARNOLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was directed by Jack Arnold and written by Danny Arnold.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "It was directed by Jack Arnold and written by Danny Arnold.",
+            "link",
+            "JACK ARNOLD",
+            "DANNY ARNOLD"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North.",
+        "entity_ids": [
+          "\"JACK ARNOLD\"",
+          "\"DANNY ARNOLD\"",
+          "\"EDMUND H. NORTH\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North.",
+            "link",
+            "JACK ARNOLD",
+            "DANNY ARNOLD",
+            "EDMUND H. NORTH"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.",
+        "entity_ids": [
+          "\"JACK ARNOLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.",
+            "link",
+            "JACK ARNOLD"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\"",
+        "branch": "relation",
+        "raw_score": 0.43825972080230713,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+        "entity_ids": [
+          "\"OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+            "link",
+            "OLDEST MEN",
+            "AVERAGE LIFE SPAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b352c56b67b43287a6b2ccb0ecb90f76",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth.\"",
+        "branch": "relation",
+        "raw_score": 0.40447139739990234,
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth.",
+        "entity_ids": [
+          "\"ONE OF THE OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN OF PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth.",
+            "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+          ],
+          "relation_texts": [
+            "making him around 90, which would make him one of the oldest men on the earth.",
+            "link",
+            "ONE OF THE OLDEST MEN",
+            "AVERAGE LIFE SPAN OF PEOPLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-89de7ae2efdac3db8323101fa0ca1bc6",
+            "hyperedge_name": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ou Ya's birthdate indicates he is 37 years old as of 2023.\"",
+        "branch": "relation",
+        "raw_score": 0.3962658643722534,
+        "hyperedge_text": "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+        "entity_ids": [
+          "\"37 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2013d0a1c4248a598513d667f5a48c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+            "Ou Ya Ou Ya( born 14 February 1986 in Baoding) is a Chinese footballer."
+          ],
+          "relation_texts": [
+            "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+            "link",
+            "37 YEARS OLD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4bc4191e4371f75c657230d13ac0cc2d",
+            "hyperedge_name": "<hyperedge>\"Ou Ya's birthdate indicates he is 37 years old as of 2023.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The term 'old soul' is often used to describe someone who is wise beyond their years.\"",
+        "branch": "relation",
+        "raw_score": 0.39544975757598877,
+        "hyperedge_text": "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+        "entity_ids": [
+          "\"WISE PERSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b5802b8cb99b1a4c5bd61bd2f766c8c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+            "Old soul Old soul or variants may refer to:"
+          ],
+          "relation_texts": [
+            "The term 'old soul' is often used to describe someone who is wise beyond their years.",
+            "link",
+            "WISE PERSON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e5d6986df486768ddc1a49cdb4f63374",
+            "hyperedge_name": "<hyperedge>\"The term 'old soul' is often used to describe someone who is wise beyond their years.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tony Owen is currently 36 years old, having been born in 1987.\"",
+        "branch": "relation",
+        "raw_score": 0.38447338342666626,
+        "hyperedge_text": "Tony Owen is currently 36 years old, having been born in 1987.",
+        "entity_ids": [
+          "\"36 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-9cc93a8204624c3fa71242d3063e92d7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tony Owen is currently 36 years old, having been born in 1987.",
+            "Tony Owen Tony Owen( born 18 February 1987) is a British professional boxer from Carshalton who is currently competing in the light welterweight division. Owen is managed by London- based promoter Michael Helliet( MD of the Mayfair Sporting Club). Due to the technical ability that Owen possesses as well as the fact that he is a tall rangy southpaw he is considered to be a future prospect and will pose difficulties to opponents in the division."
+          ],
+          "relation_texts": [
+            "Tony Owen is currently 36 years old, having been born in 1987.",
+            "link",
+            "36 YEARS OLD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf0657b8d2e5cc0595f058511a7ea0b4",
+            "hyperedge_name": "<hyperedge>\"Tony Owen is currently 36 years old, having been born in 1987.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.37145116925239563,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\"",
+        "branch": "relation",
+        "raw_score": 0.36969193816185,
+        "hyperedge_text": "The date of birth April 18, 1973, marks an important milestone in his life.",
+        "entity_ids": [
+          "\"MILESTONE\""
+        ],
+        "chunk_ids": [
+          "chunk-09c000687caeafb48b680daabcdedda6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "Jon Leach Jonathan Leach( born April 18, 1973) is a former professional tennis player from the United States. He is the husband of Lindsay Davenport."
+          ],
+          "relation_texts": [
+            "The date of birth April 18, 1973, marks an important milestone in his life.",
+            "link",
+            "MILESTONE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6d651f368d8e93791546127e4938cabb",
+            "hyperedge_name": "<hyperedge>\"The date of birth April 18, 1973, marks an important milestone in his life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 17 January 2000.\"",
+        "branch": "relation",
+        "raw_score": 0.36570411920547485,
+        "hyperedge_text": "He was born on 17 January 2000.",
+        "entity_ids": [
+          "\"17 JANUARY 2000\""
+        ],
+        "chunk_ids": [
+          "chunk-b9ee9d48f93d5f27240b7311333e2375"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 17 January 2000.",
+            "Sam Dalby Samuel George Dalby( born 17 January 2000) is an English professional footballer who plays for English Premier League side Watford as a striker."
+          ],
+          "relation_texts": [
+            "He was born on 17 January 2000.",
+            "link",
+            "17 JANUARY 2000"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5e88644e8e65ad3dc410284955ebc098",
+            "hyperedge_name": "<hyperedge>\"He was born on 17 January 2000.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 21 October 1969.\"",
+        "branch": "relation",
+        "raw_score": 0.3630942106246948,
+        "hyperedge_text": "He was born on 21 October 1969.",
+        "entity_ids": [
+          "\"21 OCTOBER 1969\""
+        ],
+        "chunk_ids": [
+          "chunk-40042efadad5032bcce12ff669e5103d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 21 October 1969.",
+            "Salman, Crown Prince of Bahrain Prince Salman bin Hamad bin Isa Al Khalifa, Deputy King, Crown Prince of Bahrain( born 21 October 1969) is the heir apparent and first deputy prime minister of the Kingdom of Bahrain. He is also the deputy supreme commander of the Bahrain Defense Force."
+          ],
+          "relation_texts": [
+            "He was born on 21 October 1969.",
+            "link",
+            "21 OCTOBER 1969"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0519ffa5846a05a6559f7dc2692c0923",
+            "hyperedge_name": "<hyperedge>\"He was born on 21 October 1969.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.36178576946258545,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold (October 14, 1916 – March 17, 1992) was an American actor and film and television director.\"",
+        "branch": "semantic",
+        "raw_score": 0.7751071453094482,
+        "hyperedge_text": "Jack Arnold (October 14, 1916 – March 17, 1992) was an American actor and film and television director.",
+        "entity_ids": [
+          "\"MARCH 17, 1992\"",
+          "\"OCTOBER 14, 1916\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jack Arnold (October 14, 1916 – March 17, 1992) was an American actor and film and television director.",
+            "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+          ],
+          "relation_texts": [
+            "Jack Arnold (October 14, 1916 – March 17, 1992) was an American actor and film and television director.",
+            "link",
+            "MARCH 17, 1992",
+            "OCTOBER 14, 1916"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4fe2098295a24293c40614bd6b651d92",
+            "hyperedge_name": "<hyperedge>\"Jack Arnold (October 14, 1916 – March 17, 1992) was an American actor and film and television director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.\"",
+        "branch": "semantic",
+        "raw_score": 0.7284466028213501,
+        "hyperedge_text": "Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"AMERICAN\"",
+          "\"ACTOR\"",
+          "\"FILM AND TELEVISION DIRECTOR\"",
+          "\"JACK ARNOLD\"",
+          "\"1950S SCIENCE FICTION FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.",
+            "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+          ],
+          "relation_texts": [
+            "Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.",
+            "link",
+            "DIRECTOR",
+            "AMERICAN",
+            "ACTOR",
+            "FILM AND TELEVISION DIRECTOR",
+            "JACK ARNOLD",
+            "1950S SCIENCE FICTION FILMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-88e09040e27a6ff11a5f2745f0ea33cd",
+            "hyperedge_name": "<hyperedge>\"Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold was best known as one of the leading filmmakers of 1950s science fiction films.\"",
+        "branch": "semantic",
+        "raw_score": 0.7026253938674927,
+        "hyperedge_text": "Jack Arnold was best known as one of the leading filmmakers of 1950s science fiction films.",
+        "entity_ids": [
+          "\"LEADING FILMMAKERS\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jack Arnold was best known as one of the leading filmmakers of 1950s science fiction films.",
+            "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+          ],
+          "relation_texts": [
+            "Jack Arnold was best known as one of the leading filmmakers of 1950s science fiction films.",
+            "link",
+            "LEADING FILMMAKERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ddd2bea123ca787eeeaea7a311996931",
+            "hyperedge_name": "<hyperedge>\"Jack Arnold was best known as one of the leading filmmakers of 1950s science fiction films.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"During the 1950s, Jack Arnold was a prominent figure in Hollywood's science fiction renaissance.\"",
+        "branch": "semantic",
+        "raw_score": 0.6987509727478027,
+        "hyperedge_text": "During the 1950s, Jack Arnold was a prominent figure in Hollywood's science fiction renaissance.",
+        "entity_ids": [
+          "\"HOLLYWOOD'S SCIENCE FICTION RENAISSANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "During the 1950s, Jack Arnold was a prominent figure in Hollywood's science fiction renaissance.",
+            "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+          ],
+          "relation_texts": [
+            "During the 1950s, Jack Arnold was a prominent figure in Hollywood's science fiction renaissance.",
+            "link",
+            "HOLLYWOOD'S SCIENCE FICTION RENAISSANCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9207ec603f1d2153b6cc59191156d953",
+            "hyperedge_name": "<hyperedge>\"During the 1950s, Jack Arnold was a prominent figure in Hollywood's science fiction renaissance.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold (director) was an American actor and film and television director.\"",
+        "branch": "semantic",
+        "raw_score": 0.6899437308311462,
+        "hyperedge_text": "Jack Arnold (director) was an American actor and film and television director.",
+        "entity_ids": [
+          "\"ACTOR AND FILM AND TELEVISION DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jack Arnold (director) was an American actor and film and television director.",
+            "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+          ],
+          "relation_texts": [
+            "Jack Arnold (director) was an American actor and film and television director.",
+            "link",
+            "ACTOR AND FILM AND TELEVISION DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e8addf58e90e3703c45fe127cb91242f",
+            "hyperedge_name": "<hyperedge>\"Jack Arnold (director) was an American actor and film and television director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold remains a significant figure in the history of science fiction filmmaking.\"",
+        "branch": "semantic",
+        "raw_score": 0.67634117603302,
+        "hyperedge_text": "Jack Arnold remains a significant figure in the history of science fiction filmmaking.",
+        "entity_ids": [
+          "\"SIGNIFICANT FIGURE\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jack Arnold remains a significant figure in the history of science fiction filmmaking.",
+            "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+          ],
+          "relation_texts": [
+            "Jack Arnold remains a significant figure in the history of science fiction filmmaking.",
+            "link",
+            "SIGNIFICANT FIGURE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4dbd5e5589646128f0b8e9c8d73fd145",
+            "hyperedge_name": "<hyperedge>\"Jack Arnold remains a significant figure in the history of science fiction filmmaking.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The films were released between 1953 and 1957, showcasing Jack Arnold’s contributions to the genre.\"",
+        "branch": "semantic",
+        "raw_score": 0.6733693480491638,
+        "hyperedge_text": "The films were released between 1953 and 1957, showcasing Jack Arnold’s contributions to the genre.",
+        "entity_ids": [
+          "\"1953 TO 1957\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The films were released between 1953 and 1957, showcasing Jack Arnold’s contributions to the genre.",
+            "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+          ],
+          "relation_texts": [
+            "The films were released between 1953 and 1957, showcasing Jack Arnold’s contributions to the genre.",
+            "link",
+            "1953 TO 1957"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd65c682cef23f92cc5ec50a733302c8",
+            "hyperedge_name": "<hyperedge>\"The films were released between 1953 and 1957, showcasing Jack Arnold’s contributions to the genre.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.\"",
+        "branch": "semantic",
+        "raw_score": 0.6589909791946411,
+        "hyperedge_text": "Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.",
+        "entity_ids": [
+          "\"JACK ARNOLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.",
+            "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+          ],
+          "relation_texts": [
+            "Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.",
+            "link",
+            "JACK ARNOLD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-abd60fcc7c9197d745cfd5fa4f10924c",
+            "hyperedge_name": "<hyperedge>\"Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold was known for his stylistic approach to directing science fiction films, combining elements of horror and suspense.\"",
+        "branch": "semantic",
+        "raw_score": 0.6571988463401794,
+        "hyperedge_text": "Jack Arnold was known for his stylistic approach to directing science fiction films, combining elements of horror and suspense.",
+        "entity_ids": [
+          "\"STYLISTIC APPROACH\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jack Arnold was known for his stylistic approach to directing science fiction films, combining elements of horror and suspense.",
+            "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+          ],
+          "relation_texts": [
+            "Jack Arnold was known for his stylistic approach to directing science fiction films, combining elements of horror and suspense.",
+            "link",
+            "STYLISTIC APPROACH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-22a21f66d700bdf4a819fd19eee79439",
+            "hyperedge_name": "<hyperedge>\"Jack Arnold was known for his stylistic approach to directing science fiction films, combining elements of horror and suspense.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold's work has influenced countless filmmakers in the science fiction genre.\"",
+        "branch": "semantic",
+        "raw_score": 0.6448739767074585,
+        "hyperedge_text": "Jack Arnold's work has influenced countless filmmakers in the science fiction genre.",
+        "entity_ids": [
+          "\"INFLUENTIAL FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jack Arnold's work has influenced countless filmmakers in the science fiction genre.",
+            "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+          ],
+          "relation_texts": [
+            "Jack Arnold's work has influenced countless filmmakers in the science fiction genre.",
+            "link",
+            "INFLUENTIAL FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f7077c6f68f285bca659cefaf8d9191",
+            "hyperedge_name": "<hyperedge>\"Jack Arnold's work has influenced countless filmmakers in the science fiction genre.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.\"",
+        "hyperedge_text": "Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7284466028213501,
+        "fusion_score": 0.5456893205642701,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"AMERICAN\"",
+          "\"ACTOR\"",
+          "\"FILM AND TELEVISION DIRECTOR\"",
+          "\"JACK ARNOLD\"",
+          "\"1950S SCIENCE FICTION FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "evidence_texts": [
+          "Jack Arnold (director) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films.",
+          "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.728447,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.545689
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.\"",
+        "hyperedge_text": "Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6589909791946411,
+        "fusion_score": 0.5317981958389283,
+        "entity_ids": [
+          "\"JACK ARNOLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2e9f1943b81d19bf1d2f6b1d906dc914"
+        ],
+        "evidence_texts": [
+          "Directed by Jack Arnold, known for his works in various film genres, including science fiction and horror.",
+          "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.658991,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531798
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold (October 14, 1916 – March 17, 1992) was an American actor and film and television director.\"",
+        "hyperedge_text": "Jack Arnold (October 14, 1916 – March 17, 1992) was an American actor and film and television director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7751071453094482,
+        "fusion_score": 0.5550214290618897,
+        "entity_ids": [
+          "\"MARCH 17, 1992\"",
+          "\"OCTOBER 14, 1916\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "evidence_texts": [
+          "Jack Arnold (October 14, 1916 – March 17, 1992) was an American actor and film and television director.",
+          "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.775107,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.555021
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Arnold was best known as one of the leading filmmakers of 1950s science fiction films.\"",
+        "hyperedge_text": "Jack Arnold was best known as one of the leading filmmakers of 1950s science fiction films.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7026253938674927,
+        "fusion_score": 0.5405250787734985,
+        "entity_ids": [
+          "\"LEADING FILMMAKERS\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "evidence_texts": [
+          "Jack Arnold was best known as one of the leading filmmakers of 1950s science fiction films.",
+          "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.702625,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540525
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"During the 1950s, Jack Arnold was a prominent figure in Hollywood's science fiction renaissance.\"",
+        "hyperedge_text": "During the 1950s, Jack Arnold was a prominent figure in Hollywood's science fiction renaissance.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6987509727478027,
+        "fusion_score": 0.5397501945495606,
+        "entity_ids": [
+          "\"HOLLYWOOD'S SCIENCE FICTION RENAISSANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-4982e7952fe02e82f8e5b0c7da256111"
+        ],
+        "evidence_texts": [
+          "During the 1950s, Jack Arnold was a prominent figure in Hollywood's science fiction renaissance.",
+          "Jack Arnold (director) Jack Arnold( October 14, 1916 – March 17, 1992) was an American actor and film and television director, best known as one of the leading filmmakers of 1950s science fiction films. His most notable films are\" It Came from Outer Space\"( 1953),\" Creature from the Black Lagoon\"( 1954),\" Tarantula\"( 1955), and\" The Incredible Shrinking Man\"( 1957)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.698751,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.53975
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+2026-05-26 20:59:14,622 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 21:02:17,758 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 21:02:17,758 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 21:02:35,523 | INFO | Starting HyperBranch pipeline for question: Which film has the director who is older than the other, Colierul De Turcoaze or Leo And Loree?
+2026-05-26 21:02:35,523 | INFO | Executing atomic DAG with 4 node(s)
+2026-05-26 21:02:45,013 | INFO | Atomic retrieval returned 22 hits for question=Who is the director of Colierul De Turcoaze?
+2026-05-26 21:03:14,033 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of Leo And Loree?
+2026-05-26 21:03:18,495 | INFO | Rewrote retrieval question for q2: What is the age of the director of Colierul De Turcoaze? -> What is the age of Gheorghe Vitanidis?
+2026-05-26 21:03:35,060 | INFO | Atomic retrieval returned 24 hits for question=What is the age of Gheorghe Vitanidis?
+2026-05-26 21:03:41,781 | INFO | Rewrote retrieval question for q4: What is the age of the director of Leo And Loree? -> What is the age of Jerry Paris?
+2026-05-26 21:03:45,939 | INFO | Atomic retrieval returned 23 hits for question=What is the age of Jerry Paris?
+2026-05-26 21:04:12,811 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_205914_which-film-has-the-director-who-is-older-than-th

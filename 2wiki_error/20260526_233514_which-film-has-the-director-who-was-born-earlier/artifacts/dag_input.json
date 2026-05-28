@@ -1,0 +1,51 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was the birth date of the director of Holiday In Tyrol?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Holiday In Tyrol?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "When was Las Aventuras De Pito Pérez born?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q4",
+    "question": "Who is the director of Las Aventuras De Pito Pérez?",
+    "dependencies": [
+      "q3"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q5",
+    "question": "What is the birth date of Holiday In Tyrol?",
+    "dependencies": [
+      "q1",
+      "q3"
+    ],
+    "metadata": {
+      "operator": "COMPARE_LESS",
+      "candidates": [
+        {
+          "label": "Holiday In Tyrol",
+          "source_node_id": "q1"
+        },
+        {
+          "label": "Las Aventuras De Pito Pérez",
+          "source_node_id": "q3"
+        }
+      ]
+    }
+  }
+]

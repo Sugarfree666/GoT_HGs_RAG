@@ -1,0 +1,99 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the place of birth of the performer?",
+    "retrieval_question": "What is the place of birth of the performer?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the place of birth of the performer?",
+      "retrieval_question": "What is the place of birth of the performer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "performer"
+      ],
+      "relations": [
+        "place of birth"
+      ],
+      "relation_query": "What is the place of birth of a performer?",
+      "answer_type": "location"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the song performed by the performer of birth?",
+    "retrieval_question": "What is the song performed by the performer of birth?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the song performed by the performer of birth?",
+      "retrieval_question": "What is the song performed by the performer of birth?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "What is the place of birth of the performer?",
+        "answer": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "answer_type": "location",
+        "reasoning_summary": "There is no evidence provided that specifies the place of birth of the performer.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+            "fusion_score": 0.30146481394767766,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The place of birth (POB) or birthplace is the place where a person was born.",
+              "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+            "fusion_score": 0.2885141372680664,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+              "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The place of birth is not necessarily the place where the parents of the new baby live.\"",
+            "fusion_score": 0.279153847694397,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The place of birth is not necessarily the place where the parents of the new baby live.",
+              "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [],
+      "relations": [
+        "performed by",
+        "song of"
+      ],
+      "relation_query": "What is the song performed by a performer?",
+      "answer_type": "work"
+    }
+  }
+]

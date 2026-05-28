@@ -1,0 +1,104 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the composer of the song Aren't You Kind Of Glad We Did?",
+    "retrieval_question": "Who is the composer of the song Aren't You Kind Of Glad We Did?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the composer of the song Aren't You Kind Of Glad We Did?",
+      "retrieval_question": "Who is the composer of the song Aren't You Kind Of Glad We Did?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Aren't You Kind Of Glad We Did"
+      ],
+      "relations": [
+        "composer of"
+      ],
+      "relation_query": "who is the composer of a song",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the composer of Aren't You Kind Of Glad We Did? die?",
+    "retrieval_question": "Where did George Gershwin? die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the composer of Aren't You Kind Of Glad We Did? die?",
+      "retrieval_question": "Where did George Gershwin? die?",
+      "whether_rewritten": true,
+      "replacement_span": "the composer of Aren't You Kind Of Glad We Did",
+      "replacement_answer": "George Gershwin",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the composer of Aren't You Kind Of Glad We Did",
+          "replacement_answer": "George Gershwin"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the composer of the song Aren't You Kind Of Glad We Did?",
+        "answer": "George Gershwin",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that 'Aren't You Kinda Glad We Did?' is composed by George Gershwin, with lyrics by Ira Gershwin.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Aren't You Kinda Glad We Did? is a song composed by George Gershwin, with lyrics by Ira Gershwin.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"He is also the composer and original singer of the song.\"",
+            "fusion_score": 0.26791762709617617,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "He is also the composer and original singer of the song.",
+              "Ami Banglay Gaan Gai \" Ami Banglay Gaan Gai\" is a patriotic song by Bangladeshi poet and composer Pratul Mukhopadhyay. He is also the composer and original singer of the song. The song was nominated as one the most popular songs on March, 2006."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Song composer Charles Strouse himself is heard singing 'You've Got Possibilities' on the album 'Charles Sings Strouse' (2006).\"",
+            "fusion_score": 0.47158528566360475,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Song composer Charles Strouse himself is heard singing 'You've Got Possibilities' on the album 'Charles Sings Strouse' (2006).",
+              "You've Got Possibilities \" You've Got Possibilities\" is an American show tune. It was created by Charles Strouse and Lee Adams for the 1966 Broadway show\" It's a Bird ... It's a Plane ... It's Superman\" and sung by Linda Lavin in the show. Lavin plays a secretary at the\" Daily Planet\" with a crush on Clark Kent and the song describes her hope to change Kent's mild- mannered, square persona(\" Let me pry you from your shell ... You've got possibilities ... you do n't even know you've got\"). \" It's a Bird ... It's a Plane ... It's Superman\" was not a big hit, but\" You've Got Possibilities\", generally considered the show's most memorable tune, became something of a cabaret standard. Peggy Lee recorded the song on her 1966 album\" Big$ pender\" and released it as the B-side of the single\" Come Back To Me\". Joanie Sommers released\" You've Got Possibilities\" as the B-side of her single\" Never..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The composition of A String of Pearls was done by Jerry Gray, and the lyrics were written by Eddie DeLange.\"",
+            "fusion_score": 0.46980361938476567,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The composition of A String of Pearls was done by Jerry Gray, and the lyrics were written by Eddie DeLange.",
+              "A String of Pearls (song) \"A String of Pearls\" is a 1941 song recorded by Glenn Miller and His Orchestra on RCA Bluebird, composed by Jerry Gray with lyrics by Eddie DeLange. The song is a big band and jazz standard."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "George Gershwin"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

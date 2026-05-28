@@ -1,0 +1,1574 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song Dip?",
+    "retrieval_question": "Who is the performer of the song Dip?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the performer of the song Dip?",
+      "retrieval_question": "Who is the performer of the song Dip?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+        "entity_ids": [
+          "\"DIP\"",
+          "\"TYGA\"",
+          "\"LEGENDARY\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+            "link",
+            "DIP",
+            "TYGA",
+            "LEGENDARY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).\"",
+        "branch": "relation",
+        "raw_score": 0.5236666202545166,
+        "hyperedge_text": "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+        "entity_ids": [
+          "\"DIP\"",
+          "\"TYGA\"",
+          "\"LEGENDARY\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+            "link",
+            "DIP",
+            "TYGA",
+            "LEGENDARY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b01542bb0fa6c65def30a34f6a5bc6e3",
+            "hyperedge_name": "<hyperedge>\"Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.\"",
+        "branch": "relation",
+        "raw_score": 0.4978545308113098,
+        "hyperedge_text": "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+        "entity_ids": [
+          "\"EVOLUTION AS AN ARTIST\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+            "link",
+            "EVOLUTION AS AN ARTIST"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d447c82fe3ae9420e5f3c610ade3633c",
+            "hyperedge_name": "<hyperedge>\"Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.\"",
+        "branch": "relation",
+        "raw_score": 0.4735409617424011,
+        "hyperedge_text": "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+        "entity_ids": [
+          "\"CATCHY HOOKS\"",
+          "\"HIP-HOP ELEMENTS\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+            "link",
+            "CATCHY HOOKS",
+            "HIP-HOP ELEMENTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ba77e5d87ae193f5769eb4ffea37d2b4",
+            "hyperedge_name": "<hyperedge>\"The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.\"",
+        "branch": "relation",
+        "raw_score": 0.43379321694374084,
+        "hyperedge_text": "The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.",
+        "entity_ids": [
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-525c57ffc5ab726ccd9ceba60620cfb3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.",
+            "Netflix (song) \"Netflix\" is a song by American rapper 2 Chainz from his second studio album . (2013) The song was released as the album's second promotional single on August 26, 2013. It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie. The song peaked on the US \"Billboard\" Bubbling Under R&B/ Hip-Hop Singles at number six."
+          ],
+          "relation_texts": [
+            "The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.",
+            "link",
+            "PRODUCER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1da3784c97b7dfa85850df13bf164dea",
+            "hyperedge_name": "<hyperedge>\"The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nicole Dieker is sometimes accompanied by other performers for recordings and performances.\"",
+        "branch": "relation",
+        "raw_score": 0.40119051933288574,
+        "hyperedge_text": "Nicole Dieker is sometimes accompanied by other performers for recordings and performances.",
+        "entity_ids": [
+          "\"OTHER PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-8324b133062a55dc341fed28b9909eed"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Nicole Dieker is sometimes accompanied by other performers for recordings and performances.",
+            "Hello, The Future! Hello, The Future! is the name of a nerd-folk band. Nicole Dieker has been performing as Hello, The Future! since May, 2010, when she recorded and uploaded one song a week to YouTube for 100 consecutive weeks. The band has released several albums and often performs at pop culture conventions. Although usually introduced as a solo act (\"My name is Nicole , my band is Hello, The Future! and I am the only person in my band\"), Hello, The Future sometimes performs and/or records with other performers or even a full backing band; \"Giant Robot Album\" was a collaboration with the band The Long Holidays."
+          ],
+          "relation_texts": [
+            "Nicole Dieker is sometimes accompanied by other performers for recordings and performances.",
+            "link",
+            "OTHER PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5fa0a4ab741cf798927015ef880166c6",
+            "hyperedge_name": "<hyperedge>\"Nicole Dieker is sometimes accompanied by other performers for recordings and performances.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In May 2008, he directed the music video for the duet 'Dabogda' by Dino Merlin and Hari Mata Hari.\"",
+        "branch": "relation",
+        "raw_score": 0.39984411001205444,
+        "hyperedge_text": "In May 2008, he directed the music video for the duet 'Dabogda' by Dino Merlin and Hari Mata Hari.",
+        "entity_ids": [
+          "\"DABOGDA\"",
+          "\"DINO MERLIN\"",
+          "\"HARI MATA HARI\""
+        ],
+        "chunk_ids": [
+          "chunk-f8aa8c68802a54b3526a4863f98c8632"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In May 2008, he directed the music video for the duet 'Dabogda' by Dino Merlin and Hari Mata Hari.",
+            "Pjer Žalica Pjer Žalica (born 7 May 1964 in Sarajevo) is a Bosnian film director, screenwriter and a professor at the Academy of Performing Arts in Sarajevo. His father Miodrag (1926–1992) was a noted dramaturgist and poet who scripted several TV movies. He has directed several short films, only one of which is (\"Mostar Sevdah Reunion\" 2000) as well as two feature films, \"Gori vatra\" (2003), and \"Kod amidže Idriza\" (2004). In May 2008, he directed the music video for the duet \"Dabogda\" by Dino Merlin and Hari Mata Hari. In 2017, Žalica signed the Declaration on the Common Language of the Croats, Serbs, Bosniaks and Montenegrins. He is married to Bosnian actress Jasna Žalica and has one child with the actress."
+          ],
+          "relation_texts": [
+            "In May 2008, he directed the music video for the duet 'Dabogda' by Dino Merlin and Hari Mata Hari.",
+            "link",
+            "DABOGDA",
+            "DINO MERLIN",
+            "HARI MATA HARI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-148b2d72a3cc48f167581991f5a74cf7",
+            "hyperedge_name": "<hyperedge>\"In May 2008, he directed the music video for the duet 'Dabogda' by Dino Merlin and Hari Mata Hari.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"who also produced the song.\"",
+        "branch": "relation",
+        "raw_score": 0.3977344334125519,
+        "hyperedge_text": "who also produced the song.",
+        "entity_ids": [
+          "\"PRODUCED\""
+        ],
+        "chunk_ids": [
+          "chunk-12315df579a13e8aefe6b95ef61a1c67"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "who also produced the song.",
+            "Don't Worry Bout Me (Zara Larsson song) \" Do n't Worry Bout Me\" is a song by Swedish singer Zara Larsson. It was released by TEN Music Group and Epic Records on 28 March 2019 as the second single from Larsson's upcoming third studio album. Larsson wrote\" Do n't Worry Bout Me\" with Tove Lo, Rami Yacoub, Linnea Södahl, Whitney Phillips, and The Struts, who also produced the song."
+          ],
+          "relation_texts": [
+            "who also produced the song.",
+            "link",
+            "PRODUCED"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a9635697e693e35bb5e2e164b13c82b5",
+            "hyperedge_name": "<hyperedge>\"who also produced the song.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song 'Dance with Me' showcases themes of dancing and escapism, serving as a joyful invitation.\"",
+        "branch": "relation",
+        "raw_score": 0.3934217691421509,
+        "hyperedge_text": "The song 'Dance with Me' showcases themes of dancing and escapism, serving as a joyful invitation.",
+        "entity_ids": [
+          "\"DANCING\"",
+          "\"ESCAPISM\""
+        ],
+        "chunk_ids": [
+          "chunk-07a3f7935aa8602d84f944f8c3fc82bc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song 'Dance with Me' showcases themes of dancing and escapism, serving as a joyful invitation.",
+            "Dance with Me (Kelly Clarkson song) \" Dance with Me\" is a song by American recording artist Kelly Clarkson from her seventh studio album,\" Piece by Piece\"( 2015). Produced by Greg Kurstin, it was the first song written by Dan Rockett after collaborating with Polow da Don in his tenure as a studio runner and an audio engineer at Interscope Records. Originally penned as a David Bowie and Lady Gaga duet, the track was later sent to Clarkson who was recording songs for her first greatest hits album\" Greatest Hits – Chapter One\"( 2012) at the time. Instead of being included for\" Chapter One\", she later recorded the song for\" Piece by Piece\". An'80s U2- inspired energetic synthpop and dance- pop anthem,\" Dance with Me\" is a song about dancing and escapism, serving as an invitation and to dance with one another. \" Dance with Me\" has received a generally positive response from music critics,..."
+          ],
+          "relation_texts": [
+            "The song 'Dance with Me' showcases themes of dancing and escapism, serving as a joyful invitation.",
+            "link",
+            "DANCING",
+            "ESCAPISM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd1d334c289fbf52d4a0460b94ce5341",
+            "hyperedge_name": "<hyperedge>\"The song 'Dance with Me' showcases themes of dancing and escapism, serving as a joyful invitation.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.\"",
+        "branch": "relation",
+        "raw_score": 0.3934069275856018,
+        "hyperedge_text": "It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.",
+        "entity_ids": [
+          "\"DA HONORABLE C.N.O.T.E.\"",
+          "\"DIPLO\"",
+          "\"DJA\"",
+          "\"FERGIE\""
+        ],
+        "chunk_ids": [
+          "chunk-525c57ffc5ab726ccd9ceba60620cfb3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.",
+            "Netflix (song) \"Netflix\" is a song by American rapper 2 Chainz from his second studio album . (2013) The song was released as the album's second promotional single on August 26, 2013. It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie. The song peaked on the US \"Billboard\" Bubbling Under R&B/ Hip-Hop Singles at number six."
+          ],
+          "relation_texts": [
+            "It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.",
+            "link",
+            "DA HONORABLE C.N.O.T.E.",
+            "DIPLO",
+            "DJA",
+            "FERGIE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-061545ff85dfc3eae5a7c62c8a892fd4",
+            "hyperedge_name": "<hyperedge>\"It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dotter is better known by her stage name, representing her artistic identity in the music industry.\"",
+        "branch": "relation",
+        "raw_score": 0.39143651723861694,
+        "hyperedge_text": "Dotter is better known by her stage name, representing her artistic identity in the music industry.",
+        "entity_ids": [
+          "\"STAGE NAME DOTTER\""
+        ],
+        "chunk_ids": [
+          "chunk-0675b580a266fddf4822846c6a6b35ba"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dotter is better known by her stage name, representing her artistic identity in the music industry.",
+            "Dotter (singer) Johanna Maria Jansson( born 10 June 1987), better known by her stage name Dotter, is a Swedish singer and songwriter. She competed in Melodifestivalen 2018 with the song\" Cry\", but placed sixth in her semi-final and was eliminated."
+          ],
+          "relation_texts": [
+            "Dotter is better known by her stage name, representing her artistic identity in the music industry.",
+            "link",
+            "STAGE NAME DOTTER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-232b897d4b0428ffcf3d5121bcefd38c",
+            "hyperedge_name": "<hyperedge>\"Dotter is better known by her stage name, representing her artistic identity in the music industry.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).\"",
+        "branch": "semantic",
+        "raw_score": 0.5056524276733398,
+        "hyperedge_text": "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+        "entity_ids": [
+          "\"DIP\"",
+          "\"TYGA\"",
+          "\"LEGENDARY\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+            "link",
+            "DIP",
+            "TYGA",
+            "LEGENDARY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b01542bb0fa6c65def30a34f6a5bc6e3",
+            "hyperedge_name": "<hyperedge>\"Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.\"",
+        "branch": "semantic",
+        "raw_score": 0.4669502377510071,
+        "hyperedge_text": "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+        "entity_ids": [
+          "\"EVOLUTION AS AN ARTIST\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+            "link",
+            "EVOLUTION AS AN ARTIST"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d447c82fe3ae9420e5f3c610ade3633c",
+            "hyperedge_name": "<hyperedge>\"Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.\"",
+        "branch": "semantic",
+        "raw_score": 0.4657158851623535,
+        "hyperedge_text": "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+        "entity_ids": [
+          "\"CATCHY HOOKS\"",
+          "\"HIP-HOP ELEMENTS\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+            "link",
+            "CATCHY HOOKS",
+            "HIP-HOP ELEMENTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ba77e5d87ae193f5769eb4ffea37d2b4",
+            "hyperedge_name": "<hyperedge>\"The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.\"",
+        "branch": "semantic",
+        "raw_score": 0.425193727016449,
+        "hyperedge_text": "The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.",
+        "entity_ids": [
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-525c57ffc5ab726ccd9ceba60620cfb3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.",
+            "Netflix (song) \"Netflix\" is a song by American rapper 2 Chainz from his second studio album . (2013) The song was released as the album's second promotional single on August 26, 2013. It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie. The song peaked on the US \"Billboard\" Bubbling Under R&B/ Hip-Hop Singles at number six."
+          ],
+          "relation_texts": [
+            "The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.",
+            "link",
+            "PRODUCER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1da3784c97b7dfa85850df13bf164dea",
+            "hyperedge_name": "<hyperedge>\"The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.\"",
+        "branch": "semantic",
+        "raw_score": 0.39371663331985474,
+        "hyperedge_text": "It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.",
+        "entity_ids": [
+          "\"DA HONORABLE C.N.O.T.E.\"",
+          "\"DIPLO\"",
+          "\"DJA\"",
+          "\"FERGIE\""
+        ],
+        "chunk_ids": [
+          "chunk-525c57ffc5ab726ccd9ceba60620cfb3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.",
+            "Netflix (song) \"Netflix\" is a song by American rapper 2 Chainz from his second studio album . (2013) The song was released as the album's second promotional single on August 26, 2013. It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie. The song peaked on the US \"Billboard\" Bubbling Under R&B/ Hip-Hop Singles at number six."
+          ],
+          "relation_texts": [
+            "It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.",
+            "link",
+            "DA HONORABLE C.N.O.T.E.",
+            "DIPLO",
+            "DJA",
+            "FERGIE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-061545ff85dfc3eae5a7c62c8a892fd4",
+            "hyperedge_name": "<hyperedge>\"It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nicole Dieker is sometimes accompanied by other performers for recordings and performances.\"",
+        "branch": "semantic",
+        "raw_score": 0.3922479450702667,
+        "hyperedge_text": "Nicole Dieker is sometimes accompanied by other performers for recordings and performances.",
+        "entity_ids": [
+          "\"OTHER PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-8324b133062a55dc341fed28b9909eed"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Nicole Dieker is sometimes accompanied by other performers for recordings and performances.",
+            "Hello, The Future! Hello, The Future! is the name of a nerd-folk band. Nicole Dieker has been performing as Hello, The Future! since May, 2010, when she recorded and uploaded one song a week to YouTube for 100 consecutive weeks. The band has released several albums and often performs at pop culture conventions. Although usually introduced as a solo act (\"My name is Nicole , my band is Hello, The Future! and I am the only person in my band\"), Hello, The Future sometimes performs and/or records with other performers or even a full backing band; \"Giant Robot Album\" was a collaboration with the band The Long Holidays."
+          ],
+          "relation_texts": [
+            "Nicole Dieker is sometimes accompanied by other performers for recordings and performances.",
+            "link",
+            "OTHER PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5fa0a4ab741cf798927015ef880166c6",
+            "hyperedge_name": "<hyperedge>\"Nicole Dieker is sometimes accompanied by other performers for recordings and performances.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dotter is better known by her stage name, representing her artistic identity in the music industry.\"",
+        "branch": "semantic",
+        "raw_score": 0.383314311504364,
+        "hyperedge_text": "Dotter is better known by her stage name, representing her artistic identity in the music industry.",
+        "entity_ids": [
+          "\"STAGE NAME DOTTER\""
+        ],
+        "chunk_ids": [
+          "chunk-0675b580a266fddf4822846c6a6b35ba"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dotter is better known by her stage name, representing her artistic identity in the music industry.",
+            "Dotter (singer) Johanna Maria Jansson( born 10 June 1987), better known by her stage name Dotter, is a Swedish singer and songwriter. She competed in Melodifestivalen 2018 with the song\" Cry\", but placed sixth in her semi-final and was eliminated."
+          ],
+          "relation_texts": [
+            "Dotter is better known by her stage name, representing her artistic identity in the music industry.",
+            "link",
+            "STAGE NAME DOTTER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-232b897d4b0428ffcf3d5121bcefd38c",
+            "hyperedge_name": "<hyperedge>\"Dotter is better known by her stage name, representing her artistic identity in the music industry.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song has become a staple in live performances by artists who cover it.\"",
+        "branch": "semantic",
+        "raw_score": 0.3826497793197632,
+        "hyperedge_text": "The song has become a staple in live performances by artists who cover it.",
+        "entity_ids": [
+          "\"LIVE PERFORMANCES\""
+        ],
+        "chunk_ids": [
+          "chunk-0147f752c8f7ab11d82c0a6dd3c7b171"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song has become a staple in live performances by artists who cover it.",
+            "When the Stars Go Blue \"When The Stars Go Blue\" is a popular alternative country song composed and originally performed by solo artist and former Whiskeytown band member Ryan Adams. It was first released on his album \"Gold\" on September 25, 2001 and has been described as the \"most gorgeous ballad\" on that album. \"When The Stars Go Blue has been covered by many artists, including Irish band The Corrs (featuring Bono of U2), country music singer Tim McGraw, and Norwegian artists Venke Knutson and Kurt Nilsen as a duo."
+          ],
+          "relation_texts": [
+            "The song has become a staple in live performances by artists who cover it.",
+            "link",
+            "LIVE PERFORMANCES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-81c94fc63e5e253db469026749ff0f71",
+            "hyperedge_name": "<hyperedge>\"The song has become a staple in live performances by artists who cover it.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nicole Dieker has been performing as Hello, The Future! since May, 2010, when she recorded and uploaded one song a week to YouTube for 100 consecutive weeks.\"",
+        "branch": "semantic",
+        "raw_score": 0.3826049566268921,
+        "hyperedge_text": "Nicole Dieker has been performing as Hello, The Future! since May, 2010, when she recorded and uploaded one song a week to YouTube for 100 consecutive weeks.",
+        "entity_ids": [
+          "\"YOUTUBE\""
+        ],
+        "chunk_ids": [
+          "chunk-8324b133062a55dc341fed28b9909eed"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Nicole Dieker has been performing as Hello, The Future! since May, 2010, when she recorded and uploaded one song a week to YouTube for 100 consecutive weeks.",
+            "Hello, The Future! Hello, The Future! is the name of a nerd-folk band. Nicole Dieker has been performing as Hello, The Future! since May, 2010, when she recorded and uploaded one song a week to YouTube for 100 consecutive weeks. The band has released several albums and often performs at pop culture conventions. Although usually introduced as a solo act (\"My name is Nicole , my band is Hello, The Future! and I am the only person in my band\"), Hello, The Future sometimes performs and/or records with other performers or even a full backing band; \"Giant Robot Album\" was a collaboration with the band The Long Holidays."
+          ],
+          "relation_texts": [
+            "Nicole Dieker has been performing as Hello, The Future! since May, 2010, when she recorded and uploaded one song a week to YouTube for 100 consecutive weeks.",
+            "link",
+            "YOUTUBE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-604ec8e4126ce5b953bfa6a5dc13bc54",
+            "hyperedge_name": "<hyperedge>\"Nicole Dieker has been performing as Hello, The Future! since May, 2010, when she recorded and uploaded one song a week to YouTube for 100 consecutive weeks.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song features uncredited vocals from Breanne Düren.\"",
+        "branch": "semantic",
+        "raw_score": 0.3801955282688141,
+        "hyperedge_text": "The song features uncredited vocals from Breanne Düren.",
+        "entity_ids": [
+          "\"BREANNE DÜREN\""
+        ],
+        "chunk_ids": [
+          "chunk-44dad80a46bd0f65274b2aa86b78b870"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song features uncredited vocals from Breanne Düren.",
+            "Sea of Voices \" Sea of Voices\" is a song recorded by American electronic music producer Porter Robinson. It was released on March 3, 2014 as the first single from his debut studio album\" Worlds\"( 2014). The track revealed the tone of\" Worlds\" as emotional and nostalgic, as opposed to his older complextro dance music style. The song features uncredited vocals from Breanne Düren. The song was a hit on the American Dance/ Electronic Songs chart."
+          ],
+          "relation_texts": [
+            "The song features uncredited vocals from Breanne Düren.",
+            "link",
+            "BREANNE DÜREN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-de34460e7ba8e815872d39711eda2e54",
+            "hyperedge_name": "<hyperedge>\"The song features uncredited vocals from Breanne Düren.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).\"",
+        "hyperedge_text": "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5236666202545166,
+        "semantic_score": 0.5056524276733398,
+        "fusion_score": 0.7105971336364747,
+        "entity_ids": [
+          "\"DIP\"",
+          "\"TYGA\"",
+          "\"LEGENDARY\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "evidence_texts": [
+          "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+          "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.523667,
+          "S": 0.505652,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.710597
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.\"",
+        "hyperedge_text": "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.4978545308113098,
+        "semantic_score": 0.4669502377510071,
+        "fusion_score": 0.6925318598747254,
+        "entity_ids": [
+          "\"EVOLUTION AS AN ARTIST\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "evidence_texts": [
+          "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+          "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.497855,
+          "S": 0.46695,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.692532
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.\"",
+        "hyperedge_text": "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.4735409617424011,
+        "semantic_score": 0.4657158851623535,
+        "fusion_score": 0.6825595617294311,
+        "entity_ids": [
+          "\"CATCHY HOOKS\"",
+          "\"HIP-HOP ELEMENTS\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "evidence_texts": [
+          "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+          "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.473541,
+          "S": 0.465716,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.68256
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.\"",
+        "hyperedge_text": "The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.43379321694374084,
+        "semantic_score": 0.425193727016449,
+        "fusion_score": 0.6585560321807862,
+        "entity_ids": [
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-525c57ffc5ab726ccd9ceba60620cfb3"
+        ],
+        "evidence_texts": [
+          "The song was produced by Da Honorable C.N.O.T.E., Diplo and DJA.",
+          "Netflix (song) \"Netflix\" is a song by American rapper 2 Chainz from his second studio album . (2013) The song was released as the album's second promotional single on August 26, 2013. It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie. The song peaked on the US \"Billboard\" Bubbling Under R&B/ Hip-Hop Singles at number six."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.433793,
+          "S": 0.425194,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.658556
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.\"",
+        "hyperedge_text": "It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.3934069275856018,
+        "semantic_score": 0.39371663331985474,
+        "fusion_score": 0.6361060976982118,
+        "entity_ids": [
+          "\"DA HONORABLE C.N.O.T.E.\"",
+          "\"DIPLO\"",
+          "\"DJA\"",
+          "\"FERGIE\""
+        ],
+        "chunk_ids": [
+          "chunk-525c57ffc5ab726ccd9ceba60620cfb3"
+        ],
+        "evidence_texts": [
+          "It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie.",
+          "Netflix (song) \"Netflix\" is a song by American rapper 2 Chainz from his second studio album . (2013) The song was released as the album's second promotional single on August 26, 2013. It was produced by Da Honorable C.N.O.T.E., Diplo and DJA and featured a guest appearance by Fergie. The song peaked on the US \"Billboard\" Bubbling Under R&B/ Hip-Hop Singles at number six."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.393407,
+          "S": 0.393717,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.636106
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the place of birth of the performer of Dip (Song)?",
+    "retrieval_question": "What is the place of birth of Tyga (Song)?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the place of birth of the performer of Dip (Song)?",
+      "retrieval_question": "What is the place of birth of Tyga (Song)?",
+      "whether_rewritten": true,
+      "replacement_span": "the performer of Dip",
+      "replacement_answer": "Tyga",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the performer of Dip",
+          "replacement_answer": "Tyga"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+        "entity_ids": [
+          "\"DIP\"",
+          "\"TYGA\"",
+          "\"LEGENDARY\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+            "link",
+            "DIP",
+            "TYGA",
+            "LEGENDARY"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "branch": "relation",
+        "raw_score": 0.48907598853111267,
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth (POB) or birthplace is the place where a person was born.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth (POB) or birthplace is the place where a person was born.",
+            "link",
+            "BIRTH",
+            "PLACE OF BIRTH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d5eff26d110559cc075b3378c12f50e3",
+            "hyperedge_name": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "branch": "relation",
+        "raw_score": 0.46127820014953613,
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "link",
+            "TERRITORIAL WATERS",
+            "LAW OF THE COUNTRIES INVOLVED",
+            "NATIONALITY OF THE PLANE OR SHIP",
+            "LAW",
+            "AIRSPACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e736e546ef2766fb6eee3ec329d43975",
+            "hyperedge_name": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was probably born at Eisenach, where his father was employed as a musician.\"",
+        "branch": "relation",
+        "raw_score": 0.4482722878456116,
+        "hyperedge_text": "He was probably born at Eisenach, where his father was employed as a musician.",
+        "entity_ids": [
+          "\"MUSICIAN\"",
+          "\"EISENACH\""
+        ],
+        "chunk_ids": [
+          "chunk-232487106fef47647d5c0866ed2de6de"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was probably born at Eisenach, where his father was employed as a musician.",
+            "Johann Nicolaus Bach Johann Nicolaus Bach (or Johann Nikolaus Bach) (– 4 November 1753) was a German composer of the Baroque period. Johann Nicolaus was the eldest son of Johann Christoph Bach and the second cousin of Johann Sebastian Bach. He was educated at the University of Jena, where he later became organist. He was probably born at Eisenach, where his father was employed as a musician, attended the Eisenach Latin school until 1689, and was a student of the Jena city organist J.M. Knüpfer, a son of Sebastian Knüpfer; after an Italian sojourn in 1696, he became organist at the Stadtkirche and the Kollegiatkirche in Jena. He was influenced by Antonio Lotti. He later joined the Danish army. He then returned to Jena where he lived for the rest of his life. Few of his compositions survive. He was also a maker of harpsichords and organs. Surviving pieces include a mass, two chorale pre..."
+          ],
+          "relation_texts": [
+            "He was probably born at Eisenach, where his father was employed as a musician.",
+            "link",
+            "MUSICIAN",
+            "EISENACH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b5c1809f3ab0a35dc7d63ccdaf23fb5d",
+            "hyperedge_name": "<hyperedge>\"He was probably born at Eisenach, where his father was employed as a musician.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\"",
+        "branch": "relation",
+        "raw_score": 0.44467946887016296,
+        "hyperedge_text": "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+        "entity_ids": [
+          "\"ETHNIC GROUP\"",
+          "\"PLACE OF ORIGIN\""
+        ],
+        "chunk_ids": [
+          "chunk-90ef8b646c23d30cfdfe5eeaca1544c1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "Motherland (disambiguation) Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group. Motherland may also refer to:"
+          ],
+          "relation_texts": [
+            "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+            "link",
+            "ETHNIC GROUP",
+            "PLACE OF ORIGIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f3f41e1fb657d16e75bd85ffccfeaeb",
+            "hyperedge_name": "<hyperedge>\"The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date, 1 April 1931, marks the beginning of an influential life in the arts.\"",
+        "branch": "relation",
+        "raw_score": 0.4390030801296234,
+        "hyperedge_text": "His birth date, 1 April 1931, marks the beginning of an influential life in the arts.",
+        "entity_ids": [
+          "\"INFLUENTIAL LIFE IN THE ARTS\""
+        ],
+        "chunk_ids": [
+          "chunk-d98c2e48b61989662dcddca18b5926b8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date, 1 April 1931, marks the beginning of an influential life in the arts.",
+            "Per Kleiva Per Kleiva (1 April 1931 – 17 September 2017) was a Norwegian painter and graphic artist. He was born in Torsken to schoolteacher Ivar Kleiva and Frida Pettersen, and was married to Ida Drage. His works are represented in the National Museum of Art, Architecture and Design. From 1987 to 1993 he was appointed professor at the Norwegian National Academy of Fine Arts."
+          ],
+          "relation_texts": [
+            "His birth date, 1 April 1931, marks the beginning of an influential life in the arts.",
+            "link",
+            "INFLUENTIAL LIFE IN THE ARTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c2fa0256ae0413c378d129a55d22f213",
+            "hyperedge_name": "<hyperedge>\"His birth date, 1 April 1931, marks the beginning of an influential life in the arts.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth is not necessarily the place where the parents of the new baby live.\"",
+        "branch": "relation",
+        "raw_score": 0.436249315738678,
+        "hyperedge_text": "The place of birth is not necessarily the place where the parents of the new baby live.",
+        "entity_ids": [
+          "\"PARENTS\"",
+          "\"NEW BABY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth is not necessarily the place where the parents of the new baby live.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth is not necessarily the place where the parents of the new baby live.",
+            "link",
+            "PARENTS",
+            "NEW BABY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c2f00fbd2ed64c5e26a5f01350457df0",
+            "hyperedge_name": "<hyperedge>\"The place of birth is not necessarily the place where the parents of the new baby live.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 25 February 1951, marking the beginning of a significant career in the arts.\"",
+        "branch": "relation",
+        "raw_score": 0.43286097049713135,
+        "hyperedge_text": "He was born on 25 February 1951, marking the beginning of a significant career in the arts.",
+        "entity_ids": [
+          "\"25 FEBRUARY 1951\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 25 February 1951, marking the beginning of a significant career in the arts.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "He was born on 25 February 1951, marking the beginning of a significant career in the arts.",
+            "link",
+            "25 FEBRUARY 1951"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7e313ab7eeaba3e7d3c1293c5fa66817",
+            "hyperedge_name": "<hyperedge>\"He was born on 25 February 1951, marking the beginning of a significant career in the arts.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"If the baby is born in a hospital in another place, that place is the place of birth.\"",
+        "branch": "relation",
+        "raw_score": 0.42320188879966736,
+        "hyperedge_text": "If the baby is born in a hospital in another place, that place is the place of birth.",
+        "entity_ids": [
+          "\"HOSPITAL\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "If the baby is born in a hospital in another place, that place is the place of birth.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "If the baby is born in a hospital in another place, that place is the place of birth.",
+            "link",
+            "HOSPITAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b4a5e47f76dca3a3ae2699b9d644d7e5",
+            "hyperedge_name": "<hyperedge>\"If the baby is born in a hospital in another place, that place is the place of birth.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.\"",
+        "branch": "relation",
+        "raw_score": 0.4207838773727417,
+        "hyperedge_text": "It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.",
+        "entity_ids": [
+          "\"PLACE OF BIRTH\"",
+          "\"PLACE OF RESIDENCE\"",
+          "\"CIRCUMSTANCES\""
+        ],
+        "chunk_ids": [
+          "chunk-1ce3735ca51311e37578f27d0613f4a2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.",
+            "Place of origin In Switzerland, the place of origin( literally\" home place\" or\" citizen place\") denotes where a Swiss citizen has their municipal citizenship. It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances."
+          ],
+          "relation_texts": [
+            "It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.",
+            "link",
+            "PLACE OF BIRTH",
+            "PLACE OF RESIDENCE",
+            "CIRCUMSTANCES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-55706a83d1361720d261cfbc0feda0ce",
+            "hyperedge_name": "<hyperedge>\"It is not to be confused with the place of birth or place of residence, although two or all three of these locations may be identical depending on the person's circumstances.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "branch": "relation",
+        "raw_score": 0.4159963130950928,
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+          ],
+          "relation_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "link",
+            "CAREER TIMELINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f292719350c455f48b3bb7d98ae9f7f2",
+            "hyperedge_name": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.\"",
+        "branch": "semantic",
+        "raw_score": 0.5305758714675903,
+        "hyperedge_text": "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+        "entity_ids": [
+          "\"CATCHY HOOKS\"",
+          "\"HIP-HOP ELEMENTS\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+            "link",
+            "CATCHY HOOKS",
+            "HIP-HOP ELEMENTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ba77e5d87ae193f5769eb4ffea37d2b4",
+            "hyperedge_name": "<hyperedge>\"The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.\"",
+        "branch": "semantic",
+        "raw_score": 0.5166656374931335,
+        "hyperedge_text": "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+        "entity_ids": [
+          "\"EVOLUTION AS AN ARTIST\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+            "link",
+            "EVOLUTION AS AN ARTIST"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d447c82fe3ae9420e5f3c610ade3633c",
+            "hyperedge_name": "<hyperedge>\"Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).\"",
+        "branch": "semantic",
+        "raw_score": 0.4763619899749756,
+        "hyperedge_text": "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+        "entity_ids": [
+          "\"DIP\"",
+          "\"TYGA\"",
+          "\"LEGENDARY\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+            "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+          ],
+          "relation_texts": [
+            "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+            "link",
+            "DIP",
+            "TYGA",
+            "LEGENDARY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b01542bb0fa6c65def30a34f6a5bc6e3",
+            "hyperedge_name": "<hyperedge>\"Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tauheed Epps (born September 12, 1977), known professionally as 2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality.\"",
+        "branch": "semantic",
+        "raw_score": 0.40018153190612793,
+        "hyperedge_text": "Tauheed Epps (born September 12, 1977), known professionally as 2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality.",
+        "entity_ids": [
+          "\"COLLEGE PARK\"",
+          "\"2 CHAINZ\"",
+          "\"TAUHEED EPPS\"",
+          "\"TITY BOI\""
+        ],
+        "chunk_ids": [
+          "chunk-11663c41c75bab278e4979b844f836b6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tauheed Epps (born September 12, 1977), known professionally as 2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality.",
+            "2 Chainz Tauheed Epps (born September 12, 1977), known professionally as 2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality. Born and raised in College Park, Georgia, he initially gained recognition for being one-half of the Southern hip hop duo Playaz Circle, alongside his longtime friend and fellow rapper Earl \"Dolla Boy\" Conyers. The duo was signed to fellow Georgia-based rapper Ludacris' Disturbing tha Peace label, and are best known for their debut single \"Duffle Bag Boy\". In February 2012, Epps signed a solo record deal with Def Jam Recordings, an imprint of Universal Music Group. The following August, he released his debut studio album \" Based on a T.R.U. Story\" on August 14, 2012, to mixed reviews. The album spawned three successful singles: \"No Lie,Birthday Song,\" and \"I'm Different\", all of which charted in the top 50 of the \"Billboard\" Hot..."
+          ],
+          "relation_texts": [
+            "Tauheed Epps (born September 12, 1977), known professionally as 2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality.",
+            "link",
+            "COLLEGE PARK",
+            "2 CHAINZ",
+            "TAUHEED EPPS",
+            "TITY BOI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b73a520d701eda717e4613117833919c",
+            "hyperedge_name": "<hyperedge>\"Tauheed Epps (born September 12, 1977), known professionally as 2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born and raised in Philadelphia, he embarked on his music career as a battle rapper, and later formed a short-lived rap group, The Bloodhoundz.\"",
+        "branch": "semantic",
+        "raw_score": 0.3738723695278168,
+        "hyperedge_text": "Born and raised in Philadelphia, he embarked on his music career as a battle rapper, and later formed a short-lived rap group, The Bloodhoundz.",
+        "entity_ids": [
+          "\"PHILADELPHIA\"",
+          "\"BATTLE RAPPER\"",
+          "\"THE BLOODHOUNDZ\""
+        ],
+        "chunk_ids": [
+          "chunk-17362e66da800d82b1365c97eb4419f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born and raised in Philadelphia, he embarked on his music career as a battle rapper, and later formed a short-lived rap group, The Bloodhoundz.",
+            "Meek Mill Robert Rihmeek Williams (born May 6, 1987), known professionally as Meek Mill, is an American rapper, songwriter, and activist. Born and raised in Philadelphia, he embarked on his music career as a battle rapper, and later formed a short-lived rap group, The Bloodhoundz. In 2008, Atlanta-based rapper T.I. signed Meek Mill to his first record deal. In February 2011, after leaving Grand Hustle Records, Mill signed with Miami-based rapper Rick Ross's Maybach Music Group (MMG). Mill's debut album, \"Dreams and Nightmares\", was released in 2012 under MMG and Warner Bros. Records. The album, preceded by the lead single \"Amen\" (featuring Drake), debuted at number two on the U.S. \"Billboard\" 200. In October 2012, Mill announced the launch of his own label imprint, Dream Chasers Records, named after his mixtape series. Meek Mill often collaborates with fellow MMG label-mates; he is al..."
+          ],
+          "relation_texts": [
+            "Born and raised in Philadelphia, he embarked on his music career as a battle rapper, and later formed a short-lived rap group, The Bloodhoundz.",
+            "link",
+            "PHILADELPHIA",
+            "BATTLE RAPPER",
+            "THE BLOODHOUNDZ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-302ff6bc54e39fd72628cb1dd4fa3e06",
+            "hyperedge_name": "<hyperedge>\"Born and raised in Philadelphia, he embarked on his music career as a battle rapper, and later formed a short-lived rap group, The Bloodhoundz.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality.\"",
+        "branch": "semantic",
+        "raw_score": 0.36539074778556824,
+        "hyperedge_text": "2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality.",
+        "entity_ids": [
+          "\"2 CHAINZ\""
+        ],
+        "chunk_ids": [
+          "chunk-11663c41c75bab278e4979b844f836b6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality.",
+            "2 Chainz Tauheed Epps (born September 12, 1977), known professionally as 2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality. Born and raised in College Park, Georgia, he initially gained recognition for being one-half of the Southern hip hop duo Playaz Circle, alongside his longtime friend and fellow rapper Earl \"Dolla Boy\" Conyers. The duo was signed to fellow Georgia-based rapper Ludacris' Disturbing tha Peace label, and are best known for their debut single \"Duffle Bag Boy\". In February 2012, Epps signed a solo record deal with Def Jam Recordings, an imprint of Universal Music Group. The following August, he released his debut studio album \" Based on a T.R.U. Story\" on August 14, 2012, to mixed reviews. The album spawned three successful singles: \"No Lie,Birthday Song,\" and \"I'm Different\", all of which charted in the top 50 of the \"Billboard\" Hot..."
+          ],
+          "relation_texts": [
+            "2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality.",
+            "link",
+            "2 CHAINZ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b25a62ba6e8e9df0612220b00fdfce0f",
+            "hyperedge_name": "<hyperedge>\"2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "branch": "semantic",
+        "raw_score": 0.3650659918785095,
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth (POB) or birthplace is the place where a person was born.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth (POB) or birthplace is the place where a person was born.",
+            "link",
+            "BIRTH",
+            "PLACE OF BIRTH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d5eff26d110559cc075b3378c12f50e3",
+            "hyperedge_name": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The following August, he released his debut studio album 'Based on a T.R.U. Story' on August 14, 2012, to mixed reviews.\"",
+        "branch": "semantic",
+        "raw_score": 0.3638983368873596,
+        "hyperedge_text": "The following August, he released his debut studio album 'Based on a T.R.U. Story' on August 14, 2012, to mixed reviews.",
+        "entity_ids": [
+          "\"BASED ON A T.R.U. STORY\""
+        ],
+        "chunk_ids": [
+          "chunk-11663c41c75bab278e4979b844f836b6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The following August, he released his debut studio album 'Based on a T.R.U. Story' on August 14, 2012, to mixed reviews.",
+            "2 Chainz Tauheed Epps (born September 12, 1977), known professionally as 2 Chainz (formerly Tity Boi), is an American rapper, songwriter and media personality. Born and raised in College Park, Georgia, he initially gained recognition for being one-half of the Southern hip hop duo Playaz Circle, alongside his longtime friend and fellow rapper Earl \"Dolla Boy\" Conyers. The duo was signed to fellow Georgia-based rapper Ludacris' Disturbing tha Peace label, and are best known for their debut single \"Duffle Bag Boy\". In February 2012, Epps signed a solo record deal with Def Jam Recordings, an imprint of Universal Music Group. The following August, he released his debut studio album \" Based on a T.R.U. Story\" on August 14, 2012, to mixed reviews. The album spawned three successful singles: \"No Lie,Birthday Song,\" and \"I'm Different\", all of which charted in the top 50 of the \"Billboard\" Hot..."
+          ],
+          "relation_texts": [
+            "The following August, he released his debut studio album 'Based on a T.R.U. Story' on August 14, 2012, to mixed reviews.",
+            "link",
+            "BASED ON A T.R.U. STORY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-856fa746207b04397988883651b8c8f7",
+            "hyperedge_name": "<hyperedge>\"The following August, he released his debut studio album 'Based on a T.R.U. Story' on August 14, 2012, to mixed reviews.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in Saint James, Port of Spain, and raised in Queens, New York City, she gained public recognition after releasing the mixtapes 'Playtime Is Over' (2007), 'Sucka Free' (2008), and 'Beam Me Up Scotty' (2009).\"",
+        "branch": "semantic",
+        "raw_score": 0.35742056369781494,
+        "hyperedge_text": "Born in Saint James, Port of Spain, and raised in Queens, New York City, she gained public recognition after releasing the mixtapes 'Playtime Is Over' (2007), 'Sucka Free' (2008), and 'Beam Me Up Scotty' (2009).",
+        "entity_ids": [
+          "\"SAINT JAMES\"",
+          "\"PORT OF SPAIN\"",
+          "\"QUEENS\"",
+          "\"MIXTAPES\""
+        ],
+        "chunk_ids": [
+          "chunk-339f7622a976130321db1d721a2c74ad"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born in Saint James, Port of Spain, and raised in Queens, New York City, she gained public recognition after releasing the mixtapes 'Playtime Is Over' (2007), 'Sucka Free' (2008), and 'Beam Me Up Scotty' (2009).",
+            "Nicki Minaj Onika Tanya Maraj-Petty (born December 8, 1982), known professionally as Nicki Minaj , is a Trinidad and Tobago-born rapper, singer, songwriter, actress, and model. Born in Saint James, Port of Spain, and raised in Queens, New York City, she gained public recognition after releasing the mixtapes \"Playtime Is Over\" (2007), \"Sucka Free\" (2008), and \"Beam Me Up Scotty\" (2009). After signing with Young Money Entertainment in 2009, Minaj released her first studio album, \"Pink Friday\" (2010), which peaked at number one on the US \"Billboard\" 200 and was ultimately certified triple platinum by the Recording Industry Association of America (RIAA). Her second album, , was released in 2012 and debuted at number one in several countries. Minaj made her film debut in the 2012 animated film . In 2013, she was a judge on the twelfth season of \"American Idol\". Minaj's third studio album,..."
+          ],
+          "relation_texts": [
+            "Born in Saint James, Port of Spain, and raised in Queens, New York City, she gained public recognition after releasing the mixtapes 'Playtime Is Over' (2007), 'Sucka Free' (2008), and 'Beam Me Up Scotty' (2009).",
+            "link",
+            "SAINT JAMES",
+            "PORT OF SPAIN",
+            "QUEENS",
+            "MIXTAPES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8f19363f07472b106283920491e62309",
+            "hyperedge_name": "<hyperedge>\"Born in Saint James, Port of Spain, and raised in Queens, New York City, she gained public recognition after releasing the mixtapes 'Playtime Is Over' (2007), 'Sucka Free' (2008), and 'Beam Me Up Scotty' (2009).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born and raised in New York City, Jay-Z first began his musical career after founding the record label Roc-A-Fella Records in 1995.\"",
+        "branch": "semantic",
+        "raw_score": 0.3546038866043091,
+        "hyperedge_text": "Born and raised in New York City, Jay-Z first began his musical career after founding the record label Roc-A-Fella Records in 1995.",
+        "entity_ids": [
+          "\"NEW YORK CITY\"",
+          "\"ROC-A-FELLA RECORDS\""
+        ],
+        "chunk_ids": [
+          "chunk-b053f501ac76888a9ef27f37ee7fff2d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Born and raised in New York City, Jay-Z first began his musical career after founding the record label Roc-A-Fella Records in 1995.",
+            "Jay-Z Shawn Corey Carter (born December 4, 1969), known professionally as Jay-Z (stylized as JAY-Z), is an American rapper, songwriter, producer, entrepreneur, and record executive. He is regarded as one of the greatest rappers of all time. Born and raised in New York City, Jay-Z first began his musical career after founding the record label Roc-A-Fella Records in 1995, and subsequently released his debut studio album \"Reasonable Doubt\" in 1996. The album was released to widespread critical success, and solidified his standing in the music industry. He has gone on to release twelve additional albums, which have all attained generally positive critical reception and commercial success, including \"The Blueprint\" (2001) and \"The Black Album\" (2003). Jay-Z has also released the full-length collaborative albums \"Watch the Throne\" (2011) and \"Everything Is Love\" (2018) with Kanye West and w..."
+          ],
+          "relation_texts": [
+            "Born and raised in New York City, Jay-Z first began his musical career after founding the record label Roc-A-Fella Records in 1995.",
+            "link",
+            "NEW YORK CITY",
+            "ROC-A-FELLA RECORDS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f8d59a2f6cf0c68b857c30870c23614",
+            "hyperedge_name": "<hyperedge>\"Born and raised in New York City, Jay-Z first began his musical career after founding the record label Roc-A-Fella Records in 1995.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).\"",
+        "hyperedge_text": "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4763619899749756,
+        "fusion_score": 0.4952723979949951,
+        "entity_ids": [
+          "\"DIP\"",
+          "\"TYGA\"",
+          "\"LEGENDARY\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "evidence_texts": [
+          "Dip is a song recorded by American rapper Tyga for his seventh studio album Legendary (2019).",
+          "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.476362,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.495272
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48907598853111267,
+        "semantic_score": 0.3650659918785095,
+        "fusion_score": 0.268643593788147,
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.489076,
+          "S": 0.365066,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268644
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.\"",
+        "hyperedge_text": "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.5305758714675903,
+        "fusion_score": 0.37278184096018474,
+        "entity_ids": [
+          "\"CATCHY HOOKS\"",
+          "\"HIP-HOP ELEMENTS\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "evidence_texts": [
+          "The song Dip features a blend of hip-hop elements with catchy hooks, characteristic of Tyga's style.",
+          "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.530576,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.372782
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.\"",
+        "hyperedge_text": "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.5166656374931335,
+        "fusion_score": 0.3699997941652934,
+        "entity_ids": [
+          "\"EVOLUTION AS AN ARTIST\""
+        ],
+        "chunk_ids": [
+          "chunk-f90f857cc244e9b8bdf45d6df247f959"
+        ],
+        "evidence_texts": [
+          "Dip was recorded for Tyga's seventh studio album which showcases his evolution as an artist.",
+          "Dip (song) \"Dip\" is a song recorded by American rapper Tyga for his seventh studio album \"Legendary\" (2019). It was released on September 19, 2018, by Last Kings Records and Empire Distribution as the third single from the album. An alternate version of the song featuring American rapper Nicki Minaj was released on October 29, 2018, along with an accompanying music video."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.516666,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.37
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.46127820014953613,
+        "semantic_score": 0.5,
+        "fusion_score": 0.28451128005981446,
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.461278,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.284511
+        }
+      }
+    ]
+  }
+]

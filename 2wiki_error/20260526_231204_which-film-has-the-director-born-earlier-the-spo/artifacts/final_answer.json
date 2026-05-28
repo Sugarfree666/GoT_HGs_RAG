@@ -1,0 +1,42 @@
+{
+  "answer": "The Spooky Bunch",
+  "candidate_answer": "The Spooky Bunch",
+  "reasoning_summary": "Ann Hui, the director of 'The Spooky Bunch', was born on 23 May 1947, while Karl Maka, the director of 'His Name Is Nobody', was born in 1948. Therefore, 'The Spooky Bunch' has the director born earlier.",
+  "answer_span_reasoning": "The Spooky Bunch has the director born earlier.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of The Spooky Bunch?",
+      "answer": "Ann Hui",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"The Spooky Bunch is a 1980 Hong Kong movie directed by Ann Hui.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "Who is the director of His Name Is Nobody?",
+      "answer": "Karl Maka",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"His Name Is Nobody is a 1979 Hong Kong martial arts comedy film written and directed by Karl Maka and starring Lau Kar- wing, Dean Shek and Bryan Leung.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "When was the director of The Spooky Bunch born?",
+      "answer": "23 May 1947",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Ann Hui On-wah, MBE, BBS, (Hepburn: Kyo Anka; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "When was the director of The Spooky Bunch born?",
+      "answer": "23 May 1947",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Ann Hui On-wah, MBE, BBS, (Hepburn: Kyo Anka; born 23 May 1947) is a Hong Kong film director, producer, screenwriter and actress.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

@@ -1,0 +1,2393 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Man'S Search For Happiness released?",
+    "retrieval_question": "When was Man'S Search For Happiness released?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Man'S Search For Happiness released?",
+      "retrieval_question": "When was Man'S Search For Happiness released?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"MAN'S SEARCH FOR HAPPINESS\"",
+          "\"PLAN OF SALVATION\""
+        ],
+        "chunk_ids": [
+          "chunk-359d96db46bd898849663ef9f48a24e5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+            "Man's Search for Happiness Man's Search for Happiness is a 13- minute film produced by The Church of Jesus Christ of Latter- day Saints( LDS Church). It explains the role of the Plan of Salvation in LDS theology, with questions like\" Who am I? Where did I come from?\", and\" Where am I going?\" being explored from an LDS perspective. This film was produced by the BYU Motion Picture Studio for the Mormon Pavilion at the 1964 World's Fair in New York City, and was viewed by over five million people, many of whom were not LDS. It was later remade in Japanese for Expo'70 in Japan. In 1986, the visuals and background music were updated, while retaining the original narration by Richard L. Evans, who served as a member of the church's of the Quorum of the Twelve Apostles."
+          ],
+          "relation_texts": [
+            "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+            "link",
+            "THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS",
+            "MAN'S SEARCH FOR HAPPINESS",
+            "PLAN OF SALVATION"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\"",
+        "branch": "relation",
+        "raw_score": 0.4918246269226074,
+        "hyperedge_text": "After setting an initial release date in the same month, casting took place between April and June 2015.",
+        "entity_ids": [
+          "\"APRIL 2015\"",
+          "\"JUNE 2015\""
+        ],
+        "chunk_ids": [
+          "chunk-b877a56c3c1803c310d3092526abfa76"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After setting an initial release date in the same month, casting took place between April and June 2015.",
+            "The Fate of the Furious The Fate of the Furious( alternatively known as Fast& Furious 8 and Fast 8 and often stylized as F8) is a 2017 American action film directed by F. Gary Gray and written by Chris Morgan. A sequel to 2015's\" Furious 7\", it is the eighth installment in the\" Fast& Furious\" franchise and stars Vin Diesel, Dwayne Johnson, Jason Statham, Michelle Rodriguez, Tyrese Gibson, Chris\" Ludacris\" Bridges, Scott Eastwood, Nathalie Emmanuel, Elsa Pataky, Kurt Russell and Charlize Theron. \" The Fate of the Furious\" follows Dominic Toretto( Diesel), who has settled down with his wife Letty Ortiz( Rodriguez), until cyberterrorist Cipher( Theron) coerces him into working for her and turns him against his team, forcing them to find Dom and take down Cipher. \" The Fate of the Furious\" marks the first installment in the franchise since( 2006) not to feature either Paul Walker, who die..."
+          ],
+          "relation_texts": [
+            "After setting an initial release date in the same month, casting took place between April and June 2015.",
+            "link",
+            "APRIL 2015",
+            "JUNE 2015"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e6cbbce13d732880961d6e63686a9ca6",
+            "hyperedge_name": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "branch": "relation",
+        "raw_score": 0.4723891019821167,
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's release occurred on a specific date.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The film's release occurred on a specific date.",
+            "link",
+            "SPECIFIC DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf00e02cc9aa046e03d764b86b678f46",
+            "hyperedge_name": "<hyperedge>\"The film's release occurred on a specific date.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "branch": "relation",
+        "raw_score": 0.46724173426628113,
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date was on 10 October 2009.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The release date was on 10 October 2009.",
+            "link",
+            "RELEASE DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-066e3d9efe074f8299dde1f259ae335f",
+            "hyperedge_name": "<hyperedge>\"The release date was on 10 October 2009.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Rakka was 14 June 2017.\"",
+        "branch": "relation",
+        "raw_score": 0.45409703254699707,
+        "hyperedge_text": "The release date of Rakka was 14 June 2017.",
+        "entity_ids": [
+          "\"14 JUNE 2017\""
+        ],
+        "chunk_ids": [
+          "chunk-44787de4ca914ea38ca9818d0ecd9288"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of Rakka was 14 June 2017.",
+            "Rakka (film) The film was released on YouTube and Steam on 14 June 2017."
+          ],
+          "relation_texts": [
+            "The release date of Rakka was 14 June 2017.",
+            "link",
+            "14 JUNE 2017"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f2ea9c55e817f00696be39ce6c6232e",
+            "hyperedge_name": "<hyperedge>\"The release date of Rakka was 14 June 2017.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.43862271308898926,
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is July 25, 1920.",
+            "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+          ],
+          "relation_texts": [
+            "The release date of the film is July 25, 1920.",
+            "link",
+            "JULY 25, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62471a4725f6e026bc7378dd17783972",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is July 25, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on May 30, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.4376589059829712,
+        "hyperedge_text": "It was released on May 30, 1920.",
+        "entity_ids": [
+          "\"MAY 30, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-677670aef346a64df94317540622436a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on May 30, 1920.",
+            "The Revenge of Tarzan The Revenge of Tarzan( 1920) is a silent adventure film, originally advertised as The Return of Tarzan, and the third Tarzan film produced. The film was produced by the Great Western Film Producing Company, a subsidiary of the Numa Pictures Corporation. The film was sold to Goldwyn Pictures for distribution. The film was written by Robert Saxmar, based on the 1915 novel\" The Return of Tarzan\" by Edgar Rice Burroughs, and directed by Harry Revier and George M. Merrick. It was released on May 30, 1920."
+          ],
+          "relation_texts": [
+            "It was released on May 30, 1920.",
+            "link",
+            "MAY 30, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82730c2563bc7b854d6b0e419a0c0e68",
+            "hyperedge_name": "<hyperedge>\"It was released on May 30, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "branch": "relation",
+        "raw_score": 0.4368012547492981,
+        "hyperedge_text": "The release date on CD was September 22.",
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date on CD was September 22.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date on CD was September 22.",
+            "link",
+            "SEPTEMBER 22"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5348043ffa573d6b9577c2a39d1c0828",
+            "hyperedge_name": "<hyperedge>\"The release date on CD was September 22.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released two months after her previous work.\"",
+        "branch": "relation",
+        "raw_score": 0.4339386224746704,
+        "hyperedge_text": "It was released two months after her previous work.",
+        "entity_ids": [
+          "\"FOURTH STUDIO ALBUM\"",
+          "\"TWO MONTHS\""
+        ],
+        "chunk_ids": [
+          "chunk-0810f85005cb33553abde2a595e2c086"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released two months after her previous work.",
+            "The Season for Romance The Season for Romance is the fifth studio album, and first Christmas album, from Lee Ann Womack. It was released two months after her fourth studio album,\" Something Worth Leaving Behind\"."
+          ],
+          "relation_texts": [
+            "It was released two months after her previous work.",
+            "link",
+            "FOURTH STUDIO ALBUM",
+            "TWO MONTHS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-175d0b8445f687da1f01c1903e270312",
+            "hyperedge_name": "<hyperedge>\"It was released two months after her previous work.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\"",
+        "branch": "relation",
+        "raw_score": 0.4294666647911072,
+        "hyperedge_text": "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+        "entity_ids": [
+          "\"PORTFOLIO\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+            "link",
+            "PORTFOLIO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-800463cc0af33ef22968d66931543a06",
+            "hyperedge_name": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on September 6, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.42727920413017273,
+        "hyperedge_text": "It was released on September 6, 1920.",
+        "entity_ids": [
+          "\"SEPTEMBER 6, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-abf58852e1b4b8d1ff00e32c25ebc8af"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on September 6, 1920.",
+            "Love, Honor and Obey Love, Honor and Obey is a 1920 American silent drama film. Directed by Leander de Cordova, the film stars Wilda Bennett, Claire Whitney, and Henry Harmon. It was released on September 6, 1920."
+          ],
+          "relation_texts": [
+            "It was released on September 6, 1920.",
+            "link",
+            "SEPTEMBER 6, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c971308713d91513707a3175e8322c4d",
+            "hyperedge_name": "<hyperedge>\"It was released on September 6, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\"",
+        "branch": "semantic",
+        "raw_score": 0.6404526233673096,
+        "hyperedge_text": "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"MAN'S SEARCH FOR HAPPINESS\"",
+          "\"PLAN OF SALVATION\""
+        ],
+        "chunk_ids": [
+          "chunk-359d96db46bd898849663ef9f48a24e5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+            "Man's Search for Happiness Man's Search for Happiness is a 13- minute film produced by The Church of Jesus Christ of Latter- day Saints( LDS Church). It explains the role of the Plan of Salvation in LDS theology, with questions like\" Who am I? Where did I come from?\", and\" Where am I going?\" being explored from an LDS perspective. This film was produced by the BYU Motion Picture Studio for the Mormon Pavilion at the 1964 World's Fair in New York City, and was viewed by over five million people, many of whom were not LDS. It was later remade in Japanese for Expo'70 in Japan. In 1986, the visuals and background music were updated, while retaining the original narration by Richard L. Evans, who served as a member of the church's of the Quorum of the Twelve Apostles."
+          ],
+          "relation_texts": [
+            "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+            "link",
+            "THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS",
+            "MAN'S SEARCH FOR HAPPINESS",
+            "PLAN OF SALVATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-398edaaf68cf3eb19ef54b8b7c8a0a02",
+            "hyperedge_name": "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In Search of Happiness is a title that likely explores the pursuit of happiness.\"",
+        "branch": "semantic",
+        "raw_score": 0.5582141876220703,
+        "hyperedge_text": "In Search of Happiness is a title that likely explores the pursuit of happiness.",
+        "entity_ids": [
+          "\"IN SEARCH OF HAPPINESS\""
+        ],
+        "chunk_ids": [
+          "chunk-e9cc7e5c5a7ac04ee14a101432be0e5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In Search of Happiness is a title that likely explores the pursuit of happiness.",
+            "Finding Joy Finding Joy, In Search of Happiness or Searching for Happiness may refer to:"
+          ],
+          "relation_texts": [
+            "In Search of Happiness is a title that likely explores the pursuit of happiness.",
+            "link",
+            "IN SEARCH OF HAPPINESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-59f01fd5481aff0fd726122d825d4e35",
+            "hyperedge_name": "<hyperedge>\"In Search of Happiness is a title that likely explores the pursuit of happiness.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Searching for Happiness is a title suggesting an exploration of happiness.\"",
+        "branch": "semantic",
+        "raw_score": 0.5330795049667358,
+        "hyperedge_text": "Searching for Happiness is a title suggesting an exploration of happiness.",
+        "entity_ids": [
+          "\"SEARCHING FOR HAPPINESS\""
+        ],
+        "chunk_ids": [
+          "chunk-e9cc7e5c5a7ac04ee14a101432be0e5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Searching for Happiness is a title suggesting an exploration of happiness.",
+            "Finding Joy Finding Joy, In Search of Happiness or Searching for Happiness may refer to:"
+          ],
+          "relation_texts": [
+            "Searching for Happiness is a title suggesting an exploration of happiness.",
+            "link",
+            "SEARCHING FOR HAPPINESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-84a85c08bfddfdb62bf4e40b0bc527e9",
+            "hyperedge_name": "<hyperedge>\"Searching for Happiness is a title suggesting an exploration of happiness.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Finding Joy, In Search of Happiness or Searching for Happiness may refer to:\"",
+        "branch": "semantic",
+        "raw_score": 0.49729445576667786,
+        "hyperedge_text": "Finding Joy, In Search of Happiness or Searching for Happiness may refer to:",
+        "entity_ids": [
+          "\"FINDING JOY\"",
+          "\"IN SEARCH OF HAPPINESS\"",
+          "\"SEARCHING FOR HAPPINESS\""
+        ],
+        "chunk_ids": [
+          "chunk-e9cc7e5c5a7ac04ee14a101432be0e5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Finding Joy, In Search of Happiness or Searching for Happiness may refer to:",
+            "Finding Joy Finding Joy, In Search of Happiness or Searching for Happiness may refer to:"
+          ],
+          "relation_texts": [
+            "Finding Joy, In Search of Happiness or Searching for Happiness may refer to:",
+            "link",
+            "FINDING JOY",
+            "IN SEARCH OF HAPPINESS",
+            "SEARCHING FOR HAPPINESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a84aadddb9b2ca5df033aebd506fa073",
+            "hyperedge_name": "<hyperedge>\"Finding Joy, In Search of Happiness or Searching for Happiness may refer to:\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The titles Finding Joy, In Search of Happiness, and Searching for Happiness might refer to research on emotional well-being.\"",
+        "branch": "semantic",
+        "raw_score": 0.4918001890182495,
+        "hyperedge_text": "The titles Finding Joy, In Search of Happiness, and Searching for Happiness might refer to research on emotional well-being.",
+        "entity_ids": [
+          "\"RESEARCH ON EMOTIONAL WELL-BEING\""
+        ],
+        "chunk_ids": [
+          "chunk-e9cc7e5c5a7ac04ee14a101432be0e5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The titles Finding Joy, In Search of Happiness, and Searching for Happiness might refer to research on emotional well-being.",
+            "Finding Joy Finding Joy, In Search of Happiness or Searching for Happiness may refer to:"
+          ],
+          "relation_texts": [
+            "The titles Finding Joy, In Search of Happiness, and Searching for Happiness might refer to research on emotional well-being.",
+            "link",
+            "RESEARCH ON EMOTIONAL WELL-BEING"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-91f860f7973ef6d0f493d5a65430f004",
+            "hyperedge_name": "<hyperedge>\"The titles Finding Joy, In Search of Happiness, and Searching for Happiness might refer to research on emotional well-being.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"For Happiness is a 1917 Russian drama film.\"",
+        "branch": "semantic",
+        "raw_score": 0.4513523578643799,
+        "hyperedge_text": "For Happiness is a 1917 Russian drama film.",
+        "entity_ids": [
+          "\"FOR HAPPINESS\""
+        ],
+        "chunk_ids": [
+          "chunk-83c2f9210680f1e34e57e7aae115fc3b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "For Happiness is a 1917 Russian drama film.",
+            "For Happiness For Happiness is a 1917 Russian drama film directed by Yevgeny Bauer."
+          ],
+          "relation_texts": [
+            "For Happiness is a 1917 Russian drama film.",
+            "link",
+            "FOR HAPPINESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-19c2baa640cb8863c848c0489c2db351",
+            "hyperedge_name": "<hyperedge>\"For Happiness is a 1917 Russian drama film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"For Happiness is a 1917 Russian drama film directed by Yevgeny Bauer.\"",
+        "branch": "semantic",
+        "raw_score": 0.414902001619339,
+        "hyperedge_text": "For Happiness is a 1917 Russian drama film directed by Yevgeny Bauer.",
+        "entity_ids": [
+          "\"1917\"",
+          "\"RUSSIAN\"",
+          "\"FOR HAPPINESS\"",
+          "\"YEVGENY BAUER\""
+        ],
+        "chunk_ids": [
+          "chunk-83c2f9210680f1e34e57e7aae115fc3b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "For Happiness is a 1917 Russian drama film directed by Yevgeny Bauer.",
+            "For Happiness For Happiness is a 1917 Russian drama film directed by Yevgeny Bauer."
+          ],
+          "relation_texts": [
+            "For Happiness is a 1917 Russian drama film directed by Yevgeny Bauer.",
+            "link",
+            "1917",
+            "RUSSIAN",
+            "FOR HAPPINESS",
+            "YEVGENY BAUER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1394b8ad19242dd6d125adbbb7c205d7",
+            "hyperedge_name": "<hyperedge>\"For Happiness is a 1917 Russian drama film directed by Yevgeny Bauer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Three for Happiness (a.k.a. Three's Happiness) is a 1985 Croatian romantic drama film directed by Rajko Grlić.\"",
+        "branch": "semantic",
+        "raw_score": 0.4085199236869812,
+        "hyperedge_text": "Three for Happiness (a.k.a. Three's Happiness) is a 1985 Croatian romantic drama film directed by Rajko Grlić.",
+        "entity_ids": [
+          "\"1985\"",
+          "\"CROATIAN\"",
+          "\"THREE FOR HAPPINESS\"",
+          "\"RAJKO GRLIĆ\"",
+          "\"ROMANTIC DRAMA FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-b71766b88ab4af217450d718594cab33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Three for Happiness (a.k.a. Three's Happiness) is a 1985 Croatian romantic drama film directed by Rajko Grlić.",
+            "Three for Happiness Three for Happiness( a.k.a. Three's Happiness) is a 1985 Croatian romantic drama film directed by Rajko Grlić."
+          ],
+          "relation_texts": [
+            "Three for Happiness (a.k.a. Three's Happiness) is a 1985 Croatian romantic drama film directed by Rajko Grlić.",
+            "link",
+            "1985",
+            "CROATIAN",
+            "THREE FOR HAPPINESS",
+            "RAJKO GRLIĆ",
+            "ROMANTIC DRAMA FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a13a376f210bbd66581cf70251c940ad",
+            "hyperedge_name": "<hyperedge>\"Three for Happiness (a.k.a. Three's Happiness) is a 1985 Croatian romantic drama film directed by Rajko Grlić.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.39934688806533813,
+        "hyperedge_text": "The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.",
+        "entity_ids": [
+          "\"1962 RELEASE\""
+        ],
+        "chunk_ids": [
+          "chunk-90d70bd8b0be3ce6b556e48c47ff8f8e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.",
+            "Boy or Girl? Boy or Girl? ( Spanish: ¿ Chico o chica?) is a 1962 Mexican- Spanish musical comedy film directed by Antonio del Amo."
+          ],
+          "relation_texts": [
+            "The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.",
+            "link",
+            "1962 RELEASE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-13f9dfc563ffa08c57ffdf41f36d4b9c",
+            "hyperedge_name": "<hyperedge>\"The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was inspired by the theme to the 1936 film 'Modern Times', written by Charlie Chaplin and commonly known as 'Smile'.\"",
+        "branch": "semantic",
+        "raw_score": 0.39725348353385925,
+        "hyperedge_text": "It was inspired by the theme to the 1936 film 'Modern Times', written by Charlie Chaplin and commonly known as 'Smile'.",
+        "entity_ids": [
+          "\"CHARLIE CHAPLIN\"",
+          "\"THEME\"",
+          "\"SMILE\"",
+          "\"JOHN TURNER\"",
+          "\"GEOFFREY PARSONS\"",
+          "\"1936 FILM\"",
+          "\"1936 FILM 'MODERN TIMES'"
+        ],
+        "chunk_ids": [
+          "chunk-2c8af8a8b813fa08b4f93028bb78e807"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was inspired by the theme to the 1936 film 'Modern Times', written by Charlie Chaplin and commonly known as 'Smile'.",
+            "Too Much Rain \" Too Much Rain\" is a song by Paul McCartney and is the seventh track on his 2005 album\" Chaos and Creation in the Backyard\". The song was recorded at George Martin's Air Studios in central London with producer Nigel Godrich. It was inspired by the theme to the 1936 film\" Modern Times\", written by Charlie Chaplin and commonly known as\" Smile\"( lyrics were added to Smile in 1954 by John Turner and Geoffrey Parsons). The lyrics of\" Too Much Rain\" concern hope in the face of adversity(\" Laugh when your eyes are burning/ Smile when your heart is filled with pain ...\"). In addition to\" Smile,\" McCartney has said the song was also inspired by his second wife, Heather Mills, who had\" a lot of tough times in her life.\""
+          ],
+          "relation_texts": [
+            "It was inspired by the theme to the 1936 film 'Modern Times', written by Charlie Chaplin and commonly known as 'Smile'.",
+            "link",
+            "CHARLIE CHAPLIN",
+            "THEME",
+            "SMILE",
+            "JOHN TURNER",
+            "GEOFFREY PARSONS",
+            "1936 FILM",
+            "\"1936 FILM 'MODERN TIMES'"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-215d49776c0eee154078dea642001f5e",
+            "hyperedge_name": "<hyperedge>\"It was inspired by the theme to the 1936 film 'Modern Times', written by Charlie Chaplin and commonly known as 'Smile'.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\"",
+        "hyperedge_text": "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6404526233673096,
+        "fusion_score": 0.528090524673462,
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"MAN'S SEARCH FOR HAPPINESS\"",
+          "\"PLAN OF SALVATION\""
+        ],
+        "chunk_ids": [
+          "chunk-359d96db46bd898849663ef9f48a24e5"
+        ],
+        "evidence_texts": [
+          "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+          "Man's Search for Happiness Man's Search for Happiness is a 13- minute film produced by The Church of Jesus Christ of Latter- day Saints( LDS Church). It explains the role of the Plan of Salvation in LDS theology, with questions like\" Who am I? Where did I come from?\", and\" Where am I going?\" being explored from an LDS perspective. This film was produced by the BYU Motion Picture Studio for the Mormon Pavilion at the 1964 World's Fair in New York City, and was viewed by over five million people, many of whom were not LDS. It was later remade in Japanese for Expo'70 in Japan. In 1986, the visuals and background music were updated, while retaining the original narration by Richard L. Evans, who served as a member of the church's of the Quorum of the Twelve Apostles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.640453,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528091
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.\"",
+        "hyperedge_text": "The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.39934688806533813,
+        "fusion_score": 0.2798693776130676,
+        "entity_ids": [
+          "\"1962 RELEASE\""
+        ],
+        "chunk_ids": [
+          "chunk-90d70bd8b0be3ce6b556e48c47ff8f8e"
+        ],
+        "evidence_texts": [
+          "The 1962 release of Boy or Girl? was part of a vibrant era for musical comedies in cinema.",
+          "Boy or Girl? Boy or Girl? ( Spanish: ¿ Chico o chica?) is a 1962 Mexican- Spanish musical comedy film directed by Antonio del Amo."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.399347,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.279869
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4723891019821167,
+        "semantic_score": 0.4,
+        "fusion_score": 0.26895564079284673,
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "evidence_texts": [
+          "The film's release occurred on a specific date.",
+          "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.472389,
+          "S": 0.4,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268956
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\"",
+        "hyperedge_text": "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4294666647911072,
+        "semantic_score": 0.4,
+        "fusion_score": 0.2517866659164429,
+        "entity_ids": [
+          "\"PORTFOLIO\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "evidence_texts": [
+          "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+          "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.429467,
+          "S": 0.4,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.251787
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\"",
+        "hyperedge_text": "After setting an initial release date in the same month, casting took place between April and June 2015.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4918246269226074,
+        "semantic_score": 0.2,
+        "fusion_score": 0.236729850769043,
+        "entity_ids": [
+          "\"APRIL 2015\"",
+          "\"JUNE 2015\""
+        ],
+        "chunk_ids": [
+          "chunk-b877a56c3c1803c310d3092526abfa76"
+        ],
+        "evidence_texts": [
+          "After setting an initial release date in the same month, casting took place between April and June 2015.",
+          "The Fate of the Furious The Fate of the Furious( alternatively known as Fast& Furious 8 and Fast 8 and often stylized as F8) is a 2017 American action film directed by F. Gary Gray and written by Chris Morgan. A sequel to 2015's\" Furious 7\", it is the eighth installment in the\" Fast& Furious\" franchise and stars Vin Diesel, Dwayne Johnson, Jason Statham, Michelle Rodriguez, Tyrese Gibson, Chris\" Ludacris\" Bridges, Scott Eastwood, Nathalie Emmanuel, Elsa Pataky, Kurt Russell and Charlize Theron. \" The Fate of the Furious\" follows Dominic Toretto( Diesel), who has settled down with his wife Letty Ortiz( Rodriguez), until cyberterrorist Cipher( Theron) coerces him into working for her and turns him against his team, forcing them to find Dom and take down Cipher. \" The Fate of the Furious\" marks the first installment in the franchise since( 2006) not to feature either Paul Walker, who die..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.491825,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.23673
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Tell It To The Bees?",
+    "retrieval_question": "What is the release date of Tell It To The Bees?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Tell It To The Bees?",
+      "retrieval_question": "What is the release date of Tell It To The Bees?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.",
+        "entity_ids": [
+          "\"ANNABEL JANKEL\"",
+          "\"TELL IT TO THE BEES\"",
+          "\"ANNA PAQUIN\"",
+          "\"HOLLIDAY GRAINGER\"",
+          "\"HENRIETTA ASHWORTH\"",
+          "\"JESSICA ASHWORTH\"",
+          "\"FIONA SHAW\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.",
+            "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+          ],
+          "relation_texts": [
+            "Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.",
+            "link",
+            "ANNABEL JANKEL",
+            "TELL IT TO THE BEES",
+            "ANNA PAQUIN",
+            "HOLLIDAY GRAINGER",
+            "HENRIETTA ASHWORTH",
+            "JESSICA ASHWORTH",
+            "FIONA SHAW"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a film directed by Annabel Jankel.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Tell It to the Bees is a film directed by Annabel Jankel.",
+        "entity_ids": [
+          "\"TELL IT TO THE BEES\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tell It to the Bees is a film directed by Annabel Jankel.",
+            "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+          ],
+          "relation_texts": [
+            "Tell It to the Bees is a film directed by Annabel Jankel.",
+            "link",
+            "TELL IT TO THE BEES"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\"",
+        "branch": "relation",
+        "raw_score": 0.4918246269226074,
+        "hyperedge_text": "After setting an initial release date in the same month, casting took place between April and June 2015.",
+        "entity_ids": [
+          "\"APRIL 2015\"",
+          "\"JUNE 2015\""
+        ],
+        "chunk_ids": [
+          "chunk-b877a56c3c1803c310d3092526abfa76"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After setting an initial release date in the same month, casting took place between April and June 2015.",
+            "The Fate of the Furious The Fate of the Furious( alternatively known as Fast& Furious 8 and Fast 8 and often stylized as F8) is a 2017 American action film directed by F. Gary Gray and written by Chris Morgan. A sequel to 2015's\" Furious 7\", it is the eighth installment in the\" Fast& Furious\" franchise and stars Vin Diesel, Dwayne Johnson, Jason Statham, Michelle Rodriguez, Tyrese Gibson, Chris\" Ludacris\" Bridges, Scott Eastwood, Nathalie Emmanuel, Elsa Pataky, Kurt Russell and Charlize Theron. \" The Fate of the Furious\" follows Dominic Toretto( Diesel), who has settled down with his wife Letty Ortiz( Rodriguez), until cyberterrorist Cipher( Theron) coerces him into working for her and turns him against his team, forcing them to find Dom and take down Cipher. \" The Fate of the Furious\" marks the first installment in the franchise since( 2006) not to feature either Paul Walker, who die..."
+          ],
+          "relation_texts": [
+            "After setting an initial release date in the same month, casting took place between April and June 2015.",
+            "link",
+            "APRIL 2015",
+            "JUNE 2015"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e6cbbce13d732880961d6e63686a9ca6",
+            "hyperedge_name": "<hyperedge>\"After setting an initial release date in the same month, casting took place between April and June 2015.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "branch": "relation",
+        "raw_score": 0.4723891019821167,
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's release occurred on a specific date.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The film's release occurred on a specific date.",
+            "link",
+            "SPECIFIC DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf00e02cc9aa046e03d764b86b678f46",
+            "hyperedge_name": "<hyperedge>\"The film's release occurred on a specific date.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "branch": "relation",
+        "raw_score": 0.46724173426628113,
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date was on 10 October 2009.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The release date was on 10 October 2009.",
+            "link",
+            "RELEASE DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-066e3d9efe074f8299dde1f259ae335f",
+            "hyperedge_name": "<hyperedge>\"The release date was on 10 October 2009.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of Rakka was 14 June 2017.\"",
+        "branch": "relation",
+        "raw_score": 0.45409703254699707,
+        "hyperedge_text": "The release date of Rakka was 14 June 2017.",
+        "entity_ids": [
+          "\"14 JUNE 2017\""
+        ],
+        "chunk_ids": [
+          "chunk-44787de4ca914ea38ca9818d0ecd9288"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of Rakka was 14 June 2017.",
+            "Rakka (film) The film was released on YouTube and Steam on 14 June 2017."
+          ],
+          "relation_texts": [
+            "The release date of Rakka was 14 June 2017.",
+            "link",
+            "14 JUNE 2017"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f2ea9c55e817f00696be39ce6c6232e",
+            "hyperedge_name": "<hyperedge>\"The release date of Rakka was 14 June 2017.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.43862271308898926,
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is July 25, 1920.",
+            "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+          ],
+          "relation_texts": [
+            "The release date of the film is July 25, 1920.",
+            "link",
+            "JULY 25, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62471a4725f6e026bc7378dd17783972",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is July 25, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on May 30, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.4376589059829712,
+        "hyperedge_text": "It was released on May 30, 1920.",
+        "entity_ids": [
+          "\"MAY 30, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-677670aef346a64df94317540622436a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on May 30, 1920.",
+            "The Revenge of Tarzan The Revenge of Tarzan( 1920) is a silent adventure film, originally advertised as The Return of Tarzan, and the third Tarzan film produced. The film was produced by the Great Western Film Producing Company, a subsidiary of the Numa Pictures Corporation. The film was sold to Goldwyn Pictures for distribution. The film was written by Robert Saxmar, based on the 1915 novel\" The Return of Tarzan\" by Edgar Rice Burroughs, and directed by Harry Revier and George M. Merrick. It was released on May 30, 1920."
+          ],
+          "relation_texts": [
+            "It was released on May 30, 1920.",
+            "link",
+            "MAY 30, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82730c2563bc7b854d6b0e419a0c0e68",
+            "hyperedge_name": "<hyperedge>\"It was released on May 30, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "branch": "relation",
+        "raw_score": 0.4368012547492981,
+        "hyperedge_text": "The release date on CD was September 22.",
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date on CD was September 22.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date on CD was September 22.",
+            "link",
+            "SEPTEMBER 22"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5348043ffa573d6b9577c2a39d1c0828",
+            "hyperedge_name": "<hyperedge>\"The release date on CD was September 22.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released two months after her previous work.\"",
+        "branch": "relation",
+        "raw_score": 0.4339386224746704,
+        "hyperedge_text": "It was released two months after her previous work.",
+        "entity_ids": [
+          "\"FOURTH STUDIO ALBUM\"",
+          "\"TWO MONTHS\""
+        ],
+        "chunk_ids": [
+          "chunk-0810f85005cb33553abde2a595e2c086"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released two months after her previous work.",
+            "The Season for Romance The Season for Romance is the fifth studio album, and first Christmas album, from Lee Ann Womack. It was released two months after her fourth studio album,\" Something Worth Leaving Behind\"."
+          ],
+          "relation_texts": [
+            "It was released two months after her previous work.",
+            "link",
+            "FOURTH STUDIO ALBUM",
+            "TWO MONTHS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-175d0b8445f687da1f01c1903e270312",
+            "hyperedge_name": "<hyperedge>\"It was released two months after her previous work.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\"",
+        "branch": "relation",
+        "raw_score": 0.4294666647911072,
+        "hyperedge_text": "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+        "entity_ids": [
+          "\"PORTFOLIO\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "The expected release of Our House in 2018 adds to his portfolio of completed works.",
+            "link",
+            "PORTFOLIO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-800463cc0af33ef22968d66931543a06",
+            "hyperedge_name": "<hyperedge>\"The expected release of Our House in 2018 adds to his portfolio of completed works.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released on September 6, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.42727920413017273,
+        "hyperedge_text": "It was released on September 6, 1920.",
+        "entity_ids": [
+          "\"SEPTEMBER 6, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-abf58852e1b4b8d1ff00e32c25ebc8af"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released on September 6, 1920.",
+            "Love, Honor and Obey Love, Honor and Obey is a 1920 American silent drama film. Directed by Leander de Cordova, the film stars Wilda Bennett, Claire Whitney, and Henry Harmon. It was released on September 6, 1920."
+          ],
+          "relation_texts": [
+            "It was released on September 6, 1920.",
+            "link",
+            "SEPTEMBER 6, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c971308713d91513707a3175e8322c4d",
+            "hyperedge_name": "<hyperedge>\"It was released on September 6, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees opened in limited release in the United States on 3 May 2019.\"",
+        "branch": "semantic",
+        "raw_score": 0.7224242687225342,
+        "hyperedge_text": "Tell It to the Bees opened in limited release in the United States on 3 May 2019.",
+        "entity_ids": [
+          "\"3 MAY 2019\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tell It to the Bees opened in limited release in the United States on 3 May 2019.",
+            "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+          ],
+          "relation_texts": [
+            "Tell It to the Bees opened in limited release in the United States on 3 May 2019.",
+            "link",
+            "3 MAY 2019"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8b9118d61a548ff907a9f148433bc04f",
+            "hyperedge_name": "<hyperedge>\"Tell It to the Bees opened in limited release in the United States on 3 May 2019.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.\"",
+        "branch": "semantic",
+        "raw_score": 0.5863131284713745,
+        "hyperedge_text": "Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.",
+        "entity_ids": [
+          "\"ANNABEL JANKEL\"",
+          "\"TELL IT TO THE BEES\"",
+          "\"ANNA PAQUIN\"",
+          "\"HOLLIDAY GRAINGER\"",
+          "\"HENRIETTA ASHWORTH\"",
+          "\"JESSICA ASHWORTH\"",
+          "\"FIONA SHAW\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.",
+            "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+          ],
+          "relation_texts": [
+            "Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.",
+            "link",
+            "ANNABEL JANKEL",
+            "TELL IT TO THE BEES",
+            "ANNA PAQUIN",
+            "HOLLIDAY GRAINGER",
+            "HENRIETTA ASHWORTH",
+            "JESSICA ASHWORTH",
+            "FIONA SHAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-10c8c5530fdb57fc57f4463ad24b6784",
+            "hyperedge_name": "<hyperedge>\"Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a film that explores themes of love and connection between characters.\"",
+        "branch": "semantic",
+        "raw_score": 0.5641125440597534,
+        "hyperedge_text": "Tell It to the Bees is a film that explores themes of love and connection between characters.",
+        "entity_ids": [
+          "\"THEMES\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tell It to the Bees is a film that explores themes of love and connection between characters.",
+            "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+          ],
+          "relation_texts": [
+            "Tell It to the Bees is a film that explores themes of love and connection between characters.",
+            "link",
+            "THEMES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-33d0da1f3d3263ff08508c9b90d89443",
+            "hyperedge_name": "<hyperedge>\"Tell It to the Bees is a film that explores themes of love and connection between characters.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees was well received at the Toronto International Film Festival.\"",
+        "branch": "semantic",
+        "raw_score": 0.5532671809196472,
+        "hyperedge_text": "Tell It to the Bees was well received at the Toronto International Film Festival.",
+        "entity_ids": [
+          "\"RECEPTION\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tell It to the Bees was well received at the Toronto International Film Festival.",
+            "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+          ],
+          "relation_texts": [
+            "Tell It to the Bees was well received at the Toronto International Film Festival.",
+            "link",
+            "RECEPTION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-65e3534f345afa1307389f05119475dd",
+            "hyperedge_name": "<hyperedge>\"Tell It to the Bees was well received at the Toronto International Film Festival.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a film directed by Annabel Jankel.\"",
+        "branch": "semantic",
+        "raw_score": 0.5515991449356079,
+        "hyperedge_text": "Tell It to the Bees is a film directed by Annabel Jankel.",
+        "entity_ids": [
+          "\"TELL IT TO THE BEES\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tell It to the Bees is a film directed by Annabel Jankel.",
+            "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+          ],
+          "relation_texts": [
+            "Tell It to the Bees is a film directed by Annabel Jankel.",
+            "link",
+            "TELL IT TO THE BEES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3f1fc384c84f113e7d9af6392ec9105a",
+            "hyperedge_name": "<hyperedge>\"Tell It to the Bees is a film directed by Annabel Jankel.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a depiction of a poignant story set against the backdrop of rural life.\"",
+        "branch": "semantic",
+        "raw_score": 0.5339254140853882,
+        "hyperedge_text": "Tell It to the Bees is a depiction of a poignant story set against the backdrop of rural life.",
+        "entity_ids": [
+          "\"RURAL LIFE\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tell It to the Bees is a depiction of a poignant story set against the backdrop of rural life.",
+            "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+          ],
+          "relation_texts": [
+            "Tell It to the Bees is a depiction of a poignant story set against the backdrop of rural life.",
+            "link",
+            "RURAL LIFE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e77a5ba5bbec4216a4bd7a609c0ac72a",
+            "hyperedge_name": "<hyperedge>\"Tell It to the Bees is a depiction of a poignant story set against the backdrop of rural life.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "branch": "semantic",
+        "raw_score": 0.4670717120170593,
+        "hyperedge_text": "The release date on CD was September 22.",
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date on CD was September 22.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date on CD was September 22.",
+            "link",
+            "SEPTEMBER 22"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5348043ffa573d6b9577c2a39d1c0828",
+            "hyperedge_name": "<hyperedge>\"The release date on CD was September 22.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film 'Keeper of the Bees' was released in theaters on July 10, 1947, but the film seems to have been lost since then.\"",
+        "branch": "semantic",
+        "raw_score": 0.452290415763855,
+        "hyperedge_text": "The film 'Keeper of the Bees' was released in theaters on July 10, 1947, but the film seems to have been lost since then.",
+        "entity_ids": [
+          "\"LOST FILM\"",
+          "\"THEATERS\"",
+          "\"JULY 10, 1947\""
+        ],
+        "chunk_ids": [
+          "chunk-638238d9217c6fd5d1bd33a5a736edf5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film 'Keeper of the Bees' was released in theaters on July 10, 1947, but the film seems to have been lost since then.",
+            "Keeper of the Bees (1947 film) Keeper of the Bees is a 1947 American drama film directed by John Sturges. It was based on the novel by the same name, written by Gene Stratton Porter. The film was shot over three weeks. \" Keeper of the Bees\"( 1947) is the third film adaption of the novel\" The Keeper of the Bees.\" There have been two previous film adaptations of the novel in 1925 and 1935. The novel was written by Gene Stratton Porter towards the end of her life, and the novel was published posthumously after a car accident. The film\" Keeper of the Bees\" was released in theaters on July 10, 1947, but the film seems to have been lost since then. The plot of the third film adaptation was changed greatly compared to the first two film adaptations. When the film was originally released by Columbia Pictures, audiences seemed to enjoy the film."
+          ],
+          "relation_texts": [
+            "The film 'Keeper of the Bees' was released in theaters on July 10, 1947, but the film seems to have been lost since then.",
+            "link",
+            "LOST FILM",
+            "THEATERS",
+            "JULY 10, 1947"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b45cbc6ad5eb6277ffe0450b0d66b1a2",
+            "hyperedge_name": "<hyperedge>\"The film 'Keeper of the Bees' was released in theaters on July 10, 1947, but the film seems to have been lost since then.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is based on the 1925 novel 'The Keeper of the Bees'.\"",
+        "branch": "semantic",
+        "raw_score": 0.4506324827671051,
+        "hyperedge_text": "The film is based on the 1925 novel 'The Keeper of the Bees'.",
+        "entity_ids": [
+          "\"GENE STRATTON PORTER\"",
+          "\"THE KEEPER OF THE BEES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7f4f88f56ba759d4b7d135846f68f8c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is based on the 1925 novel 'The Keeper of the Bees'.",
+            "The Keeper of the Bees (1925 film) The Keeper of the Bees is a 1925 American drama film written and directed by James Leo Meehan. It is based on the 1925 novel\" The Keeper of the Bees\" by Gene Stratton Porter. The film stars Robert Frazer, Josef Swickard, Martha Mattox, Clara Bow, Alyce Mills and Gene Stratton. The film was released on September 6, 1925, by Film Booking Offices of America."
+          ],
+          "relation_texts": [
+            "The film is based on the 1925 novel 'The Keeper of the Bees'.",
+            "link",
+            "GENE STRATTON PORTER",
+            "THE KEEPER OF THE BEES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-42a05008f41d430f49d3acfcf11c669e",
+            "hyperedge_name": "<hyperedge>\"The film is based on the 1925 novel 'The Keeper of the Bees'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the album on the vinyl LP was August 25, 2009.\"",
+        "branch": "semantic",
+        "raw_score": 0.44743984937667847,
+        "hyperedge_text": "The release date of the album on the vinyl LP was August 25, 2009.",
+        "entity_ids": [
+          "\"AUGUST 25, 2009\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the album on the vinyl LP was August 25, 2009.",
+            "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+          ],
+          "relation_texts": [
+            "The release date of the album on the vinyl LP was August 25, 2009.",
+            "link",
+            "AUGUST 25, 2009"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8621be053ad985e774b4aad1b1925084",
+            "hyperedge_name": "<hyperedge>\"The release date of the album on the vinyl LP was August 25, 2009.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.\"",
+        "hyperedge_text": "Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5863131284713745,
+        "fusion_score": 0.517262625694275,
+        "entity_ids": [
+          "\"ANNABEL JANKEL\"",
+          "\"TELL IT TO THE BEES\"",
+          "\"ANNA PAQUIN\"",
+          "\"HOLLIDAY GRAINGER\"",
+          "\"HENRIETTA ASHWORTH\"",
+          "\"JESSICA ASHWORTH\"",
+          "\"FIONA SHAW\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "evidence_texts": [
+          "Tell It to the Bees is a 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger.",
+          "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.586313,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517263
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a film directed by Annabel Jankel.\"",
+        "hyperedge_text": "Tell It to the Bees is a film directed by Annabel Jankel.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5515991449356079,
+        "fusion_score": 0.5103198289871216,
+        "entity_ids": [
+          "\"TELL IT TO THE BEES\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "evidence_texts": [
+          "Tell It to the Bees is a film directed by Annabel Jankel.",
+          "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.551599,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51032
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "hyperedge_text": "The release date on CD was September 22.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4368012547492981,
+        "semantic_score": 0.4670717120170593,
+        "fusion_score": 0.2681348443031311,
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "evidence_texts": [
+          "The release date on CD was September 22.",
+          "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.436801,
+          "S": 0.467072,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268135
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees opened in limited release in the United States on 3 May 2019.\"",
+        "hyperedge_text": "Tell It to the Bees opened in limited release in the United States on 3 May 2019.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.7224242687225342,
+        "fusion_score": 0.7444848537445069,
+        "entity_ids": [
+          "\"3 MAY 2019\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "evidence_texts": [
+          "Tell It to the Bees opened in limited release in the United States on 3 May 2019.",
+          "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.722424,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.744485
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tell It to the Bees is a film that explores themes of love and connection between characters.\"",
+        "hyperedge_text": "Tell It to the Bees is a film that explores themes of love and connection between characters.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5641125440597534,
+        "fusion_score": 0.5128225088119507,
+        "entity_ids": [
+          "\"THEMES\""
+        ],
+        "chunk_ids": [
+          "chunk-4b82d39711e01597fd8be7fa7070f16e"
+        ],
+        "evidence_texts": [
+          "Tell It to the Bees is a film that explores themes of love and connection between characters.",
+          "Tell It to the Bees Tell It to the Bees is 2018 British drama film directed by Annabel Jankel and starring Anna Paquin and Holliday Grainger. The screenplay by Henrietta and Jessica Ashworth is based on the 2009 novel of the same name by Fiona Shaw. The film had its world premiere at the Toronto International Film Festival as a Special Presentation on 9 September 2018. \"Tell It to the Bees\" opened in limited release in the United States on 3 May 2019. It was released theatrically in the United Kingdom on 26 July 2019."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.564113,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.512823
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Man'S Search For Happiness?",
+    "retrieval_question": "What is the release date of Man'S Search For Happiness?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Man'S Search For Happiness?",
+      "retrieval_question": "What is the release date of Man'S Search For Happiness?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"MAN'S SEARCH FOR HAPPINESS\"",
+          "\"PLAN OF SALVATION\""
+        ],
+        "chunk_ids": [
+          "chunk-359d96db46bd898849663ef9f48a24e5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+            "Man's Search for Happiness Man's Search for Happiness is a 13- minute film produced by The Church of Jesus Christ of Latter- day Saints( LDS Church). It explains the role of the Plan of Salvation in LDS theology, with questions like\" Who am I? Where did I come from?\", and\" Where am I going?\" being explored from an LDS perspective. This film was produced by the BYU Motion Picture Studio for the Mormon Pavilion at the 1964 World's Fair in New York City, and was viewed by over five million people, many of whom were not LDS. It was later remade in Japanese for Expo'70 in Japan. In 1986, the visuals and background music were updated, while retaining the original narration by Richard L. Evans, who served as a member of the church's of the Quorum of the Twelve Apostles."
+          ],
+          "relation_texts": [
+            "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+            "link",
+            "THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS",
+            "MAN'S SEARCH FOR HAPPINESS",
+            "PLAN OF SALVATION"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Church of Jesus Christ of Latter-day Saints is also known as the LDS Church.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "The Church of Jesus Christ of Latter-day Saints is also known as the LDS Church.",
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\""
+        ],
+        "chunk_ids": [
+          "chunk-399544a5902ac8f05fa8964f98368d2e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Church of Jesus Christ of Latter-day Saints is also known as the LDS Church.",
+            "May Green Hinckley May Green Hinckley( May 1, 1881 – May 2, 1943) was the third general president of the Primary of The Church of Jesus Christ of Latter- day Saints( LDS Church) from 1940 until her death. She was the stepmother of Gordon B. Hinckley, fifteenth president of the LDS Church."
+          ],
+          "relation_texts": [
+            "The Church of Jesus Christ of Latter-day Saints is also known as the LDS Church.",
+            "link",
+            "THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Anstis Elmina Shepard Taylor (September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter-day Saints and was a founding member of the National Council of Women.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Anstis Elmina Shepard Taylor (September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter-day Saints and was a founding member of the National Council of Women.",
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"ELMINA SHEPARD TAYLOR\"",
+          "\"YOUNG WOMEN ORGANIZATION\"",
+          "\"NATIONAL COUNCIL OF WOMEN\""
+        ],
+        "chunk_ids": [
+          "chunk-8013aa10207376b232a28dd51175753c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Anstis Elmina Shepard Taylor (September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter-day Saints and was a founding member of the National Council of Women.",
+            "Elmina Shepard Taylor Anstis Elmina Shepard Taylor( September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter- day Saints( LDS Church) and was a founding member of the National Council of Women."
+          ],
+          "relation_texts": [
+            "Anstis Elmina Shepard Taylor (September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter-day Saints and was a founding member of the National Council of Women.",
+            "link",
+            "THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS",
+            "ELMINA SHEPARD TAYLOR",
+            "YOUNG WOMEN ORGANIZATION",
+            "NATIONAL COUNCIL OF WOMEN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "branch": "relation",
+        "raw_score": 0.5484181642532349,
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's release occurred on a specific date.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The film's release occurred on a specific date.",
+            "link",
+            "SPECIFIC DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf00e02cc9aa046e03d764b86b678f46",
+            "hyperedge_name": "<hyperedge>\"The film's release occurred on a specific date.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released by Producers Releasing Corporation.\"",
+        "branch": "relation",
+        "raw_score": 0.5446234941482544,
+        "hyperedge_text": "The film was released by Producers Releasing Corporation.",
+        "entity_ids": [
+          "\"PRODUCERS RELEASING CORPORATION\""
+        ],
+        "chunk_ids": [
+          "chunk-60a7fe156c336c5f2765e7f745e9155b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was released by Producers Releasing Corporation.",
+            "Raiders of Red Gap Raiders of Red Gap is a 1943 American Western film directed by Sam Newfield and written by Joseph O'Donnell. The film stars Robert Livingston, Al St. John, Myrna Dell, Ed Cassidy, Charles King and Kermit Maynard. The film was released on September 30, 1943, by Producers Releasing Corporation."
+          ],
+          "relation_texts": [
+            "The film was released by Producers Releasing Corporation.",
+            "link",
+            "PRODUCERS RELEASING CORPORATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-abc3fe19447c9ae3bef036bef3052772",
+            "hyperedge_name": "<hyperedge>\"The film was released by Producers Releasing Corporation.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released on September 30, 1943, by Producers Releasing Corporation.\"",
+        "branch": "relation",
+        "raw_score": 0.512313723564148,
+        "hyperedge_text": "The film was released on September 30, 1943, by Producers Releasing Corporation.",
+        "entity_ids": [
+          "\"PRODUCERS RELEASING CORPORATION\"",
+          "\"SEPTEMBER 30, 1943\""
+        ],
+        "chunk_ids": [
+          "chunk-60a7fe156c336c5f2765e7f745e9155b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was released on September 30, 1943, by Producers Releasing Corporation.",
+            "Raiders of Red Gap Raiders of Red Gap is a 1943 American Western film directed by Sam Newfield and written by Joseph O'Donnell. The film stars Robert Livingston, Al St. John, Myrna Dell, Ed Cassidy, Charles King and Kermit Maynard. The film was released on September 30, 1943, by Producers Releasing Corporation."
+          ],
+          "relation_texts": [
+            "The film was released on September 30, 1943, by Producers Releasing Corporation.",
+            "link",
+            "PRODUCERS RELEASING CORPORATION",
+            "SEPTEMBER 30, 1943"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-02a9dd1e0af06ed7a400ce413de1ecad",
+            "hyperedge_name": "<hyperedge>\"The film was released on September 30, 1943, by Producers Releasing Corporation.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released on November 15, 1947, by Producers Releasing Corporation.\"",
+        "branch": "relation",
+        "raw_score": 0.5086519122123718,
+        "hyperedge_text": "The film was released on November 15, 1947, by Producers Releasing Corporation.",
+        "entity_ids": [
+          "\"PRODUCERS RELEASING CORPORATION\"",
+          "\"NOVEMBER 15, 1947\""
+        ],
+        "chunk_ids": [
+          "chunk-6fd5d18d339cd5ec541a31dca8bc071b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was released on November 15, 1947, by Producers Releasing Corporation.",
+            "The Fighting Vigilantes The Fighting Vigilantes is a 1947 American Western film directed by Ray Taylor and written by Robert B. Churchill. The film stars Lash LaRue, Al St. John, Jennifer Holt, George Chesebro, Lee Morgan, Marshall Reed, Carl Mathews and Russell Arms. The film was released on November 15, 1947, by Producers Releasing Corporation."
+          ],
+          "relation_texts": [
+            "The film was released on November 15, 1947, by Producers Releasing Corporation.",
+            "link",
+            "PRODUCERS RELEASING CORPORATION",
+            "NOVEMBER 15, 1947"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a23b1c28fc414fc332fb4590279c64c0",
+            "hyperedge_name": "<hyperedge>\"The film was released on November 15, 1947, by Producers Releasing Corporation.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "branch": "relation",
+        "raw_score": 0.49020853638648987,
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is July 25, 1920.",
+            "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+          ],
+          "relation_texts": [
+            "The release date of the film is July 25, 1920.",
+            "link",
+            "JULY 25, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62471a4725f6e026bc7378dd17783972",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is July 25, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released by Fox Film Corporation on October 13, 1918.\"",
+        "branch": "relation",
+        "raw_score": 0.48490461707115173,
+        "hyperedge_text": "The film was released by Fox Film Corporation on October 13, 1918.",
+        "entity_ids": [
+          "\"FOX FILM CORPORATION\"",
+          "\"OCTOBER 13, 1918\""
+        ],
+        "chunk_ids": [
+          "chunk-ee7770ebc8ff48cf5b2482c1f05a055a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was released by Fox Film Corporation on October 13, 1918.",
+            "Tell It to the Marines (1918 film) Tell It to the Marines is a 1918 American silent comedy-drama film directed by Arvid E. Gillstrom and starring Jane Lee, Katherine Lee, Charles Slattery, and Edward Bagley. The film was released by Fox Film Corporation on October 13, 1918."
+          ],
+          "relation_texts": [
+            "The film was released by Fox Film Corporation on October 13, 1918.",
+            "link",
+            "FOX FILM CORPORATION",
+            "OCTOBER 13, 1918"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-07e5403bd819a34d8402419205596016",
+            "hyperedge_name": "<hyperedge>\"The film was released by Fox Film Corporation on October 13, 1918.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Produced on a budget of, the film was theatrically released on 20 October 2017.\"",
+        "branch": "relation",
+        "raw_score": 0.4831899106502533,
+        "hyperedge_text": "Produced on a budget of, the film was theatrically released on 20 October 2017.",
+        "entity_ids": [
+          "\"BUDGET\"",
+          "\"THEATRICAL RELEASE\""
+        ],
+        "chunk_ids": [
+          "chunk-2eb5bf1c4618c7907f3bbb5d99d24ec1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Produced on a budget of, the film was theatrically released on 20 October 2017.",
+            "Golmaal Again Golmaal Again is a 2017 Indian Hindi- language supernatural action comedy film co-produced and directed by Rohit Shetty, and written by Sajid- Farhad and Yunus Sajawal. The film stars Ajay Devgn, Arshad Warsi, Tusshar Kapoor, Kunal Khemu, Shreyas Talpade, Parineeti Chopra, Tabu, Johnny Lever, Prakash Raj and Neil Nitin Mukesh in the lead roles while Mukesh Tiwari, Sanjay Mishra, Vrajesh Hirjee, Murali Sharma, Vijay Patkar, Uday Tikekar, Sachin Khedekar, Ashwini Kalsekar are featured in supporting roles and Nana Patekar makes a special appearance as himself. Golmaal Again is the fourth installment of the Golmaal franchise. Production of the film began in July 2016. Chopra signed to play the female lead after Kareena Kapoor opted out of the film because of pregnancy. Principal photography took place from March to July 2017. Produced on a budget of, the film was theatricall..."
+          ],
+          "relation_texts": [
+            "Produced on a budget of, the film was theatrically released on 20 October 2017.",
+            "link",
+            "BUDGET",
+            "THEATRICAL RELEASE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-57985497465f61a37cf55022c6de1b0e",
+            "hyperedge_name": "<hyperedge>\"Produced on a budget of, the film was theatrically released on 20 October 2017.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released in 2012, indicating its production year.\"",
+        "branch": "relation",
+        "raw_score": 0.4795415997505188,
+        "hyperedge_text": "The film was released in 2012, indicating its production year.",
+        "entity_ids": [
+          "\"2012\""
+        ],
+        "chunk_ids": [
+          "chunk-72e36347526e0e93e0708e95e799b041"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was released in 2012, indicating its production year.",
+            "Dead Mine Dead Mine is a 2012 English- language Indonesian horror film directed by Steven Sheil and starring Ario Bayu and Joe Taslim. The Film was produced by Infinite Frameworks, the production house before working on the musical animated film\" Meraih Mimpi\"( Achieved a dream) in 2009. Filming and production of the film was done in the filming facility integrated in Batam Island."
+          ],
+          "relation_texts": [
+            "The film was released in 2012, indicating its production year.",
+            "link",
+            "2012"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-071c98bc1eaace937232ee783250d527",
+            "hyperedge_name": "<hyperedge>\"The film was released in 2012, indicating its production year.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released by Lionsgate Films.\"",
+        "branch": "relation",
+        "raw_score": 0.47228556871414185,
+        "hyperedge_text": "The film was released by Lionsgate Films.",
+        "entity_ids": [
+          "\"LIONSGATE FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-6d0462b13de6034c56f151f2fbdc204b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was released by Lionsgate Films.",
+            "Safe (2012 film) Safe is a 2012 American action thriller film written and directed by Boaz Yakin, produced by Lawrence Bender and Dana Brunetti, and starring Jason Statham, Chris Sarandon, Robert John Burke and James Hong. Statham plays Luke Wright, an ex-cop and former cage fighter who winds up protecting a gifted child who is being chased by the Russian mafia, Chinese Triads, and corrupt New York City police. \" Safe\" was released by Lionsgate Films on April 27, 2012. Upon release, the film received generally negative reviews for its screenplay, writing and pace. However, the film received critical praise for the action sequences, direction, the cast( particularly Statham), music and stunts. In addition to a critical failure, the film did average business at the box office by grossing$ 40.6 million worldwide against budget of$ 30 million."
+          ],
+          "relation_texts": [
+            "The film was released by Lionsgate Films.",
+            "link",
+            "LIONSGATE FILMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7a211fbfc062aa0d518cbbacaefc2b58",
+            "hyperedge_name": "<hyperedge>\"The film was released by Lionsgate Films.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release was by a known film company, Paramount Pictures.\"",
+        "branch": "relation",
+        "raw_score": 0.4692128598690033,
+        "hyperedge_text": "The film's release was by a known film company, Paramount Pictures.",
+        "entity_ids": [
+          "\"FILM COMPANY\""
+        ],
+        "chunk_ids": [
+          "chunk-de3d5415e48a1c0ef800a1ee576f5684"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's release was by a known film company, Paramount Pictures.",
+            "The Majesty of the Law The Majesty of the Law is a 1915 American drama silent film written and directed by Julia Crawford Ivers. The film stars George Fawcett( in his film debut), Jane Wolfe, William Desmond, Myrtle Stedman, John Oaker and Charlie Ruggles. The film was released on August 26, 1915, by Paramount Pictures."
+          ],
+          "relation_texts": [
+            "The film's release was by a known film company, Paramount Pictures.",
+            "link",
+            "FILM COMPANY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fcc82879b9e94e7c449947101a9eaa04",
+            "hyperedge_name": "<hyperedge>\"The film's release was by a known film company, Paramount Pictures.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\"",
+        "branch": "semantic",
+        "raw_score": 0.5697433948516846,
+        "hyperedge_text": "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"MAN'S SEARCH FOR HAPPINESS\"",
+          "\"PLAN OF SALVATION\""
+        ],
+        "chunk_ids": [
+          "chunk-359d96db46bd898849663ef9f48a24e5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+            "Man's Search for Happiness Man's Search for Happiness is a 13- minute film produced by The Church of Jesus Christ of Latter- day Saints( LDS Church). It explains the role of the Plan of Salvation in LDS theology, with questions like\" Who am I? Where did I come from?\", and\" Where am I going?\" being explored from an LDS perspective. This film was produced by the BYU Motion Picture Studio for the Mormon Pavilion at the 1964 World's Fair in New York City, and was viewed by over five million people, many of whom were not LDS. It was later remade in Japanese for Expo'70 in Japan. In 1986, the visuals and background music were updated, while retaining the original narration by Richard L. Evans, who served as a member of the church's of the Quorum of the Twelve Apostles."
+          ],
+          "relation_texts": [
+            "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+            "link",
+            "THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS",
+            "MAN'S SEARCH FOR HAPPINESS",
+            "PLAN OF SALVATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-398edaaf68cf3eb19ef54b8b7c8a0a02",
+            "hyperedge_name": "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In Search of Happiness is a title that likely explores the pursuit of happiness.\"",
+        "branch": "semantic",
+        "raw_score": 0.46937131881713867,
+        "hyperedge_text": "In Search of Happiness is a title that likely explores the pursuit of happiness.",
+        "entity_ids": [
+          "\"IN SEARCH OF HAPPINESS\""
+        ],
+        "chunk_ids": [
+          "chunk-e9cc7e5c5a7ac04ee14a101432be0e5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In Search of Happiness is a title that likely explores the pursuit of happiness.",
+            "Finding Joy Finding Joy, In Search of Happiness or Searching for Happiness may refer to:"
+          ],
+          "relation_texts": [
+            "In Search of Happiness is a title that likely explores the pursuit of happiness.",
+            "link",
+            "IN SEARCH OF HAPPINESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-59f01fd5481aff0fd726122d825d4e35",
+            "hyperedge_name": "<hyperedge>\"In Search of Happiness is a title that likely explores the pursuit of happiness.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Searching for Happiness is a title suggesting an exploration of happiness.\"",
+        "branch": "semantic",
+        "raw_score": 0.45327848196029663,
+        "hyperedge_text": "Searching for Happiness is a title suggesting an exploration of happiness.",
+        "entity_ids": [
+          "\"SEARCHING FOR HAPPINESS\""
+        ],
+        "chunk_ids": [
+          "chunk-e9cc7e5c5a7ac04ee14a101432be0e5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Searching for Happiness is a title suggesting an exploration of happiness.",
+            "Finding Joy Finding Joy, In Search of Happiness or Searching for Happiness may refer to:"
+          ],
+          "relation_texts": [
+            "Searching for Happiness is a title suggesting an exploration of happiness.",
+            "link",
+            "SEARCHING FOR HAPPINESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-84a85c08bfddfdb62bf4e40b0bc527e9",
+            "hyperedge_name": "<hyperedge>\"Searching for Happiness is a title suggesting an exploration of happiness.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"For Happiness is a 1917 Russian drama film.\"",
+        "branch": "semantic",
+        "raw_score": 0.4271412491798401,
+        "hyperedge_text": "For Happiness is a 1917 Russian drama film.",
+        "entity_ids": [
+          "\"FOR HAPPINESS\""
+        ],
+        "chunk_ids": [
+          "chunk-83c2f9210680f1e34e57e7aae115fc3b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "For Happiness is a 1917 Russian drama film.",
+            "For Happiness For Happiness is a 1917 Russian drama film directed by Yevgeny Bauer."
+          ],
+          "relation_texts": [
+            "For Happiness is a 1917 Russian drama film.",
+            "link",
+            "FOR HAPPINESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-19c2baa640cb8863c848c0489c2db351",
+            "hyperedge_name": "<hyperedge>\"For Happiness is a 1917 Russian drama film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Finding Joy, In Search of Happiness or Searching for Happiness may refer to:\"",
+        "branch": "semantic",
+        "raw_score": 0.42083093523979187,
+        "hyperedge_text": "Finding Joy, In Search of Happiness or Searching for Happiness may refer to:",
+        "entity_ids": [
+          "\"FINDING JOY\"",
+          "\"IN SEARCH OF HAPPINESS\"",
+          "\"SEARCHING FOR HAPPINESS\""
+        ],
+        "chunk_ids": [
+          "chunk-e9cc7e5c5a7ac04ee14a101432be0e5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Finding Joy, In Search of Happiness or Searching for Happiness may refer to:",
+            "Finding Joy Finding Joy, In Search of Happiness or Searching for Happiness may refer to:"
+          ],
+          "relation_texts": [
+            "Finding Joy, In Search of Happiness or Searching for Happiness may refer to:",
+            "link",
+            "FINDING JOY",
+            "IN SEARCH OF HAPPINESS",
+            "SEARCHING FOR HAPPINESS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a84aadddb9b2ca5df033aebd506fa073",
+            "hyperedge_name": "<hyperedge>\"Finding Joy, In Search of Happiness or Searching for Happiness may refer to:\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The titles Finding Joy, In Search of Happiness, and Searching for Happiness might refer to research on emotional well-being.\"",
+        "branch": "semantic",
+        "raw_score": 0.418363094329834,
+        "hyperedge_text": "The titles Finding Joy, In Search of Happiness, and Searching for Happiness might refer to research on emotional well-being.",
+        "entity_ids": [
+          "\"RESEARCH ON EMOTIONAL WELL-BEING\""
+        ],
+        "chunk_ids": [
+          "chunk-e9cc7e5c5a7ac04ee14a101432be0e5a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The titles Finding Joy, In Search of Happiness, and Searching for Happiness might refer to research on emotional well-being.",
+            "Finding Joy Finding Joy, In Search of Happiness or Searching for Happiness may refer to:"
+          ],
+          "relation_texts": [
+            "The titles Finding Joy, In Search of Happiness, and Searching for Happiness might refer to research on emotional well-being.",
+            "link",
+            "RESEARCH ON EMOTIONAL WELL-BEING"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-91f860f7973ef6d0f493d5a65430f004",
+            "hyperedge_name": "<hyperedge>\"The titles Finding Joy, In Search of Happiness, and Searching for Happiness might refer to research on emotional well-being.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Released on 9 November 2007, the film stars Madhuri Dixit, Konkona Sen Sharma, Akshaye Khanna, and Kunal Kapoor.\"",
+        "branch": "semantic",
+        "raw_score": 0.4156257212162018,
+        "hyperedge_text": "Released on 9 November 2007, the film stars Madhuri Dixit, Konkona Sen Sharma, Akshaye Khanna, and Kunal Kapoor.",
+        "entity_ids": [
+          "\"MADHURI DIXIT\"",
+          "\"KONKONA SEN SHARMA\"",
+          "\"AKSHAYE KHANNA\"",
+          "\"KUNAL KAPOOR\""
+        ],
+        "chunk_ids": [
+          "chunk-cc3fb058bb99f1753215e146f7d6eb59"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Released on 9 November 2007, the film stars Madhuri Dixit, Konkona Sen Sharma, Akshaye Khanna, and Kunal Kapoor.",
+            "Anil Mehta Anil Mehta is a cinematographer, writer, actor, and director of Bollywood movies. He has studied cinematography at the Film and Television Institute of India, Pune. He is the founding member of Indian Society of Cinematographers( ISC). He has shot( 1996),\" Lagaan\"( 2001),\" Saathiya\"( 2002),\" Veer- Zaara\"( 2004) and\" Jab Tak Hai Jaan\"( 2012). Mehta's first feature film,\" Aaja Nachle\", was produced by Yash Raj Films. Released on 9 November 2007 the film stars Madhuri Dixit( in her comeback film), Konkona Sen Sharma, Akshaye Khanna and Kunal Kapoor. He won the National Film Award for Best Cinematography for his work in\" Hum Dil De Chuke Sanam\"( 1999)"
+          ],
+          "relation_texts": [
+            "Released on 9 November 2007, the film stars Madhuri Dixit, Konkona Sen Sharma, Akshaye Khanna, and Kunal Kapoor.",
+            "link",
+            "MADHURI DIXIT",
+            "KONKONA SEN SHARMA",
+            "AKSHAYE KHANNA",
+            "KUNAL KAPOOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-eb2dbe99bd6a54e1c33a4f2d1ae4e9b7",
+            "hyperedge_name": "<hyperedge>\"Released on 9 November 2007, the film stars Madhuri Dixit, Konkona Sen Sharma, Akshaye Khanna, and Kunal Kapoor.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is November 15, 1955.\"",
+        "branch": "semantic",
+        "raw_score": 0.4143112897872925,
+        "hyperedge_text": "The release date of the film is November 15, 1955.",
+        "entity_ids": [
+          "\"NOVEMBER 15, 1955\""
+        ],
+        "chunk_ids": [
+          "chunk-a49ee799ce6a7193f132ce150feefe35"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is November 15, 1955.",
+            "Target Zero Target Zero is a 1955 American drama film directed by Harmon Jones and written by James Warner Bellah and Sam Rolfe. The film stars Richard Conte, Peggie Castle, Charles Bronson, Richard Wyler, L. Q. Jones and Chuck Connors. The film was released by Warner Bros. on November 15, 1955."
+          ],
+          "relation_texts": [
+            "The release date of the film is November 15, 1955.",
+            "link",
+            "NOVEMBER 15, 1955"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1b8b4718d5d0e64a544c23a44d7ae41b",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is November 15, 1955.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "branch": "semantic",
+        "raw_score": 0.4121553897857666,
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The release date of the film is July 25, 1920.",
+            "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+          ],
+          "relation_texts": [
+            "The release date of the film is July 25, 1920.",
+            "link",
+            "JULY 25, 1920"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62471a4725f6e026bc7378dd17783972",
+            "hyperedge_name": "<hyperedge>\"The release date of the film is July 25, 1920.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released in the United States in 2012 by distributor Music Box Films.\"",
+        "branch": "semantic",
+        "raw_score": 0.41049158573150635,
+        "hyperedge_text": "It was released in the United States in 2012 by distributor Music Box Films.",
+        "entity_ids": [
+          "\"2012\"",
+          "\"MUSIC BOX FILMS\"",
+          "\"DISTRIBUTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-25ef9af10015e45e922a7d1f9f6a5d52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was released in the United States in 2012 by distributor Music Box Films.",
+            "The Deep Blue Sea (2011 film) The Deep Blue Sea is a 2011 British romantic drama film directed by Terence Davies and starring Rachel Weisz, Tom Hiddleston, and Simon Russell Beale. It is an adaptation of the 1952 Terence Rattigan play\" The Deep Blue Sea\" about the wife of a judge who engages in an affair with a former RAF pilot. This film version is funded by the UK Film Council and Film4, produced by Sean O'Connor and Kate Ogborn. Filming began in late 2010 and it was released in the United Kingdom in 2011, the year of Rattigan's centenary. It was released in the United States in 2012 by distributor Music Box Films."
+          ],
+          "relation_texts": [
+            "It was released in the United States in 2012 by distributor Music Box Films.",
+            "link",
+            "2012",
+            "MUSIC BOX FILMS",
+            "DISTRIBUTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e902d26bbb2be2242ceb11ec77c0718a",
+            "hyperedge_name": "<hyperedge>\"It was released in the United States in 2012 by distributor Music Box Films.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).\"",
+        "hyperedge_text": "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.4,
+        "semantic_score": 0.5697433948516846,
+        "fusion_score": 0.673948678970337,
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"MAN'S SEARCH FOR HAPPINESS\"",
+          "\"PLAN OF SALVATION\""
+        ],
+        "chunk_ids": [
+          "chunk-359d96db46bd898849663ef9f48a24e5"
+        ],
+        "evidence_texts": [
+          "Man's Search for Happiness is a 13-minute film produced by The Church of Jesus Christ of Latter-day Saints (LDS Church).",
+          "Man's Search for Happiness Man's Search for Happiness is a 13- minute film produced by The Church of Jesus Christ of Latter- day Saints( LDS Church). It explains the role of the Plan of Salvation in LDS theology, with questions like\" Who am I? Where did I come from?\", and\" Where am I going?\" being explored from an LDS perspective. This film was produced by the BYU Motion Picture Studio for the Mormon Pavilion at the 1964 World's Fair in New York City, and was viewed by over five million people, many of whom were not LDS. It was later remade in Japanese for Expo'70 in Japan. In 1986, the visuals and background music were updated, while retaining the original narration by Richard L. Evans, who served as a member of the church's of the Quorum of the Twelve Apostles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.4,
+          "S": 0.569743,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.673949
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.49020853638648987,
+        "semantic_score": 0.4121553897857666,
+        "fusion_score": 0.2785144925117493,
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "evidence_texts": [
+          "The release date of the film is July 25, 1920.",
+          "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.490209,
+          "S": 0.412155,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.278514
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is November 15, 1955.\"",
+        "hyperedge_text": "The release date of the film is November 15, 1955.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4143112897872925,
+        "fusion_score": 0.4828622579574585,
+        "entity_ids": [
+          "\"NOVEMBER 15, 1955\""
+        ],
+        "chunk_ids": [
+          "chunk-a49ee799ce6a7193f132ce150feefe35"
+        ],
+        "evidence_texts": [
+          "The release date of the film is November 15, 1955.",
+          "Target Zero Target Zero is a 1955 American drama film directed by Harmon Jones and written by James Warner Bellah and Sam Rolfe. The film stars Richard Conte, Peggie Castle, Charles Bronson, Richard Wyler, L. Q. Jones and Chuck Connors. The film was released by Warner Bros. on November 15, 1955."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.414311,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.482862
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5484181642532349,
+        "semantic_score": 0.5,
+        "fusion_score": 0.3193672657012939,
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "evidence_texts": [
+          "The film's release occurred on a specific date.",
+          "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.548418,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.319367
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Anstis Elmina Shepard Taylor (September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter-day Saints and was a founding member of the National Council of Women.\"",
+        "hyperedge_text": "Anstis Elmina Shepard Taylor (September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter-day Saints and was a founding member of the National Council of Women.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.2,
+        "semantic_score": 0.0,
+        "fusion_score": 0.28,
+        "entity_ids": [
+          "\"THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS\"",
+          "\"ELMINA SHEPARD TAYLOR\"",
+          "\"YOUNG WOMEN ORGANIZATION\"",
+          "\"NATIONAL COUNCIL OF WOMEN\""
+        ],
+        "chunk_ids": [
+          "chunk-8013aa10207376b232a28dd51175753c"
+        ],
+        "evidence_texts": [
+          "Anstis Elmina Shepard Taylor (September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter-day Saints and was a founding member of the National Council of Women.",
+          "Elmina Shepard Taylor Anstis Elmina Shepard Taylor( September 12, 1830 – December 6, 1904) was the first general president of what is today the Young Women organization of The Church of Jesus Christ of Latter- day Saints( LDS Church) and was a founding member of the National Council of Women."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.2,
+          "S": 0.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.28
+        }
+      }
+    ]
+  }
+]

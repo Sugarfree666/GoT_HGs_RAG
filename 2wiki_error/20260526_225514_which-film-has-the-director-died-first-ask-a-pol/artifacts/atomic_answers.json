@@ -1,0 +1,377 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Ask A Policeman?",
+    "analysis": {
+      "entities": [
+        "Ask A Policeman"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\"",
+        "hyperedge_text": "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6436264514923096,
+        "fusion_score": 0.5287252902984619,
+        "entity_ids": [
+          "\"WILL HAY\"",
+          "\"MARCEL VARNEL\"",
+          "\"ASK A POLICEMAN\"",
+          "\"MOORE MARRIOTT\"",
+          "\"GRAHAM MOFFATT\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "evidence_texts": [
+          "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+          "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.643626,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528725
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.\"",
+        "hyperedge_text": "Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6262600421905518,
+        "fusion_score": 0.7252520084381104,
+        "entity_ids": [
+          "\"SATIRE\"",
+          "\"SOCIETY'S VIEW ON LAW ENFORCEMENT\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "evidence_texts": [
+          "Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.",
+          "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.62626,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.725252
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.\"",
+        "hyperedge_text": "In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5904468297958374,
+        "fusion_score": 0.5180893659591675,
+        "entity_ids": [
+          "\"MUNDANE DUTIES\"",
+          "\"ABSURDITY\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "evidence_texts": [
+          "In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.",
+          "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.590447,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518089
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The title comes from the popular music hall song 'Ask a Policeman'.",
+        "hyperedge_text": "\"The title comes from the popular music hall song 'Ask a Policeman'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5503140687942505,
+        "fusion_score": 0.5100628137588501,
+        "entity_ids": [
+          "\"TITLE\"",
+          "\"POPULAR MUSIC HALL SONG\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "evidence_texts": [
+          "\"The title comes from the popular music hall song 'Ask a Policeman'.",
+          "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.550314,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510063
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As Director General of Police, he dealt with various administrative and operational issues.\"",
+        "hyperedge_text": "As Director General of Police, he dealt with various administrative and operational issues.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.46658098697662354,
+        "fusion_score": 0.49331619739532473,
+        "entity_ids": [
+          "\"ADMINISTRATIVE ISSUES\"",
+          "\"OPERATIONAL ISSUES\""
+        ],
+        "chunk_ids": [
+          "chunk-ebb600d80a026678ab405d580746470f"
+        ],
+        "evidence_texts": [
+          "As Director General of Police, he dealt with various administrative and operational issues.",
+          "S. N. Mathur S.N. Mathur was the Director of the Indian Intelligence Bureau between September 1975 and February 1980. He was also the Director General of Police in Punjab."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.466581,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.493316
+        }
+      }
+    ],
+    "answer": "Marcel Varnel",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Ask a Policeman' is directed by Marcel Varnel.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the director of Ask A Policeman die?",
+    "analysis": {
+      "entities": [
+        "Marcel Varnel"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.\"",
+        "hyperedge_text": "Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6980879306793213,
+        "fusion_score": 0.5396175861358643,
+        "entity_ids": [
+          "\"PARIS\"",
+          "\"MARCEL VARNEL\"",
+          "\"MARCEL HYACINTHE LE BOZEC\""
+        ],
+        "chunk_ids": [
+          "chunk-4808ab08f97d603225189feecdb87ba5"
+        ],
+        "evidence_texts": [
+          "Marcel Varnel was a film director born Marcel Hyacinthe le Bozec in Paris, France.",
+          "Marcel Varnel Marcel Varnel (16 October 1892 – 13 July 1947) was a film director. He was born Marcel Hyacinthe le Bozec in Paris, France. Varnel started his working life on the Paris stage, soon becoming a director of musical comedies. In 1925 he moved to New York City working as director in several Broadway operettas, musicals and dramas for the Shubert family. This was followed by a move to Hollywood where he directed three low budget thrillers. In 1934, he moved to England and it was as director of British comedies initially working at British International Pictures , Elstree then in 1936 moving to Gainsborough Pictures where he produced his best films. Among the performers he worked with were Will Hay, The Crazy Gang, Arthur Askey and George Formby. He died in a car crash near Rake, West Sussex."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.698088,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.539618
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.\"",
+        "hyperedge_text": "Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8209437131881714,
+        "fusion_score": 0.5641887426376343,
+        "entity_ids": [
+          "\"16 OCTOBER 1892\"",
+          "\"13 JULY 1947\""
+        ],
+        "chunk_ids": [
+          "chunk-4808ab08f97d603225189feecdb87ba5"
+        ],
+        "evidence_texts": [
+          "Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.",
+          "Marcel Varnel Marcel Varnel (16 October 1892 – 13 July 1947) was a film director. He was born Marcel Hyacinthe le Bozec in Paris, France. Varnel started his working life on the Paris stage, soon becoming a director of musical comedies. In 1925 he moved to New York City working as director in several Broadway operettas, musicals and dramas for the Shubert family. This was followed by a move to Hollywood where he directed three low budget thrillers. In 1934, he moved to England and it was as director of British comedies initially working at British International Pictures , Elstree then in 1936 moving to Gainsborough Pictures where he produced his best films. Among the performers he worked with were Will Hay, The Crazy Gang, Arthur Askey and George Formby. He died in a car crash near Rake, West Sussex."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.820944,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.564189
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role.\"",
+        "hyperedge_text": "South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1941\"",
+          "\"LINDEN TRAVERS\"",
+          "\"ENID STAMP-TAYLOR\"",
+          "\"FELIX AYLMER\"",
+          "\"RONALD SHINER\"",
+          "\"MARCEL VARNEL\"",
+          "\"MAVIS VILLIERS\"",
+          "\"SOUTH AMERICAN GEORGE\"",
+          "\"GEORGE FORMBY\"",
+          "\"HERBERT LOMAS\"",
+          "\"COLUMBIA (BRITISH) PRODUCTIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-f8a766f30e8e11597bb81a8f5e4654ad"
+        ],
+        "evidence_texts": [
+          "South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role.",
+          "South American George South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role, Linden Travers, Enid Stamp- Taylor, Felix Aylmer, Ronald Shiner as Swifty, Mavis Villiers and Herbert Lomas. It was produced by Columbia( British) Productions."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Marcel Varnel directed the film South American George.\"",
+        "hyperedge_text": "Marcel Varnel directed the film South American George.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"MARCEL VARNEL\""
+        ],
+        "chunk_ids": [
+          "chunk-f8a766f30e8e11597bb81a8f5e4654ad"
+        ],
+        "evidence_texts": [
+          "Marcel Varnel directed the film South American George.",
+          "South American George South American George is a 1941 British, black- and- white, comedy film directed by Marcel Varnel and starring George Formby in a dual role, Linden Travers, Enid Stamp- Taylor, Felix Aylmer, Ronald Shiner as Swifty, Mavis Villiers and Herbert Lomas. It was produced by Columbia( British) Productions."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\"",
+        "hyperedge_text": "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"WILL HAY\"",
+          "\"MARCEL VARNEL\"",
+          "\"ASK A POLICEMAN\"",
+          "\"MOORE MARRIOTT\"",
+          "\"GRAHAM MOFFATT\""
+        ],
+        "chunk_ids": [
+          "chunk-87b24ab6d348ae69ee988d9bb570459e"
+        ],
+        "evidence_texts": [
+          "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+          "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ],
+    "answer": "13 July 1947",
+    "confidence": 1.0,
+    "reasoning_summary": "Marcel Varnel, the director of Ask A Policeman, died on 13 July 1947, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Marcel Varnel was born on 16 October 1892 and died on 13 July 1947.\""
+    ]
+  }
+]

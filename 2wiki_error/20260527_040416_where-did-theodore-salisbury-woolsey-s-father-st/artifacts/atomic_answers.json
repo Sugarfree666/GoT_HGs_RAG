@@ -1,0 +1,741 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Theodore?",
+    "analysis": {
+      "entities": [
+        "Theodore"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"There was now reason to expect a more bloody war, and more lasting enmity between those kings and their fierce nations; but Theodore, the bishop, beloved of God, relying on the Divine aid, by his wholesome admonitions wholly extinguished the dangerous fire that was breaking out; so that the kings and their people on both sides were appeased.\"",
+        "hyperedge_text": "There was now reason to expect a more bloody war, and more lasting enmity between those kings and their fierce nations; but Theodore, the bishop, beloved of God, relying on the Divine aid, by his wholesome admonitions wholly extinguished the dangerous fire that was breaking out; so that the kings and their people on both sides were appeased.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"THEODORE\""
+        ],
+        "chunk_ids": [
+          "chunk-ca0a07dbdd9227efeb5fdac7169f5efb"
+        ],
+        "evidence_texts": [
+          "There was now reason to expect a more bloody war, and more lasting enmity between those kings and their fierce nations; but Theodore, the bishop, beloved of God, relying on the Divine aid, by his wholesome admonitions wholly extinguished the dangerous fire that was breaking out; so that the kings and their people on both sides were appeased.",
+          "Ælfwine of Deira Ælfwine (c. 661–679) was the King of Deira from 670 to 679. He was a son of Oswiu of Northumbria and a brother of Ecgfrith of Northumbria. After the succession of Ecgfrith as king of Northumbria in 670, he made Ælfwine king of the sub-kingdom of Deira. Ælfwine was still a boy at the time, and the title may have been intended to designate him as the heir of the childless Ecgfrith. He was, however, killed in battle against the Mercians at the Battle of the Trent in 679. Although his death could have led to an escalation of the war, further conflict was averted by the intervention of the Archbishop of Canterbury, Theodore, and King Æthelred of Mercia paid a \"weregild\" to Ecgfrith in compensation for Ælfwine's death. Bede writes: “In the ninth year of the reign of King Ecgfrith (in 679), a great battle was fought between him and Æthelred, king of the Mercians, near the ri..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"There was now reason to expect a more bloody war, and more lasting enmity between those kings and their fierce nations; but Theodore, the bishop, beloved of God, relying on the Divine aid, by his wholesome admonitions wholly extinguished the dangerous fire that was breaking out.\"",
+        "hyperedge_text": "There was now reason to expect a more bloody war, and more lasting enmity between those kings and their fierce nations; but Theodore, the bishop, beloved of God, relying on the Divine aid, by his wholesome admonitions wholly extinguished the dangerous fire that was breaking out.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"THEODORE\""
+        ],
+        "chunk_ids": [
+          "chunk-ca0a07dbdd9227efeb5fdac7169f5efb"
+        ],
+        "evidence_texts": [
+          "There was now reason to expect a more bloody war, and more lasting enmity between those kings and their fierce nations; but Theodore, the bishop, beloved of God, relying on the Divine aid, by his wholesome admonitions wholly extinguished the dangerous fire that was breaking out.",
+          "Ælfwine of Deira Ælfwine (c. 661–679) was the King of Deira from 670 to 679. He was a son of Oswiu of Northumbria and a brother of Ecgfrith of Northumbria. After the succession of Ecgfrith as king of Northumbria in 670, he made Ælfwine king of the sub-kingdom of Deira. Ælfwine was still a boy at the time, and the title may have been intended to designate him as the heir of the childless Ecgfrith. He was, however, killed in battle against the Mercians at the Battle of the Trent in 679. Although his death could have led to an escalation of the war, further conflict was averted by the intervention of the Archbishop of Canterbury, Theodore, and King Æthelred of Mercia paid a \"weregild\" to Ecgfrith in compensation for Ælfwine's death. Bede writes: “In the ninth year of the reign of King Ecgfrith (in 679), a great battle was fought between him and Æthelred, king of the Mercians, near the ri..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodore Roberts plays the role of the grandfather, adding a familial element to the narrative.\"",
+        "hyperedge_text": "Theodore Roberts plays the role of the grandfather, adding a familial element to the narrative.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4976964294910431,
+        "fusion_score": 0.4995392858982086,
+        "entity_ids": [
+          "\"GRANDFATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-9e8732d792c931a8733194ccfb0faa2a"
+        ],
+        "evidence_texts": [
+          "Theodore Roberts plays the role of the grandfather, adding a familial element to the narrative.",
+          "Such a Little Pirate Such a Little Pirate is a lost 1918 American silent Pirate adventure film directed by George Melford and starring Lila Lee as a young sea-going heroine and Theodore Roberts as her grandfather. It was produced by Adolph Zukor and Jesse Lasky."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.497696,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499539
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodore Salisbury Woolsey was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey.\"",
+        "hyperedge_text": "Theodore Salisbury Woolsey was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48681241273880005,
+        "fusion_score": 0.49736248254776005,
+        "entity_ids": [
+          "\"THEODORE DWIGHT WOOLSEY\"",
+          "\"THEODORE SALISBURY WOOLSEY\"",
+          "\"NEW HAVEN, CONNECTICUT\""
+        ],
+        "chunk_ids": [
+          "chunk-a3b3009bd9feeabe38fca469fdd09c8c"
+        ],
+        "evidence_texts": [
+          "Theodore Salisbury Woolsey was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey.",
+          "Theodore Salisbury Woolsey Theodore Salisbury Woolsey (October 22, 1852 – April 24, 1929) was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey. He graduated at Yale in 1872 and at Yale Law School (1876). In 1872 he was an initiate into The Skull and Bones Society. After traveling in Europe he was instructor in public law at Yale, and for 33 years (1878-1911) professor of international law. He was one of the founders of the \"Yale Review\" and a frequent contributor to it. He wrote several essays which were collected under the title \"America's Foreign policy\" (1898), and he edited \"Woolsey's International Law\" and \"Pomeroy's International Law\". He was a member of the General Society of Colonial Wars. Woolsey married Bostonian Annie Gardner Salisbury in 1877 and they had two sons. (One of these sons, Theodore Salisbury Woolsey, Jr., was a fores..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.486812,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.497362
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodore McMillian was born on January 28, 1919, and passed away on January 18, 2006.\"",
+        "hyperedge_text": "Theodore McMillian was born on January 28, 1919, and passed away on January 18, 2006.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.46838292479515076,
+        "fusion_score": 0.49367658495903016,
+        "entity_ids": [
+          "\"JANUARY 18, 2006\"",
+          "\"JANUARY 28, 1919\""
+        ],
+        "chunk_ids": [
+          "chunk-0b088f35f61945c2b2a681a93bf27efe"
+        ],
+        "evidence_texts": [
+          "Theodore McMillian was born on January 28, 1919, and passed away on January 18, 2006.",
+          "Theodore McMillian Theodore McMillian( January 28, 1919 – January 18, 2006) was the first African American to serve on the Missouri Court of Appeals, and the first African American to serve as a United States Circuit Judge of the United States Court of Appeals for the Eighth Circuit."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.468383,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.493677
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that identifies the father of Theodore.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"There was now reason to expect a more bloody war, and more lasting enmity between those kings and their fierce nations; but Theodore, the bishop, beloved of God, relying on the Divine aid, by his wholesome admonitions wholly extinguished the dangerous fire that was breaking out; so that the kings and their people on both sides were appeased.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the father of Salisbury?",
+    "analysis": {
+      "entities": [
+        "Salisbury"
+      ],
+      "relations": [
+        "father of"
+      ],
+      "relation_query": "Who is the father of an entity?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"She was born in Salisbury, England but grew up in Nottingham where she still lives.\"",
+        "hyperedge_text": "She was born in Salisbury, England but grew up in Nottingham where she still lives.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.43465983867645264,
+        "fusion_score": 0.48693196773529057,
+        "entity_ids": [
+          "\"ENGLAND\"",
+          "\"SALISBURY\"",
+          "\"NOTTINGHAM\""
+        ],
+        "chunk_ids": [
+          "chunk-9b212b383944a0dfff1b21a8347d2c62"
+        ],
+        "evidence_texts": [
+          "She was born in Salisbury, England but grew up in Nottingham where she still lives.",
+          "C.J. Tudor C.J. Tudor is a British author whose books include The Chalk Man and The Hiding Place. She was born in Salisbury, England but grew up in Nottingham where she still lives."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.43466,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.486932
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His mother was a sister of Patrick of Salisbury, 1st Earl of Salisbury.\"",
+        "hyperedge_text": "His mother was a sister of Patrick of Salisbury, 1st Earl of Salisbury.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5525302886962891,
+        "fusion_score": 0.5105060577392578,
+        "entity_ids": [
+          "\"EARL OF SALISBURY\""
+        ],
+        "chunk_ids": [
+          "chunk-2cdce52e02bcb1aa7bfb4950035eb774"
+        ],
+        "evidence_texts": [
+          "His mother was a sister of Patrick of Salisbury, 1st Earl of Salisbury.",
+          "Rotrou IV, Count of Perche Rotrou IV (1135-1191), Count of Perche, son of Rotrou III, Count of Perche, and Hawise, daughter of Walter of Salisbury, and Sibilla de Chaworth. Rotrou was from the House of Châteaudun and descended from the Viscounts of Châteaudun. His mother was Hawise of Salisbury, a sister of Patrick of Salisbury, 1st Earl of Salisbury. Patrick’s sister Sibyll married John FitzGilbert, the Marshal of the Horses, whose son Henry was Bishop of Exeter and a knight in the service of Rotrou. Upon the death of his father in 1144, Rotrou continued the fight against his archenemy, William III Talvas, Count of Ponthieu and Lord of Alençon. Not withstanding a long-running blood feud, his uncle Patrick had married William Talvas' daughter Adela as her second husband. His mother Hawise and her second husband, Robert I of Dreux, served as regents at Perche until he reached the age o..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.55253,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510506
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"By 1986 she was exhibiting sculpture regularly with Courcoux and Courcoux, a leading provincial contemporary gallery then based in Salisbury.\"",
+        "hyperedge_text": "By 1986 she was exhibiting sculpture regularly with Courcoux and Courcoux, a leading provincial contemporary gallery then based in Salisbury.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"COURCOUX AND COURCOUX\"",
+          "\"SALISBURY\""
+        ],
+        "chunk_ids": [
+          "chunk-08920a2c983c0c60c90663f9d38012b4"
+        ],
+        "evidence_texts": [
+          "By 1986 she was exhibiting sculpture regularly with Courcoux and Courcoux, a leading provincial contemporary gallery then based in Salisbury.",
+          "Heather Jansch Heather Jansch (born Heather Rosemary Sewell) is a British sculptor notable for making life-sized sculptures of horses from driftwood. She has also used cork as a material in hdailer creations. Jansch reported that she struggled in her youth in schools, but had a passion for drawing and horses. While an art student at Walthamstow College of Art in 1967 she met the musician Roy Harper. It was Harper who introduced her to the guitarist Bert Jansch, who she later married. She bought a smaller hill farm, breeding Welsh cobs and specializing in painting traditional equestrian portraits until starting to sculpt. She later moved to south Devon. By 1986 she was exhibiting sculpture regularly with Courcoux and Courcoux, a leading provincial contemporary gallery then based in Salisbury who took her work to the London Contemporary Art Fair where it received very favourable reviews..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Allington is a village and civil parish in Wiltshire, England, about southeast of Amesbury and northeast of Salisbury.\"",
+        "hyperedge_text": "Allington is a village and civil parish in Wiltshire, England, about southeast of Amesbury and northeast of Salisbury.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"WILTSHIRE\"",
+          "\"SALISBURY\"",
+          "\"A338 ROAD\"",
+          "\"RIVER BOURNE\"",
+          "\"BOSCOMBE\"",
+          "\"AMESBURY\"",
+          "\"ALLINGTON\""
+        ],
+        "chunk_ids": [
+          "chunk-6f37f700a39adbb63d64862464836a20"
+        ],
+        "evidence_texts": [
+          "Allington is a village and civil parish in Wiltshire, England, about southeast of Amesbury and northeast of Salisbury.",
+          "Allington, Salisbury Allington is a village and civil parish in Wiltshire, England, about southeast of Amesbury and northeast of Salisbury. The parish includes the village of Boscombe; both villages are on the River Bourne and the A338 road."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Allington is located about southeast of Amesbury and northeast of Salisbury.\"",
+        "hyperedge_text": "Allington is located about southeast of Amesbury and northeast of Salisbury.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"SALISBURY\"",
+          "\"AMESBURY\""
+        ],
+        "chunk_ids": [
+          "chunk-6f37f700a39adbb63d64862464836a20"
+        ],
+        "evidence_texts": [
+          "Allington is located about southeast of Amesbury and northeast of Salisbury.",
+          "Allington, Salisbury Allington is a village and civil parish in Wiltshire, England, about southeast of Amesbury and northeast of Salisbury. The parish includes the village of Boscombe; both villages are on the River Bourne and the A338 road."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that directly identifies the father of Salisbury.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"She was born in Salisbury, England but grew up in Nottingham where she still lives.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "Who is the father of Woolsey?",
+    "analysis": {
+      "entities": [
+        "Woolsey"
+      ],
+      "relations": [
+        "father of"
+      ],
+      "relation_query": "who is the father of an entity",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Theodore Salisbury Woolsey was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey.\"",
+        "hyperedge_text": "Theodore Salisbury Woolsey was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6218314170837402,
+        "fusion_score": 0.5243662834167481,
+        "entity_ids": [
+          "\"THEODORE DWIGHT WOOLSEY\"",
+          "\"THEODORE SALISBURY WOOLSEY\"",
+          "\"NEW HAVEN, CONNECTICUT\""
+        ],
+        "chunk_ids": [
+          "chunk-a3b3009bd9feeabe38fca469fdd09c8c"
+        ],
+        "evidence_texts": [
+          "Theodore Salisbury Woolsey was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey.",
+          "Theodore Salisbury Woolsey Theodore Salisbury Woolsey (October 22, 1852 – April 24, 1929) was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey. He graduated at Yale in 1872 and at Yale Law School (1876). In 1872 he was an initiate into The Skull and Bones Society. After traveling in Europe he was instructor in public law at Yale, and for 33 years (1878-1911) professor of international law. He was one of the founders of the \"Yale Review\" and a frequent contributor to it. He wrote several essays which were collected under the title \"America's Foreign policy\" (1898), and he edited \"Woolsey's International Law\" and \"Pomeroy's International Law\". He was a member of the General Society of Colonial Wars. Woolsey married Bostonian Annie Gardner Salisbury in 1877 and they had two sons. (One of these sons, Theodore Salisbury Woolsey, Jr., was a fores..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.621831,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524366
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodore Salisbury Woolsey Jr. (October 2, 1879 – July 10, 1933) was a United States Forest Service employee, forestry researcher, professor at Yale University and author of books and articles related to forestry and forest regulation.\"",
+        "hyperedge_text": "Theodore Salisbury Woolsey Jr. (October 2, 1879 – July 10, 1933) was a United States Forest Service employee, forestry researcher, professor at Yale University and author of books and articles related to forestry and forest regulation.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6168784499168396,
+        "fusion_score": 0.5233756899833679,
+        "entity_ids": [
+          "\"YALE UNIVERSITY\"",
+          "\"THEODORE SALISBURY WOOLSEY JR.\"",
+          "\"UNITED STATES FOREST SERVICE\"",
+          "\"FORESTRY\"",
+          "\"FOREST REGULATION\""
+        ],
+        "chunk_ids": [
+          "chunk-48a827f66689b333201cb3b70a8796bc"
+        ],
+        "evidence_texts": [
+          "Theodore Salisbury Woolsey Jr. (October 2, 1879 – July 10, 1933) was a United States Forest Service employee, forestry researcher, professor at Yale University and author of books and articles related to forestry and forest regulation.",
+          "Theodore Salisbury Woolsey Jr. Theodore Salisbury Woolsey Jr.( October 2, 1879 – July 10, 1933) was a United States Forest Service employee, forestry researcher, professor at Yale University and author of books and articles related to forestry and forest regulation."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.616878,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523376
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"(One of these sons, Theodore Salisbury Woolsey, Jr., was a forestry expert.)\"",
+        "hyperedge_text": "(One of these sons, Theodore Salisbury Woolsey, Jr., was a forestry expert.)",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5984166860580444,
+        "fusion_score": 0.519683337211609,
+        "entity_ids": [
+          "\"THEODORE SALISBURY WOOLSEY, JR.\""
+        ],
+        "chunk_ids": [
+          "chunk-a3b3009bd9feeabe38fca469fdd09c8c"
+        ],
+        "evidence_texts": [
+          "(One of these sons, Theodore Salisbury Woolsey, Jr., was a forestry expert.)",
+          "Theodore Salisbury Woolsey Theodore Salisbury Woolsey (October 22, 1852 – April 24, 1929) was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey. He graduated at Yale in 1872 and at Yale Law School (1876). In 1872 he was an initiate into The Skull and Bones Society. After traveling in Europe he was instructor in public law at Yale, and for 33 years (1878-1911) professor of international law. He was one of the founders of the \"Yale Review\" and a frequent contributor to it. He wrote several essays which were collected under the title \"America's Foreign policy\" (1898), and he edited \"Woolsey's International Law\" and \"Pomeroy's International Law\". He was a member of the General Society of Colonial Wars. Woolsey married Bostonian Annie Gardner Salisbury in 1877 and they had two sons. (One of these sons, Theodore Salisbury Woolsey, Jr., was a fores..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.598417,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519683
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodore Dwight Woolsey (October 31, 1801 – July 1, 1889) was an American academic, author and President of Yale College from 1846 through 1871.\"",
+        "hyperedge_text": "Theodore Dwight Woolsey (October 31, 1801 – July 1, 1889) was an American academic, author and President of Yale College from 1846 through 1871.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5942068099975586,
+        "fusion_score": 0.5188413619995118,
+        "entity_ids": [
+          "\"AUTHOR\"",
+          "\"PRESIDENT\"",
+          "\"THEODORE DWIGHT WOOLSEY\"",
+          "\"YALE COLLEGE\"",
+          "\"ACADEMIC\"",
+          "\"OCTOBER 31, 1801\"",
+          "\"JULY 1, 1889\""
+        ],
+        "chunk_ids": [
+          "chunk-1fb89fde33b8e9becbc36ac7e2e64bb3"
+        ],
+        "evidence_texts": [
+          "Theodore Dwight Woolsey (October 31, 1801 – July 1, 1889) was an American academic, author and President of Yale College from 1846 through 1871.",
+          "Theodore Dwight Woolsey Theodore Dwight Woolsey (October 31, 1801 – July 1, 1889) was an American academic, author and President of Yale College from 1846 through 1871."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.594207,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518841
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Theodore Salisbury Woolsey Jr. was a forestry researcher.\"",
+        "hyperedge_text": "Theodore Salisbury Woolsey Jr. was a forestry researcher.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5885841846466064,
+        "fusion_score": 0.5177168369293214,
+        "entity_ids": [
+          "\"THEODORE SALISBURY WOOLSEY JR.\"",
+          "\"FORESTRY RESEARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-48a827f66689b333201cb3b70a8796bc"
+        ],
+        "evidence_texts": [
+          "Theodore Salisbury Woolsey Jr. was a forestry researcher.",
+          "Theodore Salisbury Woolsey Jr. Theodore Salisbury Woolsey Jr.( October 2, 1879 – July 10, 1933) was a United States Forest Service employee, forestry researcher, professor at Yale University and author of books and articles related to forestry and forest regulation."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.588584,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517717
+        }
+      }
+    ],
+    "answer": "Theodore Dwight Woolsey",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that Theodore Salisbury Woolsey is the son of Theodore Dwight Woolsey, establishing the latter as his father.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Theodore Salisbury Woolsey was a United States legal scholar, born at New Haven, Connecticut, son of Theodore Dwight Woolsey.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Theodore study?",
+    "analysis": {
+      "entities": [
+        "Theodore",
+        "Theodore Roberts"
+      ],
+      "relations": [
+        "studied at",
+        "is the father of"
+      ],
+      "relation_query": "Where did the father of a person study?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"He studied at the University of Greifswald at the age of 14.\"",
+        "hyperedge_text": "He studied at the University of Greifswald at the age of 14.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.41558894515037537,
+        "semantic_score": 0.4321689009666443,
+        "fusion_score": 0.252669358253479,
+        "entity_ids": [
+          "\"UNIVERSITY OF GREIFSWALD\""
+        ],
+        "chunk_ids": [
+          "chunk-63b82ee01a9b88fa071187b834b0c4d5"
+        ],
+        "evidence_texts": [
+          "He studied at the University of Greifswald at the age of 14.",
+          "Bogislaw XIII, Duke of Pomerania Bogislaw XIII (Bogusław XIII) of Pomerania (9 August 1544 – 7 March 1606, Stettin; \"Polish\": Szczecin), son of Philip I and Maria of Saxony, was a prince of Stettin and Wolgast, and a member of the Griffins. Bogislaw studied at the University of Greifswald at the age of 14. At first, he was co-regent with his brother Johann Friedrich of Pomerania-Wolgast, but in 1569 he settled with control over Barth and Neuenkamp. There, he founded a printing house in 1582, publishing in 1588 the \"Barther Bible\", a bible in the Low German language, as translated by Johannes Bugenhagen. In 1587 he founded Franzburg to compete with Stralsund. From 1603 until his death, he ruled in Pomerania-Stettin, which he inherited under the Inheritance Treat of Jasenitz of 1509 in case his two brothers John Frederick (d. 1600) and Barnim X (d. 1603) would both die childless. He kep..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.415589,
+          "S": 0.432169,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.252669
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His father is Benjamin Bederson, Sr., a Professor of Physics Emeritus, New York University.\"",
+        "hyperedge_text": "His father is Benjamin Bederson, Sr., a Professor of Physics Emeritus, New York University.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.41848570108413696,
+        "semantic_score": 0.42279052734375,
+        "fusion_score": 0.25195238590240476,
+        "entity_ids": [
+          "\"NEW YORK UNIVERSITY\"",
+          "\"BENJAMIN BEDERSON, SR.\"",
+          "\"PHYSICS EMERITUS\""
+        ],
+        "chunk_ids": [
+          "chunk-46c272ae2ab21d7f4ca63918f7569439"
+        ],
+        "evidence_texts": [
+          "His father is Benjamin Bederson, Sr., a Professor of Physics Emeritus, New York University.",
+          "Ben Bederson Benjamin\" Ben\" Bederson is a Computer Science professor at the University of Maryland, College Park, a member of the University of Maryland Human- Computer Interaction Lab, and a co-founder of Zumobi. His father is Benjamin Bederson, Sr., a Professor of Physics Emeritus, New York University."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.418486,
+          "S": 0.422791,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.251952
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He studied philosophy, psychology and pedagogy at the University of Leipzig.\"",
+        "hyperedge_text": "He studied philosophy, psychology and pedagogy at the University of Leipzig.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.40972092747688293,
+        "semantic_score": 0.4168785512447357,
+        "fusion_score": 0.24726408123970034,
+        "entity_ids": [
+          "\"UNIVERSITY OF LEIPZIG\"",
+          "\"PHILOSOPHY\"",
+          "\"PSYCHOLOGY\"",
+          "\"PEDAGOGY\""
+        ],
+        "chunk_ids": [
+          "chunk-f30af021e58e40b0bc93e1680a47a27e"
+        ],
+        "evidence_texts": [
+          "He studied philosophy, psychology and pedagogy at the University of Leipzig.",
+          "Wolfgang Schleif Wolfgang Schleif (14 May 1912 – 21 August 1984) was a German editor, film director and screenwriter. He studied philosophy, psychology and pedagogy at the University of Leipzig. In 1934 he passed the State Examination for teachers at the Volksschule. But then he took classes at the Acting School of the Deutsches Theater in Berlin, where he was trained in directing. Schleif began working in film in 1935. By 1938, he was an assistant director. In 1939, he became a screenwriter and eventually an editor. Among his assignments, he was one of the editors of the propaganda films \"Jud Süß\" (1940) and \"Kolberg\" (1945). In 1947, Schleif was joined the DEFA film studio, making his directorial debut in 1948 with the anti-capitalist production . This was followed by the 1949 film biography of Johann Friedrich Böttger, \"The Blue Swords\". After 17 June 1953, Schleif emigrated to Wes..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.409721,
+          "S": 0.416879,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.247264
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father of naturalist, artist, and entomologist Robert Templeton.\"",
+        "hyperedge_text": "He was the father of naturalist, artist, and entomologist Robert Templeton.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4330977499485016,
+        "fusion_score": 0.48661954998970036,
+        "entity_ids": [
+          "\"ARTIST\"",
+          "\"ENTOMOLOGIST\"",
+          "\"NATURALIST\"",
+          "\"ROBERT TEMPLETON\""
+        ],
+        "chunk_ids": [
+          "chunk-b7f565ef28b2575b2cb4a2aca22a5517"
+        ],
+        "evidence_texts": [
+          "He was the father of naturalist, artist, and entomologist Robert Templeton.",
+          "John Templeton (botanist) John Templeton( 1766–1825) was an early Irish naturalist and botanist. He is often referred to as the\" Father of Irish Botany\". He was the father of naturalist, artist and entomologist Robert Templeton."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.433098,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.48662
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He studied at the American Correspondence School.\"",
+        "hyperedge_text": "He studied at the American Correspondence School.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4295414090156555,
+        "fusion_score": 0.4859082818031311,
+        "entity_ids": [
+          "\"AMERICAN CORRESPONDENCE SCHOOL\""
+        ],
+        "chunk_ids": [
+          "chunk-97e9b6d6cab8785b74d21e2ca07c0c2d"
+        ],
+        "evidence_texts": [
+          "He studied at the American Correspondence School.",
+          "Amado V. Hernandez Amado Vera Hernandez, commonly known as Amado V. Hernandez (September 13, 1903 – March 24, 1970), was a Filipino writer and labor leader who was known for his criticism of social injustices in the Philippines and was later imprisoned for his involvement in the communist movement. He was the central figure in a landmark legal case that took 13 years to settle. He was born in Tondo, Manila, to parents from Hagonoy, Bulacan. He grew up and studied at the Gagalangin, Tondo, the Manila High School and at the American Correspondence School."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.429541,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.485908
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that identifies the father of Theodore, making it impossible to determine where he studied.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"He studied at the University of Greifswald at the age of 14.\""
+    ]
+  }
+]

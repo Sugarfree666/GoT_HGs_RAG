@@ -1,0 +1,50 @@
+{
+  "answer": "Four Days In November",
+  "candidate_answer": "Four Days In November",
+  "reasoning_summary": "Mel Stuart, the director of 'Four Days In November', was born on September 2, 1928, while Wilfred Lucas, the director of 'The Romance Of Tarzan', was born on January 30, 1871. Since 1928 is later than 1871, Mel Stuart is younger than Wilfred Lucas, making 'Four Days In November' the film with the younger director.",
+  "answer_span_reasoning": "The answer identifies the film with the younger director.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Four Days In November?",
+      "answer": "Mel Stuart",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of The Romance Of Tarzan?",
+      "answer": "Wilfred Lucas",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the birth date of the director of Four Days In November?",
+      "answer": "September 2, 1928",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Mel Stuart was born on September 2, 1928, and passed away on August 9, 2012.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "What is the birth date of the director of The Romance Of Tarzan?",
+      "answer": "January 30, 1871",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Wilfred Lucas was a Canadian American stage actor.\""
+      ]
+    },
+    {
+      "node_id": "q5",
+      "question": "What is the birth date of the director of Four Days In November?",
+      "answer": "September 2, 1928",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

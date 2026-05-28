@@ -1,0 +1,37 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Christ Walking On The Water?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "When was the director of Christ Walking On The Water born?",
+      "dependencies": [
+        "q1"
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of 45 Fathers?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q4",
+      "question": "What is the birth date of the director of Christ Walking On The Water?",
+      "dependencies": [
+        "q2"
+      ],
+      "metadata": {
+        "operator": "COMPARE_GREATER",
+        "candidates": [
+          {
+            "label": "Christ Walking On The Water",
+            "source_node_id": "q2"
+          }
+        ]
+      }
+    }
+  ]
+}

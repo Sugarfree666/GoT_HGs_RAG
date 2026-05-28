@@ -1,0 +1,1602 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song Mimi?",
+    "retrieval_question": "Who is the performer of the song Mimi?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the performer of the song Mimi?",
+      "retrieval_question": "Who is the performer of the song Mimi?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.",
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RICHARD RODGERS\"",
+          "\"LORENZ HART\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.",
+            "link",
+            "MIMI",
+            "RICHARD RODGERS",
+            "LORENZ HART"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RCA VICTOR RED SEAL ALBUM 'WOMEN IN MY LIFE'\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+            "link",
+            "MIMI",
+            "RCA VICTOR RED SEAL ALBUM 'WOMEN IN MY LIFE'"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).",
+        "entity_ids": [
+          "\"MIMI\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).",
+            "link",
+            "MIMI"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"who also produced the song.\"",
+        "branch": "relation",
+        "raw_score": 0.44164901971817017,
+        "hyperedge_text": "who also produced the song.",
+        "entity_ids": [
+          "\"PRODUCED\""
+        ],
+        "chunk_ids": [
+          "chunk-12315df579a13e8aefe6b95ef61a1c67"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "who also produced the song.",
+            "Don't Worry Bout Me (Zara Larsson song) \" Do n't Worry Bout Me\" is a song by Swedish singer Zara Larsson. It was released by TEN Music Group and Epic Records on 28 March 2019 as the second single from Larsson's upcoming third studio album. Larsson wrote\" Do n't Worry Bout Me\" with Tove Lo, Rami Yacoub, Linnea Södahl, Whitney Phillips, and The Struts, who also produced the song."
+          ],
+          "relation_texts": [
+            "who also produced the song.",
+            "link",
+            "PRODUCED"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a9635697e693e35bb5e2e164b13c82b5",
+            "hyperedge_name": "<hyperedge>\"who also produced the song.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the composer and original singer of the song.\"",
+        "branch": "relation",
+        "raw_score": 0.43020063638687134,
+        "hyperedge_text": "He is also the composer and original singer of the song.",
+        "entity_ids": [
+          "\"SONG\""
+        ],
+        "chunk_ids": [
+          "chunk-c81436a59c043046312b45c13fcee5a3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is also the composer and original singer of the song.",
+            "Ami Banglay Gaan Gai \" Ami Banglay Gaan Gai\" is a patriotic song by Bangladeshi poet and composer Pratul Mukhopadhyay. He is also the composer and original singer of the song. The song was nominated as one the most popular songs on March, 2006."
+          ],
+          "relation_texts": [
+            "He is also the composer and original singer of the song.",
+            "link",
+            "SONG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a03f8ae6a7b2e1baf98075c737973a65",
+            "hyperedge_name": "<hyperedge>\"He is also the composer and original singer of the song.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song has become a staple in live performances by artists who cover it.\"",
+        "branch": "relation",
+        "raw_score": 0.42432892322540283,
+        "hyperedge_text": "The song has become a staple in live performances by artists who cover it.",
+        "entity_ids": [
+          "\"LIVE PERFORMANCES\""
+        ],
+        "chunk_ids": [
+          "chunk-0147f752c8f7ab11d82c0a6dd3c7b171"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song has become a staple in live performances by artists who cover it.",
+            "When the Stars Go Blue \"When The Stars Go Blue\" is a popular alternative country song composed and originally performed by solo artist and former Whiskeytown band member Ryan Adams. It was first released on his album \"Gold\" on September 25, 2001 and has been described as the \"most gorgeous ballad\" on that album. \"When The Stars Go Blue has been covered by many artists, including Irish band The Corrs (featuring Bono of U2), country music singer Tim McGraw, and Norwegian artists Venke Knutson and Kurt Nilsen as a duo."
+          ],
+          "relation_texts": [
+            "The song has become a staple in live performances by artists who cover it.",
+            "link",
+            "LIVE PERFORMANCES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-81c94fc63e5e253db469026749ff0f71",
+            "hyperedge_name": "<hyperedge>\"The song has become a staple in live performances by artists who cover it.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song itself has different versions depending on the artist.\"",
+        "branch": "relation",
+        "raw_score": 0.41949746012687683,
+        "hyperedge_text": "The song itself has different versions depending on the artist.",
+        "entity_ids": [
+          "\"VERSIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-8d356a664d354ffe76ab2040798bd48c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song itself has different versions depending on the artist.",
+            "All Around My Hat All Around My Hat may refer to:"
+          ],
+          "relation_texts": [
+            "The song itself has different versions depending on the artist.",
+            "link",
+            "VERSIONS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e63cef72551e02e2434fc855a7fd77e7",
+            "hyperedge_name": "<hyperedge>\"The song itself has different versions depending on the artist.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eldredge is known for delivering an adequate vocal performance in his songs.\"",
+        "branch": "relation",
+        "raw_score": 0.4137537479400635,
+        "hyperedge_text": "Eldredge is known for delivering an adequate vocal performance in his songs.",
+        "entity_ids": [
+          "\"VOCAL PERFORMANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-0860dd081c67bb1826dedb3a79122741"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Eldredge is known for delivering an adequate vocal performance in his songs.",
+            "Don't Ya \" Do n't Ya\" is a song co-written and recorded by American country music artist Brett Eldredge. It was released on October 8, 2012 as his third single overall and the second single from his debut studio album\" Bring You Back\". Eldredge co-wrote the song with Chris DeStefano and Ashley Gorley, and is about a man going after a beautiful woman. It received positive reviews from critics who praised the believable love story and vocal delivery. \" Do n't Ya\" gave Eldredge the first of four consecutive number- one hits on the\" Billboard\" Country Airplay chart. It also peaked at numbers 5 and 30 on both the Hot Country Songs and Hot 100 charts respectively. The song was certified Platinum by the Recording Industry Association of America( RIAA), and has sold 1,039,000 units as of February 2015. The song achieved similar chart success in Canada, reaching number 3 on the Canada Country..."
+          ],
+          "relation_texts": [
+            "Eldredge is known for delivering an adequate vocal performance in his songs.",
+            "link",
+            "VOCAL PERFORMANCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fb4ce62bd9f0acdc00768f0d47f16339",
+            "hyperedge_name": "<hyperedge>\"Eldredge is known for delivering an adequate vocal performance in his songs.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vijayta Pandit is a playback singer.\"",
+        "branch": "relation",
+        "raw_score": 0.39773786067962646,
+        "hyperedge_text": "Vijayta Pandit is a playback singer.",
+        "entity_ids": [
+          "\"VIJAYTA PANDIT\""
+        ],
+        "chunk_ids": [
+          "chunk-91158abb474151ed9f117a5e9d9e957a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vijayta Pandit is a playback singer.",
+            "Vijayta Pandit Vijayta Pandit is an Indian film actress and playback singer, most famous for her first film\" Love Story\"( 1981)."
+          ],
+          "relation_texts": [
+            "Vijayta Pandit is a playback singer.",
+            "link",
+            "VIJAYTA PANDIT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c3738cbfe764ecee28ea7a768251015f",
+            "hyperedge_name": "<hyperedge>\"Vijayta Pandit is a playback singer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The singer's lover jumps in to defend the singer, who is confronting his lover's brother, and is killed by the bullet intended for the singer.\"",
+        "branch": "relation",
+        "raw_score": 0.396293580532074,
+        "hyperedge_text": "The singer's lover jumps in to defend the singer, who is confronting his lover's brother, and is killed by the bullet intended for the singer.",
+        "entity_ids": [
+          "\"DEFENSE\"",
+          "\"CONFRONTATION\""
+        ],
+        "chunk_ids": [
+          "chunk-2b6963780849205b2790a69680d13be1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The singer's lover jumps in to defend the singer, who is confronting his lover's brother, and is killed by the bullet intended for the singer.",
+            "O Valencia! \" O Valencia!\" is the fifth single by the indie rock band The Decemberists, and the first released from their fourth studio album,\" The Crane Wife\". The music was written by The Decemberists and the lyrics by Colin Meloy. It tells a story of two star- crossed lovers. The singer falls in love with a person who belongs to an opposing gang. At the end of the song, the singer's lover jumps in to defend the singer, who is confronting his lover's brother( the singer's\" sworn enemy\") and is killed by the bullet intended for the singer."
+          ],
+          "relation_texts": [
+            "The singer's lover jumps in to defend the singer, who is confronting his lover's brother, and is killed by the bullet intended for the singer.",
+            "link",
+            "DEFENSE",
+            "CONFRONTATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fa9298d2b2f94ceba9017696fc848e36",
+            "hyperedge_name": "<hyperedge>\"The singer's lover jumps in to defend the singer, who is confronting his lover's brother, and is killed by the bullet intended for the singer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her performances are characterized by a unique vocal quality and dramatic interpretation.\"",
+        "branch": "relation",
+        "raw_score": 0.39324381947517395,
+        "hyperedge_text": "Her performances are characterized by a unique vocal quality and dramatic interpretation.",
+        "entity_ids": [
+          "\"UNIQUE VOCAL QUALITY\"",
+          "\"DRAMATIC INTERPRETATION\""
+        ],
+        "chunk_ids": [
+          "chunk-c18df4a9649410e8df842a8de73fca5b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Her performances are characterized by a unique vocal quality and dramatic interpretation.",
+            "Anne Evans Dame Anne Elizabeth Jane Evans,( born 20 August 1941) is an international British operatic soprano."
+          ],
+          "relation_texts": [
+            "Her performances are characterized by a unique vocal quality and dramatic interpretation.",
+            "link",
+            "UNIQUE VOCAL QUALITY",
+            "DRAMATIC INTERPRETATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a7c78669851eae3f273879bade275c37",
+            "hyperedge_name": "<hyperedge>\"Her performances are characterized by a unique vocal quality and dramatic interpretation.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song gained attention for its catchy melody and performance style.\"",
+        "branch": "relation",
+        "raw_score": 0.3892427682876587,
+        "hyperedge_text": "The song gained attention for its catchy melody and performance style.",
+        "entity_ids": [
+          "\"MELODY\"",
+          "\"PERFORMANCE STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-56a5d39204884b21940ad2547d80efcc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The song gained attention for its catchy melody and performance style.",
+            "Dance with Me (Zoli Ádok song) \" Dance with Me\" is the debut single by Hungarian singer Zoli Ádok. It was the Hungarian entry in the Eurovision Song Contest 2009 in Moscow, Russia."
+          ],
+          "relation_texts": [
+            "The song gained attention for its catchy melody and performance style.",
+            "link",
+            "MELODY",
+            "PERFORMANCE STYLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-84e767a41f26ab33738231a2d869eda3",
+            "hyperedge_name": "<hyperedge>\"The song gained attention for its catchy melody and performance style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Each rendition of the song by different artists showcases its adaptability and enduring popularity.\"",
+        "branch": "relation",
+        "raw_score": 0.3890758752822876,
+        "hyperedge_text": "Each rendition of the song by different artists showcases its adaptability and enduring popularity.",
+        "entity_ids": [
+          "\"ADAPTABILITY\""
+        ],
+        "chunk_ids": [
+          "chunk-cb50ea5ca05cf61e910d90f4d4a74e98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Each rendition of the song by different artists showcases its adaptability and enduring popularity.",
+            "See the USA in Your Chevrolet The song \"See The U.S.A. In Your Chevrolet\" (title as filed for 1950 copyright) is a commercial jingle from c. 1949, with lyrics and music by Leo Corday (ASCAP) and Leon Carr (ASCAP), written for the Chevrolet Division of General Motors. The song was the Chevrolet jingle sung on the show \"Inside U.S.A. with Chevrolet\" by Chevrolet's real-life husband-wife duo, Peter Lind Hayes and Mary Healy, years before it became associated with Dinah Shore through Chevrolet's decade-long sponsorship of her television shows. Dinah Shore sang the song after 1952, and it became something of a signature song for her. Later the song was also sung by male spokesman Pat Boone on his \"Pat Boone-Chevy Showroom\" (ABC) from 1957 through 1960. When the games of the Los Angeles Dodgers were televised in the 1960s, commercials were aired with the song sung by John Roseboro and Don D..."
+          ],
+          "relation_texts": [
+            "Each rendition of the song by different artists showcases its adaptability and enduring popularity.",
+            "link",
+            "ADAPTABILITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-45bd348945ae0efb943ab65dc97d631b",
+            "hyperedge_name": "<hyperedge>\"Each rendition of the song by different artists showcases its adaptability and enduring popularity.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.\"",
+        "branch": "semantic",
+        "raw_score": 0.5939130783081055,
+        "hyperedge_text": "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.",
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RICHARD RODGERS\"",
+          "\"LORENZ HART\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.",
+            "link",
+            "MIMI",
+            "RICHARD RODGERS",
+            "LORENZ HART"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d07dec9116b2df61bd27718515c7b8a9",
+            "hyperedge_name": "<hyperedge>\"Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).\"",
+        "branch": "semantic",
+        "raw_score": 0.5497205257415771,
+        "hyperedge_text": "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).",
+        "entity_ids": [
+          "\"MIMI\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).",
+            "link",
+            "MIMI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-53ccaf15411813a69dab421d319b43bc",
+            "hyperedge_name": "<hyperedge>\"Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\"",
+        "branch": "semantic",
+        "raw_score": 0.4919140338897705,
+        "hyperedge_text": "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RCA VICTOR RED SEAL ALBUM 'WOMEN IN MY LIFE'\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+            "link",
+            "MIMI",
+            "RCA VICTOR RED SEAL ALBUM 'WOMEN IN MY LIFE'"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-399cfbe822aff283738f66b051675874",
+            "hyperedge_name": "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.\"",
+        "branch": "semantic",
+        "raw_score": 0.43059414625167847,
+        "hyperedge_text": "He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.",
+        "entity_ids": [
+          "\"SIGNATURE SONGS\""
+        ],
+        "chunk_ids": [
+          "chunk-dd4147feacc984f701043c59ef5be1f6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.",
+            "Maurice Chevalier Maurice Auguste Chevalier (September 12, 1888 – January 1, 1972) was a French actor, cabaret singer and entertainer. He is perhaps best known for his signature songs, including \"Livin' In The SunlightValentineLouiseMimi\", and \"Thank Heaven for Little Girls\" and for his films, including \"The Love ParadeThe Big PondThe Smiling LieutenantOne Hour with You\" and \"Love Me Tonight\". His trademark attire was a boater hat and tuxedo. Chevalier was born in Paris. He made his name as a star of musical comedy, appearing in public as a singer and dancer at an early age before working in menial jobs as a teenager. In 1909, he became the partner of the biggest female star in France at the time, Fréhel. Although their relationship was brief, she secured him his first major engagement, as a mimic and a singer in \"l'Alcazar\" in Marseille, for which he received critical acclaim by Fren..."
+          ],
+          "relation_texts": [
+            "He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.",
+            "link",
+            "SIGNATURE SONGS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e3ccdc3cded3d1eb31d47be520b2ccc4",
+            "hyperedge_name": "<hyperedge>\"He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Michel'le Denise Toussant, known mononymously as Michel'le, is an American R&B singer and songwriter.\"",
+        "branch": "semantic",
+        "raw_score": 0.3859294652938843,
+        "hyperedge_text": "Michel'le Denise Toussant, known mononymously as Michel'le, is an American R&B singer and songwriter.",
+        "entity_ids": [
+          "\"MICHEL'LE DENISE TOUSSANT\"",
+          "\"MICHEL'LE\""
+        ],
+        "chunk_ids": [
+          "chunk-373a21eb648a006ec57ae5bf09e5ac98"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Michel'le Denise Toussant, known mononymously as Michel'le, is an American R&B singer and songwriter.",
+            "Michel'le Michel'le Denise Toussant( born December 5, 1970), known mononymously as Michel'le, is an American R&B singer and songwriter. She is best known for her songs from the late 1980s to early 1990s. Her most notable songs were two\" Billboard\" R&B chart toppers\" No More Lies\"( a top 10 hit on the Hot 100) and\" Something in My Heart\". Between 2013 and 2015, Michel'le was one of six members on the TV One reality show. In 2016, she was the subject of the biopic"
+          ],
+          "relation_texts": [
+            "Michel'le Denise Toussant, known mononymously as Michel'le, is an American R&B singer and songwriter.",
+            "link",
+            "MICHEL'LE DENISE TOUSSANT",
+            "MICHEL'LE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6203f608cd0f1098b77270e44b0d02a5",
+            "hyperedge_name": "<hyperedge>\"Michel'le Denise Toussant, known mononymously as Michel'le, is an American R&B singer and songwriter.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ademilson Silva Marques (born November 22, 1985 in São Luís), commonly known as Mimica, is a Brazilian footballer.\"",
+        "branch": "semantic",
+        "raw_score": 0.3820440173149109,
+        "hyperedge_text": "Ademilson Silva Marques (born November 22, 1985 in São Luís), commonly known as Mimica, is a Brazilian footballer.",
+        "entity_ids": [
+          "\"SÃO LUÍS\"",
+          "\"BRAZILIAN FOOTBALLER\"",
+          "\"ADEMILSON SILVA MARQUES\"",
+          "\"MIMICA\"",
+          "\"REMO\""
+        ],
+        "chunk_ids": [
+          "chunk-9f79307a798f3e04b93166df9225d7ec"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ademilson Silva Marques (born November 22, 1985 in São Luís), commonly known as Mimica, is a Brazilian footballer.",
+            "Ademilson Silva Marques Ademilson Silva Marques( born November 22, 1985 in São Luís), commonly known as Mimica, is a Brazilian footballer. He currently plays for Remo."
+          ],
+          "relation_texts": [
+            "Ademilson Silva Marques (born November 22, 1985 in São Luís), commonly known as Mimica, is a Brazilian footballer.",
+            "link",
+            "SÃO LUÍS",
+            "BRAZILIAN FOOTBALLER",
+            "ADEMILSON SILVA MARQUES",
+            "MIMICA",
+            "REMO"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bb545a1789840551013f9eb767d2ccbc",
+            "hyperedge_name": "<hyperedge>\"Ademilson Silva Marques (born November 22, 1985 in São Luís), commonly known as Mimica, is a Brazilian footballer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"who also produced the song.\"",
+        "branch": "semantic",
+        "raw_score": 0.37353652715682983,
+        "hyperedge_text": "who also produced the song.",
+        "entity_ids": [
+          "\"PRODUCED\""
+        ],
+        "chunk_ids": [
+          "chunk-12315df579a13e8aefe6b95ef61a1c67"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "who also produced the song.",
+            "Don't Worry Bout Me (Zara Larsson song) \" Do n't Worry Bout Me\" is a song by Swedish singer Zara Larsson. It was released by TEN Music Group and Epic Records on 28 March 2019 as the second single from Larsson's upcoming third studio album. Larsson wrote\" Do n't Worry Bout Me\" with Tove Lo, Rami Yacoub, Linnea Södahl, Whitney Phillips, and The Struts, who also produced the song."
+          ],
+          "relation_texts": [
+            "who also produced the song.",
+            "link",
+            "PRODUCED"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a9635697e693e35bb5e2e164b13c82b5",
+            "hyperedge_name": "<hyperedge>\"who also produced the song.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The track was written by Hamasaki, whilst production was handled by Japanese musician and long-time collaborator Max Matsuura with the assistance of M-Flo; this marks Hamasaki's first single to be produced with another producer outside of Matsuura.\"",
+        "branch": "semantic",
+        "raw_score": 0.37218284606933594,
+        "hyperedge_text": "The track was written by Hamasaki, whilst production was handled by Japanese musician and long-time collaborator Max Matsuura with the assistance of M-Flo; this marks Hamasaki's first single to be produced with another producer outside of Matsuura.",
+        "entity_ids": [
+          "\"M-FLO\"",
+          "\"MAX MATSUURA\""
+        ],
+        "chunk_ids": [
+          "chunk-0099baecc163ebfbfa3f288a0aad1efd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The track was written by Hamasaki, whilst production was handled by Japanese musician and long-time collaborator Max Matsuura with the assistance of M-Flo; this marks Hamasaki's first single to be produced with another producer outside of Matsuura.",
+            "Merry-Go-Round (Ayumi Hamasaki song) \"Merry-Go-Round\" is a song recorded by Japanese recording artist Ayumi Hamasaki, featuring a rap section delivered by Japanese artist Verbal, for the singer's fifteenth studio album \"Colours\" (2014). It was released worldwide in six different formats on December 25, 2013 by Avex Trax, Avex Taiwan, and Avex Entertainment Inc. It was also Hamasaki's first physical release in three years since her EP–single \"L\" (2010), and her first double A-side single, alongside the track \"Feel the Love\", since \"Moon\" and \"Blossom\" that same year. The track was written by Hamasaki, whilst production was handled by Japanese musician and long-time collaborator Max Matsuura with the assistance of M-Flo; this marks Hamasaki's first single to be produced with another producer outside of Matsuura. Musically, \"Merry-Go-Round\" is an electronic dance song that includes guita..."
+          ],
+          "relation_texts": [
+            "The track was written by Hamasaki, whilst production was handled by Japanese musician and long-time collaborator Max Matsuura with the assistance of M-Flo; this marks Hamasaki's first single to be produced with another producer outside of Matsuura.",
+            "link",
+            "M-FLO",
+            "MAX MATSUURA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ae8cabe2d58403048005a301133392a6",
+            "hyperedge_name": "<hyperedge>\"The track was written by Hamasaki, whilst production was handled by Japanese musician and long-time collaborator Max Matsuura with the assistance of M-Flo; this marks Hamasaki's first single to be produced with another producer outside of Matsuura.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The performances and uploads consist of a variety of songs showcasing Nicole's creativity and talent.\"",
+        "branch": "semantic",
+        "raw_score": 0.3685532212257385,
+        "hyperedge_text": "The performances and uploads consist of a variety of songs showcasing Nicole's creativity and talent.",
+        "entity_ids": [
+          "\"SONGS\""
+        ],
+        "chunk_ids": [
+          "chunk-8324b133062a55dc341fed28b9909eed"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The performances and uploads consist of a variety of songs showcasing Nicole's creativity and talent.",
+            "Hello, The Future! Hello, The Future! is the name of a nerd-folk band. Nicole Dieker has been performing as Hello, The Future! since May, 2010, when she recorded and uploaded one song a week to YouTube for 100 consecutive weeks. The band has released several albums and often performs at pop culture conventions. Although usually introduced as a solo act (\"My name is Nicole , my band is Hello, The Future! and I am the only person in my band\"), Hello, The Future sometimes performs and/or records with other performers or even a full backing band; \"Giant Robot Album\" was a collaboration with the band The Long Holidays."
+          ],
+          "relation_texts": [
+            "The performances and uploads consist of a variety of songs showcasing Nicole's creativity and talent.",
+            "link",
+            "SONGS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e13fe7653167ed20befd9dc5aea50f1f",
+            "hyperedge_name": "<hyperedge>\"The performances and uploads consist of a variety of songs showcasing Nicole's creativity and talent.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The live album captures the essence of Mavis Staples' powerful vocals and emotional performances.\"",
+        "branch": "semantic",
+        "raw_score": 0.3678598403930664,
+        "hyperedge_text": "The live album captures the essence of Mavis Staples' powerful vocals and emotional performances.",
+        "entity_ids": [
+          "\"VOCALS\"",
+          "\"EMOTIONAL PERFORMANCES\""
+        ],
+        "chunk_ids": [
+          "chunk-040a48ed957bebc4af8db308e63e0a1d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The live album captures the essence of Mavis Staples' powerful vocals and emotional performances.",
+            "Live: Hope at the Hideout Live: Hope at the Hideout is the first live album by Mavis Staples. The album was nominated for Best Contemporary Blues Album at the 52nd Annual Grammy Awards( held on January 31, 2010). The album was recorded at The Hideout Inn in Staples' hometown of Chicago."
+          ],
+          "relation_texts": [
+            "The live album captures the essence of Mavis Staples' powerful vocals and emotional performances.",
+            "link",
+            "VOCALS",
+            "EMOTIONAL PERFORMANCES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a8fcf9c37a315269b3cf216af0daba58",
+            "hyperedge_name": "<hyperedge>\"The live album captures the essence of Mavis Staples' powerful vocals and emotional performances.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.\"",
+        "hyperedge_text": "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5939130783081055,
+        "fusion_score": 0.7187826156616212,
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RICHARD RODGERS\"",
+          "\"LORENZ HART\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.593913,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.718783
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).\"",
+        "hyperedge_text": "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5497205257415771,
+        "fusion_score": 0.7099441051483155,
+        "entity_ids": [
+          "\"MIMI\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.549721,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.709944
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\"",
+        "hyperedge_text": "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4919140338897705,
+        "fusion_score": 0.4983828067779541,
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RCA VICTOR RED SEAL ALBUM 'WOMEN IN MY LIFE'\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.491914,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.498383
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"who also produced the song.\"",
+        "hyperedge_text": "who also produced the song.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.44164901971817017,
+        "semantic_score": 0.37353652715682983,
+        "fusion_score": 0.25136691331863403,
+        "entity_ids": [
+          "\"PRODUCED\""
+        ],
+        "chunk_ids": [
+          "chunk-12315df579a13e8aefe6b95ef61a1c67"
+        ],
+        "evidence_texts": [
+          "who also produced the song.",
+          "Don't Worry Bout Me (Zara Larsson song) \" Do n't Worry Bout Me\" is a song by Swedish singer Zara Larsson. It was released by TEN Music Group and Epic Records on 28 March 2019 as the second single from Larsson's upcoming third studio album. Larsson wrote\" Do n't Worry Bout Me\" with Tove Lo, Rami Yacoub, Linnea Södahl, Whitney Phillips, and The Struts, who also produced the song."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.441649,
+          "S": 0.373537,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.251367
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.\"",
+        "hyperedge_text": "He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.43059414625167847,
+        "fusion_score": 0.4861188292503357,
+        "entity_ids": [
+          "\"SIGNATURE SONGS\""
+        ],
+        "chunk_ids": [
+          "chunk-dd4147feacc984f701043c59ef5be1f6"
+        ],
+        "evidence_texts": [
+          "He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.",
+          "Maurice Chevalier Maurice Auguste Chevalier (September 12, 1888 – January 1, 1972) was a French actor, cabaret singer and entertainer. He is perhaps best known for his signature songs, including \"Livin' In The SunlightValentineLouiseMimi\", and \"Thank Heaven for Little Girls\" and for his films, including \"The Love ParadeThe Big PondThe Smiling LieutenantOne Hour with You\" and \"Love Me Tonight\". His trademark attire was a boater hat and tuxedo. Chevalier was born in Paris. He made his name as a star of musical comedy, appearing in public as a singer and dancer at an early age before working in menial jobs as a teenager. In 1909, he became the partner of the biggest female star in France at the time, Fréhel. Although their relationship was brief, she secured him his first major engagement, as a mimic and a singer in \"l'Alcazar\" in Marseille, for which he received critical acclaim by Fren..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.430594,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.486119
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the performer of Mimi?",
+    "retrieval_question": "What is the nationality of Sergio Franchi?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the nationality of the performer of Mimi?",
+      "retrieval_question": "What is the nationality of Sergio Franchi?",
+      "whether_rewritten": true,
+      "replacement_span": "the performer of Mimi",
+      "replacement_answer": "Sergio Franchi",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the performer of Mimi",
+          "replacement_answer": "Sergio Franchi"
+        }
+      ]
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+        "entity_ids": [
+          "\"SERGIO FRANCHI\"",
+          "\"VICTOR BORGE AT CARNEGIE HALL\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+            "link",
+            "SERGIO FRANCHI",
+            "VICTOR BORGE AT CARNEGIE HALL"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+        "entity_ids": [
+          "\"SERGIO FRANCHI\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+            "link",
+            "SERGIO FRANCHI"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').\"",
+        "branch": "relation",
+        "raw_score": 0.48665884137153625,
+        "hyperedge_text": "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+        "entity_ids": [
+          "\"JUS SANGUINIS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+            "link",
+            "JUS SANGUINIS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bcc8e08086e6cc89021620a9cfd18d3f",
+            "hyperedge_name": "<hyperedge>\"Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "branch": "relation",
+        "raw_score": 0.4700366258621216,
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+            "link",
+            "TERRITORIAL WATERS",
+            "LAW OF THE COUNTRIES INVOLVED",
+            "NATIONALITY OF THE PLANE OR SHIP",
+            "LAW",
+            "AIRSPACE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e736e546ef2766fb6eee3ec329d43975",
+            "hyperedge_name": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.\"",
+        "branch": "relation",
+        "raw_score": 0.46737200021743774,
+        "hyperedge_text": "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+        "entity_ids": [
+          "\"NATIONALITY\"",
+          "\"AMERICAS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.",
+            "link",
+            "NATIONALITY",
+            "AMERICAS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9533e282d05fe0ed1aae66ae544046ce",
+            "hyperedge_name": "<hyperedge>\"In some countries (primarily in the Americas), the place of birth automatically determines the nationality of the baby.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is important to determine from the requester whether the information requested refers to the applicant's 'place of birth' or 'nationality at birth'.\"",
+        "branch": "relation",
+        "raw_score": 0.4659980535507202,
+        "hyperedge_text": "It is important to determine from the requester whether the information requested refers to the applicant's 'place of birth' or 'nationality at birth'.",
+        "entity_ids": [
+          "\"REQUESTER\"",
+          "\"NATIONALITY AT BIRTH\"",
+          "\"REQUESTER'S CLARIFICATION\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is important to determine from the requester whether the information requested refers to the applicant's 'place of birth' or 'nationality at birth'.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "It is important to determine from the requester whether the information requested refers to the applicant's 'place of birth' or 'nationality at birth'.",
+            "link",
+            "REQUESTER",
+            "NATIONALITY AT BIRTH",
+            "REQUESTER'S CLARIFICATION",
+            "PLACE OF BIRTH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c4d31c1eecf3e485057a426833733d87",
+            "hyperedge_name": "<hyperedge>\"It is important to determine from the requester whether the information requested refers to the applicant's 'place of birth' or 'nationality at birth'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.\"",
+        "branch": "relation",
+        "raw_score": 0.458933025598526,
+        "hyperedge_text": "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+        "entity_ids": [
+          "\"COUNTRY\"",
+          "\"US CITIZENS\"",
+          "\"US CONSTITUTION\"",
+          "\"USA\"",
+          "\"US CITIZENSHIP\"",
+          "\"ACTUAL BIRTH LOCATION\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.",
+            "link",
+            "COUNTRY",
+            "US CITIZENS",
+            "US CONSTITUTION",
+            "USA",
+            "US CITIZENSHIP",
+            "ACTUAL BIRTH LOCATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-46faca6a891180adb3d5dc8164abade8",
+            "hyperedge_name": "<hyperedge>\"For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA (American), while the place of birth would be the country in which the actual birth takes place.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His nationality is not known.\"",
+        "branch": "relation",
+        "raw_score": 0.44592469930648804,
+        "hyperedge_text": "His nationality is not known.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-7318c8a72025c333f7292577275ef015"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His nationality is not known.",
+            "Fulco Fulco was the first known missionary Bishop of Estonia. He was appointed in 1165 by Eskil, the Danish Archbishop of Lund. Before his appointment, Fulco was a Benedictine monk in the abbey of Moutier- la- Celle, near Troyes in France. His nationality is not known. After his appointment, Fulco appears in sources only once. In 1171, Pope Alexander III asked the Archbishop of Trondheim to assign an Estonian monk Nicolaus living in Stavanger to go to Fulco's assistance. No further information survives about Fulco's work in Estonia, or whether he ever even got there."
+          ],
+          "relation_texts": [
+            "His nationality is not known."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1da0ba24482d2ade665482f243ec73ab",
+            "hyperedge_name": "<hyperedge>\"His nationality is not known.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The transmission of Iraqi nationality reflects the importance of familial ties in determining nationality.\"",
+        "branch": "relation",
+        "raw_score": 0.42004621028900146,
+        "hyperedge_text": "The transmission of Iraqi nationality reflects the importance of familial ties in determining nationality.",
+        "entity_ids": [
+          "\"TRANSMISSION OF NATIONALITY\""
+        ],
+        "chunk_ids": [
+          "chunk-ac273e3621287a243dc3c92fa35aa263"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The transmission of Iraqi nationality reflects the importance of familial ties in determining nationality.",
+            "Iraqi nationality law Iraqi nationality is transmitted by one's parents."
+          ],
+          "relation_texts": [
+            "The transmission of Iraqi nationality reflects the importance of familial ties in determining nationality.",
+            "link",
+            "TRANSMISSION OF NATIONALITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fca12bb9973822a1939b26724f93e8db",
+            "hyperedge_name": "<hyperedge>\"The transmission of Iraqi nationality reflects the importance of familial ties in determining nationality.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Children inherit Iraqi nationality from their parents in accordance with nationality law.\"",
+        "branch": "relation",
+        "raw_score": 0.41777166724205017,
+        "hyperedge_text": "Children inherit Iraqi nationality from their parents in accordance with nationality law.",
+        "entity_ids": [
+          "\"CHILDREN\""
+        ],
+        "chunk_ids": [
+          "chunk-ac273e3621287a243dc3c92fa35aa263"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Children inherit Iraqi nationality from their parents in accordance with nationality law.",
+            "Iraqi nationality law Iraqi nationality is transmitted by one's parents."
+          ],
+          "relation_texts": [
+            "Children inherit Iraqi nationality from their parents in accordance with nationality law.",
+            "link",
+            "CHILDREN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1078afa04310a070080843dd84827f15",
+            "hyperedge_name": "<hyperedge>\"Children inherit Iraqi nationality from their parents in accordance with nationality law.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Iraqi nationality law governs the rules around the acquisition of nationality in Iraq.\"",
+        "branch": "relation",
+        "raw_score": 0.4145177900791168,
+        "hyperedge_text": "Iraqi nationality law governs the rules around the acquisition of nationality in Iraq.",
+        "entity_ids": [
+          "\"IRAQI NATIONALITY LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-ac273e3621287a243dc3c92fa35aa263"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Iraqi nationality law governs the rules around the acquisition of nationality in Iraq.",
+            "Iraqi nationality law Iraqi nationality is transmitted by one's parents."
+          ],
+          "relation_texts": [
+            "Iraqi nationality law governs the rules around the acquisition of nationality in Iraq.",
+            "link",
+            "IRAQI NATIONALITY LAW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7d26a5f3c7005275648bd522df3220c7",
+            "hyperedge_name": "<hyperedge>\"Iraqi nationality law governs the rules around the acquisition of nationality in Iraq.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Some administrative forms may request the applicant's 'country of birth'. \"",
+        "branch": "relation",
+        "raw_score": 0.40889251232147217,
+        "hyperedge_text": "Some administrative forms may request the applicant's 'country of birth'.",
+        "entity_ids": [
+          "\"ADMINISTRATIVE FORMS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Some administrative forms may request the applicant's 'country of birth'.",
+            "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+          ],
+          "relation_texts": [
+            "Some administrative forms may request the applicant's 'country of birth'.",
+            "link",
+            "ADMINISTRATIVE FORMS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1c441b07ef908be79cd5d5ec537e508e",
+            "hyperedge_name": "<hyperedge>\"Some administrative forms may request the applicant's 'country of birth'. \""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Gobbi's identity includes his Italian-French nationality.\"",
+        "branch": "semantic",
+        "raw_score": 0.5272330641746521,
+        "hyperedge_text": "Sergio Gobbi's identity includes his Italian-French nationality.",
+        "entity_ids": [
+          "\"IDENTITY\""
+        ],
+        "chunk_ids": [
+          "chunk-7761bce582af1641f8b710ee5c185497"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Gobbi's identity includes his Italian-French nationality.",
+            "Sergio Gobbi Sergio Gobbi (born 13 May 1938 in Milan, Italy), born as Sergio Ehrlich, is an Italian-French filmmaker, who was married to Jocelyn Wildenstein."
+          ],
+          "relation_texts": [
+            "Sergio Gobbi's identity includes his Italian-French nationality.",
+            "link",
+            "IDENTITY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-74ad24d7a054eed3d6f21f8d8a5b719c",
+            "hyperedge_name": "<hyperedge>\"Sergio Gobbi's identity includes his Italian-French nationality.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Gobbi has both Italian and French heritage.\"",
+        "branch": "semantic",
+        "raw_score": 0.5086555480957031,
+        "hyperedge_text": "Sergio Gobbi has both Italian and French heritage.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-7761bce582af1641f8b710ee5c185497"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Gobbi has both Italian and French heritage.",
+            "Sergio Gobbi Sergio Gobbi (born 13 May 1938 in Milan, Italy), born as Sergio Ehrlich, is an Italian-French filmmaker, who was married to Jocelyn Wildenstein."
+          ],
+          "relation_texts": [
+            "Sergio Gobbi has both Italian and French heritage."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f4903ab45ececce4c56415a0a7580f89",
+            "hyperedge_name": "<hyperedge>\"Sergio Gobbi has both Italian and French heritage.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'\"",
+        "branch": "semantic",
+        "raw_score": 0.4998883903026581,
+        "hyperedge_text": "Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+        "entity_ids": [
+          "\"SERGIO FRANCHI\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+            "link",
+            "SERGIO FRANCHI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c0ea873ce6df9126a7e01e4d8f9fc6f5",
+            "hyperedge_name": "<hyperedge>\"Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'\"",
+        "branch": "semantic",
+        "raw_score": 0.49872544407844543,
+        "hyperedge_text": "Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+        "entity_ids": [
+          "\"SERGIO FRANCHI\"",
+          "\"VICTOR BORGE AT CARNEGIE HALL\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+            "link",
+            "SERGIO FRANCHI",
+            "VICTOR BORGE AT CARNEGIE HALL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0c0ee8eada3562f159cf738cecd9a836",
+            "hyperedge_name": "<hyperedge>\"Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\"",
+        "branch": "semantic",
+        "raw_score": 0.46483874320983887,
+        "hyperedge_text": "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RCA VICTOR RED SEAL ALBUM 'WOMEN IN MY LIFE'\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+            "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+          ],
+          "relation_texts": [
+            "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+            "link",
+            "MIMI",
+            "RCA VICTOR RED SEAL ALBUM 'WOMEN IN MY LIFE'"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-399cfbe822aff283738f66b051675874",
+            "hyperedge_name": "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Martino (born 19 July 1938) is an Italian film director and producer, notable for his contributions to the giallo genre.\"",
+        "branch": "semantic",
+        "raw_score": 0.4626706540584564,
+        "hyperedge_text": "Sergio Martino (born 19 July 1938) is an Italian film director and producer, notable for his contributions to the giallo genre.",
+        "entity_ids": [
+          "\"SERGIO MARTINO\"",
+          "\"GIALLO GENRE\""
+        ],
+        "chunk_ids": [
+          "chunk-91c55b0aef0bf18dc92435d594bb4224"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Martino (born 19 July 1938) is an Italian film director and producer, notable for his contributions to the giallo genre.",
+            "Sergio Martino Sergio Martino( born 19 July 1938) is an Italian film director and producer, notable for his contributions to the giallo genre. Martino is the brother of the late producer Luciano Martino( who died in 2013). They collaborated frequently in their respective professions. Their grandfather was director Gennaro Righelli. Sergio Martino worked for both the big screen as well as for Italian television where he does most of his current work. He often worked with actress Edwige Fenech who in the 1970s was married to his brother Luciano. He also worked with a lot of genre actors such as George Hilton( who was married to Sergio's cousin), Ivan Rassimov and Claudio Cassinelli, as well as famed Italian screenwriter Ernesto Gastaldi. Martino's pseudonyms include: Julian Barry, Martin Dolman, Serge Martin, Christian Plummer, George Raminto."
+          ],
+          "relation_texts": [
+            "Sergio Martino (born 19 July 1938) is an Italian film director and producer, notable for his contributions to the giallo genre.",
+            "link",
+            "SERGIO MARTINO",
+            "GIALLO GENRE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-babb2d5580ca2804572e882ab1561b49",
+            "hyperedge_name": "<hyperedge>\"Sergio Martino (born 19 July 1938) is an Italian film director and producer, notable for his contributions to the giallo genre.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Gobbi was born as Sergio Ehrlich.\"",
+        "branch": "semantic",
+        "raw_score": 0.46149587631225586,
+        "hyperedge_text": "Sergio Gobbi was born as Sergio Ehrlich.",
+        "entity_ids": [
+          "\"SERGIO EHRLICH\""
+        ],
+        "chunk_ids": [
+          "chunk-7761bce582af1641f8b710ee5c185497"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Gobbi was born as Sergio Ehrlich.",
+            "Sergio Gobbi Sergio Gobbi (born 13 May 1938 in Milan, Italy), born as Sergio Ehrlich, is an Italian-French filmmaker, who was married to Jocelyn Wildenstein."
+          ],
+          "relation_texts": [
+            "Sergio Gobbi was born as Sergio Ehrlich.",
+            "link",
+            "SERGIO EHRLICH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3642a6f646904fd1dba1ed5b77a54c52",
+            "hyperedge_name": "<hyperedge>\"Sergio Gobbi was born as Sergio Ehrlich.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Martino worked for Italian television where he does most of his current work.\"",
+        "branch": "semantic",
+        "raw_score": 0.45647791028022766,
+        "hyperedge_text": "Sergio Martino worked for Italian television where he does most of his current work.",
+        "entity_ids": [
+          "\"CURRENT WORK\""
+        ],
+        "chunk_ids": [
+          "chunk-91c55b0aef0bf18dc92435d594bb4224"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Martino worked for Italian television where he does most of his current work.",
+            "Sergio Martino Sergio Martino( born 19 July 1938) is an Italian film director and producer, notable for his contributions to the giallo genre. Martino is the brother of the late producer Luciano Martino( who died in 2013). They collaborated frequently in their respective professions. Their grandfather was director Gennaro Righelli. Sergio Martino worked for both the big screen as well as for Italian television where he does most of his current work. He often worked with actress Edwige Fenech who in the 1970s was married to his brother Luciano. He also worked with a lot of genre actors such as George Hilton( who was married to Sergio's cousin), Ivan Rassimov and Claudio Cassinelli, as well as famed Italian screenwriter Ernesto Gastaldi. Martino's pseudonyms include: Julian Barry, Martin Dolman, Serge Martin, Christian Plummer, George Raminto."
+          ],
+          "relation_texts": [
+            "Sergio Martino worked for Italian television where he does most of his current work.",
+            "link",
+            "CURRENT WORK"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-53cd8cc62afcd79333c07357f97e9b65",
+            "hyperedge_name": "<hyperedge>\"Sergio Martino worked for Italian television where he does most of his current work.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Gobbi is recognized both in Italy and France for his work.\"",
+        "branch": "semantic",
+        "raw_score": 0.4534849524497986,
+        "hyperedge_text": "Sergio Gobbi is recognized both in Italy and France for his work.",
+        "entity_ids": [
+          "\"ITALY AND FRANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-7761bce582af1641f8b710ee5c185497"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Gobbi is recognized both in Italy and France for his work.",
+            "Sergio Gobbi Sergio Gobbi (born 13 May 1938 in Milan, Italy), born as Sergio Ehrlich, is an Italian-French filmmaker, who was married to Jocelyn Wildenstein."
+          ],
+          "relation_texts": [
+            "Sergio Gobbi is recognized both in Italy and France for his work.",
+            "link",
+            "ITALY AND FRANCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2a6d9841ec681d6e24641f8dc0dabd18",
+            "hyperedge_name": "<hyperedge>\"Sergio Gobbi is recognized both in Italy and France for his work.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Gobbi was born in Milan, Italy.\"",
+        "branch": "semantic",
+        "raw_score": 0.44884347915649414,
+        "hyperedge_text": "Sergio Gobbi was born in Milan, Italy.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-7761bce582af1641f8b710ee5c185497"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sergio Gobbi was born in Milan, Italy.",
+            "Sergio Gobbi Sergio Gobbi (born 13 May 1938 in Milan, Italy), born as Sergio Ehrlich, is an Italian-French filmmaker, who was married to Jocelyn Wildenstein."
+          ],
+          "relation_texts": [
+            "Sergio Gobbi was born in Milan, Italy."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ca44ea5f4bda2c16cd3c9561e4aed2f8",
+            "hyperedge_name": "<hyperedge>\"Sergio Gobbi was born in Milan, Italy.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'\"",
+        "hyperedge_text": "Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4998883903026581,
+        "fusion_score": 0.4999776780605316,
+        "entity_ids": [
+          "\"SERGIO FRANCHI\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.499888,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499978
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'\"",
+        "hyperedge_text": "Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49872544407844543,
+        "fusion_score": 0.49974508881568913,
+        "entity_ids": [
+          "\"SERGIO FRANCHI\"",
+          "\"VICTOR BORGE AT CARNEGIE HALL\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.498725,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499745
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Gobbi's identity includes his Italian-French nationality.\"",
+        "hyperedge_text": "Sergio Gobbi's identity includes his Italian-French nationality.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5272330641746521,
+        "fusion_score": 0.5054466128349304,
+        "entity_ids": [
+          "\"IDENTITY\""
+        ],
+        "chunk_ids": [
+          "chunk-7761bce582af1641f8b710ee5c185497"
+        ],
+        "evidence_texts": [
+          "Sergio Gobbi's identity includes his Italian-French nationality.",
+          "Sergio Gobbi Sergio Gobbi (born 13 May 1938 in Milan, Italy), born as Sergio Ehrlich, is an Italian-French filmmaker, who was married to Jocelyn Wildenstein."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.527233,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505447
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\"",
+        "hyperedge_text": "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.46483874320983887,
+        "fusion_score": 0.4929677486419678,
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RCA VICTOR RED SEAL ALBUM 'WOMEN IN MY LIFE'\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.464839,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.492968
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').\"",
+        "hyperedge_text": "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48665884137153625,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.26133020321528116,
+        "entity_ids": [
+          "\"JUS SANGUINIS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.486659,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.26133
+        }
+      }
+    ]
+  }
+]

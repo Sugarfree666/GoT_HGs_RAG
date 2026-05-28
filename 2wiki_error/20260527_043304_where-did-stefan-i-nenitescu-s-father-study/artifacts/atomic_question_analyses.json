@@ -1,0 +1,102 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Ștefan I. Nenițescu?",
+    "retrieval_question": "Who is the father of Ștefan I. Nenițescu?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of Ștefan I. Nenițescu?",
+      "retrieval_question": "Who is the father of Ștefan I. Nenițescu?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Ștefan I. Nenițescu"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Ștefan I. Nenițescu study?",
+    "retrieval_question": "Where did the father of Ștefan I. Nenițescu study?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the father of Ștefan I. Nenițescu study?",
+      "retrieval_question": "Where did the father of Ștefan I. Nenițescu study?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the father of Ștefan I. Nenițescu?",
+        "answer": "Ioan S. Nenițescu",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that Ștefan I. Nenițescu's parents were the poet Ioan S. Nenițescu and his wife Elena, confirming Ioan S. Nenițescu as his father.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.\"",
+            "fusion_score": 0.5321766138076782,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician.",
+              "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.\"",
+            "fusion_score": 0.5311186790466309,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Ștefan I. Nenițescu was a Romanian poet and aesthetician born on October 8, 1897, in Bucharest.",
+              "Ștefan I. Nenițescu Ștefan I. Nenițescu (October 8, 1897–October 1979) was a Romanian poet and aesthetician. Born in Bucharest, his parents were the poet Ioan S. Nenițescu and his wife Elena (\"née\" Ștefan). He attended Sapienza University of Rome from 1920, as well as the literature and philosophy department of Bucharest University. At first an assistant professor of aesthetics, he later became an associate professor at Bucharest. He served as press secretary and later economic adviser to the Romanian legation in The Hague. Nenițescu's first publication was a 1915 article about William Shakespeare that appeared in \"Noua revistă română\". His first book of poetry, \"Denii\" (1919), was followed by \"Vrajă\" (1923) and \"Ode italice\" (1925). His single volume of theatre was \"Trei mistere\" (1922). From 1924, he wrote for \"Gândirea\", and was a founding member of Romania's PEN Club. He also cont..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"He was the father.\"",
+            "fusion_score": 0.2321441435813904,
+            "branch_support": [
+              "relation"
+            ],
+            "evidence_texts": [
+              "He was the father.",
+              "Obata Toramori He was the father of Obata Masamori."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Ștefan I. Nenițescu",
+        "Ioan S. Nenițescu",
+        "Sapienza University of Rome",
+        "Bucharest University"
+      ],
+      "relations": [
+        "studied at",
+        "is the father of"
+      ],
+      "relation_query": "Where did a person study who is the father of a specific individual?",
+      "answer_type": "location"
+    }
+  }
+]

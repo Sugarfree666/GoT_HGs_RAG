@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "When is the birthday of the mother of Prince Raphael Rainer Of Thurn And Taxis?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

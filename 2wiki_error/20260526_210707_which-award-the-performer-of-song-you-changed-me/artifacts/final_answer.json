@@ -1,0 +1,34 @@
+{
+  "answer": "Academy Award",
+  "candidate_answer": "Academy Award",
+  "reasoning_summary": "Jamie Foxx, the performer of 'You Changed Me', won the Academy Award for his role in the film 'Ray'. This is supported by multiple pieces of evidence confirming his achievements in acting.",
+  "answer_span_reasoning": "The performer of 'You Changed Me' is Jamie Foxx, who won the Academy Award.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the performer of the song You Changed Me?",
+      "answer": "Jamie Foxx",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What award did the performer of You Changed Me win?",
+      "answer": "Academy Award",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "What award did the performer of You Changed Me win?",
+      "answer": "Academy Award",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Foxx became widely known for his portrayal of Ray Charles in the 2004 biographical film 'Ray', for which he won the Academy Award, BAFTA, Screen Actors Guild Award, Critics' Choice Movie Award and Golden Globe Award for Best Actor.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

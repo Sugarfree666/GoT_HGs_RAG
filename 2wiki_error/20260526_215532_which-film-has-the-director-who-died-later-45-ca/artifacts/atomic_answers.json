@@ -1,0 +1,719 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When did the director of 45 Calibre Echo die?",
+    "analysis": {
+      "entities": [
+        "45 Calibre Echo"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of the director of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.\"",
+        "hyperedge_text": "45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5761717557907104,
+        "fusion_score": 0.5152343511581421,
+        "entity_ids": [
+          "\"BEN CORBETT\"",
+          "\"ELINOR FAIR\"",
+          "\"45 CALIBRE ECHO\"",
+          "\"BRUCE M. MITCHELL\"",
+          "\"JACK PERRIN\""
+        ],
+        "chunk_ids": [
+          "chunk-7e1d538dfa8c8525c968df8f558a262a"
+        ],
+        "evidence_texts": [
+          "45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.",
+          "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.576172,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515234
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"45 Calibre Echo is a 1932 American western film.\"",
+        "hyperedge_text": "45 Calibre Echo is a 1932 American western film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5724530220031738,
+        "fusion_score": 0.5144906044006348,
+        "entity_ids": [
+          "\"45 CALIBRE ECHO\""
+        ],
+        "chunk_ids": [
+          "chunk-7e1d538dfa8c8525c968df8f558a262a"
+        ],
+        "evidence_texts": [
+          "45 Calibre Echo is a 1932 American western film.",
+          "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.572453,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.514491
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The music director died before the release of the film.\"",
+        "hyperedge_text": "The music director died before the release of the film.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4986388087272644,
+        "semantic_score": 0.4878804683685303,
+        "fusion_score": 0.29703161716461185,
+        "entity_ids": [
+          "\"SAMPATH SELVAM\""
+        ],
+        "chunk_ids": [
+          "chunk-7b18343d2c0ab9d855df8ec895675e28"
+        ],
+        "evidence_texts": [
+          "The music director died before the release of the film.",
+          "Thulasi (1987 film) Thulasi is a 1987 Tamil romantic drama film directed by Ameerjan. The film features Murali and Seetha in lead roles. The film, produced by P. S. V. Hariharan, had musical score by Sampath Selvam and was released on 27 November 1987. The music director died before the release of the film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.498639,
+          "S": 0.48788,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.297032
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Perrin stars in 45 Calibre Echo.\"",
+        "hyperedge_text": "Jack Perrin stars in 45 Calibre Echo.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6003236174583435,
+        "fusion_score": 0.5200647234916688,
+        "entity_ids": [
+          "\"JACK PERRIN\""
+        ],
+        "chunk_ids": [
+          "chunk-7e1d538dfa8c8525c968df8f558a262a"
+        ],
+        "evidence_texts": [
+          "Jack Perrin stars in 45 Calibre Echo.",
+          "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.600324,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.520065
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ben Corbett features prominently in the film 45 Calibre Echo.\"",
+        "hyperedge_text": "Ben Corbett features prominently in the film 45 Calibre Echo.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5591448545455933,
+        "fusion_score": 0.5118289709091187,
+        "entity_ids": [
+          "\"BEN CORBETT\""
+        ],
+        "chunk_ids": [
+          "chunk-7e1d538dfa8c8525c968df8f558a262a"
+        ],
+        "evidence_texts": [
+          "Ben Corbett features prominently in the film 45 Calibre Echo.",
+          "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.559145,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511829
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the death of Bruce M. Mitchell, the director of '45 Calibre Echo'.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of 45 Calibre Echo?",
+    "analysis": {
+      "entities": [
+        "45 Calibre Echo"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"45 Calibre Echo is a 1932 American western film.\"",
+        "hyperedge_text": "45 Calibre Echo is a 1932 American western film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6432306170463562,
+        "fusion_score": 0.5286461234092713,
+        "entity_ids": [
+          "\"45 CALIBRE ECHO\""
+        ],
+        "chunk_ids": [
+          "chunk-7e1d538dfa8c8525c968df8f558a262a"
+        ],
+        "evidence_texts": [
+          "45 Calibre Echo is a 1932 American western film.",
+          "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.643231,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528646
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.\"",
+        "hyperedge_text": "45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6291427612304688,
+        "fusion_score": 0.5258285522460938,
+        "entity_ids": [
+          "\"BEN CORBETT\"",
+          "\"ELINOR FAIR\"",
+          "\"45 CALIBRE ECHO\"",
+          "\"BRUCE M. MITCHELL\"",
+          "\"JACK PERRIN\""
+        ],
+        "chunk_ids": [
+          "chunk-7e1d538dfa8c8525c968df8f558a262a"
+        ],
+        "evidence_texts": [
+          "45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.",
+          "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.629143,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525829
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jack Perrin stars in 45 Calibre Echo.\"",
+        "hyperedge_text": "Jack Perrin stars in 45 Calibre Echo.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6651580333709717,
+        "fusion_score": 0.5330316066741944,
+        "entity_ids": [
+          "\"JACK PERRIN\""
+        ],
+        "chunk_ids": [
+          "chunk-7e1d538dfa8c8525c968df8f558a262a"
+        ],
+        "evidence_texts": [
+          "Jack Perrin stars in 45 Calibre Echo.",
+          "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.665158,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533032
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ben Corbett features prominently in the film 45 Calibre Echo.\"",
+        "hyperedge_text": "Ben Corbett features prominently in the film 45 Calibre Echo.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6103969812393188,
+        "fusion_score": 0.5220793962478638,
+        "entity_ids": [
+          "\"BEN CORBETT\""
+        ],
+        "chunk_ids": [
+          "chunk-7e1d538dfa8c8525c968df8f558a262a"
+        ],
+        "evidence_texts": [
+          "Ben Corbett features prominently in the film 45 Calibre Echo.",
+          "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.610397,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522079
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Elinor Fair plays a role in the film 45 Calibre Echo.\"",
+        "hyperedge_text": "Elinor Fair plays a role in the film 45 Calibre Echo.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5964523553848267,
+        "fusion_score": 0.5192904710769654,
+        "entity_ids": [
+          "\"ELINOR FAIR\""
+        ],
+        "chunk_ids": [
+          "chunk-7e1d538dfa8c8525c968df8f558a262a"
+        ],
+        "evidence_texts": [
+          "Elinor Fair plays a role in the film 45 Calibre Echo.",
+          "45 Calibre Echo 45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.596452,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51929
+        }
+      }
+    ],
+    "answer": "Bruce M. Mitchell",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that '45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"45 Calibre Echo is a 1932 American western film directed by Bruce M. Mitchell and starring Jack Perrin, Ben Corbett and Elinor Fair.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "When did the director of Bons Baisers De Hong Kong die?",
+    "analysis": {
+      "entities": [
+        "Bons Baisers De Hong Kong"
+      ],
+      "relations": [
+        "director death date"
+      ],
+      "relation_query": "What is the death date of the director of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bons Baisers de Hong Kong is a 1975 French film directed by Yvan Chiffre.\"",
+        "hyperedge_text": "Bons Baisers de Hong Kong is a 1975 French film directed by Yvan Chiffre.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5917251706123352,
+        "fusion_score": 0.5183450341224671,
+        "entity_ids": [
+          "\"YVAN CHIFFRE\"",
+          "\"BONS BAISERS DE HONG KONG\""
+        ],
+        "chunk_ids": [
+          "chunk-4283759769b0da568440613fb45d44a4"
+        ],
+        "evidence_texts": [
+          "Bons Baisers de Hong Kong is a 1975 French film directed by Yvan Chiffre.",
+          "Bons Baisers de Hong Kong Bons Baisers de Hong Kong( also known as From Hong Kong with Love) is a 1975 French film directed by Yvan Chiffre. It is a parody of James Bond movies featuring Les Charlots with scenes shot in Hong Kong. Mickey Rooney featured in the film as well as Bernard Lee and Lois Maxwell, stars of the James Bond films who appeared as M and Miss Moneypenny, respectively. It was filmed at the Shaw Brothers studios in Hong Kong."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.591725,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518345
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After being photographed for 'Playboy' magazine's Playmate of the Month in August 1974, she moved to Europe and appeared in several films, including 'Bons Baisers de Hong Kong' (1975).\"",
+        "hyperedge_text": "After being photographed for 'Playboy' magazine's Playmate of the Month in August 1974, she moved to Europe and appeared in several films, including 'Bons Baisers de Hong Kong' (1975).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7142857142857143,
+        "fusion_score": 0.5428571428571429,
+        "entity_ids": [
+          "\"EUROPE\"",
+          "\"PLAYBOY MAGAZINE\"",
+          "\"AUGUST 1974\"",
+          "\"BONS BAISERS DE HONG KONG\""
+        ],
+        "chunk_ids": [
+          "chunk-c0aa0a93542be25f9f2c0e99df95d1e9"
+        ],
+        "evidence_texts": [
+          "After being photographed for 'Playboy' magazine's Playmate of the Month in August 1974, she moved to Europe and appeared in several films, including 'Bons Baisers de Hong Kong' (1975).",
+          "Jeane Manson Jeane Manson( born 1950 in Cleveland, Ohio) is an American model, singer, and actor. After being photographed for\" Playboy\" magazine's Playmate of the Month in August 1974, she moved to Europe and appeared in several films, including\" Bons Baisers de Hong Kong\"( 1975). The following year, she became known for the song\" Avant de nous dire adieu\". In 1979 she represented Luxembourg in the Eurovision Song Contest with the song\" J'ai déjà vu ça dans tes yeux\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.714286,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542857
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As an actor, he appeared in 'The Butterfly Affair', 'Bons Baisers de Hong Kong', and 'Ace High'.\"",
+        "hyperedge_text": "As an actor, he appeared in 'The Butterfly Affair', 'Bons Baisers de Hong Kong', and 'Ace High'.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7142857142857143,
+        "fusion_score": 0.5428571428571429,
+        "entity_ids": [
+          "\"ACE HIGH\"",
+          "\"BONS BAISERS DE HONG KONG\"",
+          "\"THE BUTTERFLY AFFAIR\""
+        ],
+        "chunk_ids": [
+          "chunk-f5a50999f42ada848d5a36e8053ed3f9"
+        ],
+        "evidence_texts": [
+          "As an actor, he appeared in 'The Butterfly Affair', 'Bons Baisers de Hong Kong', and 'Ace High'.",
+          "Leroy Haynes Leroy Haynes( 1914–1986) was an expat American restaurateur and actor who resided in Paris, France. As an actor, he appeared in\" The Butterfly AffairBons Baisers de Hong Kong\", and\" Ace High\". His restaurant, Chez Haynes was a well known and iconic restaurant which would be visited by well known actors and entertainers."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.714286,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542857
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She made her film appearance in 'Bons Baisers de Hong Kong' in 1975.\"",
+        "hyperedge_text": "She made her film appearance in 'Bons Baisers de Hong Kong' in 1975.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5507148504257202,
+        "fusion_score": 0.5101429700851441,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-c0aa0a93542be25f9f2c0e99df95d1e9"
+        ],
+        "evidence_texts": [
+          "She made her film appearance in 'Bons Baisers de Hong Kong' in 1975.",
+          "Jeane Manson Jeane Manson( born 1950 in Cleveland, Ohio) is an American model, singer, and actor. After being photographed for\" Playboy\" magazine's Playmate of the Month in August 1974, she moved to Europe and appeared in several films, including\" Bons Baisers de Hong Kong\"( 1975). The following year, she became known for the song\" Avant de nous dire adieu\". In 1979 she represented Luxembourg in the Eurovision Song Contest with the song\" J'ai déjà vu ça dans tes yeux\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.550715,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510143
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bons Baisers de Hong Kong is also known as From Hong Kong with Love.\"",
+        "hyperedge_text": "Bons Baisers de Hong Kong is also known as From Hong Kong with Love.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5195256471633911,
+        "fusion_score": 0.5039051294326783,
+        "entity_ids": [
+          "\"FROM HONG KONG WITH LOVE\""
+        ],
+        "chunk_ids": [
+          "chunk-4283759769b0da568440613fb45d44a4"
+        ],
+        "evidence_texts": [
+          "Bons Baisers de Hong Kong is also known as From Hong Kong with Love.",
+          "Bons Baisers de Hong Kong Bons Baisers de Hong Kong( also known as From Hong Kong with Love) is a 1975 French film directed by Yvan Chiffre. It is a parody of James Bond movies featuring Les Charlots with scenes shot in Hong Kong. Mickey Rooney featured in the film as well as Bernard Lee and Lois Maxwell, stars of the James Bond films who appeared as M and Miss Moneypenny, respectively. It was filmed at the Shaw Brothers studios in Hong Kong."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.519526,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.503905
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the death of Yvan Chiffre, the director of 'Bons Baisers De Hong Kong'.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Bons Baisers de Hong Kong is a 1975 French film directed by Yvan Chiffre.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "Who is the director of Bons Baisers De Hong Kong?",
+    "analysis": {
+      "entities": [
+        "Bons Baisers De Hong Kong"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bons Baisers de Hong Kong is a 1975 French film directed by Yvan Chiffre.\"",
+        "hyperedge_text": "Bons Baisers de Hong Kong is a 1975 French film directed by Yvan Chiffre.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6553246378898621,
+        "fusion_score": 0.5310649275779724,
+        "entity_ids": [
+          "\"YVAN CHIFFRE\"",
+          "\"BONS BAISERS DE HONG KONG\""
+        ],
+        "chunk_ids": [
+          "chunk-4283759769b0da568440613fb45d44a4"
+        ],
+        "evidence_texts": [
+          "Bons Baisers de Hong Kong is a 1975 French film directed by Yvan Chiffre.",
+          "Bons Baisers de Hong Kong Bons Baisers de Hong Kong( also known as From Hong Kong with Love) is a 1975 French film directed by Yvan Chiffre. It is a parody of James Bond movies featuring Les Charlots with scenes shot in Hong Kong. Mickey Rooney featured in the film as well as Bernard Lee and Lois Maxwell, stars of the James Bond films who appeared as M and Miss Moneypenny, respectively. It was filmed at the Shaw Brothers studios in Hong Kong."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.655325,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531065
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After being photographed for 'Playboy' magazine's Playmate of the Month in August 1974, she moved to Europe and appeared in several films, including 'Bons Baisers de Hong Kong' (1975).\"",
+        "hyperedge_text": "After being photographed for 'Playboy' magazine's Playmate of the Month in August 1974, she moved to Europe and appeared in several films, including 'Bons Baisers de Hong Kong' (1975).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8333333333333334,
+        "fusion_score": 0.5666666666666667,
+        "entity_ids": [
+          "\"EUROPE\"",
+          "\"PLAYBOY MAGAZINE\"",
+          "\"AUGUST 1974\"",
+          "\"BONS BAISERS DE HONG KONG\""
+        ],
+        "chunk_ids": [
+          "chunk-c0aa0a93542be25f9f2c0e99df95d1e9"
+        ],
+        "evidence_texts": [
+          "After being photographed for 'Playboy' magazine's Playmate of the Month in August 1974, she moved to Europe and appeared in several films, including 'Bons Baisers de Hong Kong' (1975).",
+          "Jeane Manson Jeane Manson( born 1950 in Cleveland, Ohio) is an American model, singer, and actor. After being photographed for\" Playboy\" magazine's Playmate of the Month in August 1974, she moved to Europe and appeared in several films, including\" Bons Baisers de Hong Kong\"( 1975). The following year, she became known for the song\" Avant de nous dire adieu\". In 1979 she represented Luxembourg in the Eurovision Song Contest with the song\" J'ai déjà vu ça dans tes yeux\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.833333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.566667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As an actor, he appeared in 'The Butterfly Affair', 'Bons Baisers de Hong Kong', and 'Ace High'.\"",
+        "hyperedge_text": "As an actor, he appeared in 'The Butterfly Affair', 'Bons Baisers de Hong Kong', and 'Ace High'.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8333333333333334,
+        "fusion_score": 0.5666666666666667,
+        "entity_ids": [
+          "\"ACE HIGH\"",
+          "\"BONS BAISERS DE HONG KONG\"",
+          "\"THE BUTTERFLY AFFAIR\""
+        ],
+        "chunk_ids": [
+          "chunk-f5a50999f42ada848d5a36e8053ed3f9"
+        ],
+        "evidence_texts": [
+          "As an actor, he appeared in 'The Butterfly Affair', 'Bons Baisers de Hong Kong', and 'Ace High'.",
+          "Leroy Haynes Leroy Haynes( 1914–1986) was an expat American restaurateur and actor who resided in Paris, France. As an actor, he appeared in\" The Butterfly AffairBons Baisers de Hong Kong\", and\" Ace High\". His restaurant, Chez Haynes was a well known and iconic restaurant which would be visited by well known actors and entertainers."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.833333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.566667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bons Baisers de Hong Kong is also known as From Hong Kong with Love.\"",
+        "hyperedge_text": "Bons Baisers de Hong Kong is also known as From Hong Kong with Love.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5975508689880371,
+        "fusion_score": 0.5195101737976074,
+        "entity_ids": [
+          "\"FROM HONG KONG WITH LOVE\""
+        ],
+        "chunk_ids": [
+          "chunk-4283759769b0da568440613fb45d44a4"
+        ],
+        "evidence_texts": [
+          "Bons Baisers de Hong Kong is also known as From Hong Kong with Love.",
+          "Bons Baisers de Hong Kong Bons Baisers de Hong Kong( also known as From Hong Kong with Love) is a 1975 French film directed by Yvan Chiffre. It is a parody of James Bond movies featuring Les Charlots with scenes shot in Hong Kong. Mickey Rooney featured in the film as well as Bernard Lee and Lois Maxwell, stars of the James Bond films who appeared as M and Miss Moneypenny, respectively. It was filmed at the Shaw Brothers studios in Hong Kong."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.597551,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51951
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tsui Hark, born Tsui Man-kong, is a Hong Kong film director, producer, and screenwriter.\"",
+        "hyperedge_text": "Tsui Hark, born Tsui Man-kong, is a Hong Kong film director, producer, and screenwriter.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5621334314346313,
+        "fusion_score": 0.5124266862869263,
+        "entity_ids": [
+          "\"TSUI MAN-KONG\""
+        ],
+        "chunk_ids": [
+          "chunk-7c397b2fb4603d029f9755fd2df4cbc9"
+        ],
+        "evidence_texts": [
+          "Tsui Hark, born Tsui Man-kong, is a Hong Kong film director, producer, and screenwriter.",
+          "Tsui Hark Tsui Hark( born 15 February 1950), born Tsui Man-kong, is a Hong Kong film director, producer and screenwriter. Tsui has directed several influential Hong Kong films such as\" Zu Warriors from the Magic Mountain\"( 1983), the\" Once Upon a Time in China\" film series( 1991 – 1997) and\" The Blade\"( 1995). Tsui also has been a prolific writer and( a very hands- on) producer; his productions include\" A Better Tomorrow\"( 1986),\" A Chinese Ghost Story\"( 1987),\" The Killer\"( 1989),\" The Legend of the Swordsman\"( 1992),\" The Wicked City\"( 1992),\" Iron Monkey\"( 1993) and\" Black Mask\"( 1996). He is viewed as a major figure in the Golden Age of Hong Kong cinema and is regarded by critics as\" one of the masters of Asian cinematography\". In the late 1990s, Tsui had a short- lived career in the United States, directing the Jean- Claude Van Damme –led films\" Double Team\"( 1997) and\" Knock Off..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.562133,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.512427
+        }
+      }
+    ],
+    "answer": "Yvan Chiffre",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Bons Baisers de Hong Kong' is directed by Yvan Chiffre.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Bons Baisers de Hong Kong is a 1975 French film directed by Yvan Chiffre.\""
+    ]
+  }
+]

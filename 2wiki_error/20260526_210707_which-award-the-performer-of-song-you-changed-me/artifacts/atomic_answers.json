@@ -1,0 +1,552 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song You Changed Me?",
+    "analysis": {
+      "entities": [
+        "You Changed Me"
+      ],
+      "relations": [
+        "performer of"
+      ],
+      "relation_query": "who is the performer of a song",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\"",
+        "hyperedge_text": "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.612471342086792,
+        "fusion_score": 0.7224942684173585,
+        "entity_ids": [
+          "\"CHRIS BROWN\"",
+          "\"YOU CHANGED ME\"",
+          "\"JAMIE FOXX\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.612471,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.722494
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.\"",
+        "hyperedge_text": "'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5797035098075867,
+        "fusion_score": 0.7159407019615174,
+        "entity_ids": [
+          "\"'YOU CHANGED ME'\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "'You Changed Me' is a song that showcases the talents of both Jamie Foxx and Chris Brown.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.579704,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.715941
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'You Changed Me' combines elements of R&B and pop, appealing to a variety of listeners.\"",
+        "hyperedge_text": "'You Changed Me' combines elements of R&B and pop, appealing to a variety of listeners.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5308687686920166,
+        "fusion_score": 0.5061737537384033,
+        "entity_ids": [
+          "\"POP\"",
+          "\"R&B\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "'You Changed Me' combines elements of R&B and pop, appealing to a variety of listeners.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.530869,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.506174
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.\"",
+        "hyperedge_text": "The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.47092205286026,
+        "fusion_score": 0.49418441057205204,
+        "entity_ids": [
+          "\"SUCCESS\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.470922,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.494184
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Changed It\" is a song by Trinidadian-American rapper and singer Nicki Minaj and American rapper Lil Wayne.\"",
+        "hyperedge_text": "Changed It\" is a song by Trinidadian-American rapper and singer Nicki Minaj and American rapper Lil Wayne.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.45634666085243225,
+        "fusion_score": 0.29126933217048645,
+        "entity_ids": [
+          "\"CHANGED IT\"",
+          "\"LIL WAYNE\"",
+          "\"NICKI MINAJ\""
+        ],
+        "chunk_ids": [
+          "chunk-aa6e61975599526c539dcf0c6a65da9e"
+        ],
+        "evidence_texts": [
+          "Changed It\" is a song by Trinidadian-American rapper and singer Nicki Minaj and American rapper Lil Wayne.",
+          "Changed It \"Changed It\" is a song by Trinidadian-American rapper and singer Nicki Minaj and American rapper Lil Wayne. Produced by Motiv, Detail, and Sidney Swift, the song was released as a single on March 10, 2017 by Young Money Entertainment, Cash Money Records and Republic Records, along with \"No Frauds\" and \"Regret in Your Tears\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.456347,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.291269
+        }
+      }
+    ],
+    "answer": "Jamie Foxx",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'You Changed Me' is a song by American recording artist Jamie Foxx featuring Chris Brown, clearly identifying Jamie Foxx as the performer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What award did the performer of You Changed Me win?",
+    "analysis": {
+      "entities": [
+        "Jamie Foxx"
+      ],
+      "relations": [
+        "won an award"
+      ],
+      "relation_query": "What award did a person win?",
+      "answer_type": "award"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer.\"",
+        "hyperedge_text": "Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6336678266525269,
+        "fusion_score": 0.5267335653305054,
+        "entity_ids": [
+          "\"ERIC MARLON BISHOP\"",
+          "\"JAMIE FOXX\""
+        ],
+        "chunk_ids": [
+          "chunk-c69667a86eb1810c68d168baa8993841"
+        ],
+        "evidence_texts": [
+          "Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer.",
+          "Jamie Foxx Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer. Foxx became widely known for his portrayal of Ray Charles in the 2004 biographical film \"Ray\", for which he won the Academy Award, BAFTA, Screen Actors Guild Award, Critics' Choice Movie Award and Golden Globe Award for Best Actor. That same year, he was nominated for the Academy Award for Best Supporting Actor for his role in the crime film \"Collateral\". Since spring 2017, Foxx has served as the host and executive producer of the Fox game show \"Beat Shazam\". Other acting roles include Staff Sergeant Sykes in \"Jarhead\" (2005), record executive Curtis Taylor Jr. in \"Dreamgirls\" (2006), Detective Ricardo Tubbs in the 2006 film adaptation of TV series \"Miami Vice\", the title role in the film \" Django Unchained\" (2012), the supervilla..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.633668,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.526734
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\"",
+        "hyperedge_text": "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4941294491291046,
+        "fusion_score": 0.49882588982582093,
+        "entity_ids": [
+          "\"CHRIS BROWN\"",
+          "\"YOU CHANGED ME\"",
+          "\"JAMIE FOXX\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.494129,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.498826
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.\"",
+        "hyperedge_text": "The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5955111384391785,
+        "fusion_score": 0.5191022276878358,
+        "entity_ids": [
+          "\"SUCCESS\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "The success of 'You Changed Me' helped solidify Jamie Foxx's presence in the music industry.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.595511,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519102
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As Jamie Foxx continues to work in film and music, he remains a versatile figure in the entertainment industry.\"",
+        "hyperedge_text": "As Jamie Foxx continues to work in film and music, he remains a versatile figure in the entertainment industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5790514945983887,
+        "fusion_score": 0.5158102989196778,
+        "entity_ids": [
+          "\"ENTERTAINMENT INDUSTRY\""
+        ],
+        "chunk_ids": [
+          "chunk-c69667a86eb1810c68d168baa8993841"
+        ],
+        "evidence_texts": [
+          "As Jamie Foxx continues to work in film and music, he remains a versatile figure in the entertainment industry.",
+          "Jamie Foxx Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer. Foxx became widely known for his portrayal of Ray Charles in the 2004 biographical film \"Ray\", for which he won the Academy Award, BAFTA, Screen Actors Guild Award, Critics' Choice Movie Award and Golden Globe Award for Best Actor. That same year, he was nominated for the Academy Award for Best Supporting Actor for his role in the crime film \"Collateral\". Since spring 2017, Foxx has served as the host and executive producer of the Fox game show \"Beat Shazam\". Other acting roles include Staff Sergeant Sykes in \"Jarhead\" (2005), record executive Curtis Taylor Jr. in \"Dreamgirls\" (2006), Detective Ricardo Tubbs in the 2006 film adaptation of TV series \"Miami Vice\", the title role in the film \" Django Unchained\" (2012), the supervilla..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.579051,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51581
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Foxx also starred in the sketch comedy show 'In Living Color' and his own television sitcom 'The Jamie Foxx Show' (1996–2001), in which he played Jamie King Jr.\"",
+        "hyperedge_text": "Foxx also starred in the sketch comedy show 'In Living Color' and his own television sitcom 'The Jamie Foxx Show' (1996–2001), in which he played Jamie King Jr.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5786277055740356,
+        "fusion_score": 0.5157255411148072,
+        "entity_ids": [
+          "\"IN LIVING COLOR\"",
+          "\"THE JAMIE FOXX SHOW\""
+        ],
+        "chunk_ids": [
+          "chunk-c69667a86eb1810c68d168baa8993841"
+        ],
+        "evidence_texts": [
+          "Foxx also starred in the sketch comedy show 'In Living Color' and his own television sitcom 'The Jamie Foxx Show' (1996–2001), in which he played Jamie King Jr.",
+          "Jamie Foxx Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer. Foxx became widely known for his portrayal of Ray Charles in the 2004 biographical film \"Ray\", for which he won the Academy Award, BAFTA, Screen Actors Guild Award, Critics' Choice Movie Award and Golden Globe Award for Best Actor. That same year, he was nominated for the Academy Award for Best Supporting Actor for his role in the crime film \"Collateral\". Since spring 2017, Foxx has served as the host and executive producer of the Fox game show \"Beat Shazam\". Other acting roles include Staff Sergeant Sykes in \"Jarhead\" (2005), record executive Curtis Taylor Jr. in \"Dreamgirls\" (2006), Detective Ricardo Tubbs in the 2006 film adaptation of TV series \"Miami Vice\", the title role in the film \" Django Unchained\" (2012), the supervilla..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578628,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515726
+        }
+      }
+    ],
+    "answer": "Academy Award",
+    "confidence": 0.9,
+    "reasoning_summary": "Jamie Foxx, the performer of 'You Changed Me', won the Academy Award for his role in the film 'Ray'.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What award did the performer of You Changed Me win?",
+    "analysis": {
+      "entities": [
+        "You Changed Me",
+        "Jamie Foxx",
+        "Academy Award"
+      ],
+      "relations": [
+        "won"
+      ],
+      "relation_query": "What award did a performer of a work win?",
+      "answer_type": "award"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.\"",
+        "hyperedge_text": "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 0.0,
+        "semantic_score": 0.538227379322052,
+        "fusion_score": 0.3743121425310771,
+        "entity_ids": [
+          "\"CHRIS BROWN\"",
+          "\"YOU CHANGED ME\"",
+          "\"JAMIE FOXX\""
+        ],
+        "chunk_ids": [
+          "chunk-ee3dd63f343db7c7317473cac17c8861"
+        ],
+        "evidence_texts": [
+          "You Changed Me is a song by American recording artist Jamie Foxx featuring Chris Brown.",
+          "You Changed Me \"You Changed Me\" is a song by American recording artist Jamie Foxx featuring Chris Brown. It was released on March 12, 2015 as the second single from his fifth studio album (2015)."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 0.0,
+          "S": 0.538227,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.374312
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He won for his performance in 'The More the Merrier'.\"",
+        "hyperedge_text": "He won for his performance in 'The More the Merrier'.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48090019822120667,
+        "semantic_score": 0.4274001121520996,
+        "fusion_score": 0.2778401017189026,
+        "entity_ids": [
+          "\"PERFORMANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-72e970c49ddbd341c722699adf87bf7c"
+        ],
+        "evidence_texts": [
+          "He won for his performance in 'The More the Merrier'.",
+          "Charles Coburn Charles Douville Coburn( June 19, 1877 – August 30, 1961) was an American actor. He was nominated for a Best Supporting Actor Academy Award three times – in\" The Devil and Miss Jones\"( 1941),\" The More the Merrier\"( 1943), and\" The Green Years\"( 1946) – winning for his performance in\" The More the Merrier\". He was honored with a star on the Hollywood Walk of Fame in 1960 for his contribution to the film industry."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.4809,
+          "S": 0.4274,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.27784
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has won an Academy Award for Best Documentary Feature for 'Who Are the DeBolts? And Where Did They Get Nineteen Kids?' and several other major awards.\"",
+        "hyperedge_text": "He has won an Academy Award for Best Documentary Feature for 'Who Are the DeBolts? And Where Did They Get Nineteen Kids?' and several other major awards.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 1.0,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.5666666666666667,
+        "entity_ids": [
+          "\"ACADEMY AWARD\"",
+          "\"BEST DOCUMENTARY FEATURE\""
+        ],
+        "chunk_ids": [
+          "chunk-56bdd8d5da5c776b56adc33e22daf13c"
+        ],
+        "evidence_texts": [
+          "He has won an Academy Award for Best Documentary Feature for 'Who Are the DeBolts? And Where Did They Get Nineteen Kids?' and several other major awards.",
+          "John Korty John Korty( born June 22, 1936) is an American film director and animator, best known for the television film\" The Autobiography of Miss Jane Pittman\" and the documentary\" Who Are the DeBolts? And Where Did They Get Nineteen Kids?\", as well as the theatrical animated feature\" Twice Upon a Time\". He has won an Academy Award for Best Documentary Feature( for\" Who Are the DeBolts?\") and several other major awards. He is described by the film critic Leonard Maltin as\" a principled filmmaker who has worked both outside and within the mainstream, attempting to find projects that support his humanistic beliefs\"."
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 1.0,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.566667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 1957, he won the Academy Award for Best Writing/Best Screenplay for 'Around the World in Eighty Days'.\"",
+        "hyperedge_text": "In 1957, he won the Academy Award for Best Writing/Best Screenplay for 'Around the World in Eighty Days'.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 1.0,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.5666666666666667,
+        "entity_ids": [
+          "\"ACADEMY AWARD\"",
+          "\"BEST WRITING/BEST SCREENPLAY\"",
+          "\"AROUND THE WORLD IN EIGHTY DAYS\""
+        ],
+        "chunk_ids": [
+          "chunk-b6c051f83ab566af4c403892eca834d6"
+        ],
+        "evidence_texts": [
+          "In 1957, he won the Academy Award for Best Writing/Best Screenplay for 'Around the World in Eighty Days'.",
+          "John Farrow John Villiers Farrow, KGCHS (10 February 190427 January 1963) was an Australian-born American film director, producer and screenwriter. In 1957, he won the Academy Award for Best Writing/Best Screenplay for \"Around the World in Eighty Days\" and in 1942, he was nominated as Best Director for \"Wake Island\". He had seven children by his wife, actress Maureen O'Sullivan, including actress Mia Farrow."
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 1.0,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.566667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Foxx became widely known for his portrayal of Ray Charles in the 2004 biographical film 'Ray', for which he won the Academy Award, BAFTA, Screen Actors Guild Award, Critics' Choice Movie Award and Golden Globe Award for Best Actor.\"",
+        "hyperedge_text": "Foxx became widely known for his portrayal of Ray Charles in the 2004 biographical film 'Ray', for which he won the Academy Award, BAFTA, Screen Actors Guild Award, Critics' Choice Movie Award and Golden Globe Award for Best Actor.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 1.0,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.5666666666666667,
+        "entity_ids": [
+          "\"ACADEMY AWARD\"",
+          "\"GOLDEN GLOBE AWARD\"",
+          "\"RAY CHARLES\"",
+          "\"FILM 'RAY'",
+          "\"BAFTA\"",
+          "\"CRITICS' CHOICE MOVIE AWARD\"",
+          "\"SCREEN ACTORS GUILD AWARD\""
+        ],
+        "chunk_ids": [
+          "chunk-c69667a86eb1810c68d168baa8993841"
+        ],
+        "evidence_texts": [
+          "Foxx became widely known for his portrayal of Ray Charles in the 2004 biographical film 'Ray', for which he won the Academy Award, BAFTA, Screen Actors Guild Award, Critics' Choice Movie Award and Golden Globe Award for Best Actor.",
+          "Jamie Foxx Eric Marlon Bishop (born December 13, 1967), known professionally as Jamie Foxx, is an American actor, singer, comedian, presenter, and producer. Foxx became widely known for his portrayal of Ray Charles in the 2004 biographical film \"Ray\", for which he won the Academy Award, BAFTA, Screen Actors Guild Award, Critics' Choice Movie Award and Golden Globe Award for Best Actor. That same year, he was nominated for the Academy Award for Best Supporting Actor for his role in the crime film \"Collateral\". Since spring 2017, Foxx has served as the host and executive producer of the Fox game show \"Beat Shazam\". Other acting roles include Staff Sergeant Sykes in \"Jarhead\" (2005), record executive Curtis Taylor Jr. in \"Dreamgirls\" (2006), Detective Ricardo Tubbs in the 2006 film adaptation of TV series \"Miami Vice\", the title role in the film \" Django Unchained\" (2012), the supervilla..."
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 1.0,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.566667
+        }
+      }
+    ],
+    "answer": "Academy Award",
+    "confidence": 0.9,
+    "reasoning_summary": "Jamie Foxx, the performer of 'You Changed Me', won the Academy Award for his role in the film 'Ray'.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Foxx became widely known for his portrayal of Ray Charles in the 2004 biographical film 'Ray', for which he won the Academy Award, BAFTA, Screen Actors Guild Award, Critics' Choice Movie Award and Golden Globe Award for Best Actor.\""
+    ]
+  }
+]

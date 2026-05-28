@@ -1,0 +1,209 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Taming Of The Fire?",
+    "retrieval_question": "Who is the director of Taming Of The Fire?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Taming Of The Fire?",
+      "retrieval_question": "Who is the director of Taming Of The Fire?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Taming Of The Fire"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of The Lady Takes A Flyer?",
+    "retrieval_question": "Who is the director of The Lady Takes A Flyer?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of The Lady Takes A Flyer?",
+      "retrieval_question": "Who is the director of The Lady Takes A Flyer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "The Lady Takes A Flyer"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Taming Of The Fire?",
+    "retrieval_question": "What is the age of Daniil Khrabrovitsky?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of Taming Of The Fire?",
+      "retrieval_question": "What is the age of Daniil Khrabrovitsky?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Taming Of The Fire",
+      "replacement_answer": "Daniil Khrabrovitsky",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Taming Of The Fire",
+          "replacement_answer": "Daniil Khrabrovitsky"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Taming Of The Fire?",
+        "answer": "Daniil Khrabrovitsky",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Taming of the Fire' is a 1972 film directed by Daniil Khrabrovitsky.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Taming of the Fire is a film.\"",
+            "fusion_score": 0.5225229501724243,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Taming of the Fire is a film.",
+              "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+            "fusion_score": 0.5163946151733398,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+              "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\"",
+            "fusion_score": 0.513376271724701,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Taming of the Fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.",
+              "Taming of the Fire Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Daniil Khrabrovitsky"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of The Lady Takes A Flyer?",
+    "retrieval_question": "What is the age of Jack Arnold?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the age of the director of The Lady Takes A Flyer?",
+      "retrieval_question": "What is the age of Jack Arnold?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of The Lady Takes A Flyer",
+      "replacement_answer": "Jack Arnold",
+      "replacements": [
+        {
+          "dependency_node_id": "q3",
+          "replacement_span": "the director of The Lady Takes A Flyer",
+          "replacement_answer": "Jack Arnold"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q3",
+        "question": "Who is the director of The Lady Takes A Flyer?",
+        "answer": "Jack Arnold",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that 'The Lady Takes a Flyer' was directed by Jack Arnold, providing clear support for the answer.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\"",
+            "fusion_score": 0.5325173139572144,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.",
+              "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.\"",
+            "fusion_score": 0.5281152963638306,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Lady Takes a Flyer is a comedy-drama romance film that falls under the genre of American cinema.",
+              "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.\"",
+            "fusion_score": 0.55,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "The Lady Takes a Flyer is a comedy-drama romance film made by Universal Pictures.",
+              "The Lady Takes a Flyer The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy- drama romance film made by Universal Pictures. It was directed by Jack Arnold, and written by Danny Arnold, based on a story by Edmund H. North."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Jack Arnold"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    }
+  }
+]

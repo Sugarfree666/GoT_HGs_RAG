@@ -1,0 +1,42 @@
+{
+  "answer": "Taming Of The Fire",
+  "candidate_answer": "Taming Of The Fire",
+  "reasoning_summary": "Daniil Khrabrovitsky, the director of 'Taming Of The Fire', is 100 years old, while Jack Arnold, the director of 'The Lady Takes A Flyer', is 76 years old. Therefore, 'Taming Of The Fire' has the older director.",
+  "answer_span_reasoning": "The answer identifies the film directed by the older director.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Taming Of The Fire?",
+      "answer": "Daniil Khrabrovitsky",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Taming of the fire is a 1972 film, directed by Daniil Khrabrovitsky and starring Kirill Lavrov.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of The Lady Takes A Flyer?",
+      "answer": "Jack Arnold",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"The Lady Takes a Flyer is a 1958 American CinemaScope Eastmancolor comedy-drama romance film made by Universal Pictures.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the age of the director of Taming Of The Fire?",
+      "answer": "100",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Daniil Yakovlevich Khrabrovitsky was a Soviet scriptwriter and film director.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "What is the age of the director of The Lady Takes A Flyer?",
+      "answer": "76",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Jack Arnold (October 14, 1916 – March 17, 1992) was an American actor and film and television director.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

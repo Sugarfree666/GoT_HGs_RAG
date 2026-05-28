@@ -1,0 +1,26 @@
+{
+  "answer": "French",
+  "candidate_answer": "French",
+  "reasoning_summary": "Matilda of Frisia's husband, Henry I, was King of the Franks, which indicates his French nationality. This is strongly supported by the evidence.",
+  "answer_span_reasoning": "The candidate answer directly states the nationality of Matilda Of Frisia's husband.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the husband of Matilda Of Frisia?",
+      "answer": "Henry I",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Matilda of Frisia (died in 1044) was the first queen of Henry I, King of the Franks.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the nationality of the husband of Matilda Of Frisia?",
+      "answer": "French",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Henry I (4 May 1008 – 4 August 1060) was King of the Franks from 1031 to 1060.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

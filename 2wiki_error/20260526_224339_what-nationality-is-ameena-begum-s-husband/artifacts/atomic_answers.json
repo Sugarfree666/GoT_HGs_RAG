@@ -1,0 +1,374 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the husband of Ameena Begum?",
+    "analysis": {
+      "entities": [
+        "Ameena Begum"
+      ],
+      "relations": [
+        "is the husband of"
+      ],
+      "relation_query": "who is the husband of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq.\"",
+        "hyperedge_text": "Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6550390720367432,
+        "fusion_score": 0.5310078144073487,
+        "entity_ids": [
+          "\"POLITICIAN\"",
+          "\"MEMBER OF PARLIAMENT\"",
+          "\"AMEENA BEGUM\""
+        ],
+        "chunk_ids": [
+          "chunk-084bd985bd3a5d799e495a41a3f77712"
+        ],
+        "evidence_texts": [
+          "Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq.",
+          "Ameena Begum (politician) Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq. She served as a member of the Jatiya Sangshad from 2001 to 2006, representing women's reserved seat- 31( national 331) for the Bangladesh Jamaat- e- Islami."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.655039,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531008
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Pirani Ameena Begum (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children.\"",
+        "hyperedge_text": "Pirani Ameena Begum (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.543990969657898,
+        "fusion_score": 0.5087981939315797,
+        "entity_ids": [
+          "\"CHILDREN\"",
+          "\"VILAYAT\"",
+          "\"HIDAYAT\"",
+          "\"NOOR-UN-NISA\"",
+          "\"INAYAT KHAN\"",
+          "\"AMEENA BEGUM\"",
+          "\"KHAIR-UN-NISA (CLIAIRE)\""
+        ],
+        "chunk_ids": [
+          "chunk-c53a989e3d3fe5f6d4c2a1a994a412e3"
+        ],
+        "evidence_texts": [
+          "Pirani Ameena Begum (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children.",
+          "Ameena Begum Pirani Ameena Begum (Hindustani: अमीरा बेगम / امینہ بیگم) (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children: WWII heroine Noor-un-Nisa (1914-1944), Vilayat (1916-2004), Hidayat (1917-2016) and Khair-un-Nisa (Cliaire) (1919). Baker first met Khan when she attended one of his lectures in San Francisco, after which the pair quickly fell in love. However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name \"Ameena Begum\". After living in London and Moscow for a time, the family settled in Suresnes, near Paris. She left a collection of 101 poems, \"A Rosary of one hundred and one beads\". Some poems were lost during World War II, but 54 have been preserved and were published in 1998. She was a cousin of Mary Baker Eddy, founder of the Christian Science C..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.543991,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.508798
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ameena Begum was born on 8 May 1892 and passed away on 1 May 1949.\"",
+        "hyperedge_text": "Ameena Begum was born on 8 May 1892 and passed away on 1 May 1949.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.685762345790863,
+        "fusion_score": 0.5371524691581726,
+        "entity_ids": [
+          "\"8 MAY 1892\"",
+          "\"1 MAY 1949\""
+        ],
+        "chunk_ids": [
+          "chunk-c53a989e3d3fe5f6d4c2a1a994a412e3"
+        ],
+        "evidence_texts": [
+          "Ameena Begum was born on 8 May 1892 and passed away on 1 May 1949.",
+          "Ameena Begum Pirani Ameena Begum (Hindustani: अमीरा बेगम / امینہ بیگم) (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children: WWII heroine Noor-un-Nisa (1914-1944), Vilayat (1916-2004), Hidayat (1917-2016) and Khair-un-Nisa (Cliaire) (1919). Baker first met Khan when she attended one of his lectures in San Francisco, after which the pair quickly fell in love. However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name \"Ameena Begum\". After living in London and Moscow for a time, the family settled in Suresnes, near Paris. She left a collection of 101 poems, \"A Rosary of one hundred and one beads\". Some poems were lost during World War II, but 54 have been preserved and were published in 1998. She was a cousin of Mary Baker Eddy, founder of the Christian Science C..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.685762,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.537152
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name 'Ameena Begum'.\"",
+        "hyperedge_text": "However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name 'Ameena Begum'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6637178659439087,
+        "fusion_score": 0.5327435731887817,
+        "entity_ids": [
+          "\"NAME CHANGE\"",
+          "\"1913\""
+        ],
+        "chunk_ids": [
+          "chunk-c53a989e3d3fe5f6d4c2a1a994a412e3"
+        ],
+        "evidence_texts": [
+          "However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name 'Ameena Begum'.",
+          "Ameena Begum Pirani Ameena Begum (Hindustani: अमीरा बेगम / امینہ بیگم) (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children: WWII heroine Noor-un-Nisa (1914-1944), Vilayat (1916-2004), Hidayat (1917-2016) and Khair-un-Nisa (Cliaire) (1919). Baker first met Khan when she attended one of his lectures in San Francisco, after which the pair quickly fell in love. However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name \"Ameena Begum\". After living in London and Moscow for a time, the family settled in Suresnes, near Paris. She left a collection of 101 poems, \"A Rosary of one hundred and one beads\". Some poems were lost during World War II, but 54 have been preserved and were published in 1998. She was a cousin of Mary Baker Eddy, founder of the Christian Science C..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.663718,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532744
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ameena Begum's tenure as an MP was part of a broader movement towards gender equality in politics.\"",
+        "hyperedge_text": "Ameena Begum's tenure as an MP was part of a broader movement towards gender equality in politics.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5856902599334717,
+        "fusion_score": 0.5171380519866944,
+        "entity_ids": [
+          "\"GENDER EQUALITY\""
+        ],
+        "chunk_ids": [
+          "chunk-084bd985bd3a5d799e495a41a3f77712"
+        ],
+        "evidence_texts": [
+          "Ameena Begum's tenure as an MP was part of a broader movement towards gender equality in politics.",
+          "Ameena Begum (politician) Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq. She served as a member of the Jatiya Sangshad from 2001 to 2006, representing women's reserved seat- 31( national 331) for the Bangladesh Jamaat- e- Islami."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.58569,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.517138
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that identifies the husband of Ameena Begum.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the husband of Ameena Begum?",
+    "analysis": {
+      "entities": [
+        "Ameena Begum"
+      ],
+      "relations": [
+        "nationality of a person"
+      ],
+      "relation_query": "What is the nationality of the spouse of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq.\"",
+        "hyperedge_text": "Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6313526630401611,
+        "fusion_score": 0.5262705326080322,
+        "entity_ids": [
+          "\"POLITICIAN\"",
+          "\"MEMBER OF PARLIAMENT\"",
+          "\"AMEENA BEGUM\""
+        ],
+        "chunk_ids": [
+          "chunk-084bd985bd3a5d799e495a41a3f77712"
+        ],
+        "evidence_texts": [
+          "Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq.",
+          "Ameena Begum (politician) Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq. She served as a member of the Jatiya Sangshad from 2001 to 2006, representing women's reserved seat- 31( national 331) for the Bangladesh Jamaat- e- Islami."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.631353,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.526271
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Pirani Ameena Begum (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children.\"",
+        "hyperedge_text": "Pirani Ameena Begum (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5077582597732544,
+        "fusion_score": 0.5015516519546509,
+        "entity_ids": [
+          "\"CHILDREN\"",
+          "\"VILAYAT\"",
+          "\"HIDAYAT\"",
+          "\"NOOR-UN-NISA\"",
+          "\"INAYAT KHAN\"",
+          "\"AMEENA BEGUM\"",
+          "\"KHAIR-UN-NISA (CLIAIRE)\""
+        ],
+        "chunk_ids": [
+          "chunk-c53a989e3d3fe5f6d4c2a1a994a412e3"
+        ],
+        "evidence_texts": [
+          "Pirani Ameena Begum (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children.",
+          "Ameena Begum Pirani Ameena Begum (Hindustani: अमीरा बेगम / امینہ بیگم) (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children: WWII heroine Noor-un-Nisa (1914-1944), Vilayat (1916-2004), Hidayat (1917-2016) and Khair-un-Nisa (Cliaire) (1919). Baker first met Khan when she attended one of his lectures in San Francisco, after which the pair quickly fell in love. However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name \"Ameena Begum\". After living in London and Moscow for a time, the family settled in Suresnes, near Paris. She left a collection of 101 poems, \"A Rosary of one hundred and one beads\". Some poems were lost during World War II, but 54 have been preserved and were published in 1998. She was a cousin of Mary Baker Eddy, founder of the Christian Science C..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.507758,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.501552
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ameena Begum was born on 8 May 1892 and passed away on 1 May 1949.\"",
+        "hyperedge_text": "Ameena Begum was born on 8 May 1892 and passed away on 1 May 1949.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6470028758049011,
+        "fusion_score": 0.5294005751609803,
+        "entity_ids": [
+          "\"8 MAY 1892\"",
+          "\"1 MAY 1949\""
+        ],
+        "chunk_ids": [
+          "chunk-c53a989e3d3fe5f6d4c2a1a994a412e3"
+        ],
+        "evidence_texts": [
+          "Ameena Begum was born on 8 May 1892 and passed away on 1 May 1949.",
+          "Ameena Begum Pirani Ameena Begum (Hindustani: अमीरा बेगम / امینہ بیگم) (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children: WWII heroine Noor-un-Nisa (1914-1944), Vilayat (1916-2004), Hidayat (1917-2016) and Khair-un-Nisa (Cliaire) (1919). Baker first met Khan when she attended one of his lectures in San Francisco, after which the pair quickly fell in love. However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name \"Ameena Begum\". After living in London and Moscow for a time, the family settled in Suresnes, near Paris. She left a collection of 101 poems, \"A Rosary of one hundred and one beads\". Some poems were lost during World War II, but 54 have been preserved and were published in 1998. She was a cousin of Mary Baker Eddy, founder of the Christian Science C..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.647003,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.529401
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name 'Ameena Begum'.\"",
+        "hyperedge_text": "However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name 'Ameena Begum'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6443583369255066,
+        "fusion_score": 0.5288716673851014,
+        "entity_ids": [
+          "\"NAME CHANGE\"",
+          "\"1913\""
+        ],
+        "chunk_ids": [
+          "chunk-c53a989e3d3fe5f6d4c2a1a994a412e3"
+        ],
+        "evidence_texts": [
+          "However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name 'Ameena Begum'.",
+          "Ameena Begum Pirani Ameena Begum (Hindustani: अमीरा बेगम / امینہ بیگم) (born Ora Ray Baker; 8 May 1892 – 1 May 1949) was the wife of Sufi Master Inayat Khan and the mother of their four children: WWII heroine Noor-un-Nisa (1914-1944), Vilayat (1916-2004), Hidayat (1917-2016) and Khair-un-Nisa (Cliaire) (1919). Baker first met Khan when she attended one of his lectures in San Francisco, after which the pair quickly fell in love. However, resistance from Baker's family prevented them from marrying until 1913, at which point she took the name \"Ameena Begum\". After living in London and Moscow for a time, the family settled in Suresnes, near Paris. She left a collection of 101 poems, \"A Rosary of one hundred and one beads\". Some poems were lost during World War II, but 54 have been preserved and were published in 1998. She was a cousin of Mary Baker Eddy, founder of the Christian Science C..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.644358,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528872
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ameena Begum's tenure as an MP was part of a broader movement towards gender equality in politics.\"",
+        "hyperedge_text": "Ameena Begum's tenure as an MP was part of a broader movement towards gender equality in politics.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.580963671207428,
+        "fusion_score": 0.5161927342414856,
+        "entity_ids": [
+          "\"GENDER EQUALITY\""
+        ],
+        "chunk_ids": [
+          "chunk-084bd985bd3a5d799e495a41a3f77712"
+        ],
+        "evidence_texts": [
+          "Ameena Begum's tenure as an MP was part of a broader movement towards gender equality in politics.",
+          "Ameena Begum (politician) Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq. She served as a member of the Jatiya Sangshad from 2001 to 2006, representing women's reserved seat- 31( national 331) for the Bangladesh Jamaat- e- Islami."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.580964,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516193
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that identifies the husband of Ameena Begum, making it impossible to determine his nationality.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Ameena Begum is a Bangladeshi politician and former Member of Parliament, who popularly known as Dr. Ameena Shafiq.\""
+    ]
+  }
+]

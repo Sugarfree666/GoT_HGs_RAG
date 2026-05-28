@@ -1,0 +1,923 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Four Days In November?",
+    "analysis": {
+      "entities": [
+        "Four Days In November"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy.\"",
+        "hyperedge_text": "Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6315864324569702,
+        "fusion_score": 0.5263172864913941,
+        "entity_ids": [
+          "\"ACADEMY AWARD\"",
+          "\"JOHN F. KENNEDY\"",
+          "\"MEL STUART\"",
+          "\"FOUR DAYS IN NOVEMBER\""
+        ],
+        "chunk_ids": [
+          "chunk-f7d2c4a86228f5602c0eade49705c97b"
+        ],
+        "evidence_texts": [
+          "Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy.",
+          "Four Days in November Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy. It was nominated for an Academy Award for Best Documentary Feature. The film includes Dallas radio and television coverage of: Amateur films and photos include: The opening credits indicate that\" certain scenes have been recreated in the original locations by the actual participants\". Some of these recreations include:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.631586,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.526317
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Four Days in November covers the events surrounding the assassination of John F. Kennedy.\"",
+        "hyperedge_text": "Four Days in November covers the events surrounding the assassination of John F. Kennedy.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5597652196884155,
+        "fusion_score": 0.5119530439376831,
+        "entity_ids": [
+          "\"ASSASSINATION\""
+        ],
+        "chunk_ids": [
+          "chunk-f7d2c4a86228f5602c0eade49705c97b"
+        ],
+        "evidence_texts": [
+          "Four Days in November covers the events surrounding the assassination of John F. Kennedy.",
+          "Four Days in November Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy. It was nominated for an Academy Award for Best Documentary Feature. The film includes Dallas radio and television coverage of: Amateur films and photos include: The opening credits indicate that\" certain scenes have been recreated in the original locations by the actual participants\". Some of these recreations include:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.559765,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511953
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.49399447441101074,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2975977897644043,
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "evidence_texts": [
+          "He worked as both a composer and a film director throughout his career.",
+          "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.493994,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.297598
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4777419865131378,
+        "semantic_score": 0.5,
+        "fusion_score": 0.29109679460525517,
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "evidence_texts": [
+          "His directorial works contributed to notable projects in American cinema.",
+          "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.477742,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.291097
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25314085483551024,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.253141
+        }
+      }
+    ],
+    "answer": "Mel Stuart",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Four Days in November is a 1964 American documentary film directed by Mel Stuart.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of The Romance Of Tarzan?",
+    "analysis": {
+      "entities": [
+        "The Romance Of Tarzan"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison.\"",
+        "hyperedge_text": "The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7016810178756714,
+        "fusion_score": 0.5403362035751343,
+        "entity_ids": [
+          "\"WILFRED LUCAS\"",
+          "\"THE ROMANCE OF TARZAN\"",
+          "\"ELMO LINCOLN\"",
+          "\"ENID MARKEY\"",
+          "\"THOMAS JEFFERSON\"",
+          "\"CLEO MADISON\""
+        ],
+        "chunk_ids": [
+          "chunk-6c9892d7b0ec050cd1175f07c143b1c5"
+        ],
+        "evidence_texts": [
+          "The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison.",
+          "The Romance of Tarzan The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison. The movie was the second Tarzan movie ever made, and is based on Edgar Rice Burroughs' original novel\" Tarzan of the Apes\". It adapts only the second part of the novel, the earlier portion having been the basis for the preceding film\" Tarzan of the Apes\"( 1918). Less popular than its predecessor due to much of the action taking place in the wild west rather than Africa, the film has not been preserved, and no prints of it are known to survive today."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.701681,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540336
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Romance of Tarzan is a 1918 American silent action adventure film.\"",
+        "hyperedge_text": "The Romance of Tarzan is a 1918 American silent action adventure film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6755943298339844,
+        "fusion_score": 0.5351188659667969,
+        "entity_ids": [
+          "\"SILENT FILM\"",
+          "\"1918\""
+        ],
+        "chunk_ids": [
+          "chunk-6c9892d7b0ec050cd1175f07c143b1c5"
+        ],
+        "evidence_texts": [
+          "The Romance of Tarzan is a 1918 American silent action adventure film.",
+          "The Romance of Tarzan The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison. The movie was the second Tarzan movie ever made, and is based on Edgar Rice Burroughs' original novel\" Tarzan of the Apes\". It adapts only the second part of the novel, the earlier portion having been the basis for the preceding film\" Tarzan of the Apes\"( 1918). Less popular than its predecessor due to much of the action taking place in the wild west rather than Africa, the film has not been preserved, and no prints of it are known to survive today."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.675594,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535119
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2698075215021769,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.269808
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5027865171432495,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.26778127352396647,
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "evidence_texts": [
+          "As a director, he has likely worked on a variety of projects spanning different genres.",
+          "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.502787,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.267781
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4973045885562897,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.26558850208918255,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this, he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.497305,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.265589
+        }
+      }
+    ],
+    "answer": "Wilfred Lucas",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'The Romance of Tarzan' was directed by Wilfred Lucas.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the birth date of the director of Four Days In November?",
+    "analysis": {
+      "entities": [
+        "Mel Stuart"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mel Stuart, born Stuart Solomon, was an American film director and producer who often worked with producer David L. Wolper.\"",
+        "hyperedge_text": "Mel Stuart, born Stuart Solomon, was an American film director and producer who often worked with producer David L. Wolper.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6749813556671143,
+        "fusion_score": 0.5349962711334229,
+        "entity_ids": [
+          "\"PRODUCER\"",
+          "\"AMERICAN FILM DIRECTOR\"",
+          "\"MEL STUART\"",
+          "\"STUART SOLOMON\"",
+          "\"DAVID L. WOLPER\"",
+          "\"PRODUCTION FIRM\""
+        ],
+        "chunk_ids": [
+          "chunk-ff182dc67a162b235e7291e6cf1af30b"
+        ],
+        "evidence_texts": [
+          "Mel Stuart, born Stuart Solomon, was an American film director and producer who often worked with producer David L. Wolper.",
+          "Mel Stuart Mel Stuart( born Stuart Solomon; September 2, 1928 – August 9, 2012) was an American film director and producer who often worked with producer David L. Wolper, whose production firm he worked for 17 years, before going freelance."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.674981,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534996
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Mel Stuart and released in 1964.\"",
+        "hyperedge_text": "The film was directed by Mel Stuart and released in 1964.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5614442825317383,
+        "fusion_score": 0.5122888565063477,
+        "entity_ids": [
+          "\"1964\"",
+          "\"MEL STUART\""
+        ],
+        "chunk_ids": [
+          "chunk-f7d2c4a86228f5602c0eade49705c97b"
+        ],
+        "evidence_texts": [
+          "The film was directed by Mel Stuart and released in 1964.",
+          "Four Days in November Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy. It was nominated for an Academy Award for Best Documentary Feature. The film includes Dallas radio and television coverage of: Amateur films and photos include: The opening credits indicate that\" certain scenes have been recreated in the original locations by the actual participants\". Some of these recreations include:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.561444,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.512289
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mel Stuart was born on September 2, 1928, and passed away on August 9, 2012.\"",
+        "hyperedge_text": "Mel Stuart was born on September 2, 1928, and passed away on August 9, 2012.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7539427876472473,
+        "fusion_score": 0.5507885575294496,
+        "entity_ids": [
+          "\"SEPTEMBER 2, 1928\"",
+          "\"AUGUST 9, 2012\""
+        ],
+        "chunk_ids": [
+          "chunk-ff182dc67a162b235e7291e6cf1af30b"
+        ],
+        "evidence_texts": [
+          "Mel Stuart was born on September 2, 1928, and passed away on August 9, 2012.",
+          "Mel Stuart Mel Stuart( born Stuart Solomon; September 2, 1928 – August 9, 2012) was an American film director and producer who often worked with producer David L. Wolper, whose production firm he worked for 17 years, before going freelance."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.753943,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.550789
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After 17 years with David L. Wolper's production firm, Mel Stuart went freelance.\"",
+        "hyperedge_text": "After 17 years with David L. Wolper's production firm, Mel Stuart went freelance.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5959082841873169,
+        "fusion_score": 0.5191816568374634,
+        "entity_ids": [
+          "\"FREELANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-ff182dc67a162b235e7291e6cf1af30b"
+        ],
+        "evidence_texts": [
+          "After 17 years with David L. Wolper's production firm, Mel Stuart went freelance.",
+          "Mel Stuart Mel Stuart( born Stuart Solomon; September 2, 1928 – August 9, 2012) was an American film director and producer who often worked with producer David L. Wolper, whose production firm he worked for 17 years, before going freelance."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.595908,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519182
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mel Stuart often worked on projects that showcased his directing and producing talents.\"",
+        "hyperedge_text": "Mel Stuart often worked on projects that showcased his directing and producing talents.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5562785267829895,
+        "fusion_score": 0.5112557053565979,
+        "entity_ids": [
+          "\"PROJECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-ff182dc67a162b235e7291e6cf1af30b"
+        ],
+        "evidence_texts": [
+          "Mel Stuart often worked on projects that showcased his directing and producing talents.",
+          "Mel Stuart Mel Stuart( born Stuart Solomon; September 2, 1928 – August 9, 2012) was an American film director and producer who often worked with producer David L. Wolper, whose production firm he worked for 17 years, before going freelance."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.556279,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511256
+        }
+      }
+    ],
+    "answer": "September 2, 1928",
+    "confidence": 1.0,
+    "reasoning_summary": "Mel Stuart was born on September 2, 1928, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Mel Stuart was born on September 2, 1928, and passed away on August 9, 2012.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the birth date of the director of The Romance Of Tarzan?",
+    "analysis": {
+      "entities": [
+        "Wilfred Lucas"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Wilfred Lucas was a Canadian American stage actor.\"",
+        "hyperedge_text": "Wilfred Lucas was a Canadian American stage actor.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5918337106704712,
+        "fusion_score": 0.5183667421340943,
+        "entity_ids": [
+          "\"WILFRED LUCAS\""
+        ],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "evidence_texts": [
+          "Wilfred Lucas was a Canadian American stage actor.",
+          "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.591834,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518367
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison.\"",
+        "hyperedge_text": "The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"WILFRED LUCAS\"",
+          "\"THE ROMANCE OF TARZAN\"",
+          "\"ELMO LINCOLN\"",
+          "\"ENID MARKEY\"",
+          "\"THOMAS JEFFERSON\"",
+          "\"CLEO MADISON\""
+        ],
+        "chunk_ids": [
+          "chunk-6c9892d7b0ec050cd1175f07c143b1c5"
+        ],
+        "evidence_texts": [
+          "The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison.",
+          "The Romance of Tarzan The Romance of Tarzan is a 1918 American silent action adventure film directed by Wilfred Lucas starring Elmo Lincoln, Enid Markey, Thomas Jefferson, and Cleo Madison. The movie was the second Tarzan movie ever made, and is based on Edgar Rice Burroughs' original novel\" Tarzan of the Apes\". It adapts only the second part of the novel, the earlier portion having been the basis for the preceding film\" Tarzan of the Apes\"( 1918). Less popular than its predecessor due to much of the action taking place in the wild west rather than Africa, the film has not been preserved, and no prints of it are known to survive today."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Fatal Mistake is a 1924 American silent crime film directed by Scott R. Dunlap and starring William Fairbanks, Eva Novak and Wilfred Lucas.\"",
+        "hyperedge_text": "The Fatal Mistake is a 1924 American silent crime film directed by Scott R. Dunlap and starring William Fairbanks, Eva Novak and Wilfred Lucas.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"AMERICAN\"",
+          "\"1924\"",
+          "\"WILFRED LUCAS\"",
+          "\"EVA NOVAK\"",
+          "\"SILENT CRIME FILM\"",
+          "\"THE FATAL MISTAKE\"",
+          "\"SCOTT R. DUNLAP\"",
+          "\"WILLIAM FAIRBANKS\""
+        ],
+        "chunk_ids": [
+          "chunk-fd05170a5fac14f8aac48eb00b5afcaa"
+        ],
+        "evidence_texts": [
+          "The Fatal Mistake is a 1924 American silent crime film directed by Scott R. Dunlap and starring William Fairbanks, Eva Novak and Wilfred Lucas.",
+          "The Fatal Mistake The Fatal Mistake is a 1924 American silent crime film directed by Scott R. Dunlap and starring William Fairbanks, Eva Novak and Wilfred Lucas."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"starring William Fairbanks, Eva Novak and Wilfred Lucas.\"",
+        "hyperedge_text": "starring William Fairbanks, Eva Novak and Wilfred Lucas.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"WILFRED LUCAS\"",
+          "\"EVA NOVAK\"",
+          "\"WILLIAM FAIRBANKS\""
+        ],
+        "chunk_ids": [
+          "chunk-fd05170a5fac14f8aac48eb00b5afcaa"
+        ],
+        "evidence_texts": [
+          "starring William Fairbanks, Eva Novak and Wilfred Lucas.",
+          "The Fatal Mistake The Fatal Mistake is a 1924 American silent crime film directed by Scott R. Dunlap and starring William Fairbanks, Eva Novak and Wilfred Lucas."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film stars William Fairbanks, Eva Novak, and Wilfred Lucas.\"",
+        "hyperedge_text": "The film stars William Fairbanks, Eva Novak, and Wilfred Lucas.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"WILFRED LUCAS\"",
+          "\"EVA NOVAK\"",
+          "\"WILLIAM FAIRBANKS\""
+        ],
+        "chunk_ids": [
+          "chunk-fd05170a5fac14f8aac48eb00b5afcaa"
+        ],
+        "evidence_texts": [
+          "The film stars William Fairbanks, Eva Novak, and Wilfred Lucas.",
+          "The Fatal Mistake The Fatal Mistake is a 1924 American silent crime film directed by Scott R. Dunlap and starring William Fairbanks, Eva Novak and Wilfred Lucas."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      }
+    ],
+    "answer": "January 30, 1871",
+    "confidence": 0.9,
+    "reasoning_summary": "Wilfred Lucas, the director of 'The Romance of Tarzan', was born on January 30, 1871, as stated in the evidence.",
+    "used_dependencies": [
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Wilfred Lucas was a Canadian American stage actor.\""
+    ]
+  },
+  {
+    "node_id": "q5",
+    "question": "What is the birth date of the director of Four Days In November?",
+    "analysis": {
+      "entities": [
+        "Four Days In November",
+        "Mel Stuart"
+      ],
+      "relations": [
+        "birth date of the director"
+      ],
+      "relation_query": "What is the birth date of the director of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy.\"",
+        "hyperedge_text": "Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5885987877845764,
+        "fusion_score": 0.5177197575569153,
+        "entity_ids": [
+          "\"ACADEMY AWARD\"",
+          "\"JOHN F. KENNEDY\"",
+          "\"MEL STUART\"",
+          "\"FOUR DAYS IN NOVEMBER\""
+        ],
+        "chunk_ids": [
+          "chunk-f7d2c4a86228f5602c0eade49705c97b"
+        ],
+        "evidence_texts": [
+          "Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy.",
+          "Four Days in November Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy. It was nominated for an Academy Award for Best Documentary Feature. The film includes Dallas radio and television coverage of: Amateur films and photos include: The opening credits indicate that\" certain scenes have been recreated in the original locations by the actual participants\". Some of these recreations include:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.588599,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51772
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mel Stuart, born Stuart Solomon, was an American film director and producer who often worked with producer David L. Wolper.\"",
+        "hyperedge_text": "Mel Stuart, born Stuart Solomon, was an American film director and producer who often worked with producer David L. Wolper.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.3333333333333333,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.3666666666666667,
+        "entity_ids": [
+          "\"PRODUCER\"",
+          "\"AMERICAN FILM DIRECTOR\"",
+          "\"MEL STUART\"",
+          "\"STUART SOLOMON\"",
+          "\"DAVID L. WOLPER\"",
+          "\"PRODUCTION FIRM\""
+        ],
+        "chunk_ids": [
+          "chunk-ff182dc67a162b235e7291e6cf1af30b"
+        ],
+        "evidence_texts": [
+          "Mel Stuart, born Stuart Solomon, was an American film director and producer who often worked with producer David L. Wolper.",
+          "Mel Stuart Mel Stuart( born Stuart Solomon; September 2, 1928 – August 9, 2012) was an American film director and producer who often worked with producer David L. Wolper, whose production firm he worked for 17 years, before going freelance."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.333333,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.366667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Four Days in November covers the events surrounding the assassination of John F. Kennedy.\"",
+        "hyperedge_text": "Four Days in November covers the events surrounding the assassination of John F. Kennedy.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5265040397644043,
+        "fusion_score": 0.3053008079528809,
+        "entity_ids": [
+          "\"ASSASSINATION\""
+        ],
+        "chunk_ids": [
+          "chunk-f7d2c4a86228f5602c0eade49705c97b"
+        ],
+        "evidence_texts": [
+          "Four Days in November covers the events surrounding the assassination of John F. Kennedy.",
+          "Four Days in November Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy. It was nominated for an Academy Award for Best Documentary Feature. The film includes Dallas radio and television coverage of: Amateur films and photos include: The opening credits indicate that\" certain scenes have been recreated in the original locations by the actual participants\". Some of these recreations include:"
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.526504,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.305301
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Mel Stuart and released in 1964.\"",
+        "hyperedge_text": "The film was directed by Mel Stuart and released in 1964.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.30000000000000004,
+        "entity_ids": [
+          "\"1964\"",
+          "\"MEL STUART\""
+        ],
+        "chunk_ids": [
+          "chunk-f7d2c4a86228f5602c0eade49705c97b"
+        ],
+        "evidence_texts": [
+          "The film was directed by Mel Stuart and released in 1964.",
+          "Four Days in November Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy. It was nominated for an Academy Award for Best Documentary Feature. The film includes Dallas radio and television coverage of: Amateur films and photos include: The opening credits indicate that\" certain scenes have been recreated in the original locations by the actual participants\". Some of these recreations include:"
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.3
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.\"",
+        "hyperedge_text": "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4520334005355835,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2808133602142334,
+        "entity_ids": [
+          "\"1 JULY 1960\""
+        ],
+        "chunk_ids": [
+          "chunk-aa56f51397106aa3cdfbda911c04958d"
+        ],
+        "evidence_texts": [
+          "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+          "Mikael Håfström Jan Mikael Håfström( born 1 July 1960) is a Swedish film director and screenwriter. He is best known for the 2003 film\" Evil\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.452033,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.280813
+        }
+      }
+    ],
+    "answer": "September 2, 1928",
+    "confidence": 1.0,
+    "reasoning_summary": "Mel Stuart was born on September 2, 1928, as stated in the evidence.",
+    "used_dependencies": [
+      "q2",
+      "q4"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Four Days in November is a 1964 American documentary film directed by Mel Stuart about the assassination of John F. Kennedy.\""
+    ]
+  }
+]

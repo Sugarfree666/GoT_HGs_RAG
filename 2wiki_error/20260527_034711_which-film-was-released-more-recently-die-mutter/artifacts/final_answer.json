@@ -1,0 +1,20 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "The release date for 'Die Mutter' is known (1958), but there is no information provided about the release date of 'Where Are You Going All Naked??', making it impossible to determine which film was released more recently.",
+  "answer_span_reasoning": "There is not enough information to determine the release dates of both films.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "When was Die Mutter released?",
+      "answer": "1958",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Die Mutter is an East German film that was released in 1958.\""
+      ]
+    }
+  ],
+  "remaining_gaps": [
+    "Release date for 'Where Are You Going All Naked??'"
+  ]
+}

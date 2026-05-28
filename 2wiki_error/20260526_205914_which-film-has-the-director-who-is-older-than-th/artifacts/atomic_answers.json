@@ -1,0 +1,738 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Colierul De Turcoaze?",
+    "analysis": {
+      "entities": [
+        "Colierul De Turcoaze"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6734473705291748,
+        "fusion_score": 0.534689474105835,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.673447,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.534689
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.656187891960144,
+        "fusion_score": 0.5312375783920289,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.656188,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531238
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has left a lasting impact on Turkish storytelling.\"",
+        "hyperedge_text": "As a director, he has left a lasting impact on Turkish storytelling.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.45327675342559814,
+        "fusion_score": 0.4906553506851197,
+        "entity_ids": [
+          "\"IMPACT\""
+        ],
+        "chunk_ids": [
+          "chunk-afddd1564bf751c764e871c8befcbdf8"
+        ],
+        "evidence_texts": [
+          "As a director, he has left a lasting impact on Turkish storytelling.",
+          "Kartal Tibet Kartal Tibet( born 27 March 1938) is a Turkish actor and film director. Some of his famous films include\" Ölmeyen AşkDağlar KızıSenede Bir GünSultanZübük Gol Kralı\", and\" Şalvar Davası\". Tibet is also known for his action roles, especially that of the title series."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.453277,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.490655
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.\"",
+        "hyperedge_text": "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.44440171122550964,
+        "fusion_score": 0.48888034224510196,
+        "entity_ids": [
+          "\"DINU COCEA\""
+        ],
+        "chunk_ids": [
+          "chunk-4dca11ed4daa89c6b795d4ebf6b716cd"
+        ],
+        "evidence_texts": [
+          "Constantin 'Dinu' Cocea was a Romanian actor, film director and screenwriter.",
+          "Dinu Cocea Constantin\" Dinu\" Cocea( 22 September 1929 – 26 December 2013) was a Romanian actor, film director and screenwriter. Dinu Cocea was born into a well- known theatrical family; his relatives included N. D. Cocea, Alice Cocéa, and Dina Cocea. He studied at the Institute of Theatre and Cinematographic Art in Bucharest, graduating in 1953. Cocea died from heart failure on 26 December 2013, aged 84, in Paris, France, where he had lived since 1986. He was survived by his daughter, Oana."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.444402,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.48888
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25314085483551024,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.253141
+        }
+      }
+    ],
+    "answer": "Gheorghe Vitanidis",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Leo And Loree?",
+    "analysis": {
+      "entities": [
+        "Leo And Loree"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6454430818557739,
+        "fusion_score": 0.5290886163711548,
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.645443,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.529089
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film showcases the charm of its main characters, Leo and Loree.\"",
+        "hyperedge_text": "The film showcases the charm of its main characters, Leo and Loree.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6359765529632568,
+        "fusion_score": 0.5271953105926515,
+        "entity_ids": [
+          "\"MAIN CHARACTERS\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "The film showcases the charm of its main characters, Leo and Loree.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.635977,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527195
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Leo and Loree is classified as a romantic comedy.\"",
+        "hyperedge_text": "The film Leo and Loree is classified as a romantic comedy.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5787108540534973,
+        "fusion_score": 0.5157421708106995,
+        "entity_ids": [
+          "\"ROMANTIC COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "The film Leo and Loree is classified as a romantic comedy.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.578711,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515742
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.\"",
+        "hyperedge_text": "Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.45080214738845825,
+        "fusion_score": 0.4901604294776917,
+        "entity_ids": [
+          "\"11 JANUARY 1932\"",
+          "\"2 DECEMBER 2003\""
+        ],
+        "chunk_ids": [
+          "chunk-4b6200f98f0955a42a753dcd5cac3589"
+        ],
+        "evidence_texts": [
+          "Fernando Di Leo (11 January 1932 – 2 December 2003) was an Italian film director and script writer.",
+          "Fernando Di Leo Fernando Di Leo( 11 January 1932 – 2 December 2003) was an Italian film director and script writer born in San Ferdinando di Puglia, Italy. During his career from 1964 to 1985, Di Leo directed 20 films and was involved in the writing process in 43. His films influenced many popular contemporary directors, such as Quentin Tarantino and John Woo. Di Leo started his career mostly writing scripts for spaghetti westerns. He worked on the script for\" Per un pugno di dollariA Fistful of Dollars\", 1964) and later as assistant director and assistant to Sergio Leone in\" Per qualche dollaro in più For a Few Dollars More\", 1965). Later, he wrote scripts for such westerns as\" Navajo Joe\"( 1966) and\" Johnny Yuma\"( 1967). Di Leo is now best remembered for his\" poliziotteschi\" films, especially the\" Milieu Trilogy\", which he both wrote and directed. The trilogy contains\" Caliber 9\"( 1..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.450802,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.49016
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo D. Maloney directed and starred in The Outlaw Express.\"",
+        "hyperedge_text": "Leo D. Maloney directed and starred in The Outlaw Express.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4444691836833954,
+        "fusion_score": 0.4888938367366791,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"STAR\""
+        ],
+        "chunk_ids": [
+          "chunk-0638400ec1c0e2faff8010f5d1d50b86"
+        ],
+        "evidence_texts": [
+          "Leo D. Maloney directed and starred in The Outlaw Express.",
+          "The Outlaw Express The Outlaw Express is a 1926 American silent western film directed by Leo D. Maloney and starring Leo D. Maloney, Joan Renee and Melbourne MacDowell."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.444469,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.488894
+        }
+      }
+    ],
+    "answer": "Jerry Paris",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Colierul De Turcoaze?",
+    "analysis": {
+      "entities": [
+        "Gheorghe Vitanidis"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis was born on 1 October 1929.\"",
+        "hyperedge_text": "Gheorghe Vitanidis was born on 1 October 1929.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7493227124214172,
+        "fusion_score": 0.5498645424842835,
+        "entity_ids": [
+          "\"GHEORGHE VITANIDIS\"",
+          "\"1 OCTOBER 1929\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "evidence_texts": [
+          "Gheorghe Vitanidis was born on 1 October 1929.",
+          "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.749323,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549865
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.\"",
+        "hyperedge_text": "Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6778258085250854,
+        "fusion_score": 0.5355651617050171,
+        "entity_ids": [
+          "\"GHEORGHE VITANIDIS\"",
+          "\"ROMANIAN FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "evidence_texts": [
+          "Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director.",
+          "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.677826,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535565
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.\"",
+        "hyperedge_text": "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1986\"",
+          "\"ROMANIA\"",
+          "\"COLIERUL DE TURCOAZE\"",
+          "\"GHEORGHE VITANIDIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1aa205ee4a28babed7d719c65ea67ed7"
+        ],
+        "evidence_texts": [
+          "Colierul de turcoaze is a Romanian action film directed by Gheorghe Vitanidis.",
+          "Colierul de turcoaze Colierul de turcoaze is a 1986 Romanian action film directed by Gheorghe Vitanidis."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gheorghe Vitanidis passed away on 25 November 1994.\"",
+        "hyperedge_text": "Gheorghe Vitanidis passed away on 25 November 1994.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6535838842391968,
+        "fusion_score": 0.5307167768478394,
+        "entity_ids": [
+          "\"25 NOVEMBER 1994\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a51189008560ca8ad8b4eab930193e"
+        ],
+        "evidence_texts": [
+          "Gheorghe Vitanidis passed away on 25 November 1994.",
+          "Gheorghe Vitanidis Gheorghe Vitanidis (1 October 1929 – 25 November 1994) was a Romanian film director. He directed 19 films between 1958 and 1987. His 1969 film \"A Woman for a Season\" was entered into the 6th Moscow International Film Festival. His 1979 film \"The Moment\" was entered into the 11th Moscow International Film Festival."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.653584,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530717
+        }
+      }
+    ],
+    "answer": "65",
+    "confidence": 0.9,
+    "reasoning_summary": "Gheorghe Vitanidis was born on 1 October 1929 and passed away on 25 November 1994, making him 65 years old at the time of his death.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Gheorghe Vitanidis was born on 1 October 1929.\"",
+      "<hyperedge>\"Gheorghe Vitanidis passed away on 25 November 1994.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of Leo And Loree?",
+    "analysis": {
+      "entities": [
+        "Jerry Paris"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.\"",
+        "hyperedge_text": "William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6375032663345337,
+        "fusion_score": 0.5275006532669068,
+        "entity_ids": [
+          "\"NEIGHBOR\"",
+          "\"LAURA PETRIE\"",
+          "\"JERRY HELPER\"",
+          "\"THE DICK VAN DYKE SHOW\"",
+          "\"DENTIST\"",
+          "\"ROB PETRIE\"",
+          "\"WILLIAM GERALD PARIS\"",
+          "\"JERRY PARIS\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "evidence_texts": [
+          "William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.",
+          "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.637503,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527501
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Jerry Paris.\"",
+        "hyperedge_text": "The film was directed by Jerry Paris.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5595872402191162,
+        "fusion_score": 0.5119174480438233,
+        "entity_ids": [
+          "\"JERRY PARIS\""
+        ],
+        "chunk_ids": [
+          "chunk-1fdc3036dc04bdc7ce73dbd87dc8d1e7"
+        ],
+        "evidence_texts": [
+          "The film was directed by Jerry Paris.",
+          "How Sweet It Is! How Sweet It Is! is a 1968 comedy film starring James Garner and Debbie Reynolds, with a supporting cast including Terry- Thomas and Paul Lynde. Garner plays a photographer who accompanies his wife and teenage son on an assignment in Paris, with both husband and wife struggling to stay faithful under extreme temptation. The film was written by producers Garry Marshall and Jerry Belson( adapting Muriel Resnik's novel\" The Girl in the Turqoise Bikini\") and directed by Jerry Paris. Jimmy Webb wrote the title song, and Patrick Williams scored the sound track."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.559587,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511917
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.\"",
+        "hyperedge_text": "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"LEO AND LOREE\"",
+          "\"DONNY MOST\"",
+          "\"JERRY PARIS\"",
+          "\"LINDA PURL\""
+        ],
+        "chunk_ids": [
+          "chunk-72f3c51c68a1619914d21337882e4d98"
+        ],
+        "evidence_texts": [
+          "Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl.",
+          "Leo and Loree Leo and Loree is a 1980 American romantic comedy film directed by Jerry Paris, starring Donny Most and Linda Purl."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.\"",
+        "hyperedge_text": "Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.557462215423584,
+        "fusion_score": 0.5114924430847169,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"ACTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "evidence_texts": [
+          "Jerry Paris contributed not only as an actor but also as a director, showcasing his versatility in the entertainment industry.",
+          "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.557462,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511492
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.\"",
+        "hyperedge_text": "Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5215414762496948,
+        "fusion_score": 0.504308295249939,
+        "entity_ids": [
+          "\"PORTRAYAL\"",
+          "\"CHARM AND APPEAL\"",
+          "\"CLASSIC SITCOM\""
+        ],
+        "chunk_ids": [
+          "chunk-da69d9de0fc64340dc983baada439a6e"
+        ],
+        "evidence_texts": [
+          "Jerry Paris's portrayal of Jerry Helper was integral to the charm and appeal of 'The Dick Van Dyke Show', which became a classic sitcom.",
+          "Jerry Paris William Gerald Paris( July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next- door neighbor of Rob and Laura Petrie, on\" The Dick Van Dyke Show\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.521541,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504308
+        }
+      }
+    ],
+    "answer": "60",
+    "confidence": 0.9,
+    "reasoning_summary": "Jerry Paris was born on July 25, 1925, and passed away on March 31, 1986, making him 60 years old at the time of his death. This is supported by the evidence stating his birth and death dates.",
+    "used_dependencies": [
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"William Gerald Paris (July 25, 1925 – March 31, 1986) professionally known as Jerry Paris, was an American actor and director best known for playing Jerry Helper, the dentist and next-door neighbor of Rob and Laura Petrie, on 'The Dick Van Dyke Show'.\""
+    ]
+  }
+]

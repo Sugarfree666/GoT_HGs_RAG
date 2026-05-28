@@ -1,0 +1,944 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Karin Daughter Of Ingmar?",
+    "analysis": {
+      "entities": [
+        "Karin Daughter Of Ingmar"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Karin Daughter of Ingmar is a 1920 Swedish silent drama film directed by Victor Sjöström.\"",
+        "hyperedge_text": "Karin Daughter of Ingmar is a 1920 Swedish silent drama film directed by Victor Sjöström.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7695980668067932,
+        "fusion_score": 0.5539196133613586,
+        "entity_ids": [
+          "\"KARIN DAUGHTER OF INGMAR\"",
+          "\"VICTOR SJÖSTRÖM\""
+        ],
+        "chunk_ids": [
+          "chunk-2b04ebe5fd1b3f3040081218c88fd08b"
+        ],
+        "evidence_texts": [
+          "Karin Daughter of Ingmar is a 1920 Swedish silent drama film directed by Victor Sjöström.",
+          "Karin Daughter of Ingmar Karin Daughter of Ingmar is a 1920 Swedish silent drama film directed by Victor Sjöström. It is the second part in Sjöström's large- scale adaption of Selma Lagerlöf's novel Jerusalem, following\" Sons of Ingmar\" from the year before, and depicting chapter three and four from the novel. The critical reception was, however, unenthusiastic, and Sjöström decided to not direct any more parts. Eventually the suite was finished by Gustaf Molander in 1926."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.769598,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55392
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Karin Daughter of Ingmar is the second part in Sjöström's large-scale adaption of Selma Lagerlöf's novel Jerusalem.\"",
+        "hyperedge_text": "Karin Daughter of Ingmar is the second part in Sjöström's large-scale adaption of Selma Lagerlöf's novel Jerusalem.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6590285301208496,
+        "fusion_score": 0.53180570602417,
+        "entity_ids": [
+          "\"SECOND PART\"",
+          "\"KARIN DAUGHTER OF INGMAR\"",
+          "\"LARGE-SCALE ADAPTION\""
+        ],
+        "chunk_ids": [
+          "chunk-2b04ebe5fd1b3f3040081218c88fd08b"
+        ],
+        "evidence_texts": [
+          "Karin Daughter of Ingmar is the second part in Sjöström's large-scale adaption of Selma Lagerlöf's novel Jerusalem.",
+          "Karin Daughter of Ingmar Karin Daughter of Ingmar is a 1920 Swedish silent drama film directed by Victor Sjöström. It is the second part in Sjöström's large- scale adaption of Selma Lagerlöf's novel Jerusalem, following\" Sons of Ingmar\" from the year before, and depicting chapter three and four from the novel. The critical reception was, however, unenthusiastic, and Sjöström decided to not direct any more parts. Eventually the suite was finished by Gustaf Molander in 1926."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.659029,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531806
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ernst Ingmar Bergman (14 July 1918 – 30 July 2007) was a Swedish director, writer, and producer who worked in film, television, theatre and radio.\"",
+        "hyperedge_text": "Ernst Ingmar Bergman (14 July 1918 – 30 July 2007) was a Swedish director, writer, and producer who worked in film, television, theatre and radio.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4880555272102356,
+        "fusion_score": 0.4976111054420471,
+        "entity_ids": [
+          "\"SWEDEN\"",
+          "\"INGMAR BERGMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-df9ac37559262bcca7bb7c137e477992"
+        ],
+        "evidence_texts": [
+          "Ernst Ingmar Bergman (14 July 1918 – 30 July 2007) was a Swedish director, writer, and producer who worked in film, television, theatre and radio.",
+          "Ingmar Bergman Ernst Ingmar Bergman (14 July 1918 – 30 July 2007) was a Swedish director, writer, and producer who worked in film, television, theatre and radio. Considered to be among the most accomplished and influential filmmakers of all time, Bergman's films include \"Smiles of a Summer Night\" (1955), \"The Seventh Seal\" (1957) , \"Wild Strawberries\" (1957), \"Persona\" (1966), \"Cries and Whispers\" (1972), \"Scenes from a Marriage\" (1973), and \"Fanny and Alexander\" (1982); the last two exist in extended television versions. Bergman directed over sixty films and documentaries for cinematic release and for television screenings, most of which he also wrote. He also directed over 170 plays. He eventually forged a creative partnership with his cinematographers Gunnar Fischer and Sven Nykvist. Among his company of actors were Harriet and Bibi Andersson, Liv Ullmann, Gunnar Björnstrand, Erlan..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.488056,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.497611
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work has included various productions directed by Ingmar Bergman.\"",
+        "hyperedge_text": "His work has included various productions directed by Ingmar Bergman.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5197352766990662,
+        "fusion_score": 0.30394705533981325,
+        "entity_ids": [
+          "\"PRODUCTIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-e6fbda0d87656a4c246686dddb608ee4"
+        ],
+        "evidence_texts": [
+          "His work has included various productions directed by Ingmar Bergman.",
+          "Jonas Malmsjö Carl Jonas Love Malmsjö( born September 2, 1971) is a Swedish actor who has worked in theatre, TV and radio; he is the son of Swedish actor Jan Malmsjö and the Swedish actress Marie Göranzon. Apart from his work in his native Sweden, which has included a starring role in the TV series\" Labyrint\", he has been in several productions directed by Ingmar Bergman at the Brooklyn Academy of Music. He was also cast as Skorpa of the White Horse, a Viking warlord in the second half of\" The Last Kingdom\", a BBC adaptation of the first two books in Bernard Cornwell's\" The Saxon Stories\" series of historical novels. He also contributed the voice of Ingmar Bergman in the Sparks musical,\" The Seduction of Ingmar Bergman\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.519735,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.303947
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25314085483551024,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.253141
+        }
+      }
+    ],
+    "answer": "Victor Sjöström",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Karin Daughter of Ingmar' is directed by Victor Sjöström.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Karin Daughter of Ingmar is a 1920 Swedish silent drama film directed by Victor Sjöström.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "When did the director of The Man In The Trunk die?",
+    "analysis": {
+      "entities": [
+        "The Man In The Trunk"
+      ],
+      "relations": [
+        "director's death"
+      ],
+      "relation_query": "When did the director of a work die?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.\"",
+        "hyperedge_text": "The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6103009581565857,
+        "fusion_score": 0.5220601916313172,
+        "entity_ids": [
+          "\"MALCOLM ST. CLAIR\"",
+          "\"THE MAN IN THE TRUNK\"",
+          "\"JOHN LARKIN\""
+        ],
+        "chunk_ids": [
+          "chunk-a956e62dd2a9ed20dc852cd66c1ddf55"
+        ],
+        "evidence_texts": [
+          "The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.",
+          "The Man in the Trunk The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin. The film stars Lynne Roberts, George Holmes, Raymond Walburn, J. Carrol Naish, Dorothy Peterson and Eily Malyon. The film was released on September 18, 1942, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.610301,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52206
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The music director died before the release of the film.\"",
+        "hyperedge_text": "The music director died before the release of the film.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5800895690917969,
+        "semantic_score": 0.48303401470184326,
+        "fusion_score": 0.3286426305770874,
+        "entity_ids": [
+          "\"SAMPATH SELVAM\""
+        ],
+        "chunk_ids": [
+          "chunk-7b18343d2c0ab9d855df8ec895675e28"
+        ],
+        "evidence_texts": [
+          "The music director died before the release of the film.",
+          "Thulasi (1987 film) Thulasi is a 1987 Tamil romantic drama film directed by Ameerjan. The film features Murali and Seetha in lead roles. The film, produced by P. S. V. Hariharan, had musical score by Sampath Selvam and was released on 27 November 1987. The music director died before the release of the film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.58009,
+          "S": 0.483034,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.328643
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Both the film's male lead (Trevor Goddard) and the original producer died during production.\"",
+        "hyperedge_text": "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5171573162078857,
+        "semantic_score": 0.5479962825775146,
+        "fusion_score": 0.31646218299865725,
+        "entity_ids": [
+          "\"PASSING OF ORIGINAL PRODUCER\"",
+          "\"PASSING OF TREVOR GODDARD\""
+        ],
+        "chunk_ids": [
+          "chunk-1127f76ebf275b50e146e11ff176c899"
+        ],
+        "evidence_texts": [
+          "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+          "Flexing with Monty Flexing with Monty is a 2010 comedy- drama film and stars Trevor Goddard and Sally Kirkland. Shooting started in 1994 and was finally completed in 2008 during which both the film's male lead( Trevor Goddard), and the original producer died."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.517157,
+          "S": 0.547996,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.316462
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.\"",
+        "hyperedge_text": "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5221027135848999,
+        "semantic_score": 0.5088616609573364,
+        "fusion_score": 0.31061341762542727,
+        "entity_ids": [
+          "\"2007\"",
+          "\"STARY CZŁOWIEK I PIES (THE OLD MAN AND THE DOG)\""
+        ],
+        "chunk_ids": [
+          "chunk-d3d9377a1c523159f484fa4ec74bec5e"
+        ],
+        "evidence_texts": [
+          "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+          "Witold Leszczyński Witold Leszczyński( 16 August 1933 – 1 September 2007) was a Polish film director and screenwriter. In 1967 he graduated from the National Film School in Łódź. He directed over thirty films between 1959 and 2007. Most known for\" Żywot MateuszaMatthew's Days\") based on a novel by Norwegian writer Tarjei Vesaas,\" Konopielka\", adapted from the novel of Edward Redliński,\" Siekierezada\" based on a novel by Edward Stachura and many others films. He received numerous awards, including Grand Prix at the Polish Film Festival in 1986. The director died during the shoot of his film\" Stary człowiek i pies The Old Man and the Dog\") in 2007."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.522103,
+          "S": 0.508862,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.310613
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Man in the Trunk was produced by 20th Century Fox.\"",
+        "hyperedge_text": "The Man in the Trunk was produced by 20th Century Fox.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5794488191604614,
+        "fusion_score": 0.5158897638320923,
+        "entity_ids": [
+          "\"PRODUCTION\"",
+          "\"CASTING\""
+        ],
+        "chunk_ids": [
+          "chunk-a956e62dd2a9ed20dc852cd66c1ddf55"
+        ],
+        "evidence_texts": [
+          "The Man in the Trunk was produced by 20th Century Fox.",
+          "The Man in the Trunk The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin. The film stars Lynne Roberts, George Holmes, Raymond Walburn, J. Carrol Naish, Dorothy Peterson and Eily Malyon. The film was released on September 18, 1942, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.579449,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51589
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the death of Malcolm St. Clair, the director of 'The Man In The Trunk'.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the director of Karin Daughter Of Ingmar die?",
+    "analysis": {
+      "entities": [
+        "Victor Sjöström"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Victor David Sjöström (20 September 1879 – 3 January 1960), sometimes known in the United States as Victor Seastrom, was a pioneering Swedish film director, screenwriter, and actor.\"",
+        "hyperedge_text": "Victor David Sjöström (20 September 1879 – 3 January 1960), sometimes known in the United States as Victor Seastrom, was a pioneering Swedish film director, screenwriter, and actor.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7630587816238403,
+        "fusion_score": 0.5526117563247681,
+        "entity_ids": [
+          "\"HOLLYWOOD\"",
+          "\"SWEDEN\"",
+          "\"SILENT ERA\"",
+          "\"THE PHANTOM CARRIAGE\"",
+          "\"HE WHO GETS SLAPPED\"",
+          "\"THE WIND\"",
+          "\"GOLDEN AGE OF SILENT FILM\"",
+          "\"WILD STRAWBERRIES\"",
+          "\"VICTOR SJÖSTRÖM\"",
+          "\"INGMAR BERGMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-d6a6d68fab9f03cd391cb2dedb656ea2"
+        ],
+        "evidence_texts": [
+          "Victor David Sjöström (20 September 1879 – 3 January 1960), sometimes known in the United States as Victor Seastrom, was a pioneering Swedish film director, screenwriter, and actor.",
+          "Victor Sjöström Victor David Sjöström (20 September 1879 – 3 January 1960), sometimes known in the United States as Victor Seastrom, was a pioneering Swedish film director, screenwriter, and actor. He began his career in Sweden, before moving to Hollywood in 1924. Sjöström worked primarily in the silent era; his best known films include \"The Phantom Carriage\" (1921), \"He Who Gets Slapped\" (1924), and \"The Wind\" (1928). Sjöström was Sweden's most prominent director in the \"Golden Age of Silent Film\" in Europe. Later in life, he played the leading role in Ingmar Bergman's \"Wild Strawberries\" (1957)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.763059,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.552612
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Karin Daughter of Ingmar is a 1920 Swedish silent drama film directed by Victor Sjöström.\"",
+        "hyperedge_text": "Karin Daughter of Ingmar is a 1920 Swedish silent drama film directed by Victor Sjöström.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8,
+        "fusion_score": 0.56,
+        "entity_ids": [
+          "\"KARIN DAUGHTER OF INGMAR\"",
+          "\"VICTOR SJÖSTRÖM\""
+        ],
+        "chunk_ids": [
+          "chunk-2b04ebe5fd1b3f3040081218c88fd08b"
+        ],
+        "evidence_texts": [
+          "Karin Daughter of Ingmar is a 1920 Swedish silent drama film directed by Victor Sjöström.",
+          "Karin Daughter of Ingmar Karin Daughter of Ingmar is a 1920 Swedish silent drama film directed by Victor Sjöström. It is the second part in Sjöström's large- scale adaption of Selma Lagerlöf's novel Jerusalem, following\" Sons of Ingmar\" from the year before, and depicting chapter three and four from the novel. The critical reception was, however, unenthusiastic, and Sjöström decided to not direct any more parts. Eventually the suite was finished by Gustaf Molander in 1926."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.8,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.56
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sons of Ingmar, also released in the United Kingdom under the title Dawn of Love, is a 1919 Swedish drama film directed by Victor Sjöström.\"",
+        "hyperedge_text": "Sons of Ingmar, also released in the United Kingdom under the title Dawn of Love, is a 1919 Swedish drama film directed by Victor Sjöström.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8,
+        "fusion_score": 0.56,
+        "entity_ids": [
+          "\"SONS OF INGMAR\"",
+          "\"DAWN OF LOVE\"",
+          "\"SWEDISH DRAMA FILM\"",
+          "\"VICTOR SJÖSTRÖM\""
+        ],
+        "chunk_ids": [
+          "chunk-db2253cae5ba8abcf971700672ec870c"
+        ],
+        "evidence_texts": [
+          "Sons of Ingmar, also released in the United Kingdom under the title Dawn of Love, is a 1919 Swedish drama film directed by Victor Sjöström.",
+          "Sons of Ingmar Sons of Ingmar, also released in the United Kingdom under the title Dawn of Love, is a 1919 Swedish drama film directed by Victor Sjöström. It is the first part of his adaptation of Selma Lagerlöf's novel\" Jerusalem\", originally published in 1901 and 1902. It was followed by a second part,\" Karin, Daughter of Ingmar\", the following year."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.8,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.56
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sons of Ingmar, released in the United Kingdom under the title Dawn of Love, is a 1919 Swedish drama film.\"",
+        "hyperedge_text": "Sons of Ingmar, released in the United Kingdom under the title Dawn of Love, is a 1919 Swedish drama film.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8,
+        "fusion_score": 0.56,
+        "entity_ids": [
+          "\"SWEDEN\"",
+          "\"1919\"",
+          "\"DRAMA FILM\"",
+          "\"SONS OF INGMAR\"",
+          "\"DAWN OF LOVE\"",
+          "\"VICTOR SJÖSTRÖM\""
+        ],
+        "chunk_ids": [
+          "chunk-db2253cae5ba8abcf971700672ec870c"
+        ],
+        "evidence_texts": [
+          "Sons of Ingmar, released in the United Kingdom under the title Dawn of Love, is a 1919 Swedish drama film.",
+          "Sons of Ingmar Sons of Ingmar, also released in the United Kingdom under the title Dawn of Love, is a 1919 Swedish drama film directed by Victor Sjöström. It is the first part of his adaptation of Selma Lagerlöf's novel\" Jerusalem\", originally published in 1901 and 1902. It was followed by a second part,\" Karin, Daughter of Ingmar\", the following year."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.8,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.56
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Later he worked as a script clerk for directors King Vidor and Victor Sjöström before becoming a screenwriter at MGM in 1924.\"",
+        "hyperedge_text": "Later he worked as a script clerk for directors King Vidor and Victor Sjöström before becoming a screenwriter at MGM in 1924.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8,
+        "fusion_score": 0.56,
+        "entity_ids": [
+          "\"MGM\"",
+          "\"VICTOR SJÖSTRÖM\"",
+          "\"KING VIDOR\"",
+          "\"SCRIPT CLERK\""
+        ],
+        "chunk_ids": [
+          "chunk-6076f09371adadc9581c07e067e71704"
+        ],
+        "evidence_texts": [
+          "Later he worked as a script clerk for directors King Vidor and Victor Sjöström before becoming a screenwriter at MGM in 1924.",
+          "Albert Lewin Albert Lewin (September 23, 1894 – May 9, 1968) was an American film director, producer, and screenwriter. He was born in Brooklyn, New York and raised in Newark, New Jersey. He earned a master's degree at Harvard and taught English at the University of Missouri. During World War I, he served in the military and was afterwards appointed assistant national director of the American Jewish Relief Committee. He later became a drama and film critic for the \"Jewish Tribune\" until the early 1920s, when he went to Hollywood to become a reader for Samuel Goldwyn. Later he worked as a script clerk for directors King Vidor and Victor Sjöström before becoming a screenwriter at MGM in 1924. Lewin was appointed head of the studio's script department and by the late 1920s was Irving Thalberg's personal assistant and closest associate. Nominally credited as an associate producer, he prod..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.8,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.56
+        }
+      }
+    ],
+    "answer": "3 January 1960",
+    "confidence": 1.0,
+    "reasoning_summary": "Victor Sjöström, the director of 'Karin Daughter Of Ingmar', died on 3 January 1960, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Victor David Sjöström (20 September 1879 – 3 January 1960), sometimes known in the United States as Victor Seastrom, was a pioneering Swedish film director, screenwriter, and actor.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What film is associated with the death date of The Man In The Trunk?",
+    "analysis": {
+      "entities": [
+        "The Man In The Trunk",
+        "Malcolm St. Clair"
+      ],
+      "relations": [
+        "is associated with",
+        "death date of"
+      ],
+      "relation_query": "What film is associated with the death date of a director?",
+      "answer_type": "work"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.\"",
+        "hyperedge_text": "The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.2,
+        "semantic_score": 0.6597089171409607,
+        "fusion_score": 0.6119417834281922,
+        "entity_ids": [
+          "\"MALCOLM ST. CLAIR\"",
+          "\"THE MAN IN THE TRUNK\"",
+          "\"JOHN LARKIN\""
+        ],
+        "chunk_ids": [
+          "chunk-a956e62dd2a9ed20dc852cd66c1ddf55"
+        ],
+        "evidence_texts": [
+          "The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.",
+          "The Man in the Trunk The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin. The film stars Lynne Roberts, George Holmes, Raymond Walburn, J. Carrol Naish, Dorothy Peterson and Eily Malyon. The film was released on September 18, 1942, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.2,
+          "S": 0.659709,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.611942
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His last two films as director were 'Trailing the Killer' (1932) and 'Adventure Girl' (1934).\"",
+        "hyperedge_text": "His last two films as director were 'Trailing the Killer' (1932) and 'Adventure Girl' (1934).",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5083168745040894,
+        "semantic_score": 0.4599328637123108,
+        "fusion_score": 0.2953133225440979,
+        "entity_ids": [
+          "\"ADVENTURE GIRL\"",
+          "\"TRAILING THE KILLER\""
+        ],
+        "chunk_ids": [
+          "chunk-3bf6ac4df7e131fe84eefd66de9b26c1"
+        ],
+        "evidence_texts": [
+          "His last two films as director were 'Trailing the Killer' (1932) and 'Adventure Girl' (1934).",
+          "Herman C. Raymaker Herman C. Raymaker (22 January 1893 – 6 March 1944) was an American film director and actor. He directed 51 films between 1917 and 1934. His last two films as director were \"Trailing the Killer\" (1932) and \"Adventure Girl\" (1934). He was born in Oakland, California, USA and died in Oceanside, Long Island, New York."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.508317,
+          "S": 0.459933,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.295313
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Malcolm St. Clair was a Hollywood film director, writer, producer and actor.\"",
+        "hyperedge_text": "Malcolm St. Clair was a Hollywood film director, writer, producer and actor.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.4,
+        "semantic_score": 0.16666666666666666,
+        "fusion_score": 0.39333333333333337,
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"FILM DIRECTOR\"",
+          "\"HOLLYWOOD\"",
+          "\"PRODUCER\"",
+          "\"ACTOR\"",
+          "\"MALCOLM ST. CLAIR\"",
+          "\"MAY 17, 1897\"",
+          "\"JUNE 1, 1952\""
+        ],
+        "chunk_ids": [
+          "chunk-87fdaee186221216886c4a877c9724c7"
+        ],
+        "evidence_texts": [
+          "Malcolm St. Clair was a Hollywood film director, writer, producer and actor.",
+          "Malcolm St. Clair (filmmaker) Malcolm St. Clair( May 17, 1897 – June 1, 1952) was a Hollywood film director, writer, producer and actor."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.4,
+          "S": 0.166667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.393333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Man in the Trunk was produced by 20th Century Fox.\"",
+        "hyperedge_text": "The Man in the Trunk was produced by 20th Century Fox.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.616076648235321,
+        "fusion_score": 0.32321532964706423,
+        "entity_ids": [
+          "\"PRODUCTION\"",
+          "\"CASTING\""
+        ],
+        "chunk_ids": [
+          "chunk-a956e62dd2a9ed20dc852cd66c1ddf55"
+        ],
+        "evidence_texts": [
+          "The Man in the Trunk was produced by 20th Century Fox.",
+          "The Man in the Trunk The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin. The film stars Lynne Roberts, George Holmes, Raymond Walburn, J. Carrol Naish, Dorothy Peterson and Eily Malyon. The film was released on September 18, 1942, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.616077,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.323215
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Traces of Death is a 1993 Z movie mondo shockumentary that consists of various scenes of stock footage depicting death and real scenes of violence.\"",
+        "hyperedge_text": "Traces of Death is a 1993 Z movie mondo shockumentary that consists of various scenes of stock footage depicting death and real scenes of violence.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.4739660620689392,
+        "fusion_score": 0.29479321241378786,
+        "entity_ids": [
+          "\"STOCK FOOTAGE\"",
+          "\"DAMON FOX\"",
+          "\"TRACES OF DEATH\"",
+          "\"Z MOVIE\"",
+          "\"SHOCKUMENTARY\""
+        ],
+        "chunk_ids": [
+          "chunk-2b1b89e11096dde0580b64670f0ae0e4"
+        ],
+        "evidence_texts": [
+          "Traces of Death is a 1993 Z movie mondo shockumentary that consists of various scenes of stock footage depicting death and real scenes of violence.",
+          "Traces of Death Traces of Death is a 1993 Z movie mondo shockumentary that consists of various scenes of stock footage depicting death and real scenes of violence. Unlike the earlier\" Faces of Death\" which included fake deaths and reenactments,\" Traces\" consists mostly of actual footage depicting death and injury, and consists also of public domain footage from other films. It was written and narrated by Damon Fox. Since its release,\" Traces of Death\" has been followed by four sequels. The first sequel,\" Traces of Death II\", was released the following year in 1994. This was followed by\" Traces of Death III\" in 1995,\" Traces of Death IV: Resurrected\" in 1996 and\" Traces of Death V: Back in Action\" in 2000."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.473966,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.294793
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence regarding the death date of Malcolm St. Clair, the director of 'The Man In The Trunk', which is necessary to answer the question.",
+    "used_dependencies": [
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.\""
+    ]
+  },
+  {
+    "node_id": "q5",
+    "question": "When did the director of The Man In The Trunk die?",
+    "analysis": {
+      "entities": [
+        "The Man In The Trunk",
+        "Malcolm St. Clair"
+      ],
+      "relations": [
+        "death date of"
+      ],
+      "relation_query": "What is the death date of the director of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.\"",
+        "hyperedge_text": "The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6103009581565857,
+        "fusion_score": 0.5220601916313172,
+        "entity_ids": [
+          "\"MALCOLM ST. CLAIR\"",
+          "\"THE MAN IN THE TRUNK\"",
+          "\"JOHN LARKIN\""
+        ],
+        "chunk_ids": [
+          "chunk-a956e62dd2a9ed20dc852cd66c1ddf55"
+        ],
+        "evidence_texts": [
+          "The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin.",
+          "The Man in the Trunk The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin. The film stars Lynne Roberts, George Holmes, Raymond Walburn, J. Carrol Naish, Dorothy Peterson and Eily Malyon. The film was released on September 18, 1942, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.610301,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.52206
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The music director died before the release of the film.\"",
+        "hyperedge_text": "The music director died before the release of the film.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5024697780609131,
+        "semantic_score": 0.48303401470184326,
+        "fusion_score": 0.29759471416473393,
+        "entity_ids": [
+          "\"SAMPATH SELVAM\""
+        ],
+        "chunk_ids": [
+          "chunk-7b18343d2c0ab9d855df8ec895675e28"
+        ],
+        "evidence_texts": [
+          "The music director died before the release of the film.",
+          "Thulasi (1987 film) Thulasi is a 1987 Tamil romantic drama film directed by Ameerjan. The film features Murali and Seetha in lead roles. The film, produced by P. S. V. Hariharan, had musical score by Sampath Selvam and was released on 27 November 1987. The music director died before the release of the film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.50247,
+          "S": 0.483034,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.297595
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.\"",
+        "hyperedge_text": "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45369836688041687,
+        "semantic_score": 0.5088616609573364,
+        "fusion_score": 0.28325167894363407,
+        "entity_ids": [
+          "\"2007\"",
+          "\"STARY CZŁOWIEK I PIES (THE OLD MAN AND THE DOG)\""
+        ],
+        "chunk_ids": [
+          "chunk-d3d9377a1c523159f484fa4ec74bec5e"
+        ],
+        "evidence_texts": [
+          "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+          "Witold Leszczyński Witold Leszczyński( 16 August 1933 – 1 September 2007) was a Polish film director and screenwriter. In 1967 he graduated from the National Film School in Łódź. He directed over thirty films between 1959 and 2007. Most known for\" Żywot MateuszaMatthew's Days\") based on a novel by Norwegian writer Tarjei Vesaas,\" Konopielka\", adapted from the novel of Edward Redliński,\" Siekierezada\" based on a novel by Edward Stachura and many others films. He received numerous awards, including Grand Prix at the Polish Film Festival in 1986. The director died during the shoot of his film\" Stary człowiek i pies The Old Man and the Dog\") in 2007."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.453698,
+          "S": 0.508862,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.283252
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Malcolm St. Clair was a Hollywood film director, writer, producer and actor.\"",
+        "hyperedge_text": "Malcolm St. Clair was a Hollywood film director, writer, producer and actor.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.25,
+        "semantic_score": 0.25,
+        "fusion_score": 0.35000000000000003,
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"FILM DIRECTOR\"",
+          "\"HOLLYWOOD\"",
+          "\"PRODUCER\"",
+          "\"ACTOR\"",
+          "\"MALCOLM ST. CLAIR\"",
+          "\"MAY 17, 1897\"",
+          "\"JUNE 1, 1952\""
+        ],
+        "chunk_ids": [
+          "chunk-87fdaee186221216886c4a877c9724c7"
+        ],
+        "evidence_texts": [
+          "Malcolm St. Clair was a Hollywood film director, writer, producer and actor.",
+          "Malcolm St. Clair (filmmaker) Malcolm St. Clair( May 17, 1897 – June 1, 1952) was a Hollywood film director, writer, producer and actor."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.25,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.35
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Man in the Trunk was produced by 20th Century Fox.\"",
+        "hyperedge_text": "The Man in the Trunk was produced by 20th Century Fox.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5794488191604614,
+        "fusion_score": 0.31588976383209233,
+        "entity_ids": [
+          "\"PRODUCTION\"",
+          "\"CASTING\""
+        ],
+        "chunk_ids": [
+          "chunk-a956e62dd2a9ed20dc852cd66c1ddf55"
+        ],
+        "evidence_texts": [
+          "The Man in the Trunk was produced by 20th Century Fox.",
+          "The Man in the Trunk The Man in the Trunk is a 1942 American comedy film directed by Malcolm St. Clair and written by John Larkin. The film stars Lynne Roberts, George Holmes, Raymond Walburn, J. Carrol Naish, Dorothy Peterson and Eily Malyon. The film was released on September 18, 1942, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.579449,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.31589
+        }
+      }
+    ],
+    "answer": "June 1, 1952",
+    "confidence": 0.9,
+    "reasoning_summary": "Malcolm St. Clair, the director of 'The Man In The Trunk', died on June 1, 1952, as supported by the evidence stating his birth and death dates.",
+    "used_dependencies": [
+      "q4"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Malcolm St. Clair was a Hollywood film director, writer, producer and actor.\""
+    ]
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Theodore?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Theodore study?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the father of Salisbury?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q4",
+    "question": "Who is the father of Woolsey?",
+    "dependencies": [],
+    "metadata": {}
+  }
+]

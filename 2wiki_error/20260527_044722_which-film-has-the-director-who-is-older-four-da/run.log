@@ -1,0 +1,13 @@
+2026-05-27 04:47:22,253 | INFO | Generating atomic question DAG with DEPO.
+2026-05-27 04:48:41,938 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-27 04:48:41,938 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-27 04:48:54,286 | INFO | Starting HyperBranch pipeline for question: Which film has the director who is older, Four Days In November or The Romance Of Tarzan?
+2026-05-27 04:48:54,286 | INFO | Executing atomic DAG with 5 node(s)
+2026-05-27 04:48:59,049 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of Four Days In November?
+2026-05-27 04:49:09,018 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of The Romance Of Tarzan?
+2026-05-27 04:49:13,169 | INFO | Rewrote retrieval question for q2: What is the birth date of the director of Four Days In November? -> What is the birth date of Mel Stuart?
+2026-05-27 04:49:17,395 | INFO | Atomic retrieval returned 23 hits for question=What is the birth date of Mel Stuart?
+2026-05-27 04:49:21,524 | INFO | Rewrote retrieval question for q4: What is the birth date of the director of The Romance Of Tarzan? -> What is the birth date of Wilfred Lucas?
+2026-05-27 04:49:25,331 | INFO | Atomic retrieval returned 25 hits for question=What is the birth date of Wilfred Lucas?
+2026-05-27 04:49:34,573 | INFO | Atomic retrieval returned 23 hits for question=What is the birth date of the director of Four Days In November?
+2026-05-27 04:50:25,697 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_044722_which-film-has-the-director-who-is-older-four-da

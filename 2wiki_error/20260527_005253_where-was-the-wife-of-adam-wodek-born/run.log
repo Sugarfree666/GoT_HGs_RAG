@@ -1,0 +1,9 @@
+2026-05-27 00:52:53,405 | INFO | Generating atomic question DAG with DEPO.
+2026-05-27 00:53:55,190 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-27 00:53:55,190 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-27 00:54:13,259 | INFO | Starting HyperBranch pipeline for question: Where was the wife of Adam Włodek born?
+2026-05-27 00:54:13,260 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-27 00:54:22,452 | INFO | Atomic retrieval returned 22 hits for question=Who is the wife of Adam Włodek?
+2026-05-27 00:54:31,605 | INFO | Rewrote retrieval question for q2: Where was the wife of Adam Włodek born? -> Where was Wisława Szymborska born?
+2026-05-27 00:54:38,423 | INFO | Atomic retrieval returned 23 hits for question=Where was Wisława Szymborska born?
+2026-05-27 00:55:15,799 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_005253_where-was-the-wife-of-adam-wodek-born

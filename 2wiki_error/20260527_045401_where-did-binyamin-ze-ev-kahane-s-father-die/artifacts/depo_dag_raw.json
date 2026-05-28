@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Binyamin Ze'Ev Kahane?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the father of Binyamin Ze'Ev Kahane die?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the wife of Adam Włodek?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where was the wife of Adam Włodek born?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

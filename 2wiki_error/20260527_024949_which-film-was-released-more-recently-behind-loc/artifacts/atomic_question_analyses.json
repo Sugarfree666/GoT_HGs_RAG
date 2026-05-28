@@ -1,0 +1,174 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Behind Locked Doors released?",
+    "retrieval_question": "When was Behind Locked Doors released?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Behind Locked Doors released?",
+      "retrieval_question": "When was Behind Locked Doors released?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Behind Locked Doors"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Crossing Delancey?",
+    "retrieval_question": "What is the release date of Crossing Delancey?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Crossing Delancey?",
+      "retrieval_question": "What is the release date of Crossing Delancey?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Crossing Delancey"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Behind Locked Doors?",
+    "retrieval_question": "What is the release date of Behind Locked Doors?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the release date of Behind Locked Doors?",
+      "retrieval_question": "What is the release date of Behind Locked Doors?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "When was Behind Locked Doors released?",
+        "answer": "1991",
+        "confidence": 0.9,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence states that 'Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.' This directly answers the question about the release date.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Any Body…Any Way's re-release under the name Behind Locked Doors highlights its enduring appeal and notable changes in presentation.\"",
+            "fusion_score": 0.7140485048294068,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Any Body…Any Way's re-release under the name Behind Locked Doors highlights its enduring appeal and notable changes in presentation.",
+              "Any Body...Any Way Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.\"",
+            "fusion_score": 0.5291208744049073,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.",
+              "Behind Locked Doors (1991 film) Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991. The ensemble- film shows the everyday life of 17 inhabitants of an apartment building in Berlin Kreuzberg."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson.\"",
+            "fusion_score": 0.5225146532058716,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson.",
+              "Behind Locked Doors Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson. At the behest of a pretty reporter, an amorously forward private detective goes undercover as a patient in a private sanitarium in search of a judge hiding out from the police. The two plan to split the$ 10,000 reward for the judge's capture. As the reporter and detective begin to fall in love, the detective also falls deeper into danger from an abusive attendant and difficult inpatients. The latter include an arsonist and\" The Champ,\" a lunatic ex-boxer who attacks anyone put into a room with him after he hears what sounds like a bell. The title\" Human Gorilla\" for this movie can be found on various copies of this movie. Although the film features noir lighting and camerawork, depicts corruption, and provides suspense, it lacks most of..."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "What is the release date of Crossing Delancey?",
+        "answer": "1988",
+        "confidence": 0.9,
+        "answer_type": "date",
+        "reasoning_summary": "The film 'Crossing Delancey' is confirmed to have been released in 1988 according to multiple pieces of evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert.\"",
+          "<hyperedge>\"The film Crossing Delancey is an American romantic comedy released in 1988.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert.\"",
+            "fusion_score": 0.5209151387214661,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert.",
+              "Crossing Delancey Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert. It is directed by Joan Micklin Silver and was based on a play by Susan Sandler, who also wrote the screenplay. Amy Irving was nominated for a Golden Globe for the movie, for Best Performance by an Actress in a Motion Picture- Comedy/ Musical."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+            "fusion_score": 0.2791284382343292,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The release date was on 10 October 2009.",
+              "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+            "fusion_score": 0.2712893605232239,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The release date on CD was September 22.",
+              "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Behind Locked Doors"
+      ],
+      "relations": [
+        "release date of"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  }
+]

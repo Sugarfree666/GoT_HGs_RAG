@@ -1,0 +1,9 @@
+2026-05-26 23:02:49,307 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 23:04:42,019 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 23:04:42,020 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 23:05:08,561 | INFO | Starting HyperBranch pipeline for question: What is the place of birth of the performer of song Dip (Song)?
+2026-05-26 23:05:08,562 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-26 23:05:14,053 | INFO | Atomic retrieval returned 21 hits for question=Who is the performer of the song Dip?
+2026-05-26 23:05:32,208 | INFO | Rewrote retrieval question for q2: What is the place of birth of the performer of Dip (Song)? -> What is the place of birth of Tyga (Song)?
+2026-05-26 23:05:38,299 | INFO | Atomic retrieval returned 21 hits for question=What is the place of birth of Tyga (Song)?
+2026-05-26 23:05:55,688 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_230249_what-is-the-place-of-birth-of-the-performer-of-s

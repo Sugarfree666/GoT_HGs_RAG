@@ -1,0 +1,26 @@
+{
+  "answer": "Alexandria, Egypt",
+  "candidate_answer": "Alexandria, Egypt",
+  "reasoning_summary": "Licinia Eudoxia's father, Theodosius II, is confirmed to have died in Alexandria, Egypt, based on strong evidence indicating his exile and burial there.",
+  "answer_span_reasoning": "The answer directly states the place of death of Licinia Eudoxia's father.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Licinia Eudoxia?",
+      "answer": "Theodosius II",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Licinia Eudoxia (422 – c. 493) was a Roman Empress, daughter of Eastern Roman Emperor Theodosius II.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the father of Licinia Eudoxia die?",
+      "answer": "Alexandria, Egypt",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"He then went into exile to Alexandria, Egypt, where he died and was buried the following year in Saint Catherines's Cathedral of Alexandria.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

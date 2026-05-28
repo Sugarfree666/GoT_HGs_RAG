@@ -1,0 +1,109 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Hardcase (1972 Film)?",
+    "retrieval_question": "Who is the director of Hardcase (1972 Film)?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Hardcase (1972 Film)?",
+      "retrieval_question": "Who is the director of Hardcase (1972 Film)?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Hardcase",
+        "1972 Film"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "Who is the director of a work released in a specific year?",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Which country is the director of Hardcase (1972 Film) from?",
+    "retrieval_question": "Which country is John Llewellyn Moxey from?",
+    "dependency_question_rewrite": {
+      "original_question": "Which country is the director of Hardcase (1972 Film) from?",
+      "retrieval_question": "Which country is John Llewellyn Moxey from?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Hardcase (1972 Film)",
+      "replacement_answer": "John Llewellyn Moxey",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Hardcase (1972 Film)",
+          "replacement_answer": "John Llewellyn Moxey"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Hardcase (1972 Film)?",
+        "answer": "John Llewellyn Moxey",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that 'Hardcase is a 1972 American made-for-television Western film directed by John Llewellyn Moxey.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Hardcase is a 1972 American made-for-television Western film directed by John Llewellyn Moxey and starring Clint Walker and Stefanie Powers.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The film was directed in 1972, highlighting its release year.\"",
+            "fusion_score": 0.30656416416168214,
+            "branch_support": [
+              "anchor",
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film was directed in 1972, highlighting its release year.",
+              "I Love You Rosa I Love You Rosa( translit. Ani Ohev Otach Rosa) is a 1972 Israeli film directed by Moshé Mizrahi. It was nominated for the Academy Award for Best Foreign Language Film. It was also entered into the 1972 Cannes Film Festival."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Hardcase is a 1972 American made-for-television Western film.\"",
+            "fusion_score": 0.33374881744384766,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Hardcase is a 1972 American made-for-television Western film.",
+              "Hardcase (1972 film) Hardcase is a 1972 American made-for-television Western film directed by John Llewellyn Moxey and starring Clint Walker and Stefanie Powers. It was the first fully live-action feature film of the Hanna-Barbera studios. The movie appeared on the \"ABC Movie of the Week\" on February 1, 1972 where it was a ratings surprise; becoming the seventh most popular show of the week."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Hardcase is a 1972 American made-for-television Western film directed by John Llewellyn Moxey and starring Clint Walker and Stefanie Powers.\"",
+            "fusion_score": 0.32387824058532716,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Hardcase is a 1972 American made-for-television Western film directed by John Llewellyn Moxey and starring Clint Walker and Stefanie Powers.",
+              "Hardcase (1972 film) Hardcase is a 1972 American made-for-television Western film directed by John Llewellyn Moxey and starring Clint Walker and Stefanie Powers. It was the first fully live-action feature film of the Hanna-Barbera studios. The movie appeared on the \"ABC Movie of the Week\" on February 1, 1972 where it was a ratings surprise; becoming the seventh most popular show of the week."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "John Llewellyn Moxey"
+      ],
+      "relations": [
+        "origin",
+        "nationality"
+      ],
+      "relation_query": "What country is a person from?",
+      "answer_type": "country"
+    }
+  }
+]

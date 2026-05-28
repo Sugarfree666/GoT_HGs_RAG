@@ -1,0 +1,9 @@
+2026-05-26 23:50:28,211 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 23:51:54,815 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 23:51:54,815 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 23:52:23,807 | INFO | Starting HyperBranch pipeline for question: Where did the composer of song Aren'T You Kind Of Glad We Did? die?
+2026-05-26 23:52:23,808 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-26 23:52:41,643 | INFO | Atomic retrieval returned 21 hits for question=Who is the composer of the song Aren't You Kind Of Glad We Did?
+2026-05-26 23:52:59,852 | INFO | Rewrote retrieval question for q2: Where did the composer of Aren't You Kind Of Glad We Did? die? -> Where did George Gershwin? die?
+2026-05-26 23:53:06,381 | INFO | Atomic retrieval returned 25 hits for question=Where did George Gershwin? die?
+2026-05-26 23:53:34,781 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_235028_where-did-the-composer-of-song-aren-t-you-kind-o

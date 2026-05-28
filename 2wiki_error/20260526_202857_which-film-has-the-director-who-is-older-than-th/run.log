@@ -1,0 +1,12 @@
+2026-05-26 20:28:57,672 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 20:32:14,084 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 20:32:14,085 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 20:32:27,775 | INFO | Starting HyperBranch pipeline for question: Which film has the director who is older than the other, Mektoub or Sail A Crooked Ship?
+2026-05-26 20:32:27,775 | INFO | Executing atomic DAG with 4 node(s)
+2026-05-26 20:32:34,352 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of Mektoub?
+2026-05-26 20:32:42,369 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of Sail A Crooked Ship?
+2026-05-26 20:32:58,484 | INFO | Rewrote retrieval question for q2: What is the age of the director of Mektoub? -> What is the age of Nabil Ayouch?
+2026-05-26 20:33:10,397 | INFO | Atomic retrieval returned 23 hits for question=What is the age of Nabil Ayouch?
+2026-05-26 20:33:28,695 | INFO | Rewrote retrieval question for q4: What is the age of the director of Sail A Crooked Ship? -> What is the age of Irving Brecher?
+2026-05-26 20:33:33,042 | INFO | Atomic retrieval returned 21 hits for question=What is the age of Irving Brecher?
+2026-05-26 20:34:03,080 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_202857_which-film-has-the-director-who-is-older-than-th

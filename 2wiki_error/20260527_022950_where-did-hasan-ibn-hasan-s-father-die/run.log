@@ -1,0 +1,9 @@
+2026-05-27 02:29:50,379 | INFO | Generating atomic question DAG with DEPO.
+2026-05-27 02:31:03,798 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-27 02:31:03,799 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-27 02:31:16,053 | INFO | Starting HyperBranch pipeline for question: Where did Hasan Ibn Hasan's father die?
+2026-05-27 02:31:16,054 | INFO | Executing atomic DAG with 2 node(s)
+2026-05-27 02:31:20,370 | INFO | Atomic retrieval returned 22 hits for question=Who is the father of Hasan Ibn Hasan?
+2026-05-27 02:31:24,553 | INFO | Rewrote retrieval question for q2: Where did the father of Hasan Ibn Hasan die? -> Where did Ali die?
+2026-05-27 02:31:28,757 | INFO | Atomic retrieval returned 21 hits for question=Where did Ali die?
+2026-05-27 02:31:52,635 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_022950_where-did-hasan-ibn-hasan-s-father-die

@@ -1,0 +1,177 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the maternal grandmother of Eleanor Of Brittany?",
+    "analysis": {
+      "entities": [
+        "Eleanor Of Brittany"
+      ],
+      "relations": [
+        "is the maternal grandmother of"
+      ],
+      "relation_query": "who is the maternal grandmother of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Eleanor of Brittany (1275 – 16 May 1342) was the sixteenth abbess of Fontevrault.\"",
+        "hyperedge_text": "Eleanor of Brittany (1275 – 16 May 1342) was the sixteenth abbess of Fontevrault.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6247397065162659,
+        "fusion_score": 0.5249479413032532,
+        "entity_ids": [
+          "\"ELEANOR OF BRITTANY\"",
+          "\"FONTEVRAULT\""
+        ],
+        "chunk_ids": [
+          "chunk-f1745152e58179a4cfda76cfde54411a"
+        ],
+        "evidence_texts": [
+          "Eleanor of Brittany (1275 – 16 May 1342) was the sixteenth abbess of Fontevrault.",
+          "Eleanor of Brittany (abbess) Eleanor of Brittany (1275 – 16 May 1342) was the sixteenth abbess of Fontevrault. She was born in England to John II, Duke of Brittany and Beatrice of England, and in 1281 at the age of seven entered Amesbury Abbey, a priory of the Fontevrault order (her first cousin, twice removed, Eleanor, Fair Maid of Brittany is buried there). In 1290 she moved to Fontevrault Abbey in the Loire region of France, the parent abbey of the order, where she took her vows and became a nun. The richly illuminated Fontevraud Gradual was presented to her upon her induction. In 1304 she became abbess. Upon her death in 1342 she bequeathed the gradual to the abbey. It survives to this day and is held by the public library of Limoges."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.62474,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524948
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eleanor of Brittany was born in England to John II, Duke of Brittany and Beatrice of England.\"",
+        "hyperedge_text": "Eleanor of Brittany was born in England to John II, Duke of Brittany and Beatrice of England.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6691612005233765,
+        "fusion_score": 0.5338322401046753,
+        "entity_ids": [
+          "\"ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-f1745152e58179a4cfda76cfde54411a"
+        ],
+        "evidence_texts": [
+          "Eleanor of Brittany was born in England to John II, Duke of Brittany and Beatrice of England.",
+          "Eleanor of Brittany (abbess) Eleanor of Brittany (1275 – 16 May 1342) was the sixteenth abbess of Fontevrault. She was born in England to John II, Duke of Brittany and Beatrice of England, and in 1281 at the age of seven entered Amesbury Abbey, a priory of the Fontevrault order (her first cousin, twice removed, Eleanor, Fair Maid of Brittany is buried there). In 1290 she moved to Fontevrault Abbey in the Loire region of France, the parent abbey of the order, where she took her vows and became a nun. The richly illuminated Fontevraud Gradual was presented to her upon her induction. In 1304 she became abbess. Upon her death in 1342 she bequeathed the gradual to the abbey. It survives to this day and is held by the public library of Limoges."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.669161,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533832
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eleanor's maternal grandfather was King Philip the Fair of France.\"",
+        "hyperedge_text": "Eleanor's maternal grandfather was King Philip the Fair of France.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6120453476905823,
+        "fusion_score": 0.3224090695381165,
+        "entity_ids": [
+          "\"KING PHILIP THE FAIR OF FRANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-d9c123cc4abcca107d296773145240f8"
+        ],
+        "evidence_texts": [
+          "Eleanor's maternal grandfather was King Philip the Fair of France.",
+          "Eleanor of Woodstock Eleanor of Woodstock( 18 June 1318 – 22 April 1355) was an English princess and Duchess consort of Guelders by marriage. She was regent of Guelders as the guardian of her minor son from 1343 until 1344. Eleanor was born at Woodstock Palace in Oxfordshire to King Edward II of England and his queen Isabella of France. She was a younger sister of Edward III of England and the second wife of Reginald II of Guelders,\" the Black\". Eleanor's maternal grandfather was King Philip the Fair of France."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.612045,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.322409
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thus she is the maternal grandmother of George II.\"",
+        "hyperedge_text": "Thus she is the maternal grandmother of George II.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5366708040237427,
+        "semantic_score": 0.5,
+        "fusion_score": 0.3146683216094971,
+        "entity_ids": [
+          "\"GEORGE II\""
+        ],
+        "chunk_ids": [
+          "chunk-836f44fb604829f64c6c986092c22541"
+        ],
+        "evidence_texts": [
+          "Thus she is the maternal grandmother of George II.",
+          "Éléonore Desmier d'Olbreuse Éléonore Marie Desmier d'Olbreuse (3 January 1639 – 5 February 1722) was the wife of George William, Duke of Lauenburg and Prince of Celle. She was the mother of Sophia Dorothea of Celle, who was the wife of George I of Great Britain. Thus she is the maternal grandmother of George II."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.536671,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.314668
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Doria L. Ragland is the maternal grandmother of Archie Mountbatten-Windsor.\"",
+        "hyperedge_text": "Doria L. Ragland is the maternal grandmother of Archie Mountbatten-Windsor.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5309376120567322,
+        "semantic_score": 0.5,
+        "fusion_score": 0.31237504482269285,
+        "entity_ids": [
+          "\"ARCHIE MOUNTBATTEN-WINDSOR\""
+        ],
+        "chunk_ids": [
+          "chunk-4d6cd86c0f35c1fa12023b26c78be9f3"
+        ],
+        "evidence_texts": [
+          "Doria L. Ragland is the maternal grandmother of Archie Mountbatten-Windsor.",
+          "Doria Ragland Doria L. Ragland( born September 2, 1956) is the mother of Meghan, Duchess of Sussex, the mother- in- law of Prince Harry, and the maternal grandmother of Archie Mountbatten- Windsor, who is seventh in line to the British throne. She is a former makeup artist, business owner, yoga instructor, and former social worker who worked in the mental health sector from 2015 to 2018."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.530938,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.312375
+        }
+      }
+    ],
+    "answer": "Beatrice of England",
+    "confidence": 0.75,
+    "reasoning_summary": "Eleanor of Brittany was born to John II, Duke of Brittany, and Beatrice of England, making Beatrice her maternal grandmother. This is supported by the evidence stating her parentage.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Eleanor of Brittany was born in England to John II, Duke of Brittany and Beatrice of England.\""
+    ]
+  }
+]

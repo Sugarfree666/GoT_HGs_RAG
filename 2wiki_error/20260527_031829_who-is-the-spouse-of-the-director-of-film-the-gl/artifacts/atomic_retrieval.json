@@ -1,0 +1,1691 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Glass Boat?",
+    "retrieval_question": "Who is the director of The Glass Boat?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of The Glass Boat?",
+      "retrieval_question": "Who is the director of The Glass Boat?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+        "entity_ids": [
+          "\"1927\"",
+          "\"SILENT FILM\"",
+          "\"CONSTANTIN J. DAVID\"",
+          "\"THE GLASS BOAT\"",
+          "\"JACQUELINE MILLIET\"",
+          "\"ANDRÉ NOX\"",
+          "\"FRANÇOISE ROSAY\"",
+          "\"ERIC BARCLAY\"",
+          "\"KARL GÖRGE\"",
+          "\"FRENCH-GERMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+            "link",
+            "1927",
+            "SILENT FILM",
+            "CONSTANTIN J. DAVID",
+            "THE GLASS BOAT",
+            "JACQUELINE MILLIET",
+            "ANDRÉ NOX",
+            "FRANÇOISE ROSAY",
+            "ERIC BARCLAY",
+            "KARL GÖRGE",
+            "FRENCH-GERMAN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+        "entity_ids": [
+          "\"GERMAN\"",
+          "\"FRENCH\"",
+          "\"THE GLASS BOAT\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+            "link",
+            "GERMAN",
+            "FRENCH",
+            "THE GLASS BOAT"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5064207315444946,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5018224120140076,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49626192450523376,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4959556758403778,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.4941776394844055,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48419591784477234,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.482859343290329,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48214516043663025,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47926294803619385,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.477081298828125,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.\"",
+        "branch": "semantic",
+        "raw_score": 0.6633394956588745,
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+        "entity_ids": [
+          "\"GERMAN\"",
+          "\"FRENCH\"",
+          "\"THE GLASS BOAT\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+            "link",
+            "GERMAN",
+            "FRENCH",
+            "THE GLASS BOAT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6971237b0a7b61968b519d0cb33a83e8",
+            "hyperedge_name": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.\"",
+        "branch": "semantic",
+        "raw_score": 0.6515762805938721,
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+        "entity_ids": [
+          "\"1927\"",
+          "\"SILENT FILM\"",
+          "\"CONSTANTIN J. DAVID\"",
+          "\"THE GLASS BOAT\"",
+          "\"JACQUELINE MILLIET\"",
+          "\"ANDRÉ NOX\"",
+          "\"FRANÇOISE ROSAY\"",
+          "\"ERIC BARCLAY\"",
+          "\"KARL GÖRGE\"",
+          "\"FRENCH-GERMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+            "link",
+            "1927",
+            "SILENT FILM",
+            "CONSTANTIN J. DAVID",
+            "THE GLASS BOAT",
+            "JACQUELINE MILLIET",
+            "ANDRÉ NOX",
+            "FRANÇOISE ROSAY",
+            "ERIC BARCLAY",
+            "KARL GÖRGE",
+            "FRENCH-GERMAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-792b63d09c95068ed7591bd77760e74e",
+            "hyperedge_name": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat is a silent film.\"",
+        "branch": "semantic",
+        "raw_score": 0.6372683048248291,
+        "hyperedge_text": "The Glass Boat is a silent film.",
+        "entity_ids": [
+          "\"SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat is a silent film.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat is a silent film.",
+            "link",
+            "SILENT FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6859b3f8ab4ff9267e7d337e7b29ca52",
+            "hyperedge_name": "<hyperedge>\"The Glass Boat is a silent film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.\"",
+        "branch": "semantic",
+        "raw_score": 0.6309671401977539,
+        "hyperedge_text": "The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.",
+        "entity_ids": [
+          "\"ART DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.",
+            "link",
+            "ART DIRECTION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b4faa6eea8cb70e876057b3ca404c087",
+            "hyperedge_name": "<hyperedge>\"The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The cinematography in The Glass Boat contributes to the film's silent visual storytelling style.\"",
+        "branch": "semantic",
+        "raw_score": 0.6305415630340576,
+        "hyperedge_text": "The cinematography in The Glass Boat contributes to the film's silent visual storytelling style.",
+        "entity_ids": [
+          "\"CINEMATOGRAPHY\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The cinematography in The Glass Boat contributes to the film's silent visual storytelling style.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The cinematography in The Glass Boat contributes to the film's silent visual storytelling style.",
+            "link",
+            "CINEMATOGRAPHY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-120f29058e5b0a74c1b4a8c1d5aba849",
+            "hyperedge_name": "<hyperedge>\"The cinematography in The Glass Boat contributes to the film's silent visual storytelling style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's original title is The Glass Boat, known in French as Le bateau de verre and in German as Das brennende Schiff.\"",
+        "branch": "semantic",
+        "raw_score": 0.6037226319313049,
+        "hyperedge_text": "The film's original title is The Glass Boat, known in French as Le bateau de verre and in German as Das brennende Schiff.",
+        "entity_ids": [
+          "\"LE BATEAU DE VERRE\"",
+          "\"DAS BRENNENDE SCHIFF\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's original title is The Glass Boat, known in French as Le bateau de verre and in German as Das brennende Schiff.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The film's original title is The Glass Boat, known in French as Le bateau de verre and in German as Das brennende Schiff.",
+            "link",
+            "LE BATEAU DE VERRE",
+            "DAS BRENNENDE SCHIFF"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4341b6e2a04d3093b04d97465beaf177",
+            "hyperedge_name": "<hyperedge>\"The film's original title is The Glass Boat, known in French as Le bateau de verre and in German as Das brennende Schiff.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat exemplifies early 20th-century European cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.5952457189559937,
+        "hyperedge_text": "The Glass Boat exemplifies early 20th-century European cinema.",
+        "entity_ids": [
+          "\"EARLY 20TH-CENTURY EUROPEAN CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat exemplifies early 20th-century European cinema.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat exemplifies early 20th-century European cinema.",
+            "link",
+            "EARLY 20TH-CENTURY EUROPEAN CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ea2fba0a0ecd2fd34ec3a4e3b57f7f6e",
+            "hyperedge_name": "<hyperedge>\"The Glass Boat exemplifies early 20th-century European cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat is remembered as a significant work in the heritage of French and German cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.5791343450546265,
+        "hyperedge_text": "The Glass Boat is remembered as a significant work in the heritage of French and German cinema.",
+        "entity_ids": [
+          "\"HERITAGE OF FRENCH AND GERMAN CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat is remembered as a significant work in the heritage of French and German cinema.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat is remembered as a significant work in the heritage of French and German cinema.",
+            "link",
+            "HERITAGE OF FRENCH AND GERMAN CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-25da502154128fd500ceb585109f2f8c",
+            "hyperedge_name": "<hyperedge>\"The Glass Boat is remembered as a significant work in the heritage of French and German cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gerard Barrett directed Glassland following his previous work Pilgrim Hill.\"",
+        "branch": "semantic",
+        "raw_score": 0.5215610265731812,
+        "hyperedge_text": "Gerard Barrett directed Glassland following his previous work Pilgrim Hill.",
+        "entity_ids": [
+          "\"PILGRIM HILL\""
+        ],
+        "chunk_ids": [
+          "chunk-b8747c7d20225e1d00ea8529fb8f1212"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gerard Barrett directed Glassland following his previous work Pilgrim Hill.",
+            "Glassland Glassland is a 2014 Irish drama film written and directed by Gerard Barrett in his second feature following\" Pilgrim Hill\". The film stars Jack Reynor as a young man who tries to help his mother( Toni Collette) with her alcoholism."
+          ],
+          "relation_texts": [
+            "Gerard Barrett directed Glassland following his previous work Pilgrim Hill.",
+            "link",
+            "PILGRIM HILL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-75ea7797c12e35ff9f9a50b371ca9f16",
+            "hyperedge_name": "<hyperedge>\"Gerard Barrett directed Glassland following his previous work Pilgrim Hill.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Wall is directed by Maxwell Shane.\"",
+        "branch": "semantic",
+        "raw_score": 0.5175462961196899,
+        "hyperedge_text": "The Glass Wall is directed by Maxwell Shane.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-8f43c8613096fa7a63a28281ca4ac037"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Wall is directed by Maxwell Shane.",
+            "The Glass Wall The Glass Wall is a 1953 American black- and- white drama film noir directed by Maxwell Shane and starring Vittorio Gassman and Gloria Grahame. The film was produced and distributed by Columbia Pictures. The title refers to the design of the United Nations headquarters in New York City. It tied with two other films for the 1953 Golden Leopard, the top prize at the Locarno International Film Festival."
+          ],
+          "relation_texts": [
+            "The Glass Wall is directed by Maxwell Shane."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e5e3cfb978689d5b88d65563950a07ef",
+            "hyperedge_name": "<hyperedge>\"The Glass Wall is directed by Maxwell Shane.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.\"",
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6633394956588745,
+        "fusion_score": 0.5326678991317749,
+        "entity_ids": [
+          "\"GERMAN\"",
+          "\"FRENCH\"",
+          "\"THE GLASS BOAT\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "evidence_texts": [
+          "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+          "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.663339,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532668
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.\"",
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6515762805938721,
+        "fusion_score": 0.5303152561187745,
+        "entity_ids": [
+          "\"1927\"",
+          "\"SILENT FILM\"",
+          "\"CONSTANTIN J. DAVID\"",
+          "\"THE GLASS BOAT\"",
+          "\"JACQUELINE MILLIET\"",
+          "\"ANDRÉ NOX\"",
+          "\"FRANÇOISE ROSAY\"",
+          "\"ERIC BARCLAY\"",
+          "\"KARL GÖRGE\"",
+          "\"FRENCH-GERMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "evidence_texts": [
+          "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+          "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.651576,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530315
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat is remembered as a significant work in the heritage of French and German cinema.\"",
+        "hyperedge_text": "The Glass Boat is remembered as a significant work in the heritage of French and German cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5791343450546265,
+        "fusion_score": 0.7158268690109254,
+        "entity_ids": [
+          "\"HERITAGE OF FRENCH AND GERMAN CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "evidence_texts": [
+          "The Glass Boat is remembered as a significant work in the heritage of French and German cinema.",
+          "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.579134,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.715827
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat is a silent film.\"",
+        "hyperedge_text": "The Glass Boat is a silent film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6372683048248291,
+        "fusion_score": 0.5274536609649658,
+        "entity_ids": [
+          "\"SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "evidence_texts": [
+          "The Glass Boat is a silent film.",
+          "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.637268,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.527454
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.\"",
+        "hyperedge_text": "The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6309671401977539,
+        "fusion_score": 0.5261934280395508,
+        "entity_ids": [
+          "\"ART DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "evidence_texts": [
+          "The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.",
+          "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.630967,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.526193
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the spouse of the director of The Glass Boat?",
+    "retrieval_question": "Who is the spouse of the director of The Glass Boat?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the spouse of the director of The Glass Boat?",
+      "retrieval_question": "Who is the spouse of the director of The Glass Boat?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+        "entity_ids": [
+          "\"1927\"",
+          "\"SILENT FILM\"",
+          "\"CONSTANTIN J. DAVID\"",
+          "\"THE GLASS BOAT\"",
+          "\"JACQUELINE MILLIET\"",
+          "\"ANDRÉ NOX\"",
+          "\"FRANÇOISE ROSAY\"",
+          "\"ERIC BARCLAY\"",
+          "\"KARL GÖRGE\"",
+          "\"FRENCH-GERMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+            "link",
+            "1927",
+            "SILENT FILM",
+            "CONSTANTIN J. DAVID",
+            "THE GLASS BOAT",
+            "JACQUELINE MILLIET",
+            "ANDRÉ NOX",
+            "FRANÇOISE ROSAY",
+            "ERIC BARCLAY",
+            "KARL GÖRGE",
+            "FRENCH-GERMAN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+        "entity_ids": [
+          "\"GERMAN\"",
+          "\"FRENCH\"",
+          "\"THE GLASS BOAT\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+            "link",
+            "GERMAN",
+            "FRENCH",
+            "THE GLASS BOAT"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Constantin J. David and Jacqueline Milliet.\"",
+        "branch": "anchor",
+        "raw_score": 0.6666666666666666,
+        "hyperedge_text": "The film was directed by Constantin J. David and Jacqueline Milliet.",
+        "entity_ids": [
+          "\"CONSTANTIN J. DAVID\"",
+          "\"JACQUELINE MILLIET\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Constantin J. David and Jacqueline Milliet.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The film was directed by Constantin J. David and Jacqueline Milliet.",
+            "link",
+            "CONSTANTIN J. DAVID",
+            "JACQUELINE MILLIET"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Constantin J. David (18 February 1886 – 19 February 1964) was a German journalist, film director, film producer, and actor.\"",
+        "branch": "anchor",
+        "raw_score": 0.3333333333333333,
+        "hyperedge_text": "Constantin J. David (18 February 1886 – 19 February 1964) was a German journalist, film director, film producer, and actor.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"ACTOR\"",
+          "\"FILM PRODUCER\"",
+          "\"JOURNALIST\"",
+          "\"CONSTANTIN J. DAVID\""
+        ],
+        "chunk_ids": [
+          "chunk-8ec512345f24810e8682ad6a585165a1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Constantin J. David (18 February 1886 – 19 February 1964) was a German journalist, film director, film producer, and actor.",
+            "Constantin J. David Constantin J. David (18 February 1886 – 19 February 1964) was a German journalist, film director, film producer, and actor. He is also known for his marriage to the Hungarian actress, singer, and model Käthe von Nagy."
+          ],
+          "relation_texts": [
+            "Constantin J. David (18 February 1886 – 19 February 1964) was a German journalist, film director, film producer, and actor.",
+            "link",
+            "FILM DIRECTOR",
+            "ACTOR",
+            "FILM PRODUCER",
+            "JOURNALIST",
+            "CONSTANTIN J. DAVID"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He directed both his own films as well as films directed by others.\"",
+        "branch": "relation",
+        "raw_score": 0.494319349527359,
+        "hyperedge_text": "He directed both his own films as well as films directed by others.",
+        "entity_ids": [
+          "\"HIS OWN FILMS\"",
+          "\"FILMS DIRECTED BY OTHERS\""
+        ],
+        "chunk_ids": [
+          "chunk-1622512e42b9fe00ff1ff6a93ac35761"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "Maurice Elvey Maurice Elvey( 11 November 1887 – 28 August 1967) was the most prolific film director in British history. He directed nearly 200 films between 1913 and 1957. During the silent film era he directed as many as twenty films per year. He also produced more than fifty films- his own as well as films directed by others."
+          ],
+          "relation_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "link",
+            "HIS OWN FILMS",
+            "FILMS DIRECTED BY OTHERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-427500c2d82019f242a873db4d43cbc1",
+            "hyperedge_name": "<hyperedge>\"He directed both his own films as well as films directed by others.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His wife is responsible for the illustration.\"",
+        "branch": "relation",
+        "raw_score": 0.4864134192466736,
+        "hyperedge_text": "His wife is responsible for the illustration.",
+        "entity_ids": [
+          "\"ILLUSTRATION\""
+        ],
+        "chunk_ids": [
+          "chunk-a818b3ff715607e81a6c2ebc6778d575"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His wife is responsible for the illustration.",
+            "Brian Tse (writer) Brian Tse is the author of the Hong Kong children comic, \"McMug and McDull\" series. He is one of the two creators (another is Alice Mak, his colleague-turned-wife) of the cartoon characters McMug and McDull. His wife is responsible for the illustration. His other works include The Excreman (a \"serious\" parody of the famous English cartoon, The Snowman), The Beautiful Loser, Pig Has Come, and Over the Rainbow."
+          ],
+          "relation_texts": [
+            "His wife is responsible for the illustration.",
+            "link",
+            "ILLUSTRATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1990178d8ad676b311d65b16e666e303",
+            "hyperedge_name": "<hyperedge>\"His wife is responsible for the illustration.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She has been active in preserving, and promoting her husband's work.\"",
+        "branch": "relation",
+        "raw_score": 0.48611512780189514,
+        "hyperedge_text": "She has been active in preserving, and promoting her husband's work.",
+        "entity_ids": [
+          "\"PRESERVING HER HUSBAND'S WORK\""
+        ],
+        "chunk_ids": [
+          "chunk-825014e68f47863a078119ead1dad3c7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She has been active in preserving, and promoting her husband's work.",
+            "J. A. Lawrence Judith Ann Blish( née Lawrence — born c. March 1940), known professionally as Judith L. Blish, Judy Blish, and J.A. Lawrence, is an American sketch artist and short fiction writer. She is most well known for her work on the series of\" Star Trek\" episode novelizations, alongside her husband James Blish, published from 1967 to 1978. She has been active in preserving, and promoting her husband's work."
+          ],
+          "relation_texts": [
+            "She has been active in preserving, and promoting her husband's work.",
+            "link",
+            "PRESERVING HER HUSBAND'S WORK"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-25ae6dadca515c527194959d066e7742",
+            "hyperedge_name": "<hyperedge>\"She has been active in preserving, and promoting her husband's work.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was married to Merata Mita, also a film director, actor, writer.\"",
+        "branch": "relation",
+        "raw_score": 0.4853258728981018,
+        "hyperedge_text": "He was married to Merata Mita, also a film director, actor, writer.",
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"FILM DIRECTOR\"",
+          "\"ACTOR\"",
+          "\"MERATA MITA\""
+        ],
+        "chunk_ids": [
+          "chunk-cfeb2905a5eb75615fbd523812515a8c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was married to Merata Mita, also a film director, actor, writer.",
+            "Geoff Murphy Geoffrey Peter Murphy( 12 October 1938 – 3 December 2018) was a New Zealand filmmaker, producer, director, and screenwriter best known for his work during the renaissance of New Zealand cinema that began in the last half of the 1970s. His second feature\" Goodbye Pork Pie\"( 1981) was the first New Zealand film to win major commercial success on its own soil. Murphy directed several Hollywood features during the 1990s, before returning to New Zealand as second- unit director on\" The Lord of the Rings\" film trilogy. Murphy was also at different times a scriptwriter, special effects technician, schoolteacher and trumpet player. He was married to Merata Mita, also a film director, actor, writer."
+          ],
+          "relation_texts": [
+            "He was married to Merata Mita, also a film director, actor, writer.",
+            "link",
+            "WRITER",
+            "FILM DIRECTOR",
+            "ACTOR",
+            "MERATA MITA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d47a60f666f9db8374f7e9660b55fc4d",
+            "hyperedge_name": "<hyperedge>\"He was married to Merata Mita, also a film director, actor, writer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.\"",
+        "branch": "relation",
+        "raw_score": 0.4780893921852112,
+        "hyperedge_text": "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+        "entity_ids": [
+          "\"POLITICAL INFLUENCE\""
+        ],
+        "chunk_ids": [
+          "chunk-5bda47c753bf133f277d071017097db0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+            "Amalia of Solms-Braunfels Amalia of Solms- Braunfels( 31 August 1602, Braunfels – 8 September 1675, The Hague), was Princess consort of Orange by marriage to Frederick Henry, Prince of Orange. She acted as the political adviser of her spouse during his reign, and acted as his de facto deputy and regent during his infirmity from 1640 – 47. She also served as chair of the regency council during the minority of her grandson William III, Prince of Orange from 1650 until 1672. She was the daughter of count John Albert I of Solms- Braunfels and countess Agnes of Sayn- Wittgenstein."
+          ],
+          "relation_texts": [
+            "She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.",
+            "link",
+            "POLITICAL INFLUENCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cb438ea26c41c09c3379943cb8558715",
+            "hyperedge_name": "<hyperedge>\"She acted as the political adviser of her spouse during his reign, displaying significant influence on political matters.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was married to writer Beatriz Guido, who inspired many of his scripts.\"",
+        "branch": "relation",
+        "raw_score": 0.4776344299316406,
+        "hyperedge_text": "He was married to writer Beatriz Guido, who inspired many of his scripts.",
+        "entity_ids": [
+          "\"INSPIRATION\""
+        ],
+        "chunk_ids": [
+          "chunk-e7f87e024523fd986f50b528b8248d36"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was married to writer Beatriz Guido, who inspired many of his scripts.",
+            "Leopoldo Torre Nilsson Leopoldo Torre Nilsson (5 May 1924 – 8 September 1978), also known as Leo Towers and as Babsy, was an Argentine film director, producer and screenwriter. Born as Leopoldo Torres Nilsson (he later changed his paternal surname from Torres to Torre) was the son of Argentine pioneer film director Leopoldo Torres Ríos, with whom he collaborated between 1939 and 1949. He debuted in 1947 with the short \"El muro\". His mother was an Argentinian citizen of Swedish descent. His uncle was cinematographer Carlos Torres Ríos (1898–1956). Torre Nilsson's first full-length film, \"El crimen de Oribe\" (1950), was an adaptation of Adolfo Bioy Casares's novel \"El perjurio de la nieve\". In 1954 he directed \"Días de odio\", based on Jorge Luis Borges's short story \"Emma Zunz\". In 1956 he directed \"Graciela\", based on Carmen Laforet's novel \"Nada\", winner of Nadal Literary Prize 1944...."
+          ],
+          "relation_texts": [
+            "He was married to writer Beatriz Guido, who inspired many of his scripts.",
+            "link",
+            "INSPIRATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-70d914d2ce8b10577f49623bc82b5207",
+            "hyperedge_name": "<hyperedge>\"He was married to writer Beatriz Guido, who inspired many of his scripts.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The separation from his wife was influenced not only by her struggles in the film industry but also by the demands of Korda's growing career.\"",
+        "branch": "relation",
+        "raw_score": 0.4756513237953186,
+        "hyperedge_text": "The separation from his wife was influenced not only by her struggles in the film industry but also by the demands of Korda's growing career.",
+        "entity_ids": [
+          "\"GROWING CAREER\""
+        ],
+        "chunk_ids": [
+          "chunk-60f55b526fad93ab805443533e54cf9e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The separation from his wife was influenced not only by her struggles in the film industry but also by the demands of Korda's growing career.",
+            "Alexander Korda Sir Alexander Korda( born Sándor László Kellner, 16 September 1893 – 23 January 1956) was a British film producer and director and screenwriter, who founded his own film production studios and film distribution company. Born in Hungary, where he began his career, he worked briefly in the Austrian and German film industries during the era of silent films, before being based in Hollywood from 1926 to 1930 for the first of his two brief periods there( the other was during World War II). The change led to a divorce from his first wife, the Hungarian film actress María Corda, who was unable to make the transition from silent films to\" talkies\" because of her strong Hungarian accent. From 1930, Korda was active in the British film industry, and soon became one of its leading figures. He was the founder of London Films and, post-war, the owner of British Lion Films, a film di..."
+          ],
+          "relation_texts": [
+            "The separation from his wife was influenced not only by her struggles in the film industry but also by the demands of Korda's growing career.",
+            "link",
+            "GROWING CAREER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ee514c9b52731a964eef610d4f2d412d",
+            "hyperedge_name": "<hyperedge>\"The separation from his wife was influenced not only by her struggles in the film industry but also by the demands of Korda's growing career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the husband of screenwriter Rose Gordon, who wrote many of his films.\"",
+        "branch": "relation",
+        "raw_score": 0.47360920906066895,
+        "hyperedge_text": "He was the husband of screenwriter Rose Gordon, who wrote many of his films.",
+        "entity_ids": [
+          "\"ROSE GORDON\""
+        ],
+        "chunk_ids": [
+          "chunk-eff6f8b4e1eb8d443670c8f76367fabd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was the husband of screenwriter Rose Gordon, who wrote many of his films.",
+            "Harry S. Webb Harry S. Webb( October 15, 1892 – July 4, 1959) was an American film producer, director and screenwriter. He produced 100 films between 1924 and 1940. He also directed 55 films between 1924 and 1940. He was the brother of\" B\"- film producer and director Ira S. Webb and the husband of screenwriter Rose Gordon, who wrote many of his films. In 1933 Webb and Bernard B. Ray created Reliable Pictures Corporation with a studio at Beachwood and Sunset Boulevard in Hollywood. Reliable produced and released many Westerns, starting with\" Girl Trouble\"( 1933), until the company closed in 1937. Its final release was\" The Silver Trail\". Webb and Ray then started Metropolitan Pictures Corporation in 1938, which produced and released several films until 1940, its last being\" Pinto Canyon\". Webb then produced Westerns for Monogram Pictures. He was born in Pennsylvania and died in Hollywo..."
+          ],
+          "relation_texts": [
+            "He was the husband of screenwriter Rose Gordon, who wrote many of his films.",
+            "link",
+            "ROSE GORDON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0948dd5081865b719b67fa5d0bba3dac",
+            "hyperedge_name": "<hyperedge>\"He was the husband of screenwriter Rose Gordon, who wrote many of his films.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Fernando Cortés transitioned from being an actor to focusing on his wife's career after her success.\";",
+        "branch": "relation",
+        "raw_score": 0.46862027049064636,
+        "hyperedge_text": "\"Fernando Cortés transitioned from being an actor to focusing on his wife's career after her success.\";",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-c422854663746e21ac738952c19a47ab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "\"Fernando Cortés transitioned from being an actor to focusing on his wife's career after her success.\";",
+            "Fernando Cortés Fernando \"Papi\" Cortés (October 4, 1909 – 1979) was a Puerto Rican film actor, writer and director. He was born in San Juan, Puerto Rico, but he spent most of his adult life in Mexico City, where he died. On 1932, while in New York City, Fernando Cortés married Puerto Rican childhood friend María del Pilar Cordero, who adopted the stage name of Mapy Cortés. The couple soon traveled to Spain with a Cuban theatrical troupe. They worked on the Spanish stage, radio and film until the outbreak of the Civil War in 1936. Fernando progressively began to take a backseat as actor and baritone and focused on promoting the career of his wife Mapy, who became a noted \"vedette\" (showgirl with star status) in Barcelona. After the Spanish Civil War interrupted their careers, the couple worked in New York, San Juan, Buenos Aires, Havana and Caracas, occasionally starring in movies. The..."
+          ],
+          "relation_texts": [
+            "\"Fernando Cortés transitioned from being an actor to focusing on his wife's career after her success.\";"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a2bff88927a7eede041267af364a5d3c",
+            "hyperedge_name": "<hyperedge>\"Fernando Cortés transitioned from being an actor to focusing on his wife's career after her success.\";"
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.46513915061950684,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.\"",
+        "branch": "semantic",
+        "raw_score": 0.5748459100723267,
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+        "entity_ids": [
+          "\"GERMAN\"",
+          "\"FRENCH\"",
+          "\"THE GLASS BOAT\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+            "link",
+            "GERMAN",
+            "FRENCH",
+            "THE GLASS BOAT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6971237b0a7b61968b519d0cb33a83e8",
+            "hyperedge_name": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.\"",
+        "branch": "semantic",
+        "raw_score": 0.5641526579856873,
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+        "entity_ids": [
+          "\"1927\"",
+          "\"SILENT FILM\"",
+          "\"CONSTANTIN J. DAVID\"",
+          "\"THE GLASS BOAT\"",
+          "\"JACQUELINE MILLIET\"",
+          "\"ANDRÉ NOX\"",
+          "\"FRANÇOISE ROSAY\"",
+          "\"ERIC BARCLAY\"",
+          "\"KARL GÖRGE\"",
+          "\"FRENCH-GERMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+            "link",
+            "1927",
+            "SILENT FILM",
+            "CONSTANTIN J. DAVID",
+            "THE GLASS BOAT",
+            "JACQUELINE MILLIET",
+            "ANDRÉ NOX",
+            "FRANÇOISE ROSAY",
+            "ERIC BARCLAY",
+            "KARL GÖRGE",
+            "FRENCH-GERMAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-792b63d09c95068ed7591bd77760e74e",
+            "hyperedge_name": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat is a silent film.\"",
+        "branch": "semantic",
+        "raw_score": 0.5622420310974121,
+        "hyperedge_text": "The Glass Boat is a silent film.",
+        "entity_ids": [
+          "\"SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat is a silent film.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat is a silent film.",
+            "link",
+            "SILENT FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6859b3f8ab4ff9267e7d337e7b29ca52",
+            "hyperedge_name": "<hyperedge>\"The Glass Boat is a silent film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The cinematography in The Glass Boat contributes to the film's silent visual storytelling style.\"",
+        "branch": "semantic",
+        "raw_score": 0.5558369755744934,
+        "hyperedge_text": "The cinematography in The Glass Boat contributes to the film's silent visual storytelling style.",
+        "entity_ids": [
+          "\"CINEMATOGRAPHY\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The cinematography in The Glass Boat contributes to the film's silent visual storytelling style.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The cinematography in The Glass Boat contributes to the film's silent visual storytelling style.",
+            "link",
+            "CINEMATOGRAPHY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-120f29058e5b0a74c1b4a8c1d5aba849",
+            "hyperedge_name": "<hyperedge>\"The cinematography in The Glass Boat contributes to the film's silent visual storytelling style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.\"",
+        "branch": "semantic",
+        "raw_score": 0.5425981879234314,
+        "hyperedge_text": "The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.",
+        "entity_ids": [
+          "\"ART DIRECTION\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.",
+            "link",
+            "ART DIRECTION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b4faa6eea8cb70e876057b3ca404c087",
+            "hyperedge_name": "<hyperedge>\"The art direction in The Glass Boat plays a crucial role in setting the mood and visual aesthetic.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's original title is The Glass Boat, known in French as Le bateau de verre and in German as Das brennende Schiff.\"",
+        "branch": "semantic",
+        "raw_score": 0.5303695201873779,
+        "hyperedge_text": "The film's original title is The Glass Boat, known in French as Le bateau de verre and in German as Das brennende Schiff.",
+        "entity_ids": [
+          "\"LE BATEAU DE VERRE\"",
+          "\"DAS BRENNENDE SCHIFF\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's original title is The Glass Boat, known in French as Le bateau de verre and in German as Das brennende Schiff.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The film's original title is The Glass Boat, known in French as Le bateau de verre and in German as Das brennende Schiff.",
+            "link",
+            "LE BATEAU DE VERRE",
+            "DAS BRENNENDE SCHIFF"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4341b6e2a04d3093b04d97465beaf177",
+            "hyperedge_name": "<hyperedge>\"The film's original title is The Glass Boat, known in French as Le bateau de verre and in German as Das brennende Schiff.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat exemplifies early 20th-century European cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.5202305912971497,
+        "hyperedge_text": "The Glass Boat exemplifies early 20th-century European cinema.",
+        "entity_ids": [
+          "\"EARLY 20TH-CENTURY EUROPEAN CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat exemplifies early 20th-century European cinema.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat exemplifies early 20th-century European cinema.",
+            "link",
+            "EARLY 20TH-CENTURY EUROPEAN CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ea2fba0a0ecd2fd34ec3a4e3b57f7f6e",
+            "hyperedge_name": "<hyperedge>\"The Glass Boat exemplifies early 20th-century European cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat is remembered as a significant work in the heritage of French and German cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.50355064868927,
+        "hyperedge_text": "The Glass Boat is remembered as a significant work in the heritage of French and German cinema.",
+        "entity_ids": [
+          "\"HERITAGE OF FRENCH AND GERMAN CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Glass Boat is remembered as a significant work in the heritage of French and German cinema.",
+            "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+          ],
+          "relation_texts": [
+            "The Glass Boat is remembered as a significant work in the heritage of French and German cinema.",
+            "link",
+            "HERITAGE OF FRENCH AND GERMAN CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-25da502154128fd500ceb585109f2f8c",
+            "hyperedge_name": "<hyperedge>\"The Glass Boat is remembered as a significant work in the heritage of French and German cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gerard Barrett directed Glassland following his previous work Pilgrim Hill.\"",
+        "branch": "semantic",
+        "raw_score": 0.4703309237957001,
+        "hyperedge_text": "Gerard Barrett directed Glassland following his previous work Pilgrim Hill.",
+        "entity_ids": [
+          "\"PILGRIM HILL\""
+        ],
+        "chunk_ids": [
+          "chunk-b8747c7d20225e1d00ea8529fb8f1212"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gerard Barrett directed Glassland following his previous work Pilgrim Hill.",
+            "Glassland Glassland is a 2014 Irish drama film written and directed by Gerard Barrett in his second feature following\" Pilgrim Hill\". The film stars Jack Reynor as a young man who tries to help his mother( Toni Collette) with her alcoholism."
+          ],
+          "relation_texts": [
+            "Gerard Barrett directed Glassland following his previous work Pilgrim Hill.",
+            "link",
+            "PILGRIM HILL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-75ea7797c12e35ff9f9a50b371ca9f16",
+            "hyperedge_name": "<hyperedge>\"Gerard Barrett directed Glassland following his previous work Pilgrim Hill.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gloria Grahame starred in The Glass Wall.\"",
+        "branch": "semantic",
+        "raw_score": 0.46979284286499023,
+        "hyperedge_text": "Gloria Grahame starred in The Glass Wall.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-8f43c8613096fa7a63a28281ca4ac037"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Gloria Grahame starred in The Glass Wall.",
+            "The Glass Wall The Glass Wall is a 1953 American black- and- white drama film noir directed by Maxwell Shane and starring Vittorio Gassman and Gloria Grahame. The film was produced and distributed by Columbia Pictures. The title refers to the design of the United Nations headquarters in New York City. It tied with two other films for the 1953 Golden Leopard, the top prize at the Locarno International Film Festival."
+          ],
+          "relation_texts": [
+            "Gloria Grahame starred in The Glass Wall."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bcc59ae4492a81fc183bb2211094ded1",
+            "hyperedge_name": "<hyperedge>\"Gloria Grahame starred in The Glass Wall.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.\"",
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5748459100723267,
+        "fusion_score": 0.9149691820144654,
+        "entity_ids": [
+          "\"GERMAN\"",
+          "\"FRENCH\"",
+          "\"THE GLASS BOAT\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "evidence_texts": [
+          "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet.",
+          "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.574846,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.914969
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.\"",
+        "hyperedge_text": "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5641526579856873,
+        "fusion_score": 0.9128305315971375,
+        "entity_ids": [
+          "\"1927\"",
+          "\"SILENT FILM\"",
+          "\"CONSTANTIN J. DAVID\"",
+          "\"THE GLASS BOAT\"",
+          "\"JACQUELINE MILLIET\"",
+          "\"ANDRÉ NOX\"",
+          "\"FRANÇOISE ROSAY\"",
+          "\"ERIC BARCLAY\"",
+          "\"KARL GÖRGE\"",
+          "\"FRENCH-GERMAN\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "evidence_texts": [
+          "The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay.",
+          "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.564153,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.912831
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Constantin J. David and Jacqueline Milliet.\"",
+        "hyperedge_text": "The film was directed by Constantin J. David and Jacqueline Milliet.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.6666666666666666,
+        "relation_score": 1.0,
+        "semantic_score": 0.75,
+        "fusion_score": 0.8166666666666668,
+        "entity_ids": [
+          "\"CONSTANTIN J. DAVID\"",
+          "\"JACQUELINE MILLIET\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "evidence_texts": [
+          "The film was directed by Constantin J. David and Jacqueline Milliet.",
+          "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+        ],
+        "score_breakdown": {
+          "A": 0.666667,
+          "R": 1.0,
+          "S": 0.75,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.816667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gerard Barrett directed Glassland following his previous work Pilgrim Hill.\"",
+        "hyperedge_text": "Gerard Barrett directed Glassland following his previous work Pilgrim Hill.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4703309237957001,
+        "fusion_score": 0.49406618475914005,
+        "entity_ids": [
+          "\"PILGRIM HILL\""
+        ],
+        "chunk_ids": [
+          "chunk-b8747c7d20225e1d00ea8529fb8f1212"
+        ],
+        "evidence_texts": [
+          "Gerard Barrett directed Glassland following his previous work Pilgrim Hill.",
+          "Glassland Glassland is a 2014 Irish drama film written and directed by Gerard Barrett in his second feature following\" Pilgrim Hill\". The film stars Jack Reynor as a young man who tries to help his mother( Toni Collette) with her alcoholism."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.470331,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.494066
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Glass Boat is remembered as a significant work in the heritage of French and German cinema.\"",
+        "hyperedge_text": "The Glass Boat is remembered as a significant work in the heritage of French and German cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.3333333333333333,
+        "relation_score": 0.25,
+        "semantic_score": 0.50355064868927,
+        "fusion_score": 0.3340434630711874,
+        "entity_ids": [
+          "\"HERITAGE OF FRENCH AND GERMAN CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-0194160dc24cf49d4cfaa3eb9352da33"
+        ],
+        "evidence_texts": [
+          "The Glass Boat is remembered as a significant work in the heritage of French and German cinema.",
+          "The Glass Boat The Glass Boat (French: Le bateau de verre, German: Das brennende Schiff) is a 1927 French-German silent film directed by Constantin J. David and Jacqueline Milliet and starring André Nox, Françoise Rosay and Eric Barclay. The film's sets were designed by the art director Karl Görge."
+        ],
+        "score_breakdown": {
+          "A": 0.333333,
+          "R": 0.25,
+          "S": 0.503551,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.334043
+        }
+      }
+    ]
+  }
+]

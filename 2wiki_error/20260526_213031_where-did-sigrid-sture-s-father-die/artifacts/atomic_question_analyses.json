@@ -1,0 +1,105 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Sigrid?",
+    "retrieval_question": "Who is the father of Sigrid?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of Sigrid?",
+      "retrieval_question": "Who is the father of Sigrid?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Sigrid"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Sigrid die?",
+    "retrieval_question": "Where did King Eric XIV of Sweden die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the father of Sigrid die?",
+      "retrieval_question": "Where did King Eric XIV of Sweden die?",
+      "whether_rewritten": true,
+      "replacement_span": "the father of Sigrid",
+      "replacement_answer": "King Eric XIV of Sweden",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the father of Sigrid",
+          "replacement_answer": "King Eric XIV of Sweden"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the father of Sigrid?",
+        "answer": "King Eric XIV of Sweden",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "Sigrid Eriksdotter is described as the legitimized daughter of King Eric XIV of Sweden, which directly answers the question about her father.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Sigrid Eriksdotter of Sweden (15 October 1566 – 1633) was a Swedish princess, the legitimized daughter of King Eric XIV of Sweden and of his lover, later spouse and queen, Karin Månsdotter.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Sigrid Eriksdotter of Sweden (15 October 1566 – 1633) was a Swedish princess, the legitimized daughter of King Eric XIV of Sweden and of his lover, later spouse and queen, Karin Månsdotter.\"",
+            "fusion_score": 0.5195623397827149,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Sigrid Eriksdotter of Sweden (15 October 1566 – 1633) was a Swedish princess, the legitimized daughter of King Eric XIV of Sweden and of his lover, later spouse and queen, Karin Månsdotter.",
+              "Sigrid of Sweden (1566–1633) Sigrid Eriksdotter of Sweden (15 October 1566 – 1633) was a Swedish princess, the legitimized daughter of King Eric XIV of Sweden and of his lover, later spouse and queen, Karin Månsdotter."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"He was the brother of Sigrid the Haughty.\"",
+            "fusion_score": 0.5188712477684021,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "He was the brother of Sigrid the Haughty.",
+              "Ulf Tostesson Ulf Tostesson was a jarl and the son of the Viking Skogul Toste. He was the brother of Sigrid the Haughty, and his son, Ragnvald Ulfsson, a jarl, was the father of Stenkil, who was elected king when the old House of Munsö died out."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Eystein Glumra is the father of Rognvald Eysteinsson and Sigurd Eysteinsson, according to the Heimskringla saga.\"",
+            "fusion_score": 0.5242885112762452,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Eystein Glumra is the father of Rognvald Eysteinsson and Sigurd Eysteinsson, according to the Heimskringla saga.",
+              "Eystein Glumra Eystein Glumra(\" Eystein the Noisy\" or\" Eystein the Clatterer\"; Modern Norwegian\" Øystein Glumra\") also known as Eystein Ivarsson, was reputedly a petty king on the west coast of Norway, during the 9th Century. The\" Heimskringla\" saga states that Eystein Glumra was the father of Rognvald Eysteinsson and Sigurd Eysteinsson:\" The first earl in the Orkney Islands was called Sigurd, who was a son of Eystein Glumra, and brother of Ragnvald earl of More. After Sigurd, his son Guthorm was earl for one year. After him Torf- Einar, a son of Ragnvald, took the earldom, and was long earl, and was a man of great power\". According to the\" Orkneyinga Saga\", Eystein Glumra was the son of Ivar the jarl of Uplanders and grandson of Halfdan the Old. \" Orkneyinga Saga\" also named Eystein Glumra as the father of Rognvald Eysteinsson:\" Heiti, Gorr ’s son, was father of Sveiði the sea-king,[..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "King Eric XIV of Sweden"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

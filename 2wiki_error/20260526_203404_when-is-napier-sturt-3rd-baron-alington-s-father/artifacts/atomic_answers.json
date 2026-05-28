@@ -1,0 +1,369 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Napier Sturt?",
+    "analysis": {
+      "entities": [
+        "Napier Sturt"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.\"",
+        "hyperedge_text": "Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.595599353313446,
+        "fusion_score": 0.5191198706626893,
+        "entity_ids": [
+          "\"1ST BARON ALINGTON\"",
+          "\"BRITISH PEER\"",
+          "\"2ND BARON ALINGTON\"",
+          "\"HUMPHREY NAPIER STURT\"",
+          "\"KCVO\"",
+          "\"20 AUGUST 1859\"",
+          "\"HENRY STURT\"",
+          "\"30 JULY 1919\""
+        ],
+        "chunk_ids": [
+          "chunk-a0e7bfbbbb93050222d767570f77bb5a"
+        ],
+        "evidence_texts": [
+          "Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.",
+          "Humphrey Sturt, 2nd Baron Alington Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington. He succeeded to the Barony on 17 February 1904."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.595599,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51912
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Napier Sturt, the 2nd Baron Alington, succeeded to the Barony from his father Henry Sturt.\"",
+        "hyperedge_text": "Humphrey Napier Sturt, the 2nd Baron Alington, succeeded to the Barony from his father Henry Sturt.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.6287362575531006,
+        "fusion_score": 0.9257472515106202,
+        "entity_ids": [
+          "\"BARONY\""
+        ],
+        "chunk_ids": [
+          "chunk-a0e7bfbbbb93050222d767570f77bb5a"
+        ],
+        "evidence_texts": [
+          "Humphrey Napier Sturt, the 2nd Baron Alington, succeeded to the Barony from his father Henry Sturt.",
+          "Humphrey Sturt, 2nd Baron Alington Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington. He succeeded to the Barony on 17 February 1904."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.628736,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.925747
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Succeeding his father, Henry Sturt was part of a noble lineage.\"",
+        "hyperedge_text": "Succeeding his father, Henry Sturt was part of a noble lineage.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5070895552635193,
+        "fusion_score": 0.501417911052704,
+        "entity_ids": [
+          "\"NOBLE LINEAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-97150612a2550bc2dbe2e3c644abed25"
+        ],
+        "evidence_texts": [
+          "Succeeding his father, Henry Sturt was part of a noble lineage.",
+          "Henry Sturt, 1st Baron Alington Henry Gerard Sturt, 1st Baron Alington( 16 May 1825 – 17 February 1904) was a British peer and Conservative Party politician. The son of Henry Sturt, he was created 1st Baron Alington of Crichel on 15 January 1876. Sturt was twice married. On 10 September 1853, he wed Lady Augusta Bingham, the daughter of George Charles Bingham, 3rd Earl of Lucan. They had three children :- On 10 February 1892, Sturt wed Evelyn Henrietta Leigh."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.50709,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.501418
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the father.\"",
+        "hyperedge_text": "He was the father.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48036035895347595,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2588108102480571,
+        "entity_ids": [
+          "\"FATHER\""
+        ],
+        "chunk_ids": [
+          "chunk-d9965e5ba5882ead6f997b46e6b90d93"
+        ],
+        "evidence_texts": [
+          "He was the father.",
+          "Obata Toramori He was the father of Obata Masamori."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.48036,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.258811
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is the father-in-law of Imran Farhat.\"",
+        "hyperedge_text": "He is the father-in-law of Imran Farhat.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43573564291000366,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.24096092383066814,
+        "entity_ids": [
+          "\"FATHER-IN-LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-10333be7c973d42a00364ad277052021"
+        ],
+        "evidence_texts": [
+          "He is the father-in-law of Imran Farhat.",
+          "Mohammad Ilyas (cricketer) Mohammad Ilyas Mahmood( born March 19, 1946, Lahore, Punjab) is a former Pakistani cricketer who played in ten Tests from 1964 to 1969. He is the father- in- law of Imran Farhat."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.435736,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.240961
+        }
+      }
+    ],
+    "answer": "Henry Sturt",
+    "confidence": 0.95,
+    "reasoning_summary": "The evidence clearly states that Humphrey Napier Sturt, 2nd Baron Alington, is the son of Henry Sturt, 1st Baron Alington.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When is the birthday of the father of Napier Sturt?",
+    "analysis": {
+      "entities": [
+        "Henry Sturt"
+      ],
+      "relations": [
+        "birthday of"
+      ],
+      "relation_query": "What is the birthday of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Henry Sturt, 1st Baron Alington was born on 16 May 1825.\"",
+        "hyperedge_text": "Henry Sturt, 1st Baron Alington was born on 16 May 1825.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.714847981929779,
+        "fusion_score": 0.5429695963859559,
+        "entity_ids": [
+          "\"HENRY STURT\""
+        ],
+        "chunk_ids": [
+          "chunk-97150612a2550bc2dbe2e3c644abed25"
+        ],
+        "evidence_texts": [
+          "Henry Sturt, 1st Baron Alington was born on 16 May 1825.",
+          "Henry Sturt, 1st Baron Alington Henry Gerard Sturt, 1st Baron Alington( 16 May 1825 – 17 February 1904) was a British peer and Conservative Party politician. The son of Henry Sturt, he was created 1st Baron Alington of Crichel on 15 January 1876. Sturt was twice married. On 10 September 1853, he wed Lady Augusta Bingham, the daughter of George Charles Bingham, 3rd Earl of Lucan. They had three children :- On 10 February 1892, Sturt wed Evelyn Henrietta Leigh."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.714848,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.54297
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry Sturt, the 1st Baron Alington, is an important familial connection to Humphrey Sturt.\"",
+        "hyperedge_text": "Henry Sturt, the 1st Baron Alington, is an important familial connection to Humphrey Sturt.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6067778468132019,
+        "fusion_score": 0.5213555693626404,
+        "entity_ids": [
+          "\"1859\"",
+          "\"HENRY STURT\""
+        ],
+        "chunk_ids": [
+          "chunk-a0e7bfbbbb93050222d767570f77bb5a"
+        ],
+        "evidence_texts": [
+          "Henry Sturt, the 1st Baron Alington, is an important familial connection to Humphrey Sturt.",
+          "Humphrey Sturt, 2nd Baron Alington Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington. He succeeded to the Barony on 17 February 1904."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.606778,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.521356
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.\"",
+        "hyperedge_text": "Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5574589967727661,
+        "fusion_score": 0.5114917993545532,
+        "entity_ids": [
+          "\"1ST BARON ALINGTON\"",
+          "\"BRITISH PEER\"",
+          "\"2ND BARON ALINGTON\"",
+          "\"HUMPHREY NAPIER STURT\"",
+          "\"KCVO\"",
+          "\"20 AUGUST 1859\"",
+          "\"HENRY STURT\"",
+          "\"30 JULY 1919\""
+        ],
+        "chunk_ids": [
+          "chunk-a0e7bfbbbb93050222d767570f77bb5a"
+        ],
+        "evidence_texts": [
+          "Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington.",
+          "Humphrey Sturt, 2nd Baron Alington Humphrey Napier Sturt, 2nd Baron Alington, KCVO (20 August 1859 – 30 July 1919) was a British peer, the son of Henry Sturt, 1st Baron Alington. He succeeded to the Barony on 17 February 1904."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.557459,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511492
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry Sturt, 1st Baron Alington passed away on 17 February 1904.\"",
+        "hyperedge_text": "Henry Sturt, 1st Baron Alington passed away on 17 February 1904.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6763385534286499,
+        "fusion_score": 0.53526771068573,
+        "entity_ids": [
+          "\"DEATH\""
+        ],
+        "chunk_ids": [
+          "chunk-97150612a2550bc2dbe2e3c644abed25"
+        ],
+        "evidence_texts": [
+          "Henry Sturt, 1st Baron Alington passed away on 17 February 1904.",
+          "Henry Sturt, 1st Baron Alington Henry Gerard Sturt, 1st Baron Alington( 16 May 1825 – 17 February 1904) was a British peer and Conservative Party politician. The son of Henry Sturt, he was created 1st Baron Alington of Crichel on 15 January 1876. Sturt was twice married. On 10 September 1853, he wed Lady Augusta Bingham, the daughter of George Charles Bingham, 3rd Earl of Lucan. They had three children :- On 10 February 1892, Sturt wed Evelyn Henrietta Leigh."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.676339,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535268
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The son of Henry Sturt, he was created 1st Baron Alington of Crichel on 15 January 1876.\"",
+        "hyperedge_text": "The son of Henry Sturt, he was created 1st Baron Alington of Crichel on 15 January 1876.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"HENRY STURT\""
+        ],
+        "chunk_ids": [
+          "chunk-97150612a2550bc2dbe2e3c644abed25"
+        ],
+        "evidence_texts": [
+          "The son of Henry Sturt, he was created 1st Baron Alington of Crichel on 15 January 1876.",
+          "Henry Sturt, 1st Baron Alington Henry Gerard Sturt, 1st Baron Alington( 16 May 1825 – 17 February 1904) was a British peer and Conservative Party politician. The son of Henry Sturt, he was created 1st Baron Alington of Crichel on 15 January 1876. Sturt was twice married. On 10 September 1853, he wed Lady Augusta Bingham, the daughter of George Charles Bingham, 3rd Earl of Lucan. They had three children :- On 10 February 1892, Sturt wed Evelyn Henrietta Leigh."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ],
+    "answer": "16 May 1825",
+    "confidence": 0.95,
+    "reasoning_summary": "Henry Sturt, 1st Baron Alington, was born on 16 May 1825, which is the birthday of Napier Sturt's father.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Henry Sturt, 1st Baron Alington was born on 16 May 1825.\""
+    ]
+  }
+]

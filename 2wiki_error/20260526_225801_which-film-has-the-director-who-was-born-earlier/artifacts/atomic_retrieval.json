@@ -1,0 +1,4008 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was The Red Eagle born?",
+    "retrieval_question": "When was The Red Eagle born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was The Red Eagle born?",
+      "retrieval_question": "When was The Red Eagle born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+        "entity_ids": [
+          "\"THE RED EAGLE\"",
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "link",
+            "THE RED EAGLE",
+            "WISIT SASANATIENG"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.43536245822906494,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was April 1, 1883.\"",
+        "branch": "relation",
+        "raw_score": 0.4340617060661316,
+        "hyperedge_text": "His birth date was April 1, 1883.",
+        "entity_ids": [
+          "\"APRIL 1, 1883\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was April 1, 1883.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His birth date was April 1, 1883.",
+            "link",
+            "APRIL 1, 1883"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-513618e3e9a5db9731bf910947f84866",
+            "hyperedge_name": "<hyperedge>\"His birth date was April 1, 1883.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 16, 1993.\"",
+        "branch": "relation",
+        "raw_score": 0.4331432580947876,
+        "hyperedge_text": "He was born on December 16, 1993.",
+        "entity_ids": [
+          "\"DECEMBER 16, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-2434daa5d2e639dffeeacdeae7136b7e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 16, 1993.",
+            "Michael Rector Michael Rector( born December 16, 1993) is an American football wide receiver who is currently a free agent of the National Football League. He played college football at Stanford."
+          ],
+          "relation_texts": [
+            "He was born on December 16, 1993.",
+            "link",
+            "DECEMBER 16, 1993"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd47ba46ad7b16c6fa6f60940ac4bafe",
+            "hyperedge_name": "<hyperedge>\"He was born on December 16, 1993.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.4311891198158264,
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has the birth date of 1 November 1982.",
+            "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+          ],
+          "relation_texts": [
+            "He has the birth date of 1 November 1982.",
+            "link",
+            "1 NOVEMBER 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e7ccd25dfeb68bf5e59c3683e27f9a72",
+            "hyperedge_name": "<hyperedge>\"He has the birth date of 1 November 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"born 30 December 1986\"",
+        "branch": "relation",
+        "raw_score": 0.4302058815956116,
+        "hyperedge_text": "born 30 December 1986",
+        "entity_ids": [
+          "\"30 DECEMBER 1986\""
+        ],
+        "chunk_ids": [
+          "chunk-ff775504cf67541b9da0cc36aaafe92c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "born 30 December 1986",
+            "Alan Pownall Stephen Alan Fletcher Pownall( born 30 December 1986) is an English singer- songwriter and the husband of actress Gabriella Wilde."
+          ],
+          "relation_texts": [
+            "born 30 December 1986",
+            "link",
+            "30 DECEMBER 1986"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-29ec9775fe4e17981cfe174aa175550d",
+            "hyperedge_name": "<hyperedge>\"born 30 December 1986\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "branch": "relation",
+        "raw_score": 0.42513716220855713,
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+          ],
+          "relation_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "link",
+            "CAREER TIMELINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f292719350c455f48b3bb7d98ae9f7f2",
+            "hyperedge_name": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on February 18, 1989.\"",
+        "branch": "relation",
+        "raw_score": 0.4226941466331482,
+        "hyperedge_text": "He was born on February 18, 1989.",
+        "entity_ids": [
+          "\"FEBRUARY 18, 1989\""
+        ],
+        "chunk_ids": [
+          "chunk-355112d058d669aaa46c2d9424032c99"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on February 18, 1989.",
+            "Tony Jaye Tucker Jr. Tony J. Tucker Jr. or TJ( born February 18, 1989) is currently a free agent American defensive end football player. He is known for being\" quick off the ball\"."
+          ],
+          "relation_texts": [
+            "He was born on February 18, 1989.",
+            "link",
+            "FEBRUARY 18, 1989"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c6790d20e0568df4764f89e4b56183c0",
+            "hyperedge_name": "<hyperedge>\"He was born on February 18, 1989.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.4200984835624695,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was on October 9, 1892.\"",
+        "branch": "relation",
+        "raw_score": 0.4145640730857849,
+        "hyperedge_text": "His birth date was on October 9, 1892.",
+        "entity_ids": [
+          "\"BIRTH DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-8d0866c3f8d6fb59c7691bda418ca8c9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was on October 9, 1892.",
+            "Robert P. Kerr Robert P. Kerr (October 9, 1892 – September 5, 1960) was an American film director, actor and screenwriter. He directed 41 films between 1917 and 1928. He was born in Burlington, Colorado and died in Porterville, California from a heart attack."
+          ],
+          "relation_texts": [
+            "His birth date was on October 9, 1892.",
+            "link",
+            "BIRTH DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fe9b22788083ee137d022bf188d617cf",
+            "hyperedge_name": "<hyperedge>\"His birth date was on October 9, 1892.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on May 16, 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.41212689876556396,
+        "hyperedge_text": "He was born on May 16, 1982.",
+        "entity_ids": [
+          "\"MAY 16, 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-ba21b6ff1fc669d08d0a8c77c5f7c014"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on May 16, 1982.",
+            "Ali Rahuma Ali Khalifa Rahuma( born May 16, 1982) is a Libyan football midfielder who's nationality is Libyan. He currently plays for Al- Ittihad, and is a member of the Libya national football team."
+          ],
+          "relation_texts": [
+            "He was born on May 16, 1982.",
+            "link",
+            "MAY 16, 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f8aa7408d85ee69d2857544cee18a224",
+            "hyperedge_name": "<hyperedge>\"He was born on May 16, 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\"",
+        "branch": "semantic",
+        "raw_score": 0.5472425818443298,
+        "hyperedge_text": "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+        "entity_ids": [
+          "\"THE RED EAGLE\"",
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "link",
+            "THE RED EAGLE",
+            "WISIT SASANATIENG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-91d9e3d4d29e1a6737856df42d42c9d5",
+            "hyperedge_name": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a Thai superhero film.\"",
+        "branch": "semantic",
+        "raw_score": 0.5279134511947632,
+        "hyperedge_text": "The Red Eagle is a Thai superhero film.",
+        "entity_ids": [
+          "\"RED EAGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Red Eagle is a Thai superhero film.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "The Red Eagle is a Thai superhero film.",
+            "link",
+            "RED EAGLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b9becc54699e3c743c3ad1aa5938a45d",
+            "hyperedge_name": "<hyperedge>\"The Red Eagle is a Thai superhero film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 2007 Red Eagle was voted Flutist of the Year a second time.\"",
+        "branch": "semantic",
+        "raw_score": 0.4792554974555969,
+        "hyperedge_text": "In 2007 Red Eagle was voted Flutist of the Year a second time.",
+        "entity_ids": [
+          "\"FLUTIST OF THE YEAR\""
+        ],
+        "chunk_ids": [
+          "chunk-da6d01ff37245d636a3beb46b80d45f6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "In 2007 Red Eagle was voted Flutist of the Year a second time.",
+            "Jay Red Eagle Jay Red Eagle is a Native American flautist and Native American artist whose businesses include lines of music clothing called Nashville Threads and M.T. Medicine Bottle. His clothing and shoe designs include country music and Native American clothing, Hip hop clothing, and the first ever Cherokee shoes specifically designed using the Cherokee syllabary and language. He is an enrolled member of the Cherokee Nation. His debut CD was entitled\" Vision\". He was born in Tahlequah, Oklahoma, and in 2010 he released a second CD titled\" Cherokee Nation\" which is also composed of Native American flute music. Red Eagle won two Music Awards in 2006: Best Native American Artist of the Year and Native American Flutist of the Year. In 2007 Red Eagle was voted Flutist of the Year a second time."
+          ],
+          "relation_texts": [
+            "In 2007 Red Eagle was voted Flutist of the Year a second time.",
+            "link",
+            "FLUTIST OF THE YEAR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d6700258df52cae119320e8e57a28fd7",
+            "hyperedge_name": "<hyperedge>\"In 2007 Red Eagle was voted Flutist of the Year a second time.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Red Eagle won two Music Awards in 2006: Best Native American Artist of the Year and Native American Flutist of the Year.\"",
+        "branch": "semantic",
+        "raw_score": 0.4660438299179077,
+        "hyperedge_text": "Red Eagle won two Music Awards in 2006: Best Native American Artist of the Year and Native American Flutist of the Year.",
+        "entity_ids": [
+          "\"BEST NATIVE AMERICAN ARTIST OF THE YEAR\"",
+          "\"NATIVE AMERICAN FLUTIST OF THE YEAR\""
+        ],
+        "chunk_ids": [
+          "chunk-da6d01ff37245d636a3beb46b80d45f6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Red Eagle won two Music Awards in 2006: Best Native American Artist of the Year and Native American Flutist of the Year.",
+            "Jay Red Eagle Jay Red Eagle is a Native American flautist and Native American artist whose businesses include lines of music clothing called Nashville Threads and M.T. Medicine Bottle. His clothing and shoe designs include country music and Native American clothing, Hip hop clothing, and the first ever Cherokee shoes specifically designed using the Cherokee syllabary and language. He is an enrolled member of the Cherokee Nation. His debut CD was entitled\" Vision\". He was born in Tahlequah, Oklahoma, and in 2010 he released a second CD titled\" Cherokee Nation\" which is also composed of Native American flute music. Red Eagle won two Music Awards in 2006: Best Native American Artist of the Year and Native American Flutist of the Year. In 2007 Red Eagle was voted Flutist of the Year a second time."
+          ],
+          "relation_texts": [
+            "Red Eagle won two Music Awards in 2006: Best Native American Artist of the Year and Native American Flutist of the Year.",
+            "link",
+            "BEST NATIVE AMERICAN ARTIST OF THE YEAR",
+            "NATIVE AMERICAN FLUTIST OF THE YEAR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6644b18087fbbb661c70ec0f0db99fef",
+            "hyperedge_name": "<hyperedge>\"Red Eagle won two Music Awards in 2006: Best Native American Artist of the Year and Native American Flutist of the Year.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eagle Feather was known for his significant contributions during a historic game on October 8, 1922.\"",
+        "branch": "semantic",
+        "raw_score": 0.4495541453361511,
+        "hyperedge_text": "Eagle Feather was known for his significant contributions during a historic game on October 8, 1922.",
+        "entity_ids": [
+          "\"HISTORIC GAME\""
+        ],
+        "chunk_ids": [
+          "chunk-f66068a680a4cb72ca5a58cd1281cd91"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Eagle Feather was known for his significant contributions during a historic game on October 8, 1922.",
+            "Eagle Feather Beamus Pierce aka Eagle Feather was a professional football player who played in the National Football League during the 1922 and 1923 seasons. He played college football at the Carlisle Indian School, located in Carlisle, Pennsylvania, before joining the NFL's Oorang Indians. The Indians were a team based in LaRue, Ohio, composed only of Native Americans, and coached by Jim Thorpe. Eagle Feather was a Mohican. On October 8, 1922, Eagle Feather and teammate Joe Guyon made history by making the Indians the first team with two 100- yard rushers in one game. That game Guyon ran for 116 yards and 2 touchdowns off of 13 carries. Meanwhile, Eagle Feather ran for 109 yards on 16 carries for 1 touchdown as the Indians beat the Columbus Panhandles 20- 6. During that game Eagle Feather's runs up the middle of the field were referred to as the main feature of the Oorang offense. He..."
+          ],
+          "relation_texts": [
+            "Eagle Feather was known for his significant contributions during a historic game on October 8, 1922.",
+            "link",
+            "HISTORIC GAME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ae189aa16d1548ca9232307cf0976bcd",
+            "hyperedge_name": "<hyperedge>\"Eagle Feather was known for his significant contributions during a historic game on October 8, 1922.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Metro Pictures produced The Eagle's Feather.\"",
+        "branch": "semantic",
+        "raw_score": 0.4455678164958954,
+        "hyperedge_text": "Metro Pictures produced The Eagle's Feather.",
+        "entity_ids": [
+          "\"PRODUCTION COMPANY\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Metro Pictures produced The Eagle's Feather.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "Metro Pictures produced The Eagle's Feather.",
+            "link",
+            "PRODUCTION COMPANY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-29a40bed08d566e0851e1b73d21bd042",
+            "hyperedge_name": "<hyperedge>\"Metro Pictures produced The Eagle's Feather.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jay Red Eagle is a Native American flautist and Native American artist whose businesses include lines of music clothing called Nashville Threads and M.T. Medicine Bottle.\"",
+        "branch": "semantic",
+        "raw_score": 0.4436900019645691,
+        "hyperedge_text": "Jay Red Eagle is a Native American flautist and Native American artist whose businesses include lines of music clothing called Nashville Threads and M.T. Medicine Bottle.",
+        "entity_ids": [
+          "\"JAY RED EAGLE\"",
+          "\"NATIVE AMERICAN FLAUTIST\"",
+          "\"NATIVE AMERICAN ARTIST\"",
+          "\"NASHVILLE THREADS\"",
+          "\"M.T. MEDICINE BOTTLE\""
+        ],
+        "chunk_ids": [
+          "chunk-da6d01ff37245d636a3beb46b80d45f6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jay Red Eagle is a Native American flautist and Native American artist whose businesses include lines of music clothing called Nashville Threads and M.T. Medicine Bottle.",
+            "Jay Red Eagle Jay Red Eagle is a Native American flautist and Native American artist whose businesses include lines of music clothing called Nashville Threads and M.T. Medicine Bottle. His clothing and shoe designs include country music and Native American clothing, Hip hop clothing, and the first ever Cherokee shoes specifically designed using the Cherokee syllabary and language. He is an enrolled member of the Cherokee Nation. His debut CD was entitled\" Vision\". He was born in Tahlequah, Oklahoma, and in 2010 he released a second CD titled\" Cherokee Nation\" which is also composed of Native American flute music. Red Eagle won two Music Awards in 2006: Best Native American Artist of the Year and Native American Flutist of the Year. In 2007 Red Eagle was voted Flutist of the Year a second time."
+          ],
+          "relation_texts": [
+            "Jay Red Eagle is a Native American flautist and Native American artist whose businesses include lines of music clothing called Nashville Threads and M.T. Medicine Bottle.",
+            "link",
+            "JAY RED EAGLE",
+            "NATIVE AMERICAN FLAUTIST",
+            "NATIVE AMERICAN ARTIST",
+            "NASHVILLE THREADS",
+            "M.T. MEDICINE BOTTLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0e8d6cfc6b55d639510d4bad8bc3de3e",
+            "hyperedge_name": "<hyperedge>\"Jay Red Eagle is a Native American flautist and Native American artist whose businesses include lines of music clothing called Nashville Threads and M.T. Medicine Bottle.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film.\"",
+        "branch": "semantic",
+        "raw_score": 0.4436527490615845,
+        "hyperedge_text": "The Eagle's Feather is a 1923 American silent romantic-western film.",
+        "entity_ids": [
+          "\"SILENT FILM\"",
+          "\"1923\"",
+          "\"EAGLE'S FEATHER\"",
+          "\"ROMANTIC-WESTERN\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Eagle's Feather is a 1923 American silent romantic-western film.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "The Eagle's Feather is a 1923 American silent romantic-western film.",
+            "link",
+            "SILENT FILM",
+            "1923",
+            "EAGLE'S FEATHER",
+            "ROMANTIC-WESTERN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-317697d9e4423ec96980e720ac6af8d9",
+            "hyperedge_name": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The flag was officially in use by a special warrant on July 21, 1682, when Prince Rupert granted permission to the company to use the Red Ensign.\"",
+        "branch": "semantic",
+        "raw_score": 0.43749547004699707,
+        "hyperedge_text": "The flag was officially in use by a special warrant on July 21, 1682, when Prince Rupert granted permission to the company to use the Red Ensign.",
+        "entity_ids": [
+          "\"SPECIAL WARRANT\"",
+          "\"JULY 21, 1682\"",
+          "\"PRINCE RUPERT\""
+        ],
+        "chunk_ids": [
+          "chunk-4c1ebdfe991e5dc99b6f9edc1b46a148"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The flag was officially in use by a special warrant on July 21, 1682, when Prince Rupert granted permission to the company to use the Red Ensign.",
+            "Flag of the Hudson's Bay Company The flag of the Hudson's Bay Company is a flag that served two purposes. The flag shared the same design as the Flag of Ontario and the Flag of Manitoba in using the Red Ensign. The flag was officially in use by a special warrant on July 21, 1682, when Prince Rupert granted permission to the company to use the Red Ensign. Prior to 1869 the flag was used as both the flag of Rupert's Land and the Hudson's Bay Company. After Rupert's Land was purchased by the government of Canada, the flag continued as the flag of the HBC. The current company flag is based on the governor's standard bearing the company's coat of arms( in gold on white background), in use since 1779."
+          ],
+          "relation_texts": [
+            "The flag was officially in use by a special warrant on July 21, 1682, when Prince Rupert granted permission to the company to use the Red Ensign.",
+            "link",
+            "SPECIAL WARRANT",
+            "JULY 21, 1682",
+            "PRINCE RUPERT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1741391f672a496c5be16f56ad96e20e",
+            "hyperedge_name": "<hyperedge>\"The flag was officially in use by a special warrant on July 21, 1682, when Prince Rupert granted permission to the company to use the Red Ensign.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Eagle's Eye is a 1918 American serial film consisting of 20 episodes that dramatizes German espionage in the United States during World War I.\"",
+        "branch": "semantic",
+        "raw_score": 0.4301815629005432,
+        "hyperedge_text": "The Eagle's Eye is a 1918 American serial film consisting of 20 episodes that dramatizes German espionage in the United States during World War I.",
+        "entity_ids": [
+          "\"UNITED STATES\"",
+          "\"WORLD WAR I\"",
+          "\"THE EAGLE'S EYE\"",
+          "\"GERMAN ESPIONAGE\""
+        ],
+        "chunk_ids": [
+          "chunk-ca374a3a2f4d9ee82e0db340fdb29c0b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Eagle's Eye is a 1918 American serial film consisting of 20 episodes that dramatizes German espionage in the United States during World War I.",
+            "The Eagle's Eye The Eagle's Eye is a 1918 American serial film consisting of 20 episodes that dramatizes German espionage in the United States during World War I. The stories are based on the experiences of William J. Flynn during his career as chief of the United States Secret Service from 1912–1917. It features King Baggot as the president of the Criminology Club and Marguerite Snow as a Secret Service agent who investigate spies. Among the events depicted are the sending of the Zimmermann Telegram, Franz von Rintelen's attempts to sabotage cargo loading in San Francisco Harbor, and the capture of the German espionage plans. It was directed by George Lessey, Wellington A. Playter, Leopold Wharton, and Theodore Wharton, and produced by the Whartons Studio. The serial is now considered lost. Because this serial was a commercial failure, it was the last one made by Whartons due to the..."
+          ],
+          "relation_texts": [
+            "The Eagle's Eye is a 1918 American serial film consisting of 20 episodes that dramatizes German espionage in the United States during World War I.",
+            "link",
+            "UNITED STATES",
+            "WORLD WAR I",
+            "THE EAGLE'S EYE",
+            "GERMAN ESPIONAGE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f8afc84f10f79bf48f50d091c62a57b6",
+            "hyperedge_name": "<hyperedge>\"The Eagle's Eye is a 1918 American serial film consisting of 20 episodes that dramatizes German espionage in the United States during World War I.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\"",
+        "hyperedge_text": "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5472425818443298,
+        "fusion_score": 0.509448516368866,
+        "entity_ids": [
+          "\"THE RED EAGLE\"",
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "evidence_texts": [
+          "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+          "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.547243,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.509449
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a Thai superhero film.\"",
+        "hyperedge_text": "The Red Eagle is a Thai superhero film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5279134511947632,
+        "fusion_score": 0.5055826902389526,
+        "entity_ids": [
+          "\"RED EAGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "evidence_texts": [
+          "The Red Eagle is a Thai superhero film.",
+          "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.527913,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505583
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was April 1, 1883.\"",
+        "hyperedge_text": "His birth date was April 1, 1883.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4340617060661316,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.24029134909311933,
+        "entity_ids": [
+          "\"APRIL 1, 1883\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "evidence_texts": [
+          "His birth date was April 1, 1883.",
+          "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.434062,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.240291
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 16, 1993.\"",
+        "hyperedge_text": "He was born on December 16, 1993.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4331432580947876,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2399239699045817,
+        "entity_ids": [
+          "\"DECEMBER 16, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-2434daa5d2e639dffeeacdeae7136b7e"
+        ],
+        "evidence_texts": [
+          "He was born on December 16, 1993.",
+          "Michael Rector Michael Rector( born December 16, 1993) is an American football wide receiver who is currently a free agent of the National Football League. He played college football at Stanford."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.433143,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.239924
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4311891198158264,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.23914231459299723,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.431189,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.239142
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "When was Vishukkani born?",
+    "retrieval_question": "When was Vishukkani born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Vishukkani born?",
+      "retrieval_question": "When was Vishukkani born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+        "entity_ids": [
+          "\"J. SASIKUMAR\"",
+          "\"VISHUKKANI\"",
+          "\"R. M. SUNDARAM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb825f40948545ed0ad381da2dddf3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+            "Vishukkani Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram. The film stars Prem Nazir, Sharada, Thikkurissi Sukumaran Nair and Sankaradi in the lead roles. The film has musical score by Salil Chowdhary. The film was a remake of the Tamil film\" Karpagam\"."
+          ],
+          "relation_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+            "link",
+            "J. SASIKUMAR",
+            "VISHUKKANI",
+            "R. M. SUNDARAM"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "branch": "relation",
+        "raw_score": 0.4959193468093872,
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He has the birth date of 1 November 1982.",
+            "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+          ],
+          "relation_texts": [
+            "He has the birth date of 1 November 1982.",
+            "link",
+            "1 NOVEMBER 1982"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e7ccd25dfeb68bf5e59c3683e27f9a72",
+            "hyperedge_name": "<hyperedge>\"He has the birth date of 1 November 1982.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"born 30 December 1986\"",
+        "branch": "relation",
+        "raw_score": 0.4944392442703247,
+        "hyperedge_text": "born 30 December 1986",
+        "entity_ids": [
+          "\"30 DECEMBER 1986\""
+        ],
+        "chunk_ids": [
+          "chunk-ff775504cf67541b9da0cc36aaafe92c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "born 30 December 1986",
+            "Alan Pownall Stephen Alan Fletcher Pownall( born 30 December 1986) is an English singer- songwriter and the husband of actress Gabriella Wilde."
+          ],
+          "relation_texts": [
+            "born 30 December 1986",
+            "link",
+            "30 DECEMBER 1986"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-29ec9775fe4e17981cfe174aa175550d",
+            "hyperedge_name": "<hyperedge>\"born 30 December 1986\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "branch": "relation",
+        "raw_score": 0.48719024658203125,
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+          ],
+          "relation_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "link",
+            "CAREER TIMELINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f292719350c455f48b3bb7d98ae9f7f2",
+            "hyperedge_name": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is January 30, 1871.\"",
+        "branch": "relation",
+        "raw_score": 0.4863196313381195,
+        "hyperedge_text": "His date of birth is January 30, 1871.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is January 30, 1871.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "His date of birth is January 30, 1871."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-8acc7beb731256ba0e217d7f4d06a24a",
+            "hyperedge_name": "<hyperedge>\"His date of birth is January 30, 1871.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on December 16, 1993.\"",
+        "branch": "relation",
+        "raw_score": 0.4816754162311554,
+        "hyperedge_text": "He was born on December 16, 1993.",
+        "entity_ids": [
+          "\"DECEMBER 16, 1993\""
+        ],
+        "chunk_ids": [
+          "chunk-2434daa5d2e639dffeeacdeae7136b7e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on December 16, 1993.",
+            "Michael Rector Michael Rector( born December 16, 1993) is an American football wide receiver who is currently a free agent of the National Football League. He played college football at Stanford."
+          ],
+          "relation_texts": [
+            "He was born on December 16, 1993.",
+            "link",
+            "DECEMBER 16, 1993"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-dd47ba46ad7b16c6fa6f60940ac4bafe",
+            "hyperedge_name": "<hyperedge>\"He was born on December 16, 1993.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date was April 1, 1883.\"",
+        "branch": "relation",
+        "raw_score": 0.4780188798904419,
+        "hyperedge_text": "His birth date was April 1, 1883.",
+        "entity_ids": [
+          "\"APRIL 1, 1883\""
+        ],
+        "chunk_ids": [
+          "chunk-b67efec4ddfaece55dfc3c039333100a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His birth date was April 1, 1883.",
+            "Albert-Édouard Janssen Albert- Édouard Janssen was a Belgian politician, banker and professor born in Antwerp, Belgium on April 1, 1883, and died in in Hamme- Mille, Belgium on March 29, 1966."
+          ],
+          "relation_texts": [
+            "His birth date was April 1, 1883.",
+            "link",
+            "APRIL 1, 1883"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-513618e3e9a5db9731bf910947f84866",
+            "hyperedge_name": "<hyperedge>\"His birth date was April 1, 1883.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Date of Birth: 16th March.\"",
+        "branch": "relation",
+        "raw_score": 0.4699980318546295,
+        "hyperedge_text": "Date of Birth: 16th March.",
+        "entity_ids": [
+          "\"DATE OF BIRTH\"",
+          "\"16TH MARCH\""
+        ],
+        "chunk_ids": [
+          "chunk-eb39dc242525118f5078189a5f122d46"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Date of Birth: 16th March.",
+            "Pamela Jain Pamela Jain is an Indian playback singer. Date of Birth:16th March."
+          ],
+          "relation_texts": [
+            "Date of Birth: 16th March.",
+            "link",
+            "DATE OF BIRTH",
+            "16TH MARCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd98626e2ff38eb6065e8e0b971bde3d",
+            "hyperedge_name": "<hyperedge>\"Date of Birth: 16th March.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 4 December 1994.\"",
+        "branch": "relation",
+        "raw_score": 0.4627547264099121,
+        "hyperedge_text": "He was born on 4 December 1994.",
+        "entity_ids": [
+          "\"4 DECEMBER 1994\""
+        ],
+        "chunk_ids": [
+          "chunk-c5b7f8126d305094495f652303bd2d17"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 4 December 1994.",
+            "Luke Milanzi Luke Bruno Milanzi( born 4 December 1994), variously known as Luka Milanzi or Bruno Milanzi, is a Malawian footballer."
+          ],
+          "relation_texts": [
+            "He was born on 4 December 1994.",
+            "link",
+            "4 DECEMBER 1994"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ec40e42a0133d98e6ed5dcc6e007153d",
+            "hyperedge_name": "<hyperedge>\"He was born on 4 December 1994.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on February 18, 1989.\"",
+        "branch": "relation",
+        "raw_score": 0.46173161268234253,
+        "hyperedge_text": "He was born on February 18, 1989.",
+        "entity_ids": [
+          "\"FEBRUARY 18, 1989\""
+        ],
+        "chunk_ids": [
+          "chunk-355112d058d669aaa46c2d9424032c99"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on February 18, 1989.",
+            "Tony Jaye Tucker Jr. Tony J. Tucker Jr. or TJ( born February 18, 1989) is currently a free agent American defensive end football player. He is known for being\" quick off the ball\"."
+          ],
+          "relation_texts": [
+            "He was born on February 18, 1989.",
+            "link",
+            "FEBRUARY 18, 1989"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c6790d20e0568df4764f89e4b56183c0",
+            "hyperedge_name": "<hyperedge>\"He was born on February 18, 1989.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on 24 April 1984.\"",
+        "branch": "relation",
+        "raw_score": 0.45966291427612305,
+        "hyperedge_text": "He was born on 24 April 1984.",
+        "entity_ids": [
+          "\"24 APRIL 1984\""
+        ],
+        "chunk_ids": [
+          "chunk-7fa8310bde07333a4e6ba619e2a15c7c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on 24 April 1984.",
+            "Ismael Falcón Ismael Gómez Falcón( born 24 April 1984) is a Spanish professional footballer who plays as a goalkeeper for Hércules CF."
+          ],
+          "relation_texts": [
+            "He was born on 24 April 1984.",
+            "link",
+            "24 APRIL 1984"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b01b3093d4ea0fda67ca5a1f4304c05c",
+            "hyperedge_name": "<hyperedge>\"He was born on 24 April 1984.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.\"",
+        "branch": "semantic",
+        "raw_score": 0.5532552003860474,
+        "hyperedge_text": "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+        "entity_ids": [
+          "\"J. SASIKUMAR\"",
+          "\"VISHUKKANI\"",
+          "\"R. M. SUNDARAM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb825f40948545ed0ad381da2dddf3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+            "Vishukkani Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram. The film stars Prem Nazir, Sharada, Thikkurissi Sukumaran Nair and Sankaradi in the lead roles. The film has musical score by Salil Chowdhary. The film was a remake of the Tamil film\" Karpagam\"."
+          ],
+          "relation_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+            "link",
+            "J. SASIKUMAR",
+            "VISHUKKANI",
+            "R. M. SUNDARAM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cab811203e1e1b68d8a33eec363a2b38",
+            "hyperedge_name": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film.\"",
+        "branch": "semantic",
+        "raw_score": 0.5306164622306824,
+        "hyperedge_text": "Vishukkani is a 1977 Indian Malayalam film.",
+        "entity_ids": [
+          "\"1977\"",
+          "\"INDIAN\"",
+          "\"MALAYALAM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb825f40948545ed0ad381da2dddf3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film.",
+            "Vishukkani Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram. The film stars Prem Nazir, Sharada, Thikkurissi Sukumaran Nair and Sankaradi in the lead roles. The film has musical score by Salil Chowdhary. The film was a remake of the Tamil film\" Karpagam\"."
+          ],
+          "relation_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film.",
+            "link",
+            "1977",
+            "INDIAN",
+            "MALAYALAM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-81d30ead1b5b0707e5e06b895e6fb26d",
+            "hyperedge_name": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vivek Krishna was born on 12 September 1990.\"",
+        "branch": "semantic",
+        "raw_score": 0.5125702023506165,
+        "hyperedge_text": "Vivek Krishna was born on 12 September 1990.",
+        "entity_ids": [
+          "\"12 SEPTEMBER 1990\""
+        ],
+        "chunk_ids": [
+          "chunk-4a15ede596050bed2025597210adf870"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vivek Krishna was born on 12 September 1990.",
+            "Vivek Krishna Vivek Krishna( born 12 September 1990) is an Indian former cricketer. He played one List A match for Hyderabad in 2011."
+          ],
+          "relation_texts": [
+            "Vivek Krishna was born on 12 September 1990.",
+            "link",
+            "12 SEPTEMBER 1990"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf805f17e1a154afc0ef187958f35ebd",
+            "hyperedge_name": "<hyperedge>\"Vivek Krishna was born on 12 September 1990.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vijay Krishna was born on February 7, 1956, in Delhi, India.\"",
+        "branch": "semantic",
+        "raw_score": 0.48437049984931946,
+        "hyperedge_text": "Vijay Krishna was born on February 7, 1956, in Delhi, India.",
+        "entity_ids": [
+          "\"FEBRUARY 7, 1956\""
+        ],
+        "chunk_ids": [
+          "chunk-a886f3a5f0698ce7d09ca49b4fd823f7"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vijay Krishna was born on February 7, 1956, in Delhi, India.",
+            "Vijay Krishna (economist) Vijay Krishna( born 7 February 1956 in Delhi, India) is an Indian American economist who is a Distinguished Professor of Economics and Job Market Placement Director of the Department of Economics at the Pennsylvania State University."
+          ],
+          "relation_texts": [
+            "Vijay Krishna was born on February 7, 1956, in Delhi, India.",
+            "link",
+            "FEBRUARY 7, 1956"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-259e446987f9ea0784c9acc4a2b76ff4",
+            "hyperedge_name": "<hyperedge>\"Vijay Krishna was born on February 7, 1956, in Delhi, India.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ragusan chronicler Mavro Orbini (1563–1614) wrote that Vuk was born in 1317, as son of an unnamed 'knezcountknyaz' from Rudine.\"",
+        "branch": "semantic",
+        "raw_score": 0.44448626041412354,
+        "hyperedge_text": "Ragusan chronicler Mavro Orbini (1563–1614) wrote that Vuk was born in 1317, as son of an unnamed 'knezcountknyaz' from Rudine.",
+        "entity_ids": [
+          "\"MAVRO ORBINI\"",
+          "\"RUDINE\""
+        ],
+        "chunk_ids": [
+          "chunk-4b67546e203a1950c3c21ca9d9c7b8f0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Ragusan chronicler Mavro Orbini (1563–1614) wrote that Vuk was born in 1317, as son of an unnamed 'knezcountknyaz' from Rudine.",
+            "Vuk Kosača Vuk (Cyrillic: Вук; 1317–1359), also called \"Hran\", was a powerful magnate in service to the Serbian king Stefan Dušan (r. 1331–55). Vuk was the progenitor of the Kosača family, later influential in the Kingdom of Bosnia in the late 14th- and first half of the 15th century. Ragusan chronicler Mavro Orbini (1563–1614), write that Vuk was born in 1317, as son of an unnamed \"knezcountknyaz\") from Rudine. After an incident during the two families' hunting trip in Upper Drina, where both had possessions, in which Branko Rastislalić lost his life sometime after 1351, Vuk, being responsible for Branko's death, fled to Hungary. After reconciling with the relatives of Branko, he joined (or returned to) the court of Emperor Stefan Dušan. Nevertheless, a member of the Rastislalić family eventually took revenge on Vuk, and murdered him in Rudine in 1359. Vuk distinguished himself in th..."
+          ],
+          "relation_texts": [
+            "Ragusan chronicler Mavro Orbini (1563–1614) wrote that Vuk was born in 1317, as son of an unnamed 'knezcountknyaz' from Rudine.",
+            "link",
+            "MAVRO ORBINI",
+            "RUDINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d90ac9e7aa5cd357fbc6cbfe45dda658",
+            "hyperedge_name": "<hyperedge>\"Ragusan chronicler Mavro Orbini (1563–1614) wrote that Vuk was born in 1317, as son of an unnamed 'knezcountknyaz' from Rudine.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tinnu Anand was born on 12 October, 1945.\"",
+        "branch": "semantic",
+        "raw_score": 0.42238011956214905,
+        "hyperedge_text": "Tinnu Anand was born on 12 October, 1945.",
+        "entity_ids": [
+          "\"TINNU ANAND\""
+        ],
+        "chunk_ids": [
+          "chunk-e2424634e0b9259f671662cb95767867"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Tinnu Anand was born on 12 October, 1945.",
+            "Tinnu Anand Tinnu Anand( born 12 October, 1945), sometimes referred to as Tinnu Anand or Virender Raj Anand, is an Indian actor, writer and director from Bollywood, who is most known as the director of Amitabh Bachchan's movies including,\" Kaalia\"( 1981),\" Shahenshah\"( 1988),\" Main Azaad Hoon\"( 1989) and\" Major Saab\"( 1998). He is the son of veteran writer Inder Raj Anand, brother of producer Bittu Anand and uncle of director Siddharth Anand. Anand portrayed an important role in\" Ghajini\" in 2008. He did his schooling from Mayo College in India. In an interview, Tinu Anand spoke about his early days and also praised Amitabh Bachchan for his generosity. He also worked as an assistant director to Satyajit Ray for five years, in Bengali films,\" Goopy Gyne Bagha Byne\"( 1969),\" Aranyer Din Ratri\"( 1970),\" Pratidwandi\"( 1970),\" Seemabaddha\"( 1971) to\" Ashani Sanket\"( 1973)."
+          ],
+          "relation_texts": [
+            "Tinnu Anand was born on 12 October, 1945.",
+            "link",
+            "TINNU ANAND"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0f9456193983416a38d92ca4215d5968",
+            "hyperedge_name": "<hyperedge>\"Tinnu Anand was born on 12 October, 1945.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vivek Krishna (born 12 September 1990) is an Indian former cricketer.\"",
+        "branch": "semantic",
+        "raw_score": 0.4212488532066345,
+        "hyperedge_text": "Vivek Krishna (born 12 September 1990) is an Indian former cricketer.",
+        "entity_ids": [
+          "\"HYDERABAD\"",
+          "\"VIVEK KRISHNA\"",
+          "\"LIST A MATCH\""
+        ],
+        "chunk_ids": [
+          "chunk-4a15ede596050bed2025597210adf870"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vivek Krishna (born 12 September 1990) is an Indian former cricketer.",
+            "Vivek Krishna Vivek Krishna( born 12 September 1990) is an Indian former cricketer. He played one List A match for Hyderabad in 2011."
+          ],
+          "relation_texts": [
+            "Vivek Krishna (born 12 September 1990) is an Indian former cricketer.",
+            "link",
+            "HYDERABAD",
+            "VIVEK KRISHNA",
+            "LIST A MATCH"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-85c950f665dd060384af462bf66776fe",
+            "hyperedge_name": "<hyperedge>\"Vivek Krishna (born 12 September 1990) is an Indian former cricketer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vishnuvardhan's performance in Sirivantha was noted for its depth and engagement.\"",
+        "branch": "semantic",
+        "raw_score": 0.4048188328742981,
+        "hyperedge_text": "Vishnuvardhan's performance in Sirivantha was noted for its depth and engagement.",
+        "entity_ids": [
+          "\"ENGAGEMENT\"",
+          "\"DEPTH\"",
+          "\"VISHNUVARDHAN'S PERFORMANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-886a92447356bd6a2aabcd528177c344"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vishnuvardhan's performance in Sirivantha was noted for its depth and engagement.",
+            "Sirivantha Sirivantha is a 2006 Indian Kannada film starring Vishnuvardhan. This film, directed by S. Narayan, is the sixth and last film of the Vishnu- Narayan combination. Sirivantha followed the other 5 Vishnu- Narayan films\" Veerappa NayakaSurya VamshaSimhadriya SimhaJamindaru\" and\" Varsha\". Though the film was a remake of the Telugu film\" Aa Naluguru\", starring Rajendra Prasad in the lead, the Kannada version became more popular than the original and ran successfully for 100 days at the box office."
+          ],
+          "relation_texts": [
+            "Vishnuvardhan's performance in Sirivantha was noted for its depth and engagement.",
+            "link",
+            "ENGAGEMENT",
+            "DEPTH",
+            "VISHNUVARDHAN'S PERFORMANCE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-046aca94496847d7c9145a86959ca452",
+            "hyperedge_name": "<hyperedge>\"Vishnuvardhan's performance in Sirivantha was noted for its depth and engagement.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sirivantha is a 2006 Indian Kannada film starring Vishnuvardhan.\"",
+        "branch": "semantic",
+        "raw_score": 0.4047982096672058,
+        "hyperedge_text": "Sirivantha is a 2006 Indian Kannada film starring Vishnuvardhan.",
+        "entity_ids": [
+          "\"SIRIVANTHA\"",
+          "\"VISHNUVARDHAN\""
+        ],
+        "chunk_ids": [
+          "chunk-886a92447356bd6a2aabcd528177c344"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Sirivantha is a 2006 Indian Kannada film starring Vishnuvardhan.",
+            "Sirivantha Sirivantha is a 2006 Indian Kannada film starring Vishnuvardhan. This film, directed by S. Narayan, is the sixth and last film of the Vishnu- Narayan combination. Sirivantha followed the other 5 Vishnu- Narayan films\" Veerappa NayakaSurya VamshaSimhadriya SimhaJamindaru\" and\" Varsha\". Though the film was a remake of the Telugu film\" Aa Naluguru\", starring Rajendra Prasad in the lead, the Kannada version became more popular than the original and ran successfully for 100 days at the box office."
+          ],
+          "relation_texts": [
+            "Sirivantha is a 2006 Indian Kannada film starring Vishnuvardhan.",
+            "link",
+            "SIRIVANTHA",
+            "VISHNUVARDHAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-7079e307624a2b5710867fccdcc07f0a",
+            "hyperedge_name": "<hyperedge>\"Sirivantha is a 2006 Indian Kannada film starring Vishnuvardhan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh.\"",
+        "branch": "semantic",
+        "raw_score": 0.40360718965530396,
+        "hyperedge_text": "He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh.",
+        "entity_ids": [
+          "\"TAMIL BRAHMIN\"",
+          "\"CHITTOOR\""
+        ],
+        "chunk_ids": [
+          "chunk-9ac6f5d2c836f12fc74dd081a050e75c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh.",
+            "M. B. Sreenivasan Manamadurai Balakrishnan Sreenivasan (19 September 1925 – 9 March 1988), or MBS, as he was called, was a South Indian music director who worked mainly in the Malayalam and Tamil film industries. He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh. He had his schooling at P.S. High School, Chennai. During his college days at Madras Presidency College, he was attracted to communist ideals and joined the Madras Students Organisation. His acquaintance with Nemai Ghosh, a Bengali director, paved his entry into films. His first film song was written to the words of noted Tamil lyricist, Jayakanthan, for the Tamil film \"Paadhai Theriyudhu Paar\". He played a major part in the formation of Indian Peoples Theatre Association (IPTA). He formed the Madras Youth Choir in 1971, which sings Indian choral music, based at Chennai. You can..."
+          ],
+          "relation_texts": [
+            "He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh.",
+            "link",
+            "TAMIL BRAHMIN",
+            "CHITTOOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b96ab4c5d1f64f3c412b5f35128823ed",
+            "hyperedge_name": "<hyperedge>\"He was born to an orthodox Tamil Brahmin family on 19 September 1925 in Chittoor, Andhra Pradesh.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.\"",
+        "hyperedge_text": "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5532552003860474,
+        "fusion_score": 0.5106510400772095,
+        "entity_ids": [
+          "\"J. SASIKUMAR\"",
+          "\"VISHUKKANI\"",
+          "\"R. M. SUNDARAM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb825f40948545ed0ad381da2dddf3e"
+        ],
+        "evidence_texts": [
+          "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+          "Vishukkani Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram. The film stars Prem Nazir, Sharada, Thikkurissi Sukumaran Nair and Sankaradi in the lead roles. The film has musical score by Salil Chowdhary. The film was a remake of the Tamil film\" Karpagam\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.553255,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510651
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film.\"",
+        "hyperedge_text": "Vishukkani is a 1977 Indian Malayalam film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5306164622306824,
+        "fusion_score": 0.5061232924461365,
+        "entity_ids": [
+          "\"1977\"",
+          "\"INDIAN\"",
+          "\"MALAYALAM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb825f40948545ed0ad381da2dddf3e"
+        ],
+        "evidence_texts": [
+          "Vishukkani is a 1977 Indian Malayalam film.",
+          "Vishukkani Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram. The film stars Prem Nazir, Sharada, Thikkurissi Sukumaran Nair and Sankaradi in the lead roles. The film has musical score by Salil Chowdhary. The film was a remake of the Tamil film\" Karpagam\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.530616,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.506123
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has the birth date of 1 November 1982.\"",
+        "hyperedge_text": "He has the birth date of 1 November 1982.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4959193468093872,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2983677387237549,
+        "entity_ids": [
+          "\"1 NOVEMBER 1982\""
+        ],
+        "chunk_ids": [
+          "chunk-4636dfb59a7c7feece66ee71585b6843"
+        ],
+        "evidence_texts": [
+          "He has the birth date of 1 November 1982.",
+          "Bradley Orr Bradley James Orr( born 1 November 1982) is an English retired footballer. He is the uncle of Rangers defender Jon Flanagan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.495919,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.298368
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"born 30 December 1986\"",
+        "hyperedge_text": "born 30 December 1986",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4944392442703247,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2977756977081299,
+        "entity_ids": [
+          "\"30 DECEMBER 1986\""
+        ],
+        "chunk_ids": [
+          "chunk-ff775504cf67541b9da0cc36aaafe92c"
+        ],
+        "evidence_texts": [
+          "born 30 December 1986",
+          "Alan Pownall Stephen Alan Fletcher Pownall( born 30 December 1986) is an English singer- songwriter and the husband of actress Gabriella Wilde."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.494439,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.297776
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48719024658203125,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2948760986328125,
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "evidence_texts": [
+          "His date of birth is significant as it contextualizes his career timeline.",
+          "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.48719,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.294876
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of The Red Eagle?",
+    "retrieval_question": "Who is the director of The Red Eagle?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of The Red Eagle?",
+      "retrieval_question": "Who is the director of The Red Eagle?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+        "entity_ids": [
+          "\"THE RED EAGLE\"",
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "link",
+            "THE RED EAGLE",
+            "WISIT SASANATIENG"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.",
+        "entity_ids": [
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-11feb072803d398626f6114415bced09"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.",
+            "Wisit Sasanatieng Wisit Sasanatieng( born June 28, 1963) is a Thai film director and screenwriter of Chinese descent. Best known for his colourful debut feature film,\" Tears of the Black Tiger\", he is among a\" New Wave\" of Thai directors that include Nonzee Nimibutr and Pen -Ek Ratanaruang."
+          ],
+          "relation_texts": [
+            "Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.",
+            "link",
+            "WISIT SASANATIENG"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.",
+        "entity_ids": [
+          "\"WISIT SASANATIENG\"",
+          "\"THAI DIRECTORS\"",
+          "\"TEARS OF THE BLACK TIGER\"",
+          "\"NEW WAVE\"",
+          "\"PEN-EK RATANARUANG\"",
+          "\"NONZEE NIMIBUTR\""
+        ],
+        "chunk_ids": [
+          "chunk-11feb072803d398626f6114415bced09"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.",
+            "Wisit Sasanatieng Wisit Sasanatieng( born June 28, 1963) is a Thai film director and screenwriter of Chinese descent. Best known for his colourful debut feature film,\" Tears of the Black Tiger\", he is among a\" New Wave\" of Thai directors that include Nonzee Nimibutr and Pen -Ek Ratanaruang."
+          ],
+          "relation_texts": [
+            "Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.",
+            "link",
+            "WISIT SASANATIENG",
+            "THAI DIRECTORS",
+            "TEARS OF THE BLACK TIGER",
+            "NEW WAVE",
+            "PEN-EK RATANARUANG",
+            "NONZEE NIMIBUTR"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wisit Sasanatieng directed and wrote the film.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Wisit Sasanatieng directed and wrote the film.",
+        "entity_ids": [
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Wisit Sasanatieng directed and wrote the film.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "Wisit Sasanatieng directed and wrote the film.",
+            "link",
+            "WISIT SASANATIENG"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\"",
+        "branch": "relation",
+        "raw_score": 0.5356717705726624,
+        "hyperedge_text": "The director's vision shaped the film's narrative style and storytelling.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"NARRATIVE STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-bc89e6fb4b1d4bc13f12b778e185493c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director's vision shaped the film's narrative style and storytelling.",
+            "The Law and Mr. Lee The Law and Mr Lee is a 2003 American TV film."
+          ],
+          "relation_texts": [
+            "The director's vision shaped the film's narrative style and storytelling.",
+            "link",
+            "DIRECTOR",
+            "NARRATIVE STYLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1f7ac9a08a885fa2e8df00bc09ea825c",
+            "hyperedge_name": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision is reflected in the cinematography of the film.\"",
+        "branch": "relation",
+        "raw_score": 0.5300764441490173,
+        "hyperedge_text": "The director's vision is reflected in the cinematography of the film.",
+        "entity_ids": [
+          "\"CINEMATOGRAPHY\""
+        ],
+        "chunk_ids": [
+          "chunk-875d0ddc97498458b33924bd007cede5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director's vision is reflected in the cinematography of the film.",
+            "Tahaan Tahaan – A Boy With a Grenade is an Indian Hindi- language drama film by Santosh Sivan. The film is based on the life of a young boy and his pet donkey. It is a fable- like journey of the eponymous eight- year- old boy, whose life revolves around the pursuit to find real purpose in his little world. The film stars Purav Bhandare as the young boy. Anupam Kher, Sarika, Rahul Bose, Rahul Khanna and Victor Banerjee form the rest of the cast. It was filmed on location in Jammu and Kashmir."
+          ],
+          "relation_texts": [
+            "The director's vision is reflected in the cinematography of the film.",
+            "link",
+            "CINEMATOGRAPHY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a6e2e2c5bab166ecb5cc3d5ab325c087",
+            "hyperedge_name": "<hyperedge>\"The director's vision is reflected in the cinematography of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker.\"",
+        "branch": "relation",
+        "raw_score": 0.5214277505874634,
+        "hyperedge_text": "The film was directed by a notable filmmaker.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-878081a5191725d702602749081a77c4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker.",
+            "California Winter California Winter is an American drama film from 2012."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c8914e7c16c6931f8328589f436a636c",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He directed both his own films as well as films directed by others.\"",
+        "branch": "relation",
+        "raw_score": 0.5061803460121155,
+        "hyperedge_text": "He directed both his own films as well as films directed by others.",
+        "entity_ids": [
+          "\"HIS OWN FILMS\"",
+          "\"FILMS DIRECTED BY OTHERS\""
+        ],
+        "chunk_ids": [
+          "chunk-1622512e42b9fe00ff1ff6a93ac35761"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "Maurice Elvey Maurice Elvey( 11 November 1887 – 28 August 1967) was the most prolific film director in British history. He directed nearly 200 films between 1913 and 1957. During the silent film era he directed as many as twenty films per year. He also produced more than fifty films- his own as well as films directed by others."
+          ],
+          "relation_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "link",
+            "HIS OWN FILMS",
+            "FILMS DIRECTED BY OTHERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-427500c2d82019f242a873db4d43cbc1",
+            "hyperedge_name": "<hyperedge>\"He directed both his own films as well as films directed by others.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4979618489742279,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced by a notable director known for his unique style.\"",
+        "branch": "relation",
+        "raw_score": 0.49319133162498474,
+        "hyperedge_text": "The film was produced by a notable director known for his unique style.",
+        "entity_ids": [
+          "\"NOTABLE DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-c941044d9eea8f24da132557f170b690"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was produced by a notable director known for his unique style.",
+            "Two Sinners Two Sinners is a 1935 film directed by Arthur Lubin."
+          ],
+          "relation_texts": [
+            "The film was produced by a notable director known for his unique style.",
+            "link",
+            "NOTABLE DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e0d9ea7b735ff5e23618a784dd155c83",
+            "hyperedge_name": "<hyperedge>\"The film was produced by a notable director known for his unique style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is a director, screenwriter and producer known for various film projects.\"",
+        "branch": "relation",
+        "raw_score": 0.49037960171699524,
+        "hyperedge_text": "He is a director, screenwriter and producer known for various film projects.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-b4ed25c2fae2f870d9ec38eac14a3a3b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is a director, screenwriter and producer known for various film projects.",
+            "Daniel Lind Lagerlöf Daniel Lind Lagerlöf (6 February 1969 – missing since 6 October 2011) is a Swedish director, screenwriter and producer who is presumed dead."
+          ],
+          "relation_texts": [
+            "He is a director, screenwriter and producer known for various film projects.",
+            "link",
+            "DIRECTOR",
+            "SCREENWRITER",
+            "PRODUCER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d75ab289592ffe69ca7fee2248128966",
+            "hyperedge_name": "<hyperedge>\"He is a director, screenwriter and producer known for various film projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As the director, James Franco had complete creative control over the film's direction and tone.\"",
+        "branch": "relation",
+        "raw_score": 0.48828667402267456,
+        "hyperedge_text": "As the director, James Franco had complete creative control over the film's direction and tone.",
+        "entity_ids": [
+          "\"CREATIVE CONTROL\""
+        ],
+        "chunk_ids": [
+          "chunk-9a9ce1e1fb5fdd3ee483a59c805e288f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As the director, James Franco had complete creative control over the film's direction and tone.",
+            "The Ape (2005 film) The Ape is a 2005 American comedy film directed by James Franco in his directorial debut. Franco also starred in, wrote, and served as executive producer of the film."
+          ],
+          "relation_texts": [
+            "As the director, James Franco had complete creative control over the film's direction and tone.",
+            "link",
+            "CREATIVE CONTROL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b592ecdad538615463ea283e97a6616e",
+            "hyperedge_name": "<hyperedge>\"As the director, James Franco had complete creative control over the film's direction and tone.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Robert G. Vignola is the director of the film.\"",
+        "branch": "relation",
+        "raw_score": 0.4861004948616028,
+        "hyperedge_text": "Robert G. Vignola is the director of the film.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-5a83efe0d439c48988a77409ef3ba477"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Robert G. Vignola is the director of the film.",
+            "The World and His Wife The World and His Wife is a lost American 1920 silent drama film produced by Cosmopolitan Productions and distributed through Paramount Pictures. Directed by Robert G. Vignola, the film was based on the 1908 Broadway play of the same name by Charles Frederic Nirdlinger, which was adapted from the Spanish language play\" El Gran Galeoto\" by Jose Echegaray Y Eizaguirre. The film stars Alma Rubens, Montagu Love, and Pedro de Cordoba and Broadway actress Margaret Dale in her film debut. The story was later filmed at MGM as\" Lovers\"( 1927)."
+          ],
+          "relation_texts": [
+            "Robert G. Vignola is the director of the film."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6e6cf14061c435a4695e70acad82dff7",
+            "hyperedge_name": "<hyperedge>\"Robert G. Vignola is the director of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker known for his work in the genre.\"",
+        "branch": "relation",
+        "raw_score": 0.4854732155799866,
+        "hyperedge_text": "The film was directed by a notable filmmaker known for his work in the genre.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-6e25006195b0898fe74a70b73996ec78"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker known for his work in the genre.",
+            "The Guns and the Fury The Guns and the Fury is a 1981 film starring Peter Graves and Cameron Mitchell."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker known for his work in the genre.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-48c9abe99558440a7384f0ae0ee35cd7",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker known for his work in the genre.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\"",
+        "branch": "semantic",
+        "raw_score": 0.6345375776290894,
+        "hyperedge_text": "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+        "entity_ids": [
+          "\"THE RED EAGLE\"",
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "link",
+            "THE RED EAGLE",
+            "WISIT SASANATIENG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-91d9e3d4d29e1a6737856df42d42c9d5",
+            "hyperedge_name": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a Thai superhero film.\"",
+        "branch": "semantic",
+        "raw_score": 0.5793702006340027,
+        "hyperedge_text": "The Red Eagle is a Thai superhero film.",
+        "entity_ids": [
+          "\"RED EAGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Red Eagle is a Thai superhero film.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "The Red Eagle is a Thai superhero film.",
+            "link",
+            "RED EAGLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b9becc54699e3c743c3ad1aa5938a45d",
+            "hyperedge_name": "<hyperedge>\"The Red Eagle is a Thai superhero film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edward Sloman directed The Eagle's Feather.\"",
+        "branch": "semantic",
+        "raw_score": 0.5621652603149414,
+        "hyperedge_text": "Edward Sloman directed The Eagle's Feather.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Edward Sloman directed The Eagle's Feather.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "Edward Sloman directed The Eagle's Feather.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fac7cb9ca5aa591eba903f2c3c3c7726",
+            "hyperedge_name": "<hyperedge>\"Edward Sloman directed The Eagle's Feather.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Metro Pictures produced The Eagle's Feather.\"",
+        "branch": "semantic",
+        "raw_score": 0.5199917554855347,
+        "hyperedge_text": "Metro Pictures produced The Eagle's Feather.",
+        "entity_ids": [
+          "\"PRODUCTION COMPANY\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Metro Pictures produced The Eagle's Feather.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "Metro Pictures produced The Eagle's Feather.",
+            "link",
+            "PRODUCTION COMPANY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-29a40bed08d566e0851e1b73d21bd042",
+            "hyperedge_name": "<hyperedge>\"Metro Pictures produced The Eagle's Feather.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"James Kirkwood stars in The Eagle's Feather.\"",
+        "branch": "semantic",
+        "raw_score": 0.4987311363220215,
+        "hyperedge_text": "James Kirkwood stars in The Eagle's Feather.",
+        "entity_ids": [
+          "\"STARRING\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "James Kirkwood stars in The Eagle's Feather.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "James Kirkwood stars in The Eagle's Feather.",
+            "link",
+            "STARRING"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-961988e91255c827fe47811c01dbc203",
+            "hyperedge_name": "<hyperedge>\"James Kirkwood stars in The Eagle's Feather.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is the sequel to the 1987 film 'Eye of the Eagle'. \"",
+        "branch": "semantic",
+        "raw_score": 0.4968944787979126,
+        "hyperedge_text": "It is the sequel to the 1987 film 'Eye of the Eagle'.",
+        "entity_ids": [
+          "\"EYE OF THE EAGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-db5b7b08169c13ac125bfe5c2cec5f40"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is the sequel to the 1987 film 'Eye of the Eagle'.",
+            "Eye of the Eagle 2: Inside the Enemy Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin. It is the sequel to the 1987 film\" Eye of the Eagle\". It was shot in the Philippines."
+          ],
+          "relation_texts": [
+            "It is the sequel to the 1987 film 'Eye of the Eagle'.",
+            "link",
+            "EYE OF THE EAGLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f03662f1e332f0431478b9f56d85d5fe",
+            "hyperedge_name": "<hyperedge>\"It is the sequel to the 1987 film 'Eye of the Eagle'. \""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.\"",
+        "branch": "semantic",
+        "raw_score": 0.4898465573787689,
+        "hyperedge_text": "Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.",
+        "entity_ids": [
+          "\"EYE OF THE EAGLE 2: INSIDE THE ENEMY\"",
+          "\"CARL FRANKLIN\""
+        ],
+        "chunk_ids": [
+          "chunk-db5b7b08169c13ac125bfe5c2cec5f40"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.",
+            "Eye of the Eagle 2: Inside the Enemy Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin. It is the sequel to the 1987 film\" Eye of the Eagle\". It was shot in the Philippines."
+          ],
+          "relation_texts": [
+            "Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.",
+            "link",
+            "EYE OF THE EAGLE 2: INSIDE THE ENEMY",
+            "CARL FRANKLIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-796594ab5a7a3741c4f5bf7b2c802f97",
+            "hyperedge_name": "<hyperedge>\"Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Originally titled 'The Eagle Squadron', it is based on a story by 'Melville Crossman', the pen name for 20th Century Fox studio chief Darryl F. Zanuck.\"",
+        "branch": "semantic",
+        "raw_score": 0.48686617612838745,
+        "hyperedge_text": "Originally titled 'The Eagle Squadron', it is based on a story by 'Melville Crossman', the pen name for 20th Century Fox studio chief Darryl F. Zanuck.",
+        "entity_ids": [
+          "\"THE EAGLE SQUADRON\"",
+          "\"MELVILLE CROSSMAN\"",
+          "\"DARRYL F. ZANUCK\""
+        ],
+        "chunk_ids": [
+          "chunk-bc1b44970462260395b16b9b4c894afe"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Originally titled 'The Eagle Squadron', it is based on a story by 'Melville Crossman', the pen name for 20th Century Fox studio chief Darryl F. Zanuck.",
+            "A Yank in the R.A.F. A Yank in the R.A.F. is a 1941 American black-and-white war film directed by Henry King and starring Tyrone Power and Betty Grable. It is considered a typical early-World War II production. Originally titled \"The Eagle Squadron\", it is based on a story by \"Melville Crossman\", the pen name for 20th Century Fox studio chief Darryl F. Zanuck. It follows an American pilot who joins the Royal Air Force (RAF), during a period when the United States was still neutral."
+          ],
+          "relation_texts": [
+            "Originally titled 'The Eagle Squadron', it is based on a story by 'Melville Crossman', the pen name for 20th Century Fox studio chief Darryl F. Zanuck.",
+            "link",
+            "THE EAGLE SQUADRON",
+            "MELVILLE CROSSMAN",
+            "DARRYL F. ZANUCK"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-23b0633b27c44b057777b391d84c7711",
+            "hyperedge_name": "<hyperedge>\"Originally titled 'The Eagle Squadron', it is based on a story by 'Melville Crossman', the pen name for 20th Century Fox studio chief Darryl F. Zanuck.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.\"",
+        "branch": "semantic",
+        "raw_score": 0.4793783128261566,
+        "hyperedge_text": "The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.",
+        "entity_ids": [
+          "\"EDWARD SLOMAN\"",
+          "\"METRO PICTURES\"",
+          "\"EAGLE'S FEATHER\"",
+          "\"JAMES KIRKWOOD\"",
+          "\"MARY ALDEN\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.",
+            "link",
+            "EDWARD SLOMAN",
+            "METRO PICTURES",
+            "EAGLE'S FEATHER",
+            "JAMES KIRKWOOD",
+            "MARY ALDEN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4193a13dfd79830f20149c15c111bbf1",
+            "hyperedge_name": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film.\"",
+        "branch": "semantic",
+        "raw_score": 0.4720163941383362,
+        "hyperedge_text": "The Eagle's Feather is a 1923 American silent romantic-western film.",
+        "entity_ids": [
+          "\"SILENT FILM\"",
+          "\"1923\"",
+          "\"EAGLE'S FEATHER\"",
+          "\"ROMANTIC-WESTERN\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Eagle's Feather is a 1923 American silent romantic-western film.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "The Eagle's Feather is a 1923 American silent romantic-western film.",
+            "link",
+            "SILENT FILM",
+            "1923",
+            "EAGLE'S FEATHER",
+            "ROMANTIC-WESTERN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-317697d9e4423ec96980e720ac6af8d9",
+            "hyperedge_name": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\"",
+        "hyperedge_text": "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.6345375776290894,
+        "fusion_score": 0.926907515525818,
+        "entity_ids": [
+          "\"THE RED EAGLE\"",
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "evidence_texts": [
+          "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+          "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.634538,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.926908
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wisit Sasanatieng directed and wrote the film.\"",
+        "hyperedge_text": "Wisit Sasanatieng directed and wrote the film.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.7333333333333334,
+        "entity_ids": [
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "evidence_texts": [
+          "Wisit Sasanatieng directed and wrote the film.",
+          "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.733333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.\"",
+        "hyperedge_text": "Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.6666666666666667,
+        "entity_ids": [
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-11feb072803d398626f6114415bced09"
+        ],
+        "evidence_texts": [
+          "Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.",
+          "Wisit Sasanatieng Wisit Sasanatieng( born June 28, 1963) is a Thai film director and screenwriter of Chinese descent. Best known for his colourful debut feature film,\" Tears of the Black Tiger\", he is among a\" New Wave\" of Thai directors that include Nonzee Nimibutr and Pen -Ek Ratanaruang."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.666667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.\"",
+        "hyperedge_text": "Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.6666666666666667,
+        "entity_ids": [
+          "\"WISIT SASANATIENG\"",
+          "\"THAI DIRECTORS\"",
+          "\"TEARS OF THE BLACK TIGER\"",
+          "\"NEW WAVE\"",
+          "\"PEN-EK RATANARUANG\"",
+          "\"NONZEE NIMIBUTR\""
+        ],
+        "chunk_ids": [
+          "chunk-11feb072803d398626f6114415bced09"
+        ],
+        "evidence_texts": [
+          "Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.",
+          "Wisit Sasanatieng Wisit Sasanatieng( born June 28, 1963) is a Thai film director and screenwriter of Chinese descent. Best known for his colourful debut feature film,\" Tears of the Black Tiger\", he is among a\" New Wave\" of Thai directors that include Nonzee Nimibutr and Pen -Ek Ratanaruang."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.666667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a Thai superhero film.\"",
+        "hyperedge_text": "The Red Eagle is a Thai superhero film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.5,
+        "semantic_score": 0.5793702006340027,
+        "fusion_score": 0.5158740401268006,
+        "entity_ids": [
+          "\"RED EAGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "evidence_texts": [
+          "The Red Eagle is a Thai superhero film.",
+          "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.5,
+          "S": 0.57937,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515874
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q5",
+    "question": "Who is the director of Vishukkani?",
+    "retrieval_question": "Who is the director of Vishukkani?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Vishukkani?",
+      "retrieval_question": "Who is the director of Vishukkani?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+        "entity_ids": [
+          "\"J. SASIKUMAR\"",
+          "\"VISHUKKANI\"",
+          "\"R. M. SUNDARAM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb825f40948545ed0ad381da2dddf3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+            "Vishukkani Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram. The film stars Prem Nazir, Sharada, Thikkurissi Sukumaran Nair and Sankaradi in the lead roles. The film has musical score by Salil Chowdhary. The film was a remake of the Tamil film\" Karpagam\"."
+          ],
+          "relation_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+            "link",
+            "J. SASIKUMAR",
+            "VISHUKKANI",
+            "R. M. SUNDARAM"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Naagapanchami is a 1989 Indian Malayalam film, directed by J. Sasikumar, starring Suresh Gopi and Shobhana in the lead roles.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Naagapanchami is a 1989 Indian Malayalam film, directed by J. Sasikumar, starring Suresh Gopi and Shobhana in the lead roles.",
+        "entity_ids": [
+          "\"NAAGAPANCHAMI\"",
+          "\"J. SASIKUMAR\"",
+          "\"SURESH GOPI\"",
+          "\"SHOBHANA\""
+        ],
+        "chunk_ids": [
+          "chunk-2bd5bbe0323674cdcc6888a24a44babf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Naagapanchami is a 1989 Indian Malayalam film, directed by J. Sasikumar, starring Suresh Gopi and Shobhana in the lead roles.",
+            "Naagapanchami Naagapanchami is a 1989 Indian Malayalam film, directed by J. Sasikumar, starring Suresh Gopi and Shobhana in the lead roles."
+          ],
+          "relation_texts": [
+            "Naagapanchami is a 1989 Indian Malayalam film, directed by J. Sasikumar, starring Suresh Gopi and Shobhana in the lead roles.",
+            "link",
+            "NAAGAPANCHAMI",
+            "J. SASIKUMAR",
+            "SURESH GOPI",
+            "SHOBHANA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\"",
+        "branch": "relation",
+        "raw_score": 0.5356717705726624,
+        "hyperedge_text": "The director's vision shaped the film's narrative style and storytelling.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"NARRATIVE STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-bc89e6fb4b1d4bc13f12b778e185493c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director's vision shaped the film's narrative style and storytelling.",
+            "The Law and Mr. Lee The Law and Mr Lee is a 2003 American TV film."
+          ],
+          "relation_texts": [
+            "The director's vision shaped the film's narrative style and storytelling.",
+            "link",
+            "DIRECTOR",
+            "NARRATIVE STYLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1f7ac9a08a885fa2e8df00bc09ea825c",
+            "hyperedge_name": "<hyperedge>\"The director's vision shaped the film's narrative style and storytelling.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director's vision is reflected in the cinematography of the film.\"",
+        "branch": "relation",
+        "raw_score": 0.5300764441490173,
+        "hyperedge_text": "The director's vision is reflected in the cinematography of the film.",
+        "entity_ids": [
+          "\"CINEMATOGRAPHY\""
+        ],
+        "chunk_ids": [
+          "chunk-875d0ddc97498458b33924bd007cede5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director's vision is reflected in the cinematography of the film.",
+            "Tahaan Tahaan – A Boy With a Grenade is an Indian Hindi- language drama film by Santosh Sivan. The film is based on the life of a young boy and his pet donkey. It is a fable- like journey of the eponymous eight- year- old boy, whose life revolves around the pursuit to find real purpose in his little world. The film stars Purav Bhandare as the young boy. Anupam Kher, Sarika, Rahul Bose, Rahul Khanna and Victor Banerjee form the rest of the cast. It was filmed on location in Jammu and Kashmir."
+          ],
+          "relation_texts": [
+            "The director's vision is reflected in the cinematography of the film.",
+            "link",
+            "CINEMATOGRAPHY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a6e2e2c5bab166ecb5cc3d5ab325c087",
+            "hyperedge_name": "<hyperedge>\"The director's vision is reflected in the cinematography of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker.\"",
+        "branch": "relation",
+        "raw_score": 0.5214277505874634,
+        "hyperedge_text": "The film was directed by a notable filmmaker.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-878081a5191725d702602749081a77c4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker.",
+            "California Winter California Winter is an American drama film from 2012."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c8914e7c16c6931f8328589f436a636c",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He directed both his own films as well as films directed by others.\"",
+        "branch": "relation",
+        "raw_score": 0.5061803460121155,
+        "hyperedge_text": "He directed both his own films as well as films directed by others.",
+        "entity_ids": [
+          "\"HIS OWN FILMS\"",
+          "\"FILMS DIRECTED BY OTHERS\""
+        ],
+        "chunk_ids": [
+          "chunk-1622512e42b9fe00ff1ff6a93ac35761"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "Maurice Elvey Maurice Elvey( 11 November 1887 – 28 August 1967) was the most prolific film director in British history. He directed nearly 200 films between 1913 and 1957. During the silent film era he directed as many as twenty films per year. He also produced more than fifty films- his own as well as films directed by others."
+          ],
+          "relation_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "link",
+            "HIS OWN FILMS",
+            "FILMS DIRECTED BY OTHERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-427500c2d82019f242a873db4d43cbc1",
+            "hyperedge_name": "<hyperedge>\"He directed both his own films as well as films directed by others.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4979618489742279,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced by a notable director known for his unique style.\"",
+        "branch": "relation",
+        "raw_score": 0.49319133162498474,
+        "hyperedge_text": "The film was produced by a notable director known for his unique style.",
+        "entity_ids": [
+          "\"NOTABLE DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-c941044d9eea8f24da132557f170b690"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was produced by a notable director known for his unique style.",
+            "Two Sinners Two Sinners is a 1935 film directed by Arthur Lubin."
+          ],
+          "relation_texts": [
+            "The film was produced by a notable director known for his unique style.",
+            "link",
+            "NOTABLE DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e0d9ea7b735ff5e23618a784dd155c83",
+            "hyperedge_name": "<hyperedge>\"The film was produced by a notable director known for his unique style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is a director, screenwriter and producer known for various film projects.\"",
+        "branch": "relation",
+        "raw_score": 0.49037960171699524,
+        "hyperedge_text": "He is a director, screenwriter and producer known for various film projects.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-b4ed25c2fae2f870d9ec38eac14a3a3b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is a director, screenwriter and producer known for various film projects.",
+            "Daniel Lind Lagerlöf Daniel Lind Lagerlöf (6 February 1969 – missing since 6 October 2011) is a Swedish director, screenwriter and producer who is presumed dead."
+          ],
+          "relation_texts": [
+            "He is a director, screenwriter and producer known for various film projects.",
+            "link",
+            "DIRECTOR",
+            "SCREENWRITER",
+            "PRODUCER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d75ab289592ffe69ca7fee2248128966",
+            "hyperedge_name": "<hyperedge>\"He is a director, screenwriter and producer known for various film projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As the director, James Franco had complete creative control over the film's direction and tone.\"",
+        "branch": "relation",
+        "raw_score": 0.48828667402267456,
+        "hyperedge_text": "As the director, James Franco had complete creative control over the film's direction and tone.",
+        "entity_ids": [
+          "\"CREATIVE CONTROL\""
+        ],
+        "chunk_ids": [
+          "chunk-9a9ce1e1fb5fdd3ee483a59c805e288f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As the director, James Franco had complete creative control over the film's direction and tone.",
+            "The Ape (2005 film) The Ape is a 2005 American comedy film directed by James Franco in his directorial debut. Franco also starred in, wrote, and served as executive producer of the film."
+          ],
+          "relation_texts": [
+            "As the director, James Franco had complete creative control over the film's direction and tone.",
+            "link",
+            "CREATIVE CONTROL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b592ecdad538615463ea283e97a6616e",
+            "hyperedge_name": "<hyperedge>\"As the director, James Franco had complete creative control over the film's direction and tone.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Robert G. Vignola is the director of the film.\"",
+        "branch": "relation",
+        "raw_score": 0.4861004948616028,
+        "hyperedge_text": "Robert G. Vignola is the director of the film.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-5a83efe0d439c48988a77409ef3ba477"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Robert G. Vignola is the director of the film.",
+            "The World and His Wife The World and His Wife is a lost American 1920 silent drama film produced by Cosmopolitan Productions and distributed through Paramount Pictures. Directed by Robert G. Vignola, the film was based on the 1908 Broadway play of the same name by Charles Frederic Nirdlinger, which was adapted from the Spanish language play\" El Gran Galeoto\" by Jose Echegaray Y Eizaguirre. The film stars Alma Rubens, Montagu Love, and Pedro de Cordoba and Broadway actress Margaret Dale in her film debut. The story was later filmed at MGM as\" Lovers\"( 1927)."
+          ],
+          "relation_texts": [
+            "Robert G. Vignola is the director of the film."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6e6cf14061c435a4695e70acad82dff7",
+            "hyperedge_name": "<hyperedge>\"Robert G. Vignola is the director of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker known for his work in the genre.\"",
+        "branch": "relation",
+        "raw_score": 0.4854732155799866,
+        "hyperedge_text": "The film was directed by a notable filmmaker known for his work in the genre.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-6e25006195b0898fe74a70b73996ec78"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker known for his work in the genre.",
+            "The Guns and the Fury The Guns and the Fury is a 1981 film starring Peter Graves and Cameron Mitchell."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker known for his work in the genre.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-48c9abe99558440a7384f0ae0ee35cd7",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker known for his work in the genre.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.\"",
+        "branch": "semantic",
+        "raw_score": 0.6405375003814697,
+        "hyperedge_text": "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+        "entity_ids": [
+          "\"J. SASIKUMAR\"",
+          "\"VISHUKKANI\"",
+          "\"R. M. SUNDARAM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb825f40948545ed0ad381da2dddf3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+            "Vishukkani Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram. The film stars Prem Nazir, Sharada, Thikkurissi Sukumaran Nair and Sankaradi in the lead roles. The film has musical score by Salil Chowdhary. The film was a remake of the Tamil film\" Karpagam\"."
+          ],
+          "relation_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+            "link",
+            "J. SASIKUMAR",
+            "VISHUKKANI",
+            "R. M. SUNDARAM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cab811203e1e1b68d8a33eec363a2b38",
+            "hyperedge_name": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film.\"",
+        "branch": "semantic",
+        "raw_score": 0.582728385925293,
+        "hyperedge_text": "Vishukkani is a 1977 Indian Malayalam film.",
+        "entity_ids": [
+          "\"1977\"",
+          "\"INDIAN\"",
+          "\"MALAYALAM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb825f40948545ed0ad381da2dddf3e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film.",
+            "Vishukkani Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram. The film stars Prem Nazir, Sharada, Thikkurissi Sukumaran Nair and Sankaradi in the lead roles. The film has musical score by Salil Chowdhary. The film was a remake of the Tamil film\" Karpagam\"."
+          ],
+          "relation_texts": [
+            "Vishukkani is a 1977 Indian Malayalam film.",
+            "link",
+            "1977",
+            "INDIAN",
+            "MALAYALAM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-81d30ead1b5b0707e5e06b895e6fb26d",
+            "hyperedge_name": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by P. G. Viswambharan.\"",
+        "branch": "semantic",
+        "raw_score": 0.5382391810417175,
+        "hyperedge_text": "The film was directed by P. G. Viswambharan.",
+        "entity_ids": [
+          "\"P. G. VISWAMBHARAN\""
+        ],
+        "chunk_ids": [
+          "chunk-3f91cc4bd2d2245ee798ae7f87a5c257"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by P. G. Viswambharan.",
+            "Pravachakan Pravachakan is a Malayalam movie released in 1993 under the direction of P. G. Viswambharan. The films has notable actors like Mukesh, Rajan P. Dev, Siddique and Narendra Prasad."
+          ],
+          "relation_texts": [
+            "The film was directed by P. G. Viswambharan.",
+            "link",
+            "P. G. VISWAMBHARAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-53b85ef2bf5a78ac54f26b97b8ffb779",
+            "hyperedge_name": "<hyperedge>\"The film was directed by P. G. Viswambharan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film marked the directorial debut of the great Indian film director K. Viswanath.\"",
+        "branch": "semantic",
+        "raw_score": 0.5341922044754028,
+        "hyperedge_text": "The film marked the directorial debut of the great Indian film director K. Viswanath.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-12f53f599ea998992b51ac4ace7bd89e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film marked the directorial debut of the great Indian film director K. Viswanath.",
+            "Aatma Gowravam Aatma Gowravam( English: Self- Esteem) is a 1965 Telugu drama film, produced by D. Madhusudhana Rao under the Annapurna Pictures banner and directed by K. Viswanath. It stars Akkineni Nageswara Rao, Kanchana, Rajasree in the lead roles and music composed by Saluri Rajeswara Rao. The film marked the directorial debut of the great Indian film director\" K. Viswanath\". The film is based on the novel of same name by Yaddanapudi Sulochana Rani. It won the Nandi Award for Best Feature Film in that year. The film was screened at the Asian and African film Festival at Tashkent."
+          ],
+          "relation_texts": [
+            "The film marked the directorial debut of the great Indian film director K. Viswanath."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ed95b418374582c381304f72176153df",
+            "hyperedge_name": "<hyperedge>\"The film marked the directorial debut of the great Indian film director K. Viswanath.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was written and directed by Tamilvannan.\"",
+        "branch": "semantic",
+        "raw_score": 0.5326669812202454,
+        "hyperedge_text": "The film was written and directed by Tamilvannan.",
+        "entity_ids": [
+          "\"TAMILVANNAN\""
+        ],
+        "chunk_ids": [
+          "chunk-702c2b37f961cd460321b7dac02f14ea"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was written and directed by Tamilvannan.",
+            "Nandhi Nandhi is a 2011 Indian Tamil- language action masala film written and directed by Tamilvannan and produced by Dinesh Karthik. The film stars Akhil, Sanusha, and Singampuli. The music was composed by Bharathwaj with editing by V. T. Vijayan and cinematography by M. P. Ratheesh. The film was released on 11 February 2011."
+          ],
+          "relation_texts": [
+            "The film was written and directed by Tamilvannan.",
+            "link",
+            "TAMILVANNAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a617f8dcf34e8b5747c0015a0ecffe34",
+            "hyperedge_name": "<hyperedge>\"The film was written and directed by Tamilvannan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Kasthuri Raja.\"",
+        "branch": "semantic",
+        "raw_score": 0.5310716032981873,
+        "hyperedge_text": "The film was directed by Kasthuri Raja.",
+        "entity_ids": [
+          "\"KASTHURI RAJA\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc5d4b3291d044024d9a1ba4d46a448"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Kasthuri Raja.",
+            "En Aasai Rasave En Aasai Rasave is a 1998 Tamil drama film directed by Kasthuri Raja. The film features Sivaji Ganesan and Murali in the lead roles while Raadhika, Roja and Suvalakshmi all play other supporting roles. The film, which focussed on the lives of street dancers, released in August 1998."
+          ],
+          "relation_texts": [
+            "The film was directed by Kasthuri Raja.",
+            "link",
+            "KASTHURI RAJA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-22fd5a7a7a838b35c43f1b3382b6e6d4",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Kasthuri Raja.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by M. Krishnan Nair.\"",
+        "branch": "semantic",
+        "raw_score": 0.5271329879760742,
+        "hyperedge_text": "The film is directed by M. Krishnan Nair.",
+        "entity_ids": [
+          "\"M. KRISHNAN NAIR\""
+        ],
+        "chunk_ids": [
+          "chunk-60fe53075520cbe072f859880744b542"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed by M. Krishnan Nair.",
+            "Kadal (1968 film) Kadal is a 1968 Indian Malayalam film, directed by M. Krishnan Nair and produced by P. Subramaniam. The film stars Madhu, Sharada, Thikkurissi Sukumaran Nair and Shobha in the lead roles. The film had musical score by M. B. Sreenivasan."
+          ],
+          "relation_texts": [
+            "The film is directed by M. Krishnan Nair.",
+            "link",
+            "M. KRISHNAN NAIR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-771010c5a53603baaa5e181343e7c9c9",
+            "hyperedge_name": "<hyperedge>\"The film is directed by M. Krishnan Nair.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vinod Kumar Vijayan is an Indian Film Director, Writer and Producer.\"",
+        "branch": "semantic",
+        "raw_score": 0.5268011093139648,
+        "hyperedge_text": "Vinod Kumar Vijayan is an Indian Film Director, Writer and Producer.",
+        "entity_ids": [
+          "\"WRITER\"",
+          "\"FILM DIRECTOR\"",
+          "\"PRODUCER\"",
+          "\"VINOD KUMAR VIJAYAN\""
+        ],
+        "chunk_ids": [
+          "chunk-7bce88630927223246fb4e7a1bae726a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Vinod Kumar Vijayan is an Indian Film Director, Writer and Producer.",
+            "Vinod Vijayan Vinod Kumar Vijayan is an Indian Film Director, Writer and Producer. He got International Video Festival Award for his first Short Film MASK in age of 18. He is known for his works in Malayalam and Telugu cinema. His films include\" Quotation\"( 2004),\" Red Salute\"( 2006) and\" D Company: The Judgement Day\"( 2013)."
+          ],
+          "relation_texts": [
+            "Vinod Kumar Vijayan is an Indian Film Director, Writer and Producer.",
+            "link",
+            "WRITER",
+            "FILM DIRECTOR",
+            "PRODUCER",
+            "VINOD KUMAR VIJAYAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3e901d4109e93cc76706304d8d250b5b",
+            "hyperedge_name": "<hyperedge>\"Vinod Kumar Vijayan is an Indian Film Director, Writer and Producer.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed and produced by Navodaya Appachan.\"",
+        "branch": "semantic",
+        "raw_score": 0.5187490582466125,
+        "hyperedge_text": "The film is directed and produced by Navodaya Appachan.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"PRODUCER\""
+        ],
+        "chunk_ids": [
+          "chunk-dd7a75653440f2f462941c93952ce8db"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed and produced by Navodaya Appachan.",
+            "Kadathanaattu Maakkam Kadathanaattu Maakkam is a 1978 Indian Malayalam-language historical period drama film directed and produced by Navodaya Appachan under Navodaya Studio. The film stars Prem Nazir, Jayan, Sheela and Sukumari in the lead roles. The film has musical score by G. Devarajan."
+          ],
+          "relation_texts": [
+            "The film is directed and produced by Navodaya Appachan.",
+            "link",
+            "DIRECTOR",
+            "PRODUCER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c927b0cf37dccfbe8bbc1111b01396cf",
+            "hyperedge_name": "<hyperedge>\"The film is directed and produced by Navodaya Appachan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film stars Vishnuvardhan in the title role, along with Suman Ranganathan and Tara in leading roles.\"",
+        "branch": "semantic",
+        "raw_score": 0.5036330223083496,
+        "hyperedge_text": "The film stars Vishnuvardhan in the title role, along with Suman Ranganathan and Tara in leading roles.",
+        "entity_ids": [
+          "\"TARA\"",
+          "\"VISHNUVARDHAN\"",
+          "\"SUMAN RANGANATHAN\""
+        ],
+        "chunk_ids": [
+          "chunk-3403eef1937e72f5bf1feadfb623698b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film stars Vishnuvardhan in the title role, along with Suman Ranganathan and Tara in leading roles.",
+            "Doctor Krishna Doctor Krishna is a 1989 Indian Kannada drama film, directed and written by Phani Ramachandra. The film stars Vishnuvardhan in the title role, along with Suman Ranganathan and Tara in leading roles. The music of the film was composed by Rajan-Nagendra. Produced by Vijaya Shankar Bhat under Satya Sai Movies banner, the film was released in 1989 and met with positive response from critics and audience. Actress Leelavathi won the State award for Best Supporting actress and the film was nominated under best film category."
+          ],
+          "relation_texts": [
+            "The film stars Vishnuvardhan in the title role, along with Suman Ranganathan and Tara in leading roles.",
+            "link",
+            "TARA",
+            "VISHNUVARDHAN",
+            "SUMAN RANGANATHAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a9f6a8f67b9652c8f85d15dd123b6216",
+            "hyperedge_name": "<hyperedge>\"The film stars Vishnuvardhan in the title role, along with Suman Ranganathan and Tara in leading roles.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.\"",
+        "hyperedge_text": "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.6405375003814697,
+        "fusion_score": 0.928107500076294,
+        "entity_ids": [
+          "\"J. SASIKUMAR\"",
+          "\"VISHUKKANI\"",
+          "\"R. M. SUNDARAM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb825f40948545ed0ad381da2dddf3e"
+        ],
+        "evidence_texts": [
+          "Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram.",
+          "Vishukkani Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram. The film stars Prem Nazir, Sharada, Thikkurissi Sukumaran Nair and Sankaradi in the lead roles. The film has musical score by Salil Chowdhary. The film was a remake of the Tamil film\" Karpagam\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.640538,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.928108
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Naagapanchami is a 1989 Indian Malayalam film, directed by J. Sasikumar, starring Suresh Gopi and Shobhana in the lead roles.\"",
+        "hyperedge_text": "Naagapanchami is a 1989 Indian Malayalam film, directed by J. Sasikumar, starring Suresh Gopi and Shobhana in the lead roles.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.0,
+        "fusion_score": 0.6000000000000001,
+        "entity_ids": [
+          "\"NAAGAPANCHAMI\"",
+          "\"J. SASIKUMAR\"",
+          "\"SURESH GOPI\"",
+          "\"SHOBHANA\""
+        ],
+        "chunk_ids": [
+          "chunk-2bd5bbe0323674cdcc6888a24a44babf"
+        ],
+        "evidence_texts": [
+          "Naagapanchami is a 1989 Indian Malayalam film, directed by J. Sasikumar, starring Suresh Gopi and Shobhana in the lead roles.",
+          "Naagapanchami Naagapanchami is a 1989 Indian Malayalam film, directed by J. Sasikumar, starring Suresh Gopi and Shobhana in the lead roles."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.6
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Vishukkani is a 1977 Indian Malayalam film.\"",
+        "hyperedge_text": "Vishukkani is a 1977 Indian Malayalam film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.5,
+        "semantic_score": 0.582728385925293,
+        "fusion_score": 0.5165456771850586,
+        "entity_ids": [
+          "\"1977\"",
+          "\"INDIAN\"",
+          "\"MALAYALAM\""
+        ],
+        "chunk_ids": [
+          "chunk-dfb825f40948545ed0ad381da2dddf3e"
+        ],
+        "evidence_texts": [
+          "Vishukkani is a 1977 Indian Malayalam film.",
+          "Vishukkani Vishukkani is a 1977 Indian Malayalam film, directed by J. Sasikumar and produced by R. M. Sundaram. The film stars Prem Nazir, Sharada, Thikkurissi Sukumaran Nair and Sankaradi in the lead roles. The film has musical score by Salil Chowdhary. The film was a remake of the Tamil film\" Karpagam\"."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.5,
+          "S": 0.582728,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516546
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by P. G. Viswambharan.\"",
+        "hyperedge_text": "The film was directed by P. G. Viswambharan.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5382391810417175,
+        "fusion_score": 0.5076478362083435,
+        "entity_ids": [
+          "\"P. G. VISWAMBHARAN\""
+        ],
+        "chunk_ids": [
+          "chunk-3f91cc4bd2d2245ee798ae7f87a5c257"
+        ],
+        "evidence_texts": [
+          "The film was directed by P. G. Viswambharan.",
+          "Pravachakan Pravachakan is a Malayalam movie released in 1993 under the direction of P. G. Viswambharan. The films has notable actors like Mukesh, Rajan P. Dev, Siddique and Narendra Prasad."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.538239,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.507648
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film marked the directorial debut of the great Indian film director K. Viswanath.\"",
+        "hyperedge_text": "The film marked the directorial debut of the great Indian film director K. Viswanath.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5341922044754028,
+        "fusion_score": 0.5068384408950806,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-12f53f599ea998992b51ac4ace7bd89e"
+        ],
+        "evidence_texts": [
+          "The film marked the directorial debut of the great Indian film director K. Viswanath.",
+          "Aatma Gowravam Aatma Gowravam( English: Self- Esteem) is a 1965 Telugu drama film, produced by D. Madhusudhana Rao under the Annapurna Pictures banner and directed by K. Viswanath. It stars Akkineni Nageswara Rao, Kanchana, Rajasree in the lead roles and music composed by Saluri Rajeswara Rao. The film marked the directorial debut of the great Indian film director\" K. Viswanath\". The film is based on the novel of same name by Yaddanapudi Sulochana Rani. It won the Nandi Award for Best Feature Film in that year. The film was screened at the Asian and African film Festival at Tashkent."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.534192,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.506838
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What film has the director of the birth date of The Red Eagle?",
+    "retrieval_question": "What film has the director of the birth date of The Red Eagle?",
+    "dependency_question_rewrite": {
+      "original_question": "What film has the director of the birth date of The Red Eagle?",
+      "retrieval_question": "What film has the director of the birth date of The Red Eagle?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+        "entity_ids": [
+          "\"THE RED EAGLE\"",
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "link",
+            "THE RED EAGLE",
+            "WISIT SASANATIENG"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.",
+        "entity_ids": [
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-11feb072803d398626f6114415bced09"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.",
+            "Wisit Sasanatieng Wisit Sasanatieng( born June 28, 1963) is a Thai film director and screenwriter of Chinese descent. Best known for his colourful debut feature film,\" Tears of the Black Tiger\", he is among a\" New Wave\" of Thai directors that include Nonzee Nimibutr and Pen -Ek Ratanaruang."
+          ],
+          "relation_texts": [
+            "Wisit Sasanatieng is a Thai film director and screenwriter of Chinese descent.",
+            "link",
+            "WISIT SASANATIENG"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.",
+        "entity_ids": [
+          "\"WISIT SASANATIENG\"",
+          "\"THAI DIRECTORS\"",
+          "\"TEARS OF THE BLACK TIGER\"",
+          "\"NEW WAVE\"",
+          "\"PEN-EK RATANARUANG\"",
+          "\"NONZEE NIMIBUTR\""
+        ],
+        "chunk_ids": [
+          "chunk-11feb072803d398626f6114415bced09"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.",
+            "Wisit Sasanatieng Wisit Sasanatieng( born June 28, 1963) is a Thai film director and screenwriter of Chinese descent. Best known for his colourful debut feature film,\" Tears of the Black Tiger\", he is among a\" New Wave\" of Thai directors that include Nonzee Nimibutr and Pen -Ek Ratanaruang."
+          ],
+          "relation_texts": [
+            "Wisit Sasanatieng (born June 28, 1963) is a Thai film director and screenwriter of Chinese descent.",
+            "link",
+            "WISIT SASANATIENG",
+            "THAI DIRECTORS",
+            "TEARS OF THE BLACK TIGER",
+            "NEW WAVE",
+            "PEN-EK RATANARUANG",
+            "NONZEE NIMIBUTR"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wisit Sasanatieng directed and wrote the film.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Wisit Sasanatieng directed and wrote the film.",
+        "entity_ids": [
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Wisit Sasanatieng directed and wrote the film.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "Wisit Sasanatieng directed and wrote the film.",
+            "link",
+            "WISIT SASANATIENG"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born on February 9, 1976, and is recognized for his contributions in multiple entertainment fields including acting, writing, and directing.\"",
+        "branch": "relation",
+        "raw_score": 0.4986353814601898,
+        "hyperedge_text": "He was born on February 9, 1976, and is recognized for his contributions in multiple entertainment fields including acting, writing, and directing.",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"MUSICIAN\"",
+          "\"ACTOR\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\"",
+          "\"FEBRUARY 9, 1976\""
+        ],
+        "chunk_ids": [
+          "chunk-40c9c1487a61b2650f718d315736c2ba"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was born on February 9, 1976, and is recognized for his contributions in multiple entertainment fields including acting, writing, and directing.",
+            "Charlie Day Charles Peckham Day( born February 9, 1976) is an American actor, screenwriter, producer, director and musician. He is best known for playing Charlie Kelly on\" It's Always Sunny in Philadelphia\" for which he was nominated for the Critics' Choice Television Award for Best Actor in a Comedy Series in 2011. In film, he is known for his role as Dale in the films\" Horrible Bosses\"( 2011) and its 2014 sequel, as well as for his roles in\" Monsters University\"( 2013),\" Pacific Rim\"( 2013),\" The Lego Movie\"( 2014),\" Fist Fight\"( 2017),( 2018), and( 2019). From 2018 to 2019, Day was the executive producer on the Fox comedy\" The Cool Kids.\""
+          ],
+          "relation_texts": [
+            "He was born on February 9, 1976, and is recognized for his contributions in multiple entertainment fields including acting, writing, and directing.",
+            "link",
+            "DIRECTOR",
+            "MUSICIAN",
+            "ACTOR",
+            "SCREENWRITER",
+            "PRODUCER",
+            "FEBRUARY 9, 1976"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ad7a0de560a32ad4fba3438a88e41dfa",
+            "hyperedge_name": "<hyperedge>\"He was born on February 9, 1976, and is recognized for his contributions in multiple entertainment fields including acting, writing, and directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker.\"",
+        "branch": "relation",
+        "raw_score": 0.49787917733192444,
+        "hyperedge_text": "The film was directed by a notable filmmaker.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-878081a5191725d702602749081a77c4"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker.",
+            "California Winter California Winter is an American drama film from 2012."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c8914e7c16c6931f8328589f436a636c",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed in 1972, highlighting its release year.\"",
+        "branch": "relation",
+        "raw_score": 0.4946528673171997,
+        "hyperedge_text": "The film was directed in 1972, highlighting its release year.",
+        "entity_ids": [
+          "\"1972\""
+        ],
+        "chunk_ids": [
+          "chunk-2df0399a194a4aa6e2ce50534c0f6324"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed in 1972, highlighting its release year.",
+            "I Love You Rosa I Love You Rosa( translit. Ani Ohev Otach Rosa) is a 1972 Israeli film directed by Moshé Mizrahi. It was nominated for the Academy Award for Best Foreign Language Film. It was also entered into the 1972 Cannes Film Festival."
+          ],
+          "relation_texts": [
+            "The film was directed in 1972, highlighting its release year.",
+            "link",
+            "1972"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-72402302147169bb2f7e6af28a2ae98c",
+            "hyperedge_name": "<hyperedge>\"The film was directed in 1972, highlighting its release year.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The dates associated with his notable films highlight his active years in filmmaking.\"",
+        "branch": "relation",
+        "raw_score": 0.48569902777671814,
+        "hyperedge_text": "The dates associated with his notable films highlight his active years in filmmaking.",
+        "entity_ids": [
+          "\"1955\"",
+          "\"1951\"",
+          "\"1958\""
+        ],
+        "chunk_ids": [
+          "chunk-d8f0fe9af4e923c27006ffac413a8198"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The dates associated with his notable films highlight his active years in filmmaking.",
+            "Werner Jacobs Werner Jacobs (1909–1999) was a German film director. . He was born in Berlin on the 24 April, 1990. He is best known for his contributions to Modebummel (1951), Der Stern von Santa Clara (1958) and André und Ursula (1955). ."
+          ],
+          "relation_texts": [
+            "The dates associated with his notable films highlight his active years in filmmaking.",
+            "link",
+            "1955",
+            "1951",
+            "1958"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2a504f451267c754c89c992fd532943c",
+            "hyperedge_name": "<hyperedge>\"The dates associated with his notable films highlight his active years in filmmaking.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by a notable filmmaker known for his work in the genre.\"",
+        "branch": "relation",
+        "raw_score": 0.48395049571990967,
+        "hyperedge_text": "The film was directed by a notable filmmaker known for his work in the genre.",
+        "entity_ids": [
+          "\"NOTABLE FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-6e25006195b0898fe74a70b73996ec78"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by a notable filmmaker known for his work in the genre.",
+            "The Guns and the Fury The Guns and the Fury is a 1981 film starring Peter Graves and Cameron Mitchell."
+          ],
+          "relation_texts": [
+            "The film was directed by a notable filmmaker known for his work in the genre.",
+            "link",
+            "NOTABLE FILMMAKER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-48c9abe99558440a7384f0ae0ee35cd7",
+            "hyperedge_name": "<hyperedge>\"The film was directed by a notable filmmaker known for his work in the genre.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's release occurred on a specific date.\"",
+        "branch": "relation",
+        "raw_score": 0.48343625664711,
+        "hyperedge_text": "The film's release occurred on a specific date.",
+        "entity_ids": [
+          "\"SPECIFIC DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film's release occurred on a specific date.",
+            "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+          ],
+          "relation_texts": [
+            "The film's release occurred on a specific date.",
+            "link",
+            "SPECIFIC DATE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bf00e02cc9aa046e03d764b86b678f46",
+            "hyperedge_name": "<hyperedge>\"The film's release occurred on a specific date.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He made his directorial debut in 1943.\"",
+        "branch": "relation",
+        "raw_score": 0.4801897406578064,
+        "hyperedge_text": "He made his directorial debut in 1943.",
+        "entity_ids": [
+          "\"DIRECTORIAL DEBUT\""
+        ],
+        "chunk_ids": [
+          "chunk-4bca9bc3902010a89a5ddc50d54a0679"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He made his directorial debut in 1943.",
+            "Hugo Fregonese Hugo Geronimo Fregonese( April 8, 1908 in Mendoza – January 11, 1987 in Tigre) was an Argentine film director and screenwriter who worked both in Hollywood and his home country. He made his directorial debut in 1943. In 1949, he directed\" Apenas un delincuente\". Most of Fregonese's American films were Westerns and crime melodramas, like\" Man in the Attic\"( 1953)\" and Black Tuesday\"( 1954). He worked with such Hollywood actors as Gary Cooper, Barbara Stanwyck, Anthony Quinn, Edward G. Robinson, Luisa Vehil, Víctor Laplace, Soledad Silveyra, Paul Naschy and Joel McCrea, among others. For directing the now- almost forgotten film\" My Six Convicts\"( 1952), Fregonese was nominated for the Directors Guild of America Award for Outstanding Directing- Feature Film."
+          ],
+          "relation_texts": [
+            "He made his directorial debut in 1943.",
+            "link",
+            "DIRECTORIAL DEBUT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a6946747d73ecd8d545f2f47da556e6a",
+            "hyperedge_name": "<hyperedge>\"He made his directorial debut in 1943.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by a prominent filmmaker known for their unique style.\"",
+        "branch": "relation",
+        "raw_score": 0.47933995723724365,
+        "hyperedge_text": "It was directed by a prominent filmmaker known for their unique style.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-2e66df8ff67c5a281d0840d0c1dfdfe2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was directed by a prominent filmmaker known for their unique style.",
+            "I'm Nobody's Sweetheart Now I'm Nobody's Sweetheart Now is a 1940 film."
+          ],
+          "relation_texts": [
+            "It was directed by a prominent filmmaker known for their unique style.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-549e1c37bd742da93ec23e736c0882ea",
+            "hyperedge_name": "<hyperedge>\"It was directed by a prominent filmmaker known for their unique style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released in 1944, a significant year for many cinematic works.\"",
+        "branch": "relation",
+        "raw_score": 0.47729653120040894,
+        "hyperedge_text": "The film was released in 1944, a significant year for many cinematic works.",
+        "entity_ids": [
+          "\"1944\""
+        ],
+        "chunk_ids": [
+          "chunk-bf0f11c0a7145a41cf50b019c6ae0a02"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was released in 1944, a significant year for many cinematic works.",
+            "Shadows in the Night (1944 film) Shadows in the Night is a 1944 American mystery film directed by Eugene Forde and starring Warner Baxter, Nina Foch and George Zucco. It is part of the Crime Doctor series of films made by Columbia Pictures. It is also known by the alternative title of Crime Doctor's Rendezvous."
+          ],
+          "relation_texts": [
+            "The film was released in 1944, a significant year for many cinematic works.",
+            "link",
+            "1944"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c18afd9182789236f77b4d66a1224757",
+            "hyperedge_name": "<hyperedge>\"The film was released in 1944, a significant year for many cinematic works.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced by a notable director known for his unique style.\"",
+        "branch": "relation",
+        "raw_score": 0.4769538640975952,
+        "hyperedge_text": "The film was produced by a notable director known for his unique style.",
+        "entity_ids": [
+          "\"NOTABLE DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-c941044d9eea8f24da132557f170b690"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was produced by a notable director known for his unique style.",
+            "Two Sinners Two Sinners is a 1935 film directed by Arthur Lubin."
+          ],
+          "relation_texts": [
+            "The film was produced by a notable director known for his unique style.",
+            "link",
+            "NOTABLE DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e0d9ea7b735ff5e23618a784dd155c83",
+            "hyperedge_name": "<hyperedge>\"The film was produced by a notable director known for his unique style.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\"",
+        "branch": "semantic",
+        "raw_score": 0.5722814798355103,
+        "hyperedge_text": "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+        "entity_ids": [
+          "\"THE RED EAGLE\"",
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+            "link",
+            "THE RED EAGLE",
+            "WISIT SASANATIENG"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-91d9e3d4d29e1a6737856df42d42c9d5",
+            "hyperedge_name": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a Thai superhero film.\"",
+        "branch": "semantic",
+        "raw_score": 0.5333654880523682,
+        "hyperedge_text": "The Red Eagle is a Thai superhero film.",
+        "entity_ids": [
+          "\"RED EAGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Red Eagle is a Thai superhero film.",
+            "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+          ],
+          "relation_texts": [
+            "The Red Eagle is a Thai superhero film.",
+            "link",
+            "RED EAGLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b9becc54699e3c743c3ad1aa5938a45d",
+            "hyperedge_name": "<hyperedge>\"The Red Eagle is a Thai superhero film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is the sequel to the 1987 film 'Eye of the Eagle'. \"",
+        "branch": "semantic",
+        "raw_score": 0.515353798866272,
+        "hyperedge_text": "It is the sequel to the 1987 film 'Eye of the Eagle'.",
+        "entity_ids": [
+          "\"EYE OF THE EAGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-db5b7b08169c13ac125bfe5c2cec5f40"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is the sequel to the 1987 film 'Eye of the Eagle'.",
+            "Eye of the Eagle 2: Inside the Enemy Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin. It is the sequel to the 1987 film\" Eye of the Eagle\". It was shot in the Philippines."
+          ],
+          "relation_texts": [
+            "It is the sequel to the 1987 film 'Eye of the Eagle'.",
+            "link",
+            "EYE OF THE EAGLE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f03662f1e332f0431478b9f56d85d5fe",
+            "hyperedge_name": "<hyperedge>\"It is the sequel to the 1987 film 'Eye of the Eagle'. \""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edward Sloman directed The Eagle's Feather.\"",
+        "branch": "semantic",
+        "raw_score": 0.4975261092185974,
+        "hyperedge_text": "Edward Sloman directed The Eagle's Feather.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Edward Sloman directed The Eagle's Feather.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "Edward Sloman directed The Eagle's Feather.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-fac7cb9ca5aa591eba903f2c3c3c7726",
+            "hyperedge_name": "<hyperedge>\"Edward Sloman directed The Eagle's Feather.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is the sequel to the 1923 film 'Red Devils.'\"",
+        "branch": "semantic",
+        "raw_score": 0.48662081360816956,
+        "hyperedge_text": "It is the sequel to the 1923 film 'Red Devils.'",
+        "entity_ids": [
+          "\"RED DEVILS\""
+        ],
+        "chunk_ids": [
+          "chunk-a7d888569d525e1ec99a0b086a165c84"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It is the sequel to the 1923 film 'Red Devils.'",
+            "The Savur Grave The Savur Grave( Georgian:Savur- Mogila) is a 1926 Soviet silent adventure film directed by Ivane Perestiani. It is the sequel to the 1923 film\" Red Devils\"."
+          ],
+          "relation_texts": [
+            "It is the sequel to the 1923 film 'Red Devils.'",
+            "link",
+            "RED DEVILS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cf06cf2762526a39bc8c278e60c3160a",
+            "hyperedge_name": "<hyperedge>\"It is the sequel to the 1923 film 'Red Devils.'\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Metro Pictures produced The Eagle's Feather.\"",
+        "branch": "semantic",
+        "raw_score": 0.47668513655662537,
+        "hyperedge_text": "Metro Pictures produced The Eagle's Feather.",
+        "entity_ids": [
+          "\"PRODUCTION COMPANY\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Metro Pictures produced The Eagle's Feather.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "Metro Pictures produced The Eagle's Feather.",
+            "link",
+            "PRODUCTION COMPANY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-29a40bed08d566e0851e1b73d21bd042",
+            "hyperedge_name": "<hyperedge>\"Metro Pictures produced The Eagle's Feather.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.\"",
+        "branch": "semantic",
+        "raw_score": 0.47093749046325684,
+        "hyperedge_text": "Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.",
+        "entity_ids": [
+          "\"EYE OF THE EAGLE 2: INSIDE THE ENEMY\"",
+          "\"CARL FRANKLIN\""
+        ],
+        "chunk_ids": [
+          "chunk-db5b7b08169c13ac125bfe5c2cec5f40"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.",
+            "Eye of the Eagle 2: Inside the Enemy Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin. It is the sequel to the 1987 film\" Eye of the Eagle\". It was shot in the Philippines."
+          ],
+          "relation_texts": [
+            "Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.",
+            "link",
+            "EYE OF THE EAGLE 2: INSIDE THE ENEMY",
+            "CARL FRANKLIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-796594ab5a7a3741c4f5bf7b2c802f97",
+            "hyperedge_name": "<hyperedge>\"Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film.\"",
+        "branch": "semantic",
+        "raw_score": 0.46864545345306396,
+        "hyperedge_text": "The Eagle's Feather is a 1923 American silent romantic-western film.",
+        "entity_ids": [
+          "\"SILENT FILM\"",
+          "\"1923\"",
+          "\"EAGLE'S FEATHER\"",
+          "\"ROMANTIC-WESTERN\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Eagle's Feather is a 1923 American silent romantic-western film.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "The Eagle's Feather is a 1923 American silent romantic-western film.",
+            "link",
+            "SILENT FILM",
+            "1923",
+            "EAGLE'S FEATHER",
+            "ROMANTIC-WESTERN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-317697d9e4423ec96980e720ac6af8d9",
+            "hyperedge_name": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.\"",
+        "branch": "semantic",
+        "raw_score": 0.45877259969711304,
+        "hyperedge_text": "The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.",
+        "entity_ids": [
+          "\"EDWARD SLOMAN\"",
+          "\"METRO PICTURES\"",
+          "\"EAGLE'S FEATHER\"",
+          "\"JAMES KIRKWOOD\"",
+          "\"MARY ALDEN\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.",
+            "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+          ],
+          "relation_texts": [
+            "The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.",
+            "link",
+            "EDWARD SLOMAN",
+            "METRO PICTURES",
+            "EAGLE'S FEATHER",
+            "JAMES KIRKWOOD",
+            "MARY ALDEN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4193a13dfd79830f20149c15c111bbf1",
+            "hyperedge_name": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Raiders of Red Gap is a 1943 American Western film directed by Sam Newfield and written by Joseph O'Donnell.\"",
+        "branch": "semantic",
+        "raw_score": 0.4517839550971985,
+        "hyperedge_text": "Raiders of Red Gap is a 1943 American Western film directed by Sam Newfield and written by Joseph O'Donnell.",
+        "entity_ids": [
+          "\"SAM NEWFIELD\"",
+          "\"RAIDERS OF RED GAP\"",
+          "\"JOSEPH O'DONNELL\""
+        ],
+        "chunk_ids": [
+          "chunk-60a7fe156c336c5f2765e7f745e9155b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Raiders of Red Gap is a 1943 American Western film directed by Sam Newfield and written by Joseph O'Donnell.",
+            "Raiders of Red Gap Raiders of Red Gap is a 1943 American Western film directed by Sam Newfield and written by Joseph O'Donnell. The film stars Robert Livingston, Al St. John, Myrna Dell, Ed Cassidy, Charles King and Kermit Maynard. The film was released on September 30, 1943, by Producers Releasing Corporation."
+          ],
+          "relation_texts": [
+            "Raiders of Red Gap is a 1943 American Western film directed by Sam Newfield and written by Joseph O'Donnell.",
+            "link",
+            "SAM NEWFIELD",
+            "RAIDERS OF RED GAP",
+            "JOSEPH O'DONNELL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-580d77d9fbe3d033b5ee6ffc6d8a1de8",
+            "hyperedge_name": "<hyperedge>\"Raiders of Red Gap is a 1943 American Western film directed by Sam Newfield and written by Joseph O'Donnell.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.\"",
+        "hyperedge_text": "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5722814798355103,
+        "fusion_score": 0.9144562959671021,
+        "entity_ids": [
+          "\"THE RED EAGLE\"",
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "evidence_texts": [
+          "The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng.",
+          "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.572281,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.914456
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wisit Sasanatieng directed and wrote the film.\"",
+        "hyperedge_text": "Wisit Sasanatieng directed and wrote the film.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.7000000000000001,
+        "entity_ids": [
+          "\"WISIT SASANATIENG\""
+        ],
+        "chunk_ids": [
+          "chunk-d069c217211ab948217640c460bbe4d5"
+        ],
+        "evidence_texts": [
+          "Wisit Sasanatieng directed and wrote the film.",
+          "The Red Eagle The Red Eagle is a 2010 Thai superhero film directed and written by Wisit Sasanatieng."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.7
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Edward Sloman directed The Eagle's Feather.\"",
+        "hyperedge_text": "Edward Sloman directed The Eagle's Feather.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4975261092185974,
+        "fusion_score": 0.4995052218437195,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "evidence_texts": [
+          "Edward Sloman directed The Eagle's Feather.",
+          "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.497526,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499505
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.\"",
+        "hyperedge_text": "Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.47093749046325684,
+        "fusion_score": 0.4941874980926514,
+        "entity_ids": [
+          "\"EYE OF THE EAGLE 2: INSIDE THE ENEMY\"",
+          "\"CARL FRANKLIN\""
+        ],
+        "chunk_ids": [
+          "chunk-db5b7b08169c13ac125bfe5c2cec5f40"
+        ],
+        "evidence_texts": [
+          "Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin.",
+          "Eye of the Eagle 2: Inside the Enemy Eye of the Eagle 2: Inside the Enemy is a 1989 film directed by Carl Franklin. It is the sequel to the 1987 film\" Eye of the Eagle\". It was shot in the Philippines."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.470937,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.494187
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.\"",
+        "hyperedge_text": "The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.45877259969711304,
+        "fusion_score": 0.49175451993942265,
+        "entity_ids": [
+          "\"EDWARD SLOMAN\"",
+          "\"METRO PICTURES\"",
+          "\"EAGLE'S FEATHER\"",
+          "\"JAMES KIRKWOOD\"",
+          "\"MARY ALDEN\""
+        ],
+        "chunk_ids": [
+          "chunk-debd27a90b67a1fdf796df9da5808b6f"
+        ],
+        "evidence_texts": [
+          "The Eagle's Feather is a 1923 American silent romantic-western film directed by Edward Sloman and starring James Kirkwood and Mary Alden.",
+          "The Eagle's Feather The Eagle's Feather is a 1923 American silent romantic- western film directed by Edward Sloman and starring James Kirkwood and Mary Alden. It was produced and distributed by Metro Pictures."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.458773,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.491755
+        }
+      }
+    ]
+  }
+]

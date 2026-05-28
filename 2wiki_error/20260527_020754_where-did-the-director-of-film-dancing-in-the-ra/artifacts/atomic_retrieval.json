@@ -1,0 +1,1570 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Dancing In The Rain?",
+    "retrieval_question": "Who is the director of Dancing In The Rain?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Dancing In The Rain?",
+      "retrieval_question": "Who is the director of Dancing In The Rain?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain may refer to:\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Dancing in the Rain may refer to:",
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dancing in the Rain may refer to:",
+            "Dancing in the Rain Dancing in the Rain may refer to:"
+          ],
+          "relation_texts": [
+            "Dancing in the Rain may refer to:",
+            "link",
+            "DANCING IN THE RAIN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Dancing in the Rain",
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dancing in the Rain",
+            "Dancing in the Rain Dancing in the Rain may refer to:"
+          ],
+          "relation_texts": [
+            "Dancing in the Rain",
+            "link",
+            "DANCING IN THE RAIN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5078521370887756,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5027865171432495,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4973045885562897,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49680250883102417,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.49399447441101074,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48563748598098755,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.4840206205844879,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48202356696128845,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47992169857025146,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.4777419865131378,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain\"",
+        "branch": "semantic",
+        "raw_score": 0.5580164194107056,
+        "hyperedge_text": "Dancing in the Rain",
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dancing in the Rain",
+            "Dancing in the Rain Dancing in the Rain may refer to:"
+          ],
+          "relation_texts": [
+            "Dancing in the Rain",
+            "link",
+            "DANCING IN THE RAIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-53203ea1546af5ad1f338384e31dbb3a",
+            "hyperedge_name": "<hyperedge>\"Dancing in the Rain\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain may refer to:\"",
+        "branch": "semantic",
+        "raw_score": 0.5512270927429199,
+        "hyperedge_text": "Dancing in the Rain may refer to:",
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dancing in the Rain may refer to:",
+            "Dancing in the Rain Dancing in the Rain may refer to:"
+          ],
+          "relation_texts": [
+            "Dancing in the Rain may refer to:",
+            "link",
+            "DANCING IN THE RAIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b8e56758334bb4ff550d1ffb33097aa2",
+            "hyperedge_name": "<hyperedge>\"Dancing in the Rain may refer to:\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Its international English title is 'Dance in the Rain'.\"",
+        "branch": "semantic",
+        "raw_score": 0.4938308894634247,
+        "hyperedge_text": "Its international English title is 'Dance in the Rain'.",
+        "entity_ids": [
+          "\"DANCE IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-3b115a664541d8bd04386006237aba4a"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Its international English title is 'Dance in the Rain'.",
+            "Dancing in the Rain (film) Ples v dežju is a 1961 Slovene film directed by Boštjan Hladnik. Its international English title is \"Dance in the Rain\". It is a love drama based on the novel \"Črni dnevi in beli dan \" by Dominik Smole. \"Ples v dežju\" is Hladnik's first feature film after he returned from Paris, where he worked with Claude Chabrol, Robert Siodmak & Philippe de Broca. It is considered the first Slovenian film noir. On the occasion of the hundredth anniversary of Slovene film in 2005, Slovene film critics of various generations chose \"Ples v dežju\" as the best Slovene film. The Film Fund of the Republic of Slovenia thus funded its DVD release to in honour this anniversary. It was the first Slovene film to have its image and sound digitally corrected. A discussion with Boštjan Hladnik was filmed especially for this edition. The director also participated in the choice of other..."
+          ],
+          "relation_texts": [
+            "Its international English title is 'Dance in the Rain'.",
+            "link",
+            "DANCE IN THE RAIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cdbc37cc27aae21889a05f7ca8a53d8d",
+            "hyperedge_name": "<hyperedge>\"Its international English title is 'Dance in the Rain'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Gentle Rain was directed by Burt Balaban.\"",
+        "branch": "semantic",
+        "raw_score": 0.49092257022857666,
+        "hyperedge_text": "The Gentle Rain was directed by Burt Balaban.",
+        "entity_ids": [
+          "\"BURT BALABAN\""
+        ],
+        "chunk_ids": [
+          "chunk-7eeb7f84d964c589eb326e3200c2b660"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Gentle Rain was directed by Burt Balaban.",
+            "The Gentle Rain (film) The Gentle Rain is a 1966 American-Brazilian drama film directed by Burt Balaban and starring Christopher George, Lynda Day George and Fay Spain. It became best known for its theme tune The Gentle Rain."
+          ],
+          "relation_texts": [
+            "The Gentle Rain was directed by Burt Balaban.",
+            "link",
+            "BURT BALABAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-52399756d8f85fbf9f60dd5539250a91",
+            "hyperedge_name": "<hyperedge>\"The Gentle Rain was directed by Burt Balaban.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.\"",
+        "branch": "semantic",
+        "raw_score": 0.48324745893478394,
+        "hyperedge_text": "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+        "entity_ids": [
+          "\"ACADEMY AWARD\"",
+          "\"RAIN MAN\""
+        ],
+        "chunk_ids": [
+          "chunk-05b05506ca70485c32c5fa0212b82406"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+            "Barry Levinson Barry Levinson( born April 6, 1942) is an American filmmaker, screenwriter, and actor. Levinson's best- known works are mid-budget comedy- drama and drama films such as\" Diner\"( 1982);\" The Natural\"( 1984);\" Good Morning, Vietnam\"( 1987);\" Bugsy\"( 1991); and\" Wag the Dog\"( 1997). He won the Academy Award for Best Director for\" Rain Man\"( 1988), which also won the Academy Award for Best Picture."
+          ],
+          "relation_texts": [
+            "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+            "link",
+            "ACADEMY AWARD",
+            "RAIN MAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-50b906e279932b567d87c2db33b22c7d",
+            "hyperedge_name": "<hyperedge>\"He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Gentle Rain is a 1966 American-Brazilian drama film directed by Burt Balaban and starring Christopher George, Lynda Day George and Fay Spain.\"",
+        "branch": "semantic",
+        "raw_score": 0.4496116638183594,
+        "hyperedge_text": "The Gentle Rain is a 1966 American-Brazilian drama film directed by Burt Balaban and starring Christopher George, Lynda Day George and Fay Spain.",
+        "entity_ids": [
+          "\"THEME TUNE\"",
+          "\"BURT BALABAN\"",
+          "\"THE GENTLE RAIN\"",
+          "\"CHRISTOPHER GEORGE\"",
+          "\"LYNDA DAY GEORGE\"",
+          "\"FAY SPAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-7eeb7f84d964c589eb326e3200c2b660"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Gentle Rain is a 1966 American-Brazilian drama film directed by Burt Balaban and starring Christopher George, Lynda Day George and Fay Spain.",
+            "The Gentle Rain (film) The Gentle Rain is a 1966 American-Brazilian drama film directed by Burt Balaban and starring Christopher George, Lynda Day George and Fay Spain. It became best known for its theme tune The Gentle Rain."
+          ],
+          "relation_texts": [
+            "The Gentle Rain is a 1966 American-Brazilian drama film directed by Burt Balaban and starring Christopher George, Lynda Day George and Fay Spain.",
+            "link",
+            "THEME TUNE",
+            "BURT BALABAN",
+            "THE GENTLE RAIN",
+            "CHRISTOPHER GEORGE",
+            "LYNDA DAY GEORGE",
+            "FAY SPAIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5708bf97c3784ce187141eccfec9b448",
+            "hyperedge_name": "<hyperedge>\"The Gentle Rain is a 1966 American-Brazilian drama film directed by Burt Balaban and starring Christopher George, Lynda Day George and Fay Spain.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Gentle Rain is a 1966 American-Brazilian drama film.\"",
+        "branch": "semantic",
+        "raw_score": 0.43683022260665894,
+        "hyperedge_text": "The Gentle Rain is a 1966 American-Brazilian drama film.",
+        "entity_ids": [
+          "\"THE GENTLE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-7eeb7f84d964c589eb326e3200c2b660"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Gentle Rain is a 1966 American-Brazilian drama film.",
+            "The Gentle Rain (film) The Gentle Rain is a 1966 American-Brazilian drama film directed by Burt Balaban and starring Christopher George, Lynda Day George and Fay Spain. It became best known for its theme tune The Gentle Rain."
+          ],
+          "relation_texts": [
+            "The Gentle Rain is a 1966 American-Brazilian drama film.",
+            "link",
+            "THE GENTLE RAIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0d1906d939142b11b8c90a72f90b1c5b",
+            "hyperedge_name": "<hyperedge>\"The Gentle Rain is a 1966 American-Brazilian drama film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Ralph Dawson.\"",
+        "branch": "semantic",
+        "raw_score": 0.4222295582294464,
+        "hyperedge_text": "The film is directed by Ralph Dawson.",
+        "entity_ids": [
+          "\"RALPH DAWSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7c7d127919b3b1f6e25a77e8956b451d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film is directed by Ralph Dawson.",
+            "The Girl in the Glass Cage The Girl in the Glass Cage is a 1929 American part- talkie crime drama film directed by Ralph Dawson and starring Loretta Young, Carroll Nye, Matthew Betz, Lucien Littlefield, and Ralph Lewis. It is based on the 1927 novel of the same name by George Kibbe Turner. The film was released by Warner Bros. on June 23, 1929."
+          ],
+          "relation_texts": [
+            "The film is directed by Ralph Dawson.",
+            "link",
+            "RALPH DAWSON"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3df2d818cf882a03ec99b46d62cbbd0c",
+            "hyperedge_name": "<hyperedge>\"The film is directed by Ralph Dawson.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).\"",
+        "branch": "semantic",
+        "raw_score": 0.4149527847766876,
+        "hyperedge_text": "He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"THE RAGGEDY RAWNEY\"",
+          "\"RAINBOW\""
+        ],
+        "chunk_ids": [
+          "chunk-297dfcb15f148329a263fa82fc01a4cf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).",
+            "Bob Hoskins Robert William Hoskins( 26 October 1942 – 29 April 2014) was an English actor. His work included lead roles in\" Pennies from Heaven\"( 1978),\" The Long Good Friday\"( 1980),\" Mona Lisa\"( 1986),\" Who Framed Roger Rabbit\"( 1988),\" Mermaids\"( 1990), and\" Super Mario Bros.\"( 1993), and supporting performances in\" Brazil\"( 1985),\" Hook\"( 1991),\" Nixon\"( 1995),\" Enemy at the Gates\"( 2001),\" Mrs. Henderson Presents\"( 2005),\" A Christmas Carol\"( 2009),\" Made in Dagenham\"( 2010), and\" Snow White and the Huntsman\"( 2012). He also directed two feature films:\" The Raggedy Rawney\"( 1988) and\" Rainbow\"( 1996). Hoskins received the best actor award at the Cannes Film Festival, the BAFTA Award for Best Actor in a Leading Role and the Golden Globe Award for Best Actor – Motion Picture Drama for his role in\" Mona Lisa\". He was also nominated for the Academy Award for Best Actor for the same r..."
+          ],
+          "relation_texts": [
+            "He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).",
+            "link",
+            "DIRECTOR",
+            "THE RAGGEDY RAWNEY",
+            "RAINBOW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-77727cc7efb2fc2917db5884ef7b40be",
+            "hyperedge_name": "<hyperedge>\"He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film received an Academy Award nomination for Best Dance Direction by LeRoy Prinz for 'It's the Animal in Me.'\"",
+        "branch": "semantic",
+        "raw_score": 0.40810588002204895,
+        "hyperedge_text": "The film received an Academy Award nomination for Best Dance Direction by LeRoy Prinz for 'It's the Animal in Me.'",
+        "entity_ids": [
+          "\"ACADEMY AWARD NOMINATION\"",
+          "\"BEST DANCE DIRECTION\"",
+          "\"LEROY PRINZ\"",
+          "\"IT'S THE ANIMAL IN ME\""
+        ],
+        "chunk_ids": [
+          "chunk-75164317121425233c5ae3356fda7013"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film received an Academy Award nomination for Best Dance Direction by LeRoy Prinz for 'It's the Animal in Me.'",
+            "The Big Broadcast of 1936 The Big Broadcast of 1936 is a 1935 American comedy film directed by Norman Taurog, and is the second in the series of Big Broadcast movies. The musical comedy starred Jack Oakie, Bing Crosby, George Burns, Gracie Allen, Ethel Merman, The Nicholas Brothers, Lyda Roberti, Wendy Barrie, Mary Boland, Charlie Ruggles, Akim Tamiroff, Amos' n' Andy( Freeman Gosden and Charles Correll), Bill\" Bojangles\" Robinson, and Argentine tango singer Carlos Gardel. The film featured an early appearance by Dorothy Dandridge( as one of the Dandridge Sisters). Uncredited roles include Jack Mulhall. Glenn Miller appears as part of the Ray Noble Orchestra. In\" Glenn Miller and His Orchestra\"( 1974), George Thomas Simon noted that Glenn Miller was paid extra by Ray Noble\" for working on\" The Big Broadcast of 1936\", so that Glenn's total weekly pay\" was$ 356. The screen appearance of..."
+          ],
+          "relation_texts": [
+            "The film received an Academy Award nomination for Best Dance Direction by LeRoy Prinz for 'It's the Animal in Me.'",
+            "link",
+            "ACADEMY AWARD NOMINATION",
+            "BEST DANCE DIRECTION",
+            "LEROY PRINZ",
+            "IT'S THE ANIMAL IN ME"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b57a1f3c211fbb69de501265f6631316",
+            "hyperedge_name": "<hyperedge>\"The film received an Academy Award nomination for Best Dance Direction by LeRoy Prinz for 'It's the Animal in Me.'\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain\"",
+        "hyperedge_text": "Dancing in the Rain",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5580164194107056,
+        "fusion_score": 0.5116032838821412,
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "evidence_texts": [
+          "Dancing in the Rain",
+          "Dancing in the Rain Dancing in the Rain may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.558016,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511603
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain may refer to:\"",
+        "hyperedge_text": "Dancing in the Rain may refer to:",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5512270927429199,
+        "fusion_score": 0.5102454185485841,
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "evidence_texts": [
+          "Dancing in the Rain may refer to:",
+          "Dancing in the Rain Dancing in the Rain may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.551227,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510245
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.\"",
+        "hyperedge_text": "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.48324745893478394,
+        "fusion_score": 0.49664949178695683,
+        "entity_ids": [
+          "\"ACADEMY AWARD\"",
+          "\"RAIN MAN\""
+        ],
+        "chunk_ids": [
+          "chunk-05b05506ca70485c32c5fa0212b82406"
+        ],
+        "evidence_texts": [
+          "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+          "Barry Levinson Barry Levinson( born April 6, 1942) is an American filmmaker, screenwriter, and actor. Levinson's best- known works are mid-budget comedy- drama and drama films such as\" Diner\"( 1982);\" The Natural\"( 1984);\" Good Morning, Vietnam\"( 1987);\" Bugsy\"( 1991); and\" Wag the Dog\"( 1997). He won the Academy Award for Best Director for\" Rain Man\"( 1988), which also won the Academy Award for Best Picture."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.483247,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.496649
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).\"",
+        "hyperedge_text": "He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4149527847766876,
+        "fusion_score": 0.48299055695533755,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"THE RAGGEDY RAWNEY\"",
+          "\"RAINBOW\""
+        ],
+        "chunk_ids": [
+          "chunk-297dfcb15f148329a263fa82fc01a4cf"
+        ],
+        "evidence_texts": [
+          "He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).",
+          "Bob Hoskins Robert William Hoskins( 26 October 1942 – 29 April 2014) was an English actor. His work included lead roles in\" Pennies from Heaven\"( 1978),\" The Long Good Friday\"( 1980),\" Mona Lisa\"( 1986),\" Who Framed Roger Rabbit\"( 1988),\" Mermaids\"( 1990), and\" Super Mario Bros.\"( 1993), and supporting performances in\" Brazil\"( 1985),\" Hook\"( 1991),\" Nixon\"( 1995),\" Enemy at the Gates\"( 2001),\" Mrs. Henderson Presents\"( 2005),\" A Christmas Carol\"( 2009),\" Made in Dagenham\"( 2010), and\" Snow White and the Huntsman\"( 2012). He also directed two feature films:\" The Raggedy Rawney\"( 1988) and\" Rainbow\"( 1996). Hoskins received the best actor award at the Cannes Film Festival, the BAFTA Award for Best Actor in a Leading Role and the Golden Globe Award for Best Actor – Motion Picture Drama for his role in\" Mona Lisa\". He was also nominated for the Academy Award for Best Actor for the same r..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.414953,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.482991
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5078521370887756,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.2698075215021769,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507852,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.269808
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the director of Dancing In The Rain die?",
+    "retrieval_question": "Where did the director of Dancing In The Rain die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the director of Dancing In The Rain die?",
+      "retrieval_question": "Where did the director of Dancing In The Rain die?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain may refer to:\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Dancing in the Rain may refer to:",
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dancing in the Rain may refer to:",
+            "Dancing in the Rain Dancing in the Rain may refer to:"
+          ],
+          "relation_texts": [
+            "Dancing in the Rain may refer to:",
+            "link",
+            "DANCING IN THE RAIN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Dancing in the Rain",
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dancing in the Rain",
+            "Dancing in the Rain Dancing in the Rain may refer to:"
+          ],
+          "relation_texts": [
+            "Dancing in the Rain",
+            "link",
+            "DANCING IN THE RAIN"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The music director died before the release of the film.\"",
+        "branch": "relation",
+        "raw_score": 0.5522242784500122,
+        "hyperedge_text": "The music director died before the release of the film.",
+        "entity_ids": [
+          "\"SAMPATH SELVAM\""
+        ],
+        "chunk_ids": [
+          "chunk-7b18343d2c0ab9d855df8ec895675e28"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The music director died before the release of the film.",
+            "Thulasi (1987 film) Thulasi is a 1987 Tamil romantic drama film directed by Ameerjan. The film features Murali and Seetha in lead roles. The film, produced by P. S. V. Hariharan, had musical score by Sampath Selvam and was released on 27 November 1987. The music director died before the release of the film."
+          ],
+          "relation_texts": [
+            "The music director died before the release of the film.",
+            "link",
+            "SAMPATH SELVAM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2d129ec8c6c28159c097b731aee28228",
+            "hyperedge_name": "<hyperedge>\"The music director died before the release of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5208901166915894,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was known for his role as a director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.51982581615448,
+        "hyperedge_text": "He was known for his role as a director throughout his career.",
+        "entity_ids": [
+          "\"CAREER\""
+        ],
+        "chunk_ids": [
+          "chunk-7dec1766257929be2c6bd5070ce8184e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was known for his role as a director throughout his career.",
+            "Stuart Heisler Stuart Heisler( December 5, 1896 – August 21, 1979) was an American film and television director. He was a son of Luther Albert Heisler( 1855- 1916), a carpenter, and Frances Baldwin Heisler( 1857- 1935). He worked as a motion picture editor from 1921 to 1936, then worked as film director for the rest of his career. He directed the 1944 propaganda film\" The Negro Soldier\", a documentary- style recruitment piece targeting African- Americans. He received an Oscar nomination in 1949 for his contribution to the visual effects of the film\" Tulsa\"."
+          ],
+          "relation_texts": [
+            "He was known for his role as a director throughout his career.",
+            "link",
+            "CAREER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9aad7656269a6a8f892f646a95dbb84f",
+            "hyperedge_name": "<hyperedge>\"He was known for his role as a director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.\"",
+        "branch": "relation",
+        "raw_score": 0.5151470899581909,
+        "hyperedge_text": "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+        "entity_ids": [
+          "\"2007\"",
+          "\"STARY CZŁOWIEK I PIES (THE OLD MAN AND THE DOG)\""
+        ],
+        "chunk_ids": [
+          "chunk-d3d9377a1c523159f484fa4ec74bec5e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+            "Witold Leszczyński Witold Leszczyński( 16 August 1933 – 1 September 2007) was a Polish film director and screenwriter. In 1967 he graduated from the National Film School in Łódź. He directed over thirty films between 1959 and 2007. Most known for\" Żywot MateuszaMatthew's Days\") based on a novel by Norwegian writer Tarjei Vesaas,\" Konopielka\", adapted from the novel of Edward Redliński,\" Siekierezada\" based on a novel by Edward Stachura and many others films. He received numerous awards, including Grand Prix at the Polish Film Festival in 1986. The director died during the shoot of his film\" Stary człowiek i pies The Old Man and the Dog\") in 2007."
+          ],
+          "relation_texts": [
+            "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+            "link",
+            "2007",
+            "STARY CZŁOWIEK I PIES (THE OLD MAN AND THE DOG)"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cbe2d01925c030b65cddcdc9e6586932",
+            "hyperedge_name": "<hyperedge>\"The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.514198362827301,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.511837363243103,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.5094603300094604,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Both the film's male lead (Trevor Goddard) and the original producer died during production.\"",
+        "branch": "relation",
+        "raw_score": 0.4927844703197479,
+        "hyperedge_text": "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+        "entity_ids": [
+          "\"PASSING OF ORIGINAL PRODUCER\"",
+          "\"PASSING OF TREVOR GODDARD\""
+        ],
+        "chunk_ids": [
+          "chunk-1127f76ebf275b50e146e11ff176c899"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+            "Flexing with Monty Flexing with Monty is a 2010 comedy- drama film and stars Trevor Goddard and Sally Kirkland. Shooting started in 1994 and was finally completed in 2008 during which both the film's male lead( Trevor Goddard), and the original producer died."
+          ],
+          "relation_texts": [
+            "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+            "link",
+            "PASSING OF ORIGINAL PRODUCER",
+            "PASSING OF TREVOR GODDARD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-beee26092ae1541ec3d6a1a9f151b697",
+            "hyperedge_name": "<hyperedge>\"Both the film's male lead (Trevor Goddard) and the original producer died during production.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He also served as a director.\"",
+        "branch": "relation",
+        "raw_score": 0.4905793070793152,
+        "hyperedge_text": "He also served as a director.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-1ca2551c3303f9e0e7923dcc6431b6b3"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He also served as a director.",
+            "Wilfred Lucas Wilfred Van Norman Lucas( January 30, 1871 – December 13, 1940) was a Canadian American stage actor who found success in film as an actor, director, and screenwriter."
+          ],
+          "relation_texts": [
+            "He also served as a director.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3b3358fcf68cc5fe41706b8fbcd94ce3",
+            "hyperedge_name": "<hyperedge>\"He also served as a director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was known as an American director in film and television.\"",
+        "branch": "relation",
+        "raw_score": 0.49036264419555664,
+        "hyperedge_text": "He was known as an American director in film and television.",
+        "entity_ids": [
+          "\"AMERICAN DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-e9f0c441644f13f3c68e70d9896878f1"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He was known as an American director in film and television.",
+            "Howard W. Koch Howard Winchel Koch( April 11, 1916 – February 16, 2001) was an American producer and director of film and television."
+          ],
+          "relation_texts": [
+            "He was known as an American director in film and television.",
+            "link",
+            "AMERICAN DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1e7c614e2725ed5ddc2710f838a793ef",
+            "hyperedge_name": "<hyperedge>\"He was known as an American director in film and television.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain\"",
+        "branch": "semantic",
+        "raw_score": 0.5153478980064392,
+        "hyperedge_text": "Dancing in the Rain",
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dancing in the Rain",
+            "Dancing in the Rain Dancing in the Rain may refer to:"
+          ],
+          "relation_texts": [
+            "Dancing in the Rain",
+            "link",
+            "DANCING IN THE RAIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-53203ea1546af5ad1f338384e31dbb3a",
+            "hyperedge_name": "<hyperedge>\"Dancing in the Rain\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain may refer to:\"",
+        "branch": "semantic",
+        "raw_score": 0.5035684108734131,
+        "hyperedge_text": "Dancing in the Rain may refer to:",
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Dancing in the Rain may refer to:",
+            "Dancing in the Rain Dancing in the Rain may refer to:"
+          ],
+          "relation_texts": [
+            "Dancing in the Rain may refer to:",
+            "link",
+            "DANCING IN THE RAIN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-b8e56758334bb4ff550d1ffb33097aa2",
+            "hyperedge_name": "<hyperedge>\"Dancing in the Rain may refer to:\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The music director died before the release of the film.\"",
+        "branch": "semantic",
+        "raw_score": 0.49800390005111694,
+        "hyperedge_text": "The music director died before the release of the film.",
+        "entity_ids": [
+          "\"SAMPATH SELVAM\""
+        ],
+        "chunk_ids": [
+          "chunk-7b18343d2c0ab9d855df8ec895675e28"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The music director died before the release of the film.",
+            "Thulasi (1987 film) Thulasi is a 1987 Tamil romantic drama film directed by Ameerjan. The film features Murali and Seetha in lead roles. The film, produced by P. S. V. Hariharan, had musical score by Sampath Selvam and was released on 27 November 1987. The music director died before the release of the film."
+          ],
+          "relation_texts": [
+            "The music director died before the release of the film.",
+            "link",
+            "SAMPATH SELVAM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2d129ec8c6c28159c097b731aee28228",
+            "hyperedge_name": "<hyperedge>\"The music director died before the release of the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was Rollin's final film, as the director died in 2010.\"",
+        "branch": "semantic",
+        "raw_score": 0.49181434512138367,
+        "hyperedge_text": "It was Rollin's final film, as the director died in 2010.",
+        "entity_ids": [
+          "\"2010\"",
+          "\"FINAL FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-a6187d6546e1f4ac94e20e5b509b09e2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was Rollin's final film, as the director died in 2010.",
+            "Le Masque de la Méduse Le masque de la Méduse is a 2009 fantasy horror film directed by Jean Rollin. The film is a modern-day telling of the Greek mythological tale of the Gorgon and was inspired by the 1964 classic Hammer Horror film of the same name and the 1981 cult classic\" Clash of the Titans\". It was Rollin's final film, as the director died in 2010."
+          ],
+          "relation_texts": [
+            "It was Rollin's final film, as the director died in 2010.",
+            "link",
+            "2010",
+            "FINAL FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-4c7c9d897bffcd5cf2f6e52dc9baf31e",
+            "hyperedge_name": "<hyperedge>\"It was Rollin's final film, as the director died in 2010.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Gentle Rain was directed by Burt Balaban.\"",
+        "branch": "semantic",
+        "raw_score": 0.4651169180870056,
+        "hyperedge_text": "The Gentle Rain was directed by Burt Balaban.",
+        "entity_ids": [
+          "\"BURT BALABAN\""
+        ],
+        "chunk_ids": [
+          "chunk-7eeb7f84d964c589eb326e3200c2b660"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The Gentle Rain was directed by Burt Balaban.",
+            "The Gentle Rain (film) The Gentle Rain is a 1966 American-Brazilian drama film directed by Burt Balaban and starring Christopher George, Lynda Day George and Fay Spain. It became best known for its theme tune The Gentle Rain."
+          ],
+          "relation_texts": [
+            "The Gentle Rain was directed by Burt Balaban.",
+            "link",
+            "BURT BALABAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-52399756d8f85fbf9f60dd5539250a91",
+            "hyperedge_name": "<hyperedge>\"The Gentle Rain was directed by Burt Balaban.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.\"",
+        "branch": "semantic",
+        "raw_score": 0.4569091796875,
+        "hyperedge_text": "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+        "entity_ids": [
+          "\"ACADEMY AWARD\"",
+          "\"RAIN MAN\""
+        ],
+        "chunk_ids": [
+          "chunk-05b05506ca70485c32c5fa0212b82406"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+            "Barry Levinson Barry Levinson( born April 6, 1942) is an American filmmaker, screenwriter, and actor. Levinson's best- known works are mid-budget comedy- drama and drama films such as\" Diner\"( 1982);\" The Natural\"( 1984);\" Good Morning, Vietnam\"( 1987);\" Bugsy\"( 1991); and\" Wag the Dog\"( 1997). He won the Academy Award for Best Director for\" Rain Man\"( 1988), which also won the Academy Award for Best Picture."
+          ],
+          "relation_texts": [
+            "He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.",
+            "link",
+            "ACADEMY AWARD",
+            "RAIN MAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-50b906e279932b567d87c2db33b22c7d",
+            "hyperedge_name": "<hyperedge>\"He won the Academy Award for Best Director for 'Rain Man' (1988), which also won the Academy Award for Best Picture.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.\"",
+        "branch": "semantic",
+        "raw_score": 0.4551006555557251,
+        "hyperedge_text": "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+        "entity_ids": [
+          "\"2007\"",
+          "\"STARY CZŁOWIEK I PIES (THE OLD MAN AND THE DOG)\""
+        ],
+        "chunk_ids": [
+          "chunk-d3d9377a1c523159f484fa4ec74bec5e"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+            "Witold Leszczyński Witold Leszczyński( 16 August 1933 – 1 September 2007) was a Polish film director and screenwriter. In 1967 he graduated from the National Film School in Łódź. He directed over thirty films between 1959 and 2007. Most known for\" Żywot MateuszaMatthew's Days\") based on a novel by Norwegian writer Tarjei Vesaas,\" Konopielka\", adapted from the novel of Edward Redliński,\" Siekierezada\" based on a novel by Edward Stachura and many others films. He received numerous awards, including Grand Prix at the Polish Film Festival in 1986. The director died during the shoot of his film\" Stary człowiek i pies The Old Man and the Dog\") in 2007."
+          ],
+          "relation_texts": [
+            "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+            "link",
+            "2007",
+            "STARY CZŁOWIEK I PIES (THE OLD MAN AND THE DOG)"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-cbe2d01925c030b65cddcdc9e6586932",
+            "hyperedge_name": "<hyperedge>\"The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Both the film's male lead (Trevor Goddard) and the original producer died during production.\"",
+        "branch": "semantic",
+        "raw_score": 0.4535979926586151,
+        "hyperedge_text": "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+        "entity_ids": [
+          "\"PASSING OF ORIGINAL PRODUCER\"",
+          "\"PASSING OF TREVOR GODDARD\""
+        ],
+        "chunk_ids": [
+          "chunk-1127f76ebf275b50e146e11ff176c899"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+            "Flexing with Monty Flexing with Monty is a 2010 comedy- drama film and stars Trevor Goddard and Sally Kirkland. Shooting started in 1994 and was finally completed in 2008 during which both the film's male lead( Trevor Goddard), and the original producer died."
+          ],
+          "relation_texts": [
+            "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+            "link",
+            "PASSING OF ORIGINAL PRODUCER",
+            "PASSING OF TREVOR GODDARD"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-beee26092ae1541ec3d6a1a9f151b697",
+            "hyperedge_name": "<hyperedge>\"Both the film's male lead (Trevor Goddard) and the original producer died during production.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Died on September 12, 1993, Charles Lamont left a legacy in the film industry.\"",
+        "branch": "semantic",
+        "raw_score": 0.4432026743888855,
+        "hyperedge_text": "Died on September 12, 1993, Charles Lamont left a legacy in the film industry.",
+        "entity_ids": [
+          "\"LEGACY\""
+        ],
+        "chunk_ids": [
+          "chunk-c3db1236fd00e5fccaaed075065324f9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Died on September 12, 1993, Charles Lamont left a legacy in the film industry.",
+            "Charles Lamont Charles Lamont( May 5, 1895 – September 12, 1993) was a prolific filmmaker, directing over 200 titles and producing and writing many others. A California native, Lamont was born in San Francisco and died in Los Angeles."
+          ],
+          "relation_texts": [
+            "Died on September 12, 1993, Charles Lamont left a legacy in the film industry.",
+            "link",
+            "LEGACY"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-6a04db05859e95958e370626aba83375",
+            "hyperedge_name": "<hyperedge>\"Died on September 12, 1993, Charles Lamont left a legacy in the film industry.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).\"",
+        "branch": "semantic",
+        "raw_score": 0.4367096424102783,
+        "hyperedge_text": "He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).",
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"THE RAGGEDY RAWNEY\"",
+          "\"RAINBOW\""
+        ],
+        "chunk_ids": [
+          "chunk-297dfcb15f148329a263fa82fc01a4cf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).",
+            "Bob Hoskins Robert William Hoskins( 26 October 1942 – 29 April 2014) was an English actor. His work included lead roles in\" Pennies from Heaven\"( 1978),\" The Long Good Friday\"( 1980),\" Mona Lisa\"( 1986),\" Who Framed Roger Rabbit\"( 1988),\" Mermaids\"( 1990), and\" Super Mario Bros.\"( 1993), and supporting performances in\" Brazil\"( 1985),\" Hook\"( 1991),\" Nixon\"( 1995),\" Enemy at the Gates\"( 2001),\" Mrs. Henderson Presents\"( 2005),\" A Christmas Carol\"( 2009),\" Made in Dagenham\"( 2010), and\" Snow White and the Huntsman\"( 2012). He also directed two feature films:\" The Raggedy Rawney\"( 1988) and\" Rainbow\"( 1996). Hoskins received the best actor award at the Cannes Film Festival, the BAFTA Award for Best Actor in a Leading Role and the Golden Globe Award for Best Actor – Motion Picture Drama for his role in\" Mona Lisa\". He was also nominated for the Academy Award for Best Actor for the same r..."
+          ],
+          "relation_texts": [
+            "He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).",
+            "link",
+            "DIRECTOR",
+            "THE RAGGEDY RAWNEY",
+            "RAINBOW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-77727cc7efb2fc2917db5884ef7b40be",
+            "hyperedge_name": "<hyperedge>\"He also directed two feature films: 'The Raggedy Rawney' (1988) and 'Rainbow' (1996).\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain\"",
+        "hyperedge_text": "Dancing in the Rain",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5153478980064392,
+        "fusion_score": 0.5030695796012878,
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "evidence_texts": [
+          "Dancing in the Rain",
+          "Dancing in the Rain Dancing in the Rain may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.515348,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.50307
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dancing in the Rain may refer to:\"",
+        "hyperedge_text": "Dancing in the Rain may refer to:",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5035684108734131,
+        "fusion_score": 0.5007136821746827,
+        "entity_ids": [
+          "\"DANCING IN THE RAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-e521e87e9a95361fdf9e2595e35d1f85"
+        ],
+        "evidence_texts": [
+          "Dancing in the Rain may refer to:",
+          "Dancing in the Rain Dancing in the Rain may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.503568,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.500714
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The music director died before the release of the film.\"",
+        "hyperedge_text": "The music director died before the release of the film.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5522242784500122,
+        "semantic_score": 0.49800390005111694,
+        "fusion_score": 0.3204904913902283,
+        "entity_ids": [
+          "\"SAMPATH SELVAM\""
+        ],
+        "chunk_ids": [
+          "chunk-7b18343d2c0ab9d855df8ec895675e28"
+        ],
+        "evidence_texts": [
+          "The music director died before the release of the film.",
+          "Thulasi (1987 film) Thulasi is a 1987 Tamil romantic drama film directed by Ameerjan. The film features Murali and Seetha in lead roles. The film, produced by P. S. V. Hariharan, had musical score by Sampath Selvam and was released on 27 November 1987. The music director died before the release of the film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.552224,
+          "S": 0.498004,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.32049
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.\"",
+        "hyperedge_text": "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5151470899581909,
+        "semantic_score": 0.4551006555557251,
+        "fusion_score": 0.2970789670944214,
+        "entity_ids": [
+          "\"2007\"",
+          "\"STARY CZŁOWIEK I PIES (THE OLD MAN AND THE DOG)\""
+        ],
+        "chunk_ids": [
+          "chunk-d3d9377a1c523159f484fa4ec74bec5e"
+        ],
+        "evidence_texts": [
+          "The director died during the shoot of his film 'Stary człowiek i pies (The Old Man and the Dog)' in 2007.",
+          "Witold Leszczyński Witold Leszczyński( 16 August 1933 – 1 September 2007) was a Polish film director and screenwriter. In 1967 he graduated from the National Film School in Łódź. He directed over thirty films between 1959 and 2007. Most known for\" Żywot MateuszaMatthew's Days\") based on a novel by Norwegian writer Tarjei Vesaas,\" Konopielka\", adapted from the novel of Edward Redliński,\" Siekierezada\" based on a novel by Edward Stachura and many others films. He received numerous awards, including Grand Prix at the Polish Film Festival in 1986. The director died during the shoot of his film\" Stary człowiek i pies The Old Man and the Dog\") in 2007."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.515147,
+          "S": 0.455101,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.297079
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Both the film's male lead (Trevor Goddard) and the original producer died during production.\"",
+        "hyperedge_text": "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4927844703197479,
+        "semantic_score": 0.4535979926586151,
+        "fusion_score": 0.2878333866596222,
+        "entity_ids": [
+          "\"PASSING OF ORIGINAL PRODUCER\"",
+          "\"PASSING OF TREVOR GODDARD\""
+        ],
+        "chunk_ids": [
+          "chunk-1127f76ebf275b50e146e11ff176c899"
+        ],
+        "evidence_texts": [
+          "Both the film's male lead (Trevor Goddard) and the original producer died during production.",
+          "Flexing with Monty Flexing with Monty is a 2010 comedy- drama film and stars Trevor Goddard and Sally Kirkland. Shooting started in 1994 and was finally completed in 2008 during which both the film's male lead( Trevor Goddard), and the original producer died."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.492784,
+          "S": 0.453598,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.287833
+        }
+      }
+    ]
+  }
+]

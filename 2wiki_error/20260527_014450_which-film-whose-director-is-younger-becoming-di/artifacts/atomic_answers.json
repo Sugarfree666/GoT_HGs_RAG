@@ -1,0 +1,909 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Becoming Dick?",
+    "analysis": {
+      "entities": [
+        "Becoming Dick"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.\"",
+        "hyperedge_text": "Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.647188663482666,
+        "fusion_score": 0.5294377326965333,
+        "entity_ids": [
+          "\"2000\"",
+          "\"BECOMING DICK\"",
+          "\"HARLAND WILLIAMS\"",
+          "\"BOB SAGET\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.647189,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.529438
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick is a 2000 comedy film.\"",
+        "hyperedge_text": "Becoming Dick is a 2000 comedy film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.676735520362854,
+        "fusion_score": 0.5353471040725708,
+        "entity_ids": [
+          "\"COMEDY FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick is a 2000 comedy film.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.676736,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535347
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick was produced by XYZ Productions.\"",
+        "hyperedge_text": "Becoming Dick was produced by XYZ Productions.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6551514267921448,
+        "fusion_score": 0.531030285358429,
+        "entity_ids": [
+          "\"XYZ PRODUCTIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick was produced by XYZ Productions.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.655151,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.53103
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick focuses on themes of identity and transformation.\"",
+        "hyperedge_text": "Becoming Dick focuses on themes of identity and transformation.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6207594871520996,
+        "fusion_score": 0.52415189743042,
+        "entity_ids": [
+          "\"IDENTITY\"",
+          "\"TRANSFORMATION\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick focuses on themes of identity and transformation.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.620759,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524152
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick debuted at various film festivals before its general release.\"",
+        "hyperedge_text": "Becoming Dick debuted at various film festivals before its general release.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6202948093414307,
+        "fusion_score": 0.5240589618682862,
+        "entity_ids": [
+          "\"FILM FESTIVALS\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick debuted at various film festivals before its general release.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.620295,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.524059
+        }
+      }
+    ],
+    "answer": "Bob Saget",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Becoming Dick' is directed by Bob Saget.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Who is the director of Nude On The Moon?",
+    "analysis": {
+      "entities": [
+        "Nude On The Moon"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Nude on the Moon is a 1961 science-fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms 'O. O. Miller' and 'Anthony Brooks'. \"",
+        "hyperedge_text": "Nude on the Moon is a 1961 science-fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms 'O. O. Miller' and 'Anthony Brooks'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.692023515701294,
+        "fusion_score": 0.5384047031402588,
+        "entity_ids": [
+          "\"NUDE ON THE MOON\"",
+          "\"DORIS WISHMAN\"",
+          "\"ANTHONY BROOKS\"",
+          "\"O. O. MILLER\"",
+          "\"RAYMOND PHELAN\""
+        ],
+        "chunk_ids": [
+          "chunk-1b50f61a9a29c9b22fe1048b78d6c86a"
+        ],
+        "evidence_texts": [
+          "Nude on the Moon is a 1961 science-fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms 'O. O. Miller' and 'Anthony Brooks'.",
+          "Nude on the Moon Nude on the Moon is a 1961 science- fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms\" O. O. Miller\" and\" Anthony Brooks\". The film was produced in 1960 and theatrically released in 1961. \" Nude on the Moon\" is the second of eight nudist films produced and directed by Wishman. While most nudist films of the time were set within a conventional nudist camp, apparently as a promotional gimmick Wishman decided to set the story in a nudist civilization on the Moon."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.692024,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.538405
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film 'Nude on the Moon' features a unique concept of a nudist civilization on the Moon, differing from other nudist films.\"",
+        "hyperedge_text": "The film 'Nude on the Moon' features a unique concept of a nudist civilization on the Moon, differing from other nudist films.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6861258745193481,
+        "fusion_score": 0.5372251749038697,
+        "entity_ids": [
+          "\"CONCEPT\""
+        ],
+        "chunk_ids": [
+          "chunk-1b50f61a9a29c9b22fe1048b78d6c86a"
+        ],
+        "evidence_texts": [
+          "The film 'Nude on the Moon' features a unique concept of a nudist civilization on the Moon, differing from other nudist films.",
+          "Nude on the Moon Nude on the Moon is a 1961 science- fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms\" O. O. Miller\" and\" Anthony Brooks\". The film was produced in 1960 and theatrically released in 1961. \" Nude on the Moon\" is the second of eight nudist films produced and directed by Wishman. While most nudist films of the time were set within a conventional nudist camp, apparently as a promotional gimmick Wishman decided to set the story in a nudist civilization on the Moon."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.686126,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.537225
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"'Nude on the Moon' is the second of eight nudist films produced and directed by Wishman.\"",
+        "hyperedge_text": "'Nude on the Moon' is the second of eight nudist films produced and directed by Wishman.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6469603180885315,
+        "fusion_score": 0.5293920636177063,
+        "entity_ids": [
+          "\"EIGHT NUDIST FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-1b50f61a9a29c9b22fe1048b78d6c86a"
+        ],
+        "evidence_texts": [
+          "'Nude on the Moon' is the second of eight nudist films produced and directed by Wishman.",
+          "Nude on the Moon Nude on the Moon is a 1961 science- fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms\" O. O. Miller\" and\" Anthony Brooks\". The film was produced in 1960 and theatrically released in 1961. \" Nude on the Moon\" is the second of eight nudist films produced and directed by Wishman. While most nudist films of the time were set within a conventional nudist camp, apparently as a promotional gimmick Wishman decided to set the story in a nudist civilization on the Moon."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.64696,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.529392
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The combination of science fiction and nudism in 'Nude on the Moon' creates a distinctive niche in genre filmmaking.\"",
+        "hyperedge_text": "The combination of science fiction and nudism in 'Nude on the Moon' creates a distinctive niche in genre filmmaking.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6253966689109802,
+        "fusion_score": 0.5250793337821961,
+        "entity_ids": [
+          "\"SCIENCE FICTION\"",
+          "\"NUDISM\""
+        ],
+        "chunk_ids": [
+          "chunk-1b50f61a9a29c9b22fe1048b78d6c86a"
+        ],
+        "evidence_texts": [
+          "The combination of science fiction and nudism in 'Nude on the Moon' creates a distinctive niche in genre filmmaking.",
+          "Nude on the Moon Nude on the Moon is a 1961 science- fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms\" O. O. Miller\" and\" Anthony Brooks\". The film was produced in 1960 and theatrically released in 1961. \" Nude on the Moon\" is the second of eight nudist films produced and directed by Wishman. While most nudist films of the time were set within a conventional nudist camp, apparently as a promotional gimmick Wishman decided to set the story in a nudist civilization on the Moon."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.625397,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525079
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The creative decisions taken in 'Nude on the Moon' were ahead of its time, merging social commentary with artistic expression.\"",
+        "hyperedge_text": "The creative decisions taken in 'Nude on the Moon' were ahead of its time, merging social commentary with artistic expression.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5761062502861023,
+        "fusion_score": 0.5152212500572205,
+        "entity_ids": [
+          "\"ARTISTIC EXPRESSION\"",
+          "\"SOCIAL COMMENTARY\""
+        ],
+        "chunk_ids": [
+          "chunk-1b50f61a9a29c9b22fe1048b78d6c86a"
+        ],
+        "evidence_texts": [
+          "The creative decisions taken in 'Nude on the Moon' were ahead of its time, merging social commentary with artistic expression.",
+          "Nude on the Moon Nude on the Moon is a 1961 science- fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms\" O. O. Miller\" and\" Anthony Brooks\". The film was produced in 1960 and theatrically released in 1961. \" Nude on the Moon\" is the second of eight nudist films produced and directed by Wishman. While most nudist films of the time were set within a conventional nudist camp, apparently as a promotional gimmick Wishman decided to set the story in a nudist civilization on the Moon."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.576106,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515221
+        }
+      }
+    ],
+    "answer": "Doris Wishman and Raymond Phelan",
+    "confidence": 0.9,
+    "reasoning_summary": "The film 'Nude on the Moon' was co-directed by Doris Wishman and Raymond Phelan, as stated in the evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Nude on the Moon is a 1961 science-fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms 'O. O. Miller' and 'Anthony Brooks'. \""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the age of the director of Becoming Dick?",
+    "analysis": {
+      "entities": [
+        "Bob Saget"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Bob Saget.\"",
+        "hyperedge_text": "The film was directed by Bob Saget.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5947085022926331,
+        "fusion_score": 0.5189417004585266,
+        "entity_ids": [
+          "\"BOB SAGET\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "The film was directed by Bob Saget.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.594709,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518942
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.\"",
+        "hyperedge_text": "Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3826286792755127,
+        "fusion_score": 0.47652573585510255,
+        "entity_ids": [
+          "\"2000\"",
+          "\"BECOMING DICK\"",
+          "\"HARLAND WILLIAMS\"",
+          "\"BOB SAGET\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.382629,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.476526
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.\"",
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4382716417312622,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.24197532335917155,
+        "entity_ids": [
+          "\"OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "evidence_texts": [
+          "making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time.",
+          "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.438272,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.241975
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"making him around 90, which would make him one of the oldest men on the earth.\"",
+        "hyperedge_text": "making him around 90, which would make him one of the oldest men on the earth.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4044809937477112,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.22845906416575112,
+        "entity_ids": [
+          "\"ONE OF THE OLDEST MEN\"",
+          "\"AVERAGE LIFE SPAN OF PEOPLE\""
+        ],
+        "chunk_ids": [
+          "chunk-2cc0e02b510e07f8490fc9f133ad3e6c"
+        ],
+        "evidence_texts": [
+          "making him around 90, which would make him one of the oldest men on the earth.",
+          "Belgutei Belgutei was the son of Yesugei and half-brother to Genghis Khan. He also became general to Genghis Khan. Belgutei was considered a wise counselor and skilled diplomat, and was often used as a messenger by Genghis Khan. With Genghis Khan's blessing, Belgutei killed the champion wrestler of the Mongols, Buri Boko, by breaking his neck during a wrestling match. This was revenge for an earlier incident when Buri Boko had fought with Belgutei and slashed him with a sword. According to legend, Belgutei lived to an unusually old age. Rashid ad-Din claims he died at the age of 110, while the Yuanshi reports that he was still alive when Möngke Khan took the throne in 1251, making him around 90, which would make him one of the oldest men on the earth, a fact made even more difficult due to the average life span of people during the time."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.404481,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.228459
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ou Ya's birthdate indicates he is 37 years old as of 2023.\"",
+        "hyperedge_text": "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.39624837040901184,
+        "semantic_score": 0.0,
+        "fusion_score": 0.15849934816360475,
+        "entity_ids": [
+          "\"37 YEARS OLD\""
+        ],
+        "chunk_ids": [
+          "chunk-2013d0a1c4248a598513d667f5a48c61"
+        ],
+        "evidence_texts": [
+          "Ou Ya's birthdate indicates he is 37 years old as of 2023.",
+          "Ou Ya Ou Ya( born 14 February 1986 in Baoding) is a Chinese footballer."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.396248,
+          "S": 0.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.158499
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "While I know Bob Saget is the director of 'Becoming Dick', I do not have his birthdate or age information to determine his current age.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The film was directed by Bob Saget.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the age of the director of Nude On The Moon?",
+    "analysis": {
+      "entities": [
+        "Doris Wishman",
+        "Raymond Phelan"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of two persons?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Nude on the Moon is a 1961 science-fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms 'O. O. Miller' and 'Anthony Brooks'. \"",
+        "hyperedge_text": "Nude on the Moon is a 1961 science-fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms 'O. O. Miller' and 'Anthony Brooks'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3799753189086914,
+        "fusion_score": 0.4759950637817383,
+        "entity_ids": [
+          "\"NUDE ON THE MOON\"",
+          "\"DORIS WISHMAN\"",
+          "\"ANTHONY BROOKS\"",
+          "\"O. O. MILLER\"",
+          "\"RAYMOND PHELAN\""
+        ],
+        "chunk_ids": [
+          "chunk-1b50f61a9a29c9b22fe1048b78d6c86a"
+        ],
+        "evidence_texts": [
+          "Nude on the Moon is a 1961 science-fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms 'O. O. Miller' and 'Anthony Brooks'.",
+          "Nude on the Moon Nude on the Moon is a 1961 science- fantasy nudist film co-written and co-directed by Doris Wishman and Raymond Phelan under the shared pseudonyms\" O. O. Miller\" and\" Anthony Brooks\". The film was produced in 1960 and theatrically released in 1961. \" Nude on the Moon\" is the second of eight nudist films produced and directed by Wishman. While most nudist films of the time were set within a conventional nudist camp, apparently as a promotional gimmick Wishman decided to set the story in a nudist civilization on the Moon."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.379975,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.475995
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Doris Wishman (June 1, 1912 - August 10, 2002) was an American film director, screenwriter and producer.\"",
+        "hyperedge_text": "Doris Wishman (June 1, 1912 - August 10, 2002) was an American film director, screenwriter and producer.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.586432158946991,
+        "fusion_score": 0.3172864317893982,
+        "entity_ids": [
+          "\"DORIS WISHMAN\"",
+          "\"JUNE 1, 1912\"",
+          "\"AUGUST 10, 2002\""
+        ],
+        "chunk_ids": [
+          "chunk-7f98552dcb659d67e9b78671f256f8c9"
+        ],
+        "evidence_texts": [
+          "Doris Wishman (June 1, 1912 - August 10, 2002) was an American film director, screenwriter and producer.",
+          "Doris Wishman Doris Wishman( June 1, 1912 August 10, 2002) was an American film director, screenwriter and producer. She is credited with having directed and produced at least thirty feature films during a career spanning over four decades, most notably in the sexploitation film genre. A native of New York City, Wishman began her film career as a hobby after the death of her husband in 1958. She made her feature debut with\" Hideout in the Sun\"( 1960), and went on to direct numerous nudist and sexploitation films, such as\" Gentlemen Prefer Nature Girls\"( 1963),\" Behind the Nudist Curtain\"( 1963), and\" Bad Girls Go to Hell\"( 1965). In the 1970s, she would make her first foray into directing pornographic films. In 1979, Wishman filmed her first and only feature horror film,\" A Night to Dismember\", which she spent several years editing after multiple reels were destroyed during post-produ..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.586432,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.317286
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Doris Wishman is credited with having directed and produced at least thirty feature films during a career spanning over four decades, most notably in the sexploitation film genre.\"",
+        "hyperedge_text": "Doris Wishman is credited with having directed and produced at least thirty feature films during a career spanning over four decades, most notably in the sexploitation film genre.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.4918528199195862,
+        "fusion_score": 0.29837056398391726,
+        "entity_ids": [
+          "\"CREDITED\""
+        ],
+        "chunk_ids": [
+          "chunk-7f98552dcb659d67e9b78671f256f8c9"
+        ],
+        "evidence_texts": [
+          "Doris Wishman is credited with having directed and produced at least thirty feature films during a career spanning over four decades, most notably in the sexploitation film genre.",
+          "Doris Wishman Doris Wishman( June 1, 1912 August 10, 2002) was an American film director, screenwriter and producer. She is credited with having directed and produced at least thirty feature films during a career spanning over four decades, most notably in the sexploitation film genre. A native of New York City, Wishman began her film career as a hobby after the death of her husband in 1958. She made her feature debut with\" Hideout in the Sun\"( 1960), and went on to direct numerous nudist and sexploitation films, such as\" Gentlemen Prefer Nature Girls\"( 1963),\" Behind the Nudist Curtain\"( 1963), and\" Bad Girls Go to Hell\"( 1965). In the 1970s, she would make her first foray into directing pornographic films. In 1979, Wishman filmed her first and only feature horror film,\" A Night to Dismember\", which she spent several years editing after multiple reels were destroyed during post-produ..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.491853,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.298371
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Doris Wishman's career included high levels of creativity and exploration of controversial topics.\"",
+        "hyperedge_text": "Doris Wishman's career included high levels of creativity and exploration of controversial topics.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.46458542346954346,
+        "fusion_score": 0.2929170846939087,
+        "entity_ids": [
+          "\"CREATIVITY\"",
+          "\"CONTROVERSIAL TOPICS\""
+        ],
+        "chunk_ids": [
+          "chunk-7f98552dcb659d67e9b78671f256f8c9"
+        ],
+        "evidence_texts": [
+          "Doris Wishman's career included high levels of creativity and exploration of controversial topics.",
+          "Doris Wishman Doris Wishman( June 1, 1912 August 10, 2002) was an American film director, screenwriter and producer. She is credited with having directed and produced at least thirty feature films during a career spanning over four decades, most notably in the sexploitation film genre. A native of New York City, Wishman began her film career as a hobby after the death of her husband in 1958. She made her feature debut with\" Hideout in the Sun\"( 1960), and went on to direct numerous nudist and sexploitation films, such as\" Gentlemen Prefer Nature Girls\"( 1963),\" Behind the Nudist Curtain\"( 1963), and\" Bad Girls Go to Hell\"( 1965). In the 1970s, she would make her first foray into directing pornographic films. In 1979, Wishman filmed her first and only feature horror film,\" A Night to Dismember\", which she spent several years editing after multiple reels were destroyed during post-produ..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.464585,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.292917
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Doris Wishman's filmography includes titles that have achieved cult status over the years.\"",
+        "hyperedge_text": "Doris Wishman's filmography includes titles that have achieved cult status over the years.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.45457303524017334,
+        "fusion_score": 0.2909146070480347,
+        "entity_ids": [
+          "\"FILMOGRAPHY\""
+        ],
+        "chunk_ids": [
+          "chunk-7f98552dcb659d67e9b78671f256f8c9"
+        ],
+        "evidence_texts": [
+          "Doris Wishman's filmography includes titles that have achieved cult status over the years.",
+          "Doris Wishman Doris Wishman( June 1, 1912 August 10, 2002) was an American film director, screenwriter and producer. She is credited with having directed and produced at least thirty feature films during a career spanning over four decades, most notably in the sexploitation film genre. A native of New York City, Wishman began her film career as a hobby after the death of her husband in 1958. She made her feature debut with\" Hideout in the Sun\"( 1960), and went on to direct numerous nudist and sexploitation films, such as\" Gentlemen Prefer Nature Girls\"( 1963),\" Behind the Nudist Curtain\"( 1963), and\" Bad Girls Go to Hell\"( 1965). In the 1970s, she would make her first foray into directing pornographic films. In 1979, Wishman filmed her first and only feature horror film,\" A Night to Dismember\", which she spent several years editing after multiple reels were destroyed during post-produ..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.454573,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.290915
+        }
+      }
+    ],
+    "answer": "111",
+    "confidence": 0.9,
+    "reasoning_summary": "Doris Wishman was born on June 1, 1912, and passed away on August 10, 2002, making her 90 years old at the time of her death. The evidence clearly states her birth date and death date.",
+    "used_dependencies": [
+      "q3"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Doris Wishman (June 1, 1912 - August 10, 2002) was an American film director, screenwriter and producer.\""
+    ]
+  },
+  {
+    "node_id": "q5",
+    "question": "What is the age of the director of Becoming Dick?",
+    "analysis": {
+      "entities": [
+        "Becoming Dick",
+        "Bob Saget"
+      ],
+      "relations": [
+        "age of the director"
+      ],
+      "relation_query": "What is the age of the director of a work?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.\"",
+        "hyperedge_text": "Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5691640973091125,
+        "fusion_score": 0.5138328194618226,
+        "entity_ids": [
+          "\"2000\"",
+          "\"BECOMING DICK\"",
+          "\"HARLAND WILLIAMS\"",
+          "\"BOB SAGET\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.569164,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.513833
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick is a 2000 comedy film.\"",
+        "hyperedge_text": "Becoming Dick is a 2000 comedy film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5961405634880066,
+        "fusion_score": 0.3192281126976013,
+        "entity_ids": [
+          "\"COMEDY FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick is a 2000 comedy film.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.596141,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.319228
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick was produced by XYZ Productions.\"",
+        "hyperedge_text": "Becoming Dick was produced by XYZ Productions.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5634893178939819,
+        "fusion_score": 0.3126978635787964,
+        "entity_ids": [
+          "\"XYZ PRODUCTIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick was produced by XYZ Productions.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.563489,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.312698
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick debuted at various film festivals before its general release.\"",
+        "hyperedge_text": "Becoming Dick debuted at various film festivals before its general release.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5587091445922852,
+        "fusion_score": 0.31174182891845703,
+        "entity_ids": [
+          "\"FILM FESTIVALS\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick debuted at various film festivals before its general release.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.558709,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.311742
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Becoming Dick focuses on themes of identity and transformation.\"",
+        "hyperedge_text": "Becoming Dick focuses on themes of identity and transformation.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5170190930366516,
+        "fusion_score": 0.30340381860733034,
+        "entity_ids": [
+          "\"IDENTITY\"",
+          "\"TRANSFORMATION\""
+        ],
+        "chunk_ids": [
+          "chunk-87fe4227eafd723e3d9b8c7c0d510c4a"
+        ],
+        "evidence_texts": [
+          "Becoming Dick focuses on themes of identity and transformation.",
+          "Becoming Dick Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.517019,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.303404
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "The director of 'Becoming Dick' is Bob Saget, but I lack his birthdate or age information to determine his current age.",
+    "used_dependencies": [
+      "q2",
+      "q4"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Becoming Dick is a 2000 comedy film starring Harland Williams and directed by Bob Saget.\""
+    ]
+  }
+]

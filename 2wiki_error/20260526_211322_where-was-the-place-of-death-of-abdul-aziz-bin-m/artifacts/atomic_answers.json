@@ -1,0 +1,539 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Muhammad?",
+    "analysis": {
+      "entities": [
+        "Muhammad"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Abd al-Muttalib Shaybah ibn Hashim (c. 497 – 578) was the grandfather of Islamic prophet Muhammad.\"",
+        "hyperedge_text": "Abd al-Muttalib Shaybah ibn Hashim (c. 497 – 578) was the grandfather of Islamic prophet Muhammad.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5234407782554626,
+        "fusion_score": 0.5046881556510926,
+        "entity_ids": [
+          "\"ABD AL-MUTTALIB SHAYBAH IBN HASHIM\"",
+          "\"MUHAMMAD\""
+        ],
+        "chunk_ids": [
+          "chunk-ab422e7c44b9b6009ca69a6c5d1b6299"
+        ],
+        "evidence_texts": [
+          "Abd al-Muttalib Shaybah ibn Hashim (c. 497 – 578) was the grandfather of Islamic prophet Muhammad.",
+          "Abd al-Muttalib Abd al- Muttalib Shaybah ibn Hashim( c. 497 – 578) was the grandfather of Islamic prophet Muhammad."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.523441,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.504688
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad.\"",
+        "hyperedge_text": "Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.513168215751648,
+        "fusion_score": 0.5026336431503297,
+        "entity_ids": [
+          "\"MUHAMMAD\"",
+          "\"AZ-ZUBAYR IBN ABD AL-MUTTALIB\"",
+          "\"FATIMAH BINT AMR\"",
+          "\"SHAIBA IBN HASHIM\""
+        ],
+        "chunk_ids": [
+          "chunk-047015c39bef516acf237a99c8b2762d"
+        ],
+        "evidence_texts": [
+          "Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad.",
+          "Az-Zubayr ibn Abd al-Muttalib Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad. He was full brother to Abu Talib and to Muhammad's father Abdullah."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.513168,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.502634
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdullah’s father, Muhammad, gave him the name of his father, which is notable in Islamic tradition.\"",
+        "hyperedge_text": "Abdullah’s father, Muhammad, gave him the name of his father, which is notable in Islamic tradition.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5564498901367188,
+        "fusion_score": 0.9112899780273438,
+        "entity_ids": [
+          "\"ISLAMIC TRADITION\""
+        ],
+        "chunk_ids": [
+          "chunk-08b91b7fc52d6cea11c0f27e48917483"
+        ],
+        "evidence_texts": [
+          "Abdullah’s father, Muhammad, gave him the name of his father, which is notable in Islamic tradition.",
+          "Abdullah ibn Muhammad Abdullah ibn Muhammad also known as Tahir ibn Muhammad(\" Tahirclean/ pure\") or Tayib ibn Muhammad was one of the sons of Muhammad and Khadija. Qasim ibn Muhammad was his older brother. Muhammad gave him the name of his father. Abdullah died in childhood in 615 CE."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.55645,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.91129
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.\"",
+        "hyperedge_text": "Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5103843212127686,
+        "fusion_score": 0.9020768642425537,
+        "entity_ids": [
+          "\"ABDULLAH\""
+        ],
+        "chunk_ids": [
+          "chunk-047015c39bef516acf237a99c8b2762d"
+        ],
+        "evidence_texts": [
+          "Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.",
+          "Az-Zubayr ibn Abd al-Muttalib Az-Zubayr ibn Abd al-Muttalib was the son of Shaiba ibn Hashim and Fatimah bint Amr, hence an uncle of Muhammad. He was full brother to Abu Talib and to Muhammad's father Abdullah."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.510384,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.902077
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Muslims respect him as a grandson of the Islamic Prophet Muhammad.\"",
+        "hyperedge_text": "Muslims respect him as a grandson of the Islamic Prophet Muhammad.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 1.0,
+        "fusion_score": 0.6000000000000001,
+        "entity_ids": [
+          "\"MUHAMMAD\""
+        ],
+        "chunk_ids": [
+          "chunk-34b815928e95a1dbad948f02589b07de"
+        ],
+        "evidence_texts": [
+          "Muslims respect him as a grandson of the Islamic Prophet Muhammad.",
+          "Hasan ibn Ali Al-Hasan ibn Ali ibn Abi Talib (624–670 CE), sometimes spelled Hasan or Hassan, was the eldest son of Ali and Muhammad's daughter Fatimah, and was the older brother of Husayn. Muslims respect him as a grandson of the Islamic Prophet Muhammad. Among Shia Muslims, Hasan is revered as the second Imam. Hasan was elected for the caliphate after his father's death, but abdicated after six or seven months to Muawiyah I, the founder of the Umayyad dynasty to end the First Fitna. Al-Hasan was known for donating to the poor, his kindness to the poor and bondmen, and for his knowledge, tolerance and bravery. For the rest of his life, Hasan lived in Medina, until he died at the age of 45 and was buried in the Jannat al-Baqi cemetery in Medina. His wife, Ja'da bint al-Ash'at, is commonly accused of having poisoned him."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 1.0,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.6
+        }
+      }
+    ],
+    "answer": "Abdullah",
+    "confidence": 0.9,
+    "reasoning_summary": "Az-Zubayr ibn Abd al-Muttalib is noted as a full brother to Muhammad's father, Abdullah, which directly identifies Abdullah as Muhammad's father.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Az-Zubayr ibn Abd al-Muttalib was a full brother to Muhammad's father Abdullah.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the place of death of Muhammad?",
+    "analysis": {
+      "entities": [
+        "Muhammad"
+      ],
+      "relations": [
+        "place of death"
+      ],
+      "relation_query": "the place of death of a person",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"After his death in 978, he was succeeded by his brother Marzuban ibn Muhammad.\"",
+        "hyperedge_text": "After his death in 978, he was succeeded by his brother Marzuban ibn Muhammad.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.4594316780567169,
+        "fusion_score": 0.6918863356113435,
+        "entity_ids": [
+          "\"DEATH\"",
+          "\"MARZUBAN IBN MUHAMMAD\""
+        ],
+        "chunk_ids": [
+          "chunk-2c111a415a0b89a01ad79b5c5c18f272"
+        ],
+        "evidence_texts": [
+          "After his death in 978, he was succeeded by his brother Marzuban ibn Muhammad.",
+          "Lashkari ibn Muhammad Lashkari ibn Muhammad ibn Shaddad was a Kurdish ruler, the son of Muhammad ibn Shaddad. Along with his brothers, he captured Ganja from the Sallarids in 971, coming into control of the region of Arran. After his death in 978, he was succeeded by his brother Marzuban ibn Muhammad."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.459432,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.691886
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Muslims respect him as a grandson of the Islamic Prophet Muhammad.\"",
+        "hyperedge_text": "Muslims respect him as a grandson of the Islamic Prophet Muhammad.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"MUHAMMAD\""
+        ],
+        "chunk_ids": [
+          "chunk-34b815928e95a1dbad948f02589b07de"
+        ],
+        "evidence_texts": [
+          "Muslims respect him as a grandson of the Islamic Prophet Muhammad.",
+          "Hasan ibn Ali Al-Hasan ibn Ali ibn Abi Talib (624–670 CE), sometimes spelled Hasan or Hassan, was the eldest son of Ali and Muhammad's daughter Fatimah, and was the older brother of Husayn. Muslims respect him as a grandson of the Islamic Prophet Muhammad. Among Shia Muslims, Hasan is revered as the second Imam. Hasan was elected for the caliphate after his father's death, but abdicated after six or seven months to Muawiyah I, the founder of the Umayyad dynasty to end the First Fitna. Al-Hasan was known for donating to the poor, his kindness to the poor and bondmen, and for his knowledge, tolerance and bravery. For the rest of his life, Hasan lived in Medina, until he died at the age of 45 and was buried in the Jannat al-Baqi cemetery in Medina. His wife, Ja'da bint al-Ash'at, is commonly accused of having poisoned him."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Muhammad bin Musafir died before 953.\"",
+        "hyperedge_text": "Muhammad bin Musafir died before 953.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5102612376213074,
+        "fusion_score": 0.5020522475242615,
+        "entity_ids": [
+          "\"MUHAMMAD BIN MUSAFIR\""
+        ],
+        "chunk_ids": [
+          "chunk-bb755bc3295396a47e65c6e8926ae080"
+        ],
+        "evidence_texts": [
+          "Muhammad bin Musafir died before 953.",
+          "Muhammad ibn Musafir Muhammad bin Musafir (died before 953) was the Sallarid ruler of Tarum in modern northwest Iran (before 916–941) and Iranian Azerbaijan (949). He was the son of Musafir, whose name appears to have been an Arabicized form of his Persian name Asfar/Asvar. Muhammad's original name seems to have been Sallar or Salar (Persian for 'commander'); 'Sallar' would later become a title used by his successors."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.510261,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.502052
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He reigned only until his murder by his younger brother al-Fadhl ibn Muhammad in 985.\"",
+        "hyperedge_text": "He reigned only until his murder by his younger brother al-Fadhl ibn Muhammad in 985.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4488109052181244,
+        "fusion_score": 0.4897621810436249,
+        "entity_ids": [
+          "\"985\""
+        ],
+        "chunk_ids": [
+          "chunk-13c5f9b61e093ed137ad71a530723a7f"
+        ],
+        "evidence_texts": [
+          "He reigned only until his murder by his younger brother al-Fadhl ibn Muhammad in 985.",
+          "Marzuban ibn Muhammad ibn Shaddad Marzuban ibn Muhammad ibn Shaddad was a Kurdish ruler, the brother of Lashkari ibn Muhammad. He succeeded his brother to the throne of the Shaddadids in 978. He was incompetent, however, and reigned only until his murder by his younger brother al- Fadhl ibn Muhammad in 985."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.448811,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.489762
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He reigned only until his murder by his younger brother al-Fadhl ibn Muhammad.\"",
+        "hyperedge_text": "He reigned only until his murder by his younger brother al-Fadhl ibn Muhammad.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4291979670524597,
+        "fusion_score": 0.485839593410492,
+        "entity_ids": [
+          "\"YOUNGER BROTHER\""
+        ],
+        "chunk_ids": [
+          "chunk-13c5f9b61e093ed137ad71a530723a7f"
+        ],
+        "evidence_texts": [
+          "He reigned only until his murder by his younger brother al-Fadhl ibn Muhammad.",
+          "Marzuban ibn Muhammad ibn Shaddad Marzuban ibn Muhammad ibn Shaddad was a Kurdish ruler, the brother of Lashkari ibn Muhammad. He succeeded his brother to the throne of the Shaddadids in 978. He was incompetent, however, and reigned only until his murder by his younger brother al- Fadhl ibn Muhammad in 985."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.429198,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.48584
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that specifies the place of death of Muhammad.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"After his death in 978, he was succeeded by his brother Marzuban ibn Muhammad.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Muhammad die?",
+    "analysis": {
+      "entities": [
+        "Abdullah"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Abdullah died in childhood in 615 CE.\"",
+        "hyperedge_text": "Abdullah died in childhood in 615 CE.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.6651096343994141,
+        "fusion_score": 0.9330219268798828,
+        "entity_ids": [
+          "\"ABDULLAH IBN MUHAMMAD\""
+        ],
+        "chunk_ids": [
+          "chunk-08b91b7fc52d6cea11c0f27e48917483"
+        ],
+        "evidence_texts": [
+          "Abdullah died in childhood in 615 CE.",
+          "Abdullah ibn Muhammad Abdullah ibn Muhammad also known as Tahir ibn Muhammad(\" Tahirclean/ pure\") or Tayib ibn Muhammad was one of the sons of Muhammad and Khadija. Qasim ibn Muhammad was his older brother. Muhammad gave him the name of his father. Abdullah died in childhood in 615 CE."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.66511,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.933022
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdullah died in childhood, highlighting the early loss in the family.\"",
+        "hyperedge_text": "Abdullah died in childhood, highlighting the early loss in the family.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.594228208065033,
+        "fusion_score": 0.9188456416130066,
+        "entity_ids": [
+          "\"CHILDHOOD\"",
+          "\"615 CE\""
+        ],
+        "chunk_ids": [
+          "chunk-08b91b7fc52d6cea11c0f27e48917483"
+        ],
+        "evidence_texts": [
+          "Abdullah died in childhood, highlighting the early loss in the family.",
+          "Abdullah ibn Muhammad Abdullah ibn Muhammad also known as Tahir ibn Muhammad(\" Tahirclean/ pure\") or Tayib ibn Muhammad was one of the sons of Muhammad and Khadija. Qasim ibn Muhammad was his older brother. Muhammad gave him the name of his father. Abdullah died in childhood in 615 CE."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.594228,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.918846
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdullah ruled until 1951 when he was assassinated in Jerusalem while attending Friday prayers at the entrance of the Al-Aqsa mosque by a Palestinian who feared that the King was going to make peace with Israel.\"",
+        "hyperedge_text": "Abdullah ruled until 1951 when he was assassinated in Jerusalem while attending Friday prayers at the entrance of the Al-Aqsa mosque by a Palestinian who feared that the King was going to make peace with Israel.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6273130178451538,
+        "fusion_score": 0.5254626035690309,
+        "entity_ids": [
+          "\"ASSASSINATION\"",
+          "\"JERUSALEM\"",
+          "\"AL-AQSA MOSQUE\"",
+          "\"PALESTINIAN\"",
+          "\"PEACE WITH ISRAEL\""
+        ],
+        "chunk_ids": [
+          "chunk-92f5582ef120c4c3e3c3bd319482a745"
+        ],
+        "evidence_texts": [
+          "Abdullah ruled until 1951 when he was assassinated in Jerusalem while attending Friday prayers at the entrance of the Al-Aqsa mosque by a Palestinian who feared that the King was going to make peace with Israel.",
+          "Abdullah I of Jordan Abdullah I bin Al- Hussein(\" Abd Allāh Al- Awal ibn Al- Husayn\", February 1882 – 20 July 1951) was the ruler of Jordan and its predecessor state, Transjordan, from 1921 until his assassination in 1951. He was Emir of Transjordan from 11 April 1921 to 25 May 1946 under a British mandate, and was king of an independent nation from 25 May 1946 until his assassination. According to Abdullah, he was a 38th- generation direct descendant of Muhammad as he belongs to the Hashemite family. Born in Mecca, Hejaz, Ottoman Empire, Abdullah was the second of three sons of Hussein bin Ali, Sharif of Mecca and his first wife Abdiyya bint Abdullah. He was educated in Istanbul and Hejaz. From 1909 to 1914, Abdullah sat in the Ottoman legislature, as deputy for Mecca, but allied with Britain during World War I. Between 1916 and 1918, he played a key role as architect and planner of..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.627313,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525463
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born in Mecca, Hejaz, Ottoman Empire, Abdullah was the second of three sons of Hussein bin Ali, Sharif of Mecca and his first wife Abdiyya bint Abdullah.\"",
+        "hyperedge_text": "Born in Mecca, Hejaz, Ottoman Empire, Abdullah was the second of three sons of Hussein bin Ali, Sharif of Mecca and his first wife Abdiyya bint Abdullah.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5930606126785278,
+        "fusion_score": 0.5186121225357057,
+        "entity_ids": [
+          "\"MECCA\"",
+          "\"HUSSEIN BIN ALI\"",
+          "\"SHARIF OF MECCA\"",
+          "\"ABDIYYA BINT ABDULLAH\""
+        ],
+        "chunk_ids": [
+          "chunk-92f5582ef120c4c3e3c3bd319482a745"
+        ],
+        "evidence_texts": [
+          "Born in Mecca, Hejaz, Ottoman Empire, Abdullah was the second of three sons of Hussein bin Ali, Sharif of Mecca and his first wife Abdiyya bint Abdullah.",
+          "Abdullah I of Jordan Abdullah I bin Al- Hussein(\" Abd Allāh Al- Awal ibn Al- Husayn\", February 1882 – 20 July 1951) was the ruler of Jordan and its predecessor state, Transjordan, from 1921 until his assassination in 1951. He was Emir of Transjordan from 11 April 1921 to 25 May 1946 under a British mandate, and was king of an independent nation from 25 May 1946 until his assassination. According to Abdullah, he was a 38th- generation direct descendant of Muhammad as he belongs to the Hashemite family. Born in Mecca, Hejaz, Ottoman Empire, Abdullah was the second of three sons of Hussein bin Ali, Sharif of Mecca and his first wife Abdiyya bint Abdullah. He was educated in Istanbul and Hejaz. From 1909 to 1914, Abdullah sat in the Ottoman legislature, as deputy for Mecca, but allied with Britain during World War I. Between 1916 and 1918, he played a key role as architect and planner of..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.593061,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.518612
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdullah was Emir from 11 April 1921 to 25 May 1946.\"",
+        "hyperedge_text": "Abdullah was Emir from 11 April 1921 to 25 May 1946.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5898990631103516,
+        "fusion_score": 0.5179798126220704,
+        "entity_ids": [
+          "\"11 APRIL 1921\"",
+          "\"25 MAY 1946\""
+        ],
+        "chunk_ids": [
+          "chunk-92f5582ef120c4c3e3c3bd319482a745"
+        ],
+        "evidence_texts": [
+          "Abdullah was Emir from 11 April 1921 to 25 May 1946.",
+          "Abdullah I of Jordan Abdullah I bin Al- Hussein(\" Abd Allāh Al- Awal ibn Al- Husayn\", February 1882 – 20 July 1951) was the ruler of Jordan and its predecessor state, Transjordan, from 1921 until his assassination in 1951. He was Emir of Transjordan from 11 April 1921 to 25 May 1946 under a British mandate, and was king of an independent nation from 25 May 1946 until his assassination. According to Abdullah, he was a 38th- generation direct descendant of Muhammad as he belongs to the Hashemite family. Born in Mecca, Hejaz, Ottoman Empire, Abdullah was the second of three sons of Hussein bin Ali, Sharif of Mecca and his first wife Abdiyya bint Abdullah. He was educated in Istanbul and Hejaz. From 1909 to 1914, Abdullah sat in the Ottoman legislature, as deputy for Mecca, but allied with Britain during World War I. Between 1916 and 1918, he played a key role as architect and planner of..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.589899,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51798
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the location of Abdullah's death, only that he died in childhood in 615 CE.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Abdullah died in childhood in 615 CE.\""
+    ]
+  }
+]

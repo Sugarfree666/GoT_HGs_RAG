@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Humphrey?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did the father of Humphrey die?",
+      "dependencies": [
+        "q1"
+      ]
+    }
+  ]
+}

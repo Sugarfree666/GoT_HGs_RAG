@@ -1,0 +1,366 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the place of birth of the performer?",
+    "analysis": {
+      "entities": [
+        "performer"
+      ],
+      "relations": [
+        "place of birth"
+      ],
+      "relation_query": "What is the place of birth of a performer?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5079867243766785,
+        "semantic_score": 0.49135062098503113,
+        "fusion_score": 0.30146481394767766,
+        "entity_ids": [
+          "\"BIRTH\"",
+          "\"PLACE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.507987,
+          "S": 0.491351,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.301465
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4929313063621521,
+        "semantic_score": 0.45670807361602783,
+        "fusion_score": 0.2885141372680664,
+        "entity_ids": [
+          "\"TERRITORIAL WATERS\"",
+          "\"LAW OF THE COUNTRIES INVOLVED\"",
+          "\"NATIONALITY OF THE PLANE OR SHIP\"",
+          "\"LAW\"",
+          "\"AIRSPACE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.492931,
+          "S": 0.456708,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.288514
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth is not necessarily the place where the parents of the new baby live.\"",
+        "hyperedge_text": "The place of birth is not necessarily the place where the parents of the new baby live.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.47393959760665894,
+        "semantic_score": 0.447890043258667,
+        "fusion_score": 0.279153847694397,
+        "entity_ids": [
+          "\"PARENTS\"",
+          "\"NEW BABY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth is not necessarily the place where the parents of the new baby live.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.47394,
+          "S": 0.44789,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.279154
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.\"",
+        "hyperedge_text": "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4434208869934082,
+        "semantic_score": 0.4632076025009155,
+        "fusion_score": 0.2700098752975464,
+        "entity_ids": [
+          "\"1 JULY 1960\""
+        ],
+        "chunk_ids": [
+          "chunk-aa56f51397106aa3cdfbda911c04958d"
+        ],
+        "evidence_texts": [
+          "His birth date is noted as 1 July 1960, marking his beginnings in the entertainment industry.",
+          "Mikael Håfström Jan Mikael Håfström( born 1 July 1960) is a Swedish film director and screenwriter. He is best known for the 2003 film\" Evil\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.443421,
+          "S": 0.463208,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.27001
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.\"",
+        "hyperedge_text": "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.45283421874046326,
+        "semantic_score": 0.4361562728881836,
+        "fusion_score": 0.268364942073822,
+        "entity_ids": [
+          "\"ETHNIC GROUP\"",
+          "\"PLACE OF ORIGIN\""
+        ],
+        "chunk_ids": [
+          "chunk-90ef8b646c23d30cfdfe5eeaca1544c1"
+        ],
+        "evidence_texts": [
+          "The place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group.",
+          "Motherland (disambiguation) Motherland is the place of one's birth, the place of one's ancestors, or the place of origin of an ethnic group. Motherland may also refer to:"
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.452834,
+          "S": 0.436156,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.268365
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that specifies the place of birth of the performer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the song performed by the performer of birth?",
+    "analysis": {
+      "entities": [],
+      "relations": [
+        "performed by",
+        "song of"
+      ],
+      "relation_query": "What is the song performed by a performer?",
+      "answer_type": "work"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The song is from the artist's 'Let Them Fall in Love' album.\"",
+        "hyperedge_text": "The song is from the artist's 'Let Them Fall in Love' album.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.3957023620605469,
+        "semantic_score": 0.37109243869781494,
+        "fusion_score": 0.23249943256378175,
+        "entity_ids": [
+          "\"ALBUM\"",
+          "\"LET THEM FALL IN LOVE\""
+        ],
+        "chunk_ids": [
+          "chunk-ffc6b813f86677307ba0d3d2acf041bf"
+        ],
+        "evidence_texts": [
+          "The song is from the artist's 'Let Them Fall in Love' album.",
+          "Never Have to Be Alone Never Have to Be Alone is a song by American gospel singer CeCe Winans, released in 2017. The song earned the singer a Grammy Award for Best Gospel Performance/ Song. The song is from the artist's\" Let Them Fall in Love\" album."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.395702,
+          "S": 0.371092,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.232499
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Baby Come On is a song by American rock band + 44, released in February 2007 as the fourth single from the group's debut studio album, When Your Heart Stops Beating.\"",
+        "hyperedge_text": "Baby Come On is a song by American rock band + 44, released in February 2007 as the fourth single from the group's debut studio album, When Your Heart Stops Beating.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.4156762361526489,
+        "fusion_score": 0.4831352472305298,
+        "entity_ids": [
+          "\"BABY COME ON\"",
+          "\"+ 44\"",
+          "\"FEBRUARY 2007\"",
+          "\"WHEN YOUR HEART STOPS BEATING\"",
+          "\"FEBRUARY 20, 2007\""
+        ],
+        "chunk_ids": [
+          "chunk-0b648434b8277ff5e02fa70d9945c52d"
+        ],
+        "evidence_texts": [
+          "Baby Come On is a song by American rock band + 44, released in February 2007 as the fourth single from the group's debut studio album, When Your Heart Stops Beating.",
+          "Baby Come On \" Baby Come On\" is a song by American rock band+ 44, released in February 2007 as the fourth single from the group's debut studio album,\" When Your Heart Stops Beating\"( 2006). The song impacted radio on February 20, 2007."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.415676,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.483135
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Spears has performed ...Baby One More Time in a number of live appearances and during all of her concert tours.\"",
+        "hyperedge_text": "Spears has performed ...Baby One More Time in a number of live appearances and during all of her concert tours.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.38576963543891907,
+        "fusion_score": 0.4771539270877838,
+        "entity_ids": [
+          "\"CONCERT TOURS\"",
+          "\"LIVE APPEARANCES\""
+        ],
+        "chunk_ids": [
+          "chunk-bf7c00bf856cdc6e62557ffe5061638f"
+        ],
+        "evidence_texts": [
+          "Spears has performed ...Baby One More Time in a number of live appearances and during all of her concert tours.",
+          "...Baby One More Time (song) \" ... Baby One More Time\" is the debut single by American singer Britney Spears from her debut studio album of the same title( 1999). It was written by Max Martin and produced by Martin and Rami. After recording and sending a demo tape with an unused song from Toni Braxton, Spears signed a multi-album deal with Jive. \" ... Baby One More Time\" is a pop song that refers to a girl's feelings after a break- up with her boyfriend. \" ... Baby One More Time\" was released on October 23, 1998 through Jive Records. It reached number one in at least 18 countries, including the United Kingdom, where it earned triple- platinum certification from the British Phonographic Industry( BPI) and became the country's best- selling song of 1999. The song is one of the best- selling singles of all time, with over 10 million copies sold. An accompanying music video, directed by N..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.38577,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.477154
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is possible that 'Baby One More Time' refers specifically to a famous pop song performed by Britney Spears.\"",
+        "hyperedge_text": "It is possible that 'Baby One More Time' refers specifically to a famous pop song performed by Britney Spears.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.38095200061798096,
+        "fusion_score": 0.4761904001235962,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-c0bb766a78590ffc53788b767dd7973d"
+        ],
+        "evidence_texts": [
+          "It is possible that 'Baby One More Time' refers specifically to a famous pop song performed by Britney Spears.",
+          "Baby One More Time Baby One More Time may refer to:"
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.380952,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.47619
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song has become a staple in live performances by artists who cover it.\"",
+        "hyperedge_text": "The song has become a staple in live performances by artists who cover it.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.43928733468055725,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2757149338722229,
+        "entity_ids": [
+          "\"LIVE PERFORMANCES\""
+        ],
+        "chunk_ids": [
+          "chunk-0147f752c8f7ab11d82c0a6dd3c7b171"
+        ],
+        "evidence_texts": [
+          "The song has become a staple in live performances by artists who cover it.",
+          "When the Stars Go Blue \"When The Stars Go Blue\" is a popular alternative country song composed and originally performed by solo artist and former Whiskeytown band member Ryan Adams. It was first released on his album \"Gold\" on September 25, 2001 and has been described as the \"most gorgeous ballad\" on that album. \"When The Stars Go Blue has been covered by many artists, including Irish band The Corrs (featuring Bono of U2), country music singer Tim McGraw, and Norwegian artists Venke Knutson and Kurt Nilsen as a duo."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.439287,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.275715
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided that specifies the song performed by the performer of birth.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The song is from the artist's 'Let Them Fall in Love' album.\""
+    ]
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Taming Of The Fire?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the age of the director of Taming Of The Fire?",
+      "dependencies": [
+        "q1"
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "Who is the director of The Lady Takes A Flyer?",
+      "dependencies": []
+    },
+    {
+      "node_id": "q4",
+      "question": "What is the age of the director of The Lady Takes A Flyer?",
+      "dependencies": [
+        "q3"
+      ]
+    }
+  ]
+}

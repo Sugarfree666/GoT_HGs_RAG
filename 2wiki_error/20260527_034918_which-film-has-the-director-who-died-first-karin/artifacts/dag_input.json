@@ -1,0 +1,38 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Karin Daughter Of Ingmar?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the director of Karin Daughter Of Ingmar die?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q3",
+    "question": "When did the director of The Man In The Trunk die?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q4",
+    "question": "What film is associated with the death date of The Man In The Trunk?",
+    "dependencies": [
+      "q3"
+    ],
+    "metadata": {}
+  },
+  {
+    "node_id": "q5",
+    "question": "When did the director of The Man In The Trunk die?",
+    "dependencies": [
+      "q4"
+    ],
+    "metadata": {}
+  }
+]

@@ -1,0 +1,105 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the wife of Adam Włodek?",
+    "retrieval_question": "Who is the wife of Adam Włodek?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the wife of Adam Włodek?",
+      "retrieval_question": "Who is the wife of Adam Włodek?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Adam Włodek"
+      ],
+      "relations": [
+        "is the wife of"
+      ],
+      "relation_query": "who is the wife of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was the wife of Adam Włodek born?",
+    "retrieval_question": "Where was Wisława Szymborska born?",
+    "dependency_question_rewrite": {
+      "original_question": "Where was the wife of Adam Włodek born?",
+      "retrieval_question": "Where was Wisława Szymborska born?",
+      "whether_rewritten": true,
+      "replacement_span": "the wife of Adam Włodek",
+      "replacement_answer": "Wisława Szymborska",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the wife of Adam Włodek",
+          "replacement_answer": "Wisława Szymborska"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the wife of Adam Włodek?",
+        "answer": "Wisława Szymborska",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "Adam Włodek was married to Polish Nobel Prize laureate, Wisława Szymborska between 1948 - 1954, as stated in the evidence.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Adam Włodek was married to Polish Nobel Prize laureate, Wisława Szymborska between 1948 - 1954.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Adam Włodek (8 August 1922 in Kraków – 19 January 1986 in Kraków) was a Polish poet, editor and translator.\"",
+            "fusion_score": 0.5196870803833008,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Adam Włodek (8 August 1922 in Kraków – 19 January 1986 in Kraków) was a Polish poet, editor and translator.",
+              "Adam Włodek Adam Włodek (8 August 1922 in Kraków – 19 January 1986 in Kraków) was a Polish poet, editor and translator. He was married to Polish Noble Prize laureate, Wisława Szymborska between 1948 - 1954. He published 10 books, mostly collections of his poems. He was also the editor of several Polish newspapers including \"Dziennik Polski\", and translated works from Czech and Slovak languages into Polish."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Adam Włodek was a Polish poet, editor and translator.\"",
+            "fusion_score": 0.5139380455017091,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Adam Włodek was a Polish poet, editor and translator.",
+              "Adam Włodek Adam Włodek (8 August 1922 in Kraków – 19 January 1986 in Kraków) was a Polish poet, editor and translator. He was married to Polish Noble Prize laureate, Wisława Szymborska between 1948 - 1954. He published 10 books, mostly collections of his poems. He was also the editor of several Polish newspapers including \"Dziennik Polski\", and translated works from Czech and Slovak languages into Polish."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Adam Włodek was married to Polish Nobel Prize laureate, Wisława Szymborska between 1948 - 1954.\"",
+            "fusion_score": 0.5436863541603089,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Adam Włodek was married to Polish Nobel Prize laureate, Wisława Szymborska between 1948 - 1954.",
+              "Adam Włodek Adam Włodek (8 August 1922 in Kraków – 19 January 1986 in Kraków) was a Polish poet, editor and translator. He was married to Polish Noble Prize laureate, Wisława Szymborska between 1948 - 1954. He published 10 books, mostly collections of his poems. He was also the editor of several Polish newspapers including \"Dziennik Polski\", and translated works from Czech and Slovak languages into Polish."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Wisława Szymborska"
+      ],
+      "relations": [
+        "born in"
+      ],
+      "relation_query": "Where was a person born?",
+      "answer_type": "location"
+    }
+  }
+]

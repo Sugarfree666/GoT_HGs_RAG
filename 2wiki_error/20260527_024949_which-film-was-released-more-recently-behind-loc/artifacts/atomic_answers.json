@@ -1,0 +1,565 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Behind Locked Doors released?",
+    "analysis": {
+      "entities": [
+        "Behind Locked Doors"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Any Body…Any Way's re-release under the name Behind Locked Doors highlights its enduring appeal and notable changes in presentation.\"",
+        "hyperedge_text": "Any Body…Any Way's re-release under the name Behind Locked Doors highlights its enduring appeal and notable changes in presentation.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5702425241470337,
+        "fusion_score": 0.7140485048294068,
+        "entity_ids": [
+          "\"BEHIND LOCKED DOORS\""
+        ],
+        "chunk_ids": [
+          "chunk-1703836e78298a8ef310f884342b3385"
+        ],
+        "evidence_texts": [
+          "Any Body…Any Way's re-release under the name Behind Locked Doors highlights its enduring appeal and notable changes in presentation.",
+          "Any Body...Any Way Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.570243,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.714049
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.\"",
+        "hyperedge_text": "Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6456043720245361,
+        "fusion_score": 0.5291208744049073,
+        "entity_ids": [
+          "\"BEHIND LOCKED DOORS\"",
+          "\"ANKA SCHMID\""
+        ],
+        "chunk_ids": [
+          "chunk-062a364ed34c168ef0792c56c98440ae"
+        ],
+        "evidence_texts": [
+          "Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.",
+          "Behind Locked Doors (1991 film) Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991. The ensemble- film shows the everyday life of 17 inhabitants of an apartment building in Berlin Kreuzberg."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.645604,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.529121
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson.\"",
+        "hyperedge_text": "Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6125732660293579,
+        "fusion_score": 0.5225146532058716,
+        "entity_ids": [
+          "\"BUDD BOETTICHER\"",
+          "\"BEHIND LOCKED DOORS\"",
+          "\"LUCILLE BREMER\"",
+          "\"RICHARD CARLSON\"",
+          "\"TOR JOHNSON\""
+        ],
+        "chunk_ids": [
+          "chunk-8b6c4857b679a4e8833ebf960b675a83"
+        ],
+        "evidence_texts": [
+          "Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson.",
+          "Behind Locked Doors Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson. At the behest of a pretty reporter, an amorously forward private detective goes undercover as a patient in a private sanitarium in search of a judge hiding out from the police. The two plan to split the$ 10,000 reward for the judge's capture. As the reporter and detective begin to fall in love, the detective also falls deeper into danger from an abusive attendant and difficult inpatients. The latter include an arsonist and\" The Champ,\" a lunatic ex-boxer who attacks anyone put into a room with him after he hears what sounds like a bell. The title\" Human Gorilla\" for this movie can be found on various copies of this movie. Although the film features noir lighting and camerawork, depicts corruption, and provides suspense, it lacks most of..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.612573,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522515
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth.\"",
+        "hyperedge_text": "Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5767672657966614,
+        "fusion_score": 0.5153534531593323,
+        "entity_ids": [
+          "\"1968\"",
+          "\"ANY BODY…ANY WAY\"",
+          "\"SEXPLOITATION ROUGHIE\"",
+          "\"CHARLES ROMINE\"",
+          "\"EVE REEVES\"",
+          "\"JOYCE DENNER\"",
+          "\"DANIEL GARTH\"",
+          "\"BEHIND LOCKED DOORS\""
+        ],
+        "chunk_ids": [
+          "chunk-1703836e78298a8ef310f884342b3385"
+        ],
+        "evidence_texts": [
+          "Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth.",
+          "Any Body...Any Way Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.576767,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.515353
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Behind Locked Doors was screened at several international film festivals, gaining recognition for its portrayal of everyday life.\"",
+        "hyperedge_text": "Behind Locked Doors was screened at several international film festivals, gaining recognition for its portrayal of everyday life.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5956395864486694,
+        "fusion_score": 0.519127917289734,
+        "entity_ids": [
+          "\"RECOGNITION\"",
+          "\"INTERNATIONAL FILM FESTIVALS\""
+        ],
+        "chunk_ids": [
+          "chunk-062a364ed34c168ef0792c56c98440ae"
+        ],
+        "evidence_texts": [
+          "Behind Locked Doors was screened at several international film festivals, gaining recognition for its portrayal of everyday life.",
+          "Behind Locked Doors (1991 film) Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991. The ensemble- film shows the everyday life of 17 inhabitants of an apartment building in Berlin Kreuzberg."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.59564,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519128
+        }
+      }
+    ],
+    "answer": "1991",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.' This directly answers the question about the release date.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the release date of Crossing Delancey?",
+    "analysis": {
+      "entities": [
+        "Crossing Delancey"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert.\"",
+        "hyperedge_text": "Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6045756936073303,
+        "fusion_score": 0.5209151387214661,
+        "entity_ids": [
+          "\"AMY IRVING\"",
+          "\"CROSSING DELANCEY\"",
+          "\"PETER RIEGERT\""
+        ],
+        "chunk_ids": [
+          "chunk-fdf73b4dffd6b90c07f90b6f7bac8ea1"
+        ],
+        "evidence_texts": [
+          "Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert.",
+          "Crossing Delancey Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert. It is directed by Joan Micklin Silver and was based on a play by Susan Sandler, who also wrote the screenplay. Amy Irving was nominated for a Golden Globe for the movie, for Best Performance by an Actress in a Motion Picture- Comedy/ Musical."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.604576,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.520915
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date was on 10 October 2009.\"",
+        "hyperedge_text": "The release date was on 10 October 2009.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4672178030014038,
+        "semantic_score": 0.4612065851688385,
+        "fusion_score": 0.2791284382343292,
+        "entity_ids": [
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-cedc634532d486a7ffdc31522b35c0a8"
+        ],
+        "evidence_texts": [
+          "The release date was on 10 October 2009.",
+          "The Wonderful World of Captain Kuhio The film was released in Japan on 10 October 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.467218,
+          "S": 0.461207,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.279128
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date on CD was September 22.\"",
+        "hyperedge_text": "The release date on CD was September 22.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4367821216583252,
+        "semantic_score": 0.482882559299469,
+        "fusion_score": 0.2712893605232239,
+        "entity_ids": [
+          "\"SEPTEMBER 22\""
+        ],
+        "chunk_ids": [
+          "chunk-01bf08e0672ff3d0b3744f6037ac95e0"
+        ],
+        "evidence_texts": [
+          "The release date on CD was September 22.",
+          "Your Songs Your Songs is a studio album by American jazz singer Harry Connick Jr. that was released by Columbia. It was released first in the United States on a limited edition double vinyl LP on August 25, 2009, then on CD on September 22."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.436782,
+          "S": 0.482883,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.271289
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The release date of the film is July 25, 1920.\"",
+        "hyperedge_text": "The release date of the film is July 25, 1920.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4386218786239624,
+        "semantic_score": 0.4737207293510437,
+        "fusion_score": 0.2701928973197937,
+        "entity_ids": [
+          "\"JULY 25, 1920\""
+        ],
+        "chunk_ids": [
+          "chunk-1f8abe24ad0a5b85f6a06cff7854a5bf"
+        ],
+        "evidence_texts": [
+          "The release date of the film is July 25, 1920.",
+          "Cupid the Cowpuncher Cupid the Cowpuncher is a 1920 American comedy film directed by Clarence G. Badger and written by Edfrid A. Bingham. It is based on the 1907 novel\" Cupid: The Cow- Punch\" by Eleanor Gates. The film stars Will Rogers, Helene Chadwick, Andrew Robson, Lloyd Whitlock, Guinn\" Big Boy\" Williams and Tex Parker. The film was released on July 25, 1920, by Goldwyn Pictures."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.438622,
+          "S": 0.473721,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.270193
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Crossing Delancey is an American romantic comedy released in 1988.\"",
+        "hyperedge_text": "The film Crossing Delancey is an American romantic comedy released in 1988.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6583744287490845,
+        "fusion_score": 0.5316748857498169,
+        "entity_ids": [
+          "\"1988\""
+        ],
+        "chunk_ids": [
+          "chunk-fdf73b4dffd6b90c07f90b6f7bac8ea1"
+        ],
+        "evidence_texts": [
+          "The film Crossing Delancey is an American romantic comedy released in 1988.",
+          "Crossing Delancey Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert. It is directed by Joan Micklin Silver and was based on a play by Susan Sandler, who also wrote the screenplay. Amy Irving was nominated for a Golden Globe for the movie, for Best Performance by an Actress in a Motion Picture- Comedy/ Musical."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.658374,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531675
+        }
+      }
+    ],
+    "answer": "1988",
+    "confidence": 0.9,
+    "reasoning_summary": "The film 'Crossing Delancey' is confirmed to have been released in 1988 according to multiple pieces of evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Crossing Delancey is a 1988 American romantic comedy film starring Amy Irving and Peter Riegert.\"",
+      "<hyperedge>\"The film Crossing Delancey is an American romantic comedy released in 1988.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the release date of Behind Locked Doors?",
+    "analysis": {
+      "entities": [
+        "Behind Locked Doors"
+      ],
+      "relations": [
+        "release date of"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Any Body…Any Way's re-release under the name Behind Locked Doors highlights its enduring appeal and notable changes in presentation.\"",
+        "hyperedge_text": "Any Body…Any Way's re-release under the name Behind Locked Doors highlights its enduring appeal and notable changes in presentation.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.4762954115867615,
+        "fusion_score": 0.6952590823173523,
+        "entity_ids": [
+          "\"BEHIND LOCKED DOORS\""
+        ],
+        "chunk_ids": [
+          "chunk-1703836e78298a8ef310f884342b3385"
+        ],
+        "evidence_texts": [
+          "Any Body…Any Way's re-release under the name Behind Locked Doors highlights its enduring appeal and notable changes in presentation.",
+          "Any Body...Any Way Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.476295,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.695259
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.\"",
+        "hyperedge_text": "Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5518124103546143,
+        "fusion_score": 0.5103624820709229,
+        "entity_ids": [
+          "\"BEHIND LOCKED DOORS\"",
+          "\"ANKA SCHMID\""
+        ],
+        "chunk_ids": [
+          "chunk-062a364ed34c168ef0792c56c98440ae"
+        ],
+        "evidence_texts": [
+          "Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.",
+          "Behind Locked Doors (1991 film) Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991. The ensemble- film shows the everyday life of 17 inhabitants of an apartment building in Berlin Kreuzberg."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.551812,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.510362
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson.\"",
+        "hyperedge_text": "Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.514926552772522,
+        "fusion_score": 0.5029853105545045,
+        "entity_ids": [
+          "\"BUDD BOETTICHER\"",
+          "\"BEHIND LOCKED DOORS\"",
+          "\"LUCILLE BREMER\"",
+          "\"RICHARD CARLSON\"",
+          "\"TOR JOHNSON\""
+        ],
+        "chunk_ids": [
+          "chunk-8b6c4857b679a4e8833ebf960b675a83"
+        ],
+        "evidence_texts": [
+          "Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson.",
+          "Behind Locked Doors Behind Locked Doors is a 1948 film noir directed by Budd Boetticher and starring Lucille Bremer, Richard Carlson and Tor Johnson. At the behest of a pretty reporter, an amorously forward private detective goes undercover as a patient in a private sanitarium in search of a judge hiding out from the police. The two plan to split the$ 10,000 reward for the judge's capture. As the reporter and detective begin to fall in love, the detective also falls deeper into danger from an abusive attendant and difficult inpatients. The latter include an arsonist and\" The Champ,\" a lunatic ex-boxer who attacks anyone put into a room with him after he hears what sounds like a bell. The title\" Human Gorilla\" for this movie can be found on various copies of this movie. Although the film features noir lighting and camerawork, depicts corruption, and provides suspense, it lacks most of..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.514927,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.502985
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth.\"",
+        "hyperedge_text": "Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.500505805015564,
+        "fusion_score": 0.5001011610031129,
+        "entity_ids": [
+          "\"1968\"",
+          "\"ANY BODY…ANY WAY\"",
+          "\"SEXPLOITATION ROUGHIE\"",
+          "\"CHARLES ROMINE\"",
+          "\"EVE REEVES\"",
+          "\"JOYCE DENNER\"",
+          "\"DANIEL GARTH\"",
+          "\"BEHIND LOCKED DOORS\""
+        ],
+        "chunk_ids": [
+          "chunk-1703836e78298a8ef310f884342b3385"
+        ],
+        "evidence_texts": [
+          "Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth.",
+          "Any Body...Any Way Any Body…Any Way, (re-released under the name Behind Locked Doors) is a 1968 Sexploitation Roughie film directed by Charles Romine and starring Eve Reeves, Joyce Denner, and Daniel Garth."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.500506,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.500101
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Behind Locked Doors was screened at several international film festivals, gaining recognition for its portrayal of everyday life.\"",
+        "hyperedge_text": "Behind Locked Doors was screened at several international film festivals, gaining recognition for its portrayal of everyday life.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5043655633926392,
+        "fusion_score": 0.5008731126785279,
+        "entity_ids": [
+          "\"RECOGNITION\"",
+          "\"INTERNATIONAL FILM FESTIVALS\""
+        ],
+        "chunk_ids": [
+          "chunk-062a364ed34c168ef0792c56c98440ae"
+        ],
+        "evidence_texts": [
+          "Behind Locked Doors was screened at several international film festivals, gaining recognition for its portrayal of everyday life.",
+          "Behind Locked Doors (1991 film) Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991. The ensemble- film shows the everyday life of 17 inhabitants of an apartment building in Berlin Kreuzberg."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.504366,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.500873
+        }
+      }
+    ],
+    "answer": "1991",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.' This directly answers the question about the release date.",
+    "used_dependencies": [
+      "q1",
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Behind Locked Doors is a feature film by Swiss/ German director Anka Schmid from 1991.\""
+    ]
+  }
+]

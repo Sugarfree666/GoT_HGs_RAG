@@ -1,0 +1,185 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the paternal grandmother of Marie Zéphyrine Of France?",
+    "analysis": {
+      "entities": [
+        "Marie Zéphyrine Of France"
+      ],
+      "relations": [
+        "is the paternal grandmother of"
+      ],
+      "relation_query": "who is the paternal grandmother of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Marie Zéphyrine of France (26 August 1750 – 2 September 1755) was a French princess, the daughter of Louis, Dauphin of France, and Maria Josepha of Saxony.\"",
+        "hyperedge_text": "Marie Zéphyrine of France (26 August 1750 – 2 September 1755) was a French princess, the daughter of Louis, Dauphin of France, and Maria Josepha of Saxony.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7311028242111206,
+        "fusion_score": 0.5462205648422241,
+        "entity_ids": [
+          "\"FRANCE\"",
+          "\"LOUIS, DAUPHIN OF FRANCE\"",
+          "\"MARIE ZÉPHYRINE\"",
+          "\"MARIA JOSEPHA OF SAXONY\""
+        ],
+        "chunk_ids": [
+          "chunk-8576eba2f4f967f70aa7fece66585086"
+        ],
+        "evidence_texts": [
+          "Marie Zéphyrine of France (26 August 1750 – 2 September 1755) was a French princess, the daughter of Louis, Dauphin of France, and Maria Josepha of Saxony.",
+          "Marie Zéphyrine of France Marie Zéphyrine of France (26 August 1750 – 2 September 1755) was a French princess, the daughter of Louis, Dauphin of France, and Maria Josepha of Saxony. Marie Zéphyrine, known as \"Madame Royale\" or \"la Petite Madame\", was born at the Palace of Versailles and was named after St Zephyrinus, on whose feast day she was born. Her birth was greeted with caution; in the previous two years, Maria Josepha had suffered stillbirths and her health was of a fragile nature. Louis XV, on the other hand, had hoped for a grandson. Marie Isabelle de Rohan served as Marie Zéphyrine's governess. Marie Zéphyrine died at Versailles due to an attack of convulsions, in the early hours of the morning of 2 September, having been baptised just days before by the Abbot of Chabannes. She was not officially mourned; a French princess could only be mourned if she was over the age of 7...."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.731103,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.546221
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was the grandmother of Louis XVI, Louis XVIII and Charles X of France.\"",
+        "hyperedge_text": "She was the grandmother of Louis XVI, Louis XVIII and Charles X of France.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.6121963262557983,
+        "fusion_score": 0.3224392652511597,
+        "entity_ids": [
+          "\"LOUIS XVI\"",
+          "\"LOUIS XVIII\"",
+          "\"CHARLES X\""
+        ],
+        "chunk_ids": [
+          "chunk-b610f3ab04544f0bd017c356b1fd5975"
+        ],
+        "evidence_texts": [
+          "She was the grandmother of Louis XVI, Louis XVIII and Charles X of France.",
+          "Marie Leszczyńska Maria Karolina Zofia Felicja Leszczyńska (23 June 1703 – 24 June 1768), also known as Marie Leczinska , was a Polish princess and French queen consort. The daughter of King Stanisław Leszczyński—Stanislaus I of Poland (later Duke of Lorraine)–and Catherine Opalińska, she married King Louis XV of France and became queen consort of France. She served in that role for 42 years from 1725 until her death in 1768, the longest service of any queen of France, and was popular due to her generosity and piety. She was the grandmother of Louis XVI, Louis XVIII and Charles X of France."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.612196,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.322439
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her paternal grandparents were Antoine, Duke of Lorraine and Renée of Bourbon-Montpensier.\"",
+        "hyperedge_text": "Her paternal grandparents were Antoine, Duke of Lorraine and Renée of Bourbon-Montpensier.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.568905234336853,
+        "fusion_score": 0.3137810468673706,
+        "entity_ids": [
+          "\"ANTOINE\"",
+          "\"RENÉE OF BOURBON-MONTPENSIER\""
+        ],
+        "chunk_ids": [
+          "chunk-6d035f4e2f1041dfd05f42b469b1b981"
+        ],
+        "evidence_texts": [
+          "Her paternal grandparents were Antoine, Duke of Lorraine and Renée of Bourbon-Montpensier.",
+          "Renata of Lorraine Renata of Lorraine( 20 April 1544 – 22 May 1602) was by birth a member of the House of Lorraine and by marriage Duchess of Bavaria. Born in Nancy, France, she was the second child and eldest daughter of Francis I, Duke of Lorraine and Christina of Denmark. Her paternal grandparents were Antoine, Duke of Lorraine and Renée of Bourbon- Montpensier and her maternal grandparents were Christian II of Denmark and Isabella of Austria."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.568905,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.313781
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was the paternal grandmother of Sarah, Duchess of York, and the maternal great-grandmother of Princesses Beatrice and Eugenie of York.\"",
+        "hyperedge_text": "She was the paternal grandmother of Sarah, Duchess of York, and the maternal great-grandmother of Princesses Beatrice and Eugenie of York.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.49145597219467163,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2965823888778687,
+        "entity_ids": [
+          "\"PRINCESS BEATRICE OF YORK\"",
+          "\"SARAH, DUCHESS OF YORK\"",
+          "\"PRINCESS EUGENIE OF YORK\""
+        ],
+        "chunk_ids": [
+          "chunk-110e58a5ec003065fcb7aa9dc06b034d"
+        ],
+        "evidence_texts": [
+          "She was the paternal grandmother of Sarah, Duchess of York, and the maternal great-grandmother of Princesses Beatrice and Eugenie of York.",
+          "Marian Montagu Douglas Scott Marian Louisa, Lady Elmhirst( previously Ferguson; née Montagu Douglas Scott; 16 June 1908 – 11 December 1996) was the first daughter born to Lord Herbert Montagu Douglas Scott and Marie Edwards. She was the paternal grandmother of Sarah, Duchess of York, and the maternal great- grandmother of Princesses Beatrice and Eugenie of York. Elmhirst was also a first cousin of Lady Alice Montagu Douglas Scott, who became the Duchess of Gloucester after her wedding to Prince Henry, and an aunt- by- marriage of Queen Elizabeth II."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.491456,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.296582
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Thus she is the maternal grandmother of George II.\"",
+        "hyperedge_text": "Thus she is the maternal grandmother of George II.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5136781930923462,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.27213794390360513,
+        "entity_ids": [
+          "\"GEORGE II\""
+        ],
+        "chunk_ids": [
+          "chunk-836f44fb604829f64c6c986092c22541"
+        ],
+        "evidence_texts": [
+          "Thus she is the maternal grandmother of George II.",
+          "Éléonore Desmier d'Olbreuse Éléonore Marie Desmier d'Olbreuse (3 January 1639 – 5 February 1722) was the wife of George William, Duke of Lauenburg and Prince of Celle. She was the mother of Sophia Dorothea of Celle, who was the wife of George I of Great Britain. Thus she is the maternal grandmother of George II."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.513678,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.272138
+        }
+      }
+    ],
+    "answer": "Maria Leszczyńska",
+    "confidence": 0.75,
+    "reasoning_summary": "Marie Zéphyrine of France was the daughter of Louis, Dauphin of France, whose mother was Maria Leszczyńska, making her the paternal grandmother. This is supported by the evidence stating that Maria Leszczyńska was the queen consort and grandmother of Louis XVI, who is related to Marie Zéphyrine.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Marie Zéphyrine of France (26 August 1750 – 2 September 1755) was a French princess, the daughter of Louis, Dauphin of France, and Maria Josepha of Saxony.\"",
+      "<hyperedge>\"She was the grandmother of Louis XVI, Louis XVIII and Charles X of France.\""
+    ]
+  }
+]

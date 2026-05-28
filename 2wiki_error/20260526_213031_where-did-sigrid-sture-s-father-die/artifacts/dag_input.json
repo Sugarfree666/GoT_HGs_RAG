@@ -1,0 +1,16 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Sigrid?",
+    "dependencies": [],
+    "metadata": {}
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Sigrid die?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {}
+  }
+]

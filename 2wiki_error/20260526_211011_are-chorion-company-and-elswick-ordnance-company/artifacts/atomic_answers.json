@@ -1,0 +1,575 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What country is Chorion (Company) located in?",
+    "analysis": {
+      "entities": [
+        "Chorion (Company)"
+      ],
+      "relations": [
+        "is located in"
+      ],
+      "relation_query": "What country is an organization located in?",
+      "answer_type": "country"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The company is located in Bend, Oregon.\"",
+        "hyperedge_text": "The company is located in Bend, Oregon.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5,
+        "fusion_score": 0.5,
+        "entity_ids": [
+          "\"LOCAL COMMUNITY\"",
+          "\"RADIO STATION\"",
+          "\"COMPANY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b02a259c419501f2e8c6e4ed484f125"
+        ],
+        "evidence_texts": [
+          "The company is located in Bend, Oregon.",
+          "Bend Radio Group Bend Radio Group is a local radio station company located in the Bend, Oregon."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"United States is the country where Oregon is located.\"",
+        "hyperedge_text": "United States is the country where Oregon is located.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.3823768198490143,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2529507279396057,
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-824686815583696279f0b420f2ded85c"
+        ],
+        "evidence_texts": [
+          "United States is the country where Oregon is located.",
+          "Valley View Airport Valley View Airport, is a privately owned, public use airport located northeast of Estacada in Clackamas County, Oregon, United States."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.382377,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.252951
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The United States is a country located in North America.\"",
+        "hyperedge_text": "The United States is a country located in North America.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.37679365277290344,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2507174611091614,
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-68b09b66646328d6a9cbb43a689ffe5a"
+        ],
+        "evidence_texts": [
+          "The United States is a country located in North America.",
+          "Fairbank Island (Michigan) Fairbank Island is an island located in Chippewa County, Michigan, United States."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.376794,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.250717
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand.\"",
+        "hyperedge_text": "Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.3650401532649994,
+        "semantic_score": 0.5,
+        "fusion_score": 0.24601606130599976,
+        "entity_ids": [
+          "\"AUSTRALIA\"",
+          "\"NEW ZEALAND\"",
+          "\"THAILAND\"",
+          "\"CHINA\"",
+          "\"MALAYSIA\"",
+          "\"SINGAPORE\"",
+          "\"TAIWAN\"",
+          "\"OFFICES\"",
+          "\"VIETNAM\""
+        ],
+        "chunk_ids": [
+          "chunk-f8f8824b1a3b987fabf8d24168d438b5"
+        ],
+        "evidence_texts": [
+          "Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand.",
+          "Shriro Shriro Group is a private company headquartered in Hong Kong. It is an international marketing and distribution company with over 3,500 employees around the world. Shriro was founded in 1906 as a family business in Harbin, Northern China. The first international office was set up in 1917 in Yokohama, Japan. From the early days, the business was mainly commodities and expanded rapidly after 1945 as the product line expanded and new subsidiaries opened in many South East Asian countries and Canada. Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand. Shriro is a major distributor of medium- format camera equipment in Asia, including Hasselblad and Linhof."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.36504,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.246016
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is located in Kinshasa, Democratic Republic of the Congo, though it was originally located in Zomba, Malawi.\"",
+        "hyperedge_text": "It is located in Kinshasa, Democratic Republic of the Congo, though it was originally located in Zomba, Malawi.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.3916206955909729,
+        "semantic_score": 0.25,
+        "fusion_score": 0.20664827823638915,
+        "entity_ids": [
+          "\"MALAWI\"",
+          "\"ZOMBA\"",
+          "\"KINSHASA\"",
+          "\"FUTURE STUDIES\""
+        ],
+        "chunk_ids": [
+          "chunk-d450ddb6b588b18aa5cccac2e19550b7"
+        ],
+        "evidence_texts": [
+          "It is located in Kinshasa, Democratic Republic of the Congo, though it was originally located in Zomba, Malawi.",
+          "African Institute for Future Studies The African Institute for Future Studies, also known as Panafrican Institute for Future Studies or INADEP, is a research institution and university founded in 1989 by the President of Zaire( present day Democratic Republic of the Congo)( Ordinance 89–287 of 9 November 1989). It is located in Kinshasa, Democratic Republic of the Congo, though it was originally located in Zomba, Malawi. In addition to subsidiary departments that are funded for the future studies or for the exploration of the future, INADEP has funded a Centre for the exploration of the past, named Diop's Center for Egyptology. INADEP is a member of the National Research Council of Congo and one of the National Government Organizations devoted exclusively to scientific research and to the training of new researchers."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.391621,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.206648
+        }
+      }
+    ],
+    "answer": "United States",
+    "confidence": 0.85,
+    "reasoning_summary": "Chorion (Company) is located in Bend, Oregon, which is in the United States. This is supported by the evidence stating that Oregon is located in the United States.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The company is located in Bend, Oregon.\"",
+      "<hyperedge>\"United States is the country where Oregon is located.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What country is the Elswick Ordnance Company located in?",
+    "analysis": {
+      "entities": [
+        "Elswick Ordnance Company"
+      ],
+      "relations": [
+        "is located in"
+      ],
+      "relation_query": "which country is associated with a specific organization",
+      "answer_type": "country"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Elswick Ordnance Company (sometimes referred to as Elswick Ordnance Works, but usually as 'EOC') was a British armaments manufacturing company of the late 19th and early 20th century.\"",
+        "hyperedge_text": "The Elswick Ordnance Company (sometimes referred to as Elswick Ordnance Works, but usually as 'EOC') was a British armaments manufacturing company of the late 19th and early 20th century.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7070842981338501,
+        "fusion_score": 0.5414168596267701,
+        "entity_ids": [
+          "\"BRITISH\"",
+          "\"19TH CENTURY\"",
+          "\"20TH CENTURY\"",
+          "\"ORDNANCE WORKS\"",
+          "\"LATE 19TH AND EARLY 20TH CENTURY\"",
+          "\"BRITISH ARMAMENTS MANUFACTURING COMPANY\"",
+          "\"ARMAMENTS MANUFACTURING\"",
+          "\"ELSWICK ORDNANCE COMPANY\"",
+          "\"EOC\""
+        ],
+        "chunk_ids": [
+          "chunk-fe783cfb444054876ce3b651cedddcfd"
+        ],
+        "evidence_texts": [
+          "The Elswick Ordnance Company (sometimes referred to as Elswick Ordnance Works, but usually as 'EOC') was a British armaments manufacturing company of the late 19th and early 20th century.",
+          "Elswick Ordnance Company The Elswick Ordnance Company( sometimes referred to as Elswick Ordnance Works, but usually as\" EOC\") was a British armaments manufacturing company of the late 19th and early 20th century"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.707084,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.541417
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Camperdown, Tyne and Wear is located in North East England.\"",
+        "hyperedge_text": "Camperdown, Tyne and Wear is located in North East England.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.3649322986602783,
+        "fusion_score": 0.47298645973205566,
+        "entity_ids": [
+          "\"NORTH EAST ENGLAND\""
+        ],
+        "chunk_ids": [
+          "chunk-0ea1c34cc817caf379bf3af2f9c0ba16"
+        ],
+        "evidence_texts": [
+          "Camperdown, Tyne and Wear is located in North East England.",
+          "Camperdown, Tyne and Wear Camperdown, Tyne and Wear is a village in the Metropolitan Borough of North Tyneside in North East England. Camperdown is just south of Burradon, and the two villages are closely linked. Both villages had coal mines."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.364932,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.472986
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The countries were paired as follows:\"",
+        "hyperedge_text": "The countries were paired as follows:",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.3947446942329407,
+        "semantic_score": 0.2,
+        "fusion_score": 0.1978978776931763,
+        "entity_ids": [
+          "\"COUNTRIES\"",
+          "\"COUNTRIES PAIRING\"",
+          "\"PAIRED COUNTRIES\""
+        ],
+        "chunk_ids": [
+          "chunk-48841d85bc2063d01f9f6b2fd8dc60ed",
+          "chunk-5ccb56f4a5cbaffcf8a075fb55ddf332",
+          "chunk-3d94a10682e17385005eecaaec4714e7"
+        ],
+        "evidence_texts": [
+          "The countries were paired as follows:",
+          "1992 Copa Libertadores The 1992 Copa Libertadores was the 33rd edition of the Copa Libertadores, CONMEBOL's annual international club tournament. São Paulo won the competition. The participating teams were divided into five groups, in which teams of the same country were placed in the same group. Each country was represented by two teams. The countries were paired as follows:",
+          "1993 Copa Libertadores The Copa Libertadores 1993 was the 34th edition of the Copa Libertadores, CONMEBOL's annual international club tournament. São Paulo won the competition. The participating teams were divided into five groups, in which teams of the same country were placed in the same group. Each country was represented by two teams. The countries were paired as follows:",
+          "1971 Copa Libertadores The Copa Libertadores 1971 was the 12th edition of the Copa Libertadores, CONMEBOL's annual international club tournament. Nacional won the competition. The participating teams were divided into five groups, in which teams of the same country were placed in the same group. Each country was represented by two teams. The countries were paired as follows:"
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.394745,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.197898
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Each country was represented by two teams.\"",
+        "hyperedge_text": "Each country was represented by two teams.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.3760448098182678,
+        "semantic_score": 0.2,
+        "fusion_score": 0.19041792392730714,
+        "entity_ids": [
+          "\"COUNTRIES\"",
+          "\"TWO TEAMS\""
+        ],
+        "chunk_ids": [
+          "chunk-48841d85bc2063d01f9f6b2fd8dc60ed",
+          "chunk-5ccb56f4a5cbaffcf8a075fb55ddf332",
+          "chunk-3d94a10682e17385005eecaaec4714e7"
+        ],
+        "evidence_texts": [
+          "Each country was represented by two teams.",
+          "1992 Copa Libertadores The 1992 Copa Libertadores was the 33rd edition of the Copa Libertadores, CONMEBOL's annual international club tournament. São Paulo won the competition. The participating teams were divided into five groups, in which teams of the same country were placed in the same group. Each country was represented by two teams. The countries were paired as follows:",
+          "1993 Copa Libertadores The Copa Libertadores 1993 was the 34th edition of the Copa Libertadores, CONMEBOL's annual international club tournament. São Paulo won the competition. The participating teams were divided into five groups, in which teams of the same country were placed in the same group. Each country was represented by two teams. The countries were paired as follows:",
+          "1971 Copa Libertadores The Copa Libertadores 1971 was the 12th edition of the Copa Libertadores, CONMEBOL's annual international club tournament. Nacional won the competition. The participating teams were divided into five groups, in which teams of the same country were placed in the same group. Each country was represented by two teams. The countries were paired as follows:"
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.376045,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.190418
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The participating teams were divided into five groups, in which teams of the same country were placed in the same group.\"",
+        "hyperedge_text": "The participating teams were divided into five groups, in which teams of the same country were placed in the same group.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.35796064138412476,
+        "semantic_score": 0.2,
+        "fusion_score": 0.18318425655364992,
+        "entity_ids": [
+          "\"TEAMS\"",
+          "\"SAME COUNTRY\"",
+          "\"FIVE GROUPS\"",
+          "\"PARTICIPATING TEAMS\""
+        ],
+        "chunk_ids": [
+          "chunk-48841d85bc2063d01f9f6b2fd8dc60ed",
+          "chunk-5ccb56f4a5cbaffcf8a075fb55ddf332",
+          "chunk-3d94a10682e17385005eecaaec4714e7"
+        ],
+        "evidence_texts": [
+          "The participating teams were divided into five groups, in which teams of the same country were placed in the same group.",
+          "1992 Copa Libertadores The 1992 Copa Libertadores was the 33rd edition of the Copa Libertadores, CONMEBOL's annual international club tournament. São Paulo won the competition. The participating teams were divided into five groups, in which teams of the same country were placed in the same group. Each country was represented by two teams. The countries were paired as follows:",
+          "1993 Copa Libertadores The Copa Libertadores 1993 was the 34th edition of the Copa Libertadores, CONMEBOL's annual international club tournament. São Paulo won the competition. The participating teams were divided into five groups, in which teams of the same country were placed in the same group. Each country was represented by two teams. The countries were paired as follows:",
+          "1971 Copa Libertadores The Copa Libertadores 1971 was the 12th edition of the Copa Libertadores, CONMEBOL's annual international club tournament. Nacional won the competition. The participating teams were divided into five groups, in which teams of the same country were placed in the same group. Each country was represented by two teams. The countries were paired as follows:"
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.357961,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.183184
+        }
+      }
+    ],
+    "answer": "United Kingdom",
+    "confidence": 0.9,
+    "reasoning_summary": "The Elswick Ordnance Company was identified as a British armaments manufacturing company, indicating its location in the United Kingdom.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Elswick Ordnance Company (sometimes referred to as Elswick Ordnance Works, but usually as 'EOC') was a British armaments manufacturing company of the late 19th and early 20th century.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the country of Chorion (Company)?",
+    "analysis": {
+      "entities": [
+        "Chorion (Company)",
+        "United States"
+      ],
+      "relations": [
+        "is located in"
+      ],
+      "relation_query": "What country is a company located in?",
+      "answer_type": "country"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The company is located in Bend, Oregon.\"",
+        "hyperedge_text": "The company is located in Bend, Oregon.",
+        "branch_support": [
+          "anchor",
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4447234570980072,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.24455604950586957,
+        "entity_ids": [
+          "\"LOCAL COMMUNITY\"",
+          "\"RADIO STATION\"",
+          "\"COMPANY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b02a259c419501f2e8c6e4ed484f125"
+        ],
+        "evidence_texts": [
+          "The company is located in Bend, Oregon.",
+          "Bend Radio Group Bend Radio Group is a local radio station company located in the Bend, Oregon."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.444723,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.244556
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Shriro Group is a private company headquartered in Hong Kong.\"",
+        "hyperedge_text": "Shriro Group is a private company headquartered in Hong Kong.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.41345399618148804,
+        "semantic_score": 0.3476359248161316,
+        "fusion_score": 0.23490878343582156,
+        "entity_ids": [
+          "\"HONG KONG\"",
+          "\"SHRIRO GROUP\""
+        ],
+        "chunk_ids": [
+          "chunk-f8f8824b1a3b987fabf8d24168d438b5"
+        ],
+        "evidence_texts": [
+          "Shriro Group is a private company headquartered in Hong Kong.",
+          "Shriro Shriro Group is a private company headquartered in Hong Kong. It is an international marketing and distribution company with over 3,500 employees around the world. Shriro was founded in 1906 as a family business in Harbin, Northern China. The first international office was set up in 1917 in Yokohama, Japan. From the early days, the business was mainly commodities and expanded rapidly after 1945 as the product line expanded and new subsidiaries opened in many South East Asian countries and Canada. Today, Shriro offices are located in Hong Kong, China, Japan, Singapore, Malaysia, Taiwan, Thailand, Vietnam, Australia, and New Zealand. Shriro is a major distributor of medium- format camera equipment in Asia, including Hasselblad and Linhof."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.413454,
+          "S": 0.347636,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.234909
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The United States is a country located in North America.\"",
+        "hyperedge_text": "The United States is a country located in North America.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.6666666666666667,
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-68b09b66646328d6a9cbb43a689ffe5a"
+        ],
+        "evidence_texts": [
+          "The United States is a country located in North America.",
+          "Fairbank Island (Michigan) Fairbank Island is an island located in Chippewa County, Michigan, United States."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.666667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The United States is the country where Thornwood High School is located.\"",
+        "hyperedge_text": "The United States is the country where Thornwood High School is located.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.6666666666666667,
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-731ad25932d6d464407da7b8549a559a"
+        ],
+        "evidence_texts": [
+          "The United States is the country where Thornwood High School is located.",
+          "Thornwood High School Thornwood High School is a public high school located in South Holland, Illinois, United States. It was built as part of Thornton Township High School District 205."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.666667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"M. A. Hanna Company was an iron ore processing company located in Cleveland, Ohio, United States.\"",
+        "hyperedge_text": "M. A. Hanna Company was an iron ore processing company located in Cleveland, Ohio, United States.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 1.0,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.6666666666666667,
+        "entity_ids": [
+          "\"UNITED STATES\"",
+          "\"OHIO\"",
+          "\"CLEVELAND\"",
+          "\"M. A. HANNA COMPANY\"",
+          "\"IRON ORE PROCESSING COMPANY\""
+        ],
+        "chunk_ids": [
+          "chunk-42ee93374bb117c59075cee3a32a1b02"
+        ],
+        "evidence_texts": [
+          "M. A. Hanna Company was an iron ore processing company located in Cleveland, Ohio, United States.",
+          "M. A. Hanna Company M. A. Hanna Company was an iron ore processing company located in Cleveland, Ohio, United States."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 1.0,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.666667
+        }
+      }
+    ],
+    "answer": "United States",
+    "confidence": 0.85,
+    "reasoning_summary": "Chorion (Company) is located in Bend, Oregon, which is in the United States, as supported by the evidence.",
+    "used_dependencies": [
+      "q1",
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The company is located in Bend, Oregon.\""
+    ]
+  }
+]

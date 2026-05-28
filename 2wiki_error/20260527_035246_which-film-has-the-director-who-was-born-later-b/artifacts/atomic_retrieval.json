@@ -1,0 +1,2476 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Bárbara Atómica?",
+    "retrieval_question": "Who is the director of Bárbara Atómica?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Bárbara Atómica?",
+      "retrieval_question": "Who is the director of Bárbara Atómica?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+        "entity_ids": [
+          "\"JULIO SARACENI\"",
+          "\"ABEL SANTA CRUZ\"",
+          "\"MICHEL DURAN\"",
+          "\"MAY 23, 1952\"",
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+            "link",
+            "JULIO SARACENI",
+            "ABEL SANTA CRUZ",
+            "MICHEL DURAN",
+            "MAY 23, 1952",
+            "BÁRBARA ATÓMICA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film.",
+        "entity_ids": [
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bárbara atómica is a 1952 Argentine film.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Bárbara atómica is a 1952 Argentine film.",
+            "link",
+            "BÁRBARA ATÓMICA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5064207315444946,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5018224120140076,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49626192450523376,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4959556758403778,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.4941776394844055,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48419591784477234,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.482859343290329,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48214516043663025,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47926294803619385,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.477081298828125,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\"",
+        "branch": "semantic",
+        "raw_score": 0.7062029838562012,
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+        "entity_ids": [
+          "\"JULIO SARACENI\"",
+          "\"ABEL SANTA CRUZ\"",
+          "\"MICHEL DURAN\"",
+          "\"MAY 23, 1952\"",
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+            "link",
+            "JULIO SARACENI",
+            "ABEL SANTA CRUZ",
+            "MICHEL DURAN",
+            "MAY 23, 1952",
+            "BÁRBARA ATÓMICA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5e6078141e3ce3cb9d69d153dc0511ff",
+            "hyperedge_name": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film.\"",
+        "branch": "semantic",
+        "raw_score": 0.6870623826980591,
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film.",
+        "entity_ids": [
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bárbara atómica is a 1952 Argentine film.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Bárbara atómica is a 1952 Argentine film.",
+            "link",
+            "BÁRBARA ATÓMICA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3b15f5057dfb0810ca93b84be2a028ae",
+            "hyperedge_name": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica showcases themes of love, conflict, and Argentine identity.\"",
+        "branch": "semantic",
+        "raw_score": 0.6409659385681152,
+        "hyperedge_text": "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+        "entity_ids": [
+          "\"ARGENTINE IDENTITY\"",
+          "\"THEMES OF LOVE AND CONFLICT\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+            "link",
+            "ARGENTINE IDENTITY",
+            "THEMES OF LOVE AND CONFLICT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e2aaefb0b6d67c9e636e8fbda99ba6fd",
+            "hyperedge_name": "<hyperedge>\"Bárbara atómica showcases themes of love, conflict, and Argentine identity.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is known as Atomised and has an alternative title 'The Elementary Particles'.",
+        "branch": "semantic",
+        "raw_score": 0.44193920493125916,
+        "hyperedge_text": "\"The film is known as Atomised and has an alternative title 'The Elementary Particles'.",
+        "entity_ids": [
+          "\"THE ELEMENTARY PARTICLES\""
+        ],
+        "chunk_ids": [
+          "chunk-d30b788f2520b0bda1f88fa5d301c6bc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "\"The film is known as Atomised and has an alternative title 'The Elementary Particles'.",
+            "Atomised (film) Atomised (also known as The Elementary Particles) is a 2006 German film based on the novel \"Les Particules élémentaires\" by Michel Houellebecq. The film was written and directed by Oskar Roehler and produced by Oliver Berben and Bernd Eichinger. It stars Moritz Bleibtreu as Bruno, Christian Ulmen as Michael, Martina Gedeck as Christiane, Franka Potente as Annabelle, and Nina Hoss as Jane. The film had its premiere at the Berlin Film Festival in Germany in February 2006. In contrast to the book setting in Paris, the film was shot entirely and is mainly situated in various places in Germany. Cities and states in Germany used for filming included Thuringia and Berlin. Contrary to the book, the film does not have cultural pessimism as a main theme, and it has an alternative ending."
+          ],
+          "relation_texts": [
+            "\"The film is known as Atomised and has an alternative title 'The Elementary Particles'.",
+            "link",
+            "THE ELEMENTARY PARTICLES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-94ab555e87c273137384fdf90638c955",
+            "hyperedge_name": "<hyperedge>\"The film is known as Atomised and has an alternative title 'The Elementary Particles'."
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.43074551224708557,
+        "hyperedge_text": "The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.",
+        "entity_ids": [
+          "\"ARGENTINE CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-b3a7c1d9cc2687bd5eb3269e28bd9287"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.",
+            "Modern Husbands Modern Husbands( Spanish: Maridos modernos) is a 1948 Argentine comedy film directed by Luis Bayón Herrera and starring Olinda Bozán, Francisco Álvarez and Oscar Valicelli. The film's art direction was by Juan Manuel Concado."
+          ],
+          "relation_texts": [
+            "The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.",
+            "link",
+            "ARGENTINE CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-63e36c904d37be29696d7beb50fee69b",
+            "hyperedge_name": "<hyperedge>\"The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Atomised (also known as The Elementary Particles) is a 2006 German film based on the novel 'Les Particules élémentaires' by Michel Houellebecq.\"",
+        "branch": "semantic",
+        "raw_score": 0.4242188036441803,
+        "hyperedge_text": "Atomised (also known as The Elementary Particles) is a 2006 German film based on the novel 'Les Particules élémentaires' by Michel Houellebecq.",
+        "entity_ids": [
+          "\"ATOMISED\"",
+          "\"LES PARTICULES ÉLÉMENTAIRES\"",
+          "\"MICHEL HOUELLEBECQ\""
+        ],
+        "chunk_ids": [
+          "chunk-d30b788f2520b0bda1f88fa5d301c6bc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Atomised (also known as The Elementary Particles) is a 2006 German film based on the novel 'Les Particules élémentaires' by Michel Houellebecq.",
+            "Atomised (film) Atomised (also known as The Elementary Particles) is a 2006 German film based on the novel \"Les Particules élémentaires\" by Michel Houellebecq. The film was written and directed by Oskar Roehler and produced by Oliver Berben and Bernd Eichinger. It stars Moritz Bleibtreu as Bruno, Christian Ulmen as Michael, Martina Gedeck as Christiane, Franka Potente as Annabelle, and Nina Hoss as Jane. The film had its premiere at the Berlin Film Festival in Germany in February 2006. In contrast to the book setting in Paris, the film was shot entirely and is mainly situated in various places in Germany. Cities and states in Germany used for filming included Thuringia and Berlin. Contrary to the book, the film does not have cultural pessimism as a main theme, and it has an alternative ending."
+          ],
+          "relation_texts": [
+            "Atomised (also known as The Elementary Particles) is a 2006 German film based on the novel 'Les Particules élémentaires' by Michel Houellebecq.",
+            "link",
+            "ATOMISED",
+            "LES PARTICULES ÉLÉMENTAIRES",
+            "MICHEL HOUELLEBECQ"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a3d241e2e98148cde96e0aeaa730fb91",
+            "hyperedge_name": "<hyperedge>\"Atomised (also known as The Elementary Particles) is a 2006 German film based on the novel 'Les Particules élémentaires' by Michel Houellebecq.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'.\"",
+        "branch": "semantic",
+        "raw_score": 0.41290712356567383,
+        "hyperedge_text": "Script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'.",
+        "entity_ids": [
+          "\"ABEL SANTA CRUZ\"",
+          "\"BARBARA BOW\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'.",
+            "link",
+            "ABEL SANTA CRUZ",
+            "BARBARA BOW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-379d378bc8af275ad3b373b033a276ea",
+            "hyperedge_name": "<hyperedge>\"Script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Gracia Querejeta.\"",
+        "branch": "semantic",
+        "raw_score": 0.41172707080841064,
+        "hyperedge_text": "It was directed by Gracia Querejeta.",
+        "entity_ids": [
+          "\"GRACIA QUEREJETA\""
+        ],
+        "chunk_ids": [
+          "chunk-edcb32a5dab58055d479802c2d1fa4f8"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "It was directed by Gracia Querejeta.",
+            "Felices 140 Felices 140 is a 2015 Spanish comedy- drama film directed by Gracia Querejeta. It was co-written by Querejeta and Antonio Mercero. It was released in Spain on April 10, 2015. On September 8, 2015 it was one of the three entries shortlisted to represent Spain at the 88th Academy Awards in the category for Best Foreign Language Film, but was not selected."
+          ],
+          "relation_texts": [
+            "It was directed by Gracia Querejeta.",
+            "link",
+            "GRACIA QUEREJETA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-efec88229cd2fddcafb744f751d170ce",
+            "hyperedge_name": "<hyperedge>\"It was directed by Gracia Querejeta.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Based on Michel Duran's play, 'Barbara Bow'\"",
+        "branch": "semantic",
+        "raw_score": 0.41118067502975464,
+        "hyperedge_text": "Based on Michel Duran's play, 'Barbara Bow'",
+        "entity_ids": [
+          "\"MICHEL DURAN\"",
+          "\"BARBARA BOW\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Based on Michel Duran's play, 'Barbara Bow'",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Based on Michel Duran's play, 'Barbara Bow'",
+            "link",
+            "MICHEL DURAN",
+            "BARBARA BOW"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-329abe6f503edfd18d349be174344f6e",
+            "hyperedge_name": "<hyperedge>\"Based on Michel Duran's play, 'Barbara Bow'\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Barry Barringer.\"",
+        "branch": "semantic",
+        "raw_score": 0.41056573390960693,
+        "hyperedge_text": "The film was directed by Barry Barringer.",
+        "entity_ids": [
+          "\"FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-8dd101e7ea317dd80621e73ecc6c8e9c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was directed by Barry Barringer.",
+            "Vengeance of the Deep (1923 film) Vengeance of the Deep is a lost 1923 film directed by Barry Barringer and starring Ralph Lewis, Virginia Brown Faire and Richard Arlen."
+          ],
+          "relation_texts": [
+            "The film was directed by Barry Barringer.",
+            "link",
+            "FILM"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-861d6719525845beaafa52759349ec8d",
+            "hyperedge_name": "<hyperedge>\"The film was directed by Barry Barringer.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\"",
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7062029838562012,
+        "fusion_score": 0.5412405967712403,
+        "entity_ids": [
+          "\"JULIO SARACENI\"",
+          "\"ABEL SANTA CRUZ\"",
+          "\"MICHEL DURAN\"",
+          "\"MAY 23, 1952\"",
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.706203,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.541241
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film.\"",
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6870623826980591,
+        "fusion_score": 0.5374124765396119,
+        "entity_ids": [
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica is a 1952 Argentine film.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.687062,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.537412
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica showcases themes of love, conflict, and Argentine identity.\"",
+        "hyperedge_text": "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6409659385681152,
+        "fusion_score": 0.5281931877136231,
+        "entity_ids": [
+          "\"ARGENTINE IDENTITY\"",
+          "\"THEMES OF LOVE AND CONFLICT\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.640966,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.528193
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.\"",
+        "hyperedge_text": "The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.43074551224708557,
+        "fusion_score": 0.4861491024494171,
+        "entity_ids": [
+          "\"ARGENTINE CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-b3a7c1d9cc2687bd5eb3269e28bd9287"
+        ],
+        "evidence_texts": [
+          "The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.",
+          "Modern Husbands Modern Husbands( Spanish: Maridos modernos) is a 1948 Argentine comedy film directed by Luis Bayón Herrera and starring Olinda Bozán, Francisco Álvarez and Oscar Valicelli. The film's art direction was by Juan Manuel Concado."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.430746,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.486149
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.47926294803619385,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2917051792144776,
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "evidence_texts": [
+          "As a visual effects artist, he contributed to various film projects before directing.",
+          "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.479263,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.291705
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Three Lucky Fools?",
+    "retrieval_question": "Who is the director of Three Lucky Fools?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Three Lucky Fools?",
+      "retrieval_question": "Who is the director of Three Lucky Fools?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+        "entity_ids": [
+          "\"1933\"",
+          "\"THREE LUCKY FOOLS\""
+        ],
+        "chunk_ids": [
+          "chunk-2f55903ca60f3365f409badc0dfcc259"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+            "Three Lucky Fools Three Lucky Fools( Italian: Tre uomini in frack) is a 1933 French- Italian comedy film directed by Mario Bonnard and starring Tito Schipa, Eduardo De Filippo and Fred Pasquali. It marked the film debut of Assia Noris who went on to be a leading Italian star. It was released in two separate versions one in French and the other in Italian."
+          ],
+          "relation_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+            "link",
+            "1933",
+            "THREE LUCKY FOOLS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.\"",
+        "branch": "anchor",
+        "raw_score": 1.0,
+        "hyperedge_text": "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+        "entity_ids": [
+          "\"EDUARDO DE FILIPPO\"",
+          "\"MARIO BONNARD\"",
+          "\"ASSIA NORIS\"",
+          "\"THREE LUCKY FOOLS\"",
+          "\"TITO SCHIPA\"",
+          "\"FRED PASQUALI\""
+        ],
+        "chunk_ids": [
+          "chunk-2f55903ca60f3365f409badc0dfcc259"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+            "Three Lucky Fools Three Lucky Fools( Italian: Tre uomini in frack) is a 1933 French- Italian comedy film directed by Mario Bonnard and starring Tito Schipa, Eduardo De Filippo and Fred Pasquali. It marked the film debut of Assia Noris who went on to be a leading Italian star. It was released in two separate versions one in French and the other in Italian."
+          ],
+          "relation_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+            "link",
+            "EDUARDO DE FILIPPO",
+            "MARIO BONNARD",
+            "ASSIA NORIS",
+            "THREE LUCKY FOOLS",
+            "TITO SCHIPA",
+            "FRED PASQUALI"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.5064207315444946,
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-142b0219cfd26a6a536e5609faf19a13",
+            "hyperedge_name": "<hyperedge>\"After this he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\"",
+        "branch": "relation",
+        "raw_score": 0.5018224120140076,
+        "hyperedge_text": "As a director, he has likely worked on a variety of projects spanning different genres.",
+        "entity_ids": [
+          "\"PROJECTS\"",
+          "\"GENRES\""
+        ],
+        "chunk_ids": [
+          "chunk-d7369eb9577f24e08b63493abca20c61"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "Thomas Jahn Thomas Jahn( born 9 July 1965) is a German film and television director."
+          ],
+          "relation_texts": [
+            "As a director, he has likely worked on a variety of projects spanning different genres.",
+            "link",
+            "PROJECTS",
+            "GENRES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-c01e3c6eb0ef9629e5ef20fd5e96a7e2",
+            "hyperedge_name": "<hyperedge>\"As a director, he has likely worked on a variety of projects spanning different genres.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49626192450523376,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he went on to become a director himself.\"",
+        "branch": "relation",
+        "raw_score": 0.4959556758403778,
+        "hyperedge_text": "After this, he went on to become a director himself.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "After this, he went on to become a director himself.",
+            "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+          ],
+          "relation_texts": [
+            "After this, he went on to become a director himself.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-82d89c534c222905f5cd52f69de07436",
+            "hyperedge_name": "<hyperedge>\"After this, he went on to become a director himself.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.4941776394844055,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\"",
+        "branch": "relation",
+        "raw_score": 0.48419591784477234,
+        "hyperedge_text": "As a director, Joseph Pennella interprets scripts and guides performers.",
+        "entity_ids": [
+          "\"SCRIPTS\"",
+          "\"PERFORMERS\""
+        ],
+        "chunk_ids": [
+          "chunk-aab7ecf09b6e0b007693ee8a3a9ca6f2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "Joe Pennella Joseph Pennella is an American cinematographer and television director."
+          ],
+          "relation_texts": [
+            "As a director, Joseph Pennella interprets scripts and guides performers.",
+            "link",
+            "SCRIPTS",
+            "PERFORMERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f2e97574a48b2eff07620ce0bece7a6f",
+            "hyperedge_name": "<hyperedge>\"As a director, Joseph Pennella interprets scripts and guides performers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\"",
+        "branch": "relation",
+        "raw_score": 0.482859343290329,
+        "hyperedge_text": "As a film director, he has directed several works in addition to acting.",
+        "entity_ids": [
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-71362f3e5642796a0789929e1e34ef4f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "Yevgeni Gerasimov (actor) Yevgeni Vladimirovich Gerasimov (born 25 February 1951) is a Soviet and Russian theater and film actor, film director, people's artist of the Russian Federation (1994) and a Moscow City Duma deputy from the United Russia party. He is most known for his part in the television series \"Guest from the Future\"."
+          ],
+          "relation_texts": [
+            "As a film director, he has directed several works in addition to acting.",
+            "link",
+            "FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-1a96fac39b340bd78dae73e467dd247b",
+            "hyperedge_name": "<hyperedge>\"As a film director, he has directed several works in addition to acting.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\"",
+        "branch": "relation",
+        "raw_score": 0.48214516043663025,
+        "hyperedge_text": "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+        "entity_ids": [
+          "\"REPUTATION\"",
+          "\"AVANT-GARDE EXPRESSIONIST STYLE\"",
+          "\"STUDIO-SYSTEM DIRECTOR\"",
+          "\"TROUBLED PROJECTS\"",
+          "\"HOTEL IMPERIAL\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+          ],
+          "relation_texts": [
+            "His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.",
+            "link",
+            "REPUTATION",
+            "AVANT-GARDE EXPRESSIONIST STYLE",
+            "STUDIO-SYSTEM DIRECTOR",
+            "TROUBLED PROJECTS",
+            "HOTEL IMPERIAL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9e407d60a8d7e36b8332a695b9f04b14",
+            "hyperedge_name": "<hyperedge>\"His reputation is balanced between his avant-garde expressionist style, most evident in his early career, and his work as a fast, reliable studio-system director called on to finish troubled projects.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "branch": "relation",
+        "raw_score": 0.47926294803619385,
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+          ],
+          "relation_texts": [
+            "As a visual effects artist, he contributed to various film projects before directing.",
+            "link",
+            "VISUAL EFFECTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-76c478c72e9e93b6085dd897bcc9d3c2",
+            "hyperedge_name": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\"",
+        "branch": "relation",
+        "raw_score": 0.477081298828125,
+        "hyperedge_text": "His directorial works contributed to notable projects in American cinema.",
+        "entity_ids": [
+          "\"DIRECTORIAL WORKS\""
+        ],
+        "chunk_ids": [
+          "chunk-adbb7a91bc7881d154daa1b6cfd6fdab"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "Fred F. Sears Frederick Francis Sears( July 7, 1913 – November 30, 1957) was an American film actor and director."
+          ],
+          "relation_texts": [
+            "His directorial works contributed to notable projects in American cinema.",
+            "link",
+            "DIRECTORIAL WORKS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-055ccfe1aae8546260d29ef5eefec572",
+            "hyperedge_name": "<hyperedge>\"His directorial works contributed to notable projects in American cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.\"",
+        "branch": "semantic",
+        "raw_score": 0.6155170202255249,
+        "hyperedge_text": "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+        "entity_ids": [
+          "\"EDUARDO DE FILIPPO\"",
+          "\"MARIO BONNARD\"",
+          "\"ASSIA NORIS\"",
+          "\"THREE LUCKY FOOLS\"",
+          "\"TITO SCHIPA\"",
+          "\"FRED PASQUALI\""
+        ],
+        "chunk_ids": [
+          "chunk-2f55903ca60f3365f409badc0dfcc259"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+            "Three Lucky Fools Three Lucky Fools( Italian: Tre uomini in frack) is a 1933 French- Italian comedy film directed by Mario Bonnard and starring Tito Schipa, Eduardo De Filippo and Fred Pasquali. It marked the film debut of Assia Noris who went on to be a leading Italian star. It was released in two separate versions one in French and the other in Italian."
+          ],
+          "relation_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+            "link",
+            "EDUARDO DE FILIPPO",
+            "MARIO BONNARD",
+            "ASSIA NORIS",
+            "THREE LUCKY FOOLS",
+            "TITO SCHIPA",
+            "FRED PASQUALI"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9a2d36bfec09d954b146454ea3491dba",
+            "hyperedge_name": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.\"",
+        "branch": "semantic",
+        "raw_score": 0.5970155000686646,
+        "hyperedge_text": "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+        "entity_ids": [
+          "\"1933\"",
+          "\"THREE LUCKY FOOLS\""
+        ],
+        "chunk_ids": [
+          "chunk-2f55903ca60f3365f409badc0dfcc259"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+            "Three Lucky Fools Three Lucky Fools( Italian: Tre uomini in frack) is a 1933 French- Italian comedy film directed by Mario Bonnard and starring Tito Schipa, Eduardo De Filippo and Fred Pasquali. It marked the film debut of Assia Noris who went on to be a leading Italian star. It was released in two separate versions one in French and the other in Italian."
+          ],
+          "relation_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+            "link",
+            "1933",
+            "THREE LUCKY FOOLS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9ca54a8ce43fc3bc159399c73a803432",
+            "hyperedge_name": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman.\"",
+        "branch": "semantic",
+        "raw_score": 0.4672834277153015,
+        "hyperedge_text": "Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman.",
+        "entity_ids": [
+          "\"FRANK LAUNDER\"",
+          "\"ALASTAIR SIM\"",
+          "\"FOLLY TO BE WISE\"",
+          "\"ELIZABETH ALLAN\"",
+          "\"COLIN GORDON\"",
+          "\"MARTITA HUNT\"",
+          "\"EDWARD CHAPMAN\"",
+          "\"ROLAND CULVER\""
+        ],
+        "chunk_ids": [
+          "chunk-57669db8b3e29849447716ef99989c00"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman.",
+            "Folly to Be Wise Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman. It is based on the play \" It Depends What You Mean\" by James Bridie. The film follows the efforts of a British Army chaplain attempting to recruit entertainment acts to perform for the troops and the complications that ensue when he does. The title is taken from the line by Thomas Gray \"where ignorance is bliss, 'tis folly to be wise\"."
+          ],
+          "relation_texts": [
+            "Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman.",
+            "link",
+            "FRANK LAUNDER",
+            "ALASTAIR SIM",
+            "FOLLY TO BE WISE",
+            "ELIZABETH ALLAN",
+            "COLIN GORDON",
+            "MARTITA HUNT",
+            "EDWARD CHAPMAN",
+            "ROLAND CULVER"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e269bbe6ebae7288418a14704f2d4847",
+            "hyperedge_name": "<hyperedge>\"Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Folly to Be Wise is a British comedy film produced in 1953.\"",
+        "branch": "semantic",
+        "raw_score": 0.46468716859817505,
+        "hyperedge_text": "The film Folly to Be Wise is a British comedy film produced in 1953.",
+        "entity_ids": [
+          "\"FOLLY TO BE WISE\""
+        ],
+        "chunk_ids": [
+          "chunk-57669db8b3e29849447716ef99989c00"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film Folly to Be Wise is a British comedy film produced in 1953.",
+            "Folly to Be Wise Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman. It is based on the play \" It Depends What You Mean\" by James Bridie. The film follows the efforts of a British Army chaplain attempting to recruit entertainment acts to perform for the troops and the complications that ensue when he does. The title is taken from the line by Thomas Gray \"where ignorance is bliss, 'tis folly to be wise\"."
+          ],
+          "relation_texts": [
+            "The film Folly to Be Wise is a British comedy film produced in 1953.",
+            "link",
+            "FOLLY TO BE WISE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e047ddd8bc57964a88dd72cf0a8f0923",
+            "hyperedge_name": "<hyperedge>\"The film Folly to Be Wise is a British comedy film produced in 1953.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Johnnie To takes the helm as director for A Moment of Romance III.\"",
+        "branch": "semantic",
+        "raw_score": 0.43872129917144775,
+        "hyperedge_text": "Johnnie To takes the helm as director for A Moment of Romance III.",
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-a26f424785d79d7014a72a70d8df13fb"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Johnnie To takes the helm as director for A Moment of Romance III.",
+            "A Moment of Romance II A Moment of Romance II is a 1993 Hong Kong action romance film directed by Benny Chan and starring Aaron Kwok and Jacklyn Wu. It is the second installment of the\" A Moment of Romance\" trilogy, featuring a new storyline. The film is followed by a final installment,\" A Moment of Romance III\"( 1996), with producer Johnnie To taking the helm as director and features the return of Andy Lau, the star of the first installment."
+          ],
+          "relation_texts": [
+            "Johnnie To takes the helm as director for A Moment of Romance III.",
+            "link",
+            "DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-ef7c3db5c3e2a69b077bb00eeb795464",
+            "hyperedge_name": "<hyperedge>\"Johnnie To takes the helm as director for A Moment of Romance III.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is best known for his films 'Trust', 'Amateur' and 'Henry Fool', which are notable for deadpan humour and offbeat characters quoting philosophical dialogue.\"",
+        "branch": "semantic",
+        "raw_score": 0.43415412306785583,
+        "hyperedge_text": "He is best known for his films 'Trust', 'Amateur' and 'Henry Fool', which are notable for deadpan humour and offbeat characters quoting philosophical dialogue.",
+        "entity_ids": [
+          "\"TRUST\"",
+          "\"DEADPAN HUMOUR\"",
+          "\"OFFBEAT CHARACTERS\"",
+          "\"AMATEUR\"",
+          "\"HENRY FOOL\""
+        ],
+        "chunk_ids": [
+          "chunk-8d974fd4eb75e22904fc7451c85feedf"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He is best known for his films 'Trust', 'Amateur' and 'Henry Fool', which are notable for deadpan humour and offbeat characters quoting philosophical dialogue.",
+            "Hal Hartley Hal Hartley (born November 3, 1959) is an American film director, screenwriter, producer and composer who became a key figure in the American independent film movement of the 1980s and '90s. He is best known for his films \"TrustAmateur\" and \"Henry Fool\", which are notable for deadpan humour and offbeat characters quoting philosophical dialogue. His films provided a career launch for a number of actors, including Adrienne Shelly, Edie Falco, Martin Donovan, Karen Sillas and Elina Löwensohn. Hartley frequently scores his own films using his pseudonym Ned Rifle, and his soundtracks regularly feature music by indie rock acts Yo La Tengo and PJ Harvey."
+          ],
+          "relation_texts": [
+            "He is best known for his films 'Trust', 'Amateur' and 'Henry Fool', which are notable for deadpan humour and offbeat characters quoting philosophical dialogue.",
+            "link",
+            "TRUST",
+            "DEADPAN HUMOUR",
+            "OFFBEAT CHARACTERS",
+            "AMATEUR",
+            "HENRY FOOL"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-eb5a3e4ed3559257f287cee67da1c391",
+            "hyperedge_name": "<hyperedge>\"He is best known for his films 'Trust', 'Amateur' and 'Henry Fool', which are notable for deadpan humour and offbeat characters quoting philosophical dialogue.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Films he has produced include 'Sky West and Crooked' and 'Three Hats for Lisa.'\"",
+        "branch": "semantic",
+        "raw_score": 0.4311095178127289,
+        "hyperedge_text": "Films he has produced include 'Sky West and Crooked' and 'Three Hats for Lisa.'",
+        "entity_ids": [
+          "\"FILMS\"",
+          "\"SKY WEST AND CROOKED\"",
+          "\"THREE HATS FOR LISA\""
+        ],
+        "chunk_ids": [
+          "chunk-bddc6549153c6b257e557ae335baf94b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Films he has produced include 'Sky West and Crooked' and 'Three Hats for Lisa.'",
+            "Jack Hanbury Jack Hanbury was a British film producer( died Jan. 1968). Films he has produced include\" Sky West and Crooked\" and\" Three Hats for Lisa\"."
+          ],
+          "relation_texts": [
+            "Films he has produced include 'Sky West and Crooked' and 'Three Hats for Lisa.'",
+            "link",
+            "FILMS",
+            "SKY WEST AND CROOKED",
+            "THREE HATS FOR LISA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-218f5711849b7e9db41f1adb4771b67f",
+            "hyperedge_name": "<hyperedge>\"Films he has produced include 'Sky West and Crooked' and 'Three Hats for Lisa.'\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Three Live Ghosts is a 1922 British comedy film directed by George Fitzmaurice.\"",
+        "branch": "semantic",
+        "raw_score": 0.42987531423568726,
+        "hyperedge_text": "Three Live Ghosts is a 1922 British comedy film directed by George Fitzmaurice.",
+        "entity_ids": [
+          "\"GEORGE FITZMAURICE\"",
+          "\"THREE LIVE GHOSTS\""
+        ],
+        "chunk_ids": [
+          "chunk-6b331118f47a97d2ab4b5eacfc0a49ed"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Three Live Ghosts is a 1922 British comedy film directed by George Fitzmaurice.",
+            "Three Live Ghosts (1922 film) Three Live Ghosts is a 1922 British comedy film directed by George Fitzmaurice. Alfred Hitchcock is credited as a title designer. The film is based on a 1920 Broadway play,\" Three Live Ghosts\", by Frederic S. Isham and Max Marcin. Actor Cyril Chadwick is the only performer from the play to appear in the film. A copy of the film, thought to be lost, was found in a Russian archive and shown publicly in 2015. This version had however been radically re-edited by Soviet censors in the 1920s, making the film a searing critique of post-war Britain, including its relations with Ireland, which achieved Dominion status in the year the film was first shown."
+          ],
+          "relation_texts": [
+            "Three Live Ghosts is a 1922 British comedy film directed by George Fitzmaurice.",
+            "link",
+            "GEORGE FITZMAURICE",
+            "THREE LIVE GHOSTS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bc11a23ea5fe2fa9b7e3e69d7b502e90",
+            "hyperedge_name": "<hyperedge>\"Three Live Ghosts is a 1922 British comedy film directed by George Fitzmaurice.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The cast of Folly to Be Wise includes prominent actors of their time, such as Alastair Sim and Elizabeth Allan.\"",
+        "branch": "semantic",
+        "raw_score": 0.4291720688343048,
+        "hyperedge_text": "The cast of Folly to Be Wise includes prominent actors of their time, such as Alastair Sim and Elizabeth Allan.",
+        "entity_ids": [
+          "\"ALASTAIR SIM\"",
+          "\"ELIZABETH ALLAN\""
+        ],
+        "chunk_ids": [
+          "chunk-57669db8b3e29849447716ef99989c00"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The cast of Folly to Be Wise includes prominent actors of their time, such as Alastair Sim and Elizabeth Allan.",
+            "Folly to Be Wise Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman. It is based on the play \" It Depends What You Mean\" by James Bridie. The film follows the efforts of a British Army chaplain attempting to recruit entertainment acts to perform for the troops and the complications that ensue when he does. The title is taken from the line by Thomas Gray \"where ignorance is bliss, 'tis folly to be wise\"."
+          ],
+          "relation_texts": [
+            "The cast of Folly to Be Wise includes prominent actors of their time, such as Alastair Sim and Elizabeth Allan.",
+            "link",
+            "ALASTAIR SIM",
+            "ELIZABETH ALLAN"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-d5980db984c998900bb206e207ceb886",
+            "hyperedge_name": "<hyperedge>\"The cast of Folly to Be Wise includes prominent actors of their time, such as Alastair Sim and Elizabeth Allan.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Jules White had a key role in directing notable comedy shorts including those starring The Three Stooges.\"",
+        "branch": "semantic",
+        "raw_score": 0.42735517024993896,
+        "hyperedge_text": "Jules White had a key role in directing notable comedy shorts including those starring The Three Stooges.",
+        "entity_ids": [
+          "\"JULES WHITE\""
+        ],
+        "chunk_ids": [
+          "chunk-bf1472426d89957969c5e06085563554"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Jules White had a key role in directing notable comedy shorts including those starring The Three Stooges.",
+            "Self-Made Maids Self- Made Maids is a 1950 short subject directed by Jules White starring American slapstick comedy team The Three Stooges( Moe Howard, Larry Fine and Shemp Howard). It is the 124th entry in the series released by Columbia Pictures starring the comedians, who released 190 shorts for the studio between 1934 and 1959."
+          ],
+          "relation_texts": [
+            "Jules White had a key role in directing notable comedy shorts including those starring The Three Stooges.",
+            "link",
+            "JULES WHITE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9a0b746e233251018f00a644b6ee5575",
+            "hyperedge_name": "<hyperedge>\"Jules White had a key role in directing notable comedy shorts including those starring The Three Stooges.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.\"",
+        "hyperedge_text": "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6155170202255249,
+        "fusion_score": 0.523103404045105,
+        "entity_ids": [
+          "\"EDUARDO DE FILIPPO\"",
+          "\"MARIO BONNARD\"",
+          "\"ASSIA NORIS\"",
+          "\"THREE LUCKY FOOLS\"",
+          "\"TITO SCHIPA\"",
+          "\"FRED PASQUALI\""
+        ],
+        "chunk_ids": [
+          "chunk-2f55903ca60f3365f409badc0dfcc259"
+        ],
+        "evidence_texts": [
+          "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+          "Three Lucky Fools Three Lucky Fools( Italian: Tre uomini in frack) is a 1933 French- Italian comedy film directed by Mario Bonnard and starring Tito Schipa, Eduardo De Filippo and Fred Pasquali. It marked the film debut of Assia Noris who went on to be a leading Italian star. It was released in two separate versions one in French and the other in Italian."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.615517,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.523103
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.\"",
+        "hyperedge_text": "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5970155000686646,
+        "fusion_score": 0.5194031000137329,
+        "entity_ids": [
+          "\"1933\"",
+          "\"THREE LUCKY FOOLS\""
+        ],
+        "chunk_ids": [
+          "chunk-2f55903ca60f3365f409badc0dfcc259"
+        ],
+        "evidence_texts": [
+          "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+          "Three Lucky Fools Three Lucky Fools( Italian: Tre uomini in frack) is a 1933 French- Italian comedy film directed by Mario Bonnard and starring Tito Schipa, Eduardo De Filippo and Fred Pasquali. It marked the film debut of Assia Noris who went on to be a leading Italian star. It was released in two separate versions one in French and the other in Italian."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.597016,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519403
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Johnnie To takes the helm as director for A Moment of Romance III.\"",
+        "hyperedge_text": "Johnnie To takes the helm as director for A Moment of Romance III.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.43872129917144775,
+        "fusion_score": 0.4877442598342896,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-a26f424785d79d7014a72a70d8df13fb"
+        ],
+        "evidence_texts": [
+          "Johnnie To takes the helm as director for A Moment of Romance III.",
+          "A Moment of Romance II A Moment of Romance II is a 1993 Hong Kong action romance film directed by Benny Chan and starring Aaron Kwok and Jacklyn Wu. It is the second installment of the\" A Moment of Romance\" trilogy, featuring a new storyline. The film is followed by a final installment,\" A Moment of Romance III\"( 1996), with producer Johnnie To taking the helm as director and features the return of Andy Lau, the star of the first installment."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.438721,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.487744
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a visual effects artist, he contributed to various film projects before directing.\"",
+        "hyperedge_text": "As a visual effects artist, he contributed to various film projects before directing.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.47926294803619385,
+        "semantic_score": 0.5,
+        "fusion_score": 0.2917051792144776,
+        "entity_ids": [
+          "\"VISUAL EFFECTS\""
+        ],
+        "chunk_ids": [
+          "chunk-8916df2ef7585aa77e569b35a96c4cbc"
+        ],
+        "evidence_texts": [
+          "As a visual effects artist, he contributed to various film projects before directing.",
+          "Anthony Scott Burns Anthony Scott Burns( born May 9, 1977) is a Canadian filmmaker, visual effects artist and musician. After starting his film career as a visual effects artist and director, as of 2015 he is directing three feature films in pre-production:\" Dark MatterHolidays\", and Plan B Entertainment's\" Alpha\". He also releases music under the moniker Pilotpriest. Our House is currently in post and should be released in 2018."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.479263,
+          "S": 0.5,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.291705
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this he went on to become a director himself.\"",
+        "hyperedge_text": "After this he went on to become a director himself.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5064207315444946,
+        "semantic_score": 0.25,
+        "fusion_score": 0.25256829261779784,
+        "entity_ids": [
+          "\"DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-ef79a592b581a6a65989c1d03f7c005c"
+        ],
+        "evidence_texts": [
+          "After this he went on to become a director himself.",
+          "François Leterrier François Leterrier, born 26 May 1929 in Margny- lès- Compiègne, is a French film director and actor. He entered the film industry when he was cast in Robert Bresson's film\" A Man Escaped\". After this he went on to become a director himself."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.506421,
+          "S": 0.25,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.252568
+        }
+      }
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "Is the birth date of the director of Bárbara Atómica later than the birth date of the director of Three Lucky Fools?",
+    "retrieval_question": "Is the birth date of the director of Bárbara Atómica later than the birth date of the director of Three Lucky Fools?",
+    "dependency_question_rewrite": {
+      "original_question": "Is the birth date of the director of Bárbara Atómica later than the birth date of the director of Three Lucky Fools?",
+      "retrieval_question": "Is the birth date of the director of Bárbara Atómica later than the birth date of the director of Three Lucky Fools?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "branch_hits": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+        "entity_ids": [
+          "\"JULIO SARACENI\"",
+          "\"ABEL SANTA CRUZ\"",
+          "\"MICHEL DURAN\"",
+          "\"MAY 23, 1952\"",
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+            "link",
+            "JULIO SARACENI",
+            "ABEL SANTA CRUZ",
+            "MICHEL DURAN",
+            "MAY 23, 1952",
+            "BÁRBARA ATÓMICA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film.",
+        "entity_ids": [
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bárbara atómica is a 1952 Argentine film.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Bárbara atómica is a 1952 Argentine film.",
+            "link",
+            "BÁRBARA ATÓMICA"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+        "entity_ids": [
+          "\"1933\"",
+          "\"THREE LUCKY FOOLS\""
+        ],
+        "chunk_ids": [
+          "chunk-2f55903ca60f3365f409badc0dfcc259"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+            "Three Lucky Fools Three Lucky Fools( Italian: Tre uomini in frack) is a 1933 French- Italian comedy film directed by Mario Bonnard and starring Tito Schipa, Eduardo De Filippo and Fred Pasquali. It marked the film debut of Assia Noris who went on to be a leading Italian star. It was released in two separate versions one in French and the other in Italian."
+          ],
+          "relation_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film.",
+            "link",
+            "1933",
+            "THREE LUCKY FOOLS"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.\"",
+        "branch": "anchor",
+        "raw_score": 0.5,
+        "hyperedge_text": "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+        "entity_ids": [
+          "\"EDUARDO DE FILIPPO\"",
+          "\"MARIO BONNARD\"",
+          "\"ASSIA NORIS\"",
+          "\"THREE LUCKY FOOLS\"",
+          "\"TITO SCHIPA\"",
+          "\"FRED PASQUALI\""
+        ],
+        "chunk_ids": [
+          "chunk-2f55903ca60f3365f409badc0dfcc259"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+            "Three Lucky Fools Three Lucky Fools( Italian: Tre uomini in frack) is a 1933 French- Italian comedy film directed by Mario Bonnard and starring Tito Schipa, Eduardo De Filippo and Fred Pasquali. It marked the film debut of Assia Noris who went on to be a leading Italian star. It was released in two separate versions one in French and the other in Italian."
+          ],
+          "relation_texts": [
+            "Three Lucky Fools (Italian: Tre uomini in frack) is a 1933 French-Italian comedy film directed by Mario Bonnard.",
+            "link",
+            "EDUARDO DE FILIPPO",
+            "MARIO BONNARD",
+            "ASSIA NORIS",
+            "THREE LUCKY FOOLS",
+            "TITO SCHIPA",
+            "FRED PASQUALI"
+          ]
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His work as a director spanned over two decades.\"",
+        "branch": "relation",
+        "raw_score": 0.49568310379981995,
+        "hyperedge_text": "His work as a director spanned over two decades.",
+        "entity_ids": [
+          "\"TWO DECADES\""
+        ],
+        "chunk_ids": [
+          "chunk-b2908038abf2c49538ee52133e9f151d"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His work as a director spanned over two decades.",
+            "Gonzalo Martínez Ortega Gonzalo Martínez Ortega( 27 April 1934 – 2 June 1998) was a Mexican actor, director, screenwriter and producer. He directed thirteen films and television series between 1973 and 1996."
+          ],
+          "relation_texts": [
+            "His work as a director spanned over two decades.",
+            "link",
+            "TWO DECADES"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5f076670aa6bfa9b819171295367f030",
+            "hyperedge_name": "<hyperedge>\"His work as a director spanned over two decades.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released in a different year than it was directed, showcasing its journey to publication and reception.\"",
+        "branch": "relation",
+        "raw_score": 0.49196988344192505,
+        "hyperedge_text": "The film was released in a different year than it was directed, showcasing its journey to publication and reception.",
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-35b3582b7eaf60a277dfe3e6a460d1f9"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film was released in a different year than it was directed, showcasing its journey to publication and reception.",
+            "Eugénie de Sade Eugenie de Sade( original titles: Eugénie and Eugenie Sex Happening) is a softcore film adaptation and modern- day update of the Marquis de Sade's short story\" Eugénie de Franval\"( 1800) directed by Spanish filmmaker Jesús Franco in 1970 and released in 1973. It has often been confused with his earlier\" Eugenie … The Story of Her Journey into Perversion\"( 1970), an adaptation of de Sade's book\" Philosophy in the Bedroom\"( 1795), as both films are often referred to simply as\" Eugenie\"."
+          ],
+          "relation_texts": [
+            "The film was released in a different year than it was directed, showcasing its journey to publication and reception."
+          ],
+          "vector_metadata": {
+            "__id__": "rel-a8cc276b3bbffe230560788cdc9991e6",
+            "hyperedge_name": "<hyperedge>\"The film was released in a different year than it was directed, showcasing its journey to publication and reception.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\"",
+        "branch": "relation",
+        "raw_score": 0.46475011110305786,
+        "hyperedge_text": "His date of birth is significant as it contextualizes his career timeline.",
+        "entity_ids": [
+          "\"CAREER TIMELINE\""
+        ],
+        "chunk_ids": [
+          "chunk-72dfbd73c6d7cb7a47c420f9f5cacc4b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "Jim May (tennis) James May( born 17 June 1981) is a British former professional tennis player."
+          ],
+          "relation_texts": [
+            "His date of birth is significant as it contextualizes his career timeline.",
+            "link",
+            "CAREER TIMELINE"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-f292719350c455f48b3bb7d98ae9f7f2",
+            "hyperedge_name": "<hyperedge>\"His date of birth is significant as it contextualizes his career timeline.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Conflicting release dates indicate possible variations in historical records surrounding the film.\"",
+        "branch": "relation",
+        "raw_score": 0.4617064297199249,
+        "hyperedge_text": "Conflicting release dates indicate possible variations in historical records surrounding the film.",
+        "entity_ids": [
+          "\"HISTORICAL RECORDS\""
+        ],
+        "chunk_ids": [
+          "chunk-b27dcdff6c12af0f1181ad3859999869"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Conflicting release dates indicate possible variations in historical records surrounding the film.",
+            "Pirates of the Sky Pirates of the Sky is a 1926 American silent adventure melodrama film directed by Charles Andrews. The film stars Charles Hutchison, Wanda Hawley and Crauford Kent. In different sources,\" Pirates of the Sky\" distributed by Pathé Exchange has conflicting release dates of February 20, 1926 and March 21, 1927."
+          ],
+          "relation_texts": [
+            "Conflicting release dates indicate possible variations in historical records surrounding the film.",
+            "link",
+            "HISTORICAL RECORDS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9fb4e74d158b0a2dd33e6fef6b81f04c",
+            "hyperedge_name": "<hyperedge>\"Conflicting release dates indicate possible variations in historical records surrounding the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The dates associated with his notable films highlight his active years in filmmaking.\"",
+        "branch": "relation",
+        "raw_score": 0.4612380266189575,
+        "hyperedge_text": "The dates associated with his notable films highlight his active years in filmmaking.",
+        "entity_ids": [
+          "\"1955\"",
+          "\"1951\"",
+          "\"1958\""
+        ],
+        "chunk_ids": [
+          "chunk-d8f0fe9af4e923c27006ffac413a8198"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The dates associated with his notable films highlight his active years in filmmaking.",
+            "Werner Jacobs Werner Jacobs (1909–1999) was a German film director. . He was born in Berlin on the 24 April, 1990. He is best known for his contributions to Modebummel (1951), Der Stern von Santa Clara (1958) and André und Ursula (1955). ."
+          ],
+          "relation_texts": [
+            "The dates associated with his notable films highlight his active years in filmmaking.",
+            "link",
+            "1955",
+            "1951",
+            "1958"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-2a504f451267c754c89c992fd532943c",
+            "hyperedge_name": "<hyperedge>\"The dates associated with his notable films highlight his active years in filmmaking.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He directed both his own films as well as films directed by others.\"",
+        "branch": "relation",
+        "raw_score": 0.4510325789451599,
+        "hyperedge_text": "He directed both his own films as well as films directed by others.",
+        "entity_ids": [
+          "\"HIS OWN FILMS\"",
+          "\"FILMS DIRECTED BY OTHERS\""
+        ],
+        "chunk_ids": [
+          "chunk-1622512e42b9fe00ff1ff6a93ac35761"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "Maurice Elvey Maurice Elvey( 11 November 1887 – 28 August 1967) was the most prolific film director in British history. He directed nearly 200 films between 1913 and 1957. During the silent film era he directed as many as twenty films per year. He also produced more than fifty films- his own as well as films directed by others."
+          ],
+          "relation_texts": [
+            "He directed both his own films as well as films directed by others.",
+            "link",
+            "HIS OWN FILMS",
+            "FILMS DIRECTED BY OTHERS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-427500c2d82019f242a873db4d43cbc1",
+            "hyperedge_name": "<hyperedge>\"He directed both his own films as well as films directed by others.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\"",
+        "branch": "relation",
+        "raw_score": 0.447268009185791,
+        "hyperedge_text": "He worked as both a composer and a film director throughout his career.",
+        "entity_ids": [
+          "\"COMPOSER AND FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-792aa21b437447586a47d3f3cba8bc52"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "Philippe Arthuys Philippe Arthuys( 22 November 1928 – 6 January 2010) was a French composer and film director. He worked on over 20 films between 1959 and 1997. His 1965 film\" The Glass Cage\" was entered into the 4th Moscow International Film Festival."
+          ],
+          "relation_texts": [
+            "He worked as both a composer and a film director throughout his career.",
+            "link",
+            "COMPOSER AND FILM DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e25db4edbda417352e5c48dd22a65f54",
+            "hyperedge_name": "<hyperedge>\"He worked as both a composer and a film director throughout his career.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Later on, he established himself as a theatrical director.\"",
+        "branch": "relation",
+        "raw_score": 0.4427875876426697,
+        "hyperedge_text": "Later on, he established himself as a theatrical director.",
+        "entity_ids": [
+          "\"THEATRICAL DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-1db89d7d9dea4bae7c86af26dfe3dbf2"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Later on, he established himself as a theatrical director.",
+            "Sidney Salkow Sidney Salkow (June 16, 1911 – October 18, 2000) was an American film director (more than 50 motion pictures), screenwriter, and television director. Salkow was educated at the City College of New York, Columbia University and Harvard Law School. After school, he returned to New York City and became an assistant director of theater and playwright. Later on, he established himself as a theatrical director. In 1932, he joined up with the film industry starting as a dialogue director. But soon, after achieving the ranks, he became a prolific writer/director of such films as \"Sitting BullTwice-Told Tales\", and \"The Last Man on Earth\" (the last two both starring Vincent Price). During World War II Salkow was commissioned into the United States Marine Corps rising to the rank of Major. He was wounded whilst filming a battle on an aircraft carrier. Additionally, Salkow directed..."
+          ],
+          "relation_texts": [
+            "Later on, he established himself as a theatrical director.",
+            "link",
+            "THEATRICAL DIRECTOR"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-0128516e863135a881c411ab8e832311",
+            "hyperedge_name": "<hyperedge>\"Later on, he established himself as a theatrical director.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"During the late 1950s, his eventual career trajectory as a director began when he was relied upon to complete projects begun by or credited to his colleague Riccardo Freda and other filmmakers.\"",
+        "branch": "relation",
+        "raw_score": 0.4413267970085144,
+        "hyperedge_text": "During the late 1950s, his eventual career trajectory as a director began when he was relied upon to complete projects begun by or credited to his colleague Riccardo Freda and other filmmakers.",
+        "entity_ids": [
+          "\"RICCARDO FREDA\""
+        ],
+        "chunk_ids": [
+          "chunk-27a319f243422ddebd49130ce909f09b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "During the late 1950s, his eventual career trajectory as a director began when he was relied upon to complete projects begun by or credited to his colleague Riccardo Freda and other filmmakers.",
+            "Mario Bava Mario Bava( 31 July 1914 – 27 April 1980) was an Italian cinematographer, director, special effects artist and screenwriter, frequently referred to as the\" Master of Italian Horror\" and the\" Master of the Macabre\". His low- budget genre films, known for their distinctive visual flair and technical ingenuity, feature recurring themes and imagery concerning the conflict between illusion and reality, and the destructive capacity of human nature. Born to sculptor, cinematographer and special effects pioneer Eugenio Bava, the younger Bava followed his father into the film industry, and eventually earned a reputation as one of Italy's foremost cameramen, lighting and providing the special effects for such films as\" Hercules\"( 1958) and its sequel\" Hercules Unchained\"( 1959)( each were lampooned on\" Mystery Science Theater 3000\"). During the late 1950s, his eventual career traject..."
+          ],
+          "relation_texts": [
+            "During the late 1950s, his eventual career trajectory as a director began when he was relied upon to complete projects begun by or credited to his colleague Riccardo Freda and other filmmakers.",
+            "link",
+            "RICCARDO FREDA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5b91612a873af5f57872e86385ed7acf",
+            "hyperedge_name": "<hyperedge>\"During the late 1950s, his eventual career trajectory as a director began when he was relied upon to complete projects begun by or credited to his colleague Riccardo Freda and other filmmakers.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Later in the same year, Smith made her directorial debut.\"",
+        "branch": "relation",
+        "raw_score": 0.43892359733581543,
+        "hyperedge_text": "Later in the same year, Smith made her directorial debut.",
+        "entity_ids": [
+          "\"DIRECTORIAL DEBUT\""
+        ],
+        "chunk_ids": [
+          "chunk-ba45b35fdd512e14ec358c16bf8bbec0"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Later in the same year, Smith made her directorial debut.",
+            "Tasha Smith Tasha Smith( born February 28, 1971) is an American actress, director and producer. She began her career in a starring role on the NBC comedy series\" Boston Common\"( 1996 – 97), and she later appeared in numerous movies and television series. Smith has appeared in films include\" The Whole Ten Yards\"( 2004),\" Daddy's Little Girls\"( 2007),\" The Longshots\"( 2008),\" Couples Retreat\"( 2009), and\" Jumping the Broom\"( 2011). She starred as Angela Williams in the Tyler Perry films\" Why Did I Get Married?\"( 2007), its sequel\" Why Did I Get Married Too?\"( 2010), and on the television series based on the movies,\" For Better or Worse\"( 2011–2017). In 2015, she began a recurring role as Carol Holloway on the Fox musical drama series\" Empire\". Later in the same year, Smith made her directorial debut."
+          ],
+          "relation_texts": [
+            "Later in the same year, Smith made her directorial debut.",
+            "link",
+            "DIRECTORIAL DEBUT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-afa8c2bc76e12da44bb920dd03f1509e",
+            "hyperedge_name": "<hyperedge>\"Later in the same year, Smith made her directorial debut.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\"",
+        "branch": "semantic",
+        "raw_score": 0.5524497628211975,
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+        "entity_ids": [
+          "\"JULIO SARACENI\"",
+          "\"ABEL SANTA CRUZ\"",
+          "\"MICHEL DURAN\"",
+          "\"MAY 23, 1952\"",
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+            "link",
+            "JULIO SARACENI",
+            "ABEL SANTA CRUZ",
+            "MICHEL DURAN",
+            "MAY 23, 1952",
+            "BÁRBARA ATÓMICA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-5e6078141e3ce3cb9d69d153dc0511ff",
+            "hyperedge_name": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film.\"",
+        "branch": "semantic",
+        "raw_score": 0.5256851315498352,
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film.",
+        "entity_ids": [
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bárbara atómica is a 1952 Argentine film.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Bárbara atómica is a 1952 Argentine film.",
+            "link",
+            "BÁRBARA ATÓMICA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-3b15f5057dfb0810ca93b84be2a028ae",
+            "hyperedge_name": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica showcases themes of love, conflict, and Argentine identity.\"",
+        "branch": "semantic",
+        "raw_score": 0.43350592255592346,
+        "hyperedge_text": "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+        "entity_ids": [
+          "\"ARGENTINE IDENTITY\"",
+          "\"THEMES OF LOVE AND CONFLICT\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+            "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+          ],
+          "relation_texts": [
+            "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+            "link",
+            "ARGENTINE IDENTITY",
+            "THEMES OF LOVE AND CONFLICT"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-e2aaefb0b6d67c9e636e8fbda99ba6fd",
+            "hyperedge_name": "<hyperedge>\"Bárbara atómica showcases themes of love, conflict, and Argentine identity.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bigas Luna was born in Barcelona on 19 March 1946.\"",
+        "branch": "semantic",
+        "raw_score": 0.42077210545539856,
+        "hyperedge_text": "Bigas Luna was born in Barcelona on 19 March 1946.",
+        "entity_ids": [
+          "\"BARCELONA\"",
+          "\"19 MARCH 1946\""
+        ],
+        "chunk_ids": [
+          "chunk-116e40ad1ca87955c1185214b6f1287b"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Bigas Luna was born in Barcelona on 19 March 1946.",
+            "Bigas Luna José Juan Bigas Luna (Barcelona, 19 March 1946 - la Riera de Gaià, Catalonia, 5 April 2013), known artistically as Bigas Luna, was a Spanish film director, designer and artist. His films are typically characterised by a strong emphasis on the erotic, often related to food, something for which he admitted a strong passion. His work often explores and parodies clichés of Spanish identity, but he had an international career and has made films in the Spanish, Catalan, Italian, French and English languages."
+          ],
+          "relation_texts": [
+            "Bigas Luna was born in Barcelona on 19 March 1946.",
+            "link",
+            "BARCELONA",
+            "19 MARCH 1946"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-bd2dced5bb2c3551a0e4331d443d103a",
+            "hyperedge_name": "<hyperedge>\"Bigas Luna was born in Barcelona on 19 March 1946.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Castellari's birth date is significant to his biographical information.\"",
+        "branch": "semantic",
+        "raw_score": 0.40697595477104187,
+        "hyperedge_text": "Castellari's birth date is significant to his biographical information.",
+        "entity_ids": [
+          "\"BIOGRAPHICAL INFORMATION\""
+        ],
+        "chunk_ids": [
+          "chunk-4efeb20de34816861256f308734cb4fd"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Castellari's birth date is significant to his biographical information.",
+            "Enzo G. Castellari Enzo Girolami Castellari( born 29 July 1938) is an Italian director, screenwriter and actor."
+          ],
+          "relation_texts": [
+            "Castellari's birth date is significant to his biographical information.",
+            "link",
+            "BIOGRAPHICAL INFORMATION"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-70e9addbe37cf5a169bfdfceafb0cd70",
+            "hyperedge_name": "<hyperedge>\"Castellari's birth date is significant to his biographical information.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film premiered in Buenos Aires on 18 October 1939.\"",
+        "branch": "semantic",
+        "raw_score": 0.4069555103778839,
+        "hyperedge_text": "The film premiered in Buenos Aires on 18 October 1939.",
+        "entity_ids": [
+          "\"BUENOS AIRES\"",
+          "\"18 OCTOBER 1939\""
+        ],
+        "chunk_ids": [
+          "chunk-cb493d755552e8bfdcb1361dd2c031da"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film premiered in Buenos Aires on 18 October 1939.",
+            "Los Pagares de Mendieta Los Pagares de Mendieta is a b&w Argentine comedy film directed by Leopoldo Torres Ríos. The film premiered in Buenos Aires on 18 October 1939 and starred Tito Lusiardo."
+          ],
+          "relation_texts": [
+            "The film premiered in Buenos Aires on 18 October 1939.",
+            "link",
+            "BUENOS AIRES",
+            "18 OCTOBER 1939"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-62430f6bfc59b0dfd6901c2c93eecf4a",
+            "hyperedge_name": "<hyperedge>\"The film premiered in Buenos Aires on 18 October 1939.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"According to film critic Joel Poblete, who writes for 'Mabuse', a cinema magazine, Daniel Burman is one of the members of the so-called 'New Argentina Cinema', which began 'circa' 1998.\"",
+        "branch": "semantic",
+        "raw_score": 0.40005800127983093,
+        "hyperedge_text": "According to film critic Joel Poblete, who writes for 'Mabuse', a cinema magazine, Daniel Burman is one of the members of the so-called 'New Argentina Cinema', which began 'circa' 1998.",
+        "entity_ids": [
+          "\"JOEL POBLETE\"",
+          "\"MABUSE\"",
+          "\"NEW ARGENTINA CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-69a67cecf73902449959d3b2e7de7666"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "According to film critic Joel Poblete, who writes for 'Mabuse', a cinema magazine, Daniel Burman is one of the members of the so-called 'New Argentina Cinema', which began 'circa' 1998.",
+            "Daniel Burman Daniel Burman (born 29 August 1973 in Buenos Aires) is an Argentine film director, screenplay writer, and producer. According to film critic Joel Poblete, who writes for \"Mabuse\", a cinema magazine, Daniel Burman is one of the members of the so-called \"New Argentina Cinema\", which began \"circa\" 1998. Film critic Anthony Kaufman, writing for \"indieWIRE\", an online community of independent filmmakers and aficionados, said Burman's \"A Chrysanthemum Burst in Cincoesquinas\" (1998) has been cited as the beginning of the \"New Argentine Cinema\" wave."
+          ],
+          "relation_texts": [
+            "According to film critic Joel Poblete, who writes for 'Mabuse', a cinema magazine, Daniel Burman is one of the members of the so-called 'New Argentina Cinema', which began 'circa' 1998.",
+            "link",
+            "JOEL POBLETE",
+            "MABUSE",
+            "NEW ARGENTINA CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-36f0b1a9c31f7fdd1ffe0ddf2b830441",
+            "hyperedge_name": "<hyperedge>\"According to film critic Joel Poblete, who writes for 'Mabuse', a cinema magazine, Daniel Burman is one of the members of the so-called 'New Argentina Cinema', which began 'circa' 1998.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.\"",
+        "branch": "semantic",
+        "raw_score": 0.396342396736145,
+        "hyperedge_text": "The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.",
+        "entity_ids": [
+          "\"ARGENTINE CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-b3a7c1d9cc2687bd5eb3269e28bd9287"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.",
+            "Modern Husbands Modern Husbands( Spanish: Maridos modernos) is a 1948 Argentine comedy film directed by Luis Bayón Herrera and starring Olinda Bozán, Francisco Álvarez and Oscar Valicelli. The film's art direction was by Juan Manuel Concado."
+          ],
+          "relation_texts": [
+            "The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.",
+            "link",
+            "ARGENTINE CINEMA"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-63e36c904d37be29696d7beb50fee69b",
+            "hyperedge_name": "<hyperedge>\"The director of the film is Luis Bayón Herrera, known for his work in Argentine cinema.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Conflicting release dates indicate possible variations in historical records surrounding the film.\"",
+        "branch": "semantic",
+        "raw_score": 0.39613431692123413,
+        "hyperedge_text": "Conflicting release dates indicate possible variations in historical records surrounding the film.",
+        "entity_ids": [
+          "\"HISTORICAL RECORDS\""
+        ],
+        "chunk_ids": [
+          "chunk-b27dcdff6c12af0f1181ad3859999869"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "Conflicting release dates indicate possible variations in historical records surrounding the film.",
+            "Pirates of the Sky Pirates of the Sky is a 1926 American silent adventure melodrama film directed by Charles Andrews. The film stars Charles Hutchison, Wanda Hawley and Crauford Kent. In different sources,\" Pirates of the Sky\" distributed by Pathé Exchange has conflicting release dates of February 20, 1926 and March 21, 1927."
+          ],
+          "relation_texts": [
+            "Conflicting release dates indicate possible variations in historical records surrounding the film.",
+            "link",
+            "HISTORICAL RECORDS"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-9fb4e74d158b0a2dd33e6fef6b81f04c",
+            "hyperedge_name": "<hyperedge>\"Conflicting release dates indicate possible variations in historical records surrounding the film.\""
+          }
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film premiered on September 6, 1939 in Buenos Aires.\"",
+        "branch": "semantic",
+        "raw_score": 0.39324700832366943,
+        "hyperedge_text": "The film premiered on September 6, 1939 in Buenos Aires.",
+        "entity_ids": [
+          "\"BUENOS AIRES\"",
+          "\"SEPTEMBER 6, 1939\""
+        ],
+        "chunk_ids": [
+          "chunk-1b975a310de3c32d15e0af86acc1b29f"
+        ],
+        "metadata": {
+          "evidence_texts": [
+            "The film premiered on September 6, 1939 in Buenos Aires.",
+            "Muchachas que estudian Muchachas que estudian is a Argentine comedy film directed and written by Manuel Romero. The film premiered on September 6, 1939 in Buenos Aires and starred Sofía Bozán, Enrique Serrano and Delia Garcés."
+          ],
+          "relation_texts": [
+            "The film premiered on September 6, 1939 in Buenos Aires.",
+            "link",
+            "BUENOS AIRES",
+            "SEPTEMBER 6, 1939"
+          ],
+          "vector_metadata": {
+            "__id__": "rel-24a7dbf802c6afccccb7d217e95aeee1",
+            "hyperedge_name": "<hyperedge>\"The film premiered on September 6, 1939 in Buenos Aires.\""
+          }
+        }
+      }
+    ],
+    "top_evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.\"",
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5524497628211975,
+        "fusion_score": 0.3104899525642395,
+        "entity_ids": [
+          "\"JULIO SARACENI\"",
+          "\"ABEL SANTA CRUZ\"",
+          "\"MICHEL DURAN\"",
+          "\"MAY 23, 1952\"",
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play, 'Barbara Bow'. It was released on May 23, 1952.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.55245,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.31049
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica is a 1952 Argentine film.\"",
+        "hyperedge_text": "Bárbara atómica is a 1952 Argentine film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.5256851315498352,
+        "fusion_score": 0.3051370263099671,
+        "entity_ids": [
+          "\"BÁRBARA ATÓMICA\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica is a 1952 Argentine film.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.525685,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.305137
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Conflicting release dates indicate possible variations in historical records surrounding the film.\"",
+        "hyperedge_text": "Conflicting release dates indicate possible variations in historical records surrounding the film.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4617064297199249,
+        "semantic_score": 0.39613431692123413,
+        "fusion_score": 0.26390943527221683,
+        "entity_ids": [
+          "\"HISTORICAL RECORDS\""
+        ],
+        "chunk_ids": [
+          "chunk-b27dcdff6c12af0f1181ad3859999869"
+        ],
+        "evidence_texts": [
+          "Conflicting release dates indicate possible variations in historical records surrounding the film.",
+          "Pirates of the Sky Pirates of the Sky is a 1926 American silent adventure melodrama film directed by Charles Andrews. The film stars Charles Hutchison, Wanda Hawley and Crauford Kent. In different sources,\" Pirates of the Sky\" distributed by Pathé Exchange has conflicting release dates of February 20, 1926 and March 21, 1927."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.461706,
+          "S": 0.396134,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.263909
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Castellari's birth date is significant to his biographical information.\"",
+        "hyperedge_text": "Castellari's birth date is significant to his biographical information.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.6666666666666666,
+        "semantic_score": 0.40697595477104187,
+        "fusion_score": 0.34806185762087505,
+        "entity_ids": [
+          "\"BIOGRAPHICAL INFORMATION\""
+        ],
+        "chunk_ids": [
+          "chunk-4efeb20de34816861256f308734cb4fd"
+        ],
+        "evidence_texts": [
+          "Castellari's birth date is significant to his biographical information.",
+          "Enzo G. Castellari Enzo Girolami Castellari( born 29 July 1938) is an Italian director, screenwriter and actor."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.666667,
+          "S": 0.406976,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.348062
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bárbara atómica showcases themes of love, conflict, and Argentine identity.\"",
+        "hyperedge_text": "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.43350592255592346,
+        "fusion_score": 0.2867011845111847,
+        "entity_ids": [
+          "\"ARGENTINE IDENTITY\"",
+          "\"THEMES OF LOVE AND CONFLICT\""
+        ],
+        "chunk_ids": [
+          "chunk-5a30a6c0df419c2dfef33bea836ec3c6"
+        ],
+        "evidence_texts": [
+          "Bárbara atómica showcases themes of love, conflict, and Argentine identity.",
+          "Bárbara atómica Bárbara atómica is a 1952 Argentine film. Directed by Julio Saraceni and script written by Abel Santa Cruz based on Michel Duran's play,\" Barbara Bow\". It was released on May 23, 1952."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.433506,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.286701
+        }
+      }
+    ]
+  }
+]

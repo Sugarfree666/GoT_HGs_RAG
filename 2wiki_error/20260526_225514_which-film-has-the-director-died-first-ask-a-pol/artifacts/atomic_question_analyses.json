@@ -1,0 +1,104 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Ask A Policeman?",
+    "retrieval_question": "Who is the director of Ask A Policeman?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Ask A Policeman?",
+      "retrieval_question": "Who is the director of Ask A Policeman?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Ask A Policeman"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When did the director of Ask A Policeman die?",
+    "retrieval_question": "When did Marcel Varnel die?",
+    "dependency_question_rewrite": {
+      "original_question": "When did the director of Ask A Policeman die?",
+      "retrieval_question": "When did Marcel Varnel die?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Ask A Policeman",
+      "replacement_answer": "Marcel Varnel",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Ask A Policeman",
+          "replacement_answer": "Marcel Varnel"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Ask A Policeman?",
+        "answer": "Marcel Varnel",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Ask a Policeman' is directed by Marcel Varnel.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.\"",
+            "fusion_score": 0.5287252902984619,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt.",
+              "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.\"",
+            "fusion_score": 0.7252520084381104,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Ultimately, 'Ask a Policeman' is a reflection of both society's view on law enforcement and a satire on police work.",
+              "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.\"",
+            "fusion_score": 0.5180893659591675,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "In summary, 'Ask a Policeman' juxtaposes the mundane duties of the police with the absurdity of their attempts to create criminals.",
+              "Ask a Policeman Ask a Policeman is a 1939 British comedy film directed by Marcel Varnel and starring Will Hay, Moore Marriott and Graham Moffatt. The title comes from the popular music hall song\" Ask a Policeman\". The Turnbotham Round police force are threatened with dismissal by their Chief Constable and decide to manufacture some smugglers to keep their jobs. When they encounter real smugglers, their plans begins to fall apart."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Marcel Varnel"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of a person?",
+      "answer_type": "date"
+    }
+  }
+]

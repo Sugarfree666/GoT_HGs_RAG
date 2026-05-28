@@ -1,0 +1,105 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Aleksandr Aleksandrovich Bibikov?",
+    "retrieval_question": "Who is the father of Aleksandr Aleksandrovich Bibikov?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of Aleksandr Aleksandrovich Bibikov?",
+      "retrieval_question": "Who is the father of Aleksandr Aleksandrovich Bibikov?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Aleksandr Aleksandrovich Bibikov"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the father of Aleksandr Aleksandrovich Bibikov die?",
+    "retrieval_question": "Where did Aleksandr Ilyich Bibikov die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did the father of Aleksandr Aleksandrovich Bibikov die?",
+      "retrieval_question": "Where did Aleksandr Ilyich Bibikov die?",
+      "whether_rewritten": true,
+      "replacement_span": "the father of Aleksandr Aleksandrovich Bibikov",
+      "replacement_answer": "Aleksandr Ilyich Bibikov",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the father of Aleksandr Aleksandrovich Bibikov",
+          "replacement_answer": "Aleksandr Ilyich Bibikov"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the father of Aleksandr Aleksandrovich Bibikov?",
+        "answer": "Aleksandr Ilyich Bibikov",
+        "confidence": 0.75,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence indicates that Aleksandr Aleksandrovich Bibikov is the son of an eminent general, specifically mentioned as Aleksandr Ilyich Bibikov, who was his father. This is supported by the evidence regarding his family background.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"His son from his marriage with Princess Anastasia Semyonovna Kozlovskaya, Aleksandr Aleksandrovich Bibikov, served as a military commander in the Napoleonic Wars, and held several diplomatic posts.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"His son from his marriage with Princess Anastasia Semyonovna Kozlovskaya, Aleksandr Aleksandrovich Bibikov, served as a military commander in the Napoleonic Wars, and held several diplomatic posts.\"",
+            "fusion_score": 0.5405875205993653,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "His son from his marriage with Princess Anastasia Semyonovna Kozlovskaya, Aleksandr Aleksandrovich Bibikov, served as a military commander in the Napoleonic Wars, and held several diplomatic posts.",
+              "Aleksandr Bibikov Aleksandr Ilyich Bibikov (Moscow – , Bugulma) was a Russian statesman and military officer. Bibikov came from an old noble family; Field Marshal Mikhail Kutuzov was his brother-in-law. He began his military service in 1746, participating in the Seven Years' War (1756–1763). He was unit commander in the Battle of Zorndorf. His unit lost 60 officers and about half of soldiers but did not retreat. He was promoted to Colonel Rank by Empress Elizabeth of Russia. He also participated in Battle of Kunersdorf and thereafter was appointed military commandant of Frankfurt. Bibikov acted against the Polish Bar Confederation (1771–1774). In 1773 Bibikov was assigned to suppress Yemelyan Pugachev's uprising. In the letter to Catherine II of Russia he wrote: \"I expect from v. V. of the resolution of the boundary local matter not on the Polish statutes, but on the zbornomu (cathedr..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Aleksandr Aleksandrovich Bibikov was an officer of the Imperial Russian Army, who saw service during the Russo-Swedish War and the Napoleonic Wars.\"",
+            "fusion_score": 0.5290346503257752,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Aleksandr Aleksandrovich Bibikov was an officer of the Imperial Russian Army, who saw service during the Russo-Swedish War and the Napoleonic Wars.",
+              "Aleksandr Aleksandrovich Bibikov Aleksandr Aleksandrovich Bibikov was an officer of the Imperial Russian Army, who saw service during the Russo-Swedish War and the Napoleonic Wars. He was ambassador to several countries, and also served as a senator in the Governing Senate. Born into a noble family as the son of an eminent general of Empress Elizabeth's service, Aleksandr Bibikov was enrolled into the lists of the Izmaylovsky Regiment at just three years old. After his father's death on campaign in 1774, the younger Bibikov was promoted to officer status at nine years old, and by the time he was old enough to join the ranks of his regiment, he already held the rank of captain. He served in the Empress Catherine's retinue for a time, before taking part in the Russo-Swedish War, and seeing action on a number of occasions. Wounded in battle, and presented several awards, he entered the c..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"After his father's death on campaign in 1774, the younger Bibikov was promoted to officer status at nine years old.\"",
+            "fusion_score": 0.50985426902771,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "After his father's death on campaign in 1774, the younger Bibikov was promoted to officer status at nine years old.",
+              "Aleksandr Aleksandrovich Bibikov Aleksandr Aleksandrovich Bibikov was an officer of the Imperial Russian Army, who saw service during the Russo-Swedish War and the Napoleonic Wars. He was ambassador to several countries, and also served as a senator in the Governing Senate. Born into a noble family as the son of an eminent general of Empress Elizabeth's service, Aleksandr Bibikov was enrolled into the lists of the Izmaylovsky Regiment at just three years old. After his father's death on campaign in 1774, the younger Bibikov was promoted to officer status at nine years old, and by the time he was old enough to join the ranks of his regiment, he already held the rank of captain. He served in the Empress Catherine's retinue for a time, before taking part in the Russo-Swedish War, and seeing action on a number of occasions. Wounded in battle, and presented several awards, he entered the c..."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Aleksandr Ilyich Bibikov"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

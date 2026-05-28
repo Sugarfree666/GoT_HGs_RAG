@@ -1,0 +1,9 @@
+2026-05-26 21:10:11,039 | INFO | Generating atomic question DAG with DEPO.
+2026-05-26 21:11:14,711 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-05-26 21:11:14,712 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-05-26 21:11:29,334 | INFO | Starting HyperBranch pipeline for question: Are Chorion (Company) and Elswick Ordnance Company located in the same country?
+2026-05-26 21:11:29,334 | INFO | Executing atomic DAG with 3 node(s)
+2026-05-26 21:11:34,147 | INFO | Atomic retrieval returned 41 hits for question=What country is Chorion (Company) located in?
+2026-05-26 21:11:46,268 | INFO | Atomic retrieval returned 21 hits for question=What country is the Elswick Ordnance Company located in?
+2026-05-26 21:12:15,504 | INFO | Atomic retrieval returned 203 hits for question=What is the country of Chorion (Company)?
+2026-05-26 21:13:21,599 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_211011_are-chorion-company-and-elswick-ordnance-company

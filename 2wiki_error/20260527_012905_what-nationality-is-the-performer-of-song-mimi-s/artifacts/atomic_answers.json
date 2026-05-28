@@ -1,0 +1,361 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song Mimi?",
+    "analysis": {
+      "entities": [
+        "Mimi"
+      ],
+      "relations": [
+        "performer of"
+      ],
+      "relation_query": "who is the performer of a song",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.\"",
+        "hyperedge_text": "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5939130783081055,
+        "fusion_score": 0.7187826156616212,
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RICHARD RODGERS\"",
+          "\"LORENZ HART\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart.",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.593913,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.718783
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).\"",
+        "hyperedge_text": "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.5497205257415771,
+        "fusion_score": 0.7099441051483155,
+        "entity_ids": [
+          "\"MIMI\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Mimi is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie 'Love Me Tonight' (1932).",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.5,
+          "S": 0.549721,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.709944
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\"",
+        "hyperedge_text": "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4919140338897705,
+        "fusion_score": 0.4983828067779541,
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RCA VICTOR RED SEAL ALBUM 'WOMEN IN MY LIFE'\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.491914,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.498383
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"who also produced the song.\"",
+        "hyperedge_text": "who also produced the song.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.44164901971817017,
+        "semantic_score": 0.37353652715682983,
+        "fusion_score": 0.25136691331863403,
+        "entity_ids": [
+          "\"PRODUCED\""
+        ],
+        "chunk_ids": [
+          "chunk-12315df579a13e8aefe6b95ef61a1c67"
+        ],
+        "evidence_texts": [
+          "who also produced the song.",
+          "Don't Worry Bout Me (Zara Larsson song) \" Do n't Worry Bout Me\" is a song by Swedish singer Zara Larsson. It was released by TEN Music Group and Epic Records on 28 March 2019 as the second single from Larsson's upcoming third studio album. Larsson wrote\" Do n't Worry Bout Me\" with Tove Lo, Rami Yacoub, Linnea Södahl, Whitney Phillips, and The Struts, who also produced the song."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.441649,
+          "S": 0.373537,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.251367
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.\"",
+        "hyperedge_text": "He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.43059414625167847,
+        "fusion_score": 0.4861188292503357,
+        "entity_ids": [
+          "\"SIGNATURE SONGS\""
+        ],
+        "chunk_ids": [
+          "chunk-dd4147feacc984f701043c59ef5be1f6"
+        ],
+        "evidence_texts": [
+          "He is perhaps best known for his signature songs, including 'Livin' In The SunlightValentineLouiseMimi', and 'Thank Heaven for Little Girls'.",
+          "Maurice Chevalier Maurice Auguste Chevalier (September 12, 1888 – January 1, 1972) was a French actor, cabaret singer and entertainer. He is perhaps best known for his signature songs, including \"Livin' In The SunlightValentineLouiseMimi\", and \"Thank Heaven for Little Girls\" and for his films, including \"The Love ParadeThe Big PondThe Smiling LieutenantOne Hour with You\" and \"Love Me Tonight\". His trademark attire was a boater hat and tuxedo. Chevalier was born in Paris. He made his name as a star of musical comedy, appearing in public as a singer and dancer at an early age before working in menial jobs as a teenager. In 1909, he became the partner of the biggest female star in France at the time, Fréhel. Although their relationship was brief, she secured him his first major engagement, as a mimic and a singer in \"l'Alcazar\" in Marseille, for which he received critical acclaim by Fren..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.430594,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.486119
+        }
+      }
+    ],
+    "answer": "Sergio Franchi",
+    "confidence": 0.75,
+    "reasoning_summary": "Sergio Franchi is mentioned as having performed 'Mimi' on a television special and recorded it on an album, indicating he is a performer of the song.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of the performer of Mimi?",
+    "analysis": {
+      "entities": [
+        "Sergio Franchi"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'\"",
+        "hyperedge_text": "Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4998883903026581,
+        "fusion_score": 0.4999776780605316,
+        "entity_ids": [
+          "\"SERGIO FRANCHI\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Sergio Franchi performed this song on January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.499888,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499978
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'\"",
+        "hyperedge_text": "Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49872544407844543,
+        "fusion_score": 0.49974508881568913,
+        "entity_ids": [
+          "\"SERGIO FRANCHI\"",
+          "\"VICTOR BORGE AT CARNEGIE HALL\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Sergio Franchi performed this song January 2, 1964 on the ABC Television special, 'Victor Borge At Carnegie Hall.'",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.498725,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499745
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Gobbi's identity includes his Italian-French nationality.\"",
+        "hyperedge_text": "Sergio Gobbi's identity includes his Italian-French nationality.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.5272330641746521,
+        "fusion_score": 0.5054466128349304,
+        "entity_ids": [
+          "\"IDENTITY\""
+        ],
+        "chunk_ids": [
+          "chunk-7761bce582af1641f8b710ee5c185497"
+        ],
+        "evidence_texts": [
+          "Sergio Gobbi's identity includes his Italian-French nationality.",
+          "Sergio Gobbi Sergio Gobbi (born 13 May 1938 in Milan, Italy), born as Sergio Ehrlich, is an Italian-French filmmaker, who was married to Jocelyn Wildenstein."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.527233,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.505447
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\"",
+        "hyperedge_text": "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.46483874320983887,
+        "fusion_score": 0.4929677486419678,
+        "entity_ids": [
+          "\"MIMI\"",
+          "\"RCA VICTOR RED SEAL ALBUM 'WOMEN IN MY LIFE'\""
+        ],
+        "chunk_ids": [
+          "chunk-f2f53415f8b48fe08196ed92112775aa"
+        ],
+        "evidence_texts": [
+          "Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'",
+          "Mimi (song) \"Mimi\" is a popular song written by Richard Rodgers, with words by Lorenz Hart. It was featured in the movie \"Love Me Tonight\" (1932), in which it was first sung by Maurice Chevalier to Jeanette MacDonald, then later reprised by the entire company. Sergio Franchi performed this song January 2, 1964 on the ABC Television special, \"Victor Borge At Carnegie Hall.\" Sergio Franchi also recorded \"Mimi\" on his 1963 RCA Victor Red Seal album. \" Women In My Life\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.464839,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.492968
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').\"",
+        "hyperedge_text": "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.48665884137153625,
+        "semantic_score": 0.3333333333333333,
+        "fusion_score": 0.26133020321528116,
+        "entity_ids": [
+          "\"JUS SANGUINIS\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Almost all countries outside the Americas instead attribute nationality based on the nationality(ies) of the baby's parents (referred to as 'jus sanguinis').",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.486659,
+          "S": 0.333333,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.26133
+        }
+      }
+    ],
+    "answer": "Italian-American",
+    "confidence": 0.75,
+    "reasoning_summary": "Sergio Franchi is identified as the performer of 'Mimi' and is known to be of Italian descent, which supports the answer of Italian-American nationality.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Sergio Franchi also recorded 'Mimi' on his 1963 RCA Victor Red Seal album 'Women In My Life.'\""
+    ]
+  }
+]

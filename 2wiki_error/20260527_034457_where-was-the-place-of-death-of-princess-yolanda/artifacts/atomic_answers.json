@@ -1,0 +1,364 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Princess Yolanda Of Savoy?",
+    "analysis": {
+      "entities": [
+        "Princess Yolanda Of Savoy"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a royal figure",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy.\"",
+        "hyperedge_text": "Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7430084943771362,
+        "fusion_score": 0.5486016988754273,
+        "entity_ids": [
+          "\"ITALY\"",
+          "\"KING VICTOR EMMANUEL III OF ITALY\"",
+          "\"PRINCESS YOLANDA OF SAVOY\""
+        ],
+        "chunk_ids": [
+          "chunk-9f04f52e79fb6ce5854eb3a186fe6bfd"
+        ],
+        "evidence_texts": [
+          "Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy.",
+          "Princess Yolanda of Savoy Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.743008,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.548602
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy.\"",
+        "hyperedge_text": "Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.75,
+        "fusion_score": 0.55,
+        "entity_ids": [
+          "\"DATE OF DEATH\"",
+          "\"DATE OF BIRTH\"",
+          "\"ITALY\"",
+          "\"ELDEST DAUGHTER\"",
+          "\"SAVOY\"",
+          "\"PRINCESS YOLANDA OF SAVOY\"",
+          "\"KING VICTOR EMMANUEL III\""
+        ],
+        "chunk_ids": [
+          "chunk-9f04f52e79fb6ce5854eb3a186fe6bfd"
+        ],
+        "evidence_texts": [
+          "Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy.",
+          "Princess Yolanda of Savoy Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.75,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.55
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III.\"",
+        "hyperedge_text": "Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7145171165466309,
+        "fusion_score": 0.5429034233093262,
+        "entity_ids": [
+          "\"ELDEST DAUGHTER\""
+        ],
+        "chunk_ids": [
+          "chunk-9f04f52e79fb6ce5854eb3a186fe6bfd"
+        ],
+        "evidence_texts": [
+          "Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III.",
+          "Princess Yolanda of Savoy Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.714517,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542903
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Yolanda of Savoy is a member of the Savoy dynasty.\"",
+        "hyperedge_text": "Princess Yolanda of Savoy is a member of the Savoy dynasty.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7032285928726196,
+        "fusion_score": 0.5406457185745239,
+        "entity_ids": [
+          "\"SAVOY DYNASTY\""
+        ],
+        "chunk_ids": [
+          "chunk-9f04f52e79fb6ce5854eb3a186fe6bfd"
+        ],
+        "evidence_texts": [
+          "Princess Yolanda of Savoy is a member of the Savoy dynasty.",
+          "Princess Yolanda of Savoy Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.703229,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540646
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Yolanda of Savoy was born on 1 June 1901.\"",
+        "hyperedge_text": "Princess Yolanda of Savoy was born on 1 June 1901.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6681911945343018,
+        "fusion_score": 0.5336382389068604,
+        "entity_ids": [
+          "\"1 JUNE 1901\""
+        ],
+        "chunk_ids": [
+          "chunk-9f04f52e79fb6ce5854eb3a186fe6bfd"
+        ],
+        "evidence_texts": [
+          "Princess Yolanda of Savoy was born on 1 June 1901.",
+          "Princess Yolanda of Savoy Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.668191,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533638
+        }
+      }
+    ],
+    "answer": "King Victor Emmanuel III",
+    "confidence": 1.0,
+    "reasoning_summary": "Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy, as stated in the evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy.\"",
+      "<hyperedge>\"Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was the father of Princess Yolanda Of Savoy buried?",
+    "analysis": {
+      "entities": [
+        "King Victor Emmanuel III"
+      ],
+      "relations": [
+        "burial location"
+      ],
+      "relation_query": "Where is the burial location of a person?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy.\"",
+        "hyperedge_text": "Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8,
+        "fusion_score": 0.56,
+        "entity_ids": [
+          "\"DATE OF DEATH\"",
+          "\"DATE OF BIRTH\"",
+          "\"ITALY\"",
+          "\"ELDEST DAUGHTER\"",
+          "\"SAVOY\"",
+          "\"PRINCESS YOLANDA OF SAVOY\"",
+          "\"KING VICTOR EMMANUEL III\""
+        ],
+        "chunk_ids": [
+          "chunk-9f04f52e79fb6ce5854eb3a186fe6bfd"
+        ],
+        "evidence_texts": [
+          "Princess Yolanda of Savoy was the eldest daughter of King Victor Emmanuel III of Italy.",
+          "Princess Yolanda of Savoy Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.8,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.56
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"King Victor Emmanuel III of Italy was the last king of Italy before the establishment of the Italian Republic.\"",
+        "hyperedge_text": "King Victor Emmanuel III of Italy was the last king of Italy before the establishment of the Italian Republic.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.543175220489502,
+        "fusion_score": 0.5086350440979004,
+        "entity_ids": [
+          "\"LAST KING OF ITALY\""
+        ],
+        "chunk_ids": [
+          "chunk-9f04f52e79fb6ce5854eb3a186fe6bfd"
+        ],
+        "evidence_texts": [
+          "King Victor Emmanuel III of Italy was the last king of Italy before the establishment of the Italian Republic.",
+          "Princess Yolanda of Savoy Princess Yolanda of Savoy (1 June 1901 – 16 October 1986) was the eldest daughter of King Victor Emmanuel III of Italy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.543175,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.508635
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Elena of Montenegro was the wife of King Victor Emmanuel III of Italy.\"",
+        "hyperedge_text": "Elena of Montenegro was the wife of King Victor Emmanuel III of Italy.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49488744139671326,
+        "fusion_score": 0.4989774882793427,
+        "entity_ids": [
+          "\"WIFE\""
+        ],
+        "chunk_ids": [
+          "chunk-1c2e2861022d0a1299b0b2a153bf9ae8"
+        ],
+        "evidence_texts": [
+          "Elena of Montenegro was the wife of King Victor Emmanuel III of Italy.",
+          "Princess Mafalda of Savoy Princess Mafalda of Savoy (2 November 1902 – 27 August 1944) was the second daughter of King Victor Emmanuel III of Italy and his wife Elena of Montenegro. The future King Umberto II of Italy was her younger brother."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.494887,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.498977
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His burial at Glympton, Oxfordshire after death reflects the customs of his time.\"",
+        "hyperedge_text": "His burial at Glympton, Oxfordshire after death reflects the customs of his time.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5291610956192017,
+        "semantic_score": 0.2,
+        "fusion_score": 0.2516644382476807,
+        "entity_ids": [
+          "\"CUSTOMS\""
+        ],
+        "chunk_ids": [
+          "chunk-da98d1261c251bc7c65088d82ee7c260"
+        ],
+        "evidence_texts": [
+          "His burial at Glympton, Oxfordshire after death reflects the customs of his time.",
+          "Sir Thomas Wheate, 2nd Baronet Sir Thomas Wheate, 2nd Baronet( 2 March 1693 – 1 May 1746) was an English politician who was the Member of Parliament for Woodstock from 1722 to 1727. He was the eldest son of Sir Thomas Wheate, 1st Baronet, whom he succeeded in 1721, inheriting Glympton Park, near Woodstock. He served briefly as a cornet in Col. William Stanhope ’s Dragoons in 1715. He was elected Member of Parliament for Woodstock in 1722, sitting until 1727. He married Mary Gould, the daughter and coheiress of Thomas Gould of Oak End, Iver, Buckinghamshire, with whom he had four daughters. On his death in 1746 he was buried at Glympton, Oxfordshire and succeeded by his brother, George Wheate."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.529161,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.251664
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He is buried at Mount Auburn Cemetery.\"",
+        "hyperedge_text": "He is buried at Mount Auburn Cemetery.",
+        "branch_support": [
+          "relation"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5248831510543823,
+        "semantic_score": 0.2,
+        "fusion_score": 0.24995326042175295,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-730c08d62727d687972f478bb61e513c"
+        ],
+        "evidence_texts": [
+          "He is buried at Mount Auburn Cemetery.",
+          "John Caldwell (seigneur) Sir John Caldwell( bap. 25 February 1775 – 26 October 1842) was a businessman and politician in Lower Canada and the only son of Henry Caldwell, the receiver- general of Lower Canada from 1794. John grew up near Quebec City on the family estate which was one of the properties his father, Henry Caldwell, had obtained from Governor James Murray by way of a 99- year lease. He studied to become a lawyer and was called to the bar in 1798. He never practiced law as he was administering his father's assets and ongoing business affairs. In 1800, he ran for, and was elected in the riding of Dorchester along with Jean- Thomas Taschereau for the 3rd Parliament of Lower Canada. Aside from an irregularity concerning the 1809 election, he served until December 1811, when he gave up his seat in the Legislative Assembly. Caldwell was immediately appointed to the Legislative C..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.524883,
+          "S": 0.2,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.249953
+        }
+      }
+    ],
+    "answer": "Glympton, Oxfordshire",
+    "confidence": 0.75,
+    "reasoning_summary": "King Victor Emmanuel III, the father of Princess Yolanda of Savoy, was buried at Glympton, Oxfordshire, as indicated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"His burial at Glympton, Oxfordshire after death reflects the customs of his time.\""
+    ]
+  }
+]

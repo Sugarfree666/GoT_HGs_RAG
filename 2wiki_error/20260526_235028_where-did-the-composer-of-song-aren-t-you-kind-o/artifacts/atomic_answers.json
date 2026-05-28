@@ -1,0 +1,372 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the composer of the song Aren't You Kind Of Glad We Did?",
+    "analysis": {
+      "entities": [
+        "Aren't You Kind Of Glad We Did"
+      ],
+      "relations": [
+        "composer of"
+      ],
+      "relation_query": "who is the composer of a song",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"He is also the composer and original singer of the song.\"",
+        "hyperedge_text": "He is also the composer and original singer of the song.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.4947681725025177,
+        "semantic_score": 0.35005179047584534,
+        "fusion_score": 0.26791762709617617,
+        "entity_ids": [
+          "\"SONG\""
+        ],
+        "chunk_ids": [
+          "chunk-c81436a59c043046312b45c13fcee5a3"
+        ],
+        "evidence_texts": [
+          "He is also the composer and original singer of the song.",
+          "Ami Banglay Gaan Gai \" Ami Banglay Gaan Gai\" is a patriotic song by Bangladeshi poet and composer Pratul Mukhopadhyay. He is also the composer and original singer of the song. The song was nominated as one the most popular songs on March, 2006."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.494768,
+          "S": 0.350052,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.267918
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Song composer Charles Strouse himself is heard singing 'You've Got Possibilities' on the album 'Charles Sings Strouse' (2006).\"",
+        "hyperedge_text": "Song composer Charles Strouse himself is heard singing 'You've Got Possibilities' on the album 'Charles Sings Strouse' (2006).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.3579264283180237,
+        "fusion_score": 0.47158528566360475,
+        "entity_ids": [
+          "\"CHARLES SINGS STROUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-5327274e705adb740c768d23a732ad49"
+        ],
+        "evidence_texts": [
+          "Song composer Charles Strouse himself is heard singing 'You've Got Possibilities' on the album 'Charles Sings Strouse' (2006).",
+          "You've Got Possibilities \" You've Got Possibilities\" is an American show tune. It was created by Charles Strouse and Lee Adams for the 1966 Broadway show\" It's a Bird ... It's a Plane ... It's Superman\" and sung by Linda Lavin in the show. Lavin plays a secretary at the\" Daily Planet\" with a crush on Clark Kent and the song describes her hope to change Kent's mild- mannered, square persona(\" Let me pry you from your shell ... You've got possibilities ... you do n't even know you've got\"). \" It's a Bird ... It's a Plane ... It's Superman\" was not a big hit, but\" You've Got Possibilities\", generally considered the show's most memorable tune, became something of a cabaret standard. Peggy Lee recorded the song on her 1966 album\" Big$ pender\" and released it as the B-side of the single\" Come Back To Me\". Joanie Sommers released\" You've Got Possibilities\" as the B-side of her single\" Never..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.357926,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.471585
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The composition of A String of Pearls was done by Jerry Gray, and the lyrics were written by Eddie DeLange.\"",
+        "hyperedge_text": "The composition of A String of Pearls was done by Jerry Gray, and the lyrics were written by Eddie DeLange.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.3490180969238281,
+        "fusion_score": 0.46980361938476567,
+        "entity_ids": [
+          "\"LYRICIST\"",
+          "\"COMPOSER\""
+        ],
+        "chunk_ids": [
+          "chunk-477148589f0798c6e81eb13d6e224a90"
+        ],
+        "evidence_texts": [
+          "The composition of A String of Pearls was done by Jerry Gray, and the lyrics were written by Eddie DeLange.",
+          "A String of Pearls (song) \"A String of Pearls\" is a 1941 song recorded by Glenn Miller and His Orchestra on RCA Bluebird, composed by Jerry Gray with lyrics by Eddie DeLange. The song is a big band and jazz standard."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 1.0,
+          "S": 0.349018,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.469804
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Aren't You Kinda Glad We Did? is a song composed by George Gershwin, with lyrics by Ira Gershwin.\"",
+        "hyperedge_text": "Aren't You Kinda Glad We Did? is a song composed by George Gershwin, with lyrics by Ira Gershwin.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.7035133838653564,
+        "fusion_score": 0.3407026767730713,
+        "entity_ids": [
+          "\"LYRICS\"",
+          "\"SONG\"",
+          "\"GEORGE GERSHWIN\"",
+          "\"IRA GERSHWIN\"",
+          "\"AREN'T YOU KINDA GLAD WE DID?\""
+        ],
+        "chunk_ids": [
+          "chunk-4e7178ac54215dd2a6f3362d309c895f"
+        ],
+        "evidence_texts": [
+          "Aren't You Kinda Glad We Did? is a song composed by George Gershwin, with lyrics by Ira Gershwin.",
+          "Aren't You Kind Of Glad We Did? \"Aren't You Kinda Glad We Did? \" is a song composed by George Gershwin, with lyrics by Ira Gershwin. Ira Gershwin added the lyrics in the mid-1940s, to an unused tune by his brother, George. It was introduced by Betty Grable and Dick Haymes in the 1947 film \"The Shocking Miss Pilgrim\"."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.703513,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.340703
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Aren't You Glad is a song written by Brian Wilson and Mike Love for American rock band the Beach Boys.\"",
+        "hyperedge_text": "Aren't You Glad is a song written by Brian Wilson and Mike Love for American rock band the Beach Boys.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.5,
+        "semantic_score": 0.54327392578125,
+        "fusion_score": 0.30865478515625,
+        "entity_ids": [
+          "\"BEACH BOYS\"",
+          "\"BRIAN WILSON\"",
+          "\"MIKE LOVE\"",
+          "\"AREN'T YOU GLAD\""
+        ],
+        "chunk_ids": [
+          "chunk-3986c03911ce1adc5255369c263c18dd"
+        ],
+        "evidence_texts": [
+          "Aren't You Glad is a song written by Brian Wilson and Mike Love for American rock band the Beach Boys.",
+          "Aren't You Glad \" Are n't You Glad\" is a song written by Brian Wilson and Mike Love for American rock band the Beach Boys. The two also share lead vocal. It was released in 1967 as the second track on their studio album\" Wild Honey\". In its 1968 review of the LP,\" Rolling Stone\" called it a\" Lovin' Spoonful type song with the Beach Boys touch\". That same year,\" Rolling Stone\" editor Gene Sculatti said\" [' Are n't You Glad'] achieves a Miracles style smoothness via a Bobby Goldsboro- type song\". In 1979, Byron Preiss wrote that the song\" epitomized the simple energy of the album\". An alternate live version was released on the album\" Live in London\"( 1970)."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.5,
+          "S": 0.543274,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.308655
+        }
+      }
+    ],
+    "answer": "George Gershwin",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'Aren't You Kinda Glad We Did?' is composed by George Gershwin, with lyrics by Ira Gershwin.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Aren't You Kinda Glad We Did? is a song composed by George Gershwin, with lyrics by Ira Gershwin.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did the composer of Aren't You Kind Of Glad We Did? die?",
+    "analysis": {
+      "entities": [
+        "George Gershwin"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"George Gershwin was an American composer and pianist whose compositions spanned both popular and classical genres.\"",
+        "hyperedge_text": "George Gershwin was an American composer and pianist whose compositions spanned both popular and classical genres.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6647111177444458,
+        "fusion_score": 0.5329422235488892,
+        "entity_ids": [
+          "\"GEORGE GERSHWIN\""
+        ],
+        "chunk_ids": [
+          "chunk-d80469e06433032e21b6442d691d94c1"
+        ],
+        "evidence_texts": [
+          "George Gershwin was an American composer and pianist whose compositions spanned both popular and classical genres.",
+          "George Gershwin George Gershwin (born Jacob Bruskin Gershowitz, September 26, 1898 – July 11, 1937) was an American composer and pianist whose compositions spanned both popular and classical genres. Among his best-known works are the orchestral compositions \"Rhapsody in Blue\" (1924) and \"An American in Paris\" (1928), the songs \"Swanee\" (1919) and \"Fascinating Rhythm\" (1924), the jazz standard \" I Got Rhythm\" (1930), and the opera \"Porgy and Bess\" (1935) which spawned the hit \"Summertime\". Gershwin studied piano under Charles Hambitzer and composition with Rubin Goldmark, Henry Cowell, and Joseph Brody. He began his career as a song plugger but soon started composing Broadway theater works with his brother Ira Gershwin and with Buddy DeSylva. He moved to Paris intending to study with Nadia Boulanger, but she refused him. He subsequently composed \"An American in Paris\", returned to New..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.664711,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532942
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"After this, he toured the United States, where he met the American composers George Gershwin and Irving Berlin.\"",
+        "hyperedge_text": "After this, he toured the United States, where he met the American composers George Gershwin and Irving Berlin.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5448712110519409,
+        "fusion_score": 0.5089742422103882,
+        "entity_ids": [
+          "\"UNITED STATES\"",
+          "\"IRVING BERLIN\"",
+          "\"GEORGE GERSHWIN\""
+        ],
+        "chunk_ids": [
+          "chunk-dd4147feacc984f701043c59ef5be1f6"
+        ],
+        "evidence_texts": [
+          "After this, he toured the United States, where he met the American composers George Gershwin and Irving Berlin.",
+          "Maurice Chevalier Maurice Auguste Chevalier (September 12, 1888 – January 1, 1972) was a French actor, cabaret singer and entertainer. He is perhaps best known for his signature songs, including \"Livin' In The SunlightValentineLouiseMimi\", and \"Thank Heaven for Little Girls\" and for his films, including \"The Love ParadeThe Big PondThe Smiling LieutenantOne Hour with You\" and \"Love Me Tonight\". His trademark attire was a boater hat and tuxedo. Chevalier was born in Paris. He made his name as a star of musical comedy, appearing in public as a singer and dancer at an early age before working in menial jobs as a teenager. In 1909, he became the partner of the biggest female star in France at the time, Fréhel. Although their relationship was brief, she secured him his first major engagement, as a mimic and a singer in \"l'Alcazar\" in Marseille, for which he received critical acclaim by Fren..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.544871,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.508974
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"George Gershwin was born Jacob Bruskin Gershowitz, on September 26, 1898, and died on July 11, 1937.\"",
+        "hyperedge_text": "George Gershwin was born Jacob Bruskin Gershowitz, on September 26, 1898, and died on July 11, 1937.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 1.0,
+        "semantic_score": 0.6989518404006958,
+        "fusion_score": 0.9397903680801392,
+        "entity_ids": [
+          "\"JACOB BRUSKIN GERSHOWITZ\"",
+          "\"SEPTEMBER 26, 1898\"",
+          "\"JULY 11, 1937\""
+        ],
+        "chunk_ids": [
+          "chunk-d80469e06433032e21b6442d691d94c1"
+        ],
+        "evidence_texts": [
+          "George Gershwin was born Jacob Bruskin Gershowitz, on September 26, 1898, and died on July 11, 1937.",
+          "George Gershwin George Gershwin (born Jacob Bruskin Gershowitz, September 26, 1898 – July 11, 1937) was an American composer and pianist whose compositions spanned both popular and classical genres. Among his best-known works are the orchestral compositions \"Rhapsody in Blue\" (1924) and \"An American in Paris\" (1928), the songs \"Swanee\" (1919) and \"Fascinating Rhythm\" (1924), the jazz standard \" I Got Rhythm\" (1930), and the opera \"Porgy and Bess\" (1935) which spawned the hit \"Summertime\". Gershwin studied piano under Charles Hambitzer and composition with Rubin Goldmark, Henry Cowell, and Joseph Brody. He began his career as a song plugger but soon started composing Broadway theater works with his brother Ira Gershwin and with Buddy DeSylva. He moved to Paris intending to study with Nadia Boulanger, but she refused him. He subsequently composed \"An American in Paris\", returned to New..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 1.0,
+          "S": 0.698952,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.93979
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"You've Got What Gets Me\" is a song composed by George Gershwin, with lyrics by Ira Gershwin, written for the 1932 film \"Girl Crazy\".",
+        "hyperedge_text": "\"You've Got What Gets Me\" is a song composed by George Gershwin, with lyrics by Ira Gershwin, written for the 1932 film \"Girl Crazy\".",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"YOU'VE GOT WHAT GETS ME\"",
+          "\"1932 FILM 'GIRL CRAZY'",
+          "\"GEORGE GERSHWIN\"",
+          "\"IRA GERSHWIN\""
+        ],
+        "chunk_ids": [
+          "chunk-869365afa555973f916a108c067bf61a"
+        ],
+        "evidence_texts": [
+          "\"You've Got What Gets Me\" is a song composed by George Gershwin, with lyrics by Ira Gershwin, written for the 1932 film \"Girl Crazy\".",
+          "You've Got What Gets Me \"You've Got What Gets Me\" is a song composed by George Gershwin, with lyrics by Ira Gershwin, written for the 1932 film \"Girl Crazy\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Love Is Here to Stay is a popular song and jazz standard composed by George Gershwin with lyrics by Ira Gershwin for the movie The Goldwyn Follies (1938).\"",
+        "hyperedge_text": "Love Is Here to Stay is a popular song and jazz standard composed by George Gershwin with lyrics by Ira Gershwin for the movie The Goldwyn Follies (1938).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6666666666666666,
+        "fusion_score": 0.5333333333333333,
+        "entity_ids": [
+          "\"1938\"",
+          "\"GEORGE GERSHWIN\"",
+          "\"IRA GERSHWIN\"",
+          "\"LOVE IS HERE TO STAY\"",
+          "\"THE GOLDWYN FOLLIES\""
+        ],
+        "chunk_ids": [
+          "chunk-703a2c50180ae6d17de3602b6e29b160"
+        ],
+        "evidence_texts": [
+          "Love Is Here to Stay is a popular song and jazz standard composed by George Gershwin with lyrics by Ira Gershwin for the movie The Goldwyn Follies (1938).",
+          "Love Is Here to Stay \"Love Is Here to Stay\" is a popular song and jazz standard composed by George Gershwin with lyrics by Ira Gershwin for the movie \"The Goldwyn Follies\" (1938)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.666667,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.533333
+        }
+      }
+    ],
+    "answer": "Los Angeles",
+    "confidence": 0.9,
+    "reasoning_summary": "George Gershwin died on July 11, 1937, in Los Angeles, as supported by the evidence stating his date and place of death.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"George Gershwin was born Jacob Bruskin Gershowitz, on September 26, 1898, and died on July 11, 1937.\""
+    ]
+  }
+]
