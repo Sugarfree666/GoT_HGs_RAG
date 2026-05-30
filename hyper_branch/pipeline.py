@@ -48,6 +48,7 @@ class HyperBranchPipeline:
             dataset=self.dataset,
             embedder=self.embedder,
             config=config.retrieval,
+            llm_service=self.llm_service,
             logger=logger,
         )
         fusion = AtomicEvidenceFusion(

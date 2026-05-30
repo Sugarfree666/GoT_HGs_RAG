@@ -1,7 +1,9 @@
 import asyncio
 import json
+import os
 import re
 import random
+import sys
 from tqdm.asyncio import tqdm as tqdm_async
 from typing import Union, List, Dict, Set, Tuple
 from collections import Counter, defaultdict
@@ -36,6 +38,109 @@ from .hypermemory_prompt import (
     hypergraph_entity_pruning_prompt,
     hypergraph_prompt_evaluate,
 )
+
+
+ENTITY_EXTRACTION_CACHE_FILE = "kv_store_entity_extraction_cache.jsonl"
+ENTITY_EXTRACTION_STATE_FILE = "kv_store_entity_extraction_state.json"
+CHECKPOINT_VERSION = 1
+
+
+def entity_extraction_checkpoint_pending(working_dir: str, chunk_ids: list[str]) -> bool:
+    state = _load_extraction_state(_extraction_state_path(working_dir))
+    chunk_ids_hash = _chunk_ids_hash(chunk_ids)
+    if state.get("chunk_ids_hash") == chunk_ids_hash:
+        return not bool(state.get("merged"))
+
+    cache_path = _extraction_cache_path(working_dir)
+    return os.path.exists(cache_path) and os.path.getsize(cache_path) > 0
+
+
+def _extraction_cache_path(working_dir: str) -> str:
+    return os.path.join(working_dir, ENTITY_EXTRACTION_CACHE_FILE)
+
+
+def _extraction_state_path(working_dir: str) -> str:
+    return os.path.join(working_dir, ENTITY_EXTRACTION_STATE_FILE)
+
+
+def _chunk_ids_hash(chunk_ids: list[str]) -> str:
+    return compute_args_hash(sorted(chunk_ids))
+
+
+def _load_extraction_state(path: str) -> dict:
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, encoding="utf-8") as handle:
+            return json.load(handle)
+    except json.JSONDecodeError:
+        logger.warning("Ignoring invalid entity extraction state file: %s", path)
+        return {}
+
+
+def _write_extraction_state(path: str, state: dict) -> None:
+    tmp_path = f"{path}.tmp"
+    with open(tmp_path, "w", encoding="utf-8") as handle:
+        json.dump(state, handle, ensure_ascii=False, indent=2)
+    os.replace(tmp_path, path)
+
+
+def _load_extraction_cache(path: str) -> dict[str, dict]:
+    if not os.path.exists(path):
+        return {}
+
+    cache: dict[str, dict] = {}
+    with open(path, encoding="utf-8") as handle:
+        for line_number, line in enumerate(handle, start=1):
+            stripped = line.strip()
+            if not stripped:
+                continue
+            try:
+                record = json.loads(stripped)
+            except json.JSONDecodeError:
+                logger.warning("Skipping invalid extraction checkpoint at %s:%s", path, line_number)
+                continue
+
+            chunk_id = record.get("chunk_id")
+            if not chunk_id:
+                continue
+            cache[chunk_id] = {
+                "nodes": record.get("nodes", {}),
+                "edges": record.get("edges", {}),
+            }
+    return cache
+
+
+def _append_extraction_cache(path: str, chunk_id: str, nodes: dict, edges: dict) -> None:
+    with open(path, "a", encoding="utf-8") as handle:
+        handle.write(
+            json.dumps(
+                {"chunk_id": chunk_id, "nodes": nodes, "edges": edges},
+                ensure_ascii=False,
+            )
+        )
+        handle.write("\n")
+
+
+def _graph_has_data(knowledge_graph_inst: BaseGraphStorage) -> bool:
+    graph = getattr(knowledge_graph_inst, "_graph", None)
+    if graph is None:
+        return False
+    return graph.number_of_nodes() > 0 or graph.number_of_edges() > 0
+
+
+def _clear_graph_for_checkpoint_rebuild(knowledge_graph_inst: BaseGraphStorage) -> None:
+    graph = getattr(knowledge_graph_inst, "_graph", None)
+    if graph is None:
+        logger.warning("Cannot clear graph storage for checkpoint rebuild; storage does not expose _graph.")
+        return
+    if graph.number_of_nodes() or graph.number_of_edges():
+        logger.info(
+            "Clearing partial graph before checkpoint rebuild: %s nodes, %s edges",
+            graph.number_of_nodes(),
+            graph.number_of_edges(),
+        )
+    graph.clear()
 
 
 
@@ -275,8 +380,54 @@ async def extract_entities(
 ) -> Union[BaseGraphStorage, None]:
     use_llm_func: callable = global_config["llm_model_func"]
     entity_extract_max_gleaning = global_config["entity_extract_max_gleaning"]
+    max_concurrency = global_config["addon_params"].get("max_concurrency")
+    chunk_semaphore = (
+        asyncio.Semaphore(max_concurrency)
+        if isinstance(max_concurrency, int) and max_concurrency > 0
+        else None
+    )
+    resume_enabled = bool(global_config["addon_params"].get("resume"))
 
     ordered_chunks = list(chunks.items())
+    ordered_chunk_ids = [chunk_id for chunk_id, _ in ordered_chunks]
+    cached_results: dict[str, dict] = {}
+    checkpoint_state: dict = {}
+    checkpoint_matches = False
+    cache_path = ""
+    state_path = ""
+    chunk_ids_hash = ""
+    if resume_enabled:
+        ordered_chunk_id_set = set(ordered_chunk_ids)
+        working_dir = global_config["working_dir"]
+        cache_path = _extraction_cache_path(working_dir)
+        state_path = _extraction_state_path(working_dir)
+        chunk_ids_hash = _chunk_ids_hash(ordered_chunk_ids)
+        checkpoint_state = _load_extraction_state(state_path)
+        checkpoint_matches = checkpoint_state.get("chunk_ids_hash") == chunk_ids_hash
+        cached_results = {
+            chunk_id: payload
+            for chunk_id, payload in _load_extraction_cache(cache_path).items()
+            if chunk_id in ordered_chunk_id_set
+        }
+        if (
+            checkpoint_matches
+            and checkpoint_state.get("merged")
+            and len(cached_results) >= len(ordered_chunks)
+            and _graph_has_data(knowledge_graph_inst)
+        ):
+            logger.info(
+                "Entity extraction checkpoint already merged; skipping %s chunks.",
+                len(ordered_chunks),
+            )
+            return knowledge_graph_inst
+
+        if cached_results:
+            logger.info(
+                "Loaded entity extraction checkpoint with %s/%s completed chunks.",
+                len(cached_results),
+                len(ordered_chunks),
+            )
+
     # add language and example number params to prompt
     language = global_config["addon_params"].get(
         "language", PROMPTS["DEFAULT_LANGUAGE"]
@@ -315,9 +466,9 @@ async def extract_entities(
     continue_prompt = PROMPTS["entiti_continue_extraction"]
     if_loop_prompt = PROMPTS["entiti_if_loop_extraction"]
 
-    already_processed = 0
-    already_entities = 0
-    already_relations = 0
+    already_processed = len(cached_results)
+    already_entities = sum(len(result.get("nodes", {})) for result in cached_results.values())
+    already_relations = sum(len(result.get("edges", {})) for result in cached_results.values())
 
     async def _process_single_content(chunk_key_dp: tuple[str, TextChunkSchema]):
         nonlocal already_processed, already_entities, already_relations
@@ -384,25 +535,97 @@ async def extract_entities(
         now_ticks = PROMPTS["process_tickers"][
             already_processed % len(PROMPTS["process_tickers"])
         ]
+        stdout_encoding = sys.stdout.encoding or "utf-8"
+        try:
+            now_ticks.encode(stdout_encoding)
+        except UnicodeEncodeError:
+            now_ticks = "*"
         print(
             f"{now_ticks} Processed {already_processed} chunks, {already_entities} entities(duplicated), {already_relations} relations(duplicated)\r",
             end="",
             flush=True,
         )
-        return dict(maybe_nodes), dict(maybe_edges)
+        return chunk_key, dict(maybe_nodes), dict(maybe_edges)
 
-    results = []
+    async def _bounded_process_single_content(chunk_key_dp: tuple[str, TextChunkSchema]):
+        if chunk_semaphore is None:
+            return await _process_single_content(chunk_key_dp)
+        async with chunk_semaphore:
+            return await _process_single_content(chunk_key_dp)
+
+    missing_chunks = [chunk for chunk in ordered_chunks if chunk[0] not in cached_results]
+    if resume_enabled:
+        _write_extraction_state(
+            state_path,
+            {
+                "version": CHECKPOINT_VERSION,
+                "chunk_count": len(ordered_chunks),
+                "chunk_ids_hash": chunk_ids_hash,
+                "extracted_count": len(cached_results),
+                "extraction_complete": False,
+                "merged": False,
+            },
+        )
+    if missing_chunks and resume_enabled:
+        logger.info(
+            "Extracting %s chunks; %s chunks will be reused from checkpoint.",
+            len(missing_chunks),
+            len(cached_results),
+        )
+    elif missing_chunks:
+        logger.info("Extracting %s chunks.", len(missing_chunks))
+    else:
+        logger.info("All %s chunks will be reused from extraction checkpoint.", len(ordered_chunks))
+
     for result in tqdm_async(
-        asyncio.as_completed([_process_single_content(c) for c in ordered_chunks]),
-        total=len(ordered_chunks),
+        asyncio.as_completed([_bounded_process_single_content(c) for c in missing_chunks]),
+        total=len(missing_chunks),
         desc="Extracting entities from chunks",
         unit="chunk",
     ):
-        results.append(await result)
+        chunk_id, m_nodes, m_edges = await result
+        cached_results[chunk_id] = {"nodes": m_nodes, "edges": m_edges}
+        if resume_enabled:
+            _append_extraction_cache(cache_path, chunk_id, m_nodes, m_edges)
+        if resume_enabled and (len(cached_results) % 25 == 0 or len(cached_results) == len(ordered_chunks)):
+            _write_extraction_state(
+                state_path,
+                {
+                    "version": CHECKPOINT_VERSION,
+                    "chunk_count": len(ordered_chunks),
+                    "chunk_ids_hash": chunk_ids_hash,
+                    "extracted_count": len(cached_results),
+                    "extraction_complete": False,
+                    "merged": False,
+                },
+            )
+
+    if len(cached_results) < len(ordered_chunks):
+        raise RuntimeError(
+            f"Entity extraction checkpoint is incomplete: {len(cached_results)}/{len(ordered_chunks)} chunks."
+        )
+
+    if resume_enabled:
+        _write_extraction_state(
+            state_path,
+            {
+                "version": CHECKPOINT_VERSION,
+                "chunk_count": len(ordered_chunks),
+                "chunk_ids_hash": chunk_ids_hash,
+                "extracted_count": len(cached_results),
+                "extraction_complete": True,
+                "merged": False,
+            },
+        )
+    if resume_enabled and checkpoint_matches and not checkpoint_state.get("merged") and _graph_has_data(knowledge_graph_inst):
+        _clear_graph_for_checkpoint_rebuild(knowledge_graph_inst)
 
     maybe_nodes = defaultdict(list)
     maybe_edges = defaultdict(list)
-    for m_nodes, m_edges in results:
+    for chunk_id in ordered_chunk_ids:
+        cached_result = cached_results[chunk_id]
+        m_nodes = cached_result.get("nodes", {})
+        m_edges = cached_result.get("edges", {})
         for k, v in m_nodes.items():
             maybe_nodes[k].extend(v)
         for k, v in m_edges.items():
@@ -485,6 +708,19 @@ async def extract_entities(
             for dp in all_entities_data
         }
         await entity_vdb.upsert(data_for_vdb)
+
+    if resume_enabled:
+        _write_extraction_state(
+            state_path,
+            {
+                "version": CHECKPOINT_VERSION,
+                "chunk_count": len(ordered_chunks),
+                "chunk_ids_hash": chunk_ids_hash,
+                "extracted_count": len(cached_results),
+                "extraction_complete": True,
+                "merged": True,
+            },
+        )
 
     return knowledge_graph_inst
 

@@ -12,6 +12,7 @@ from .llm import (
 )
 from .operate import (
     chunking_by_token_size,
+    entity_extraction_checkpoint_pending,
     extract_entities,
     # local_query,global_query,hybrid_query,
     kg_query
@@ -277,21 +278,20 @@ class HyperGraphRAG:
             if isinstance(string_or_strings, str):
                 string_or_strings = [string_or_strings]
 
-            new_docs = {
+            all_docs = {
                 compute_mdhash_id(c.strip(), prefix="doc-"): {"content": c.strip()}
                 for c in string_or_strings
             }
-            _add_doc_keys = await self.full_docs.filter_keys(list(new_docs.keys()))
-            new_docs = {k: v for k, v in new_docs.items() if k in _add_doc_keys}
-            if not len(new_docs):
-                logger.warning("All docs are already in the storage")
-                return
-            update_storage = True
-            logger.info(f"[New Docs] inserting {len(new_docs)} docs")
+            _add_doc_keys = await self.full_docs.filter_keys(list(all_docs.keys()))
+            new_docs = {k: v for k, v in all_docs.items() if k in _add_doc_keys}
+            if len(new_docs):
+                logger.info(f"[New Docs] inserting {len(new_docs)} docs")
+            else:
+                logger.info("All docs are already in the storage")
 
-            inserting_chunks = {}
+            all_chunks = {}
             for doc_key, doc in tqdm_async(
-                new_docs.items(), desc="Chunking documents", unit="doc"
+                all_docs.items(), desc="Chunking documents", unit="doc"
             ):
                 chunks = {
                     compute_mdhash_id(dp["content"], prefix="chunk-"): {
@@ -305,23 +305,79 @@ class HyperGraphRAG:
                         tiktoken_model=self.tiktoken_model_name,
                     )
                 }
-                inserting_chunks.update(chunks)
-            _add_chunk_keys = await self.text_chunks.filter_keys(
-                list(inserting_chunks.keys())
-            )
-            inserting_chunks = {
-                k: v for k, v in inserting_chunks.items() if k in _add_chunk_keys
-            }
-            if not len(inserting_chunks):
-                logger.warning("All chunks are already in the storage")
+                all_chunks.update(chunks)
+            if not len(all_chunks):
+                logger.warning("No chunks were created from the input docs")
                 return
-            logger.info(f"[New Chunks] inserting {len(inserting_chunks)} chunks")
 
-            await self.chunks_vdb.upsert(inserting_chunks)
+            _add_text_chunk_keys = await self.text_chunks.filter_keys(
+                list(all_chunks.keys())
+            )
+            new_text_chunks = {
+                k: v for k, v in all_chunks.items() if k in _add_text_chunk_keys
+            }
+            _add_chunk_vector_keys = await self.chunks_vdb.filter_keys(
+                list(all_chunks.keys())
+            )
+            new_chunk_vectors = {
+                k: v for k, v in all_chunks.items() if k in _add_chunk_vector_keys
+            }
+            if len(new_text_chunks):
+                logger.info(f"[New Chunks] inserting {len(new_text_chunks)} chunks")
+            else:
+                logger.info("All text chunks are already in the storage")
+
+            if len(new_chunk_vectors):
+                await self.chunks_vdb.upsert(new_chunk_vectors)
+            else:
+                logger.info("All chunk vectors are already in the storage")
+
+            if len(new_docs):
+                await self.full_docs.upsert(new_docs)
+            if len(new_text_chunks):
+                await self.text_chunks.upsert(new_text_chunks)
+            if len(new_docs) or len(new_text_chunks) or len(new_chunk_vectors):
+                update_storage = True
+                await self._commit_storages(
+                    self.full_docs,
+                    self.text_chunks,
+                    self.chunks_vdb,
+                )
+
+            resume_enabled = bool(self.addon_params.get("resume"))
+            has_pending_checkpoint = (
+                entity_extraction_checkpoint_pending(
+                    self.working_dir,
+                    list(all_chunks.keys()),
+                )
+                if resume_enabled
+                else False
+            )
+            graph_has_data = self._graph_has_data()
+            if (
+                not len(new_docs)
+                and not len(new_text_chunks)
+                and not len(new_chunk_vectors)
+                and graph_has_data
+                and not has_pending_checkpoint
+            ):
+                logger.warning("All docs, chunks, vectors, and graph data are already in the storage")
+                return
+
+            if has_pending_checkpoint or not graph_has_data:
+                chunks_for_extraction = all_chunks
+            else:
+                new_chunk_ids = set(new_text_chunks) | set(new_chunk_vectors)
+                chunks_for_extraction = {
+                    k: v for k, v in all_chunks.items() if k in new_chunk_ids
+                }
+            if not len(chunks_for_extraction):
+                logger.warning("No chunks need entity extraction")
+                return
 
             logger.info("[Entity Extraction]...")
             maybe_new_kg = await extract_entities(
-                inserting_chunks,
+                chunks_for_extraction,
                 knowledge_graph_inst=self.chunk_entity_relation_graph,
                 entity_vdb=self.entities_vdb,
                 hyperedge_vdb=self.hyperedges_vdb,
@@ -331,12 +387,24 @@ class HyperGraphRAG:
                 logger.warning("No new hyperedges and entities found")
                 return
             self.chunk_entity_relation_graph = maybe_new_kg
-
-            await self.full_docs.upsert(new_docs)
-            await self.text_chunks.upsert(inserting_chunks)
+            update_storage = True
         finally:
             if update_storage:
                 await self._insert_done()
+
+    def _graph_has_data(self) -> bool:
+        graph = getattr(self.chunk_entity_relation_graph, "_graph", None)
+        if graph is None:
+            return False
+        return graph.number_of_nodes() > 0 or graph.number_of_edges() > 0
+
+    async def _commit_storages(self, *storage_instances):
+        tasks = []
+        for storage_inst in storage_instances:
+            if storage_inst is None:
+                continue
+            tasks.append(cast(StorageNameSpace, storage_inst).index_done_callback())
+        await asyncio.gather(*tasks)
 
     async def _insert_done(self):
         tasks = []

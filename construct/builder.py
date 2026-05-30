@@ -4,7 +4,6 @@ import argparse
 import json
 import os
 from dataclasses import dataclass
-from functools import partial
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -24,13 +23,21 @@ class ConstructConfig:
     base_url: str | None = None
     llm_model: str = "gpt-4o-mini"
     embedding_model: str = "text-embedding-3-small"
+    temperature: float = 0.0
     chunk_token_size: int = 1200
     chunk_overlap_token_size: int = 100
     tiktoken_model_name: str = "gpt-4o-mini"
     language: str | None = None
+    max_concurrency: int | None = None
+    llm_max_async: int = 16
+    embedding_max_async: int = 16
+    resume: bool = False
 
 
 def construct_hypergraph(config: ConstructConfig) -> dict[str, Any]:
+    _validate_positive("max_concurrency", config.max_concurrency, allow_none=True)
+    _validate_positive("llm_max_async", config.llm_max_async)
+    _validate_positive("embedding_max_async", config.embedding_max_async)
     contexts = read_contexts(
         config.input_path,
         input_format=config.input_format,
@@ -46,25 +53,39 @@ def construct_hypergraph(config: ConstructConfig) -> dict[str, Any]:
     from .hypergraphrag import HyperGraphRAG
     from .hypergraphrag.llm import openai_complete, openai_embedding
 
-    llm_kwargs = _compact_dict({"base_url": config.base_url, "api_key": config.api_key})
+    llm_kwargs = _compact_dict(
+        {
+            "base_url": config.base_url,
+            "api_key": config.api_key,
+            "temperature": config.temperature,
+        }
+    )
+    embedding_func = _make_openai_embedding_func(
+        openai_embedding,
+        model=config.embedding_model,
+        base_url=config.base_url,
+        api_key=config.api_key,
+        concurrent_limit=config.embedding_max_async,
+    )
     addon_params = {}
     if config.language:
         addon_params["language"] = config.language
+    if config.max_concurrency is not None:
+        addon_params["max_concurrency"] = config.max_concurrency
+    if config.resume:
+        addon_params["resume"] = True
 
     rag = HyperGraphRAG(
         working_dir=str(config.output_dir),
         llm_model_func=openai_complete,
         llm_model_name=config.llm_model,
         llm_model_kwargs=llm_kwargs,
-        embedding_func=partial(
-            openai_embedding,
-            model=config.embedding_model,
-            base_url=config.base_url,
-            api_key=config.api_key,
-        ),
+        embedding_func=embedding_func,
         chunk_token_size=config.chunk_token_size,
         chunk_overlap_token_size=config.chunk_overlap_token_size,
         tiktoken_model_name=config.tiktoken_model_name,
+        llm_model_max_async=config.llm_max_async,
+        embedding_func_max_async=config.embedding_max_async,
         addon_params=addon_params,
     )
     rag.insert(contexts)
@@ -169,6 +190,34 @@ def _coerce_text(value: Any) -> str:
     return str(value).strip()
 
 
+def _make_openai_embedding_func(
+    openai_embedding_func: Any,
+    *,
+    model: str,
+    base_url: str | None,
+    api_key: str | None,
+    concurrent_limit: int,
+) -> Any:
+    from .hypergraphrag.utils import EmbeddingFunc
+
+    raw_embedding_func = getattr(openai_embedding_func, "func", openai_embedding_func)
+
+    async def embedding(texts: list[str]):
+        return await raw_embedding_func(
+            texts,
+            model=model,
+            base_url=base_url,
+            api_key=api_key,
+        )
+
+    return EmbeddingFunc(
+        embedding_dim=getattr(openai_embedding_func, "embedding_dim", 1536),
+        max_token_size=getattr(openai_embedding_func, "max_token_size", 8192),
+        func=embedding,
+        concurrent_limit=concurrent_limit,
+    )
+
+
 def _resolve_input_format(path: Path, input_format: str) -> str:
     if input_format != "auto":
         return input_format
@@ -195,6 +244,13 @@ def _compact_dict(payload: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in payload.items() if value is not None}
 
 
+def _validate_positive(name: str, value: int | None, *, allow_none: bool = False) -> None:
+    if value is None and allow_none:
+        return
+    if value is None or value <= 0:
+        raise ValueError(f"{name} must be a positive integer.")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Construct a HyperBranch hypergraph with the HyperRAG method.")
     parser.add_argument("--input", required=True, help="Input corpus file: .jsonl, .json, or .txt.")
@@ -211,10 +267,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--base-url", default=None, help="OpenAI-compatible base URL. Prefer OPENAI_BASE_URL.")
     parser.add_argument("--llm-model", default="gpt-4o-mini")
     parser.add_argument("--embedding-model", default="text-embedding-3-small")
+    parser.add_argument("--temperature", type=float, default=0.0, help="LLM sampling temperature for graph construction.")
     parser.add_argument("--chunk-token-size", type=int, default=1200)
     parser.add_argument("--chunk-overlap-token-size", type=int, default=100)
     parser.add_argument("--tiktoken-model-name", default="gpt-4o-mini")
     parser.add_argument("--language", default=None, help="Optional extraction language hint.")
+    parser.add_argument("--max-concurrency", type=int, default=None, help="Max chunk extraction tasks in flight.")
+    parser.add_argument("--llm-max-async", type=int, default=16, help="Max concurrent LLM calls.")
+    parser.add_argument("--embedding-max-async", type=int, default=16, help="Max concurrent embedding calls.")
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Enable checkpoint files for resumable entity extraction. Disabled by default to match standard dataset outputs.",
+    )
     return parser.parse_args()
 
 
@@ -233,10 +298,15 @@ def main() -> int:
         base_url=args.base_url,
         llm_model=args.llm_model,
         embedding_model=args.embedding_model,
+        temperature=args.temperature,
         chunk_token_size=args.chunk_token_size,
         chunk_overlap_token_size=args.chunk_overlap_token_size,
         tiktoken_model_name=args.tiktoken_model_name,
         language=args.language,
+        max_concurrency=args.max_concurrency,
+        llm_max_async=args.llm_max_async,
+        embedding_max_async=args.embedding_max_async,
+        resume=args.resume,
     )
     summary = construct_hypergraph(config)
     print(json.dumps(summary, indent=2, ensure_ascii=True))

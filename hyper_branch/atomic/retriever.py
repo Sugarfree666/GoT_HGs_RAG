@@ -2,13 +2,39 @@ from __future__ import annotations
 
 import logging
 from collections import defaultdict
+from dataclasses import dataclass
 from typing import Any
 
 from ..config import RetrievalConfig
 from ..data.loaders import DatasetBundle
+from ..llm.service import AtomicLLMService
 from ..models import VectorMatch
 from ..utils import lexical_overlap_score, normalize_label, short_text
 from .models import AtomicQuestionAnalysis, BranchHit
+
+
+@dataclass(slots=True)
+class AnchorEntityMatch:
+    query_index: int
+    query_entity: str
+    entity_id: str
+    match_type: str
+    link_score: float
+    vector_score: float | None = None
+    llm_confidence: float | None = None
+    candidate_rank: int | None = None
+
+    def to_metadata(self) -> dict[str, Any]:
+        return {
+            "query_entity": self.query_entity,
+            "matched_entity": normalize_label(self.entity_id),
+            "matched_entity_id": self.entity_id,
+            "match_type": self.match_type,
+            "link_score": self.link_score,
+            "vector_score": self.vector_score,
+            "llm_confidence": self.llm_confidence,
+            "candidate_rank": self.candidate_rank,
+        }
 
 
 class AtomicHyperedgeRetriever:
@@ -17,11 +43,13 @@ class AtomicHyperedgeRetriever:
         dataset: DatasetBundle,
         embedder: Any,
         config: RetrievalConfig,
+        llm_service: AtomicLLMService | None = None,
         logger: logging.Logger | None = None,
     ) -> None:
         self.dataset = dataset
         self.embedder = embedder
         self.config = config
+        self.llm_service = llm_service
         self.logger = logger or logging.getLogger(__name__)
         self._entity_ids = [
             node_id for node_id, node in self.dataset.graph.nodes.items() if getattr(node, "role", "") == "entity"
@@ -34,7 +62,7 @@ class AtomicHyperedgeRetriever:
 
     def retrieve(self, question: str, analysis: AtomicQuestionAnalysis) -> list[BranchHit]:
         hits = [
-            *self.retrieve_anchor_branch(analysis),
+            *self.retrieve_anchor_branch(question, analysis),
             *self.retrieve_relation_branch(analysis),
             *self.retrieve_semantic_branch(question),
         ]
@@ -45,24 +73,56 @@ class AtomicHyperedgeRetriever:
         )
         return hits
 
-    def retrieve_anchor_branch(self, analysis: AtomicQuestionAnalysis) -> list[BranchHit]:
+    def retrieve_anchor_branch(self, question: str, analysis: AtomicQuestionAnalysis) -> list[BranchHit]:
         if not analysis.entities:
             return []
 
-        hits: dict[str, BranchHit] = {}
+        query_entities = [
+            (index, normalize_label(str(entity)))
+            for index, entity in enumerate(analysis.entities)
+            if normalize_label(str(entity))
+        ]
+        if not query_entities:
+            return []
+
+        hyperedge_scores: dict[str, dict[int, float]] = defaultdict(dict)
+        hyperedge_matches: dict[str, dict[int, dict[str, Any]]] = defaultdict(dict)
         max_per_entity = getattr(self.config, "max_anchor_hyperedges_per_entity", None)
-        for entity in analysis.entities:
-            hyperedge_ids = self._anchor_hyperedges_for_entity(entity)
-            if isinstance(max_per_entity, int) and max_per_entity > 0:
-                hyperedge_ids = hyperedge_ids[:max_per_entity]
-            for hyperedge_id in hyperedge_ids:
-                hit = self._hit_from_hyperedge(
+
+        for query_index, entity in query_entities:
+            matches = self._resolve_anchor_entity_matches(
+                question=question,
+                entity=entity,
+                analysis=analysis,
+                query_index=query_index,
+            )
+            for match in matches:
+                hyperedge_ids = self.dataset.graph.entity_hyperedge_ids(match.entity_id)
+                if isinstance(max_per_entity, int) and max_per_entity > 0:
+                    hyperedge_ids = hyperedge_ids[:max_per_entity]
+                for hyperedge_id in hyperedge_ids:
+                    current_score = hyperedge_scores[hyperedge_id].get(query_index)
+                    if current_score is None or match.link_score > current_score:
+                        hyperedge_scores[hyperedge_id][query_index] = match.link_score
+                        hyperedge_matches[hyperedge_id][query_index] = match.to_metadata()
+
+        denominator = len(query_entities)
+        hits: list[BranchHit] = []
+        for hyperedge_id, scores_by_query in hyperedge_scores.items():
+            raw_score = sum(scores_by_query.values()) / max(denominator, 1)
+            anchor_matches = [
+                hyperedge_matches[hyperedge_id][query_index]
+                for query_index in sorted(hyperedge_matches[hyperedge_id])
+            ]
+            hits.append(
+                self._hit_from_hyperedge(
                     hyperedge_id=hyperedge_id,
                     branch="anchor",
-                    raw_score=self._anchor_raw_score(analysis.entities, hyperedge_id),
+                    raw_score=raw_score,
+                    extra_metadata={"anchor_matches": anchor_matches},
                 )
-                hits[hyperedge_id] = hit
-        return list(hits.values())
+            )
+        return hits
 
     def retrieve_relation_branch(self, analysis: AtomicQuestionAnalysis) -> list[BranchHit]:
         query = analysis.relation_query or " ".join(analysis.relations)
@@ -82,16 +142,6 @@ class AtomicHyperedgeRetriever:
                 if hyperedge_id not in seen:
                     seen.add(hyperedge_id)
                     hyperedge_ids.append(hyperedge_id)
-
-        if hyperedge_ids:
-            return hyperedge_ids
-
-        normalized_entity = normalize_label(entity).lower()
-        for hyperedge_id in self._hyperedge_ids:
-            if normalized_entity and normalized_entity in normalize_label(hyperedge_id).lower():
-                if hyperedge_id not in seen:
-                    seen.add(hyperedge_id)
-                    hyperedge_ids.append(hyperedge_id)
         return hyperedge_ids
 
     def _resolve_entity_ids(self, entity: str) -> list[str]:
@@ -103,12 +153,155 @@ class AtomicHyperedgeRetriever:
         if exact:
             return list(exact)
 
-        matches: list[str] = []
-        for entity_id in self._entity_ids:
-            candidate = normalize_label(entity_id).lower()
-            if normalized in candidate or candidate in normalized:
-                matches.append(entity_id)
-        return matches
+        return []
+
+    def _resolve_anchor_entity_matches(
+        self,
+        question: str,
+        entity: str,
+        analysis: AtomicQuestionAnalysis,
+        query_index: int,
+    ) -> list[AnchorEntityMatch]:
+        exact_entity_ids = self._resolve_entity_ids(entity)
+        if exact_entity_ids:
+            return [
+                AnchorEntityMatch(
+                    query_index=query_index,
+                    query_entity=entity,
+                    entity_id=entity_id,
+                    match_type="exact",
+                    link_score=1.0,
+                )
+                for entity_id in exact_entity_ids
+            ]
+
+        candidates = self._anchor_entity_vector_candidates(entity)
+        if not candidates:
+            return []
+
+        selected = self._select_anchor_entity_with_llm(
+            question=question,
+            entity=entity,
+            analysis=analysis,
+            candidates=candidates,
+        )
+        if selected is None:
+            return []
+
+        return [
+            AnchorEntityMatch(
+                query_index=query_index,
+                query_entity=entity,
+                entity_id=str(selected["entity_id"]),
+                match_type="vector_llm",
+                link_score=float(selected["vector_score"]),
+                vector_score=float(selected["vector_score"]),
+                llm_confidence=float(selected["llm_confidence"]),
+                candidate_rank=int(selected["candidate_rank"]),
+            )
+        ]
+
+    def _anchor_entity_vector_candidates(self, entity: str) -> list[dict[str, Any]]:
+        matches = self._query_entity_store(entity, int(getattr(self.config, "anchor_entity_top_k", 3)))
+        candidates: list[dict[str, Any]] = []
+        seen: set[str] = set()
+        for rank, match in enumerate(matches, start=1):
+            entity_id = self._resolve_entity_id_from_vector_match(match)
+            if not entity_id or entity_id in seen:
+                continue
+            seen.add(entity_id)
+            candidates.append(
+                {
+                    "entity_id": entity_id,
+                    "label": normalize_label(entity_id),
+                    "vector_score": float(match.score),
+                    "candidate_rank": rank,
+                    "source_label": normalize_label(match.label),
+                    "source_item_id": match.item_id,
+                }
+            )
+        return candidates
+
+    def _query_entity_store(self, entity: str, top_k: int) -> list[VectorMatch]:
+        if top_k <= 0:
+            return []
+        if self.embedder is None or not hasattr(self.embedder, "embed_texts"):
+            return []
+        store = getattr(self.dataset, "entity_store", None)
+        if store is None or not hasattr(store, "query"):
+            return []
+        try:
+            vectors = self.embedder.embed_texts([entity], stage="atomic_anchor_entity_retrieval")
+            if not vectors:
+                return []
+            return list(store.query(vectors[0], top_k=top_k))
+        except (TypeError, ValueError):
+            return []
+
+    def _resolve_entity_id_from_vector_match(self, match: VectorMatch) -> str | None:
+        metadata = match.metadata if isinstance(match.metadata, dict) else {}
+        raw_candidates = [
+            match.label,
+            match.item_id,
+            metadata.get("entity_name"),
+            metadata.get("__id__"),
+            metadata.get("name"),
+        ]
+        for raw_candidate in raw_candidates:
+            if raw_candidate is None:
+                continue
+            candidate = str(raw_candidate).strip()
+            if not candidate:
+                continue
+            node = self.dataset.graph.nodes.get(candidate)
+            if node is not None and getattr(node, "role", "") == "entity":
+                return candidate
+            normalized = normalize_label(candidate).lower()
+            mapped = self._entity_lookup.get(normalized, [])
+            if mapped:
+                return mapped[0]
+        return None
+
+    def _select_anchor_entity_with_llm(
+        self,
+        question: str,
+        entity: str,
+        analysis: AtomicQuestionAnalysis,
+        candidates: list[dict[str, Any]],
+    ) -> dict[str, Any] | None:
+        if self.llm_service is None or not hasattr(self.llm_service, "select_anchor_entity"):
+            return None
+        try:
+            response = self.llm_service.select_anchor_entity(question, entity, analysis, candidates)
+        except Exception as exc:  # pragma: no cover - defensive guard for external LLM failures
+            self.logger.warning("Anchor entity selector failed for %s: %s", short_text(entity, 80), exc)
+            return None
+
+        if not isinstance(response, dict):
+            return None
+        selected_entity_id = str(response.get("selected_entity_id", "NONE")).strip()
+        if not selected_entity_id or selected_entity_id.upper() == "NONE":
+            return None
+
+        try:
+            confidence = float(response.get("confidence", 0.0) or 0.0)
+        except (TypeError, ValueError):
+            return None
+        min_confidence = float(getattr(self.config, "anchor_entity_llm_min_confidence", 0.6))
+        if confidence < min_confidence:
+            return None
+
+        candidates_by_id = {str(candidate["entity_id"]): candidate for candidate in candidates}
+        selected = candidates_by_id.get(selected_entity_id)
+        if selected is None:
+            return None
+
+        return {
+            "entity_id": selected["entity_id"],
+            "vector_score": float(selected["vector_score"]),
+            "llm_confidence": confidence,
+            "candidate_rank": int(selected["candidate_rank"]),
+        }
 
     def _vector_or_lexical_hyperedge_hits(self, query: str, branch: str, top_k: int) -> list[BranchHit]:
         query = str(query or "").strip()
@@ -179,6 +372,7 @@ class AtomicHyperedgeRetriever:
         branch: str,
         raw_score: float,
         match_metadata: dict[str, Any] | None = None,
+        extra_metadata: dict[str, Any] | None = None,
     ) -> BranchHit:
         description = self.dataset.graph.describe_hyperedge(hyperedge_id)
         hyperedge_text = normalize_label(str(description.get("hyperedge_text") or hyperedge_id))
@@ -191,6 +385,8 @@ class AtomicHyperedgeRetriever:
         }
         if match_metadata:
             metadata["vector_metadata"] = match_metadata
+        if extra_metadata:
+            metadata.update(extra_metadata)
         return BranchHit(
             hyperedge_id=hyperedge_id,
             branch=branch,  # type: ignore[arg-type]
@@ -200,19 +396,6 @@ class AtomicHyperedgeRetriever:
             chunk_ids=chunk_ids,
             metadata=metadata,
         )
-
-    def _anchor_raw_score(self, entities: list[str], hyperedge_id: str) -> float:
-        normalized_entities = [normalize_label(entity).lower() for entity in entities if normalize_label(entity)]
-        if not normalized_entities:
-            return 0.0
-        description = self.dataset.graph.describe_hyperedge(hyperedge_id)
-        entity_ids = [normalize_label(str(item)).lower() for item in description.get("entity_ids", [])]
-        hyperedge_text = normalize_label(str(description.get("hyperedge_text") or hyperedge_id)).lower()
-        matched = 0
-        for entity in normalized_entities:
-            if entity in entity_ids or entity in hyperedge_text:
-                matched += 1
-        return matched / max(len(normalized_entities), 1)
 
     def _evidence_texts(self, hyperedge_text: str, chunk_ids: list[str]) -> list[str]:
         texts = [hyperedge_text] if hyperedge_text else []

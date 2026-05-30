@@ -44,7 +44,11 @@ class AtomicEvidenceFusion:
         scored_items: list[tuple[FusedHyperedgeCandidate, list[BranchHit]]] = []
         for hyperedge_id, group_hits in grouped.items():
             candidate = self._candidate_from_hits(hyperedge_id, group_hits)
-            candidate.anchor_score = self.anchor_score(analysis.entities, candidate)
+            raw_anchor = _branch_raw_score(group_hits, "anchor")
+            if raw_anchor is not None:
+                candidate.anchor_score = raw_anchor
+            else:
+                candidate.anchor_score = self.anchor_score(analysis.entities, candidate)
             scored_items.append((candidate, group_hits))
 
         self._score_relation_and_semantic_candidates(question, analysis, scored_items)
@@ -80,10 +84,9 @@ class AtomicEvidenceFusion:
         if not query_entities:
             return 0.0
         hyperedge_entities = {normalize_label(entity_id).lower() for entity_id in candidate.entity_ids}
-        hyperedge_text = normalize_label(candidate.hyperedge_text).lower()
         matched = 0
         for entity in query_entities:
-            if entity in hyperedge_entities or entity in hyperedge_text:
+            if entity in hyperedge_entities:
                 matched += 1
         return matched / max(len(query_entities), 1)
 

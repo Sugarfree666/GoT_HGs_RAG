@@ -44,6 +44,16 @@ class AtomicLLMService(ABC):
     ) -> dict[str, Any]:
         raise NotImplementedError
 
+    @abstractmethod
+    def select_anchor_entity(
+        self,
+        question: str,
+        mention: str,
+        analysis: Any,
+        candidates: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        raise NotImplementedError
+
 
 class OpenAIAtomicLLMService(AtomicLLMService):
     def __init__(self, client: OpenAICompatibleClient, prompts: PromptManager) -> None:
@@ -134,6 +144,29 @@ class OpenAIAtomicLLMService(AtomicLLMService):
         response.setdefault("answer", "")
         response.setdefault("confidence", synthesis_candidate.get("confidence", 0.0))
         response.setdefault("answer_span_reasoning", "")
+        return response
+
+    def select_anchor_entity(
+        self,
+        question: str,
+        mention: str,
+        analysis: Any,
+        candidates: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        response = self.client.chat_json(
+            "anchor_entity_selection",
+            self.prompts.get("anchor_entity_selection"),
+            {
+                "question": question,
+                "mention": mention,
+                "analysis": _analysis_payload(analysis),
+                "candidate_entities": candidates,
+            },
+            max_tokens=300,
+        )
+        response.setdefault("selected_entity_id", "NONE")
+        response.setdefault("confidence", 0.0)
+        response.setdefault("reason", "")
         return response
 
 
@@ -254,6 +287,27 @@ class MockAtomicLLMService(AtomicLLMService):
             "answer_span_reasoning": "Mock final span mirrors the candidate answer.",
         }
 
+    def select_anchor_entity(
+        self,
+        question: str,
+        mention: str,
+        analysis: Any,
+        candidates: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        del question, mention, analysis
+        if not candidates:
+            return {
+                "selected_entity_id": "NONE",
+                "confidence": 0.0,
+                "reason": "No candidates were provided.",
+            }
+        selected = str(candidates[0].get("entity_id", "")).strip()
+        return {
+            "selected_entity_id": selected or "NONE",
+            "confidence": 1.0 if selected else 0.0,
+            "reason": "Deterministic mock selects the first candidate.",
+        }
+
 
 def _extract_topic_phrases(question: str) -> list[str]:
     cleaned = question.replace("?", " ").replace(",", " ").replace(";", " ")
@@ -327,3 +381,21 @@ def _dedupe_texts(values: list[str]) -> list[str]:
         if text and text not in deduped:
             deduped.append(text)
     return deduped
+
+
+def _analysis_payload(analysis: Any) -> dict[str, Any]:
+    if hasattr(analysis, "to_dict") and callable(analysis.to_dict):
+        payload = dict(analysis.to_dict())
+    elif isinstance(analysis, dict):
+        payload = dict(analysis)
+    else:
+        payload = {
+            "entities": getattr(analysis, "entities", []),
+            "relations": getattr(analysis, "relations", []),
+            "relation_query": getattr(analysis, "relation_query", ""),
+        }
+    return {
+        "entities": [str(item) for item in ensure_list(payload.get("entities", []))],
+        "relations": [str(item) for item in ensure_list(payload.get("relations", []))],
+        "relation_query": str(payload.get("relation_query", "") or ""),
+    }

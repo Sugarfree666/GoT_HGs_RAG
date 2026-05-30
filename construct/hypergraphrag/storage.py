@@ -137,6 +137,14 @@ class NanoVectorDBStorage(BaseVectorStorage):
     def client_storage(self):
         return getattr(self._client, "_NanoVectorDB__storage")
 
+    async def filter_keys(self, data: list[str]) -> set[str]:
+        existing = {
+            row.get("__id__")
+            for row in self.client_storage.get("data", [])
+            if row.get("__id__")
+        }
+        return {item for item in data if item not in existing}
+
     async def delete_entity(self, entity_name: str):
         try:
             entity_id = [compute_mdhash_id(entity_name, prefix="ent-")]

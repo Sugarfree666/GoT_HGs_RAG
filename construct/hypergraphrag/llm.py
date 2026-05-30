@@ -38,10 +38,16 @@ else:
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 
+class EmptyLLMResponseError(RuntimeError):
+    """Raised when an OpenAI-compatible endpoint returns no message content."""
+
+
 @retry(
     stop=stop_after_attempt(3),
     wait=wait_exponential(multiplier=1, min=4, max=10),
-    retry=retry_if_exception_type((RateLimitError, APIConnectionError, Timeout)),
+    retry=retry_if_exception_type(
+        (RateLimitError, APIConnectionError, Timeout, EmptyLLMResponseError)
+    ),
 )
 async def openai_complete_if_cache(
     model,
@@ -93,7 +99,12 @@ async def openai_complete_if_cache(
 
         return inner()
     else:
-        content = response.choices[0].message.content
+        choice = response.choices[0]
+        content = choice.message.content
+        if content is None:
+            finish_reason = getattr(choice, "finish_reason", None)
+            logger.warning("Empty LLM response content. finish_reason=%s", finish_reason)
+            raise EmptyLLMResponseError("OpenAI-compatible endpoint returned empty message content.")
         if r"\u" in content:
             content = safe_unicode_decode(content.encode("utf-8"))
         return content
@@ -102,7 +113,9 @@ async def openai_complete_if_cache(
 @retry(
     stop=stop_after_attempt(3),
     wait=wait_exponential(multiplier=1, min=4, max=10),
-    retry=retry_if_exception_type((RateLimitError, APIConnectionError, Timeout)),
+    retry=retry_if_exception_type(
+        (RateLimitError, APIConnectionError, Timeout, EmptyLLMResponseError)
+    ),
 )
 async def azure_openai_complete_if_cache(
     model,
@@ -137,7 +150,12 @@ async def azure_openai_complete_if_cache(
     response = await openai_async_client.chat.completions.create(
         model=model, messages=messages, **kwargs
     )
-    content = response.choices[0].message.content
+    choice = response.choices[0]
+    content = choice.message.content
+    if content is None:
+        finish_reason = getattr(choice, "finish_reason", None)
+        logger.warning("Empty Azure OpenAI response content. finish_reason=%s", finish_reason)
+        raise EmptyLLMResponseError("Azure OpenAI endpoint returned empty message content.")
 
     return content
 

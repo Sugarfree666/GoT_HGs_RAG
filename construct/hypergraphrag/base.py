@@ -60,6 +60,10 @@ class BaseVectorStorage(StorageNameSpace):
         """
         raise NotImplementedError
 
+    async def filter_keys(self, data: list[str]) -> set[str]:
+        """return un-exist keys"""
+        raise NotImplementedError
+
 
 @dataclass
 class BaseKVStorage(Generic[T], StorageNameSpace):
