@@ -29,6 +29,8 @@ class RuntimeConfig:
 class RetrievalConfig:
     relation_top_k: int = 10
     semantic_top_k: int = 10
+    semantic_chunk_top_k: int = 10
+    max_semantic_hyperedges_per_chunk: int | None = 20
     evidence_top_k: int = 5
     max_anchor_hyperedges_per_entity: int | None = None
     anchor_entity_top_k: int = 3
@@ -91,6 +93,8 @@ def load_config(config_path: Path, project_root: Path) -> Config:
     retrieval_cfg = RetrievalConfig(
         relation_top_k=int(retrieval.get("relation_top_k", 10)),
         semantic_top_k=int(retrieval.get("semantic_top_k", 10)),
+        semantic_chunk_top_k=int(retrieval.get("semantic_chunk_top_k", 10)),
+        max_semantic_hyperedges_per_chunk=_optional_int(retrieval.get("max_semantic_hyperedges_per_chunk", 20)),
         evidence_top_k=int(retrieval.get("evidence_top_k", 5)),
         max_anchor_hyperedges_per_entity=_optional_int(retrieval.get("max_anchor_hyperedges_per_entity")),
         anchor_entity_top_k=int(retrieval.get("anchor_entity_top_k", 3)),

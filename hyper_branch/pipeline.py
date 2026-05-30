@@ -55,6 +55,7 @@ class HyperBranchPipeline:
             config=config.retrieval,
             embedder=self.embedder,
             hyperedge_store=self.dataset.hyperedge_store,
+            chunk_store=self.dataset.chunk_store,
         )
         composer = FinalAnswerComposer(llm_service=self.llm_service)
         self.executor = AtomicDagExecutor(
