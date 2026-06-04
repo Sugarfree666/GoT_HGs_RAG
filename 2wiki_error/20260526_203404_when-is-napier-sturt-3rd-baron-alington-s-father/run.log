@@ -1,9 +1,0 @@
-2026-05-26 20:34:04,251 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 20:35:07,827 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 20:35:07,827 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 20:35:20,811 | INFO | Starting HyperBranch pipeline for question: When is Napier Sturt, 3Rd Baron Alington's father's birthday?
-2026-05-26 20:35:20,811 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 20:35:26,566 | INFO | Atomic retrieval returned 21 hits for question=Who is the father of Napier Sturt?
-2026-05-26 20:35:53,403 | INFO | Rewrote retrieval question for q2: When is the birthday of the father of Napier Sturt? -> When is the birthday of Henry Sturt?
-2026-05-26 20:36:00,971 | INFO | Atomic retrieval returned 24 hits for question=When is the birthday of Henry Sturt?
-2026-05-26 20:36:20,009 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_203404_when-is-napier-sturt-3rd-baron-alington-s-father

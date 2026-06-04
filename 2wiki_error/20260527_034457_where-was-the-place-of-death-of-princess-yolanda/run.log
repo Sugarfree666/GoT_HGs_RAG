@@ -1,9 +1,0 @@
-2026-05-27 03:44:57,024 | INFO | Generating atomic question DAG with DEPO.
-2026-05-27 03:46:07,100 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-27 03:46:07,100 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-27 03:46:19,692 | INFO | Starting HyperBranch pipeline for question: Where was the place of death of Princess Yolanda Of Savoy's father?
-2026-05-27 03:46:19,692 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-27 03:46:25,550 | INFO | Atomic retrieval returned 22 hits for question=Who is the father of Princess Yolanda Of Savoy?
-2026-05-27 03:46:29,385 | INFO | Rewrote retrieval question for q2: Where was the father of Princess Yolanda Of Savoy buried? -> Where was King Victor Emmanuel III buried?
-2026-05-27 03:46:33,707 | INFO | Atomic retrieval returned 21 hits for question=Where was King Victor Emmanuel III buried?
-2026-05-27 03:47:10,115 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_034457_where-was-the-place-of-death-of-princess-yolanda

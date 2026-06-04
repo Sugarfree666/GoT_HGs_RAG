@@ -1,9 +1,0 @@
-2026-05-27 01:29:05,377 | INFO | Generating atomic question DAG with DEPO.
-2026-05-27 01:30:29,310 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-27 01:30:29,311 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-27 01:30:41,881 | INFO | Starting HyperBranch pipeline for question: What nationality is the performer of song Mimi (Song)?
-2026-05-27 01:30:41,882 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-27 01:30:46,450 | INFO | Atomic retrieval returned 23 hits for question=Who is the performer of the song Mimi?
-2026-05-27 01:30:53,070 | INFO | Rewrote retrieval question for q2: What is the nationality of the performer of Mimi? -> What is the nationality of Sergio Franchi?
-2026-05-27 01:30:59,568 | INFO | Atomic retrieval returned 22 hits for question=What is the nationality of Sergio Franchi?
-2026-05-27 01:31:22,719 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_012905_what-nationality-is-the-performer-of-song-mimi-s

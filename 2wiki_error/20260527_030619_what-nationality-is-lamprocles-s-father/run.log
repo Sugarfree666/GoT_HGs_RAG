@@ -1,9 +1,0 @@
-2026-05-27 03:06:19,026 | INFO | Generating atomic question DAG with DEPO.
-2026-05-27 03:07:06,929 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-27 03:07:06,929 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-27 03:07:19,400 | INFO | Starting HyperBranch pipeline for question: What nationality is Lamprocles's father?
-2026-05-27 03:07:19,400 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-27 03:07:23,384 | INFO | Atomic retrieval returned 22 hits for question=Who is the father of Lamprocles?
-2026-05-27 03:07:31,318 | INFO | Rewrote retrieval question for q2: What is the nationality of the father of Lamprocles? -> What is the nationality of Socrates?
-2026-05-27 03:07:37,211 | INFO | Atomic retrieval returned 24 hits for question=What is the nationality of Socrates?
-2026-05-27 03:08:15,811 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_030619_what-nationality-is-lamprocles-s-father

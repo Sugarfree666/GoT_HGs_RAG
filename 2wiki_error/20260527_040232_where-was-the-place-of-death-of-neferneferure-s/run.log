@@ -1,9 +1,0 @@
-2026-05-27 04:02:32,413 | INFO | Generating atomic question DAG with DEPO.
-2026-05-27 04:03:09,280 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-27 04:03:09,280 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-27 04:03:21,775 | INFO | Starting HyperBranch pipeline for question: Where was the place of death of Neferneferure's mother?
-2026-05-27 04:03:21,775 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-27 04:03:28,281 | INFO | Atomic retrieval returned 21 hits for question=Who is the mother of Neferneferure?
-2026-05-27 04:03:31,692 | INFO | Rewrote retrieval question for q2: Where did the mother of Neferneferure die? -> Where did Nefertiti die?
-2026-05-27 04:03:36,216 | INFO | Atomic retrieval returned 23 hits for question=Where did Nefertiti die?
-2026-05-27 04:04:15,321 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_040232_where-was-the-place-of-death-of-neferneferure-s

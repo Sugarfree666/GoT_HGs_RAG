@@ -1,9 +1,0 @@
-2026-05-26 22:55:14,445 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 22:57:10,515 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 22:57:10,516 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 22:57:25,578 | INFO | Starting HyperBranch pipeline for question: Which film has the director died first, Ask A Policeman or The Half-Naked Truth?
-2026-05-26 22:57:25,578 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 22:57:31,155 | INFO | Atomic retrieval returned 21 hits for question=Who is the director of Ask A Policeman?
-2026-05-26 22:57:35,262 | INFO | Rewrote retrieval question for q2: When did the director of Ask A Policeman die? -> When did Marcel Varnel die?
-2026-05-26 22:57:43,357 | INFO | Atomic retrieval returned 24 hits for question=When did Marcel Varnel die?
-2026-05-26 22:57:59,932 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_225514_which-film-has-the-director-died-first-ask-a-pol

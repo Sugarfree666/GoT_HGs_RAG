@@ -1,9 +1,0 @@
-2026-05-26 22:25:05,641 | INFO | Generating atomic question DAG with DEPO.
-2026-05-26 22:26:29,090 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-26 22:26:29,090 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-26 22:26:50,841 | INFO | Starting HyperBranch pipeline for question: What nationality is Lord Frederick Cavendish-Bentinck's father?
-2026-05-26 22:26:50,842 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-26 22:26:56,137 | INFO | Atomic retrieval returned 21 hits for question=Who is the father of Lord Frederick Cavendish-Bentinck?
-2026-05-26 22:27:01,913 | INFO | Rewrote retrieval question for q2: What is the nationality of the father of Lord Frederick Cavendish-Bentinck? -> What is the nationality of William Cavendish-Bentinck, 3rd Duke of Portland?
-2026-05-26 22:27:21,260 | INFO | Atomic retrieval returned 21 hits for question=What is the nationality of William Cavendish-Bentinck, 3rd Duke of Portland?
-2026-05-26 22:28:03,106 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260526_222505_what-nationality-is-lord-frederick-cavendish-ben

@@ -1,9 +1,0 @@
-2026-05-27 02:57:15,993 | INFO | Generating atomic question DAG with DEPO.
-2026-05-27 02:58:25,708 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
-2026-05-27 02:58:25,709 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
-2026-05-27 02:58:38,061 | INFO | Starting HyperBranch pipeline for question: Where did Elisa Godínez Gómez De Batista's husband die?
-2026-05-27 02:58:38,061 | INFO | Executing atomic DAG with 2 node(s)
-2026-05-27 02:58:43,226 | INFO | Atomic retrieval returned 21 hits for question=Who is the husband of Elisa Godínez Gómez De Batista?
-2026-05-27 02:59:01,537 | INFO | Rewrote retrieval question for q2: Where did the husband of Elisa Godínez Gómez De Batista die? -> Where did Fulgencio Batista die?
-2026-05-27 02:59:06,618 | INFO | Atomic retrieval returned 24 hits for question=Where did Fulgencio Batista die?
-2026-05-27 02:59:25,073 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\2wikimultihopqa\20260527_025715_where-did-elisa-godinez-gomez-de-batista-s-husba
