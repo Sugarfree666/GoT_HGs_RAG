@@ -37,18 +37,16 @@ def main() -> int:
     )
     print(
         "overall="
+        f"EM:{fmt_score(overall.get('em'))} "
         f"F1:{fmt_score(overall.get('f1'))} "
-        f"R-S:{fmt_score(overall.get('r_s'))} "
-        f"G-E:{fmt_score(overall.get('g_e'))}"
     )
 
     for nhops, metrics in sorted(by_nhops.items(), key=lambda item: int(item[0])):
         print(
             f"nhops={nhops} "
             f"count={metrics.get('count', 0)} "
+            f"EM:{fmt_score(metrics.get('em'))} "
             f"F1:{fmt_score(metrics.get('f1'))} "
-            f"R-S:{fmt_score(metrics.get('r_s'))} "
-            f"G-E:{fmt_score(metrics.get('g_e'))}"
         )
 
     return 0

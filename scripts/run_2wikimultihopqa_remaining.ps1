@@ -197,10 +197,7 @@ if (-not $SkipEval) {
         --runs-dir $RunsDir `
         --start-index $EvalStartIndex `
         --limit $EvalLimit `
-        --output-dir $EvalDir `
-        --workers 1 `
-        --skip-rsim `
-        --skip-gen
+        --output-dir $EvalDir
 }
 
 Write-Host "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] finished"

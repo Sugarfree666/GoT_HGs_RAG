@@ -17,6 +17,240 @@ ALLOWED_OPERATORS = [
     "LOGICAL_OR",
 ]
 
+CANDIDATE_NODES_AND_FRAME_SYSTEM = """
+You are implementing the DEPO path-projection pipeline after CoreNLP parsing.
+
+Current step: produce a high-recall candidate node pool and a Problem Frame.
+
+The candidate node pool is not the final AST.
+You may include noisy but potentially useful candidate nodes such as type qualifiers,
+operator cues, role nouns, value slots, coreference mentions, and constraints.
+
+Do not generate a full AST.
+Do not generate selected paths.
+Do not generate atomic questions.
+Return valid JSON only.
+""".strip()
+
+
+def build_candidate_nodes_and_frame_prompt(
+    question: str,
+    restored_question: str,
+    graph_nodes: list[dict[str, object]],
+) -> str:
+    schema = {
+        "candidate_nodes": [
+            {
+                "id": "n1",
+                "text": "MovieA",
+                "kind": "entity",
+                "graph_node_ids": ["4"],
+                "confidence": 1.0,
+            }
+        ],
+        "problem_frame": {
+            "operator": "COMPARE_SAME",
+            "answer_mode": "boolean",
+            "answer_focus": None,
+            "notes": None,
+            "requirements": [
+                {
+                    "id": "r1",
+                    "root": "MovieA",
+                    "target": "nationality",
+                    "description": "nationality associated with MovieA branch",
+                },
+                {
+                    "id": "r2",
+                    "root": "MovieB",
+                    "target": "nationality",
+                    "description": "nationality associated with MovieB branch",
+                },
+            ],
+        },
+    }
+    return f"""
+Build high-recall candidate nodes and a Problem Frame for the question.
+
+Original question:
+{question}
+
+Restored/normalized question used by the parser-facing pipeline:
+{restored_question}
+
+Restored dependency graph nodes:
+{json.dumps(graph_nodes, ensure_ascii=False, indent=2)}
+
+Candidate node rules:
+1. candidate_nodes is a high-recall pool, not final AST nodes.
+2. Include every likely semantic endpoint needed for path construction.
+3. It is acceptable to include noisy candidates such as type qualifiers, operator cues,
+   constraint values, and coreference mentions, but mark kind accurately.
+4. Use kind values from:
+   entity, role, slot, type_qualifier, operator_cue, constraint_value, coref, other.
+5. If possible, include graph_node_ids copied from the provided graph node list.
+6. Do not invent graph_node_ids. If grounding is uncertain, omit graph_node_ids.
+
+Problem Frame rules:
+1. requirements must describe the branch-level outputs the final program needs.
+2. Each requirement should have a stable id such as r1, r2.
+3. root is the branch starting point, usually a fixed entity.
+4. target is the branch-level value that should feed the final operator.
+5. operator must be one of:
+   {", ".join(ALLOWED_OPERATORS)}
+6. Use NONE for a single serial lookup with no comparison, set, ranking, or logical operator.
+7. Use COMPARE_SAME when the question asks whether branch outputs are the same.
+8. Use COMPARE_DIFF when the question asks whether branch outputs are different.
+9. Use ARGMAX/ARGMIN for max/min selection and INTERSECTION/UNION/DIFFERENCE for set operations.
+
+Forbidden:
+- Do not generate a complete AST.
+- Do not select final paths.
+- Do not generate atomic subquestions.
+- Do not output markdown.
+
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
+
+SELECT_PATHS_SYSTEM = """
+You are implementing the DEPO path-projection pipeline.
+
+Current step: choose exactly one provided candidate path for each requirement.
+
+You must only select from the supplied candidate_paths by path_id.
+Do not create paths.
+Do not generate an AST.
+Do not generate atomic questions.
+Return valid JSON only.
+""".strip()
+
+
+def build_select_paths_prompt(
+    question: str,
+    problem_frame: dict[str, object],
+    filtered_candidate_paths: list[dict[str, object]],
+    validation_feedback: str | None = None,
+) -> str:
+    schema = {
+        "selected_paths": [
+            {
+                "requirement_id": "r1",
+                "path_id": "p1",
+            },
+            {
+                "requirement_id": "r2",
+                "path_id": "p2",
+            },
+        ]
+    }
+    feedback = f"\nPrevious selection failed validation:\n{validation_feedback}\n" if validation_feedback else ""
+    return f"""
+Select candidate paths for the requirements.
+
+Original question:
+{question}
+
+Problem Frame:
+{json.dumps(problem_frame, ensure_ascii=False, indent=2)}
+
+Filtered candidate paths:
+{json.dumps(filtered_candidate_paths, ensure_ascii=False, indent=2)}
+{feedback}
+Task:
+- For each requirement in Problem Frame, choose exactly one path.
+- The number of selected paths must equal the number of requirements.
+- Use only path_id values from filtered candidate paths.
+- Do not invent or rewrite paths.
+- Do not generate an AST.
+- Do not generate atomic questions.
+
+Selection principles:
+1. For each requirement, prefer the path that best expresses root to target.
+2. If multiple paths are reasonable, prefer the shorter and more direct path.
+3. Do not choose a path that only connects two roots and does not express the requirement target.
+4. Do not choose a path that only contains type/context information unless that type is the requirement target.
+5. The selected path's candidate_for must include the requirement_id.
+
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
+
+LABEL_AST_EDGES_SYSTEM = """
+You are implementing the DEPO path-projection pipeline.
+
+Current step: label fixed AST skeleton edges and confirm the operator.
+
+The AST skeleton is already built by code from selected paths.
+You may only label existing edges and confirm operator metadata.
+You must not add, delete, merge, split, shortcut, or reorder AST nodes or edges.
+Return valid JSON only.
+""".strip()
+
+
+def build_label_ast_edges_prompt(
+    question: str,
+    ast_skeleton: dict[str, object],
+    selected_paths: list[dict[str, object]],
+    problem_frame: dict[str, object],
+) -> str:
+    schema = {
+        "edges": [
+            {
+                "source": "MovieA",
+                "target": "director_r1",
+                "relation": "director of MovieA",
+                "atomic_question_template": "Who directed MovieA?",
+            },
+            {
+                "source": "director_r1",
+                "target": "nationality_r1",
+                "relation": "nationality of the director",
+                "atomic_question_template": "What is the nationality of that director?",
+            },
+        ],
+        "operator": {
+            "type": "COMPARE_SAME",
+            "inputs": ["nationality_r1", "nationality_r2"],
+            "output": "boolean",
+        },
+    }
+    return f"""
+Label the fixed AST skeleton edges.
+
+Original question:
+{question}
+
+Selected paths:
+{json.dumps(selected_paths, ensure_ascii=False, indent=2)}
+
+AST skeleton:
+{json.dumps(ast_skeleton, ensure_ascii=False, indent=2)}
+
+Problem Frame:
+{json.dumps(problem_frame, ensure_ascii=False, indent=2)}
+
+Rules:
+1. Give each existing AST edge a relation label or relation hint.
+2. You may optionally provide atomic_question_template for that one edge.
+3. Confirm the operator type and inputs from the AST skeleton and Problem Frame.
+4. Do not add AST nodes.
+5. Do not delete AST nodes.
+6. Do not add AST edges.
+7. Do not delete AST edges.
+8. Do not merge branch-specific clones.
+9. Do not create shortcut edges. For example, do not add AlphaGo -> university unless
+   those nodes are adjacent in the selected path and skeleton.
+10. Do not create selected-path-external query nodes.
+11. Do not generate executable DAG steps or final atomic questions.
+
+Output one item for every skeleton edge and only those edges.
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
 MASK_SPAN_EXTRACTION_SYSTEM = """
 You are implementing DEPO Step 1: selective mask span extraction before CoreNLP dependency parsing.
 

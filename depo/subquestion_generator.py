@@ -45,8 +45,9 @@ class _GenerationState:
 
 
 class SubquestionGenerator:
-    def __init__(self, llm_client: "LLMClient") -> None:
+    def __init__(self, llm_client: "LLMClient", include_operator_steps: bool = False) -> None:
         self.llm_client = llm_client
+        self.include_operator_steps = include_operator_steps
 
     def generate(
         self,
@@ -68,12 +69,16 @@ class SubquestionGenerator:
         original_question: str,
         semantic_ast: SemanticASTResult | None = None,
         ast: SemanticASTResult | None = None,
+        include_operator_steps: bool | None = None,
     ) -> AtomicQuestionDAG:
         semantic_ast = semantic_ast if semantic_ast is not None else ast
         if semantic_ast is None:
             raise TypeError("generate_dag requires a SemanticASTResult.")
         semantic_ast = repair_missing_value_slots(original_question, semantic_ast)
-        execution_plan = compile_execution_plan(semantic_ast)
+        execution_plan = compile_execution_plan(
+            semantic_ast,
+            include_operator_steps=self.include_operator_steps if include_operator_steps is None else include_operator_steps,
+        )
         nodes: list[AtomicQuestionNode] = []
         edges: list[AtomicQuestionEdge] = []
         variable_to_question: dict[str, str] = {}
@@ -897,7 +902,10 @@ def _dedupe_preserve_order(values: list[str]) -> list[str]:
     return result
 
 
-def compile_execution_plan(semantic_ast: SemanticASTResult) -> ExecutionPlan:
+def compile_execution_plan(
+    semantic_ast: SemanticASTResult,
+    include_operator_steps: bool = False,
+) -> ExecutionPlan:
     """Compile a directed semantic AST into a deterministic variable-bound DAG.
 
     The AST stores semantic structure. This plan stores execution order and
@@ -949,7 +957,7 @@ def compile_execution_plan(semantic_ast: SemanticASTResult) -> ExecutionPlan:
         )
 
     operator = semantic_ast.primary_operator.operator or "NONE"
-    if operator != "NONE":
+    if include_operator_steps and operator != "NONE":
         semantic_inputs = _operator_semantic_inputs(semantic_ast)
         minimum_inputs = _operator_min_input_count(operator)
         if len(semantic_inputs) < minimum_inputs:

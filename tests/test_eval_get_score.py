@@ -5,7 +5,6 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
 
 
 def load_eval_get_score_module():
@@ -128,7 +127,7 @@ class EvalGetScoreTest(unittest.TestCase):
             self.assertIn("Who wrote Hamlet?", run_index)
             self.assertEqual(run_index["Who wrote Hamlet?"]["status"], "success")
 
-    def test_evaluate_one_uses_generation_explanation_for_gen(self) -> None:
+    def test_evaluate_one_scores_em_and_f1_only(self) -> None:
         module = load_eval_get_score_module()
         record = {
             "question": "When did the expansion happen?",
@@ -140,14 +139,12 @@ class EvalGetScoreTest(unittest.TestCase):
             "retrieved_knowledge": "",
         }
 
-        with patch.object(module, "_get_gen_fn", return_value=lambda q, a, g, f: {"score": 0.5, "explanation": {"generation": g}}):
-            scored = module.evaluate_one(record, use_rsim=False, use_gen=True)
+        scored = module.evaluate_one(record)
 
+        self.assertEqual(scored["em"], 1.0)
         self.assertEqual(scored["f1"], 1.0)
-        self.assertEqual(
-            scored["g_e_exp"]["generation"],
-            "<answer>1979</answer>\n\nReasoning summary: The evidence ties the expansion to 1979.",
-        )
+        self.assertNotIn("r_s", scored)
+        self.assertNotIn("g_e", scored)
 
 
 if __name__ == "__main__":

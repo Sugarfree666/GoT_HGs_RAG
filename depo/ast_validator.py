@@ -6,6 +6,8 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 from models import (
+    ASTSkeleton,
+    ProblemFrame,
     SemanticASTEdge,
     SemanticASTNode,
     SemanticASTPrimaryOperator,
@@ -29,6 +31,21 @@ MIN_OPERATOR_ARITY = {
     "DIFFERENCE": 2,
     "LOGICAL_AND": 2,
     "LOGICAL_OR": 2,
+}
+
+PATH_PIPELINE_ALLOWED_OPERATORS = {
+    "NONE",
+    "COMPARE_SAME",
+    "COMPARE_DIFF",
+    "COMPARE_GREATER",
+    "COMPARE_LESS",
+    "ARGMAX",
+    "ARGMIN",
+    "INTERSECTION",
+    "UNION",
+    "DIFFERENCE",
+    "LOGICAL_AND",
+    "LOGICAL_OR",
 }
 
 
@@ -189,6 +206,79 @@ def validate_ast_completeness(original_question: str, ast: SemanticASTResult) ->
                 f"Operator {operator} uses cue {frame.cue_text!r}, which requires expected_value_slot={frame.expected_value_slot}, "
                 f"but current input is {input_id} ({label}). Missing implicit variable {frame.expected_value_slot} for {input_id}."
             )
+    return warnings
+
+
+def validate_path_based_ast(
+    semantic_ast: SemanticASTResult,
+    ast_skeleton: ASTSkeleton,
+    problem_frame: ProblemFrame,
+) -> list[str]:
+    """Validate an AST produced by the selected-path pipeline.
+
+    The LLM may label relations but must not add, remove, merge, or shortcut
+    the program-built skeleton.
+    """
+
+    warnings: list[str] = []
+    skeleton_node_ids = {node.id for node in ast_skeleton.nodes}
+    ast_node_ids = {node.id for node in semantic_ast.nodes}
+    extra_nodes = sorted(ast_node_ids - skeleton_node_ids)
+    missing_nodes = sorted(skeleton_node_ids - ast_node_ids)
+    if extra_nodes:
+        warnings.append("AST contains nodes outside selected paths: " + ", ".join(extra_nodes))
+    if missing_nodes:
+        warnings.append("AST is missing selected-path nodes: " + ", ".join(missing_nodes))
+
+    allowed_edge_pairs = {
+        (edge.source, edge.target)
+        for edge in ast_skeleton.edges
+    }
+    ast_edge_pairs = [
+        (edge.source, edge.target)
+        for edge in semantic_ast.edges
+        if edge.edge_type != "operator"
+    ]
+    for source, target in ast_edge_pairs:
+        if (source, target) not in allowed_edge_pairs:
+            warnings.append(
+                f"AST contains shortcut or non-selected edge {source}->{target}; "
+                "edges must be adjacent candidate nodes from selected paths."
+            )
+    missing_edges = sorted(allowed_edge_pairs - set(ast_edge_pairs))
+    if missing_edges:
+        warnings.append(
+            "AST is missing selected-path edge(s): "
+            + ", ".join(f"{source}->{target}" for source, target in missing_edges)
+        )
+
+    operator = semantic_ast.primary_operator.operator or "NONE"
+    if operator not in PATH_PIPELINE_ALLOWED_OPERATORS:
+        warnings.append(f"Operator {operator!r} is not in the allowed operator set.")
+    if operator != (problem_frame.operator or "NONE"):
+        warnings.append(
+            f"Operator {operator!r} does not match ProblemFrame operator {problem_frame.operator!r}."
+        )
+
+    expected_inputs = [
+        ast_skeleton.branch_terminals[requirement.id]
+        for requirement in problem_frame.requirements
+        if requirement.id in ast_skeleton.branch_terminals
+    ]
+    actual_inputs = list(semantic_ast.primary_operator.inputs)
+    if actual_inputs != expected_inputs:
+        warnings.append(
+            "Operator inputs must be selected branch terminal nodes; "
+            f"expected {expected_inputs}, got {actual_inputs}."
+        )
+
+    for requirement in problem_frame.requirements:
+        if requirement.id not in ast_skeleton.branch_terminals:
+            warnings.append(f"AST skeleton does not cover requirement {requirement.id!r}.")
+        if not ast_skeleton.requirement_node_ids.get(requirement.id):
+            warnings.append(f"AST skeleton has no branch nodes for requirement {requirement.id!r}.")
+
+    warnings.extend(_validate_branch_specific_clones(semantic_ast, ast_skeleton, problem_frame))
     return warnings
 
 
@@ -465,6 +555,55 @@ def _is_single_chain_ast(ast: SemanticASTResult) -> bool:
         seen.add(node_id)
         stack.extend(sorted(undirected.get(node_id, set()) - seen))
     return seen == involved
+
+
+def _validate_branch_specific_clones(
+    semantic_ast: SemanticASTResult,
+    ast_skeleton: ASTSkeleton,
+    problem_frame: ProblemFrame,
+) -> list[str]:
+    if len(problem_frame.requirements) <= 1:
+        return []
+
+    warnings: list[str] = []
+    node_by_id = semantic_ast.node_by_id()
+    root_surfaces = {_norm(requirement.root) for requirement in problem_frame.requirements}
+    surface_to_requirement_nodes: dict[str, dict[str, set[str]]] = {}
+    for requirement in problem_frame.requirements:
+        for node_id in ast_skeleton.requirement_node_ids.get(requirement.id, []):
+            node = node_by_id.get(node_id)
+            if node is None:
+                continue
+            surface = _norm(node.label)
+            if not surface or surface in root_surfaces:
+                continue
+            surface_to_requirement_nodes.setdefault(surface, {}).setdefault(requirement.id, set()).add(node_id)
+
+    for surface, by_requirement in surface_to_requirement_nodes.items():
+        if len(by_requirement) <= 1:
+            continue
+        all_node_ids = {node_id for node_ids in by_requirement.values() for node_id in node_ids}
+        if len(all_node_ids) < len(by_requirement):
+            warnings.append(
+                f"Shared surface node {surface!r} was merged across branches; branch-specific clones are required."
+            )
+        for requirement_id, node_ids in by_requirement.items():
+            for node_id in node_ids:
+                node = node_by_id.get(node_id)
+                if node is None:
+                    continue
+                expected_suffix = f"_{requirement_id}"
+                if not node.id.endswith(expected_suffix):
+                    warnings.append(
+                        f"Shared surface node {node.id!r} for requirement {requirement_id!r} "
+                        f"must use branch-specific suffix {expected_suffix!r}."
+                    )
+                if node.branch_of != requirement_id:
+                    warnings.append(
+                        f"Shared surface node {node.id!r} must have branch_of={requirement_id!r}; "
+                        f"got {node.branch_of!r}."
+                    )
+    return warnings
 
 
 def _format_relation_hint(frame: ValueSlotCueFrame, source_node: SemanticASTNode) -> str:

@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
 from statistics import mean
@@ -18,15 +17,12 @@ from eval import cal_em, cal_f1
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Evaluate hyper-branch reasoning runs with F1, R-S, and G-E.")
+    parser = argparse.ArgumentParser(description="Evaluate QA runs with normalized exact EM and token-level F1.")
     parser.add_argument("--question-file", default="questions/agriculture/questions.json", help="Path to the question JSON list.")
     parser.add_argument("--runs-dir", default="runs", help="Directory containing per-question run folders.")
     parser.add_argument("--limit", type=int, default=50, help="Number of leading questions to evaluate.")
     parser.add_argument("--start-index", type=int, default=0, help="Starting question index.")
     parser.add_argument("--output-dir", default="", help="Optional output directory. Defaults to eval/results/<dataset>/<timestamp>.")
-    parser.add_argument("--workers", type=int, default=1, help="Parallel workers for per-sample scoring. Keep 1 if using G-E online.")
-    parser.add_argument("--skip-rsim", action="store_true", help="Skip R-S evaluation.")
-    parser.add_argument("--skip-gen", action="store_true", help="Skip G-E evaluation.")
     return parser.parse_args()
 
 
@@ -302,58 +298,11 @@ def _extract_gold_answers(question_entry: dict[str, Any]) -> list[str]:
     return []
 
 
-def _get_rsim_fn():
-    from eval_r import cal_rsim
-
-    return cal_rsim
-
-
-def _get_gen_fn():
-    from eval_g import cal_gen
-
-    return cal_gen
-
-
-def evaluate_one(record: dict[str, Any], use_rsim: bool, use_gen: bool) -> dict[str, Any]:
+def evaluate_one(record: dict[str, Any]) -> dict[str, Any]:
     answer = record.get("answer", "") or ""
     gold_answers = record.get("golden_answers", [])
-    em_score = cal_em([gold_answers], [answer]) if gold_answers else 0.0
-    f1_score = cal_f1([gold_answers], [answer]) if gold_answers else 0.0
-    record["em"] = float(em_score)
-    record["f1"] = float(f1_score)
-
-    if use_rsim:
-        rsim_fn = _get_rsim_fn()
-        dedup_context = list(dict.fromkeys(str(item) for item in record.get("context", []) if str(item).strip()))
-        knowledge = str(record.get("retrieved_knowledge", "") or "").strip()
-        record["r_s"] = float(rsim_fn(["\n".join(dedup_context)], [knowledge])) if knowledge else 0.0
-    else:
-        record["r_s"] = None
-
-    if use_gen:
-        generation = str(record.get("generation", "") or "").strip()
-        generation_explanation = str(record.get("generation_explanation", "") or "").strip()
-        generation_for_gen = generation
-        if generation_explanation:
-            generation_for_gen = f"{generation}\n\n{generation_explanation}".strip()
-        if not generation_for_gen:
-            record["g_e"] = 0.0
-            record["g_e_exp"] = {"status": "empty_generation"}
-        else:
-            try:
-                gen_fn = _get_gen_fn()
-                gen_score = gen_fn(record["question"], gold_answers, generation_for_gen, f1_score)
-                record["g_e"] = float(gen_score["score"])
-                record["g_e_exp"] = gen_score["explanation"]
-            except Exception as exc:
-                record["g_e"] = None
-                record["g_e_exp"] = {"status": "error", "message": str(exc)}
-    else:
-        record["g_e"] = None
-
-    # Backward-compatible aliases for older tooling.
-    record["rsim"] = record["r_s"]
-    record["gen"] = record["g_e"]
+    record["em"] = float(cal_em([gold_answers], [answer])) if gold_answers else 0.0
+    record["f1"] = float(cal_f1([gold_answers], [answer])) if gold_answers else 0.0
     return record
 
 
@@ -367,9 +316,9 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
         nhops = record.get("nhops")
         if nhops is None:
             continue
-        bucket = by_nhops.setdefault(str(nhops), {"count": 0, "em": [], "f1": [], "r_s": [], "g_e": []})
+        bucket = by_nhops.setdefault(str(nhops), {"count": 0, "em": [], "f1": []})
         bucket["count"] += 1
-        for metric in ("em", "f1", "r_s", "g_e"):
+        for metric in ("em", "f1"):
             value = record.get(metric)
             if value is not None:
                 bucket[metric].append(float(value))
@@ -384,8 +333,6 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
         "overall": {
             "em": avg("em"),
             "f1": avg("f1"),
-            "r_s": avg("r_s"),
-            "g_e": avg("g_e"),
         },
         "by_nhops": {},
     }
@@ -395,22 +342,12 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
             "count": bucket["count"],
             "em": mean(bucket["em"]) if bucket["em"] else None,
             "f1": mean(bucket["f1"]) if bucket["f1"] else None,
-            "r_s": mean(bucket["r_s"]) if bucket["r_s"] else None,
-            "g_e": mean(bucket["g_e"]) if bucket["g_e"] else None,
         }
-
-    # Backward-compatible aliases for older tooling.
-    summary["overall"]["rsim"] = summary["overall"]["r_s"]
-    summary["overall"]["gen"] = summary["overall"]["g_e"]
     return summary
 
 
 def save_outputs(output_dir: Path, records: list[dict[str, Any]], summary: dict[str, Any], meta: dict[str, Any]) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
-
-    generated_path = output_dir / "generated_answer.json"
-    result_path = output_dir / "test_result.json"
-    score_path = output_dir / "test_score.json"
 
     generated_payload = [
         {
@@ -429,9 +366,18 @@ def save_outputs(output_dir: Path, records: list[dict[str, Any]], summary: dict[
         for record in records
     ]
 
-    generated_path.write_text(json.dumps(generated_payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    result_path.write_text(json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8")
-    score_path.write_text(json.dumps({"meta": meta, **summary}, ensure_ascii=False, indent=2), encoding="utf-8")
+    (output_dir / "generated_answer.json").write_text(
+        json.dumps(generated_payload, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    (output_dir / "test_result.json").write_text(
+        json.dumps(records, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    (output_dir / "test_score.json").write_text(
+        json.dumps({"meta": meta, **summary}, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
 
 
 def main() -> int:
@@ -444,21 +390,7 @@ def main() -> int:
     questions = load_questions(question_file, args.start_index, args.limit)
     run_index = discover_latest_runs(runs_dir)
     records = [build_eval_record(question_entry, run_index) for question_entry in questions]
-
-    use_rsim = not args.skip_rsim
-    use_gen = not args.skip_gen
-    workers = max(1, int(args.workers))
-
-    if workers == 1:
-        scored_records = [evaluate_one(record, use_rsim=use_rsim, use_gen=use_gen) for record in records]
-    else:
-        with ThreadPoolExecutor(max_workers=workers) as executor:
-            scored_records = list(
-                executor.map(
-                    lambda record: evaluate_one(record, use_rsim=use_rsim, use_gen=use_gen),
-                    records,
-                )
-            )
+    scored_records = [evaluate_one(record) for record in records]
 
     summary = summarize(scored_records)
     meta = {
@@ -467,9 +399,7 @@ def main() -> int:
         "output_dir": str(output_dir),
         "start_index": args.start_index,
         "limit": args.limit,
-        "skip_rsim": args.skip_rsim,
-        "skip_gen": args.skip_gen,
-        "workers": workers,
+        "metrics": ["em", "f1"],
     }
     save_outputs(output_dir, scored_records, summary, meta)
 
@@ -478,8 +408,6 @@ def main() -> int:
     print(f"saved_scores={output_dir / 'test_score.json'}")
     print(f"EM={summary['overall']['em'] if summary['overall']['em'] is not None else 'N/A'}")
     print(f"F1={summary['overall']['f1'] if summary['overall']['f1'] is not None else 'N/A'}")
-    print(f"R-S={summary['overall']['r_s'] if summary['overall']['r_s'] is not None else 'N/A'}")
-    print(f"G-E={summary['overall']['g_e'] if summary['overall']['g_e'] is not None else 'N/A'}")
     return 0
 
 

@@ -8,13 +8,18 @@ from typing import TYPE_CHECKING, Any
 from io_utils import read_questions
 from models import (
     AnchorSelectionResult,
+    ASTSkeleton,
     AtomicQuestionDAG,
     AtomicSubquestion,
+    CandidateNode,
+    CandidatePath,
     MaskReplacement,
     MaskSpanResult,
+    ProblemFrame,
     QuestionRecord,
     RestoredAnchorConnectedSubgraph,
     RestoredGraphNodeCandidate,
+    SelectedPath,
     SemanticNormalizationResult,
     SemanticASTResult,
 )
@@ -25,6 +30,7 @@ if TYPE_CHECKING:
     from corenlp_parser import CoreNLPParser
     from graph_builder import GraphBuilder
     from mask_span_extractor import MaskSpanExtractor
+    from path_pipeline import PathBasedSemanticParser
     from question_normalizer import SemanticQuestionNormalizer
     from subquestion_generator import SubquestionGenerator
 
@@ -68,12 +74,11 @@ def main() -> int:
     records = [QuestionRecord(question=args.question)] if args.question else read_questions(args.questions_file)
 
     try:
-        from anchor_selector import AnchorSelector
-        from ast_builder import SemanticASTOptimizer
         from corenlp_parser import CoreNLPConnectionError, CoreNLPParser
         from graph_builder import GraphBuilder
         from llm_client import LLMClient
         from mask_span_extractor import MaskSpanExtractor
+        from path_pipeline import PathBasedSemanticParser
         from question_normalizer import SemanticQuestionNormalizer
         from subquestion_generator import SubquestionGenerator
 
@@ -81,8 +86,7 @@ def main() -> int:
         question_normalizer = SemanticQuestionNormalizer(llm_client)
         mask_span_extractor = MaskSpanExtractor(llm_client)
         graph_builder = GraphBuilder()
-        anchor_selector = AnchorSelector(llm_client)
-        semantic_ast_optimizer = SemanticASTOptimizer(llm_client)
+        path_semantic_parser = PathBasedSemanticParser(llm_client)
         subquestion_generator = SubquestionGenerator(llm_client)
 
         with CoreNLPParser(
@@ -98,10 +102,11 @@ def main() -> int:
                     mask_span_extractor=mask_span_extractor,
                     parser=parser,
                     graph_builder=graph_builder,
-                    anchor_selector=anchor_selector,
-                    semantic_ast_optimizer=semantic_ast_optimizer,
+                    anchor_selector=None,
+                    semantic_ast_optimizer=None,
                     subquestion_generator=subquestion_generator,
                     question_normalizer=question_normalizer,
+                    path_semantic_parser=path_semantic_parser,
                     debug=args.debug,
                 )
                 print_result(index, record, result, debug=args.debug)
@@ -125,10 +130,26 @@ def run_pipeline(
     semantic_ast_optimizer: "SemanticASTOptimizer",
     subquestion_generator: "SubquestionGenerator",
     question_normalizer: "SemanticQuestionNormalizer | None" = None,
+    path_semantic_parser: "PathBasedSemanticParser | None" = None,
     debug: bool = False,
 ) -> dict[str, Any]:
     del index, debug
+    del anchor_selector, semantic_ast_optimizer
     from placeholder import selective_entity_masking
+    from ast_validator import validate_path_based_ast
+    from graph_builder import restored_dependency_tokens
+    from path_ast_builder import (
+        prefer_endpoint_complete_selected_paths,
+        selected_paths_to_ast_skeleton,
+        validate_selected_paths,
+    )
+    from path_pipeline import PathBasedSemanticParser
+    from path_projector import (
+        build_candidate_projected_graph,
+        build_undirected_dependency_graph,
+        enumerate_candidate_paths,
+        filter_candidate_paths,
+    )
 
     semantic_normalization = (
         question_normalizer.normalize(record.question)
@@ -155,29 +176,86 @@ def run_pipeline(
         graph_node_candidates=graph_node_candidates,
         replacement=replacement,
     )
-    anchor_selection = anchor_selector.select(
-        original_question=processing_question,
-        masked_question=replacement.masked_question,
-        replacement=replacement,
+
+    if path_semantic_parser is None:
+        path_semantic_parser = PathBasedSemanticParser(getattr(subquestion_generator, "llm_client", None))
+
+    dependency_graph = build_undirected_dependency_graph(
         dependency_parse=dependency_parse,
-        weighted_graph=weighted_graph,
         restored_graph_node_candidates=restored_graph_node_candidates,
     )
-    anchor_connected_subgraph = graph_builder.build_anchor_connected_subgraph(
-        weighted_graph=weighted_graph,
-        selected_anchors=anchor_selection.selected_anchors,
-        graph_node_candidates=graph_node_candidates,
+    restored_graph_nodes = restored_dependency_tokens(
+        dependency_parse=dependency_parse,
+        restored_candidates=restored_graph_node_candidates,
     )
-    restored_anchor_connected_subgraph = graph_builder.restore_anchor_connected_subgraph(
-        anchor_connected_subgraph=anchor_connected_subgraph,
-        replacement=replacement,
+    candidate_nodes, problem_frame, candidate_frame_payload = path_semantic_parser.build_candidate_nodes_and_frame(
+        question=record.question,
+        restored_question=processing_question,
+        graph_nodes=restored_graph_nodes,
     )
-    semantic_ast = semantic_ast_optimizer.optimize(
-        original_question=processing_question,
-        replacement=replacement,
-        selected_anchors=anchor_selection.selected_anchors,
-        restored_anchor_connected_subgraph=restored_anchor_connected_subgraph,
+    candidate_projected_graph = build_candidate_projected_graph(
+        dependency_graph=dependency_graph,
+        candidate_nodes=candidate_nodes,
     )
+    enumerated_candidate_paths = enumerate_candidate_paths(candidate_projected_graph)
+    filtered_candidate_paths = filter_candidate_paths(
+        candidate_paths=enumerated_candidate_paths,
+        requirements=problem_frame.requirements,
+    )
+    if not filtered_candidate_paths:
+        raise ValueError("No filtered candidate paths remain after requirement filtering.")
+
+    selected_paths: list[SelectedPath] = []
+    selected_paths_payload: dict[str, Any] = {}
+    validation_feedback: str | None = None
+    for attempt in range(2):
+        selected_paths, selected_paths_payload = path_semantic_parser.select_paths(
+            question=processing_question,
+            problem_frame=problem_frame,
+            filtered_candidate_paths=filtered_candidate_paths,
+            validation_feedback=validation_feedback,
+        )
+        try:
+            validate_selected_paths(
+                selected_paths=selected_paths,
+                requirements=problem_frame.requirements,
+                filtered_paths=filtered_candidate_paths,
+            )
+            break
+        except ValueError as exc:
+            validation_feedback = str(exc)
+            if attempt == 1:
+                raise ValueError(f"LLM selected invalid candidate paths after retry: {exc}") from exc
+
+    selected_paths, selected_path_repair_actions = prefer_endpoint_complete_selected_paths(
+        selected_paths=selected_paths,
+        requirements=problem_frame.requirements,
+        filtered_paths=filtered_candidate_paths,
+    )
+
+    ast_skeleton = selected_paths_to_ast_skeleton(
+        problem_frame=problem_frame,
+        selected_paths=selected_paths,
+        filtered_paths=filtered_candidate_paths,
+        candidate_nodes=candidate_nodes,
+    )
+    semantic_ast, relation_label_payload = path_semantic_parser.label_ast_edges(
+        question=processing_question,
+        ast_skeleton=ast_skeleton,
+        selected_paths=selected_paths,
+        problem_frame=problem_frame,
+    )
+    path_ast_validation_warnings = validate_path_based_ast(
+        semantic_ast=semantic_ast,
+        ast_skeleton=ast_skeleton,
+        problem_frame=problem_frame,
+    )
+    semantic_ast.validation_warnings.extend(
+        warning for warning in path_ast_validation_warnings if warning not in semantic_ast.validation_warnings
+    )
+    if path_ast_validation_warnings:
+        raise ValueError("Invalid path-based AST: " + "; ".join(path_ast_validation_warnings))
+
     subquestion_dag: AtomicQuestionDAG | None = None
     generate_dag = getattr(subquestion_generator, "generate_dag", None)
     if callable(generate_dag):
@@ -199,9 +277,18 @@ def run_pipeline(
         "weighted_graph": weighted_graph,
         "graph_node_candidates": graph_node_candidates,
         "restored_graph_node_candidates": restored_graph_node_candidates,
-        "anchor_selection": anchor_selection,
-        "anchor_connected_subgraph": anchor_connected_subgraph,
-        "restored_anchor_connected_subgraph": restored_anchor_connected_subgraph,
+        "dependency_graph": dependency_graph,
+        "candidate_nodes": candidate_nodes,
+        "problem_frame": problem_frame,
+        "candidate_frame_payload": candidate_frame_payload,
+        "candidate_projected_graph": candidate_projected_graph,
+        "enumerated_candidate_paths": enumerated_candidate_paths,
+        "filtered_candidate_paths": filtered_candidate_paths,
+        "selected_paths": selected_paths,
+        "selected_paths_payload": selected_paths_payload,
+        "selected_path_repair_actions": selected_path_repair_actions,
+        "ast_skeleton": ast_skeleton,
+        "relation_label_payload": relation_label_payload,
         "semantic_ast": semantic_ast,
         "subquestions": subquestions,
         "subquestion_dag": subquestion_dag,
@@ -217,8 +304,14 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     dependency_parse = result["dependency_parse"]
     weighted_graph = result["weighted_graph"]
     restored_graph_node_candidates: list[RestoredGraphNodeCandidate] = result["restored_graph_node_candidates"]
-    anchor_selection: AnchorSelectionResult = result["anchor_selection"]
-    restored_anchor_connected_subgraph: RestoredAnchorConnectedSubgraph = result["restored_anchor_connected_subgraph"]
+    candidate_nodes: list[CandidateNode] = result["candidate_nodes"]
+    problem_frame: ProblemFrame = result["problem_frame"]
+    candidate_projected_graph = result["candidate_projected_graph"]
+    enumerated_candidate_paths: list[CandidatePath] = result["enumerated_candidate_paths"]
+    filtered_candidate_paths: list[CandidatePath] = result["filtered_candidate_paths"]
+    selected_paths: list[SelectedPath] = result["selected_paths"]
+    selected_path_repair_actions: list[str] = result.get("selected_path_repair_actions", [])
+    ast_skeleton: ASTSkeleton = result["ast_skeleton"]
     semantic_ast: SemanticASTResult = result["semantic_ast"]
     subquestions: list[AtomicSubquestion] = result["subquestions"]
     subquestion_dag: AtomicQuestionDAG | None = result.get("subquestion_dag")
@@ -281,33 +374,52 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
         print("  (none)")
     print()
 
-    print("[7. Selected Explicit Anchors]")
-    if anchor_selection.selected_anchors:
-        for anchor in anchor_selection.selected_anchors:
-            print(f"  - {anchor.display_text}")
-    else:
-        print("  (none)")
     if debug:
-        _print_warnings(anchor_selection.warnings)
-    print()
+        from path_projector import format_projected_graph_edges
 
-    print("[8. Anchor Connected Subgraph]")
-    print("Edges:")
-    subgraph_edge_lines = _format_restored_subgraph_edges(restored_anchor_connected_subgraph)
-    if subgraph_edge_lines:
-        for line in subgraph_edge_lines:
-            print(line)
+        print("[7. Candidate Nodes]")
+        _print_candidate_nodes(candidate_nodes)
+        print()
+
+        print("[8. Problem Frame]")
+        _print_problem_frame(problem_frame)
+        print()
+
+        print("[9. Candidate-Projected Graph]")
+        projected_lines = format_projected_graph_edges(candidate_projected_graph)
+        if projected_lines:
+            for line in projected_lines:
+                print(line)
+        else:
+            print("  (no projected edges)")
+        print()
+
+        print("[10. Enumerated Candidate Paths]")
+        _print_candidate_paths(enumerated_candidate_paths)
+        print()
+
+        print("[11. Filtered Candidate Paths]")
+        _print_candidate_paths(filtered_candidate_paths)
+        print()
+
+        print("[12. LLM Selected Paths]")
+        _print_selected_paths(selected_paths)
+        _print_repair_actions(selected_path_repair_actions)
+        print()
+
+        print("[13. AST Skeleton]")
+        _print_ast_skeleton(ast_skeleton)
+        print()
+
+        print("[14. Relation-Labeled AST]")
     else:
-        print("  (no subgraph edges)")
-    print()
-
-    print("[9. Final Semantic AST]")
+        print("[7. Final Semantic AST]")
     _print_semantic_ast(semantic_ast)
     if debug:
         _print_warnings(semantic_ast.warnings)
     print()
 
-    print("[10. Atomic Subquestion DAG]")
+    print("[15. Atomic Subquestion DAG]" if debug else "[8. Atomic Subquestion DAG]")
     if subquestion_dag is not None:
         _print_atomic_question_dag(subquestion_dag)
     elif not subquestions:
@@ -331,6 +443,88 @@ def _format_restored_subgraph_edges(
         relation_text = relation or "related"
         lines.append(f"  - {source_text}[{source}] --{relation_text}--> {target_text}[{target}]")
     return lines
+
+
+def _print_candidate_nodes(candidate_nodes: list[CandidateNode]) -> None:
+    if not candidate_nodes:
+        print("  (none)")
+        return
+    for node in candidate_nodes:
+        grounding = f" graph_node_ids={node.graph_node_ids}" if node.graph_node_ids else ""
+        print(f"  - {node.id}: {node.text} kind={node.kind} confidence={node.confidence}{grounding}")
+
+
+def _print_problem_frame(problem_frame: ProblemFrame) -> None:
+    print(f"Operator: {problem_frame.operator}")
+    if problem_frame.answer_mode:
+        print(f"Answer mode: {problem_frame.answer_mode}")
+    if problem_frame.answer_focus:
+        print(f"Answer focus: {problem_frame.answer_focus}")
+    if problem_frame.notes:
+        print(f"Notes: {problem_frame.notes}")
+    print("Requirements:")
+    if not problem_frame.requirements:
+        print("  (none)")
+        return
+    for requirement in problem_frame.requirements:
+        description = f" - {requirement.description}" if requirement.description else ""
+        print(f"  - {requirement.id}: {requirement.root} -> {requirement.target}{description}")
+
+
+def _print_candidate_paths(candidate_paths: list[CandidatePath]) -> None:
+    if not candidate_paths:
+        print("  (none)")
+        return
+    for path in candidate_paths:
+        candidate_for = ", ".join(path.candidate_for) if path.candidate_for else "unassigned"
+        print(f"  - {path.path_id}: {' -- '.join(path.nodes)} candidate_for={candidate_for}")
+        for evidence in path.evidence:
+            evidence_text = " -- ".join(str(item) for item in evidence.get("evidence_text_path", []))
+            source = evidence.get("source_text", evidence.get("source", ""))
+            target = evidence.get("target_text", evidence.get("target", ""))
+            print(f"    evidence {source} -> {target}: {evidence_text}")
+
+
+def _print_selected_paths(selected_paths: list[SelectedPath]) -> None:
+    if not selected_paths:
+        print("  (none)")
+        return
+    for selected in selected_paths:
+        print(f"  - {selected.requirement_id}: {selected.path_id}")
+
+
+def _print_repair_actions(actions: list[str]) -> None:
+    if not actions:
+        return
+    print("Repair actions:")
+    for action in actions:
+        print(f"  - {action}")
+
+
+def _print_ast_skeleton(ast_skeleton: ASTSkeleton) -> None:
+    operator = ast_skeleton.operator
+    inputs = ", ".join(operator.inputs)
+    print(f"Operator: {operator.operator}({inputs}) -> {operator.output}")
+    print("Branch terminals:")
+    if ast_skeleton.branch_terminals:
+        for requirement_id, terminal in ast_skeleton.branch_terminals.items():
+            print(f"  - {requirement_id}: {terminal}")
+    else:
+        print("  (none)")
+    print("Nodes:")
+    if ast_skeleton.nodes:
+        for node in ast_skeleton.nodes:
+            branch = f" branch_of={node.branch_of}" if node.branch_of else ""
+            print(f"  - {node.id}: {node.label} kind={node.kind}{branch}")
+    else:
+        print("  (none)")
+    print("Edges:")
+    if ast_skeleton.edges:
+        for edge in ast_skeleton.edges:
+            support = f" support={' -- '.join(edge.support_path)}" if edge.support_path else ""
+            print(f"  - {edge.source} -> {edge.target}{support}")
+    else:
+        print("  (none)")
 
 
 def _print_semantic_ast(semantic_ast: SemanticASTResult) -> None:

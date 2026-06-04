@@ -4,14 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="" />
+    <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/agriculture.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/mix.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/construct/builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/construct/builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/construct/hypergraphrag/llm.py" beforeDir="false" afterPath="$PROJECT_DIR$/construct/hypergraphrag/llm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/construct/hypergraphrag/operate.py" beforeDir="false" afterPath="$PROJECT_DIR$/construct/hypergraphrag/operate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval/eval.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval/eval_g.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval/eval_r.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval/get_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval/get_score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/eval/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval/see_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval/see_score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval/simcse/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval/simcse/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval/simcse/tool.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval/simcse/trainers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hypergraphrag.log" beforeDir="false" afterPath="$PROJECT_DIR$/hypergraphrag.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions/agriculture/query_test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions/agriculture/questions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions/agriculture/questions_first100.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions/cs/questions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions/hypertension/questions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions/legal/questions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/questions/mix/questions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/ask_depo_hyperbranch.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_2wikimultihopqa_remaining.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_2wikimultihopqa_remaining.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_depo_2wiki.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_llm_only_2wiki.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_llm_only_2wiki.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run_mix_batch.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_mix_batch.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_eval_get_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_eval_get_score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_eval_metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_eval_metrics.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="6313" />
+    <option name="cachedIndexableFilesCount" value="33573" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -30,6 +63,65 @@
     <commands />
     <urls />
   </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.2483626629726396" />
+      <entry key="MS500" value="1.9691224905204205" />
+      <entry key="S2" value="3.818613670879055" />
+      <entry key="S5" value="6.425846828371627" />
+      <entry key="S10" value="8.670905756021021" />
+      <entry key="S30" value="11.207397703872454" />
+      <entry key="S60" value="12.049199204266234" />
+      <entry key="M2" value="12.509984683538926" />
+      <entry key="M5" value="12.826401642321501" />
+      <entry key="M10" value="13.834950450955068" />
+      <entry key="M15" value="16.054245202512163" />
+      <entry key="M30" value="24.050271116566176" />
+      <entry key="H1" value="39.36962894236957" />
+      <entry key="H2" value="64.47403300353082" />
+      <entry key="H4" value="91.9008346156797" />
+      <entry key="D1" value="131.34329324315837" />
+      <entry key="W1" value="140.40794533533358" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.202537826521126" />
+      <entry key="MS500" value="1.9534035082904322" />
+      <entry key="S2" value="3.8101671368881176" />
+      <entry key="S5" value="6.4191122607001185" />
+      <entry key="S10" value="8.665792108475921" />
+      <entry key="S30" value="11.204964215019455" />
+      <entry key="S60" value="12.047855405150122" />
+      <entry key="M2" value="12.50927747798731" />
+      <entry key="M5" value="12.82610930567986" />
+      <entry key="M10" value="13.834794469715156" />
+      <entry key="M15" value="16.05412771526039" />
+      <entry key="M30" value="24.05018806766001" />
+      <entry key="H1" value="39.369561363655784" />
+      <entry key="H2" value="64.47397446252785" />
+      <entry key="H4" value="91.90079069808868" />
+      <entry key="D1" value="131.34328224265224" />
+      <entry key="W1" value="140.4079436402922" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -41,56 +133,59 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.cli.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
-    "WebServerToolWindowPanel.toolwindow.show.date": "false",
-    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
-    "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "D:/GitHub/HyperBranch/datasets/open_domain_dataset",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.intellij.sdk.settings.AppSettingsConfigurable",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.cli.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GitHub/HyperBranch/questions/musique&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMThirdPartyAiProvidersConfigurable&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\GitHub\HyperBranch\questions\musique" />
+      <recent name="D:\GitHub\HyperBranch\questions\hotpotqa" />
       <recent name="D:\GitHub\HyperBranch\datasets\open_domain_dataset" />
       <recent name="D:\GitHub\HyperBranch" />
       <recent name="D:\GitHub\GoT_HGs_RAG" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GitHub\HyperBranch\questions\hotpotqa" />
+      <recent name="D:\GitHub\HyperBranch\questions\musique" />
       <recent name="D:\GitHub\HyperBranch\runs" />
       <recent name="D:\GitHub\HyperBranch" />
       <recent name="D:\GitHub\HyperBranch\baselines\Standard RAG (text-embedding-3-small)" />
-      <recent name="D:\GitHub\HyperBranch\baselines" />
-      <recent name="D:\GitHub\HyperBranch\Methods" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.31033.139" />
-        <option value="bundled-python-sdk-2653e85de345-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.31033.139" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-PY-261.24374.152" />
+        <option value="bundled-python-sdk-c59985aa861c-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.24374.152" />
       </set>
     </attachedChunks>
   </component>
@@ -146,7 +241,15 @@
       <workItem from="1779938246195" duration="1154000" />
       <workItem from="1779944228610" duration="8543000" />
       <workItem from="1779964761203" duration="17133000" />
-      <workItem from="1780024721193" duration="27868000" />
+      <workItem from="1780024721193" duration="73879000" />
+      <workItem from="1780327824634" duration="8881000" />
+      <workItem from="1780451078844" duration="500000" />
+      <workItem from="1780452489105" duration="370000" />
+      <workItem from="1780452881188" duration="812000" />
+      <workItem from="1780469583404" duration="9734000" />
+      <workItem from="1780537179156" duration="19000" />
+      <workItem from="1780541004385" duration="3449000" />
+      <workItem from="1780551944328" duration="7242000" />
     </task>
     <servers />
   </component>

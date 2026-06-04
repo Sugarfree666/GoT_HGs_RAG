@@ -19,6 +19,7 @@ from tenacity import (
     retry,
     stop_after_attempt,
     wait_exponential,
+    retry_if_exception,
     retry_if_exception_type,
 )
 from .utils import (
@@ -41,13 +42,21 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 class EmptyLLMResponseError(RuntimeError):
     """Raised when an OpenAI-compatible endpoint returns no message content."""
 
+    def __init__(self, message: str, *, finish_reason: Optional[str] = None):
+        super().__init__(message)
+        self.finish_reason = finish_reason
+
+
+def _is_retryable_chat_error(exc: BaseException) -> bool:
+    if isinstance(exc, EmptyLLMResponseError):
+        return exc.finish_reason != "content_filter"
+    return isinstance(exc, (RateLimitError, APIConnectionError, Timeout))
+
 
 @retry(
     stop=stop_after_attempt(3),
     wait=wait_exponential(multiplier=1, min=4, max=10),
-    retry=retry_if_exception_type(
-        (RateLimitError, APIConnectionError, Timeout, EmptyLLMResponseError)
-    ),
+    retry=retry_if_exception(_is_retryable_chat_error),
 )
 async def openai_complete_if_cache(
     model,
@@ -104,7 +113,10 @@ async def openai_complete_if_cache(
         if content is None:
             finish_reason = getattr(choice, "finish_reason", None)
             logger.warning("Empty LLM response content. finish_reason=%s", finish_reason)
-            raise EmptyLLMResponseError("OpenAI-compatible endpoint returned empty message content.")
+            raise EmptyLLMResponseError(
+                "OpenAI-compatible endpoint returned empty message content.",
+                finish_reason=finish_reason,
+            )
         if r"\u" in content:
             content = safe_unicode_decode(content.encode("utf-8"))
         return content
@@ -113,9 +125,7 @@ async def openai_complete_if_cache(
 @retry(
     stop=stop_after_attempt(3),
     wait=wait_exponential(multiplier=1, min=4, max=10),
-    retry=retry_if_exception_type(
-        (RateLimitError, APIConnectionError, Timeout, EmptyLLMResponseError)
-    ),
+    retry=retry_if_exception(_is_retryable_chat_error),
 )
 async def azure_openai_complete_if_cache(
     model,
@@ -155,7 +165,10 @@ async def azure_openai_complete_if_cache(
     if content is None:
         finish_reason = getattr(choice, "finish_reason", None)
         logger.warning("Empty Azure OpenAI response content. finish_reason=%s", finish_reason)
-        raise EmptyLLMResponseError("Azure OpenAI endpoint returned empty message content.")
+        raise EmptyLLMResponseError(
+            "Azure OpenAI endpoint returned empty message content.",
+            finish_reason=finish_reason,
+        )
 
     return content
 

@@ -1,8 +1,8 @@
-dataset:
-  root: datasets/agriculture
+﻿dataset:
+  root: datasets/2wikimultihopqa
 
 runtime:
-  base_run_dir: runs
+  base_run_dir: runs/depo_hyperbranch_2wikimultihopqa0
   log_level: INFO
 
 retrieval:
@@ -19,6 +19,7 @@ llm:
   base_url_env: OPENAI_BASE_URL
   model: gpt-4o-mini
   embedding_model: text-embedding-3-small
+
   timeout_seconds: 120
   max_retries: 3
   retry_backoff_seconds: 2.0
@@ -27,3 +28,4 @@ llm:
 
 prompts:
   dir: prompts
+

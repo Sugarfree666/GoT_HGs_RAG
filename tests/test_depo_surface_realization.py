@@ -20,8 +20,6 @@ from hyper_branch.atomic import AtomicDagExecutor
 class FakeSurfaceLLM:
     def chat_json(self, system_prompt: str, prompt: str) -> dict[str, str]:
         del system_prompt
-        if '"step_id": "q3"' in prompt and "ARGMIN" in prompt:
-            return {"question": "Which of X1 and X2 was released first?"}
         if '"step_id": "q1"' in prompt and "release date" in prompt:
             return {"question": "What is the release date of Aas Ka Panchhi?"}
         if '"step_id": "q2"' in prompt and "release date" in prompt:
@@ -67,7 +65,7 @@ class DepoSurfaceRealizationTest(unittest.TestCase):
         normalized = AtomicDagExecutor.normalize_dag_payload(payload)
         self.assertEqual([node.node_id for node in AtomicDagExecutor.topological_sort(normalized)], ["q1", "q2"])
 
-    def test_selection_node_uses_candidate_metadata_not_variable_contract(self) -> None:
+    def test_operator_ast_does_not_emit_final_operator_dag_node(self) -> None:
         ast = SemanticASTResult(
             status="ok",
             primary_operator=SemanticASTPrimaryOperator(
@@ -95,22 +93,18 @@ class DepoSurfaceRealizationTest(unittest.TestCase):
         payload = dag.to_dict()
 
         self.assertEqual(validate_atomic_dag_surface(payload), [])
-        self.assertEqual([node["dependencies"] for node in payload["nodes"]], [[], [], ["q1", "q2"]])
+        self.assertEqual([node["dependencies"] for node in payload["nodes"]], [[], []])
         self.assertFalse(any(contains_bare_variable(node["question"]) for node in payload["nodes"]))
-        self.assertNotIn("Which of X1 and X2 was released first?", [node["question"] for node in payload["nodes"]])
-
-        final_node = payload["nodes"][2]
-        self.assertEqual(final_node["question"], "Which film was released first, Aas Ka Panchhi or Phoolwari?")
-        self.assertEqual(final_node["metadata"]["operator"], "ARGMIN")
         self.assertEqual(
-            final_node["metadata"]["candidates"],
+            [node["question"] for node in payload["nodes"]],
             [
-                {"label": "Aas Ka Panchhi", "source_node_id": "q1"},
-                {"label": "Phoolwari", "source_node_id": "q2"},
+                "What is the release date of Aas Ka Panchhi?",
+                "What is the release date of Phoolwari?",
             ],
         )
+        self.assertFalse(any(node.get("metadata", {}).get("operator") for node in payload["nodes"]))
         normalized = AtomicDagExecutor.normalize_dag_payload(payload)
-        self.assertEqual([node.node_id for node in AtomicDagExecutor.topological_sort(normalized)], ["q1", "q2", "q3"])
+        self.assertEqual([node.node_id for node in AtomicDagExecutor.topological_sort(normalized)], ["q1", "q2"])
 
     def test_compare_operator_with_single_chain_gets_none_feedback(self) -> None:
         ast = SemanticASTResult(

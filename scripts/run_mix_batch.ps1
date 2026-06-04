@@ -2,8 +2,7 @@ param(
     [int]$StartIndex = 0,
     [int]$EndIndex = 199,
     [string]$PythonExe = "C:\Users\sugarfree\.conda\envs\GoTHyper\python.exe",
-    [string]$BaseUrl = "https://api.chatanywhere.tech/v1",
-    [switch]$IncludeGenEval
+    [string]$BaseUrl = "https://api.chatanywhere.tech/v1"
 )
 
 $ErrorActionPreference = "Continue"
@@ -41,13 +40,8 @@ $EvalArgs = @(
     "--question-file", "questions\mix\questions.json",
     "--runs-dir", "runs\mix",
     "--limit", "200",
-    "--output-dir", $EvalDir,
-    "--workers", "1"
+    "--output-dir", $EvalDir
 )
-
-if (-not $IncludeGenEval) {
-    $EvalArgs += "--skip-gen"
-}
 
 Write-Host "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] evaluating runs into $EvalDir"
 & $PythonExe @EvalArgs

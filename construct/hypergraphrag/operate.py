@@ -38,6 +38,7 @@ from .hypermemory_prompt import (
     hypergraph_entity_pruning_prompt,
     hypergraph_prompt_evaluate,
 )
+from .llm import EmptyLLMResponseError
 
 
 ENTITY_EXTRACTION_CACHE_FILE = "kv_store_entity_extraction_cache.jsonl"
@@ -141,6 +142,50 @@ def _clear_graph_for_checkpoint_rebuild(knowledge_graph_inst: BaseGraphStorage) 
             graph.number_of_edges(),
         )
     graph.clear()
+
+
+def _find_empty_llm_response_error(exc: BaseException) -> Union[EmptyLLMResponseError, None]:
+    pending: list[BaseException] = [exc]
+    seen: set[int] = set()
+    while pending:
+        current = pending.pop()
+        if id(current) in seen:
+            continue
+        seen.add(id(current))
+
+        if isinstance(current, EmptyLLMResponseError):
+            return current
+
+        last_attempt = getattr(current, "last_attempt", None)
+        if last_attempt is not None:
+            try:
+                attempted_exc = last_attempt.exception()
+            except Exception:
+                attempted_exc = None
+            if isinstance(attempted_exc, BaseException):
+                pending.append(attempted_exc)
+
+        cause = current.__cause__
+        context = current.__context__
+        if isinstance(cause, BaseException):
+            pending.append(cause)
+        if isinstance(context, BaseException):
+            pending.append(context)
+    return None
+
+
+def _is_empty_llm_response_exception(exc: BaseException) -> bool:
+    return _find_empty_llm_response_error(exc) is not None
+
+
+def _empty_llm_response_reason(exc: BaseException) -> str:
+    empty_error = _find_empty_llm_response_error(exc)
+    if empty_error is None:
+        return str(exc)
+    finish_reason = getattr(empty_error, "finish_reason", None)
+    if finish_reason:
+        return f"finish_reason={finish_reason}"
+    return str(empty_error)
 
 
 
@@ -475,24 +520,83 @@ async def extract_entities(
         chunk_key = chunk_key_dp[0]
         chunk_dp = chunk_key_dp[1]
         content = chunk_dp["content"]
+
+        def _finish_chunk(
+            maybe_nodes: dict[str, list[dict]],
+            maybe_edges: dict[str, list[dict]],
+        ):
+            nonlocal already_processed, already_entities, already_relations
+            nodes = dict(maybe_nodes)
+            edges = dict(maybe_edges)
+            already_processed += 1
+            already_entities += len(nodes)
+            already_relations += len(edges)
+            now_ticks = PROMPTS["process_tickers"][
+                already_processed % len(PROMPTS["process_tickers"])
+            ]
+            stdout_encoding = sys.stdout.encoding or "utf-8"
+            try:
+                now_ticks.encode(stdout_encoding)
+            except UnicodeEncodeError:
+                now_ticks = "*"
+            print(
+                f"{now_ticks} Processed {already_processed} chunks, {already_entities} entities(duplicated), {already_relations} relations(duplicated)\r",
+                end="",
+                flush=True,
+            )
+            return chunk_key, nodes, edges
+
         # hint_prompt = entity_extract_prompt.format(**context_base, input_text=content)
         hint_prompt = entity_extract_prompt.format(
             **context_base, input_text="{input_text}"
         ).format(**context_base, input_text=content)
 
-        final_result = await use_llm_func(hint_prompt)
+        try:
+            final_result = await use_llm_func(hint_prompt)
+        except Exception as exc:
+            if _is_empty_llm_response_exception(exc):
+                logger.warning(
+                    "Skipping chunk %s because initial entity extraction returned empty LLM content (%s).",
+                    chunk_key,
+                    _empty_llm_response_reason(exc),
+                )
+                return _finish_chunk({}, {})
+            raise
+
         history = pack_user_ass_to_openai_messages(hint_prompt, final_result)
         for now_glean_index in range(entity_extract_max_gleaning):
-            glean_result = await use_llm_func(continue_prompt, history_messages=history)
+            try:
+                glean_result = await use_llm_func(continue_prompt, history_messages=history)
+            except Exception as exc:
+                if _is_empty_llm_response_exception(exc):
+                    logger.warning(
+                        "Stopping entity gleaning for chunk %s at pass %s because continue extraction returned empty LLM content (%s).",
+                        chunk_key,
+                        now_glean_index + 1,
+                        _empty_llm_response_reason(exc),
+                    )
+                    break
+                raise
 
             history += pack_user_ass_to_openai_messages(continue_prompt, glean_result)
             final_result += glean_result
             if now_glean_index == entity_extract_max_gleaning - 1:
                 break
 
-            if_loop_result: str = await use_llm_func(
-                if_loop_prompt, history_messages=history
-            )
+            try:
+                if_loop_result: str = await use_llm_func(
+                    if_loop_prompt, history_messages=history
+                )
+            except Exception as exc:
+                if _is_empty_llm_response_exception(exc):
+                    logger.warning(
+                        "Stopping entity gleaning for chunk %s at pass %s because loop check returned empty LLM content (%s).",
+                        chunk_key,
+                        now_glean_index + 1,
+                        _empty_llm_response_reason(exc),
+                    )
+                    break
+                raise
             if_loop_result = if_loop_result.strip().strip('"').strip("'").lower()
             if if_loop_result != "yes":
                 break
@@ -528,24 +632,8 @@ async def extract_entities(
             if if_entities is not None:
                 maybe_nodes[if_entities["entity_name"]].append(if_entities)
                 continue
-            
-        already_processed += 1
-        already_entities += len(maybe_nodes)
-        already_relations += len(maybe_edges)
-        now_ticks = PROMPTS["process_tickers"][
-            already_processed % len(PROMPTS["process_tickers"])
-        ]
-        stdout_encoding = sys.stdout.encoding or "utf-8"
-        try:
-            now_ticks.encode(stdout_encoding)
-        except UnicodeEncodeError:
-            now_ticks = "*"
-        print(
-            f"{now_ticks} Processed {already_processed} chunks, {already_entities} entities(duplicated), {already_relations} relations(duplicated)\r",
-            end="",
-            flush=True,
-        )
-        return chunk_key, dict(maybe_nodes), dict(maybe_edges)
+
+        return _finish_chunk(maybe_nodes, maybe_edges)
 
     async def _bounded_process_single_content(chunk_key_dp: tuple[str, TextChunkSchema]):
         if chunk_semaphore is None:

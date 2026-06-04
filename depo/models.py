@@ -311,6 +311,87 @@ class RestoredAnchorConnectedSubgraph:
 
 
 @dataclass
+class CandidateNode:
+    """High-recall candidate node proposed after dependency parsing.
+
+    Candidate nodes are not final AST nodes. They are a recall-oriented pool
+    used to project the dependency graph before path selection.
+    """
+
+    id: str
+    text: str
+    kind: str
+    token_ids: list[int] = field(default_factory=list)
+    graph_node_ids: list[str] = field(default_factory=list)
+    confidence: float = 1.0
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class Requirement:
+    id: str
+    root: str
+    target: str
+    description: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class ProblemFrame:
+    operator: str
+    requirements: list[Requirement] = field(default_factory=list)
+    answer_mode: str | None = None
+    answer_focus: str | None = None
+    notes: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class CandidatePath:
+    path_id: str
+    nodes: list[str]
+    node_ids: list[str]
+    candidate_for: list[str] = field(default_factory=list)
+    evidence: list[dict[str, Any]] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class SelectedPath:
+    requirement_id: str
+    path_id: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class ASTSkeleton:
+    """Program-built semantic AST skeleton derived only from selected paths."""
+
+    nodes: list["SemanticASTNode"] = field(default_factory=list)
+    edges: list["SemanticASTEdge"] = field(default_factory=list)
+    operator: "SemanticASTPrimaryOperator" = field(default_factory=lambda: SemanticASTPrimaryOperator())
+    branch_terminals: dict[str, str] = field(default_factory=dict)
+    requirement_paths: dict[str, list[str]] = field(default_factory=dict)
+    requirement_node_ids: dict[str, list[str]] = field(default_factory=dict)
+    node_surface: dict[str, str] = field(default_factory=dict)
+    node_candidate_ids: dict[str, str] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
 class SemanticASTNode:
     id: str
     label: str

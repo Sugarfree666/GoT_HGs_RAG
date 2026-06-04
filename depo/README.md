@@ -27,11 +27,12 @@ anchor decisions are made on restored original question text.
    such as `nsubj`, `obj`, `iobj`, `ccomp`, and `xcomp` stay low weight;
    modifiers such as `nmod`, `obl`, `amod`, and `compound` stay medium weight;
    `det`, `punct`, and coordination penalties keep their previous behavior.
+   This graph is still printed for compatibility and debugging.
 
 5. **Restored graph node candidates**
-   Before LLM anchor selection, graph node candidates are restored for display.
-   The internal graph still contains placeholders like `MovieA`, but the LLM
-   sees candidate text directly from the original question:
+   Graph node candidates are restored for LLM display. The internal graph still
+   contains placeholders like `MovieA`, but the LLM sees candidate text directly
+   from the original question:
 
    ```json
    {"node_id": "8", "text": "Ten9Eight: Shoot For The Moon"}
@@ -39,54 +40,57 @@ anchor decisions are made on restored original question text.
 
    It is never rendered as `MovieA [Ten9Eight: Shoot For The Moon]`.
 
-6. **Explicit anchor selection**
-   Step 4 asks the LLM to select only explicit anchors from a minimal candidate
-   anchor set. The LLM prompt contains only the semantic-normalized question,
-   and candidate `node_id`/`text` pairs; masked text, dependency tokens,
-   dependency edges, POS tags, parser labels, and placeholder metadata are
-   intentionally withheld to keep the task focused. Allowed anchor kinds are
-   `entity` and `type_variable`. The LLM should select every explicit semantic
-   endpoint needed to preserve the relation chain, including final answer
-   variables, intermediate roles/classes, constrained noun phrases, explicit
-   attributes, and single-token named entities. Generic answer-type labels such
-   as `person`, `thing`, `place`, or `time`, along with predicate/function/cue
-   words such as `share`, `developed`, `same`, `older`, `largest`, `before`,
-   `after`, `and`, and `or`, are filtered by code validation if the LLM returns
-   them. Successful LLM selections are no longer expanded by deterministic
-   anchor-completion logic.
+6. **High-recall candidate nodes and Problem Frame**
+   After CoreNLP parsing, the LLM proposes a high-recall candidate node pool and
+   a Problem Frame. Candidate nodes are not final AST nodes. They may include
+   entities, roles, slots, type qualifiers, operator cues, constraint values,
+   coreference mentions, and other noisy but useful graph nodes. The Problem
+   Frame declares the operator and the branch-level requirements.
 
-7. **Anchor connected subgraph**
-   Step 5 uses the selected anchor `node_id` values to return to the masked
-   weighted graph and compute shortest-path evidence connecting anchors. This
-   subgraph is syntactic evidence, not the final AST.
+7. **Candidate-projected graph and candidate paths**
+   The CoreNLP dependency graph is converted to an unweighted undirected graph.
+   Candidate nodes are projected onto it: two candidates receive a projected
+   edge only if a short dependency bridge connects them without crossing another
+   candidate. The program enumerates simple candidate paths, removes reverse
+   duplicates, and keeps only paths that mention at least one requirement root
+   or target.
 
-8. **Semantic AST optimization**
-   Step 6 is the only stage that may add implicit type variables and choose a
-   primary operator. The LLM receives the original question, selected anchors,
-   restored anchor connected subgraph, mask restore information, and the fixed
-   allowed operator set:
+8. **LLM path selection**
+   The LLM selects exactly one filtered candidate path per requirement. It may
+   only choose from provided `path_id` values. It cannot invent paths, generate
+   an AST, or generate atomic questions. The program validates the selection and
+   retries once on invalid output.
+
+9. **Selected paths to AST skeleton**
+   The AST skeleton is built by code from selected paths. Adjacent candidate
+   nodes become one-hop AST edges. Shared surface variables in multiple branches
+   are cloned, for example `director_r1`, `nationality_r1`, `director_r2`,
+   `nationality_r2`. Root entities can remain shared or un-cloned. The operator
+   and operator inputs come from the Problem Frame and branch terminals.
+
+10. **Relation labeling**
+   The LLM labels fixed AST edges with relation hints and confirms operator
+   metadata. It cannot add, delete, merge, reorder, or shortcut skeleton nodes
+   or edges. The validator rejects any structure not derived from selected
+   paths. The fixed allowed operator set is:
 
    `NONE`, `COMPARE_SAME`, `COMPARE_DIFF`, `COMPARE_GREATER`,
    `COMPARE_LESS`, `ARGMAX`, `ARGMIN`, `INTERSECTION`, `UNION`,
    `DIFFERENCE`, `LOGICAL_AND`, `LOGICAL_OR`.
 
-   Examples: `same` maps to `COMPARE_SAME`; `older` can create an implicit
-   `age` variable and choose `COMPARE_GREATER`; `largest population` chooses
-   `ARGMAX`. Non-`NONE` operators are materialized as AST operator nodes, and
-   branch endpoint variables point into that operator node.
-
-9. **Execution DAG and atomic subquestion generation**
-   Step 8 first compiles the final semantic AST into a deterministic execution
+11. **Execution DAG and atomic subquestion generation**
+   The final semantic AST is compiled into a deterministic execution
    DAG. This code layer decides edge order, variable bindings such as `X1` and
-   `X2`, and the final operator step. Operator nodes are AST join nodes, not
-   ordinary attribute hops.
+   `X2`. Non-`NONE` operators stay in the semantic AST, but they are not emitted
+   as extra atomic DAG questions by default.
 
    The LLM then receives only one compiled plan step at a time. For an edge
    step, it turns `known -> ask` into one atomic subquestion whose answer is the
-   assigned variable. For an operator step, it applies the operator to the bound
-   branch variables. The LLM is no longer allowed to see and re-plan the full AST
-   during subquestion generation, which prevents multi-hop fusion and accidental
-   expansion of already-bound variables.
+   assigned variable. Final comparison, ranking, set, or logical reasoning is
+   left to the HyperBranch final answer composer, which receives the original
+   question plus the atomic answers and evidence. The LLM is no longer allowed
+   to see and re-plan the full AST during subquestion generation, which prevents
+   multi-hop fusion and accidental expansion of already-bound variables.
 
 ## Run
 

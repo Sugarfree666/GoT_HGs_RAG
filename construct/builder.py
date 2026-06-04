@@ -31,7 +31,7 @@ class ConstructConfig:
     max_concurrency: int | None = None
     llm_max_async: int = 16
     embedding_max_async: int = 16
-    resume: bool = False
+    resume: bool = True
 
 
 def construct_hypergraph(config: ConstructConfig) -> dict[str, Any]:
@@ -277,8 +277,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--embedding-max-async", type=int, default=16, help="Max concurrent embedding calls.")
     parser.add_argument(
         "--resume",
+        dest="resume",
         action="store_true",
-        help="Enable checkpoint files for resumable entity extraction. Disabled by default to match standard dataset outputs.",
+        default=True,
+        help="Enable checkpoint files for resumable entity extraction. Enabled by default.",
+    )
+    parser.add_argument(
+        "--no-resume",
+        dest="resume",
+        action="store_false",
+        help="Disable entity extraction checkpoint files.",
     )
     return parser.parse_args()
 
