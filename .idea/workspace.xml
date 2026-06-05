@@ -5,38 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/agriculture.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/mix.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/construct/builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/construct/builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/construct/hypergraphrag/llm.py" beforeDir="false" afterPath="$PROJECT_DIR$/construct/hypergraphrag/llm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/construct/hypergraphrag/operate.py" beforeDir="false" afterPath="$PROJECT_DIR$/construct/hypergraphrag/operate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval/eval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/eval_g.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/eval_r.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/get_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval/get_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/eval/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/see_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval/see_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/simcse/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/simcse/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/simcse/tool.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/simcse/trainers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hypergraphrag.log" beforeDir="false" afterPath="$PROJECT_DIR$/hypergraphrag.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/questions/agriculture/query_test.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/questions/agriculture/questions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/questions/agriculture/questions_first100.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/questions/cs/questions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/questions/hypertension/questions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/questions/legal/questions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/questions/mix/questions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/ask_depo_hyperbranch.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_2wikimultihopqa_remaining.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_2wikimultihopqa_remaining.ps1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_depo_2wiki.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_llm_only_2wiki.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_llm_only_2wiki.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run_mix_batch.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_mix_batch.ps1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_eval_get_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_eval_get_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_eval_metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_eval_metrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/graph_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/graph_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/mask_span_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/mask_span_extractor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/path_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/path_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/prompts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/subquestion_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/subquestion_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_depo_path_projection.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_depo_path_projection.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +21,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="33573" />
+    <option name="cachedIndexableFilesCount" value="32851" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -65,23 +42,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.2483626629726396" />
-      <entry key="MS500" value="1.9691224905204205" />
-      <entry key="S2" value="3.818613670879055" />
-      <entry key="S5" value="6.425846828371627" />
-      <entry key="S10" value="8.670905756021021" />
-      <entry key="S30" value="11.207397703872454" />
-      <entry key="S60" value="12.049199204266234" />
-      <entry key="M2" value="12.509984683538926" />
-      <entry key="M5" value="12.826401642321501" />
-      <entry key="M10" value="13.834950450955068" />
-      <entry key="M15" value="16.054245202512163" />
-      <entry key="M30" value="24.050271116566176" />
-      <entry key="H1" value="39.36962894236957" />
-      <entry key="H2" value="64.47403300353082" />
-      <entry key="H4" value="91.9008346156797" />
-      <entry key="D1" value="131.34329324315837" />
-      <entry key="W1" value="140.40794533533358" />
+      <entry key="MS100" value="1.0041289781423826" />
+      <entry key="MS500" value="1.350728902363811" />
+      <entry key="S2" value="2.2850142579080153" />
+      <entry key="S5" value="3.511248358477352" />
+      <entry key="S10" value="5.636343924884871" />
+      <entry key="S30" value="14.000914415923706" />
+      <entry key="S60" value="21.794506725408525" />
+      <entry key="M2" value="29.906486296072973" />
+      <entry key="M5" value="42.183989992309264" />
+      <entry key="M10" value="56.07524839528499" />
+      <entry key="M15" value="66.38283104932854" />
+      <entry key="M30" value="85.41770005942116" />
+      <entry key="H1" value="102.0846085930822" />
+      <entry key="H2" value="118.56240837681615" />
+      <entry key="H4" value="159.67544887102432" />
+      <entry key="D1" value="366.3245488167134" />
+      <entry key="W1" value="458.4555661449494" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -103,23 +80,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.202537826521126" />
-      <entry key="MS500" value="1.9534035082904322" />
-      <entry key="S2" value="3.8101671368881176" />
-      <entry key="S5" value="6.4191122607001185" />
-      <entry key="S10" value="8.665792108475921" />
-      <entry key="S30" value="11.204964215019455" />
-      <entry key="S60" value="12.047855405150122" />
-      <entry key="M2" value="12.50927747798731" />
-      <entry key="M5" value="12.82610930567986" />
-      <entry key="M10" value="13.834794469715156" />
-      <entry key="M15" value="16.05412771526039" />
-      <entry key="M30" value="24.05018806766001" />
-      <entry key="H1" value="39.369561363655784" />
-      <entry key="H2" value="64.47397446252785" />
-      <entry key="H4" value="91.90079069808868" />
-      <entry key="D1" value="131.34328224265224" />
-      <entry key="W1" value="140.4079436402922" />
+      <entry key="MS100" value="0.9631975407967908" />
+      <entry key="MS500" value="1.3390588317994228" />
+      <entry key="S2" value="2.2798791375082623" />
+      <entry key="S5" value="3.5080733438752976" />
+      <entry key="S10" value="5.633738612498755" />
+      <entry key="S30" value="13.998657701333151" />
+      <entry key="S60" value="21.79273657993568" />
+      <entry key="M2" value="29.90527424039183" />
+      <entry key="M5" value="42.18330371614009" />
+      <entry key="M10" value="56.07478361708395" />
+      <entry key="M15" value="66.38245899036012" />
+      <entry key="M30" value="85.41745543733141" />
+      <entry key="H1" value="102.08446022068888" />
+      <entry key="H2" value="118.56232018818666" />
+      <entry key="H4" value="159.67538543430894" />
+      <entry key="D1" value="366.3245215917872" />
+      <entry key="W1" value="458.45556118251255" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -249,7 +226,8 @@
       <workItem from="1780469583404" duration="9734000" />
       <workItem from="1780537179156" duration="19000" />
       <workItem from="1780541004385" duration="3449000" />
-      <workItem from="1780551944328" duration="7242000" />
+      <workItem from="1780551944328" duration="22729000" />
+      <workItem from="1780590199613" duration="7932000" />
     </task>
     <servers />
   </component>

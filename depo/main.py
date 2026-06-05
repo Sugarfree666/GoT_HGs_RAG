@@ -167,7 +167,6 @@ def run_pipeline(
         extracted_nodes=mask_spans,
     )
     dependency_parse = parser.parse(replacement.masked_question)
-    weighted_graph = graph_builder.build_weighted_dependency_graph(dependency_parse)
     graph_node_candidates = graph_builder.build_graph_node_candidates(
         dependency_parse=dependency_parse,
         replacement=replacement,
@@ -192,6 +191,7 @@ def run_pipeline(
         question=record.question,
         restored_question=processing_question,
         graph_nodes=restored_graph_nodes,
+        masked_question=replacement.masked_question,
     )
     candidate_projected_graph = build_candidate_projected_graph(
         dependency_graph=dependency_graph,
@@ -274,7 +274,7 @@ def run_pipeline(
         "mask_spans": mask_spans,
         "replacement": replacement,
         "dependency_parse": dependency_parse,
-        "weighted_graph": weighted_graph,
+        "weighted_graph": dependency_graph,
         "graph_node_candidates": graph_node_candidates,
         "restored_graph_node_candidates": restored_graph_node_candidates,
         "dependency_graph": dependency_graph,
@@ -296,13 +296,13 @@ def run_pipeline(
 
 
 def print_result(index: int, record: QuestionRecord, result: dict[str, Any], debug: bool = False) -> None:
-    from graph_builder import format_weighted_graph_edges
+    from graph_builder import format_undirected_graph_edges
 
     semantic_normalization: SemanticNormalizationResult = result["semantic_normalization"]
     mask_spans: MaskSpanResult = result["mask_spans"]
     replacement: MaskReplacement = result["replacement"]
     dependency_parse = result["dependency_parse"]
-    weighted_graph = result["weighted_graph"]
+    dependency_graph = result.get("dependency_graph", result["weighted_graph"])
     restored_graph_node_candidates: list[RestoredGraphNodeCandidate] = result["restored_graph_node_candidates"]
     candidate_nodes: list[CandidateNode] = result["candidate_nodes"]
     problem_frame: ProblemFrame = result["problem_frame"]
@@ -358,13 +358,13 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
         print("  (no dependency edges)")
     print()
 
-    print("[5. Weighted Undirected Dependency Graph]")
-    weighted_lines = format_weighted_graph_edges(weighted_graph)
-    if weighted_lines:
-        for line in weighted_lines:
+    print("[5. Undirected Dependency Graph]")
+    graph_lines = format_undirected_graph_edges(dependency_graph)
+    if graph_lines:
+        for line in graph_lines:
             print(line)
     else:
-        print("  (no weighted edges)")
+        print("  (no dependency graph edges)")
     print()
 
     print("[6. Restored Graph Node Candidates]")
@@ -455,7 +455,6 @@ def _print_candidate_nodes(candidate_nodes: list[CandidateNode]) -> None:
 
 
 def _print_problem_frame(problem_frame: ProblemFrame) -> None:
-    print(f"Operator: {problem_frame.operator}")
     if problem_frame.answer_mode:
         print(f"Answer mode: {problem_frame.answer_mode}")
     if problem_frame.answer_focus:
@@ -468,7 +467,8 @@ def _print_problem_frame(problem_frame: ProblemFrame) -> None:
         return
     for requirement in problem_frame.requirements:
         description = f" - {requirement.description}" if requirement.description else ""
-        print(f"  - {requirement.id}: {requirement.root} -> {requirement.target}{description}")
+        context = f" context={requirement.context}" if requirement.context else ""
+        print(f"  - {requirement.id}: {requirement.root} -> {requirement.target}{context}{description}")
 
 
 def _print_candidate_paths(candidate_paths: list[CandidatePath]) -> None:

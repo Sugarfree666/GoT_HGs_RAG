@@ -17,15 +17,15 @@ ALLOWED_OPERATORS = [
     "LOGICAL_OR",
 ]
 
-CANDIDATE_NODES_AND_FRAME_SYSTEM = """
+CANDIDATE_NODES_SYSTEM = """
 You are implementing the DEPO path-projection pipeline after CoreNLP parsing.
 
-Current step: produce a high-recall candidate node pool and a Problem Frame.
+Current step: produce a high-recall candidate node pool only.
 
-The candidate node pool is not the final AST.
-You may include noisy but potentially useful candidate nodes such as type qualifiers,
-operator cues, role nouns, value slots, coreference mentions, and constraints.
+Candidate nodes must be semantic endpoints used for dependency-path projection.
+They are not relation words, not predicates, not function words, and not final AST nodes.
 
+Do not generate a Problem Frame.
 Do not generate a full AST.
 Do not generate selected paths.
 Do not generate atomic questions.
@@ -33,7 +33,7 @@ Return valid JSON only.
 """.strip()
 
 
-def build_candidate_nodes_and_frame_prompt(
+def build_candidate_nodes_prompt(
     question: str,
     restored_question: str,
     graph_nodes: list[dict[str, object]],
@@ -47,30 +47,10 @@ def build_candidate_nodes_and_frame_prompt(
                 "graph_node_ids": ["4"],
                 "confidence": 1.0,
             }
-        ],
-        "problem_frame": {
-            "operator": "COMPARE_SAME",
-            "answer_mode": "boolean",
-            "answer_focus": None,
-            "notes": None,
-            "requirements": [
-                {
-                    "id": "r1",
-                    "root": "MovieA",
-                    "target": "nationality",
-                    "description": "nationality associated with MovieA branch",
-                },
-                {
-                    "id": "r2",
-                    "root": "MovieB",
-                    "target": "nationality",
-                    "description": "nationality associated with MovieB branch",
-                },
-            ],
-        },
+        ]
     }
     return f"""
-Build high-recall candidate nodes and a Problem Frame for the question.
+Build high-recall candidate nodes for the question.
 
 Original question:
 {question}
@@ -84,26 +64,31 @@ Restored dependency graph nodes:
 Candidate node rules:
 1. candidate_nodes is a high-recall pool, not final AST nodes.
 2. Include every likely semantic endpoint needed for path construction.
-3. It is acceptable to include noisy candidates such as type qualifiers, operator cues,
-   constraint values, and coreference mentions, but mark kind accurately.
+3. A semantic endpoint is a named entity, explicit role noun, answer slot/value type,
+   class/type noun, constraint value, or coreference mention that can act as a path endpoint.
 4. Use kind values from:
-   entity, role, slot, type_qualifier, operator_cue, constraint_value, coref, other.
+   entity, role, slot, type_qualifier, constraint_value, coref, other.
 5. If possible, include graph_node_ids copied from the provided graph node list.
 6. Do not invent graph_node_ids. If grounding is uncertain, omit graph_node_ids.
+7. Use other only for a semantic endpoint that does not fit the other kinds.
 
-Problem Frame rules:
-1. requirements must describe the branch-level outputs the final program needs.
-2. Each requirement should have a stable id such as r1, r2.
-3. root is the branch starting point, usually a fixed entity.
-4. target is the branch-level value that should feed the final operator.
-5. operator must be one of:
-   {", ".join(ALLOWED_OPERATORS)}
-6. Use NONE for a single serial lookup with no comparison, set, ranking, or logical operator.
-7. Use COMPARE_SAME when the question asks whether branch outputs are the same.
-8. Use COMPARE_DIFF when the question asks whether branch outputs are different.
-9. Use ARGMAX/ARGMIN for max/min selection and INTERSECTION/UNION/DIFFERENCE for set operations.
+Allowed endpoint examples:
+- named entities: AlphaGo, MovieA, The Godfather, BookA, Paris
+- roles: CEO, director, author, spouse
+- slots/value types: university, city, nationality, birth_date, death_date
+- type qualifiers when they are endpoints: company, film, book, organization
+- constraint values: 1999, France, Nobel Prize
 
 Forbidden:
+- Do not include function words or auxiliaries: did, do, does, is, was, were, be, have.
+- Do not include wh/function fragments: which, who, what, where, when, in which, by whom.
+- Do not include prepositions or particles: of, in, by, to, from, with, for, at, on.
+- Do not include relative-clause connectors: that, which, who, whom, whose.
+- Do not include conjunctions or determiners: and, or, the, a, an, this, that.
+- Do not include predicates or relation cues merely because they connect endpoints:
+  developed, graduate, graduated, located, born, died, played, share, same, different.
+- Do not output kind=operator_cue. That kind is not supported in this pipeline.
+- Do not generate a Problem Frame.
 - Do not generate a complete AST.
 - Do not select final paths.
 - Do not generate atomic subquestions.
@@ -111,6 +96,147 @@ Forbidden:
 
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
+
+PROBLEM_FRAME_SYSTEM = """
+You are given a complex question and its masked / normalized form.
+
+Your task is to construct a lightweight Problem Frame for path selection.
+
+The Problem Frame is NOT an AST.
+The Problem Frame is NOT a decomposition.
+The Problem Frame must NOT contain intermediate nodes.
+The Problem Frame must only specify:
+
+1. The known root entity or entities.
+2. The final target slot/value that must be reached from each root.
+3. Optional answer_focus and answer_mode.
+
+Important definitions:
+
+* root:
+  A given entity or explicit starting point in the question.
+  Examples: a movie title, book title, person name, organization name, location name.
+
+* target:
+  The final answer slot/value required by the original question.
+  The target is NOT the first intermediate variable.
+  The target is NOT a relation cue.
+  The target is NOT a preposition or function word.
+  The target should be the value that the selected path ultimately needs to reach.
+
+* requirement:
+  One branch-level search objective of the form:
+  root -> target
+
+For serial multi-hop lookup questions, create exactly ONE requirement from the known root to the final answer target.
+
+Example:
+Question: Who is the spouse of the author of BookA?
+Correct requirement:
+root = BookA
+target = spouse
+Incorrect requirement:
+root = BookA
+target = author
+Reason: author is only an intermediate node; spouse is the final answer target.
+
+For parallel or comparison questions, create one requirement per branch.
+
+Example:
+Question: Do the directors of MovieA and MovieB share the same nationality?
+Correct requirements:
+r1: root = MovieA, target = nationality
+r2: root = MovieB, target = nationality
+Do NOT create an extra operator requirement.
+Do NOT create a final comparison question.
+
+For asymmetric parallel questions, each branch may have a different implied intermediate relation, but the requirement should still point to the final target.
+
+Example:
+Question: Was the author of BookA born before the director of MovieB died?
+Correct requirements:
+r1: root = BookA, target = birth_date
+r2: root = MovieB, target = death_date
+
+For context-constrained questions, keep the main root -> target requirement and place contextual entities in context.
+
+Example:
+Question: Who is played by the director of MovieA in MovieB?
+Correct requirement:
+root = MovieA
+target = Who
+context = [MovieB]
+Reason: MovieB constrains the final relation "played in MovieB"; it is not the main target.
+
+Do not output operators such as COMPARE_SAME, ARGMAX, COUNT, NONE, VERIFY, or FILTER.
+Final comparison, verification, counting, and answer synthesis will be handled downstream using the original question and subquestion answers.
+The Problem Frame only guides path selection.
+
+Forbidden targets:
+
+* pure function words: of, in, by, to, from, with, for
+* determiners or auxiliaries: the, a, an, is, was, do, does
+* punctuation
+* generic relation cues unless they are the actual answer slot
+
+Output strict JSON only. Do not output markdown.
+
+JSON schema:
+
+{
+"answer_focus": string | null,
+"answer_mode": string | null,
+"requirements": [
+{
+"id": "r1",
+"root": string,
+"target": string,
+"context": [string],
+"description": string
+}
+]
+}
+
+Requirements:
+
+* Every requirement must have a non-empty root and target.
+* The number of requirements should equal the number of branch-level outputs needed to answer the question.
+* For ordinary serial multi-hop questions, use one requirement.
+* For parallel / comparison / intersection-style questions, use one requirement per branch.
+* Do not include intermediate nodes as separate requirements.
+* Do not include operator requirements.
+* The target must be the final slot needed for answering the original question.
+""".strip()
+
+
+def build_problem_frame_prompt(
+    question: str,
+    restored_question: str,
+    graph_nodes: list[dict[str, object]],
+    candidate_nodes: list[dict[str, object]],
+    masked_question: str | None = None,
+) -> str:
+    return f"""
+Construct the lightweight Problem Frame for this question.
+
+Complex question:
+{question}
+
+Masked / normalized form:
+{masked_question or restored_question}
+
+Restored/normalized question:
+{restored_question}
+
+High-recall candidate nodes available for path selection:
+{json.dumps(candidate_nodes, ensure_ascii=False, indent=2)}
+
+Restored dependency graph nodes:
+{json.dumps(graph_nodes, ensure_ascii=False, indent=2)}
+
+Return the strict JSON object only.
 """.strip()
 
 
@@ -317,7 +443,7 @@ A. Multi-token proper names
 Return every continuous multi-token proper name:
 - person names: "John Middleton Murry", "Gideon Johnson Pillow", "Holm Jølsen";
 - organization/company/institution names;
-- place names;
+- place, geopolitical region, and historical region names;
 - event/product names;
 - named works and titles.
 
@@ -1055,20 +1181,6 @@ Output JSON with exactly this shape:
 """.strip()
 
 
-ATOMIC_SUBQUESTION_GENERATION_SYSTEM = """
-You are implementing DEPO Step 8: LLM-based atomic subquestion generation.
-Generate exactly one atomic subquestion for the provided one-hop semantic AST edge, or exactly one final operator question for the provided primary operator.
-Use the original question and semantic AST context, but do not combine multiple AST edges into a multi-hop question.
-The input edge is already oriented as source/bound node -> target node to solve.
-Internal variables such as X1, X2, V1, and VAR_* are implementation details. Never expose them in the generated question.
-If the source is bound to an answer variable, use the provided natural-language dependency description instead.
-For ordinary attribute edges, do not include operator cue words such as same, older, largest, before, or after.
-For operator steps, preserve the concrete cue from the original question and name the natural-language candidates or compared facts explicitly.
-The DAG inputs, outputs, dependencies, edges, and candidate bindings are produced by code; only write the natural-language question text.
-Return valid JSON only.
-""".strip()
-
-
 ATOMIC_PLAN_STEP_SURFACE_SYSTEM = """
 You are implementing DEPO Step 10: atomic subquestion surface realization.
 
@@ -1302,60 +1414,12 @@ Output JSON with exactly this shape:
 """.strip()
 
 
-def build_atomic_subquestion_generation_prompt(
-    original_question: str,
-    semantic_ast: dict[str, object],
-    current_edge: dict[str, object],
-    source_node: dict[str, object] | None,
-    target_node: dict[str, object] | None,
-    primary_operator: dict[str, object],
-) -> str:
-    schema = {
-        "question": "Who is the director of Ten9Eight: Shoot For The Moon?",
-        "explanation": "This asks only for the target node of the one-hop edge.",
-    }
-    return f"""
-Generate one atomic subquestion for the current semantic item.
-
-Original question:
-{original_question}
-
-Final semantic AST:
-{json.dumps(semantic_ast, ensure_ascii=False, indent=2)}
-
-Current one-hop edge or operator step:
-{json.dumps(current_edge, ensure_ascii=False, indent=2)}
-
-Source node:
-{json.dumps(source_node, ensure_ascii=False, indent=2)}
-
-Target node:
-{json.dumps(target_node, ensure_ascii=False, indent=2)}
-
-Primary operator:
-{json.dumps(primary_operator, ensure_ascii=False, indent=2)}
-
-Rules:
-- For a directed one-hop edge, generate exactly one question for that edge only.
-- Treat current_edge.source_display as the known subject. Treat current_edge.target_label as the value to ask for.
-- Internal variables such as X1, X2, V1, and VAR_* are implementation details and must not appear in the generated question.
-- When current_edge.source_display is a variable, use the surrounding semantic context to produce the most natural descriptive question without inventing the answer.
-- The answer to this subquestion will be current_edge.answer_variable.
-- Do not merge this edge with another edge.
-- Do not include same/older/largest/comparative/superlative cue words in ordinary attribute questions.
-- For an implicit variable edge such as actor -> age, ask a normal attribute question such as "What is the age of the actor?"
-- For an operator step, generate the final operator question using the original question, primary_operator.operator, primary_operator.cue_text, and natural-language candidate descriptions. Do not mention input variables.
-
-Output JSON with exactly this shape:
-{json.dumps(schema, ensure_ascii=False, indent=2)}
-""".strip()
-
 GLOBAL_METHOD_GUARD = """
 You are implementing the DEPO method from depo.md.
 CoreNLP parses a selectively masked question: complex noun phrases may be replaced by POS-hinting placeholders such as MovieA, CompanyA, or NetworkA.
 Type variables and syntactic scaffold words stay in natural language.
 After parsing, entity/type-variable token spans are folded into anchor supernodes on the dependency graph.
-The MST is an anchor-only MST over entity/type-variable anchor nodes.
+The semantic graph is an anchor-only undirected graph over entity/type-variable anchor nodes.
 Do not do ordinary end-to-end subquestion decomposition.
 Do only the current pipeline step.
 Do not introduce unsupported entities or type variables; implicit attribute variables are allowed only when grounded by an explicit comparative, superlative, ordinal, or predicate cue in the original question.
@@ -1455,7 +1519,7 @@ OPERATOR_SELECTION_SYSTEM = (
     GLOBAL_METHOD_GUARD
     + f"""
 Current step: choose operators and shared-node attachments for the final AST.
-The input graph is already an anchor-only semantic graph built from weighted dependency shortest paths.
+The input graph is already an anchor-only undirected semantic graph.
 You must not rewrite the anchor graph.
 You must not add, remove, or reorder anchor-anchor edges.
 You must not generate subquestions.

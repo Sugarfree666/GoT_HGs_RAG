@@ -138,7 +138,7 @@ class GraphBuilder:
         if closure.number_of_nodes() > 1 and not nx.is_connected(closure):
             components = [sorted(component) for component in nx.connected_components(closure)]
             raise AnchorGraphError(
-                "Could not connect all anchors in the weighted dependency graph. Components: "
+                "Could not connect all anchors in the dependency graph. Components: "
                 + "; ".join(", ".join(component) for component in components)
             )
 
@@ -650,7 +650,7 @@ def format_dependency_edges(dependency_parse: DependencyParse) -> list[str]:
     return [f"  - {edge.display()}" for edge in dependency_parse.edges]
 
 
-def format_weighted_graph_edges(graph: nx.Graph) -> list[str]:
+def format_undirected_graph_edges(graph: nx.Graph) -> list[str]:
     lines: list[str] = []
     for source, target, attrs in sorted(
         graph.edges(data=True),
@@ -664,10 +664,13 @@ def format_weighted_graph_edges(graph: nx.Graph) -> list[str]:
         relation = "|".join(attrs.get("relations", [])) or attrs.get("relation", "")
         relation_text = f" ({relation})" if relation else ""
         lines.append(
-            f"  - {_graph_node_label(graph, source)} --{attrs.get('weight', DEFAULT_RELATION_WEIGHT)}-- "
-            f"{_graph_node_label(graph, target)}{relation_text}"
+            f"  - {_graph_node_label(graph, source)} -- {_graph_node_label(graph, target)}{relation_text}"
         )
     return lines
+
+
+def format_weighted_graph_edges(graph: nx.Graph) -> list[str]:
+    return format_undirected_graph_edges(graph)
 
 
 def relation_weight(relation: str) -> float:

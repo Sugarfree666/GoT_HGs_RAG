@@ -335,6 +335,7 @@ class Requirement:
     root: str
     target: str
     description: str | None = None
+    context: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

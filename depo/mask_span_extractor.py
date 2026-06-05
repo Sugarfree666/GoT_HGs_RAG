@@ -121,6 +121,22 @@ NON_PERSON_NAME_WORDS = {
 
 PERSON_NAME_PARTICLES = {"al", "bin", "da", "de", "del", "der", "di", "la", "le", "van", "von"}
 CAPITALIZED_ENTITY_TOKEN = r"(?:[A-Z][A-Za-z0-9']+|[A-Z]\.|[A-Z]{2,}(?:\.)?)"
+CAPITALIZED_ENTITY_CONNECTORS = {"de", "for", "la", "of", "the"}
+CONTEXT_SEMANTIC_TYPE_CUES = [
+    ("university", "University"),
+    ("institution", "Institution"),
+    ("school", "Institution"),
+    ("company", "Company"),
+    ("organization", "Organization"),
+    ("organisation", "Organization"),
+    ("city", "City"),
+    ("country", "Country"),
+    ("region", "Region"),
+    ("province", "Region"),
+    ("state", "Region"),
+    ("location", "Location"),
+    ("place", "Location"),
+]
 
 CLAUSE_BOUNDARY = {
     "and",
@@ -164,8 +180,10 @@ class MaskSpanExtractor:
                     MASK_SPAN_EXTRACTION_SYSTEM,
                     build_mask_span_extraction_prompt(question),
                 )
+                llm_spans = self._parse_payload(question, payload, warnings)
+                heuristic_spans = _heuristic_mask_spans(question)
                 return MaskSpanResult(
-                    mask_spans=self._parse_payload(question, payload, warnings),
+                    mask_spans=_merge_spans(question, [*llm_spans, *heuristic_spans], warnings),
                     warnings=warnings,
                 )
             except Exception as exc:
@@ -384,29 +402,70 @@ def _is_person_name_token(token: str) -> bool:
     return bool(re.fullmatch(r"[A-Z][A-Za-z'.-]*", stripped))
 
 
+def _is_capitalized_entity_token(token: str) -> bool:
+    stripped = token.strip()
+    return bool(
+        re.fullmatch(r"[A-Z][A-Za-z0-9'.-]*", stripped)
+        or re.fullmatch(r"[A-Z]\.", stripped)
+        or re.fullmatch(r"[A-Z]{2,}(?:\.)?", stripped.strip("."))
+    )
+
+
 def _capitalized_entity_spans(question: str) -> list[MaskSpan]:
     spans: list[MaskSpan] = []
-    pattern = re.compile(
-        rf"\b{CAPITALIZED_ENTITY_TOKEN}(?:\s+(?:of|the|and|for|de|la|{CAPITALIZED_ENTITY_TOKEN})){{1,6}}\b"
-    )
-    for match in pattern.finditer(question):
-        text = match.group(0).strip()
-        if _token_count(text) < 2 or _starts_sentence_only(question, match.start(), text):
+    token_matches = list(re.finditer(r"[A-Za-z][A-Za-z0-9'.-]*", question))
+    index = 0
+    while index < len(token_matches):
+        match = token_matches[index]
+        token = match.group(0).strip()
+        if not _is_capitalized_entity_token(token):
+            index += 1
             continue
-        if _capitalized_content_token_count(text) < 2:
-            continue
-        if not _is_mask_worthy(text):
+
+        start = match.start()
+        end = match.end()
+        last_content_end = end
+        content_count = 1
+        cursor = index + 1
+        while cursor < len(token_matches):
+            next_match = token_matches[cursor]
+            between = question[end : next_match.start()]
+            if not between.isspace():
+                break
+            next_token = next_match.group(0).strip()
+            lowered = next_token.lower().strip(".")
+            if _is_capitalized_entity_token(next_token):
+                end = next_match.end()
+                last_content_end = end
+                content_count += 1
+                cursor += 1
+                continue
+            if lowered in CAPITALIZED_ENTITY_CONNECTORS:
+                end = next_match.end()
+                cursor += 1
+                continue
+            break
+
+        end = last_content_end
+        text = question[start:end].strip()
+        if (
+            content_count < 2
+            or _starts_sentence_only(question, start, text)
+            or not _is_mask_worthy(text)
+        ):
+            index += 1
             continue
         spans.append(
             MaskSpan(
                 text=text,
-                start_char=match.start(),
-                end_char=match.end(),
+                start_char=start,
+                end_char=end,
                 kind_hint="entity",
-                semantic_type_hint=_infer_semantic_type(text, "entity", question, match.start(), match.end()),
+                semantic_type_hint=_infer_semantic_type(text, "entity", question, start, end),
                 reason="continuous multi-word named entity",
             )
         )
+        index = max(cursor, index + 1)
     return spans
 
 
@@ -661,7 +720,22 @@ def _starts_sentence_only(question: str, start: int, text: str) -> bool:
     first = re.match(r"\w+", text)
     if not first:
         return False
-    return first.group(0).lower() in {"what", "which", "who", "do", "does", "did", "is", "are"}
+    return first.group(0).lower() in {
+        "are",
+        "did",
+        "do",
+        "does",
+        "how",
+        "is",
+        "was",
+        "were",
+        "what",
+        "when",
+        "where",
+        "which",
+        "who",
+        "why",
+    }
 
 
 def _infer_semantic_type(
@@ -682,6 +756,9 @@ def _infer_semantic_type(
         return "University"
     if "city" in lowered:
         return "City"
+    context_type = _semantic_type_from_local_context(question, start, end)
+    if context_type is not None:
+        return context_type
     if (
         kind_hint == "entity"
         and question
@@ -690,6 +767,20 @@ def _infer_semantic_type(
     ):
         return "Person"
     return normalize_semantic_type(text, "entity" if kind_hint == "entity" else "type_variable")
+
+
+def _semantic_type_from_local_context(
+    question: str,
+    start: int | None,
+    end: int | None,
+) -> str | None:
+    if not question or start is None or end is None:
+        return None
+    local_text = f"{question[max(0, start - 80):start]} {question[end:min(len(question), end + 80)]}".lower()
+    for cue, semantic_type in CONTEXT_SEMANTIC_TYPE_CUES:
+        if re.search(rf"\b{re.escape(cue)}\b", local_text):
+            return semantic_type
+    return None
 
 
 def _refine_semantic_type(
@@ -791,17 +882,6 @@ def _resolve_span(
 
 def _token_count(text: str) -> int:
     return len(re.findall(r"[A-Za-z0-9]+", text))
-
-
-def _capitalized_content_token_count(text: str) -> int:
-    count = 0
-    for word in re.findall(r"[A-Za-z0-9']+", text):
-        lowered = word.lower()
-        if lowered in {"and", "de", "for", "la", "of", "the"}:
-            continue
-        if word[:1].isupper() or word.isupper():
-            count += 1
-    return count
 
 
 def _coerce_int(value: Any) -> int | None:

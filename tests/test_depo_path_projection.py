@@ -44,7 +44,9 @@ class FakePathLLM:
 
     def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
         if "candidate node pool" in system_prompt:
-            return self.candidate_frame_payload
+            return {"candidate_nodes": self.candidate_frame_payload.get("candidate_nodes", [])}
+        if "lightweight Problem Frame" in system_prompt:
+            return self.candidate_frame_payload.get("problem_frame", self.candidate_frame_payload)
         if "choose exactly one" in system_prompt:
             paths = _json_after_marker(prompt, "Filtered candidate paths:")
             selected = []
@@ -114,7 +116,6 @@ class PathProjectionPipelineTest(unittest.TestCase):
             CandidateNode(id="film", text="film", kind="type_qualifier"),
             CandidateNode(id="director", text="director", kind="role"),
             CandidateNode(id="nationality", text="nationality", kind="slot"),
-            CandidateNode(id="same", text="same", kind="operator_cue"),
         ]
         problem_frame = ProblemFrame(
             operator="COMPARE_SAME",
