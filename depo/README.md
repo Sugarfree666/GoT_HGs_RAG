@@ -59,13 +59,20 @@ anchor decisions are made on restored original question text.
    Problem Frame, build an AST, or generate atomic questions. The program
    validates entity/path consistency and retries once on invalid output.
 
-9. **Path-pruned semantic AST**
-   The selected raw dependency paths are used as evidence for an LLM AST prompt.
-   The LLM removes syntactic noise, keeps semantic reasoning nodes, labels
-   one-hop relations, and keeps every selected path as an independent branch.
-   It does not infer or emit operators. If the LLM merges parallel branches into
-   shared suffix nodes, DEPO localizes those shared non-entity nodes back into
-   branch-specific path nodes before atomic subquestion generation.
+9. **Selected Path Semantic Transduction**
+   The selected dependency paths are syntactic evidence, not the final semantic
+   graph. The LLM converts each selected path into an executable branch-level
+   relation chain whose nodes are query endpoints: fixed entities, licensed
+   intermediate variables, and final value slots such as `death_date`,
+   `birth_date`, `birthplace`, `university`, or `nationality`.
+
+   Step 9 must not copy wh words, auxiliaries, prepositions, punctuation,
+   comparison cues, or pure event predicates such as `die`, `born`, `worked`,
+   `developed`, and `graduated` into AST nodes. Those tokens are converted into
+   relation labels or value slots, for example `When + die -> death_date`.
+   Possessive chains are kept executable, so `Lothair II's mother` becomes
+   `Lothair II -> mother`, followed by `mother -> death_date`. DEPO validates
+   this contract and retries once on invalid transductions.
 
 10. **Execution DAG and atomic subquestion generation**
    The final semantic AST is compiled into a deterministic execution

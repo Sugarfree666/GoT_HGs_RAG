@@ -6,6 +6,7 @@ from entity_path_projector import (
     localize_path_pruned_ast_branches,
     parse_path_pruned_ast_payload,
     validate_selected_entity_paths,
+    validate_selected_path_semantic_ast,
 )
 from models import (
     EntityOriginPath,
@@ -15,8 +16,8 @@ from models import (
 )
 from prompts import (
     ENTITY_PATH_SELECTION_SYSTEM,
-    PATH_PRUNED_AST_SYSTEM,
-    build_path_pruned_ast_prompt,
+    SELECTED_PATH_SEMANTIC_TRANSDUCTION_SYSTEM,
+    build_selected_path_semantic_transduction_prompt,
     build_select_entity_paths_prompt,
 )
 
@@ -68,7 +69,7 @@ class EntityPathSemanticParser:
                     raise ValueError(f"LLM selected invalid entity-origin paths after retry: {exc}") from exc
         raise ValueError("LLM selected invalid entity-origin paths.")
 
-    def build_path_pruned_ast(
+    def build_selected_path_semantic_ast(
         self,
         *,
         original_question: str,
@@ -78,33 +79,68 @@ class EntityPathSemanticParser:
         undirected_graph_edges: list[dict[str, Any]],
     ) -> tuple[SemanticASTResult, dict[str, Any]]:
         selected_path_objects = _selected_path_objects(selected_entity_paths, entity_origin_paths)
-        payload = self.llm_client.chat_json(
-            PATH_PRUNED_AST_SYSTEM,
-            build_path_pruned_ast_prompt(
-                original_question=original_question,
-                restored_question=restored_question,
-                selected_entity_paths=[
-                    {
-                        **path.to_dict(),
-                        "selection_reason": _selection_reason(path.path_id, selected_entity_paths),
-                    }
-                    for path in selected_path_objects
-                ],
-                undirected_graph_edges=undirected_graph_edges,
-            ),
+        validation_feedback: str | None = None
+        last_payload: dict[str, Any] = {}
+        prompt_paths = [
+            {
+                **path.to_dict(),
+                "selection_reason": _selection_reason(path.path_id, selected_entity_paths),
+            }
+            for path in selected_path_objects
+        ]
+        for attempt in range(2):
+            payload = self.llm_client.chat_json(
+                SELECTED_PATH_SEMANTIC_TRANSDUCTION_SYSTEM,
+                build_selected_path_semantic_transduction_prompt(
+                    original_question=original_question,
+                    restored_question=restored_question,
+                    selected_entity_paths=prompt_paths,
+                    undirected_graph_edges=undirected_graph_edges,
+                    validation_feedback=validation_feedback,
+                ),
+            )
+            last_payload = payload if isinstance(payload, dict) else {}
+            semantic_ast = parse_path_pruned_ast_payload(
+                last_payload,
+                selected_paths=selected_path_objects,
+            )
+            semantic_ast = localize_path_pruned_ast_branches(
+                semantic_ast=semantic_ast,
+                selected_paths=selected_path_objects,
+            )
+            semantic_ast.raw_payload = last_payload
+            semantic_ast.retry_count = attempt
+            try:
+                validate_selected_path_semantic_ast(
+                    semantic_ast=semantic_ast,
+                    selected_paths=selected_path_objects,
+                    original_question=original_question,
+                )
+                return semantic_ast, last_payload
+            except ValueError as exc:
+                validation_feedback = str(exc)
+                if attempt == 1:
+                    raise ValueError(
+                        f"LLM produced invalid selected-path semantic transduction after retry: {exc}"
+                    ) from exc
+        raise ValueError("LLM produced invalid selected-path semantic transduction.")
+
+    def build_path_pruned_ast(
+        self,
+        *,
+        original_question: str,
+        restored_question: str,
+        selected_entity_paths: list[SelectedEntityPath],
+        entity_origin_paths: list[EntityOriginPath],
+        undirected_graph_edges: list[dict[str, Any]],
+    ) -> tuple[SemanticASTResult, dict[str, Any]]:
+        return self.build_selected_path_semantic_ast(
+            original_question=original_question,
+            restored_question=restored_question,
+            selected_entity_paths=selected_entity_paths,
+            entity_origin_paths=entity_origin_paths,
+            undirected_graph_edges=undirected_graph_edges,
         )
-        path_pruned_ast_payload = payload if isinstance(payload, dict) else {}
-        semantic_ast = parse_path_pruned_ast_payload(
-            path_pruned_ast_payload,
-            selected_paths=selected_path_objects,
-        )
-        semantic_ast = localize_path_pruned_ast_branches(
-            semantic_ast=semantic_ast,
-            selected_paths=selected_path_objects,
-        )
-        semantic_ast.raw_payload = path_pruned_ast_payload
-        semantic_ast.retry_count = 0
-        return semantic_ast, path_pruned_ast_payload
 
 
 def _paths_grouped_for_prompt(

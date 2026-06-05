@@ -94,6 +94,57 @@ FUNCTION_SURFACES = {
     "with",
 }
 
+WH_SURFACES = {"who", "what", "which", "where", "when", "whom", "whose"}
+
+AUXILIARY_SURFACES = {
+    "am",
+    "are",
+    "be",
+    "been",
+    "being",
+    "did",
+    "do",
+    "does",
+    "is",
+    "was",
+    "were",
+}
+
+DETERMINER_PREPOSITION_SURFACES = {
+    "a",
+    "an",
+    "at",
+    "by",
+    "for",
+    "from",
+    "in",
+    "of",
+    "on",
+    "the",
+    "to",
+    "with",
+}
+
+PURE_PREDICATE_SURFACES = {
+    "born",
+    "develop",
+    "developed",
+    "develops",
+    "die",
+    "died",
+    "dies",
+    "graduate",
+    "graduated",
+    "graduates",
+    "located",
+    "released",
+    "release",
+    "releases",
+    "work",
+    "worked",
+    "works",
+}
+
 ANSWER_CUES = {
     "age",
     "city",
@@ -121,6 +172,27 @@ ROLE_SLOT_CUES = {
     "spouse",
     "university",
     "wife",
+}
+
+VALUE_SLOT_SURFACES = {
+    "age",
+    "birth date",
+    "birth_date",
+    "birthplace",
+    "city",
+    "company",
+    "date",
+    "date of birth",
+    "date of death",
+    "date_of_birth",
+    "death date",
+    "death_date",
+    "location",
+    "nationality",
+    "place of birth",
+    "release date",
+    "release_date",
+    "university",
 }
 
 COMPARISON_CUE_SURFACES = {
@@ -159,6 +231,40 @@ IMPLICIT_COMPARISON_ATTRIBUTE_SURFACES = {
     "birth date",
     "date of birth",
     "date_of_birth",
+}
+
+IMPLICIT_VALUE_SLOT_SURFACES = IMPLICIT_COMPARISON_ATTRIBUTE_SURFACES | {
+    "birth_date",
+    "birthplace",
+    "date of death",
+    "death date",
+    "death_date",
+    "location",
+    "place of birth",
+    "release date",
+    "release_date",
+}
+
+DEPENDENCY_STYLE_RELATIONS = {
+    "acl",
+    "advcl",
+    "advmod",
+    "amod",
+    "aux",
+    "aux:pass",
+    "case",
+    "compound",
+    "compound:prt",
+    "cop",
+    "det",
+    "nmod",
+    "nmod:of",
+    "nsubj",
+    "nsubj:pass",
+    "obj",
+    "obl",
+    "obl:agent",
+    "punct",
 }
 
 
@@ -353,6 +459,58 @@ def validate_selected_entity_paths(
         raise ValueError("Missing selected path for entity/entities: " + ", ".join(missing))
 
 
+def validate_selected_path_semantic_ast(
+    *,
+    semantic_ast: SemanticASTResult,
+    selected_paths: list[EntityOriginPath],
+    original_question: str,
+) -> None:
+    """Validate Step 9 output as executable semantic lookup branches.
+
+    The LLM is allowed to transduce syntax into semantic endpoints, but the
+    resulting AST must not contain syntactic tokens as nodes or collapse
+    possessive chains into one unqueryable endpoint.
+    """
+
+    node_by_id = semantic_ast.node_by_id()
+    if not semantic_ast.nodes:
+        raise ValueError("Selected Path Semantic Transduction produced no AST nodes.")
+    if not semantic_ast.edges:
+        raise ValueError("Selected Path Semantic Transduction produced no AST edges.")
+
+    selected_entity_surfaces = {
+        _norm_node_label(path.entity_text) for path in selected_paths
+    } | {
+        _strip_possessive_surface(path.entity_text) for path in selected_paths
+    }
+
+    for node in semantic_ast.nodes:
+        normalized = _norm_node_label(node.label)
+        if not normalized:
+            raise ValueError(f"AST node {node.id!r} has an empty label.")
+        if _is_forbidden_ast_node_label(normalized) and not _is_allowed_named_entity_exception(node, selected_entity_surfaces):
+            raise ValueError(
+                f"AST node {node.id!r} label {node.label!r} is a syntactic/operator/predicate token, "
+                "not an executable query endpoint."
+            )
+
+    for edge in semantic_ast.edges:
+        if edge.source not in node_by_id or edge.target not in node_by_id:
+            raise ValueError(f"AST edge {edge.source}->{edge.target} references a missing node.")
+        if _is_dependency_style_relation(edge.relation_hint):
+            raise ValueError(
+                f"AST edge {edge.source}->{edge.target} has dependency-style relation "
+                f"{edge.relation_hint!r}, not an executable lookup relation."
+            )
+
+    _validate_no_merged_possessive_role(semantic_ast=semantic_ast, selected_paths=selected_paths)
+    _validate_required_value_slot_transductions(
+        semantic_ast=semantic_ast,
+        selected_paths=selected_paths,
+        original_question=original_question,
+    )
+
+
 def parse_path_pruned_ast_payload(
     payload: dict[str, Any],
     *,
@@ -377,8 +535,8 @@ def parse_path_pruned_ast_payload(
             source_path_ids = _str_list(item.get("source_path_ids", item.get("source_paths", [])))
             source_path_ids = [path_id for path_id in source_path_ids if path_id in selected_path_ids]
             source_node_ids = _str_list(item.get("source_node_ids", item.get("source_graph_nodes", [])))
-            if not source_node_ids and _is_implicit_comparison_attribute_label(label) and source_path_ids:
-                source_node_ids = _infer_comparison_cue_source_node_ids(source_path_ids, selected_paths)
+            if not source_node_ids and _is_implicit_value_slot_label(label) and source_path_ids:
+                source_node_ids = _infer_value_slot_source_node_ids(label, source_path_ids, selected_paths)
             token_ids = [int(value) for value in source_node_ids if value.isdigit()]
             nodes.append(
                 SemanticASTNode(
@@ -740,13 +898,185 @@ def _dependency_edge_evidence(dependency_graph: nx.Graph, node_ids: list[str]) -
     return evidence
 
 
+def _is_forbidden_ast_node_label(normalized: str) -> bool:
+    if normalized in WH_SURFACES:
+        return True
+    if normalized in AUXILIARY_SURFACES:
+        return True
+    if normalized in DETERMINER_PREPOSITION_SURFACES:
+        return True
+    if normalized in PURE_PREDICATE_SURFACES:
+        return True
+    if normalized in COMPARISON_CUE_SURFACES:
+        return True
+    return bool(re.fullmatch(r"\W+", normalized))
+
+
+def _is_allowed_named_entity_exception(node: SemanticASTNode, selected_entity_surfaces: set[str]) -> bool:
+    if node.kind != "entity":
+        return False
+    normalized = _norm_node_label(node.label)
+    return normalized in selected_entity_surfaces
+
+
+def _is_dependency_style_relation(relation_hint: str) -> bool:
+    normalized = _norm(relation_hint)
+    if not normalized:
+        return False
+    if normalized in DEPENDENCY_STYLE_RELATIONS:
+        return True
+    if re.fullmatch(r"[a-z]+(?::[a-z]+)?", normalized) and normalized in DEPENDENCY_STYLE_RELATIONS:
+        return True
+    return normalized.startswith(
+        (
+            "auxiliary of ",
+            "determiner of ",
+            "modifier of ",
+            "object of ",
+            "preposition of ",
+            "subject of ",
+            "time of ",
+        )
+    )
+
+
+def _validate_no_merged_possessive_role(
+    *,
+    semantic_ast: SemanticASTResult,
+    selected_paths: list[EntityOriginPath],
+) -> None:
+    for path in selected_paths:
+        entity_surface = _strip_possessive_surface(path.entity_text)
+        if not entity_surface:
+            continue
+        role_surfaces = {
+            _norm_node_label(text)
+            for text in path.nodes[1:]
+            if _norm_node_label(text) in ROLE_SLOT_CUES or _looks_like_possessed_role(text)
+        }
+        if not role_surfaces:
+            continue
+        for node in semantic_ast.nodes:
+            normalized = _norm_node_label(node.label)
+            if normalized == entity_surface:
+                continue
+            if entity_surface in normalized and any(role in normalized for role in role_surfaces):
+                raise ValueError(
+                    f"AST node {node.id!r} label {node.label!r} merges known entity "
+                    f"{path.entity_text!r} with a possessed/intermediate role. "
+                    "Use separate query endpoints such as entity -> role."
+                )
+
+
+def _validate_required_value_slot_transductions(
+    *,
+    semantic_ast: SemanticASTResult,
+    selected_paths: list[EntityOriginPath],
+    original_question: str,
+) -> None:
+    ast_labels = {_norm_node_label(node.label) for node in semantic_ast.nodes}
+    question = _norm(original_question)
+    for path in selected_paths:
+        path_surfaces = {_norm_node_label(text) for text in path.nodes}
+        has_when = "when" in path_surfaces or "when" in question
+        has_where = "where" in path_surfaces or "where" in question
+        has_which_university = "which university" in question
+        has_which_company = "which company" in question
+
+        if has_when and path_surfaces & {"die", "died", "dies"}:
+            _require_value_slot(ast_labels, {"death_date", "death date", "date of death"}, "When + die/died")
+        if has_when and "born" in path_surfaces:
+            _require_value_slot(ast_labels, {"birth_date", "birth date", "date of birth"}, "When + born")
+        if has_where and "born" in path_surfaces:
+            _require_value_slot(ast_labels, {"birthplace", "place of birth"}, "Where + born")
+        if has_where and "located" in path_surfaces:
+            _require_value_slot(ast_labels, {"location"}, "Where + located")
+        if has_which_university and path_surfaces & {"graduate", "graduated", "graduates"}:
+            _require_value_slot(ast_labels, {"university"}, "Which university + graduate from")
+        if has_which_company and path_surfaces & {"develop", "developed", "develops"}:
+            _require_value_slot(ast_labels, {"company"}, "Which company + developed")
+        if path_surfaces & {"older", "younger"}:
+            _require_value_slot(
+                ast_labels,
+                {"age", "birth_date", "birth date", "date of birth", "date_of_birth"},
+                "older/younger comparison cue",
+            )
+        if path_surfaces & {"earlier", "later", "first", "latest"} and path_surfaces & {"release", "released", "releases"}:
+            _require_value_slot(
+                ast_labels,
+                {"release_date", "release date", "date"},
+                "release ordering cue",
+            )
+
+
+def _require_value_slot(ast_labels: set[str], allowed: set[str], cue_description: str) -> None:
+    normalized_allowed = {_norm_node_label(label) for label in allowed}
+    if ast_labels.isdisjoint(normalized_allowed):
+        raise ValueError(
+            f"AST missing required value slot for {cue_description}: "
+            f"expected one of {sorted(normalized_allowed)}."
+        )
+
+
+def _looks_like_possessed_role(text: str) -> bool:
+    normalized = _norm_node_label(text)
+    return normalized in {
+        "author",
+        "ceo",
+        "child",
+        "company",
+        "daughter",
+        "director",
+        "father",
+        "mother",
+        "parent",
+        "spouse",
+        "son",
+        "wife",
+    }
+
+
 def _is_implicit_comparison_attribute_label(label: str) -> bool:
     return _norm(label) in IMPLICIT_COMPARISON_ATTRIBUTE_SURFACES
+
+
+def _is_implicit_value_slot_label(label: str) -> bool:
+    return _norm_node_label(label) in IMPLICIT_VALUE_SLOT_SURFACES
+
+
+def _infer_value_slot_source_node_ids(
+    label: str,
+    source_path_ids: list[str],
+    selected_paths: list[EntityOriginPath],
+) -> list[str]:
+    normalized_label = _norm_node_label(label)
+    cue_surfaces: set[str]
+    if normalized_label in {"death_date", "death date", "date of death"}:
+        cue_surfaces = {"die", "died", "dies", "when"}
+    elif normalized_label in {"birth_date", "birth date", "date of birth"}:
+        cue_surfaces = {"born", "when"}
+    elif normalized_label in {"birthplace", "place of birth"}:
+        cue_surfaces = {"born", "where"}
+    elif normalized_label == "location":
+        cue_surfaces = {"located", "where"}
+    elif normalized_label in {"release_date", "release date"}:
+        cue_surfaces = {"earlier", "first", "later", "latest", "release", "released", "releases", "when"}
+    else:
+        cue_surfaces = set(COMPARISON_CUE_SURFACES)
+    return _infer_cue_source_node_ids(source_path_ids, selected_paths, cue_surfaces)
 
 
 def _infer_comparison_cue_source_node_ids(
     source_path_ids: list[str],
     selected_paths: list[EntityOriginPath],
+) -> list[str]:
+    return _infer_cue_source_node_ids(source_path_ids, selected_paths, set(COMPARISON_CUE_SURFACES))
+
+
+def _infer_cue_source_node_ids(
+    source_path_ids: list[str],
+    selected_paths: list[EntityOriginPath],
+    cue_surfaces: set[str],
 ) -> list[str]:
     path_by_id = {path.path_id: path for path in selected_paths}
     inferred: list[str] = []
@@ -755,7 +1085,7 @@ def _infer_comparison_cue_source_node_ids(
         if path is None:
             continue
         for node_id, text in zip(path.node_ids, path.nodes, strict=True):
-            if _norm(text) in COMPARISON_CUE_SURFACES and node_id not in inferred:
+            if _norm_node_label(text) in cue_surfaces and node_id not in inferred:
                 inferred.append(node_id)
     return inferred
 
@@ -895,3 +1225,14 @@ def _str_list(raw: Any) -> list[str]:
 
 def _norm(value: str) -> str:
     return re.sub(r"\s+", " ", str(value).strip().lower())
+
+
+def _norm_node_label(value: str) -> str:
+    text = str(value or "").strip().lower().replace("_", " ")
+    text = re.sub(r"[^\w\s']+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _strip_possessive_surface(value: str) -> str:
+    normalized = _norm_node_label(value)
+    return re.sub(r"(?:'s|s')$", "", normalized).strip()

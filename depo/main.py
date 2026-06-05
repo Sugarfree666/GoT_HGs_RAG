@@ -203,7 +203,10 @@ def run_pipeline(
         entity_origin_paths=entity_origin_paths,
     )
     graph_edge_payloads = undirected_graph_edge_payloads(dependency_graph)
-    semantic_ast, path_pruned_ast_payload = path_semantic_parser.build_path_pruned_ast(
+    build_selected_path_semantic_ast = getattr(path_semantic_parser, "build_selected_path_semantic_ast", None)
+    if not callable(build_selected_path_semantic_ast):
+        build_selected_path_semantic_ast = path_semantic_parser.build_path_pruned_ast
+    semantic_ast, selected_path_semantic_transduction_payload = build_selected_path_semantic_ast(
         original_question=record.question,
         restored_question=processing_question,
         selected_entity_paths=selected_entity_paths,
@@ -237,7 +240,8 @@ def run_pipeline(
         "entity_origin_paths": entity_origin_paths,
         "selected_entity_paths": selected_entity_paths,
         "selected_paths_payload": selected_paths_payload,
-        "path_pruned_ast_payload": path_pruned_ast_payload,
+        "selected_path_semantic_transduction_payload": selected_path_semantic_transduction_payload,
+        "path_pruned_ast_payload": selected_path_semantic_transduction_payload,
         "semantic_ast": semantic_ast,
         "subquestions": subquestions,
         "subquestion_dag": subquestion_dag,
@@ -333,7 +337,7 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     _print_selected_entity_paths(selected_entity_paths, entity_origin_paths)
     print()
 
-    print("[9. Path-Pruned Semantic AST]")
+    print("[9. Selected Path Semantic Transduction]")
     _print_semantic_ast(semantic_ast)
     if debug:
         _print_warnings(semantic_ast.warnings)
