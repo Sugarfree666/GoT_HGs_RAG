@@ -375,6 +375,43 @@ class SelectedPath:
 
 
 @dataclass
+class EntityStartNode:
+    entity_id: str
+    text: str
+    graph_node_ids: list[str]
+    token_ids: list[int] = field(default_factory=list)
+    kind_hint: str = "entity"
+    semantic_type_hint: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class EntityOriginPath:
+    path_id: str
+    entity_id: str
+    entity_text: str
+    nodes: list[str]
+    node_ids: list[str]
+    length: int
+    evidence: list[dict[str, Any]] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class SelectedEntityPath:
+    entity_id: str
+    path_id: str
+    reason: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
 class ASTSkeleton:
     """Program-built semantic AST skeleton derived only from selected paths."""
 
@@ -439,7 +476,7 @@ class SemanticASTPrimaryOperator:
 @dataclass
 class SemanticASTResult:
     status: str
-    primary_operator: SemanticASTPrimaryOperator
+    primary_operator: SemanticASTPrimaryOperator = field(default_factory=SemanticASTPrimaryOperator)
     nodes: list[SemanticASTNode] = field(default_factory=list)
     edges: list[SemanticASTEdge] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)

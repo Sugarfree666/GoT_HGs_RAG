@@ -6,11 +6,13 @@ from pathlib import Path
 from hyper_branch.config import load_config
 from hyper_branch.logging_utils import TraceStore, configure_logging, create_run_dir
 from hyper_branch.pipeline import HyperBranchPipeline
+from tests.agriculture_fixture import ensure_agriculture_fixture
 
 
 class PipelineSmokeTest(unittest.TestCase):
     def test_mock_pipeline_runs_end_to_end(self) -> None:
         project_root = Path(__file__).resolve().parents[1]
+        ensure_agriculture_fixture(project_root)
         config = load_config(project_root / "configs" / "agriculture.yaml", project_root)
         config.llm.use_mock = True
 

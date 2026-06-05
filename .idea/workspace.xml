@@ -6,14 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/graph_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/graph_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/depo/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/mask_span_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/mask_span_extractor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/path_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/path_pipeline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/prompts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/subquestion_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/subquestion_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_depo_path_projection.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_depo_path_projection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_atomic_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_pipeline_smoke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_pipeline_smoke.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,23 +40,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0041289781423826" />
-      <entry key="MS500" value="1.350728902363811" />
-      <entry key="S2" value="2.2850142579080153" />
-      <entry key="S5" value="3.511248358477352" />
-      <entry key="S10" value="5.636343924884871" />
-      <entry key="S30" value="14.000914415923706" />
-      <entry key="S60" value="21.794506725408525" />
-      <entry key="M2" value="29.906486296072973" />
-      <entry key="M5" value="42.183989992309264" />
-      <entry key="M10" value="56.07524839528499" />
-      <entry key="M15" value="66.38283104932854" />
-      <entry key="M30" value="85.41770005942116" />
-      <entry key="H1" value="102.0846085930822" />
-      <entry key="H2" value="118.56240837681615" />
-      <entry key="H4" value="159.67544887102432" />
-      <entry key="D1" value="366.3245488167134" />
-      <entry key="W1" value="458.4555661449494" />
+      <entry key="MS100" value="1.000065038406693" />
+      <entry key="MS500" value="1.1829151123023942" />
+      <entry key="S2" value="2.057624782292601" />
+      <entry key="S5" value="2.5453600966950902" />
+      <entry key="S10" value="2.8138941710068712" />
+      <entry key="S30" value="5.768980580393846" />
+      <entry key="S60" value="14.171268394545862" />
+      <entry key="M2" value="28.103707496914236" />
+      <entry key="M5" value="50.6611742728485" />
+      <entry key="M10" value="75.2967917825281" />
+      <entry key="M15" value="96.94954741836197" />
+      <entry key="M30" value="153.88519946072677" />
+      <entry key="H1" value="230.93952199975186" />
+      <entry key="H2" value="314.4990110031635" />
+      <entry key="H4" value="406.1354747930888" />
+      <entry key="D1" value="708.5603940098086" />
+      <entry key="W1" value="855.9951304457587" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -80,23 +78,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9631975407967908" />
-      <entry key="MS500" value="1.3390588317994228" />
-      <entry key="S2" value="2.2798791375082623" />
-      <entry key="S5" value="3.5080733438752976" />
-      <entry key="S10" value="5.633738612498755" />
-      <entry key="S30" value="13.998657701333151" />
-      <entry key="S60" value="21.79273657993568" />
-      <entry key="M2" value="29.90527424039183" />
-      <entry key="M5" value="42.18330371614009" />
-      <entry key="M10" value="56.07478361708395" />
-      <entry key="M15" value="66.38245899036012" />
-      <entry key="M30" value="85.41745543733141" />
-      <entry key="H1" value="102.08446022068888" />
-      <entry key="H2" value="118.56232018818666" />
-      <entry key="H4" value="159.67538543430894" />
-      <entry key="D1" value="366.3245215917872" />
-      <entry key="W1" value="458.45556118251255" />
+      <entry key="MS100" value="0.9593265078421577" />
+      <entry key="MS500" value="1.173065153714631" />
+      <entry key="S2" value="2.053198323399463" />
+      <entry key="S5" value="2.543144075189498" />
+      <entry key="S10" value="2.8126657468422818" />
+      <entry key="S30" value="5.768150604077234" />
+      <entry key="S60" value="14.170244166755536" />
+      <entry key="M2" value="28.10268397104831" />
+      <entry key="M5" value="50.66043376083486" />
+      <entry key="M10" value="75.29624096477825" />
+      <entry key="M15" value="96.94907226200719" />
+      <entry key="M30" value="153.88481596779695" />
+      <entry key="H1" value="230.93922866430742" />
+      <entry key="H2" value="314.49880713425256" />
+      <entry key="H4" value="406.13533877879024" />
+      <entry key="D1" value="708.5603492416323" />
+      <entry key="W1" value="855.9951224152451" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -227,7 +225,7 @@
       <workItem from="1780537179156" duration="19000" />
       <workItem from="1780541004385" duration="3449000" />
       <workItem from="1780551944328" duration="22729000" />
-      <workItem from="1780590199613" duration="7932000" />
+      <workItem from="1780590199613" duration="24221000" />
     </task>
     <servers />
   </component>

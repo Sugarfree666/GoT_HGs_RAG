@@ -377,6 +377,178 @@ Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 """.strip()
 
+
+ENTITY_PATH_SELECTION_SYSTEM = """
+You are implementing a DEPO entity-origin dependency-path pipeline.
+
+Current step: for each given entity, choose exactly one provided dependency path that is most useful for reasoning about the original multi-hop question.
+
+You must only select from the supplied path_id values.
+Do not invent paths.
+Do not generate candidate nodes.
+Do not generate a Problem Frame.
+Do not generate an AST.
+Do not generate atomic questions.
+Return valid JSON only.
+""".strip()
+
+
+def build_select_entity_paths_prompt(
+    original_question: str,
+    restored_question: str,
+    entity_start_nodes: list[dict[str, object]],
+    entity_origin_paths_by_entity: dict[str, list[dict[str, object]]],
+    validation_feedback: str | None = None,
+) -> str:
+    schema = {
+        "selected_paths": [
+            {
+                "entity_id": "e1",
+                "path_id": "e1_p7",
+                "reason": "This path follows the useful reasoning chain from the entity through author to spouse.",
+            }
+        ]
+    }
+    feedback = f"\nPrevious selection failed validation:\n{validation_feedback}\n" if validation_feedback else ""
+    return f"""
+Select one entity-origin dependency path for each entity.
+
+Original question:
+{original_question}
+
+Restored/normalized question:
+{restored_question}
+
+Entity start nodes:
+{json.dumps(entity_start_nodes, ensure_ascii=False, indent=2)}
+
+Entity-origin dependency paths:
+{json.dumps(entity_origin_paths_by_entity, ensure_ascii=False, indent=2)}
+{feedback}
+Rules:
+1. For every entity_id in Entity start nodes, choose exactly one path.
+2. The selected path_id must exist in that entity_id's provided path list.
+3. The selected path must start from that entity.
+4. Prefer paths that express the useful reasoning chain from a known entity to the final answer slot or comparison attribute.
+5. For serial multi-hop questions, prefer the longest useful reasoning path over local short edges.
+6. For parallel/comparison questions, choose one path from each entity to its corresponding compared attribute or value slot.
+7. Prefer paths where passes_through_other_entity_start is false.
+8. Do not choose a path that passes through a different entity start as an intermediate node when a path from the current entity to the answer slot exists.
+9. For common-answer questions with cues such as both/share/common, each entity should normally choose its own path to the shared answer slot, e.g. PersonA -- worked -- screenplay, not PersonA -- PersonB -- worked -- screenplay.
+10. Paths may include noisy nodes such as of, the, who, ?, share, and punctuation if the overall path is useful. The next AST step will prune noise.
+11. Do not choose a path merely because it is short. Avoid meaningless paths such as entity--of or entity--the.
+12. Do not select paths that only end at punctuation, determiners, or prepositions unless they pass through a useful role/slot chain.
+13. Do not generate candidate nodes, a Problem Frame, an AST, or atomic questions.
+
+Return strict JSON only.
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
+
+PATH_PRUNED_AST_SYSTEM = """
+You are implementing the DEPO entity-origin path-to-AST step.
+You receive selected dependency paths that start from question entities.
+Your task is to process each selected dependency path independently: remove syntactic noise, keep semantic reasoning nodes, and label one-hop relations.
+
+You may only use information supported by:
+1. the original question, and
+2. the selected dependency paths.
+
+You may remove noise nodes such as determiners, auxiliaries, prepositions, punctuation, wh markers, and pure comparison/final-answer cues.
+You may keep semantic nodes such as named entities, role nouns, answer slots, value types, comparison attributes, and necessary intermediate variables.
+You must not merge multiple selected paths into one shared branch.
+Do not generate comparison, intersection, set, logical, ranking, or final-answer nodes. Final synthesis is handled by HyperBranch.
+Return valid JSON only.
+""".strip()
+
+
+def build_path_pruned_ast_prompt(
+    original_question: str,
+    restored_question: str,
+    selected_entity_paths: list[dict[str, object]],
+    undirected_graph_edges: list[dict[str, object]],
+) -> str:
+    schema = {
+        "nodes": [
+            {
+                "id": "young_man_luther",
+                "label": "Young Man Luther",
+                "kind": "entity",
+                "semantic_type": "Book",
+                "source_path_ids": ["e1_p4"],
+                "source_node_ids": ["9"],
+            },
+            {
+                "id": "author",
+                "label": "author",
+                "kind": "type_variable",
+                "semantic_type": "Role",
+                "source_path_ids": ["e1_p4"],
+                "source_node_ids": ["7"],
+            },
+        ],
+        "edges": [
+            {
+                "source": "young_man_luther",
+                "target": "author",
+                "relation": "author of Young Man Luther",
+                "support_path_id": "e1_p4",
+                "support_node_ids": ["9", "7"],
+            }
+        ],
+        "branch_terminals": {"e1": "author"},
+    }
+    return f"""
+Construct a path-pruned semantic AST from the selected dependency paths.
+
+Original question:
+{original_question}
+
+Restored/normalized question:
+{restored_question}
+
+Selected entity-origin dependency paths:
+{json.dumps(selected_entity_paths, ensure_ascii=False, indent=2)}
+
+Full undirected graph edges for debugging:
+{json.dumps(undirected_graph_edges, ensure_ascii=False, indent=2)}
+
+Rules:
+1. Each selected entity path must become one independent reasoning branch.
+2. Remove syntactic noise nodes such as determiners, auxiliaries, prepositions, punctuation, wh markers, and pure comparison/final-answer cues.
+3. Keep only semantic reasoning nodes: named entities, role nouns, answer slots, value types, comparison attributes, and necessary intermediate variables.
+4. Do not invent unsupported entities or type variables.
+5. Do not create shortcut multi-hop edges. If a selected path supports AlphaGo -- developed -- company -- CEO -- graduated -- university, the AST must use AlphaGo -> company -> CEO -> university, not AlphaGo -> university.
+6. Preserve branch-specific variable clones for every multi-entity question. Do not merge shared labels or shared dependency tokens across selected paths.
+   - Correct: edward_carfagno -> worked_e1 -> screenplay_e1 and miklos_rozsa -> worked_e2 -> screenplay_e2.
+   - Incorrect: edward_carfagno -> worked <- miklos_rozsa and worked -> screenplay.
+   - Correct: director_r1/nationality_r1 and director_r2/nationality_r2.
+7. For serial multi-hop questions, keep one-hop semantic edges in solve order.
+8. Do not emit comparison, intersection, union, difference, logical, ranking, or final-answer nodes or fields.
+9. For same/share/both/common questions, keep the per-entity lookup branches separate. Final answer synthesis will compare or intersect the branch answers.
+10. Ordered comparison cue words are not ordinary semantic targets. Do not emit nodes or edges like film -> younger or director -> younger.
+11. If a selected path reaches only an ordered comparison cue, infer an explicit compared value slot supported by that cue:
+   - older/younger -> age, or date_of_birth when birth-date evidence is the intended retrievable value;
+   - earlier/later/first/latest with films/events -> release_date/date when that is the compared value;
+   - larger/smaller/greater/less/more/fewer -> the explicit measurable attribute in the question or path.
+12. Ground inferred comparison value nodes to the selected path and cue token: include source_path_ids and source_node_ids for the cue node that licenses the implicit value slot.
+13. For "Which film whose director is younger, Term Of Trial or Would You Marry Me??", use Term Of Trial -> director_r1 -> age_r1 and Would You Marry Me? -> director_r2 -> age_r2. Do not use Term Of Trial -> younger.
+14. branch_terminals must map every selected entity_id to that path branch's final node id.
+15. Do not emit atomic subquestions.
+16. Return strict JSON only.
+
+Examples:
+- Young Man Luther -> author: relation "author of Young Man Luther"; author -> spouse: relation "spouse of the author".
+- ten9eight_shoot_for_the_moon -> director_r1 -> nationality_r1 and sabotage_1936_film -> director_r2 -> nationality_r2.
+- edward_carfagno -> worked_e1 -> screenplay_e1 and miklos_rozsa -> worked_e2 -> screenplay_e2. HyperBranch final synthesis will infer the common screenplay from the atomic answers.
+- term_of_trial -> director_r1 -> age_r1 and would_you_marry_me -> director_r2 -> age_r2. The age nodes are inferred from the "younger" cue and grounded to that cue's source_node_ids.
+- AlphaGo -> company: relation "company that developed AlphaGo"; company -> CEO: relation "CEO of the company"; CEO -> university: relation "university the CEO graduated from".
+
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
 MASK_SPAN_EXTRACTION_SYSTEM = """
 You are implementing DEPO Step 1: selective mask span extraction before CoreNLP dependency parsing.
 

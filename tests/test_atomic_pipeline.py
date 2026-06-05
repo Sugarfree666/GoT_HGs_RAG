@@ -27,6 +27,7 @@ from hyper_branch.logging_utils import TraceStore, configure_logging, create_run
 from hyper_branch.models import GraphNode, VectorMatch
 from hyper_branch.pipeline import HyperBranchPipeline
 from hyper_branch.utils import normalize_label
+from tests.agriculture_fixture import ensure_agriculture_fixture
 
 
 class AtomicDagAdapterTest(unittest.TestCase):
@@ -965,6 +966,7 @@ class TwoStageLLM:
 class AtomicPipelineSmokeTest(unittest.TestCase):
     def test_mock_pipeline_runs_minimal_dag(self) -> None:
         project_root = Path(__file__).resolve().parents[1]
+        ensure_agriculture_fixture(project_root)
         config = load_config(project_root / "configs" / "agriculture.yaml", project_root)
         config.llm.use_mock = True
 

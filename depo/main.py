@@ -20,6 +20,9 @@ from models import (
     RestoredAnchorConnectedSubgraph,
     RestoredGraphNodeCandidate,
     SelectedPath,
+    EntityOriginPath,
+    EntityStartNode,
+    SelectedEntityPath,
     SemanticNormalizationResult,
     SemanticASTResult,
 )
@@ -30,7 +33,7 @@ if TYPE_CHECKING:
     from corenlp_parser import CoreNLPParser
     from graph_builder import GraphBuilder
     from mask_span_extractor import MaskSpanExtractor
-    from path_pipeline import PathBasedSemanticParser
+    from entity_path_pipeline import EntityPathSemanticParser
     from question_normalizer import SemanticQuestionNormalizer
     from subquestion_generator import SubquestionGenerator
 
@@ -78,7 +81,7 @@ def main() -> int:
         from graph_builder import GraphBuilder
         from llm_client import LLMClient
         from mask_span_extractor import MaskSpanExtractor
-        from path_pipeline import PathBasedSemanticParser
+        from entity_path_pipeline import EntityPathSemanticParser
         from question_normalizer import SemanticQuestionNormalizer
         from subquestion_generator import SubquestionGenerator
 
@@ -86,7 +89,7 @@ def main() -> int:
         question_normalizer = SemanticQuestionNormalizer(llm_client)
         mask_span_extractor = MaskSpanExtractor(llm_client)
         graph_builder = GraphBuilder()
-        path_semantic_parser = PathBasedSemanticParser(llm_client)
+        path_semantic_parser = EntityPathSemanticParser(llm_client)
         subquestion_generator = SubquestionGenerator(llm_client)
 
         with CoreNLPParser(
@@ -130,25 +133,20 @@ def run_pipeline(
     semantic_ast_optimizer: "SemanticASTOptimizer",
     subquestion_generator: "SubquestionGenerator",
     question_normalizer: "SemanticQuestionNormalizer | None" = None,
-    path_semantic_parser: "PathBasedSemanticParser | None" = None,
+    path_semantic_parser: "EntityPathSemanticParser | None" = None,
     debug: bool = False,
 ) -> dict[str, Any]:
     del index, debug
     del anchor_selector, semantic_ast_optimizer
     from placeholder import selective_entity_masking
-    from ast_validator import validate_path_based_ast
-    from graph_builder import restored_dependency_tokens
-    from path_ast_builder import (
-        prefer_endpoint_complete_selected_paths,
-        selected_paths_to_ast_skeleton,
-        validate_selected_paths,
+    from entity_path_pipeline import EntityPathSemanticParser
+    from entity_path_projector import (
+        enumerate_entity_origin_paths,
+        extract_entity_start_nodes,
+        undirected_graph_edge_payloads,
     )
-    from path_pipeline import PathBasedSemanticParser
     from path_projector import (
-        build_candidate_projected_graph,
         build_undirected_dependency_graph,
-        enumerate_candidate_paths,
-        filter_candidate_paths,
     )
 
     semantic_normalization = (
@@ -176,85 +174,42 @@ def run_pipeline(
         replacement=replacement,
     )
 
-    if path_semantic_parser is None:
-        path_semantic_parser = PathBasedSemanticParser(getattr(subquestion_generator, "llm_client", None))
-
     dependency_graph = build_undirected_dependency_graph(
         dependency_parse=dependency_parse,
         restored_graph_node_candidates=restored_graph_node_candidates,
     )
-    restored_graph_nodes = restored_dependency_tokens(
-        dependency_parse=dependency_parse,
-        restored_candidates=restored_graph_node_candidates,
-    )
-    candidate_nodes, problem_frame, candidate_frame_payload = path_semantic_parser.build_candidate_nodes_and_frame(
-        question=record.question,
-        restored_question=processing_question,
-        graph_nodes=restored_graph_nodes,
-        masked_question=replacement.masked_question,
-    )
-    candidate_projected_graph = build_candidate_projected_graph(
+    if path_semantic_parser is None:
+        path_semantic_parser = EntityPathSemanticParser(getattr(subquestion_generator, "llm_client", None))
+
+    entity_start_nodes = extract_entity_start_nodes(
         dependency_graph=dependency_graph,
-        candidate_nodes=candidate_nodes,
+        restored_graph_node_candidates=restored_graph_node_candidates,
+        replacement=replacement,
     )
-    enumerated_candidate_paths = enumerate_candidate_paths(candidate_projected_graph)
-    filtered_candidate_paths = filter_candidate_paths(
-        candidate_paths=enumerated_candidate_paths,
-        requirements=problem_frame.requirements,
-    )
-    if not filtered_candidate_paths:
-        raise ValueError("No filtered candidate paths remain after requirement filtering.")
+    if not entity_start_nodes:
+        raise ValueError("No entity start nodes found for entity-origin path pipeline.")
 
-    selected_paths: list[SelectedPath] = []
-    selected_paths_payload: dict[str, Any] = {}
-    validation_feedback: str | None = None
-    for attempt in range(2):
-        selected_paths, selected_paths_payload = path_semantic_parser.select_paths(
-            question=processing_question,
-            problem_frame=problem_frame,
-            filtered_candidate_paths=filtered_candidate_paths,
-            validation_feedback=validation_feedback,
-        )
-        try:
-            validate_selected_paths(
-                selected_paths=selected_paths,
-                requirements=problem_frame.requirements,
-                filtered_paths=filtered_candidate_paths,
-            )
-            break
-        except ValueError as exc:
-            validation_feedback = str(exc)
-            if attempt == 1:
-                raise ValueError(f"LLM selected invalid candidate paths after retry: {exc}") from exc
+    entity_origin_paths = enumerate_entity_origin_paths(
+        dependency_graph=dependency_graph,
+        entity_starts=entity_start_nodes,
+    )
+    if not entity_origin_paths:
+        raise ValueError("No entity-origin dependency paths were enumerated.")
 
-    selected_paths, selected_path_repair_actions = prefer_endpoint_complete_selected_paths(
-        selected_paths=selected_paths,
-        requirements=problem_frame.requirements,
-        filtered_paths=filtered_candidate_paths,
+    selected_entity_paths, selected_paths_payload = path_semantic_parser.select_entity_paths(
+        original_question=record.question,
+        restored_question=processing_question,
+        entity_start_nodes=entity_start_nodes,
+        entity_origin_paths=entity_origin_paths,
     )
-
-    ast_skeleton = selected_paths_to_ast_skeleton(
-        problem_frame=problem_frame,
-        selected_paths=selected_paths,
-        filtered_paths=filtered_candidate_paths,
-        candidate_nodes=candidate_nodes,
+    graph_edge_payloads = undirected_graph_edge_payloads(dependency_graph)
+    semantic_ast, path_pruned_ast_payload = path_semantic_parser.build_path_pruned_ast(
+        original_question=record.question,
+        restored_question=processing_question,
+        selected_entity_paths=selected_entity_paths,
+        entity_origin_paths=entity_origin_paths,
+        undirected_graph_edges=graph_edge_payloads,
     )
-    semantic_ast, relation_label_payload = path_semantic_parser.label_ast_edges(
-        question=processing_question,
-        ast_skeleton=ast_skeleton,
-        selected_paths=selected_paths,
-        problem_frame=problem_frame,
-    )
-    path_ast_validation_warnings = validate_path_based_ast(
-        semantic_ast=semantic_ast,
-        ast_skeleton=ast_skeleton,
-        problem_frame=problem_frame,
-    )
-    semantic_ast.validation_warnings.extend(
-        warning for warning in path_ast_validation_warnings if warning not in semantic_ast.validation_warnings
-    )
-    if path_ast_validation_warnings:
-        raise ValueError("Invalid path-based AST: " + "; ".join(path_ast_validation_warnings))
 
     subquestion_dag: AtomicQuestionDAG | None = None
     generate_dag = getattr(subquestion_generator, "generate_dag", None)
@@ -278,20 +233,24 @@ def run_pipeline(
         "graph_node_candidates": graph_node_candidates,
         "restored_graph_node_candidates": restored_graph_node_candidates,
         "dependency_graph": dependency_graph,
-        "candidate_nodes": candidate_nodes,
-        "problem_frame": problem_frame,
-        "candidate_frame_payload": candidate_frame_payload,
-        "candidate_projected_graph": candidate_projected_graph,
-        "enumerated_candidate_paths": enumerated_candidate_paths,
-        "filtered_candidate_paths": filtered_candidate_paths,
-        "selected_paths": selected_paths,
+        "entity_start_nodes": entity_start_nodes,
+        "entity_origin_paths": entity_origin_paths,
+        "selected_entity_paths": selected_entity_paths,
         "selected_paths_payload": selected_paths_payload,
-        "selected_path_repair_actions": selected_path_repair_actions,
-        "ast_skeleton": ast_skeleton,
-        "relation_label_payload": relation_label_payload,
+        "path_pruned_ast_payload": path_pruned_ast_payload,
         "semantic_ast": semantic_ast,
         "subquestions": subquestions,
         "subquestion_dag": subquestion_dag,
+        "candidate_nodes": [],
+        "problem_frame": None,
+        "candidate_frame_payload": None,
+        "candidate_projected_graph": None,
+        "enumerated_candidate_paths": [],
+        "filtered_candidate_paths": [],
+        "selected_paths": [],
+        "selected_path_repair_actions": [],
+        "ast_skeleton": None,
+        "relation_label_payload": None,
     }
 
 
@@ -304,14 +263,9 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     dependency_parse = result["dependency_parse"]
     dependency_graph = result.get("dependency_graph", result["weighted_graph"])
     restored_graph_node_candidates: list[RestoredGraphNodeCandidate] = result["restored_graph_node_candidates"]
-    candidate_nodes: list[CandidateNode] = result["candidate_nodes"]
-    problem_frame: ProblemFrame = result["problem_frame"]
-    candidate_projected_graph = result["candidate_projected_graph"]
-    enumerated_candidate_paths: list[CandidatePath] = result["enumerated_candidate_paths"]
-    filtered_candidate_paths: list[CandidatePath] = result["filtered_candidate_paths"]
-    selected_paths: list[SelectedPath] = result["selected_paths"]
-    selected_path_repair_actions: list[str] = result.get("selected_path_repair_actions", [])
-    ast_skeleton: ASTSkeleton = result["ast_skeleton"]
+    entity_start_nodes: list[EntityStartNode] = result["entity_start_nodes"]
+    entity_origin_paths: list[EntityOriginPath] = result["entity_origin_paths"]
+    selected_entity_paths: list[SelectedEntityPath] = result["selected_entity_paths"]
     semantic_ast: SemanticASTResult = result["semantic_ast"]
     subquestions: list[AtomicSubquestion] = result["subquestions"]
     subquestion_dag: AtomicQuestionDAG | None = result.get("subquestion_dag")
@@ -367,59 +321,25 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
         print("  (no dependency graph edges)")
     print()
 
-    print("[6. Restored Graph Node Candidates]")
-    for candidate in restored_graph_node_candidates:
-        print(f"  - {candidate.display_text}")
-    if not restored_graph_node_candidates:
-        print("  (none)")
+    print("[6. Entity Start Nodes]")
+    _print_entity_start_nodes(entity_start_nodes)
     print()
 
-    if debug:
-        from path_projector import format_projected_graph_edges
+    print("[7. Entity-Origin Dependency Paths]")
+    _print_entity_origin_paths(entity_origin_paths, include_evidence=debug)
+    print()
 
-        print("[7. Candidate Nodes]")
-        _print_candidate_nodes(candidate_nodes)
-        print()
+    print("[8. LLM Selected Entity Paths]")
+    _print_selected_entity_paths(selected_entity_paths, entity_origin_paths)
+    print()
 
-        print("[8. Problem Frame]")
-        _print_problem_frame(problem_frame)
-        print()
-
-        print("[9. Candidate-Projected Graph]")
-        projected_lines = format_projected_graph_edges(candidate_projected_graph)
-        if projected_lines:
-            for line in projected_lines:
-                print(line)
-        else:
-            print("  (no projected edges)")
-        print()
-
-        print("[10. Enumerated Candidate Paths]")
-        _print_candidate_paths(enumerated_candidate_paths)
-        print()
-
-        print("[11. Filtered Candidate Paths]")
-        _print_candidate_paths(filtered_candidate_paths)
-        print()
-
-        print("[12. LLM Selected Paths]")
-        _print_selected_paths(selected_paths)
-        _print_repair_actions(selected_path_repair_actions)
-        print()
-
-        print("[13. AST Skeleton]")
-        _print_ast_skeleton(ast_skeleton)
-        print()
-
-        print("[14. Relation-Labeled AST]")
-    else:
-        print("[7. Final Semantic AST]")
+    print("[9. Path-Pruned Semantic AST]")
     _print_semantic_ast(semantic_ast)
     if debug:
         _print_warnings(semantic_ast.warnings)
     print()
 
-    print("[15. Atomic Subquestion DAG]" if debug else "[8. Atomic Subquestion DAG]")
+    print("[10. Atomic Subquestion DAG]")
     if subquestion_dag is not None:
         _print_atomic_question_dag(subquestion_dag)
     elif not subquestions:
@@ -443,6 +363,51 @@ def _format_restored_subgraph_edges(
         relation_text = relation or "related"
         lines.append(f"  - {source_text}[{source}] --{relation_text}--> {target_text}[{target}]")
     return lines
+
+
+def _print_entity_start_nodes(entity_start_nodes: list[EntityStartNode]) -> None:
+    if not entity_start_nodes:
+        print("  (none)")
+        return
+    for entity in entity_start_nodes:
+        semantic = f" semantic_type={entity.semantic_type_hint}" if entity.semantic_type_hint else ""
+        tokens = f" token_ids={entity.token_ids}" if entity.token_ids else ""
+        print(f"  - {entity.entity_id}: {entity.text} graph_node_ids={entity.graph_node_ids}{tokens}{semantic}")
+
+
+def _print_entity_origin_paths(
+    entity_origin_paths: list[EntityOriginPath],
+    *,
+    include_evidence: bool = False,
+) -> None:
+    if not entity_origin_paths:
+        print("  (none)")
+        return
+    for path in entity_origin_paths:
+        print(f"  - {path.path_id} ({path.entity_id}): {' -- '.join(path.nodes)}")
+        if include_evidence:
+            for evidence in path.evidence:
+                relations = "/".join(str(item) for item in evidence.get("relations", []) if item)
+                relation_text = f" relations={relations}" if relations else ""
+                print(
+                    f"    {evidence.get('source_text', evidence.get('source'))}"
+                    f" -> {evidence.get('target_text', evidence.get('target'))}{relation_text}"
+                )
+
+
+def _print_selected_entity_paths(
+    selected_entity_paths: list[SelectedEntityPath],
+    entity_origin_paths: list[EntityOriginPath],
+) -> None:
+    if not selected_entity_paths:
+        print("  (none)")
+        return
+    path_by_id = {path.path_id: path for path in entity_origin_paths}
+    for selected in selected_entity_paths:
+        path = path_by_id.get(selected.path_id)
+        path_text = f" {' -- '.join(path.nodes)}" if path is not None else ""
+        reason = f" reason={selected.reason}" if selected.reason else ""
+        print(f"  - {selected.entity_id}: {selected.path_id}{path_text}{reason}")
 
 
 def _print_candidate_nodes(candidate_nodes: list[CandidateNode]) -> None:
@@ -502,9 +467,6 @@ def _print_repair_actions(actions: list[str]) -> None:
 
 
 def _print_ast_skeleton(ast_skeleton: ASTSkeleton) -> None:
-    operator = ast_skeleton.operator
-    inputs = ", ".join(operator.inputs)
-    print(f"Operator: {operator.operator}({inputs}) -> {operator.output}")
     print("Branch terminals:")
     if ast_skeleton.branch_terminals:
         for requirement_id, terminal in ast_skeleton.branch_terminals.items():
@@ -528,15 +490,6 @@ def _print_ast_skeleton(ast_skeleton: ASTSkeleton) -> None:
 
 
 def _print_semantic_ast(semantic_ast: SemanticASTResult) -> None:
-    operator = semantic_ast.primary_operator
-    if operator.operator != "NONE":
-        inputs = ", ".join(operator.inputs)
-        output = operator.output or "answer"
-        cue = f" cue={operator.cue_text}" if operator.cue_text else ""
-        print(f"Operator: {operator.operator}({inputs}) -> {output}{cue}")
-    else:
-        print("Operator: NONE")
-
     print("Nodes:")
     if semantic_ast.nodes:
         for node in semantic_ast.nodes:
@@ -555,8 +508,6 @@ def _print_semantic_ast(semantic_ast: SemanticASTResult) -> None:
         cue = frame.get("cue_text", "")
         slot = frame.get("expected_value_slot", "")
         print(f"Detected cue frame: cue={cue} expected_value_slot={slot}")
-    if semantic_ast.operator_inputs_before_validation:
-        print(f"Operator inputs before validation: {semantic_ast.operator_inputs_before_validation}")
     if semantic_ast.retry_count:
         print(f"Retry count: {semantic_ast.retry_count}")
     if semantic_ast.validation_warnings:
@@ -578,8 +529,7 @@ def _print_atomic_question_dag(dag: AtomicQuestionDAG) -> None:
     for node in dag.nodes:
         inputs = ", ".join(node.inputs) if node.inputs else "none"
         depends_on = ", ".join(node.depends_on) if node.depends_on else "none"
-        operator = f" operator={node.operator}" if node.operator else ""
-        print(f"  - {node.id} [{node.type}]{operator}: inputs=({inputs}) -> {node.output}; depends_on={depends_on}")
+        print(f"  - {node.id} [{node.type}]: inputs=({inputs}) -> {node.output}; depends_on={depends_on}")
         print(f"    {node.question}")
         if node.candidate_bindings:
             print(f"    candidate_bindings={node.candidate_bindings}")

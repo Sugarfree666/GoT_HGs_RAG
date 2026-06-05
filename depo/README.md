@@ -22,12 +22,11 @@ anchor decisions are made on restored original question text.
    CoreNLP parses the masked question. The masked placeholders remain the
    internal graph tokens so token indices and dependency node IDs stay stable.
 
-4. **Weighted undirected dependency graph**
-   The existing dependency relation weight scheme is preserved. Core relations
-   such as `nsubj`, `obj`, `iobj`, `ccomp`, and `xcomp` stay low weight;
-   modifiers such as `nmod`, `obl`, `amod`, and `compound` stay medium weight;
-   `det`, `punct`, and coordination penalties keep their previous behavior.
-   This graph is still printed for compatibility and debugging.
+4. **Undirected dependency graph**
+   The CoreNLP dependency parse is converted to an unweighted undirected graph.
+   Edge metadata preserves the original directed dependency labels for evidence
+   and later LLM prompts, but the post-parse path search no longer uses
+   dependency weights.
 
 5. **Restored graph node candidates**
    Graph node candidates are restored for LLM display. The internal graph still
@@ -40,49 +39,38 @@ anchor decisions are made on restored original question text.
 
    It is never rendered as `MovieA [Ten9Eight: Shoot For The Moon]`.
 
-6. **High-recall candidate nodes and Problem Frame**
-   After CoreNLP parsing, the LLM proposes a high-recall candidate node pool and
-   a Problem Frame. Candidate nodes are not final AST nodes. They may include
-   entities, roles, slots, type qualifiers, operator cues, constraint values,
-   coreference mentions, and other noisy but useful graph nodes. The Problem
-   Frame declares the operator and the branch-level requirements.
+6. **Entity start detection**
+   Known entity start nodes are selected deterministically from mask mappings,
+   restored graph node metadata, and conservative proper-noun fallback rules.
+   The LLM no longer generates candidate nodes and no Problem Frame is built.
+   Role or slot words such as `author`, `director`, `CEO`, `company`, and
+   `nationality` are not entity starts unless they are masked concrete entities.
 
-7. **Candidate-projected graph and candidate paths**
-   The CoreNLP dependency graph is converted to an unweighted undirected graph.
-   Candidate nodes are projected onto it: two candidates receive a projected
-   edge only if a short dependency bridge connects them without crossing another
-   candidate. The program enumerates simple candidate paths, removes reverse
-   duplicates, and keeps only paths that mention at least one requirement root
-   or target.
+7. **Entity-origin path enumeration**
+   For each entity start node, the program enumerates bounded simple paths from
+   that entity over the undirected dependency graph. Paths may include syntactic
+   noise such as determiners, prepositions, wh words, and punctuation because the
+   later AST stage prunes noise. Prompt size is controlled by scoring and keeping
+   the most useful paths per entity.
 
-8. **LLM path selection**
-   The LLM selects exactly one filtered candidate path per requirement. It may
-   only choose from provided `path_id` values. It cannot invent paths, generate
-   an AST, or generate atomic questions. The program validates the selection and
-   retries once on invalid output.
+8. **LLM entity-origin path selection**
+   The LLM receives grouped paths and chooses exactly one provided `path_id` for
+   each entity. It cannot invent paths, generate candidate nodes, create a
+   Problem Frame, build an AST, or generate atomic questions. The program
+   validates entity/path consistency and retries once on invalid output.
 
-9. **Selected paths to AST skeleton**
-   The AST skeleton is built by code from selected paths. Adjacent candidate
-   nodes become one-hop AST edges. Shared surface variables in multiple branches
-   are cloned, for example `director_r1`, `nationality_r1`, `director_r2`,
-   `nationality_r2`. Root entities can remain shared or un-cloned. The operator
-   and operator inputs come from the Problem Frame and branch terminals.
+9. **Path-pruned semantic AST**
+   The selected raw dependency paths are used as evidence for an LLM AST prompt.
+   The LLM removes syntactic noise, keeps semantic reasoning nodes, labels
+   one-hop relations, and keeps every selected path as an independent branch.
+   It does not infer or emit operators. If the LLM merges parallel branches into
+   shared suffix nodes, DEPO localizes those shared non-entity nodes back into
+   branch-specific path nodes before atomic subquestion generation.
 
-10. **Relation labeling**
-   The LLM labels fixed AST edges with relation hints and confirms operator
-   metadata. It cannot add, delete, merge, reorder, or shortcut skeleton nodes
-   or edges. The validator rejects any structure not derived from selected
-   paths. The fixed allowed operator set is:
-
-   `NONE`, `COMPARE_SAME`, `COMPARE_DIFF`, `COMPARE_GREATER`,
-   `COMPARE_LESS`, `ARGMAX`, `ARGMIN`, `INTERSECTION`, `UNION`,
-   `DIFFERENCE`, `LOGICAL_AND`, `LOGICAL_OR`.
-
-11. **Execution DAG and atomic subquestion generation**
+10. **Execution DAG and atomic subquestion generation**
    The final semantic AST is compiled into a deterministic execution
    DAG. This code layer decides edge order, variable bindings such as `X1` and
-   `X2`. Non-`NONE` operators stay in the semantic AST, but they are not emitted
-   as extra atomic DAG questions by default.
+   `X2` from ordinary path edges only.
 
    The LLM then receives only one compiled plan step at a time. For an edge
    step, it turns `known -> ask` into one atomic subquestion whose answer is the
