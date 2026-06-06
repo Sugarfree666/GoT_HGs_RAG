@@ -96,14 +96,14 @@ def main() -> int:
         from graph_builder import GraphBuilder
         from llm_client import LLMClient
         from main import run_pipeline
-        from mask_span_extractor import MaskSpanExtractor
+        from mask_span_extractor import ExplicitEntityExtractor
         from models import QuestionRecord
         from question_normalizer import SemanticQuestionNormalizer
         from subquestion_generator import SubquestionGenerator
 
         llm_client = LLMClient(api_key=api_key, base_url=base_url, model=args.model)
         question_normalizer = SemanticQuestionNormalizer(llm_client)
-        mask_span_extractor = MaskSpanExtractor(llm_client)
+        mask_span_extractor = ExplicitEntityExtractor(llm_client)
         graph_builder = GraphBuilder()
         path_semantic_parser = EntityPathSemanticParser(llm_client)
         subquestion_generator = SubquestionGenerator(llm_client)
@@ -238,7 +238,12 @@ def build_decomposition_payload(
         "gold_answer": item.get("answer"),
         "stages": {
             "1_semantic_normalized_question": _dataclass_to_jsonable(result["semantic_normalization"]),
+            "2_explicit_entities": _dataclass_to_jsonable(result.get("explicit_entities")),
             "2_mask_spans": _dataclass_to_jsonable(result["mask_spans"]),
+            "3_entity_masking": {
+                "masked_question": result["replacement"].masked_question,
+                "mask_mappings": [_dataclass_to_jsonable(mapping) for mapping in result.get("entity_mask_mappings", [])],
+            },
             "3_selective_masked_question": result["replacement"].masked_question,
             "4_corenlp_dependency_parse": {
                 "tokens": [_dataclass_to_jsonable(token) for token in dependency_parse.tokens],
@@ -304,17 +309,26 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append(normalized)
     lines.append("")
 
-    lines.append("## 2. Mask Spans")
-    mask_spans = stages["2_mask_spans"].get("mask_spans", [])
-    if mask_spans:
-        for span in mask_spans:
-            lines.append(f"- {span.get('text')} ({span.get('kind_hint')}, {span.get('semantic_type_hint')})")
+    lines.append("## 2. Explicit Entities")
+    explicit_entities = (stages.get("2_explicit_entities") or {}).get("entities", [])
+    if explicit_entities:
+        for entity in explicit_entities:
+            lines.append(
+                f"- {entity.get('text')} ({entity.get('semantic_type_hint')}) "
+                f"span=({entity.get('start_char')}, {entity.get('end_char')})"
+            )
     else:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 3. Selective Masked Question")
-    lines.append(str(stages["3_selective_masked_question"]))
+    lines.append("## 3. Entity Masking")
+    entity_masking = stages.get("3_entity_masking") or {}
+    for mapping in entity_masking.get("mask_mappings", []):
+        lines.append(f"- {mapping.get('placeholder')} -> {mapping.get('original_text')}")
+    if not entity_masking.get("mask_mappings"):
+        lines.append("(none)")
+    lines.append("")
+    lines.append(str(entity_masking.get("masked_question", stages.get("3_selective_masked_question", ""))))
     lines.append("")
 
     lines.append("## 4. CoreNLP Dependency Parse")
@@ -332,7 +346,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 6. Entity Start Nodes")
+    lines.append("## 6. Entity Start Nodes from Explicit Entities")
     for entity in stages["6_entity_start_nodes"]:
         lines.append(f"- {entity.get('entity_id')}: {entity.get('text')} graph_node_ids={entity.get('graph_node_ids')}")
     if not stages["6_entity_start_nodes"]:

@@ -33,8 +33,11 @@ from models import (  # noqa: E402
     DependencyParse,
     EntityOriginPath,
     EntityStartNode,
+    ExplicitEntity,
+    ExplicitEntityResult,
     MaskMapping,
     MaskReplacement,
+    MaskSpan,
     MaskSpanResult,
     PathSetCandidate,
     QuestionRecord,
@@ -454,15 +457,25 @@ class EntityOriginPipelineTest(unittest.TestCase):
     def test_no_candidate_node_llm_calls(self) -> None:
         question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
         dependency_parse = _dependency_parse(
-            ["AlphaGo", "developed", "company", "CEO", "graduated", "university"],
+            ["GameA", "developed", "company", "CEO", "graduated", "university"],
             [(1, 2, "dep"), (2, 3, "obj"), (3, 4, "nmod:of"), (4, 5, "dep"), (5, 6, "obl:from")],
-            pos_by_word={"AlphaGo": "NNP"},
+            pos_by_word={"GameA": "NNP"},
         )
         llm = NoCandidatePromptLLM()
         result = run_pipeline(
             record=QuestionRecord(question=question),
             index=1,
-            mask_span_extractor=StaticMaskSpanExtractor(),
+            mask_span_extractor=StaticMaskSpanExtractor(
+                [
+                    MaskSpan(
+                        text="AlphaGo",
+                        start_char=question.index("AlphaGo"),
+                        end_char=question.index("AlphaGo") + len("AlphaGo"),
+                        kind_hint="entity",
+                        semantic_type_hint="Game",
+                    )
+                ]
+            ),
             parser=StaticParser(dependency_parse),
             graph_builder=GraphBuilder(),
             anchor_selector=None,
@@ -771,9 +784,12 @@ class NoCandidatePromptLLM:
 
 
 class StaticMaskSpanExtractor:
+    def __init__(self, mask_spans: list[MaskSpan] | None = None) -> None:
+        self.mask_spans = mask_spans or []
+
     def extract(self, question: str) -> MaskSpanResult:
         del question
-        return MaskSpanResult(mask_spans=[])
+        return MaskSpanResult(mask_spans=list(self.mask_spans))
 
 
 class StaticParser:

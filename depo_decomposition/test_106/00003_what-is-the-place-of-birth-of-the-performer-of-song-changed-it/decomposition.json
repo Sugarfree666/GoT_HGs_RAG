@@ -1,0 +1,2930 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 3,
+  "qid": null,
+  "question": "What is the place of birth of the performer of song Changed It?",
+  "raw_question_item": {
+    "question": "What is the place of birth of the performer of song Changed It?",
+    "answer": "Port of Spain"
+  },
+  "gold_answer": "Port of Spain",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "What is the place of birth of the performer of song Changed It?",
+      "normalized_question": "What is the place of birth of the performer of the song Changed It?",
+      "changed": true,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "What is the place of birth of the performer of the song Changed It?",
+        "changed": false,
+        "rewrite_type": "identity",
+        "added_type_variables": [],
+        "reason": "The original question is grammatically correct and does not present a syntactic risk for dependency parsing."
+      }
+    },
+    "2_explicit_entities": {
+      "entities": [
+        {
+          "text": "Changed It?",
+          "start_char": 56,
+          "end_char": 67,
+          "semantic_type_hint": "Song",
+          "confidence": 0.55,
+          "reason": "complex title after explicit type head"
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "entities": []
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "Changed It?",
+          "start_char": 56,
+          "end_char": 67,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Song",
+          "reason": "complex title after explicit type head"
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "entities": []
+      }
+    },
+    "3_entity_masking": {
+      "masked_question": "What is the place of birth of the performer of the song SongA",
+      "mask_mappings": [
+        {
+          "placeholder": "SongA",
+          "original_text": "Changed It?",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Song",
+          "original_char_span": [
+            56,
+            67
+          ],
+          "masked_char_span": [
+            56,
+            61
+          ],
+          "token_indices": []
+        }
+      ]
+    },
+    "3_selective_masked_question": "What is the place of birth of the performer of the song SongA",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "What",
+          "character_offset_begin": 0,
+          "character_offset_end": 4,
+          "lemma": "what",
+          "pos": "WP"
+        },
+        {
+          "index": 2,
+          "word": "is",
+          "character_offset_begin": 5,
+          "character_offset_end": 7,
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "index": 3,
+          "word": "the",
+          "character_offset_begin": 8,
+          "character_offset_end": 11,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 4,
+          "word": "place",
+          "character_offset_begin": 12,
+          "character_offset_end": 17,
+          "lemma": "place",
+          "pos": "NN"
+        },
+        {
+          "index": 5,
+          "word": "of",
+          "character_offset_begin": 18,
+          "character_offset_end": 20,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 6,
+          "word": "birth",
+          "character_offset_begin": 21,
+          "character_offset_end": 26,
+          "lemma": "birth",
+          "pos": "NN"
+        },
+        {
+          "index": 7,
+          "word": "of",
+          "character_offset_begin": 27,
+          "character_offset_end": 29,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 8,
+          "word": "the",
+          "character_offset_begin": 30,
+          "character_offset_end": 33,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 9,
+          "word": "performer",
+          "character_offset_begin": 34,
+          "character_offset_end": 43,
+          "lemma": "performer",
+          "pos": "NN"
+        },
+        {
+          "index": 10,
+          "word": "of",
+          "character_offset_begin": 44,
+          "character_offset_end": 46,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 11,
+          "word": "the",
+          "character_offset_begin": 47,
+          "character_offset_end": 50,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 12,
+          "word": "song",
+          "character_offset_begin": 51,
+          "character_offset_end": 55,
+          "lemma": "song",
+          "pos": "NN"
+        },
+        {
+          "index": 13,
+          "word": "SongA",
+          "character_offset_begin": 56,
+          "character_offset_end": 61,
+          "lemma": "songa",
+          "pos": "NN"
+        }
+      ],
+      "edges": [
+        {
+          "source": "What",
+          "relation": "cop",
+          "target": "is",
+          "source_index": 1,
+          "target_index": 2
+        },
+        {
+          "source": "place",
+          "relation": "det",
+          "target": "the",
+          "source_index": 4,
+          "target_index": 3
+        },
+        {
+          "source": "What",
+          "relation": "nsubj",
+          "target": "place",
+          "source_index": 1,
+          "target_index": 4
+        },
+        {
+          "source": "birth",
+          "relation": "case",
+          "target": "of",
+          "source_index": 6,
+          "target_index": 5
+        },
+        {
+          "source": "place",
+          "relation": "nmod:of",
+          "target": "birth",
+          "source_index": 4,
+          "target_index": 6
+        },
+        {
+          "source": "performer",
+          "relation": "case",
+          "target": "of",
+          "source_index": 9,
+          "target_index": 7
+        },
+        {
+          "source": "performer",
+          "relation": "det",
+          "target": "the",
+          "source_index": 9,
+          "target_index": 8
+        },
+        {
+          "source": "birth",
+          "relation": "nmod:of",
+          "target": "performer",
+          "source_index": 6,
+          "target_index": 9
+        },
+        {
+          "source": "SongA",
+          "relation": "case",
+          "target": "of",
+          "source_index": 13,
+          "target_index": 10
+        },
+        {
+          "source": "SongA",
+          "relation": "det",
+          "target": "the",
+          "source_index": 13,
+          "target_index": 11
+        },
+        {
+          "source": "SongA",
+          "relation": "compound",
+          "target": "song",
+          "source_index": 13,
+          "target_index": 12
+        },
+        {
+          "source": "performer",
+          "relation": "nmod:of",
+          "target": "SongA",
+          "source_index": 9,
+          "target_index": 13
+        }
+      ],
+      "edge_display": [
+        "What[1] --cop--> is[2]",
+        "place[4] --det--> the[3]",
+        "What[1] --nsubj--> place[4]",
+        "birth[6] --case--> of[5]",
+        "place[4] --nmod:of--> birth[6]",
+        "performer[9] --case--> of[7]",
+        "performer[9] --det--> the[8]",
+        "birth[6] --nmod:of--> performer[9]",
+        "SongA[13] --case--> of[10]",
+        "SongA[13] --det--> the[11]",
+        "SongA[13] --compound--> song[12]",
+        "performer[9] --nmod:of--> SongA[13]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "What",
+          "graph_text": "What",
+          "text": "What",
+          "label": "What[1]",
+          "order": 1,
+          "pos": "WP",
+          "lemma": "what",
+          "character_offset_begin": 0,
+          "character_offset_end": 4
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "is",
+          "graph_text": "is",
+          "text": "is",
+          "label": "is[2]",
+          "order": 2,
+          "pos": "VBZ",
+          "lemma": "be",
+          "character_offset_begin": 5,
+          "character_offset_end": 7
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[3]",
+          "order": 3,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 8,
+          "character_offset_end": 11
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "place",
+          "graph_text": "place",
+          "text": "place",
+          "label": "place[4]",
+          "order": 4,
+          "pos": "NN",
+          "lemma": "place",
+          "character_offset_begin": 12,
+          "character_offset_end": 17
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[5]",
+          "order": 5,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 18,
+          "character_offset_end": 20
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "birth",
+          "graph_text": "birth",
+          "text": "birth",
+          "label": "birth[6]",
+          "order": 6,
+          "pos": "NN",
+          "lemma": "birth",
+          "character_offset_begin": 21,
+          "character_offset_end": 26
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[7]",
+          "order": 7,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 27,
+          "character_offset_end": 29
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[8]",
+          "order": 8,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 30,
+          "character_offset_end": 33
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "performer",
+          "graph_text": "performer",
+          "text": "performer",
+          "label": "performer[9]",
+          "order": 9,
+          "pos": "NN",
+          "lemma": "performer",
+          "character_offset_begin": 34,
+          "character_offset_end": 43
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[10]",
+          "order": 10,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 44,
+          "character_offset_end": 46
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[11]",
+          "order": 11,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 47,
+          "character_offset_end": 50
+        },
+        {
+          "id": "12",
+          "token_index": 12,
+          "word": "song",
+          "graph_text": "song",
+          "text": "song",
+          "label": "song[12]",
+          "order": 12,
+          "pos": "NN",
+          "lemma": "song",
+          "character_offset_begin": 51,
+          "character_offset_end": 55
+        },
+        {
+          "id": "13",
+          "token_index": 13,
+          "word": "SongA",
+          "graph_text": "SongA",
+          "text": "Changed It?",
+          "label": "Changed It?[13]",
+          "order": 13,
+          "pos": "NN",
+          "lemma": "songa",
+          "character_offset_begin": 56,
+          "character_offset_end": 61
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "2",
+          "source_text": "What",
+          "target_text": "is",
+          "relation": "cop",
+          "relations": [
+            "cop"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "2",
+              "governor_text": "What",
+              "dependent_text": "is",
+              "governor_graph_text": "What",
+              "dependent_graph_text": "is",
+              "governor_index": 1,
+              "dependent_index": 2,
+              "dependency_label": "cop"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "2",
+          "dependency_label": "cop",
+          "token_text": {
+            "1": "What",
+            "2": "is"
+          },
+          "token_index": {
+            "1": 1,
+            "2": 2
+          }
+        },
+        {
+          "source": "1",
+          "target": "4",
+          "source_text": "What",
+          "target_text": "place",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "4",
+              "governor_text": "What",
+              "dependent_text": "place",
+              "governor_graph_text": "What",
+              "dependent_graph_text": "place",
+              "governor_index": 1,
+              "dependent_index": 4,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "4",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "1": "What",
+            "4": "place"
+          },
+          "token_index": {
+            "1": 1,
+            "4": 4
+          }
+        },
+        {
+          "source": "3",
+          "target": "4",
+          "source_text": "the",
+          "target_text": "place",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "3",
+              "governor_text": "place",
+              "dependent_text": "the",
+              "governor_graph_text": "place",
+              "dependent_graph_text": "the",
+              "governor_index": 4,
+              "dependent_index": 3,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "3",
+          "dependency_label": "det",
+          "token_text": {
+            "4": "place",
+            "3": "the"
+          },
+          "token_index": {
+            "4": 4,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "6",
+          "source_text": "place",
+          "target_text": "birth",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "6",
+              "governor_text": "place",
+              "dependent_text": "birth",
+              "governor_graph_text": "place",
+              "dependent_graph_text": "birth",
+              "governor_index": 4,
+              "dependent_index": 6,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "6",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "4": "place",
+            "6": "birth"
+          },
+          "token_index": {
+            "4": 4,
+            "6": 6
+          }
+        },
+        {
+          "source": "5",
+          "target": "6",
+          "source_text": "of",
+          "target_text": "birth",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "5",
+              "governor_text": "birth",
+              "dependent_text": "of",
+              "governor_graph_text": "birth",
+              "dependent_graph_text": "of",
+              "governor_index": 6,
+              "dependent_index": 5,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "5",
+          "dependency_label": "case",
+          "token_text": {
+            "6": "birth",
+            "5": "of"
+          },
+          "token_index": {
+            "6": 6,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "9",
+          "source_text": "birth",
+          "target_text": "performer",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "9",
+              "governor_text": "birth",
+              "dependent_text": "performer",
+              "governor_graph_text": "birth",
+              "dependent_graph_text": "performer",
+              "governor_index": 6,
+              "dependent_index": 9,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "9",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "6": "birth",
+            "9": "performer"
+          },
+          "token_index": {
+            "6": 6,
+            "9": 9
+          }
+        },
+        {
+          "source": "7",
+          "target": "9",
+          "source_text": "of",
+          "target_text": "performer",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "7",
+              "governor_text": "performer",
+              "dependent_text": "of",
+              "governor_graph_text": "performer",
+              "dependent_graph_text": "of",
+              "governor_index": 9,
+              "dependent_index": 7,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "7",
+          "dependency_label": "case",
+          "token_text": {
+            "9": "performer",
+            "7": "of"
+          },
+          "token_index": {
+            "9": 9,
+            "7": 7
+          }
+        },
+        {
+          "source": "8",
+          "target": "9",
+          "source_text": "the",
+          "target_text": "performer",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "8",
+              "governor_text": "performer",
+              "dependent_text": "the",
+              "governor_graph_text": "performer",
+              "dependent_graph_text": "the",
+              "governor_index": 9,
+              "dependent_index": 8,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "8",
+          "dependency_label": "det",
+          "token_text": {
+            "9": "performer",
+            "8": "the"
+          },
+          "token_index": {
+            "9": 9,
+            "8": 8
+          }
+        },
+        {
+          "source": "9",
+          "target": "13",
+          "source_text": "performer",
+          "target_text": "Changed It?",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "13",
+              "governor_text": "performer",
+              "dependent_text": "Changed It?",
+              "governor_graph_text": "performer",
+              "dependent_graph_text": "SongA",
+              "governor_index": 9,
+              "dependent_index": 13,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "13",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "9": "performer",
+            "13": "Changed It?"
+          },
+          "token_index": {
+            "9": 9,
+            "13": 13
+          }
+        },
+        {
+          "source": "10",
+          "target": "13",
+          "source_text": "of",
+          "target_text": "Changed It?",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "13",
+              "dependent": "10",
+              "governor_text": "Changed It?",
+              "dependent_text": "of",
+              "governor_graph_text": "SongA",
+              "dependent_graph_text": "of",
+              "governor_index": 13,
+              "dependent_index": 10,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "13",
+          "original_dependent": "10",
+          "dependency_label": "case",
+          "token_text": {
+            "13": "Changed It?",
+            "10": "of"
+          },
+          "token_index": {
+            "13": 13,
+            "10": 10
+          }
+        },
+        {
+          "source": "11",
+          "target": "13",
+          "source_text": "the",
+          "target_text": "Changed It?",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "13",
+              "dependent": "11",
+              "governor_text": "Changed It?",
+              "dependent_text": "the",
+              "governor_graph_text": "SongA",
+              "dependent_graph_text": "the",
+              "governor_index": 13,
+              "dependent_index": 11,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "13",
+          "original_dependent": "11",
+          "dependency_label": "det",
+          "token_text": {
+            "13": "Changed It?",
+            "11": "the"
+          },
+          "token_index": {
+            "13": 13,
+            "11": 11
+          }
+        },
+        {
+          "source": "12",
+          "target": "13",
+          "source_text": "song",
+          "target_text": "Changed It?",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "13",
+              "dependent": "12",
+              "governor_text": "Changed It?",
+              "dependent_text": "song",
+              "governor_graph_text": "SongA",
+              "dependent_graph_text": "song",
+              "governor_index": 13,
+              "dependent_index": 12,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "13",
+          "original_dependent": "12",
+          "dependency_label": "compound",
+          "token_text": {
+            "13": "Changed It?",
+            "12": "song"
+          },
+          "token_index": {
+            "13": 13,
+            "12": 12
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "Changed It?",
+        "graph_node_ids": [
+          "13"
+        ],
+        "token_ids": [
+          13
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Song"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "performer",
+          "birth",
+          "place",
+          "What"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "4",
+          "1"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Changed It?",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "performer",
+                "dependent_text": "Changed It?",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "performer",
+            "target_text": "birth",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "birth",
+                "dependent_text": "performer",
+                "governor_graph_text": "birth",
+                "dependent_graph_text": "performer",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "birth",
+            "target_text": "place",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "place",
+                "dependent_text": "birth",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "birth",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "1",
+            "source_text": "place",
+            "target_text": "What",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "4",
+                "governor_text": "What",
+                "dependent_text": "place",
+                "governor_graph_text": "What",
+                "dependent_graph_text": "place",
+                "governor_index": 1,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "performer",
+          "birth",
+          "place",
+          "What",
+          "is"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "4",
+          "1",
+          "2"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Changed It?",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "performer",
+                "dependent_text": "Changed It?",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "performer",
+            "target_text": "birth",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "birth",
+                "dependent_text": "performer",
+                "governor_graph_text": "birth",
+                "dependent_graph_text": "performer",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "birth",
+            "target_text": "place",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "place",
+                "dependent_text": "birth",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "birth",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "1",
+            "source_text": "place",
+            "target_text": "What",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "4",
+                "governor_text": "What",
+                "dependent_text": "place",
+                "governor_graph_text": "What",
+                "dependent_graph_text": "place",
+                "governor_index": 1,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "1",
+            "target": "2",
+            "source_text": "What",
+            "target_text": "is",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "2",
+                "governor_text": "What",
+                "dependent_text": "is",
+                "governor_graph_text": "What",
+                "dependent_graph_text": "is",
+                "governor_index": 1,
+                "dependent_index": 2,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "performer",
+          "birth",
+          "place"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "4"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Changed It?",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "performer",
+                "dependent_text": "Changed It?",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "performer",
+            "target_text": "birth",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "birth",
+                "dependent_text": "performer",
+                "governor_graph_text": "birth",
+                "dependent_graph_text": "performer",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "birth",
+            "target_text": "place",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "place",
+                "dependent_text": "birth",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "birth",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "performer",
+          "birth",
+          "place",
+          "the"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "4",
+          "3"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Changed It?",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "performer",
+                "dependent_text": "Changed It?",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "performer",
+            "target_text": "birth",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "birth",
+                "dependent_text": "performer",
+                "governor_graph_text": "birth",
+                "dependent_graph_text": "performer",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "birth",
+            "target_text": "place",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "place",
+                "dependent_text": "birth",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "birth",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "place",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "place",
+                "dependent_text": "the",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "the",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "performer",
+          "birth"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Changed It?",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "performer",
+                "dependent_text": "Changed It?",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "performer",
+            "target_text": "birth",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "birth",
+                "dependent_text": "performer",
+                "governor_graph_text": "birth",
+                "dependent_graph_text": "performer",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "performer",
+          "birth",
+          "of"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "5"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Changed It?",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "performer",
+                "dependent_text": "Changed It?",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "performer",
+            "target_text": "birth",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "birth",
+                "dependent_text": "performer",
+                "governor_graph_text": "birth",
+                "dependent_graph_text": "performer",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "5",
+            "source_text": "birth",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "5",
+                "governor_text": "birth",
+                "dependent_text": "of",
+                "governor_graph_text": "birth",
+                "dependent_graph_text": "of",
+                "governor_index": 6,
+                "dependent_index": 5,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "performer"
+        ],
+        "node_ids": [
+          "13",
+          "9"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Changed It?",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "performer",
+                "dependent_text": "Changed It?",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "song"
+        ],
+        "node_ids": [
+          "13",
+          "12"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "12",
+            "source_text": "Changed It?",
+            "target_text": "song",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "13",
+                "dependent": "12",
+                "governor_text": "Changed It?",
+                "dependent_text": "song",
+                "governor_graph_text": "SongA",
+                "dependent_graph_text": "song",
+                "governor_index": 13,
+                "dependent_index": 12,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "performer",
+          "of"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "7"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Changed It?",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "performer",
+                "dependent_text": "Changed It?",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "7",
+            "source_text": "performer",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "7",
+                "governor_text": "performer",
+                "dependent_text": "of",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "of",
+                "governor_index": 9,
+                "dependent_index": 7,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "performer",
+          "the"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "8"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Changed It?",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "performer",
+                "dependent_text": "Changed It?",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "8",
+            "source_text": "performer",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "8",
+                "governor_text": "performer",
+                "dependent_text": "the",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "the",
+                "governor_index": 9,
+                "dependent_index": 8,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p11",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "of"
+        ],
+        "node_ids": [
+          "13",
+          "10"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "10",
+            "source_text": "Changed It?",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "13",
+                "dependent": "10",
+                "governor_text": "Changed It?",
+                "dependent_text": "of",
+                "governor_graph_text": "SongA",
+                "dependent_graph_text": "of",
+                "governor_index": 13,
+                "dependent_index": 10,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p12",
+        "entity_id": "e1",
+        "entity_text": "Changed It?",
+        "nodes": [
+          "Changed It?",
+          "the"
+        ],
+        "node_ids": [
+          "13",
+          "11"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "11",
+            "source_text": "Changed It?",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "13",
+                "dependent": "11",
+                "governor_text": "Changed It?",
+                "dependent_text": "the",
+                "governor_graph_text": "SongA",
+                "dependent_graph_text": "the",
+                "governor_index": 13,
+                "dependent_index": 11,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "performer",
+          "birth",
+          "place",
+          "what"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?', reaches 'performer', covers 'birth' and 'place', and includes the 'what' cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p2",
+        "score": 95.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "performer",
+          "birth",
+          "place",
+          "what",
+          "is"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?', reaches 'performer', covers 'birth' and 'place', and includes the 'what' and 'is' cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p3",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "performer",
+          "birth",
+          "place"
+        ],
+        "missing_cues": [
+          "what"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?', reaches 'performer', covers 'birth' and 'place', but misses the 'what' cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p4",
+        "score": 80.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "performer",
+          "birth",
+          "place",
+          "the"
+        ],
+        "missing_cues": [
+          "what"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?', reaches 'performer', covers 'birth' and 'place', but misses the 'what' cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p5",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "performer",
+          "birth"
+        ],
+        "missing_cues": [
+          "place",
+          "what"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?', reaches 'performer', and covers 'birth', but misses 'place' and 'what' cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p6",
+        "score": 60.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "performer",
+          "birth",
+          "of"
+        ],
+        "missing_cues": [
+          "place",
+          "what"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?', reaches 'performer', and covers 'birth', but misses 'place' and 'what' cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p7",
+        "score": 50.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "performer"
+        ],
+        "missing_cues": [
+          "birth",
+          "place",
+          "what"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?' and reaches 'performer', but misses 'birth', 'place', and 'what' cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p8",
+        "score": 40.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "song"
+        ],
+        "missing_cues": [
+          "performer",
+          "birth",
+          "place",
+          "what"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?' and reaches 'song', but misses all relevant cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p9",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "performer",
+          "of"
+        ],
+        "missing_cues": [
+          "birth",
+          "place",
+          "what"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?' and reaches 'performer', but misses 'birth', 'place', and 'what' cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p10",
+        "score": 50.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "performer",
+          "the"
+        ],
+        "missing_cues": [
+          "birth",
+          "place",
+          "what"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?' and reaches 'performer', but misses 'birth', 'place', and 'what' cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p11",
+        "score": 30.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "of"
+        ],
+        "missing_cues": [
+          "performer",
+          "birth",
+          "place",
+          "what"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?' and reaches 'of', but misses all relevant cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p12",
+        "score": 25.0,
+        "valid": true,
+        "terminal_hint": "place_of_birth",
+        "semantic_chain_hint": [
+          "performer",
+          "place_of_birth"
+        ],
+        "covered_cues": [
+          "the"
+        ],
+        "missing_cues": [
+          "performer",
+          "birth",
+          "place",
+          "what"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'Changed It?' and reaches 'the', but misses all relevant cues."
+      }
+    ],
+    "8_1_top_paths_by_entity": {
+      "e1": [
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p2",
+          "score": 95.0,
+          "valid": true,
+          "terminal_hint": "place_of_birth",
+          "semantic_chain_hint": [
+            "performer",
+            "place_of_birth"
+          ],
+          "covered_cues": [
+            "performer",
+            "birth",
+            "place",
+            "what",
+            "is"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from 'Changed It?', reaches 'performer', covers 'birth' and 'place', and includes the 'what' and 'is' cues."
+        },
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p1",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "place_of_birth",
+          "semantic_chain_hint": [
+            "performer",
+            "place_of_birth"
+          ],
+          "covered_cues": [
+            "performer",
+            "birth",
+            "place",
+            "what"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from 'Changed It?', reaches 'performer', covers 'birth' and 'place', and includes the 'what' cue."
+        }
+      ]
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p2"
+        },
+        "mean_path_score": 95.0
+      },
+      {
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "mean_path_score": 90.0
+      }
+    ],
+    "9_candidate_semantic_asts": [
+      {
+        "candidate_id": "ast_ps1",
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p2"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "changed_it",
+              "label": "Changed It",
+              "kind": "entity",
+              "semantic_type": "Song",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "13"
+              ],
+              "source_token_indices": [
+                13
+              ],
+              "grounding_text": "Changed It",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "performer",
+              "label": "performer",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "9"
+              ],
+              "source_token_indices": [
+                9
+              ],
+              "grounding_text": "performer",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "birthplace",
+              "label": "birthplace",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "4",
+                "6"
+              ],
+              "source_token_indices": [
+                4,
+                6
+              ],
+              "grounding_text": "birthplace",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "changed_it",
+              "target": "performer",
+              "edge_type": "attribute",
+              "relation_hint": "performer of Changed It",
+              "support_path": [
+                "e1_p2",
+                "13",
+                "9"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "performer",
+              "target": "birthplace",
+              "edge_type": "attribute",
+              "relation_hint": "place of birth of performer",
+              "support_path": [
+                "e1_p2",
+                "9",
+                "6",
+                "4"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "changed_it",
+                "label": "Changed It",
+                "kind": "entity",
+                "semantic_type": "Song",
+                "source_path_ids": [
+                  "e1_p2"
+                ],
+                "source_node_ids": [
+                  "13"
+                ]
+              },
+              {
+                "id": "performer",
+                "label": "performer",
+                "kind": "type_variable",
+                "semantic_type": "Person",
+                "source_path_ids": [
+                  "e1_p2"
+                ],
+                "source_node_ids": [
+                  "9"
+                ]
+              },
+              {
+                "id": "birthplace",
+                "label": "birthplace",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p2"
+                ],
+                "source_node_ids": [
+                  "4",
+                  "6"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "changed_it",
+                "target": "performer",
+                "relation": "performer of Changed It",
+                "support_path_id": "e1_p2",
+                "support_node_ids": [
+                  "13",
+                  "9"
+                ]
+              },
+              {
+                "source": "performer",
+                "target": "birthplace",
+                "relation": "place of birth of performer",
+                "support_path_id": "e1_p2",
+                "support_node_ids": [
+                  "9",
+                  "6",
+                  "4"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "birthplace"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "changed_it",
+              "label": "Changed It",
+              "kind": "entity",
+              "semantic_type": "Song",
+              "source_path_ids": [
+                "e1_p2"
+              ],
+              "source_node_ids": [
+                "13"
+              ]
+            },
+            {
+              "id": "performer",
+              "label": "performer",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source_path_ids": [
+                "e1_p2"
+              ],
+              "source_node_ids": [
+                "9"
+              ]
+            },
+            {
+              "id": "birthplace",
+              "label": "birthplace",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p2"
+              ],
+              "source_node_ids": [
+                "4",
+                "6"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "changed_it",
+              "target": "performer",
+              "relation": "performer of Changed It",
+              "support_path_id": "e1_p2",
+              "support_node_ids": [
+                "13",
+                "9"
+              ]
+            },
+            {
+              "source": "performer",
+              "target": "birthplace",
+              "relation": "place of birth of performer",
+              "support_path_id": "e1_p2",
+              "support_node_ids": [
+                "9",
+                "6",
+                "4"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "birthplace"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 95.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p2",
+              "score": 95.0,
+              "valid": true,
+              "terminal_hint": "place_of_birth",
+              "semantic_chain_hint": [
+                "performer",
+                "place_of_birth"
+              ],
+              "covered_cues": [
+                "performer",
+                "birth",
+                "place",
+                "what",
+                "is"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from 'Changed It?', reaches 'performer', covers 'birth' and 'place', and includes the 'what' and 'is' cues."
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "ast_ps2",
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "changed_it",
+              "label": "Changed It",
+              "kind": "entity",
+              "semantic_type": "Song",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "1"
+              ],
+              "source_token_indices": [
+                1
+              ],
+              "grounding_text": "Changed It",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "performer",
+              "label": "performer",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "2"
+              ],
+              "source_token_indices": [
+                2
+              ],
+              "grounding_text": "performer",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "birthplace",
+              "label": "birthplace",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "3",
+                "4"
+              ],
+              "source_token_indices": [
+                3,
+                4
+              ],
+              "grounding_text": "birthplace",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "changed_it",
+              "target": "performer",
+              "edge_type": "attribute",
+              "relation_hint": "performer of Changed It",
+              "support_path": [
+                "e1_p1",
+                "1",
+                "2"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "performer",
+              "target": "birthplace",
+              "edge_type": "attribute",
+              "relation_hint": "place of birth of the performer",
+              "support_path": [
+                "e1_p1",
+                "2",
+                "3",
+                "4"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "changed_it",
+                "label": "Changed It",
+                "kind": "entity",
+                "semantic_type": "Song",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "1"
+                ]
+              },
+              {
+                "id": "performer",
+                "label": "performer",
+                "kind": "type_variable",
+                "semantic_type": "Person",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "2"
+                ]
+              },
+              {
+                "id": "birthplace",
+                "label": "birthplace",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "3",
+                  "4"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "changed_it",
+                "target": "performer",
+                "relation": "performer of Changed It",
+                "support_path_id": "e1_p1",
+                "support_node_ids": [
+                  "1",
+                  "2"
+                ]
+              },
+              {
+                "source": "performer",
+                "target": "birthplace",
+                "relation": "place of birth of the performer",
+                "support_path_id": "e1_p1",
+                "support_node_ids": [
+                  "2",
+                  "3",
+                  "4"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "birthplace"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "changed_it",
+              "label": "Changed It",
+              "kind": "entity",
+              "semantic_type": "Song",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "1"
+              ]
+            },
+            {
+              "id": "performer",
+              "label": "performer",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "2"
+              ]
+            },
+            {
+              "id": "birthplace",
+              "label": "birthplace",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "3",
+                "4"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "changed_it",
+              "target": "performer",
+              "relation": "performer of Changed It",
+              "support_path_id": "e1_p1",
+              "support_node_ids": [
+                "1",
+                "2"
+              ]
+            },
+            {
+              "source": "performer",
+              "target": "birthplace",
+              "relation": "place of birth of the performer",
+              "support_path_id": "e1_p1",
+              "support_node_ids": [
+                "2",
+                "3",
+                "4"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "birthplace"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 90.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p1",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "place_of_birth",
+              "semantic_chain_hint": [
+                "performer",
+                "place_of_birth"
+              ],
+              "covered_cues": [
+                "performer",
+                "birth",
+                "place",
+                "what"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from 'Changed It?', reaches 'performer', covers 'birth' and 'place', and includes the 'what' cue."
+            }
+          }
+        }
+      }
+    ],
+    "10_best_ast_selection": {
+      "ast_reviews": [
+        {
+          "candidate_id": "ast_ps1",
+          "path_set_id": "ps1",
+          "score": 0.96,
+          "valid_for_decomposition": true,
+          "covers_original_question": true,
+          "answer_intent_compatible": true,
+          "branch_complete": true,
+          "atomic_questions_would_be_executable": true,
+          "has_final_operator_question": false,
+          "fatal_errors": [],
+          "reason": "This AST effectively captures the relationship between the song 'Changed It' and its performer, as well as the performer's place of birth, allowing for straightforward decomposition into atomic subquestions."
+        }
+      ],
+      "best_candidate_id": "ast_ps1",
+      "selected_candidate_id": "ast_ps1"
+    },
+    "10_selected_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "changed_it",
+          "label": "Changed It",
+          "kind": "entity",
+          "semantic_type": "Song",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "13"
+          ],
+          "source_token_indices": [
+            13
+          ],
+          "grounding_text": "Changed It",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "performer",
+          "label": "performer",
+          "kind": "type_variable",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "9"
+          ],
+          "source_token_indices": [
+            9
+          ],
+          "grounding_text": "performer",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "birthplace",
+          "label": "birthplace",
+          "kind": "value_slot",
+          "semantic_type": "Location",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "4",
+            "6"
+          ],
+          "source_token_indices": [
+            4,
+            6
+          ],
+          "grounding_text": "birthplace",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "changed_it",
+          "target": "performer",
+          "edge_type": "attribute",
+          "relation_hint": "performer of Changed It",
+          "support_path": [
+            "e1_p2",
+            "13",
+            "9"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "performer",
+          "target": "birthplace",
+          "edge_type": "attribute",
+          "relation_hint": "place of birth of performer",
+          "support_path": [
+            "e1_p2",
+            "9",
+            "6",
+            "4"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "nodes": [
+          {
+            "id": "changed_it",
+            "label": "Changed It",
+            "kind": "entity",
+            "semantic_type": "Song",
+            "source_path_ids": [
+              "e1_p2"
+            ],
+            "source_node_ids": [
+              "13"
+            ]
+          },
+          {
+            "id": "performer",
+            "label": "performer",
+            "kind": "type_variable",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p2"
+            ],
+            "source_node_ids": [
+              "9"
+            ]
+          },
+          {
+            "id": "birthplace",
+            "label": "birthplace",
+            "kind": "value_slot",
+            "semantic_type": "Location",
+            "source_path_ids": [
+              "e1_p2"
+            ],
+            "source_node_ids": [
+              "4",
+              "6"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "changed_it",
+            "target": "performer",
+            "relation": "performer of Changed It",
+            "support_path_id": "e1_p2",
+            "support_node_ids": [
+              "13",
+              "9"
+            ]
+          },
+          {
+            "source": "performer",
+            "target": "birthplace",
+            "relation": "place of birth of performer",
+            "support_path_id": "e1_p2",
+            "support_node_ids": [
+              "9",
+              "6",
+              "4"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "birthplace"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {},
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "11_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the performer of the song Changed It?",
+          "type": "lookup",
+          "inputs": [
+            "Changed It"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "changed_it",
+          "target_node": "performer",
+          "ast_edge": {
+            "source": "changed_it",
+            "target": "performer",
+            "edge_type": "attribute",
+            "relation_hint": "performer of Changed It",
+            "support_path": [
+              "e1_p2",
+              "13",
+              "9"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "What is the birthplace of the performer of Changed It?",
+          "type": "lookup",
+          "inputs": [
+            "X1"
+          ],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": "performer",
+          "target_node": "birthplace",
+          "ast_edge": {
+            "source": "performer",
+            "target": "birthplace",
+            "edge_type": "attribute",
+            "relation_hint": "place of birth of performer",
+            "support_path": [
+              "e1_p2",
+              "9",
+              "6",
+              "4"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "11_subquestions": [
+      {
+        "index": 1,
+        "question": "Who is the performer of the song Changed It?",
+        "answer_variable": "X1",
+        "source_node": "changed_it",
+        "target_node": "performer",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "changed_it",
+          "target": "performer",
+          "edge_type": "attribute",
+          "relation_hint": "performer of Changed It",
+          "support_path": [
+            "e1_p2",
+            "13",
+            "9"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "What is the birthplace of the performer of Changed It?",
+        "answer_variable": "X2",
+        "source_node": "performer",
+        "target_node": "birthplace",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "performer",
+          "target": "birthplace",
+          "edge_type": "attribute",
+          "relation_hint": "place of birth of performer",
+          "support_path": [
+            "e1_p2",
+            "9",
+            "6",
+            "4"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,6316 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 4,
+  "qid": null,
+  "question": "Are Marufabad and Nasamkhrali both located in the same country?",
+  "raw_question_item": {
+    "question": "Are Marufabad and Nasamkhrali both located in the same country?",
+    "answer": "no"
+  },
+  "gold_answer": "no",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "Are Marufabad and Nasamkhrali both located in the same country?",
+      "normalized_question": "Are Marufabad and Nasamkhrali both located in the same country?",
+      "changed": false,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "Are Marufabad and Nasamkhrali both located in the same country?",
+        "changed": false,
+        "rewrite_type": "identity",
+        "added_type_variables": [],
+        "reason": "The original question is already grammatically correct and does not present any syntactic risks for dependency parsing."
+      }
+    },
+    "2_explicit_entities": {
+      "entities": [
+        {
+          "text": "Marufabad",
+          "start_char": 4,
+          "end_char": 13,
+          "semantic_type_hint": "Location",
+          "confidence": 0.95,
+          "reason": "Marufabad is a specific place name."
+        },
+        {
+          "text": "Nasamkhrali",
+          "start_char": 18,
+          "end_char": 29,
+          "semantic_type_hint": "Location",
+          "confidence": 0.95,
+          "reason": "Nasamkhrali is a specific place name."
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "entities": [
+          {
+            "text": "Marufabad",
+            "start_char": 4,
+            "end_char": 13,
+            "semantic_type_hint": "Location",
+            "confidence": 0.95,
+            "reason": "Marufabad is a specific place name."
+          },
+          {
+            "text": "Nasamkhrali",
+            "start_char": 18,
+            "end_char": 29,
+            "semantic_type_hint": "Location",
+            "confidence": 0.95,
+            "reason": "Nasamkhrali is a specific place name."
+          }
+        ]
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "Marufabad",
+          "start_char": 4,
+          "end_char": 13,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "reason": "Marufabad is a specific place name."
+        },
+        {
+          "text": "Nasamkhrali",
+          "start_char": 18,
+          "end_char": 29,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "reason": "Nasamkhrali is a specific place name."
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "entities": [
+          {
+            "text": "Marufabad",
+            "start_char": 4,
+            "end_char": 13,
+            "semantic_type_hint": "Location",
+            "confidence": 0.95,
+            "reason": "Marufabad is a specific place name."
+          },
+          {
+            "text": "Nasamkhrali",
+            "start_char": 18,
+            "end_char": 29,
+            "semantic_type_hint": "Location",
+            "confidence": 0.95,
+            "reason": "Nasamkhrali is a specific place name."
+          }
+        ]
+      }
+    },
+    "3_entity_masking": {
+      "masked_question": "Are LocationA and LocationB both located in the same country?",
+      "mask_mappings": [
+        {
+          "placeholder": "LocationA",
+          "original_text": "Marufabad",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            4,
+            13
+          ],
+          "masked_char_span": [
+            4,
+            13
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "LocationB",
+          "original_text": "Nasamkhrali",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Location",
+          "original_char_span": [
+            18,
+            29
+          ],
+          "masked_char_span": [
+            18,
+            27
+          ],
+          "token_indices": []
+        }
+      ]
+    },
+    "3_selective_masked_question": "Are LocationA and LocationB both located in the same country?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "Are",
+          "character_offset_begin": 0,
+          "character_offset_end": 3,
+          "lemma": "be",
+          "pos": "VBP"
+        },
+        {
+          "index": 2,
+          "word": "LocationA",
+          "character_offset_begin": 4,
+          "character_offset_end": 13,
+          "lemma": "locationa",
+          "pos": "NN"
+        },
+        {
+          "index": 3,
+          "word": "and",
+          "character_offset_begin": 14,
+          "character_offset_end": 17,
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "index": 4,
+          "word": "LocationB",
+          "character_offset_begin": 18,
+          "character_offset_end": 27,
+          "lemma": "locationb",
+          "pos": "NN"
+        },
+        {
+          "index": 5,
+          "word": "both",
+          "character_offset_begin": 28,
+          "character_offset_end": 32,
+          "lemma": "both",
+          "pos": "CC"
+        },
+        {
+          "index": 6,
+          "word": "located",
+          "character_offset_begin": 33,
+          "character_offset_end": 40,
+          "lemma": "locate",
+          "pos": "VBN"
+        },
+        {
+          "index": 7,
+          "word": "in",
+          "character_offset_begin": 41,
+          "character_offset_end": 43,
+          "lemma": "in",
+          "pos": "IN"
+        },
+        {
+          "index": 8,
+          "word": "the",
+          "character_offset_begin": 44,
+          "character_offset_end": 47,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 9,
+          "word": "same",
+          "character_offset_begin": 48,
+          "character_offset_end": 52,
+          "lemma": "same",
+          "pos": "JJ"
+        },
+        {
+          "index": 10,
+          "word": "country",
+          "character_offset_begin": 53,
+          "character_offset_end": 60,
+          "lemma": "country",
+          "pos": "NN"
+        },
+        {
+          "index": 11,
+          "word": "?",
+          "character_offset_begin": 60,
+          "character_offset_end": 61,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "located",
+          "relation": "cop",
+          "target": "Are",
+          "source_index": 6,
+          "target_index": 1
+        },
+        {
+          "source": "located",
+          "relation": "nsubj",
+          "target": "LocationA",
+          "source_index": 6,
+          "target_index": 2
+        },
+        {
+          "source": "LocationB",
+          "relation": "cc",
+          "target": "and",
+          "source_index": 4,
+          "target_index": 3
+        },
+        {
+          "source": "LocationA",
+          "relation": "conj:and",
+          "target": "LocationB",
+          "source_index": 2,
+          "target_index": 4
+        },
+        {
+          "source": "located",
+          "relation": "nsubj",
+          "target": "LocationB",
+          "source_index": 6,
+          "target_index": 4
+        },
+        {
+          "source": "located",
+          "relation": "cc:preconj",
+          "target": "both",
+          "source_index": 6,
+          "target_index": 5
+        },
+        {
+          "source": "country",
+          "relation": "case",
+          "target": "in",
+          "source_index": 10,
+          "target_index": 7
+        },
+        {
+          "source": "country",
+          "relation": "det",
+          "target": "the",
+          "source_index": 10,
+          "target_index": 8
+        },
+        {
+          "source": "country",
+          "relation": "amod",
+          "target": "same",
+          "source_index": 10,
+          "target_index": 9
+        },
+        {
+          "source": "located",
+          "relation": "obl:in",
+          "target": "country",
+          "source_index": 6,
+          "target_index": 10
+        },
+        {
+          "source": "located",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 6,
+          "target_index": 11
+        }
+      ],
+      "edge_display": [
+        "located[6] --cop--> Are[1]",
+        "located[6] --nsubj--> LocationA[2]",
+        "LocationB[4] --cc--> and[3]",
+        "LocationA[2] --conj:and--> LocationB[4]",
+        "located[6] --nsubj--> LocationB[4]",
+        "located[6] --cc:preconj--> both[5]",
+        "country[10] --case--> in[7]",
+        "country[10] --det--> the[8]",
+        "country[10] --amod--> same[9]",
+        "located[6] --obl:in--> country[10]",
+        "located[6] --punct--> ?[11]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "Are",
+          "graph_text": "Are",
+          "text": "Are",
+          "label": "Are[1]",
+          "order": 1,
+          "pos": "VBP",
+          "lemma": "be",
+          "character_offset_begin": 0,
+          "character_offset_end": 3
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "LocationA",
+          "graph_text": "LocationA",
+          "text": "Marufabad",
+          "label": "Marufabad[2]",
+          "order": 2,
+          "pos": "NN",
+          "lemma": "locationa",
+          "character_offset_begin": 4,
+          "character_offset_end": 13
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "and",
+          "graph_text": "and",
+          "text": "and",
+          "label": "and[3]",
+          "order": 3,
+          "pos": "CC",
+          "lemma": "and",
+          "character_offset_begin": 14,
+          "character_offset_end": 17
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "LocationB",
+          "graph_text": "LocationB",
+          "text": "Nasamkhrali",
+          "label": "Nasamkhrali[4]",
+          "order": 4,
+          "pos": "NN",
+          "lemma": "locationb",
+          "character_offset_begin": 18,
+          "character_offset_end": 27
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "both",
+          "graph_text": "both",
+          "text": "both",
+          "label": "both[5]",
+          "order": 5,
+          "pos": "CC",
+          "lemma": "both",
+          "character_offset_begin": 28,
+          "character_offset_end": 32
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "located",
+          "graph_text": "located",
+          "text": "located",
+          "label": "located[6]",
+          "order": 6,
+          "pos": "VBN",
+          "lemma": "locate",
+          "character_offset_begin": 33,
+          "character_offset_end": 40
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "in",
+          "graph_text": "in",
+          "text": "in",
+          "label": "in[7]",
+          "order": 7,
+          "pos": "IN",
+          "lemma": "in",
+          "character_offset_begin": 41,
+          "character_offset_end": 43
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[8]",
+          "order": 8,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 44,
+          "character_offset_end": 47
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "same",
+          "graph_text": "same",
+          "text": "same",
+          "label": "same[9]",
+          "order": 9,
+          "pos": "JJ",
+          "lemma": "same",
+          "character_offset_begin": 48,
+          "character_offset_end": 52
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "country",
+          "graph_text": "country",
+          "text": "country",
+          "label": "country[10]",
+          "order": 10,
+          "pos": "NN",
+          "lemma": "country",
+          "character_offset_begin": 53,
+          "character_offset_end": 60
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[11]",
+          "order": 11,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 60,
+          "character_offset_end": 61
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "6",
+          "source_text": "Are",
+          "target_text": "located",
+          "relation": "cop",
+          "relations": [
+            "cop"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "1",
+              "governor_text": "located",
+              "dependent_text": "Are",
+              "governor_graph_text": "located",
+              "dependent_graph_text": "Are",
+              "governor_index": 6,
+              "dependent_index": 1,
+              "dependency_label": "cop"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "1",
+          "dependency_label": "cop",
+          "token_text": {
+            "6": "located",
+            "1": "Are"
+          },
+          "token_index": {
+            "6": 6,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "6",
+          "source_text": "Marufabad",
+          "target_text": "located",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "2",
+              "governor_text": "located",
+              "dependent_text": "Marufabad",
+              "governor_graph_text": "located",
+              "dependent_graph_text": "LocationA",
+              "governor_index": 6,
+              "dependent_index": 2,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "2",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "6": "located",
+            "2": "Marufabad"
+          },
+          "token_index": {
+            "6": 6,
+            "2": 2
+          }
+        },
+        {
+          "source": "2",
+          "target": "4",
+          "source_text": "Marufabad",
+          "target_text": "Nasamkhrali",
+          "relation": "conj:and",
+          "relations": [
+            "conj:and"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "4",
+              "governor_text": "Marufabad",
+              "dependent_text": "Nasamkhrali",
+              "governor_graph_text": "LocationA",
+              "dependent_graph_text": "LocationB",
+              "governor_index": 2,
+              "dependent_index": 4,
+              "dependency_label": "conj:and"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "4",
+          "dependency_label": "conj:and",
+          "token_text": {
+            "2": "Marufabad",
+            "4": "Nasamkhrali"
+          },
+          "token_index": {
+            "2": 2,
+            "4": 4
+          }
+        },
+        {
+          "source": "3",
+          "target": "4",
+          "source_text": "and",
+          "target_text": "Nasamkhrali",
+          "relation": "cc",
+          "relations": [
+            "cc"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "3",
+              "governor_text": "Nasamkhrali",
+              "dependent_text": "and",
+              "governor_graph_text": "LocationB",
+              "dependent_graph_text": "and",
+              "governor_index": 4,
+              "dependent_index": 3,
+              "dependency_label": "cc"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "3",
+          "dependency_label": "cc",
+          "token_text": {
+            "4": "Nasamkhrali",
+            "3": "and"
+          },
+          "token_index": {
+            "4": 4,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "6",
+          "source_text": "Nasamkhrali",
+          "target_text": "located",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "4",
+              "governor_text": "located",
+              "dependent_text": "Nasamkhrali",
+              "governor_graph_text": "located",
+              "dependent_graph_text": "LocationB",
+              "governor_index": 6,
+              "dependent_index": 4,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "4",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "6": "located",
+            "4": "Nasamkhrali"
+          },
+          "token_index": {
+            "6": 6,
+            "4": 4
+          }
+        },
+        {
+          "source": "5",
+          "target": "6",
+          "source_text": "both",
+          "target_text": "located",
+          "relation": "cc:preconj",
+          "relations": [
+            "cc:preconj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "5",
+              "governor_text": "located",
+              "dependent_text": "both",
+              "governor_graph_text": "located",
+              "dependent_graph_text": "both",
+              "governor_index": 6,
+              "dependent_index": 5,
+              "dependency_label": "cc:preconj"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "5",
+          "dependency_label": "cc:preconj",
+          "token_text": {
+            "6": "located",
+            "5": "both"
+          },
+          "token_index": {
+            "6": 6,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "10",
+          "source_text": "located",
+          "target_text": "country",
+          "relation": "obl:in",
+          "relations": [
+            "obl:in"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "10",
+              "governor_text": "located",
+              "dependent_text": "country",
+              "governor_graph_text": "located",
+              "dependent_graph_text": "country",
+              "governor_index": 6,
+              "dependent_index": 10,
+              "dependency_label": "obl:in"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "10",
+          "dependency_label": "obl:in",
+          "token_text": {
+            "6": "located",
+            "10": "country"
+          },
+          "token_index": {
+            "6": 6,
+            "10": 10
+          }
+        },
+        {
+          "source": "6",
+          "target": "11",
+          "source_text": "located",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "11",
+              "governor_text": "located",
+              "dependent_text": "?",
+              "governor_graph_text": "located",
+              "dependent_graph_text": "?",
+              "governor_index": 6,
+              "dependent_index": 11,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "11",
+          "dependency_label": "punct",
+          "token_text": {
+            "6": "located",
+            "11": "?"
+          },
+          "token_index": {
+            "6": 6,
+            "11": 11
+          }
+        },
+        {
+          "source": "7",
+          "target": "10",
+          "source_text": "in",
+          "target_text": "country",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "7",
+              "governor_text": "country",
+              "dependent_text": "in",
+              "governor_graph_text": "country",
+              "dependent_graph_text": "in",
+              "governor_index": 10,
+              "dependent_index": 7,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "7",
+          "dependency_label": "case",
+          "token_text": {
+            "10": "country",
+            "7": "in"
+          },
+          "token_index": {
+            "10": 10,
+            "7": 7
+          }
+        },
+        {
+          "source": "8",
+          "target": "10",
+          "source_text": "the",
+          "target_text": "country",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "8",
+              "governor_text": "country",
+              "dependent_text": "the",
+              "governor_graph_text": "country",
+              "dependent_graph_text": "the",
+              "governor_index": 10,
+              "dependent_index": 8,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "8",
+          "dependency_label": "det",
+          "token_text": {
+            "10": "country",
+            "8": "the"
+          },
+          "token_index": {
+            "10": 10,
+            "8": 8
+          }
+        },
+        {
+          "source": "9",
+          "target": "10",
+          "source_text": "same",
+          "target_text": "country",
+          "relation": "amod",
+          "relations": [
+            "amod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "9",
+              "governor_text": "country",
+              "dependent_text": "same",
+              "governor_graph_text": "country",
+              "dependent_graph_text": "same",
+              "governor_index": 10,
+              "dependent_index": 9,
+              "dependency_label": "amod"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "9",
+          "dependency_label": "amod",
+          "token_text": {
+            "10": "country",
+            "9": "same"
+          },
+          "token_index": {
+            "10": 10,
+            "9": 9
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "Marufabad",
+        "graph_node_ids": [
+          "2"
+        ],
+        "token_ids": [
+          2
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Location"
+      },
+      {
+        "entity_id": "e2",
+        "text": "Nasamkhrali",
+        "graph_node_ids": [
+          "4"
+        ],
+        "token_ids": [
+          4
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Location"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "located",
+          "country"
+        ],
+        "node_ids": [
+          "2",
+          "6",
+          "10"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "located",
+          "country",
+          "in"
+        ],
+        "node_ids": [
+          "2",
+          "6",
+          "10",
+          "7"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "country",
+            "target_text": "in",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "7",
+                "governor_text": "country",
+                "dependent_text": "in",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "in",
+                "governor_index": 10,
+                "dependent_index": 7,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "located",
+          "country",
+          "the"
+        ],
+        "node_ids": [
+          "2",
+          "6",
+          "10",
+          "8"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "8",
+            "source_text": "country",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "country",
+                "dependent_text": "the",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "the",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "located",
+          "country",
+          "same"
+        ],
+        "node_ids": [
+          "2",
+          "6",
+          "10",
+          "9"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "9",
+            "source_text": "country",
+            "target_text": "same",
+            "relations": [
+              "amod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "9",
+                "governor_text": "country",
+                "dependent_text": "same",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "same",
+                "governor_index": 10,
+                "dependent_index": 9,
+                "dependency_label": "amod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "located",
+          "both"
+        ],
+        "node_ids": [
+          "2",
+          "6",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "5",
+            "source_text": "located",
+            "target_text": "both",
+            "relations": [
+              "cc:preconj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "5",
+                "governor_text": "located",
+                "dependent_text": "both",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "both",
+                "governor_index": 6,
+                "dependent_index": 5,
+                "dependency_label": "cc:preconj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "located"
+        ],
+        "node_ids": [
+          "2",
+          "6"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "located",
+          "Are"
+        ],
+        "node_ids": [
+          "2",
+          "6",
+          "1"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "1",
+            "source_text": "located",
+            "target_text": "Are",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "1",
+                "governor_text": "located",
+                "dependent_text": "Are",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "Are",
+                "governor_index": 6,
+                "dependent_index": 1,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "located",
+          "?"
+        ],
+        "node_ids": [
+          "2",
+          "6",
+          "11"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "11",
+            "source_text": "located",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "11",
+                "governor_text": "located",
+                "dependent_text": "?",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "?",
+                "governor_index": 6,
+                "dependent_index": 11,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "located",
+          "Nasamkhrali"
+        ],
+        "node_ids": [
+          "2",
+          "6",
+          "4"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "located",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "Nasamkhrali"
+        ],
+        "node_ids": [
+          "2",
+          "4"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Marufabad",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p11",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "Nasamkhrali",
+          "located",
+          "country"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "6",
+          "10"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Marufabad",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p12",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "Nasamkhrali",
+          "located",
+          "country",
+          "in"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "6",
+          "10",
+          "7"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Marufabad",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "country",
+            "target_text": "in",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "7",
+                "governor_text": "country",
+                "dependent_text": "in",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "in",
+                "governor_index": 10,
+                "dependent_index": 7,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p13",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "Nasamkhrali",
+          "located",
+          "country",
+          "the"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "6",
+          "10",
+          "8"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Marufabad",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "8",
+            "source_text": "country",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "country",
+                "dependent_text": "the",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "the",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p14",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "Nasamkhrali",
+          "located",
+          "country",
+          "same"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "6",
+          "10",
+          "9"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Marufabad",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "9",
+            "source_text": "country",
+            "target_text": "same",
+            "relations": [
+              "amod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "9",
+                "governor_text": "country",
+                "dependent_text": "same",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "same",
+                "governor_index": 10,
+                "dependent_index": 9,
+                "dependency_label": "amod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p15",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "Nasamkhrali",
+          "located",
+          "both"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "6",
+          "5"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Marufabad",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "5",
+            "source_text": "located",
+            "target_text": "both",
+            "relations": [
+              "cc:preconj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "5",
+                "governor_text": "located",
+                "dependent_text": "both",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "both",
+                "governor_index": 6,
+                "dependent_index": 5,
+                "dependency_label": "cc:preconj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p16",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "Nasamkhrali",
+          "located"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "6"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Marufabad",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p17",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "Nasamkhrali",
+          "located",
+          "Are"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "6",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Marufabad",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "1",
+            "source_text": "located",
+            "target_text": "Are",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "1",
+                "governor_text": "located",
+                "dependent_text": "Are",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "Are",
+                "governor_index": 6,
+                "dependent_index": 1,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p18",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "Nasamkhrali",
+          "located",
+          "?"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "6",
+          "11"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Marufabad",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "11",
+            "source_text": "located",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "11",
+                "governor_text": "located",
+                "dependent_text": "?",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "?",
+                "governor_index": 6,
+                "dependent_index": 11,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p19",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "located",
+          "Nasamkhrali",
+          "and"
+        ],
+        "node_ids": [
+          "2",
+          "6",
+          "4",
+          "3"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "located",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "Nasamkhrali",
+            "target_text": "and",
+            "relations": [
+              "cc"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "Nasamkhrali",
+                "dependent_text": "and",
+                "governor_graph_text": "LocationB",
+                "dependent_graph_text": "and",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "cc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p20",
+        "entity_id": "e1",
+        "entity_text": "Marufabad",
+        "nodes": [
+          "Marufabad",
+          "Nasamkhrali",
+          "and"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "3"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Marufabad",
+            "target_text": "Nasamkhrali",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "Nasamkhrali",
+            "target_text": "and",
+            "relations": [
+              "cc"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "Nasamkhrali",
+                "dependent_text": "and",
+                "governor_graph_text": "LocationB",
+                "dependent_graph_text": "and",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "cc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p1",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "located",
+          "country"
+        ],
+        "node_ids": [
+          "4",
+          "6",
+          "10"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p2",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "located",
+          "country",
+          "in"
+        ],
+        "node_ids": [
+          "4",
+          "6",
+          "10",
+          "7"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "country",
+            "target_text": "in",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "7",
+                "governor_text": "country",
+                "dependent_text": "in",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "in",
+                "governor_index": 10,
+                "dependent_index": 7,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p3",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "located",
+          "country",
+          "the"
+        ],
+        "node_ids": [
+          "4",
+          "6",
+          "10",
+          "8"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "8",
+            "source_text": "country",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "country",
+                "dependent_text": "the",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "the",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p4",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "located",
+          "country",
+          "same"
+        ],
+        "node_ids": [
+          "4",
+          "6",
+          "10",
+          "9"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "9",
+            "source_text": "country",
+            "target_text": "same",
+            "relations": [
+              "amod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "9",
+                "governor_text": "country",
+                "dependent_text": "same",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "same",
+                "governor_index": 10,
+                "dependent_index": 9,
+                "dependency_label": "amod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p5",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "located",
+          "both"
+        ],
+        "node_ids": [
+          "4",
+          "6",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "5",
+            "source_text": "located",
+            "target_text": "both",
+            "relations": [
+              "cc:preconj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "5",
+                "governor_text": "located",
+                "dependent_text": "both",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "both",
+                "governor_index": 6,
+                "dependent_index": 5,
+                "dependency_label": "cc:preconj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p6",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "located"
+        ],
+        "node_ids": [
+          "4",
+          "6"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p7",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "located",
+          "Are"
+        ],
+        "node_ids": [
+          "4",
+          "6",
+          "1"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "1",
+            "source_text": "located",
+            "target_text": "Are",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "1",
+                "governor_text": "located",
+                "dependent_text": "Are",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "Are",
+                "governor_index": 6,
+                "dependent_index": 1,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p8",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "located",
+          "?"
+        ],
+        "node_ids": [
+          "4",
+          "6",
+          "11"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "11",
+            "source_text": "located",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "11",
+                "governor_text": "located",
+                "dependent_text": "?",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "?",
+                "governor_index": 6,
+                "dependent_index": 11,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p9",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "and"
+        ],
+        "node_ids": [
+          "4",
+          "3"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "Nasamkhrali",
+            "target_text": "and",
+            "relations": [
+              "cc"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "Nasamkhrali",
+                "dependent_text": "and",
+                "governor_graph_text": "LocationB",
+                "dependent_graph_text": "and",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "cc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p10",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "located",
+          "Marufabad"
+        ],
+        "node_ids": [
+          "4",
+          "6",
+          "2"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "Nasamkhrali",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "located",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "2",
+            "source_text": "located",
+            "target_text": "Marufabad",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p11",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "Marufabad"
+        ],
+        "node_ids": [
+          "4",
+          "2"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "Nasamkhrali",
+            "target_text": "Marufabad",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p12",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "Marufabad",
+          "located",
+          "country"
+        ],
+        "node_ids": [
+          "4",
+          "2",
+          "6",
+          "10"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "Nasamkhrali",
+            "target_text": "Marufabad",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p13",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "Marufabad",
+          "located",
+          "country",
+          "in"
+        ],
+        "node_ids": [
+          "4",
+          "2",
+          "6",
+          "10",
+          "7"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "Nasamkhrali",
+            "target_text": "Marufabad",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "country",
+            "target_text": "in",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "7",
+                "governor_text": "country",
+                "dependent_text": "in",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "in",
+                "governor_index": 10,
+                "dependent_index": 7,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p14",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "Marufabad",
+          "located",
+          "country",
+          "the"
+        ],
+        "node_ids": [
+          "4",
+          "2",
+          "6",
+          "10",
+          "8"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "Nasamkhrali",
+            "target_text": "Marufabad",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "8",
+            "source_text": "country",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "country",
+                "dependent_text": "the",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "the",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p15",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "Marufabad",
+          "located",
+          "country",
+          "same"
+        ],
+        "node_ids": [
+          "4",
+          "2",
+          "6",
+          "10",
+          "9"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "Nasamkhrali",
+            "target_text": "Marufabad",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "located",
+            "target_text": "country",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "located",
+                "dependent_text": "country",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "country",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "9",
+            "source_text": "country",
+            "target_text": "same",
+            "relations": [
+              "amod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "9",
+                "governor_text": "country",
+                "dependent_text": "same",
+                "governor_graph_text": "country",
+                "dependent_graph_text": "same",
+                "governor_index": 10,
+                "dependent_index": 9,
+                "dependency_label": "amod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p16",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "Marufabad",
+          "located",
+          "both"
+        ],
+        "node_ids": [
+          "4",
+          "2",
+          "6",
+          "5"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "Nasamkhrali",
+            "target_text": "Marufabad",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "5",
+            "source_text": "located",
+            "target_text": "both",
+            "relations": [
+              "cc:preconj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "5",
+                "governor_text": "located",
+                "dependent_text": "both",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "both",
+                "governor_index": 6,
+                "dependent_index": 5,
+                "dependency_label": "cc:preconj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p17",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "Marufabad",
+          "located"
+        ],
+        "node_ids": [
+          "4",
+          "2",
+          "6"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "Nasamkhrali",
+            "target_text": "Marufabad",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p18",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "Marufabad",
+          "located",
+          "Are"
+        ],
+        "node_ids": [
+          "4",
+          "2",
+          "6",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "Nasamkhrali",
+            "target_text": "Marufabad",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "1",
+            "source_text": "located",
+            "target_text": "Are",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "1",
+                "governor_text": "located",
+                "dependent_text": "Are",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "Are",
+                "governor_index": 6,
+                "dependent_index": 1,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p19",
+        "entity_id": "e2",
+        "entity_text": "Nasamkhrali",
+        "nodes": [
+          "Nasamkhrali",
+          "Marufabad",
+          "located",
+          "?"
+        ],
+        "node_ids": [
+          "4",
+          "2",
+          "6",
+          "11"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "Nasamkhrali",
+            "target_text": "Marufabad",
+            "relations": [
+              "conj:and"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "Marufabad",
+                "dependent_text": "Nasamkhrali",
+                "governor_graph_text": "LocationA",
+                "dependent_graph_text": "LocationB",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "conj:and"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "6",
+            "source_text": "Marufabad",
+            "target_text": "located",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "2",
+                "governor_text": "located",
+                "dependent_text": "Marufabad",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "LocationA",
+                "governor_index": 6,
+                "dependent_index": 2,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "11",
+            "source_text": "located",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "11",
+                "governor_text": "located",
+                "dependent_text": "?",
+                "governor_graph_text": "located",
+                "dependent_graph_text": "?",
+                "governor_index": 6,
+                "dependent_index": 11,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches the predicate 'located', and covers the answer slot 'country'."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p2",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "in"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches the predicate 'located', and includes the preposition 'in' for the answer slot 'country'."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p3",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "the"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad and reaches 'located' and 'country', but includes a determiner that adds noise."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p4",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "same"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches 'located', and includes 'same' which is relevant to the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p5",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "both"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad and reaches 'located', but 'both' does not directly contribute to the answer slot."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p6",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "located"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad and reaches 'located', but does not cover the answer slot 'country'."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p7",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "located",
+          "Are"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad and reaches 'located', but does not cover the answer slot 'country' and includes a copula that adds noise."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p8",
+        "score": 30.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "located",
+          "?"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad and reaches 'located', but ends with punctuation and does not cover the answer slot 'country'."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p9",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Nasamkhrali"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches 'located', and includes the other entity 'Nasamkhrali' which is relevant to the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p10",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "Nasamkhrali"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad and reaches 'Nasamkhrali', but does not cover the answer slot 'country'."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p11",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Nasamkhrali"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' which is relevant to the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p12",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Nasamkhrali",
+          "in"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' and 'in' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p13",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Nasamkhrali",
+          "the"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' and 'the' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p14",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Nasamkhrali",
+          "same"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' and 'same' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p15",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Nasamkhrali",
+          "both"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' and 'both' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p16",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "Nasamkhrali"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad and reaches 'Nasamkhrali' and 'located', but does not cover the answer slot 'country'."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p17",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Nasamkhrali",
+          "Are"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' and 'Are' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p18",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Nasamkhrali",
+          "?"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' and '?' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p19",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Nasamkhrali",
+          "and"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' and 'and' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p20",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "Nasamkhrali",
+          "and"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Marufabad and reaches 'Nasamkhrali', but does not cover the answer slot 'country'."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p1",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches the predicate 'located', and covers the answer slot 'country'."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p2",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "in"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches the predicate 'located', and includes the preposition 'in' for the answer slot 'country'."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p3",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "the"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali and reaches 'located' and 'country', but includes a determiner that adds noise."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p4",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "same"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'same' which is relevant to the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p5",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "both"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali and reaches 'located', but 'both' does not directly contribute to the answer slot."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p6",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "located"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali and reaches 'located', but does not cover the answer slot 'country'."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p7",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "located",
+          "Are"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali and reaches 'located', but does not cover the answer slot 'country' and includes a copula that adds noise."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p8",
+        "score": 30.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "located",
+          "?"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali and reaches 'located', but ends with punctuation and does not cover the answer slot 'country'."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p9",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "and"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali but does not cover the answer slot 'country' and ends with a conjunction."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p10",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Marufabad"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' which is relevant to the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p11",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located"
+        ],
+        "covered_cues": [
+          "Marufabad"
+        ],
+        "missing_cues": [
+          "country"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali and reaches 'Marufabad', but does not cover the answer slot 'country'."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p12",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Marufabad",
+          "in"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' and 'in' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p13",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Marufabad",
+          "in"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' and 'in' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p14",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Marufabad",
+          "the"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' and 'the' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p15",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Marufabad",
+          "same"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' and 'same' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p16",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Marufabad",
+          "both"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' and 'both' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p17",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Marufabad"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' which is relevant to the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p18",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Marufabad",
+          "Are"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' and 'Are' which are relevant to the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p19",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "country",
+        "semantic_chain_hint": [
+          "located",
+          "country"
+        ],
+        "covered_cues": [
+          "located",
+          "Marufabad",
+          "?"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' and '?' which are relevant to the answer intent."
+      }
+    ],
+    "8_1_top_paths_by_entity": {
+      "e1": [
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p1",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "country",
+          "semantic_chain_hint": [
+            "located",
+            "country"
+          ],
+          "covered_cues": [
+            "located"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Marufabad, reaches the predicate 'located', and covers the answer slot 'country'."
+        },
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p11",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "country",
+          "semantic_chain_hint": [
+            "located",
+            "country"
+          ],
+          "covered_cues": [
+            "located",
+            "Nasamkhrali"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' which is relevant to the answer intent."
+        }
+      ],
+      "e2": [
+        {
+          "entity_id": "e2",
+          "path_id": "e2_p1",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "country",
+          "semantic_chain_hint": [
+            "located",
+            "country"
+          ],
+          "covered_cues": [
+            "located"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Nasamkhrali, reaches the predicate 'located', and covers the answer slot 'country'."
+        },
+        {
+          "entity_id": "e2",
+          "path_id": "e2_p10",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "country",
+          "semantic_chain_hint": [
+            "located",
+            "country"
+          ],
+          "covered_cues": [
+            "located",
+            "Marufabad"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' which is relevant to the answer intent."
+        }
+      ]
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p1",
+          "e2": "e2_p1"
+        },
+        "mean_path_score": 90.0
+      },
+      {
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p1",
+          "e2": "e2_p10"
+        },
+        "mean_path_score": 90.0
+      },
+      {
+        "path_set_id": "ps3",
+        "path_ids_by_entity": {
+          "e1": "e1_p11",
+          "e2": "e2_p1"
+        },
+        "mean_path_score": 90.0
+      },
+      {
+        "path_set_id": "ps4",
+        "path_ids_by_entity": {
+          "e1": "e1_p11",
+          "e2": "e2_p10"
+        },
+        "mean_path_score": 90.0
+      }
+    ],
+    "9_candidate_semantic_asts": [
+      {
+        "candidate_id": "ast_ps1",
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p1",
+          "e2": "e2_p1"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "marufabad",
+              "label": "Marufabad",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "2"
+              ],
+              "source_token_indices": [
+                2
+              ],
+              "grounding_text": "Marufabad",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "nasamkhrali",
+              "label": "Nasamkhrali",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "4"
+              ],
+              "source_token_indices": [
+                4
+              ],
+              "grounding_text": "Nasamkhrali",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "country_e1",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Country",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "country",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "country_e2",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Country",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "country",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "marufabad",
+              "target": "country_e1",
+              "edge_type": "attribute",
+              "relation_hint": "located in",
+              "support_path": [
+                "e1_p1",
+                "2",
+                "6",
+                "10"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "nasamkhrali",
+              "target": "country_e2",
+              "edge_type": "attribute",
+              "relation_hint": "located in",
+              "support_path": [
+                "e2_p1",
+                "4",
+                "6",
+                "10"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "marufabad",
+                "label": "Marufabad",
+                "kind": "entity",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "2"
+                ]
+              },
+              {
+                "id": "nasamkhrali",
+                "label": "Nasamkhrali",
+                "kind": "entity",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e2_p1"
+                ],
+                "source_node_ids": [
+                  "4"
+                ]
+              },
+              {
+                "id": "country_e1",
+                "label": "country",
+                "kind": "value_slot",
+                "semantic_type": "Country",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              },
+              {
+                "id": "country_e2",
+                "label": "country",
+                "kind": "value_slot",
+                "semantic_type": "Country",
+                "source_path_ids": [
+                  "e2_p1"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "marufabad",
+                "target": "country_e1",
+                "relation": "located in",
+                "support_path_id": "e1_p1",
+                "support_node_ids": [
+                  "2",
+                  "6",
+                  "10"
+                ]
+              },
+              {
+                "source": "nasamkhrali",
+                "target": "country_e2",
+                "relation": "located in",
+                "support_path_id": "e2_p1",
+                "support_node_ids": [
+                  "4",
+                  "6",
+                  "10"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "country_e1",
+              "e2": "country_e2"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "marufabad",
+              "label": "Marufabad",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "2"
+              ]
+            },
+            {
+              "id": "nasamkhrali",
+              "label": "Nasamkhrali",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e2_p1"
+              ],
+              "source_node_ids": [
+                "4"
+              ]
+            },
+            {
+              "id": "country_e1",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Country",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            },
+            {
+              "id": "country_e2",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Country",
+              "source_path_ids": [
+                "e2_p1"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "marufabad",
+              "target": "country_e1",
+              "relation": "located in",
+              "support_path_id": "e1_p1",
+              "support_node_ids": [
+                "2",
+                "6",
+                "10"
+              ]
+            },
+            {
+              "source": "nasamkhrali",
+              "target": "country_e2",
+              "relation": "located in",
+              "support_path_id": "e2_p1",
+              "support_node_ids": [
+                "4",
+                "6",
+                "10"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "country_e1",
+            "e2": "country_e2"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 90.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p1",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "country",
+              "semantic_chain_hint": [
+                "located",
+                "country"
+              ],
+              "covered_cues": [
+                "located"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Marufabad, reaches the predicate 'located', and covers the answer slot 'country'."
+            },
+            "e2": {
+              "entity_id": "e2",
+              "path_id": "e2_p1",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "country",
+              "semantic_chain_hint": [
+                "located",
+                "country"
+              ],
+              "covered_cues": [
+                "located"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Nasamkhrali, reaches the predicate 'located', and covers the answer slot 'country'."
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "ast_ps2",
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p1",
+          "e2": "e2_p10"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "marufabad",
+              "label": "Marufabad",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "2"
+              ],
+              "source_token_indices": [
+                2
+              ],
+              "grounding_text": "Marufabad",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "country_e1",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "country",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "nasamkhrali",
+              "label": "Nasamkhrali",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "4"
+              ],
+              "source_token_indices": [
+                4
+              ],
+              "grounding_text": "Nasamkhrali",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "country_e2",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "country",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "marufabad",
+              "target": "country_e1",
+              "edge_type": "attribute",
+              "relation_hint": "located in",
+              "support_path": [
+                "e1_p1",
+                "2",
+                "6",
+                "10"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "nasamkhrali",
+              "target": "country_e2",
+              "edge_type": "attribute",
+              "relation_hint": "located in",
+              "support_path": [
+                "e2_p10",
+                "4",
+                "6",
+                "10"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "marufabad",
+                "label": "Marufabad",
+                "kind": "entity",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "2"
+                ]
+              },
+              {
+                "id": "country_e1",
+                "label": "country",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              },
+              {
+                "id": "nasamkhrali",
+                "label": "Nasamkhrali",
+                "kind": "entity",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e2_p10"
+                ],
+                "source_node_ids": [
+                  "4"
+                ]
+              },
+              {
+                "id": "country_e2",
+                "label": "country",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e2_p10"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "marufabad",
+                "target": "country_e1",
+                "relation": "located in",
+                "support_path_id": "e1_p1",
+                "support_node_ids": [
+                  "2",
+                  "6",
+                  "10"
+                ]
+              },
+              {
+                "source": "nasamkhrali",
+                "target": "country_e2",
+                "relation": "located in",
+                "support_path_id": "e2_p10",
+                "support_node_ids": [
+                  "4",
+                  "6",
+                  "10"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "country_e1",
+              "e2": "country_e2"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "marufabad",
+              "label": "Marufabad",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "2"
+              ]
+            },
+            {
+              "id": "country_e1",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            },
+            {
+              "id": "nasamkhrali",
+              "label": "Nasamkhrali",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e2_p10"
+              ],
+              "source_node_ids": [
+                "4"
+              ]
+            },
+            {
+              "id": "country_e2",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e2_p10"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "marufabad",
+              "target": "country_e1",
+              "relation": "located in",
+              "support_path_id": "e1_p1",
+              "support_node_ids": [
+                "2",
+                "6",
+                "10"
+              ]
+            },
+            {
+              "source": "nasamkhrali",
+              "target": "country_e2",
+              "relation": "located in",
+              "support_path_id": "e2_p10",
+              "support_node_ids": [
+                "4",
+                "6",
+                "10"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "country_e1",
+            "e2": "country_e2"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 90.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p1",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "country",
+              "semantic_chain_hint": [
+                "located",
+                "country"
+              ],
+              "covered_cues": [
+                "located"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Marufabad, reaches the predicate 'located', and covers the answer slot 'country'."
+            },
+            "e2": {
+              "entity_id": "e2",
+              "path_id": "e2_p10",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "country",
+              "semantic_chain_hint": [
+                "located",
+                "country"
+              ],
+              "covered_cues": [
+                "located",
+                "Marufabad"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' which is relevant to the answer intent."
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "ast_ps3",
+        "path_set_id": "ps3",
+        "path_ids_by_entity": {
+          "e1": "e1_p11",
+          "e2": "e2_p1"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "marufabad",
+              "label": "Marufabad",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "2"
+              ],
+              "source_token_indices": [
+                2
+              ],
+              "grounding_text": "Marufabad",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "nasamkhrali",
+              "label": "Nasamkhrali",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "4"
+              ],
+              "source_token_indices": [
+                4
+              ],
+              "grounding_text": "Nasamkhrali",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "country_r1",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "country",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "country_r2",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "country",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "marufabad",
+              "target": "country_r1",
+              "edge_type": "attribute",
+              "relation_hint": "located in",
+              "support_path": [
+                "e1_p11",
+                "2",
+                "6",
+                "10"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "nasamkhrali",
+              "target": "country_r2",
+              "edge_type": "attribute",
+              "relation_hint": "located in",
+              "support_path": [
+                "e2_p1",
+                "4",
+                "6",
+                "10"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "marufabad",
+                "label": "Marufabad",
+                "kind": "entity",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p11"
+                ],
+                "source_node_ids": [
+                  "2"
+                ]
+              },
+              {
+                "id": "nasamkhrali",
+                "label": "Nasamkhrali",
+                "kind": "entity",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e2_p1"
+                ],
+                "source_node_ids": [
+                  "4"
+                ]
+              },
+              {
+                "id": "country_r1",
+                "label": "country",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p11"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              },
+              {
+                "id": "country_r2",
+                "label": "country",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e2_p1"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "marufabad",
+                "target": "country_r1",
+                "relation": "located in",
+                "support_path_id": "e1_p11",
+                "support_node_ids": [
+                  "2",
+                  "6",
+                  "10"
+                ]
+              },
+              {
+                "source": "nasamkhrali",
+                "target": "country_r2",
+                "relation": "located in",
+                "support_path_id": "e2_p1",
+                "support_node_ids": [
+                  "4",
+                  "6",
+                  "10"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "country_r1",
+              "e2": "country_r2"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "marufabad",
+              "label": "Marufabad",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p11"
+              ],
+              "source_node_ids": [
+                "2"
+              ]
+            },
+            {
+              "id": "nasamkhrali",
+              "label": "Nasamkhrali",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e2_p1"
+              ],
+              "source_node_ids": [
+                "4"
+              ]
+            },
+            {
+              "id": "country_r1",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p11"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            },
+            {
+              "id": "country_r2",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e2_p1"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "marufabad",
+              "target": "country_r1",
+              "relation": "located in",
+              "support_path_id": "e1_p11",
+              "support_node_ids": [
+                "2",
+                "6",
+                "10"
+              ]
+            },
+            {
+              "source": "nasamkhrali",
+              "target": "country_r2",
+              "relation": "located in",
+              "support_path_id": "e2_p1",
+              "support_node_ids": [
+                "4",
+                "6",
+                "10"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "country_r1",
+            "e2": "country_r2"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 90.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p11",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "country",
+              "semantic_chain_hint": [
+                "located",
+                "country"
+              ],
+              "covered_cues": [
+                "located",
+                "Nasamkhrali"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' which is relevant to the answer intent."
+            },
+            "e2": {
+              "entity_id": "e2",
+              "path_id": "e2_p1",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "country",
+              "semantic_chain_hint": [
+                "located",
+                "country"
+              ],
+              "covered_cues": [
+                "located"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Nasamkhrali, reaches the predicate 'located', and covers the answer slot 'country'."
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "ast_ps4",
+        "path_set_id": "ps4",
+        "path_ids_by_entity": {
+          "e1": "e1_p11",
+          "e2": "e2_p10"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "marufabad",
+              "label": "Marufabad",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "2"
+              ],
+              "source_token_indices": [
+                2
+              ],
+              "grounding_text": "Marufabad",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "nasamkhrali",
+              "label": "Nasamkhrali",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "4"
+              ],
+              "source_token_indices": [
+                4
+              ],
+              "grounding_text": "Nasamkhrali",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "country_r1",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "country",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "country_r2",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "country",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "marufabad",
+              "target": "country_r1",
+              "edge_type": "attribute",
+              "relation_hint": "located in",
+              "support_path": [
+                "e1_p11",
+                "2",
+                "6",
+                "10"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "nasamkhrali",
+              "target": "country_r2",
+              "edge_type": "attribute",
+              "relation_hint": "located in",
+              "support_path": [
+                "e2_p10",
+                "4",
+                "6",
+                "10"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "marufabad",
+                "label": "Marufabad",
+                "kind": "entity",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p11"
+                ],
+                "source_node_ids": [
+                  "2"
+                ]
+              },
+              {
+                "id": "nasamkhrali",
+                "label": "Nasamkhrali",
+                "kind": "entity",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e2_p10"
+                ],
+                "source_node_ids": [
+                  "4"
+                ]
+              },
+              {
+                "id": "country_r1",
+                "label": "country",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p11"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              },
+              {
+                "id": "country_r2",
+                "label": "country",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e2_p10"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "marufabad",
+                "target": "country_r1",
+                "relation": "located in",
+                "support_path_id": "e1_p11",
+                "support_node_ids": [
+                  "2",
+                  "6",
+                  "10"
+                ]
+              },
+              {
+                "source": "nasamkhrali",
+                "target": "country_r2",
+                "relation": "located in",
+                "support_path_id": "e2_p10",
+                "support_node_ids": [
+                  "4",
+                  "6",
+                  "10"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "country_r1",
+              "e2": "country_r2"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "marufabad",
+              "label": "Marufabad",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p11"
+              ],
+              "source_node_ids": [
+                "2"
+              ]
+            },
+            {
+              "id": "nasamkhrali",
+              "label": "Nasamkhrali",
+              "kind": "entity",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e2_p10"
+              ],
+              "source_node_ids": [
+                "4"
+              ]
+            },
+            {
+              "id": "country_r1",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p11"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            },
+            {
+              "id": "country_r2",
+              "label": "country",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e2_p10"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "marufabad",
+              "target": "country_r1",
+              "relation": "located in",
+              "support_path_id": "e1_p11",
+              "support_node_ids": [
+                "2",
+                "6",
+                "10"
+              ]
+            },
+            {
+              "source": "nasamkhrali",
+              "target": "country_r2",
+              "relation": "located in",
+              "support_path_id": "e2_p10",
+              "support_node_ids": [
+                "4",
+                "6",
+                "10"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "country_r1",
+            "e2": "country_r2"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 90.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p11",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "country",
+              "semantic_chain_hint": [
+                "located",
+                "country"
+              ],
+              "covered_cues": [
+                "located",
+                "Nasamkhrali"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Marufabad, reaches 'located', and includes 'Nasamkhrali' which is relevant to the answer intent."
+            },
+            "e2": {
+              "entity_id": "e2",
+              "path_id": "e2_p10",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "country",
+              "semantic_chain_hint": [
+                "located",
+                "country"
+              ],
+              "covered_cues": [
+                "located",
+                "Marufabad"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Nasamkhrali, reaches 'located', and includes 'Marufabad' which is relevant to the answer intent."
+            }
+          }
+        }
+      }
+    ],
+    "10_best_ast_selection": {
+      "ast_reviews": [
+        {
+          "candidate_id": "ast_ps1",
+          "path_set_id": "ps1",
+          "score": 0.96,
+          "valid_for_decomposition": true,
+          "covers_original_question": true,
+          "answer_intent_compatible": true,
+          "branch_complete": true,
+          "atomic_questions_would_be_executable": true,
+          "has_final_operator_question": false,
+          "fatal_errors": [],
+          "reason": "This AST effectively covers the required branch facts for both entities, providing a clear path to determine their respective countries without generating a final comparison question."
+        }
+      ],
+      "best_candidate_id": "ast_ps1",
+      "selected_candidate_id": "ast_ps1"
+    },
+    "10_selected_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "marufabad",
+          "label": "Marufabad",
+          "kind": "entity",
+          "semantic_type": "Location",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "2"
+          ],
+          "source_token_indices": [
+            2
+          ],
+          "grounding_text": "Marufabad",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "nasamkhrali",
+          "label": "Nasamkhrali",
+          "kind": "entity",
+          "semantic_type": "Location",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "4"
+          ],
+          "source_token_indices": [
+            4
+          ],
+          "grounding_text": "Nasamkhrali",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "country_e1",
+          "label": "country",
+          "kind": "value_slot",
+          "semantic_type": "Country",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "10"
+          ],
+          "source_token_indices": [
+            10
+          ],
+          "grounding_text": "country",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "country_e2",
+          "label": "country",
+          "kind": "value_slot",
+          "semantic_type": "Country",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "10"
+          ],
+          "source_token_indices": [
+            10
+          ],
+          "grounding_text": "country",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "marufabad",
+          "target": "country_e1",
+          "edge_type": "attribute",
+          "relation_hint": "located in",
+          "support_path": [
+            "e1_p1",
+            "2",
+            "6",
+            "10"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "nasamkhrali",
+          "target": "country_e2",
+          "edge_type": "attribute",
+          "relation_hint": "located in",
+          "support_path": [
+            "e2_p1",
+            "4",
+            "6",
+            "10"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "nodes": [
+          {
+            "id": "marufabad",
+            "label": "Marufabad",
+            "kind": "entity",
+            "semantic_type": "Location",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "2"
+            ]
+          },
+          {
+            "id": "nasamkhrali",
+            "label": "Nasamkhrali",
+            "kind": "entity",
+            "semantic_type": "Location",
+            "source_path_ids": [
+              "e2_p1"
+            ],
+            "source_node_ids": [
+              "4"
+            ]
+          },
+          {
+            "id": "country_e1",
+            "label": "country",
+            "kind": "value_slot",
+            "semantic_type": "Country",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "10"
+            ]
+          },
+          {
+            "id": "country_e2",
+            "label": "country",
+            "kind": "value_slot",
+            "semantic_type": "Country",
+            "source_path_ids": [
+              "e2_p1"
+            ],
+            "source_node_ids": [
+              "10"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "marufabad",
+            "target": "country_e1",
+            "relation": "located in",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "2",
+              "6",
+              "10"
+            ]
+          },
+          {
+            "source": "nasamkhrali",
+            "target": "country_e2",
+            "relation": "located in",
+            "support_path_id": "e2_p1",
+            "support_node_ids": [
+              "4",
+              "6",
+              "10"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "country_e1",
+          "e2": "country_e2"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {},
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "11_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "In which country is Marufabad located?",
+          "type": "lookup",
+          "inputs": [
+            "Marufabad"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "marufabad",
+          "target_node": "country_e1",
+          "ast_edge": {
+            "source": "marufabad",
+            "target": "country_e1",
+            "edge_type": "attribute",
+            "relation_hint": "located in",
+            "support_path": [
+              "e1_p1",
+              "2",
+              "6",
+              "10"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "In which country is Nasamkhrali located?",
+          "type": "lookup",
+          "inputs": [
+            "Nasamkhrali"
+          ],
+          "output": "X2",
+          "depends_on": [],
+          "source_node": "nasamkhrali",
+          "target_node": "country_e2",
+          "ast_edge": {
+            "source": "nasamkhrali",
+            "target": "country_e2",
+            "edge_type": "attribute",
+            "relation_hint": "located in",
+            "support_path": [
+              "e2_p1",
+              "4",
+              "6",
+              "10"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "11_subquestions": [
+      {
+        "index": 1,
+        "question": "In which country is Marufabad located?",
+        "answer_variable": "X1",
+        "source_node": "marufabad",
+        "target_node": "country_e1",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "marufabad",
+          "target": "country_e1",
+          "edge_type": "attribute",
+          "relation_hint": "located in",
+          "support_path": [
+            "e1_p1",
+            "2",
+            "6",
+            "10"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "In which country is Nasamkhrali located?",
+        "answer_variable": "X2",
+        "source_node": "nasamkhrali",
+        "target_node": "country_e2",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "nasamkhrali",
+          "target": "country_e2",
+          "edge_type": "attribute",
+          "relation_hint": "located in",
+          "support_path": [
+            "e2_p1",
+            "4",
+            "6",
+            "10"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

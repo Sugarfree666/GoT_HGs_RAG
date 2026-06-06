@@ -1,0 +1,3128 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 17,
+  "qid": null,
+  "question": "What is the date of death of the director of film Madame La Presidente?",
+  "raw_question_item": {
+    "question": "What is the date of death of the director of film Madame La Presidente?",
+    "answer": "10 August 1960"
+  },
+  "gold_answer": "10 August 1960",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "What is the date of death of the director of film Madame La Presidente?",
+      "normalized_question": "What is the date of death of the director of the film Madame La Presidente?",
+      "changed": true,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "What is the date of death of the director of the film Madame La Presidente?",
+        "changed": true,
+        "rewrite_type": "grammar_repair",
+        "added_type_variables": [],
+        "reason": "Added 'the' before 'film' for grammatical correctness."
+      }
+    },
+    "2_explicit_entities": {
+      "entities": [
+        {
+          "text": "Madame La Presidente",
+          "start_char": 54,
+          "end_char": 74,
+          "semantic_type_hint": "Film",
+          "confidence": 0.95,
+          "reason": "it is the title of a film mentioned in the question"
+        }
+      ],
+      "warnings": [
+        "Corrected explicit entity span for text='Madame La Presidente' from (30, 50) to (54, 74).",
+        "Dropped overlapping non-minimal entity span text='Madame La Presidente?'."
+      ],
+      "raw_payload": {
+        "entities": [
+          {
+            "text": "Madame La Presidente",
+            "start_char": 30,
+            "end_char": 50,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "it is the title of a film mentioned in the question"
+          }
+        ]
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "Madame La Presidente",
+          "start_char": 54,
+          "end_char": 74,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "reason": "it is the title of a film mentioned in the question"
+        }
+      ],
+      "warnings": [
+        "Corrected explicit entity span for text='Madame La Presidente' from (30, 50) to (54, 74).",
+        "Dropped overlapping non-minimal entity span text='Madame La Presidente?'."
+      ],
+      "raw_payload": {
+        "entities": [
+          {
+            "text": "Madame La Presidente",
+            "start_char": 30,
+            "end_char": 50,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "it is the title of a film mentioned in the question"
+          }
+        ]
+      }
+    },
+    "3_entity_masking": {
+      "masked_question": "What is the date of death of the director of the film FilmA?",
+      "mask_mappings": [
+        {
+          "placeholder": "FilmA",
+          "original_text": "Madame La Presidente",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "original_char_span": [
+            54,
+            74
+          ],
+          "masked_char_span": [
+            54,
+            59
+          ],
+          "token_indices": []
+        }
+      ]
+    },
+    "3_selective_masked_question": "What is the date of death of the director of the film FilmA?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "What",
+          "character_offset_begin": 0,
+          "character_offset_end": 4,
+          "lemma": "what",
+          "pos": "WP"
+        },
+        {
+          "index": 2,
+          "word": "is",
+          "character_offset_begin": 5,
+          "character_offset_end": 7,
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "index": 3,
+          "word": "the",
+          "character_offset_begin": 8,
+          "character_offset_end": 11,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 4,
+          "word": "date",
+          "character_offset_begin": 12,
+          "character_offset_end": 16,
+          "lemma": "date",
+          "pos": "NN"
+        },
+        {
+          "index": 5,
+          "word": "of",
+          "character_offset_begin": 17,
+          "character_offset_end": 19,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 6,
+          "word": "death",
+          "character_offset_begin": 20,
+          "character_offset_end": 25,
+          "lemma": "death",
+          "pos": "NN"
+        },
+        {
+          "index": 7,
+          "word": "of",
+          "character_offset_begin": 26,
+          "character_offset_end": 28,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 8,
+          "word": "the",
+          "character_offset_begin": 29,
+          "character_offset_end": 32,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 9,
+          "word": "director",
+          "character_offset_begin": 33,
+          "character_offset_end": 41,
+          "lemma": "director",
+          "pos": "NN"
+        },
+        {
+          "index": 10,
+          "word": "of",
+          "character_offset_begin": 42,
+          "character_offset_end": 44,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 11,
+          "word": "the",
+          "character_offset_begin": 45,
+          "character_offset_end": 48,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 12,
+          "word": "film",
+          "character_offset_begin": 49,
+          "character_offset_end": 53,
+          "lemma": "film",
+          "pos": "NN"
+        },
+        {
+          "index": 13,
+          "word": "FilmA",
+          "character_offset_begin": 54,
+          "character_offset_end": 59,
+          "lemma": "filma",
+          "pos": "NN"
+        },
+        {
+          "index": 14,
+          "word": "?",
+          "character_offset_begin": 59,
+          "character_offset_end": 60,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "What",
+          "relation": "cop",
+          "target": "is",
+          "source_index": 1,
+          "target_index": 2
+        },
+        {
+          "source": "date",
+          "relation": "det",
+          "target": "the",
+          "source_index": 4,
+          "target_index": 3
+        },
+        {
+          "source": "What",
+          "relation": "nsubj",
+          "target": "date",
+          "source_index": 1,
+          "target_index": 4
+        },
+        {
+          "source": "death",
+          "relation": "case",
+          "target": "of",
+          "source_index": 6,
+          "target_index": 5
+        },
+        {
+          "source": "date",
+          "relation": "nmod:of",
+          "target": "death",
+          "source_index": 4,
+          "target_index": 6
+        },
+        {
+          "source": "director",
+          "relation": "case",
+          "target": "of",
+          "source_index": 9,
+          "target_index": 7
+        },
+        {
+          "source": "director",
+          "relation": "det",
+          "target": "the",
+          "source_index": 9,
+          "target_index": 8
+        },
+        {
+          "source": "death",
+          "relation": "nmod:of",
+          "target": "director",
+          "source_index": 6,
+          "target_index": 9
+        },
+        {
+          "source": "FilmA",
+          "relation": "case",
+          "target": "of",
+          "source_index": 13,
+          "target_index": 10
+        },
+        {
+          "source": "FilmA",
+          "relation": "det",
+          "target": "the",
+          "source_index": 13,
+          "target_index": 11
+        },
+        {
+          "source": "FilmA",
+          "relation": "compound",
+          "target": "film",
+          "source_index": 13,
+          "target_index": 12
+        },
+        {
+          "source": "director",
+          "relation": "nmod:of",
+          "target": "FilmA",
+          "source_index": 9,
+          "target_index": 13
+        },
+        {
+          "source": "What",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 1,
+          "target_index": 14
+        }
+      ],
+      "edge_display": [
+        "What[1] --cop--> is[2]",
+        "date[4] --det--> the[3]",
+        "What[1] --nsubj--> date[4]",
+        "death[6] --case--> of[5]",
+        "date[4] --nmod:of--> death[6]",
+        "director[9] --case--> of[7]",
+        "director[9] --det--> the[8]",
+        "death[6] --nmod:of--> director[9]",
+        "FilmA[13] --case--> of[10]",
+        "FilmA[13] --det--> the[11]",
+        "FilmA[13] --compound--> film[12]",
+        "director[9] --nmod:of--> FilmA[13]",
+        "What[1] --punct--> ?[14]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "What",
+          "graph_text": "What",
+          "text": "What",
+          "label": "What[1]",
+          "order": 1,
+          "pos": "WP",
+          "lemma": "what",
+          "character_offset_begin": 0,
+          "character_offset_end": 4
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "is",
+          "graph_text": "is",
+          "text": "is",
+          "label": "is[2]",
+          "order": 2,
+          "pos": "VBZ",
+          "lemma": "be",
+          "character_offset_begin": 5,
+          "character_offset_end": 7
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[3]",
+          "order": 3,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 8,
+          "character_offset_end": 11
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "date",
+          "graph_text": "date",
+          "text": "date",
+          "label": "date[4]",
+          "order": 4,
+          "pos": "NN",
+          "lemma": "date",
+          "character_offset_begin": 12,
+          "character_offset_end": 16
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[5]",
+          "order": 5,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 17,
+          "character_offset_end": 19
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "death",
+          "graph_text": "death",
+          "text": "death",
+          "label": "death[6]",
+          "order": 6,
+          "pos": "NN",
+          "lemma": "death",
+          "character_offset_begin": 20,
+          "character_offset_end": 25
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[7]",
+          "order": 7,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 26,
+          "character_offset_end": 28
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[8]",
+          "order": 8,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 29,
+          "character_offset_end": 32
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "director",
+          "graph_text": "director",
+          "text": "director",
+          "label": "director[9]",
+          "order": 9,
+          "pos": "NN",
+          "lemma": "director",
+          "character_offset_begin": 33,
+          "character_offset_end": 41
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[10]",
+          "order": 10,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 42,
+          "character_offset_end": 44
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[11]",
+          "order": 11,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 45,
+          "character_offset_end": 48
+        },
+        {
+          "id": "12",
+          "token_index": 12,
+          "word": "film",
+          "graph_text": "film",
+          "text": "film",
+          "label": "film[12]",
+          "order": 12,
+          "pos": "NN",
+          "lemma": "film",
+          "character_offset_begin": 49,
+          "character_offset_end": 53
+        },
+        {
+          "id": "13",
+          "token_index": 13,
+          "word": "FilmA",
+          "graph_text": "FilmA",
+          "text": "Madame La Presidente",
+          "label": "Madame La Presidente[13]",
+          "order": 13,
+          "pos": "NN",
+          "lemma": "filma",
+          "character_offset_begin": 54,
+          "character_offset_end": 59
+        },
+        {
+          "id": "14",
+          "token_index": 14,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[14]",
+          "order": 14,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 59,
+          "character_offset_end": 60
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "2",
+          "source_text": "What",
+          "target_text": "is",
+          "relation": "cop",
+          "relations": [
+            "cop"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "2",
+              "governor_text": "What",
+              "dependent_text": "is",
+              "governor_graph_text": "What",
+              "dependent_graph_text": "is",
+              "governor_index": 1,
+              "dependent_index": 2,
+              "dependency_label": "cop"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "2",
+          "dependency_label": "cop",
+          "token_text": {
+            "1": "What",
+            "2": "is"
+          },
+          "token_index": {
+            "1": 1,
+            "2": 2
+          }
+        },
+        {
+          "source": "1",
+          "target": "4",
+          "source_text": "What",
+          "target_text": "date",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "4",
+              "governor_text": "What",
+              "dependent_text": "date",
+              "governor_graph_text": "What",
+              "dependent_graph_text": "date",
+              "governor_index": 1,
+              "dependent_index": 4,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "4",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "1": "What",
+            "4": "date"
+          },
+          "token_index": {
+            "1": 1,
+            "4": 4
+          }
+        },
+        {
+          "source": "1",
+          "target": "14",
+          "source_text": "What",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "14",
+              "governor_text": "What",
+              "dependent_text": "?",
+              "governor_graph_text": "What",
+              "dependent_graph_text": "?",
+              "governor_index": 1,
+              "dependent_index": 14,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "14",
+          "dependency_label": "punct",
+          "token_text": {
+            "1": "What",
+            "14": "?"
+          },
+          "token_index": {
+            "1": 1,
+            "14": 14
+          }
+        },
+        {
+          "source": "3",
+          "target": "4",
+          "source_text": "the",
+          "target_text": "date",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "3",
+              "governor_text": "date",
+              "dependent_text": "the",
+              "governor_graph_text": "date",
+              "dependent_graph_text": "the",
+              "governor_index": 4,
+              "dependent_index": 3,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "3",
+          "dependency_label": "det",
+          "token_text": {
+            "4": "date",
+            "3": "the"
+          },
+          "token_index": {
+            "4": 4,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "6",
+          "source_text": "date",
+          "target_text": "death",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "6",
+              "governor_text": "date",
+              "dependent_text": "death",
+              "governor_graph_text": "date",
+              "dependent_graph_text": "death",
+              "governor_index": 4,
+              "dependent_index": 6,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "6",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "4": "date",
+            "6": "death"
+          },
+          "token_index": {
+            "4": 4,
+            "6": 6
+          }
+        },
+        {
+          "source": "5",
+          "target": "6",
+          "source_text": "of",
+          "target_text": "death",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "5",
+              "governor_text": "death",
+              "dependent_text": "of",
+              "governor_graph_text": "death",
+              "dependent_graph_text": "of",
+              "governor_index": 6,
+              "dependent_index": 5,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "5",
+          "dependency_label": "case",
+          "token_text": {
+            "6": "death",
+            "5": "of"
+          },
+          "token_index": {
+            "6": 6,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "9",
+          "source_text": "death",
+          "target_text": "director",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "9",
+              "governor_text": "death",
+              "dependent_text": "director",
+              "governor_graph_text": "death",
+              "dependent_graph_text": "director",
+              "governor_index": 6,
+              "dependent_index": 9,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "9",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "6": "death",
+            "9": "director"
+          },
+          "token_index": {
+            "6": 6,
+            "9": 9
+          }
+        },
+        {
+          "source": "7",
+          "target": "9",
+          "source_text": "of",
+          "target_text": "director",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "7",
+              "governor_text": "director",
+              "dependent_text": "of",
+              "governor_graph_text": "director",
+              "dependent_graph_text": "of",
+              "governor_index": 9,
+              "dependent_index": 7,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "7",
+          "dependency_label": "case",
+          "token_text": {
+            "9": "director",
+            "7": "of"
+          },
+          "token_index": {
+            "9": 9,
+            "7": 7
+          }
+        },
+        {
+          "source": "8",
+          "target": "9",
+          "source_text": "the",
+          "target_text": "director",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "8",
+              "governor_text": "director",
+              "dependent_text": "the",
+              "governor_graph_text": "director",
+              "dependent_graph_text": "the",
+              "governor_index": 9,
+              "dependent_index": 8,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "8",
+          "dependency_label": "det",
+          "token_text": {
+            "9": "director",
+            "8": "the"
+          },
+          "token_index": {
+            "9": 9,
+            "8": 8
+          }
+        },
+        {
+          "source": "9",
+          "target": "13",
+          "source_text": "director",
+          "target_text": "Madame La Presidente",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "13",
+              "governor_text": "director",
+              "dependent_text": "Madame La Presidente",
+              "governor_graph_text": "director",
+              "dependent_graph_text": "FilmA",
+              "governor_index": 9,
+              "dependent_index": 13,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "13",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "9": "director",
+            "13": "Madame La Presidente"
+          },
+          "token_index": {
+            "9": 9,
+            "13": 13
+          }
+        },
+        {
+          "source": "10",
+          "target": "13",
+          "source_text": "of",
+          "target_text": "Madame La Presidente",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "13",
+              "dependent": "10",
+              "governor_text": "Madame La Presidente",
+              "dependent_text": "of",
+              "governor_graph_text": "FilmA",
+              "dependent_graph_text": "of",
+              "governor_index": 13,
+              "dependent_index": 10,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "13",
+          "original_dependent": "10",
+          "dependency_label": "case",
+          "token_text": {
+            "13": "Madame La Presidente",
+            "10": "of"
+          },
+          "token_index": {
+            "13": 13,
+            "10": 10
+          }
+        },
+        {
+          "source": "11",
+          "target": "13",
+          "source_text": "the",
+          "target_text": "Madame La Presidente",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "13",
+              "dependent": "11",
+              "governor_text": "Madame La Presidente",
+              "dependent_text": "the",
+              "governor_graph_text": "FilmA",
+              "dependent_graph_text": "the",
+              "governor_index": 13,
+              "dependent_index": 11,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "13",
+          "original_dependent": "11",
+          "dependency_label": "det",
+          "token_text": {
+            "13": "Madame La Presidente",
+            "11": "the"
+          },
+          "token_index": {
+            "13": 13,
+            "11": 11
+          }
+        },
+        {
+          "source": "12",
+          "target": "13",
+          "source_text": "film",
+          "target_text": "Madame La Presidente",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "13",
+              "dependent": "12",
+              "governor_text": "Madame La Presidente",
+              "dependent_text": "film",
+              "governor_graph_text": "FilmA",
+              "dependent_graph_text": "film",
+              "governor_index": 13,
+              "dependent_index": 12,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "13",
+          "original_dependent": "12",
+          "dependency_label": "compound",
+          "token_text": {
+            "13": "Madame La Presidente",
+            "12": "film"
+          },
+          "token_index": {
+            "13": 13,
+            "12": 12
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "Madame La Presidente",
+        "graph_node_ids": [
+          "13"
+        ],
+        "token_ids": [
+          13
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Film"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "director",
+          "death",
+          "date",
+          "What"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "4",
+          "1"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Madame La Presidente",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "director",
+                "dependent_text": "Madame La Presidente",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "director",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "death",
+                "dependent_text": "director",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "director",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "death",
+            "target_text": "date",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "date",
+                "dependent_text": "death",
+                "governor_graph_text": "date",
+                "dependent_graph_text": "death",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "1",
+            "source_text": "date",
+            "target_text": "What",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "4",
+                "governor_text": "What",
+                "dependent_text": "date",
+                "governor_graph_text": "What",
+                "dependent_graph_text": "date",
+                "governor_index": 1,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "director",
+          "death",
+          "date",
+          "What",
+          "is"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "4",
+          "1",
+          "2"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Madame La Presidente",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "director",
+                "dependent_text": "Madame La Presidente",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "director",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "death",
+                "dependent_text": "director",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "director",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "death",
+            "target_text": "date",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "date",
+                "dependent_text": "death",
+                "governor_graph_text": "date",
+                "dependent_graph_text": "death",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "1",
+            "source_text": "date",
+            "target_text": "What",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "4",
+                "governor_text": "What",
+                "dependent_text": "date",
+                "governor_graph_text": "What",
+                "dependent_graph_text": "date",
+                "governor_index": 1,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "1",
+            "target": "2",
+            "source_text": "What",
+            "target_text": "is",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "2",
+                "governor_text": "What",
+                "dependent_text": "is",
+                "governor_graph_text": "What",
+                "dependent_graph_text": "is",
+                "governor_index": 1,
+                "dependent_index": 2,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "director",
+          "death",
+          "date",
+          "What",
+          "?"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "4",
+          "1",
+          "14"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Madame La Presidente",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "director",
+                "dependent_text": "Madame La Presidente",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "director",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "death",
+                "dependent_text": "director",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "director",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "death",
+            "target_text": "date",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "date",
+                "dependent_text": "death",
+                "governor_graph_text": "date",
+                "dependent_graph_text": "death",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "1",
+            "source_text": "date",
+            "target_text": "What",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "4",
+                "governor_text": "What",
+                "dependent_text": "date",
+                "governor_graph_text": "What",
+                "dependent_graph_text": "date",
+                "governor_index": 1,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "1",
+            "target": "14",
+            "source_text": "What",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "14",
+                "governor_text": "What",
+                "dependent_text": "?",
+                "governor_graph_text": "What",
+                "dependent_graph_text": "?",
+                "governor_index": 1,
+                "dependent_index": 14,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "director",
+          "death",
+          "date"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "4"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Madame La Presidente",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "director",
+                "dependent_text": "Madame La Presidente",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "director",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "death",
+                "dependent_text": "director",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "director",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "death",
+            "target_text": "date",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "date",
+                "dependent_text": "death",
+                "governor_graph_text": "date",
+                "dependent_graph_text": "death",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "director",
+          "death",
+          "date",
+          "the"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "4",
+          "3"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Madame La Presidente",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "director",
+                "dependent_text": "Madame La Presidente",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "director",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "death",
+                "dependent_text": "director",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "director",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "death",
+            "target_text": "date",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "date",
+                "dependent_text": "death",
+                "governor_graph_text": "date",
+                "dependent_graph_text": "death",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "date",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "date",
+                "dependent_text": "the",
+                "governor_graph_text": "date",
+                "dependent_graph_text": "the",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "director",
+          "death"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Madame La Presidente",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "director",
+                "dependent_text": "Madame La Presidente",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "director",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "death",
+                "dependent_text": "director",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "director",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "director",
+          "death",
+          "of"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "6",
+          "5"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Madame La Presidente",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "director",
+                "dependent_text": "Madame La Presidente",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "6",
+            "source_text": "director",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "9",
+                "governor_text": "death",
+                "dependent_text": "director",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "director",
+                "governor_index": 6,
+                "dependent_index": 9,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "5",
+            "source_text": "death",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "5",
+                "governor_text": "death",
+                "dependent_text": "of",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "of",
+                "governor_index": 6,
+                "dependent_index": 5,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "director"
+        ],
+        "node_ids": [
+          "13",
+          "9"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Madame La Presidente",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "director",
+                "dependent_text": "Madame La Presidente",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "director",
+          "of"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "7"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Madame La Presidente",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "director",
+                "dependent_text": "Madame La Presidente",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "7",
+            "source_text": "director",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "7",
+                "governor_text": "director",
+                "dependent_text": "of",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "of",
+                "governor_index": 9,
+                "dependent_index": 7,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "director",
+          "the"
+        ],
+        "node_ids": [
+          "13",
+          "9",
+          "8"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "9",
+            "source_text": "Madame La Presidente",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "13",
+                "governor_text": "director",
+                "dependent_text": "Madame La Presidente",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 9,
+                "dependent_index": 13,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "8",
+            "source_text": "director",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "8",
+                "governor_text": "director",
+                "dependent_text": "the",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "the",
+                "governor_index": 9,
+                "dependent_index": 8,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p11",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "film"
+        ],
+        "node_ids": [
+          "13",
+          "12"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "12",
+            "source_text": "Madame La Presidente",
+            "target_text": "film",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "13",
+                "dependent": "12",
+                "governor_text": "Madame La Presidente",
+                "dependent_text": "film",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "film",
+                "governor_index": 13,
+                "dependent_index": 12,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p12",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "of"
+        ],
+        "node_ids": [
+          "13",
+          "10"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "10",
+            "source_text": "Madame La Presidente",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "13",
+                "dependent": "10",
+                "governor_text": "Madame La Presidente",
+                "dependent_text": "of",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "of",
+                "governor_index": 13,
+                "dependent_index": 10,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p13",
+        "entity_id": "e1",
+        "entity_text": "Madame La Presidente",
+        "nodes": [
+          "Madame La Presidente",
+          "the"
+        ],
+        "node_ids": [
+          "13",
+          "11"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "13",
+            "target": "11",
+            "source_text": "Madame La Presidente",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "13",
+                "dependent": "11",
+                "governor_text": "Madame La Presidente",
+                "dependent_text": "the",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "the",
+                "governor_index": 13,
+                "dependent_index": 11,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [
+          "director",
+          "death",
+          "date"
+        ],
+        "covered_cues": [
+          "what",
+          "death",
+          "date"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente, reaches director, covers the death predicate, and includes the date cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p2",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [
+          "director",
+          "death",
+          "date"
+        ],
+        "covered_cues": [
+          "what",
+          "death",
+          "date",
+          "is"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente, reaches director, covers the death predicate, includes the date cue, and has the auxiliary 'is' for completeness."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p3",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [
+          "director",
+          "death",
+          "date"
+        ],
+        "covered_cues": [
+          "what",
+          "death",
+          "date"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente, reaches director, covers the death predicate, includes the date cue, but ends with punctuation which slightly reduces its score."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p4",
+        "score": 95.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [
+          "director",
+          "death",
+          "date"
+        ],
+        "covered_cues": [
+          "what",
+          "death",
+          "date"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente, reaches director, covers the death predicate, and includes the date cue without any noise."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p5",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [
+          "director",
+          "death",
+          "date"
+        ],
+        "covered_cues": [
+          "what",
+          "death",
+          "date"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente, reaches director, covers the death predicate, and includes the date cue, but ends with a determiner which reduces its executability."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p6",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [
+          "director",
+          "death"
+        ],
+        "covered_cues": [
+          "what",
+          "death"
+        ],
+        "missing_cues": [
+          "date"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente, reaches director, and covers the death predicate, but it does not include the date cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p7",
+        "score": 60.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [
+          "director",
+          "death"
+        ],
+        "covered_cues": [
+          "what",
+          "death"
+        ],
+        "missing_cues": [
+          "date"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente, reaches director, and covers the death predicate, but ends with a preposition which reduces its executability."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p8",
+        "score": 40.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "director",
+          "death",
+          "date"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente and reaches director, but it does not cover any relevant predicates or cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p9",
+        "score": 50.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "director",
+          "death",
+          "date"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente and reaches director, but it ends with a preposition and does not cover any relevant predicates or cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p10",
+        "score": 40.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "director",
+          "death",
+          "date"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente and reaches director, but it ends with a determiner and does not cover any relevant predicates or cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p11",
+        "score": 30.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "director",
+          "death",
+          "date"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente and reaches film, but it does not cover any relevant predicates or cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p12",
+        "score": 20.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "director",
+          "death",
+          "date"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente and reaches 'of', but it does not cover any relevant predicates or cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p13",
+        "score": 20.0,
+        "valid": true,
+        "terminal_hint": "date_of_death",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "director",
+          "death",
+          "date"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Madame La Presidente and reaches 'the', but it does not cover any relevant predicates or cues."
+      }
+    ],
+    "8_1_top_paths_by_entity": {
+      "e1": [
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p4",
+          "score": 95.0,
+          "valid": true,
+          "terminal_hint": "date_of_death",
+          "semantic_chain_hint": [
+            "director",
+            "death",
+            "date"
+          ],
+          "covered_cues": [
+            "what",
+            "death",
+            "date"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Madame La Presidente, reaches director, covers the death predicate, and includes the date cue without any noise."
+        },
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p1",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "date_of_death",
+          "semantic_chain_hint": [
+            "director",
+            "death",
+            "date"
+          ],
+          "covered_cues": [
+            "what",
+            "death",
+            "date"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Madame La Presidente, reaches director, covers the death predicate, and includes the date cue."
+        }
+      ]
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p4"
+        },
+        "mean_path_score": 95.0
+      },
+      {
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "mean_path_score": 90.0
+      }
+    ],
+    "9_candidate_semantic_asts": [
+      {
+        "candidate_id": "ast_ps1",
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p4"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "madame_la_presidente",
+              "label": "Madame La Presidente",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "13"
+              ],
+              "source_token_indices": [
+                13
+              ],
+              "grounding_text": "Madame La Presidente",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "director",
+              "label": "director",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "9"
+              ],
+              "source_token_indices": [
+                9
+              ],
+              "grounding_text": "director",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "death_date",
+              "label": "death_date",
+              "kind": "value_slot",
+              "semantic_type": "Date",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "4",
+                "6"
+              ],
+              "source_token_indices": [
+                4,
+                6
+              ],
+              "grounding_text": "death_date",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "madame_la_presidente",
+              "target": "director",
+              "edge_type": "attribute",
+              "relation_hint": "director of Madame La Presidente",
+              "support_path": [
+                "e1_p4",
+                "13",
+                "9"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "director",
+              "target": "death_date",
+              "edge_type": "attribute",
+              "relation_hint": "date of death of the director",
+              "support_path": [
+                "e1_p4",
+                "9",
+                "6",
+                "4"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "madame_la_presidente",
+                "label": "Madame La Presidente",
+                "kind": "entity",
+                "semantic_type": "Film",
+                "source_path_ids": [
+                  "e1_p4"
+                ],
+                "source_node_ids": [
+                  "13"
+                ]
+              },
+              {
+                "id": "director",
+                "label": "director",
+                "kind": "type_variable",
+                "semantic_type": "Person",
+                "source_path_ids": [
+                  "e1_p4"
+                ],
+                "source_node_ids": [
+                  "9"
+                ]
+              },
+              {
+                "id": "death_date",
+                "label": "death_date",
+                "kind": "value_slot",
+                "semantic_type": "Date",
+                "source_path_ids": [
+                  "e1_p4"
+                ],
+                "source_node_ids": [
+                  "4",
+                  "6"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "madame_la_presidente",
+                "target": "director",
+                "relation": "director of Madame La Presidente",
+                "support_path_id": "e1_p4",
+                "support_node_ids": [
+                  "13",
+                  "9"
+                ]
+              },
+              {
+                "source": "director",
+                "target": "death_date",
+                "relation": "date of death of the director",
+                "support_path_id": "e1_p4",
+                "support_node_ids": [
+                  "9",
+                  "6",
+                  "4"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "death_date"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "madame_la_presidente",
+              "label": "Madame La Presidente",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source_path_ids": [
+                "e1_p4"
+              ],
+              "source_node_ids": [
+                "13"
+              ]
+            },
+            {
+              "id": "director",
+              "label": "director",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source_path_ids": [
+                "e1_p4"
+              ],
+              "source_node_ids": [
+                "9"
+              ]
+            },
+            {
+              "id": "death_date",
+              "label": "death_date",
+              "kind": "value_slot",
+              "semantic_type": "Date",
+              "source_path_ids": [
+                "e1_p4"
+              ],
+              "source_node_ids": [
+                "4",
+                "6"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "madame_la_presidente",
+              "target": "director",
+              "relation": "director of Madame La Presidente",
+              "support_path_id": "e1_p4",
+              "support_node_ids": [
+                "13",
+                "9"
+              ]
+            },
+            {
+              "source": "director",
+              "target": "death_date",
+              "relation": "date of death of the director",
+              "support_path_id": "e1_p4",
+              "support_node_ids": [
+                "9",
+                "6",
+                "4"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "death_date"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 95.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p4",
+              "score": 95.0,
+              "valid": true,
+              "terminal_hint": "date_of_death",
+              "semantic_chain_hint": [
+                "director",
+                "death",
+                "date"
+              ],
+              "covered_cues": [
+                "what",
+                "death",
+                "date"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Madame La Presidente, reaches director, covers the death predicate, and includes the date cue without any noise."
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "ast_ps2",
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "madame_la_presidente",
+              "label": "Madame La Presidente",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "1"
+              ],
+              "source_token_indices": [
+                1
+              ],
+              "grounding_text": "Madame La Presidente",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "director",
+              "label": "director",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "2"
+              ],
+              "source_token_indices": [
+                2
+              ],
+              "grounding_text": "director",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "death_date",
+              "label": "death_date",
+              "kind": "value_slot",
+              "semantic_type": "Date",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "3",
+                "4"
+              ],
+              "source_token_indices": [
+                3,
+                4
+              ],
+              "grounding_text": "death_date",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "madame_la_presidente",
+              "target": "director",
+              "edge_type": "attribute",
+              "relation_hint": "director of Madame La Presidente",
+              "support_path": [
+                "e1_p1",
+                "1",
+                "2"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "director",
+              "target": "death_date",
+              "edge_type": "attribute",
+              "relation_hint": "date of death of the director",
+              "support_path": [
+                "e1_p1",
+                "2",
+                "3",
+                "4"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "madame_la_presidente",
+                "label": "Madame La Presidente",
+                "kind": "entity",
+                "semantic_type": "Film",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "1"
+                ]
+              },
+              {
+                "id": "director",
+                "label": "director",
+                "kind": "type_variable",
+                "semantic_type": "Person",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "2"
+                ]
+              },
+              {
+                "id": "death_date",
+                "label": "death_date",
+                "kind": "value_slot",
+                "semantic_type": "Date",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "3",
+                  "4"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "madame_la_presidente",
+                "target": "director",
+                "relation": "director of Madame La Presidente",
+                "support_path_id": "e1_p1",
+                "support_node_ids": [
+                  "1",
+                  "2"
+                ]
+              },
+              {
+                "source": "director",
+                "target": "death_date",
+                "relation": "date of death of the director",
+                "support_path_id": "e1_p1",
+                "support_node_ids": [
+                  "2",
+                  "3",
+                  "4"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "death_date"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "madame_la_presidente",
+              "label": "Madame La Presidente",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "1"
+              ]
+            },
+            {
+              "id": "director",
+              "label": "director",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "2"
+              ]
+            },
+            {
+              "id": "death_date",
+              "label": "death_date",
+              "kind": "value_slot",
+              "semantic_type": "Date",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "3",
+                "4"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "madame_la_presidente",
+              "target": "director",
+              "relation": "director of Madame La Presidente",
+              "support_path_id": "e1_p1",
+              "support_node_ids": [
+                "1",
+                "2"
+              ]
+            },
+            {
+              "source": "director",
+              "target": "death_date",
+              "relation": "date of death of the director",
+              "support_path_id": "e1_p1",
+              "support_node_ids": [
+                "2",
+                "3",
+                "4"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "death_date"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 90.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p1",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "date_of_death",
+              "semantic_chain_hint": [
+                "director",
+                "death",
+                "date"
+              ],
+              "covered_cues": [
+                "what",
+                "death",
+                "date"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Madame La Presidente, reaches director, covers the death predicate, and includes the date cue."
+            }
+          }
+        }
+      }
+    ],
+    "10_best_ast_selection": {
+      "ast_reviews": [
+        {
+          "candidate_id": "ast_ps1",
+          "path_set_id": "ps1",
+          "score": 0.96,
+          "valid_for_decomposition": true,
+          "covers_original_question": true,
+          "answer_intent_compatible": true,
+          "branch_complete": true,
+          "atomic_questions_would_be_executable": true,
+          "has_final_operator_question": false,
+          "fatal_errors": [],
+          "reason": "This AST effectively captures the relationship between the film 'Madame La Presidente', its director, and the director's date of death, allowing for straightforward decomposition into atomic subquestions."
+        }
+      ],
+      "best_candidate_id": "ast_ps1",
+      "selected_candidate_id": "ast_ps1"
+    },
+    "10_selected_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "madame_la_presidente",
+          "label": "Madame La Presidente",
+          "kind": "entity",
+          "semantic_type": "Film",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "13"
+          ],
+          "source_token_indices": [
+            13
+          ],
+          "grounding_text": "Madame La Presidente",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "director",
+          "label": "director",
+          "kind": "type_variable",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "9"
+          ],
+          "source_token_indices": [
+            9
+          ],
+          "grounding_text": "director",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "death_date",
+          "label": "death_date",
+          "kind": "value_slot",
+          "semantic_type": "Date",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "4",
+            "6"
+          ],
+          "source_token_indices": [
+            4,
+            6
+          ],
+          "grounding_text": "death_date",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "madame_la_presidente",
+          "target": "director",
+          "edge_type": "attribute",
+          "relation_hint": "director of Madame La Presidente",
+          "support_path": [
+            "e1_p4",
+            "13",
+            "9"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "director",
+          "target": "death_date",
+          "edge_type": "attribute",
+          "relation_hint": "date of death of the director",
+          "support_path": [
+            "e1_p4",
+            "9",
+            "6",
+            "4"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "nodes": [
+          {
+            "id": "madame_la_presidente",
+            "label": "Madame La Presidente",
+            "kind": "entity",
+            "semantic_type": "Film",
+            "source_path_ids": [
+              "e1_p4"
+            ],
+            "source_node_ids": [
+              "13"
+            ]
+          },
+          {
+            "id": "director",
+            "label": "director",
+            "kind": "type_variable",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p4"
+            ],
+            "source_node_ids": [
+              "9"
+            ]
+          },
+          {
+            "id": "death_date",
+            "label": "death_date",
+            "kind": "value_slot",
+            "semantic_type": "Date",
+            "source_path_ids": [
+              "e1_p4"
+            ],
+            "source_node_ids": [
+              "4",
+              "6"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "madame_la_presidente",
+            "target": "director",
+            "relation": "director of Madame La Presidente",
+            "support_path_id": "e1_p4",
+            "support_node_ids": [
+              "13",
+              "9"
+            ]
+          },
+          {
+            "source": "director",
+            "target": "death_date",
+            "relation": "date of death of the director",
+            "support_path_id": "e1_p4",
+            "support_node_ids": [
+              "9",
+              "6",
+              "4"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "death_date"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {},
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "11_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the director of Madame La Presidente?",
+          "type": "lookup",
+          "inputs": [
+            "Madame La Presidente"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "madame_la_presidente",
+          "target_node": "director",
+          "ast_edge": {
+            "source": "madame_la_presidente",
+            "target": "director",
+            "edge_type": "attribute",
+            "relation_hint": "director of Madame La Presidente",
+            "support_path": [
+              "e1_p4",
+              "13",
+              "9"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "When did the director of Madame La Presidente die?",
+          "type": "lookup",
+          "inputs": [
+            "X1"
+          ],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": "director",
+          "target_node": "death_date",
+          "ast_edge": {
+            "source": "director",
+            "target": "death_date",
+            "edge_type": "attribute",
+            "relation_hint": "date of death of the director",
+            "support_path": [
+              "e1_p4",
+              "9",
+              "6",
+              "4"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "11_subquestions": [
+      {
+        "index": 1,
+        "question": "Who is the director of Madame La Presidente?",
+        "answer_variable": "X1",
+        "source_node": "madame_la_presidente",
+        "target_node": "director",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "madame_la_presidente",
+          "target": "director",
+          "edge_type": "attribute",
+          "relation_hint": "director of Madame La Presidente",
+          "support_path": [
+            "e1_p4",
+            "13",
+            "9"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "When did the director of Madame La Presidente die?",
+        "answer_variable": "X2",
+        "source_node": "director",
+        "target_node": "death_date",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "director",
+          "target": "death_date",
+          "edge_type": "attribute",
+          "relation_hint": "date of death of the director",
+          "support_path": [
+            "e1_p4",
+            "9",
+            "6",
+            "4"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

@@ -95,9 +95,16 @@ RELATIVE_OR_COMPLEMENT_BOUNDARIES = {
     "when",
 }
 POS_HINT_BASE_BY_TYPE = {
+    "album": "Album",
+    "book": "Book",
     "business": "Company",
     "company": "Company",
     "corporation": "Company",
+    "entity": "Entity",
+    "event": "Event",
+    "film": "Film",
+    "game": "Game",
+    "location": "Location",
     "organisation": "Organization",
     "organization": "Organization",
     "ceo": "Person",
@@ -105,18 +112,18 @@ POS_HINT_BASE_BY_TYPE = {
     "founder": "Person",
     "person": "Person",
     "people": "Person",
-    "film": "Movie",
-    "movie": "Movie",
-    "book": "Book",
+    "movie": "Film",
     "novel": "Book",
-    "album": "Album",
+    "product": "Product",
+    "region": "Region",
+    "series": "Series",
     "song": "Song",
+    "work": "Work",
     "university": "Institution",
     "college": "Institution",
     "school": "Institution",
     "city": "City",
     "country": "Country",
-    "region": "Region",
     "network": "Network",
     "system": "System",
     "structure": "Structure",
@@ -295,8 +302,8 @@ def _extraction_from_mask_spans(question: str, spans: list[MaskSpan]) -> Extract
         )
         if start is None or end is None:
             continue
-        kind = "type_variable" if span.kind_hint == "type_variable" else "entity"
-        semantic_type = span.semantic_type_hint or ("Variable" if kind == "type_variable" else "Entity")
+        kind = "entity"
+        semantic_type = span.semantic_type_hint or "Entity"
         node = ExtractedNode(
             placeholder=_fallback_placeholder(semantic_type, kind, index),
             text=question[start:end],
@@ -306,10 +313,7 @@ def _extraction_from_mask_spans(question: str, spans: list[MaskSpan]) -> Extract
             end=end,
             occurrence=1,
         )
-        if kind == "type_variable":
-            type_variables.append(node)
-        else:
-            entities.append(node)
+        entities.append(node)
     return ExtractionResult(entities=entities, type_variables=type_variables)
 
 
@@ -763,7 +767,7 @@ def _span_matches_text(question: str, node: ExtractedNode) -> bool:
 
 
 def _remove_overlapping_candidates(candidates: list[_MaskCandidate]) -> list[_MaskCandidate]:
-    ordered = sorted(candidates, key=lambda item: (item.start, -(item.end - item.start)))
+    ordered = sorted(candidates, key=lambda item: (item.start, item.end - item.start))
     result: list[_MaskCandidate] = []
     used: list[tuple[int, int]] = []
     for candidate in ordered:
@@ -775,6 +779,32 @@ def _remove_overlapping_candidates(candidates: list[_MaskCandidate]) -> list[_Ma
 
 
 def _pos_hint_base(node: ExtractedNode) -> str:
+    semantic_type = re.sub(r"[^A-Za-z0-9]+", "", node.semantic_type or "").lower()
+    explicit_type_bases = {
+        "album": "Album",
+        "book": "Book",
+        "city": "City",
+        "company": "Company",
+        "country": "Country",
+        "entity": "Entity",
+        "event": "Event",
+        "film": "Film",
+        "game": "Game",
+        "institution": "Institution",
+        "location": "Location",
+        "movie": "Film",
+        "organization": "Organization",
+        "organisation": "Organization",
+        "person": "Person",
+        "product": "Product",
+        "region": "Region",
+        "series": "Series",
+        "song": "Song",
+        "university": "University",
+        "work": "Work",
+    }
+    if node.is_entity and semantic_type in explicit_type_bases:
+        return explicit_type_bases[semantic_type]
     combined = f"{node.semantic_type} {node.text}".lower()
     for key, base in POS_HINT_BASE_BY_TYPE.items():
         if re.search(rf"\b{re.escape(key)}\b", combined):

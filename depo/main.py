@@ -14,7 +14,10 @@ from models import (
     CandidateNode,
     CandidatePath,
     MaskReplacement,
+    MaskSpan,
     MaskSpanResult,
+    ExplicitEntity,
+    ExplicitEntityResult,
     ProblemFrame,
     QuestionRecord,
     RestoredAnchorConnectedSubgraph,
@@ -35,7 +38,7 @@ if TYPE_CHECKING:
     from ast_builder import SemanticASTOptimizer
     from corenlp_parser import CoreNLPParser
     from graph_builder import GraphBuilder
-    from mask_span_extractor import MaskSpanExtractor
+    from mask_span_extractor import ExplicitEntityExtractor, MaskSpanExtractor
     from entity_path_pipeline import (
         EntityPathSemanticParser,
         build_path_set_candidates,
@@ -94,7 +97,7 @@ def main() -> int:
 
         llm_client = LLMClient(api_key=api_key, base_url=base_url, model="gpt-4o-mini")
         question_normalizer = SemanticQuestionNormalizer(llm_client)
-        mask_span_extractor = MaskSpanExtractor(llm_client)
+        mask_span_extractor = ExplicitEntityExtractor(llm_client)
         graph_builder = GraphBuilder()
         path_semantic_parser = EntityPathSemanticParser(llm_client)
         subquestion_generator = SubquestionGenerator(llm_client)
@@ -152,8 +155,8 @@ def run_pipeline(
         select_top_paths_by_entity,
     )
     from entity_path_projector import (
+        build_entity_start_nodes_from_explicit_entities,
         enumerate_entity_origin_paths,
-        extract_entity_start_nodes,
         undirected_graph_edge_payloads,
     )
     from path_projector import (
@@ -170,7 +173,10 @@ def run_pipeline(
         )
     )
     processing_question = semantic_normalization.normalized_question
-    mask_spans = mask_span_extractor.extract(processing_question)
+    explicit_entities = _coerce_explicit_entity_result(
+        mask_span_extractor.extract(processing_question),
+    )
+    mask_spans = _mask_span_result_from_explicit_entities(explicit_entities)
     replacement = selective_entity_masking(
         original_question=processing_question,
         extracted_nodes=mask_spans,
@@ -192,7 +198,7 @@ def run_pipeline(
     if path_semantic_parser is None:
         path_semantic_parser = EntityPathSemanticParser(getattr(subquestion_generator, "llm_client", None))
 
-    entity_start_nodes = extract_entity_start_nodes(
+    entity_start_nodes = build_entity_start_nodes_from_explicit_entities(
         dependency_graph=dependency_graph,
         restored_graph_node_candidates=restored_graph_node_candidates,
         replacement=replacement,
@@ -260,7 +266,11 @@ def run_pipeline(
         )
     return {
         "semantic_normalization": semantic_normalization,
+        "explicit_entities": explicit_entities,
+        "explicit_entity_payload": explicit_entities.raw_payload,
         "mask_spans": mask_spans,
+        "masked_question": replacement.masked_question,
+        "entity_mask_mappings": replacement.mask_mappings,
         "replacement": replacement,
         "dependency_parse": dependency_parse,
         "weighted_graph": dependency_graph,
@@ -295,10 +305,52 @@ def run_pipeline(
     }
 
 
+def _coerce_explicit_entity_result(raw_result: Any) -> ExplicitEntityResult:
+    if isinstance(raw_result, ExplicitEntityResult):
+        return raw_result
+    if isinstance(raw_result, MaskSpanResult):
+        return ExplicitEntityResult(
+            entities=[
+                ExplicitEntity(
+                    text=span.text,
+                    start_char=span.start_char,
+                    end_char=span.end_char,
+                    semantic_type_hint=span.semantic_type_hint or "Entity",
+                    confidence=1.0,
+                    reason=span.reason,
+                )
+                for span in raw_result.mask_spans
+                if span.kind_hint == "entity"
+            ],
+            warnings=list(raw_result.warnings),
+            raw_payload=raw_result.raw_payload,
+        )
+    raise TypeError("Step 2 extractor must return ExplicitEntityResult or MaskSpanResult.")
+
+
+def _mask_span_result_from_explicit_entities(explicit_entities: ExplicitEntityResult) -> MaskSpanResult:
+    return MaskSpanResult(
+        mask_spans=[
+            MaskSpan(
+                text=entity.text,
+                start_char=entity.start_char,
+                end_char=entity.end_char,
+                kind_hint="entity",
+                semantic_type_hint=entity.semantic_type_hint or "Entity",
+                reason=entity.reason,
+            )
+            for entity in explicit_entities.entities
+        ],
+        warnings=list(explicit_entities.warnings),
+        raw_payload=explicit_entities.raw_payload,
+    )
+
+
 def print_result(index: int, record: QuestionRecord, result: dict[str, Any], debug: bool = False) -> None:
     from graph_builder import format_undirected_graph_edges
 
     semantic_normalization: SemanticNormalizationResult = result["semantic_normalization"]
+    explicit_entities: ExplicitEntityResult = result.get("explicit_entities") or ExplicitEntityResult()
     mask_spans: MaskSpanResult = result["mask_spans"]
     replacement: MaskReplacement = result["replacement"]
     dependency_parse = result["dependency_parse"]
@@ -334,17 +386,27 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
         _print_warnings(semantic_normalization.warnings)
     print()
 
-    print("[2. Mask Spans]")
-    if replacement.mask_mappings:
-        for mapping in replacement.mask_mappings:
-            print(f"  - {mapping.original_text} -> {mapping.placeholder}")
+    print("[2. Explicit Entities]")
+    if explicit_entities.entities:
+        for entity in explicit_entities.entities:
+            semantic = f" [{entity.semantic_type_hint}]" if entity.semantic_type_hint else ""
+            print(
+                f"  - {entity.text}{semantic} span=({entity.start_char}, {entity.end_char}) "
+                f"confidence={entity.confidence:.2f}"
+            )
     else:
         print("  (none)")
     if debug:
-        _print_warnings(mask_spans.warnings)
+        _print_warnings(explicit_entities.warnings or mask_spans.warnings)
     print()
 
-    print("[3. Selective Masked Question]")
+    print("[3. Entity Masking]")
+    if replacement.mask_mappings:
+        for mapping in replacement.mask_mappings:
+            print(f"  - {mapping.placeholder} -> {mapping.original_text}")
+    else:
+        print("  (none)")
+    print("Masked question:")
     print(replacement.masked_question)
     print()
 
@@ -366,7 +428,7 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
         print("  (no dependency graph edges)")
     print()
 
-    print("[6. Entity Start Nodes]")
+    print("[6. Entity Start Nodes from Explicit Entities]")
     _print_entity_start_nodes(entity_start_nodes)
     print()
 

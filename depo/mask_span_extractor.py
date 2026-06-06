@@ -4,8 +4,13 @@ import re
 from typing import TYPE_CHECKING, Any
 
 from entity_extractor import normalize_semantic_type
-from models import MaskSpan, MaskSpanResult
-from prompts import MASK_SPAN_EXTRACTION_SYSTEM, build_mask_span_extraction_prompt
+from models import ExplicitEntity, ExplicitEntityResult, MaskSpan, MaskSpanResult
+from prompts import (
+    EXPLICIT_ENTITY_EXTRACTION_SYSTEM,
+    MASK_SPAN_EXTRACTION_SYSTEM,
+    build_explicit_entity_extraction_prompt,
+    build_mask_span_extraction_prompt,
+)
 
 if TYPE_CHECKING:
     from llm_client import LLMClient
@@ -160,74 +165,306 @@ CLAUSE_BOUNDARY = {
 }
 
 
-class MaskSpanExtractor:
-    """Step 1 extractor for parse-protection spans only.
-
-    The extractor may ask an LLM for spans, but it never returns anchors,
-    implicit variables, operators, relations, AST structures, or subquestions.
-    A conservative heuristic fallback handles the obvious cases used by tests
-    and keeps the CLI usable when the LLM returns malformed JSON.
-    """
+class ExplicitEntityExtractor:
+    """Step 2 extractor for explicit named entities only."""
 
     def __init__(self, llm_client: "LLMClient | None" = None) -> None:
         self.llm_client = llm_client
 
-    def extract(self, question: str) -> MaskSpanResult:
+    def extract(self, question: str) -> ExplicitEntityResult:
         warnings: list[str] = []
+        raw_payload: dict[str, Any] | None = None
         if self.llm_client is not None:
             try:
-                payload = self.llm_client.chat_json(
-                    MASK_SPAN_EXTRACTION_SYSTEM,
-                    build_mask_span_extraction_prompt(question),
+                raw = self.llm_client.chat_json(
+                    EXPLICIT_ENTITY_EXTRACTION_SYSTEM,
+                    build_explicit_entity_extraction_prompt(question),
                 )
-                llm_spans = self._parse_payload(question, payload, warnings)
-                heuristic_spans = _heuristic_mask_spans(question)
-                return MaskSpanResult(
-                    mask_spans=_merge_spans(question, [*llm_spans, *heuristic_spans], warnings),
+                raw_payload = raw if isinstance(raw, dict) else {}
+                llm_entities = self._parse_payload(question, raw_payload, warnings)
+                heuristic_entities = _heuristic_explicit_entities(question)
+                return ExplicitEntityResult(
+                    entities=_merge_explicit_entities([*llm_entities, *heuristic_entities], warnings),
                     warnings=warnings,
+                    raw_payload=raw_payload,
                 )
             except Exception as exc:
-                warnings.append(f"Mask span LLM failed; using heuristic fallback: {exc}")
+                warnings.append(f"Explicit entity LLM failed; using heuristic fallback: {exc}")
 
-        return MaskSpanResult(mask_spans=_heuristic_mask_spans(question), warnings=warnings)
+        return ExplicitEntityResult(
+            entities=_heuristic_explicit_entities(question),
+            warnings=warnings,
+            raw_payload=raw_payload,
+        )
 
     @staticmethod
     def _parse_payload(
         question: str,
         payload: dict[str, Any],
         warnings: list[str],
-    ) -> list[MaskSpan]:
-        raw_spans = payload.get("mask_spans", payload.get("maskSpans", []))
-        if not isinstance(raw_spans, list):
-            warnings.append("Mask span payload did not contain a list mask_spans field.")
+    ) -> list[ExplicitEntity]:
+        raw_entities = payload.get("entities", payload.get("explicit_entities"))
+        if raw_entities is None:
+            raw_entities = payload.get("mask_spans", payload.get("maskSpans", []))
+        if not isinstance(raw_entities, list):
+            warnings.append("Explicit entity payload did not contain a list entities field.")
             return []
 
-        spans: list[MaskSpan] = []
-        for raw in raw_spans:
+        entities: list[ExplicitEntity] = []
+        for raw in raw_entities:
             if not isinstance(raw, dict):
+                continue
+            if _normalize_kind_hint(raw.get("kind_hint", raw.get("kind", "entity"))) != "entity":
+                warnings.append(f"Dropped non-entity explicit entity item: {raw!r}.")
                 continue
             text = str(raw.get("text", "")).strip()
             start = _coerce_int(raw.get("start_char", raw.get("start")))
             end = _coerce_int(raw.get("end_char", raw.get("end")))
             if not text:
                 continue
-            start, end = _resolve_span(question, text, start, end)
+            start, end = _resolve_explicit_entity_span(question, text, start, end, warnings)
             if start is None or end is None:
-                warnings.append(f"Could not resolve mask span text={text!r}.")
+                warnings.append(f"Could not resolve explicit entity text={text!r}.")
                 continue
-            kind_hint = _normalize_kind_hint(raw.get("kind_hint", raw.get("kind", "entity")))
-            semantic_type_hint = str(raw.get("semantic_type_hint", raw.get("semantic_type", ""))).strip() or None
-            spans.append(
-                MaskSpan(
+            entity_text = question[start:end]
+            if _is_forbidden_explicit_entity(entity_text):
+                warnings.append(f"Dropped forbidden non-entity span text={entity_text!r}.")
+                continue
+            semantic_type_hint = _normalize_entity_type(raw.get("semantic_type_hint", raw.get("semantic_type", "")))
+            entities.append(
+                ExplicitEntity(
                     text=question[start:end],
                     start_char=start,
                     end_char=end,
-                    kind_hint=kind_hint,
                     semantic_type_hint=semantic_type_hint,
+                    confidence=_clamp_float(raw.get("confidence", 1.0), 0.0, 1.0),
                     reason=str(raw.get("reason", "")).strip(),
                 )
             )
-        return _filter_llm_mask_spans(question, spans, warnings)
+        return _merge_explicit_entities(entities, warnings)
+
+
+class MaskSpanExtractor:
+    """Compatibility wrapper for the new explicit-entity Step 2."""
+
+    def __init__(self, llm_client: "LLMClient | None" = None) -> None:
+        self.entity_extractor = ExplicitEntityExtractor(llm_client)
+
+    def extract(self, question: str) -> MaskSpanResult:
+        result = self.entity_extractor.extract(question)
+        return MaskSpanResult(
+            mask_spans=_mask_spans_from_explicit_entities(result.entities),
+            warnings=result.warnings,
+            raw_payload=result.raw_payload,
+        )
+
+
+def _mask_spans_from_explicit_entities(entities: list[ExplicitEntity]) -> list[MaskSpan]:
+    return [
+        MaskSpan(
+            text=entity.text,
+            start_char=entity.start_char,
+            end_char=entity.end_char,
+            kind_hint="entity",
+            semantic_type_hint=entity.semantic_type_hint or "Entity",
+            reason=entity.reason,
+        )
+        for entity in entities
+    ]
+
+
+def _heuristic_explicit_entities(question: str) -> list[ExplicitEntity]:
+    spans = _heuristic_mask_spans(question)
+    entities = [
+        ExplicitEntity(
+            text=span.text,
+            start_char=span.start_char,
+            end_char=span.end_char,
+            semantic_type_hint=_normalize_entity_type(span.semantic_type_hint),
+            confidence=0.55,
+            reason=span.reason or "deterministic explicit entity fallback",
+        )
+        for span in spans
+        if span.kind_hint == "entity" and not _is_forbidden_explicit_entity(span.text)
+    ]
+    return _merge_explicit_entities(entities, [])
+
+
+def _resolve_explicit_entity_span(
+    question: str,
+    text: str,
+    start: int | None,
+    end: int | None,
+    warnings: list[str],
+) -> tuple[int | None, int | None]:
+    if _valid_bounds(question, start, end) and question[start or 0 : end or 0] == text:
+        return start, end
+
+    matches = list(re.finditer(re.escape(text), question))
+    if len(matches) == 1:
+        match = matches[0]
+        if start is not None or end is not None:
+            warnings.append(
+                f"Corrected explicit entity span for text={text!r} from ({start}, {end}) "
+                f"to ({match.start()}, {match.end()})."
+            )
+        return match.start(), match.end()
+    if len(matches) > 1:
+        warnings.append(f"Dropped ambiguous repeated explicit entity text={text!r}.")
+        return None, None
+
+    return None, None
+
+
+def _valid_bounds(question: str, start: int | None, end: int | None) -> bool:
+    return start is not None and end is not None and 0 <= start < end <= len(question)
+
+
+def _normalize_entity_type(value: Any) -> str:
+    raw = str(value or "").strip()
+    if not raw:
+        return "Entity"
+    normalized = normalize_semantic_type(raw, "entity")
+    aliases = {
+        "Movie": "Film",
+        "Place": "Location",
+        "Organisation": "Organization",
+        "Creativework": "Work",
+        "CreativeWork": "Work",
+    }
+    normalized = aliases.get(normalized, normalized)
+    allowed = {
+        "Album",
+        "Book",
+        "City",
+        "Company",
+        "Country",
+        "Entity",
+        "Event",
+        "Film",
+        "Game",
+        "Institution",
+        "Location",
+        "Organization",
+        "Product",
+        "Region",
+        "Series",
+        "Song",
+        "University",
+        "Work",
+        "Person",
+    }
+    return normalized if normalized in allowed else "Entity"
+
+
+def _clamp_float(value: Any, minimum: float, maximum: float) -> float:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        number = maximum
+    return min(max(number, minimum), maximum)
+
+
+FORBIDDEN_EXPLICIT_ENTITY_SURFACES = {
+    *SIMPLE_TYPE_VARIABLES,
+    "actor",
+    "album",
+    "artificial intelligence company",
+    "author",
+    "birth date",
+    "book",
+    "cause",
+    "ceo",
+    "chief operating officer",
+    "date",
+    "death date",
+    "father",
+    "film",
+    "founder",
+    "husband",
+    "movie",
+    "reason",
+    "research institute",
+    "song",
+    "spouse",
+    "wife",
+}
+FORBIDDEN_PREFIXES = {
+    "born in",
+    "ceo of",
+    "company that",
+    "developed by",
+    "director of",
+    "graduated from",
+    "located in",
+    "released first",
+    "wife of",
+}
+
+
+def _is_forbidden_explicit_entity(text: str) -> bool:
+    stripped = text.strip().strip("?.!,;:")
+    lowered = re.sub(r"\s+", " ", stripped.lower())
+    if not lowered:
+        return True
+    if lowered in WH_SPAN_WORDS or lowered in FORBIDDEN_EXPLICIT_ENTITY_SURFACES:
+        return True
+    if lowered in {"and", "or", "both", "same", "share", "different", "older", "younger", "first"}:
+        return True
+    if any(lowered.startswith(prefix) for prefix in FORBIDDEN_PREFIXES):
+        return True
+    if lowered.startswith(("which ", "what ", "who ", "whose ", "when ", "where ", "why ")):
+        return not _looks_like_official_title(stripped)
+    if lowered.startswith(("was ", "were ", "is ", "are ", "has ", "have ", "had ", "from ")):
+        return True
+    return False
+
+
+def _looks_like_official_title(text: str) -> bool:
+    tokens = re.findall(r"[A-Za-z0-9][A-Za-z0-9'-]*", text)
+    if len(tokens) < 3:
+        return False
+    title_like = sum(1 for token in tokens if token[:1].isupper() or token.isdigit())
+    return title_like >= max(2, len(tokens) - 1)
+
+
+def _merge_explicit_entities(
+    entities: list[ExplicitEntity],
+    warnings: list[str],
+) -> list[ExplicitEntity]:
+    by_span: dict[tuple[int, int], ExplicitEntity] = {}
+    for entity in entities:
+        if entity.start_char < 0 or entity.end_char <= entity.start_char:
+            continue
+        if _is_forbidden_explicit_entity(entity.text):
+            warnings.append(f"Dropped forbidden non-entity span text={entity.text!r}.")
+            continue
+        normalized = ExplicitEntity(
+            text=entity.text.strip(),
+            start_char=entity.start_char,
+            end_char=entity.end_char,
+            semantic_type_hint=_normalize_entity_type(entity.semantic_type_hint),
+            confidence=_clamp_float(entity.confidence, 0.0, 1.0),
+            reason=entity.reason,
+        )
+        key = (normalized.start_char, normalized.end_char)
+        existing = by_span.get(key)
+        if existing is None or normalized.confidence > existing.confidence:
+            by_span[key] = normalized
+
+    ordered = sorted(
+        by_span.values(),
+        key=lambda item: ((item.end_char - item.start_char), -item.confidence, item.start_char),
+    )
+    kept: list[ExplicitEntity] = []
+    occupied: list[tuple[int, int]] = []
+    for entity in ordered:
+        if any(not (entity.end_char <= start or entity.start_char >= end) for start, end in occupied):
+            warnings.append(f"Dropped overlapping non-minimal entity span text={entity.text!r}.")
+            continue
+        kept.append(entity)
+        occupied.append((entity.start_char, entity.end_char))
+    return sorted(kept, key=lambda item: item.start_char)
 
 
 def _heuristic_mask_spans(question: str) -> list[MaskSpan]:
@@ -237,7 +474,6 @@ def _heuristic_mask_spans(question: str) -> list[MaskSpan]:
     spans.extend(_quoted_spans(question))
     spans.extend(_person_name_token_spans(question))
     spans.extend(_capitalized_entity_spans(question))
-    spans.extend(_type_phrase_spans(question))
     return _merge_spans(question, spans, [])
 
 

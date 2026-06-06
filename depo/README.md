@@ -6,30 +6,32 @@ anchor decisions are made on restored original question text.
 
 ## Architecture
 
-1. **Mask span extraction**
-   Step 1 is not full anchor extraction. It only finds complex named entities
-   and multi-word type/function noun phrases that should be masked to protect
-   CoreNLP parsing. It does not select anchors, infer implicit variables, choose
-   operators, split coordination, build an AST, or generate subquestions.
+1. **Semantic-normalized question**
+   The question is lightly normalized for parser stability while preserving the
+   original semantic content.
 
-2. **Selective masking**
-   Complex spans are replaced with POS-hint placeholders such as `MovieA`,
-   `CompanyA`, `NetworkA`, or `TypeVarA`. Simple type variables such as
-   `director`, `CEO`, `university`, `city`, and `nationality` normally remain
-   in natural language.
+2. **Explicit entity detection**
+   The LLM only identifies explicit named entities in the original question. It
+   does not extract type variables, roles, relation phrases, answer slots,
+   operators, parser-protection phrases, AST nodes, or subquestions. Single-token
+   concrete entities such as `AlphaGo`, `Marufabad`, and `Phoolwari` are valid
+   entities.
 
-3. **CoreNLP parse**
-   CoreNLP parses the masked question. The masked placeholders remain the
+3. **Entity masking**
+   The program masks all detected explicit entities, including single-token
+   entities, using POS-hint placeholders such as `PersonA`, `FilmA`,
+   `LocationA`, `GameA`, `WorkA`, or `EntityA`. Possessive suffixes outside the
+   entity span are preserved, e.g. `John Middleton Murry's` becomes
+   `PersonA's`.
+
+4. **CoreNLP parse**
+   CoreNLP parses the fully entity-masked question. The masked placeholders remain the
    internal graph tokens so token indices and dependency node IDs stay stable.
 
-4. **Undirected dependency graph**
+5. **Undirected dependency graph and restored graph**
    The CoreNLP dependency parse is converted to an unweighted undirected graph.
    Edge metadata preserves the original directed dependency labels for evidence
-   and later LLM prompts, but the post-parse path search no longer uses
-   dependency weights.
-
-5. **Restored graph node candidates**
-   Graph node candidates are restored for LLM display. The internal graph still
+   and later LLM prompts. Graph node candidates are restored for LLM display. The internal graph still
    contains placeholders like `MovieA`, but the LLM sees candidate text directly
    from the original question:
 
@@ -39,12 +41,13 @@ anchor decisions are made on restored original question text.
 
    It is never rendered as `MovieA [Ten9Eight: Shoot For The Moon]`.
 
-6. **Entity start detection**
-   Known entity start nodes are selected deterministically from mask mappings,
-   restored graph node metadata, and conservative proper-noun fallback rules.
-   The LLM no longer generates candidate nodes and no Problem Frame is built.
-   Role or slot words such as `author`, `director`, `CEO`, `company`, and
-   `nationality` are not entity starts unless they are masked concrete entities.
+6. **Entity start mapping**
+   Entity start nodes are not re-detected. They are deterministically built from
+   Step 2 explicit entity mappings and the corresponding placeholder graph
+   nodes. There is no POS/proper-noun fallback in the main flow, so role or slot
+   words such as `author`, `director`, `CEO`, `company`, and `nationality` cannot
+   become entity starts unless Step 2 explicitly identified them as concrete
+   named entities.
 
 7. **Entity-origin path enumeration**
    For each entity start node, the program enumerates bounded simple paths from

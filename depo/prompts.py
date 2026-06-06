@@ -1021,6 +1021,146 @@ Output JSON with exactly this shape:
 """.strip()
 
 
+EXPLICIT_ENTITY_EXTRACTION_SYSTEM = """
+You are implementing DEPO Step 2: explicit entity detection before dependency parsing.
+
+Your task is to identify explicit named entities mentioned in the question.
+
+This is strict entity recognition only.
+This is not parser-protection span detection.
+This is not type-variable extraction.
+This is not relation extraction.
+This is not answer-slot extraction.
+This is not operator detection.
+This is not AST construction.
+This is not question decomposition.
+
+Return every explicit named entity mention that appears as a contiguous surface span in the original question.
+Include both single-token and multi-token entities.
+The downstream code will mask all returned entities, including single-token entities.
+
+Allowed explicit entities include:
+- person names: "John Middleton Murry", "Sisowath Kossamak", "Lothair II"
+- named works/titles: "Young Man Luther", "AlphaGo", "Aas Ka Panchhi", "Phoolwari", "Ten9Eight: Shoot For The Moon", "Sabotage (1936 Film)"
+- organizations, companies, institutions, universities, schools
+- locations: cities, countries, regions, geopolitical places
+- events, products, games, albums, songs, series, creative works
+- single-token named entities when they are concrete names, e.g. "AlphaGo", "Marufabad", "Nasamkhrali", "Phoolwari"
+
+Forbidden outputs:
+- Do not output roles or relation nouns: wife, husband, mother, father, author, director, actor, CEO, founder, spouse
+- Do not output answer slots or value types: university, company, nationality, country, city, age, population, date, birth date, death date, reason, cause
+- Do not output type phrases: artificial intelligence company, chief operating officer, research institute, film, movie, book, song
+- Do not output wh phrases: which film, what country, who, whom, whose, when, where, why
+- Do not output relation phrases: wife of, director of, CEO of, born in, located in, graduated from, developed by, released first
+- Do not output operators or comparison cues: same, different, both, share, older, younger, first, later, earlier
+- Do not output auxiliaries, determiners, prepositions, or punctuation
+- Do not output full clauses or relative clauses
+- Do not output a larger phrase when a smaller entity span is the actual named entity
+
+Boundary rules:
+1. Each entity must be a minimal contiguous substring copied exactly from the original question.
+2. start_char is inclusive; end_char is exclusive.
+3. question[start_char:end_char] must exactly equal text.
+4. Do not include leading type words such as film, movie, book, song, album, series, city, country, company unless they are part of the official name.
+5. Do not include possessive "'s" unless it is part of an official name, which is rare.
+6. In possessive constructions, return only the possessor entity.
+   Example: "John Middleton Murry's wife" -> "John Middleton Murry"
+   Example: "Lothair II's mother" -> "Lothair II"
+7. In coordinated or compared entities, return each entity separately.
+   Example: "Aas Ka Panchhi or Phoolwari" -> "Aas Ka Panchhi" and "Phoolwari"
+   Example: "Ten9Eight: Shoot For The Moon and Sabotage (1936 Film)" -> two separate entities
+8. Do not include coordination words such as and/or between two entity names unless the conjunction is part of one official title.
+9. Parenthetical disambiguators that are part of a title should be included.
+   Example: "Sabotage (1936 Film)" is one entity.
+10. Title punctuation such as colon in a subtitle should be included.
+   Example: "Ten9Eight: Shoot For The Moon" is one entity.
+
+Semantic type hint rules:
+- Use Person for human names.
+- Use Film for film/movie titles when locally indicated by film, movie, director, released, starring, etc.
+- Use Book for book titles when locally indicated by book, novel, author, writer, etc.
+- Use Song, Album, Series, Game, Product, Event, Company, Organization, University, Institution, City, Country, Region, Location, or Work when appropriate.
+- Use Entity only when the local context does not support a more specific type.
+- In a coordinated group of same-type alternatives, use the same semantic_type_hint.
+
+Return valid JSON only.
+""".strip()
+
+
+def build_explicit_entity_extraction_prompt(question: str) -> str:
+    schema = {
+        "entities": [
+            {
+                "text": "exact contiguous entity span copied from the original question",
+                "start_char": 0,
+                "end_char": 15,
+                "semantic_type_hint": "Person | Film | Book | Song | Album | Series | Work | Game | Product | Company | Organization | University | Institution | City | Country | Region | Location | Event | Entity",
+                "confidence": 0.95,
+                "reason": "brief reason why this is an explicit named entity",
+            }
+        ]
+    }
+    return f"""
+Identify explicit named entities in the question.
+
+Question:
+{question}
+
+This is entity recognition only. Do not output roles, type variables, answer slots, relation phrases, operators, parser-protection phrases, AST nodes, or subquestions.
+Return all explicit entities, including single-token and multi-token entities. The code will mask every returned entity.
+
+Example 1:
+Question: "Why did John Middleton Murry's wife die?"
+Return only:
+- "John Middleton Murry", semantic_type_hint "Person"
+Do not return "John Middleton Murry's", "John Middleton Murry's wife", "wife", or "die".
+
+Example 2:
+Question: "When did Lothair II's mother die?"
+Return only:
+- "Lothair II", semantic_type_hint "Person"
+Do not return "Lothair II's", "Lothair II's mother", "mother", or "die".
+
+Example 3:
+Question: "Which film was released first, Aas Ka Panchhi or Phoolwari?"
+Return:
+- "Aas Ka Panchhi", semantic_type_hint "Film"
+- "Phoolwari", semantic_type_hint "Film"
+Do not return "was released first, Aas Ka Panchhi or Phoolwari", "Aas Ka Panchhi or Phoolwari", "released first", or "film".
+
+Example 4:
+Question: "Do director of film Ten9Eight: Shoot For The Moon and director of film Sabotage (1936 Film) share the same nationality?"
+Return:
+- "Ten9Eight: Shoot For The Moon", semantic_type_hint "Film"
+- "Sabotage (1936 Film)", semantic_type_hint "Film"
+Do not return "director", "film", "nationality", "same nationality", or the full coordinated phrase.
+
+Example 5:
+Question: "Which university did the CEO of the company that developed the AI game AlphaGo graduate from?"
+Return:
+- "AlphaGo", semantic_type_hint "Game" or "Work"
+Do not return "CEO", "company", "AI game", "university", "graduate from", or "company that developed the AI game AlphaGo".
+
+Example 6:
+Question: "Are Marufabad and Nasamkhrali both located in the same country?"
+Return:
+- "Marufabad", semantic_type_hint "Location"
+- "Nasamkhrali", semantic_type_hint "Location"
+Do not return "country", "same country", "both", or "located".
+
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
+
+MASK_SPAN_EXTRACTION_SYSTEM = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
+
+
+def build_mask_span_extraction_prompt(question: str) -> str:
+    return build_explicit_entity_extraction_prompt(question)
+
+
 SEMANTIC_QUESTION_NORMALIZATION_SYSTEM = """
 You are implementing DEPO Step 0: parser-oriented question normalization before CoreNLP dependency parsing.
 

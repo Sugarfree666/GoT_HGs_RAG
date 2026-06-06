@@ -126,9 +126,33 @@ class MaskSpan:
 
 
 @dataclass
+class ExplicitEntity:
+    text: str
+    start_char: int
+    end_char: int
+    semantic_type_hint: str | None = None
+    confidence: float = 1.0
+    reason: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class ExplicitEntityResult:
+    entities: list[ExplicitEntity] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    raw_payload: dict[str, Any] | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
 class MaskSpanResult:
     mask_spans: list[MaskSpan] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
+    raw_payload: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

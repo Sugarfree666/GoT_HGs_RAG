@@ -192,9 +192,14 @@ class GraphBuilder:
         replacement: PlaceholderReplacement,
     ) -> list[GraphNodeCandidate]:
         mapping_by_placeholder = _replacement_mapping_by_placeholder(replacement)
+        replacement_mappings = list(mapping_by_placeholder.values())
         candidates: list[GraphNodeCandidate] = []
         for token in dependency_parse.tokens:
-            mask_info = mapping_by_placeholder.get(token.word)
+            mask_info = _replacement_mapping_for_token(
+                token=token,
+                mapping_by_placeholder=mapping_by_placeholder,
+                replacement_mappings=replacement_mappings,
+            )
             if mask_info is not None:
                 restored_text = mask_info.original_text
                 kind_hint = (
@@ -204,7 +209,7 @@ class GraphBuilder:
                 )
                 char_span = mask_info.original_char_span or None
                 semantic_type = mask_info.semantic_type_hint
-                placeholder = token.word
+                placeholder = mask_info.placeholder
             else:
                 restored_text = token.word
                 kind_hint = _candidate_kind_hint(token)
@@ -1017,6 +1022,69 @@ def _replacement_mapping_by_placeholder(replacement: PlaceholderReplacement) -> 
             masked_char_span=_span_payload_to_list(masked_span),
         )
     return result
+
+
+def _replacement_mapping_for_token(
+    *,
+    token: CoreNLPToken,
+    mapping_by_placeholder: dict[str, MaskMapping],
+    replacement_mappings: list[MaskMapping],
+) -> MaskMapping | None:
+    exact = mapping_by_placeholder.get(token.word)
+    if exact is not None:
+        return exact
+
+    offset_match = _replacement_mapping_by_token_offset(token, replacement_mappings)
+    if offset_match is not None:
+        return offset_match
+
+    return _replacement_mapping_by_token_surface(token.word, replacement_mappings)
+
+
+def _replacement_mapping_by_token_offset(
+    token: CoreNLPToken,
+    replacement_mappings: list[MaskMapping],
+) -> MaskMapping | None:
+    token_start = token.character_offset_begin
+    token_end = token.character_offset_end
+    if token_start < 0 or token_end <= token_start:
+        return None
+
+    best: tuple[int, int, int, MaskMapping] | None = None
+    for index, mapping in enumerate(replacement_mappings):
+        if len(mapping.masked_char_span) != 2:
+            continue
+        mask_start, mask_end = mapping.masked_char_span
+        if mask_start < 0 or mask_end <= mask_start:
+            continue
+        overlap = min(token_end, mask_end) - max(token_start, mask_start)
+        if overlap <= 0:
+            continue
+        mask_len = mask_end - mask_start
+        token_len = token_end - token_start
+        # The token must cover at least part of the placeholder span. This
+        # handles CoreNLP tokenization like "PersonA's" while avoiding adjacent
+        # possessive or punctuation tokens that merely touch the placeholder.
+        score = (overlap, -abs(token_len - mask_len), -index)
+        if best is None or score > best[:3]:
+            best = (score[0], score[1], score[2], mapping)
+    return best[3] if best is not None else None
+
+
+def _replacement_mapping_by_token_surface(
+    token_word: str,
+    replacement_mappings: list[MaskMapping],
+) -> MaskMapping | None:
+    stripped = token_word.strip()
+    for mapping in replacement_mappings:
+        placeholder = mapping.placeholder
+        if stripped == placeholder:
+            return mapping
+        if stripped.startswith(placeholder):
+            suffix = stripped[len(placeholder) :]
+            if suffix in {"'s", "’s"} or re.fullmatch(r"[\W_]+", suffix):
+                return mapping
+    return None
 
 
 def _span_payload_to_list(value: Any) -> list[int]:

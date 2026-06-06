@@ -182,59 +182,102 @@ IMPLICIT_VALUE_SLOT_SURFACES = IMPLICIT_COMPARISON_ATTRIBUTE_SURFACES | {
     "release_date",
 }
 
-def extract_entity_start_nodes(
+def build_entity_start_nodes_from_explicit_entities(
     dependency_graph: nx.Graph,
     restored_graph_node_candidates: list[RestoredGraphNodeCandidate],
     replacement: MaskReplacement,
 ) -> list[EntityStartNode]:
-    """Deterministically find known entity start nodes for entity-origin paths."""
+    """Map Step 2/3 explicit entity placeholders to dependency graph start nodes."""
 
-    by_node_id = {str(candidate.node_id): candidate for candidate in restored_graph_node_candidates}
     by_placeholder = {
         str(candidate.placeholder or candidate.graph_text): candidate
         for candidate in restored_graph_node_candidates
         if candidate.placeholder or candidate.graph_text
     }
     starts: list[EntityStartNode] = []
-    seen_keys: set[str] = set()
+    seen_placeholders: set[str] = set()
+    missing_placeholders: list[str] = []
 
-    for mapping in replacement.mask_mappings:
-        if not _mask_mapping_is_entity(mapping.kind_hint, mapping.semantic_type_hint):
+    mappings = sorted(
+        replacement.mask_mappings,
+        key=lambda item: (
+            item.original_char_span[0] if item.original_char_span else 10**9,
+            item.masked_char_span[0] if item.masked_char_span else 10**9,
+            item.placeholder,
+        ),
+    )
+    for mapping in mappings:
+        if str(mapping.kind_hint or "").strip().lower() != "entity":
             continue
+        if mapping.placeholder in seen_placeholders:
+            continue
+        seen_placeholders.add(mapping.placeholder)
         candidate = by_placeholder.get(mapping.placeholder)
         if candidate is None:
+            candidate = _candidate_from_graph_placeholder(dependency_graph, mapping.placeholder)
+        if candidate is None or str(candidate.node_id) not in {str(node_id) for node_id in dependency_graph.nodes}:
+            missing_placeholders.append(mapping.placeholder)
             continue
-        _append_entity_start(starts, seen_keys, candidate, dependency_graph)
-
-    for candidate in restored_graph_node_candidates:
-        if not _candidate_is_entity_start(candidate):
-            continue
-        _append_entity_start(starts, seen_keys, candidate, dependency_graph)
-
-    if not starts:
-        for node_id, attrs in dependency_graph.nodes(data=True):
-            candidate = by_node_id.get(str(node_id))
-            if candidate is not None and _candidate_is_excluded(candidate):
-                continue
-            text = str(attrs.get("text") or attrs.get("word") or node_id).strip()
-            pos = str(attrs.get("pos") or "").upper()
-            if not _fallback_surface_is_entity(text, pos):
-                continue
-            starts.append(
-                EntityStartNode(
-                    entity_id=f"e{len(starts) + 1}",
-                    text=text,
-                    graph_node_ids=[str(node_id)],
-                    token_ids=_token_ids_from_node_ids([str(node_id)]),
-                    kind_hint="entity",
-                    semantic_type_hint="Entity",
-                )
+        node_id = str(candidate.node_id)
+        token_ids = list(candidate.source_token_indices or [candidate.token_index])
+        starts.append(
+            EntityStartNode(
+                entity_id=f"e{len(starts) + 1}",
+                text=mapping.original_text or candidate.text or candidate.display_text,
+                graph_node_ids=[node_id],
+                token_ids=[int(item) for item in token_ids if item is not None],
+                kind_hint="entity",
+                semantic_type_hint=mapping.semantic_type_hint or candidate.semantic_type_hint,
             )
+        )
 
-    starts.sort(key=lambda item: _entity_sort_key(item, dependency_graph))
+    if missing_placeholders:
+        raise ValueError(
+            "Explicit entity placeholder(s) were not found in the dependency graph: "
+            + ", ".join(missing_placeholders)
+        )
+
     for index, start in enumerate(starts, start=1):
         start.entity_id = f"e{index}"
     return starts
+
+
+def extract_entity_start_nodes(
+    dependency_graph: nx.Graph,
+    restored_graph_node_candidates: list[RestoredGraphNodeCandidate],
+    replacement: MaskReplacement,
+) -> list[EntityStartNode]:
+    """Legacy wrapper; Step 6 no longer re-detects entities or uses POS fallback."""
+
+    return build_entity_start_nodes_from_explicit_entities(
+        dependency_graph=dependency_graph,
+        restored_graph_node_candidates=restored_graph_node_candidates,
+        replacement=replacement,
+    )
+
+
+def _candidate_from_graph_placeholder(
+    dependency_graph: nx.Graph,
+    placeholder: str,
+) -> RestoredGraphNodeCandidate | None:
+    for node_id, attrs in dependency_graph.nodes(data=True):
+        text = str(attrs.get("word") or attrs.get("text") or "").strip()
+        if text != placeholder:
+            continue
+        token_index = int(attrs.get("order") or node_id)
+        return RestoredGraphNodeCandidate(
+            node_id=str(node_id),
+            token_index=token_index,
+            graph_text=placeholder,
+            placeholder=placeholder,
+            restored_text=placeholder,
+            display_text=placeholder,
+            is_mask_placeholder=True,
+            kind_hint="entity_candidate",
+            source_token_indices=[token_index],
+            text=placeholder,
+        )
+    return None
 
 
 def enumerate_entity_origin_paths(
