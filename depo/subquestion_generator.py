@@ -556,6 +556,17 @@ def _fallback_plan_edge_question(
     known = _known_description(plan_step, variable_descriptions)
     ask = plan_step.ask or "value"
     relation = plan_step.relation_hint.lower()
+    normalized_ask = ask.strip().lower().replace("_", " ")
+    if any(token in normalized_ask for token in ("reason", "cause")):
+        if "die" in relation or "death" in relation:
+            return f"Why did {known} die?"
+        return f"Why is {known} associated with this {ask}?"
+    if any(token in normalized_ask for token in ("death date", "date of death")) or "death_date" in ask:
+        return f"When did {known} die?"
+    if any(token in normalized_ask for token in ("birth date", "date of birth")) or "birth_date" in ask:
+        return f"When was {known} born?"
+    if "birthplace" in normalized_ask or "place of birth" in normalized_ask:
+        return f"Where was {known} born?"
     if _is_person_answer_label(ask):
         return f"Who is the {ask} of {known}?"
     if relation.startswith(("develop", "create", "invent", "found", "write", "direct")):

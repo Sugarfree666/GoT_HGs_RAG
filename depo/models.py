@@ -412,6 +412,66 @@ class SelectedEntityPath:
 
 
 @dataclass
+class ScoredEntityPath:
+    entity_id: str
+    path_id: str
+    score: float
+    valid: bool = True
+    terminal_hint: str | None = None
+    semantic_chain_hint: list[str] = field(default_factory=list)
+    covered_cues: list[str] = field(default_factory=list)
+    missing_cues: list[str] = field(default_factory=list)
+    fatal_errors: list[str] = field(default_factory=list)
+    reason: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class PathSetCandidate:
+    path_set_id: str
+    path_ids_by_entity: dict[str, str]
+    mean_path_score: float = 0.0
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class CandidateSemanticAST:
+    candidate_id: str
+    path_set_id: str
+    path_ids_by_entity: dict[str, str]
+    semantic_ast: "SemanticASTResult | None" = None
+    raw_payload: dict[str, Any] = field(default_factory=dict)
+    parse_error: str | None = None
+    generation_error: str | None = None
+    path_score_summary: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class BestASTReview:
+    candidate_id: str
+    path_set_id: str
+    score: float
+    valid_for_decomposition: bool = True
+    covers_original_question: bool = True
+    answer_intent_compatible: bool = True
+    branch_complete: bool = True
+    atomic_questions_would_be_executable: bool = True
+    has_final_operator_question: bool = False
+    fatal_errors: list[str] = field(default_factory=list)
+    reason: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
 class ASTSkeleton:
     """Program-built semantic AST skeleton derived only from selected paths."""
 

@@ -1,0 +1,1167 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 1,
+  "qid": null,
+  "question": "When did Lothair Ii's mother die?",
+  "raw_question_item": {
+    "question": "When did Lothair Ii's mother die?",
+    "answer": "20 March 851"
+  },
+  "gold_answer": "20 March 851",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "When did Lothair Ii's mother die?",
+      "normalized_question": "When did Lothair II's mother die?",
+      "changed": false,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "When did Lothair II's mother die?",
+        "changed": false,
+        "rewrite_type": "identity",
+        "added_type_variables": [],
+        "reason": "The original question is grammatically correct and does not present any syntactic risks for dependency parsing."
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "Lothair II's",
+          "start_char": 9,
+          "end_char": 21,
+          "kind_hint": "entity",
+          "semantic_type_hint": "LothairIIS",
+          "reason": "continuous multi-word named entity"
+        }
+      ],
+      "warnings": []
+    },
+    "3_selective_masked_question": "When did SomeEntityA mother die?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "When",
+          "character_offset_begin": 0,
+          "character_offset_end": 4,
+          "lemma": "when",
+          "pos": "WRB"
+        },
+        {
+          "index": 2,
+          "word": "did",
+          "character_offset_begin": 5,
+          "character_offset_end": 8,
+          "lemma": "do",
+          "pos": "VBD"
+        },
+        {
+          "index": 3,
+          "word": "SomeEntityA",
+          "character_offset_begin": 9,
+          "character_offset_end": 20,
+          "lemma": "SomeEntityA",
+          "pos": "NNP"
+        },
+        {
+          "index": 4,
+          "word": "mother",
+          "character_offset_begin": 21,
+          "character_offset_end": 27,
+          "lemma": "mother",
+          "pos": "NN"
+        },
+        {
+          "index": 5,
+          "word": "die",
+          "character_offset_begin": 28,
+          "character_offset_end": 31,
+          "lemma": "die",
+          "pos": "VB"
+        },
+        {
+          "index": 6,
+          "word": "?",
+          "character_offset_begin": 31,
+          "character_offset_end": 32,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "die",
+          "relation": "advmod",
+          "target": "When",
+          "source_index": 5,
+          "target_index": 1
+        },
+        {
+          "source": "die",
+          "relation": "aux",
+          "target": "did",
+          "source_index": 5,
+          "target_index": 2
+        },
+        {
+          "source": "mother",
+          "relation": "compound",
+          "target": "SomeEntityA",
+          "source_index": 4,
+          "target_index": 3
+        },
+        {
+          "source": "die",
+          "relation": "nsubj",
+          "target": "mother",
+          "source_index": 5,
+          "target_index": 4
+        },
+        {
+          "source": "die",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 5,
+          "target_index": 6
+        }
+      ],
+      "edge_display": [
+        "die[5] --advmod--> When[1]",
+        "die[5] --aux--> did[2]",
+        "mother[4] --compound--> SomeEntityA[3]",
+        "die[5] --nsubj--> mother[4]",
+        "die[5] --punct--> ?[6]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "When",
+          "graph_text": "When",
+          "text": "When",
+          "label": "When[1]",
+          "order": 1,
+          "pos": "WRB",
+          "lemma": "when",
+          "character_offset_begin": 0,
+          "character_offset_end": 4
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "did",
+          "graph_text": "did",
+          "text": "did",
+          "label": "did[2]",
+          "order": 2,
+          "pos": "VBD",
+          "lemma": "do",
+          "character_offset_begin": 5,
+          "character_offset_end": 8
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "SomeEntityA",
+          "graph_text": "SomeEntityA",
+          "text": "Lothair II's",
+          "label": "Lothair II's[3]",
+          "order": 3,
+          "pos": "NNP",
+          "lemma": "SomeEntityA",
+          "character_offset_begin": 9,
+          "character_offset_end": 20
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "mother",
+          "graph_text": "mother",
+          "text": "mother",
+          "label": "mother[4]",
+          "order": 4,
+          "pos": "NN",
+          "lemma": "mother",
+          "character_offset_begin": 21,
+          "character_offset_end": 27
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "die",
+          "graph_text": "die",
+          "text": "die",
+          "label": "die[5]",
+          "order": 5,
+          "pos": "VB",
+          "lemma": "die",
+          "character_offset_begin": 28,
+          "character_offset_end": 31
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[6]",
+          "order": 6,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 31,
+          "character_offset_end": 32
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "5",
+          "source_text": "When",
+          "target_text": "die",
+          "relation": "advmod",
+          "relations": [
+            "advmod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "5",
+              "dependent": "1",
+              "governor_text": "die",
+              "dependent_text": "When",
+              "governor_graph_text": "die",
+              "dependent_graph_text": "When",
+              "governor_index": 5,
+              "dependent_index": 1,
+              "dependency_label": "advmod"
+            }
+          ],
+          "original_governor": "5",
+          "original_dependent": "1",
+          "dependency_label": "advmod",
+          "token_text": {
+            "5": "die",
+            "1": "When"
+          },
+          "token_index": {
+            "5": 5,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "5",
+          "source_text": "did",
+          "target_text": "die",
+          "relation": "aux",
+          "relations": [
+            "aux"
+          ],
+          "directed_edges": [
+            {
+              "governor": "5",
+              "dependent": "2",
+              "governor_text": "die",
+              "dependent_text": "did",
+              "governor_graph_text": "die",
+              "dependent_graph_text": "did",
+              "governor_index": 5,
+              "dependent_index": 2,
+              "dependency_label": "aux"
+            }
+          ],
+          "original_governor": "5",
+          "original_dependent": "2",
+          "dependency_label": "aux",
+          "token_text": {
+            "5": "die",
+            "2": "did"
+          },
+          "token_index": {
+            "5": 5,
+            "2": 2
+          }
+        },
+        {
+          "source": "3",
+          "target": "4",
+          "source_text": "Lothair II's",
+          "target_text": "mother",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "3",
+              "governor_text": "mother",
+              "dependent_text": "Lothair II's",
+              "governor_graph_text": "mother",
+              "dependent_graph_text": "SomeEntityA",
+              "governor_index": 4,
+              "dependent_index": 3,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "3",
+          "dependency_label": "compound",
+          "token_text": {
+            "4": "mother",
+            "3": "Lothair II's"
+          },
+          "token_index": {
+            "4": 4,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "5",
+          "source_text": "mother",
+          "target_text": "die",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "5",
+              "dependent": "4",
+              "governor_text": "die",
+              "dependent_text": "mother",
+              "governor_graph_text": "die",
+              "dependent_graph_text": "mother",
+              "governor_index": 5,
+              "dependent_index": 4,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "5",
+          "original_dependent": "4",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "5": "die",
+            "4": "mother"
+          },
+          "token_index": {
+            "5": 5,
+            "4": 4
+          }
+        },
+        {
+          "source": "5",
+          "target": "6",
+          "source_text": "die",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "5",
+              "dependent": "6",
+              "governor_text": "die",
+              "dependent_text": "?",
+              "governor_graph_text": "die",
+              "dependent_graph_text": "?",
+              "governor_index": 5,
+              "dependent_index": 6,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "5",
+          "original_dependent": "6",
+          "dependency_label": "punct",
+          "token_text": {
+            "5": "die",
+            "6": "?"
+          },
+          "token_index": {
+            "5": 5,
+            "6": 6
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "Lothair II's",
+        "graph_node_ids": [
+          "3"
+        ],
+        "token_ids": [
+          3
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "LothairIIS"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "Lothair II's",
+        "nodes": [
+          "Lothair II's",
+          "mother",
+          "die",
+          "When"
+        ],
+        "node_ids": [
+          "3",
+          "4",
+          "5",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "4",
+            "source_text": "Lothair II's",
+            "target_text": "mother",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "mother",
+                "dependent_text": "Lothair II's",
+                "governor_graph_text": "mother",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "5",
+            "source_text": "mother",
+            "target_text": "die",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "4",
+                "governor_text": "die",
+                "dependent_text": "mother",
+                "governor_graph_text": "die",
+                "dependent_graph_text": "mother",
+                "governor_index": 5,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "1",
+            "source_text": "die",
+            "target_text": "When",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "1",
+                "governor_text": "die",
+                "dependent_text": "When",
+                "governor_graph_text": "die",
+                "dependent_graph_text": "When",
+                "governor_index": 5,
+                "dependent_index": 1,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "Lothair II's",
+        "nodes": [
+          "Lothair II's",
+          "mother",
+          "die"
+        ],
+        "node_ids": [
+          "3",
+          "4",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "4",
+            "source_text": "Lothair II's",
+            "target_text": "mother",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "mother",
+                "dependent_text": "Lothair II's",
+                "governor_graph_text": "mother",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "5",
+            "source_text": "mother",
+            "target_text": "die",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "4",
+                "governor_text": "die",
+                "dependent_text": "mother",
+                "governor_graph_text": "die",
+                "dependent_graph_text": "mother",
+                "governor_index": 5,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "Lothair II's",
+        "nodes": [
+          "Lothair II's",
+          "mother",
+          "die",
+          "did"
+        ],
+        "node_ids": [
+          "3",
+          "4",
+          "5",
+          "2"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "4",
+            "source_text": "Lothair II's",
+            "target_text": "mother",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "mother",
+                "dependent_text": "Lothair II's",
+                "governor_graph_text": "mother",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "5",
+            "source_text": "mother",
+            "target_text": "die",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "4",
+                "governor_text": "die",
+                "dependent_text": "mother",
+                "governor_graph_text": "die",
+                "dependent_graph_text": "mother",
+                "governor_index": 5,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "2",
+            "source_text": "die",
+            "target_text": "did",
+            "relations": [
+              "aux"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "2",
+                "governor_text": "die",
+                "dependent_text": "did",
+                "governor_graph_text": "die",
+                "dependent_graph_text": "did",
+                "governor_index": 5,
+                "dependent_index": 2,
+                "dependency_label": "aux"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "Lothair II's",
+        "nodes": [
+          "Lothair II's",
+          "mother",
+          "die",
+          "?"
+        ],
+        "node_ids": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "4",
+            "source_text": "Lothair II's",
+            "target_text": "mother",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "mother",
+                "dependent_text": "Lothair II's",
+                "governor_graph_text": "mother",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "5",
+            "source_text": "mother",
+            "target_text": "die",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "4",
+                "governor_text": "die",
+                "dependent_text": "mother",
+                "governor_graph_text": "die",
+                "dependent_graph_text": "mother",
+                "governor_index": 5,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "6",
+            "source_text": "die",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "6",
+                "governor_text": "die",
+                "dependent_text": "?",
+                "governor_graph_text": "die",
+                "dependent_graph_text": "?",
+                "governor_index": 5,
+                "dependent_index": 6,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "Lothair II's",
+        "nodes": [
+          "Lothair II's",
+          "mother"
+        ],
+        "node_ids": [
+          "3",
+          "4"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "4",
+            "source_text": "Lothair II's",
+            "target_text": "mother",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "mother",
+                "dependent_text": "Lothair II's",
+                "governor_graph_text": "mother",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_selected_entity_paths": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "reason": "This path follows the useful reasoning chain from Lothair II's mother to the action of dying, and includes the temporal question 'When'.",
+        "path": {
+          "path_id": "e1_p1",
+          "entity_id": "e1",
+          "entity_text": "Lothair II's",
+          "nodes": [
+            "Lothair II's",
+            "mother",
+            "die",
+            "When"
+          ],
+          "node_ids": [
+            "3",
+            "4",
+            "5",
+            "1"
+          ],
+          "length": 4,
+          "evidence": [
+            {
+              "source": "3",
+              "target": "4",
+              "source_text": "Lothair II's",
+              "target_text": "mother",
+              "relations": [
+                "compound"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "4",
+                  "dependent": "3",
+                  "governor_text": "mother",
+                  "dependent_text": "Lothair II's",
+                  "governor_graph_text": "mother",
+                  "dependent_graph_text": "SomeEntityA",
+                  "governor_index": 4,
+                  "dependent_index": 3,
+                  "dependency_label": "compound"
+                }
+              ]
+            },
+            {
+              "source": "4",
+              "target": "5",
+              "source_text": "mother",
+              "target_text": "die",
+              "relations": [
+                "nsubj"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "5",
+                  "dependent": "4",
+                  "governor_text": "die",
+                  "dependent_text": "mother",
+                  "governor_graph_text": "die",
+                  "dependent_graph_text": "mother",
+                  "governor_index": 5,
+                  "dependent_index": 4,
+                  "dependency_label": "nsubj"
+                }
+              ]
+            },
+            {
+              "source": "5",
+              "target": "1",
+              "source_text": "die",
+              "target_text": "When",
+              "relations": [
+                "advmod"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "5",
+                  "dependent": "1",
+                  "governor_text": "die",
+                  "dependent_text": "When",
+                  "governor_graph_text": "die",
+                  "dependent_graph_text": "When",
+                  "governor_index": 5,
+                  "dependent_index": 1,
+                  "dependency_label": "advmod"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "9a_answer_intent": {
+      "wh_cue": "when",
+      "answer_kind": "temporal",
+      "answer_slot_hint": "death_date",
+      "focus_predicate": "die"
+    },
+    "9b_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "lothair_ii",
+          "label": "Lothair II",
+          "kind": "entity",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "3"
+          ],
+          "source_token_indices": [
+            3
+          ],
+          "grounding_text": "Lothair II",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "mother",
+          "label": "mother",
+          "kind": "type_variable",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "4"
+          ],
+          "source_token_indices": [
+            4
+          ],
+          "grounding_text": "mother",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "death_date",
+          "label": "death_date",
+          "kind": "value_slot",
+          "semantic_type": "Date",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "5",
+            "1"
+          ],
+          "source_token_indices": [
+            5,
+            1
+          ],
+          "grounding_text": "death_date",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "lothair_ii",
+          "target": "mother",
+          "edge_type": "attribute",
+          "relation_hint": "mother of Lothair II",
+          "support_path": [
+            "e1_p1",
+            "3",
+            "4"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "mother",
+          "target": "death_date",
+          "edge_type": "attribute",
+          "relation_hint": "date of death of the mother",
+          "support_path": [
+            "e1_p1",
+            "4",
+            "5"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "answer_intent": {
+          "wh_cue": "when",
+          "answer_kind": "temporal",
+          "answer_slot_hint": "death_date",
+          "focus_predicate": "die"
+        },
+        "nodes": [
+          {
+            "id": "lothair_ii",
+            "label": "Lothair II",
+            "kind": "entity",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "3"
+            ]
+          },
+          {
+            "id": "mother",
+            "label": "mother",
+            "kind": "type_variable",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "4"
+            ]
+          },
+          {
+            "id": "death_date",
+            "label": "death_date",
+            "kind": "value_slot",
+            "semantic_type": "Date",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "5",
+              "1"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "lothair_ii",
+            "target": "mother",
+            "relation": "mother of Lothair II",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "3",
+              "4"
+            ]
+          },
+          {
+            "source": "mother",
+            "target": "death_date",
+            "relation": "date of death of the mother",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "4",
+              "5"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "death_date"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {
+        "wh_cue": "when",
+        "answer_kind": "temporal",
+        "answer_slot_hint": "death_date",
+        "focus_predicate": "die",
+        "focus_noun": null,
+        "requires_value_slot": true
+      },
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "10_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the mother of Lothair II?",
+          "type": "lookup",
+          "inputs": [
+            "Lothair II"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "lothair_ii",
+          "target_node": "mother",
+          "ast_edge": {
+            "source": "lothair_ii",
+            "target": "mother",
+            "edge_type": "attribute",
+            "relation_hint": "mother of Lothair II",
+            "support_path": [
+              "e1_p1",
+              "3",
+              "4"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "When did the mother of Lothair II die?",
+          "type": "lookup",
+          "inputs": [
+            "X1"
+          ],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": "mother",
+          "target_node": "death_date",
+          "ast_edge": {
+            "source": "mother",
+            "target": "death_date",
+            "edge_type": "attribute",
+            "relation_hint": "date of death of the mother",
+            "support_path": [
+              "e1_p1",
+              "4",
+              "5"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "10_subquestions": [
+      {
+        "index": 1,
+        "question": "Who is the mother of Lothair II?",
+        "answer_variable": "X1",
+        "source_node": "lothair_ii",
+        "target_node": "mother",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "lothair_ii",
+          "target": "mother",
+          "edge_type": "attribute",
+          "relation_hint": "mother of Lothair II",
+          "support_path": [
+            "e1_p1",
+            "3",
+            "4"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "When did the mother of Lothair II die?",
+        "answer_variable": "X2",
+        "source_node": "mother",
+        "target_node": "death_date",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "mother",
+          "target": "death_date",
+          "edge_type": "attribute",
+          "relation_hint": "date of death of the mother",
+          "support_path": [
+            "e1_p1",
+            "4",
+            "5"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

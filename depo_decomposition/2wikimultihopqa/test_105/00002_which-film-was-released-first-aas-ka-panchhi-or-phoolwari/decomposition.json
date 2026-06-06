@@ -1,0 +1,1221 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 2,
+  "qid": null,
+  "question": "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+  "raw_question_item": {
+    "question": "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+    "answer": "Phoolwari"
+  },
+  "gold_answer": "Phoolwari",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+      "normalized_question": "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+      "changed": false,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+        "changed": false,
+        "rewrite_type": "identity",
+        "added_type_variables": [],
+        "reason": "The original question is already grammatically correct and does not present any syntactic risks for dependency parsing."
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "was released first, Aas Ka Panchhi or Phoolwari?",
+          "start_char": 11,
+          "end_char": 59,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "reason": "complex title after explicit type head"
+        }
+      ],
+      "warnings": [
+        "Dropped invalid mask span text='Phoolwari'.",
+        "Dropped overlapping mask span text='Aas Ka Panchhi'."
+      ]
+    },
+    "3_selective_masked_question": "Which film MovieA",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "Which",
+          "character_offset_begin": 0,
+          "character_offset_end": 5,
+          "lemma": "which",
+          "pos": "WDT"
+        },
+        {
+          "index": 2,
+          "word": "film",
+          "character_offset_begin": 6,
+          "character_offset_end": 10,
+          "lemma": "film",
+          "pos": "NN"
+        },
+        {
+          "index": 3,
+          "word": "MovieA",
+          "character_offset_begin": 11,
+          "character_offset_end": 17,
+          "lemma": "moviea",
+          "pos": "NN"
+        }
+      ],
+      "edges": [
+        {
+          "source": "MovieA",
+          "relation": "det",
+          "target": "Which",
+          "source_index": 3,
+          "target_index": 1
+        },
+        {
+          "source": "MovieA",
+          "relation": "compound",
+          "target": "film",
+          "source_index": 3,
+          "target_index": 2
+        }
+      ],
+      "edge_display": [
+        "MovieA[3] --det--> Which[1]",
+        "MovieA[3] --compound--> film[2]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "Which",
+          "graph_text": "Which",
+          "text": "Which",
+          "label": "Which[1]",
+          "order": 1,
+          "pos": "WDT",
+          "lemma": "which",
+          "character_offset_begin": 0,
+          "character_offset_end": 5
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "film",
+          "graph_text": "film",
+          "text": "film",
+          "label": "film[2]",
+          "order": 2,
+          "pos": "NN",
+          "lemma": "film",
+          "character_offset_begin": 6,
+          "character_offset_end": 10
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "MovieA",
+          "graph_text": "MovieA",
+          "text": "was released first, Aas Ka Panchhi or Phoolwari?",
+          "label": "was released first, Aas Ka Panchhi or Phoolwari?[3]",
+          "order": 3,
+          "pos": "NN",
+          "lemma": "moviea",
+          "character_offset_begin": 11,
+          "character_offset_end": 17
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "3",
+          "source_text": "Which",
+          "target_text": "was released first, Aas Ka Panchhi or Phoolwari?",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "1",
+              "governor_text": "was released first, Aas Ka Panchhi or Phoolwari?",
+              "dependent_text": "Which",
+              "governor_graph_text": "MovieA",
+              "dependent_graph_text": "Which",
+              "governor_index": 3,
+              "dependent_index": 1,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "1",
+          "dependency_label": "det",
+          "token_text": {
+            "3": "was released first, Aas Ka Panchhi or Phoolwari?",
+            "1": "Which"
+          },
+          "token_index": {
+            "3": 3,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "3",
+          "source_text": "film",
+          "target_text": "was released first, Aas Ka Panchhi or Phoolwari?",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "2",
+              "governor_text": "was released first, Aas Ka Panchhi or Phoolwari?",
+              "dependent_text": "film",
+              "governor_graph_text": "MovieA",
+              "dependent_graph_text": "film",
+              "governor_index": 3,
+              "dependent_index": 2,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "2",
+          "dependency_label": "compound",
+          "token_text": {
+            "3": "was released first, Aas Ka Panchhi or Phoolwari?",
+            "2": "film"
+          },
+          "token_index": {
+            "3": 3,
+            "2": 2
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "was released first, Aas Ka Panchhi or Phoolwari?",
+        "graph_node_ids": [
+          "3"
+        ],
+        "token_ids": [
+          3
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Film"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "was released first, Aas Ka Panchhi or Phoolwari?",
+        "nodes": [
+          "was released first, Aas Ka Panchhi or Phoolwari?",
+          "film"
+        ],
+        "node_ids": [
+          "3",
+          "2"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "2",
+            "source_text": "was released first, Aas Ka Panchhi or Phoolwari?",
+            "target_text": "film",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "2",
+                "governor_text": "was released first, Aas Ka Panchhi or Phoolwari?",
+                "dependent_text": "film",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "film",
+                "governor_index": 3,
+                "dependent_index": 2,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "was released first, Aas Ka Panchhi or Phoolwari?",
+        "nodes": [
+          "was released first, Aas Ka Panchhi or Phoolwari?",
+          "Which"
+        ],
+        "node_ids": [
+          "3",
+          "1"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "1",
+            "source_text": "was released first, Aas Ka Panchhi or Phoolwari?",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "1",
+                "governor_text": "was released first, Aas Ka Panchhi or Phoolwari?",
+                "dependent_text": "Which",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "Which",
+                "governor_index": 3,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "film_release",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "film",
+          "release"
+        ],
+        "missing_cues": [
+          "first"
+        ],
+        "fatal_errors": [],
+        "reason": "The path connects the entity to 'film' but lacks coverage of the 'first' release aspect, which is crucial for the question intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p2",
+        "score": 50.0,
+        "valid": true,
+        "terminal_hint": "film_release",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "which"
+        ],
+        "missing_cues": [
+          "first",
+          "film"
+        ],
+        "fatal_errors": [],
+        "reason": "The path connects to 'Which' but does not adequately address the film or the 'first' release aspect, making it less relevant."
+      }
+    ],
+    "8_1_top_paths_by_entity": {
+      "e1": [
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p1",
+          "score": 70.0,
+          "valid": true,
+          "terminal_hint": "film_release",
+          "semantic_chain_hint": [
+            "film",
+            "release_date"
+          ],
+          "covered_cues": [
+            "film",
+            "release"
+          ],
+          "missing_cues": [
+            "first"
+          ],
+          "fatal_errors": [],
+          "reason": "The path connects the entity to 'film' but lacks coverage of the 'first' release aspect, which is crucial for the question intent."
+        },
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p2",
+          "score": 50.0,
+          "valid": true,
+          "terminal_hint": "film_release",
+          "semantic_chain_hint": [
+            "film",
+            "release_date"
+          ],
+          "covered_cues": [
+            "which"
+          ],
+          "missing_cues": [
+            "first",
+            "film"
+          ],
+          "fatal_errors": [],
+          "reason": "The path connects to 'Which' but does not adequately address the film or the 'first' release aspect, making it less relevant."
+        }
+      ]
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "mean_path_score": 70.0
+      },
+      {
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p2"
+        },
+        "mean_path_score": 50.0
+      }
+    ],
+    "9_candidate_semantic_asts": [
+      {
+        "candidate_id": "ast_ps1",
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "aas_ka_panchhi",
+              "label": "Aas Ka Panchhi",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "1"
+              ],
+              "source_token_indices": [
+                1
+              ],
+              "grounding_text": "Aas Ka Panchhi",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "phoolwari",
+              "label": "Phoolwari",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "2"
+              ],
+              "source_token_indices": [
+                2
+              ],
+              "grounding_text": "Phoolwari",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "release_date",
+              "label": "release_date",
+              "kind": "value_slot",
+              "semantic_type": "Date",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "3"
+              ],
+              "source_token_indices": [
+                3
+              ],
+              "grounding_text": "release_date",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "aas_ka_panchhi",
+              "target": "release_date",
+              "edge_type": "attribute",
+              "relation_hint": "release date of Aas Ka Panchhi",
+              "support_path": [
+                "e1_p1",
+                "1",
+                "3"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "phoolwari",
+              "target": "release_date",
+              "edge_type": "attribute",
+              "relation_hint": "release date of Phoolwari",
+              "support_path": [
+                "e1_p1",
+                "2",
+                "3"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "aas_ka_panchhi",
+                "label": "Aas Ka Panchhi",
+                "kind": "entity",
+                "semantic_type": "Film",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "1"
+                ]
+              },
+              {
+                "id": "phoolwari",
+                "label": "Phoolwari",
+                "kind": "entity",
+                "semantic_type": "Film",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "2"
+                ]
+              },
+              {
+                "id": "release_date",
+                "label": "release_date",
+                "kind": "value_slot",
+                "semantic_type": "Date",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "3"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "aas_ka_panchhi",
+                "target": "release_date",
+                "relation": "release date of Aas Ka Panchhi",
+                "support_path_id": "e1_p1",
+                "support_node_ids": [
+                  "1",
+                  "3"
+                ]
+              },
+              {
+                "source": "phoolwari",
+                "target": "release_date",
+                "relation": "release date of Phoolwari",
+                "support_path_id": "e1_p1",
+                "support_node_ids": [
+                  "2",
+                  "3"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "release_date"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "aas_ka_panchhi",
+              "label": "Aas Ka Panchhi",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "1"
+              ]
+            },
+            {
+              "id": "phoolwari",
+              "label": "Phoolwari",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "2"
+              ]
+            },
+            {
+              "id": "release_date",
+              "label": "release_date",
+              "kind": "value_slot",
+              "semantic_type": "Date",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "3"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "aas_ka_panchhi",
+              "target": "release_date",
+              "relation": "release date of Aas Ka Panchhi",
+              "support_path_id": "e1_p1",
+              "support_node_ids": [
+                "1",
+                "3"
+              ]
+            },
+            {
+              "source": "phoolwari",
+              "target": "release_date",
+              "relation": "release date of Phoolwari",
+              "support_path_id": "e1_p1",
+              "support_node_ids": [
+                "2",
+                "3"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "release_date"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 70.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p1",
+              "score": 70.0,
+              "valid": true,
+              "terminal_hint": "film_release",
+              "semantic_chain_hint": [
+                "film",
+                "release_date"
+              ],
+              "covered_cues": [
+                "film",
+                "release"
+              ],
+              "missing_cues": [
+                "first"
+              ],
+              "fatal_errors": [],
+              "reason": "The path connects the entity to 'film' but lacks coverage of the 'first' release aspect, which is crucial for the question intent."
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "ast_ps2",
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p2"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "aas_ka_panchhi",
+              "label": "Aas Ka Panchhi",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "3"
+              ],
+              "source_token_indices": [
+                3
+              ],
+              "grounding_text": "Aas Ka Panchhi",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "phoolwari",
+              "label": "Phoolwari",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "3"
+              ],
+              "source_token_indices": [
+                3
+              ],
+              "grounding_text": "Phoolwari",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "release_date",
+              "label": "release_date",
+              "kind": "value_slot",
+              "semantic_type": "Date",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "3"
+              ],
+              "source_token_indices": [
+                3
+              ],
+              "grounding_text": "release_date",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "aas_ka_panchhi",
+              "target": "release_date",
+              "edge_type": "attribute",
+              "relation_hint": "release date of Aas Ka Panchhi",
+              "support_path": [
+                "e1_p2",
+                "3"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "phoolwari",
+              "target": "release_date",
+              "edge_type": "attribute",
+              "relation_hint": "release date of Phoolwari",
+              "support_path": [
+                "e1_p2",
+                "3"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "aas_ka_panchhi",
+                "label": "Aas Ka Panchhi",
+                "kind": "entity",
+                "semantic_type": "Film",
+                "source_path_ids": [
+                  "e1_p2"
+                ],
+                "source_node_ids": [
+                  "3"
+                ]
+              },
+              {
+                "id": "phoolwari",
+                "label": "Phoolwari",
+                "kind": "entity",
+                "semantic_type": "Film",
+                "source_path_ids": [
+                  "e1_p2"
+                ],
+                "source_node_ids": [
+                  "3"
+                ]
+              },
+              {
+                "id": "release_date",
+                "label": "release_date",
+                "kind": "value_slot",
+                "semantic_type": "Date",
+                "source_path_ids": [
+                  "e1_p2"
+                ],
+                "source_node_ids": [
+                  "3"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "aas_ka_panchhi",
+                "target": "release_date",
+                "relation": "release date of Aas Ka Panchhi",
+                "support_path_id": "e1_p2",
+                "support_node_ids": [
+                  "3"
+                ]
+              },
+              {
+                "source": "phoolwari",
+                "target": "release_date",
+                "relation": "release date of Phoolwari",
+                "support_path_id": "e1_p2",
+                "support_node_ids": [
+                  "3"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "release_date"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "aas_ka_panchhi",
+              "label": "Aas Ka Panchhi",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source_path_ids": [
+                "e1_p2"
+              ],
+              "source_node_ids": [
+                "3"
+              ]
+            },
+            {
+              "id": "phoolwari",
+              "label": "Phoolwari",
+              "kind": "entity",
+              "semantic_type": "Film",
+              "source_path_ids": [
+                "e1_p2"
+              ],
+              "source_node_ids": [
+                "3"
+              ]
+            },
+            {
+              "id": "release_date",
+              "label": "release_date",
+              "kind": "value_slot",
+              "semantic_type": "Date",
+              "source_path_ids": [
+                "e1_p2"
+              ],
+              "source_node_ids": [
+                "3"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "aas_ka_panchhi",
+              "target": "release_date",
+              "relation": "release date of Aas Ka Panchhi",
+              "support_path_id": "e1_p2",
+              "support_node_ids": [
+                "3"
+              ]
+            },
+            {
+              "source": "phoolwari",
+              "target": "release_date",
+              "relation": "release date of Phoolwari",
+              "support_path_id": "e1_p2",
+              "support_node_ids": [
+                "3"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "release_date"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 50.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p2",
+              "score": 50.0,
+              "valid": true,
+              "terminal_hint": "film_release",
+              "semantic_chain_hint": [
+                "film",
+                "release_date"
+              ],
+              "covered_cues": [
+                "which"
+              ],
+              "missing_cues": [
+                "first",
+                "film"
+              ],
+              "fatal_errors": [],
+              "reason": "The path connects to 'Which' but does not adequately address the film or the 'first' release aspect, making it less relevant."
+            }
+          }
+        }
+      }
+    ],
+    "10_best_ast_selection": {
+      "ast_reviews": [
+        {
+          "candidate_id": "ast_ps1",
+          "path_set_id": "ps1",
+          "score": 0.96,
+          "valid_for_decomposition": true,
+          "covers_original_question": true,
+          "answer_intent_compatible": true,
+          "branch_complete": true,
+          "atomic_questions_would_be_executable": true,
+          "has_final_operator_question": false,
+          "fatal_errors": [],
+          "reason": "This AST effectively connects both films to their release dates, allowing for the decomposition into atomic questions about each film's release date without generating a final comparison question."
+        }
+      ],
+      "best_candidate_id": "ast_ps1",
+      "selected_candidate_id": "ast_ps1"
+    },
+    "10_selected_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "aas_ka_panchhi",
+          "label": "Aas Ka Panchhi",
+          "kind": "entity",
+          "semantic_type": "Film",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "1"
+          ],
+          "source_token_indices": [
+            1
+          ],
+          "grounding_text": "Aas Ka Panchhi",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "phoolwari",
+          "label": "Phoolwari",
+          "kind": "entity",
+          "semantic_type": "Film",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "2"
+          ],
+          "source_token_indices": [
+            2
+          ],
+          "grounding_text": "Phoolwari",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "release_date",
+          "label": "release_date",
+          "kind": "value_slot",
+          "semantic_type": "Date",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "3"
+          ],
+          "source_token_indices": [
+            3
+          ],
+          "grounding_text": "release_date",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "aas_ka_panchhi",
+          "target": "release_date",
+          "edge_type": "attribute",
+          "relation_hint": "release date of Aas Ka Panchhi",
+          "support_path": [
+            "e1_p1",
+            "1",
+            "3"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "phoolwari",
+          "target": "release_date",
+          "edge_type": "attribute",
+          "relation_hint": "release date of Phoolwari",
+          "support_path": [
+            "e1_p1",
+            "2",
+            "3"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "nodes": [
+          {
+            "id": "aas_ka_panchhi",
+            "label": "Aas Ka Panchhi",
+            "kind": "entity",
+            "semantic_type": "Film",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "1"
+            ]
+          },
+          {
+            "id": "phoolwari",
+            "label": "Phoolwari",
+            "kind": "entity",
+            "semantic_type": "Film",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "2"
+            ]
+          },
+          {
+            "id": "release_date",
+            "label": "release_date",
+            "kind": "value_slot",
+            "semantic_type": "Date",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "3"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "aas_ka_panchhi",
+            "target": "release_date",
+            "relation": "release date of Aas Ka Panchhi",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "1",
+              "3"
+            ]
+          },
+          {
+            "source": "phoolwari",
+            "target": "release_date",
+            "relation": "release date of Phoolwari",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "2",
+              "3"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "release_date"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {},
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "11_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What is the release date of Aas Ka Panchhi?",
+          "type": "lookup",
+          "inputs": [
+            "Aas Ka Panchhi"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "aas_ka_panchhi",
+          "target_node": "release_date",
+          "ast_edge": {
+            "source": "aas_ka_panchhi",
+            "target": "release_date",
+            "edge_type": "attribute",
+            "relation_hint": "release date of Aas Ka Panchhi",
+            "support_path": [
+              "e1_p1",
+              "1",
+              "3"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "What is the release date of Phoolwari?",
+          "type": "lookup",
+          "inputs": [
+            "Phoolwari"
+          ],
+          "output": "X2",
+          "depends_on": [],
+          "source_node": "phoolwari",
+          "target_node": "release_date",
+          "ast_edge": {
+            "source": "phoolwari",
+            "target": "release_date",
+            "edge_type": "attribute",
+            "relation_hint": "release date of Phoolwari",
+            "support_path": [
+              "e1_p1",
+              "2",
+              "3"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "11_subquestions": [
+      {
+        "index": 1,
+        "question": "What is the release date of Aas Ka Panchhi?",
+        "answer_variable": "X1",
+        "source_node": "aas_ka_panchhi",
+        "target_node": "release_date",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "aas_ka_panchhi",
+          "target": "release_date",
+          "edge_type": "attribute",
+          "relation_hint": "release date of Aas Ka Panchhi",
+          "support_path": [
+            "e1_p1",
+            "1",
+            "3"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "What is the release date of Phoolwari?",
+        "answer_variable": "X2",
+        "source_node": "phoolwari",
+        "target_node": "release_date",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "phoolwari",
+          "target": "release_date",
+          "edge_type": "attribute",
+          "relation_hint": "release date of Phoolwari",
+          "support_path": [
+            "e1_p1",
+            "2",
+            "3"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

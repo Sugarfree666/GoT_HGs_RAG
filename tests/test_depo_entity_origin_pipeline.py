@@ -12,7 +12,11 @@ DEPO_ROOT = PROJECT_ROOT / "depo"
 if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
-from entity_path_pipeline import EntityPathSemanticParser  # noqa: E402
+from entity_path_pipeline import (  # noqa: E402
+    EntityPathSemanticParser,
+    build_path_set_candidates,
+    select_top_paths_by_entity,
+)
 from entity_path_projector import (  # noqa: E402
     enumerate_entity_origin_paths,
     extract_entity_start_nodes,
@@ -28,16 +32,24 @@ from models import (  # noqa: E402
     DependencyEdge,
     DependencyParse,
     EntityOriginPath,
+    EntityStartNode,
     MaskMapping,
     MaskReplacement,
     MaskSpanResult,
+    PathSetCandidate,
     QuestionRecord,
     RestoredGraphNodeCandidate,
+    ScoredEntityPath,
     SelectedEntityPath,
     SemanticNormalizationResult,
 )
 from path_projector import build_undirected_dependency_graph  # noqa: E402
-from prompts import CANDIDATE_NODES_SYSTEM, PROBLEM_FRAME_SYSTEM  # noqa: E402
+from prompts import (  # noqa: E402
+    BEST_AST_SELECTION_SYSTEM,
+    CANDIDATE_NODES_SYSTEM,
+    ENTITY_PATH_SCORING_SYSTEM,
+    PROBLEM_FRAME_SYSTEM,
+)
 from subquestion_generator import SubquestionGenerator  # noqa: E402
 
 
@@ -272,6 +284,173 @@ class EntityOriginPipelineTest(unittest.TestCase):
                 entity_origin_paths=paths,
             )
 
+    def test_path_scoring_keeps_top2_per_entity(self) -> None:
+        entity = EntityStartNode(entity_id="e1", text="Entity A", graph_node_ids=["1"])
+        paths = [
+            _entity_path("e1_p1", "e1", ["Entity A", "weak"]),
+            _entity_path("e1_p2", "e1", ["Entity A", "good"]),
+            _entity_path("e1_p3", "e1", ["Entity A", "best"]),
+            _entity_path("e1_p4", "e1", ["Entity A", "bad"]),
+        ]
+        llm = CandidateFlowLLM(
+            path_scores=[
+                {"entity_id": "e1", "path_id": "e1_p1", "score": 20, "valid": False},
+                {"entity_id": "e1", "path_id": "e1_p2", "score": 88, "valid": True},
+                {"entity_id": "e1", "path_id": "e1_p3", "score": 96, "valid": True},
+                {"entity_id": "e1", "path_id": "e1_p4", "score": 60, "valid": True},
+            ],
+            ast_payloads_by_path_set={},
+            best_candidate_id="",
+        )
+        parser = EntityPathSemanticParser(llm)
+        scored, _ = parser.score_entity_paths(
+            original_question="test?",
+            restored_question="test?",
+            entity_start_nodes=[entity],
+            entity_origin_paths=paths,
+        )
+        top = select_top_paths_by_entity(
+            scored_paths=scored,
+            entity_start_nodes=[entity],
+            entity_origin_paths=paths,
+            top_k=2,
+        )
+
+        self.assertEqual([item.path_id for item in top["e1"]], ["e1_p3", "e1_p2"])
+
+    def test_two_entity_top2_cartesian_path_sets(self) -> None:
+        top = {
+            "e1": [
+                ScoredEntityPath(entity_id="e1", path_id="e1_p1", score=95),
+                ScoredEntityPath(entity_id="e1", path_id="e1_p2", score=80),
+            ],
+            "e2": [
+                ScoredEntityPath(entity_id="e2", path_id="e2_p1", score=90),
+                ScoredEntityPath(entity_id="e2", path_id="e2_p2", score=70),
+            ],
+        }
+
+        path_sets = build_path_set_candidates(top_paths_by_entity=top)
+
+        self.assertEqual(
+            [(item.path_set_id, item.path_ids_by_entity) for item in path_sets],
+            [
+                ("ps1", {"e1": "e1_p1", "e2": "e2_p1"}),
+                ("ps2", {"e1": "e1_p1", "e2": "e2_p2"}),
+                ("ps3", {"e1": "e1_p2", "e2": "e2_p1"}),
+                ("ps4", {"e1": "e1_p2", "e2": "e2_p2"}),
+            ],
+        )
+
+    def test_candidate_asts_are_not_prefiltered_before_best_ast_judge(self) -> None:
+        paths = [
+            _entity_path("e1_p1", "e1", ["Lothair II", "mother", "die", "When"]),
+            _entity_path("e1_p2", "e1", ["Lothair II", "mother"]),
+        ]
+        path_sets = [
+            PathSetCandidate(path_set_id="ps1", path_ids_by_entity={"e1": "e1_p1"}, mean_path_score=95),
+            PathSetCandidate(path_set_id="ps2", path_ids_by_entity={"e1": "e1_p2"}, mean_path_score=60),
+        ]
+        scored = [
+            ScoredEntityPath(entity_id="e1", path_id="e1_p1", score=95),
+            ScoredEntityPath(entity_id="e1", path_id="e1_p2", score=60),
+        ]
+        llm = CandidateFlowLLM(
+            path_scores=[],
+            ast_payloads_by_path_set={
+                "ps1": {
+                    "nodes": [
+                        {"id": "lothair_ii_mother", "label": "Lothair II's mother", "kind": "entity", "source_path_ids": ["e1_p1"], "source_node_ids": ["1", "2"]},
+                        {"id": "die", "label": "die", "kind": "type_variable", "source_path_ids": ["e1_p1"], "source_node_ids": ["3"]},
+                    ],
+                    "edges": [
+                        {"source": "lothair_ii_mother", "target": "die", "relation": "subject of die", "support_path_id": "e1_p1", "support_node_ids": ["1", "2", "3"]},
+                    ],
+                    "branch_terminals": {"e1": "die"},
+                },
+                "ps2": {
+                    "nodes": [
+                        {"id": "lothair_ii", "label": "Lothair II", "kind": "entity", "source_path_ids": ["e1_p2"], "source_node_ids": ["1"]},
+                        {"id": "mother", "label": "mother", "kind": "type_variable", "source_path_ids": ["e1_p2"], "source_node_ids": ["2"]},
+                    ],
+                    "edges": [
+                        {"source": "lothair_ii", "target": "mother", "relation": "mother of Lothair II", "support_path_id": "e1_p2", "support_node_ids": ["1", "2"]},
+                    ],
+                    "branch_terminals": {"e1": "mother"},
+                },
+            },
+            best_candidate_id="ast_ps1",
+        )
+        parser = EntityPathSemanticParser(llm)
+
+        candidates = parser.build_candidate_semantic_asts(
+            original_question="When did Lothair II's mother die?",
+            restored_question="When did Lothair II's mother die?",
+            path_set_candidates=path_sets,
+            entity_origin_paths=paths,
+            scored_paths=scored,
+            undirected_graph_edges=[],
+        )
+        semantic_ast, _ = parser.select_best_candidate_ast(
+            original_question="When did Lothair II's mother die?",
+            restored_question="When did Lothair II's mother die?",
+            entity_start_nodes=[EntityStartNode(entity_id="e1", text="Lothair II", graph_node_ids=["1"])],
+            path_set_candidates=path_sets,
+            scored_paths=scored,
+            candidate_asts=candidates,
+        )
+
+        self.assertIsNotNone(candidates[0].semantic_ast)
+        self.assertIn("ast_ps1", llm.best_ast_prompt)
+        self.assertIn("ast_ps2", llm.best_ast_prompt)
+        self.assertEqual([(edge.source, edge.target) for edge in semantic_ast.edges], [("lothair_ii_mother", "die")])
+
+    def test_best_ast_selection_controls_final_dag(self) -> None:
+        paths = [
+            _entity_path("e1_p1", "e1", ["John Middleton Murry", "wife", "die", "Why"]),
+            _entity_path("e1_p2", "e1", ["John Middleton Murry", "wife", "die", "When"]),
+        ]
+        path_sets = [
+            PathSetCandidate(path_set_id="ps1", path_ids_by_entity={"e1": "e1_p1"}, mean_path_score=95),
+            PathSetCandidate(path_set_id="ps2", path_ids_by_entity={"e1": "e1_p2"}, mean_path_score=90),
+        ]
+        scored = [
+            ScoredEntityPath(entity_id="e1", path_id="e1_p1", score=95, terminal_hint="death_reason"),
+            ScoredEntityPath(entity_id="e1", path_id="e1_p2", score=90, terminal_hint="death_date"),
+        ]
+        llm = CandidateFlowLLM(
+            path_scores=[],
+            ast_payloads_by_path_set={
+                "ps1": _death_ast_payload("death_reason", "Reason", "reason why the wife died", "e1_p1"),
+                "ps2": _death_ast_payload("death_date", "Date", "date of death of the wife", "e1_p2"),
+            },
+            best_candidate_id="ast_ps1",
+        )
+        parser = EntityPathSemanticParser(llm)
+
+        candidates = parser.build_candidate_semantic_asts(
+            original_question="Why did John Middleton Murry's wife die?",
+            restored_question="Why did John Middleton Murry's wife die?",
+            path_set_candidates=path_sets,
+            entity_origin_paths=paths,
+            scored_paths=scored,
+            undirected_graph_edges=[],
+        )
+        semantic_ast, _ = parser.select_best_candidate_ast(
+            original_question="Why did John Middleton Murry's wife die?",
+            restored_question="Why did John Middleton Murry's wife die?",
+            entity_start_nodes=[EntityStartNode(entity_id="e1", text="John Middleton Murry", graph_node_ids=["1"])],
+            path_set_candidates=path_sets,
+            scored_paths=scored,
+            candidate_asts=candidates,
+        )
+        dag = SubquestionGenerator(llm).generate_dag("Why did John Middleton Murry's wife die?", semantic_ast)
+
+        self.assertIn("death_reason", [node.id for node in semantic_ast.nodes])
+        self.assertNotIn("death_date", [node.id for node in semantic_ast.nodes])
+        self.assertTrue(any(node.question.startswith("Why did") for node in dag.nodes))
+        self.assertFalse(any(node.question.startswith("When did") for node in dag.nodes))
+
     def test_no_candidate_node_llm_calls(self) -> None:
         question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
         dependency_parse = _dependency_parse(
@@ -295,7 +474,9 @@ class EntityOriginPipelineTest(unittest.TestCase):
         )
 
         self.assertEqual([entity.text for entity in result["entity_start_nodes"]], ["AlphaGo"])
-        self.assertTrue(result["selected_entity_paths"])
+        self.assertTrue(result["scored_entity_paths"])
+        self.assertTrue(result["path_set_candidates"])
+        self.assertTrue(result["candidate_asts"])
         self.assertIsNone(result["problem_frame"])
         self.assertEqual(result["candidate_nodes"], [])
 
@@ -343,7 +524,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual(by_id["age_r1"].source_graph_nodes, ["3"])
         self.assertEqual(by_id["age_r2"].source_graph_nodes, ["6"])
 
-    def test_selected_path_semantic_transduction_retries_lothair_bad_ast(self) -> None:
+    def test_selected_path_semantic_transduction_accepts_llm_ast_without_validator(self) -> None:
         selected_paths = [
             EntityOriginPath(
                 path_id="e1_p1",
@@ -355,33 +536,20 @@ class EntityOriginPipelineTest(unittest.TestCase):
             )
         ]
         selected = [SelectedEntityPath(entity_id="e1", path_id="e1_p1")]
-        llm = RetryTransductionLLM(
-            payloads=[
-                {
-                    "nodes": [
-                        {"id": "lothair_ii_mother", "label": "Lothair II's mother", "kind": "entity", "source_path_ids": ["e1_p1"], "source_node_ids": ["1", "2"]},
-                        {"id": "die", "label": "die", "kind": "type_variable", "source_path_ids": ["e1_p1"], "source_node_ids": ["3"]},
-                        {"id": "when", "label": "When", "kind": "type_variable", "source_path_ids": ["e1_p1"], "source_node_ids": ["4"]},
-                    ],
-                    "edges": [
-                        {"source": "lothair_ii_mother", "target": "die", "relation": "subject of die", "support_path_id": "e1_p1", "support_node_ids": ["1", "2", "3"]},
-                        {"source": "when", "target": "die", "relation": "time of die", "support_path_id": "e1_p1", "support_node_ids": ["4", "3"]},
-                    ],
-                    "branch_terminals": {"e1": "when"},
-                },
-                {
-                    "nodes": [
-                        {"id": "lothair_ii", "label": "Lothair II", "kind": "entity", "semantic_type": "Person", "source_path_ids": ["e1_p1"], "source_node_ids": ["1"]},
-                        {"id": "mother", "label": "mother", "kind": "type_variable", "semantic_type": "Person", "source_path_ids": ["e1_p1"], "source_node_ids": ["2"]},
-                        {"id": "death_date", "label": "death_date", "kind": "type_variable", "semantic_type": "Date", "source_path_ids": ["e1_p1"]},
-                    ],
-                    "edges": [
-                        {"source": "lothair_ii", "target": "mother", "relation": "mother of Lothair II", "support_path_id": "e1_p1", "support_node_ids": ["1", "2"]},
-                        {"source": "mother", "target": "death_date", "relation": "date of death of the mother", "support_path_id": "e1_p1", "support_node_ids": ["2", "3", "4"]},
-                    ],
-                    "branch_terminals": {"e1": "death_date"},
-                },
-            ]
+        llm = FakeEntityPathLLM(
+            desired_paths={"e1": ["Lothair II's", "mother", "die", "When"]},
+            ast_payload={
+                "nodes": [
+                    {"id": "lothair_ii_mother", "label": "Lothair II's mother", "kind": "entity", "source_path_ids": ["e1_p1"], "source_node_ids": ["1", "2"]},
+                    {"id": "die", "label": "die", "kind": "type_variable", "source_path_ids": ["e1_p1"], "source_node_ids": ["3"]},
+                    {"id": "when", "label": "When", "kind": "type_variable", "source_path_ids": ["e1_p1"], "source_node_ids": ["4"]},
+                ],
+                "edges": [
+                    {"source": "lothair_ii_mother", "target": "die", "relation": "subject of die", "support_path_id": "e1_p1", "support_node_ids": ["1", "2", "3"]},
+                    {"source": "when", "target": "die", "relation": "time of die", "support_path_id": "e1_p1", "support_node_ids": ["4", "3"]},
+                ],
+                "branch_terminals": {"e1": "when"},
+            },
         )
         parser = EntityPathSemanticParser(llm)
 
@@ -393,15 +561,13 @@ class EntityOriginPipelineTest(unittest.TestCase):
             undirected_graph_edges=[],
         )
 
-        self.assertEqual(llm.transduction_calls, 2)
         self.assertEqual(
             [(edge.source, edge.target, edge.relation_hint) for edge in semantic_ast.edges],
             [
-                ("lothair_ii", "mother", "mother of Lothair II"),
-                ("mother", "death_date", "date of death of the mother"),
+                ("lothair_ii_mother", "die", "subject of die"),
+                ("when", "die", "time of die"),
             ],
         )
-        self.assertEqual(semantic_ast.node_by_id()["death_date"].source_graph_nodes, ["3", "4"])
 
     def test_merged_parallel_ast_is_localized_per_selected_path(self) -> None:
         selected_paths = [
@@ -462,28 +628,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
         )
 
 
-class RetryTransductionLLM:
-    def __init__(self, payloads: list[dict[str, Any]]) -> None:
-        self.payloads = payloads
-        self.transduction_calls = 0
-
-    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
-        if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
-            raise AssertionError("legacy candidate-node/problem-frame prompt was called")
-        if "Selected Path Semantic Transduction" not in system_prompt:
-            raise AssertionError(f"Unexpected prompt: {system_prompt}")
-        if self.transduction_calls > 0:
-            self.assert_feedback_present(prompt)
-        payload = self.payloads[min(self.transduction_calls, len(self.payloads) - 1)]
-        self.transduction_calls += 1
-        return json.loads(json.dumps(payload))
-
-    @staticmethod
-    def assert_feedback_present(prompt: str) -> None:
-        if "Previous AST failed validation:" not in prompt:
-            raise AssertionError("retry prompt did not include validation feedback")
-
-
 class FakeEntityPathLLM:
     def __init__(self, desired_paths: dict[str, list[str]], ast_payload: dict[str, Any]) -> None:
         self.desired_paths = desired_paths
@@ -516,10 +660,70 @@ class FakeEntityPathLLM:
         raise AssertionError(f"Unexpected prompt: {system_prompt}")
 
 
+class CandidateFlowLLM:
+    def __init__(
+        self,
+        *,
+        path_scores: list[dict[str, Any]],
+        ast_payloads_by_path_set: dict[str, dict[str, Any]],
+        best_candidate_id: str,
+    ) -> None:
+        self.path_scores = path_scores
+        self.ast_payloads_by_path_set = ast_payloads_by_path_set
+        self.best_candidate_id = best_candidate_id
+        self.best_ast_prompt = ""
+
+    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
+        if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
+            raise AssertionError("legacy candidate-node/problem-frame prompt was called")
+        if system_prompt == ENTITY_PATH_SCORING_SYSTEM or "dependency-path judge" in system_prompt:
+            return {"path_scores": json.loads(json.dumps(self.path_scores))}
+        if "Selected Path Semantic Transduction" in system_prompt or "Selected Path Semantic Transduction" in prompt:
+            selected_paths = _json_after_marker(prompt, "Selected entity-origin dependency paths:")
+            path_set_id = selected_paths[0].get("path_set_id", "ps1") if selected_paths else "ps1"
+            return json.loads(json.dumps(self.ast_payloads_by_path_set[path_set_id]))
+        if system_prompt == BEST_AST_SELECTION_SYSTEM or "candidate Semantic ASTs" in system_prompt:
+            self.best_ast_prompt = prompt
+            candidates = _json_after_marker(prompt, "Candidate ASTs:")
+            reviews = [
+                {
+                    "candidate_id": candidate["candidate_id"],
+                    "path_set_id": candidate["path_set_id"],
+                    "score": 0.99 if candidate["candidate_id"] == self.best_candidate_id else 0.5,
+                    "valid_for_decomposition": True,
+                    "covers_original_question": True,
+                    "answer_intent_compatible": True,
+                    "branch_complete": True,
+                    "atomic_questions_would_be_executable": True,
+                    "has_final_operator_question": False,
+                    "fatal_errors": [],
+                    "reason": "test review",
+                }
+                for candidate in candidates
+            ]
+            return {"ast_reviews": reviews, "best_candidate_id": self.best_candidate_id}
+        raise AssertionError(f"Unexpected prompt: {system_prompt}")
+
+
 class NoCandidatePromptLLM:
     def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
         if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
             raise AssertionError("legacy candidate-node/problem-frame prompt was called")
+        if system_prompt == ENTITY_PATH_SCORING_SYSTEM or "dependency-path judge" in system_prompt:
+            paths_by_entity = _json_after_marker(prompt, "Entity-origin dependency paths grouped by entity:")
+            scores = []
+            for entity_id, paths in paths_by_entity.items():
+                for path in paths:
+                    scores.append(
+                        {
+                            "entity_id": entity_id,
+                            "path_id": path["path_id"],
+                            "score": min(100, len(path["node_ids"]) * 20),
+                            "valid": True,
+                            "reason": "longer path score",
+                        }
+                    )
+            return {"path_scores": scores}
         if "entity-origin dependency-path pipeline" in system_prompt:
             paths_by_entity = _json_after_marker(prompt, "Entity-origin dependency paths:")
             selected = []
@@ -543,6 +747,25 @@ class NoCandidatePromptLLM:
                     {"source": "ceo", "target": "university", "relation": "university the CEO graduated from", "support_path_id": path_id, "support_node_ids": ["4", "6"]},
                 ],
                 "branch_terminals": {"e1": "university"},
+            }
+        if system_prompt == BEST_AST_SELECTION_SYSTEM or "candidate Semantic ASTs" in system_prompt:
+            return {
+                "ast_reviews": [
+                    {
+                        "candidate_id": "ast_ps1",
+                        "path_set_id": "ps1",
+                        "score": 0.9,
+                        "valid_for_decomposition": True,
+                        "covers_original_question": True,
+                        "answer_intent_compatible": True,
+                        "branch_complete": True,
+                        "atomic_questions_would_be_executable": True,
+                        "has_final_operator_question": False,
+                        "fatal_errors": [],
+                        "reason": "first candidate is sufficient",
+                    }
+                ],
+                "best_candidate_id": "ast_ps1",
             }
         return {"question": "test question?"}
 
@@ -574,6 +797,32 @@ class StaticSubquestionGenerator:
     def generate_dag(self, original_question: str, semantic_ast: Any) -> AtomicQuestionDAG:
         del original_question, semantic_ast
         return AtomicQuestionDAG()
+
+
+def _entity_path(path_id: str, entity_id: str, nodes: list[str]) -> EntityOriginPath:
+    return EntityOriginPath(
+        path_id=path_id,
+        entity_id=entity_id,
+        entity_text=nodes[0],
+        nodes=nodes,
+        node_ids=[str(index) for index in range(1, len(nodes) + 1)],
+        length=len(nodes),
+    )
+
+
+def _death_ast_payload(slot_id: str, semantic_type: str, relation: str, path_id: str) -> dict[str, Any]:
+    return {
+        "nodes": [
+            {"id": "john_middleton_murry", "label": "John Middleton Murry", "kind": "entity", "semantic_type": "Person", "source_path_ids": [path_id], "source_node_ids": ["1"]},
+            {"id": "wife", "label": "wife", "kind": "type_variable", "semantic_type": "Person", "source_path_ids": [path_id], "source_node_ids": ["2"]},
+            {"id": slot_id, "label": slot_id, "kind": "value_slot", "semantic_type": semantic_type, "source_path_ids": [path_id], "source_node_ids": ["3", "4"]},
+        ],
+        "edges": [
+            {"source": "john_middleton_murry", "target": "wife", "relation": "wife of John Middleton Murry", "support_path_id": path_id, "support_node_ids": ["1", "2"]},
+            {"source": "wife", "target": slot_id, "relation": relation, "support_path_id": path_id, "support_node_ids": ["2", "3", "4"]},
+        ],
+        "branch_terminals": {"e1": slot_id},
+    }
 
 
 def _dependency_parse(

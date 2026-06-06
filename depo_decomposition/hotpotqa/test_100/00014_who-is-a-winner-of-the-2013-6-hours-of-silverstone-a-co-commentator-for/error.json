@@ -1,0 +1,15 @@
+{
+  "status": "error",
+  "dataset": "hotpotqa",
+  "questions_file": "questions\\hotpotqa\\questions.json",
+  "index": 14,
+  "qid": null,
+  "question": "Who is a winner of the 2013 6 Hours of Silverstone a co-commentator for?",
+  "raw_question_item": {
+    "question": "Who is a winner of the 2013 6 Hours of Silverstone a co-commentator for?",
+    "answer": "BBC Formula One"
+  },
+  "gold_answer": "BBC Formula One",
+  "error_type": "ValueError",
+  "error": "LLM produced invalid selected-path semantic transduction after retry: Branch terminal 'person_or_entity' label 'person_or_entity' is incompatible with AnswerIntent(answer_kind='person_or_entity', answer_slot_hint=None)."
+}

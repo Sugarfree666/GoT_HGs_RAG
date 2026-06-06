@@ -1,0 +1,1250 @@
+{
+  "status": "ok",
+  "dataset": "hotpotqa",
+  "questions_file": "questions\\hotpotqa\\questions.json",
+  "index": 7,
+  "qid": null,
+  "question": "Which Walt Disney film was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+  "raw_question_item": {
+    "question": "Which Walt Disney film was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+    "answer": "The Apple Dumpling Gang"
+  },
+  "gold_answer": "The Apple Dumpling Gang",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "Which Walt Disney film was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+      "normalized_question": "Which Walt Disney film was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+      "changed": false,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "Which Walt Disney film was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+        "changed": false,
+        "rewrite_type": "identity",
+        "added_type_variables": [],
+        "reason": "The original question is grammatically correct and does not present any syntactic risks for dependency parsing."
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "Walt Disney",
+          "start_char": 6,
+          "end_char": 17,
+          "kind_hint": "entity",
+          "semantic_type_hint": "WaltDisney",
+          "reason": "continuous multi-word named entity"
+        },
+        {
+          "text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "start_char": 23,
+          "end_char": 102,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "reason": "complex title after explicit type head"
+        }
+      ],
+      "warnings": [
+        "Dropped overlapping mask span text='The Apple Dumpling Gang'.",
+        "Dropped overlapping mask span text='Something Wicked This Way Comes'."
+      ]
+    },
+    "3_selective_masked_question": "Which SomeEntityA film MovieA",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "Which",
+          "character_offset_begin": 0,
+          "character_offset_end": 5,
+          "lemma": "which",
+          "pos": "WDT"
+        },
+        {
+          "index": 2,
+          "word": "SomeEntityA",
+          "character_offset_begin": 6,
+          "character_offset_end": 17,
+          "lemma": "someentitya",
+          "pos": "NN"
+        },
+        {
+          "index": 3,
+          "word": "film",
+          "character_offset_begin": 18,
+          "character_offset_end": 22,
+          "lemma": "film",
+          "pos": "NN"
+        },
+        {
+          "index": 4,
+          "word": "MovieA",
+          "character_offset_begin": 23,
+          "character_offset_end": 29,
+          "lemma": "moviea",
+          "pos": "NN"
+        }
+      ],
+      "edges": [
+        {
+          "source": "MovieA",
+          "relation": "det",
+          "target": "Which",
+          "source_index": 4,
+          "target_index": 1
+        },
+        {
+          "source": "MovieA",
+          "relation": "compound",
+          "target": "SomeEntityA",
+          "source_index": 4,
+          "target_index": 2
+        },
+        {
+          "source": "MovieA",
+          "relation": "compound",
+          "target": "film",
+          "source_index": 4,
+          "target_index": 3
+        }
+      ],
+      "edge_display": [
+        "MovieA[4] --det--> Which[1]",
+        "MovieA[4] --compound--> SomeEntityA[2]",
+        "MovieA[4] --compound--> film[3]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "Which",
+          "graph_text": "Which",
+          "text": "Which",
+          "label": "Which[1]",
+          "order": 1,
+          "pos": "WDT",
+          "lemma": "which",
+          "character_offset_begin": 0,
+          "character_offset_end": 5
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "SomeEntityA",
+          "graph_text": "SomeEntityA",
+          "text": "Walt Disney",
+          "label": "Walt Disney[2]",
+          "order": 2,
+          "pos": "NN",
+          "lemma": "someentitya",
+          "character_offset_begin": 6,
+          "character_offset_end": 17
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "film",
+          "graph_text": "film",
+          "text": "film",
+          "label": "film[3]",
+          "order": 3,
+          "pos": "NN",
+          "lemma": "film",
+          "character_offset_begin": 18,
+          "character_offset_end": 22
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "MovieA",
+          "graph_text": "MovieA",
+          "text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "label": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?[4]",
+          "order": 4,
+          "pos": "NN",
+          "lemma": "moviea",
+          "character_offset_begin": 23,
+          "character_offset_end": 29
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "4",
+          "source_text": "Which",
+          "target_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "1",
+              "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+              "dependent_text": "Which",
+              "governor_graph_text": "MovieA",
+              "dependent_graph_text": "Which",
+              "governor_index": 4,
+              "dependent_index": 1,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "1",
+          "dependency_label": "det",
+          "token_text": {
+            "4": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "1": "Which"
+          },
+          "token_index": {
+            "4": 4,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "4",
+          "source_text": "Walt Disney",
+          "target_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "2",
+              "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+              "dependent_text": "Walt Disney",
+              "governor_graph_text": "MovieA",
+              "dependent_graph_text": "SomeEntityA",
+              "governor_index": 4,
+              "dependent_index": 2,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "2",
+          "dependency_label": "compound",
+          "token_text": {
+            "4": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "2": "Walt Disney"
+          },
+          "token_index": {
+            "4": 4,
+            "2": 2
+          }
+        },
+        {
+          "source": "3",
+          "target": "4",
+          "source_text": "film",
+          "target_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "3",
+              "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+              "dependent_text": "film",
+              "governor_graph_text": "MovieA",
+              "dependent_graph_text": "film",
+              "governor_index": 4,
+              "dependent_index": 3,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "3",
+          "dependency_label": "compound",
+          "token_text": {
+            "4": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "3": "film"
+          },
+          "token_index": {
+            "4": 4,
+            "3": 3
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "Walt Disney",
+        "graph_node_ids": [
+          "2"
+        ],
+        "token_ids": [
+          2
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "WaltDisney"
+      },
+      {
+        "entity_id": "e2",
+        "text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+        "graph_node_ids": [
+          "4"
+        ],
+        "token_ids": [
+          4
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Film"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "Walt Disney",
+        "nodes": [
+          "Walt Disney",
+          "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?"
+        ],
+        "node_ids": [
+          "2",
+          "4"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Walt Disney",
+            "target_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+                "dependent_text": "Walt Disney",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "Walt Disney",
+        "nodes": [
+          "Walt Disney",
+          "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "film"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "3"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Walt Disney",
+            "target_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+                "dependent_text": "Walt Disney",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "target_text": "film",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+                "dependent_text": "film",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "film",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "Walt Disney",
+        "nodes": [
+          "Walt Disney",
+          "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "Which"
+        ],
+        "node_ids": [
+          "2",
+          "4",
+          "1"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "2",
+            "target": "4",
+            "source_text": "Walt Disney",
+            "target_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+                "dependent_text": "Walt Disney",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "1",
+            "source_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "1",
+                "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+                "dependent_text": "Which",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "Which",
+                "governor_index": 4,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p1",
+        "entity_id": "e2",
+        "entity_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+        "nodes": [
+          "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "film"
+        ],
+        "node_ids": [
+          "4",
+          "3"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "target_text": "film",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+                "dependent_text": "film",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "film",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p2",
+        "entity_id": "e2",
+        "entity_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+        "nodes": [
+          "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "Which"
+        ],
+        "node_ids": [
+          "4",
+          "1"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "1",
+            "source_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "1",
+                "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+                "dependent_text": "Which",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "Which",
+                "governor_index": 4,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p3",
+        "entity_id": "e2",
+        "entity_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+        "nodes": [
+          "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "Walt Disney"
+        ],
+        "node_ids": [
+          "4",
+          "2"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "target_text": "Walt Disney",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+                "dependent_text": "Walt Disney",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_selected_entity_paths": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "reason": "This path directly connects Walt Disney to the question about the films, providing a clear reasoning chain.",
+        "path": {
+          "path_id": "e1_p1",
+          "entity_id": "e1",
+          "entity_text": "Walt Disney",
+          "nodes": [
+            "Walt Disney",
+            "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?"
+          ],
+          "node_ids": [
+            "2",
+            "4"
+          ],
+          "length": 2,
+          "evidence": [
+            {
+              "source": "2",
+              "target": "4",
+              "source_text": "Walt Disney",
+              "target_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+              "relations": [
+                "compound"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "4",
+                  "dependent": "2",
+                  "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+                  "dependent_text": "Walt Disney",
+                  "governor_graph_text": "MovieA",
+                  "dependent_graph_text": "SomeEntityA",
+                  "governor_index": 4,
+                  "dependent_index": 2,
+                  "dependency_label": "compound"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p1",
+        "reason": "This path connects the question about the films directly to the concept of 'film', which is essential for answering the question.",
+        "path": {
+          "path_id": "e2_p1",
+          "entity_id": "e2",
+          "entity_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+          "nodes": [
+            "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+            "film"
+          ],
+          "node_ids": [
+            "4",
+            "3"
+          ],
+          "length": 2,
+          "evidence": [
+            {
+              "source": "4",
+              "target": "3",
+              "source_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+              "target_text": "film",
+              "relations": [
+                "compound"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "4",
+                  "dependent": "3",
+                  "governor_text": "was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+                  "dependent_text": "film",
+                  "governor_graph_text": "MovieA",
+                  "dependent_graph_text": "film",
+                  "governor_index": 4,
+                  "dependent_index": 3,
+                  "dependency_label": "compound"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "9a_answer_intent": {
+      "wh_cue": "which",
+      "answer_kind": "comparison_or_boolean",
+      "answer_slot_hint": "date",
+      "focus_predicate": null,
+      "focus_noun": "walt",
+      "requires_value_slot": true
+    },
+    "9b_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "walt_disney",
+          "label": "Walt Disney",
+          "kind": "entity",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "2"
+          ],
+          "source_token_indices": [
+            2
+          ],
+          "grounding_text": "Walt Disney",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "film_a",
+          "label": "The Apple Dumpling Gang",
+          "kind": "entity",
+          "semantic_type": "Film",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "4"
+          ],
+          "source_token_indices": [
+            4
+          ],
+          "grounding_text": "The Apple Dumpling Gang",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "film_b",
+          "label": "Something Wicked This Way Comes",
+          "kind": "entity",
+          "semantic_type": "Film",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "4"
+          ],
+          "source_token_indices": [
+            4
+          ],
+          "grounding_text": "Something Wicked This Way Comes",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "release_date_e1",
+          "label": "release_date",
+          "kind": "value_slot",
+          "semantic_type": "Date",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "3"
+          ],
+          "source_token_indices": [
+            3
+          ],
+          "grounding_text": "release_date",
+          "cue_text": "",
+          "branch_of": "e1",
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "release_date_e2",
+          "label": "release_date",
+          "kind": "value_slot",
+          "semantic_type": "Date",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "3"
+          ],
+          "source_token_indices": [
+            3
+          ],
+          "grounding_text": "release_date",
+          "cue_text": "",
+          "branch_of": "e2",
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "walt_disney",
+          "target": "film_a",
+          "edge_type": "attribute",
+          "relation_hint": "produced",
+          "support_path": [
+            "e1_p1",
+            "2",
+            "4"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "walt_disney",
+          "target": "film_b",
+          "edge_type": "attribute",
+          "relation_hint": "produced",
+          "support_path": [
+            "e1_p1",
+            "2",
+            "4"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "film_a",
+          "target": "release_date_e1",
+          "edge_type": "attribute",
+          "relation_hint": "release_date of The Apple Dumpling Gang",
+          "support_path": [
+            "e1_p1",
+            "4",
+            "3"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "film_a",
+          "target": "release_date_e2",
+          "edge_type": "attribute",
+          "relation_hint": "release_date of The Apple Dumpling Gang",
+          "support_path": [
+            "e2_p1",
+            "4",
+            "3"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "film_b",
+          "target": "release_date_e1",
+          "edge_type": "attribute",
+          "relation_hint": "release_date of Something Wicked This Way Comes",
+          "support_path": [
+            "e1_p1",
+            "4",
+            "3"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "answer_intent": {
+          "wh_cue": "which",
+          "answer_kind": "comparison_or_boolean",
+          "answer_slot_hint": "date",
+          "focus_predicate": null,
+          "focus_noun": "walt",
+          "requires_value_slot": true
+        },
+        "nodes": [
+          {
+            "id": "walt_disney",
+            "label": "Walt Disney",
+            "kind": "entity",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "2"
+            ]
+          },
+          {
+            "id": "film_a",
+            "label": "The Apple Dumpling Gang",
+            "kind": "entity",
+            "semantic_type": "Film",
+            "source_path_ids": [
+              "e2_p1"
+            ],
+            "source_node_ids": [
+              "4"
+            ]
+          },
+          {
+            "id": "film_b",
+            "label": "Something Wicked This Way Comes",
+            "kind": "entity",
+            "semantic_type": "Film",
+            "source_path_ids": [
+              "e2_p1"
+            ],
+            "source_node_ids": [
+              "4"
+            ]
+          },
+          {
+            "id": "release_date",
+            "label": "release_date",
+            "kind": "value_slot",
+            "semantic_type": "Date",
+            "source_path_ids": [
+              "e2_p1"
+            ],
+            "source_node_ids": [
+              "3"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "walt_disney",
+            "target": "film_a",
+            "relation": "produced",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "2",
+              "4"
+            ]
+          },
+          {
+            "source": "walt_disney",
+            "target": "film_b",
+            "relation": "produced",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "2",
+              "4"
+            ]
+          },
+          {
+            "source": "film_a",
+            "target": "release_date",
+            "relation": "release_date of The Apple Dumpling Gang",
+            "support_path_id": "e2_p1",
+            "support_node_ids": [
+              "4",
+              "3"
+            ]
+          },
+          {
+            "source": "film_b",
+            "target": "release_date",
+            "relation": "release_date of Something Wicked This Way Comes",
+            "support_path_id": "e2_p1",
+            "support_node_ids": [
+              "4",
+              "3"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "release_date",
+          "e2": "release_date"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {
+        "wh_cue": "which",
+        "answer_kind": "comparison_or_boolean",
+        "answer_slot_hint": "date",
+        "focus_predicate": null,
+        "focus_noun": "walt",
+        "requires_value_slot": true
+      },
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "10_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What film did Walt Disney produce called The Apple Dumpling Gang?",
+          "type": "lookup",
+          "inputs": [
+            "Walt Disney"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "walt_disney",
+          "target_node": "film_a",
+          "ast_edge": {
+            "source": "walt_disney",
+            "target": "film_a",
+            "edge_type": "attribute",
+            "relation_hint": "produced",
+            "support_path": [
+              "e1_p1",
+              "2",
+              "4"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "What is the release date of The Apple Dumpling Gang?",
+          "type": "lookup",
+          "inputs": [
+            "X1"
+          ],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": "film_a",
+          "target_node": "release_date_e1",
+          "ast_edge": {
+            "source": "film_a",
+            "target": "release_date_e1",
+            "edge_type": "attribute",
+            "relation_hint": "release_date of The Apple Dumpling Gang",
+            "support_path": [
+              "e1_p1",
+              "4",
+              "3"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q3",
+          "question": "What is the release date of The Apple Dumpling Gang?",
+          "type": "lookup",
+          "inputs": [
+            "X1"
+          ],
+          "output": "X3",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": "film_a",
+          "target_node": "release_date_e2",
+          "ast_edge": {
+            "source": "film_a",
+            "target": "release_date_e2",
+            "edge_type": "attribute",
+            "relation_hint": "release_date of The Apple Dumpling Gang",
+            "support_path": [
+              "e2_p1",
+              "4",
+              "3"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q4",
+          "question": "What film was produced by Walt Disney titled Something Wicked This Way Comes?",
+          "type": "lookup",
+          "inputs": [
+            "Walt Disney"
+          ],
+          "output": "X4",
+          "depends_on": [],
+          "source_node": "walt_disney",
+          "target_node": "film_b",
+          "ast_edge": {
+            "source": "walt_disney",
+            "target": "film_b",
+            "edge_type": "attribute",
+            "relation_hint": "produced",
+            "support_path": [
+              "e1_p1",
+              "2",
+              "4"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q5",
+          "question": "What is the release date of Something Wicked This Way Comes?",
+          "type": "lookup",
+          "inputs": [
+            "X4"
+          ],
+          "output": "X5",
+          "depends_on": [
+            "q4"
+          ],
+          "source_node": "film_b",
+          "target_node": "release_date_e1",
+          "ast_edge": {
+            "source": "film_b",
+            "target": "release_date_e1",
+            "edge_type": "attribute",
+            "relation_hint": "release_date of Something Wicked This Way Comes",
+            "support_path": [
+              "e1_p1",
+              "4",
+              "3"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        },
+        {
+          "source": "q1",
+          "target": "q3",
+          "variable": "X1"
+        },
+        {
+          "source": "q4",
+          "target": "q5",
+          "variable": "X4"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2",
+        "X3": "q3",
+        "X4": "q4",
+        "X5": "q5"
+      },
+      "warnings": []
+    },
+    "10_subquestions": [
+      {
+        "index": 1,
+        "question": "What film did Walt Disney produce called The Apple Dumpling Gang?",
+        "answer_variable": "X1",
+        "source_node": "walt_disney",
+        "target_node": "film_a",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "walt_disney",
+          "target": "film_a",
+          "edge_type": "attribute",
+          "relation_hint": "produced",
+          "support_path": [
+            "e1_p1",
+            "2",
+            "4"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "What is the release date of The Apple Dumpling Gang?",
+        "answer_variable": "X2",
+        "source_node": "film_a",
+        "target_node": "release_date_e1",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "film_a",
+          "target": "release_date_e1",
+          "edge_type": "attribute",
+          "relation_hint": "release_date of The Apple Dumpling Gang",
+          "support_path": [
+            "e1_p1",
+            "4",
+            "3"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 3,
+        "question": "What is the release date of The Apple Dumpling Gang?",
+        "answer_variable": "X3",
+        "source_node": "film_a",
+        "target_node": "release_date_e2",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "film_a",
+          "target": "release_date_e2",
+          "edge_type": "attribute",
+          "relation_hint": "release_date of The Apple Dumpling Gang",
+          "support_path": [
+            "e2_p1",
+            "4",
+            "3"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 4,
+        "question": "What film was produced by Walt Disney titled Something Wicked This Way Comes?",
+        "answer_variable": "X4",
+        "source_node": "walt_disney",
+        "target_node": "film_b",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "walt_disney",
+          "target": "film_b",
+          "edge_type": "attribute",
+          "relation_hint": "produced",
+          "support_path": [
+            "e1_p1",
+            "2",
+            "4"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 5,
+        "question": "What is the release date of Something Wicked This Way Comes?",
+        "answer_variable": "X5",
+        "source_node": "film_b",
+        "target_node": "release_date_e1",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "film_b",
+          "target": "release_date_e1",
+          "edge_type": "attribute",
+          "relation_hint": "release_date of Something Wicked This Way Comes",
+          "support_path": [
+            "e1_p1",
+            "4",
+            "3"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

@@ -22,6 +22,9 @@ from models import (
     SelectedPath,
     EntityOriginPath,
     EntityStartNode,
+    CandidateSemanticAST,
+    PathSetCandidate,
+    ScoredEntityPath,
     SelectedEntityPath,
     SemanticNormalizationResult,
     SemanticASTResult,
@@ -33,7 +36,11 @@ if TYPE_CHECKING:
     from corenlp_parser import CoreNLPParser
     from graph_builder import GraphBuilder
     from mask_span_extractor import MaskSpanExtractor
-    from entity_path_pipeline import EntityPathSemanticParser
+    from entity_path_pipeline import (
+        EntityPathSemanticParser,
+        build_path_set_candidates,
+        select_top_paths_by_entity,
+    )
     from question_normalizer import SemanticQuestionNormalizer
     from subquestion_generator import SubquestionGenerator
 
@@ -139,7 +146,11 @@ def run_pipeline(
     del index, debug
     del anchor_selector, semantic_ast_optimizer
     from placeholder import selective_entity_masking
-    from entity_path_pipeline import EntityPathSemanticParser
+    from entity_path_pipeline import (
+        EntityPathSemanticParser,
+        build_path_set_candidates,
+        select_top_paths_by_entity,
+    )
     from entity_path_projector import (
         enumerate_entity_origin_paths,
         extract_entity_start_nodes,
@@ -196,22 +207,42 @@ def run_pipeline(
     if not entity_origin_paths:
         raise ValueError("No entity-origin dependency paths were enumerated.")
 
-    selected_entity_paths, selected_paths_payload = path_semantic_parser.select_entity_paths(
+    graph_edge_payloads = undirected_graph_edge_payloads(dependency_graph)
+    scored_entity_paths, path_scoring_payload = path_semantic_parser.score_entity_paths(
         original_question=record.question,
         restored_question=processing_question,
         entity_start_nodes=entity_start_nodes,
         entity_origin_paths=entity_origin_paths,
     )
-    graph_edge_payloads = undirected_graph_edge_payloads(dependency_graph)
-    build_selected_path_semantic_ast = getattr(path_semantic_parser, "build_selected_path_semantic_ast", None)
-    if not callable(build_selected_path_semantic_ast):
-        build_selected_path_semantic_ast = path_semantic_parser.build_path_pruned_ast
-    semantic_ast, selected_path_semantic_transduction_payload = build_selected_path_semantic_ast(
+
+    top_paths_by_entity = select_top_paths_by_entity(
+        scored_paths=scored_entity_paths,
+        entity_start_nodes=entity_start_nodes,
+        entity_origin_paths=entity_origin_paths,
+        top_k=2,
+    )
+    path_set_candidates = build_path_set_candidates(
+        top_paths_by_entity=top_paths_by_entity,
+        max_path_sets=16,
+    )
+    if not path_set_candidates:
+        raise ValueError("No candidate path sets were constructed for entity-origin path pipeline.")
+
+    candidate_asts = path_semantic_parser.build_candidate_semantic_asts(
         original_question=record.question,
         restored_question=processing_question,
-        selected_entity_paths=selected_entity_paths,
+        path_set_candidates=path_set_candidates,
         entity_origin_paths=entity_origin_paths,
+        scored_paths=scored_entity_paths,
         undirected_graph_edges=graph_edge_payloads,
+    )
+    semantic_ast, best_ast_selection_payload = path_semantic_parser.select_best_candidate_ast(
+        original_question=record.question,
+        restored_question=processing_question,
+        entity_start_nodes=entity_start_nodes,
+        path_set_candidates=path_set_candidates,
+        scored_paths=scored_entity_paths,
+        candidate_asts=candidate_asts,
     )
 
     subquestion_dag: AtomicQuestionDAG | None = None
@@ -238,10 +269,16 @@ def run_pipeline(
         "dependency_graph": dependency_graph,
         "entity_start_nodes": entity_start_nodes,
         "entity_origin_paths": entity_origin_paths,
-        "selected_entity_paths": selected_entity_paths,
-        "selected_paths_payload": selected_paths_payload,
-        "selected_path_semantic_transduction_payload": selected_path_semantic_transduction_payload,
-        "path_pruned_ast_payload": selected_path_semantic_transduction_payload,
+        "scored_entity_paths": scored_entity_paths,
+        "path_scoring_payload": path_scoring_payload,
+        "top_paths_by_entity": top_paths_by_entity,
+        "path_set_candidates": path_set_candidates,
+        "candidate_asts": candidate_asts,
+        "best_ast_selection_payload": best_ast_selection_payload,
+        "selected_entity_paths": [],
+        "selected_paths_payload": None,
+        "selected_path_semantic_transduction_payload": None,
+        "path_pruned_ast_payload": best_ast_selection_payload,
         "semantic_ast": semantic_ast,
         "subquestions": subquestions,
         "subquestion_dag": subquestion_dag,
@@ -269,7 +306,11 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     restored_graph_node_candidates: list[RestoredGraphNodeCandidate] = result["restored_graph_node_candidates"]
     entity_start_nodes: list[EntityStartNode] = result["entity_start_nodes"]
     entity_origin_paths: list[EntityOriginPath] = result["entity_origin_paths"]
-    selected_entity_paths: list[SelectedEntityPath] = result["selected_entity_paths"]
+    scored_entity_paths: list[ScoredEntityPath] = result.get("scored_entity_paths", [])
+    top_paths_by_entity: dict[str, list[ScoredEntityPath]] = result.get("top_paths_by_entity", {})
+    path_set_candidates: list[PathSetCandidate] = result.get("path_set_candidates", [])
+    candidate_asts: list[CandidateSemanticAST] = result.get("candidate_asts", [])
+    best_ast_selection_payload: dict[str, Any] = result.get("best_ast_selection_payload") or {}
     semantic_ast: SemanticASTResult = result["semantic_ast"]
     subquestions: list[AtomicSubquestion] = result["subquestions"]
     subquestion_dag: AtomicQuestionDAG | None = result.get("subquestion_dag")
@@ -333,17 +374,31 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     _print_entity_origin_paths(entity_origin_paths, include_evidence=debug)
     print()
 
-    print("[8. LLM Selected Entity Paths]")
-    _print_selected_entity_paths(selected_entity_paths, entity_origin_paths)
+    print("[8. LLM Path Scores]")
+    _print_scored_entity_paths(scored_entity_paths, entity_origin_paths)
     print()
 
-    print("[9. Selected Path Semantic Transduction]")
+    print("[8.1 Top-2 Paths per Entity]")
+    _print_top_paths_by_entity(top_paths_by_entity, entity_origin_paths)
+    print()
+
+    print("[8.2 Candidate Path Sets]")
+    _print_path_set_candidates(path_set_candidates)
+    print()
+
+    print("[9. Candidate Path-Set Semantic ASTs]")
+    _print_candidate_semantic_asts(candidate_asts)
+    print()
+
+    print("[10. LLM Best AST Selection]")
+    _print_best_ast_selection(best_ast_selection_payload)
+    print("Selected Semantic AST:")
     _print_semantic_ast(semantic_ast)
     if debug:
         _print_warnings(semantic_ast.warnings)
     print()
 
-    print("[10. Atomic Subquestion DAG]")
+    print("[11. Atomic Subquestion DAG]")
     if subquestion_dag is not None:
         _print_atomic_question_dag(subquestion_dag)
     elif not subquestions:
@@ -412,6 +467,110 @@ def _print_selected_entity_paths(
         path_text = f" {' -- '.join(path.nodes)}" if path is not None else ""
         reason = f" reason={selected.reason}" if selected.reason else ""
         print(f"  - {selected.entity_id}: {selected.path_id}{path_text}{reason}")
+
+
+def _print_scored_entity_paths(
+    scored_paths: list[ScoredEntityPath],
+    entity_origin_paths: list[EntityOriginPath],
+) -> None:
+    if not scored_paths:
+        print("  (none)")
+        return
+    path_by_id = {path.path_id: path for path in entity_origin_paths}
+    for score in sorted(scored_paths, key=lambda item: (_entity_sort_key_for_print(item.entity_id), -item.score, item.path_id)):
+        path = path_by_id.get(score.path_id)
+        path_text = f" {' -- '.join(path.nodes)}" if path is not None else ""
+        terminal = f" terminal_hint={score.terminal_hint}" if score.terminal_hint else ""
+        chain = f" semantic_chain_hint={score.semantic_chain_hint}" if score.semantic_chain_hint else ""
+        reason = f" reason={score.reason}" if score.reason else ""
+        print(
+            f"  - {score.entity_id}: {score.path_id} score={score.score:.1f} "
+            f"valid={score.valid}{terminal}{chain}{path_text}{reason}"
+        )
+
+
+def _print_top_paths_by_entity(
+    top_paths_by_entity: dict[str, list[ScoredEntityPath]],
+    entity_origin_paths: list[EntityOriginPath],
+) -> None:
+    if not top_paths_by_entity:
+        print("  (none)")
+        return
+    path_by_id = {path.path_id: path for path in entity_origin_paths}
+    for entity_id in sorted(top_paths_by_entity, key=_entity_sort_key_for_print):
+        parts = []
+        for score in top_paths_by_entity[entity_id]:
+            path = path_by_id.get(score.path_id)
+            path_text = f" ({' -- '.join(path.nodes)})" if path is not None else ""
+            parts.append(f"{score.path_id}:{score.score:.1f}{path_text}")
+        print(f"  - {entity_id}: {', '.join(parts)}")
+
+
+def _print_path_set_candidates(path_set_candidates: list[PathSetCandidate]) -> None:
+    if not path_set_candidates:
+        print("  (none)")
+        return
+    for candidate in path_set_candidates:
+        mapping = ", ".join(
+            f"{entity_id}={path_id}"
+            for entity_id, path_id in sorted(candidate.path_ids_by_entity.items(), key=lambda item: _entity_sort_key_for_print(item[0]))
+        )
+        print(f"  - {candidate.path_set_id}: {mapping}; mean_path_score={candidate.mean_path_score:.1f}")
+
+
+def _print_candidate_semantic_asts(candidate_asts: list[CandidateSemanticAST]) -> None:
+    if not candidate_asts:
+        print("  (none)")
+        return
+    for candidate in candidate_asts:
+        print(f"  - {candidate.candidate_id} ({candidate.path_set_id}) paths={candidate.path_ids_by_entity}")
+        if candidate.parse_error:
+            print(f"    parse_error={candidate.parse_error}")
+        if candidate.generation_error:
+            print(f"    generation_error={candidate.generation_error}")
+        if candidate.semantic_ast is None:
+            continue
+        print("    Nodes:")
+        if candidate.semantic_ast.nodes:
+            for node in candidate.semantic_ast.nodes:
+                print(f"      - {node.id}: {node.label}")
+        else:
+            print("      (none)")
+        print("    Edges:")
+        if candidate.semantic_ast.edges:
+            for edge in candidate.semantic_ast.edges:
+                hint = f" ({edge.relation_hint})" if edge.relation_hint else ""
+                print(f"      - {edge.source} -> {edge.target}{hint}")
+        else:
+            print("      (none)")
+
+
+def _print_best_ast_selection(payload: dict[str, Any]) -> None:
+    if not payload:
+        print("  (none)")
+        return
+    reviews = payload.get("ast_reviews", [])
+    if isinstance(reviews, list) and reviews:
+        for review in reviews:
+            if not isinstance(review, dict):
+                continue
+            fatal = review.get("fatal_errors") or []
+            fatal_text = f" fatal_errors={fatal}" if fatal else ""
+            reason = f" reason={review.get('reason')}" if review.get("reason") else ""
+            print(
+                f"  - {review.get('candidate_id')} ({review.get('path_set_id')}): "
+                f"score={review.get('score')} valid={review.get('valid_for_decomposition')}{fatal_text}{reason}"
+            )
+    else:
+        print("  Reviews: (none)")
+    best = payload.get("best_candidate_id")
+    selected = payload.get("selected_candidate_id")
+    fallback = payload.get("selection_fallback")
+    print(f"  best_candidate_id={best}")
+    if selected:
+        print(f"  selected_candidate_id={selected}")
+    if fallback:
+        print(f"  selection_fallback={fallback}")
 
 
 def _print_candidate_nodes(candidate_nodes: list[CandidateNode]) -> None:
@@ -556,6 +715,12 @@ def _print_warnings(warnings: list[str]) -> None:
     print("Warnings:")
     for warning in warnings:
         print(f"  - {warning}")
+
+
+def _entity_sort_key_for_print(entity_id: str) -> tuple[int, str]:
+    text = str(entity_id)
+    digits = "".join(ch for ch in text if ch.isdigit())
+    return (int(digits) if digits else 10**9, text)
 
 
 if __name__ == "__main__":

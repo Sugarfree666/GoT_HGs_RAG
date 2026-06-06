@@ -1,0 +1,2536 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 13,
+  "qid": null,
+  "question": "What nationality is the performer of song When The Stars Go Blue?",
+  "raw_question_item": {
+    "question": "What nationality is the performer of song When The Stars Go Blue?",
+    "answer": "America"
+  },
+  "gold_answer": "America",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "What nationality is the performer of song When The Stars Go Blue?",
+      "normalized_question": "What nationality is the performer of the song When The Stars Go Blue?",
+      "changed": true,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "What nationality is the performer of the song When The Stars Go Blue?",
+        "changed": true,
+        "rewrite_type": "possessive_to_of",
+        "added_type_variables": [],
+        "reason": "Added 'the' before 'song' for grammaticality."
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "The Stars Go Blue",
+          "start_char": 51,
+          "end_char": 68,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "reason": "continuous multi-word named entity"
+        }
+      ],
+      "warnings": [
+        "Dropped invalid mask span text='When The Stars Go Blue'."
+      ]
+    },
+    "3_selective_masked_question": "What nationality is the performer of the song When SomeEntityA?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "What",
+          "character_offset_begin": 0,
+          "character_offset_end": 4,
+          "lemma": "what",
+          "pos": "WDT"
+        },
+        {
+          "index": 2,
+          "word": "nationality",
+          "character_offset_begin": 5,
+          "character_offset_end": 16,
+          "lemma": "nationality",
+          "pos": "NN"
+        },
+        {
+          "index": 3,
+          "word": "is",
+          "character_offset_begin": 17,
+          "character_offset_end": 19,
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "index": 4,
+          "word": "the",
+          "character_offset_begin": 20,
+          "character_offset_end": 23,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 5,
+          "word": "performer",
+          "character_offset_begin": 24,
+          "character_offset_end": 33,
+          "lemma": "performer",
+          "pos": "NN"
+        },
+        {
+          "index": 6,
+          "word": "of",
+          "character_offset_begin": 34,
+          "character_offset_end": 36,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 7,
+          "word": "the",
+          "character_offset_begin": 37,
+          "character_offset_end": 40,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 8,
+          "word": "song",
+          "character_offset_begin": 41,
+          "character_offset_end": 45,
+          "lemma": "song",
+          "pos": "NN"
+        },
+        {
+          "index": 9,
+          "word": "When",
+          "character_offset_begin": 46,
+          "character_offset_end": 50,
+          "lemma": "when",
+          "pos": "WRB"
+        },
+        {
+          "index": 10,
+          "word": "SomeEntityA",
+          "character_offset_begin": 51,
+          "character_offset_end": 62,
+          "lemma": "SomeEntityA",
+          "pos": "NNP"
+        },
+        {
+          "index": 11,
+          "word": "?",
+          "character_offset_begin": 62,
+          "character_offset_end": 63,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "nationality",
+          "relation": "det",
+          "target": "What",
+          "source_index": 2,
+          "target_index": 1
+        },
+        {
+          "source": "is",
+          "relation": "obj",
+          "target": "nationality",
+          "source_index": 3,
+          "target_index": 2
+        },
+        {
+          "source": "performer",
+          "relation": "det",
+          "target": "the",
+          "source_index": 5,
+          "target_index": 4
+        },
+        {
+          "source": "is",
+          "relation": "nsubj",
+          "target": "performer",
+          "source_index": 3,
+          "target_index": 5
+        },
+        {
+          "source": "song",
+          "relation": "case",
+          "target": "of",
+          "source_index": 8,
+          "target_index": 6
+        },
+        {
+          "source": "song",
+          "relation": "det",
+          "target": "the",
+          "source_index": 8,
+          "target_index": 7
+        },
+        {
+          "source": "performer",
+          "relation": "nmod:of",
+          "target": "song",
+          "source_index": 5,
+          "target_index": 8
+        },
+        {
+          "source": "SomeEntityA",
+          "relation": "advmod",
+          "target": "When",
+          "source_index": 10,
+          "target_index": 9
+        },
+        {
+          "source": "is",
+          "relation": "dep",
+          "target": "SomeEntityA",
+          "source_index": 3,
+          "target_index": 10
+        },
+        {
+          "source": "is",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 3,
+          "target_index": 11
+        }
+      ],
+      "edge_display": [
+        "nationality[2] --det--> What[1]",
+        "is[3] --obj--> nationality[2]",
+        "performer[5] --det--> the[4]",
+        "is[3] --nsubj--> performer[5]",
+        "song[8] --case--> of[6]",
+        "song[8] --det--> the[7]",
+        "performer[5] --nmod:of--> song[8]",
+        "SomeEntityA[10] --advmod--> When[9]",
+        "is[3] --dep--> SomeEntityA[10]",
+        "is[3] --punct--> ?[11]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "What",
+          "graph_text": "What",
+          "text": "What",
+          "label": "What[1]",
+          "order": 1,
+          "pos": "WDT",
+          "lemma": "what",
+          "character_offset_begin": 0,
+          "character_offset_end": 4
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "nationality",
+          "graph_text": "nationality",
+          "text": "nationality",
+          "label": "nationality[2]",
+          "order": 2,
+          "pos": "NN",
+          "lemma": "nationality",
+          "character_offset_begin": 5,
+          "character_offset_end": 16
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "is",
+          "graph_text": "is",
+          "text": "is",
+          "label": "is[3]",
+          "order": 3,
+          "pos": "VBZ",
+          "lemma": "be",
+          "character_offset_begin": 17,
+          "character_offset_end": 19
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[4]",
+          "order": 4,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 20,
+          "character_offset_end": 23
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "performer",
+          "graph_text": "performer",
+          "text": "performer",
+          "label": "performer[5]",
+          "order": 5,
+          "pos": "NN",
+          "lemma": "performer",
+          "character_offset_begin": 24,
+          "character_offset_end": 33
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[6]",
+          "order": 6,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 34,
+          "character_offset_end": 36
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[7]",
+          "order": 7,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 37,
+          "character_offset_end": 40
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "song",
+          "graph_text": "song",
+          "text": "song",
+          "label": "song[8]",
+          "order": 8,
+          "pos": "NN",
+          "lemma": "song",
+          "character_offset_begin": 41,
+          "character_offset_end": 45
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "When",
+          "graph_text": "When",
+          "text": "When",
+          "label": "When[9]",
+          "order": 9,
+          "pos": "WRB",
+          "lemma": "when",
+          "character_offset_begin": 46,
+          "character_offset_end": 50
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "SomeEntityA",
+          "graph_text": "SomeEntityA",
+          "text": "The Stars Go Blue",
+          "label": "The Stars Go Blue[10]",
+          "order": 10,
+          "pos": "NNP",
+          "lemma": "SomeEntityA",
+          "character_offset_begin": 51,
+          "character_offset_end": 62
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[11]",
+          "order": 11,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 62,
+          "character_offset_end": 63
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "2",
+          "source_text": "What",
+          "target_text": "nationality",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "1",
+              "governor_text": "nationality",
+              "dependent_text": "What",
+              "governor_graph_text": "nationality",
+              "dependent_graph_text": "What",
+              "governor_index": 2,
+              "dependent_index": 1,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "1",
+          "dependency_label": "det",
+          "token_text": {
+            "2": "nationality",
+            "1": "What"
+          },
+          "token_index": {
+            "2": 2,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "3",
+          "source_text": "nationality",
+          "target_text": "is",
+          "relation": "obj",
+          "relations": [
+            "obj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "2",
+              "governor_text": "is",
+              "dependent_text": "nationality",
+              "governor_graph_text": "is",
+              "dependent_graph_text": "nationality",
+              "governor_index": 3,
+              "dependent_index": 2,
+              "dependency_label": "obj"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "2",
+          "dependency_label": "obj",
+          "token_text": {
+            "3": "is",
+            "2": "nationality"
+          },
+          "token_index": {
+            "3": 3,
+            "2": 2
+          }
+        },
+        {
+          "source": "3",
+          "target": "5",
+          "source_text": "is",
+          "target_text": "performer",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "5",
+              "governor_text": "is",
+              "dependent_text": "performer",
+              "governor_graph_text": "is",
+              "dependent_graph_text": "performer",
+              "governor_index": 3,
+              "dependent_index": 5,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "5",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "3": "is",
+            "5": "performer"
+          },
+          "token_index": {
+            "3": 3,
+            "5": 5
+          }
+        },
+        {
+          "source": "3",
+          "target": "10",
+          "source_text": "is",
+          "target_text": "The Stars Go Blue",
+          "relation": "dep",
+          "relations": [
+            "dep"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "10",
+              "governor_text": "is",
+              "dependent_text": "The Stars Go Blue",
+              "governor_graph_text": "is",
+              "dependent_graph_text": "SomeEntityA",
+              "governor_index": 3,
+              "dependent_index": 10,
+              "dependency_label": "dep"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "10",
+          "dependency_label": "dep",
+          "token_text": {
+            "3": "is",
+            "10": "The Stars Go Blue"
+          },
+          "token_index": {
+            "3": 3,
+            "10": 10
+          }
+        },
+        {
+          "source": "3",
+          "target": "11",
+          "source_text": "is",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "11",
+              "governor_text": "is",
+              "dependent_text": "?",
+              "governor_graph_text": "is",
+              "dependent_graph_text": "?",
+              "governor_index": 3,
+              "dependent_index": 11,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "11",
+          "dependency_label": "punct",
+          "token_text": {
+            "3": "is",
+            "11": "?"
+          },
+          "token_index": {
+            "3": 3,
+            "11": 11
+          }
+        },
+        {
+          "source": "4",
+          "target": "5",
+          "source_text": "the",
+          "target_text": "performer",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "5",
+              "dependent": "4",
+              "governor_text": "performer",
+              "dependent_text": "the",
+              "governor_graph_text": "performer",
+              "dependent_graph_text": "the",
+              "governor_index": 5,
+              "dependent_index": 4,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "5",
+          "original_dependent": "4",
+          "dependency_label": "det",
+          "token_text": {
+            "5": "performer",
+            "4": "the"
+          },
+          "token_index": {
+            "5": 5,
+            "4": 4
+          }
+        },
+        {
+          "source": "5",
+          "target": "8",
+          "source_text": "performer",
+          "target_text": "song",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "5",
+              "dependent": "8",
+              "governor_text": "performer",
+              "dependent_text": "song",
+              "governor_graph_text": "performer",
+              "dependent_graph_text": "song",
+              "governor_index": 5,
+              "dependent_index": 8,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "5",
+          "original_dependent": "8",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "5": "performer",
+            "8": "song"
+          },
+          "token_index": {
+            "5": 5,
+            "8": 8
+          }
+        },
+        {
+          "source": "6",
+          "target": "8",
+          "source_text": "of",
+          "target_text": "song",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "8",
+              "dependent": "6",
+              "governor_text": "song",
+              "dependent_text": "of",
+              "governor_graph_text": "song",
+              "dependent_graph_text": "of",
+              "governor_index": 8,
+              "dependent_index": 6,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "8",
+          "original_dependent": "6",
+          "dependency_label": "case",
+          "token_text": {
+            "8": "song",
+            "6": "of"
+          },
+          "token_index": {
+            "8": 8,
+            "6": 6
+          }
+        },
+        {
+          "source": "7",
+          "target": "8",
+          "source_text": "the",
+          "target_text": "song",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "8",
+              "dependent": "7",
+              "governor_text": "song",
+              "dependent_text": "the",
+              "governor_graph_text": "song",
+              "dependent_graph_text": "the",
+              "governor_index": 8,
+              "dependent_index": 7,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "8",
+          "original_dependent": "7",
+          "dependency_label": "det",
+          "token_text": {
+            "8": "song",
+            "7": "the"
+          },
+          "token_index": {
+            "8": 8,
+            "7": 7
+          }
+        },
+        {
+          "source": "9",
+          "target": "10",
+          "source_text": "When",
+          "target_text": "The Stars Go Blue",
+          "relation": "advmod",
+          "relations": [
+            "advmod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "9",
+              "governor_text": "The Stars Go Blue",
+              "dependent_text": "When",
+              "governor_graph_text": "SomeEntityA",
+              "dependent_graph_text": "When",
+              "governor_index": 10,
+              "dependent_index": 9,
+              "dependency_label": "advmod"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "9",
+          "dependency_label": "advmod",
+          "token_text": {
+            "10": "The Stars Go Blue",
+            "9": "When"
+          },
+          "token_index": {
+            "10": 10,
+            "9": 9
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "The Stars Go Blue",
+        "graph_node_ids": [
+          "10"
+        ],
+        "token_ids": [
+          10
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Entity"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "The Stars Go Blue",
+        "nodes": [
+          "The Stars Go Blue",
+          "is",
+          "performer",
+          "song"
+        ],
+        "node_ids": [
+          "10",
+          "3",
+          "5",
+          "8"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "3",
+            "source_text": "The Stars Go Blue",
+            "target_text": "is",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "10",
+                "governor_text": "is",
+                "dependent_text": "The Stars Go Blue",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 3,
+                "dependent_index": 10,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "5",
+            "source_text": "is",
+            "target_text": "performer",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "5",
+                "governor_text": "is",
+                "dependent_text": "performer",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "performer",
+                "governor_index": 3,
+                "dependent_index": 5,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "8",
+            "source_text": "performer",
+            "target_text": "song",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "8",
+                "governor_text": "performer",
+                "dependent_text": "song",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "song",
+                "governor_index": 5,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "The Stars Go Blue",
+        "nodes": [
+          "The Stars Go Blue",
+          "is",
+          "performer",
+          "song",
+          "of"
+        ],
+        "node_ids": [
+          "10",
+          "3",
+          "5",
+          "8",
+          "6"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "3",
+            "source_text": "The Stars Go Blue",
+            "target_text": "is",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "10",
+                "governor_text": "is",
+                "dependent_text": "The Stars Go Blue",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 3,
+                "dependent_index": 10,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "5",
+            "source_text": "is",
+            "target_text": "performer",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "5",
+                "governor_text": "is",
+                "dependent_text": "performer",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "performer",
+                "governor_index": 3,
+                "dependent_index": 5,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "8",
+            "source_text": "performer",
+            "target_text": "song",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "8",
+                "governor_text": "performer",
+                "dependent_text": "song",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "song",
+                "governor_index": 5,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "song",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "8",
+                "dependent": "6",
+                "governor_text": "song",
+                "dependent_text": "of",
+                "governor_graph_text": "song",
+                "dependent_graph_text": "of",
+                "governor_index": 8,
+                "dependent_index": 6,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "The Stars Go Blue",
+        "nodes": [
+          "The Stars Go Blue",
+          "is",
+          "performer",
+          "song",
+          "the"
+        ],
+        "node_ids": [
+          "10",
+          "3",
+          "5",
+          "8",
+          "7"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "3",
+            "source_text": "The Stars Go Blue",
+            "target_text": "is",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "10",
+                "governor_text": "is",
+                "dependent_text": "The Stars Go Blue",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 3,
+                "dependent_index": 10,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "5",
+            "source_text": "is",
+            "target_text": "performer",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "5",
+                "governor_text": "is",
+                "dependent_text": "performer",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "performer",
+                "governor_index": 3,
+                "dependent_index": 5,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "8",
+            "source_text": "performer",
+            "target_text": "song",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "8",
+                "governor_text": "performer",
+                "dependent_text": "song",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "song",
+                "governor_index": 5,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "8",
+            "target": "7",
+            "source_text": "song",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "8",
+                "dependent": "7",
+                "governor_text": "song",
+                "dependent_text": "the",
+                "governor_graph_text": "song",
+                "dependent_graph_text": "the",
+                "governor_index": 8,
+                "dependent_index": 7,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "The Stars Go Blue",
+        "nodes": [
+          "The Stars Go Blue",
+          "is",
+          "nationality",
+          "What"
+        ],
+        "node_ids": [
+          "10",
+          "3",
+          "2",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "3",
+            "source_text": "The Stars Go Blue",
+            "target_text": "is",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "10",
+                "governor_text": "is",
+                "dependent_text": "The Stars Go Blue",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 3,
+                "dependent_index": 10,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "2",
+            "source_text": "is",
+            "target_text": "nationality",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "2",
+                "governor_text": "is",
+                "dependent_text": "nationality",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "nationality",
+                "governor_index": 3,
+                "dependent_index": 2,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "nationality",
+            "target_text": "What",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "nationality",
+                "dependent_text": "What",
+                "governor_graph_text": "nationality",
+                "dependent_graph_text": "What",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "The Stars Go Blue",
+        "nodes": [
+          "The Stars Go Blue",
+          "is",
+          "nationality"
+        ],
+        "node_ids": [
+          "10",
+          "3",
+          "2"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "3",
+            "source_text": "The Stars Go Blue",
+            "target_text": "is",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "10",
+                "governor_text": "is",
+                "dependent_text": "The Stars Go Blue",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 3,
+                "dependent_index": 10,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "2",
+            "source_text": "is",
+            "target_text": "nationality",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "2",
+                "governor_text": "is",
+                "dependent_text": "nationality",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "nationality",
+                "governor_index": 3,
+                "dependent_index": 2,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "The Stars Go Blue",
+        "nodes": [
+          "The Stars Go Blue",
+          "is",
+          "performer"
+        ],
+        "node_ids": [
+          "10",
+          "3",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "3",
+            "source_text": "The Stars Go Blue",
+            "target_text": "is",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "10",
+                "governor_text": "is",
+                "dependent_text": "The Stars Go Blue",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 3,
+                "dependent_index": 10,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "5",
+            "source_text": "is",
+            "target_text": "performer",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "5",
+                "governor_text": "is",
+                "dependent_text": "performer",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "performer",
+                "governor_index": 3,
+                "dependent_index": 5,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "The Stars Go Blue",
+        "nodes": [
+          "The Stars Go Blue",
+          "is",
+          "performer",
+          "the"
+        ],
+        "node_ids": [
+          "10",
+          "3",
+          "5",
+          "4"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "3",
+            "source_text": "The Stars Go Blue",
+            "target_text": "is",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "10",
+                "governor_text": "is",
+                "dependent_text": "The Stars Go Blue",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 3,
+                "dependent_index": 10,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "5",
+            "source_text": "is",
+            "target_text": "performer",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "5",
+                "governor_text": "is",
+                "dependent_text": "performer",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "performer",
+                "governor_index": 3,
+                "dependent_index": 5,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "4",
+            "source_text": "performer",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "4",
+                "governor_text": "performer",
+                "dependent_text": "the",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "the",
+                "governor_index": 5,
+                "dependent_index": 4,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "The Stars Go Blue",
+        "nodes": [
+          "The Stars Go Blue",
+          "When"
+        ],
+        "node_ids": [
+          "10",
+          "9"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "9",
+            "source_text": "The Stars Go Blue",
+            "target_text": "When",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "9",
+                "governor_text": "The Stars Go Blue",
+                "dependent_text": "When",
+                "governor_graph_text": "SomeEntityA",
+                "dependent_graph_text": "When",
+                "governor_index": 10,
+                "dependent_index": 9,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "The Stars Go Blue",
+        "nodes": [
+          "The Stars Go Blue",
+          "is"
+        ],
+        "node_ids": [
+          "10",
+          "3"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "3",
+            "source_text": "The Stars Go Blue",
+            "target_text": "is",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "10",
+                "governor_text": "is",
+                "dependent_text": "The Stars Go Blue",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 3,
+                "dependent_index": 10,
+                "dependency_label": "dep"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "The Stars Go Blue",
+        "nodes": [
+          "The Stars Go Blue",
+          "is",
+          "?"
+        ],
+        "node_ids": [
+          "10",
+          "3",
+          "11"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "3",
+            "source_text": "The Stars Go Blue",
+            "target_text": "is",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "10",
+                "governor_text": "is",
+                "dependent_text": "The Stars Go Blue",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 3,
+                "dependent_index": 10,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "11",
+            "source_text": "is",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "11",
+                "governor_text": "is",
+                "dependent_text": "?",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "?",
+                "governor_index": 3,
+                "dependent_index": 11,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "nationality",
+        "semantic_chain_hint": [
+          "performer",
+          "nationality"
+        ],
+        "covered_cues": [
+          "performer"
+        ],
+        "missing_cues": [
+          "nationality"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from 'The Stars Go Blue' and reaches 'performer', but it does not cover the nationality aspect needed for the answer."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p2",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "nationality",
+        "semantic_chain_hint": [
+          "performer",
+          "nationality"
+        ],
+        "covered_cues": [
+          "performer"
+        ],
+        "missing_cues": [
+          "nationality"
+        ],
+        "fatal_errors": [],
+        "reason": "The path includes 'of' but does not lead to the necessary answer about nationality."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p3",
+        "score": 65.0,
+        "valid": true,
+        "terminal_hint": "nationality",
+        "semantic_chain_hint": [
+          "performer",
+          "nationality"
+        ],
+        "covered_cues": [
+          "performer"
+        ],
+        "missing_cues": [
+          "nationality"
+        ],
+        "fatal_errors": [],
+        "reason": "The path includes 'the' but does not provide the necessary information about nationality."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p4",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "nationality",
+        "semantic_chain_hint": [
+          "performer",
+          "nationality"
+        ],
+        "covered_cues": [
+          "nationality",
+          "What"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path effectively connects 'The Stars Go Blue' to 'nationality' and includes the 'What' cue, making it strong for answering the question."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p5",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "nationality",
+        "semantic_chain_hint": [
+          "performer",
+          "nationality"
+        ],
+        "covered_cues": [
+          "nationality"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path connects 'The Stars Go Blue' to 'nationality', which is crucial for the answer, but lacks additional context."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p6",
+        "score": 60.0,
+        "valid": true,
+        "terminal_hint": "nationality",
+        "semantic_chain_hint": [
+          "performer",
+          "nationality"
+        ],
+        "covered_cues": [
+          "performer"
+        ],
+        "missing_cues": [
+          "nationality"
+        ],
+        "fatal_errors": [],
+        "reason": "The path stops at 'performer' and does not reach the necessary information about nationality."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p7",
+        "score": 65.0,
+        "valid": true,
+        "terminal_hint": "nationality",
+        "semantic_chain_hint": [
+          "performer",
+          "nationality"
+        ],
+        "covered_cues": [
+          "performer"
+        ],
+        "missing_cues": [
+          "nationality"
+        ],
+        "fatal_errors": [],
+        "reason": "The path includes 'the' but does not provide the necessary information about nationality."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p8",
+        "score": 30.0,
+        "valid": true,
+        "terminal_hint": "nationality",
+        "semantic_chain_hint": [
+          "performer",
+          "nationality"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "performer",
+          "nationality"
+        ],
+        "fatal_errors": [],
+        "reason": "The path only connects 'The Stars Go Blue' to 'When', which does not help in answering the question."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p9",
+        "score": 20.0,
+        "valid": true,
+        "terminal_hint": "nationality",
+        "semantic_chain_hint": [
+          "performer",
+          "nationality"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "performer",
+          "nationality"
+        ],
+        "fatal_errors": [],
+        "reason": "The path only connects 'The Stars Go Blue' to 'is', which does not provide any useful information for the question."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p10",
+        "score": 10.0,
+        "valid": true,
+        "terminal_hint": "nationality",
+        "semantic_chain_hint": [
+          "performer",
+          "nationality"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "performer",
+          "nationality"
+        ],
+        "fatal_errors": [],
+        "reason": "The path connects 'The Stars Go Blue' to 'is' and then to '?', which does not help in answering the question."
+      }
+    ],
+    "8_1_top_paths_by_entity": {
+      "e1": [
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p4",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "nationality",
+          "semantic_chain_hint": [
+            "performer",
+            "nationality"
+          ],
+          "covered_cues": [
+            "nationality",
+            "What"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path effectively connects 'The Stars Go Blue' to 'nationality' and includes the 'What' cue, making it strong for answering the question."
+        },
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p5",
+          "score": 85.0,
+          "valid": true,
+          "terminal_hint": "nationality",
+          "semantic_chain_hint": [
+            "performer",
+            "nationality"
+          ],
+          "covered_cues": [
+            "nationality"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path connects 'The Stars Go Blue' to 'nationality', which is crucial for the answer, but lacks additional context."
+        }
+      ]
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p4"
+        },
+        "mean_path_score": 90.0
+      },
+      {
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p5"
+        },
+        "mean_path_score": 85.0
+      }
+    ],
+    "9_candidate_semantic_asts": [
+      {
+        "candidate_id": "ast_ps1",
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p4"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "the_stars_go_blue",
+              "label": "The Stars Go Blue",
+              "kind": "entity",
+              "semantic_type": "Song",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "The Stars Go Blue",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "performer",
+              "label": "performer",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "3"
+              ],
+              "source_token_indices": [
+                3
+              ],
+              "grounding_text": "performer",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "nationality",
+              "label": "nationality",
+              "kind": "value_slot",
+              "semantic_type": "Nationality",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "2"
+              ],
+              "source_token_indices": [
+                2
+              ],
+              "grounding_text": "nationality",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "the_stars_go_blue",
+              "target": "performer",
+              "edge_type": "attribute",
+              "relation_hint": "performer of The Stars Go Blue",
+              "support_path": [
+                "e1_p4",
+                "10",
+                "3"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "performer",
+              "target": "nationality",
+              "edge_type": "attribute",
+              "relation_hint": "nationality of the performer",
+              "support_path": [
+                "e1_p4",
+                "3",
+                "2"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "the_stars_go_blue",
+                "label": "The Stars Go Blue",
+                "kind": "entity",
+                "semantic_type": "Song",
+                "source_path_ids": [
+                  "e1_p4"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              },
+              {
+                "id": "performer",
+                "label": "performer",
+                "kind": "type_variable",
+                "semantic_type": "Person",
+                "source_path_ids": [
+                  "e1_p4"
+                ],
+                "source_node_ids": [
+                  "3"
+                ]
+              },
+              {
+                "id": "nationality",
+                "label": "nationality",
+                "kind": "value_slot",
+                "semantic_type": "Nationality",
+                "source_path_ids": [
+                  "e1_p4"
+                ],
+                "source_node_ids": [
+                  "2"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "the_stars_go_blue",
+                "target": "performer",
+                "relation": "performer of The Stars Go Blue",
+                "support_path_id": "e1_p4",
+                "support_node_ids": [
+                  "10",
+                  "3"
+                ]
+              },
+              {
+                "source": "performer",
+                "target": "nationality",
+                "relation": "nationality of the performer",
+                "support_path_id": "e1_p4",
+                "support_node_ids": [
+                  "3",
+                  "2"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "nationality"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "the_stars_go_blue",
+              "label": "The Stars Go Blue",
+              "kind": "entity",
+              "semantic_type": "Song",
+              "source_path_ids": [
+                "e1_p4"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            },
+            {
+              "id": "performer",
+              "label": "performer",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source_path_ids": [
+                "e1_p4"
+              ],
+              "source_node_ids": [
+                "3"
+              ]
+            },
+            {
+              "id": "nationality",
+              "label": "nationality",
+              "kind": "value_slot",
+              "semantic_type": "Nationality",
+              "source_path_ids": [
+                "e1_p4"
+              ],
+              "source_node_ids": [
+                "2"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "the_stars_go_blue",
+              "target": "performer",
+              "relation": "performer of The Stars Go Blue",
+              "support_path_id": "e1_p4",
+              "support_node_ids": [
+                "10",
+                "3"
+              ]
+            },
+            {
+              "source": "performer",
+              "target": "nationality",
+              "relation": "nationality of the performer",
+              "support_path_id": "e1_p4",
+              "support_node_ids": [
+                "3",
+                "2"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "nationality"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 90.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p4",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "nationality",
+              "semantic_chain_hint": [
+                "performer",
+                "nationality"
+              ],
+              "covered_cues": [
+                "nationality",
+                "What"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path effectively connects 'The Stars Go Blue' to 'nationality' and includes the 'What' cue, making it strong for answering the question."
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "ast_ps2",
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p5"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "The_Stars_Go_Blue",
+              "label": "When The Stars Go Blue",
+              "kind": "entity",
+              "semantic_type": "Song",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "When The Stars Go Blue",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "performer",
+              "label": "performer",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "3"
+              ],
+              "source_token_indices": [
+                3
+              ],
+              "grounding_text": "performer",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "nationality",
+              "label": "nationality",
+              "kind": "value_slot",
+              "semantic_type": "Nationality",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "2"
+              ],
+              "source_token_indices": [
+                2
+              ],
+              "grounding_text": "nationality",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "The_Stars_Go_Blue",
+              "target": "performer",
+              "edge_type": "attribute",
+              "relation_hint": "performer of When The Stars Go Blue",
+              "support_path": [
+                "e1_p5",
+                "10",
+                "3"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "performer",
+              "target": "nationality",
+              "edge_type": "attribute",
+              "relation_hint": "nationality of the performer",
+              "support_path": [
+                "e1_p5",
+                "3",
+                "2"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "The_Stars_Go_Blue",
+                "label": "When The Stars Go Blue",
+                "kind": "entity",
+                "semantic_type": "Song",
+                "source_path_ids": [
+                  "e1_p5"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              },
+              {
+                "id": "performer",
+                "label": "performer",
+                "kind": "type_variable",
+                "semantic_type": "Person",
+                "source_path_ids": [
+                  "e1_p5"
+                ],
+                "source_node_ids": [
+                  "3"
+                ]
+              },
+              {
+                "id": "nationality",
+                "label": "nationality",
+                "kind": "value_slot",
+                "semantic_type": "Nationality",
+                "source_path_ids": [
+                  "e1_p5"
+                ],
+                "source_node_ids": [
+                  "2"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "The_Stars_Go_Blue",
+                "target": "performer",
+                "relation": "performer of When The Stars Go Blue",
+                "support_path_id": "e1_p5",
+                "support_node_ids": [
+                  "10",
+                  "3"
+                ]
+              },
+              {
+                "source": "performer",
+                "target": "nationality",
+                "relation": "nationality of the performer",
+                "support_path_id": "e1_p5",
+                "support_node_ids": [
+                  "3",
+                  "2"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "nationality"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "The_Stars_Go_Blue",
+              "label": "When The Stars Go Blue",
+              "kind": "entity",
+              "semantic_type": "Song",
+              "source_path_ids": [
+                "e1_p5"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            },
+            {
+              "id": "performer",
+              "label": "performer",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source_path_ids": [
+                "e1_p5"
+              ],
+              "source_node_ids": [
+                "3"
+              ]
+            },
+            {
+              "id": "nationality",
+              "label": "nationality",
+              "kind": "value_slot",
+              "semantic_type": "Nationality",
+              "source_path_ids": [
+                "e1_p5"
+              ],
+              "source_node_ids": [
+                "2"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "The_Stars_Go_Blue",
+              "target": "performer",
+              "relation": "performer of When The Stars Go Blue",
+              "support_path_id": "e1_p5",
+              "support_node_ids": [
+                "10",
+                "3"
+              ]
+            },
+            {
+              "source": "performer",
+              "target": "nationality",
+              "relation": "nationality of the performer",
+              "support_path_id": "e1_p5",
+              "support_node_ids": [
+                "3",
+                "2"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "nationality"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 85.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p5",
+              "score": 85.0,
+              "valid": true,
+              "terminal_hint": "nationality",
+              "semantic_chain_hint": [
+                "performer",
+                "nationality"
+              ],
+              "covered_cues": [
+                "nationality"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path connects 'The Stars Go Blue' to 'nationality', which is crucial for the answer, but lacks additional context."
+            }
+          }
+        }
+      }
+    ],
+    "10_best_ast_selection": {
+      "ast_reviews": [
+        {
+          "candidate_id": "ast_ps1",
+          "path_set_id": "ps1",
+          "score": 0.96,
+          "valid_for_decomposition": true,
+          "covers_original_question": true,
+          "answer_intent_compatible": true,
+          "branch_complete": true,
+          "atomic_questions_would_be_executable": true,
+          "has_final_operator_question": false,
+          "fatal_errors": [],
+          "reason": "This AST effectively connects 'The Stars Go Blue' to 'performer' and then to 'nationality', covering all necessary aspects of the original question without generating a final comparison question."
+        }
+      ],
+      "best_candidate_id": "ast_ps1",
+      "selected_candidate_id": "ast_ps1"
+    },
+    "10_selected_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "the_stars_go_blue",
+          "label": "The Stars Go Blue",
+          "kind": "entity",
+          "semantic_type": "Song",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "10"
+          ],
+          "source_token_indices": [
+            10
+          ],
+          "grounding_text": "The Stars Go Blue",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "performer",
+          "label": "performer",
+          "kind": "type_variable",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "3"
+          ],
+          "source_token_indices": [
+            3
+          ],
+          "grounding_text": "performer",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "nationality",
+          "label": "nationality",
+          "kind": "value_slot",
+          "semantic_type": "Nationality",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "2"
+          ],
+          "source_token_indices": [
+            2
+          ],
+          "grounding_text": "nationality",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "the_stars_go_blue",
+          "target": "performer",
+          "edge_type": "attribute",
+          "relation_hint": "performer of The Stars Go Blue",
+          "support_path": [
+            "e1_p4",
+            "10",
+            "3"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "performer",
+          "target": "nationality",
+          "edge_type": "attribute",
+          "relation_hint": "nationality of the performer",
+          "support_path": [
+            "e1_p4",
+            "3",
+            "2"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "nodes": [
+          {
+            "id": "the_stars_go_blue",
+            "label": "The Stars Go Blue",
+            "kind": "entity",
+            "semantic_type": "Song",
+            "source_path_ids": [
+              "e1_p4"
+            ],
+            "source_node_ids": [
+              "10"
+            ]
+          },
+          {
+            "id": "performer",
+            "label": "performer",
+            "kind": "type_variable",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p4"
+            ],
+            "source_node_ids": [
+              "3"
+            ]
+          },
+          {
+            "id": "nationality",
+            "label": "nationality",
+            "kind": "value_slot",
+            "semantic_type": "Nationality",
+            "source_path_ids": [
+              "e1_p4"
+            ],
+            "source_node_ids": [
+              "2"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "the_stars_go_blue",
+            "target": "performer",
+            "relation": "performer of The Stars Go Blue",
+            "support_path_id": "e1_p4",
+            "support_node_ids": [
+              "10",
+              "3"
+            ]
+          },
+          {
+            "source": "performer",
+            "target": "nationality",
+            "relation": "nationality of the performer",
+            "support_path_id": "e1_p4",
+            "support_node_ids": [
+              "3",
+              "2"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "nationality"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {},
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "11_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the performer of The Stars Go Blue?",
+          "type": "lookup",
+          "inputs": [
+            "The Stars Go Blue"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "the_stars_go_blue",
+          "target_node": "performer",
+          "ast_edge": {
+            "source": "the_stars_go_blue",
+            "target": "performer",
+            "edge_type": "attribute",
+            "relation_hint": "performer of The Stars Go Blue",
+            "support_path": [
+              "e1_p4",
+              "10",
+              "3"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "What is the nationality of the performer of When The Stars Go Blue?",
+          "type": "lookup",
+          "inputs": [
+            "X1"
+          ],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": "performer",
+          "target_node": "nationality",
+          "ast_edge": {
+            "source": "performer",
+            "target": "nationality",
+            "edge_type": "attribute",
+            "relation_hint": "nationality of the performer",
+            "support_path": [
+              "e1_p4",
+              "3",
+              "2"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "11_subquestions": [
+      {
+        "index": 1,
+        "question": "Who is the performer of The Stars Go Blue?",
+        "answer_variable": "X1",
+        "source_node": "the_stars_go_blue",
+        "target_node": "performer",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "the_stars_go_blue",
+          "target": "performer",
+          "edge_type": "attribute",
+          "relation_hint": "performer of The Stars Go Blue",
+          "support_path": [
+            "e1_p4",
+            "10",
+            "3"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "What is the nationality of the performer of When The Stars Go Blue?",
+        "answer_variable": "X2",
+        "source_node": "performer",
+        "target_node": "nationality",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "performer",
+          "target": "nationality",
+          "edge_type": "attribute",
+          "relation_hint": "nationality of the performer",
+          "support_path": [
+            "e1_p4",
+            "3",
+            "2"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

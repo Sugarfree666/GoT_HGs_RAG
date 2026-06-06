@@ -1,0 +1,3459 @@
+{
+  "status": "ok",
+  "dataset": "hotpotqa",
+  "questions_file": "questions\\hotpotqa\\questions.json",
+  "index": 10,
+  "qid": null,
+  "question": "The 2000 ICC KnockOut Trophy was the debut of a Jamaican cricketer who is a right-handed what?",
+  "raw_question_item": {
+    "question": "The 2000 ICC KnockOut Trophy was the debut of a Jamaican cricketer who is a right-handed what?",
+    "answer": "middle order batsman"
+  },
+  "gold_answer": "middle order batsman",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "The 2000 ICC KnockOut Trophy was the debut of a Jamaican cricketer who is a right-handed what?",
+      "normalized_question": "The 2000 ICC KnockOut Trophy was the debut of a Jamaican cricketer who is a right-handed batsman?",
+      "changed": true,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "The 2000 ICC KnockOut Trophy was the debut of a Jamaican cricketer who is a right-handed batsman?",
+        "changed": true,
+        "rewrite_type": "ellipsis_expansion",
+        "added_type_variables": [],
+        "reason": "Expanded the ellipsis 'what' to 'batsman' for clarity while preserving the original meaning."
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "ICC KnockOut Trophy",
+          "start_char": 9,
+          "end_char": 28,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "reason": "multi-token person name in human context"
+        }
+      ],
+      "warnings": []
+    },
+    "3_selective_masked_question": "The 2000 PersonA was the debut of a Jamaican cricketer who is a right-handed batsman?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "The",
+          "character_offset_begin": 0,
+          "character_offset_end": 3,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 2,
+          "word": "2000",
+          "character_offset_begin": 4,
+          "character_offset_end": 8,
+          "lemma": "2000",
+          "pos": "CD"
+        },
+        {
+          "index": 3,
+          "word": "PersonA",
+          "character_offset_begin": 9,
+          "character_offset_end": 16,
+          "lemma": "persona",
+          "pos": "NN"
+        },
+        {
+          "index": 4,
+          "word": "was",
+          "character_offset_begin": 17,
+          "character_offset_end": 20,
+          "lemma": "be",
+          "pos": "VBD"
+        },
+        {
+          "index": 5,
+          "word": "the",
+          "character_offset_begin": 21,
+          "character_offset_end": 24,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 6,
+          "word": "debut",
+          "character_offset_begin": 25,
+          "character_offset_end": 30,
+          "lemma": "debut",
+          "pos": "NN"
+        },
+        {
+          "index": 7,
+          "word": "of",
+          "character_offset_begin": 31,
+          "character_offset_end": 33,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 8,
+          "word": "a",
+          "character_offset_begin": 34,
+          "character_offset_end": 35,
+          "lemma": "a",
+          "pos": "DT"
+        },
+        {
+          "index": 9,
+          "word": "Jamaican",
+          "character_offset_begin": 36,
+          "character_offset_end": 44,
+          "lemma": "Jamaican",
+          "pos": "JJ"
+        },
+        {
+          "index": 10,
+          "word": "cricketer",
+          "character_offset_begin": 45,
+          "character_offset_end": 54,
+          "lemma": "cricketer",
+          "pos": "NN"
+        },
+        {
+          "index": 11,
+          "word": "who",
+          "character_offset_begin": 55,
+          "character_offset_end": 58,
+          "lemma": "who",
+          "pos": "WP"
+        },
+        {
+          "index": 12,
+          "word": "is",
+          "character_offset_begin": 59,
+          "character_offset_end": 61,
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "index": 13,
+          "word": "a",
+          "character_offset_begin": 62,
+          "character_offset_end": 63,
+          "lemma": "a",
+          "pos": "DT"
+        },
+        {
+          "index": 14,
+          "word": "right",
+          "character_offset_begin": 64,
+          "character_offset_end": 69,
+          "lemma": "right",
+          "pos": "JJ"
+        },
+        {
+          "index": 15,
+          "word": "-",
+          "character_offset_begin": 69,
+          "character_offset_end": 70,
+          "lemma": "-",
+          "pos": "HYPH"
+        },
+        {
+          "index": 16,
+          "word": "handed",
+          "character_offset_begin": 70,
+          "character_offset_end": 76,
+          "lemma": "handed",
+          "pos": "JJ"
+        },
+        {
+          "index": 17,
+          "word": "batsman",
+          "character_offset_begin": 77,
+          "character_offset_end": 84,
+          "lemma": "batsman",
+          "pos": "NN"
+        },
+        {
+          "index": 18,
+          "word": "?",
+          "character_offset_begin": 84,
+          "character_offset_end": 85,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "PersonA",
+          "relation": "det",
+          "target": "The",
+          "source_index": 3,
+          "target_index": 1
+        },
+        {
+          "source": "PersonA",
+          "relation": "nummod",
+          "target": "2000",
+          "source_index": 3,
+          "target_index": 2
+        },
+        {
+          "source": "debut",
+          "relation": "nsubj",
+          "target": "PersonA",
+          "source_index": 6,
+          "target_index": 3
+        },
+        {
+          "source": "debut",
+          "relation": "cop",
+          "target": "was",
+          "source_index": 6,
+          "target_index": 4
+        },
+        {
+          "source": "debut",
+          "relation": "det",
+          "target": "the",
+          "source_index": 6,
+          "target_index": 5
+        },
+        {
+          "source": "cricketer",
+          "relation": "case",
+          "target": "of",
+          "source_index": 10,
+          "target_index": 7
+        },
+        {
+          "source": "cricketer",
+          "relation": "det",
+          "target": "a",
+          "source_index": 10,
+          "target_index": 8
+        },
+        {
+          "source": "cricketer",
+          "relation": "amod",
+          "target": "Jamaican",
+          "source_index": 10,
+          "target_index": 9
+        },
+        {
+          "source": "debut",
+          "relation": "nmod:of",
+          "target": "cricketer",
+          "source_index": 6,
+          "target_index": 10
+        },
+        {
+          "source": "cricketer",
+          "relation": "acl",
+          "target": "who",
+          "source_index": 10,
+          "target_index": 11
+        },
+        {
+          "source": "who",
+          "relation": "cop",
+          "target": "is",
+          "source_index": 11,
+          "target_index": 12
+        },
+        {
+          "source": "batsman",
+          "relation": "det",
+          "target": "a",
+          "source_index": 17,
+          "target_index": 13
+        },
+        {
+          "source": "handed",
+          "relation": "amod",
+          "target": "right",
+          "source_index": 16,
+          "target_index": 14
+        },
+        {
+          "source": "handed",
+          "relation": "punct",
+          "target": "-",
+          "source_index": 16,
+          "target_index": 15
+        },
+        {
+          "source": "batsman",
+          "relation": "amod",
+          "target": "handed",
+          "source_index": 17,
+          "target_index": 16
+        },
+        {
+          "source": "who",
+          "relation": "nsubj",
+          "target": "batsman",
+          "source_index": 11,
+          "target_index": 17
+        },
+        {
+          "source": "debut",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 6,
+          "target_index": 18
+        }
+      ],
+      "edge_display": [
+        "PersonA[3] --det--> The[1]",
+        "PersonA[3] --nummod--> 2000[2]",
+        "debut[6] --nsubj--> PersonA[3]",
+        "debut[6] --cop--> was[4]",
+        "debut[6] --det--> the[5]",
+        "cricketer[10] --case--> of[7]",
+        "cricketer[10] --det--> a[8]",
+        "cricketer[10] --amod--> Jamaican[9]",
+        "debut[6] --nmod:of--> cricketer[10]",
+        "cricketer[10] --acl--> who[11]",
+        "who[11] --cop--> is[12]",
+        "batsman[17] --det--> a[13]",
+        "handed[16] --amod--> right[14]",
+        "handed[16] --punct--> -[15]",
+        "batsman[17] --amod--> handed[16]",
+        "who[11] --nsubj--> batsman[17]",
+        "debut[6] --punct--> ?[18]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "The",
+          "graph_text": "The",
+          "text": "The",
+          "label": "The[1]",
+          "order": 1,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 0,
+          "character_offset_end": 3
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "2000",
+          "graph_text": "2000",
+          "text": "2000",
+          "label": "2000[2]",
+          "order": 2,
+          "pos": "CD",
+          "lemma": "2000",
+          "character_offset_begin": 4,
+          "character_offset_end": 8
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "PersonA",
+          "graph_text": "PersonA",
+          "text": "ICC KnockOut Trophy",
+          "label": "ICC KnockOut Trophy[3]",
+          "order": 3,
+          "pos": "NN",
+          "lemma": "persona",
+          "character_offset_begin": 9,
+          "character_offset_end": 16
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "was",
+          "graph_text": "was",
+          "text": "was",
+          "label": "was[4]",
+          "order": 4,
+          "pos": "VBD",
+          "lemma": "be",
+          "character_offset_begin": 17,
+          "character_offset_end": 20
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[5]",
+          "order": 5,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 21,
+          "character_offset_end": 24
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "debut",
+          "graph_text": "debut",
+          "text": "debut",
+          "label": "debut[6]",
+          "order": 6,
+          "pos": "NN",
+          "lemma": "debut",
+          "character_offset_begin": 25,
+          "character_offset_end": 30
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[7]",
+          "order": 7,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 31,
+          "character_offset_end": 33
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "a",
+          "graph_text": "a",
+          "text": "a",
+          "label": "a[8]",
+          "order": 8,
+          "pos": "DT",
+          "lemma": "a",
+          "character_offset_begin": 34,
+          "character_offset_end": 35
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "Jamaican",
+          "graph_text": "Jamaican",
+          "text": "Jamaican",
+          "label": "Jamaican[9]",
+          "order": 9,
+          "pos": "JJ",
+          "lemma": "Jamaican",
+          "character_offset_begin": 36,
+          "character_offset_end": 44
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "cricketer",
+          "graph_text": "cricketer",
+          "text": "cricketer",
+          "label": "cricketer[10]",
+          "order": 10,
+          "pos": "NN",
+          "lemma": "cricketer",
+          "character_offset_begin": 45,
+          "character_offset_end": 54
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "who",
+          "graph_text": "who",
+          "text": "who",
+          "label": "who[11]",
+          "order": 11,
+          "pos": "WP",
+          "lemma": "who",
+          "character_offset_begin": 55,
+          "character_offset_end": 58
+        },
+        {
+          "id": "12",
+          "token_index": 12,
+          "word": "is",
+          "graph_text": "is",
+          "text": "is",
+          "label": "is[12]",
+          "order": 12,
+          "pos": "VBZ",
+          "lemma": "be",
+          "character_offset_begin": 59,
+          "character_offset_end": 61
+        },
+        {
+          "id": "13",
+          "token_index": 13,
+          "word": "a",
+          "graph_text": "a",
+          "text": "a",
+          "label": "a[13]",
+          "order": 13,
+          "pos": "DT",
+          "lemma": "a",
+          "character_offset_begin": 62,
+          "character_offset_end": 63
+        },
+        {
+          "id": "14",
+          "token_index": 14,
+          "word": "right",
+          "graph_text": "right",
+          "text": "right",
+          "label": "right[14]",
+          "order": 14,
+          "pos": "JJ",
+          "lemma": "right",
+          "character_offset_begin": 64,
+          "character_offset_end": 69
+        },
+        {
+          "id": "15",
+          "token_index": 15,
+          "word": "-",
+          "graph_text": "-",
+          "text": "-",
+          "label": "-[15]",
+          "order": 15,
+          "pos": "HYPH",
+          "lemma": "-",
+          "character_offset_begin": 69,
+          "character_offset_end": 70
+        },
+        {
+          "id": "16",
+          "token_index": 16,
+          "word": "handed",
+          "graph_text": "handed",
+          "text": "handed",
+          "label": "handed[16]",
+          "order": 16,
+          "pos": "JJ",
+          "lemma": "handed",
+          "character_offset_begin": 70,
+          "character_offset_end": 76
+        },
+        {
+          "id": "17",
+          "token_index": 17,
+          "word": "batsman",
+          "graph_text": "batsman",
+          "text": "batsman",
+          "label": "batsman[17]",
+          "order": 17,
+          "pos": "NN",
+          "lemma": "batsman",
+          "character_offset_begin": 77,
+          "character_offset_end": 84
+        },
+        {
+          "id": "18",
+          "token_index": 18,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[18]",
+          "order": 18,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 84,
+          "character_offset_end": 85
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "3",
+          "source_text": "The",
+          "target_text": "ICC KnockOut Trophy",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "1",
+              "governor_text": "ICC KnockOut Trophy",
+              "dependent_text": "The",
+              "governor_graph_text": "PersonA",
+              "dependent_graph_text": "The",
+              "governor_index": 3,
+              "dependent_index": 1,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "1",
+          "dependency_label": "det",
+          "token_text": {
+            "3": "ICC KnockOut Trophy",
+            "1": "The"
+          },
+          "token_index": {
+            "3": 3,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "3",
+          "source_text": "2000",
+          "target_text": "ICC KnockOut Trophy",
+          "relation": "nummod",
+          "relations": [
+            "nummod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "2",
+              "governor_text": "ICC KnockOut Trophy",
+              "dependent_text": "2000",
+              "governor_graph_text": "PersonA",
+              "dependent_graph_text": "2000",
+              "governor_index": 3,
+              "dependent_index": 2,
+              "dependency_label": "nummod"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "2",
+          "dependency_label": "nummod",
+          "token_text": {
+            "3": "ICC KnockOut Trophy",
+            "2": "2000"
+          },
+          "token_index": {
+            "3": 3,
+            "2": 2
+          }
+        },
+        {
+          "source": "3",
+          "target": "6",
+          "source_text": "ICC KnockOut Trophy",
+          "target_text": "debut",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "3",
+              "governor_text": "debut",
+              "dependent_text": "ICC KnockOut Trophy",
+              "governor_graph_text": "debut",
+              "dependent_graph_text": "PersonA",
+              "governor_index": 6,
+              "dependent_index": 3,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "3",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "6": "debut",
+            "3": "ICC KnockOut Trophy"
+          },
+          "token_index": {
+            "6": 6,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "6",
+          "source_text": "was",
+          "target_text": "debut",
+          "relation": "cop",
+          "relations": [
+            "cop"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "4",
+              "governor_text": "debut",
+              "dependent_text": "was",
+              "governor_graph_text": "debut",
+              "dependent_graph_text": "was",
+              "governor_index": 6,
+              "dependent_index": 4,
+              "dependency_label": "cop"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "4",
+          "dependency_label": "cop",
+          "token_text": {
+            "6": "debut",
+            "4": "was"
+          },
+          "token_index": {
+            "6": 6,
+            "4": 4
+          }
+        },
+        {
+          "source": "5",
+          "target": "6",
+          "source_text": "the",
+          "target_text": "debut",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "5",
+              "governor_text": "debut",
+              "dependent_text": "the",
+              "governor_graph_text": "debut",
+              "dependent_graph_text": "the",
+              "governor_index": 6,
+              "dependent_index": 5,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "5",
+          "dependency_label": "det",
+          "token_text": {
+            "6": "debut",
+            "5": "the"
+          },
+          "token_index": {
+            "6": 6,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "10",
+          "source_text": "debut",
+          "target_text": "cricketer",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "10",
+              "governor_text": "debut",
+              "dependent_text": "cricketer",
+              "governor_graph_text": "debut",
+              "dependent_graph_text": "cricketer",
+              "governor_index": 6,
+              "dependent_index": 10,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "10",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "6": "debut",
+            "10": "cricketer"
+          },
+          "token_index": {
+            "6": 6,
+            "10": 10
+          }
+        },
+        {
+          "source": "6",
+          "target": "18",
+          "source_text": "debut",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "18",
+              "governor_text": "debut",
+              "dependent_text": "?",
+              "governor_graph_text": "debut",
+              "dependent_graph_text": "?",
+              "governor_index": 6,
+              "dependent_index": 18,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "18",
+          "dependency_label": "punct",
+          "token_text": {
+            "6": "debut",
+            "18": "?"
+          },
+          "token_index": {
+            "6": 6,
+            "18": 18
+          }
+        },
+        {
+          "source": "7",
+          "target": "10",
+          "source_text": "of",
+          "target_text": "cricketer",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "7",
+              "governor_text": "cricketer",
+              "dependent_text": "of",
+              "governor_graph_text": "cricketer",
+              "dependent_graph_text": "of",
+              "governor_index": 10,
+              "dependent_index": 7,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "7",
+          "dependency_label": "case",
+          "token_text": {
+            "10": "cricketer",
+            "7": "of"
+          },
+          "token_index": {
+            "10": 10,
+            "7": 7
+          }
+        },
+        {
+          "source": "8",
+          "target": "10",
+          "source_text": "a",
+          "target_text": "cricketer",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "8",
+              "governor_text": "cricketer",
+              "dependent_text": "a",
+              "governor_graph_text": "cricketer",
+              "dependent_graph_text": "a",
+              "governor_index": 10,
+              "dependent_index": 8,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "8",
+          "dependency_label": "det",
+          "token_text": {
+            "10": "cricketer",
+            "8": "a"
+          },
+          "token_index": {
+            "10": 10,
+            "8": 8
+          }
+        },
+        {
+          "source": "9",
+          "target": "10",
+          "source_text": "Jamaican",
+          "target_text": "cricketer",
+          "relation": "amod",
+          "relations": [
+            "amod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "9",
+              "governor_text": "cricketer",
+              "dependent_text": "Jamaican",
+              "governor_graph_text": "cricketer",
+              "dependent_graph_text": "Jamaican",
+              "governor_index": 10,
+              "dependent_index": 9,
+              "dependency_label": "amod"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "9",
+          "dependency_label": "amod",
+          "token_text": {
+            "10": "cricketer",
+            "9": "Jamaican"
+          },
+          "token_index": {
+            "10": 10,
+            "9": 9
+          }
+        },
+        {
+          "source": "10",
+          "target": "11",
+          "source_text": "cricketer",
+          "target_text": "who",
+          "relation": "acl",
+          "relations": [
+            "acl"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "11",
+              "governor_text": "cricketer",
+              "dependent_text": "who",
+              "governor_graph_text": "cricketer",
+              "dependent_graph_text": "who",
+              "governor_index": 10,
+              "dependent_index": 11,
+              "dependency_label": "acl"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "11",
+          "dependency_label": "acl",
+          "token_text": {
+            "10": "cricketer",
+            "11": "who"
+          },
+          "token_index": {
+            "10": 10,
+            "11": 11
+          }
+        },
+        {
+          "source": "11",
+          "target": "12",
+          "source_text": "who",
+          "target_text": "is",
+          "relation": "cop",
+          "relations": [
+            "cop"
+          ],
+          "directed_edges": [
+            {
+              "governor": "11",
+              "dependent": "12",
+              "governor_text": "who",
+              "dependent_text": "is",
+              "governor_graph_text": "who",
+              "dependent_graph_text": "is",
+              "governor_index": 11,
+              "dependent_index": 12,
+              "dependency_label": "cop"
+            }
+          ],
+          "original_governor": "11",
+          "original_dependent": "12",
+          "dependency_label": "cop",
+          "token_text": {
+            "11": "who",
+            "12": "is"
+          },
+          "token_index": {
+            "11": 11,
+            "12": 12
+          }
+        },
+        {
+          "source": "11",
+          "target": "17",
+          "source_text": "who",
+          "target_text": "batsman",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "11",
+              "dependent": "17",
+              "governor_text": "who",
+              "dependent_text": "batsman",
+              "governor_graph_text": "who",
+              "dependent_graph_text": "batsman",
+              "governor_index": 11,
+              "dependent_index": 17,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "11",
+          "original_dependent": "17",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "11": "who",
+            "17": "batsman"
+          },
+          "token_index": {
+            "11": 11,
+            "17": 17
+          }
+        },
+        {
+          "source": "13",
+          "target": "17",
+          "source_text": "a",
+          "target_text": "batsman",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "17",
+              "dependent": "13",
+              "governor_text": "batsman",
+              "dependent_text": "a",
+              "governor_graph_text": "batsman",
+              "dependent_graph_text": "a",
+              "governor_index": 17,
+              "dependent_index": 13,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "17",
+          "original_dependent": "13",
+          "dependency_label": "det",
+          "token_text": {
+            "17": "batsman",
+            "13": "a"
+          },
+          "token_index": {
+            "17": 17,
+            "13": 13
+          }
+        },
+        {
+          "source": "14",
+          "target": "16",
+          "source_text": "right",
+          "target_text": "handed",
+          "relation": "amod",
+          "relations": [
+            "amod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "16",
+              "dependent": "14",
+              "governor_text": "handed",
+              "dependent_text": "right",
+              "governor_graph_text": "handed",
+              "dependent_graph_text": "right",
+              "governor_index": 16,
+              "dependent_index": 14,
+              "dependency_label": "amod"
+            }
+          ],
+          "original_governor": "16",
+          "original_dependent": "14",
+          "dependency_label": "amod",
+          "token_text": {
+            "16": "handed",
+            "14": "right"
+          },
+          "token_index": {
+            "16": 16,
+            "14": 14
+          }
+        },
+        {
+          "source": "15",
+          "target": "16",
+          "source_text": "-",
+          "target_text": "handed",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "16",
+              "dependent": "15",
+              "governor_text": "handed",
+              "dependent_text": "-",
+              "governor_graph_text": "handed",
+              "dependent_graph_text": "-",
+              "governor_index": 16,
+              "dependent_index": 15,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "16",
+          "original_dependent": "15",
+          "dependency_label": "punct",
+          "token_text": {
+            "16": "handed",
+            "15": "-"
+          },
+          "token_index": {
+            "16": 16,
+            "15": 15
+          }
+        },
+        {
+          "source": "16",
+          "target": "17",
+          "source_text": "handed",
+          "target_text": "batsman",
+          "relation": "amod",
+          "relations": [
+            "amod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "17",
+              "dependent": "16",
+              "governor_text": "batsman",
+              "dependent_text": "handed",
+              "governor_graph_text": "batsman",
+              "dependent_graph_text": "handed",
+              "governor_index": 17,
+              "dependent_index": 16,
+              "dependency_label": "amod"
+            }
+          ],
+          "original_governor": "17",
+          "original_dependent": "16",
+          "dependency_label": "amod",
+          "token_text": {
+            "17": "batsman",
+            "16": "handed"
+          },
+          "token_index": {
+            "17": 17,
+            "16": 16
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "ICC KnockOut Trophy",
+        "graph_node_ids": [
+          "3"
+        ],
+        "token_ids": [
+          3
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Person"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer",
+          "who",
+          "batsman",
+          "handed",
+          "right"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10",
+          "11",
+          "17",
+          "16",
+          "14"
+        ],
+        "length": 7,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "11",
+            "source_text": "cricketer",
+            "target_text": "who",
+            "relations": [
+              "acl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "11",
+                "governor_text": "cricketer",
+                "dependent_text": "who",
+                "governor_graph_text": "cricketer",
+                "dependent_graph_text": "who",
+                "governor_index": 10,
+                "dependent_index": 11,
+                "dependency_label": "acl"
+              }
+            ]
+          },
+          {
+            "source": "11",
+            "target": "17",
+            "source_text": "who",
+            "target_text": "batsman",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "11",
+                "dependent": "17",
+                "governor_text": "who",
+                "dependent_text": "batsman",
+                "governor_graph_text": "who",
+                "dependent_graph_text": "batsman",
+                "governor_index": 11,
+                "dependent_index": 17,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "16",
+            "source_text": "batsman",
+            "target_text": "handed",
+            "relations": [
+              "amod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "16",
+                "governor_text": "batsman",
+                "dependent_text": "handed",
+                "governor_graph_text": "batsman",
+                "dependent_graph_text": "handed",
+                "governor_index": 17,
+                "dependent_index": 16,
+                "dependency_label": "amod"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "14",
+            "source_text": "handed",
+            "target_text": "right",
+            "relations": [
+              "amod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "14",
+                "governor_text": "handed",
+                "dependent_text": "right",
+                "governor_graph_text": "handed",
+                "dependent_graph_text": "right",
+                "governor_index": 16,
+                "dependent_index": 14,
+                "dependency_label": "amod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer",
+          "who",
+          "batsman",
+          "handed"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10",
+          "11",
+          "17",
+          "16"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "11",
+            "source_text": "cricketer",
+            "target_text": "who",
+            "relations": [
+              "acl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "11",
+                "governor_text": "cricketer",
+                "dependent_text": "who",
+                "governor_graph_text": "cricketer",
+                "dependent_graph_text": "who",
+                "governor_index": 10,
+                "dependent_index": 11,
+                "dependency_label": "acl"
+              }
+            ]
+          },
+          {
+            "source": "11",
+            "target": "17",
+            "source_text": "who",
+            "target_text": "batsman",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "11",
+                "dependent": "17",
+                "governor_text": "who",
+                "dependent_text": "batsman",
+                "governor_graph_text": "who",
+                "dependent_graph_text": "batsman",
+                "governor_index": 11,
+                "dependent_index": 17,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "16",
+            "source_text": "batsman",
+            "target_text": "handed",
+            "relations": [
+              "amod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "16",
+                "governor_text": "batsman",
+                "dependent_text": "handed",
+                "governor_graph_text": "batsman",
+                "dependent_graph_text": "handed",
+                "governor_index": 17,
+                "dependent_index": 16,
+                "dependency_label": "amod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer",
+          "who",
+          "batsman",
+          "handed",
+          "-"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10",
+          "11",
+          "17",
+          "16",
+          "15"
+        ],
+        "length": 7,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "11",
+            "source_text": "cricketer",
+            "target_text": "who",
+            "relations": [
+              "acl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "11",
+                "governor_text": "cricketer",
+                "dependent_text": "who",
+                "governor_graph_text": "cricketer",
+                "dependent_graph_text": "who",
+                "governor_index": 10,
+                "dependent_index": 11,
+                "dependency_label": "acl"
+              }
+            ]
+          },
+          {
+            "source": "11",
+            "target": "17",
+            "source_text": "who",
+            "target_text": "batsman",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "11",
+                "dependent": "17",
+                "governor_text": "who",
+                "dependent_text": "batsman",
+                "governor_graph_text": "who",
+                "dependent_graph_text": "batsman",
+                "governor_index": 11,
+                "dependent_index": 17,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "16",
+            "source_text": "batsman",
+            "target_text": "handed",
+            "relations": [
+              "amod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "16",
+                "governor_text": "batsman",
+                "dependent_text": "handed",
+                "governor_graph_text": "batsman",
+                "dependent_graph_text": "handed",
+                "governor_index": 17,
+                "dependent_index": 16,
+                "dependency_label": "amod"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "15",
+            "source_text": "handed",
+            "target_text": "-",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "15",
+                "governor_text": "handed",
+                "dependent_text": "-",
+                "governor_graph_text": "handed",
+                "dependent_graph_text": "-",
+                "governor_index": 16,
+                "dependent_index": 15,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer",
+          "who",
+          "batsman"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10",
+          "11",
+          "17"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "11",
+            "source_text": "cricketer",
+            "target_text": "who",
+            "relations": [
+              "acl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "11",
+                "governor_text": "cricketer",
+                "dependent_text": "who",
+                "governor_graph_text": "cricketer",
+                "dependent_graph_text": "who",
+                "governor_index": 10,
+                "dependent_index": 11,
+                "dependency_label": "acl"
+              }
+            ]
+          },
+          {
+            "source": "11",
+            "target": "17",
+            "source_text": "who",
+            "target_text": "batsman",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "11",
+                "dependent": "17",
+                "governor_text": "who",
+                "dependent_text": "batsman",
+                "governor_graph_text": "who",
+                "dependent_graph_text": "batsman",
+                "governor_index": 11,
+                "dependent_index": 17,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer",
+          "who",
+          "batsman",
+          "a"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10",
+          "11",
+          "17",
+          "13"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "11",
+            "source_text": "cricketer",
+            "target_text": "who",
+            "relations": [
+              "acl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "11",
+                "governor_text": "cricketer",
+                "dependent_text": "who",
+                "governor_graph_text": "cricketer",
+                "dependent_graph_text": "who",
+                "governor_index": 10,
+                "dependent_index": 11,
+                "dependency_label": "acl"
+              }
+            ]
+          },
+          {
+            "source": "11",
+            "target": "17",
+            "source_text": "who",
+            "target_text": "batsman",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "11",
+                "dependent": "17",
+                "governor_text": "who",
+                "dependent_text": "batsman",
+                "governor_graph_text": "who",
+                "dependent_graph_text": "batsman",
+                "governor_index": 11,
+                "dependent_index": 17,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "13",
+            "source_text": "batsman",
+            "target_text": "a",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "13",
+                "governor_text": "batsman",
+                "dependent_text": "a",
+                "governor_graph_text": "batsman",
+                "dependent_graph_text": "a",
+                "governor_index": 17,
+                "dependent_index": 13,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer",
+          "Jamaican"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10",
+          "9"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "9",
+            "source_text": "cricketer",
+            "target_text": "Jamaican",
+            "relations": [
+              "amod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "9",
+                "governor_text": "cricketer",
+                "dependent_text": "Jamaican",
+                "governor_graph_text": "cricketer",
+                "dependent_graph_text": "Jamaican",
+                "governor_index": 10,
+                "dependent_index": 9,
+                "dependency_label": "amod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer",
+          "who"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10",
+          "11"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "11",
+            "source_text": "cricketer",
+            "target_text": "who",
+            "relations": [
+              "acl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "11",
+                "governor_text": "cricketer",
+                "dependent_text": "who",
+                "governor_graph_text": "cricketer",
+                "dependent_graph_text": "who",
+                "governor_index": 10,
+                "dependent_index": 11,
+                "dependency_label": "acl"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer",
+          "who",
+          "is"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10",
+          "11",
+          "12"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "11",
+            "source_text": "cricketer",
+            "target_text": "who",
+            "relations": [
+              "acl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "11",
+                "governor_text": "cricketer",
+                "dependent_text": "who",
+                "governor_graph_text": "cricketer",
+                "dependent_graph_text": "who",
+                "governor_index": 10,
+                "dependent_index": 11,
+                "dependency_label": "acl"
+              }
+            ]
+          },
+          {
+            "source": "11",
+            "target": "12",
+            "source_text": "who",
+            "target_text": "is",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "11",
+                "dependent": "12",
+                "governor_text": "who",
+                "dependent_text": "is",
+                "governor_graph_text": "who",
+                "dependent_graph_text": "is",
+                "governor_index": 11,
+                "dependent_index": 12,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer",
+          "of"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10",
+          "7"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "cricketer",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "7",
+                "governor_text": "cricketer",
+                "dependent_text": "of",
+                "governor_graph_text": "cricketer",
+                "dependent_graph_text": "of",
+                "governor_index": 10,
+                "dependent_index": 7,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p11",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "cricketer",
+          "a"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "10",
+          "8"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "10",
+            "source_text": "debut",
+            "target_text": "cricketer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "debut",
+                "dependent_text": "cricketer",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "cricketer",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "8",
+            "source_text": "cricketer",
+            "target_text": "a",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "cricketer",
+                "dependent_text": "a",
+                "governor_graph_text": "cricketer",
+                "dependent_graph_text": "a",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p12",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "2000"
+        ],
+        "node_ids": [
+          "3",
+          "2"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "2",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "2000",
+            "relations": [
+              "nummod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "2",
+                "governor_text": "ICC KnockOut Trophy",
+                "dependent_text": "2000",
+                "governor_graph_text": "PersonA",
+                "dependent_graph_text": "2000",
+                "governor_index": 3,
+                "dependent_index": 2,
+                "dependency_label": "nummod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p13",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut"
+        ],
+        "node_ids": [
+          "3",
+          "6"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p14",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "was"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "4"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "debut",
+            "target_text": "was",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "debut",
+                "dependent_text": "was",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "was",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p15",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "the"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "5",
+            "source_text": "debut",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "5",
+                "governor_text": "debut",
+                "dependent_text": "the",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "the",
+                "governor_index": 6,
+                "dependent_index": 5,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p16",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "debut",
+          "?"
+        ],
+        "node_ids": [
+          "3",
+          "6",
+          "18"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "6",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "debut",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "debut",
+                "dependent_text": "ICC KnockOut Trophy",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "18",
+            "source_text": "debut",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "18",
+                "governor_text": "debut",
+                "dependent_text": "?",
+                "governor_graph_text": "debut",
+                "dependent_graph_text": "?",
+                "governor_index": 6,
+                "dependent_index": 18,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p17",
+        "entity_id": "e1",
+        "entity_text": "ICC KnockOut Trophy",
+        "nodes": [
+          "ICC KnockOut Trophy",
+          "The"
+        ],
+        "node_ids": [
+          "3",
+          "1"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "3",
+            "target": "1",
+            "source_text": "ICC KnockOut Trophy",
+            "target_text": "The",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "1",
+                "governor_text": "ICC KnockOut Trophy",
+                "dependent_text": "The",
+                "governor_graph_text": "PersonA",
+                "dependent_graph_text": "The",
+                "governor_index": 3,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_selected_entity_paths": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "reason": "This path provides a comprehensive reasoning chain from the ICC KnockOut Trophy to the cricketer's debut and their batting style, which is essential for answering the question.",
+        "path": {
+          "path_id": "e1_p1",
+          "entity_id": "e1",
+          "entity_text": "ICC KnockOut Trophy",
+          "nodes": [
+            "ICC KnockOut Trophy",
+            "debut",
+            "cricketer",
+            "who",
+            "batsman",
+            "handed",
+            "right"
+          ],
+          "node_ids": [
+            "3",
+            "6",
+            "10",
+            "11",
+            "17",
+            "16",
+            "14"
+          ],
+          "length": 7,
+          "evidence": [
+            {
+              "source": "3",
+              "target": "6",
+              "source_text": "ICC KnockOut Trophy",
+              "target_text": "debut",
+              "relations": [
+                "nsubj"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "6",
+                  "dependent": "3",
+                  "governor_text": "debut",
+                  "dependent_text": "ICC KnockOut Trophy",
+                  "governor_graph_text": "debut",
+                  "dependent_graph_text": "PersonA",
+                  "governor_index": 6,
+                  "dependent_index": 3,
+                  "dependency_label": "nsubj"
+                }
+              ]
+            },
+            {
+              "source": "6",
+              "target": "10",
+              "source_text": "debut",
+              "target_text": "cricketer",
+              "relations": [
+                "nmod:of"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "6",
+                  "dependent": "10",
+                  "governor_text": "debut",
+                  "dependent_text": "cricketer",
+                  "governor_graph_text": "debut",
+                  "dependent_graph_text": "cricketer",
+                  "governor_index": 6,
+                  "dependent_index": 10,
+                  "dependency_label": "nmod:of"
+                }
+              ]
+            },
+            {
+              "source": "10",
+              "target": "11",
+              "source_text": "cricketer",
+              "target_text": "who",
+              "relations": [
+                "acl"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "10",
+                  "dependent": "11",
+                  "governor_text": "cricketer",
+                  "dependent_text": "who",
+                  "governor_graph_text": "cricketer",
+                  "dependent_graph_text": "who",
+                  "governor_index": 10,
+                  "dependent_index": 11,
+                  "dependency_label": "acl"
+                }
+              ]
+            },
+            {
+              "source": "11",
+              "target": "17",
+              "source_text": "who",
+              "target_text": "batsman",
+              "relations": [
+                "nsubj"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "11",
+                  "dependent": "17",
+                  "governor_text": "who",
+                  "dependent_text": "batsman",
+                  "governor_graph_text": "who",
+                  "dependent_graph_text": "batsman",
+                  "governor_index": 11,
+                  "dependent_index": 17,
+                  "dependency_label": "nsubj"
+                }
+              ]
+            },
+            {
+              "source": "17",
+              "target": "16",
+              "source_text": "batsman",
+              "target_text": "handed",
+              "relations": [
+                "amod"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "17",
+                  "dependent": "16",
+                  "governor_text": "batsman",
+                  "dependent_text": "handed",
+                  "governor_graph_text": "batsman",
+                  "dependent_graph_text": "handed",
+                  "governor_index": 17,
+                  "dependent_index": 16,
+                  "dependency_label": "amod"
+                }
+              ]
+            },
+            {
+              "source": "16",
+              "target": "14",
+              "source_text": "handed",
+              "target_text": "right",
+              "relations": [
+                "amod"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "16",
+                  "dependent": "14",
+                  "governor_text": "handed",
+                  "dependent_text": "right",
+                  "governor_graph_text": "handed",
+                  "dependent_graph_text": "right",
+                  "governor_index": 16,
+                  "dependent_index": 14,
+                  "dependency_label": "amod"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "9_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "icc_knockout_trophy",
+          "label": "ICC KnockOut Trophy",
+          "kind": "entity",
+          "semantic_type": "Event",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "3"
+          ],
+          "source_token_indices": [
+            3
+          ],
+          "grounding_text": "ICC KnockOut Trophy",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "debut",
+          "label": "debut",
+          "kind": "type_variable",
+          "semantic_type": "Event",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "6"
+          ],
+          "source_token_indices": [
+            6
+          ],
+          "grounding_text": "debut",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "cricketer",
+          "label": "cricketer",
+          "kind": "type_variable",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "10"
+          ],
+          "source_token_indices": [
+            10
+          ],
+          "grounding_text": "cricketer",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "batsman",
+          "label": "batsman",
+          "kind": "type_variable",
+          "semantic_type": "Role",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "17"
+          ],
+          "source_token_indices": [
+            17
+          ],
+          "grounding_text": "batsman",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "handed",
+          "label": "handed",
+          "kind": "type_variable",
+          "semantic_type": "Attribute",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "16"
+          ],
+          "source_token_indices": [
+            16
+          ],
+          "grounding_text": "handed",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "right",
+          "label": "right",
+          "kind": "value_slot",
+          "semantic_type": "Handedness",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "14"
+          ],
+          "source_token_indices": [
+            14
+          ],
+          "grounding_text": "right",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "icc_knockout_trophy",
+          "target": "debut",
+          "edge_type": "attribute",
+          "relation_hint": "debut of ICC KnockOut Trophy",
+          "support_path": [
+            "e1_p1",
+            "3",
+            "6"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "debut",
+          "target": "cricketer",
+          "edge_type": "attribute",
+          "relation_hint": "cricketer who debuted",
+          "support_path": [
+            "e1_p1",
+            "6",
+            "10"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "cricketer",
+          "target": "batsman",
+          "edge_type": "attribute",
+          "relation_hint": "batsman role of cricketer",
+          "support_path": [
+            "e1_p1",
+            "10",
+            "11",
+            "17"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "batsman",
+          "target": "handed",
+          "edge_type": "attribute",
+          "relation_hint": "handedness of batsman",
+          "support_path": [
+            "e1_p1",
+            "17",
+            "16"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "handed",
+          "target": "right",
+          "edge_type": "attribute",
+          "relation_hint": "right-handedness",
+          "support_path": [
+            "e1_p1",
+            "16",
+            "14"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "nodes": [
+          {
+            "id": "icc_knockout_trophy",
+            "label": "ICC KnockOut Trophy",
+            "kind": "entity",
+            "semantic_type": "Event",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "3"
+            ]
+          },
+          {
+            "id": "debut",
+            "label": "debut",
+            "kind": "type_variable",
+            "semantic_type": "Event",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "6"
+            ]
+          },
+          {
+            "id": "cricketer",
+            "label": "cricketer",
+            "kind": "type_variable",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "10"
+            ]
+          },
+          {
+            "id": "batsman",
+            "label": "batsman",
+            "kind": "type_variable",
+            "semantic_type": "Role",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "17"
+            ]
+          },
+          {
+            "id": "handed",
+            "label": "handed",
+            "kind": "type_variable",
+            "semantic_type": "Attribute",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "16"
+            ]
+          },
+          {
+            "id": "right",
+            "label": "right",
+            "kind": "value_slot",
+            "semantic_type": "Handedness",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "14"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "icc_knockout_trophy",
+            "target": "debut",
+            "relation": "debut of ICC KnockOut Trophy",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "3",
+              "6"
+            ]
+          },
+          {
+            "source": "debut",
+            "target": "cricketer",
+            "relation": "cricketer who debuted",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "6",
+              "10"
+            ]
+          },
+          {
+            "source": "cricketer",
+            "target": "batsman",
+            "relation": "batsman role of cricketer",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "10",
+              "11",
+              "17"
+            ]
+          },
+          {
+            "source": "batsman",
+            "target": "handed",
+            "relation": "handedness of batsman",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "17",
+              "16"
+            ]
+          },
+          {
+            "source": "handed",
+            "target": "right",
+            "relation": "right-handedness",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "16",
+              "14"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "right"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {},
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "10_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "When did the ICC KnockOut Trophy debut?",
+          "type": "lookup",
+          "inputs": [
+            "ICC KnockOut Trophy"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "icc_knockout_trophy",
+          "target_node": "debut",
+          "ast_edge": {
+            "source": "icc_knockout_trophy",
+            "target": "debut",
+            "edge_type": "attribute",
+            "relation_hint": "debut of ICC KnockOut Trophy",
+            "support_path": [
+              "e1_p1",
+              "3",
+              "6"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "Who is the cricketer who debuted in the ICC KnockOut Trophy?",
+          "type": "lookup",
+          "inputs": [
+            "X1"
+          ],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": "debut",
+          "target_node": "cricketer",
+          "ast_edge": {
+            "source": "debut",
+            "target": "cricketer",
+            "edge_type": "attribute",
+            "relation_hint": "cricketer who debuted",
+            "support_path": [
+              "e1_p1",
+              "6",
+              "10"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q3",
+          "question": "What is the batting style of the cricketer of the debut of ICC KnockOut Trophy?",
+          "type": "lookup",
+          "inputs": [
+            "X2"
+          ],
+          "output": "X3",
+          "depends_on": [
+            "q2"
+          ],
+          "source_node": "cricketer",
+          "target_node": "batsman",
+          "ast_edge": {
+            "source": "cricketer",
+            "target": "batsman",
+            "edge_type": "attribute",
+            "relation_hint": "batsman role of cricketer",
+            "support_path": [
+              "e1_p1",
+              "10",
+              "11",
+              "17"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q4",
+          "question": "What is the handedness of the batsman of the cricketer of the debut of ICC KnockOut Trophy?",
+          "type": "lookup",
+          "inputs": [
+            "X3"
+          ],
+          "output": "X4",
+          "depends_on": [
+            "q3"
+          ],
+          "source_node": "batsman",
+          "target_node": "handed",
+          "ast_edge": {
+            "source": "batsman",
+            "target": "handed",
+            "edge_type": "attribute",
+            "relation_hint": "handedness of batsman",
+            "support_path": [
+              "e1_p1",
+              "17",
+              "16"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q5",
+          "question": "Is the batsman of the cricketer of the debut of ICC KnockOut Trophy right-handed?",
+          "type": "lookup",
+          "inputs": [
+            "X4"
+          ],
+          "output": "X5",
+          "depends_on": [
+            "q4"
+          ],
+          "source_node": "handed",
+          "target_node": "right",
+          "ast_edge": {
+            "source": "handed",
+            "target": "right",
+            "edge_type": "attribute",
+            "relation_hint": "right-handedness",
+            "support_path": [
+              "e1_p1",
+              "16",
+              "14"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        },
+        {
+          "source": "q2",
+          "target": "q3",
+          "variable": "X2"
+        },
+        {
+          "source": "q3",
+          "target": "q4",
+          "variable": "X3"
+        },
+        {
+          "source": "q4",
+          "target": "q5",
+          "variable": "X4"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2",
+        "X3": "q3",
+        "X4": "q4",
+        "X5": "q5"
+      },
+      "warnings": []
+    },
+    "10_subquestions": [
+      {
+        "index": 1,
+        "question": "When did the ICC KnockOut Trophy debut?",
+        "answer_variable": "X1",
+        "source_node": "icc_knockout_trophy",
+        "target_node": "debut",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "icc_knockout_trophy",
+          "target": "debut",
+          "edge_type": "attribute",
+          "relation_hint": "debut of ICC KnockOut Trophy",
+          "support_path": [
+            "e1_p1",
+            "3",
+            "6"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "Who is the cricketer who debuted in the ICC KnockOut Trophy?",
+        "answer_variable": "X2",
+        "source_node": "debut",
+        "target_node": "cricketer",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "debut",
+          "target": "cricketer",
+          "edge_type": "attribute",
+          "relation_hint": "cricketer who debuted",
+          "support_path": [
+            "e1_p1",
+            "6",
+            "10"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 3,
+        "question": "What is the batting style of the cricketer of the debut of ICC KnockOut Trophy?",
+        "answer_variable": "X3",
+        "source_node": "cricketer",
+        "target_node": "batsman",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "cricketer",
+          "target": "batsman",
+          "edge_type": "attribute",
+          "relation_hint": "batsman role of cricketer",
+          "support_path": [
+            "e1_p1",
+            "10",
+            "11",
+            "17"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 4,
+        "question": "What is the handedness of the batsman of the cricketer of the debut of ICC KnockOut Trophy?",
+        "answer_variable": "X4",
+        "source_node": "batsman",
+        "target_node": "handed",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "batsman",
+          "target": "handed",
+          "edge_type": "attribute",
+          "relation_hint": "handedness of batsman",
+          "support_path": [
+            "e1_p1",
+            "17",
+            "16"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 5,
+        "question": "Is the batsman of the cricketer of the debut of ICC KnockOut Trophy right-handed?",
+        "answer_variable": "X5",
+        "source_node": "handed",
+        "target_node": "right",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "handed",
+          "target": "right",
+          "edge_type": "attribute",
+          "relation_hint": "right-handedness",
+          "support_path": [
+            "e1_p1",
+            "16",
+            "14"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,1849 @@
+{
+  "status": "ok",
+  "dataset": "hotpotqa",
+  "questions_file": "questions\\hotpotqa\\questions.json",
+  "index": 1,
+  "qid": null,
+  "question": "what is one of the stars of  The Newcomers known for",
+  "raw_question_item": {
+    "question": "what is one of the stars of  The Newcomers known for",
+    "answer": "superhero roles as the Marvel Comics"
+  },
+  "gold_answer": "superhero roles as the Marvel Comics",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "what is one of the stars of The Newcomers known for",
+      "normalized_question": "what is one of the stars of The Newcomers known for?",
+      "changed": true,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "what is one of the stars of The Newcomers known for",
+        "changed": false,
+        "rewrite_type": "identity",
+        "added_type_variables": [],
+        "reason": "The original question is grammatically correct and does not present any syntactic risks for dependency parsing."
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "The Newcomers",
+          "start_char": 28,
+          "end_char": 41,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "reason": "multi-token title of a film"
+        }
+      ],
+      "warnings": []
+    },
+    "3_selective_masked_question": "what is one of the stars of MovieA known for?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "what",
+          "character_offset_begin": 0,
+          "character_offset_end": 4,
+          "lemma": "what",
+          "pos": "WP"
+        },
+        {
+          "index": 2,
+          "word": "is",
+          "character_offset_begin": 5,
+          "character_offset_end": 7,
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "index": 3,
+          "word": "one",
+          "character_offset_begin": 8,
+          "character_offset_end": 11,
+          "lemma": "one",
+          "pos": "CD"
+        },
+        {
+          "index": 4,
+          "word": "of",
+          "character_offset_begin": 12,
+          "character_offset_end": 14,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 5,
+          "word": "the",
+          "character_offset_begin": 15,
+          "character_offset_end": 18,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 6,
+          "word": "stars",
+          "character_offset_begin": 19,
+          "character_offset_end": 24,
+          "lemma": "star",
+          "pos": "NNS"
+        },
+        {
+          "index": 7,
+          "word": "of",
+          "character_offset_begin": 25,
+          "character_offset_end": 27,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 8,
+          "word": "MovieA",
+          "character_offset_begin": 28,
+          "character_offset_end": 34,
+          "lemma": "moviea",
+          "pos": "NN"
+        },
+        {
+          "index": 9,
+          "word": "known",
+          "character_offset_begin": 35,
+          "character_offset_end": 40,
+          "lemma": "know",
+          "pos": "VBN"
+        },
+        {
+          "index": 10,
+          "word": "for",
+          "character_offset_begin": 41,
+          "character_offset_end": 44,
+          "lemma": "for",
+          "pos": "IN"
+        },
+        {
+          "index": 11,
+          "word": "?",
+          "character_offset_begin": 44,
+          "character_offset_end": 45,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "what",
+          "relation": "cop",
+          "target": "is",
+          "source_index": 1,
+          "target_index": 2
+        },
+        {
+          "source": "stars",
+          "relation": "det:qmod",
+          "target": "one",
+          "source_index": 6,
+          "target_index": 3
+        },
+        {
+          "source": "one",
+          "relation": "fixed",
+          "target": "of",
+          "source_index": 3,
+          "target_index": 4
+        },
+        {
+          "source": "stars",
+          "relation": "det",
+          "target": "the",
+          "source_index": 6,
+          "target_index": 5
+        },
+        {
+          "source": "known",
+          "relation": "nsubj",
+          "target": "stars",
+          "source_index": 9,
+          "target_index": 6
+        },
+        {
+          "source": "MovieA",
+          "relation": "case",
+          "target": "of",
+          "source_index": 8,
+          "target_index": 7
+        },
+        {
+          "source": "stars",
+          "relation": "nmod:of",
+          "target": "MovieA",
+          "source_index": 6,
+          "target_index": 8
+        },
+        {
+          "source": "what",
+          "relation": "dep",
+          "target": "known",
+          "source_index": 1,
+          "target_index": 9
+        },
+        {
+          "source": "known",
+          "relation": "dep",
+          "target": "for",
+          "source_index": 9,
+          "target_index": 10
+        },
+        {
+          "source": "what",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 1,
+          "target_index": 11
+        }
+      ],
+      "edge_display": [
+        "what[1] --cop--> is[2]",
+        "stars[6] --det:qmod--> one[3]",
+        "one[3] --fixed--> of[4]",
+        "stars[6] --det--> the[5]",
+        "known[9] --nsubj--> stars[6]",
+        "MovieA[8] --case--> of[7]",
+        "stars[6] --nmod:of--> MovieA[8]",
+        "what[1] --dep--> known[9]",
+        "known[9] --dep--> for[10]",
+        "what[1] --punct--> ?[11]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "what",
+          "graph_text": "what",
+          "text": "what",
+          "label": "what[1]",
+          "order": 1,
+          "pos": "WP",
+          "lemma": "what",
+          "character_offset_begin": 0,
+          "character_offset_end": 4
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "is",
+          "graph_text": "is",
+          "text": "is",
+          "label": "is[2]",
+          "order": 2,
+          "pos": "VBZ",
+          "lemma": "be",
+          "character_offset_begin": 5,
+          "character_offset_end": 7
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "one",
+          "graph_text": "one",
+          "text": "one",
+          "label": "one[3]",
+          "order": 3,
+          "pos": "CD",
+          "lemma": "one",
+          "character_offset_begin": 8,
+          "character_offset_end": 11
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[4]",
+          "order": 4,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 12,
+          "character_offset_end": 14
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[5]",
+          "order": 5,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 15,
+          "character_offset_end": 18
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "stars",
+          "graph_text": "stars",
+          "text": "stars",
+          "label": "stars[6]",
+          "order": 6,
+          "pos": "NNS",
+          "lemma": "star",
+          "character_offset_begin": 19,
+          "character_offset_end": 24
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[7]",
+          "order": 7,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 25,
+          "character_offset_end": 27
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "MovieA",
+          "graph_text": "MovieA",
+          "text": "The Newcomers",
+          "label": "The Newcomers[8]",
+          "order": 8,
+          "pos": "NN",
+          "lemma": "moviea",
+          "character_offset_begin": 28,
+          "character_offset_end": 34
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "known",
+          "graph_text": "known",
+          "text": "known",
+          "label": "known[9]",
+          "order": 9,
+          "pos": "VBN",
+          "lemma": "know",
+          "character_offset_begin": 35,
+          "character_offset_end": 40
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "for",
+          "graph_text": "for",
+          "text": "for",
+          "label": "for[10]",
+          "order": 10,
+          "pos": "IN",
+          "lemma": "for",
+          "character_offset_begin": 41,
+          "character_offset_end": 44
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[11]",
+          "order": 11,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 44,
+          "character_offset_end": 45
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "2",
+          "source_text": "what",
+          "target_text": "is",
+          "relation": "cop",
+          "relations": [
+            "cop"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "2",
+              "governor_text": "what",
+              "dependent_text": "is",
+              "governor_graph_text": "what",
+              "dependent_graph_text": "is",
+              "governor_index": 1,
+              "dependent_index": 2,
+              "dependency_label": "cop"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "2",
+          "dependency_label": "cop",
+          "token_text": {
+            "1": "what",
+            "2": "is"
+          },
+          "token_index": {
+            "1": 1,
+            "2": 2
+          }
+        },
+        {
+          "source": "1",
+          "target": "9",
+          "source_text": "what",
+          "target_text": "known",
+          "relation": "dep",
+          "relations": [
+            "dep"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "9",
+              "governor_text": "what",
+              "dependent_text": "known",
+              "governor_graph_text": "what",
+              "dependent_graph_text": "known",
+              "governor_index": 1,
+              "dependent_index": 9,
+              "dependency_label": "dep"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "9",
+          "dependency_label": "dep",
+          "token_text": {
+            "1": "what",
+            "9": "known"
+          },
+          "token_index": {
+            "1": 1,
+            "9": 9
+          }
+        },
+        {
+          "source": "1",
+          "target": "11",
+          "source_text": "what",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "11",
+              "governor_text": "what",
+              "dependent_text": "?",
+              "governor_graph_text": "what",
+              "dependent_graph_text": "?",
+              "governor_index": 1,
+              "dependent_index": 11,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "11",
+          "dependency_label": "punct",
+          "token_text": {
+            "1": "what",
+            "11": "?"
+          },
+          "token_index": {
+            "1": 1,
+            "11": 11
+          }
+        },
+        {
+          "source": "3",
+          "target": "6",
+          "source_text": "one",
+          "target_text": "stars",
+          "relation": "det:qmod",
+          "relations": [
+            "det:qmod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "3",
+              "governor_text": "stars",
+              "dependent_text": "one",
+              "governor_graph_text": "stars",
+              "dependent_graph_text": "one",
+              "governor_index": 6,
+              "dependent_index": 3,
+              "dependency_label": "det:qmod"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "3",
+          "dependency_label": "det:qmod",
+          "token_text": {
+            "6": "stars",
+            "3": "one"
+          },
+          "token_index": {
+            "6": 6,
+            "3": 3
+          }
+        },
+        {
+          "source": "3",
+          "target": "4",
+          "source_text": "one",
+          "target_text": "of",
+          "relation": "fixed",
+          "relations": [
+            "fixed"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "4",
+              "governor_text": "one",
+              "dependent_text": "of",
+              "governor_graph_text": "one",
+              "dependent_graph_text": "of",
+              "governor_index": 3,
+              "dependent_index": 4,
+              "dependency_label": "fixed"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "4",
+          "dependency_label": "fixed",
+          "token_text": {
+            "3": "one",
+            "4": "of"
+          },
+          "token_index": {
+            "3": 3,
+            "4": 4
+          }
+        },
+        {
+          "source": "5",
+          "target": "6",
+          "source_text": "the",
+          "target_text": "stars",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "5",
+              "governor_text": "stars",
+              "dependent_text": "the",
+              "governor_graph_text": "stars",
+              "dependent_graph_text": "the",
+              "governor_index": 6,
+              "dependent_index": 5,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "5",
+          "dependency_label": "det",
+          "token_text": {
+            "6": "stars",
+            "5": "the"
+          },
+          "token_index": {
+            "6": 6,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "9",
+          "source_text": "stars",
+          "target_text": "known",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "6",
+              "governor_text": "known",
+              "dependent_text": "stars",
+              "governor_graph_text": "known",
+              "dependent_graph_text": "stars",
+              "governor_index": 9,
+              "dependent_index": 6,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "6",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "9": "known",
+            "6": "stars"
+          },
+          "token_index": {
+            "9": 9,
+            "6": 6
+          }
+        },
+        {
+          "source": "6",
+          "target": "8",
+          "source_text": "stars",
+          "target_text": "The Newcomers",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "8",
+              "governor_text": "stars",
+              "dependent_text": "The Newcomers",
+              "governor_graph_text": "stars",
+              "dependent_graph_text": "MovieA",
+              "governor_index": 6,
+              "dependent_index": 8,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "8",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "6": "stars",
+            "8": "The Newcomers"
+          },
+          "token_index": {
+            "6": 6,
+            "8": 8
+          }
+        },
+        {
+          "source": "7",
+          "target": "8",
+          "source_text": "of",
+          "target_text": "The Newcomers",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "8",
+              "dependent": "7",
+              "governor_text": "The Newcomers",
+              "dependent_text": "of",
+              "governor_graph_text": "MovieA",
+              "dependent_graph_text": "of",
+              "governor_index": 8,
+              "dependent_index": 7,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "8",
+          "original_dependent": "7",
+          "dependency_label": "case",
+          "token_text": {
+            "8": "The Newcomers",
+            "7": "of"
+          },
+          "token_index": {
+            "8": 8,
+            "7": 7
+          }
+        },
+        {
+          "source": "9",
+          "target": "10",
+          "source_text": "known",
+          "target_text": "for",
+          "relation": "dep",
+          "relations": [
+            "dep"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "10",
+              "governor_text": "known",
+              "dependent_text": "for",
+              "governor_graph_text": "known",
+              "dependent_graph_text": "for",
+              "governor_index": 9,
+              "dependent_index": 10,
+              "dependency_label": "dep"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "10",
+          "dependency_label": "dep",
+          "token_text": {
+            "9": "known",
+            "10": "for"
+          },
+          "token_index": {
+            "9": 9,
+            "10": 10
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "The Newcomers",
+        "graph_node_ids": [
+          "8"
+        ],
+        "token_ids": [
+          8
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Film"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "The Newcomers",
+        "nodes": [
+          "The Newcomers",
+          "stars",
+          "known",
+          "what"
+        ],
+        "node_ids": [
+          "8",
+          "6",
+          "9",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "The Newcomers",
+            "target_text": "stars",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "8",
+                "governor_text": "stars",
+                "dependent_text": "The Newcomers",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "MovieA",
+                "governor_index": 6,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "9",
+            "source_text": "stars",
+            "target_text": "known",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "6",
+                "governor_text": "known",
+                "dependent_text": "stars",
+                "governor_graph_text": "known",
+                "dependent_graph_text": "stars",
+                "governor_index": 9,
+                "dependent_index": 6,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "1",
+            "source_text": "known",
+            "target_text": "what",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "9",
+                "governor_text": "what",
+                "dependent_text": "known",
+                "governor_graph_text": "what",
+                "dependent_graph_text": "known",
+                "governor_index": 1,
+                "dependent_index": 9,
+                "dependency_label": "dep"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "The Newcomers",
+        "nodes": [
+          "The Newcomers",
+          "stars",
+          "known",
+          "what",
+          "is"
+        ],
+        "node_ids": [
+          "8",
+          "6",
+          "9",
+          "1",
+          "2"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "The Newcomers",
+            "target_text": "stars",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "8",
+                "governor_text": "stars",
+                "dependent_text": "The Newcomers",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "MovieA",
+                "governor_index": 6,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "9",
+            "source_text": "stars",
+            "target_text": "known",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "6",
+                "governor_text": "known",
+                "dependent_text": "stars",
+                "governor_graph_text": "known",
+                "dependent_graph_text": "stars",
+                "governor_index": 9,
+                "dependent_index": 6,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "1",
+            "source_text": "known",
+            "target_text": "what",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "9",
+                "governor_text": "what",
+                "dependent_text": "known",
+                "governor_graph_text": "what",
+                "dependent_graph_text": "known",
+                "governor_index": 1,
+                "dependent_index": 9,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "1",
+            "target": "2",
+            "source_text": "what",
+            "target_text": "is",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "2",
+                "governor_text": "what",
+                "dependent_text": "is",
+                "governor_graph_text": "what",
+                "dependent_graph_text": "is",
+                "governor_index": 1,
+                "dependent_index": 2,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "The Newcomers",
+        "nodes": [
+          "The Newcomers",
+          "stars",
+          "known",
+          "what",
+          "?"
+        ],
+        "node_ids": [
+          "8",
+          "6",
+          "9",
+          "1",
+          "11"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "The Newcomers",
+            "target_text": "stars",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "8",
+                "governor_text": "stars",
+                "dependent_text": "The Newcomers",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "MovieA",
+                "governor_index": 6,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "9",
+            "source_text": "stars",
+            "target_text": "known",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "6",
+                "governor_text": "known",
+                "dependent_text": "stars",
+                "governor_graph_text": "known",
+                "dependent_graph_text": "stars",
+                "governor_index": 9,
+                "dependent_index": 6,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "1",
+            "source_text": "known",
+            "target_text": "what",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "9",
+                "governor_text": "what",
+                "dependent_text": "known",
+                "governor_graph_text": "what",
+                "dependent_graph_text": "known",
+                "governor_index": 1,
+                "dependent_index": 9,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "1",
+            "target": "11",
+            "source_text": "what",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "11",
+                "governor_text": "what",
+                "dependent_text": "?",
+                "governor_graph_text": "what",
+                "dependent_graph_text": "?",
+                "governor_index": 1,
+                "dependent_index": 11,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "The Newcomers",
+        "nodes": [
+          "The Newcomers",
+          "stars",
+          "one"
+        ],
+        "node_ids": [
+          "8",
+          "6",
+          "3"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "The Newcomers",
+            "target_text": "stars",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "8",
+                "governor_text": "stars",
+                "dependent_text": "The Newcomers",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "MovieA",
+                "governor_index": 6,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "3",
+            "source_text": "stars",
+            "target_text": "one",
+            "relations": [
+              "det:qmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "stars",
+                "dependent_text": "one",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "one",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "det:qmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "The Newcomers",
+        "nodes": [
+          "The Newcomers",
+          "stars",
+          "known"
+        ],
+        "node_ids": [
+          "8",
+          "6",
+          "9"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "The Newcomers",
+            "target_text": "stars",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "8",
+                "governor_text": "stars",
+                "dependent_text": "The Newcomers",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "MovieA",
+                "governor_index": 6,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "9",
+            "source_text": "stars",
+            "target_text": "known",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "6",
+                "governor_text": "known",
+                "dependent_text": "stars",
+                "governor_graph_text": "known",
+                "dependent_graph_text": "stars",
+                "governor_index": 9,
+                "dependent_index": 6,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "The Newcomers",
+        "nodes": [
+          "The Newcomers",
+          "stars",
+          "one",
+          "of"
+        ],
+        "node_ids": [
+          "8",
+          "6",
+          "3",
+          "4"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "The Newcomers",
+            "target_text": "stars",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "8",
+                "governor_text": "stars",
+                "dependent_text": "The Newcomers",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "MovieA",
+                "governor_index": 6,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "3",
+            "source_text": "stars",
+            "target_text": "one",
+            "relations": [
+              "det:qmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "stars",
+                "dependent_text": "one",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "one",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "det:qmod"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "4",
+            "source_text": "one",
+            "target_text": "of",
+            "relations": [
+              "fixed"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "4",
+                "governor_text": "one",
+                "dependent_text": "of",
+                "governor_graph_text": "one",
+                "dependent_graph_text": "of",
+                "governor_index": 3,
+                "dependent_index": 4,
+                "dependency_label": "fixed"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "The Newcomers",
+        "nodes": [
+          "The Newcomers",
+          "stars",
+          "known",
+          "for"
+        ],
+        "node_ids": [
+          "8",
+          "6",
+          "9",
+          "10"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "The Newcomers",
+            "target_text": "stars",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "8",
+                "governor_text": "stars",
+                "dependent_text": "The Newcomers",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "MovieA",
+                "governor_index": 6,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "9",
+            "source_text": "stars",
+            "target_text": "known",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "6",
+                "governor_text": "known",
+                "dependent_text": "stars",
+                "governor_graph_text": "known",
+                "dependent_graph_text": "stars",
+                "governor_index": 9,
+                "dependent_index": 6,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "10",
+            "source_text": "known",
+            "target_text": "for",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "10",
+                "governor_text": "known",
+                "dependent_text": "for",
+                "governor_graph_text": "known",
+                "dependent_graph_text": "for",
+                "governor_index": 9,
+                "dependent_index": 10,
+                "dependency_label": "dep"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "The Newcomers",
+        "nodes": [
+          "The Newcomers",
+          "stars"
+        ],
+        "node_ids": [
+          "8",
+          "6"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "The Newcomers",
+            "target_text": "stars",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "8",
+                "governor_text": "stars",
+                "dependent_text": "The Newcomers",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "MovieA",
+                "governor_index": 6,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "The Newcomers",
+        "nodes": [
+          "The Newcomers",
+          "stars",
+          "the"
+        ],
+        "node_ids": [
+          "8",
+          "6",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "The Newcomers",
+            "target_text": "stars",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "8",
+                "governor_text": "stars",
+                "dependent_text": "The Newcomers",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "MovieA",
+                "governor_index": 6,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "5",
+            "source_text": "stars",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "5",
+                "governor_text": "stars",
+                "dependent_text": "the",
+                "governor_graph_text": "stars",
+                "dependent_graph_text": "the",
+                "governor_index": 6,
+                "dependent_index": 5,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "The Newcomers",
+        "nodes": [
+          "The Newcomers",
+          "of"
+        ],
+        "node_ids": [
+          "8",
+          "7"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "7",
+            "source_text": "The Newcomers",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "8",
+                "dependent": "7",
+                "governor_text": "The Newcomers",
+                "dependent_text": "of",
+                "governor_graph_text": "MovieA",
+                "dependent_graph_text": "of",
+                "governor_index": 8,
+                "dependent_index": 7,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_selected_entity_paths": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p7",
+        "reason": "This path follows the useful reasoning chain from the entity 'The Newcomers' through 'stars' to 'known for', which directly addresses the question about what one of the stars is known for.",
+        "path": {
+          "path_id": "e1_p7",
+          "entity_id": "e1",
+          "entity_text": "The Newcomers",
+          "nodes": [
+            "The Newcomers",
+            "stars",
+            "known",
+            "for"
+          ],
+          "node_ids": [
+            "8",
+            "6",
+            "9",
+            "10"
+          ],
+          "length": 4,
+          "evidence": [
+            {
+              "source": "8",
+              "target": "6",
+              "source_text": "The Newcomers",
+              "target_text": "stars",
+              "relations": [
+                "nmod:of"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "6",
+                  "dependent": "8",
+                  "governor_text": "stars",
+                  "dependent_text": "The Newcomers",
+                  "governor_graph_text": "stars",
+                  "dependent_graph_text": "MovieA",
+                  "governor_index": 6,
+                  "dependent_index": 8,
+                  "dependency_label": "nmod:of"
+                }
+              ]
+            },
+            {
+              "source": "6",
+              "target": "9",
+              "source_text": "stars",
+              "target_text": "known",
+              "relations": [
+                "nsubj"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "9",
+                  "dependent": "6",
+                  "governor_text": "known",
+                  "dependent_text": "stars",
+                  "governor_graph_text": "known",
+                  "dependent_graph_text": "stars",
+                  "governor_index": 9,
+                  "dependent_index": 6,
+                  "dependency_label": "nsubj"
+                }
+              ]
+            },
+            {
+              "source": "9",
+              "target": "10",
+              "source_text": "known",
+              "target_text": "for",
+              "relations": [
+                "dep"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "9",
+                  "dependent": "10",
+                  "governor_text": "known",
+                  "dependent_text": "for",
+                  "governor_graph_text": "known",
+                  "dependent_graph_text": "for",
+                  "governor_index": 9,
+                  "dependent_index": 10,
+                  "dependency_label": "dep"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "9_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "the_newcomers",
+          "label": "The Newcomers",
+          "kind": "entity",
+          "semantic_type": "Movie",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "8"
+          ],
+          "source_token_indices": [
+            8
+          ],
+          "grounding_text": "The Newcomers",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "stars",
+          "label": "stars",
+          "kind": "type_variable",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "6"
+          ],
+          "source_token_indices": [
+            6
+          ],
+          "grounding_text": "stars",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "known_for",
+          "label": "known_for",
+          "kind": "value_slot",
+          "semantic_type": "Achievement",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "9",
+            "10"
+          ],
+          "source_token_indices": [
+            9,
+            10
+          ],
+          "grounding_text": "known_for",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "the_newcomers",
+          "target": "stars",
+          "edge_type": "attribute",
+          "relation_hint": "stars of The Newcomers",
+          "support_path": [
+            "e1_p7",
+            "8",
+            "6"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "stars",
+          "target": "known_for",
+          "edge_type": "attribute",
+          "relation_hint": "known for",
+          "support_path": [
+            "e1_p7",
+            "6",
+            "9",
+            "10"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "nodes": [
+          {
+            "id": "the_newcomers",
+            "label": "The Newcomers",
+            "kind": "entity",
+            "semantic_type": "Movie",
+            "source_path_ids": [
+              "e1_p7"
+            ],
+            "source_node_ids": [
+              "8"
+            ]
+          },
+          {
+            "id": "stars",
+            "label": "stars",
+            "kind": "type_variable",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p7"
+            ],
+            "source_node_ids": [
+              "6"
+            ]
+          },
+          {
+            "id": "known_for",
+            "label": "known_for",
+            "kind": "value_slot",
+            "semantic_type": "Achievement",
+            "source_path_ids": [
+              "e1_p7"
+            ],
+            "source_node_ids": [
+              "9",
+              "10"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "the_newcomers",
+            "target": "stars",
+            "relation": "stars of The Newcomers",
+            "support_path_id": "e1_p7",
+            "support_node_ids": [
+              "8",
+              "6"
+            ]
+          },
+          {
+            "source": "stars",
+            "target": "known_for",
+            "relation": "known for",
+            "support_path_id": "e1_p7",
+            "support_node_ids": [
+              "6",
+              "9",
+              "10"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "known_for"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {},
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "10_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who are the stars of The Newcomers?",
+          "type": "lookup",
+          "inputs": [
+            "The Newcomers"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "the_newcomers",
+          "target_node": "stars",
+          "ast_edge": {
+            "source": "the_newcomers",
+            "target": "stars",
+            "edge_type": "attribute",
+            "relation_hint": "stars of The Newcomers",
+            "support_path": [
+              "e1_p7",
+              "8",
+              "6"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "What is one of the stars of The Newcomers known for?",
+          "type": "lookup",
+          "inputs": [
+            "X1"
+          ],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": "stars",
+          "target_node": "known_for",
+          "ast_edge": {
+            "source": "stars",
+            "target": "known_for",
+            "edge_type": "attribute",
+            "relation_hint": "known for",
+            "support_path": [
+              "e1_p7",
+              "6",
+              "9",
+              "10"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "10_subquestions": [
+      {
+        "index": 1,
+        "question": "Who are the stars of The Newcomers?",
+        "answer_variable": "X1",
+        "source_node": "the_newcomers",
+        "target_node": "stars",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "the_newcomers",
+          "target": "stars",
+          "edge_type": "attribute",
+          "relation_hint": "stars of The Newcomers",
+          "support_path": [
+            "e1_p7",
+            "8",
+            "6"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "What is one of the stars of The Newcomers known for?",
+        "answer_variable": "X2",
+        "source_node": "stars",
+        "target_node": "known_for",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "stars",
+          "target": "known_for",
+          "edge_type": "attribute",
+          "relation_hint": "known for",
+          "support_path": [
+            "e1_p7",
+            "6",
+            "9",
+            "10"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

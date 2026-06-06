@@ -1,0 +1,15 @@
+{
+  "status": "error",
+  "dataset": "hotpotqa",
+  "questions_file": "questions\\hotpotqa\\questions.json",
+  "index": 19,
+  "qid": null,
+  "question": "One Raffles Place is one of the tallest skyscrapers in the city of Singapore and tallest in the wolrd outside North America until it was succeeded by a Building in city?",
+  "raw_question_item": {
+    "question": "One Raffles Place is one of the tallest skyscrapers in the city of Singapore and tallest in the wolrd outside North America until it was succeeded by a Building in city?",
+    "answer": "Hong Kong"
+  },
+  "gold_answer": "Hong Kong",
+  "error_type": "RuntimeError",
+  "error": "LLM did not return valid JSON after 3 attempts: Expecting ',' delimiter: line 2287 column 8 (char 59619)"
+}

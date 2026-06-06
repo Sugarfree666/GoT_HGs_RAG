@@ -446,19 +446,219 @@ Output JSON with exactly this shape:
 """.strip()
 
 
+ENTITY_PATH_SCORING_SYSTEM = """
+You are a dependency-path judge for DEPO.
+
+Your task is to score each entity-origin dependency path independently.
+You are not selecting the final path.
+You are not generating an AST.
+You are not generating atomic questions.
+
+A path receives a high score if it can support Step 9 semantic transduction into an executable branch-level semantic relation chain.
+
+Use the original question and the restored question as constraints.
+
+Important principles:
+1. The path must start from the given entity.
+2. A good path should cover necessary intermediate roles.
+3. A good path should cover the focus predicate or answer slot cue when needed.
+4. A good path should cover the answer intent.
+5. Wh words are not AST nodes, but they can be important answer-intent cues.
+6. Predicate words such as die, born, graduate, develop are usually not AST nodes, but they may be important relation or event cues.
+7. Do not reward a path just because it is long.
+8. Penalize paths that stop too early.
+9. Penalize paths that end only at auxiliaries, determiners, prepositions, or punctuation.
+10. Penalize paths that miss the required intermediate role or answer target.
+11. For parallel branch questions, score whether this path can support this entity's branch only.
+12. Do not generate a final comparison operator.
+
+Score from 0 to 100:
+90-100 = excellent, directly supports a complete branch-level semantic chain.
+75-89 = good, mostly complete but may miss a minor cue.
+55-74 = partially useful but incomplete.
+30-54 = weakly related.
+0-29 = invalid or not useful.
+
+Return valid JSON only.
+""".strip()
+
+
+def build_score_entity_paths_prompt(
+    original_question: str,
+    restored_question: str,
+    entity_start_nodes: list[dict[str, object]],
+    entity_origin_paths_by_entity: dict[str, list[dict[str, object]]],
+    question_intent_metadata: dict[str, object] | None = None,
+    validation_feedback: str | None = None,
+) -> str:
+    schema = {
+        "path_scores": [
+            {
+                "entity_id": "e1",
+                "path_id": "e1_p1",
+                "score": 95,
+                "valid": True,
+                "subscores": {
+                    "entity_grounding": 15,
+                    "semantic_chain_coverage": 25,
+                    "answer_intent_coverage": 25,
+                    "ast_executability": 23,
+                    "noise_and_minimality": 7,
+                },
+                "terminal_hint": "death_reason",
+                "semantic_chain_hint": ["wife", "death_reason"],
+                "covered_cues": ["wife", "die", "why"],
+                "missing_cues": [],
+                "fatal_errors": [],
+                "reason": "The path starts from John Middleton Murry, reaches wife, covers the die predicate, and includes the Why cue.",
+            }
+        ]
+    }
+    feedback = f"\nPrevious scoring feedback:\n{validation_feedback}\n" if validation_feedback else ""
+    return f"""
+Score every entity-origin dependency path independently.
+
+Original question:
+{original_question}
+
+Restored/normalized question:
+{restored_question}
+
+Entity start nodes:
+{json.dumps(entity_start_nodes, ensure_ascii=False, indent=2)}
+
+Question intent metadata:
+{json.dumps(question_intent_metadata or {}, ensure_ascii=False, indent=2)}
+
+Entity-origin dependency paths grouped by entity:
+{json.dumps(entity_origin_paths_by_entity, ensure_ascii=False, indent=2)}
+{feedback}
+Task:
+- Output one path_scores item for every supplied path_id unless the input path list is empty.
+- Do not choose a best path.
+- Do not output selected_paths.
+- Do not generate candidate nodes, a Problem Frame, an AST, atomic questions, or final operators.
+
+Scoring rules:
+1. Score must be a number from 0 to 100.
+2. path_id must come from the input paths and entity_id must match that path.
+3. valid=false paths still require score, fatal_errors, and reason.
+4. terminal_hint and semantic_chain_hint are only hints for later AST generation, not final AST nodes.
+5. Penalize paths that pass through another entity start when the entity's own branch should go to an answer slot.
+6. For common-answer, both/share/same, comparison, or parallel questions, score whether the path supports only that entity's branch toward the needed attribute.
+7. Wh words and predicates can be useful cues, but they must not be treated as final AST nodes here.
+
+Return strict JSON only.
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
+
+BEST_AST_SELECTION_SYSTEM = """
+You are judging candidate Semantic ASTs for DEPO.
+
+You are given multiple candidate ASTs. Each candidate was generated from a different path-set.
+Your task is to select the candidate AST that best supports decomposition into one-hop atomic subquestions for the original question.
+
+Do not generate a new AST.
+Do not modify candidate ASTs.
+Do not generate atomic questions unless draft questions are already provided for judging.
+Do not invent candidate IDs.
+Do not generate final comparison/operator questions.
+Return valid JSON only.
+""".strip()
+
+
+def build_best_ast_selection_prompt(
+    original_question: str,
+    restored_question: str,
+    entity_start_nodes: list[dict[str, object]],
+    path_set_candidates: list[dict[str, object]],
+    path_scores: list[dict[str, object]],
+    candidate_asts: list[dict[str, object]],
+    draft_atomic_questions_by_candidate: dict[str, list[dict[str, object]]] | None = None,
+    question_intent_metadata: dict[str, object] | None = None,
+) -> str:
+    schema = {
+        "ast_reviews": [
+            {
+                "candidate_id": "ast_ps1",
+                "path_set_id": "ps1",
+                "score": 0.96,
+                "valid_for_decomposition": True,
+                "covers_original_question": True,
+                "answer_intent_compatible": True,
+                "branch_complete": True,
+                "atomic_questions_would_be_executable": True,
+                "has_final_operator_question": False,
+                "fatal_errors": [],
+                "reason": "This AST decomposes each film into director and nationality branches without generating a final comparison question.",
+            }
+        ],
+        "best_candidate_id": "ast_ps1",
+    }
+    return f"""
+Select the best candidate Semantic AST for DEPO decomposition.
+
+Original question:
+{original_question}
+
+Restored/normalized question:
+{restored_question}
+
+Entity start nodes:
+{json.dumps(entity_start_nodes, ensure_ascii=False, indent=2)}
+
+Question intent metadata:
+{json.dumps(question_intent_metadata or {}, ensure_ascii=False, indent=2)}
+
+Path-set candidates:
+{json.dumps(path_set_candidates, ensure_ascii=False, indent=2)}
+
+Path-level scores and hints:
+{json.dumps(path_scores, ensure_ascii=False, indent=2)}
+
+Candidate ASTs:
+{json.dumps(candidate_asts, ensure_ascii=False, indent=2)}
+
+Draft atomic questions by candidate, if provided:
+{json.dumps(draft_atomic_questions_by_candidate or {}, ensure_ascii=False, indent=2)}
+
+Judge criteria:
+1. Prefer ASTs that cover the original question's required branch facts.
+2. Prefer ASTs whose final branch terminals match the question intent.
+3. Prefer ASTs that produce one-hop executable atomic subquestions.
+4. Prefer minimal but complete ASTs.
+5. Penalize ASTs that stop too early.
+6. Penalize ASTs that generate final comparison/operator nodes/questions.
+7. Penalize ASTs with unsupported shortcuts.
+8. Penalize ASTs that copy wh words, auxiliaries, punctuation, or pure predicates as AST nodes.
+9. For multi-entity parallel questions, prefer ASTs with complete branch-specific variables, e.g. director_r1/nationality_r1 and director_r2/nationality_r2.
+10. For DEPO, final comparison, boolean judgment, set/ranking/count reasoning is handled downstream, so the AST should only contain lookup branches.
+11. Candidate ASTs may include parse_error or generation_error metadata. Review those errors, but do not invent a replacement candidate.
+12. Choose only a candidate_id that appears in Candidate ASTs.
+
+Return strict JSON only.
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
+
 SELECTED_PATH_SEMANTIC_TRANSDUCTION_SYSTEM = """
-You are implementing DEPO Step 9: Selected Path Semantic Transduction.
-You receive selected entity-origin dependency paths that start from question entities.
-Your task is to convert each selected syntactic dependency path into an executable branch-level semantic relation chain.
+You are implementing DEPO Step 9: Candidate Path-Set Semantic Transduction.
+This is the compatible Selected Path Semantic Transduction interface for one path-set at a time.
+You receive a selected entity-origin dependency path-set whose paths start from question entities.
+Your task is to convert the complete path-set into executable branch-level semantic relation chains.
 
 You may only use information supported by:
 1. the original question, and
-2. the selected dependency paths.
+2. the selected dependency paths in this path-set.
 
 The selected dependency path is syntactic evidence, not the final semantic graph.
 Do not copy dependency tokens directly into AST nodes.
 AST nodes must be query endpoints: fixed named entities, intermediate variables licensed by the question, or final answer/value slots.
 Edges must be executable one-hop lookup relations.
+Wh words must not become AST nodes; use the original question wording to infer the appropriate final branch slot.
 
 You must not merge multiple selected paths into one shared branch.
 Do not generate final operator nodes, final comparison questions, intersection nodes, set nodes, logical nodes, or ranking nodes.
@@ -471,54 +671,52 @@ def build_selected_path_semantic_transduction_prompt(
     restored_question: str,
     selected_entity_paths: list[dict[str, object]],
     undirected_graph_edges: list[dict[str, object]],
-    validation_feedback: str | None = None,
 ) -> str:
     schema = {
         "nodes": [
             {
-                "id": "lothair_ii",
-                "label": "Lothair II",
+                "id": "john_middleton_murry",
+                "label": "John Middleton Murry",
                 "kind": "entity",
                 "semantic_type": "Person",
                 "source_path_ids": ["e1_p1"],
                 "source_node_ids": ["1"],
             },
             {
-                "id": "mother",
-                "label": "mother",
+                "id": "wife",
+                "label": "wife",
                 "kind": "type_variable",
                 "semantic_type": "Person",
                 "source_path_ids": ["e1_p1"],
                 "source_node_ids": ["2"],
             },
             {
-                "id": "death_date",
-                "label": "death_date",
-                "kind": "type_variable",
-                "semantic_type": "Date",
+                "id": "death_reason",
+                "label": "death_reason",
+                "kind": "value_slot",
+                "semantic_type": "Reason",
                 "source_path_ids": ["e1_p1"],
                 "source_node_ids": ["3", "4"],
             },
         ],
         "edges": [
             {
-                "source": "lothair_ii",
-                "target": "mother",
-                "relation": "mother of Lothair II",
+                "source": "john_middleton_murry",
+                "target": "wife",
+                "relation": "wife of John Middleton Murry",
                 "support_path_id": "e1_p1",
                 "support_node_ids": ["1", "2"],
             },
             {
-                "source": "mother",
-                "target": "death_date",
-                "relation": "date of death of the mother",
+                "source": "wife",
+                "target": "death_reason",
+                "relation": "reason why the wife died",
                 "support_path_id": "e1_p1",
                 "support_node_ids": ["2", "3", "4"],
             }
         ],
-        "branch_terminals": {"e1": "death_date"},
+        "branch_terminals": {"e1": "death_reason"},
     }
-    feedback = f"\nPrevious AST failed validation:\n{validation_feedback}\n" if validation_feedback else ""
     return f"""
 Construct a branch-level Semantic AST by transducing selected dependency paths into executable semantic lookup chains.
 
@@ -533,7 +731,6 @@ Selected entity-origin dependency paths:
 
 Full undirected graph edges for debugging:
 {json.dumps(undirected_graph_edges, ensure_ascii=False, indent=2)}
-{feedback}
 Goal:
 Convert each selected entity-origin dependency path into an executable branch-level semantic relation chain.
 The selected path is syntactic evidence, not the final semantic graph.
@@ -542,10 +739,10 @@ AST node contract:
 Allowed AST nodes:
 1. Fixed named entities given in the question.
 2. Intermediate variables explicitly licensed by the question, such as mother, father, author, CEO, company, director, spouse, performer.
-3. Final answer slots or value slots, such as university, nationality, death_date, birth_date, birthplace, location, city, release_date, screenplay.
+3. Final answer slots or value slots, such as university, nationality, death_date, death_reason, cause_of_death, birth_date, birthplace, location, city, release_date, screenplay, count.
 
 Forbidden AST nodes:
-1. wh words: who, what, which, where, when.
+1. wh words: who, what, which, where, when, why.
 2. auxiliaries: do, did, does, is, was, were.
 3. determiners and prepositions: the, a, an, of, in, by, from, to.
 4. punctuation.
@@ -553,10 +750,14 @@ Forbidden AST nodes:
 6. comparison/operator cues: same, share, different, later, earlier, older, younger, first.
 
 Predicate/value-slot conversion:
-- When + die/died -> death_date.
-- When + born -> birth_date.
-- Where + born -> birthplace.
-- Where + located -> location.
+- The wh cue / answer phrase in the original question determines the answer dimension.
+- The selected path predicate determines the event or relation domain.
+- why/reason + die/death -> death_reason or cause_of_death.
+- when/temporal + die/death -> death_date.
+- where/location + die/death -> death_place.
+- how/manner + die/death -> death_manner or cause_of_death.
+- when/temporal + born/birth -> birth_date.
+- where/location + born/birth -> birthplace.
 - Which university + graduate from -> university.
 - Which company + developed -> company.
 - same nationality -> nationality branch terminal, with no COMPARE_SAME operator.
@@ -578,26 +779,29 @@ Rules:
 8. Do not emit dependency-style edges such as when -> die, mother -> die, did -> die, or screenplay -> worked.
 9. Do not emit wh words, auxiliaries, prepositions, determiners, punctuation, pure predicate/event words, or comparison/operator cues as nodes.
 10. Do not merge a known entity and a possessed role into one AST node.
-11. For "When did Lothair II's mother die?" with selected path Lothair II's -- mother -- die -- When, output Lothair II -> mother -> death_date.
-12. Edge relation labels must be executable one-hop lookup relations.
+11. Wh words must not be AST nodes, but they should guide the final branch slot.
+12. For "When did Lothair II's mother die?" with selected path Lothair II's -- mother -- die -- When, output Lothair II -> mother -> death_date.
+13. For "Why did John Middleton Murry's wife die?" with selected path John Middleton Murry -- wife -- die -- Why, output John Middleton Murry -> wife -> death_reason or cause_of_death.
+14. Edge relation labels must be executable one-hop lookup relations.
     - Lothair II -> mother means "mother of Lothair II".
     - mother -> death_date means "date of death of the mother".
-13. Do not generate final operator nodes, final comparison questions, intersection nodes, set nodes, logical nodes, ranking nodes, or atomic subquestions.
-14. branch_terminals must map every selected entity_id to that branch's final answer/value slot node id.
-15. Preserve branch-specific variable clones for every multi-entity question. Do not merge shared labels or shared dependency tokens across selected paths.
+    - wife -> death_reason means "reason why the wife died".
+15. Do not generate final operator nodes, final comparison questions, intersection nodes, set nodes, logical nodes, ranking nodes, or atomic subquestions.
+16. branch_terminals must map every selected entity_id to that branch's final answer/value slot node id.
+17. Preserve branch-specific variable clones for every multi-entity question. Do not merge shared labels or shared dependency tokens across selected paths.
    - Correct: edward_carfagno -> screenplay_e1 and miklos_rozsa -> screenplay_e2, with worked-on semantics in the relation labels.
    - Incorrect: edward_carfagno -> worked <- miklos_rozsa and worked -> screenplay.
    - Correct: director_r1/nationality_r1 and director_r2/nationality_r2.
-16. For serial multi-hop questions, keep one-hop semantic edges in solve order.
-17. For same/share/both/common questions, keep the per-entity lookup branches separate. Final answer synthesis will compare or intersect the branch answers.
-18. Ordered comparison cue words are not ordinary semantic targets. Do not emit nodes or edges like film -> younger or director -> younger.
-19. If a selected path reaches only an ordered comparison cue, infer an explicit compared value slot supported by that cue:
+18. For serial multi-hop questions, keep one-hop semantic edges in solve order.
+19. For same/share/both/common questions, keep the per-entity lookup branches separate. Final answer synthesis will compare or intersect the branch answers.
+20. Ordered comparison cue words are not ordinary semantic targets. Do not emit nodes or edges like film -> younger or director -> younger.
+21. If a selected path reaches only an ordered comparison cue, infer an explicit compared value slot supported by that cue:
    - older/younger -> age, or date_of_birth when birth-date evidence is the intended retrievable value;
    - earlier/later/first/latest with films/events -> release_date/date when that is the compared value;
    - larger/smaller/greater/less/more/fewer -> the explicit measurable attribute in the question or path.
-20. Ground inferred value-slot nodes to the selected path and cue token: include source_path_ids and source_node_ids for the cue node that licenses the implicit value slot.
-21. For "Which film whose director is younger, Term Of Trial or Would You Marry Me??", use Term Of Trial -> director_r1 -> age_r1 and Would You Marry Me? -> director_r2 -> age_r2. Do not use Term Of Trial -> younger.
-22. Return strict JSON only.
+22. Ground inferred value-slot nodes to the selected path and cue token: include source_path_ids and source_node_ids for the cue node that licenses the implicit value slot.
+23. For "Which film whose director is younger, Term Of Trial or Would You Marry Me??", use Term Of Trial -> director_r1 -> age_r1 and Would You Marry Me? -> director_r2 -> age_r2. Do not use Term Of Trial -> younger.
+24. Return strict JSON only.
 
 Examples:
 - Young Man Luther -> author: relation "author of Young Man Luther"; author -> spouse: relation "spouse of the author".
@@ -606,6 +810,7 @@ Examples:
 - term_of_trial -> director_r1 -> age_r1 and would_you_marry_me -> director_r2 -> age_r2. The age nodes are inferred from the "younger" cue and grounded to that cue's source_node_ids.
 - AlphaGo -> company: relation "company that developed AlphaGo"; company -> CEO: relation "CEO of the company"; CEO -> university: relation "university the CEO graduated from".
 - Lothair II -> mother: relation "mother of Lothair II"; mother -> death_date: relation "date of death of the mother".
+- John Middleton Murry -> wife: relation "wife of John Middleton Murry"; wife -> death_reason: relation "reason why the wife died".
 
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
@@ -622,12 +827,12 @@ def build_path_pruned_ast_prompt(
     undirected_graph_edges: list[dict[str, object]],
     validation_feedback: str | None = None,
 ) -> str:
+    del validation_feedback
     return build_selected_path_semantic_transduction_prompt(
         original_question=original_question,
         restored_question=restored_question,
         selected_entity_paths=selected_entity_paths,
         undirected_graph_edges=undirected_graph_edges,
-        validation_feedback=validation_feedback,
     )
 
 MASK_SPAN_EXTRACTION_SYSTEM = """

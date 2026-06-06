@@ -1,0 +1,5354 @@
+{
+  "status": "ok",
+  "dataset": "hotpotqa",
+  "questions_file": "questions\\hotpotqa\\questions.json",
+  "index": 17,
+  "qid": null,
+  "question": "In what year was the Golden State NBA player, who was part of the Cavaliers-Warriors rivalry, named NBA Finals Most Valuable Player?",
+  "raw_question_item": {
+    "question": "In what year was the Golden State NBA player, who was part of the Cavaliers-Warriors rivalry, named NBA Finals Most Valuable Player?",
+    "answer": "2015"
+  },
+  "gold_answer": "2015",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "In what year was the Golden State NBA player, who was part of the Cavaliers-Warriors rivalry, named NBA Finals Most Valuable Player?",
+      "normalized_question": "In what year was the Golden State NBA player who was part of the Cavaliers-Warriors rivalry named NBA Finals Most Valuable Player?",
+      "changed": true,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "In what year was the Golden State NBA player who was part of the Cavaliers-Warriors rivalry named NBA Finals Most Valuable Player?",
+        "changed": false,
+        "rewrite_type": "identity",
+        "added_type_variables": [],
+        "reason": "The original question is grammatically correct and does not present any syntactic risks for dependency parsing."
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "Golden State NBA",
+          "start_char": 21,
+          "end_char": 37,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "reason": "multi-token person name in human context"
+        },
+        {
+          "text": "NBA Finals Most Valuable Player",
+          "start_char": 98,
+          "end_char": 129,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Event",
+          "reason": "multi-token title of an event"
+        }
+      ],
+      "warnings": [
+        "Dropped overlapping mask span text='Golden State'."
+      ]
+    },
+    "3_selective_masked_question": "In what year was the PersonA player who was part of the Cavaliers-Warriors rivalry named SomeEntityA?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "In",
+          "character_offset_begin": 0,
+          "character_offset_end": 2,
+          "lemma": "in",
+          "pos": "IN"
+        },
+        {
+          "index": 2,
+          "word": "what",
+          "character_offset_begin": 3,
+          "character_offset_end": 7,
+          "lemma": "what",
+          "pos": "WDT"
+        },
+        {
+          "index": 3,
+          "word": "year",
+          "character_offset_begin": 8,
+          "character_offset_end": 12,
+          "lemma": "year",
+          "pos": "NN"
+        },
+        {
+          "index": 4,
+          "word": "was",
+          "character_offset_begin": 13,
+          "character_offset_end": 16,
+          "lemma": "be",
+          "pos": "VBD"
+        },
+        {
+          "index": 5,
+          "word": "the",
+          "character_offset_begin": 17,
+          "character_offset_end": 20,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 6,
+          "word": "PersonA",
+          "character_offset_begin": 21,
+          "character_offset_end": 28,
+          "lemma": "persona",
+          "pos": "NN"
+        },
+        {
+          "index": 7,
+          "word": "player",
+          "character_offset_begin": 29,
+          "character_offset_end": 35,
+          "lemma": "player",
+          "pos": "NN"
+        },
+        {
+          "index": 8,
+          "word": "who",
+          "character_offset_begin": 36,
+          "character_offset_end": 39,
+          "lemma": "who",
+          "pos": "WP"
+        },
+        {
+          "index": 9,
+          "word": "was",
+          "character_offset_begin": 40,
+          "character_offset_end": 43,
+          "lemma": "be",
+          "pos": "VBD"
+        },
+        {
+          "index": 10,
+          "word": "part",
+          "character_offset_begin": 44,
+          "character_offset_end": 48,
+          "lemma": "part",
+          "pos": "NN"
+        },
+        {
+          "index": 11,
+          "word": "of",
+          "character_offset_begin": 49,
+          "character_offset_end": 51,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 12,
+          "word": "the",
+          "character_offset_begin": 52,
+          "character_offset_end": 55,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 13,
+          "word": "Cavaliers",
+          "character_offset_begin": 56,
+          "character_offset_end": 65,
+          "lemma": "Cavaliers",
+          "pos": "NNPS"
+        },
+        {
+          "index": 14,
+          "word": "-",
+          "character_offset_begin": 65,
+          "character_offset_end": 66,
+          "lemma": "-",
+          "pos": ":"
+        },
+        {
+          "index": 15,
+          "word": "Warriors",
+          "character_offset_begin": 66,
+          "character_offset_end": 74,
+          "lemma": "warrior",
+          "pos": "NNS"
+        },
+        {
+          "index": 16,
+          "word": "rivalry",
+          "character_offset_begin": 75,
+          "character_offset_end": 82,
+          "lemma": "rivalry",
+          "pos": "NN"
+        },
+        {
+          "index": 17,
+          "word": "named",
+          "character_offset_begin": 83,
+          "character_offset_end": 88,
+          "lemma": "name",
+          "pos": "VBN"
+        },
+        {
+          "index": 18,
+          "word": "SomeEntityA",
+          "character_offset_begin": 89,
+          "character_offset_end": 100,
+          "lemma": "SomeEntityA",
+          "pos": "NNP"
+        },
+        {
+          "index": 19,
+          "word": "?",
+          "character_offset_begin": 100,
+          "character_offset_end": 101,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "year",
+          "relation": "case",
+          "target": "In",
+          "source_index": 3,
+          "target_index": 1
+        },
+        {
+          "source": "year",
+          "relation": "det",
+          "target": "what",
+          "source_index": 3,
+          "target_index": 2
+        },
+        {
+          "source": "player",
+          "relation": "obl:in",
+          "target": "year",
+          "source_index": 7,
+          "target_index": 3
+        },
+        {
+          "source": "player",
+          "relation": "cop",
+          "target": "was",
+          "source_index": 7,
+          "target_index": 4
+        },
+        {
+          "source": "player",
+          "relation": "det",
+          "target": "the",
+          "source_index": 7,
+          "target_index": 5
+        },
+        {
+          "source": "player",
+          "relation": "compound",
+          "target": "PersonA",
+          "source_index": 7,
+          "target_index": 6
+        },
+        {
+          "source": "named",
+          "relation": "obj",
+          "target": "player",
+          "source_index": 17,
+          "target_index": 7
+        },
+        {
+          "source": "player",
+          "relation": "ref",
+          "target": "who",
+          "source_index": 7,
+          "target_index": 8
+        },
+        {
+          "source": "who",
+          "relation": "cop",
+          "target": "was",
+          "source_index": 8,
+          "target_index": 9
+        },
+        {
+          "source": "named",
+          "relation": "nsubj",
+          "target": "part",
+          "source_index": 17,
+          "target_index": 10
+        },
+        {
+          "source": "rivalry",
+          "relation": "case",
+          "target": "of",
+          "source_index": 16,
+          "target_index": 11
+        },
+        {
+          "source": "rivalry",
+          "relation": "det",
+          "target": "the",
+          "source_index": 16,
+          "target_index": 12
+        },
+        {
+          "source": "Warriors",
+          "relation": "compound",
+          "target": "Cavaliers",
+          "source_index": 15,
+          "target_index": 13
+        },
+        {
+          "source": "Warriors",
+          "relation": "punct",
+          "target": "-",
+          "source_index": 15,
+          "target_index": 14
+        },
+        {
+          "source": "rivalry",
+          "relation": "compound",
+          "target": "Warriors",
+          "source_index": 16,
+          "target_index": 15
+        },
+        {
+          "source": "part",
+          "relation": "nmod:of",
+          "target": "rivalry",
+          "source_index": 10,
+          "target_index": 16
+        },
+        {
+          "source": "player",
+          "relation": "acl:relcl",
+          "target": "named",
+          "source_index": 7,
+          "target_index": 17
+        },
+        {
+          "source": "named",
+          "relation": "obj",
+          "target": "SomeEntityA",
+          "source_index": 17,
+          "target_index": 18
+        },
+        {
+          "source": "player",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 7,
+          "target_index": 19
+        }
+      ],
+      "edge_display": [
+        "year[3] --case--> In[1]",
+        "year[3] --det--> what[2]",
+        "player[7] --obl:in--> year[3]",
+        "player[7] --cop--> was[4]",
+        "player[7] --det--> the[5]",
+        "player[7] --compound--> PersonA[6]",
+        "named[17] --obj--> player[7]",
+        "player[7] --ref--> who[8]",
+        "who[8] --cop--> was[9]",
+        "named[17] --nsubj--> part[10]",
+        "rivalry[16] --case--> of[11]",
+        "rivalry[16] --det--> the[12]",
+        "Warriors[15] --compound--> Cavaliers[13]",
+        "Warriors[15] --punct--> -[14]",
+        "rivalry[16] --compound--> Warriors[15]",
+        "part[10] --nmod:of--> rivalry[16]",
+        "player[7] --acl:relcl--> named[17]",
+        "named[17] --obj--> SomeEntityA[18]",
+        "player[7] --punct--> ?[19]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "In",
+          "graph_text": "In",
+          "text": "In",
+          "label": "In[1]",
+          "order": 1,
+          "pos": "IN",
+          "lemma": "in",
+          "character_offset_begin": 0,
+          "character_offset_end": 2
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "what",
+          "graph_text": "what",
+          "text": "what",
+          "label": "what[2]",
+          "order": 2,
+          "pos": "WDT",
+          "lemma": "what",
+          "character_offset_begin": 3,
+          "character_offset_end": 7
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "year",
+          "graph_text": "year",
+          "text": "year",
+          "label": "year[3]",
+          "order": 3,
+          "pos": "NN",
+          "lemma": "year",
+          "character_offset_begin": 8,
+          "character_offset_end": 12
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "was",
+          "graph_text": "was",
+          "text": "was",
+          "label": "was[4]",
+          "order": 4,
+          "pos": "VBD",
+          "lemma": "be",
+          "character_offset_begin": 13,
+          "character_offset_end": 16
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[5]",
+          "order": 5,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 17,
+          "character_offset_end": 20
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "PersonA",
+          "graph_text": "PersonA",
+          "text": "Golden State NBA",
+          "label": "Golden State NBA[6]",
+          "order": 6,
+          "pos": "NN",
+          "lemma": "persona",
+          "character_offset_begin": 21,
+          "character_offset_end": 28
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "player",
+          "graph_text": "player",
+          "text": "player",
+          "label": "player[7]",
+          "order": 7,
+          "pos": "NN",
+          "lemma": "player",
+          "character_offset_begin": 29,
+          "character_offset_end": 35
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "who",
+          "graph_text": "who",
+          "text": "who",
+          "label": "who[8]",
+          "order": 8,
+          "pos": "WP",
+          "lemma": "who",
+          "character_offset_begin": 36,
+          "character_offset_end": 39
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "was",
+          "graph_text": "was",
+          "text": "was",
+          "label": "was[9]",
+          "order": 9,
+          "pos": "VBD",
+          "lemma": "be",
+          "character_offset_begin": 40,
+          "character_offset_end": 43
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "part",
+          "graph_text": "part",
+          "text": "part",
+          "label": "part[10]",
+          "order": 10,
+          "pos": "NN",
+          "lemma": "part",
+          "character_offset_begin": 44,
+          "character_offset_end": 48
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[11]",
+          "order": 11,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 49,
+          "character_offset_end": 51
+        },
+        {
+          "id": "12",
+          "token_index": 12,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[12]",
+          "order": 12,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 52,
+          "character_offset_end": 55
+        },
+        {
+          "id": "13",
+          "token_index": 13,
+          "word": "Cavaliers",
+          "graph_text": "Cavaliers",
+          "text": "Cavaliers",
+          "label": "Cavaliers[13]",
+          "order": 13,
+          "pos": "NNPS",
+          "lemma": "Cavaliers",
+          "character_offset_begin": 56,
+          "character_offset_end": 65
+        },
+        {
+          "id": "14",
+          "token_index": 14,
+          "word": "-",
+          "graph_text": "-",
+          "text": "-",
+          "label": "-[14]",
+          "order": 14,
+          "pos": ":",
+          "lemma": "-",
+          "character_offset_begin": 65,
+          "character_offset_end": 66
+        },
+        {
+          "id": "15",
+          "token_index": 15,
+          "word": "Warriors",
+          "graph_text": "Warriors",
+          "text": "Warriors",
+          "label": "Warriors[15]",
+          "order": 15,
+          "pos": "NNS",
+          "lemma": "warrior",
+          "character_offset_begin": 66,
+          "character_offset_end": 74
+        },
+        {
+          "id": "16",
+          "token_index": 16,
+          "word": "rivalry",
+          "graph_text": "rivalry",
+          "text": "rivalry",
+          "label": "rivalry[16]",
+          "order": 16,
+          "pos": "NN",
+          "lemma": "rivalry",
+          "character_offset_begin": 75,
+          "character_offset_end": 82
+        },
+        {
+          "id": "17",
+          "token_index": 17,
+          "word": "named",
+          "graph_text": "named",
+          "text": "named",
+          "label": "named[17]",
+          "order": 17,
+          "pos": "VBN",
+          "lemma": "name",
+          "character_offset_begin": 83,
+          "character_offset_end": 88
+        },
+        {
+          "id": "18",
+          "token_index": 18,
+          "word": "SomeEntityA",
+          "graph_text": "SomeEntityA",
+          "text": "NBA Finals Most Valuable Player",
+          "label": "NBA Finals Most Valuable Player[18]",
+          "order": 18,
+          "pos": "NNP",
+          "lemma": "SomeEntityA",
+          "character_offset_begin": 89,
+          "character_offset_end": 100
+        },
+        {
+          "id": "19",
+          "token_index": 19,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[19]",
+          "order": 19,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 100,
+          "character_offset_end": 101
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "3",
+          "source_text": "In",
+          "target_text": "year",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "1",
+              "governor_text": "year",
+              "dependent_text": "In",
+              "governor_graph_text": "year",
+              "dependent_graph_text": "In",
+              "governor_index": 3,
+              "dependent_index": 1,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "1",
+          "dependency_label": "case",
+          "token_text": {
+            "3": "year",
+            "1": "In"
+          },
+          "token_index": {
+            "3": 3,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "3",
+          "source_text": "what",
+          "target_text": "year",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "3",
+              "dependent": "2",
+              "governor_text": "year",
+              "dependent_text": "what",
+              "governor_graph_text": "year",
+              "dependent_graph_text": "what",
+              "governor_index": 3,
+              "dependent_index": 2,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "3",
+          "original_dependent": "2",
+          "dependency_label": "det",
+          "token_text": {
+            "3": "year",
+            "2": "what"
+          },
+          "token_index": {
+            "3": 3,
+            "2": 2
+          }
+        },
+        {
+          "source": "3",
+          "target": "7",
+          "source_text": "year",
+          "target_text": "player",
+          "relation": "obl:in",
+          "relations": [
+            "obl:in"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "3",
+              "governor_text": "player",
+              "dependent_text": "year",
+              "governor_graph_text": "player",
+              "dependent_graph_text": "year",
+              "governor_index": 7,
+              "dependent_index": 3,
+              "dependency_label": "obl:in"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "3",
+          "dependency_label": "obl:in",
+          "token_text": {
+            "7": "player",
+            "3": "year"
+          },
+          "token_index": {
+            "7": 7,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "7",
+          "source_text": "was",
+          "target_text": "player",
+          "relation": "cop",
+          "relations": [
+            "cop"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "4",
+              "governor_text": "player",
+              "dependent_text": "was",
+              "governor_graph_text": "player",
+              "dependent_graph_text": "was",
+              "governor_index": 7,
+              "dependent_index": 4,
+              "dependency_label": "cop"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "4",
+          "dependency_label": "cop",
+          "token_text": {
+            "7": "player",
+            "4": "was"
+          },
+          "token_index": {
+            "7": 7,
+            "4": 4
+          }
+        },
+        {
+          "source": "5",
+          "target": "7",
+          "source_text": "the",
+          "target_text": "player",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "5",
+              "governor_text": "player",
+              "dependent_text": "the",
+              "governor_graph_text": "player",
+              "dependent_graph_text": "the",
+              "governor_index": 7,
+              "dependent_index": 5,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "5",
+          "dependency_label": "det",
+          "token_text": {
+            "7": "player",
+            "5": "the"
+          },
+          "token_index": {
+            "7": 7,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "7",
+          "source_text": "Golden State NBA",
+          "target_text": "player",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "6",
+              "governor_text": "player",
+              "dependent_text": "Golden State NBA",
+              "governor_graph_text": "player",
+              "dependent_graph_text": "PersonA",
+              "governor_index": 7,
+              "dependent_index": 6,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "6",
+          "dependency_label": "compound",
+          "token_text": {
+            "7": "player",
+            "6": "Golden State NBA"
+          },
+          "token_index": {
+            "7": 7,
+            "6": 6
+          }
+        },
+        {
+          "source": "7",
+          "target": "17",
+          "source_text": "player",
+          "target_text": "named",
+          "relation": "obj|acl:relcl",
+          "relations": [
+            "obj",
+            "acl:relcl"
+          ],
+          "directed_edges": [
+            {
+              "governor": "17",
+              "dependent": "7",
+              "governor_text": "named",
+              "dependent_text": "player",
+              "governor_graph_text": "named",
+              "dependent_graph_text": "player",
+              "governor_index": 17,
+              "dependent_index": 7,
+              "dependency_label": "obj"
+            },
+            {
+              "governor": "7",
+              "dependent": "17",
+              "governor_text": "player",
+              "dependent_text": "named",
+              "governor_graph_text": "player",
+              "dependent_graph_text": "named",
+              "governor_index": 7,
+              "dependent_index": 17,
+              "dependency_label": "acl:relcl"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "17",
+          "dependency_label": "acl:relcl",
+          "token_text": {
+            "7": "player",
+            "17": "named"
+          },
+          "token_index": {
+            "7": 7,
+            "17": 17
+          }
+        },
+        {
+          "source": "7",
+          "target": "8",
+          "source_text": "player",
+          "target_text": "who",
+          "relation": "ref",
+          "relations": [
+            "ref"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "8",
+              "governor_text": "player",
+              "dependent_text": "who",
+              "governor_graph_text": "player",
+              "dependent_graph_text": "who",
+              "governor_index": 7,
+              "dependent_index": 8,
+              "dependency_label": "ref"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "8",
+          "dependency_label": "ref",
+          "token_text": {
+            "7": "player",
+            "8": "who"
+          },
+          "token_index": {
+            "7": 7,
+            "8": 8
+          }
+        },
+        {
+          "source": "7",
+          "target": "19",
+          "source_text": "player",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "19",
+              "governor_text": "player",
+              "dependent_text": "?",
+              "governor_graph_text": "player",
+              "dependent_graph_text": "?",
+              "governor_index": 7,
+              "dependent_index": 19,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "19",
+          "dependency_label": "punct",
+          "token_text": {
+            "7": "player",
+            "19": "?"
+          },
+          "token_index": {
+            "7": 7,
+            "19": 19
+          }
+        },
+        {
+          "source": "8",
+          "target": "9",
+          "source_text": "who",
+          "target_text": "was",
+          "relation": "cop",
+          "relations": [
+            "cop"
+          ],
+          "directed_edges": [
+            {
+              "governor": "8",
+              "dependent": "9",
+              "governor_text": "who",
+              "dependent_text": "was",
+              "governor_graph_text": "who",
+              "dependent_graph_text": "was",
+              "governor_index": 8,
+              "dependent_index": 9,
+              "dependency_label": "cop"
+            }
+          ],
+          "original_governor": "8",
+          "original_dependent": "9",
+          "dependency_label": "cop",
+          "token_text": {
+            "8": "who",
+            "9": "was"
+          },
+          "token_index": {
+            "8": 8,
+            "9": 9
+          }
+        },
+        {
+          "source": "10",
+          "target": "17",
+          "source_text": "part",
+          "target_text": "named",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "17",
+              "dependent": "10",
+              "governor_text": "named",
+              "dependent_text": "part",
+              "governor_graph_text": "named",
+              "dependent_graph_text": "part",
+              "governor_index": 17,
+              "dependent_index": 10,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "17",
+          "original_dependent": "10",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "17": "named",
+            "10": "part"
+          },
+          "token_index": {
+            "17": 17,
+            "10": 10
+          }
+        },
+        {
+          "source": "10",
+          "target": "16",
+          "source_text": "part",
+          "target_text": "rivalry",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "16",
+              "governor_text": "part",
+              "dependent_text": "rivalry",
+              "governor_graph_text": "part",
+              "dependent_graph_text": "rivalry",
+              "governor_index": 10,
+              "dependent_index": 16,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "16",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "10": "part",
+            "16": "rivalry"
+          },
+          "token_index": {
+            "10": 10,
+            "16": 16
+          }
+        },
+        {
+          "source": "11",
+          "target": "16",
+          "source_text": "of",
+          "target_text": "rivalry",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "16",
+              "dependent": "11",
+              "governor_text": "rivalry",
+              "dependent_text": "of",
+              "governor_graph_text": "rivalry",
+              "dependent_graph_text": "of",
+              "governor_index": 16,
+              "dependent_index": 11,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "16",
+          "original_dependent": "11",
+          "dependency_label": "case",
+          "token_text": {
+            "16": "rivalry",
+            "11": "of"
+          },
+          "token_index": {
+            "16": 16,
+            "11": 11
+          }
+        },
+        {
+          "source": "12",
+          "target": "16",
+          "source_text": "the",
+          "target_text": "rivalry",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "16",
+              "dependent": "12",
+              "governor_text": "rivalry",
+              "dependent_text": "the",
+              "governor_graph_text": "rivalry",
+              "dependent_graph_text": "the",
+              "governor_index": 16,
+              "dependent_index": 12,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "16",
+          "original_dependent": "12",
+          "dependency_label": "det",
+          "token_text": {
+            "16": "rivalry",
+            "12": "the"
+          },
+          "token_index": {
+            "16": 16,
+            "12": 12
+          }
+        },
+        {
+          "source": "13",
+          "target": "15",
+          "source_text": "Cavaliers",
+          "target_text": "Warriors",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "15",
+              "dependent": "13",
+              "governor_text": "Warriors",
+              "dependent_text": "Cavaliers",
+              "governor_graph_text": "Warriors",
+              "dependent_graph_text": "Cavaliers",
+              "governor_index": 15,
+              "dependent_index": 13,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "15",
+          "original_dependent": "13",
+          "dependency_label": "compound",
+          "token_text": {
+            "15": "Warriors",
+            "13": "Cavaliers"
+          },
+          "token_index": {
+            "15": 15,
+            "13": 13
+          }
+        },
+        {
+          "source": "14",
+          "target": "15",
+          "source_text": "-",
+          "target_text": "Warriors",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "15",
+              "dependent": "14",
+              "governor_text": "Warriors",
+              "dependent_text": "-",
+              "governor_graph_text": "Warriors",
+              "dependent_graph_text": "-",
+              "governor_index": 15,
+              "dependent_index": 14,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "15",
+          "original_dependent": "14",
+          "dependency_label": "punct",
+          "token_text": {
+            "15": "Warriors",
+            "14": "-"
+          },
+          "token_index": {
+            "15": 15,
+            "14": 14
+          }
+        },
+        {
+          "source": "15",
+          "target": "16",
+          "source_text": "Warriors",
+          "target_text": "rivalry",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "16",
+              "dependent": "15",
+              "governor_text": "rivalry",
+              "dependent_text": "Warriors",
+              "governor_graph_text": "rivalry",
+              "dependent_graph_text": "Warriors",
+              "governor_index": 16,
+              "dependent_index": 15,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "16",
+          "original_dependent": "15",
+          "dependency_label": "compound",
+          "token_text": {
+            "16": "rivalry",
+            "15": "Warriors"
+          },
+          "token_index": {
+            "16": 16,
+            "15": 15
+          }
+        },
+        {
+          "source": "17",
+          "target": "18",
+          "source_text": "named",
+          "target_text": "NBA Finals Most Valuable Player",
+          "relation": "obj",
+          "relations": [
+            "obj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "17",
+              "dependent": "18",
+              "governor_text": "named",
+              "dependent_text": "NBA Finals Most Valuable Player",
+              "governor_graph_text": "named",
+              "dependent_graph_text": "SomeEntityA",
+              "governor_index": 17,
+              "dependent_index": 18,
+              "dependency_label": "obj"
+            }
+          ],
+          "original_governor": "17",
+          "original_dependent": "18",
+          "dependency_label": "obj",
+          "token_text": {
+            "17": "named",
+            "18": "NBA Finals Most Valuable Player"
+          },
+          "token_index": {
+            "17": 17,
+            "18": 18
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "Golden State NBA",
+        "graph_node_ids": [
+          "6"
+        ],
+        "token_ids": [
+          6
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Person"
+      },
+      {
+        "entity_id": "e2",
+        "text": "NBA Finals Most Valuable Player",
+        "graph_node_ids": [
+          "18"
+        ],
+        "token_ids": [
+          18
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Event"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "named",
+          "part",
+          "rivalry",
+          "Warriors",
+          "Cavaliers"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "17",
+          "10",
+          "16",
+          "15",
+          "13"
+        ],
+        "length": 7,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "17",
+            "source_text": "player",
+            "target_text": "named",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "15",
+            "source_text": "rivalry",
+            "target_text": "Warriors",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "15",
+                "governor_text": "rivalry",
+                "dependent_text": "Warriors",
+                "governor_graph_text": "rivalry",
+                "dependent_graph_text": "Warriors",
+                "governor_index": 16,
+                "dependent_index": 15,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "15",
+            "target": "13",
+            "source_text": "Warriors",
+            "target_text": "Cavaliers",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "15",
+                "dependent": "13",
+                "governor_text": "Warriors",
+                "dependent_text": "Cavaliers",
+                "governor_graph_text": "Warriors",
+                "dependent_graph_text": "Cavaliers",
+                "governor_index": 15,
+                "dependent_index": 13,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "named",
+          "part",
+          "rivalry",
+          "Warriors"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "17",
+          "10",
+          "16",
+          "15"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "17",
+            "source_text": "player",
+            "target_text": "named",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "15",
+            "source_text": "rivalry",
+            "target_text": "Warriors",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "15",
+                "governor_text": "rivalry",
+                "dependent_text": "Warriors",
+                "governor_graph_text": "rivalry",
+                "dependent_graph_text": "Warriors",
+                "governor_index": 16,
+                "dependent_index": 15,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "named",
+          "part",
+          "rivalry",
+          "Warriors",
+          "-"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "17",
+          "10",
+          "16",
+          "15",
+          "14"
+        ],
+        "length": 7,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "17",
+            "source_text": "player",
+            "target_text": "named",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "15",
+            "source_text": "rivalry",
+            "target_text": "Warriors",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "15",
+                "governor_text": "rivalry",
+                "dependent_text": "Warriors",
+                "governor_graph_text": "rivalry",
+                "dependent_graph_text": "Warriors",
+                "governor_index": 16,
+                "dependent_index": 15,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "15",
+            "target": "14",
+            "source_text": "Warriors",
+            "target_text": "-",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "15",
+                "dependent": "14",
+                "governor_text": "Warriors",
+                "dependent_text": "-",
+                "governor_graph_text": "Warriors",
+                "dependent_graph_text": "-",
+                "governor_index": 15,
+                "dependent_index": 14,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "named",
+          "part",
+          "rivalry"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "17",
+          "10",
+          "16"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "17",
+            "source_text": "player",
+            "target_text": "named",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "named",
+          "part",
+          "rivalry",
+          "of"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "17",
+          "10",
+          "16",
+          "11"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "17",
+            "source_text": "player",
+            "target_text": "named",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "11",
+            "source_text": "rivalry",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "11",
+                "governor_text": "rivalry",
+                "dependent_text": "of",
+                "governor_graph_text": "rivalry",
+                "dependent_graph_text": "of",
+                "governor_index": 16,
+                "dependent_index": 11,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "named",
+          "part",
+          "rivalry",
+          "the"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "17",
+          "10",
+          "16",
+          "12"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "17",
+            "source_text": "player",
+            "target_text": "named",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "12",
+            "source_text": "rivalry",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "12",
+                "governor_text": "rivalry",
+                "dependent_text": "the",
+                "governor_graph_text": "rivalry",
+                "dependent_graph_text": "the",
+                "governor_index": 16,
+                "dependent_index": 12,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "named",
+          "part"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "17",
+          "10"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "17",
+            "source_text": "player",
+            "target_text": "named",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "year",
+          "what"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "3",
+          "2"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "3",
+            "source_text": "player",
+            "target_text": "year",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "3",
+                "governor_text": "player",
+                "dependent_text": "year",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "year",
+                "governor_index": 7,
+                "dependent_index": 3,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "2",
+            "source_text": "year",
+            "target_text": "what",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "2",
+                "governor_text": "year",
+                "dependent_text": "what",
+                "governor_graph_text": "year",
+                "dependent_graph_text": "what",
+                "governor_index": 3,
+                "dependent_index": 2,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "year"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "3"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "3",
+            "source_text": "player",
+            "target_text": "year",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "3",
+                "governor_text": "player",
+                "dependent_text": "year",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "year",
+                "governor_index": 7,
+                "dependent_index": 3,
+                "dependency_label": "obl:in"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "named"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "17"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "17",
+            "source_text": "player",
+            "target_text": "named",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p11",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "year",
+          "In"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "3",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "3",
+            "source_text": "player",
+            "target_text": "year",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "3",
+                "governor_text": "player",
+                "dependent_text": "year",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "year",
+                "governor_index": 7,
+                "dependent_index": 3,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "1",
+            "source_text": "year",
+            "target_text": "In",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "1",
+                "governor_text": "year",
+                "dependent_text": "In",
+                "governor_graph_text": "year",
+                "dependent_graph_text": "In",
+                "governor_index": 3,
+                "dependent_index": 1,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p12",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "who"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "8"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "8",
+            "source_text": "player",
+            "target_text": "who",
+            "relations": [
+              "ref"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "8",
+                "governor_text": "player",
+                "dependent_text": "who",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "who",
+                "governor_index": 7,
+                "dependent_index": 8,
+                "dependency_label": "ref"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p13",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "who",
+          "was"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "8",
+            "source_text": "player",
+            "target_text": "who",
+            "relations": [
+              "ref"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "8",
+                "governor_text": "player",
+                "dependent_text": "who",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "who",
+                "governor_index": 7,
+                "dependent_index": 8,
+                "dependency_label": "ref"
+              }
+            ]
+          },
+          {
+            "source": "8",
+            "target": "9",
+            "source_text": "who",
+            "target_text": "was",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "8",
+                "dependent": "9",
+                "governor_text": "who",
+                "dependent_text": "was",
+                "governor_graph_text": "who",
+                "dependent_graph_text": "was",
+                "governor_index": 8,
+                "dependent_index": 9,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p14",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player"
+        ],
+        "node_ids": [
+          "6",
+          "7"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p15",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "was"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "4"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "player",
+            "target_text": "was",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "4",
+                "governor_text": "player",
+                "dependent_text": "was",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "was",
+                "governor_index": 7,
+                "dependent_index": 4,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p16",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "the"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "player",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "player",
+                "dependent_text": "the",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "the",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p17",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "?"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "19"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "19",
+            "source_text": "player",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "19",
+                "governor_text": "player",
+                "dependent_text": "?",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "?",
+                "governor_index": 7,
+                "dependent_index": 19,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p18",
+        "entity_id": "e1",
+        "entity_text": "Golden State NBA",
+        "nodes": [
+          "Golden State NBA",
+          "player",
+          "named",
+          "NBA Finals Most Valuable Player"
+        ],
+        "node_ids": [
+          "6",
+          "7",
+          "17",
+          "18"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "6",
+            "target": "7",
+            "source_text": "Golden State NBA",
+            "target_text": "player",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "17",
+            "source_text": "player",
+            "target_text": "named",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "18",
+            "source_text": "named",
+            "target_text": "NBA Finals Most Valuable Player",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p1",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "part",
+          "rivalry",
+          "Warriors",
+          "Cavaliers"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "10",
+          "16",
+          "15",
+          "13"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "15",
+            "source_text": "rivalry",
+            "target_text": "Warriors",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "15",
+                "governor_text": "rivalry",
+                "dependent_text": "Warriors",
+                "governor_graph_text": "rivalry",
+                "dependent_graph_text": "Warriors",
+                "governor_index": 16,
+                "dependent_index": 15,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "15",
+            "target": "13",
+            "source_text": "Warriors",
+            "target_text": "Cavaliers",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "15",
+                "dependent": "13",
+                "governor_text": "Warriors",
+                "dependent_text": "Cavaliers",
+                "governor_graph_text": "Warriors",
+                "dependent_graph_text": "Cavaliers",
+                "governor_index": 15,
+                "dependent_index": 13,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p2",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "part",
+          "rivalry",
+          "Warriors"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "10",
+          "16",
+          "15"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "15",
+            "source_text": "rivalry",
+            "target_text": "Warriors",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "15",
+                "governor_text": "rivalry",
+                "dependent_text": "Warriors",
+                "governor_graph_text": "rivalry",
+                "dependent_graph_text": "Warriors",
+                "governor_index": 16,
+                "dependent_index": 15,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p3",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "part",
+          "rivalry",
+          "Warriors",
+          "-"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "10",
+          "16",
+          "15",
+          "14"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "15",
+            "source_text": "rivalry",
+            "target_text": "Warriors",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "15",
+                "governor_text": "rivalry",
+                "dependent_text": "Warriors",
+                "governor_graph_text": "rivalry",
+                "dependent_graph_text": "Warriors",
+                "governor_index": 16,
+                "dependent_index": 15,
+                "dependency_label": "compound"
+              }
+            ]
+          },
+          {
+            "source": "15",
+            "target": "14",
+            "source_text": "Warriors",
+            "target_text": "-",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "15",
+                "dependent": "14",
+                "governor_text": "Warriors",
+                "dependent_text": "-",
+                "governor_graph_text": "Warriors",
+                "dependent_graph_text": "-",
+                "governor_index": 15,
+                "dependent_index": 14,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p4",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "player",
+          "year",
+          "what"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "7",
+          "3",
+          "2"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "7",
+            "source_text": "named",
+            "target_text": "player",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "3",
+            "source_text": "player",
+            "target_text": "year",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "3",
+                "governor_text": "player",
+                "dependent_text": "year",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "year",
+                "governor_index": 7,
+                "dependent_index": 3,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "2",
+            "source_text": "year",
+            "target_text": "what",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "2",
+                "governor_text": "year",
+                "dependent_text": "what",
+                "governor_graph_text": "year",
+                "dependent_graph_text": "what",
+                "governor_index": 3,
+                "dependent_index": 2,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p5",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "player",
+          "year"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "7",
+          "3"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "7",
+            "source_text": "named",
+            "target_text": "player",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "3",
+            "source_text": "player",
+            "target_text": "year",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "3",
+                "governor_text": "player",
+                "dependent_text": "year",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "year",
+                "governor_index": 7,
+                "dependent_index": 3,
+                "dependency_label": "obl:in"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p6",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "part",
+          "rivalry"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "10",
+          "16"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p7",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "player",
+          "year",
+          "In"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "7",
+          "3",
+          "1"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "7",
+            "source_text": "named",
+            "target_text": "player",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "3",
+            "source_text": "player",
+            "target_text": "year",
+            "relations": [
+              "obl:in"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "3",
+                "governor_text": "player",
+                "dependent_text": "year",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "year",
+                "governor_index": 7,
+                "dependent_index": 3,
+                "dependency_label": "obl:in"
+              }
+            ]
+          },
+          {
+            "source": "3",
+            "target": "1",
+            "source_text": "year",
+            "target_text": "In",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "3",
+                "dependent": "1",
+                "governor_text": "year",
+                "dependent_text": "In",
+                "governor_graph_text": "year",
+                "dependent_graph_text": "In",
+                "governor_index": 3,
+                "dependent_index": 1,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p8",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "part",
+          "rivalry",
+          "of"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "10",
+          "16",
+          "11"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "11",
+            "source_text": "rivalry",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "11",
+                "governor_text": "rivalry",
+                "dependent_text": "of",
+                "governor_graph_text": "rivalry",
+                "dependent_graph_text": "of",
+                "governor_index": 16,
+                "dependent_index": 11,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p9",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "part",
+          "rivalry",
+          "the"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "10",
+          "16",
+          "12"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "16",
+            "source_text": "part",
+            "target_text": "rivalry",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "16",
+                "governor_text": "part",
+                "dependent_text": "rivalry",
+                "governor_graph_text": "part",
+                "dependent_graph_text": "rivalry",
+                "governor_index": 10,
+                "dependent_index": 16,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "16",
+            "target": "12",
+            "source_text": "rivalry",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "16",
+                "dependent": "12",
+                "governor_text": "rivalry",
+                "dependent_text": "the",
+                "governor_graph_text": "rivalry",
+                "dependent_graph_text": "the",
+                "governor_index": 16,
+                "dependent_index": 12,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p10",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "player",
+          "who"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "7",
+          "8"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "7",
+            "source_text": "named",
+            "target_text": "player",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "8",
+            "source_text": "player",
+            "target_text": "who",
+            "relations": [
+              "ref"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "8",
+                "governor_text": "player",
+                "dependent_text": "who",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "who",
+                "governor_index": 7,
+                "dependent_index": 8,
+                "dependency_label": "ref"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p11",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "player",
+          "who",
+          "was"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "7",
+          "8",
+          "9"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "7",
+            "source_text": "named",
+            "target_text": "player",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "8",
+            "source_text": "player",
+            "target_text": "who",
+            "relations": [
+              "ref"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "8",
+                "governor_text": "player",
+                "dependent_text": "who",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "who",
+                "governor_index": 7,
+                "dependent_index": 8,
+                "dependency_label": "ref"
+              }
+            ]
+          },
+          {
+            "source": "8",
+            "target": "9",
+            "source_text": "who",
+            "target_text": "was",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "8",
+                "dependent": "9",
+                "governor_text": "who",
+                "dependent_text": "was",
+                "governor_graph_text": "who",
+                "dependent_graph_text": "was",
+                "governor_index": 8,
+                "dependent_index": 9,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p12",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "player"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "7"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "7",
+            "source_text": "named",
+            "target_text": "player",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p13",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "part"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "10"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "10",
+            "source_text": "named",
+            "target_text": "part",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "10",
+                "governor_text": "named",
+                "dependent_text": "part",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "part",
+                "governor_index": 17,
+                "dependent_index": 10,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p14",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "player",
+          "was"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "7",
+          "4"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "7",
+            "source_text": "named",
+            "target_text": "player",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "player",
+            "target_text": "was",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "4",
+                "governor_text": "player",
+                "dependent_text": "was",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "was",
+                "governor_index": 7,
+                "dependent_index": 4,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p15",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "player",
+          "the"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "7",
+          "5"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "7",
+            "source_text": "named",
+            "target_text": "player",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "player",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "player",
+                "dependent_text": "the",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "the",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p16",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "player",
+          "?"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "7",
+          "19"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "7",
+            "source_text": "named",
+            "target_text": "player",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "19",
+            "source_text": "player",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "19",
+                "governor_text": "player",
+                "dependent_text": "?",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "?",
+                "governor_index": 7,
+                "dependent_index": 19,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p17",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named"
+        ],
+        "node_ids": [
+          "18",
+          "17"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p18",
+        "entity_id": "e2",
+        "entity_text": "NBA Finals Most Valuable Player",
+        "nodes": [
+          "NBA Finals Most Valuable Player",
+          "named",
+          "player",
+          "Golden State NBA"
+        ],
+        "node_ids": [
+          "18",
+          "17",
+          "7",
+          "6"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "18",
+            "target": "17",
+            "source_text": "NBA Finals Most Valuable Player",
+            "target_text": "named",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "18",
+                "governor_text": "named",
+                "dependent_text": "NBA Finals Most Valuable Player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "SomeEntityA",
+                "governor_index": 17,
+                "dependent_index": 18,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "17",
+            "target": "7",
+            "source_text": "named",
+            "target_text": "player",
+            "relations": [
+              "obj",
+              "acl:relcl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "17",
+                "dependent": "7",
+                "governor_text": "named",
+                "dependent_text": "player",
+                "governor_graph_text": "named",
+                "dependent_graph_text": "player",
+                "governor_index": 17,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              },
+              {
+                "governor": "7",
+                "dependent": "17",
+                "governor_text": "player",
+                "dependent_text": "named",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "named",
+                "governor_index": 7,
+                "dependent_index": 17,
+                "dependency_label": "acl:relcl"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "6",
+            "source_text": "player",
+            "target_text": "Golden State NBA",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "player",
+                "dependent_text": "Golden State NBA",
+                "governor_graph_text": "player",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_selected_entity_paths": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p18",
+        "reason": "This path connects the Golden State NBA player directly to the NBA Finals Most Valuable Player, providing a clear reasoning chain to the answer.",
+        "path": {
+          "path_id": "e1_p18",
+          "entity_id": "e1",
+          "entity_text": "Golden State NBA",
+          "nodes": [
+            "Golden State NBA",
+            "player",
+            "named",
+            "NBA Finals Most Valuable Player"
+          ],
+          "node_ids": [
+            "6",
+            "7",
+            "17",
+            "18"
+          ],
+          "length": 4,
+          "evidence": [
+            {
+              "source": "6",
+              "target": "7",
+              "source_text": "Golden State NBA",
+              "target_text": "player",
+              "relations": [
+                "compound"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "7",
+                  "dependent": "6",
+                  "governor_text": "player",
+                  "dependent_text": "Golden State NBA",
+                  "governor_graph_text": "player",
+                  "dependent_graph_text": "PersonA",
+                  "governor_index": 7,
+                  "dependent_index": 6,
+                  "dependency_label": "compound"
+                }
+              ]
+            },
+            {
+              "source": "7",
+              "target": "17",
+              "source_text": "player",
+              "target_text": "named",
+              "relations": [
+                "obj",
+                "acl:relcl"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "17",
+                  "dependent": "7",
+                  "governor_text": "named",
+                  "dependent_text": "player",
+                  "governor_graph_text": "named",
+                  "dependent_graph_text": "player",
+                  "governor_index": 17,
+                  "dependent_index": 7,
+                  "dependency_label": "obj"
+                },
+                {
+                  "governor": "7",
+                  "dependent": "17",
+                  "governor_text": "player",
+                  "dependent_text": "named",
+                  "governor_graph_text": "player",
+                  "dependent_graph_text": "named",
+                  "governor_index": 7,
+                  "dependent_index": 17,
+                  "dependency_label": "acl:relcl"
+                }
+              ]
+            },
+            {
+              "source": "17",
+              "target": "18",
+              "source_text": "named",
+              "target_text": "NBA Finals Most Valuable Player",
+              "relations": [
+                "obj"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "17",
+                  "dependent": "18",
+                  "governor_text": "named",
+                  "dependent_text": "NBA Finals Most Valuable Player",
+                  "governor_graph_text": "named",
+                  "dependent_graph_text": "SomeEntityA",
+                  "governor_index": 17,
+                  "dependent_index": 18,
+                  "dependency_label": "obj"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p5",
+        "reason": "This path connects the NBA Finals Most Valuable Player to the player and year, which is essential for answering the question about the year they were named MVP.",
+        "path": {
+          "path_id": "e2_p5",
+          "entity_id": "e2",
+          "entity_text": "NBA Finals Most Valuable Player",
+          "nodes": [
+            "NBA Finals Most Valuable Player",
+            "named",
+            "player",
+            "year"
+          ],
+          "node_ids": [
+            "18",
+            "17",
+            "7",
+            "3"
+          ],
+          "length": 4,
+          "evidence": [
+            {
+              "source": "18",
+              "target": "17",
+              "source_text": "NBA Finals Most Valuable Player",
+              "target_text": "named",
+              "relations": [
+                "obj"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "17",
+                  "dependent": "18",
+                  "governor_text": "named",
+                  "dependent_text": "NBA Finals Most Valuable Player",
+                  "governor_graph_text": "named",
+                  "dependent_graph_text": "SomeEntityA",
+                  "governor_index": 17,
+                  "dependent_index": 18,
+                  "dependency_label": "obj"
+                }
+              ]
+            },
+            {
+              "source": "17",
+              "target": "7",
+              "source_text": "named",
+              "target_text": "player",
+              "relations": [
+                "obj",
+                "acl:relcl"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "17",
+                  "dependent": "7",
+                  "governor_text": "named",
+                  "dependent_text": "player",
+                  "governor_graph_text": "named",
+                  "dependent_graph_text": "player",
+                  "governor_index": 17,
+                  "dependent_index": 7,
+                  "dependency_label": "obj"
+                },
+                {
+                  "governor": "7",
+                  "dependent": "17",
+                  "governor_text": "player",
+                  "dependent_text": "named",
+                  "governor_graph_text": "player",
+                  "dependent_graph_text": "named",
+                  "governor_index": 7,
+                  "dependent_index": 17,
+                  "dependency_label": "acl:relcl"
+                }
+              ]
+            },
+            {
+              "source": "7",
+              "target": "3",
+              "source_text": "player",
+              "target_text": "year",
+              "relations": [
+                "obl:in"
+              ],
+              "directed_edges": [
+                {
+                  "governor": "7",
+                  "dependent": "3",
+                  "governor_text": "player",
+                  "dependent_text": "year",
+                  "governor_graph_text": "player",
+                  "dependent_graph_text": "year",
+                  "governor_index": 7,
+                  "dependent_index": 3,
+                  "dependency_label": "obl:in"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "9_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "golden_state_nba_player",
+          "label": "Golden State NBA player",
+          "kind": "type_variable",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "6",
+            "7"
+          ],
+          "source_token_indices": [
+            6,
+            7
+          ],
+          "grounding_text": "Golden State NBA player",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "nba_finals_mvp",
+          "label": "NBA Finals Most Valuable Player",
+          "kind": "entity",
+          "semantic_type": "Award",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "18"
+          ],
+          "source_token_indices": [
+            18
+          ],
+          "grounding_text": "NBA Finals Most Valuable Player",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "year",
+          "label": "year",
+          "kind": "value_slot",
+          "semantic_type": "Date",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "3"
+          ],
+          "source_token_indices": [
+            3
+          ],
+          "grounding_text": "year",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "golden_state_nba_player",
+          "target": "nba_finals_mvp",
+          "edge_type": "attribute",
+          "relation_hint": "named",
+          "support_path": [
+            "e1_p18",
+            "7",
+            "18"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "nba_finals_mvp",
+          "target": "year",
+          "edge_type": "attribute",
+          "relation_hint": "year of NBA Finals Most Valuable Player",
+          "support_path": [
+            "e2_p5",
+            "18",
+            "3"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "nodes": [
+          {
+            "id": "golden_state_nba_player",
+            "label": "Golden State NBA player",
+            "kind": "type_variable",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p18"
+            ],
+            "source_node_ids": [
+              "6",
+              "7"
+            ]
+          },
+          {
+            "id": "nba_finals_mvp",
+            "label": "NBA Finals Most Valuable Player",
+            "kind": "entity",
+            "semantic_type": "Award",
+            "source_path_ids": [
+              "e1_p18"
+            ],
+            "source_node_ids": [
+              "18"
+            ]
+          },
+          {
+            "id": "year",
+            "label": "year",
+            "kind": "value_slot",
+            "semantic_type": "Date",
+            "source_path_ids": [
+              "e2_p5"
+            ],
+            "source_node_ids": [
+              "3"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "golden_state_nba_player",
+            "target": "nba_finals_mvp",
+            "relation": "named",
+            "support_path_id": "e1_p18",
+            "support_node_ids": [
+              "7",
+              "18"
+            ]
+          },
+          {
+            "source": "nba_finals_mvp",
+            "target": "year",
+            "relation": "year of NBA Finals Most Valuable Player",
+            "support_path_id": "e2_p5",
+            "support_node_ids": [
+              "18",
+              "3"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "year"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {},
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "10_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who was the NBA Finals Most Valuable Player among Golden State NBA players?",
+          "type": "lookup",
+          "inputs": [
+            "Golden State NBA player"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "golden_state_nba_player",
+          "target_node": "nba_finals_mvp",
+          "ast_edge": {
+            "source": "golden_state_nba_player",
+            "target": "nba_finals_mvp",
+            "edge_type": "attribute",
+            "relation_hint": "named",
+            "support_path": [
+              "e1_p18",
+              "7",
+              "18"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "In what year was the NBA Finals Most Valuable Player of the Golden State NBA player awarded?",
+          "type": "lookup",
+          "inputs": [
+            "X1"
+          ],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": "nba_finals_mvp",
+          "target_node": "year",
+          "ast_edge": {
+            "source": "nba_finals_mvp",
+            "target": "year",
+            "edge_type": "attribute",
+            "relation_hint": "year of NBA Finals Most Valuable Player",
+            "support_path": [
+              "e2_p5",
+              "18",
+              "3"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "10_subquestions": [
+      {
+        "index": 1,
+        "question": "Who was the NBA Finals Most Valuable Player among Golden State NBA players?",
+        "answer_variable": "X1",
+        "source_node": "golden_state_nba_player",
+        "target_node": "nba_finals_mvp",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "golden_state_nba_player",
+          "target": "nba_finals_mvp",
+          "edge_type": "attribute",
+          "relation_hint": "named",
+          "support_path": [
+            "e1_p18",
+            "7",
+            "18"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "In what year was the NBA Finals Most Valuable Player of the Golden State NBA player awarded?",
+        "answer_variable": "X2",
+        "source_node": "nba_finals_mvp",
+        "target_node": "year",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "nba_finals_mvp",
+          "target": "year",
+          "edge_type": "attribute",
+          "relation_hint": "year of NBA Finals Most Valuable Player",
+          "support_path": [
+            "e2_p5",
+            "18",
+            "3"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

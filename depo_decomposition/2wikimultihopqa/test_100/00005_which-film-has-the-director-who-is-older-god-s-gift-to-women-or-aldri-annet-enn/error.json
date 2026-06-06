@@ -1,0 +1,15 @@
+{
+  "status": "error",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 5,
+  "qid": null,
+  "question": "Which film has the director who is older, God'S Gift To Women or Aldri Annet Enn Bråk?",
+  "raw_question_item": {
+    "question": "Which film has the director who is older, God'S Gift To Women or Aldri Annet Enn Bråk?",
+    "answer": "God'S Gift To Women"
+  },
+  "gold_answer": "God'S Gift To Women",
+  "error_type": "ValueError",
+  "error": "LLM selected invalid entity-origin paths after retry: Selected path_id='e1_p9' passes through another entity start as an intermediate node. For parallel/common-answer questions, choose a path from this entity directly toward the answer slot or compared attribute, not through a different entity start."
+}

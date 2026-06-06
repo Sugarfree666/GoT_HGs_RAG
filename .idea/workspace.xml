@@ -10,7 +10,9 @@
       <change beforePath="$PROJECT_DIR$/depo/entity_path_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/entity_path_pipeline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/entity_path_projector.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/entity_path_projector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/prompts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/subquestion_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/subquestion_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_depo_entity_origin_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_depo_entity_origin_pipeline.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,23 +42,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000000005159935" />
-      <entry key="MS500" value="1.0220059287851229" />
-      <entry key="S2" value="1.4636457219931671" />
-      <entry key="S5" value="3.158640681796716" />
-      <entry key="S10" value="6.320589551968139" />
-      <entry key="S30" value="12.02238820755364" />
-      <entry key="S60" value="16.478812344908434" />
-      <entry key="M2" value="25.190355612794516" />
-      <entry key="M5" value="40.23971271259756" />
-      <entry key="M10" value="54.8738066380761" />
-      <entry key="M15" value="71.04078169442192" />
-      <entry key="M30" value="125.43647664386668" />
-      <entry key="H1" value="216.15010494279696" />
-      <entry key="H2" value="324.17137538675536" />
-      <entry key="H4" value="438.5380207615138" />
-      <entry key="D1" value="773.6665754149834" />
-      <entry key="W1" value="932.5899030041802" />
+      <entry key="MS100" value="1.0000018681311473" />
+      <entry key="MS500" value="1.1122200097451072" />
+      <entry key="S2" value="2.109017241254378" />
+      <entry key="S5" value="3.60997313928173" />
+      <entry key="S10" value="5.897508525156291" />
+      <entry key="S30" value="10.370763982932017" />
+      <entry key="S60" value="12.383230832338874" />
+      <entry key="M2" value="13.610633767774694" />
+      <entry key="M5" value="15.05693304947339" />
+      <entry key="M10" value="17.869303038561718" />
+      <entry key="M15" value="20.302490428482226" />
+      <entry key="M30" value="25.2332425888008" />
+      <entry key="H1" value="38.71781706412108" />
+      <entry key="H2" value="98.82096699191374" />
+      <entry key="H4" value="242.5205750368626" />
+      <entry key="D1" value="783.6872554227632" />
+      <entry key="W1" value="1053.8463251264143" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -78,23 +80,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9592641242750047" />
-      <entry key="MS500" value="1.0135403770293903" />
-      <entry key="S2" value="1.4605759875454194" />
-      <entry key="S5" value="3.1559000291545565" />
-      <entry key="S10" value="6.317844615794086" />
-      <entry key="S30" value="12.020660530276658" />
-      <entry key="S60" value="16.477621932269802" />
-      <entry key="M2" value="25.189432903813707" />
-      <entry key="M5" value="40.23911641172968" />
-      <entry key="M10" value="54.87340095329361" />
-      <entry key="M15" value="71.04043298516237" />
-      <entry key="M30" value="125.43616795654668" />
-      <entry key="H1" value="216.14983490284806" />
-      <entry key="H2" value="324.1711688169507" />
-      <entry key="H4" value="438.5378766179534" />
-      <entry key="D1" value="773.6665275863063" />
-      <entry key="W1" value="932.5898944344826" />
+      <entry key="MS100" value="0.9526397605811424" />
+      <entry key="MS500" value="1.1009842075734824" />
+      <entry key="S2" value="2.1026030081516973" />
+      <entry key="S5" value="3.6053197038940534" />
+      <entry key="S10" value="5.893568035779798" />
+      <entry key="S30" value="10.368416663690528" />
+      <entry key="S60" value="12.381828088926786" />
+      <entry key="M2" value="13.609863026509064" />
+      <entry key="M5" value="15.056595542593612" />
+      <entry key="M10" value="17.869109211765295" />
+      <entry key="M15" value="20.30234687554003" />
+      <entry key="M30" value="25.233156465786525" />
+      <entry key="H1" value="38.71775647067019" />
+      <entry key="H2" value="98.82089855886218" />
+      <entry key="H4" value="242.5204936763345" />
+      <entry key="D1" value="783.6872077704419" />
+      <entry key="W1" value="1053.8463156231328" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -149,10 +151,10 @@
       <recent name="D:\GitHub\GoT_HGs_RAG" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\GitHub\HyperBranch\questions\hotpotqa" />
-      <recent name="D:\GitHub\HyperBranch\questions\musique" />
       <recent name="D:\GitHub\HyperBranch\runs" />
       <recent name="D:\GitHub\HyperBranch" />
+      <recent name="D:\GitHub\HyperBranch\questions\hotpotqa" />
+      <recent name="D:\GitHub\HyperBranch\questions\musique" />
       <recent name="D:\GitHub\HyperBranch\baselines\Standard RAG (text-embedding-3-small)" />
     </key>
   </component>
@@ -225,7 +227,7 @@
       <workItem from="1780537179156" duration="19000" />
       <workItem from="1780541004385" duration="3449000" />
       <workItem from="1780551944328" duration="22729000" />
-      <workItem from="1780590199613" duration="27850000" />
+      <workItem from="1780590199613" duration="44409000" />
     </task>
     <servers />
   </component>

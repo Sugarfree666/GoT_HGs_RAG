@@ -1,0 +1,2763 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 15,
+  "qid": null,
+  "question": "Where was the place of death of Maurice, Prince Of Orange's father?",
+  "raw_question_item": {
+    "question": "Where was the place of death of Maurice, Prince Of Orange's father?",
+    "answer": "Delft"
+  },
+  "gold_answer": "Delft",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "Where was the place of death of Maurice, Prince Of Orange's father?",
+      "normalized_question": "Where was the place of death of Maurice, Prince Of Orange's father?",
+      "changed": false,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "Where was the place of death of Maurice, Prince Of Orange's father?",
+        "changed": false,
+        "rewrite_type": "identity",
+        "added_type_variables": [],
+        "reason": "The original question is grammatically correct and does not present a syntactic risk for dependency parsing."
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "Maurice, Prince Of Orange",
+          "start_char": 32,
+          "end_char": 57,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Person",
+          "reason": "multi-token proper name"
+        }
+      ],
+      "warnings": [
+        "Dropped overlapping mask span text=\"Prince Of Orange's\"."
+      ]
+    },
+    "3_selective_masked_question": "Where was the place of death of PersonA's father?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "Where",
+          "character_offset_begin": 0,
+          "character_offset_end": 5,
+          "lemma": "where",
+          "pos": "WRB"
+        },
+        {
+          "index": 2,
+          "word": "was",
+          "character_offset_begin": 6,
+          "character_offset_end": 9,
+          "lemma": "be",
+          "pos": "VBD"
+        },
+        {
+          "index": 3,
+          "word": "the",
+          "character_offset_begin": 10,
+          "character_offset_end": 13,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 4,
+          "word": "place",
+          "character_offset_begin": 14,
+          "character_offset_end": 19,
+          "lemma": "place",
+          "pos": "NN"
+        },
+        {
+          "index": 5,
+          "word": "of",
+          "character_offset_begin": 20,
+          "character_offset_end": 22,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 6,
+          "word": "death",
+          "character_offset_begin": 23,
+          "character_offset_end": 28,
+          "lemma": "death",
+          "pos": "NN"
+        },
+        {
+          "index": 7,
+          "word": "of",
+          "character_offset_begin": 29,
+          "character_offset_end": 31,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 8,
+          "word": "PersonA",
+          "character_offset_begin": 32,
+          "character_offset_end": 39,
+          "lemma": "persona",
+          "pos": "NN"
+        },
+        {
+          "index": 9,
+          "word": "'s",
+          "character_offset_begin": 39,
+          "character_offset_end": 41,
+          "lemma": "'s",
+          "pos": "POS"
+        },
+        {
+          "index": 10,
+          "word": "father",
+          "character_offset_begin": 42,
+          "character_offset_end": 48,
+          "lemma": "father",
+          "pos": "NN"
+        },
+        {
+          "index": 11,
+          "word": "?",
+          "character_offset_begin": 48,
+          "character_offset_end": 49,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "was",
+          "relation": "advmod",
+          "target": "Where",
+          "source_index": 2,
+          "target_index": 1
+        },
+        {
+          "source": "place",
+          "relation": "det",
+          "target": "the",
+          "source_index": 4,
+          "target_index": 3
+        },
+        {
+          "source": "was",
+          "relation": "nsubj",
+          "target": "place",
+          "source_index": 2,
+          "target_index": 4
+        },
+        {
+          "source": "death",
+          "relation": "case",
+          "target": "of",
+          "source_index": 6,
+          "target_index": 5
+        },
+        {
+          "source": "place",
+          "relation": "nmod:of",
+          "target": "death",
+          "source_index": 4,
+          "target_index": 6
+        },
+        {
+          "source": "father",
+          "relation": "case",
+          "target": "of",
+          "source_index": 10,
+          "target_index": 7
+        },
+        {
+          "source": "father",
+          "relation": "nmod:poss",
+          "target": "PersonA",
+          "source_index": 10,
+          "target_index": 8
+        },
+        {
+          "source": "PersonA",
+          "relation": "case",
+          "target": "'s",
+          "source_index": 8,
+          "target_index": 9
+        },
+        {
+          "source": "death",
+          "relation": "nmod:of",
+          "target": "father",
+          "source_index": 6,
+          "target_index": 10
+        },
+        {
+          "source": "was",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 2,
+          "target_index": 11
+        }
+      ],
+      "edge_display": [
+        "was[2] --advmod--> Where[1]",
+        "place[4] --det--> the[3]",
+        "was[2] --nsubj--> place[4]",
+        "death[6] --case--> of[5]",
+        "place[4] --nmod:of--> death[6]",
+        "father[10] --case--> of[7]",
+        "father[10] --nmod:poss--> PersonA[8]",
+        "PersonA[8] --case--> 's[9]",
+        "death[6] --nmod:of--> father[10]",
+        "was[2] --punct--> ?[11]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "Where",
+          "graph_text": "Where",
+          "text": "Where",
+          "label": "Where[1]",
+          "order": 1,
+          "pos": "WRB",
+          "lemma": "where",
+          "character_offset_begin": 0,
+          "character_offset_end": 5
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "was",
+          "graph_text": "was",
+          "text": "was",
+          "label": "was[2]",
+          "order": 2,
+          "pos": "VBD",
+          "lemma": "be",
+          "character_offset_begin": 6,
+          "character_offset_end": 9
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[3]",
+          "order": 3,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 10,
+          "character_offset_end": 13
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "place",
+          "graph_text": "place",
+          "text": "place",
+          "label": "place[4]",
+          "order": 4,
+          "pos": "NN",
+          "lemma": "place",
+          "character_offset_begin": 14,
+          "character_offset_end": 19
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[5]",
+          "order": 5,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 20,
+          "character_offset_end": 22
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "death",
+          "graph_text": "death",
+          "text": "death",
+          "label": "death[6]",
+          "order": 6,
+          "pos": "NN",
+          "lemma": "death",
+          "character_offset_begin": 23,
+          "character_offset_end": 28
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[7]",
+          "order": 7,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 29,
+          "character_offset_end": 31
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "PersonA",
+          "graph_text": "PersonA",
+          "text": "Maurice, Prince Of Orange",
+          "label": "Maurice, Prince Of Orange[8]",
+          "order": 8,
+          "pos": "NN",
+          "lemma": "persona",
+          "character_offset_begin": 32,
+          "character_offset_end": 39
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "'s",
+          "graph_text": "'s",
+          "text": "'s",
+          "label": "'s[9]",
+          "order": 9,
+          "pos": "POS",
+          "lemma": "'s",
+          "character_offset_begin": 39,
+          "character_offset_end": 41
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "father",
+          "graph_text": "father",
+          "text": "father",
+          "label": "father[10]",
+          "order": 10,
+          "pos": "NN",
+          "lemma": "father",
+          "character_offset_begin": 42,
+          "character_offset_end": 48
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[11]",
+          "order": 11,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 48,
+          "character_offset_end": 49
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "2",
+          "source_text": "Where",
+          "target_text": "was",
+          "relation": "advmod",
+          "relations": [
+            "advmod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "1",
+              "governor_text": "was",
+              "dependent_text": "Where",
+              "governor_graph_text": "was",
+              "dependent_graph_text": "Where",
+              "governor_index": 2,
+              "dependent_index": 1,
+              "dependency_label": "advmod"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "1",
+          "dependency_label": "advmod",
+          "token_text": {
+            "2": "was",
+            "1": "Where"
+          },
+          "token_index": {
+            "2": 2,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "4",
+          "source_text": "was",
+          "target_text": "place",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "4",
+              "governor_text": "was",
+              "dependent_text": "place",
+              "governor_graph_text": "was",
+              "dependent_graph_text": "place",
+              "governor_index": 2,
+              "dependent_index": 4,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "4",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "2": "was",
+            "4": "place"
+          },
+          "token_index": {
+            "2": 2,
+            "4": 4
+          }
+        },
+        {
+          "source": "2",
+          "target": "11",
+          "source_text": "was",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "11",
+              "governor_text": "was",
+              "dependent_text": "?",
+              "governor_graph_text": "was",
+              "dependent_graph_text": "?",
+              "governor_index": 2,
+              "dependent_index": 11,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "11",
+          "dependency_label": "punct",
+          "token_text": {
+            "2": "was",
+            "11": "?"
+          },
+          "token_index": {
+            "2": 2,
+            "11": 11
+          }
+        },
+        {
+          "source": "3",
+          "target": "4",
+          "source_text": "the",
+          "target_text": "place",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "3",
+              "governor_text": "place",
+              "dependent_text": "the",
+              "governor_graph_text": "place",
+              "dependent_graph_text": "the",
+              "governor_index": 4,
+              "dependent_index": 3,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "3",
+          "dependency_label": "det",
+          "token_text": {
+            "4": "place",
+            "3": "the"
+          },
+          "token_index": {
+            "4": 4,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "6",
+          "source_text": "place",
+          "target_text": "death",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "6",
+              "governor_text": "place",
+              "dependent_text": "death",
+              "governor_graph_text": "place",
+              "dependent_graph_text": "death",
+              "governor_index": 4,
+              "dependent_index": 6,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "6",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "4": "place",
+            "6": "death"
+          },
+          "token_index": {
+            "4": 4,
+            "6": 6
+          }
+        },
+        {
+          "source": "5",
+          "target": "6",
+          "source_text": "of",
+          "target_text": "death",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "5",
+              "governor_text": "death",
+              "dependent_text": "of",
+              "governor_graph_text": "death",
+              "dependent_graph_text": "of",
+              "governor_index": 6,
+              "dependent_index": 5,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "5",
+          "dependency_label": "case",
+          "token_text": {
+            "6": "death",
+            "5": "of"
+          },
+          "token_index": {
+            "6": 6,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "10",
+          "source_text": "death",
+          "target_text": "father",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "10",
+              "governor_text": "death",
+              "dependent_text": "father",
+              "governor_graph_text": "death",
+              "dependent_graph_text": "father",
+              "governor_index": 6,
+              "dependent_index": 10,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "10",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "6": "death",
+            "10": "father"
+          },
+          "token_index": {
+            "6": 6,
+            "10": 10
+          }
+        },
+        {
+          "source": "7",
+          "target": "10",
+          "source_text": "of",
+          "target_text": "father",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "7",
+              "governor_text": "father",
+              "dependent_text": "of",
+              "governor_graph_text": "father",
+              "dependent_graph_text": "of",
+              "governor_index": 10,
+              "dependent_index": 7,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "7",
+          "dependency_label": "case",
+          "token_text": {
+            "10": "father",
+            "7": "of"
+          },
+          "token_index": {
+            "10": 10,
+            "7": 7
+          }
+        },
+        {
+          "source": "8",
+          "target": "10",
+          "source_text": "Maurice, Prince Of Orange",
+          "target_text": "father",
+          "relation": "nmod:poss",
+          "relations": [
+            "nmod:poss"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "8",
+              "governor_text": "father",
+              "dependent_text": "Maurice, Prince Of Orange",
+              "governor_graph_text": "father",
+              "dependent_graph_text": "PersonA",
+              "governor_index": 10,
+              "dependent_index": 8,
+              "dependency_label": "nmod:poss"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "8",
+          "dependency_label": "nmod:poss",
+          "token_text": {
+            "10": "father",
+            "8": "Maurice, Prince Of Orange"
+          },
+          "token_index": {
+            "10": 10,
+            "8": 8
+          }
+        },
+        {
+          "source": "8",
+          "target": "9",
+          "source_text": "Maurice, Prince Of Orange",
+          "target_text": "'s",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "8",
+              "dependent": "9",
+              "governor_text": "Maurice, Prince Of Orange",
+              "dependent_text": "'s",
+              "governor_graph_text": "PersonA",
+              "dependent_graph_text": "'s",
+              "governor_index": 8,
+              "dependent_index": 9,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "8",
+          "original_dependent": "9",
+          "dependency_label": "case",
+          "token_text": {
+            "8": "Maurice, Prince Of Orange",
+            "9": "'s"
+          },
+          "token_index": {
+            "8": 8,
+            "9": 9
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "Maurice, Prince Of Orange",
+        "graph_node_ids": [
+          "8"
+        ],
+        "token_ids": [
+          8
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Person"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "Maurice, Prince Of Orange",
+        "nodes": [
+          "Maurice, Prince Of Orange",
+          "father",
+          "death",
+          "place",
+          "was",
+          "Where"
+        ],
+        "node_ids": [
+          "8",
+          "10",
+          "6",
+          "4",
+          "2",
+          "1"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "10",
+            "source_text": "Maurice, Prince Of Orange",
+            "target_text": "father",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "father",
+                "dependent_text": "Maurice, Prince Of Orange",
+                "governor_graph_text": "father",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "6",
+            "source_text": "father",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "death",
+                "dependent_text": "father",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "father",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "death",
+            "target_text": "place",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "place",
+                "dependent_text": "death",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "death",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "place",
+            "target_text": "was",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "was",
+                "dependent_text": "place",
+                "governor_graph_text": "was",
+                "dependent_graph_text": "place",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "was",
+            "target_text": "Where",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "was",
+                "dependent_text": "Where",
+                "governor_graph_text": "was",
+                "dependent_graph_text": "Where",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "Maurice, Prince Of Orange",
+        "nodes": [
+          "Maurice, Prince Of Orange",
+          "father",
+          "death",
+          "place"
+        ],
+        "node_ids": [
+          "8",
+          "10",
+          "6",
+          "4"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "10",
+            "source_text": "Maurice, Prince Of Orange",
+            "target_text": "father",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "father",
+                "dependent_text": "Maurice, Prince Of Orange",
+                "governor_graph_text": "father",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "6",
+            "source_text": "father",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "death",
+                "dependent_text": "father",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "father",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "death",
+            "target_text": "place",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "place",
+                "dependent_text": "death",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "death",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "Maurice, Prince Of Orange",
+        "nodes": [
+          "Maurice, Prince Of Orange",
+          "father",
+          "death",
+          "place",
+          "was"
+        ],
+        "node_ids": [
+          "8",
+          "10",
+          "6",
+          "4",
+          "2"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "10",
+            "source_text": "Maurice, Prince Of Orange",
+            "target_text": "father",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "father",
+                "dependent_text": "Maurice, Prince Of Orange",
+                "governor_graph_text": "father",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "6",
+            "source_text": "father",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "death",
+                "dependent_text": "father",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "father",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "death",
+            "target_text": "place",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "place",
+                "dependent_text": "death",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "death",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "place",
+            "target_text": "was",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "was",
+                "dependent_text": "place",
+                "governor_graph_text": "was",
+                "dependent_graph_text": "place",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "Maurice, Prince Of Orange",
+        "nodes": [
+          "Maurice, Prince Of Orange",
+          "father",
+          "death",
+          "place",
+          "the"
+        ],
+        "node_ids": [
+          "8",
+          "10",
+          "6",
+          "4",
+          "3"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "10",
+            "source_text": "Maurice, Prince Of Orange",
+            "target_text": "father",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "father",
+                "dependent_text": "Maurice, Prince Of Orange",
+                "governor_graph_text": "father",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "6",
+            "source_text": "father",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "death",
+                "dependent_text": "father",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "father",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "death",
+            "target_text": "place",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "place",
+                "dependent_text": "death",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "death",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "place",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "place",
+                "dependent_text": "the",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "the",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "Maurice, Prince Of Orange",
+        "nodes": [
+          "Maurice, Prince Of Orange",
+          "father",
+          "death",
+          "place",
+          "was",
+          "?"
+        ],
+        "node_ids": [
+          "8",
+          "10",
+          "6",
+          "4",
+          "2",
+          "11"
+        ],
+        "length": 6,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "10",
+            "source_text": "Maurice, Prince Of Orange",
+            "target_text": "father",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "father",
+                "dependent_text": "Maurice, Prince Of Orange",
+                "governor_graph_text": "father",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "6",
+            "source_text": "father",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "death",
+                "dependent_text": "father",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "father",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "death",
+            "target_text": "place",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "place",
+                "dependent_text": "death",
+                "governor_graph_text": "place",
+                "dependent_graph_text": "death",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "place",
+            "target_text": "was",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "4",
+                "governor_text": "was",
+                "dependent_text": "place",
+                "governor_graph_text": "was",
+                "dependent_graph_text": "place",
+                "governor_index": 2,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "11",
+            "source_text": "was",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "11",
+                "governor_text": "was",
+                "dependent_text": "?",
+                "governor_graph_text": "was",
+                "dependent_graph_text": "?",
+                "governor_index": 2,
+                "dependent_index": 11,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "Maurice, Prince Of Orange",
+        "nodes": [
+          "Maurice, Prince Of Orange",
+          "father",
+          "death"
+        ],
+        "node_ids": [
+          "8",
+          "10",
+          "6"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "10",
+            "source_text": "Maurice, Prince Of Orange",
+            "target_text": "father",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "father",
+                "dependent_text": "Maurice, Prince Of Orange",
+                "governor_graph_text": "father",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "6",
+            "source_text": "father",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "death",
+                "dependent_text": "father",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "father",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "Maurice, Prince Of Orange",
+        "nodes": [
+          "Maurice, Prince Of Orange",
+          "father",
+          "death",
+          "of"
+        ],
+        "node_ids": [
+          "8",
+          "10",
+          "6",
+          "5"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "10",
+            "source_text": "Maurice, Prince Of Orange",
+            "target_text": "father",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "father",
+                "dependent_text": "Maurice, Prince Of Orange",
+                "governor_graph_text": "father",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "6",
+            "source_text": "father",
+            "target_text": "death",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "10",
+                "governor_text": "death",
+                "dependent_text": "father",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "father",
+                "governor_index": 6,
+                "dependent_index": 10,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "5",
+            "source_text": "death",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "5",
+                "governor_text": "death",
+                "dependent_text": "of",
+                "governor_graph_text": "death",
+                "dependent_graph_text": "of",
+                "governor_index": 6,
+                "dependent_index": 5,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "Maurice, Prince Of Orange",
+        "nodes": [
+          "Maurice, Prince Of Orange",
+          "'s"
+        ],
+        "node_ids": [
+          "8",
+          "9"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "9",
+            "source_text": "Maurice, Prince Of Orange",
+            "target_text": "'s",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "8",
+                "dependent": "9",
+                "governor_text": "Maurice, Prince Of Orange",
+                "dependent_text": "'s",
+                "governor_graph_text": "PersonA",
+                "dependent_graph_text": "'s",
+                "governor_index": 8,
+                "dependent_index": 9,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "Maurice, Prince Of Orange",
+        "nodes": [
+          "Maurice, Prince Of Orange",
+          "father"
+        ],
+        "node_ids": [
+          "8",
+          "10"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "10",
+            "source_text": "Maurice, Prince Of Orange",
+            "target_text": "father",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "father",
+                "dependent_text": "Maurice, Prince Of Orange",
+                "governor_graph_text": "father",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "Maurice, Prince Of Orange",
+        "nodes": [
+          "Maurice, Prince Of Orange",
+          "father",
+          "of"
+        ],
+        "node_ids": [
+          "8",
+          "10",
+          "7"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "10",
+            "source_text": "Maurice, Prince Of Orange",
+            "target_text": "father",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "8",
+                "governor_text": "father",
+                "dependent_text": "Maurice, Prince Of Orange",
+                "governor_graph_text": "father",
+                "dependent_graph_text": "PersonA",
+                "governor_index": 10,
+                "dependent_index": 8,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "father",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "7",
+                "governor_text": "father",
+                "dependent_text": "of",
+                "governor_graph_text": "father",
+                "dependent_graph_text": "of",
+                "governor_index": 10,
+                "dependent_index": 7,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "place_of_death",
+        "semantic_chain_hint": [
+          "father",
+          "death",
+          "place"
+        ],
+        "covered_cues": [
+          "where",
+          "death"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Maurice, Prince Of Orange, covers the necessary roles leading to the place of death, and includes the where cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p2",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "place_of_death",
+        "semantic_chain_hint": [
+          "father",
+          "death",
+          "place"
+        ],
+        "covered_cues": [
+          "death"
+        ],
+        "missing_cues": [
+          "where"
+        ],
+        "fatal_errors": [],
+        "reason": "The path effectively connects Maurice, Prince Of Orange to the place of death but lacks the explicit where cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p3",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "place_of_death",
+        "semantic_chain_hint": [
+          "father",
+          "death",
+          "place"
+        ],
+        "covered_cues": [
+          "where",
+          "death"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Maurice, Prince Of Orange, and effectively leads to the place of death while including the where cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p4",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "place_of_death",
+        "semantic_chain_hint": [
+          "father",
+          "death",
+          "place"
+        ],
+        "covered_cues": [
+          "death"
+        ],
+        "missing_cues": [
+          "where"
+        ],
+        "fatal_errors": [],
+        "reason": "The path connects Maurice, Prince Of Orange to the place of death but lacks the where cue and ends with a determiner."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p5",
+        "score": 65.0,
+        "valid": true,
+        "terminal_hint": "place_of_death",
+        "semantic_chain_hint": [
+          "father",
+          "death",
+          "place"
+        ],
+        "covered_cues": [
+          "where"
+        ],
+        "missing_cues": [
+          "death"
+        ],
+        "fatal_errors": [],
+        "reason": "The path includes the where cue but ends with punctuation and does not fully connect to the place of death."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p6",
+        "score": 60.0,
+        "valid": true,
+        "terminal_hint": "place_of_death",
+        "semantic_chain_hint": [
+          "father",
+          "death"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "where",
+          "place"
+        ],
+        "fatal_errors": [],
+        "reason": "The path connects Maurice, Prince Of Orange to father and death but does not reach the place of death or include the where cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p7",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "place_of_death",
+        "semantic_chain_hint": [
+          "father",
+          "death"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "where",
+          "place"
+        ],
+        "fatal_errors": [],
+        "reason": "The path connects Maurice, Prince Of Orange to father and death but ends with a preposition and does not reach the place of death."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p8",
+        "score": 20.0,
+        "valid": false,
+        "terminal_hint": "place_of_death",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "where",
+          "father",
+          "death",
+          "place"
+        ],
+        "fatal_errors": [],
+        "reason": "The path is too short and does not connect to any relevant concepts."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p9",
+        "score": 30.0,
+        "valid": false,
+        "terminal_hint": "place_of_death",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "where",
+          "death",
+          "place"
+        ],
+        "fatal_errors": [],
+        "reason": "The path connects Maurice, Prince Of Orange to father but does not reach the place of death or include the where cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p10",
+        "score": 50.0,
+        "valid": false,
+        "terminal_hint": "place_of_death",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "where",
+          "father",
+          "death",
+          "place"
+        ],
+        "fatal_errors": [],
+        "reason": "The path connects Maurice, Prince Of Orange to father but does not reach the place of death or include the where cue."
+      }
+    ],
+    "8_1_top_paths_by_entity": {
+      "e1": [
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p1",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "place_of_death",
+          "semantic_chain_hint": [
+            "father",
+            "death",
+            "place"
+          ],
+          "covered_cues": [
+            "where",
+            "death"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Maurice, Prince Of Orange, covers the necessary roles leading to the place of death, and includes the where cue."
+        },
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p3",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "place_of_death",
+          "semantic_chain_hint": [
+            "father",
+            "death",
+            "place"
+          ],
+          "covered_cues": [
+            "where",
+            "death"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Maurice, Prince Of Orange, and effectively leads to the place of death while including the where cue."
+        }
+      ]
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "mean_path_score": 90.0
+      },
+      {
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p3"
+        },
+        "mean_path_score": 90.0
+      }
+    ],
+    "9_candidate_semantic_asts": [
+      {
+        "candidate_id": "ast_ps1",
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "maurice_prince_of_orange",
+              "label": "Maurice, Prince Of Orange",
+              "kind": "entity",
+              "semantic_type": "Person",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "8"
+              ],
+              "source_token_indices": [
+                8
+              ],
+              "grounding_text": "Maurice, Prince Of Orange",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "father",
+              "label": "father",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "father",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "death_place",
+              "label": "death_place",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "4",
+                "6"
+              ],
+              "source_token_indices": [
+                4,
+                6
+              ],
+              "grounding_text": "death_place",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "maurice_prince_of_orange",
+              "target": "father",
+              "edge_type": "attribute",
+              "relation_hint": "father of Maurice, Prince Of Orange",
+              "support_path": [
+                "e1_p1",
+                "8",
+                "10"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "father",
+              "target": "death_place",
+              "edge_type": "attribute",
+              "relation_hint": "place of death of the father",
+              "support_path": [
+                "e1_p1",
+                "10",
+                "6",
+                "4"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "maurice_prince_of_orange",
+                "label": "Maurice, Prince Of Orange",
+                "kind": "entity",
+                "semantic_type": "Person",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "8"
+                ]
+              },
+              {
+                "id": "father",
+                "label": "father",
+                "kind": "type_variable",
+                "semantic_type": "Person",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              },
+              {
+                "id": "death_place",
+                "label": "death_place",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p1"
+                ],
+                "source_node_ids": [
+                  "4",
+                  "6"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "maurice_prince_of_orange",
+                "target": "father",
+                "relation": "father of Maurice, Prince Of Orange",
+                "support_path_id": "e1_p1",
+                "support_node_ids": [
+                  "8",
+                  "10"
+                ]
+              },
+              {
+                "source": "father",
+                "target": "death_place",
+                "relation": "place of death of the father",
+                "support_path_id": "e1_p1",
+                "support_node_ids": [
+                  "10",
+                  "6",
+                  "4"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "death_place"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "maurice_prince_of_orange",
+              "label": "Maurice, Prince Of Orange",
+              "kind": "entity",
+              "semantic_type": "Person",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "8"
+              ]
+            },
+            {
+              "id": "father",
+              "label": "father",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            },
+            {
+              "id": "death_place",
+              "label": "death_place",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p1"
+              ],
+              "source_node_ids": [
+                "4",
+                "6"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "maurice_prince_of_orange",
+              "target": "father",
+              "relation": "father of Maurice, Prince Of Orange",
+              "support_path_id": "e1_p1",
+              "support_node_ids": [
+                "8",
+                "10"
+              ]
+            },
+            {
+              "source": "father",
+              "target": "death_place",
+              "relation": "place of death of the father",
+              "support_path_id": "e1_p1",
+              "support_node_ids": [
+                "10",
+                "6",
+                "4"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "death_place"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 90.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p1",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "place_of_death",
+              "semantic_chain_hint": [
+                "father",
+                "death",
+                "place"
+              ],
+              "covered_cues": [
+                "where",
+                "death"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Maurice, Prince Of Orange, covers the necessary roles leading to the place of death, and includes the where cue."
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "ast_ps2",
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p3"
+        },
+        "semantic_ast": {
+          "status": "ok",
+          "primary_operator": {
+            "operator": "NONE",
+            "inputs": [],
+            "output": "answer",
+            "cue_text": "",
+            "explanation": ""
+          },
+          "nodes": [
+            {
+              "id": "maurice_prince_of_orange",
+              "label": "Maurice, Prince Of Orange",
+              "kind": "entity",
+              "semantic_type": "Person",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "8"
+              ],
+              "source_token_indices": [
+                8
+              ],
+              "grounding_text": "Maurice, Prince Of Orange",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "father",
+              "label": "father",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "10"
+              ],
+              "source_token_indices": [
+                10
+              ],
+              "grounding_text": "father",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "death",
+              "label": "death",
+              "kind": "type_variable",
+              "semantic_type": "Event",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "6"
+              ],
+              "source_token_indices": [
+                6
+              ],
+              "grounding_text": "death",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            },
+            {
+              "id": "place_of_death",
+              "label": "place_of_death",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source": "path_pruned_ast",
+              "source_graph_nodes": [
+                "4"
+              ],
+              "source_token_indices": [
+                4
+              ],
+              "grounding_text": "place_of_death",
+              "cue_text": "",
+              "branch_of": null,
+              "expected_value_slot": null,
+              "relation_hint": null
+            }
+          ],
+          "edges": [
+            {
+              "source": "maurice_prince_of_orange",
+              "target": "father",
+              "edge_type": "attribute",
+              "relation_hint": "father of Maurice, Prince Of Orange",
+              "support_path": [
+                "e1_p3",
+                "8",
+                "10"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "father",
+              "target": "death",
+              "edge_type": "attribute",
+              "relation_hint": "death of father",
+              "support_path": [
+                "e1_p3",
+                "10",
+                "6"
+              ],
+              "support_dependency_relations": []
+            },
+            {
+              "source": "death",
+              "target": "place_of_death",
+              "edge_type": "attribute",
+              "relation_hint": "place of death",
+              "support_path": [
+                "e1_p3",
+                "6",
+                "4"
+              ],
+              "support_dependency_relations": []
+            }
+          ],
+          "warnings": [],
+          "raw_payload": {
+            "nodes": [
+              {
+                "id": "maurice_prince_of_orange",
+                "label": "Maurice, Prince Of Orange",
+                "kind": "entity",
+                "semantic_type": "Person",
+                "source_path_ids": [
+                  "e1_p3"
+                ],
+                "source_node_ids": [
+                  "8"
+                ]
+              },
+              {
+                "id": "father",
+                "label": "father",
+                "kind": "type_variable",
+                "semantic_type": "Person",
+                "source_path_ids": [
+                  "e1_p3"
+                ],
+                "source_node_ids": [
+                  "10"
+                ]
+              },
+              {
+                "id": "death",
+                "label": "death",
+                "kind": "type_variable",
+                "semantic_type": "Event",
+                "source_path_ids": [
+                  "e1_p3"
+                ],
+                "source_node_ids": [
+                  "6"
+                ]
+              },
+              {
+                "id": "place_of_death",
+                "label": "place_of_death",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_ids": [
+                  "e1_p3"
+                ],
+                "source_node_ids": [
+                  "4"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "source": "maurice_prince_of_orange",
+                "target": "father",
+                "relation": "father of Maurice, Prince Of Orange",
+                "support_path_id": "e1_p3",
+                "support_node_ids": [
+                  "8",
+                  "10"
+                ]
+              },
+              {
+                "source": "father",
+                "target": "death",
+                "relation": "death of father",
+                "support_path_id": "e1_p3",
+                "support_node_ids": [
+                  "10",
+                  "6"
+                ]
+              },
+              {
+                "source": "death",
+                "target": "place_of_death",
+                "relation": "place of death",
+                "support_path_id": "e1_p3",
+                "support_node_ids": [
+                  "6",
+                  "4"
+                ]
+              }
+            ],
+            "branch_terminals": {
+              "e1": "place_of_death"
+            }
+          },
+          "coreference_links": [],
+          "canonical_node_map": {},
+          "validation_warnings": [],
+          "detected_cue_frame": {},
+          "operator_inputs_before_validation": [],
+          "retry_count": 0,
+          "fallback_repair_actions": []
+        },
+        "raw_payload": {
+          "nodes": [
+            {
+              "id": "maurice_prince_of_orange",
+              "label": "Maurice, Prince Of Orange",
+              "kind": "entity",
+              "semantic_type": "Person",
+              "source_path_ids": [
+                "e1_p3"
+              ],
+              "source_node_ids": [
+                "8"
+              ]
+            },
+            {
+              "id": "father",
+              "label": "father",
+              "kind": "type_variable",
+              "semantic_type": "Person",
+              "source_path_ids": [
+                "e1_p3"
+              ],
+              "source_node_ids": [
+                "10"
+              ]
+            },
+            {
+              "id": "death",
+              "label": "death",
+              "kind": "type_variable",
+              "semantic_type": "Event",
+              "source_path_ids": [
+                "e1_p3"
+              ],
+              "source_node_ids": [
+                "6"
+              ]
+            },
+            {
+              "id": "place_of_death",
+              "label": "place_of_death",
+              "kind": "value_slot",
+              "semantic_type": "Location",
+              "source_path_ids": [
+                "e1_p3"
+              ],
+              "source_node_ids": [
+                "4"
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "maurice_prince_of_orange",
+              "target": "father",
+              "relation": "father of Maurice, Prince Of Orange",
+              "support_path_id": "e1_p3",
+              "support_node_ids": [
+                "8",
+                "10"
+              ]
+            },
+            {
+              "source": "father",
+              "target": "death",
+              "relation": "death of father",
+              "support_path_id": "e1_p3",
+              "support_node_ids": [
+                "10",
+                "6"
+              ]
+            },
+            {
+              "source": "death",
+              "target": "place_of_death",
+              "relation": "place of death",
+              "support_path_id": "e1_p3",
+              "support_node_ids": [
+                "6",
+                "4"
+              ]
+            }
+          ],
+          "branch_terminals": {
+            "e1": "place_of_death"
+          }
+        },
+        "parse_error": null,
+        "generation_error": null,
+        "path_score_summary": {
+          "mean_path_score": 90.0,
+          "paths": {
+            "e1": {
+              "entity_id": "e1",
+              "path_id": "e1_p3",
+              "score": 90.0,
+              "valid": true,
+              "terminal_hint": "place_of_death",
+              "semantic_chain_hint": [
+                "father",
+                "death",
+                "place"
+              ],
+              "covered_cues": [
+                "where",
+                "death"
+              ],
+              "missing_cues": [],
+              "fatal_errors": [],
+              "reason": "The path starts from Maurice, Prince Of Orange, and effectively leads to the place of death while including the where cue."
+            }
+          }
+        }
+      }
+    ],
+    "10_best_ast_selection": {
+      "ast_reviews": [
+        {
+          "candidate_id": "ast_ps1",
+          "path_set_id": "ps1",
+          "score": 0.96,
+          "valid_for_decomposition": true,
+          "covers_original_question": true,
+          "answer_intent_compatible": true,
+          "branch_complete": true,
+          "atomic_questions_would_be_executable": true,
+          "has_final_operator_question": false,
+          "fatal_errors": [],
+          "reason": "This AST effectively covers the necessary roles leading to the place of death of Maurice, Prince Of Orange's father, and includes the required 'where' cue."
+        },
+        {
+          "candidate_id": "ast_ps2",
+          "path_set_id": "ps2",
+          "score": 0.95,
+          "valid_for_decomposition": true,
+          "covers_original_question": true,
+          "answer_intent_compatible": true,
+          "branch_complete": true,
+          "atomic_questions_would_be_executable": true,
+          "has_final_operator_question": false,
+          "fatal_errors": [],
+          "reason": "This AST also covers the necessary roles and includes the 'where' cue, but it introduces an additional node for 'death' which may complicate the decomposition slightly."
+        }
+      ],
+      "best_candidate_id": "ast_ps1",
+      "selected_candidate_id": "ast_ps1"
+    },
+    "10_selected_semantic_ast": {
+      "status": "ok",
+      "primary_operator": {
+        "operator": "NONE",
+        "inputs": [],
+        "output": "answer",
+        "cue_text": "",
+        "explanation": ""
+      },
+      "nodes": [
+        {
+          "id": "maurice_prince_of_orange",
+          "label": "Maurice, Prince Of Orange",
+          "kind": "entity",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "8"
+          ],
+          "source_token_indices": [
+            8
+          ],
+          "grounding_text": "Maurice, Prince Of Orange",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "father",
+          "label": "father",
+          "kind": "type_variable",
+          "semantic_type": "Person",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "10"
+          ],
+          "source_token_indices": [
+            10
+          ],
+          "grounding_text": "father",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        },
+        {
+          "id": "death_place",
+          "label": "death_place",
+          "kind": "value_slot",
+          "semantic_type": "Location",
+          "source": "path_pruned_ast",
+          "source_graph_nodes": [
+            "4",
+            "6"
+          ],
+          "source_token_indices": [
+            4,
+            6
+          ],
+          "grounding_text": "death_place",
+          "cue_text": "",
+          "branch_of": null,
+          "expected_value_slot": null,
+          "relation_hint": null
+        }
+      ],
+      "edges": [
+        {
+          "source": "maurice_prince_of_orange",
+          "target": "father",
+          "edge_type": "attribute",
+          "relation_hint": "father of Maurice, Prince Of Orange",
+          "support_path": [
+            "e1_p1",
+            "8",
+            "10"
+          ],
+          "support_dependency_relations": []
+        },
+        {
+          "source": "father",
+          "target": "death_place",
+          "edge_type": "attribute",
+          "relation_hint": "place of death of the father",
+          "support_path": [
+            "e1_p1",
+            "10",
+            "6",
+            "4"
+          ],
+          "support_dependency_relations": []
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "nodes": [
+          {
+            "id": "maurice_prince_of_orange",
+            "label": "Maurice, Prince Of Orange",
+            "kind": "entity",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "8"
+            ]
+          },
+          {
+            "id": "father",
+            "label": "father",
+            "kind": "type_variable",
+            "semantic_type": "Person",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "10"
+            ]
+          },
+          {
+            "id": "death_place",
+            "label": "death_place",
+            "kind": "value_slot",
+            "semantic_type": "Location",
+            "source_path_ids": [
+              "e1_p1"
+            ],
+            "source_node_ids": [
+              "4",
+              "6"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "source": "maurice_prince_of_orange",
+            "target": "father",
+            "relation": "father of Maurice, Prince Of Orange",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "8",
+              "10"
+            ]
+          },
+          {
+            "source": "father",
+            "target": "death_place",
+            "relation": "place of death of the father",
+            "support_path_id": "e1_p1",
+            "support_node_ids": [
+              "10",
+              "6",
+              "4"
+            ]
+          }
+        ],
+        "branch_terminals": {
+          "e1": "death_place"
+        }
+      },
+      "coreference_links": [],
+      "canonical_node_map": {},
+      "validation_warnings": [],
+      "detected_cue_frame": {},
+      "operator_inputs_before_validation": [],
+      "retry_count": 0,
+      "fallback_repair_actions": []
+    },
+    "11_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the father of Maurice, Prince Of Orange?",
+          "type": "lookup",
+          "inputs": [
+            "Maurice, Prince Of Orange"
+          ],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": "maurice_prince_of_orange",
+          "target_node": "father",
+          "ast_edge": {
+            "source": "maurice_prince_of_orange",
+            "target": "father",
+            "edge_type": "attribute",
+            "relation_hint": "father of Maurice, Prince Of Orange",
+            "support_path": [
+              "e1_p1",
+              "8",
+              "10"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        },
+        {
+          "id": "q2",
+          "question": "Where did the father of Maurice, Prince Of Orange die?",
+          "type": "lookup",
+          "inputs": [
+            "X1"
+          ],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": "father",
+          "target_node": "death_place",
+          "ast_edge": {
+            "source": "father",
+            "target": "death_place",
+            "edge_type": "attribute",
+            "relation_hint": "place of death of the father",
+            "support_path": [
+              "e1_p1",
+              "10",
+              "6",
+              "4"
+            ],
+            "support_dependency_relations": []
+          },
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {},
+          "source": "llm"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "11_subquestions": [
+      {
+        "index": 1,
+        "question": "Who is the father of Maurice, Prince Of Orange?",
+        "answer_variable": "X1",
+        "source_node": "maurice_prince_of_orange",
+        "target_node": "father",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "maurice_prince_of_orange",
+          "target": "father",
+          "edge_type": "attribute",
+          "relation_hint": "father of Maurice, Prince Of Orange",
+          "support_path": [
+            "e1_p1",
+            "8",
+            "10"
+          ],
+          "support_dependency_relations": []
+        }
+      },
+      {
+        "index": 2,
+        "question": "Where did the father of Maurice, Prince Of Orange die?",
+        "answer_variable": "X2",
+        "source_node": "father",
+        "target_node": "death_place",
+        "operator": null,
+        "type": "edge",
+        "source": "llm",
+        "ast_edge": {
+          "source": "father",
+          "target": "death_place",
+          "edge_type": "attribute",
+          "relation_hint": "place of death of the father",
+          "support_path": [
+            "e1_p1",
+            "10",
+            "6",
+            "4"
+          ],
+          "support_dependency_relations": []
+        }
+      }
+    ]
+  }
+}

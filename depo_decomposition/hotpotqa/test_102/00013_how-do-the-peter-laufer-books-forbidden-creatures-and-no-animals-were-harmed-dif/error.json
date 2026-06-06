@@ -1,0 +1,15 @@
+{
+  "status": "error",
+  "dataset": "hotpotqa",
+  "questions_file": "questions\\hotpotqa\\questions.json",
+  "index": 13,
+  "qid": null,
+  "question": "How do the Peter Laufer books Forbidden Creatures and No Animals Were Harmed differ in their focus on animals?",
+  "raw_question_item": {
+    "question": "How do the Peter Laufer books Forbidden Creatures and No Animals Were Harmed differ in their focus on animals?",
+    "answer": "his own opinions changed"
+  },
+  "gold_answer": "his own opinions changed",
+  "error_type": "RuntimeError",
+  "error": "LLM did not return valid JSON after 3 attempts: Expecting ',' delimiter: line 2292 column 8 (char 60041)"
+}
