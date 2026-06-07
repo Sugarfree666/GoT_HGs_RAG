@@ -218,7 +218,6 @@ def build_decomposition_payload(
 ) -> dict[str, Any]:
     dependency_parse = result["dependency_parse"]
     dependency_graph = result["dependency_graph"]
-    semantic_ast = result["semantic_ast"]
     subquestion_dag = result.get("subquestion_dag")
     subquestions = result.get("subquestions", [])
 
@@ -256,17 +255,15 @@ def build_decomposition_payload(
             "8_path_scores": [_dataclass_to_jsonable(path) for path in result.get("scored_entity_paths", [])],
             "8_1_top_paths_by_entity": top_paths_by_entity,
             "8_2_path_set_candidates": [_dataclass_to_jsonable(candidate) for candidate in result.get("path_set_candidates", [])],
-            "9_candidate_semantic_asts": [_dataclass_to_jsonable(candidate) for candidate in result.get("candidate_asts", [])],
-            "10_best_ast_selection": _dataclass_to_jsonable(result.get("best_ast_selection_payload") or {}),
-            "10_selected_semantic_ast": _dataclass_to_jsonable(semantic_ast),
-            "11_atomic_subquestion_dag": _dataclass_to_jsonable(subquestion_dag) if subquestion_dag else None,
-            "11_subquestions": [_dataclass_to_jsonable(item) for item in subquestions],
+            "9_grounded_atomic_dag_generation": _dataclass_to_jsonable(result.get("grounded_atomic_dag_payload") or {}),
+            "10_atomic_subquestion_dag": _dataclass_to_jsonable(subquestion_dag) if subquestion_dag else None,
+            "10_subquestions": [_dataclass_to_jsonable(item) for item in subquestions],
         },
     }
     if debug:
         payload["debug_payloads"] = {
             "path_scoring_payload": result.get("path_scoring_payload"),
-            "best_ast_selection_payload": result.get("best_ast_selection_payload"),
+            "grounded_atomic_dag_payload": result.get("grounded_atomic_dag_payload"),
         }
     return payload
 
@@ -391,51 +388,32 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 9. Candidate Path-Set Semantic ASTs")
-    for candidate in stages["9_candidate_semantic_asts"]:
-        lines.append(f"### {candidate.get('candidate_id')} ({candidate.get('path_set_id')})")
-        if candidate.get("parse_error"):
-            lines.append(f"- parse_error: {candidate.get('parse_error')}")
-        if candidate.get("generation_error"):
-            lines.append(f"- generation_error: {candidate.get('generation_error')}")
-        ast = candidate.get("semantic_ast") or {}
-        for edge in ast.get("edges", []):
-            relation = f" ({edge.get('relation_hint')})" if edge.get("relation_hint") else ""
-            lines.append(f"- {edge.get('source')} -> {edge.get('target')}{relation}")
-    if not stages["9_candidate_semantic_asts"]:
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("## 10. LLM Best AST Selection")
-    best_payload = stages["10_best_ast_selection"]
-    for review in best_payload.get("ast_reviews", []):
+    lines.append("## 9. Grounded Atomic DAG Generation")
+    grounded_payload = stages.get("9_grounded_atomic_dag_generation") or {}
+    if grounded_payload.get("selected_path_set_ids"):
+        lines.append(f"- selected_path_set_ids: {grounded_payload.get('selected_path_set_ids')}")
+    if grounded_payload.get("reason"):
+        lines.append(f"- reason: {grounded_payload.get('reason')}")
+    for node in grounded_payload.get("nodes", []):
+        support = node.get("support") or []
+        support_ids = [
+            item.get("path_id")
+            for item in support
+            if isinstance(item, dict) and item.get("path_id")
+        ]
         lines.append(
-            f"- {review.get('candidate_id')}: score={review.get('score')} "
-            f"valid={review.get('valid_for_decomposition')} reason={review.get('reason', '')}"
+            f"- {node.get('node_id')}: {node.get('question')} "
+            f"depends_on={node.get('dependencies') or []} support={support_ids}"
         )
-    lines.append(f"- best_candidate_id: {best_payload.get('best_candidate_id')}")
-    if best_payload.get("selected_candidate_id"):
-        lines.append(f"- selected_candidate_id: {best_payload.get('selected_candidate_id')}")
+    if not grounded_payload.get("nodes"):
+        lines.append("(none)")
+    warnings = grounded_payload.get("normalization_warnings") or []
+    for warning in warnings:
+        lines.append(f"- warning: {warning}")
     lines.append("")
 
-    lines.append("## 10. Selected Semantic AST")
-    ast = stages["10_selected_semantic_ast"]
-    lines.append("Nodes:")
-    for node in ast.get("nodes", []):
-        lines.append(f"- {node.get('id')}: {node.get('label')} ({node.get('kind')})")
-    if not ast.get("nodes"):
-        lines.append("- (none)")
-    lines.append("")
-    lines.append("Edges:")
-    for edge in ast.get("edges", []):
-        relation = f" ({edge.get('relation_hint')})" if edge.get("relation_hint") else ""
-        lines.append(f"- {edge.get('source')} -> {edge.get('target')}{relation}")
-    if not ast.get("edges"):
-        lines.append("- (none)")
-    lines.append("")
-
-    lines.append("## 11. Atomic Subquestion DAG")
-    dag = stages["11_atomic_subquestion_dag"] or {}
+    lines.append("## 10. Atomic Subquestion DAG")
+    dag = stages["10_atomic_subquestion_dag"] or {}
     for node in dag.get("nodes", []):
         metadata = node.get("metadata", {})
         operator = f" operator={metadata.get('operator')}" if metadata.get("operator") else ""
@@ -577,7 +555,7 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
 
 def _manifest_item(payload: dict[str, Any], question_dir: Path) -> dict[str, Any]:
     stages = payload["stages"]
-    dag = stages.get("11_atomic_subquestion_dag") or {}
+    dag = stages.get("10_atomic_subquestion_dag") or {}
     return {
         "dataset": payload["dataset"],
         "index": payload["index"],
@@ -586,8 +564,6 @@ def _manifest_item(payload: dict[str, Any], question_dir: Path) -> dict[str, Any
         "gold_answer": payload.get("gold_answer"),
         "status": "ok",
         "path_score_count": len(stages.get("8_path_scores", [])),
-        "candidate_ast_count": len(stages.get("9_candidate_semantic_asts", [])),
-        "ast_edge_count": len(stages.get("10_selected_semantic_ast", {}).get("edges", [])),
         "atomic_question_count": len(dag.get("nodes", [])),
         "output_dir": str(question_dir),
     }

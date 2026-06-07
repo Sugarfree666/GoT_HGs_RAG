@@ -7,30 +7,20 @@ from typing import TYPE_CHECKING, Any
 
 from io_utils import read_questions
 from models import (
-    AnchorSelectionResult,
-    ASTSkeleton,
     AtomicQuestionDAG,
     AtomicSubquestion,
-    CandidateNode,
-    CandidatePath,
     MaskReplacement,
     MaskSpan,
     MaskSpanResult,
     ExplicitEntity,
     ExplicitEntityResult,
-    ProblemFrame,
     QuestionRecord,
-    RestoredAnchorConnectedSubgraph,
     RestoredGraphNodeCandidate,
-    SelectedPath,
     EntityOriginPath,
     EntityStartNode,
-    CandidateSemanticAST,
     PathSetCandidate,
     ScoredEntityPath,
-    SelectedEntityPath,
     SemanticNormalizationResult,
-    SemanticASTResult,
 )
 
 if TYPE_CHECKING:
@@ -50,7 +40,7 @@ if TYPE_CHECKING:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="DEPO decomposition with mask-only parsing, restored anchor selection, semantic AST, and one-hop subquestions."
+        description="DEPO decomposition with explicit entity masking, grounded paths, and grounded atomic subquestions."
     )
     parser.add_argument("--question", help="Run one manually supplied question instead of questions.json.")
     parser.add_argument("--questions-file", default="questions.json", help="Path to questions.json.")
@@ -90,7 +80,7 @@ def main() -> int:
         from corenlp_parser import CoreNLPConnectionError, CoreNLPParser
         from graph_builder import GraphBuilder
         from llm_client import LLMClient
-        from mask_span_extractor import MaskSpanExtractor
+        from mask_span_extractor import ExplicitEntityExtractor
         from entity_path_pipeline import EntityPathSemanticParser
         from question_normalizer import SemanticQuestionNormalizer
         from subquestion_generator import SubquestionGenerator
@@ -234,36 +224,16 @@ def run_pipeline(
     if not path_set_candidates:
         raise ValueError("No candidate path sets were constructed for entity-origin path pipeline.")
 
-    candidate_asts = path_semantic_parser.build_candidate_semantic_asts(
+    subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
         original_question=record.question,
         restored_question=processing_question,
+        entity_start_nodes=entity_start_nodes,
         path_set_candidates=path_set_candidates,
         entity_origin_paths=entity_origin_paths,
         scored_paths=scored_entity_paths,
         undirected_graph_edges=graph_edge_payloads,
     )
-    semantic_ast, best_ast_selection_payload = path_semantic_parser.select_best_candidate_ast(
-        original_question=record.question,
-        restored_question=processing_question,
-        entity_start_nodes=entity_start_nodes,
-        path_set_candidates=path_set_candidates,
-        scored_paths=scored_entity_paths,
-        candidate_asts=candidate_asts,
-    )
-
-    subquestion_dag: AtomicQuestionDAG | None = None
-    generate_dag = getattr(subquestion_generator, "generate_dag", None)
-    if callable(generate_dag):
-        subquestion_dag = generate_dag(
-            original_question=processing_question,
-            semantic_ast=semantic_ast,
-        )
-        subquestions = subquestion_dag.to_subquestions()
-    else:
-        subquestions = subquestion_generator.generate(
-            original_question=processing_question,
-            ast=semantic_ast,
-        )
+    subquestions = subquestion_dag.to_subquestions()
     return {
         "semantic_normalization": semantic_normalization,
         "explicit_entities": explicit_entities,
@@ -283,25 +253,9 @@ def run_pipeline(
         "path_scoring_payload": path_scoring_payload,
         "top_paths_by_entity": top_paths_by_entity,
         "path_set_candidates": path_set_candidates,
-        "candidate_asts": candidate_asts,
-        "best_ast_selection_payload": best_ast_selection_payload,
-        "selected_entity_paths": [],
-        "selected_paths_payload": None,
-        "selected_path_semantic_transduction_payload": None,
-        "path_pruned_ast_payload": best_ast_selection_payload,
-        "semantic_ast": semantic_ast,
+        "grounded_atomic_dag_payload": grounded_atomic_dag_payload,
         "subquestions": subquestions,
         "subquestion_dag": subquestion_dag,
-        "candidate_nodes": [],
-        "problem_frame": None,
-        "candidate_frame_payload": None,
-        "candidate_projected_graph": None,
-        "enumerated_candidate_paths": [],
-        "filtered_candidate_paths": [],
-        "selected_paths": [],
-        "selected_path_repair_actions": [],
-        "ast_skeleton": None,
-        "relation_label_payload": None,
     }
 
 
@@ -361,9 +315,7 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     scored_entity_paths: list[ScoredEntityPath] = result.get("scored_entity_paths", [])
     top_paths_by_entity: dict[str, list[ScoredEntityPath]] = result.get("top_paths_by_entity", {})
     path_set_candidates: list[PathSetCandidate] = result.get("path_set_candidates", [])
-    candidate_asts: list[CandidateSemanticAST] = result.get("candidate_asts", [])
-    best_ast_selection_payload: dict[str, Any] = result.get("best_ast_selection_payload") or {}
-    semantic_ast: SemanticASTResult = result["semantic_ast"]
+    grounded_atomic_dag_payload: dict[str, Any] = result.get("grounded_atomic_dag_payload") or {}
     subquestions: list[AtomicSubquestion] = result["subquestions"]
     subquestion_dag: AtomicQuestionDAG | None = result.get("subquestion_dag")
 
@@ -448,19 +400,11 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     _print_path_set_candidates(path_set_candidates)
     print()
 
-    print("[9. Candidate Path-Set Semantic ASTs]")
-    _print_candidate_semantic_asts(candidate_asts)
+    print("[9. Grounded Atomic DAG Generation]")
+    _print_grounded_atomic_dag_payload(grounded_atomic_dag_payload)
     print()
 
-    print("[10. LLM Best AST Selection]")
-    _print_best_ast_selection(best_ast_selection_payload)
-    print("Selected Semantic AST:")
-    _print_semantic_ast(semantic_ast)
-    if debug:
-        _print_warnings(semantic_ast.warnings)
-    print()
-
-    print("[11. Atomic Subquestion DAG]")
+    print("[10. Atomic Subquestion DAG]")
     if subquestion_dag is not None:
         _print_atomic_question_dag(subquestion_dag)
     elif not subquestions:
@@ -469,21 +413,6 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
         for item in subquestions:
             print(f"  q{item.index}: {item.question}")
     print()
-
-
-def _format_restored_subgraph_edges(
-    restored_anchor_connected_subgraph: RestoredAnchorConnectedSubgraph,
-) -> list[str]:
-    lines: list[str] = []
-    for edge in restored_anchor_connected_subgraph.edges:
-        source = edge.get("source")
-        target = edge.get("target")
-        source_text = edge.get("source_text", source)
-        target_text = edge.get("target_text", target)
-        relation = edge.get("relation") or "|".join(edge.get("relations", []))
-        relation_text = relation or "related"
-        lines.append(f"  - {source_text}[{source}] --{relation_text}--> {target_text}[{target}]")
-    return lines
 
 
 def _print_entity_start_nodes(entity_start_nodes: list[EntityStartNode]) -> None:
@@ -514,21 +443,6 @@ def _print_entity_origin_paths(
                     f"    {evidence.get('source_text', evidence.get('source'))}"
                     f" -> {evidence.get('target_text', evidence.get('target'))}{relation_text}"
                 )
-
-
-def _print_selected_entity_paths(
-    selected_entity_paths: list[SelectedEntityPath],
-    entity_origin_paths: list[EntityOriginPath],
-) -> None:
-    if not selected_entity_paths:
-        print("  (none)")
-        return
-    path_by_id = {path.path_id: path for path in entity_origin_paths}
-    for selected in selected_entity_paths:
-        path = path_by_id.get(selected.path_id)
-        path_text = f" {' -- '.join(path.nodes)}" if path is not None else ""
-        reason = f" reason={selected.reason}" if selected.reason else ""
-        print(f"  - {selected.entity_id}: {selected.path_id}{path_text}{reason}")
 
 
 def _print_scored_entity_paths(
@@ -580,169 +494,34 @@ def _print_path_set_candidates(path_set_candidates: list[PathSetCandidate]) -> N
         print(f"  - {candidate.path_set_id}: {mapping}; mean_path_score={candidate.mean_path_score:.1f}")
 
 
-def _print_candidate_semantic_asts(candidate_asts: list[CandidateSemanticAST]) -> None:
-    if not candidate_asts:
-        print("  (none)")
-        return
-    for candidate in candidate_asts:
-        print(f"  - {candidate.candidate_id} ({candidate.path_set_id}) paths={candidate.path_ids_by_entity}")
-        if candidate.parse_error:
-            print(f"    parse_error={candidate.parse_error}")
-        if candidate.generation_error:
-            print(f"    generation_error={candidate.generation_error}")
-        if candidate.semantic_ast is None:
-            continue
-        print("    Nodes:")
-        if candidate.semantic_ast.nodes:
-            for node in candidate.semantic_ast.nodes:
-                print(f"      - {node.id}: {node.label}")
-        else:
-            print("      (none)")
-        print("    Edges:")
-        if candidate.semantic_ast.edges:
-            for edge in candidate.semantic_ast.edges:
-                hint = f" ({edge.relation_hint})" if edge.relation_hint else ""
-                print(f"      - {edge.source} -> {edge.target}{hint}")
-        else:
-            print("      (none)")
-
-
-def _print_best_ast_selection(payload: dict[str, Any]) -> None:
+def _print_grounded_atomic_dag_payload(payload: dict[str, Any]) -> None:
     if not payload:
         print("  (none)")
         return
-    reviews = payload.get("ast_reviews", [])
-    if isinstance(reviews, list) and reviews:
-        for review in reviews:
-            if not isinstance(review, dict):
+    reason = str(payload.get("reason") or "").strip()
+    selected_path_sets = payload.get("selected_path_set_ids")
+    if selected_path_sets:
+        print(f"  selected_path_set_ids={selected_path_sets}")
+    if reason:
+        print(f"  reason={reason}")
+    nodes = payload.get("nodes", [])
+    if isinstance(nodes, list) and nodes:
+        print("  Nodes:")
+        for node in nodes:
+            if not isinstance(node, dict):
                 continue
-            fatal = review.get("fatal_errors") or []
-            fatal_text = f" fatal_errors={fatal}" if fatal else ""
-            reason = f" reason={review.get('reason')}" if review.get("reason") else ""
-            print(
-                f"  - {review.get('candidate_id')} ({review.get('path_set_id')}): "
-                f"score={review.get('score')} valid={review.get('valid_for_decomposition')}{fatal_text}{reason}"
-            )
-    else:
-        print("  Reviews: (none)")
-    best = payload.get("best_candidate_id")
-    selected = payload.get("selected_candidate_id")
-    fallback = payload.get("selection_fallback")
-    print(f"  best_candidate_id={best}")
-    if selected:
-        print(f"  selected_candidate_id={selected}")
-    if fallback:
-        print(f"  selection_fallback={fallback}")
-
-
-def _print_candidate_nodes(candidate_nodes: list[CandidateNode]) -> None:
-    if not candidate_nodes:
-        print("  (none)")
-        return
-    for node in candidate_nodes:
-        grounding = f" graph_node_ids={node.graph_node_ids}" if node.graph_node_ids else ""
-        print(f"  - {node.id}: {node.text} kind={node.kind} confidence={node.confidence}{grounding}")
-
-
-def _print_problem_frame(problem_frame: ProblemFrame) -> None:
-    if problem_frame.answer_mode:
-        print(f"Answer mode: {problem_frame.answer_mode}")
-    if problem_frame.answer_focus:
-        print(f"Answer focus: {problem_frame.answer_focus}")
-    if problem_frame.notes:
-        print(f"Notes: {problem_frame.notes}")
-    print("Requirements:")
-    if not problem_frame.requirements:
-        print("  (none)")
-        return
-    for requirement in problem_frame.requirements:
-        description = f" - {requirement.description}" if requirement.description else ""
-        context = f" context={requirement.context}" if requirement.context else ""
-        print(f"  - {requirement.id}: {requirement.root} -> {requirement.target}{context}{description}")
-
-
-def _print_candidate_paths(candidate_paths: list[CandidatePath]) -> None:
-    if not candidate_paths:
-        print("  (none)")
-        return
-    for path in candidate_paths:
-        candidate_for = ", ".join(path.candidate_for) if path.candidate_for else "unassigned"
-        print(f"  - {path.path_id}: {' -- '.join(path.nodes)} candidate_for={candidate_for}")
-        for evidence in path.evidence:
-            evidence_text = " -- ".join(str(item) for item in evidence.get("evidence_text_path", []))
-            source = evidence.get("source_text", evidence.get("source", ""))
-            target = evidence.get("target_text", evidence.get("target", ""))
-            print(f"    evidence {source} -> {target}: {evidence_text}")
-
-
-def _print_selected_paths(selected_paths: list[SelectedPath]) -> None:
-    if not selected_paths:
-        print("  (none)")
-        return
-    for selected in selected_paths:
-        print(f"  - {selected.requirement_id}: {selected.path_id}")
-
-
-def _print_repair_actions(actions: list[str]) -> None:
-    if not actions:
-        return
-    print("Repair actions:")
-    for action in actions:
-        print(f"  - {action}")
-
-
-def _print_ast_skeleton(ast_skeleton: ASTSkeleton) -> None:
-    print("Branch terminals:")
-    if ast_skeleton.branch_terminals:
-        for requirement_id, terminal in ast_skeleton.branch_terminals.items():
-            print(f"  - {requirement_id}: {terminal}")
-    else:
-        print("  (none)")
-    print("Nodes:")
-    if ast_skeleton.nodes:
-        for node in ast_skeleton.nodes:
-            branch = f" branch_of={node.branch_of}" if node.branch_of else ""
-            print(f"  - {node.id}: {node.label} kind={node.kind}{branch}")
-    else:
-        print("  (none)")
-    print("Edges:")
-    if ast_skeleton.edges:
-        for edge in ast_skeleton.edges:
-            support = f" support={' -- '.join(edge.support_path)}" if edge.support_path else ""
-            print(f"  - {edge.source} -> {edge.target}{support}")
-    else:
-        print("  (none)")
-
-
-def _print_semantic_ast(semantic_ast: SemanticASTResult) -> None:
-    print("Nodes:")
-    if semantic_ast.nodes:
-        for node in semantic_ast.nodes:
-            print(f"  - {node.id}: {node.label}")
-    else:
-        print("  (none)")
-    print("Edges:")
-    if semantic_ast.edges:
-        for edge in semantic_ast.edges:
-            hint = f" ({edge.relation_hint})" if edge.relation_hint else ""
-            print(f"  - {edge.source} -> {edge.target}{hint}")
-    else:
-        print("  (none)")
-    if semantic_ast.detected_cue_frame:
-        frame = semantic_ast.detected_cue_frame
-        cue = frame.get("cue_text", "")
-        slot = frame.get("expected_value_slot", "")
-        print(f"Detected cue frame: cue={cue} expected_value_slot={slot}")
-    if semantic_ast.retry_count:
-        print(f"Retry count: {semantic_ast.retry_count}")
-    if semantic_ast.validation_warnings:
-        print("Validation warnings:")
-        for warning in semantic_ast.validation_warnings:
-            print(f"  - {warning}")
-    if semantic_ast.fallback_repair_actions:
-        print("Fallback repair actions:")
-        for action in semantic_ast.fallback_repair_actions:
-            print(f"  - {action}")
+            dependencies = node.get("dependencies") or []
+            support = node.get("support") or []
+            support_ids = []
+            if isinstance(support, list):
+                support_ids = [str(item.get("path_id")) for item in support if isinstance(item, dict) and item.get("path_id")]
+            print(f"    - {node.get('node_id')}: depends_on={dependencies or 'none'} support={support_ids or 'none'}")
+            print(f"      {node.get('question')}")
+    warnings = payload.get("normalization_warnings") or []
+    if warnings:
+        print("  Warnings:")
+        for warning in warnings:
+            print(f"    - {warning}")
 
 
 def _print_atomic_question_dag(dag: AtomicQuestionDAG) -> None:
@@ -756,6 +535,9 @@ def _print_atomic_question_dag(dag: AtomicQuestionDAG) -> None:
         depends_on = ", ".join(node.depends_on) if node.depends_on else "none"
         print(f"  - {node.id} [{node.type}]: inputs=({inputs}) -> {node.output}; depends_on={depends_on}")
         print(f"    {node.question}")
+        support_ids = node.metadata.get("support_path_ids") if isinstance(node.metadata, dict) else None
+        if support_ids:
+            print(f"    support_path_ids={support_ids}")
         if node.candidate_bindings:
             print(f"    candidate_bindings={node.candidate_bindings}")
 

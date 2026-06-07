@@ -9,8 +9,9 @@ from entity_path_projector import (
     validate_selected_entity_paths,
 )
 from models import (
-    BestASTReview,
-    CandidateSemanticAST,
+    AtomicQuestionDAG,
+    AtomicQuestionEdge,
+    AtomicQuestionNode,
     EntityOriginPath,
     EntityStartNode,
     PathSetCandidate,
@@ -19,11 +20,11 @@ from models import (
     SemanticASTResult,
 )
 from prompts import (
-    BEST_AST_SELECTION_SYSTEM,
     ENTITY_PATH_SCORING_SYSTEM,
     ENTITY_PATH_SELECTION_SYSTEM,
+    GROUNDED_ATOMIC_DAG_SYSTEM,
     SELECTED_PATH_SEMANTIC_TRANSDUCTION_SYSTEM,
-    build_best_ast_selection_prompt,
+    build_grounded_atomic_dag_prompt,
     build_score_entity_paths_prompt,
     build_select_entity_paths_prompt,
     build_selected_path_semantic_transduction_prompt,
@@ -63,146 +64,46 @@ class EntityPathSemanticParser:
         scored_paths = _parse_scored_entity_paths(raw_payload.get("path_scores"), entity_origin_paths)
         return scored_paths, raw_payload
 
-    def build_candidate_semantic_asts(
-        self,
-        *,
-        original_question: str,
-        restored_question: str,
-        path_set_candidates: list[PathSetCandidate],
-        entity_origin_paths: list[EntityOriginPath],
-        scored_paths: list[ScoredEntityPath],
-        undirected_graph_edges: list[dict[str, Any]],
-    ) -> list[CandidateSemanticAST]:
-        path_by_id = {path.path_id: path for path in entity_origin_paths}
-        score_by_path_id = {score.path_id: score for score in scored_paths}
-        candidates: list[CandidateSemanticAST] = []
-        for path_set in path_set_candidates:
-            candidate_id = f"ast_{path_set.path_set_id}"
-            selected_paths = [
-                path_by_id[path_id]
-                for _, path_id in sorted(path_set.path_ids_by_entity.items(), key=lambda item: _entity_id_sort_key(item[0]))
-                if path_id in path_by_id
-            ]
-            candidate = CandidateSemanticAST(
-                candidate_id=candidate_id,
-                path_set_id=path_set.path_set_id,
-                path_ids_by_entity=dict(path_set.path_ids_by_entity),
-                path_score_summary=_path_score_summary(path_set, scored_paths),
-            )
-            if len(selected_paths) != len(path_set.path_ids_by_entity):
-                missing = [
-                    path_id
-                    for path_id in path_set.path_ids_by_entity.values()
-                    if path_id not in path_by_id
-                ]
-                candidate.generation_error = "Path-set references missing path_id(s): " + ", ".join(missing)
-                candidates.append(candidate)
-                continue
-
-            prompt_paths = []
-            for path in selected_paths:
-                score = score_by_path_id.get(path.path_id)
-                prompt_paths.append(
-                    {
-                        **path.to_dict(),
-                        "path_set_id": path_set.path_set_id,
-                        "path_score": score.score if score is not None else 0.0,
-                        "path_score_valid": score.valid if score is not None else False,
-                        "path_score_reason": score.reason if score is not None else "",
-                        "terminal_hint": score.terminal_hint if score is not None else None,
-                        "semantic_chain_hint": score.semantic_chain_hint if score is not None else [],
-                    }
-                )
-            try:
-                payload = self.llm_client.chat_json(
-                    SELECTED_PATH_SEMANTIC_TRANSDUCTION_SYSTEM,
-                    build_selected_path_semantic_transduction_prompt(
-                        original_question=original_question,
-                        restored_question=restored_question,
-                        selected_entity_paths=prompt_paths,
-                        undirected_graph_edges=undirected_graph_edges,
-                    ),
-                )
-                candidate.raw_payload = payload if isinstance(payload, dict) else {}
-                if not isinstance(payload, dict):
-                    candidate.parse_error = "LLM returned non-object payload for candidate AST."
-                    candidates.append(candidate)
-                    continue
-                semantic_ast = parse_path_pruned_ast_payload(
-                    candidate.raw_payload,
-                    selected_paths=selected_paths,
-                )
-                semantic_ast = localize_path_pruned_ast_branches(
-                    semantic_ast=semantic_ast,
-                    selected_paths=selected_paths,
-                )
-                semantic_ast.raw_payload = candidate.raw_payload
-                semantic_ast.retry_count = 0
-                candidate.semantic_ast = semantic_ast
-            except Exception as exc:
-                candidate.generation_error = str(exc)
-            candidates.append(candidate)
-        return candidates
-
-    def select_best_candidate_ast(
+    def build_grounded_atomic_dag(
         self,
         *,
         original_question: str,
         restored_question: str,
         entity_start_nodes: list[EntityStartNode],
         path_set_candidates: list[PathSetCandidate],
+        entity_origin_paths: list[EntityOriginPath],
         scored_paths: list[ScoredEntityPath],
-        candidate_asts: list[CandidateSemanticAST],
-    ) -> tuple[SemanticASTResult, dict[str, Any]]:
+        undirected_graph_edges: list[dict[str, Any]],
+        direct_decomposition_draft: dict[str, Any] | None = None,
+    ) -> tuple[AtomicQuestionDAG, dict[str, Any]]:
+        """Generate a grounded Atomic DAG directly from top path-set evidence."""
+
+        path_sets_with_paths = _path_sets_with_paths_for_prompt(
+            path_set_candidates=path_set_candidates,
+            entity_origin_paths=entity_origin_paths,
+            scored_paths=scored_paths,
+        )
         payload = self.llm_client.chat_json(
-            BEST_AST_SELECTION_SYSTEM,
-            build_best_ast_selection_prompt(
+            GROUNDED_ATOMIC_DAG_SYSTEM,
+            build_grounded_atomic_dag_prompt(
                 original_question=original_question,
                 restored_question=restored_question,
                 entity_start_nodes=[entity.to_dict() for entity in entity_start_nodes],
                 path_set_candidates=[candidate.to_dict() for candidate in path_set_candidates],
+                path_sets_with_paths=path_sets_with_paths,
                 path_scores=[score.to_dict() for score in scored_paths],
-                candidate_asts=[_candidate_ast_prompt_payload(candidate) for candidate in candidate_asts],
+                undirected_graph_edges=undirected_graph_edges,
                 question_intent_metadata=_lightweight_question_intent_metadata(original_question),
+                direct_decomposition_draft=direct_decomposition_draft,
             ),
         )
         raw_payload = payload if isinstance(payload, dict) else {}
-        reviews = _parse_best_ast_reviews(raw_payload.get("ast_reviews"))
-        candidate_by_id = {candidate.candidate_id: candidate for candidate in candidate_asts}
-
-        best_candidate_id = str(raw_payload.get("best_candidate_id", "") or "").strip()
-        chosen = candidate_by_id.get(best_candidate_id)
-        if chosen is not None and chosen.semantic_ast is not None:
-            raw_payload["selected_candidate_id"] = chosen.candidate_id
-            return chosen.semantic_ast, raw_payload
-
-        for review in sorted(reviews, key=lambda item: item.score, reverse=True):
-            if not review.valid_for_decomposition:
-                continue
-            candidate = candidate_by_id.get(review.candidate_id)
-            if candidate is not None and candidate.semantic_ast is not None:
-                raw_payload["selected_candidate_id"] = candidate.candidate_id
-                raw_payload["selection_fallback"] = "highest_valid_review"
-                return candidate.semantic_ast, raw_payload
-
-        for review in sorted(reviews, key=lambda item: item.score, reverse=True):
-            candidate = candidate_by_id.get(review.candidate_id)
-            if candidate is not None and candidate.semantic_ast is not None:
-                raw_payload["selected_candidate_id"] = candidate.candidate_id
-                raw_payload["selection_fallback"] = "highest_review_score"
-                return candidate.semantic_ast, raw_payload
-
-        for candidate in candidate_asts:
-            if candidate.semantic_ast is not None:
-                raw_payload["selected_candidate_id"] = candidate.candidate_id
-                raw_payload["selection_fallback"] = "first_parseable_candidate"
-                return candidate.semantic_ast, raw_payload
-
-        errors = [
-            f"{candidate.candidate_id}: {candidate.parse_error or candidate.generation_error or 'unparseable'}"
-            for candidate in candidate_asts
-        ]
-        raise ValueError("No parseable candidate Semantic AST was produced. " + "; ".join(errors))
+        valid_path_ids = {path.path_id for path in entity_origin_paths}
+        dag, warnings = _parse_grounded_atomic_dag_payload(raw_payload, valid_path_ids=valid_path_ids)
+        if warnings:
+            raw_payload["normalization_warnings"] = warnings
+        raw_payload.setdefault("path_sets_with_paths", path_sets_with_paths)
+        return dag, raw_payload
 
     # Legacy methods kept for tests and compatibility. The main pipeline no
     # longer uses exactly-one path selection.
@@ -465,35 +366,6 @@ def _parse_scored_entity_paths(raw: Any, entity_origin_paths: list[EntityOriginP
     return result
 
 
-def _parse_best_ast_reviews(raw: Any) -> list[BestASTReview]:
-    if not isinstance(raw, list):
-        return []
-    reviews: list[BestASTReview] = []
-    for item in raw:
-        if not isinstance(item, dict):
-            continue
-        candidate_id = str(item.get("candidate_id", "") or "").strip()
-        path_set_id = str(item.get("path_set_id", "") or "").strip()
-        if not candidate_id:
-            continue
-        reviews.append(
-            BestASTReview(
-                candidate_id=candidate_id,
-                path_set_id=path_set_id,
-                score=_clamp_review_score(item.get("score")),
-                valid_for_decomposition=_bool_value(item.get("valid_for_decomposition"), default=True),
-                covers_original_question=_bool_value(item.get("covers_original_question"), default=True),
-                answer_intent_compatible=_bool_value(item.get("answer_intent_compatible"), default=True),
-                branch_complete=_bool_value(item.get("branch_complete"), default=True),
-                atomic_questions_would_be_executable=_bool_value(item.get("atomic_questions_would_be_executable"), default=True),
-                has_final_operator_question=_bool_value(item.get("has_final_operator_question"), default=False),
-                fatal_errors=_str_list(item.get("fatal_errors")),
-                reason=str(item.get("reason", "") or "").strip(),
-            )
-        )
-    return reviews
-
-
 def _selected_path_objects(
     selected_entity_paths: list[SelectedEntityPath],
     entity_origin_paths: list[EntityOriginPath],
@@ -514,32 +386,194 @@ def _selection_reason(path_id: str, selected_entity_paths: list[SelectedEntityPa
     return ""
 
 
-def _path_score_summary(path_set: PathSetCandidate, scored_paths: list[ScoredEntityPath]) -> dict[str, Any]:
+def _path_sets_with_paths_for_prompt(
+    *,
+    path_set_candidates: list[PathSetCandidate],
+    entity_origin_paths: list[EntityOriginPath],
+    scored_paths: list[ScoredEntityPath],
+) -> list[dict[str, Any]]:
+    path_by_id = {path.path_id: path for path in entity_origin_paths}
     score_by_path_id = {score.path_id: score for score in scored_paths}
-    return {
-        "mean_path_score": path_set.mean_path_score,
-        "paths": {
-            entity_id: score_by_path_id[path_id].to_dict()
-            for entity_id, path_id in path_set.path_ids_by_entity.items()
-            if path_id in score_by_path_id
+    payloads: list[dict[str, Any]] = []
+    for path_set in path_set_candidates:
+        paths_payload: list[dict[str, Any]] = []
+        for entity_id, path_id in sorted(path_set.path_ids_by_entity.items(), key=lambda item: _entity_id_sort_key(item[0])):
+            path = path_by_id.get(path_id)
+            score = score_by_path_id.get(path_id)
+            item: dict[str, Any] = {
+                "entity_id": entity_id,
+                "path_id": path_id,
+                "path_missing": path is None,
+            }
+            if path is not None:
+                item.update(path.to_dict())
+            if score is not None:
+                item["path_score"] = score.score
+                item["path_score_valid"] = score.valid
+                item["path_score_reason"] = score.reason
+                item["terminal_hint"] = score.terminal_hint
+                item["semantic_chain_hint"] = list(score.semantic_chain_hint)
+            paths_payload.append(item)
+        payloads.append(
+            {
+                "path_set_id": path_set.path_set_id,
+                "path_ids_by_entity": dict(path_set.path_ids_by_entity),
+                "mean_path_score": path_set.mean_path_score,
+                "paths": paths_payload,
+            }
+        )
+    return payloads
+
+
+def _parse_grounded_atomic_dag_payload(
+    payload: dict[str, Any],
+    *,
+    valid_path_ids: set[str],
+) -> tuple[AtomicQuestionDAG, list[str]]:
+    raw_nodes = payload.get("nodes")
+    if raw_nodes is None:
+        raw_nodes = payload.get("atomic_questions") or payload.get("subquestions")
+    if not isinstance(raw_nodes, list) or not raw_nodes:
+        raise ValueError("Grounded Atomic DAG payload must contain a non-empty nodes list.")
+
+    warnings: list[str] = []
+    nodes: list[AtomicQuestionNode] = []
+    edges: list[AtomicQuestionEdge] = []
+    seen_ids: set[str] = set()
+    output_by_node_id: dict[str, str] = {}
+
+    for index, raw_node in enumerate(raw_nodes, start=1):
+        if not isinstance(raw_node, dict):
+            warnings.append(f"Dropped non-object node at position {index}.")
+            continue
+        node_id = _normalize_grounded_node_id(raw_node.get("node_id") or raw_node.get("id"), index, seen_ids, warnings)
+        question = str(raw_node.get("question") or raw_node.get("subquestion") or raw_node.get("sub_question") or "").strip()
+        if not question:
+            warnings.append(f"Dropped node {node_id} because question is empty.")
+            continue
+        dependencies = _normalize_grounded_dependencies(
+            raw_node.get("dependencies") if "dependencies" in raw_node else raw_node.get("depends_on"),
+            seen_ids=seen_ids,
+            node_id=node_id,
+            warnings=warnings,
+        )
+        support = _normalize_grounded_support(raw_node.get("support"), valid_path_ids=valid_path_ids, node_id=node_id, warnings=warnings)
+        metadata: dict[str, Any] = {
+            "source": "grounded_atomic_dag",
+            "support": support,
+            "support_path_ids": sorted({item["path_id"] for item in support if item.get("path_id")}),
+        }
+        if not support:
+            warnings.append(f"Node {node_id} has no valid dependency-path support.")
+        output = str(raw_node.get("output") or f"X{len(nodes) + 1}").strip()
+        node = AtomicQuestionNode(
+            id=node_id,
+            question=question,
+            type=str(raw_node.get("type") or "lookup"),
+            inputs=_str_list(raw_node.get("inputs")),
+            output=output,
+            depends_on=dependencies,
+            metadata=metadata,
+            source="grounded_atomic_dag",
+        )
+        nodes.append(node)
+        seen_ids.add(node_id)
+        output_by_node_id[node_id] = output
+        for dependency in dependencies:
+            edges.append(AtomicQuestionEdge(source=dependency, target=node_id, variable=output_by_node_id.get(dependency, dependency)))
+
+    if not nodes:
+        raise ValueError("Grounded Atomic DAG payload produced no usable nodes.")
+    dag = AtomicQuestionDAG(
+        nodes=nodes,
+        edges=edges,
+        variable_to_question={
+            node.output: node.id
+            for node in nodes
+            if node.output
         },
-    }
+        warnings=warnings,
+    )
+    return dag, warnings
 
 
-def _candidate_ast_prompt_payload(candidate: CandidateSemanticAST) -> dict[str, Any]:
-    semantic_ast_payload: dict[str, Any] | None = None
-    if candidate.semantic_ast is not None:
-        semantic_ast_payload = candidate.semantic_ast.to_dict()
-    return {
-        "candidate_id": candidate.candidate_id,
-        "path_set_id": candidate.path_set_id,
-        "path_ids_by_entity": dict(candidate.path_ids_by_entity),
-        "semantic_ast": semantic_ast_payload,
-        "raw_payload": candidate.raw_payload,
-        "parse_error": candidate.parse_error,
-        "generation_error": candidate.generation_error,
-        "path_score_summary": candidate.path_score_summary,
-    }
+def _normalize_grounded_node_id(raw: Any, index: int, seen_ids: set[str], warnings: list[str]) -> str:
+    node_id = str(raw or f"q{index}").strip()
+    if not node_id or not node_id.startswith("q") or not node_id[1:].isdigit():
+        replacement = f"q{index}"
+        warnings.append(f"Renamed invalid node_id {node_id!r} to {replacement}.")
+        node_id = replacement
+    if node_id in seen_ids:
+        replacement = f"q{index}"
+        suffix = index
+        while replacement in seen_ids:
+            suffix += 1
+            replacement = f"q{suffix}"
+        warnings.append(f"Renamed duplicate node_id {node_id!r} to {replacement}.")
+        node_id = replacement
+    return node_id
+
+
+def _normalize_grounded_dependencies(
+    raw: Any,
+    *,
+    seen_ids: set[str],
+    node_id: str,
+    warnings: list[str],
+) -> list[str]:
+    if raw is None:
+        return []
+    if isinstance(raw, str):
+        candidates = [raw]
+    elif isinstance(raw, list):
+        candidates = raw
+    else:
+        warnings.append(f"Ignored invalid dependencies for {node_id}: expected list or string.")
+        return []
+    dependencies: list[str] = []
+    for item in candidates:
+        dependency = str(item).strip()
+        if not dependency or dependency == node_id:
+            continue
+        if dependency not in seen_ids:
+            warnings.append(f"Ignored dependency {dependency!r} for {node_id}; it does not reference an earlier node.")
+            continue
+        if dependency not in dependencies:
+            dependencies.append(dependency)
+    return dependencies
+
+
+def _normalize_grounded_support(
+    raw: Any,
+    *,
+    valid_path_ids: set[str],
+    node_id: str,
+    warnings: list[str],
+) -> list[dict[str, Any]]:
+    if isinstance(raw, dict):
+        raw_items = [raw]
+    elif isinstance(raw, list):
+        raw_items = raw
+    else:
+        return []
+    support: list[dict[str, Any]] = []
+    for item in raw_items:
+        if not isinstance(item, dict):
+            continue
+        path_id = str(item.get("path_id") or "").strip()
+        if not path_id or path_id not in valid_path_ids:
+            warnings.append(f"Ignored invalid support path_id {path_id!r} for {node_id}.")
+            continue
+        support.append(
+            {
+                "path_set_id": str(item.get("path_set_id") or "").strip(),
+                "path_id": path_id,
+                "node_texts": _str_list(item.get("node_texts")),
+                "node_ids": _str_list(item.get("node_ids")),
+                "reason": str(item.get("reason") or "").strip(),
+            }
+        )
+    return support
 
 
 def _lightweight_question_intent_metadata(question: str) -> dict[str, object]:
@@ -570,16 +604,6 @@ def _clamp_score(value: Any) -> float:
     except (TypeError, ValueError):
         score = 0.0
     return max(0.0, min(100.0, score))
-
-
-def _clamp_review_score(value: Any) -> float:
-    try:
-        score = float(value)
-    except (TypeError, ValueError):
-        score = 0.0
-    if score > 1.0:
-        score = score / 100.0
-    return max(0.0, min(1.0, score))
 
 
 def _bool_value(value: Any, *, default: bool) -> bool:

@@ -53,8 +53,8 @@ anchor decisions are made on restored original question text.
    For each entity start node, the program enumerates bounded simple paths from
    that entity over the undirected dependency graph. Paths may include syntactic
    noise such as determiners, prepositions, wh words, and punctuation because the
-   later AST stage prunes noise. Prompt size is controlled by scoring and keeping
-   the most useful paths per entity.
+   later grounded DAG stage uses them as evidence. Prompt size is controlled by
+   scoring and keeping the most useful paths per entity.
 
 8. **LLM path scoring**
    The LLM receives grouped entity-origin paths and scores every path
@@ -69,36 +69,18 @@ anchor decisions are made on restored original question text.
    The program builds Cartesian path-set candidates from the per-entity top-2
    paths. For two entities, top-2 by top-2 yields up to four path sets.
 
-9. **Candidate Path-Set Semantic Transduction**
-   Each path-set is independently converted into a candidate branch-level
-   Semantic AST. The selected dependency paths are syntactic evidence, not the
-   final semantic graph. The LLM converts the path-set into executable lookup
-   branches whose nodes are query endpoints: fixed entities, licensed
-   intermediate variables, and final value slots such as `death_date`,
-   `birth_date`, `birthplace`, `university`, or `nationality`.
+9. **Grounded Atomic DAG generation**
+   The LLM generates the Atomic Subquestion DAG directly from the original
+   question plus DEPO path-set evidence. It does not generate a Semantic AST,
+   does not call a Best-AST judge, and does not produce a final comparison or
+   operator question. Each atomic node must cite supporting `path_id` and
+   `node_texts` from the supplied dependency paths.
 
-   Candidate ASTs are parsed and localized, but they are not prefiltered by an
-   AST validator before final judging. Even imperfect parseable candidates are
-   preserved for the Best-AST judge.
-
-10. **LLM Best-AST Selection**
-   The LLM compares all candidate ASTs and selects the best AST for
-   decomposition. It must not generate a new AST or final comparison/operator
-   questions. Final comparison, ranking, set, or logical reasoning is left to
-   HyperBranch answer synthesis.
-
-11. **Execution DAG and atomic subquestion generation**
-   The selected semantic AST is compiled into a deterministic execution
-   DAG. This code layer decides edge order, variable bindings such as `X1` and
-   `X2` from ordinary path edges only.
-
-   The LLM then receives only one compiled plan step at a time. For an edge
-   step, it turns `known -> ask` into one atomic subquestion whose answer is the
-   assigned variable. Final comparison, ranking, set, or logical reasoning is
-   left to the HyperBranch final answer composer, which receives the original
-   question plus the atomic answers and evidence. The LLM is no longer allowed
-   to see and re-plan the full AST during subquestion generation, which prevents
-   multi-hop fusion and accidental expansion of already-bound variables.
+10. **Atomic Subquestion DAG**
+   The generated DAG contains only one-hop lookup subquestions and explicit
+   dependencies between them. Final comparison, ranking, set, boolean, or
+   synthesis reasoning is left to the HyperBranch final answer composer, which
+   receives the original question plus atomic answers and evidence.
 
 ## Run
 

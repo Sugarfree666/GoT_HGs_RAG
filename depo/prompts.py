@@ -554,51 +554,90 @@ Output JSON with exactly this shape:
 """.strip()
 
 
-BEST_AST_SELECTION_SYSTEM = """
-You are judging candidate Semantic ASTs for DEPO.
+GROUNDED_ATOMIC_DAG_SYSTEM = """
+You are implementing DEPO Step 9: Grounded Atomic DAG Generation.
 
-You are given multiple candidate ASTs. Each candidate was generated from a different path-set.
-Your task is to select the candidate AST that best supports decomposition into one-hop atomic subquestions for the original question.
+Your task is to generate an executable Atomic Subquestion DAG directly from:
+1. the original question,
+2. entity-origin dependency path-set candidates, and
+3. dependency path evidence.
 
-Do not generate a new AST.
-Do not modify candidate ASTs.
-Do not generate atomic questions unless draft questions are already provided for judging.
-Do not invent candidate IDs.
-Do not generate final comparison/operator questions.
+The dependency paths are grounding evidence, not a syntax skeleton to copy.
+Use the original question to infer the semantic decomposition.
+Use the paths to justify each atomic question.
+
+Return valid JSON only.
+Do not generate a Semantic AST.
+Do not generate final answers.
+Do not retrieve evidence.
+Do not generate a final comparison, yes/no, intersection, union, ranking, or aggregation question.
+
+Atomic DAG rules:
+1. Each node must be a one-hop lookup question.
+2. Each node must be executable by retrieval either independently or after dependency answers are substituted.
+3. Dependencies must reference earlier node_id values only.
+4. Use node_id values q1, q2, q3, ...
+5. For comparison questions, generate only the branch lookup questions needed by downstream answer composition.
+6. For yes/no same/different questions, generate one lookup branch per compared entity/item; do not generate the final yes/no question.
+7. For common-answer questions, generate one branch per entity/item if needed; downstream answer composition handles intersection/commonality.
+8. Do not copy wh words, auxiliaries, determiners, prepositions, punctuation, or pure dependency predicates as standalone questions.
+9. Each node must cite at least one supplied path_id in support.
+10. support.path_id must come from the supplied path-set candidates.
+11. support.node_texts should name the path nodes that license the atomic relation.
+
+Prefer decompositions that look like a strong direct semantic decomposition, but grounded by DEPO paths.
+
 Return valid JSON only.
 """.strip()
 
 
-def build_best_ast_selection_prompt(
+def build_grounded_atomic_dag_prompt(
     original_question: str,
     restored_question: str,
     entity_start_nodes: list[dict[str, object]],
     path_set_candidates: list[dict[str, object]],
+    path_sets_with_paths: list[dict[str, object]],
     path_scores: list[dict[str, object]],
-    candidate_asts: list[dict[str, object]],
-    draft_atomic_questions_by_candidate: dict[str, list[dict[str, object]]] | None = None,
+    undirected_graph_edges: list[dict[str, object]],
     question_intent_metadata: dict[str, object] | None = None,
+    direct_decomposition_draft: dict[str, object] | None = None,
 ) -> str:
     schema = {
-        "ast_reviews": [
+        "nodes": [
             {
-                "candidate_id": "ast_ps1",
-                "path_set_id": "ps1",
-                "score": 0.96,
-                "valid_for_decomposition": True,
-                "covers_original_question": True,
-                "answer_intent_compatible": True,
-                "branch_complete": True,
-                "atomic_questions_would_be_executable": True,
-                "has_final_operator_question": False,
-                "fatal_errors": [],
-                "reason": "This AST decomposes each film into director and nationality branches without generating a final comparison question.",
-            }
+                "node_id": "q1",
+                "question": "Who is the director of God'S Gift To Women?",
+                "dependencies": [],
+                "support": [
+                    {
+                        "path_set_id": "ps1",
+                        "path_id": "e1_p1",
+                        "node_texts": ["God'S Gift To Women", "director"],
+                        "node_ids": ["5", "2"],
+                        "reason": "The path connects the film entity to the director role.",
+                    }
+                ],
+            },
+            {
+                "node_id": "q2",
+                "question": "When was the director of God'S Gift To Women born?",
+                "dependencies": ["q1"],
+                "support": [
+                    {
+                        "path_set_id": "ps1",
+                        "path_id": "e1_p1",
+                        "node_texts": ["director", "older"],
+                        "node_ids": ["2", "8"],
+                        "reason": "The older cue licenses comparing directors by age/birth date.",
+                    }
+                ],
+            },
         ],
-        "best_candidate_id": "ast_ps1",
+        "selected_path_set_ids": ["ps1"],
+        "reason": "The DAG covers the branch lookups needed to answer the original question without adding a final comparison question.",
     }
     return f"""
-Select the best candidate Semantic AST for DEPO decomposition.
+Generate a grounded Atomic Subquestion DAG for DEPO.
 
 Original question:
 {original_question}
@@ -615,30 +654,44 @@ Question intent metadata:
 Path-set candidates:
 {json.dumps(path_set_candidates, ensure_ascii=False, indent=2)}
 
+Path-set candidates with selected dependency paths and evidence:
+{json.dumps(path_sets_with_paths, ensure_ascii=False, indent=2)}
+
 Path-level scores and hints:
 {json.dumps(path_scores, ensure_ascii=False, indent=2)}
 
-Candidate ASTs:
-{json.dumps(candidate_asts, ensure_ascii=False, indent=2)}
+Optional direct semantic decomposition draft:
+{json.dumps(direct_decomposition_draft or {}, ensure_ascii=False, indent=2)}
 
-Draft atomic questions by candidate, if provided:
-{json.dumps(draft_atomic_questions_by_candidate or {}, ensure_ascii=False, indent=2)}
+Full undirected graph edges for debugging:
+{json.dumps(undirected_graph_edges, ensure_ascii=False, indent=2)}
 
-Judge criteria:
-1. Prefer ASTs that cover the original question's required branch facts.
-2. Prefer ASTs whose final branch terminals match the question intent.
-3. Prefer ASTs that produce one-hop executable atomic subquestions.
-4. Prefer minimal but complete ASTs.
-5. Penalize ASTs that stop too early.
-6. Penalize ASTs that generate final comparison/operator nodes/questions.
-7. Penalize ASTs with unsupported shortcuts.
-8. Penalize ASTs that copy wh words, auxiliaries, punctuation, or pure predicates as AST nodes.
-9. For multi-entity parallel questions, prefer ASTs with complete branch-specific variables, e.g. director_r1/nationality_r1 and director_r2/nationality_r2.
-10. For DEPO, final comparison, boolean judgment, set/ranking/count reasoning is handled downstream, so the AST should only contain lookup branches.
-11. Candidate ASTs may include parse_error or generation_error metadata. Review those errors, but do not invent a replacement candidate.
-12. Choose only a candidate_id that appears in Candidate ASTs.
+Task:
+Generate only the one-hop atomic lookup DAG needed by downstream HyperBranch answer composition.
+Each atomic node must cite grounding support from supplied dependency paths.
 
-Return strict JSON only.
+Important decomposition patterns:
+- "director of film X" -> "Who is the director of X?"
+- "director born first/later" -> director lookup, then birth-date lookup for each branch.
+- "director older/younger" -> director lookup, then age or birth-date lookup for each branch.
+- "same nationality/country/place" -> per-entity lookup branches only; no final yes/no node.
+- "both singers/flowering plants" -> per-entity type-membership lookup branches only; no final yes/no node.
+- "X's mother/father/spouse/wife/husband/author/director" -> first lookup that role, then ask the next attribute about the role answer.
+- "when did X die" -> death-date lookup; "where did X die" -> death-place lookup; "why did X die" -> death-reason lookup.
+- "written by whom" for a work/title -> author/writer lookup for that work/title.
+
+Rules:
+1. Use q1, q2, q3, ... in solve order.
+2. dependencies must reference only earlier node_id values.
+3. Do not output answers.
+4. Do not output a final comparison, final yes/no, final intersection/common-answer, final ranking, or final aggregation question.
+5. Keep the question text natural; do not expose internal variables like X1.
+6. If a node depends on q1, write the question so the dependency answer can replace the relevant span.
+7. Every node must have support with valid path_id values from Path-set candidates with selected dependency paths and evidence.
+8. Do not invent support path_id values.
+9. Do not add unsupported entities that are absent from the original question and selected paths.
+10. Return strict JSON only.
+
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 """.strip()
@@ -1024,9 +1077,9 @@ Output JSON with exactly this shape:
 EXPLICIT_ENTITY_EXTRACTION_SYSTEM = """
 You are implementing DEPO Step 2: explicit entity detection before dependency parsing.
 
-Your task is to identify explicit named entities mentioned in the question.
+Your task is to identify explicit named entity mentions in the original question.
 
-This is strict entity recognition only.
+This is strict entity mention recognition only.
 This is not parser-protection span detection.
 This is not type-variable extraction.
 This is not relation extraction.
@@ -1035,54 +1088,170 @@ This is not operator detection.
 This is not AST construction.
 This is not question decomposition.
 
-Return every explicit named entity mention that appears as a contiguous surface span in the original question.
-Include both single-token and multi-token entities.
-The downstream code will mask all returned entities, including single-token entities.
+The downstream code will mask every entity mention you return.
+Therefore, your boundaries must be precise.
 
-Allowed explicit entities include:
-- person names: "John Middleton Murry", "Sisowath Kossamak", "Lothair II"
-- named works/titles: "Young Man Luther", "AlphaGo", "Aas Ka Panchhi", "Phoolwari", "Ten9Eight: Shoot For The Moon", "Sabotage (1936 Film)"
+Return every explicit named entity mention that appears as a contiguous surface span in the original question.
+Include both single-token and multi-token named entities.
+
+Allowed explicit entity mentions include:
+- person names and person designations:
+  "John Middleton Murry", "Sisowath Kossamak", "Lothair II", "Maurice, Prince Of Orange"
+- named works and titles:
+  "Young Man Luther", "AlphaGo", "When The Stars Go Blue", "Wrong Turn 5: Bloodlines",
+  "Aas Ka Panchhi", "Phoolwari", "Ten9Eight: Shoot For The Moon", "Sabotage (1936 Film)"
 - organizations, companies, institutions, universities, schools
 - locations: cities, countries, regions, geopolitical places
 - events, products, games, albums, songs, series, creative works
-- single-token named entities when they are concrete names, e.g. "AlphaGo", "Marufabad", "Nasamkhrali", "Phoolwari"
+- single-token named entities when they are concrete names:
+  "AlphaGo", "Marufabad", "Nasamkhrali", "Phoolwari"
 
 Forbidden outputs:
-- Do not output roles or relation nouns: wife, husband, mother, father, author, director, actor, CEO, founder, spouse
-- Do not output answer slots or value types: university, company, nationality, country, city, age, population, date, birth date, death date, reason, cause
-- Do not output type phrases: artificial intelligence company, chief operating officer, research institute, film, movie, book, song
-- Do not output wh phrases: which film, what country, who, whom, whose, when, where, why
-- Do not output relation phrases: wife of, director of, CEO of, born in, located in, graduated from, developed by, released first
-- Do not output operators or comparison cues: same, different, both, share, older, younger, first, later, earlier
-- Do not output auxiliaries, determiners, prepositions, or punctuation
-- Do not output full clauses or relative clauses
-- Do not output a larger phrase when a smaller entity span is the actual named entity
+- Do not output roles or relation nouns:
+  wife, husband, mother, father, author, director, actor, CEO, founder, spouse, performer
+- Do not output answer slots or value types:
+  university, company, nationality, country, city, age, population, date, birth date, death date, reason, cause
+- Do not output type words or type phrases:
+  film, movie, book, song, album, series, game, artificial intelligence company, chief operating officer
+- Do not output wh phrases or wh words when they function as question words:
+  which film, what country, who, whom, whose, when, where, why
+- Do not output relation phrases:
+  wife of, director of, CEO of, born in, located in, graduated from, developed by, released first
+- Do not output operators or comparison cues:
+  same, different, both, share, older, younger, first, later, earlier
+- Do not output auxiliaries, determiners, prepositions, punctuation, full clauses, or relative clauses.
+- Do not output a larger phrase when a smaller span is the actual named entity.
+- Do not output a smaller substring when the full named entity title/designation is present.
 
-Boundary rules:
-1. Each entity must be a minimal contiguous substring copied exactly from the original question.
-2. start_char is inclusive; end_char is exclusive.
-3. question[start_char:end_char] must exactly equal text.
-4. Do not include leading type words such as film, movie, book, song, album, series, city, country, company unless they are part of the official name.
-5. Do not include possessive "'s" unless it is part of an official name, which is rare.
-6. In possessive constructions, return only the possessor entity.
-   Example: "John Middleton Murry's wife" -> "John Middleton Murry"
-   Example: "Lothair II's mother" -> "Lothair II"
-7. In coordinated or compared entities, return each entity separately.
-   Example: "Aas Ka Panchhi or Phoolwari" -> "Aas Ka Panchhi" and "Phoolwari"
-   Example: "Ten9Eight: Shoot For The Moon and Sabotage (1936 Film)" -> two separate entities
-8. Do not include coordination words such as and/or between two entity names unless the conjunction is part of one official title.
-9. Parenthetical disambiguators that are part of a title should be included.
-   Example: "Sabotage (1936 Film)" is one entity.
-10. Title punctuation such as colon in a subtitle should be included.
-   Example: "Ten9Eight: Shoot For The Moon" is one entity.
+Critical boundary principles:
+
+1. Exact surface span
+Each entity must be copied exactly from the original question.
+start_char is inclusive and end_char is exclusive.
+question[start_char:end_char] must exactly equal text.
+
+2. Minimal but complete named entity
+Choose the minimal span that is a complete named entity mention.
+Do not include external type cues such as film, movie, book, song, album, city, country, company unless they are part of the official name.
+But do include all internal title words, subtitles, numbers, and disambiguators that are part of the name.
+
+3. Named work/title boundaries
+For named works introduced by type cues such as song, film, movie, book, album, series, or game, include the full title after the type cue.
+The type cue itself is usually not part of the entity.
+Words that look like wh/function words may still be part of a title when they appear in Title Case inside the title.
+Do not drop an initial title word just because it is also a question word.
+
+Correct:
+- song When The Stars Go Blue -> "When The Stars Go Blue"
+Incorrect:
+- "The Stars Go Blue"
+- "When"
+- "song When The Stars Go Blue"
+
+Correct:
+- films Wrong Turn 5: Bloodlines and Dark River (2017 Film)
+  -> "Wrong Turn 5: Bloodlines"
+  -> "Dark River (2017 Film)"
+Incorrect:
+- "Wrong Turn"
+- "Wrong Turn 5"
+- "Bloodlines"
+- "films Wrong Turn 5: Bloodlines"
+
+4. Colon subtitles, sequel numbers, and title punctuation
+If a work title contains a sequel number, colon subtitle, hyphen subtitle, or subtitle-like continuation, include it.
+Do not truncate a title before a colon, number, or subtitle.
+
+Correct:
+- "Wrong Turn 5: Bloodlines"
+- "Ten9Eight: Shoot For The Moon"
+- "Star Wars: Episode IV"
+Incorrect:
+- "Wrong Turn"
+- "Wrong Turn 5"
+- "Ten9Eight"
+
+5. Parenthetical disambiguators
+If a parenthetical phrase is part of a title or disambiguated entity mention, include it.
+
+Correct:
+- "Sabotage (1936 Film)"
+- "Dark River (2017 Film)"
+Incorrect:
+- "Sabotage"
+- "Dark River"
+
+6. Possessive constructions
+Do not include possessive "'s" unless it is genuinely part of an official name, which is rare.
+In possessive relation phrases, return only the possessor entity.
+
+Correct:
+- "John Middleton Murry's wife" -> "John Middleton Murry"
+- "Lothair II's mother" -> "Lothair II"
+Incorrect:
+- "John Middleton Murry's"
+- "John Middleton Murry's wife"
+- "Lothair II's"
+- "Lothair II's mother"
+
+7. Comma appositives and explanatory designations
+A comma inside a person designation may introduce an appositive title, rank, office, or disambiguating description.
+When the comma phrase identifies or disambiguates the same person, return the full person designation as one entity mention.
+Do not split it into two independent entities.
+
+Correct:
+- "Maurice, Prince Of Orange" -> one Person entity mention
+- "William, Duke Of Normandy" -> one Person entity mention
+- "Charles, Prince Of Wales" -> one Person entity mention
+
+Incorrect:
+- "Maurice" and "Prince Of Orange" as two separate entity mentions
+- "Prince Of Orange" alone, when it is only an appositive designation for Maurice
+
+However, if the question explicitly coordinates two independent entities using and/or, return them separately.
+
+Correct:
+- "Aas Ka Panchhi or Phoolwari" -> "Aas Ka Panchhi" and "Phoolwari"
+- "Gideon Johnson Pillow or Holm Jølsen" -> "Gideon Johnson Pillow" and "Holm Jølsen"
+- "Ten9Eight: Shoot For The Moon and Sabotage (1936 Film)" -> two film entities
+
+8. Coordination and comparison
+In coordinated or compared alternatives, return each independent entity separately.
+Do not return the whole coordinated phrase unless it is one official title.
+
+Correct:
+- "Aas Ka Panchhi or Phoolwari" -> two entities
+Incorrect:
+- "Aas Ka Panchhi or Phoolwari"
+
+Correct:
+- "Marufabad and Nasamkhrali" -> two entities
+Incorrect:
+- "Marufabad and Nasamkhrali"
+
+9. Entity-type consistency in parallel questions
+When two coordinated or compared entities play the same role, use the same semantic_type_hint when the local context supports it.
+Example:
+- films Wrong Turn 5: Bloodlines and Dark River (2017 Film)
+  -> both Film
+- locations Marufabad and Nasamkhrali
+  -> both Location
+
+10. When uncertain about boundary
+Prefer the full conventional name/title/designation over a truncated substring.
+Prefer:
+- "When The Stars Go Blue" over "The Stars Go Blue"
+- "Wrong Turn 5: Bloodlines" over "Wrong Turn"
+- "Maurice, Prince Of Orange" over "Maurice" + "Prince Of Orange"
 
 Semantic type hint rules:
-- Use Person for human names.
-- Use Film for film/movie titles when locally indicated by film, movie, director, released, starring, etc.
-- Use Book for book titles when locally indicated by book, novel, author, writer, etc.
-- Use Song, Album, Series, Game, Product, Event, Company, Organization, University, Institution, City, Country, Region, Location, or Work when appropriate.
+- Use Person for human names and person designations.
+- Use Film for film/movie titles when locally indicated by film, movie, director, released, starring, or a parenthetical like "(2017 Film)".
+- Use Song for song titles when locally indicated by song, performer, singer, recorded, released, album, etc.
+- Use Book for book/novel titles when locally indicated by book, novel, author, writer, etc.
+- Use Album, Series, Game, Product, Event, Company, Organization, University, Institution, City, Country, Region, Location, or Work when appropriate.
+- Use Work for named creative works when the exact subtype is unclear.
 - Use Entity only when the local context does not support a more specific type.
-- In a coordinated group of same-type alternatives, use the same semantic_type_hint.
 
 Return valid JSON only.
 """.strip()
@@ -1095,59 +1264,167 @@ def build_explicit_entity_extraction_prompt(question: str) -> str:
                 "text": "exact contiguous entity span copied from the original question",
                 "start_char": 0,
                 "end_char": 15,
-                "semantic_type_hint": "Person | Film | Book | Song | Album | Series | Work | Game | Product | Company | Organization | University | Institution | City | Country | Region | Location | Event | Entity",
+                "semantic_type_hint": (
+                    "Person | Film | Book | Song | Album | Series | Work | Game | Product | "
+                    "Company | Organization | University | Institution | City | Country | "
+                    "Region | Location | Event | Entity"
+                ),
                 "confidence": 0.95,
                 "reason": "brief reason why this is an explicit named entity",
             }
         ]
     }
+
     return f"""
-Identify explicit named entities in the question.
+Identify explicit named entity mentions in the original question.
 
 Question:
 {question}
 
-This is entity recognition only. Do not output roles, type variables, answer slots, relation phrases, operators, parser-protection phrases, AST nodes, or subquestions.
-Return all explicit entities, including single-token and multi-token entities. The code will mask every returned entity.
+This is entity recognition only.
+Do not output roles, type variables, answer slots, relation phrases, operators, parser-protection phrases, AST nodes, or subquestions.
+Return all explicit named entities, including single-token and multi-token entities.
+The code will mask every returned entity.
 
-Example 1:
+Output requirements:
+- Return JSON only.
+- Use the exact schema below.
+- Every returned entity must be a contiguous substring of the question.
+- start_char is inclusive; end_char is exclusive.
+- question[start_char:end_char] must exactly equal text.
+- Sort entities by start_char.
+- Do not return duplicate or overlapping entities.
+- If a full title/designation and a truncated substring overlap, return the full title/designation only.
+
+Hard examples:
+
+Example 1: Possessive person
 Question: "Why did John Middleton Murry's wife die?"
 Return only:
 - "John Middleton Murry", semantic_type_hint "Person"
-Do not return "John Middleton Murry's", "John Middleton Murry's wife", "wife", or "die".
+Do not return:
+- "John Middleton Murry's"
+- "John Middleton Murry's wife"
+- "wife"
+- "die"
 
-Example 2:
+Example 2: Possessive historical person
 Question: "When did Lothair II's mother die?"
 Return only:
 - "Lothair II", semantic_type_hint "Person"
-Do not return "Lothair II's", "Lothair II's mother", "mother", or "die".
+Do not return:
+- "Lothair II's"
+- "Lothair II's mother"
+- "mother"
+- "die"
 
-Example 3:
+Example 3: Coordinated film titles
 Question: "Which film was released first, Aas Ka Panchhi or Phoolwari?"
 Return:
 - "Aas Ka Panchhi", semantic_type_hint "Film"
 - "Phoolwari", semantic_type_hint "Film"
-Do not return "was released first, Aas Ka Panchhi or Phoolwari", "Aas Ka Panchhi or Phoolwari", "released first", or "film".
+Do not return:
+- "was released first, Aas Ka Panchhi or Phoolwari"
+- "Aas Ka Panchhi or Phoolwari"
+- "released first"
+- "film"
 
-Example 4:
+Example 4: Parallel film titles with colon and parenthetical disambiguator
 Question: "Do director of film Ten9Eight: Shoot For The Moon and director of film Sabotage (1936 Film) share the same nationality?"
 Return:
 - "Ten9Eight: Shoot For The Moon", semantic_type_hint "Film"
 - "Sabotage (1936 Film)", semantic_type_hint "Film"
-Do not return "director", "film", "nationality", "same nationality", or the full coordinated phrase.
+Do not return:
+- "Ten9Eight"
+- "Shoot For The Moon"
+- "Sabotage"
+- "director"
+- "film"
+- "nationality"
+- "same nationality"
+- the full coordinated phrase
 
-Example 5:
+Example 5: Single-token named work
 Question: "Which university did the CEO of the company that developed the AI game AlphaGo graduate from?"
 Return:
 - "AlphaGo", semantic_type_hint "Game" or "Work"
-Do not return "CEO", "company", "AI game", "university", "graduate from", or "company that developed the AI game AlphaGo".
+Do not return:
+- "CEO"
+- "company"
+- "AI game"
+- "university"
+- "graduate from"
+- "company that developed the AI game AlphaGo"
 
-Example 6:
+Example 6: Single-token locations
 Question: "Are Marufabad and Nasamkhrali both located in the same country?"
 Return:
 - "Marufabad", semantic_type_hint "Location"
 - "Nasamkhrali", semantic_type_hint "Location"
-Do not return "country", "same country", "both", or "located".
+Do not return:
+- "country"
+- "same country"
+- "both"
+- "located"
+
+Example 7: Song title beginning with a wh-like word
+Question: "What nationality is the performer of song When The Stars Go Blue?"
+Return:
+- "When The Stars Go Blue", semantic_type_hint "Song"
+Do not return:
+- "The Stars Go Blue"
+- "Stars Go Blue"
+- "When"
+- "song When The Stars Go Blue"
+- "performer"
+
+Explanation:
+Here, "When" is part of the song title. It is not the question's wh cue.
+
+Example 8: Film title with sequel number and colon subtitle
+Question: "Do both directors of films Wrong Turn 5: Bloodlines and Dark River (2017 Film) have the same nationality?"
+Return:
+- "Wrong Turn 5: Bloodlines", semantic_type_hint "Film"
+- "Dark River (2017 Film)", semantic_type_hint "Film"
+Do not return:
+- "Wrong Turn"
+- "Wrong Turn 5"
+- "Bloodlines"
+- "Dark River"
+- "films"
+- "directors"
+- "nationality"
+
+Example 9: Person name with comma appositive designation
+Question: "Where was the place of death of the father of Maurice, Prince Of Orange?"
+Return:
+- "Maurice, Prince Of Orange", semantic_type_hint "Person"
+Do not return:
+- "Maurice"
+- "Prince Of Orange"
+- "father"
+- "place of death"
+
+Explanation:
+"Prince Of Orange" is an appositive designation/disambiguator for Maurice in this mention.
+It should not become a second independent entity start.
+
+Example 10: Person alternatives
+Question: "Who was born later, Gideon Johnson Pillow or Holm Jølsen?"
+Return:
+- "Gideon Johnson Pillow", semantic_type_hint "Person"
+- "Holm Jølsen", semantic_type_hint "Person"
+Do not return:
+- "Gideon Johnson Pillow or Holm Jølsen"
+
+Decision checklist before final JSON:
+1. Did I return only explicit named entities?
+2. Did I exclude roles, relation words, type words, answer slots, and operators?
+3. Did I include the full title when a work has an initial wh-like title word, number, colon subtitle, or parenthetical disambiguator?
+4. Did I avoid truncating titles such as "When The Stars Go Blue" or "Wrong Turn 5: Bloodlines"?
+5. Did I avoid splitting comma appositive person designations such as "Maurice, Prince Of Orange"?
+6. Did I split true coordinated alternatives joined by and/or into separate entities?
+7. Do all start_char/end_char offsets exactly match the returned text?
 
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}

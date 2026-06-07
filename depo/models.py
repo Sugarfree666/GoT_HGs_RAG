@@ -463,39 +463,6 @@ class PathSetCandidate:
 
 
 @dataclass
-class CandidateSemanticAST:
-    candidate_id: str
-    path_set_id: str
-    path_ids_by_entity: dict[str, str]
-    semantic_ast: "SemanticASTResult | None" = None
-    raw_payload: dict[str, Any] = field(default_factory=dict)
-    parse_error: str | None = None
-    generation_error: str | None = None
-    path_score_summary: dict[str, Any] = field(default_factory=dict)
-
-    def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
-
-
-@dataclass
-class BestASTReview:
-    candidate_id: str
-    path_set_id: str
-    score: float
-    valid_for_decomposition: bool = True
-    covers_original_question: bool = True
-    answer_intent_compatible: bool = True
-    branch_complete: bool = True
-    atomic_questions_would_be_executable: bool = True
-    has_final_operator_question: bool = False
-    fatal_errors: list[str] = field(default_factory=list)
-    reason: str = ""
-
-    def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
-
-
-@dataclass
 class ASTSkeleton:
     """Program-built semantic AST skeleton derived only from selected paths."""
 
@@ -697,7 +664,11 @@ class AtomicQuestionNode:
             "question": self.question,
             "dependencies": list(self.depends_on),
         }
-        metadata: dict[str, Any] = {}
+        metadata: dict[str, Any] = {
+            key: value
+            for key, value in self.metadata.items()
+            if key not in {"operator", "candidates", "warning"}
+        }
         if self.operator:
             metadata["operator"] = self.operator
         candidates = _external_candidates(self.candidate_bindings)

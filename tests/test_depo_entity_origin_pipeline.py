@@ -48,9 +48,9 @@ from models import (  # noqa: E402
 )
 from path_projector import build_undirected_dependency_graph  # noqa: E402
 from prompts import (  # noqa: E402
-    BEST_AST_SELECTION_SYSTEM,
     CANDIDATE_NODES_SYSTEM,
     ENTITY_PATH_SCORING_SYSTEM,
+    GROUNDED_ATOMIC_DAG_SYSTEM,
     PROBLEM_FRAME_SYSTEM,
 )
 from subquestion_generator import SubquestionGenerator  # noqa: E402
@@ -345,114 +345,76 @@ class EntityOriginPipelineTest(unittest.TestCase):
             ],
         )
 
-    def test_candidate_asts_are_not_prefiltered_before_best_ast_judge(self) -> None:
+    def test_grounded_atomic_dag_generation_uses_path_support(self) -> None:
         paths = [
-            _entity_path("e1_p1", "e1", ["Lothair II", "mother", "die", "When"]),
-            _entity_path("e1_p2", "e1", ["Lothair II", "mother"]),
+            _entity_path("e1_p1", "e1", ["El Tonto", "director", "born"]),
+            _entity_path("e2_p1", "e2", ["The Heart Of Doreon", "director", "born"]),
         ]
         path_sets = [
-            PathSetCandidate(path_set_id="ps1", path_ids_by_entity={"e1": "e1_p1"}, mean_path_score=95),
-            PathSetCandidate(path_set_id="ps2", path_ids_by_entity={"e1": "e1_p2"}, mean_path_score=60),
+            PathSetCandidate(
+                path_set_id="ps1",
+                path_ids_by_entity={"e1": "e1_p1", "e2": "e2_p1"},
+                mean_path_score=95,
+            )
         ]
         scored = [
-            ScoredEntityPath(entity_id="e1", path_id="e1_p1", score=95),
-            ScoredEntityPath(entity_id="e1", path_id="e1_p2", score=60),
+            ScoredEntityPath(entity_id="e1", path_id="e1_p1", score=96, terminal_hint="birth_date"),
+            ScoredEntityPath(entity_id="e2", path_id="e2_p1", score=94, terminal_hint="birth_date"),
         ]
-        llm = CandidateFlowLLM(
-            path_scores=[],
-            ast_payloads_by_path_set={
-                "ps1": {
-                    "nodes": [
-                        {"id": "lothair_ii_mother", "label": "Lothair II's mother", "kind": "entity", "source_path_ids": ["e1_p1"], "source_node_ids": ["1", "2"]},
-                        {"id": "die", "label": "die", "kind": "type_variable", "source_path_ids": ["e1_p1"], "source_node_ids": ["3"]},
-                    ],
-                    "edges": [
-                        {"source": "lothair_ii_mother", "target": "die", "relation": "subject of die", "support_path_id": "e1_p1", "support_node_ids": ["1", "2", "3"]},
-                    ],
-                    "branch_terminals": {"e1": "die"},
-                },
-                "ps2": {
-                    "nodes": [
-                        {"id": "lothair_ii", "label": "Lothair II", "kind": "entity", "source_path_ids": ["e1_p2"], "source_node_ids": ["1"]},
-                        {"id": "mother", "label": "mother", "kind": "type_variable", "source_path_ids": ["e1_p2"], "source_node_ids": ["2"]},
-                    ],
-                    "edges": [
-                        {"source": "lothair_ii", "target": "mother", "relation": "mother of Lothair II", "support_path_id": "e1_p2", "support_node_ids": ["1", "2"]},
-                    ],
-                    "branch_terminals": {"e1": "mother"},
-                },
-            },
-            best_candidate_id="ast_ps1",
+        llm = GroundedAtomicLLM(
+            {
+                "nodes": [
+                    {
+                        "node_id": "q1",
+                        "question": "Who is the director of El Tonto?",
+                        "dependencies": [],
+                        "support": [
+                            {
+                                "path_set_id": "ps1",
+                                "path_id": "e1_p1",
+                                "node_texts": ["El Tonto", "director"],
+                                "node_ids": ["1", "2"],
+                            }
+                        ],
+                    },
+                    {
+                        "node_id": "q2",
+                        "question": "When was the director of El Tonto born?",
+                        "dependencies": ["q1"],
+                        "support": [
+                            {
+                                "path_set_id": "ps1",
+                                "path_id": "e1_p1",
+                                "node_texts": ["director", "born"],
+                                "node_ids": ["2", "3"],
+                            }
+                        ],
+                    },
+                ],
+                "selected_path_set_ids": ["ps1"],
+                "reason": "test grounded DAG",
+            }
         )
         parser = EntityPathSemanticParser(llm)
 
-        candidates = parser.build_candidate_semantic_asts(
-            original_question="When did Lothair II's mother die?",
-            restored_question="When did Lothair II's mother die?",
+        dag, payload = parser.build_grounded_atomic_dag(
+            original_question="Which film whose director was born first, El Tonto or The Heart Of Doreon?",
+            restored_question="Which film whose director was born first, El Tonto or The Heart Of Doreon?",
+            entity_start_nodes=[
+                EntityStartNode(entity_id="e1", text="El Tonto", graph_node_ids=["1"]),
+                EntityStartNode(entity_id="e2", text="The Heart Of Doreon", graph_node_ids=["4"]),
+            ],
             path_set_candidates=path_sets,
             entity_origin_paths=paths,
             scored_paths=scored,
             undirected_graph_edges=[],
         )
-        semantic_ast, _ = parser.select_best_candidate_ast(
-            original_question="When did Lothair II's mother die?",
-            restored_question="When did Lothair II's mother die?",
-            entity_start_nodes=[EntityStartNode(entity_id="e1", text="Lothair II", graph_node_ids=["1"])],
-            path_set_candidates=path_sets,
-            scored_paths=scored,
-            candidate_asts=candidates,
-        )
 
-        self.assertIsNotNone(candidates[0].semantic_ast)
-        self.assertIn("ast_ps1", llm.best_ast_prompt)
-        self.assertIn("ast_ps2", llm.best_ast_prompt)
-        self.assertEqual([(edge.source, edge.target) for edge in semantic_ast.edges], [("lothair_ii_mother", "die")])
-
-    def test_best_ast_selection_controls_final_dag(self) -> None:
-        paths = [
-            _entity_path("e1_p1", "e1", ["John Middleton Murry", "wife", "die", "Why"]),
-            _entity_path("e1_p2", "e1", ["John Middleton Murry", "wife", "die", "When"]),
-        ]
-        path_sets = [
-            PathSetCandidate(path_set_id="ps1", path_ids_by_entity={"e1": "e1_p1"}, mean_path_score=95),
-            PathSetCandidate(path_set_id="ps2", path_ids_by_entity={"e1": "e1_p2"}, mean_path_score=90),
-        ]
-        scored = [
-            ScoredEntityPath(entity_id="e1", path_id="e1_p1", score=95, terminal_hint="death_reason"),
-            ScoredEntityPath(entity_id="e1", path_id="e1_p2", score=90, terminal_hint="death_date"),
-        ]
-        llm = CandidateFlowLLM(
-            path_scores=[],
-            ast_payloads_by_path_set={
-                "ps1": _death_ast_payload("death_reason", "Reason", "reason why the wife died", "e1_p1"),
-                "ps2": _death_ast_payload("death_date", "Date", "date of death of the wife", "e1_p2"),
-            },
-            best_candidate_id="ast_ps1",
-        )
-        parser = EntityPathSemanticParser(llm)
-
-        candidates = parser.build_candidate_semantic_asts(
-            original_question="Why did John Middleton Murry's wife die?",
-            restored_question="Why did John Middleton Murry's wife die?",
-            path_set_candidates=path_sets,
-            entity_origin_paths=paths,
-            scored_paths=scored,
-            undirected_graph_edges=[],
-        )
-        semantic_ast, _ = parser.select_best_candidate_ast(
-            original_question="Why did John Middleton Murry's wife die?",
-            restored_question="Why did John Middleton Murry's wife die?",
-            entity_start_nodes=[EntityStartNode(entity_id="e1", text="John Middleton Murry", graph_node_ids=["1"])],
-            path_set_candidates=path_sets,
-            scored_paths=scored,
-            candidate_asts=candidates,
-        )
-        dag = SubquestionGenerator(llm).generate_dag("Why did John Middleton Murry's wife die?", semantic_ast)
-
-        self.assertIn("death_reason", [node.id for node in semantic_ast.nodes])
-        self.assertNotIn("death_date", [node.id for node in semantic_ast.nodes])
-        self.assertTrue(any(node.question.startswith("Why did") for node in dag.nodes))
-        self.assertFalse(any(node.question.startswith("When did") for node in dag.nodes))
+        self.assertEqual([node.id for node in dag.nodes], ["q1", "q2"])
+        self.assertEqual(dag.nodes[1].depends_on, ["q1"])
+        self.assertEqual(dag.nodes[0].metadata["support_path_ids"], ["e1_p1"])
+        self.assertEqual(dag.nodes[0].metadata["support"][0]["node_texts"], ["El Tonto", "director"])
+        self.assertEqual(payload["selected_path_set_ids"], ["ps1"])
 
     def test_no_candidate_node_llm_calls(self) -> None:
         question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
@@ -489,9 +451,52 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual([entity.text for entity in result["entity_start_nodes"]], ["AlphaGo"])
         self.assertTrue(result["scored_entity_paths"])
         self.assertTrue(result["path_set_candidates"])
-        self.assertTrue(result["candidate_asts"])
-        self.assertIsNone(result["problem_frame"])
-        self.assertEqual(result["candidate_nodes"], [])
+        self.assertIn("grounded_atomic_dag_payload", result)
+        self.assertNotIn("candidate_asts", result)
+        self.assertNotIn("semantic_ast", result)
+        self.assertEqual([node.question for node in result["subquestion_dag"].nodes], ["Which company developed AlphaGo?"])
+        self.assertNotIn("problem_frame", result)
+        self.assertNotIn("candidate_nodes", result)
+
+    def test_run_pipeline_uses_grounded_atomic_dag(self) -> None:
+        question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
+        dependency_parse = _dependency_parse(
+            ["GameA", "developed", "company", "CEO", "graduated", "university"],
+            [(1, 2, "dep"), (2, 3, "obj"), (3, 4, "nmod:of"), (4, 5, "dep"), (5, 6, "obl:from")],
+            pos_by_word={"GameA": "NNP"},
+        )
+        llm = NoCandidatePromptLLM()
+
+        result = run_pipeline(
+            record=QuestionRecord(question=question),
+            index=1,
+            mask_span_extractor=StaticMaskSpanExtractor(
+                [
+                    MaskSpan(
+                        text="AlphaGo",
+                        start_char=question.index("AlphaGo"),
+                        end_char=question.index("AlphaGo") + len("AlphaGo"),
+                        kind_hint="entity",
+                        semantic_type_hint="Game",
+                    )
+                ]
+            ),
+            parser=StaticParser(dependency_parse),
+            graph_builder=GraphBuilder(),
+            anchor_selector=None,
+            semantic_ast_optimizer=None,
+            subquestion_generator=StaticSubquestionGenerator(llm),
+            question_normalizer=IdentityNormalizer(),
+            path_semantic_parser=EntityPathSemanticParser(llm),
+            debug=False,
+        )
+
+        self.assertNotIn("candidate_asts", result)
+        self.assertNotIn("semantic_ast", result)
+        self.assertIn("grounded_atomic_dag_payload", result)
+        self.assertIsNotNone(result["subquestion_dag"])
+        self.assertEqual([node.question for node in result["subquestion_dag"].nodes], ["Which company developed AlphaGo?"])
+        self.assertEqual(result["subquestion_dag"].nodes[0].metadata["support_path_ids"], ["e1_p1"])
 
     def test_ordered_comparison_infers_age_from_younger_cue(self) -> None:
         selected_paths = [
@@ -678,13 +683,12 @@ class CandidateFlowLLM:
         self,
         *,
         path_scores: list[dict[str, Any]],
-        ast_payloads_by_path_set: dict[str, dict[str, Any]],
-        best_candidate_id: str,
+        ast_payloads_by_path_set: dict[str, dict[str, Any]] | None = None,
+        best_candidate_id: str = "",
     ) -> None:
         self.path_scores = path_scores
-        self.ast_payloads_by_path_set = ast_payloads_by_path_set
+        self.ast_payloads_by_path_set = ast_payloads_by_path_set or {}
         self.best_candidate_id = best_candidate_id
-        self.best_ast_prompt = ""
 
     def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
         if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
@@ -695,26 +699,22 @@ class CandidateFlowLLM:
             selected_paths = _json_after_marker(prompt, "Selected entity-origin dependency paths:")
             path_set_id = selected_paths[0].get("path_set_id", "ps1") if selected_paths else "ps1"
             return json.loads(json.dumps(self.ast_payloads_by_path_set[path_set_id]))
-        if system_prompt == BEST_AST_SELECTION_SYSTEM or "candidate Semantic ASTs" in system_prompt:
-            self.best_ast_prompt = prompt
-            candidates = _json_after_marker(prompt, "Candidate ASTs:")
-            reviews = [
-                {
-                    "candidate_id": candidate["candidate_id"],
-                    "path_set_id": candidate["path_set_id"],
-                    "score": 0.99 if candidate["candidate_id"] == self.best_candidate_id else 0.5,
-                    "valid_for_decomposition": True,
-                    "covers_original_question": True,
-                    "answer_intent_compatible": True,
-                    "branch_complete": True,
-                    "atomic_questions_would_be_executable": True,
-                    "has_final_operator_question": False,
-                    "fatal_errors": [],
-                    "reason": "test review",
-                }
-                for candidate in candidates
-            ]
-            return {"ast_reviews": reviews, "best_candidate_id": self.best_candidate_id}
+        raise AssertionError(f"Unexpected prompt: {system_prompt}")
+
+
+class GroundedAtomicLLM:
+    def __init__(self, dag_payload: dict[str, Any]) -> None:
+        self.dag_payload = dag_payload
+        self.prompt = ""
+
+    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
+        if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
+            raise AssertionError("legacy candidate-node/problem-frame prompt was called")
+        if "Selected Path Semantic Transduction" in system_prompt or "candidate Semantic ASTs" in system_prompt:
+            raise AssertionError("AST pipeline prompt should not be called in grounded atomic mode")
+        if system_prompt == GROUNDED_ATOMIC_DAG_SYSTEM:
+            self.prompt = prompt
+            return json.loads(json.dumps(self.dag_payload))
         raise AssertionError(f"Unexpected prompt: {system_prompt}")
 
 
@@ -761,24 +761,25 @@ class NoCandidatePromptLLM:
                 ],
                 "branch_terminals": {"e1": "university"},
             }
-        if system_prompt == BEST_AST_SELECTION_SYSTEM or "candidate Semantic ASTs" in system_prompt:
+        if system_prompt == GROUNDED_ATOMIC_DAG_SYSTEM:
             return {
-                "ast_reviews": [
+                "nodes": [
                     {
-                        "candidate_id": "ast_ps1",
-                        "path_set_id": "ps1",
-                        "score": 0.9,
-                        "valid_for_decomposition": True,
-                        "covers_original_question": True,
-                        "answer_intent_compatible": True,
-                        "branch_complete": True,
-                        "atomic_questions_would_be_executable": True,
-                        "has_final_operator_question": False,
-                        "fatal_errors": [],
-                        "reason": "first candidate is sufficient",
+                        "node_id": "q1",
+                        "question": "Which company developed AlphaGo?",
+                        "dependencies": [],
+                        "support": [
+                            {
+                                "path_set_id": "ps1",
+                                "path_id": "e1_p1",
+                                "node_texts": ["AlphaGo", "developed", "company"],
+                                "node_ids": ["1", "2", "3"],
+                            }
+                        ],
                     }
                 ],
-                "best_candidate_id": "ast_ps1",
+                "selected_path_set_ids": ["ps1"],
+                "reason": "test grounded mode",
             }
         return {"question": "test question?"}
 
