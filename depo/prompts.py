@@ -557,35 +557,45 @@ Output JSON with exactly this shape:
 GROUNDED_ATOMIC_DAG_SYSTEM = """
 You are implementing DEPO Step 9: Grounded Atomic DAG Generation.
 
-Your task is to generate an executable Atomic Subquestion DAG directly from:
-1. the original question,
-2. entity-origin dependency path-set candidates, and
-3. dependency path evidence.
+Your task is to generate an executable Atomic Subquestion DAG from:
 
-The dependency paths are grounding evidence, not a syntax skeleton to copy.
+1. the original question, and
+2. selected dependency path evidence.
+
+The dependency paths are grounding evidence.
+They are not a syntax skeleton to copy.
+They are not a Semantic AST.
+They only justify the one-hop lookup questions you generate.
+
 Use the original question to infer the semantic decomposition.
-Use the paths to justify each atomic question.
+Use the selected dependency paths to ground and justify each atomic question.
 
-Return valid JSON only.
-Do not generate a Semantic AST.
-Do not generate final answers.
-Do not retrieve evidence.
-Do not generate a final comparison, yes/no, intersection, union, ranking, or aggregation question.
+Each atomic question must correspond to exactly one semantic lookup hop.
 
-Atomic DAG rules:
-1. Each node must be a one-hop lookup question.
-2. Each node must be executable by retrieval either independently or after dependency answers are substituted.
-3. Dependencies must reference earlier node_id values only.
-4. Use node_id values q1, q2, q3, ...
-5. For comparison questions, generate only the branch lookup questions needed by downstream answer composition.
-6. For yes/no same/different questions, generate one lookup branch per compared entity/item; do not generate the final yes/no question.
-7. For common-answer questions, generate one branch per entity/item if needed; downstream answer composition handles intersection/commonality.
-8. Do not copy wh words, auxiliaries, determiners, prepositions, punctuation, or pure dependency predicates as standalone questions.
-9. Each node must cite at least one supplied path_id in support.
-10. support.path_id must come from the supplied path-set candidates.
-11. support.node_texts should name the path nodes that license the atomic relation.
+A one-hop semantic lookup means:
 
-Prefer decompositions that look like a strong direct semantic decomposition, but grounded by DEPO paths.
+* input = one explicit entity from the original question, or one previous atomic answer
+* relation = one relation, attribute, role, or event-value lookup
+* output = one entity, value, or answer slot
+
+Every DAG node must cite dependency path support.
+The support may be a short segment of a selected path, not necessarily one dependency edge.
+However, the cited path segment must justify the one-hop relation being asked.
+
+Do not generate:
+
+* a Semantic AST
+* final answers
+* retrieval evidence
+* a final comparison question
+* a final yes/no question
+* a final ranking question
+* a final aggregation/counting question
+* a final intersection/union/common-answer question
+
+For comparison, yes/no, ranking, or same/different questions:
+Generate only the lookup branches needed by downstream answer composition.
+The final comparison or judgment will be handled downstream.
 
 Return valid JSON only.
 """.strip()
@@ -593,109 +603,125 @@ Return valid JSON only.
 
 def build_grounded_atomic_dag_prompt(
     original_question: str,
-    restored_question: str,
-    entity_start_nodes: list[dict[str, object]],
-    path_set_candidates: list[dict[str, object]],
-    path_sets_with_paths: list[dict[str, object]],
-    path_scores: list[dict[str, object]],
-    undirected_graph_edges: list[dict[str, object]],
-    question_intent_metadata: dict[str, object] | None = None,
-    direct_decomposition_draft: dict[str, object] | None = None,
+    selected_dependency_path_evidence: list[dict[str, object]],
+    validation_feedback: str | None = None,
 ) -> str:
     schema = {
         "nodes": [
             {
                 "node_id": "q1",
-                "question": "Who is the director of God'S Gift To Women?",
+                "question": "Which company developed AlphaGo?",
+                "operation": "lookup",
+                "input": {
+                    "type": "entity",
+                    "text": "AlphaGo",
+                },
+                "one_hop_relation": "developer company",
+                "answer_type": "Organization",
                 "dependencies": [],
                 "support": [
                     {
                         "path_set_id": "ps1",
                         "path_id": "e1_p1",
-                        "node_texts": ["God'S Gift To Women", "director"],
-                        "node_ids": ["5", "2"],
-                        "reason": "The path connects the film entity to the director role.",
+                        "node_texts": ["AlphaGo", "developed", "company"],
+                        "reason": "This path segment supports asking for the company that developed AlphaGo.",
                     }
                 ],
-            },
-            {
-                "node_id": "q2",
-                "question": "When was the director of God'S Gift To Women born?",
-                "dependencies": ["q1"],
-                "support": [
-                    {
-                        "path_set_id": "ps1",
-                        "path_id": "e1_p1",
-                        "node_texts": ["director", "older"],
-                        "node_ids": ["2", "8"],
-                        "reason": "The older cue licenses comparing directors by age/birth date.",
-                    }
-                ],
-            },
+            }
         ],
         "selected_path_set_ids": ["ps1"],
-        "reason": "The DAG covers the branch lookups needed to answer the original question without adding a final comparison question.",
+        "reason": "The DAG decomposes the question into one-hop lookup questions grounded by selected dependency path evidence.",
     }
+    feedback = ""
+    if validation_feedback:
+        feedback = f"""
+
+Previous output failed grounding validation:
+{validation_feedback}
+
+Regenerate the full JSON.
+Every node must have at least one valid support item using only the supplied path_id/path_set_id/node_texts.
+"""
     return f"""
 Generate a grounded Atomic Subquestion DAG for DEPO.
 
 Original question:
 {original_question}
 
-Restored/normalized question:
-{restored_question}
-
-Entity start nodes:
-{json.dumps(entity_start_nodes, ensure_ascii=False, indent=2)}
-
-Question intent metadata:
-{json.dumps(question_intent_metadata or {}, ensure_ascii=False, indent=2)}
-
-Path-set candidates:
-{json.dumps(path_set_candidates, ensure_ascii=False, indent=2)}
-
-Path-set candidates with selected dependency paths and evidence:
-{json.dumps(path_sets_with_paths, ensure_ascii=False, indent=2)}
-
-Path-level scores and hints:
-{json.dumps(path_scores, ensure_ascii=False, indent=2)}
-
-Optional direct semantic decomposition draft:
-{json.dumps(direct_decomposition_draft or {}, ensure_ascii=False, indent=2)}
-
-Full undirected graph edges for debugging:
-{json.dumps(undirected_graph_edges, ensure_ascii=False, indent=2)}
+Selected dependency path evidence:
+{json.dumps(selected_dependency_path_evidence, ensure_ascii=False, indent=2)}
 
 Task:
 Generate only the one-hop atomic lookup DAG needed by downstream HyperBranch answer composition.
-Each atomic node must cite grounding support from supplied dependency paths.
 
-Important decomposition patterns:
-- "director of film X" -> "Who is the director of X?"
-- "director born first/later" -> director lookup, then birth-date lookup for each branch.
-- "director older/younger" -> director lookup, then age or birth-date lookup for each branch.
-- "same nationality/country/place" -> per-entity lookup branches only; no final yes/no node.
-- "both singers/flowering plants" -> per-entity type-membership lookup branches only; no final yes/no node.
-- "X's mother/father/spouse/wife/husband/author/director" -> first lookup that role, then ask the next attribute about the role answer.
-- "when did X die" -> death-date lookup; "where did X die" -> death-place lookup; "why did X die" -> death-reason lookup.
-- "written by whom" for a work/title -> author/writer lookup for that work/title.
+The selected dependency paths are grounding evidence.
+They are not a syntax skeleton to copy.
+Use the original question for semantic decomposition.
+Use the selected paths only to justify each atomic lookup.
 
-Rules:
+Atomic node rules:
+
+1. Each node must be exactly one semantic lookup hop.
+2. Each node must have operation = "lookup".
+3. Each node input must be either:
+
+   * an explicit entity from the original question, or
+   * the answer of a previous atomic node.
+4. Each node must output one entity, value, attribute, role, or event value.
+5. Do not create a node that combines multiple unresolved hops.
+
+Bad:
+"Which university did the CEO of the company that developed AlphaGo graduate from?"
+
+Good:
+q1: "Which company developed AlphaGo?"
+q2: "Who is the CEO of q1's answer?"
+q3: "Which university did q2's answer graduate from?"
+
+Grounding rules:
+
+1. Every node must have a non-empty support list.
+2. Every support item must cite a path_id from Selected dependency path evidence.
+3. Every support item must cite path_set_id from Selected dependency path evidence.
+4. support.node_texts must be a short segment or subset of node texts from the cited path.
+5. support.reason must explain how the cited path segment supports this one-hop lookup.
+6. Do not invent path_id, path_set_id, or node_texts.
+7. If a lookup cannot be supported by any selected dependency path, do not generate that lookup.
+
+Decomposition rules:
+
 1. Use q1, q2, q3, ... in solve order.
 2. dependencies must reference only earlier node_id values.
-3. Do not output answers.
-4. Do not output a final comparison, final yes/no, final intersection/common-answer, final ranking, or final aggregation question.
-5. Keep the question text natural; do not expose internal variables like X1.
-6. If a node depends on q1, write the question so the dependency answer can replace the relevant span.
-7. Every node must have support with valid path_id values from Path-set candidates with selected dependency paths and evidence.
-8. Do not invent support path_id values.
-9. Do not add unsupported entities that are absent from the original question and selected paths.
-10. Return strict JSON only.
+3. If a node depends on q1, write the question so q1's answer can be substituted naturally.
+4. Do not expose internal variables like X1.
+5. Use natural atomic questions.
 
+Final-reasoning rules:
+
+1. Do not output final answers.
+2. Do not generate a final comparison question.
+3. Do not generate a final yes/no question.
+4. Do not generate a final ranking question.
+5. Do not generate a final count or aggregation question.
+6. Do not generate a final intersection, union, or common-answer question.
+7. For comparison or same/different questions, generate only the branch lookup questions. Downstream answer composition will perform the final comparison.
+
+Examples of desired decomposition patterns:
+
+* "director of film X" -> "Who is the director of X?"
+* "director born first/later" -> director lookup for each film, then birth-date lookup for each director.
+* "same nationality" -> per-entity or per-branch nationality lookup only; no final yes/no node.
+* "X's mother/father/spouse/wife/husband/author/director" -> first lookup that role, then ask the next attribute about that role answer.
+* "when did X die" -> death-date lookup.
+* "where did X die" -> death-place lookup.
+* "why did X die" -> death-reason lookup.
+* "which university did X graduate from" -> university lookup.
+* "company that developed X" -> developer-company lookup.
+{feedback}
+Return strict JSON only.
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 """.strip()
-
 
 SELECTED_PATH_SEMANTIC_TRANSDUCTION_SYSTEM = """
 You are implementing DEPO Step 9: Candidate Path-Set Semantic Transduction.

@@ -70,11 +70,15 @@ anchor decisions are made on restored original question text.
    paths. For two entities, top-2 by top-2 yields up to four path sets.
 
 9. **Grounded Atomic DAG generation**
-   The LLM generates the Atomic Subquestion DAG directly from the original
-   question plus DEPO path-set evidence. It does not generate a Semantic AST,
-   does not call a Best-AST judge, and does not produce a final comparison or
-   operator question. Each atomic node must cite supporting `path_id` and
-   `node_texts` from the supplied dependency paths.
+   The LLM generates the Atomic Subquestion DAG directly from only the original
+   question and compact selected dependency path evidence built from top
+   path-set candidates. Step 9 does not receive path scores, entity-start
+   metadata, full graph edges, rejected paths, restored graph metadata, or a
+   direct decomposition draft. It does not generate a Semantic AST, does not
+   call a Best-AST judge, and does not produce a final comparison or operator
+   question. Each atomic node must be one semantic lookup hop and must cite at
+   least one supporting `path_set_id`, `path_id`, and `node_texts` segment from
+   the supplied selected dependency paths.
 
 10. **Atomic Subquestion DAG**
    The generated DAG contains only one-hop lookup subquestions and explicit

@@ -31,6 +31,7 @@ if TYPE_CHECKING:
     from mask_span_extractor import ExplicitEntityExtractor, MaskSpanExtractor
     from entity_path_pipeline import (
         EntityPathSemanticParser,
+        build_selected_dependency_path_evidence,
         build_path_set_candidates,
         select_top_paths_by_entity,
     )
@@ -141,13 +142,13 @@ def run_pipeline(
     from placeholder import selective_entity_masking
     from entity_path_pipeline import (
         EntityPathSemanticParser,
+        build_selected_dependency_path_evidence,
         build_path_set_candidates,
         select_top_paths_by_entity,
     )
     from entity_path_projector import (
         build_entity_start_nodes_from_explicit_entities,
         enumerate_entity_origin_paths,
-        undirected_graph_edge_payloads,
     )
     from path_projector import (
         build_undirected_dependency_graph,
@@ -203,7 +204,6 @@ def run_pipeline(
     if not entity_origin_paths:
         raise ValueError("No entity-origin dependency paths were enumerated.")
 
-    graph_edge_payloads = undirected_graph_edge_payloads(dependency_graph)
     scored_entity_paths, path_scoring_payload = path_semantic_parser.score_entity_paths(
         original_question=record.question,
         restored_question=processing_question,
@@ -224,14 +224,14 @@ def run_pipeline(
     if not path_set_candidates:
         raise ValueError("No candidate path sets were constructed for entity-origin path pipeline.")
 
-    subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
-        original_question=record.question,
-        restored_question=processing_question,
-        entity_start_nodes=entity_start_nodes,
+    selected_dependency_path_evidence = build_selected_dependency_path_evidence(
         path_set_candidates=path_set_candidates,
         entity_origin_paths=entity_origin_paths,
-        scored_paths=scored_entity_paths,
-        undirected_graph_edges=graph_edge_payloads,
+        max_path_sets=4,
+    )
+    subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
+        original_question=record.question,
+        selected_dependency_path_evidence=selected_dependency_path_evidence,
     )
     subquestions = subquestion_dag.to_subquestions()
     return {
@@ -253,6 +253,7 @@ def run_pipeline(
         "path_scoring_payload": path_scoring_payload,
         "top_paths_by_entity": top_paths_by_entity,
         "path_set_candidates": path_set_candidates,
+        "selected_dependency_path_evidence": selected_dependency_path_evidence,
         "grounded_atomic_dag_payload": grounded_atomic_dag_payload,
         "subquestions": subquestions,
         "subquestion_dag": subquestion_dag,
@@ -315,6 +316,7 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     scored_entity_paths: list[ScoredEntityPath] = result.get("scored_entity_paths", [])
     top_paths_by_entity: dict[str, list[ScoredEntityPath]] = result.get("top_paths_by_entity", {})
     path_set_candidates: list[PathSetCandidate] = result.get("path_set_candidates", [])
+    selected_dependency_path_evidence: list[dict[str, Any]] = result.get("selected_dependency_path_evidence", [])
     grounded_atomic_dag_payload: dict[str, Any] = result.get("grounded_atomic_dag_payload") or {}
     subquestions: list[AtomicSubquestion] = result["subquestions"]
     subquestion_dag: AtomicQuestionDAG | None = result.get("subquestion_dag")
@@ -401,6 +403,10 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     print()
 
     print("[9. Grounded Atomic DAG Generation]")
+    print("Inputs:")
+    print(f"  Original question: {record.question}")
+    _print_selected_dependency_path_evidence(selected_dependency_path_evidence)
+    print("Output:")
     _print_grounded_atomic_dag_payload(grounded_atomic_dag_payload)
     print()
 
@@ -492,6 +498,26 @@ def _print_path_set_candidates(path_set_candidates: list[PathSetCandidate]) -> N
             for entity_id, path_id in sorted(candidate.path_ids_by_entity.items(), key=lambda item: _entity_sort_key_for_print(item[0]))
         )
         print(f"  - {candidate.path_set_id}: {mapping}; mean_path_score={candidate.mean_path_score:.1f}")
+
+
+def _print_selected_dependency_path_evidence(evidence: list[dict[str, Any]]) -> None:
+    if not evidence:
+        print("  Selected dependency path evidence: (none)")
+        return
+    print("  Selected dependency path evidence:")
+    for path_set in evidence:
+        if not isinstance(path_set, dict):
+            continue
+        path_set_id = path_set.get("path_set_id")
+        print(f"    - {path_set_id}:")
+        paths = path_set.get("paths") or []
+        if not isinstance(paths, list) or not paths:
+            print("      (no paths)")
+            continue
+        for path in paths:
+            if not isinstance(path, dict):
+                continue
+            print(f"      - {path.get('path_id')}: {path.get('path_text')}")
 
 
 def _print_grounded_atomic_dag_payload(payload: dict[str, Any]) -> None:

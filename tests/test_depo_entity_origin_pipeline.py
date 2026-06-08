@@ -15,6 +15,7 @@ if str(DEPO_ROOT) not in sys.path:
 from entity_path_pipeline import (  # noqa: E402
     EntityPathSemanticParser,
     build_path_set_candidates,
+    build_selected_dependency_path_evidence,
     select_top_paths_by_entity,
 )
 from entity_path_projector import (  # noqa: E402
@@ -52,6 +53,7 @@ from prompts import (  # noqa: E402
     ENTITY_PATH_SCORING_SYSTEM,
     GROUNDED_ATOMIC_DAG_SYSTEM,
     PROBLEM_FRAME_SYSTEM,
+    build_grounded_atomic_dag_prompt,
 )
 from subquestion_generator import SubquestionGenerator  # noqa: E402
 
@@ -357,10 +359,10 @@ class EntityOriginPipelineTest(unittest.TestCase):
                 mean_path_score=95,
             )
         ]
-        scored = [
-            ScoredEntityPath(entity_id="e1", path_id="e1_p1", score=96, terminal_hint="birth_date"),
-            ScoredEntityPath(entity_id="e2", path_id="e2_p1", score=94, terminal_hint="birth_date"),
-        ]
+        selected_evidence = build_selected_dependency_path_evidence(
+            path_set_candidates=path_sets,
+            entity_origin_paths=paths,
+        )
         llm = GroundedAtomicLLM(
             {
                 "nodes": [
@@ -399,15 +401,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
         dag, payload = parser.build_grounded_atomic_dag(
             original_question="Which film whose director was born first, El Tonto or The Heart Of Doreon?",
-            restored_question="Which film whose director was born first, El Tonto or The Heart Of Doreon?",
-            entity_start_nodes=[
-                EntityStartNode(entity_id="e1", text="El Tonto", graph_node_ids=["1"]),
-                EntityStartNode(entity_id="e2", text="The Heart Of Doreon", graph_node_ids=["4"]),
-            ],
-            path_set_candidates=path_sets,
-            entity_origin_paths=paths,
-            scored_paths=scored,
-            undirected_graph_edges=[],
+            selected_dependency_path_evidence=selected_evidence,
         )
 
         self.assertEqual([node.id for node in dag.nodes], ["q1", "q2"])
@@ -415,6 +409,188 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual(dag.nodes[0].metadata["support_path_ids"], ["e1_p1"])
         self.assertEqual(dag.nodes[0].metadata["support"][0]["node_texts"], ["El Tonto", "director"])
         self.assertEqual(payload["selected_path_set_ids"], ["ps1"])
+
+    def test_step9_prompt_only_contains_question_and_selected_path_evidence(self) -> None:
+        evidence = [
+            {
+                "path_set_id": "ps1",
+                "paths": [
+                    {
+                        "entity_id": "e1",
+                        "entity_text": "AlphaGo",
+                        "path_id": "e1_p1",
+                        "path_text": "AlphaGo -> developed -> company",
+                        "node_texts": ["AlphaGo", "developed", "company"],
+                    }
+                ],
+            }
+        ]
+
+        prompt = build_grounded_atomic_dag_prompt(
+            original_question="Which company developed AlphaGo?",
+            selected_dependency_path_evidence=evidence,
+        )
+
+        self.assertIn("Which company developed AlphaGo?", prompt)
+        self.assertIn("Selected dependency path evidence", prompt)
+        self.assertIn("AlphaGo -> developed -> company", prompt)
+        self.assertNotIn("Full undirected graph edges", prompt)
+        self.assertNotIn("Path-level scores", prompt)
+        self.assertNotIn("Entity start nodes", prompt)
+        self.assertNotIn("Restored/normalized question", prompt)
+        self.assertNotIn("Question intent metadata", prompt)
+        self.assertNotIn("direct semantic decomposition draft", prompt)
+
+    def test_grounded_dag_requires_support(self) -> None:
+        evidence = _selected_dependency_path_evidence_for_alphago()
+        llm = SequenceGroundedAtomicLLM(
+            [
+                {
+                    "nodes": [
+                        {
+                            "node_id": "q1",
+                            "question": "Which company developed AlphaGo?",
+                            "dependencies": [],
+                        }
+                    ]
+                },
+                _grounded_alphago_payload(),
+            ]
+        )
+        parser = EntityPathSemanticParser(llm)
+
+        dag, _ = parser.build_grounded_atomic_dag(
+            original_question="Which company developed AlphaGo?",
+            selected_dependency_path_evidence=evidence,
+        )
+
+        self.assertEqual(llm.call_count, 2)
+        self.assertEqual([node.question for node in dag.nodes], ["Which company developed AlphaGo?"])
+        self.assertIn("Previous output failed grounding validation", llm.prompts[1])
+
+    def test_invalid_support_path_id_rejected(self) -> None:
+        evidence = _selected_dependency_path_evidence_for_alphago()
+        llm = SequenceGroundedAtomicLLM(
+            [
+                {
+                    "nodes": [
+                        {
+                            "node_id": "q1",
+                            "question": "Which company developed AlphaGo?",
+                            "dependencies": [],
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "fake_path",
+                                    "node_texts": ["AlphaGo", "developed", "company"],
+                                }
+                            ],
+                        }
+                    ]
+                },
+                {
+                    "nodes": [
+                        {
+                            "node_id": "q1",
+                            "question": "Which company developed AlphaGo?",
+                            "dependencies": [],
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "fake_path",
+                                    "node_texts": ["AlphaGo", "developed", "company"],
+                                }
+                            ],
+                        }
+                    ]
+                },
+            ]
+        )
+        parser = EntityPathSemanticParser(llm)
+
+        with self.assertRaisesRegex(ValueError, "fake_path"):
+            parser.build_grounded_atomic_dag(
+                original_question="Which company developed AlphaGo?",
+                selected_dependency_path_evidence=evidence,
+            )
+        self.assertEqual(llm.call_count, 2)
+
+    def test_support_node_texts_must_come_from_path(self) -> None:
+        evidence = _selected_dependency_path_evidence_for_alphago()
+        llm = SequenceGroundedAtomicLLM(
+            [
+                {
+                    "nodes": [
+                        {
+                            "node_id": "q1",
+                            "question": "Which university developed AlphaGo?",
+                            "dependencies": [],
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "e1_p1",
+                                    "node_texts": ["AlphaGo", "university"],
+                                }
+                            ],
+                        }
+                    ]
+                },
+                {
+                    "nodes": [
+                        {
+                            "node_id": "q1",
+                            "question": "Which university developed AlphaGo?",
+                            "dependencies": [],
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "e1_p1",
+                                    "node_texts": ["AlphaGo", "university"],
+                                }
+                            ],
+                        }
+                    ]
+                },
+            ]
+        )
+        parser = EntityPathSemanticParser(llm)
+
+        with self.assertRaisesRegex(ValueError, "university"):
+            parser.build_grounded_atomic_dag(
+                original_question="Which university developed AlphaGo?",
+                selected_dependency_path_evidence=evidence,
+            )
+
+    def test_atomic_node_one_hop_fields_preserved(self) -> None:
+        evidence = _selected_dependency_path_evidence_for_alphago()
+        payload = _grounded_alphago_payload()
+        payload["nodes"][0]["operation"] = "lookup"
+        payload["nodes"][0]["input"] = {"type": "entity", "text": "AlphaGo"}
+        payload["nodes"][0]["one_hop_relation"] = "developer company"
+        payload["nodes"][0]["answer_type"] = "Organization"
+        parser = EntityPathSemanticParser(GroundedAtomicLLM(payload))
+
+        dag, _ = parser.build_grounded_atomic_dag(
+            original_question="Which company developed AlphaGo?",
+            selected_dependency_path_evidence=evidence,
+        )
+
+        metadata = dag.nodes[0].metadata
+        self.assertEqual(metadata["operation"], "lookup")
+        self.assertEqual(metadata["input"], {"type": "entity", "text": "AlphaGo"})
+        self.assertEqual(metadata["one_hop_relation"], "developer company")
+        self.assertEqual(metadata["answer_type"], "Organization")
+
+    def test_no_final_operator_question_in_prompt(self) -> None:
+        prompt = build_grounded_atomic_dag_prompt(
+            original_question="Are AlphaGo and Lee Sedol from the same country?",
+            selected_dependency_path_evidence=_selected_dependency_path_evidence_for_alphago(),
+        )
+
+        self.assertIn("Do not generate a final comparison question", prompt)
+        self.assertIn("Do not generate a final yes/no question", prompt)
+        self.assertIn("Do not generate a final ranking question", prompt)
+        self.assertIn("Do not generate a final count or aggregation question", prompt)
 
     def test_no_candidate_node_llm_calls(self) -> None:
         question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
@@ -718,6 +894,21 @@ class GroundedAtomicLLM:
         raise AssertionError(f"Unexpected prompt: {system_prompt}")
 
 
+class SequenceGroundedAtomicLLM:
+    def __init__(self, dag_payloads: list[dict[str, Any]]) -> None:
+        self.dag_payloads = dag_payloads
+        self.prompts: list[str] = []
+        self.call_count = 0
+
+    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
+        if system_prompt != GROUNDED_ATOMIC_DAG_SYSTEM:
+            raise AssertionError(f"Unexpected prompt: {system_prompt}")
+        self.prompts.append(prompt)
+        payload_index = min(self.call_count, len(self.dag_payloads) - 1)
+        self.call_count += 1
+        return json.loads(json.dumps(self.dag_payloads[payload_index]))
+
+
 class NoCandidatePromptLLM:
     def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
         if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
@@ -825,6 +1016,50 @@ def _entity_path(path_id: str, entity_id: str, nodes: list[str]) -> EntityOrigin
         node_ids=[str(index) for index in range(1, len(nodes) + 1)],
         length=len(nodes),
     )
+
+
+def _selected_dependency_path_evidence_for_alphago() -> list[dict[str, Any]]:
+    return [
+        {
+            "path_set_id": "ps1",
+            "paths": [
+                {
+                    "entity_id": "e1",
+                    "entity_text": "AlphaGo",
+                    "path_id": "e1_p1",
+                    "path_text": "AlphaGo -> developed -> company",
+                    "node_texts": ["AlphaGo", "developed", "company"],
+                    "node_ids": ["1", "2", "3"],
+                }
+            ],
+        }
+    ]
+
+
+def _grounded_alphago_payload() -> dict[str, Any]:
+    return {
+        "nodes": [
+            {
+                "node_id": "q1",
+                "question": "Which company developed AlphaGo?",
+                "operation": "lookup",
+                "input": {"type": "entity", "text": "AlphaGo"},
+                "one_hop_relation": "developer company",
+                "answer_type": "Organization",
+                "dependencies": [],
+                "support": [
+                    {
+                        "path_set_id": "ps1",
+                        "path_id": "e1_p1",
+                        "node_texts": ["AlphaGo", "developed", "company"],
+                        "reason": "This path segment supports asking for the company that developed AlphaGo.",
+                    }
+                ],
+            }
+        ],
+        "selected_path_set_ids": ["ps1"],
+        "reason": "test grounded DAG",
+    }
 
 
 def _death_ast_payload(slot_id: str, semantic_type: str, relation: str, path_id: str) -> dict[str, Any]:

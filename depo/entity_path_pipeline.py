@@ -68,42 +68,59 @@ class EntityPathSemanticParser:
         self,
         *,
         original_question: str,
-        restored_question: str,
-        entity_start_nodes: list[EntityStartNode],
-        path_set_candidates: list[PathSetCandidate],
-        entity_origin_paths: list[EntityOriginPath],
-        scored_paths: list[ScoredEntityPath],
-        undirected_graph_edges: list[dict[str, Any]],
-        direct_decomposition_draft: dict[str, Any] | None = None,
+        selected_dependency_path_evidence: list[dict[str, object]] | None = None,
+        **legacy_kwargs: Any,
     ) -> tuple[AtomicQuestionDAG, dict[str, Any]]:
         """Generate a grounded Atomic DAG directly from top path-set evidence."""
+        if selected_dependency_path_evidence is None:
+            path_set_candidates = legacy_kwargs.get("path_set_candidates")
+            entity_origin_paths = legacy_kwargs.get("entity_origin_paths")
+            if path_set_candidates is None or entity_origin_paths is None:
+                raise TypeError(
+                    "build_grounded_atomic_dag requires selected_dependency_path_evidence. "
+                    "Legacy callers must provide path_set_candidates and entity_origin_paths "
+                    "so compact selected dependency path evidence can be built."
+                )
+            selected_dependency_path_evidence = build_selected_dependency_path_evidence(
+                path_set_candidates=path_set_candidates,
+                entity_origin_paths=entity_origin_paths,
+                max_path_sets=4,
+            )
+        validation_feedback: str | None = None
+        last_payload: dict[str, Any] = {}
+        for attempt in range(2):
+            payload = self.llm_client.chat_json(
+                GROUNDED_ATOMIC_DAG_SYSTEM,
+                build_grounded_atomic_dag_prompt(
+                    original_question=original_question,
+                    selected_dependency_path_evidence=selected_dependency_path_evidence,
+                    validation_feedback=validation_feedback,
+                ),
+            )
+            raw_payload = payload if isinstance(payload, dict) else {}
+            last_payload = raw_payload
+            errors = validate_grounded_atomic_dag_support(
+                raw_payload,
+                selected_dependency_path_evidence,
+            )
+            if errors:
+                validation_feedback = "\n".join(errors)
+                if attempt == 1:
+                    raise ValueError(
+                        "Grounded Atomic DAG support validation failed after retry: "
+                        + validation_feedback
+                    )
+                continue
 
-        path_sets_with_paths = _path_sets_with_paths_for_prompt(
-            path_set_candidates=path_set_candidates,
-            entity_origin_paths=entity_origin_paths,
-            scored_paths=scored_paths,
-        )
-        payload = self.llm_client.chat_json(
-            GROUNDED_ATOMIC_DAG_SYSTEM,
-            build_grounded_atomic_dag_prompt(
-                original_question=original_question,
-                restored_question=restored_question,
-                entity_start_nodes=[entity.to_dict() for entity in entity_start_nodes],
-                path_set_candidates=[candidate.to_dict() for candidate in path_set_candidates],
-                path_sets_with_paths=path_sets_with_paths,
-                path_scores=[score.to_dict() for score in scored_paths],
-                undirected_graph_edges=undirected_graph_edges,
-                question_intent_metadata=_lightweight_question_intent_metadata(original_question),
-                direct_decomposition_draft=direct_decomposition_draft,
-            ),
-        )
-        raw_payload = payload if isinstance(payload, dict) else {}
-        valid_path_ids = {path.path_id for path in entity_origin_paths}
-        dag, warnings = _parse_grounded_atomic_dag_payload(raw_payload, valid_path_ids=valid_path_ids)
-        if warnings:
-            raw_payload["normalization_warnings"] = warnings
-        raw_payload.setdefault("path_sets_with_paths", path_sets_with_paths)
-        return dag, raw_payload
+            dag, warnings = _parse_grounded_atomic_dag_payload(
+                raw_payload,
+                selected_dependency_path_evidence=selected_dependency_path_evidence,
+            )
+            if warnings:
+                raw_payload["normalization_warnings"] = warnings
+            raw_payload.setdefault("selected_dependency_path_evidence", selected_dependency_path_evidence)
+            return dag, raw_payload
+        raise ValueError("Grounded Atomic DAG generation failed. Last payload: " + repr(last_payload))
 
     # Legacy methods kept for tests and compatibility. The main pipeline no
     # longer uses exactly-one path selection.
@@ -282,6 +299,120 @@ def build_path_set_candidates(
     ]
 
 
+def build_selected_dependency_path_evidence(
+    *,
+    path_set_candidates: list[PathSetCandidate],
+    entity_origin_paths: list[EntityOriginPath],
+    max_path_sets: int | None = 4,
+) -> list[dict[str, Any]]:
+    if not path_set_candidates:
+        raise ValueError("No path-set candidates available for selected dependency path evidence.")
+
+    path_by_id = {path.path_id: path for path in entity_origin_paths}
+    selected_path_sets = path_set_candidates[:max_path_sets] if max_path_sets is not None else path_set_candidates
+    evidence: list[dict[str, Any]] = []
+    seen_path_set_ids: set[str] = set()
+    for path_set in selected_path_sets:
+        if path_set.path_set_id in seen_path_set_ids:
+            continue
+        seen_path_set_ids.add(path_set.path_set_id)
+        paths_payload: list[dict[str, Any]] = []
+        seen_path_ids: set[str] = set()
+        for entity_id, path_id in sorted(path_set.path_ids_by_entity.items(), key=lambda item: _entity_id_sort_key(item[0])):
+            if path_id in seen_path_ids:
+                continue
+            seen_path_ids.add(path_id)
+            path = path_by_id.get(path_id)
+            if path is None:
+                raise ValueError(
+                    f"Path-set {path_set.path_set_id!r} references missing entity-origin path {path_id!r}."
+                )
+            paths_payload.append(
+                {
+                    "entity_id": entity_id,
+                    "entity_text": path.entity_text,
+                    "path_id": path.path_id,
+                    "path_text": " -> ".join(path.nodes),
+                    "node_texts": list(path.nodes),
+                    "node_ids": list(path.node_ids),
+                }
+            )
+        evidence.append(
+            {
+                "path_set_id": path_set.path_set_id,
+                "paths": paths_payload,
+            }
+        )
+    if not evidence:
+        raise ValueError("Selected dependency path evidence is empty after path-set de-duplication.")
+    return evidence
+
+
+def validate_grounded_atomic_dag_support(
+    payload: dict[str, Any],
+    selected_dependency_path_evidence: list[dict[str, Any]],
+) -> list[str]:
+    errors: list[str] = []
+    support_index = _selected_dependency_support_index(selected_dependency_path_evidence)
+    raw_nodes = payload.get("nodes")
+    if raw_nodes is None:
+        raw_nodes = payload.get("atomic_questions") or payload.get("subquestions")
+    if not isinstance(raw_nodes, list) or not raw_nodes:
+        return ["Grounded Atomic DAG payload must contain a non-empty nodes list."]
+
+    for index, raw_node in enumerate(raw_nodes, start=1):
+        if not isinstance(raw_node, dict):
+            errors.append(f"Node at position {index} is not a JSON object.")
+            continue
+        node_id = str(raw_node.get("node_id") or raw_node.get("id") or f"q{index}").strip()
+        raw_support = raw_node.get("support")
+        if isinstance(raw_support, dict):
+            support_items = [raw_support]
+        elif isinstance(raw_support, list):
+            support_items = raw_support
+        else:
+            errors.append(f"Node {node_id} has no support list.")
+            continue
+        if not support_items:
+            errors.append(f"Node {node_id} has an empty support list.")
+            continue
+
+        valid_support_count = 0
+        for support_index_in_node, support in enumerate(support_items, start=1):
+            if not isinstance(support, dict):
+                errors.append(f"Node {node_id} support #{support_index_in_node} is not a JSON object.")
+                continue
+            path_set_id = str(support.get("path_set_id") or "").strip()
+            path_id = str(support.get("path_id") or "").strip()
+            key = (path_set_id, path_id)
+            if key not in support_index:
+                errors.append(
+                    f"Node {node_id} support #{support_index_in_node} cites invalid path_set_id/path_id "
+                    f"{path_set_id!r}/{path_id!r}."
+                )
+                continue
+            node_texts = _str_list(support.get("node_texts"))
+            if not node_texts:
+                errors.append(f"Node {node_id} support #{support_index_in_node} has empty node_texts.")
+                continue
+            available = support_index[key]["normalized_node_texts"]
+            missing = [
+                text
+                for text in node_texts
+                if _normalize_support_text(text) not in available
+            ]
+            if missing:
+                errors.append(
+                    f"Node {node_id} support #{support_index_in_node} cites node_texts not present in "
+                    f"{path_set_id}/{path_id}: {missing}."
+                )
+                continue
+            valid_support_count += 1
+        if valid_support_count == 0:
+            errors.append(f"Node {node_id} has no valid selected dependency path support.")
+    return errors
+
+
 def _paths_grouped_for_prompt(
     entity_origin_paths: list[EntityOriginPath],
     entity_start_nodes: list[EntityStartNode],
@@ -386,49 +517,10 @@ def _selection_reason(path_id: str, selected_entity_paths: list[SelectedEntityPa
     return ""
 
 
-def _path_sets_with_paths_for_prompt(
-    *,
-    path_set_candidates: list[PathSetCandidate],
-    entity_origin_paths: list[EntityOriginPath],
-    scored_paths: list[ScoredEntityPath],
-) -> list[dict[str, Any]]:
-    path_by_id = {path.path_id: path for path in entity_origin_paths}
-    score_by_path_id = {score.path_id: score for score in scored_paths}
-    payloads: list[dict[str, Any]] = []
-    for path_set in path_set_candidates:
-        paths_payload: list[dict[str, Any]] = []
-        for entity_id, path_id in sorted(path_set.path_ids_by_entity.items(), key=lambda item: _entity_id_sort_key(item[0])):
-            path = path_by_id.get(path_id)
-            score = score_by_path_id.get(path_id)
-            item: dict[str, Any] = {
-                "entity_id": entity_id,
-                "path_id": path_id,
-                "path_missing": path is None,
-            }
-            if path is not None:
-                item.update(path.to_dict())
-            if score is not None:
-                item["path_score"] = score.score
-                item["path_score_valid"] = score.valid
-                item["path_score_reason"] = score.reason
-                item["terminal_hint"] = score.terminal_hint
-                item["semantic_chain_hint"] = list(score.semantic_chain_hint)
-            paths_payload.append(item)
-        payloads.append(
-            {
-                "path_set_id": path_set.path_set_id,
-                "path_ids_by_entity": dict(path_set.path_ids_by_entity),
-                "mean_path_score": path_set.mean_path_score,
-                "paths": paths_payload,
-            }
-        )
-    return payloads
-
-
 def _parse_grounded_atomic_dag_payload(
     payload: dict[str, Any],
     *,
-    valid_path_ids: set[str],
+    selected_dependency_path_evidence: list[dict[str, Any]],
 ) -> tuple[AtomicQuestionDAG, list[str]]:
     raw_nodes = payload.get("nodes")
     if raw_nodes is None:
@@ -436,6 +528,7 @@ def _parse_grounded_atomic_dag_payload(
     if not isinstance(raw_nodes, list) or not raw_nodes:
         raise ValueError("Grounded Atomic DAG payload must contain a non-empty nodes list.")
 
+    support_index = _selected_dependency_support_index(selected_dependency_path_evidence)
     warnings: list[str] = []
     nodes: list[AtomicQuestionNode] = []
     edges: list[AtomicQuestionEdge] = []
@@ -457,19 +550,27 @@ def _parse_grounded_atomic_dag_payload(
             node_id=node_id,
             warnings=warnings,
         )
-        support = _normalize_grounded_support(raw_node.get("support"), valid_path_ids=valid_path_ids, node_id=node_id, warnings=warnings)
+        support = _normalize_grounded_support(
+            raw_node.get("support"),
+            support_index=support_index,
+            node_id=node_id,
+            warnings=warnings,
+        )
+        if not support:
+            raise ValueError(f"Node {node_id} has no valid selected dependency path support.")
         metadata: dict[str, Any] = {
             "source": "grounded_atomic_dag",
             "support": support,
             "support_path_ids": sorted({item["path_id"] for item in support if item.get("path_id")}),
         }
-        if not support:
-            warnings.append(f"Node {node_id} has no valid dependency-path support.")
+        for metadata_key in ("operation", "input", "one_hop_relation", "answer_type"):
+            if metadata_key in raw_node:
+                metadata[metadata_key] = raw_node.get(metadata_key)
         output = str(raw_node.get("output") or f"X{len(nodes) + 1}").strip()
         node = AtomicQuestionNode(
             id=node_id,
             question=question,
-            type=str(raw_node.get("type") or "lookup"),
+            type=str(raw_node.get("operation") or raw_node.get("type") or "lookup"),
             inputs=_str_list(raw_node.get("inputs")),
             output=output,
             depends_on=dependencies,
@@ -546,7 +647,7 @@ def _normalize_grounded_dependencies(
 def _normalize_grounded_support(
     raw: Any,
     *,
-    valid_path_ids: set[str],
+    support_index: dict[tuple[str, str], dict[str, Any]],
     node_id: str,
     warnings: list[str],
 ) -> list[dict[str, Any]]:
@@ -560,20 +661,67 @@ def _normalize_grounded_support(
     for item in raw_items:
         if not isinstance(item, dict):
             continue
+        path_set_id = str(item.get("path_set_id") or "").strip()
         path_id = str(item.get("path_id") or "").strip()
-        if not path_id or path_id not in valid_path_ids:
-            warnings.append(f"Ignored invalid support path_id {path_id!r} for {node_id}.")
+        key = (path_set_id, path_id)
+        if key not in support_index:
+            warnings.append(f"Ignored invalid support path_set/path {path_set_id!r}/{path_id!r} for {node_id}.")
+            continue
+        node_texts = _str_list(item.get("node_texts"))
+        if not node_texts:
+            warnings.append(f"Ignored support with empty node_texts for {node_id}.")
+            continue
+        available = support_index[key]["normalized_node_texts"]
+        invalid_node_texts = [
+            text
+            for text in node_texts
+            if _normalize_support_text(text) not in available
+        ]
+        if invalid_node_texts:
+            warnings.append(
+                f"Ignored support for {node_id}; node_texts are not in selected path {path_set_id}/{path_id}: "
+                f"{invalid_node_texts}."
+            )
             continue
         support.append(
             {
-                "path_set_id": str(item.get("path_set_id") or "").strip(),
+                "path_set_id": path_set_id,
                 "path_id": path_id,
-                "node_texts": _str_list(item.get("node_texts")),
+                "node_texts": node_texts,
                 "node_ids": _str_list(item.get("node_ids")),
                 "reason": str(item.get("reason") or "").strip(),
             }
         )
     return support
+
+
+def _selected_dependency_support_index(
+    selected_dependency_path_evidence: list[dict[str, Any]],
+) -> dict[tuple[str, str], dict[str, Any]]:
+    index: dict[tuple[str, str], dict[str, Any]] = {}
+    for path_set in selected_dependency_path_evidence:
+        if not isinstance(path_set, dict):
+            continue
+        path_set_id = str(path_set.get("path_set_id") or "").strip()
+        paths = path_set.get("paths")
+        if not path_set_id or not isinstance(paths, list):
+            continue
+        for path in paths:
+            if not isinstance(path, dict):
+                continue
+            path_id = str(path.get("path_id") or "").strip()
+            node_texts = _str_list(path.get("node_texts"))
+            if not path_id or not node_texts:
+                continue
+            index[(path_set_id, path_id)] = {
+                "node_texts": node_texts,
+                "normalized_node_texts": {_normalize_support_text(text) for text in node_texts},
+            }
+    return index
+
+
+def _normalize_support_text(value: str) -> str:
+    return " ".join(str(value or "").strip().lower().split())
 
 
 def _lightweight_question_intent_metadata(question: str) -> dict[str, object]:

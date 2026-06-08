@@ -255,6 +255,7 @@ def build_decomposition_payload(
             "8_path_scores": [_dataclass_to_jsonable(path) for path in result.get("scored_entity_paths", [])],
             "8_1_top_paths_by_entity": top_paths_by_entity,
             "8_2_path_set_candidates": [_dataclass_to_jsonable(candidate) for candidate in result.get("path_set_candidates", [])],
+            "9_selected_dependency_path_evidence": _dataclass_to_jsonable(result.get("selected_dependency_path_evidence") or []),
             "9_grounded_atomic_dag_generation": _dataclass_to_jsonable(result.get("grounded_atomic_dag_payload") or {}),
             "10_atomic_subquestion_dag": _dataclass_to_jsonable(subquestion_dag) if subquestion_dag else None,
             "10_subquestions": [_dataclass_to_jsonable(item) for item in subquestions],
@@ -389,6 +390,17 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append("")
 
     lines.append("## 9. Grounded Atomic DAG Generation")
+    lines.append("Inputs:")
+    lines.append(f"- Original question: {payload['question']}")
+    selected_evidence = stages.get("9_selected_dependency_path_evidence") or []
+    for path_set in selected_evidence:
+        lines.append(f"- {path_set.get('path_set_id')}")
+        for path in path_set.get("paths", []):
+            lines.append(f"  - {path.get('path_id')}: {path.get('path_text')}")
+    if not selected_evidence:
+        lines.append("- Selected dependency path evidence: (none)")
+    lines.append("")
+    lines.append("Output:")
     grounded_payload = stages.get("9_grounded_atomic_dag_generation") or {}
     if grounded_payload.get("selected_path_set_ids"):
         lines.append(f"- selected_path_set_ids: {grounded_payload.get('selected_path_set_ids')}")
