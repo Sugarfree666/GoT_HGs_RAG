@@ -1,0 +1,2900 @@
+{
+  "status": "ok",
+  "dataset": "hotpotqa",
+  "questions_file": "questions\\hotpotqa\\questions.json",
+  "index": 20,
+  "qid": null,
+  "question": "Where is the ice hockey team based that Zdeno Chára currently serving as captain of?",
+  "raw_question_item": {
+    "question": "Where is the ice hockey team based that Zdeno Chára currently serving as captain of?",
+    "answer": "Boston, Massachusetts"
+  },
+  "gold_answer": "Boston, Massachusetts",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "Where is the ice hockey team based that Zdeno Chára currently serving as captain of?",
+      "normalized_question": "Where is the ice hockey team based that Zdeno Chára is currently serving as captain of?",
+      "changed": true,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "Where is the ice hockey team based that Zdeno Chára is currently serving as captain of?",
+        "changed": true,
+        "rewrite_type": "grammar_repair",
+        "added_type_variables": [],
+        "reason": "Adjusted the verb tense for grammatical correctness."
+      }
+    },
+    "2_explicit_entities": {
+      "entities": [
+        {
+          "text": "Zdeno Ch",
+          "start_char": 40,
+          "end_char": 48,
+          "semantic_type_hint": "Entity",
+          "confidence": 0.55,
+          "reason": "continuous multi-word named entity"
+        }
+      ],
+      "warnings": [
+        "Corrected explicit entity span for text='Zdeno Chára' from (36, 48) to (40, 51).",
+        "Dropped overlapping non-minimal entity span text='Zdeno Chára'."
+      ],
+      "raw_payload": {
+        "entities": [
+          {
+            "text": "Zdeno Chára",
+            "start_char": 36,
+            "end_char": 48,
+            "semantic_type_hint": "Person",
+            "confidence": 0.95,
+            "reason": "Zdeno Chára is a recognized professional ice hockey player."
+          }
+        ]
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "Zdeno Ch",
+          "start_char": 40,
+          "end_char": 48,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "reason": "continuous multi-word named entity"
+        }
+      ],
+      "warnings": [
+        "Corrected explicit entity span for text='Zdeno Chára' from (36, 48) to (40, 51).",
+        "Dropped overlapping non-minimal entity span text='Zdeno Chára'."
+      ],
+      "raw_payload": {
+        "entities": [
+          {
+            "text": "Zdeno Chára",
+            "start_char": 36,
+            "end_char": 48,
+            "semantic_type_hint": "Person",
+            "confidence": 0.95,
+            "reason": "Zdeno Chára is a recognized professional ice hockey player."
+          }
+        ]
+      }
+    },
+    "3_entity_masking": {
+      "masked_question": "Where is the ice hockey team based that EntityAára is currently serving as captain of?",
+      "mask_mappings": [
+        {
+          "placeholder": "EntityA",
+          "original_text": "Zdeno Ch",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Entity",
+          "original_char_span": [
+            40,
+            48
+          ],
+          "masked_char_span": [
+            40,
+            47
+          ],
+          "token_indices": []
+        }
+      ]
+    },
+    "3_selective_masked_question": "Where is the ice hockey team based that EntityAára is currently serving as captain of?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "Where",
+          "character_offset_begin": 0,
+          "character_offset_end": 5,
+          "lemma": "where",
+          "pos": "WRB"
+        },
+        {
+          "index": 2,
+          "word": "is",
+          "character_offset_begin": 6,
+          "character_offset_end": 8,
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "index": 3,
+          "word": "the",
+          "character_offset_begin": 9,
+          "character_offset_end": 12,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 4,
+          "word": "ice",
+          "character_offset_begin": 13,
+          "character_offset_end": 16,
+          "lemma": "ice",
+          "pos": "NN"
+        },
+        {
+          "index": 5,
+          "word": "hockey",
+          "character_offset_begin": 17,
+          "character_offset_end": 23,
+          "lemma": "hockey",
+          "pos": "NN"
+        },
+        {
+          "index": 6,
+          "word": "team",
+          "character_offset_begin": 24,
+          "character_offset_end": 28,
+          "lemma": "team",
+          "pos": "NN"
+        },
+        {
+          "index": 7,
+          "word": "based",
+          "character_offset_begin": 29,
+          "character_offset_end": 34,
+          "lemma": "base",
+          "pos": "VBN"
+        },
+        {
+          "index": 8,
+          "word": "that",
+          "character_offset_begin": 35,
+          "character_offset_end": 39,
+          "lemma": "that",
+          "pos": "IN"
+        },
+        {
+          "index": 9,
+          "word": "EntityAára",
+          "character_offset_begin": 40,
+          "character_offset_end": 50,
+          "lemma": "EntityAára",
+          "pos": "NNP"
+        },
+        {
+          "index": 10,
+          "word": "is",
+          "character_offset_begin": 51,
+          "character_offset_end": 53,
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "index": 11,
+          "word": "currently",
+          "character_offset_begin": 54,
+          "character_offset_end": 63,
+          "lemma": "currently",
+          "pos": "RB"
+        },
+        {
+          "index": 12,
+          "word": "serving",
+          "character_offset_begin": 64,
+          "character_offset_end": 71,
+          "lemma": "serve",
+          "pos": "VBG"
+        },
+        {
+          "index": 13,
+          "word": "as",
+          "character_offset_begin": 72,
+          "character_offset_end": 74,
+          "lemma": "as",
+          "pos": "IN"
+        },
+        {
+          "index": 14,
+          "word": "captain",
+          "character_offset_begin": 75,
+          "character_offset_end": 82,
+          "lemma": "captain",
+          "pos": "NN"
+        },
+        {
+          "index": 15,
+          "word": "of",
+          "character_offset_begin": 83,
+          "character_offset_end": 85,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 16,
+          "word": "?",
+          "character_offset_begin": 85,
+          "character_offset_end": 86,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "is",
+          "relation": "advmod",
+          "target": "Where",
+          "source_index": 2,
+          "target_index": 1
+        },
+        {
+          "source": "based",
+          "relation": "aux:pass",
+          "target": "is",
+          "source_index": 7,
+          "target_index": 2
+        },
+        {
+          "source": "team",
+          "relation": "det",
+          "target": "the",
+          "source_index": 6,
+          "target_index": 3
+        },
+        {
+          "source": "team",
+          "relation": "compound",
+          "target": "ice",
+          "source_index": 6,
+          "target_index": 4
+        },
+        {
+          "source": "team",
+          "relation": "compound",
+          "target": "hockey",
+          "source_index": 6,
+          "target_index": 5
+        },
+        {
+          "source": "based",
+          "relation": "nsubj:pass",
+          "target": "team",
+          "source_index": 7,
+          "target_index": 6
+        },
+        {
+          "source": "serving",
+          "relation": "mark",
+          "target": "that",
+          "source_index": 12,
+          "target_index": 8
+        },
+        {
+          "source": "serving",
+          "relation": "nsubj",
+          "target": "EntityAára",
+          "source_index": 12,
+          "target_index": 9
+        },
+        {
+          "source": "serving",
+          "relation": "aux",
+          "target": "is",
+          "source_index": 12,
+          "target_index": 10
+        },
+        {
+          "source": "serving",
+          "relation": "advmod",
+          "target": "currently",
+          "source_index": 12,
+          "target_index": 11
+        },
+        {
+          "source": "based",
+          "relation": "ccomp",
+          "target": "serving",
+          "source_index": 7,
+          "target_index": 12
+        },
+        {
+          "source": "captain",
+          "relation": "case",
+          "target": "as",
+          "source_index": 14,
+          "target_index": 13
+        },
+        {
+          "source": "serving",
+          "relation": "obl:as",
+          "target": "captain",
+          "source_index": 12,
+          "target_index": 14
+        },
+        {
+          "source": "captain",
+          "relation": "acl",
+          "target": "of",
+          "source_index": 14,
+          "target_index": 15
+        },
+        {
+          "source": "based",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 7,
+          "target_index": 16
+        }
+      ],
+      "edge_display": [
+        "is[2] --advmod--> Where[1]",
+        "based[7] --aux:pass--> is[2]",
+        "team[6] --det--> the[3]",
+        "team[6] --compound--> ice[4]",
+        "team[6] --compound--> hockey[5]",
+        "based[7] --nsubj:pass--> team[6]",
+        "serving[12] --mark--> that[8]",
+        "serving[12] --nsubj--> EntityAára[9]",
+        "serving[12] --aux--> is[10]",
+        "serving[12] --advmod--> currently[11]",
+        "based[7] --ccomp--> serving[12]",
+        "captain[14] --case--> as[13]",
+        "serving[12] --obl:as--> captain[14]",
+        "captain[14] --acl--> of[15]",
+        "based[7] --punct--> ?[16]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "Where",
+          "graph_text": "Where",
+          "text": "Where",
+          "label": "Where[1]",
+          "order": 1,
+          "pos": "WRB",
+          "lemma": "where",
+          "character_offset_begin": 0,
+          "character_offset_end": 5
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "is",
+          "graph_text": "is",
+          "text": "is",
+          "label": "is[2]",
+          "order": 2,
+          "pos": "VBZ",
+          "lemma": "be",
+          "character_offset_begin": 6,
+          "character_offset_end": 8
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[3]",
+          "order": 3,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 9,
+          "character_offset_end": 12
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "ice",
+          "graph_text": "ice",
+          "text": "ice",
+          "label": "ice[4]",
+          "order": 4,
+          "pos": "NN",
+          "lemma": "ice",
+          "character_offset_begin": 13,
+          "character_offset_end": 16
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "hockey",
+          "graph_text": "hockey",
+          "text": "hockey",
+          "label": "hockey[5]",
+          "order": 5,
+          "pos": "NN",
+          "lemma": "hockey",
+          "character_offset_begin": 17,
+          "character_offset_end": 23
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "team",
+          "graph_text": "team",
+          "text": "team",
+          "label": "team[6]",
+          "order": 6,
+          "pos": "NN",
+          "lemma": "team",
+          "character_offset_begin": 24,
+          "character_offset_end": 28
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "based",
+          "graph_text": "based",
+          "text": "based",
+          "label": "based[7]",
+          "order": 7,
+          "pos": "VBN",
+          "lemma": "base",
+          "character_offset_begin": 29,
+          "character_offset_end": 34
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "that",
+          "graph_text": "that",
+          "text": "that",
+          "label": "that[8]",
+          "order": 8,
+          "pos": "IN",
+          "lemma": "that",
+          "character_offset_begin": 35,
+          "character_offset_end": 39
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "EntityAára",
+          "graph_text": "EntityAára",
+          "text": "Zdeno Ch",
+          "label": "Zdeno Ch[9]",
+          "order": 9,
+          "pos": "NNP",
+          "lemma": "EntityAára",
+          "character_offset_begin": 40,
+          "character_offset_end": 50
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "is",
+          "graph_text": "is",
+          "text": "is",
+          "label": "is[10]",
+          "order": 10,
+          "pos": "VBZ",
+          "lemma": "be",
+          "character_offset_begin": 51,
+          "character_offset_end": 53
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "currently",
+          "graph_text": "currently",
+          "text": "currently",
+          "label": "currently[11]",
+          "order": 11,
+          "pos": "RB",
+          "lemma": "currently",
+          "character_offset_begin": 54,
+          "character_offset_end": 63
+        },
+        {
+          "id": "12",
+          "token_index": 12,
+          "word": "serving",
+          "graph_text": "serving",
+          "text": "serving",
+          "label": "serving[12]",
+          "order": 12,
+          "pos": "VBG",
+          "lemma": "serve",
+          "character_offset_begin": 64,
+          "character_offset_end": 71
+        },
+        {
+          "id": "13",
+          "token_index": 13,
+          "word": "as",
+          "graph_text": "as",
+          "text": "as",
+          "label": "as[13]",
+          "order": 13,
+          "pos": "IN",
+          "lemma": "as",
+          "character_offset_begin": 72,
+          "character_offset_end": 74
+        },
+        {
+          "id": "14",
+          "token_index": 14,
+          "word": "captain",
+          "graph_text": "captain",
+          "text": "captain",
+          "label": "captain[14]",
+          "order": 14,
+          "pos": "NN",
+          "lemma": "captain",
+          "character_offset_begin": 75,
+          "character_offset_end": 82
+        },
+        {
+          "id": "15",
+          "token_index": 15,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[15]",
+          "order": 15,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 83,
+          "character_offset_end": 85
+        },
+        {
+          "id": "16",
+          "token_index": 16,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[16]",
+          "order": 16,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 85,
+          "character_offset_end": 86
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "2",
+          "source_text": "Where",
+          "target_text": "is",
+          "relation": "advmod",
+          "relations": [
+            "advmod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "1",
+              "governor_text": "is",
+              "dependent_text": "Where",
+              "governor_graph_text": "is",
+              "dependent_graph_text": "Where",
+              "governor_index": 2,
+              "dependent_index": 1,
+              "dependency_label": "advmod"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "1",
+          "dependency_label": "advmod",
+          "token_text": {
+            "2": "is",
+            "1": "Where"
+          },
+          "token_index": {
+            "2": 2,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "7",
+          "source_text": "is",
+          "target_text": "based",
+          "relation": "aux:pass",
+          "relations": [
+            "aux:pass"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "2",
+              "governor_text": "based",
+              "dependent_text": "is",
+              "governor_graph_text": "based",
+              "dependent_graph_text": "is",
+              "governor_index": 7,
+              "dependent_index": 2,
+              "dependency_label": "aux:pass"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "2",
+          "dependency_label": "aux:pass",
+          "token_text": {
+            "7": "based",
+            "2": "is"
+          },
+          "token_index": {
+            "7": 7,
+            "2": 2
+          }
+        },
+        {
+          "source": "3",
+          "target": "6",
+          "source_text": "the",
+          "target_text": "team",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "3",
+              "governor_text": "team",
+              "dependent_text": "the",
+              "governor_graph_text": "team",
+              "dependent_graph_text": "the",
+              "governor_index": 6,
+              "dependent_index": 3,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "3",
+          "dependency_label": "det",
+          "token_text": {
+            "6": "team",
+            "3": "the"
+          },
+          "token_index": {
+            "6": 6,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "6",
+          "source_text": "ice",
+          "target_text": "team",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "4",
+              "governor_text": "team",
+              "dependent_text": "ice",
+              "governor_graph_text": "team",
+              "dependent_graph_text": "ice",
+              "governor_index": 6,
+              "dependent_index": 4,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "4",
+          "dependency_label": "compound",
+          "token_text": {
+            "6": "team",
+            "4": "ice"
+          },
+          "token_index": {
+            "6": 6,
+            "4": 4
+          }
+        },
+        {
+          "source": "5",
+          "target": "6",
+          "source_text": "hockey",
+          "target_text": "team",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "6",
+              "dependent": "5",
+              "governor_text": "team",
+              "dependent_text": "hockey",
+              "governor_graph_text": "team",
+              "dependent_graph_text": "hockey",
+              "governor_index": 6,
+              "dependent_index": 5,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "6",
+          "original_dependent": "5",
+          "dependency_label": "compound",
+          "token_text": {
+            "6": "team",
+            "5": "hockey"
+          },
+          "token_index": {
+            "6": 6,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "7",
+          "source_text": "team",
+          "target_text": "based",
+          "relation": "nsubj:pass",
+          "relations": [
+            "nsubj:pass"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "6",
+              "governor_text": "based",
+              "dependent_text": "team",
+              "governor_graph_text": "based",
+              "dependent_graph_text": "team",
+              "governor_index": 7,
+              "dependent_index": 6,
+              "dependency_label": "nsubj:pass"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "6",
+          "dependency_label": "nsubj:pass",
+          "token_text": {
+            "7": "based",
+            "6": "team"
+          },
+          "token_index": {
+            "7": 7,
+            "6": 6
+          }
+        },
+        {
+          "source": "7",
+          "target": "12",
+          "source_text": "based",
+          "target_text": "serving",
+          "relation": "ccomp",
+          "relations": [
+            "ccomp"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "12",
+              "governor_text": "based",
+              "dependent_text": "serving",
+              "governor_graph_text": "based",
+              "dependent_graph_text": "serving",
+              "governor_index": 7,
+              "dependent_index": 12,
+              "dependency_label": "ccomp"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "12",
+          "dependency_label": "ccomp",
+          "token_text": {
+            "7": "based",
+            "12": "serving"
+          },
+          "token_index": {
+            "7": 7,
+            "12": 12
+          }
+        },
+        {
+          "source": "7",
+          "target": "16",
+          "source_text": "based",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "16",
+              "governor_text": "based",
+              "dependent_text": "?",
+              "governor_graph_text": "based",
+              "dependent_graph_text": "?",
+              "governor_index": 7,
+              "dependent_index": 16,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "16",
+          "dependency_label": "punct",
+          "token_text": {
+            "7": "based",
+            "16": "?"
+          },
+          "token_index": {
+            "7": 7,
+            "16": 16
+          }
+        },
+        {
+          "source": "8",
+          "target": "12",
+          "source_text": "that",
+          "target_text": "serving",
+          "relation": "mark",
+          "relations": [
+            "mark"
+          ],
+          "directed_edges": [
+            {
+              "governor": "12",
+              "dependent": "8",
+              "governor_text": "serving",
+              "dependent_text": "that",
+              "governor_graph_text": "serving",
+              "dependent_graph_text": "that",
+              "governor_index": 12,
+              "dependent_index": 8,
+              "dependency_label": "mark"
+            }
+          ],
+          "original_governor": "12",
+          "original_dependent": "8",
+          "dependency_label": "mark",
+          "token_text": {
+            "12": "serving",
+            "8": "that"
+          },
+          "token_index": {
+            "12": 12,
+            "8": 8
+          }
+        },
+        {
+          "source": "9",
+          "target": "12",
+          "source_text": "Zdeno Ch",
+          "target_text": "serving",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "12",
+              "dependent": "9",
+              "governor_text": "serving",
+              "dependent_text": "Zdeno Ch",
+              "governor_graph_text": "serving",
+              "dependent_graph_text": "EntityAára",
+              "governor_index": 12,
+              "dependent_index": 9,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "12",
+          "original_dependent": "9",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "12": "serving",
+            "9": "Zdeno Ch"
+          },
+          "token_index": {
+            "12": 12,
+            "9": 9
+          }
+        },
+        {
+          "source": "10",
+          "target": "12",
+          "source_text": "is",
+          "target_text": "serving",
+          "relation": "aux",
+          "relations": [
+            "aux"
+          ],
+          "directed_edges": [
+            {
+              "governor": "12",
+              "dependent": "10",
+              "governor_text": "serving",
+              "dependent_text": "is",
+              "governor_graph_text": "serving",
+              "dependent_graph_text": "is",
+              "governor_index": 12,
+              "dependent_index": 10,
+              "dependency_label": "aux"
+            }
+          ],
+          "original_governor": "12",
+          "original_dependent": "10",
+          "dependency_label": "aux",
+          "token_text": {
+            "12": "serving",
+            "10": "is"
+          },
+          "token_index": {
+            "12": 12,
+            "10": 10
+          }
+        },
+        {
+          "source": "11",
+          "target": "12",
+          "source_text": "currently",
+          "target_text": "serving",
+          "relation": "advmod",
+          "relations": [
+            "advmod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "12",
+              "dependent": "11",
+              "governor_text": "serving",
+              "dependent_text": "currently",
+              "governor_graph_text": "serving",
+              "dependent_graph_text": "currently",
+              "governor_index": 12,
+              "dependent_index": 11,
+              "dependency_label": "advmod"
+            }
+          ],
+          "original_governor": "12",
+          "original_dependent": "11",
+          "dependency_label": "advmod",
+          "token_text": {
+            "12": "serving",
+            "11": "currently"
+          },
+          "token_index": {
+            "12": 12,
+            "11": 11
+          }
+        },
+        {
+          "source": "12",
+          "target": "14",
+          "source_text": "serving",
+          "target_text": "captain",
+          "relation": "obl:as",
+          "relations": [
+            "obl:as"
+          ],
+          "directed_edges": [
+            {
+              "governor": "12",
+              "dependent": "14",
+              "governor_text": "serving",
+              "dependent_text": "captain",
+              "governor_graph_text": "serving",
+              "dependent_graph_text": "captain",
+              "governor_index": 12,
+              "dependent_index": 14,
+              "dependency_label": "obl:as"
+            }
+          ],
+          "original_governor": "12",
+          "original_dependent": "14",
+          "dependency_label": "obl:as",
+          "token_text": {
+            "12": "serving",
+            "14": "captain"
+          },
+          "token_index": {
+            "12": 12,
+            "14": 14
+          }
+        },
+        {
+          "source": "13",
+          "target": "14",
+          "source_text": "as",
+          "target_text": "captain",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "14",
+              "dependent": "13",
+              "governor_text": "captain",
+              "dependent_text": "as",
+              "governor_graph_text": "captain",
+              "dependent_graph_text": "as",
+              "governor_index": 14,
+              "dependent_index": 13,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "14",
+          "original_dependent": "13",
+          "dependency_label": "case",
+          "token_text": {
+            "14": "captain",
+            "13": "as"
+          },
+          "token_index": {
+            "14": 14,
+            "13": 13
+          }
+        },
+        {
+          "source": "14",
+          "target": "15",
+          "source_text": "captain",
+          "target_text": "of",
+          "relation": "acl",
+          "relations": [
+            "acl"
+          ],
+          "directed_edges": [
+            {
+              "governor": "14",
+              "dependent": "15",
+              "governor_text": "captain",
+              "dependent_text": "of",
+              "governor_graph_text": "captain",
+              "dependent_graph_text": "of",
+              "governor_index": 14,
+              "dependent_index": 15,
+              "dependency_label": "acl"
+            }
+          ],
+          "original_governor": "14",
+          "original_dependent": "15",
+          "dependency_label": "acl",
+          "token_text": {
+            "14": "captain",
+            "15": "of"
+          },
+          "token_index": {
+            "14": 14,
+            "15": 15
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "Zdeno Ch",
+        "graph_node_ids": [
+          "9"
+        ],
+        "token_ids": [
+          9
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Entity"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "based",
+          "team",
+          "ice"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "7",
+          "6",
+          "4"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "serving",
+            "target_text": "based",
+            "relations": [
+              "ccomp"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "based",
+                "dependent_text": "serving",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "serving",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "ccomp"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "6",
+            "source_text": "based",
+            "target_text": "team",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "based",
+                "dependent_text": "team",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "team",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "4",
+            "source_text": "team",
+            "target_text": "ice",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "4",
+                "governor_text": "team",
+                "dependent_text": "ice",
+                "governor_graph_text": "team",
+                "dependent_graph_text": "ice",
+                "governor_index": 6,
+                "dependent_index": 4,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "based",
+          "team",
+          "hockey"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "7",
+          "6",
+          "5"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "serving",
+            "target_text": "based",
+            "relations": [
+              "ccomp"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "based",
+                "dependent_text": "serving",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "serving",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "ccomp"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "6",
+            "source_text": "based",
+            "target_text": "team",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "based",
+                "dependent_text": "team",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "team",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "5",
+            "source_text": "team",
+            "target_text": "hockey",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "5",
+                "governor_text": "team",
+                "dependent_text": "hockey",
+                "governor_graph_text": "team",
+                "dependent_graph_text": "hockey",
+                "governor_index": 6,
+                "dependent_index": 5,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "based",
+          "team"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "7",
+          "6"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "serving",
+            "target_text": "based",
+            "relations": [
+              "ccomp"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "based",
+                "dependent_text": "serving",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "serving",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "ccomp"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "6",
+            "source_text": "based",
+            "target_text": "team",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "based",
+                "dependent_text": "team",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "team",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "captain",
+          "as"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "14",
+          "13"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "14",
+            "source_text": "serving",
+            "target_text": "captain",
+            "relations": [
+              "obl:as"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "14",
+                "governor_text": "serving",
+                "dependent_text": "captain",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "captain",
+                "governor_index": 12,
+                "dependent_index": 14,
+                "dependency_label": "obl:as"
+              }
+            ]
+          },
+          {
+            "source": "14",
+            "target": "13",
+            "source_text": "captain",
+            "target_text": "as",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "14",
+                "dependent": "13",
+                "governor_text": "captain",
+                "dependent_text": "as",
+                "governor_graph_text": "captain",
+                "dependent_graph_text": "as",
+                "governor_index": 14,
+                "dependent_index": 13,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "based",
+          "team",
+          "the"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "7",
+          "6",
+          "3"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "serving",
+            "target_text": "based",
+            "relations": [
+              "ccomp"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "based",
+                "dependent_text": "serving",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "serving",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "ccomp"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "6",
+            "source_text": "based",
+            "target_text": "team",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "based",
+                "dependent_text": "team",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "team",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "6",
+            "target": "3",
+            "source_text": "team",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "6",
+                "dependent": "3",
+                "governor_text": "team",
+                "dependent_text": "the",
+                "governor_graph_text": "team",
+                "dependent_graph_text": "the",
+                "governor_index": 6,
+                "dependent_index": 3,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "based",
+          "is",
+          "Where"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "7",
+          "2",
+          "1"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "serving",
+            "target_text": "based",
+            "relations": [
+              "ccomp"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "based",
+                "dependent_text": "serving",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "serving",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "ccomp"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "based",
+            "target_text": "is",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "2",
+                "governor_text": "based",
+                "dependent_text": "is",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "is",
+                "governor_index": 7,
+                "dependent_index": 2,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "is",
+            "target_text": "Where",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "is",
+                "dependent_text": "Where",
+                "governor_graph_text": "is",
+                "dependent_graph_text": "Where",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "based"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "7"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "serving",
+            "target_text": "based",
+            "relations": [
+              "ccomp"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "based",
+                "dependent_text": "serving",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "serving",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "ccomp"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "currently"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "11"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "11",
+            "source_text": "serving",
+            "target_text": "currently",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "11",
+                "governor_text": "serving",
+                "dependent_text": "currently",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "currently",
+                "governor_index": 12,
+                "dependent_index": 11,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "captain"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "14"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "14",
+            "source_text": "serving",
+            "target_text": "captain",
+            "relations": [
+              "obl:as"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "14",
+                "governor_text": "serving",
+                "dependent_text": "captain",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "captain",
+                "governor_index": 12,
+                "dependent_index": 14,
+                "dependency_label": "obl:as"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "based",
+          "is"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "7",
+          "2"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "serving",
+            "target_text": "based",
+            "relations": [
+              "ccomp"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "based",
+                "dependent_text": "serving",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "serving",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "ccomp"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "based",
+            "target_text": "is",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "2",
+                "governor_text": "based",
+                "dependent_text": "is",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "is",
+                "governor_index": 7,
+                "dependent_index": 2,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p11",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "based",
+          "?"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "7",
+          "16"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "serving",
+            "target_text": "based",
+            "relations": [
+              "ccomp"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "based",
+                "dependent_text": "serving",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "serving",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "ccomp"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "16",
+            "source_text": "based",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "16",
+                "governor_text": "based",
+                "dependent_text": "?",
+                "governor_graph_text": "based",
+                "dependent_graph_text": "?",
+                "governor_index": 7,
+                "dependent_index": 16,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p12",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "captain",
+          "of"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "14",
+          "15"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "14",
+            "source_text": "serving",
+            "target_text": "captain",
+            "relations": [
+              "obl:as"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "14",
+                "governor_text": "serving",
+                "dependent_text": "captain",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "captain",
+                "governor_index": 12,
+                "dependent_index": 14,
+                "dependency_label": "obl:as"
+              }
+            ]
+          },
+          {
+            "source": "14",
+            "target": "15",
+            "source_text": "captain",
+            "target_text": "of",
+            "relations": [
+              "acl"
+            ],
+            "directed_edges": [
+              {
+                "governor": "14",
+                "dependent": "15",
+                "governor_text": "captain",
+                "dependent_text": "of",
+                "governor_graph_text": "captain",
+                "dependent_graph_text": "of",
+                "governor_index": 14,
+                "dependent_index": 15,
+                "dependency_label": "acl"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p13",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving"
+        ],
+        "node_ids": [
+          "9",
+          "12"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p14",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "that"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "8"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "8",
+            "source_text": "serving",
+            "target_text": "that",
+            "relations": [
+              "mark"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "8",
+                "governor_text": "serving",
+                "dependent_text": "that",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "that",
+                "governor_index": 12,
+                "dependent_index": 8,
+                "dependency_label": "mark"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p15",
+        "entity_id": "e1",
+        "entity_text": "Zdeno Ch",
+        "nodes": [
+          "Zdeno Ch",
+          "serving",
+          "is"
+        ],
+        "node_ids": [
+          "9",
+          "12",
+          "10"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "12",
+            "source_text": "Zdeno Ch",
+            "target_text": "serving",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "9",
+                "governor_text": "serving",
+                "dependent_text": "Zdeno Ch",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "EntityAára",
+                "governor_index": 12,
+                "dependent_index": 9,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "serving",
+            "target_text": "is",
+            "relations": [
+              "aux"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "10",
+                "governor_text": "serving",
+                "dependent_text": "is",
+                "governor_graph_text": "serving",
+                "dependent_graph_text": "is",
+                "governor_index": 12,
+                "dependent_index": 10,
+                "dependency_label": "aux"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [
+          "team",
+          "based"
+        ],
+        "covered_cues": [
+          "where"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára, reaches the team and based, covering the location intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p2",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [
+          "hockey",
+          "team",
+          "based"
+        ],
+        "covered_cues": [
+          "where"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára, reaches the hockey team and based, effectively covering the location intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p3",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [
+          "team",
+          "based"
+        ],
+        "covered_cues": [
+          "where"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára and reaches the team and based, but lacks some additional context."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p4",
+        "score": 30.0,
+        "valid": true,
+        "terminal_hint": "captain",
+        "semantic_chain_hint": [
+          "serving",
+          "captain"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "where"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára and reaches serving and captain, but does not address the location intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p5",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [
+          "team",
+          "based"
+        ],
+        "covered_cues": [
+          "where"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára, reaches the team and based, but includes unnecessary noise."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p6",
+        "score": 40.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [
+          "is",
+          "where"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "team"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára and includes is and where, but lacks the necessary context for the team."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p7",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [
+          "team",
+          "based"
+        ],
+        "covered_cues": [],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára and reaches serving and based, but is too minimal."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p8",
+        "score": 50.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [
+          "currently"
+        ],
+        "covered_cues": [],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára and includes currently, but lacks the necessary context for the location."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p9",
+        "score": 60.0,
+        "valid": true,
+        "terminal_hint": "captain",
+        "semantic_chain_hint": [
+          "serving"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "where"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára and reaches serving and captain, but does not address the location intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p10",
+        "score": 45.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [
+          "is"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "team"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára and includes is, but lacks the necessary context for the team."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p11",
+        "score": 20.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "team",
+          "based"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára but ends with a punctuation mark, failing to provide useful information."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p12",
+        "score": 35.0,
+        "valid": true,
+        "terminal_hint": "captain",
+        "semantic_chain_hint": [
+          "of"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "where"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára and reaches serving and captain, but does not address the location intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p13",
+        "score": 10.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "team",
+          "based"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára but is too minimal to provide useful information."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p14",
+        "score": 25.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "team",
+          "based"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára and includes that, but does not address the location intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p15",
+        "score": 15.0,
+        "valid": true,
+        "terminal_hint": "location",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "team",
+          "based"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Zdeno Chára but is too minimal to provide useful information."
+      }
+    ],
+    "8_1_top_paths_by_entity": {
+      "e1": [
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p2",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "location",
+          "semantic_chain_hint": [
+            "hockey",
+            "team",
+            "based"
+          ],
+          "covered_cues": [
+            "where"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Zdeno Chára, reaches the hockey team and based, effectively covering the location intent."
+        },
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p1",
+          "score": 85.0,
+          "valid": true,
+          "terminal_hint": "location",
+          "semantic_chain_hint": [
+            "team",
+            "based"
+          ],
+          "covered_cues": [
+            "where"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Zdeno Chára, reaches the team and based, covering the location intent."
+        }
+      ]
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p2"
+        },
+        "mean_path_score": 90.0
+      },
+      {
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "mean_path_score": 85.0
+      }
+    ],
+    "9_selected_dependency_path_evidence": [
+      {
+        "path_set_id": "ps1",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "Zdeno Ch",
+            "path_id": "e1_p2",
+            "path_text": "Zdeno Ch -> serving -> based -> team -> hockey",
+            "node_texts": [
+              "Zdeno Ch",
+              "serving",
+              "based",
+              "team",
+              "hockey"
+            ],
+            "node_ids": [
+              "9",
+              "12",
+              "7",
+              "6",
+              "5"
+            ]
+          }
+        ]
+      },
+      {
+        "path_set_id": "ps2",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "Zdeno Ch",
+            "path_id": "e1_p1",
+            "path_text": "Zdeno Ch -> serving -> based -> team -> ice",
+            "node_texts": [
+              "Zdeno Ch",
+              "serving",
+              "based",
+              "team",
+              "ice"
+            ],
+            "node_ids": [
+              "9",
+              "12",
+              "7",
+              "6",
+              "4"
+            ]
+          }
+        ]
+      }
+    ],
+    "9_grounded_atomic_dag_generation": {
+      "nodes": [
+        {
+          "node_id": "q1",
+          "question": "What team is Zdeno Chára currently serving as captain of?",
+          "operation": "lookup",
+          "input": {
+            "type": "entity",
+            "text": "Zdeno Chára"
+          },
+          "one_hop_relation": "current team",
+          "answer_type": "Team",
+          "dependencies": [],
+          "support": [
+            {
+              "path_set_id": "ps1",
+              "path_id": "e1_p2",
+              "node_texts": [
+                "Zdeno Ch",
+                "serving",
+                "team"
+              ],
+              "reason": "This path segment supports asking for the team that Zdeno Chára is currently serving as captain of."
+            }
+          ]
+        },
+        {
+          "node_id": "q2",
+          "question": "Where is the team that q1's answer is based?",
+          "operation": "lookup",
+          "input": {
+            "type": "entity",
+            "text": "q1's answer"
+          },
+          "one_hop_relation": "team location",
+          "answer_type": "Location",
+          "dependencies": [
+            "q1"
+          ],
+          "support": [
+            {
+              "path_set_id": "ps1",
+              "path_id": "e1_p2",
+              "node_texts": [
+                "based",
+                "team"
+              ],
+              "reason": "This path segment supports asking for the location where the team is based."
+            }
+          ]
+        }
+      ],
+      "selected_path_set_ids": [
+        "ps1",
+        "ps2"
+      ],
+      "reason": "The DAG decomposes the question into one-hop lookup questions grounded by selected dependency path evidence.",
+      "selected_dependency_path_evidence": [
+        {
+          "path_set_id": "ps1",
+          "paths": [
+            {
+              "entity_id": "e1",
+              "entity_text": "Zdeno Ch",
+              "path_id": "e1_p2",
+              "path_text": "Zdeno Ch -> serving -> based -> team -> hockey",
+              "node_texts": [
+                "Zdeno Ch",
+                "serving",
+                "based",
+                "team",
+                "hockey"
+              ],
+              "node_ids": [
+                "9",
+                "12",
+                "7",
+                "6",
+                "5"
+              ]
+            }
+          ]
+        },
+        {
+          "path_set_id": "ps2",
+          "paths": [
+            {
+              "entity_id": "e1",
+              "entity_text": "Zdeno Ch",
+              "path_id": "e1_p1",
+              "path_text": "Zdeno Ch -> serving -> based -> team -> ice",
+              "node_texts": [
+                "Zdeno Ch",
+                "serving",
+                "based",
+                "team",
+                "ice"
+              ],
+              "node_ids": [
+                "9",
+                "12",
+                "7",
+                "6",
+                "4"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "10_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "What team is Zdeno Chára currently serving as captain of?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "path_set_id": "ps1",
+                "path_id": "e1_p2",
+                "node_texts": [
+                  "Zdeno Ch",
+                  "serving",
+                  "team"
+                ],
+                "node_ids": [],
+                "reason": "This path segment supports asking for the team that Zdeno Chára is currently serving as captain of."
+              }
+            ],
+            "support_path_ids": [
+              "e1_p2"
+            ],
+            "operation": "lookup",
+            "input": {
+              "type": "entity",
+              "text": "Zdeno Chára"
+            },
+            "one_hop_relation": "current team",
+            "answer_type": "Team"
+          },
+          "source": "grounded_atomic_dag"
+        },
+        {
+          "id": "q2",
+          "question": "Where is the team that q1's answer is based?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "path_set_id": "ps1",
+                "path_id": "e1_p2",
+                "node_texts": [
+                  "based",
+                  "team"
+                ],
+                "node_ids": [],
+                "reason": "This path segment supports asking for the location where the team is based."
+              }
+            ],
+            "support_path_ids": [
+              "e1_p2"
+            ],
+            "operation": "lookup",
+            "input": {
+              "type": "entity",
+              "text": "q1's answer"
+            },
+            "one_hop_relation": "team location",
+            "answer_type": "Location"
+          },
+          "source": "grounded_atomic_dag"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "10_subquestions": [
+      {
+        "index": 1,
+        "question": "What team is Zdeno Chára currently serving as captain of?",
+        "answer_variable": "X1",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      },
+      {
+        "index": 2,
+        "question": "Where is the team that q1's answer is based?",
+        "answer_variable": "X2",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      }
+    ]
+  }
+}
