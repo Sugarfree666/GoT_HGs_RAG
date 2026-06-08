@@ -1,0 +1,174 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was A Romance Of Seville released?",
+    "retrieval_question": "When was A Romance Of Seville released?",
+    "dependency_question_rewrite": {
+      "original_question": "When was A Romance Of Seville released?",
+      "retrieval_question": "When was A Romance Of Seville released?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "A Romance Of Seville"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Pirates Of The Sky released?",
+    "retrieval_question": "When was Pirates Of The Sky released?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Pirates Of The Sky released?",
+      "retrieval_question": "When was Pirates Of The Sky released?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Pirates Of The Sky"
+      ],
+      "relations": [
+        "release date"
+      ],
+      "relation_query": "What is the release date of a work?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Which film was released first, the answer of q1 or the answer of q2?",
+    "retrieval_question": "Which film was released first, the answer of q1 or the answer of q2?",
+    "dependency_question_rewrite": {
+      "original_question": "Which film was released first, the answer of q1 or the answer of q2?",
+      "retrieval_question": "Which film was released first, the answer of q1 or the answer of q2?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "When was A Romance Of Seville released?",
+        "answer": "1929",
+        "confidence": 1.0,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence clearly states that 'A Romance of Seville is a 1929 British drama film', directly providing the release year.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"A Romance of Seville is a 1929 British drama film directed by Norman Walker and starring Alexander D'Arcy, Marguerite Allan and Cecil Barry.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"A Romance of Seville is a 1929 British drama film directed by Norman Walker and starring Alexander D'Arcy, Marguerite Allan and Cecil Barry.\"",
+            "fusion_score": 0.5277301073074341,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "A Romance of Seville is a 1929 British drama film directed by Norman Walker and starring Alexander D'Arcy, Marguerite Allan and Cecil Barry.",
+              "A Romance of Seville A Romance of Seville is a 1929 British drama film directed by Norman Walker and starring Alexander D'Arcy, Marguerite Allan and Cecil Barry. This was the first British sound film released in colour, using the Pathéchrome stencil- colouring process. The film is also known by the alternative title The Romance of Seville."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"A Romance of Seville is a 1929 British drama film directed by Norman Walker.\"",
+            "fusion_score": 0.5277301073074341,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "A Romance of Seville is a 1929 British drama film directed by Norman Walker.",
+              "A Romance of Seville A Romance of Seville is a 1929 British drama film directed by Norman Walker and starring Alexander D'Arcy, Marguerite Allan and Cecil Barry. This was the first British sound film released in colour, using the Pathéchrome stencil- colouring process. The film is also known by the alternative title The Romance of Seville."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"This was the first British sound film released in colour, using the Pathéchrome stencil- colouring process.\"",
+            "fusion_score": 0.1277301073074341,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "A Romance of Seville A Romance of Seville is a 1929 British drama film directed by Norman Walker and starring Alexander D'Arcy, Marguerite Allan and Cecil Barry. This was the first British sound film released in colour, using the Pathéchrome stencil- colouring process. The film is also known by the alternative title The Romance of Seville.",
+              "This was the first British sound film released in colour, using the Pathéchrome stencil- colouring process."
+            ]
+          }
+        ]
+      },
+      {
+        "node_id": "q2",
+        "question": "When was Pirates Of The Sky released?",
+        "answer": "February 20, 1926",
+        "confidence": 0.75,
+        "answer_type": "date",
+        "reasoning_summary": "The evidence indicates that 'Pirates of the Sky' has a release date of February 20, 1926, although it also mentions a conflicting date of March 21, 1927. The February date is supported by multiple sources.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"In different sources, 'Pirates of the Sky' distributed by Pathé Exchange has conflicting release dates of February 20, 1926 and March 21, 1927.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Pirates of the Sky is a 1926 American silent adventure melodrama film directed by Charles Andrews.\"",
+            "fusion_score": 0.5341898918151856,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Pirates of the Sky is a 1926 American silent adventure melodrama film directed by Charles Andrews.",
+              "Pirates of the Sky Pirates of the Sky is a 1926 American silent adventure melodrama film directed by Charles Andrews. The film stars Charles Hutchison, Wanda Hawley and Crauford Kent. In different sources,\" Pirates of the Sky\" distributed by Pathé Exchange has conflicting release dates of February 20, 1926 and March 21, 1927."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"In different sources, 'Pirates of the Sky' distributed by Pathé Exchange has conflicting release dates of February 20, 1926 and March 21, 1927.\"",
+            "fusion_score": 0.13418989181518556,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Pirates of the Sky Pirates of the Sky is a 1926 American silent adventure melodrama film directed by Charles Andrews. The film stars Charles Hutchison, Wanda Hawley and Crauford Kent. In different sources,\" Pirates of the Sky\" distributed by Pathé Exchange has conflicting release dates of February 20, 1926 and March 21, 1927.",
+              "In different sources, 'Pirates of the Sky' distributed by Pathé Exchange has conflicting release dates of February 20, 1926 and March 21, 1927."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Pirates of the Sky is a silent adventure melodrama film released in 1926.\"",
+            "fusion_score": 0.13418989181518556,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Pirates of the Sky Pirates of the Sky is a 1926 American silent adventure melodrama film directed by Charles Andrews. The film stars Charles Hutchison, Wanda Hawley and Crauford Kent. In different sources,\" Pirates of the Sky\" distributed by Pathé Exchange has conflicting release dates of February 20, 1926 and March 21, 1927.",
+              "Pirates of the Sky is a silent adventure melodrama film released in 1926."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "A Romance Of Seville",
+        "Pirates Of The Sky",
+        "1929",
+        "February 20, 1926"
+      ],
+      "relations": [
+        "was released",
+        "is earlier than"
+      ],
+      "relation_query": "Which film was released earlier between two films with release dates?",
+      "answer_type": "candidate selection"
+    }
+  }
+]

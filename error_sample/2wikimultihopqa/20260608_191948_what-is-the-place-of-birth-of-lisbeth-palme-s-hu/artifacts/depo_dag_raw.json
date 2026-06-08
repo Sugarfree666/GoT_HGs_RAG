@@ -1,0 +1,67 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is Lisbeth Palme's husband?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "Lisbeth Palme",
+              "husband"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for Lisbeth Palme's husband."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Lisbeth Palme"
+        },
+        "one_hop_relation": "husband",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the place of birth of q1's answer?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e1_p4",
+            "node_texts": [
+              "husband",
+              "birth",
+              "place"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the place of birth of Lisbeth Palme's husband."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p4"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1"
+        },
+        "one_hop_relation": "place of birth",
+        "answer_type": "Location"
+      }
+    }
+  ]
+}

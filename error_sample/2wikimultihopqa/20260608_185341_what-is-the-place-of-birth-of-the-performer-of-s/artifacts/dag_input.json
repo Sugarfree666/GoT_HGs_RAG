@@ -1,0 +1,65 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song Changed It?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p1",
+          "node_texts": [
+            "Changed It",
+            "performer"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the performer of the song Changed It."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Changed It"
+      },
+      "one_hop_relation": "performer",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the place of birth of q1's answer?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps2",
+          "path_id": "e1_p4",
+          "node_texts": [
+            "performer",
+            "birth",
+            "place"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the place of birth of the performer."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p4"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q1"
+      },
+      "one_hop_relation": "birth place",
+      "answer_type": "Location"
+    }
+  }
+]

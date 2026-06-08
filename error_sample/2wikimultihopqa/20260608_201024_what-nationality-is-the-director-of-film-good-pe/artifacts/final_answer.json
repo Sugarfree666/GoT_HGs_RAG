@@ -1,0 +1,26 @@
+{
+  "answer": "Danish",
+  "candidate_answer": "Danish",
+  "reasoning_summary": "The director of 'Good People' is Henrik Ruben Genz, who is identified as a Danish film director. This conclusion is strongly supported by the evidence provided.",
+  "answer_span_reasoning": "The director of 'Good People' is identified as Danish.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Good People (Film)?",
+      "answer": "Henrik Ruben Genz",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the nationality of q1's answer?",
+      "answer": "Danish",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Henrik Ruben Genz (born 7 November 1959 in Gram, Denmark) is a Danish film director.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

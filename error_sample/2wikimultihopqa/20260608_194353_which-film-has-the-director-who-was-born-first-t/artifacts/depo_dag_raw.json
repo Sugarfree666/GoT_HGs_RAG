@@ -1,0 +1,132 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Tombstone Rashomon?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "Tombstone Rashomon",
+              "born",
+              "one",
+              "director"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the director of Tombstone Rashomon."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Tombstone Rashomon"
+        },
+        "one_hop_relation": "director",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the director of Waiting For The Clouds?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e2_p1",
+            "node_texts": [
+              "Waiting For The Clouds",
+              "born",
+              "one",
+              "director"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the director of Waiting For The Clouds."
+          }
+        ],
+        "support_path_ids": [
+          "e2_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Waiting For The Clouds"
+        },
+        "one_hop_relation": "director",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q3",
+      "question": "When was the director of Tombstone Rashomon born?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "Tombstone Rashomon",
+              "born"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the birth date of the director of Tombstone Rashomon."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1"
+        },
+        "one_hop_relation": "birth date",
+        "answer_type": "Date"
+      }
+    },
+    {
+      "node_id": "q4",
+      "question": "When was the director of Waiting For The Clouds born?",
+      "dependencies": [
+        "q2"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e2_p2",
+            "node_texts": [
+              "Waiting For The Clouds",
+              "born"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the birth date of the director of Waiting For The Clouds."
+          }
+        ],
+        "support_path_ids": [
+          "e2_p2"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q2"
+        },
+        "one_hop_relation": "birth date",
+        "answer_type": "Date"
+      }
+    }
+  ]
+}

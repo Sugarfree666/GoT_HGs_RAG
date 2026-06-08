@@ -1,0 +1,10 @@
+2026-06-08 19:02:10,879 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 19:02:54,632 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 19:02:54,633 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 19:03:08,448 | INFO | Starting HyperBranch pipeline for question: Do both films Interview With A Hitman and The Last Coupon have the directors from the same country?
+2026-06-08 19:03:08,449 | INFO | Executing atomic DAG with 4 node(s)
+2026-06-08 19:03:12,366 | INFO | Atomic retrieval returned 80 hits for question=Who is the director of Interview With A Hitman?
+2026-06-08 19:03:17,355 | INFO | Atomic retrieval returned 93 hits for question=Who is the director of The Last Coupon?
+2026-06-08 19:03:23,360 | INFO | Atomic retrieval returned 80 hits for question=What country is the director of q1's answer from?
+2026-06-08 19:03:30,329 | INFO | Atomic retrieval returned 77 hits for question=What country is the director of q2's answer from?
+2026-06-08 19:03:40,481 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_190210_do-both-films-interview-with-a-hitman-and-the-la

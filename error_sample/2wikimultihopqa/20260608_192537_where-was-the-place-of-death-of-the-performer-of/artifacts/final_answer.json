@@ -1,0 +1,26 @@
+{
+  "answer": "Detroit, Michigan",
+  "candidate_answer": "Detroit, Michigan",
+  "reasoning_summary": "Aretha Franklin, the performer of the song 'I Can't See Myself Leaving You', died in Detroit, Michigan, as confirmed by the evidence regarding her life.",
+  "answer_span_reasoning": "The answer identifies the location of Aretha Franklin's death.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the performer of the song I Can'T See Myself Leaving You?",
+      "answer": "Aretha Franklin",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"I Can't See Myself Leaving You is a song written by Ronnie Shannon and performed by Aretha Franklin.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did q1's answer die?",
+      "answer": "Detroit, Michigan",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Aretha Louise Franklin (March 25, 1942 - August 16, 2018) was an American singer, songwriter, pianist, and civil rights activist.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

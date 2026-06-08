@@ -1,0 +1,99 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Blood Street?",
+    "retrieval_question": "Who is the director of Blood Street?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Blood Street?",
+      "retrieval_question": "Who is the director of Blood Street?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Blood Street"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of q1's answer?",
+    "retrieval_question": "What is the nationality of q1's answer?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the nationality of q1's answer?",
+      "retrieval_question": "What is the nationality of q1's answer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Blood Street?",
+        "answer": "Leo Fong",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that 'Blood Street is a 1988 film co-directed by Leo Fong,' providing clear support for the answer.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Blood Street is a 1988 film co-directed by Leo Fong.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Blood Street is a 1988 film co-directed by Leo Fong.\"",
+            "fusion_score": 0.525395393371582,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Blood Street is a 1988 film co-directed by Leo Fong.",
+              "Blood Street Blood Street is a 1988 film co-directed by Leo Fong. It stars Fong in a reprised role as private detective Joe Wong who has been hired to find a woman's husband who has gone missing. Richard Norton, Stan Wertlieb, Stack Pierce, Chuck Jeffreys and Kymberly Paige also appear in the film."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"It stars Fong in a reprised role as private detective Joe Wong who has been hired to find a woman's husband who has gone missing.\"",
+            "fusion_score": 0.12539539337158204,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Blood Street Blood Street is a 1988 film co-directed by Leo Fong. It stars Fong in a reprised role as private detective Joe Wong who has been hired to find a woman's husband who has gone missing. Richard Norton, Stan Wertlieb, Stack Pierce, Chuck Jeffreys and Kymberly Paige also appear in the film.",
+              "It stars Fong in a reprised role as private detective Joe Wong who has been hired to find a woman's husband who has gone missing."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Richard Norton, Stan Wertlieb, Stack Pierce, Chuck Jeffreys and Kymberly Paige also appear in the film.\"",
+            "fusion_score": 0.12539539337158204,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Blood Street Blood Street is a 1988 film co-directed by Leo Fong. It stars Fong in a reprised role as private detective Joe Wong who has been hired to find a woman's husband who has gone missing. Richard Norton, Stan Wertlieb, Stack Pierce, Chuck Jeffreys and Kymberly Paige also appear in the film.",
+              "Richard Norton, Stan Wertlieb, Stack Pierce, Chuck Jeffreys and Kymberly Paige also appear in the film."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Leo Fong",
+        "Blood Street"
+      ],
+      "relations": [
+        "has nationality"
+      ],
+      "relation_query": "What is the nationality of the director of a film?",
+      "answer_type": "nationality"
+    }
+  }
+]

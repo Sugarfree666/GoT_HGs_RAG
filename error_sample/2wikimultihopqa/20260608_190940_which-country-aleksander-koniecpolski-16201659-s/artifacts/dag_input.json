@@ -1,0 +1,65 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Aleksander Koniecpolski?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p7",
+          "node_texts": [
+            "Aleksander Koniecpolski",
+            "father"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the father of Aleksander Koniecpolski."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p7"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Aleksander Koniecpolski"
+      },
+      "one_hop_relation": "father",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Which country is the father of q1's answer from?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps2",
+          "path_id": "e1_p3",
+          "node_texts": [
+            "Aleksander Koniecpolski",
+            "country",
+            "Which"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the country of Aleksander Koniecpolski's father."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p3"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q1"
+      },
+      "one_hop_relation": "country",
+      "answer_type": "Country"
+    }
+  }
+]

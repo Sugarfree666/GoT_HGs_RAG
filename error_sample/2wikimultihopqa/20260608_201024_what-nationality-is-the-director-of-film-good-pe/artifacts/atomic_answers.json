@@ -1,0 +1,385 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Good People (Film)?",
+    "analysis": {
+      "entities": [
+        "Good People"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name.\"",
+        "hyperedge_text": "Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6764646768569946,
+        "fusion_score": 0.535292935371399,
+        "entity_ids": [
+          "\"GOOD PEOPLE\"",
+          "\"KELLY MASTERSON\"",
+          "\"MARCUS SAKEY\"",
+          "\"KATE HUDSON\"",
+          "\"OMAR SY\"",
+          "\"TOM WILKINSON\"",
+          "\"SAM SPRUELL\"",
+          "\"JAMES FRANCO\"",
+          "\"HENRIK RUBEN GENZ\""
+        ],
+        "chunk_ids": [
+          "chunk-f19b5d2a7cbe5575936371aa08ff60ed"
+        ],
+        "evidence_texts": [
+          "Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name.",
+          "Good People (film) Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name. The film stars James Franco, Kate Hudson, Omar Sy, Tom Wilkinson, and Sam Spruell and tells the story of an American couple, Tom and Anna Wright, living in London who fall into severe debt while renovating their family’s home. The film was released in select theaters and on demand on 26 September 2014."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.676465,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.535293
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film tells the story of an American couple, Tom and Anna Wright, living in London who fall into severe debt while renovating their family’s home.\"",
+        "hyperedge_text": "The film tells the story of an American couple, Tom and Anna Wright, living in London who fall into severe debt while renovating their family’s home.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6764646768569946,
+        "fusion_score": 0.13529293537139894,
+        "entity_ids": [
+          "\"TOM WRIGHT\"",
+          "\"ANNA WRIGHT\"",
+          "\"LONDON\"",
+          "\"DEBT\"",
+          "\"FAMILY’S HOME\""
+        ],
+        "chunk_ids": [
+          "chunk-f19b5d2a7cbe5575936371aa08ff60ed"
+        ],
+        "evidence_texts": [
+          "Good People (film) Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name. The film stars James Franco, Kate Hudson, Omar Sy, Tom Wilkinson, and Sam Spruell and tells the story of an American couple, Tom and Anna Wright, living in London who fall into severe debt while renovating their family’s home. The film was released in select theaters and on demand on 26 September 2014.",
+          "The film tells the story of an American couple, Tom and Anna Wright, living in London who fall into severe debt while renovating their family’s home."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.676465,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.135293
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released in select theaters and on demand on 26 September 2014.\"",
+        "hyperedge_text": "The film was released in select theaters and on demand on 26 September 2014.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6764646768569946,
+        "fusion_score": 0.13529293537139894,
+        "entity_ids": [
+          "\"SELECT THEATERS\"",
+          "\"ON DEMAND\"",
+          "\"RELEASE DATE\""
+        ],
+        "chunk_ids": [
+          "chunk-f19b5d2a7cbe5575936371aa08ff60ed"
+        ],
+        "evidence_texts": [
+          "Good People (film) Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name. The film stars James Franco, Kate Hudson, Omar Sy, Tom Wilkinson, and Sam Spruell and tells the story of an American couple, Tom and Anna Wright, living in London who fall into severe debt while renovating their family’s home. The film was released in select theaters and on demand on 26 September 2014.",
+          "The film was released in select theaters and on demand on 26 September 2014."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.676465,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.135293
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Good People (released in some countries as Getaway 2) is a 2013 American thriller action film.\"",
+        "hyperedge_text": "Good People (released in some countries as Getaway 2) is a 2013 American thriller action film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6764646768569946,
+        "fusion_score": 0.13529293537139894,
+        "entity_ids": [
+          "\"GETAWAY 2\""
+        ],
+        "chunk_ids": [
+          "chunk-f19b5d2a7cbe5575936371aa08ff60ed"
+        ],
+        "evidence_texts": [
+          "Good People (film) Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name. The film stars James Franco, Kate Hudson, Omar Sy, Tom Wilkinson, and Sam Spruell and tells the story of an American couple, Tom and Anna Wright, living in London who fall into severe debt while renovating their family’s home. The film was released in select theaters and on demand on 26 September 2014.",
+          "Good People (released in some countries as Getaway 2) is a 2013 American thriller action film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.676465,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.135293
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film stars James Franco, Kate Hudson, Omar Sy, Tom Wilkinson, and Sam Spruell.\"",
+        "hyperedge_text": "The film stars James Franco, Kate Hudson, Omar Sy, Tom Wilkinson, and Sam Spruell.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6764646768569946,
+        "fusion_score": 0.13529293537139894,
+        "entity_ids": [
+          "\"KATE HUDSON\"",
+          "\"OMAR SY\"",
+          "\"TOM WILKINSON\"",
+          "\"SAM SPRUELL\"",
+          "\"JAMES FRANCO\""
+        ],
+        "chunk_ids": [
+          "chunk-f19b5d2a7cbe5575936371aa08ff60ed"
+        ],
+        "evidence_texts": [
+          "Good People (film) Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name. The film stars James Franco, Kate Hudson, Omar Sy, Tom Wilkinson, and Sam Spruell and tells the story of an American couple, Tom and Anna Wright, living in London who fall into severe debt while renovating their family’s home. The film was released in select theaters and on demand on 26 September 2014.",
+          "The film stars James Franco, Kate Hudson, Omar Sy, Tom Wilkinson, and Sam Spruell."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.676465,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.135293
+        }
+      }
+    ],
+    "answer": "Henrik Ruben Genz",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Good People' is directed by Henrik Ruben Genz.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the nationality of q1's answer?",
+    "analysis": {
+      "entities": [
+        "Henrik Ruben Genz"
+      ],
+      "relations": [
+        "has nationality"
+      ],
+      "relation_query": "What is the nationality of a person who directed a specific film?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Henrik Ruben Genz (born 7 November 1959 in Gram, Denmark) is a Danish film director.\"",
+        "hyperedge_text": "Henrik Ruben Genz (born 7 November 1959 in Gram, Denmark) is a Danish film director.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.17033584415912628,
+        "fusion_score": 0.4340671688318253,
+        "entity_ids": [
+          "\"DENMARK\"",
+          "\"HENRIK RUBEN GENZ\""
+        ],
+        "chunk_ids": [
+          "chunk-9f075b6fdb045a1b95d37175d7601f54"
+        ],
+        "evidence_texts": [
+          "Henrik Ruben Genz (born 7 November 1959 in Gram, Denmark) is a Danish film director.",
+          "Henrik Ruben Genz Henrik Ruben Genz (born 7 November 1959 in Gram, Denmark) is a Danish film director. Before becoming involved with film, Genz attended Designskolen Kolding, where he studied graphic design, after giving up on an earlier dream of being a painter. While there, he did some work with video, and a chance meeting with director Arne Bro encouraged him to pursue film as a career. Genz was then accepted into the National Film School of Denmark at the age of 31, graduating after completing the well-regarded short film \"Cross Roads\" (Danish title: Omveje, \"Detours\") in 1995. Genz's next work, the short film \"Theis and Nico\" (Danish title: Bror, min bror, \"Brother, my brother\"), released in 1999, was nominated for an Academy Award for Best Live Action Short Film. He then became involved with the Dogme 95 movement, but was unable to produce any quality work after six months of ef..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.170336,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.434067
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name.\"",
+        "hyperedge_text": "Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.1293102502822876,
+        "fusion_score": 0.42586205005645755,
+        "entity_ids": [
+          "\"GOOD PEOPLE\"",
+          "\"KELLY MASTERSON\"",
+          "\"MARCUS SAKEY\"",
+          "\"KATE HUDSON\"",
+          "\"OMAR SY\"",
+          "\"TOM WILKINSON\"",
+          "\"SAM SPRUELL\"",
+          "\"JAMES FRANCO\"",
+          "\"HENRIK RUBEN GENZ\""
+        ],
+        "chunk_ids": [
+          "chunk-f19b5d2a7cbe5575936371aa08ff60ed"
+        ],
+        "evidence_texts": [
+          "Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name.",
+          "Good People (film) Good People (released in some countries as Getaway 2) is a 2013 American thriller action film directed by Henrik Ruben Genz and written by Kelly Masterson, based on Marcus Sakey's 2008 novel of same name. The film stars James Franco, Kate Hudson, Omar Sy, Tom Wilkinson, and Sam Spruell and tells the story of an American couple, Tom and Anna Wright, living in London who fall into severe debt while renovating their family’s home. The film was released in select theaters and on demand on 26 September 2014."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.12931,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.425862
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3346017301082611,
+        "fusion_score": 0.06692034602165223,
+        "entity_ids": [
+          "\"PLACE OF BIRTH\"",
+          "\"PERSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place.",
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.334602,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.06692
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.\"",
+        "hyperedge_text": "This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3346017301082611,
+        "fusion_score": 0.06692034602165223,
+        "entity_ids": [
+          "\"LEGAL DOCUMENTS\"",
+          "\"NAME\"",
+          "\"DATE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place.",
+          "This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.334602,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.06692
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a general rule with respect to passports, the place of birth is determined to be the country that currently has sovereignty over the actual place of birth, regardless of when the birth actually occurred.\"",
+        "hyperedge_text": "As a general rule with respect to passports, the place of birth is determined to be the country that currently has sovereignty over the actual place of birth, regardless of when the birth actually occurred.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3346017301082611,
+        "fusion_score": 0.06692034602165223,
+        "entity_ids": [
+          "\"PASSPORTS\"",
+          "\"SOVEREIGNTY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place.",
+          "As a general rule with respect to passports, the place of birth is determined to be the country that currently has sovereignty over the actual place of birth, regardless of when the birth actually occurred.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.334602,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.06692
+        }
+      }
+    ],
+    "answer": "Danish",
+    "confidence": 1.0,
+    "reasoning_summary": "Henrik Ruben Genz is identified as a Danish film director in the evidence provided.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Henrik Ruben Genz (born 7 November 1959 in Gram, Denmark) is a Danish film director.\""
+    ]
+  }
+]

@@ -1,0 +1,100 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Fortunella (Film)?",
+    "retrieval_question": "Who is the director of Fortunella (Film)?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Fortunella (Film)?",
+      "retrieval_question": "Who is the director of Fortunella (Film)?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Fortunella",
+        "Film"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a film",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the place of birth of q1's answer?",
+    "retrieval_question": "What is the place of birth of q1's answer?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the place of birth of q1's answer?",
+      "retrieval_question": "What is the place of birth of q1's answer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Fortunella (Film)?",
+        "answer": "Eduardo De Filippo",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Fortunella is a 1958 Italian film directed by Eduardo De Filippo.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Fortunella is a 1958 Italian film directed by Eduardo De Filippo, with script by Federico Fellini.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Fortunella is a 1958 Italian film directed by Eduardo De Filippo, with script by Federico Fellini.\"",
+            "fusion_score": 0.344987440109253,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Fortunella is a 1958 Italian film directed by Eduardo De Filippo, with script by Federico Fellini.",
+              "Fortunella (film) Fortunella is a 1958 Italian film directed by Eduardo De Filippo, with script by Federico Fellini."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Fortunella is an Italian film released in 1958.\"",
+            "fusion_score": 0.344987440109253,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Fortunella is an Italian film released in 1958.",
+              "Fortunella (film) Fortunella is a 1958 Italian film directed by Eduardo De Filippo, with script by Federico Fellini."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film was both written and directed by Eric Byler.\"",
+            "fusion_score": 0.2753719687461853,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "The film was both written and directed by Eric Byler.",
+              "Charlotte Sometimes (film) Charlotte Sometimes is a 2002 film written, directed, and produced by Eric Byler."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Eduardo De Filippo"
+      ],
+      "relations": [
+        "place of birth"
+      ],
+      "relation_query": "What is the place of birth of a person?",
+      "answer_type": "location"
+    }
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Aivar Kuusmaa born?",
+    "retrieval_question": "When was Aivar Kuusmaa born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Aivar Kuusmaa born?",
+      "retrieval_question": "When was Aivar Kuusmaa born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Aivar Kuusmaa"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Andy Summers born?",
+    "retrieval_question": "When was Andy Summers born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was Andy Summers born?",
+      "retrieval_question": "When was Andy Summers born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Andy Summers"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "the birth date of a person",
+      "answer_type": "date"
+    }
+  }
+]

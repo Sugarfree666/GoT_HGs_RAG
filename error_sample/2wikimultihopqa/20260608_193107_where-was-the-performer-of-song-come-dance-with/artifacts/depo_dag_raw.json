@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the performer of the song Come Dance With Me?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e1_p2",
+            "node_texts": [
+              "Come Dance With Me",
+              "performer"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the performer of the song Come Dance With Me."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p2"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Come Dance With Me"
+        },
+        "one_hop_relation": "performer",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "Where was q1's answer born?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "performer",
+              "born"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the birthplace of the performer."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1"
+        },
+        "one_hop_relation": "born",
+        "answer_type": "Location"
+      }
+    }
+  ]
+}

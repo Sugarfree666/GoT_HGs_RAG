@@ -1,0 +1,100 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the husband of Joanna Elisabeth Of Holstein-Gottorp?",
+    "retrieval_question": "Who is the husband of Joanna Elisabeth Of Holstein-Gottorp?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the husband of Joanna Elisabeth Of Holstein-Gottorp?",
+      "retrieval_question": "Who is the husband of Joanna Elisabeth Of Holstein-Gottorp?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Joanna Elisabeth Of Holstein-Gottorp"
+      ],
+      "relations": [
+        "is the husband of"
+      ],
+      "relation_query": "Who is the husband of a person?",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was q1's answer born?",
+    "retrieval_question": "Where was q1's answer born?",
+    "dependency_question_rewrite": {
+      "original_question": "Where was q1's answer born?",
+      "retrieval_question": "Where was q1's answer born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the husband of Joanna Elisabeth Of Holstein-Gottorp?",
+        "answer": "Christian August, Prince of Anhalt-Zerbst",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "Joanna Elisabeth of Holstein-Gottorp was a Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, which directly answers the question.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Johanna Elisabeth was Princess of Anhalt-Zerbst by marriage to Christian August.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.\"",
+            "fusion_score": 0.3924080610275269,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+              "Joanna Elisabeth of Holstein-Gottorp Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus. She is best known as the mother of Catherine the Great of Russia. She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus.\"",
+            "fusion_score": 0.12785489559173585,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Joanna Elisabeth of Holstein-Gottorp Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus. She is best known as the mother of Catherine the Great of Russia. She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+              "Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"She is best known as the mother of Catherine the Great of Russia.\"",
+            "fusion_score": 0.12785489559173585,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Joanna Elisabeth of Holstein-Gottorp Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus. She is best known as the mother of Catherine the Great of Russia. She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+              "She is best known as the mother of Catherine the Great of Russia."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Joanna Elisabeth Of Holstein-Gottorp",
+        "Christian August, Prince of Anhalt-Zerbst",
+        "Gottorp"
+      ],
+      "relations": [
+        "was born at"
+      ],
+      "relation_query": "Where was a person born?",
+      "answer_type": "location"
+    }
+  }
+]

@@ -1,0 +1,8 @@
+2026-06-08 19:59:57,238 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 20:00:23,068 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 20:00:23,068 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 20:00:34,950 | INFO | Starting HyperBranch pipeline for question: Who is the father of the director of film Palo Alto (2013 Film)?
+2026-06-08 20:00:34,951 | INFO | Executing atomic DAG with 2 node(s)
+2026-06-08 20:00:41,898 | INFO | Atomic retrieval returned 89 hits for question=Who is the director of Palo Alto (2013 Film)?
+2026-06-08 20:00:50,891 | INFO | Atomic retrieval returned 76 hits for question=Who is the father of q1's answer?
+2026-06-08 20:01:00,470 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_195957_who-is-the-father-of-the-director-of-film-palo-a

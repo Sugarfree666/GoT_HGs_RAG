@@ -1,0 +1,364 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What country is Gare De La Roche-Sur-Yon located in?",
+    "analysis": {
+      "entities": [
+        "Gare De La Roche-Sur-Yon"
+      ],
+      "relations": [
+        "is located in"
+      ],
+      "relation_query": "What country is a place located in?",
+      "answer_type": "country"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Gare de La Roche-sur-Yon is a railway station serving the town La Roche-sur-Yon, Vendée department, western France.\"",
+        "hyperedge_text": "Gare de La Roche-sur-Yon is a railway station serving the town La Roche-sur-Yon, Vendée department, western France.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7408187389373779,
+        "fusion_score": 0.5481637477874757,
+        "entity_ids": [
+          "\"GARE DE LA ROCHE-SUR-YON\"",
+          "\"LA ROCHE-SUR-YON\"",
+          "\"VENDÉE DEPARTMENT\"",
+          "\"FRANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-53da08c3047d6d55bbaf01c139aa9d39"
+        ],
+        "evidence_texts": [
+          "Gare de La Roche-sur-Yon is a railway station serving the town La Roche-sur-Yon, Vendée department, western France.",
+          "Gare de La Roche-sur-Yon Gare de La Roche-sur- Yon is a railway station serving the town La Roche- sur- Yon, Vendée department, western France."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.740819,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.548164
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gare de La Roche-sur-Yon is a railway station.\"",
+        "hyperedge_text": "Gare de La Roche-sur-Yon is a railway station.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7408187389373779,
+        "fusion_score": 0.5481637477874757,
+        "entity_ids": [
+          "\"GARE DE LA ROCHE-SUR-YON\""
+        ],
+        "chunk_ids": [
+          "chunk-53da08c3047d6d55bbaf01c139aa9d39"
+        ],
+        "evidence_texts": [
+          "Gare de La Roche-sur-Yon is a railway station.",
+          "Gare de La Roche-sur-Yon Gare de La Roche-sur- Yon is a railway station serving the town La Roche- sur- Yon, Vendée department, western France."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.740819,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.548164
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The railway station serves the town La Roche-sur-Yon.\"",
+        "hyperedge_text": "The railway station serves the town La Roche-sur-Yon.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7408187389373779,
+        "fusion_score": 0.1481637477874756,
+        "entity_ids": [
+          "\"RAILWAY STATION\""
+        ],
+        "chunk_ids": [
+          "chunk-53da08c3047d6d55bbaf01c139aa9d39"
+        ],
+        "evidence_texts": [
+          "Gare de La Roche-sur-Yon Gare de La Roche-sur- Yon is a railway station serving the town La Roche- sur- Yon, Vendée department, western France.",
+          "The railway station serves the town La Roche-sur-Yon."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.740819,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.148164
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"La Roche-sur-Yon is located in the Vendée department.\"",
+        "hyperedge_text": "La Roche-sur-Yon is located in the Vendée department.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7408187389373779,
+        "fusion_score": 0.1481637477874756,
+        "entity_ids": [
+          "\"VENDÉE DEPARTMENT\""
+        ],
+        "chunk_ids": [
+          "chunk-53da08c3047d6d55bbaf01c139aa9d39"
+        ],
+        "evidence_texts": [
+          "Gare de La Roche-sur-Yon Gare de La Roche-sur- Yon is a railway station serving the town La Roche- sur- Yon, Vendée department, western France.",
+          "La Roche-sur-Yon is located in the Vendée department."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.740819,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.148164
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"La Roche-sur-Yon is in western France.\"",
+        "hyperedge_text": "La Roche-sur-Yon is in western France.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7408187389373779,
+        "fusion_score": 0.1481637477874756,
+        "entity_ids": [
+          "\"WESTERN FRANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-53da08c3047d6d55bbaf01c139aa9d39"
+        ],
+        "evidence_texts": [
+          "Gare de La Roche-sur-Yon Gare de La Roche-sur- Yon is a railway station serving the town La Roche- sur- Yon, Vendée department, western France.",
+          "La Roche-sur-Yon is in western France."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.740819,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.148164
+        }
+      }
+    ],
+    "answer": "France",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that Gare de La Roche-sur-Yon is located in western France, specifically in the Vendée department, which confirms that it is in France.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Gare de La Roche-sur-Yon is a railway station serving the town La Roche-sur-Yon, Vendée department, western France.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What country is Gare De Namps-Quevauvillers located in?",
+    "analysis": {
+      "entities": [
+        "Gare De Namps-Quevauvillers"
+      ],
+      "relations": [
+        "is located in"
+      ],
+      "relation_query": "which country is a place located in",
+      "answer_type": "country"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Gare de Namps-Quevauvillers (Namps-Quevauvillers station) is a railway station located in the commune of Namps-Maisnil and near Quevauvillers, in the Somme department, France.\"",
+        "hyperedge_text": "The Gare de Namps-Quevauvillers (Namps-Quevauvillers station) is a railway station located in the commune of Namps-Maisnil and near Quevauvillers, in the Somme department, France.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7284854054450989,
+        "fusion_score": 0.5456970810890198,
+        "entity_ids": [
+          "\"GARE DE NAMPS-QUEVAUVILLERS\"",
+          "\"NAMPS-MAISNIL\"",
+          "\"QUEVAUVILLERS\"",
+          "\"SOMME DEPARTMENT\""
+        ],
+        "chunk_ids": [
+          "chunk-1010c2239f009552415e5e424ad43701"
+        ],
+        "evidence_texts": [
+          "The Gare de Namps-Quevauvillers (Namps-Quevauvillers station) is a railway station located in the commune of Namps-Maisnil and near Quevauvillers, in the Somme department, France.",
+          "Gare de Namps-Quevauvillers The Gare de Namps- Quevauvillers( Namps- Quevauvillers station) is a railway station located in the commune of Namps- Maisnil and near Quevauvillers, in the Somme department, France. The station is served by TER Normandie and TER Hauts- de- France trains from Amiens to Rouen. The station is one of several low importance stations along the 139 km long line. According to the SNCF, in 2003 it averaged 5 passengers per operating day."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.728485,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.545697
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The station is served by TER Normandie and TER Hauts-de-France trains from Amiens to Rouen.\"",
+        "hyperedge_text": "The station is served by TER Normandie and TER Hauts-de-France trains from Amiens to Rouen.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7284854054450989,
+        "fusion_score": 0.14569708108901977,
+        "entity_ids": [
+          "\"TER NORMANDIE\"",
+          "\"TER HAUTS-DE-FRANCE\"",
+          "\"AMIENS\"",
+          "\"ROUEN\""
+        ],
+        "chunk_ids": [
+          "chunk-1010c2239f009552415e5e424ad43701"
+        ],
+        "evidence_texts": [
+          "Gare de Namps-Quevauvillers The Gare de Namps- Quevauvillers( Namps- Quevauvillers station) is a railway station located in the commune of Namps- Maisnil and near Quevauvillers, in the Somme department, France. The station is served by TER Normandie and TER Hauts- de- France trains from Amiens to Rouen. The station is one of several low importance stations along the 139 km long line. According to the SNCF, in 2003 it averaged 5 passengers per operating day.",
+          "The station is served by TER Normandie and TER Hauts-de-France trains from Amiens to Rouen."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.728485,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.145697
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The station is one of several low importance stations along the 139 km long line.\"",
+        "hyperedge_text": "The station is one of several low importance stations along the 139 km long line.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7284854054450989,
+        "fusion_score": 0.14569708108901977,
+        "entity_ids": [
+          "\"LOW IMPORTANCE STATIONS\"",
+          "\"139 KM LONG LINE\""
+        ],
+        "chunk_ids": [
+          "chunk-1010c2239f009552415e5e424ad43701"
+        ],
+        "evidence_texts": [
+          "Gare de Namps-Quevauvillers The Gare de Namps- Quevauvillers( Namps- Quevauvillers station) is a railway station located in the commune of Namps- Maisnil and near Quevauvillers, in the Somme department, France. The station is served by TER Normandie and TER Hauts- de- France trains from Amiens to Rouen. The station is one of several low importance stations along the 139 km long line. According to the SNCF, in 2003 it averaged 5 passengers per operating day.",
+          "The station is one of several low importance stations along the 139 km long line."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.728485,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.145697
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"According to the SNCF, in 2003 it averaged 5 passengers per operating day.\"",
+        "hyperedge_text": "According to the SNCF, in 2003 it averaged 5 passengers per operating day.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7284854054450989,
+        "fusion_score": 0.14569708108901977,
+        "entity_ids": [
+          "\"SNCF\"",
+          "\"5 PASSENGERS\"",
+          "\"OPERATING DAY\""
+        ],
+        "chunk_ids": [
+          "chunk-1010c2239f009552415e5e424ad43701"
+        ],
+        "evidence_texts": [
+          "Gare de Namps-Quevauvillers The Gare de Namps- Quevauvillers( Namps- Quevauvillers station) is a railway station located in the commune of Namps- Maisnil and near Quevauvillers, in the Somme department, France. The station is served by TER Normandie and TER Hauts- de- France trains from Amiens to Rouen. The station is one of several low importance stations along the 139 km long line. According to the SNCF, in 2003 it averaged 5 passengers per operating day.",
+          "According to the SNCF, in 2003 it averaged 5 passengers per operating day."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.728485,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.145697
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Gare de Namps-Quevauvillers station is served by trains that connect various locations in the region.\"",
+        "hyperedge_text": "The Gare de Namps-Quevauvillers station is served by trains that connect various locations in the region.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7284854054450989,
+        "fusion_score": 0.14569708108901977,
+        "entity_ids": [
+          "\"TRAINS\"",
+          "\"CONNECTIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-1010c2239f009552415e5e424ad43701"
+        ],
+        "evidence_texts": [
+          "Gare de Namps-Quevauvillers The Gare de Namps- Quevauvillers( Namps- Quevauvillers station) is a railway station located in the commune of Namps- Maisnil and near Quevauvillers, in the Somme department, France. The station is served by TER Normandie and TER Hauts- de- France trains from Amiens to Rouen. The station is one of several low importance stations along the 139 km long line. According to the SNCF, in 2003 it averaged 5 passengers per operating day.",
+          "The Gare de Namps-Quevauvillers station is served by trains that connect various locations in the region."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.728485,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.145697
+        }
+      }
+    ],
+    "answer": "France",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that Gare de Namps-Quevauvillers is located in the Somme department, France.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Gare de Namps-Quevauvillers (Namps-Quevauvillers station) is a railway station located in the commune of Namps-Maisnil and near Quevauvillers, in the Somme department, France.\""
+    ]
+  }
+]

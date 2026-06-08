@@ -1,0 +1,371 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is Mugain's mother?",
+    "analysis": {
+      "entities": [
+        "Mugain"
+      ],
+      "relations": [
+        "is the mother of"
+      ],
+      "relation_query": "who is the mother of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.\"",
+        "hyperedge_text": "Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5831242799758911,
+        "fusion_score": 0.5166248559951783,
+        "entity_ids": [
+          "\"CONCHOBAR MAC NESSA\"",
+          "\"ULSTER CYCLE\"",
+          "\"MUGAIN\"",
+          "\"EOCHAID FEIDLECH\""
+        ],
+        "chunk_ids": [
+          "chunk-fa4e07ba866f45e9feaf35b1f9eb5fd2"
+        ],
+        "evidence_texts": [
+          "Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.",
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair...",
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair with Áed, Conchobar's poet, led to the death of Lóegaire Búadach. The Ulstermen took her life, out of the love of her, though they seldom engaged in femicide. p.23"
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.583124,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.516625
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Also styled Mumain, she bore him a son named Glaisne.\"",
+        "hyperedge_text": "Also styled Mumain, she bore him a son named Glaisne.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5831242799758911,
+        "fusion_score": 0.11662485599517823,
+        "entity_ids": [
+          "\"MUMAIN\"",
+          "\"GLAISNE\""
+        ],
+        "chunk_ids": [
+          "chunk-fa4e07ba866f45e9feaf35b1f9eb5fd2"
+        ],
+        "evidence_texts": [
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair with Áed, Conchobar's poet, led to the death of Lóegaire Búadach. The Ulstermen took her life, out of the love of her, though they seldom engaged in femicide. p.23",
+          "Also styled Mumain, she bore him a son named Glaisne.",
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.583124,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.116625
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She was also a sister of Medb by paternity.\"",
+        "hyperedge_text": "She was also a sister of Medb by paternity.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5831242799758911,
+        "fusion_score": 0.11662485599517823,
+        "entity_ids": [
+          "\"MEDB\""
+        ],
+        "chunk_ids": [
+          "chunk-fa4e07ba866f45e9feaf35b1f9eb5fd2"
+        ],
+        "evidence_texts": [
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair with Áed, Conchobar's poet, led to the death of Lóegaire Búadach. The Ulstermen took her life, out of the love of her, though they seldom engaged in femicide. p.23",
+          "She was also a sister of Medb by paternity.",
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.583124,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.116625
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her epithet, 'Aitinchairchech', literally means 'having gorse-like body hair', or perhaps more specifically pubic hair.\"",
+        "hyperedge_text": "Her epithet, 'Aitinchairchech', literally means 'having gorse-like body hair', or perhaps more specifically pubic hair.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5831242799758911,
+        "fusion_score": 0.11662485599517823,
+        "entity_ids": [
+          "\"AITINCHAIRCHECH\""
+        ],
+        "chunk_ids": [
+          "chunk-fa4e07ba866f45e9feaf35b1f9eb5fd2"
+        ],
+        "evidence_texts": [
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair with Áed, Conchobar's poet, led to the death of Lóegaire Búadach. The Ulstermen took her life, out of the love of her, though they seldom engaged in femicide. p.23",
+          "Her epithet, 'Aitinchairchech', literally means 'having gorse-like body hair', or perhaps more specifically pubic hair.",
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.583124,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.116625
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them.\"",
+        "hyperedge_text": "When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5831242799758911,
+        "fusion_score": 0.11662485599517823,
+        "entity_ids": [
+          "\"CÚCHULAINN\"",
+          "\"EMAIN MACHA\""
+        ],
+        "chunk_ids": [
+          "chunk-fa4e07ba866f45e9feaf35b1f9eb5fd2"
+        ],
+        "evidence_texts": [
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair with Áed, Conchobar's poet, led to the death of Lóegaire Búadach. The Ulstermen took her life, out of the love of her, though they seldom engaged in femicide. p.23",
+          "When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them.",
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.583124,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.116625
+        }
+      }
+    ],
+    "answer": "Eochaid Feidlech",
+    "confidence": 0.9,
+    "reasoning_summary": "Mugain is identified as the daughter of Eochaid Feidlech in the evidence provided, which directly answers the question about her mother.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the mother-in-law of q1's answer?",
+    "analysis": {
+      "entities": [
+        "Mugain",
+        "Eochaid Feidlech"
+      ],
+      "relations": [
+        "is the mother-in-law of"
+      ],
+      "relation_query": "Who is the mother-in-law of a person who is the daughter of a specific person?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.\"",
+        "hyperedge_text": "Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3093802034854889,
+        "fusion_score": 0.4618760406970978,
+        "entity_ids": [
+          "\"CONCHOBAR MAC NESSA\"",
+          "\"ULSTER CYCLE\"",
+          "\"MUGAIN\"",
+          "\"EOCHAID FEIDLECH\""
+        ],
+        "chunk_ids": [
+          "chunk-fa4e07ba866f45e9feaf35b1f9eb5fd2"
+        ],
+        "evidence_texts": [
+          "Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.",
+          "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.30938,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.461876
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Fatima bint Mubarak Al Ketbi is the third wife of Sheikh Zayed bin Sultan Al Nahyan, the founder and inaugural president of United Arab Emirates, and late emir of Abu Dhabi.\"",
+        "hyperedge_text": "Fatima bint Mubarak Al Ketbi is the third wife of Sheikh Zayed bin Sultan Al Nahyan, the founder and inaugural president of United Arab Emirates, and late emir of Abu Dhabi.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3845447897911072,
+        "fusion_score": 0.07690895795822145,
+        "entity_ids": [
+          "\"FATIMA BINT MUBARAK AL KETBI\"",
+          "\"SHEIKH ZAYED BIN SULTAN AL NAHYAN\"",
+          "\"UNITED ARAB EMIRATES\"",
+          "\"ABU DHABI\"",
+          "\"MOTHER OF SHEIKHS\"",
+          "\"MOTHER OF THE UAE\""
+        ],
+        "chunk_ids": [
+          "chunk-8bba2c27b7223214ae7ed1f48823d63e"
+        ],
+        "evidence_texts": [
+          "Fatima bint Mubarak Al Ketbi Fatima bint Mubarak Al Ketbi is the third wife of Sheikh Zayed bin Sultan Al Nahyan, the founder and inaugural president of United Arab Emirates, and late emir( ruler) of Abu Dhabi. She is referred to as the mother of sheikhs and as the Mother of the UAE.",
+          "Fatima bint Mubarak Al Ketbi is the third wife of Sheikh Zayed bin Sultan Al Nahyan, the founder and inaugural president of United Arab Emirates, and late emir of Abu Dhabi."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.384545,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.076909
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Fatima bint Mubarak Al Ketbi is the third wife of Sheikh Zayed bin Sultan Al Nahyan.\"",
+        "hyperedge_text": "Fatima bint Mubarak Al Ketbi is the third wife of Sheikh Zayed bin Sultan Al Nahyan.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3845447897911072,
+        "fusion_score": 0.07690895795822145,
+        "entity_ids": [
+          "\"FATIMA BINT MUBARAK AL KETBI\""
+        ],
+        "chunk_ids": [
+          "chunk-8bba2c27b7223214ae7ed1f48823d63e"
+        ],
+        "evidence_texts": [
+          "Fatima bint Mubarak Al Ketbi Fatima bint Mubarak Al Ketbi is the third wife of Sheikh Zayed bin Sultan Al Nahyan, the founder and inaugural president of United Arab Emirates, and late emir( ruler) of Abu Dhabi. She is referred to as the mother of sheikhs and as the Mother of the UAE.",
+          "Fatima bint Mubarak Al Ketbi is the third wife of Sheikh Zayed bin Sultan Al Nahyan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.384545,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.076909
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is referred to as the mother of sheikhs and as the Mother of the UAE.\"",
+        "hyperedge_text": "She is referred to as the mother of sheikhs and as the Mother of the UAE.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3845447897911072,
+        "fusion_score": 0.07690895795822145,
+        "entity_ids": [
+          "\"MOTHER OF SHEIKHS\"",
+          "\"MOTHER OF THE UAE\""
+        ],
+        "chunk_ids": [
+          "chunk-8bba2c27b7223214ae7ed1f48823d63e"
+        ],
+        "evidence_texts": [
+          "Fatima bint Mubarak Al Ketbi Fatima bint Mubarak Al Ketbi is the third wife of Sheikh Zayed bin Sultan Al Nahyan, the founder and inaugural president of United Arab Emirates, and late emir( ruler) of Abu Dhabi. She is referred to as the mother of sheikhs and as the Mother of the UAE.",
+          "She is referred to as the mother of sheikhs and as the Mother of the UAE."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.384545,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.076909
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sheikh Zayed bin Sultan Al Nahyan is the founder and inaugural president of United Arab Emirates.\"",
+        "hyperedge_text": "Sheikh Zayed bin Sultan Al Nahyan is the founder and inaugural president of United Arab Emirates.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3845447897911072,
+        "fusion_score": 0.07690895795822145,
+        "entity_ids": [
+          "\"SHEIKH ZAYED BIN SULTAN AL NAHYAN\""
+        ],
+        "chunk_ids": [
+          "chunk-8bba2c27b7223214ae7ed1f48823d63e"
+        ],
+        "evidence_texts": [
+          "Fatima bint Mubarak Al Ketbi Fatima bint Mubarak Al Ketbi is the third wife of Sheikh Zayed bin Sultan Al Nahyan, the founder and inaugural president of United Arab Emirates, and late emir( ruler) of Abu Dhabi. She is referred to as the mother of sheikhs and as the Mother of the UAE.",
+          "Sheikh Zayed bin Sultan Al Nahyan is the founder and inaugural president of United Arab Emirates."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.384545,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.076909
+        }
+      }
+    ],
+    "answer": "Conchobar mac Nessa",
+    "confidence": 0.9,
+    "reasoning_summary": "Mugain is identified as the wife of Conchobar mac Nessa, making him the mother-in-law's son-in-law.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.\""
+    ]
+  }
+]

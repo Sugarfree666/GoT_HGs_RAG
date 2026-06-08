@@ -1,0 +1,198 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of El Tonto?",
+    "retrieval_question": "Who is the director of El Tonto?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of El Tonto?",
+      "retrieval_question": "Who is the director of El Tonto?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "El Tonto"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of The Heart Of Doreon?",
+    "retrieval_question": "Who is the director of The Heart Of Doreon?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of The Heart Of Doreon?",
+      "retrieval_question": "Who is the director of The Heart Of Doreon?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "The Heart Of Doreon"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of q1 born?",
+    "retrieval_question": "When was the director of q1 born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was the director of q1 born?",
+      "retrieval_question": "When was the director of q1 born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of El Tonto?",
+        "answer": "Charlie Day",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'El Tonto is an upcoming comedy film written and directed by Charlie Day.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"El Tonto is an upcoming comedy film written and directed by Charlie Day.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"El Tonto is an upcoming comedy film written and directed by Charlie Day.\"",
+            "fusion_score": 0.5128783464431763,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "El Tonto is an upcoming comedy film written and directed by Charlie Day.",
+              "El Tonto El Tonto is an upcoming comedy film written and directed by Charlie Day."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"El Tonto is an upcoming comedy film.\"",
+            "fusion_score": 0.5128783464431763,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "El Tonto is an upcoming comedy film.",
+              "El Tonto El Tonto is an upcoming comedy film written and directed by Charlie Day."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"El Tonto is written and directed by Charlie Day.\"",
+            "fusion_score": 0.11287834644317628,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "El Tonto El Tonto is an upcoming comedy film written and directed by Charlie Day.",
+              "El Tonto is written and directed by Charlie Day."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Charlie Day",
+        "El Tonto"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was a person born?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of q2 born?",
+    "retrieval_question": "When was the director of q2 born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was the director of q2 born?",
+      "retrieval_question": "When was the director of q2 born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "Who is the director of The Heart Of Doreon?",
+        "answer": "Robert North Bradbury",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'The Heart of Doreon' was directed by Robert North Bradbury.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange.\"",
+            "fusion_score": 0.5362607598304749,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange.",
+              "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film.\"",
+            "fusion_score": 0.5362607598304749,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film.",
+              "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse.\"",
+            "fusion_score": 0.13626075983047486,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon.",
+              "It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Robert North Bradbury",
+        "The Heart Of Doreon"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was the director of a work born?",
+      "answer_type": "date"
+    }
+  }
+]

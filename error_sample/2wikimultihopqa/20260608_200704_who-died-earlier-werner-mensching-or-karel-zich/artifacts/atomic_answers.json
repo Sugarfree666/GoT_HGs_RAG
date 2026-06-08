@@ -1,0 +1,366 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When did Werner Mensching die?",
+    "analysis": {
+      "entities": [
+        "Werner Mensching"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "the date of death of a person",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Werner Mensching (December 23, 1933 – June 21, 1997) was a West German pair skater.\"",
+        "hyperedge_text": "Werner Mensching (December 23, 1933 – June 21, 1997) was a West German pair skater.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7125108242034912,
+        "fusion_score": 0.5425021648406982,
+        "entity_ids": [
+          "\"RITA BLUMENBERG\"",
+          "\"WERNER MENSCHING\""
+        ],
+        "chunk_ids": [
+          "chunk-b4b348f5b8472d014aed4249407e449b"
+        ],
+        "evidence_texts": [
+          "Werner Mensching (December 23, 1933 – June 21, 1997) was a West German pair skater.",
+          "Werner Mensching Werner Mensching( December 23, 1933 – June 21, 1997) was a West German pair skater. With partner Rita Blumenberg, he won the silver medal at the 1958 German Figure Skating Championships. The pair finished 7th at the 1960 Winter Olympics and 4th at the European Figure Skating Championships in 1961."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.712511,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542502
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Werner Mensching was a West German pair skater.\"",
+        "hyperedge_text": "Werner Mensching was a West German pair skater.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7125108242034912,
+        "fusion_score": 0.5425021648406982,
+        "entity_ids": [
+          "\"WERNER MENSCHING\""
+        ],
+        "chunk_ids": [
+          "chunk-b4b348f5b8472d014aed4249407e449b"
+        ],
+        "evidence_texts": [
+          "Werner Mensching was a West German pair skater.",
+          "Werner Mensching Werner Mensching( December 23, 1933 – June 21, 1997) was a West German pair skater. With partner Rita Blumenberg, he won the silver medal at the 1958 German Figure Skating Championships. The pair finished 7th at the 1960 Winter Olympics and 4th at the European Figure Skating Championships in 1961."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.712511,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.542502
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"With partner Werner Mensching, she won the silver medal at the 1958 German Figure Skating Championships.\"",
+        "hyperedge_text": "With partner Werner Mensching, she won the silver medal at the 1958 German Figure Skating Championships.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4049852192401886,
+        "fusion_score": 0.48099704384803776,
+        "entity_ids": [
+          "\"SILVER MEDAL\"",
+          "\"WERNER MENSCHING\"",
+          "\"1958 GERMAN FIGURE SKATING CHAMPIONSHIPS\""
+        ],
+        "chunk_ids": [
+          "chunk-05354402c2c84d2f321731b5fa962176"
+        ],
+        "evidence_texts": [
+          "With partner Werner Mensching, she won the silver medal at the 1958 German Figure Skating Championships.",
+          "Rita Blumenberg Rita Blumenberg( born June 23, 1936) was a West German pair skater. With partner Werner Mensching, she won the silver medal at the 1958 German Figure Skating Championships. The pair finished 7th at the 1960 Winter Olympics and 4th at the European Figure Skating Championships in 1961."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.404985,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.480997
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The pair finished 7th at the 1960 Winter Olympics.\"",
+        "hyperedge_text": "The pair finished 7th at the 1960 Winter Olympics.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7125108242034912,
+        "fusion_score": 0.14250216484069825,
+        "entity_ids": [
+          "\"1960 WINTER OLYMPICS\"",
+          "\"7TH\""
+        ],
+        "chunk_ids": [
+          "chunk-b4b348f5b8472d014aed4249407e449b",
+          "chunk-05354402c2c84d2f321731b5fa962176"
+        ],
+        "evidence_texts": [
+          "Werner Mensching Werner Mensching( December 23, 1933 – June 21, 1997) was a West German pair skater. With partner Rita Blumenberg, he won the silver medal at the 1958 German Figure Skating Championships. The pair finished 7th at the 1960 Winter Olympics and 4th at the European Figure Skating Championships in 1961.",
+          "Rita Blumenberg Rita Blumenberg( born June 23, 1936) was a West German pair skater. With partner Werner Mensching, she won the silver medal at the 1958 German Figure Skating Championships. The pair finished 7th at the 1960 Winter Olympics and 4th at the European Figure Skating Championships in 1961.",
+          "The pair finished 7th at the 1960 Winter Olympics."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.712511,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.142502
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"With partner Rita Blumenberg, he won the silver medal at the 1958 German Figure Skating Championships.\"",
+        "hyperedge_text": "With partner Rita Blumenberg, he won the silver medal at the 1958 German Figure Skating Championships.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7125108242034912,
+        "fusion_score": 0.14250216484069825,
+        "entity_ids": [
+          "\"SILVER MEDAL\"",
+          "\"RITA BLUMENBERG\"",
+          "\"1958 GERMAN FIGURE SKATING CHAMPIONSHIPS\""
+        ],
+        "chunk_ids": [
+          "chunk-b4b348f5b8472d014aed4249407e449b"
+        ],
+        "evidence_texts": [
+          "Werner Mensching Werner Mensching( December 23, 1933 – June 21, 1997) was a West German pair skater. With partner Rita Blumenberg, he won the silver medal at the 1958 German Figure Skating Championships. The pair finished 7th at the 1960 Winter Olympics and 4th at the European Figure Skating Championships in 1961.",
+          "With partner Rita Blumenberg, he won the silver medal at the 1958 German Figure Skating Championships."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.712511,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.142502
+        }
+      }
+    ],
+    "answer": "June 21, 1997",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence states that Werner Mensching died on June 21, 1997.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Werner Mensching (December 23, 1933 – June 21, 1997) was a West German pair skater.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When did Karel Zich die?",
+    "analysis": {
+      "entities": [
+        "Karel Zich"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "the date of death of a person",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Karel Zich (10 June 1949 – 13 July 2004) was a Czech singer, guitarist and composer whose voice was often compared with that of Elvis Presley.\"",
+        "hyperedge_text": "Karel Zich (10 June 1949 – 13 July 2004) was a Czech singer, guitarist and composer whose voice was often compared with that of Elvis Presley.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.719538688659668,
+        "fusion_score": 0.5439077377319337,
+        "entity_ids": [
+          "\"COMPOSER\"",
+          "\"KAREL ZICH\"",
+          "\"CZECH\"",
+          "\"ELVIS PRESLEY\"",
+          "\"GUITARIST\"",
+          "\"VOICE\"",
+          "\"SINGER\""
+        ],
+        "chunk_ids": [
+          "chunk-a5e795a9621ba80d33b78eda8c5f9f15"
+        ],
+        "evidence_texts": [
+          "Karel Zich (10 June 1949 – 13 July 2004) was a Czech singer, guitarist and composer whose voice was often compared with that of Elvis Presley.",
+          "Karel Zich Karel Zich( 10 June 1949 – 13 July 2004) was a Czech singer, guitarist and composer whose voice was often compared with that of Elvis Presley."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.719539,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.543908
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Karel Zich was born on 10 June 1949.\"",
+        "hyperedge_text": "Karel Zich was born on 10 June 1949.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.719538688659668,
+        "fusion_score": 0.1439077377319336,
+        "entity_ids": [
+          "\"10 JUNE 1949\""
+        ],
+        "chunk_ids": [
+          "chunk-a5e795a9621ba80d33b78eda8c5f9f15"
+        ],
+        "evidence_texts": [
+          "Karel Zich Karel Zich( 10 June 1949 – 13 July 2004) was a Czech singer, guitarist and composer whose voice was often compared with that of Elvis Presley.",
+          "Karel Zich was born on 10 June 1949."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.719539,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.143908
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Karel Zich passed away on 13 July 2004.\"",
+        "hyperedge_text": "Karel Zich passed away on 13 July 2004.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.719538688659668,
+        "fusion_score": 0.1439077377319336,
+        "entity_ids": [
+          "\"13 JULY 2004\""
+        ],
+        "chunk_ids": [
+          "chunk-a5e795a9621ba80d33b78eda8c5f9f15"
+        ],
+        "evidence_texts": [
+          "Karel Zich Karel Zich( 10 June 1949 – 13 July 2004) was a Czech singer, guitarist and composer whose voice was often compared with that of Elvis Presley.",
+          "Karel Zich passed away on 13 July 2004."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.719539,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.143908
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Karel Zich's voice was often compared with that of Elvis Presley.\"",
+        "hyperedge_text": "Karel Zich's voice was often compared with that of Elvis Presley.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.719538688659668,
+        "fusion_score": 0.1439077377319336,
+        "entity_ids": [
+          "\"COMPARISON\""
+        ],
+        "chunk_ids": [
+          "chunk-a5e795a9621ba80d33b78eda8c5f9f15"
+        ],
+        "evidence_texts": [
+          "Karel Zich Karel Zich( 10 June 1949 – 13 July 2004) was a Czech singer, guitarist and composer whose voice was often compared with that of Elvis Presley.",
+          "Karel Zich's voice was often compared with that of Elvis Presley."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.719539,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.143908
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Karel Zich was known for his contributions to music as a singer, guitarist, and composer.\"",
+        "hyperedge_text": "Karel Zich was known for his contributions to music as a singer, guitarist, and composer.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.719538688659668,
+        "fusion_score": 0.1439077377319336,
+        "entity_ids": [
+          "\"MUSIC\""
+        ],
+        "chunk_ids": [
+          "chunk-a5e795a9621ba80d33b78eda8c5f9f15"
+        ],
+        "evidence_texts": [
+          "Karel Zich Karel Zich( 10 June 1949 – 13 July 2004) was a Czech singer, guitarist and composer whose voice was often compared with that of Elvis Presley.",
+          "Karel Zich was known for his contributions to music as a singer, guitarist, and composer."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.719539,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.143908
+        }
+      }
+    ],
+    "answer": "13 July 2004",
+    "confidence": 1.0,
+    "reasoning_summary": "Karel Zich passed away on 13 July 2004, as stated in the evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Karel Zich passed away on 13 July 2004.\""
+    ]
+  }
+]

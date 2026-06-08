@@ -1,0 +1,388 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the composer of Inherent Vice (Film)?",
+    "analysis": {
+      "entities": [
+        "Inherent Vice",
+        "Film"
+      ],
+      "relations": [
+        "is the composer of"
+      ],
+      "relation_query": "who is the composer of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.\"",
+        "hyperedge_text": "Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.6844595670700073,
+        "fusion_score": 0.3368919134140015,
+        "entity_ids": [
+          "\"PAUL THOMAS ANDERSON\"",
+          "\"INHERENT VICE\"",
+          "\"THOMAS PYNCHON\""
+        ],
+        "chunk_ids": [
+          "chunk-c473661fcc558b2c33e8445aef638c51"
+        ],
+        "evidence_texts": [
+          "Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in...",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and involves a number of his other recurring collaborators, including producers Daniel Lupi and JoAnne Sellar, cinematographer Robert Elswit, editor Leslie Jones, and composer Jonny Greenwood. \"Inherent Vice\" premiered at the New York Film Festival on October 4, 2014, and began a limited theatrical release in the United States on December 12, 2014. Critical reception was divided; while some argued the film had a convoluted plot and lacked coherence, others praised the cast, particularly Brolin, Phoenix and Waterston. The film was nominated for a number of awards, including two Academy Awards and a Best Actor Golden Globe Award for Phoenix. The National Board of Review named it one of the . Some critics have said that \"Inherent Vice\" has the makings of a cult film. In 2016, it was voted the 75th best film since 2000 in an international critics' poll."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.68446,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.336892
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ian Barry (director)\"",
+        "hyperedge_text": "Ian Barry (director)",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.34385237097740173,
+        "fusion_score": 0.2687704741954804,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"FILM\"",
+          "\"AUSTRALIA\"",
+          "\"IAN BARRY\"",
+          "\"TV\""
+        ],
+        "chunk_ids": [
+          "chunk-a3b3dc9bc5cbe9e8f17d76851a769810"
+        ],
+        "evidence_texts": [
+          "Ian Barry (director)",
+          "Ian Barry (director) Ian Barry is an Australian director of film and TV."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.343852,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.26877
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Doug Liman.\"",
+        "hyperedge_text": "The film was directed by Doug Liman.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.3249133825302124,
+        "fusion_score": 0.2649826765060425,
+        "entity_ids": [
+          "\"FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-c769defaa5411ca6596aaecaeaa93104"
+        ],
+        "evidence_texts": [
+          "The film was directed by Doug Liman.",
+          "Getting In Getting In, also known as Student Body, is a 1994 American comedy film directed by Doug Liman starring Andrew McCarthy and Stephen Mailer."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.324913,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.264983
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Claude Lelouch.\"",
+        "hyperedge_text": "The film was directed by Claude Lelouch.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.3108896017074585,
+        "fusion_score": 0.26217792034149173,
+        "entity_ids": [
+          "\"CLAUDE LELOUCH\"",
+          "\"DIRECTED\"",
+          "\"FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-d56ba69041ab2cbbf634d356f4b7faee",
+          "chunk-01d5b3384aa28b0d6fdc51f01994b710"
+        ],
+        "evidence_texts": [
+          "The film was directed by Claude Lelouch.",
+          "Le propre de l'homme Le Propre de l'homme is a 1960 film directed by Claude Lelouch.",
+          "Attention bandits! Attention bandits! is a 1987 film directed by Claude Lelouch."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.31089,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.262178
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released just before the 'Pirates of the Caribbean' film series, and shares several similarities with it.\"",
+        "hyperedge_text": "The film was released just before the 'Pirates of the Caribbean' film series, and shares several similarities with it.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.3038749694824219,
+        "fusion_score": 0.2607749938964844,
+        "entity_ids": [
+          "\"SIMILARITIES\"",
+          "\"IMITATION\"",
+          "\"2006 AMERICAN COMEDY-DRAMA FILM\"",
+          "\"NOVEL\"",
+          "\"RELEASE\"",
+          "\"ADAPTATION\"",
+          "\"FILM\"",
+          "\"2006\"",
+          "\"COMEDY-DRAMA\"",
+          "\"AMERICAN\""
+        ],
+        "chunk_ids": [
+          "chunk-5b428d61d09389380a93f7ee6e227b1b"
+        ],
+        "evidence_texts": [
+          "The film was released just before the 'Pirates of the Caribbean' film series, and shares several similarities with it.",
+          "Pirates of Treasure Island Pirates of Treasure Island is a 2006 American comedy- drama film produced by The Asylum, loosely adapted from Robert Louis Stevenson's novel\" Treasure Island\". The film was criticized as an imitation of the\" Pirates of the Caribbean\" film series, particularly as was released just before, and shares several similarities with,."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.303875,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.260775
+        }
+      }
+    ],
+    "answer": "Jonny Greenwood",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence indicates that Jonny Greenwood is the composer for the film 'Inherent Vice'.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the place of birth of q1's answer?",
+    "analysis": {
+      "entities": [
+        "Jonny Greenwood"
+      ],
+      "relations": [
+        "place of birth"
+      ],
+      "relation_query": "What is the place of birth of a person?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"It is Anderson's second collaboration with Phoenix, following 'The Master,' and involves a number of his other recurring collaborators, including producers Daniel Lupi and JoAnne Sellar, cinematographer Robert Elswit, editor Leslie Jones, and composer Jonny Greenwood.\"",
+        "hyperedge_text": "It is Anderson's second collaboration with Phoenix, following 'The Master,' and involves a number of his other recurring collaborators, including producers Daniel Lupi and JoAnne Sellar, cinematographer Robert Elswit, editor Leslie Jones, and composer Jonny Greenwood.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.07447350770235062,
+        "fusion_score": 0.41489470154047015,
+        "entity_ids": [
+          "\"THE MASTER\"",
+          "\"DANIEL LUPI\"",
+          "\"JOANNE SELLAR\"",
+          "\"ROBERT ELSWIT\"",
+          "\"LESLIE JONES\"",
+          "\"JONNY GREENWOOD\"",
+          "\"RECURRING COLLABORATORS\""
+        ],
+        "chunk_ids": [
+          "chunk-c473661fcc558b2c33e8445aef638c51"
+        ],
+        "evidence_texts": [
+          "It is Anderson's second collaboration with Phoenix, following 'The Master,' and involves a number of his other recurring collaborators, including producers Daniel Lupi and JoAnne Sellar, cinematographer Robert Elswit, editor Leslie Jones, and composer Jonny Greenwood.",
+          "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.074474,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.414895
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4190850555896759,
+        "fusion_score": 0.08381701111793519,
+        "entity_ids": [
+          "\"PLACE OF BIRTH\"",
+          "\"PERSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe...",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.419085,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.083817
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4190850555896759,
+        "fusion_score": 0.08381701111793519,
+        "entity_ids": [
+          "\"LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe...",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.419085,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.083817
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth is not necessarily the place where the parents of the new baby live.\"",
+        "hyperedge_text": "The place of birth is not necessarily the place where the parents of the new baby live.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4190850555896759,
+        "fusion_score": 0.08381701111793519,
+        "entity_ids": [
+          "\"PARENTS\"",
+          "\"NEW BABY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth is not necessarily the place where the parents of the new baby live.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe...",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.419085,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.083817
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"If the baby is born in a hospital in another place, that place is the place of birth.\"",
+        "hyperedge_text": "If the baby is born in a hospital in another place, that place is the place of birth.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4190850555896759,
+        "fusion_score": 0.08381701111793519,
+        "entity_ids": [
+          "\"HOSPITAL\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "If the baby is born in a hospital in another place, that place is the place of birth.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe...",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.419085,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.083817
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding Jonny Greenwood's place of birth.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"It is Anderson's second collaboration with Phoenix, following 'The Master,' and involves a number of his other recurring collaborators, including producers Daniel Lupi and JoAnne Sellar, cinematographer Robert Elswit, editor Leslie Jones, and composer Jonny Greenwood.\""
+    ]
+  }
+]

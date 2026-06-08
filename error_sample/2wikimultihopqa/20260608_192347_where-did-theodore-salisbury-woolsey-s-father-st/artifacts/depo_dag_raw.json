@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Theodore Salisbury Woolsey?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e1_p3",
+            "node_texts": [
+              "Theodore Salisbury Woolsey",
+              "father"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the father of Theodore Salisbury Woolsey."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p3"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Theodore Salisbury Woolsey"
+        },
+        "one_hop_relation": "father",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did q1's answer study?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "study",
+              "father"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the study location of q1's answer (the father of Theodore Salisbury Woolsey)."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1's answer"
+        },
+        "one_hop_relation": "study location",
+        "answer_type": "Location"
+      }
+    }
+  ]
+}

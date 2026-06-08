@@ -1,0 +1,50 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Which country did Inside The Room originate from?",
+    "retrieval_question": "Which country did Inside The Room originate from?",
+    "dependency_question_rewrite": {
+      "original_question": "Which country did Inside The Room originate from?",
+      "retrieval_question": "Which country did Inside The Room originate from?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Inside The Room"
+      ],
+      "relations": [
+        "originated from"
+      ],
+      "relation_query": "which country a work originated from",
+      "answer_type": "country"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Which country did Crude Set Drama originate from?",
+    "retrieval_question": "Which country did Crude Set Drama originate from?",
+    "dependency_question_rewrite": {
+      "original_question": "Which country did Crude Set Drama originate from?",
+      "retrieval_question": "Which country did Crude Set Drama originate from?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Crude Set Drama"
+      ],
+      "relations": [
+        "originate from"
+      ],
+      "relation_query": "Which country is the origin of a work?",
+      "answer_type": "country"
+    }
+  }
+]

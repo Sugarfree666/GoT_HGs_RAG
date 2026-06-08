@@ -1,0 +1,62 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Aivar Kuusmaa born?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p10",
+          "node_texts": [
+            "Aivar Kuusmaa",
+            "born"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the birth date of Aivar Kuusmaa."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p10"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Aivar Kuusmaa"
+      },
+      "one_hop_relation": "birth date",
+      "answer_type": "Date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Andy Summers born?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e2_p10",
+          "node_texts": [
+            "Andy Summers",
+            "born"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the birth date of Andy Summers."
+        }
+      ],
+      "support_path_ids": [
+        "e2_p10"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Andy Summers"
+      },
+      "one_hop_relation": "birth date",
+      "answer_type": "Date"
+    }
+  }
+]

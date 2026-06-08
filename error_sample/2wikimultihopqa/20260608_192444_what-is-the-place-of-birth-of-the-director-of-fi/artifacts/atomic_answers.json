@@ -1,0 +1,375 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Return Of Swamp Thing?",
+    "analysis": {
+      "entities": [
+        "The Return Of Swamp Thing"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Return of Swamp Thing is a 1989 American superhero film based on the Vertigo/DC Comics character of the same name.\"",
+        "hyperedge_text": "The Return of Swamp Thing is a 1989 American superhero film based on the Vertigo/DC Comics character of the same name.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7497789859771729,
+        "fusion_score": 0.5499557971954346,
+        "entity_ids": [
+          "\"THE RETURN OF SWAMP THING\"",
+          "\"VERTIGO/DC COMICS\"",
+          "\"1989\"",
+          "\"SUPERHERO\""
+        ],
+        "chunk_ids": [
+          "chunk-a31aaf520ce47c2f2bf7932eb804ac6f"
+        ],
+        "evidence_texts": [
+          "The Return of Swamp Thing is a 1989 American superhero film based on the Vertigo/DC Comics character of the same name.",
+          "The Return of Swamp Thing The Return of Swamp Thing is a 1989 American superhero film based on the Vertigo/DC Comics character of the same name. Directed by Jim Wynorski, it is a sequel to the 1982 film \"Swamp Thing\", having a lighter tone than its predecessor. The film has a main title montage that consists of comic book covers set to Creedence Clearwater Revival's \"Born on the Bayou\", and features Dick Durock and Louis Jourdan reprising their roles as the Swamp Thing and Anton Arcane, respectively, along with Sarah Douglas and Heather Locklear."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.749779,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549956
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was followed by a sequel, 'The Return of Swamp Thing', in 1989.\"",
+        "hyperedge_text": "It was followed by a sequel, 'The Return of Swamp Thing', in 1989.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7085005044937134,
+        "fusion_score": 0.5417001008987428,
+        "entity_ids": [
+          "\"THE RETURN OF SWAMP THING\""
+        ],
+        "chunk_ids": [
+          "chunk-0c22a1d04590c5a98b95ff91a0f0a6b7"
+        ],
+        "evidence_texts": [
+          "It was followed by a sequel, 'The Return of Swamp Thing', in 1989.",
+          "Swamp Thing (film) Swamp Thing is a 1982 American Technicolor superhero film written and directed by Wes Craven, based on the Vertigo/ DC Comics character of the same name created by Len Wein and Bernie Wrightson. It tells the story of scientist Alec Holland( Ray Wise) who becomes transformed into the monster the Swamp Thing( Dick Durock) through laboratory sabotage orchestrated by the evil Anton Arcane( Louis Jourdan). Later, he helps a woman named Alice Cable( Adrienne Barbeau) and battles the man responsible for it all, the ruthless Arcane. It was followed by a sequel,\" The Return of Swamp Thing\", in 1989."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.708501,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5417
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was perhaps best known for playing Swamp Thing in both the feature films 'Swamp Thing' and 'The Return of Swamp Thing'.\"",
+        "hyperedge_text": "He was perhaps best known for playing Swamp Thing in both the feature films 'Swamp Thing' and 'The Return of Swamp Thing'.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5569262504577637,
+        "fusion_score": 0.5113852500915528,
+        "entity_ids": [
+          "\"THE RETURN OF SWAMP THING\"",
+          "\"SWAMP THING (FILM)\"",
+          "\"FEATURE FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-aa00030c0f0b12ff0bb7a71c4d8020f1"
+        ],
+        "evidence_texts": [
+          "He was perhaps best known for playing Swamp Thing in both the feature films 'Swamp Thing' and 'The Return of Swamp Thing'.",
+          "Dick Durock Richard Durock (January 18, 1937 – September 17, 2009) was an American actor and stuntman who appeared in over eighty films and over seven hundred television episodes. He was perhaps best known for playing Swamp Thing in both the feature films \"Swamp Thing\" and \"The Return of Swamp Thing\" and the ."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.556926,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.511385
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by Jim Wynorski, it is a sequel to the 1982 film 'Swamp Thing', having a lighter tone than its predecessor.\"",
+        "hyperedge_text": "Directed by Jim Wynorski, it is a sequel to the 1982 film 'Swamp Thing', having a lighter tone than its predecessor.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7497789859771729,
+        "fusion_score": 0.1499557971954346,
+        "entity_ids": [
+          "\"JIM WYNORSKI\"",
+          "\"SWAMP THING\"",
+          "\"LIGHTER TONE\"",
+          "\"SEQUEL\"",
+          "\"1982\""
+        ],
+        "chunk_ids": [
+          "chunk-a31aaf520ce47c2f2bf7932eb804ac6f"
+        ],
+        "evidence_texts": [
+          "The Return of Swamp Thing The Return of Swamp Thing is a 1989 American superhero film based on the Vertigo/DC Comics character of the same name. Directed by Jim Wynorski, it is a sequel to the 1982 film \"Swamp Thing\", having a lighter tone than its predecessor. The film has a main title montage that consists of comic book covers set to Creedence Clearwater Revival's \"Born on the Bayou\", and features Dick Durock and Louis Jourdan reprising their roles as the Swamp Thing and Anton Arcane, respectively, along with Sarah Douglas and Heather Locklear.",
+          "Directed by Jim Wynorski, it is a sequel to the 1982 film 'Swamp Thing', having a lighter tone than its predecessor."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.749779,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.149956
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film has a main title montage that consists of comic book covers set to Creedence Clearwater Revival's 'Born on the Bayou'.\"",
+        "hyperedge_text": "The film has a main title montage that consists of comic book covers set to Creedence Clearwater Revival's 'Born on the Bayou'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7497789859771729,
+        "fusion_score": 0.1499557971954346,
+        "entity_ids": [
+          "\"MAIN TITLE MONTAGE\"",
+          "\"COMIC BOOK COVERS\"",
+          "\"CREEDENCE CLEARWATER REVIVAL\"",
+          "\"BORN ON THE BAYOU\""
+        ],
+        "chunk_ids": [
+          "chunk-a31aaf520ce47c2f2bf7932eb804ac6f"
+        ],
+        "evidence_texts": [
+          "The Return of Swamp Thing The Return of Swamp Thing is a 1989 American superhero film based on the Vertigo/DC Comics character of the same name. Directed by Jim Wynorski, it is a sequel to the 1982 film \"Swamp Thing\", having a lighter tone than its predecessor. The film has a main title montage that consists of comic book covers set to Creedence Clearwater Revival's \"Born on the Bayou\", and features Dick Durock and Louis Jourdan reprising their roles as the Swamp Thing and Anton Arcane, respectively, along with Sarah Douglas and Heather Locklear.",
+          "The film has a main title montage that consists of comic book covers set to Creedence Clearwater Revival's 'Born on the Bayou'."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.749779,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.149956
+        }
+      }
+    ],
+    "answer": "Jim Wynorski",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence explicitly states that 'The Return of Swamp Thing' was directed by Jim Wynorski.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Directed by Jim Wynorski, it is a sequel to the 1982 film 'Swamp Thing', having a lighter tone than its predecessor.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the place of birth of q1's answer?",
+    "analysis": {
+      "entities": [
+        "Jim Wynorski"
+      ],
+      "relations": [
+        "place of birth"
+      ],
+      "relation_query": "What is the place of birth of a person who directed a work?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Jim Wynorski (born August 14, 1950 in Glen Cove, Long Island, New York) is an American screenwriter, director, and producer.\"",
+        "hyperedge_text": "Jim Wynorski (born August 14, 1950 in Glen Cove, Long Island, New York) is an American screenwriter, director, and producer.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.07416413724422455,
+        "fusion_score": 0.4148328274488449,
+        "entity_ids": [
+          "\"JIM WYNORSKI\""
+        ],
+        "chunk_ids": [
+          "chunk-7344a19bddd9a92d9abf9ea10b53f366"
+        ],
+        "evidence_texts": [
+          "Jim Wynorski (born August 14, 1950 in Glen Cove, Long Island, New York) is an American screenwriter, director, and producer.",
+          "Jim Wynorski Jim Wynorski (born August 14, 1950 in Glen Cove, Long Island, New York) is an American screenwriter, director, and producer. Wynorski has been making B-movies and exploitation movies since the early 1980s, and has directed over 150 feature films. His earliest films were released to movie theaters, but his later works have predominantly been released to cable or the straight-to-video market. He often works under pseudonyms such as \"Jay Andrews,Arch Stanton,H.R. Blueberry,Tom Popatopolis,\" and \"Noble Henry.\" His movies often spoof horror films: \"Cleavagefield\", for example, parodies \"CloverfieldThe Bare Wench Project\" parodies \"The Blair Witch Project\", and \"Para-Knockers Activity\" parodies \"Paranormal Activity\". A character in the film \"The Final Destination\" is named after him. In 2009, the documentary \"Popatopolis\", directed by Clay Westervelt and named for one of Wynors..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.074164,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.414833
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"976-EVIL II, also known as 976-EVIL 2: The Astral Factor, is a 1992 supernatural horror–slasher film directed by Jim Wynorski.\"",
+        "hyperedge_text": "976-EVIL II, also known as 976-EVIL 2: The Astral Factor, is a 1992 supernatural horror–slasher film directed by Jim Wynorski.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.0541502982378006,
+        "fusion_score": 0.41083005964756014,
+        "entity_ids": [
+          "\"JIM WYNORSKI\"",
+          "\"976-EVIL II\""
+        ],
+        "chunk_ids": [
+          "chunk-bbeeb4718d6d711fa135de5190195607"
+        ],
+        "evidence_texts": [
+          "976-EVIL II, also known as 976-EVIL 2: The Astral Factor, is a 1992 supernatural horror–slasher film directed by Jim Wynorski.",
+          "976-Evil II 976-EVIL II, also known as 976-EVIL 2: The Astral Factor, is a 1992 supernatural horror–slasher film directed by Jim Wynorski. The film is a sequel to the 1988 horror film \"976-EVIL\". It was referenced in \"Invasion of the Scream Queens\" (1992)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.05415,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.41083
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Directed by Jim Wynorski, it is a sequel to the 1982 film 'Swamp Thing', having a lighter tone than its predecessor.\"",
+        "hyperedge_text": "Directed by Jim Wynorski, it is a sequel to the 1982 film 'Swamp Thing', having a lighter tone than its predecessor.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.033347878605127335,
+        "fusion_score": 0.40666957572102547,
+        "entity_ids": [
+          "\"JIM WYNORSKI\"",
+          "\"SWAMP THING\"",
+          "\"LIGHTER TONE\"",
+          "\"SEQUEL\"",
+          "\"1982\""
+        ],
+        "chunk_ids": [
+          "chunk-a31aaf520ce47c2f2bf7932eb804ac6f"
+        ],
+        "evidence_texts": [
+          "Directed by Jim Wynorski, it is a sequel to the 1982 film 'Swamp Thing', having a lighter tone than its predecessor.",
+          "The Return of Swamp Thing The Return of Swamp Thing is a 1989 American superhero film based on the Vertigo/DC Comics character of the same name. Directed by Jim Wynorski, it is a sequel to the 1982 film \"Swamp Thing\", having a lighter tone than its predecessor. The film has a main title montage that consists of comic book covers set to Creedence Clearwater Revival's \"Born on the Bayou\", and features Dick Durock and Louis Jourdan reprising their roles as the Swamp Thing and Anton Arcane, respectively, along with Sarah Douglas and Heather Locklear."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.033348,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.40667
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4190061390399933,
+        "fusion_score": 0.08380122780799866,
+        "entity_ids": [
+          "\"PLACE OF BIRTH\"",
+          "\"PERSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place.",
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.419006,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.083801
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.\"",
+        "hyperedge_text": "This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4190061390399933,
+        "fusion_score": 0.08380122780799866,
+        "entity_ids": [
+          "\"LEGAL DOCUMENTS\"",
+          "\"NAME\"",
+          "\"DATE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place.",
+          "This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.419006,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.083801
+        }
+      }
+    ],
+    "answer": "Glen Cove, Long Island, New York",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence states that Jim Wynorski was born in Glen Cove, Long Island, New York.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Jim Wynorski (born August 14, 1950 in Glen Cove, Long Island, New York) is an American screenwriter, director, and producer.\""
+    ]
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Talk About A Stranger?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p2",
+          "node_texts": [
+            "Talk About A Stranger",
+            "work",
+            "director"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the director of Talk About A Stranger."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p2"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Talk About A Stranger"
+      },
+      "one_hop_relation": "director",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where does q1's answer work?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p2",
+          "node_texts": [
+            "Talk About A Stranger",
+            "work",
+            "director"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking where the director of Talk About A Stranger works."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p2"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q1"
+      },
+      "one_hop_relation": "work",
+      "answer_type": "Location"
+    }
+  }
+]

@@ -1,0 +1,127 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Phalitamsha?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps3",
+          "path_id": "e1_p13",
+          "node_texts": [
+            "Phalitamsha",
+            "director"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the director of Phalitamsha."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p13"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Phalitamsha"
+      },
+      "one_hop_relation": "director",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Gladiators Seven?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps4",
+          "path_id": "e2_p13",
+          "node_texts": [
+            "Gladiators Seven",
+            "director"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the director of Gladiators Seven.",
+          "node_text_warnings": [
+            "node_texts not present in selected path: ['director']"
+          ]
+        }
+      ],
+      "support_path_ids": [
+        "e2_p13"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Gladiators Seven"
+      },
+      "one_hop_relation": "director",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the birth year of the director of Phalitamsha?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps3",
+          "path_id": "e1_p13",
+          "node_texts": [
+            "younger"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the birth year of the director of Phalitamsha to compare ages."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p13"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q1's answer"
+      },
+      "one_hop_relation": "birth year",
+      "answer_type": "Date"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the birth year of the director of Gladiators Seven?",
+    "dependencies": [
+      "q2"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps4",
+          "path_id": "e2_p13",
+          "node_texts": [
+            "younger"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the birth year of the director of Gladiators Seven to compare ages."
+        }
+      ],
+      "support_path_ids": [
+        "e2_p13"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q2's answer"
+      },
+      "one_hop_relation": "birth year",
+      "answer_type": "Date"
+    }
+  }
+]

@@ -1,0 +1,754 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Dangerously They Live?",
+    "analysis": {
+      "entities": [
+        "Dangerously They Live"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey.\"",
+        "hyperedge_text": "Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6296391487121582,
+        "fusion_score": 0.5259278297424317,
+        "entity_ids": [
+          "\"DANGEROUSLY THEY LIVE\"",
+          "\"NANCY COLEMAN\"",
+          "\"RAYMOND MASSEY\"",
+          "\"JOHN GARFIELD\"",
+          "\"ROBERT FLOREY\""
+        ],
+        "chunk_ids": [
+          "chunk-e91cd1426ab8bc9948d4820c9d810ab3"
+        ],
+        "evidence_texts": [
+          "Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey.",
+          "Dangerously They Live Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey. Nazi spies try to pry information out of a British agent."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.629639,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.525928
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Nazi spies try to pry information out of a British agent.\"",
+        "hyperedge_text": "Nazi spies try to pry information out of a British agent.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6296391487121582,
+        "fusion_score": 0.12592782974243164,
+        "entity_ids": [
+          "\"NAZI SPIES\"",
+          "\"BRITISH AGENT\""
+        ],
+        "chunk_ids": [
+          "chunk-e91cd1426ab8bc9948d4820c9d810ab3"
+        ],
+        "evidence_texts": [
+          "Dangerously They Live Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey. Nazi spies try to pry information out of a British agent.",
+          "Nazi spies try to pry information out of a British agent."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.629639,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.125928
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is set during World War II, highlighting the espionage activities of Nazi spies.\"",
+        "hyperedge_text": "The film is set during World War II, highlighting the espionage activities of Nazi spies.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6296391487121582,
+        "fusion_score": 0.12592782974243164,
+        "entity_ids": [
+          "\"ESPIONAGE\"",
+          "\"WORLD WAR II\""
+        ],
+        "chunk_ids": [
+          "chunk-e91cd1426ab8bc9948d4820c9d810ab3"
+        ],
+        "evidence_texts": [
+          "Dangerously They Live Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey. Nazi spies try to pry information out of a British agent.",
+          "The film is set during World War II, highlighting the espionage activities of Nazi spies."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.629639,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.125928
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film features a plot where Nazi spies attempt to extract sensitive information.\"",
+        "hyperedge_text": "The film features a plot where Nazi spies attempt to extract sensitive information.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6296391487121582,
+        "fusion_score": 0.12592782974243164,
+        "entity_ids": [
+          "\"SENSITIVE INFORMATION\""
+        ],
+        "chunk_ids": [
+          "chunk-e91cd1426ab8bc9948d4820c9d810ab3"
+        ],
+        "evidence_texts": [
+          "Dangerously They Live Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey. Nazi spies try to pry information out of a British agent.",
+          "The film features a plot where Nazi spies attempt to extract sensitive information."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.629639,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.125928
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released in 1941, during a time of global conflict and tension.\"",
+        "hyperedge_text": "The film was released in 1941, during a time of global conflict and tension.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6296391487121582,
+        "fusion_score": 0.12592782974243164,
+        "entity_ids": [
+          "\"GLOBAL CONFLICT\"",
+          "\"1941\""
+        ],
+        "chunk_ids": [
+          "chunk-e91cd1426ab8bc9948d4820c9d810ab3"
+        ],
+        "evidence_texts": [
+          "Dangerously They Live Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey. Nazi spies try to pry information out of a British agent.",
+          "The film was released in 1941, during a time of global conflict and tension."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.629639,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.125928
+        }
+      }
+    ],
+    "answer": "Robert Florey",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Dangerously They Live' is directed by Robert Florey.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Salad By The Roots?",
+    "analysis": {
+      "entities": [
+        "Salad By The Roots"
+      ],
+      "relations": [
+        "is directed by"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Salad by the Roots (literally 'Eating dandelions by the roots' which is the French idiom for 'Pushing up the daisies') is a Franco-Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld.\"",
+        "hyperedge_text": "Salad by the Roots (literally 'Eating dandelions by the roots' which is the French idiom for 'Pushing up the daisies') is a Franco-Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5052942633628845,
+        "fusion_score": 0.501058852672577,
+        "entity_ids": [
+          "\"1964\"",
+          "\"SALAD BY THE ROOTS\"",
+          "\"LES TONTONS FLINGUEURS\"",
+          "\"PARISIAN UNDERWORLD\"",
+          "\"GEORGES DELERUE\"",
+          "\"PLUS T'AS DE POGNON, MOINS T'AS DE PRINCIPES. L'OSEILLE C'EST LA GANGRÈNE DE L'ÂME.\"",
+          "\"GEORGES LAUTNER\"",
+          "\"MICHEL AUDIARD\""
+        ],
+        "chunk_ids": [
+          "chunk-09e02b8f51c2ff3a1063329505e4bf3c"
+        ],
+        "evidence_texts": [
+          "Salad by the Roots (literally 'Eating dandelions by the roots' which is the French idiom for 'Pushing up the daisies') is a Franco-Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld.",
+          "Salad by the Roots Salad by the Roots( literally\"( Eating) dandelions by the roots\" which is the French idiom for\" Pushing up the daisies\") is a Franco- Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld. It benefits from music by Georges Delerue and dialogue by Michel Audiard, among whose legendary lines is\" Plus t'as de pognon, moins t'as de principes. L'oseille c'est la gangrène de l'âme.\" ( The more loot you've got, the fewer your principles. Lolly is the gangrene of the soul)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.505294,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.501059
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It benefits from music by Georges Delerue and dialogue by Michel Audiard, among whose legendary lines is 'Plus t'as de pognon, moins t'as de principes. L'oseille c'est la gangrène de l'âme.'.\"",
+        "hyperedge_text": "It benefits from music by Georges Delerue and dialogue by Michel Audiard, among whose legendary lines is 'Plus t'as de pognon, moins t'as de principes. L'oseille c'est la gangrène de l'âme.'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5052942633628845,
+        "fusion_score": 0.10105885267257692,
+        "entity_ids": [
+          "\"DIALOGUE\"",
+          "\"LEGENDARY LINES\"",
+          "\"MUSIC\""
+        ],
+        "chunk_ids": [
+          "chunk-09e02b8f51c2ff3a1063329505e4bf3c"
+        ],
+        "evidence_texts": [
+          "Salad by the Roots Salad by the Roots( literally\"( Eating) dandelions by the roots\" which is the French idiom for\" Pushing up the daisies\") is a Franco- Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld. It benefits from music by Georges Delerue and dialogue by Michel Audiard, among whose legendary lines is\" Plus t'as de pognon, moins t'as de principes. L'oseille c'est la gangrène de l'âme.\" ( The more loot you've got, the fewer your principles. Lolly is the gangrene of the soul).",
+          "It benefits from music by Georges Delerue and dialogue by Michel Audiard, among whose legendary lines is 'Plus t'as de pognon, moins t'as de principes. L'oseille c'est la gangrène de l'âme.'."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.505294,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.101059
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Salad by the Roots (literally 'Eating dandelions by the roots' which is the French idiom for 'Pushing up the daisies') is a Franco-Italian comedy directed by Georges Lautner and released in 1964.\"",
+        "hyperedge_text": "Salad by the Roots (literally 'Eating dandelions by the roots' which is the French idiom for 'Pushing up the daisies') is a Franco-Italian comedy directed by Georges Lautner and released in 1964.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5052942633628845,
+        "fusion_score": 0.10105885267257692,
+        "entity_ids": [
+          "\"FRENCH IDIOM\""
+        ],
+        "chunk_ids": [
+          "chunk-09e02b8f51c2ff3a1063329505e4bf3c"
+        ],
+        "evidence_texts": [
+          "Salad by the Roots Salad by the Roots( literally\"( Eating) dandelions by the roots\" which is the French idiom for\" Pushing up the daisies\") is a Franco- Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld. It benefits from music by Georges Delerue and dialogue by Michel Audiard, among whose legendary lines is\" Plus t'as de pognon, moins t'as de principes. L'oseille c'est la gangrène de l'âme.\" ( The more loot you've got, the fewer your principles. Lolly is the gangrene of the soul).",
+          "Salad by the Roots (literally 'Eating dandelions by the roots' which is the French idiom for 'Pushing up the daisies') is a Franco-Italian comedy directed by Georges Lautner and released in 1964."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.505294,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.101059
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The more loot you've got, the fewer your principles. Lolly is the gangrene of the soul.\"",
+        "hyperedge_text": "The more loot you've got, the fewer your principles. Lolly is the gangrene of the soul.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5052942633628845,
+        "fusion_score": 0.10105885267257692,
+        "entity_ids": [
+          "\"PRINCIPLES\"",
+          "\"LOOT\"",
+          "\"GANGRENE\""
+        ],
+        "chunk_ids": [
+          "chunk-09e02b8f51c2ff3a1063329505e4bf3c"
+        ],
+        "evidence_texts": [
+          "Salad by the Roots Salad by the Roots( literally\"( Eating) dandelions by the roots\" which is the French idiom for\" Pushing up the daisies\") is a Franco- Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld. It benefits from music by Georges Delerue and dialogue by Michel Audiard, among whose legendary lines is\" Plus t'as de pognon, moins t'as de principes. L'oseille c'est la gangrène de l'âme.\" ( The more loot you've got, the fewer your principles. Lolly is the gangrene of the soul).",
+          "The more loot you've got, the fewer your principles. Lolly is the gangrene of the soul."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.505294,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.101059
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film Salad by the Roots is a comedy that explores themes of morality and the underworld through its characters and dialogue.\"",
+        "hyperedge_text": "The film Salad by the Roots is a comedy that explores themes of morality and the underworld through its characters and dialogue.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5052942633628845,
+        "fusion_score": 0.10105885267257692,
+        "entity_ids": [
+          "\"MORALITY\"",
+          "\"CHARACTERS\""
+        ],
+        "chunk_ids": [
+          "chunk-09e02b8f51c2ff3a1063329505e4bf3c"
+        ],
+        "evidence_texts": [
+          "Salad by the Roots Salad by the Roots( literally\"( Eating) dandelions by the roots\" which is the French idiom for\" Pushing up the daisies\") is a Franco- Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld. It benefits from music by Georges Delerue and dialogue by Michel Audiard, among whose legendary lines is\" Plus t'as de pognon, moins t'as de principes. L'oseille c'est la gangrène de l'âme.\" ( The more loot you've got, the fewer your principles. Lolly is the gangrene of the soul).",
+          "The film Salad by the Roots is a comedy that explores themes of morality and the underworld through its characters and dialogue."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.505294,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.101059
+        }
+      }
+    ],
+    "answer": "Georges Lautner",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Salad by the Roots' is directed by Georges Lautner.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Salad by the Roots (literally 'Eating dandelions by the roots' which is the French idiom for 'Pushing up the daisies') is a Franco-Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the birth year of the director of Dangerously They Live?",
+    "analysis": {
+      "entities": [
+        "Robert Florey"
+      ],
+      "relations": [
+        "birth year of"
+      ],
+      "relation_query": "What is the birth year of a person?",
+      "answer_type": "year"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Robert Florey (14 September 1900 – 16 May 1979) was a French-American director, screenwriter, film journalist and actor.\"",
+        "hyperedge_text": "Robert Florey (14 September 1900 – 16 May 1979) was a French-American director, screenwriter, film journalist and actor.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6642175912857056,
+        "fusion_score": 0.5328435182571412,
+        "entity_ids": [
+          "\"DIRECTOR\"",
+          "\"ACTOR\"",
+          "\"SCREENWRITER\"",
+          "\"ROBERT FLOREY\"",
+          "\"FRENCH-AMERICAN\"",
+          "\"FILM JOURNALIST\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "evidence_texts": [
+          "Robert Florey (14 September 1900 – 16 May 1979) was a French-American director, screenwriter, film journalist and actor.",
+          "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts...",
+          "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts\" of 1929, and his 1932 foray into Universal- style horror,\" Murders in the Rue Morgue\" is regarded by horror fans as highly reflective of German expressionism. In 2006, as his 1937 film\" Daughter of Shanghai\" was selected for preservation in the United States National Film Registry by the Library of Congress, Florey was called\" widely acclaimed as the best director working in major studio B-films\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.664218,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532844
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey.\"",
+        "hyperedge_text": "Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.23048576712608337,
+        "fusion_score": 0.4460971534252167,
+        "entity_ids": [
+          "\"DANGEROUSLY THEY LIVE\"",
+          "\"NANCY COLEMAN\"",
+          "\"RAYMOND MASSEY\"",
+          "\"JOHN GARFIELD\"",
+          "\"ROBERT FLOREY\""
+        ],
+        "chunk_ids": [
+          "chunk-e91cd1426ab8bc9948d4820c9d810ab3"
+        ],
+        "evidence_texts": [
+          "Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey.",
+          "Dangerously They Live Dangerously They Live is a 1941 American World War II spy film directed by Robert Florey, and starring John Garfield, Nancy Coleman and Raymond Massey. Nazi spies try to pry information out of a British agent."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.230486,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.446097
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland.\"",
+        "hyperedge_text": "Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6642175912857056,
+        "fusion_score": 0.1328435182571411,
+        "entity_ids": [
+          "\"SWITZERLAND\"",
+          "\"ROBERT FUCHS\"",
+          "\"ORPHAN\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "evidence_texts": [
+          "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts\" of 1929, and his 1932 foray into Universal- style horror,\" Murders in the Rue Morgue\" is regarded by horror fans as highly reflective of German expressionism. In 2006, as his 1937 film\" Daughter of Shanghai\" was selected for preservation in the United States National Film Registry by the Library of Congress, Florey was called\" widely acclaimed as the best director working in major studio B-films\".",
+          "Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland.",
+          "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.664218,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.132844
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade.\"",
+        "hyperedge_text": "In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6642175912857056,
+        "fusion_score": 0.1328435182571411,
+        "entity_ids": [
+          "\"1920\"",
+          "\"ASSISTANT\"",
+          "\"EXTRA\"",
+          "\"FEATURETTES\"",
+          "\"LOUIS FEUILLADE\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "evidence_texts": [
+          "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts\" of 1929, and his 1932 foray into Universal- style horror,\" Murders in the Rue Morgue\" is regarded by horror fans as highly reflective of German expressionism. In 2006, as his 1937 film\" Daughter of Shanghai\" was selected for preservation in the United States National Film Registry by the Library of Congress, Florey was called\" widely acclaimed as the best director working in major studio B-films\".",
+          "In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade.",
+          "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.664218,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.132844
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Florey moved to the United States in 1921.\"",
+        "hyperedge_text": "Florey moved to the United States in 1921.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6642175912857056,
+        "fusion_score": 0.1328435182571411,
+        "entity_ids": [
+          "\"UNITED STATES\""
+        ],
+        "chunk_ids": [
+          "chunk-5e00b50661936455d885de65260a504b"
+        ],
+        "evidence_texts": [
+          "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts\" of 1929, and his 1932 foray into Universal- style horror,\" Murders in the Rue Morgue\" is regarded by horror fans as highly reflective of German expressionism. In 2006, as his 1937 film\" Daughter of Shanghai\" was selected for preservation in the United States National Film Registry by the Library of Congress, Florey was called\" widely acclaimed as the best director working in major studio B-films\".",
+          "Florey moved to the United States in 1921.",
+          "Robert Florey Robert Florey( 14 September 1900 – 16 May 1979) was a French- American director, screenwriter, film journalist and actor. Born as Robert Fuchs in Paris, he became an orphan at an early age and was then raised in Switzerland. In 1920 he worked at first as a film journalist, then as an assistant and extra in featurettes from Louis Feuillade. Florey moved to the United States in 1921. As a director, Florey's most productive decades were the 1930s and 1940s, working on relatively low- budget fillers for Paramount and Warner Brothers. His reputation is balanced between his avant- garde expressionist style, most evident in his early career, and his work as a fast, reliable studio- system director called on to finish troubled projects, such as 1939's\" Hotel Imperial\". He directed more than 50 movies. His most popular film is likely the first Marx Brothers feature\" The Cocoanuts..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.664218,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.132844
+        }
+      }
+    ],
+    "answer": "1900",
+    "confidence": 1.0,
+    "reasoning_summary": "Robert Florey, the director of 'Dangerously They Live', was born on 14 September 1900, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Robert Florey (14 September 1900 – 16 May 1979) was a French-American director, screenwriter, film journalist and actor.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the birth year of the director of Salad By The Roots?",
+    "analysis": {
+      "entities": [
+        "Georges Lautner"
+      ],
+      "relations": [
+        "birth year of"
+      ],
+      "relation_query": "What is the birth year of a person?",
+      "answer_type": "year"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Lautner (24 January 1926 – 22 November 2013) was a French film director and screenwriter, known primarily for his comedies created in collaboration with screenwriter Michel Audiard.\"",
+        "hyperedge_text": "Georges Lautner (24 January 1926 – 22 November 2013) was a French film director and screenwriter, known primarily for his comedies created in collaboration with screenwriter Michel Audiard.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7004215717315674,
+        "fusion_score": 0.5400843143463135,
+        "entity_ids": [
+          "\"GEORGES LAUTNER\"",
+          "\"MICHEL AUDIARD\"",
+          "\"FRENCH FILM DIRECTOR\"",
+          "\"SCREENWRITER\""
+        ],
+        "chunk_ids": [
+          "chunk-578da641f97df96ba05175014d5dfcb6"
+        ],
+        "evidence_texts": [
+          "Georges Lautner (24 January 1926 – 22 November 2013) was a French film director and screenwriter, known primarily for his comedies created in collaboration with screenwriter Michel Audiard.",
+          "Georges Lautner Georges Lautner( 24 January 1926 – 22 November 2013) was a French film director and screenwriter, known primarily for his comedies created in collaboration with screenwriter Michel Audiard. Lautner's ventures into other genres were less successful though the thriller Le Professionnel starring Jean- Paul Belmondo was a big commercial hit in France in 1981. He was born in Nice, the son of actress Renée Saint- Cyr."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.700422,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540084
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Salad by the Roots (literally 'Eating dandelions by the roots' which is the French idiom for 'Pushing up the daisies') is a Franco-Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld.\"",
+        "hyperedge_text": "Salad by the Roots (literally 'Eating dandelions by the roots' which is the French idiom for 'Pushing up the daisies') is a Franco-Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.32165080308914185,
+        "fusion_score": 0.4643301606178284,
+        "entity_ids": [
+          "\"1964\"",
+          "\"SALAD BY THE ROOTS\"",
+          "\"LES TONTONS FLINGUEURS\"",
+          "\"PARISIAN UNDERWORLD\"",
+          "\"GEORGES DELERUE\"",
+          "\"PLUS T'AS DE POGNON, MOINS T'AS DE PRINCIPES. L'OSEILLE C'EST LA GANGRÈNE DE L'ÂME.\"",
+          "\"GEORGES LAUTNER\"",
+          "\"MICHEL AUDIARD\""
+        ],
+        "chunk_ids": [
+          "chunk-09e02b8f51c2ff3a1063329505e4bf3c"
+        ],
+        "evidence_texts": [
+          "Salad by the Roots (literally 'Eating dandelions by the roots' which is the French idiom for 'Pushing up the daisies') is a Franco-Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld.",
+          "Salad by the Roots Salad by the Roots( literally\"( Eating) dandelions by the roots\" which is the French idiom for\" Pushing up the daisies\") is a Franco- Italian comedy directed by Georges Lautner and released in 1964, a year after his success with Les Tontons flingueurs, which was also set in the Parisian underworld. It benefits from music by Georges Delerue and dialogue by Michel Audiard, among whose legendary lines is\" Plus t'as de pognon, moins t'as de principes. L'oseille c'est la gangrène de l'âme.\" ( The more loot you've got, the fewer your principles. Lolly is the gangrene of the soul)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.321651,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.46433
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lautner's ventures into other genres were less successful though the thriller Le Professionnel starring Jean-Paul Belmondo was a big commercial hit in France in 1981.\"",
+        "hyperedge_text": "Lautner's ventures into other genres were less successful though the thriller Le Professionnel starring Jean-Paul Belmondo was a big commercial hit in France in 1981.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7004215717315674,
+        "fusion_score": 0.1400843143463135,
+        "entity_ids": [
+          "\"LE PROFESSIONNEL\"",
+          "\"JEAN-PAUL BELMONDO\""
+        ],
+        "chunk_ids": [
+          "chunk-578da641f97df96ba05175014d5dfcb6"
+        ],
+        "evidence_texts": [
+          "Georges Lautner Georges Lautner( 24 January 1926 – 22 November 2013) was a French film director and screenwriter, known primarily for his comedies created in collaboration with screenwriter Michel Audiard. Lautner's ventures into other genres were less successful though the thriller Le Professionnel starring Jean- Paul Belmondo was a big commercial hit in France in 1981. He was born in Nice, the son of actress Renée Saint- Cyr.",
+          "Lautner's ventures into other genres were less successful though the thriller Le Professionnel starring Jean-Paul Belmondo was a big commercial hit in France in 1981."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.700422,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.140084
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was born in Nice, the son of actress Renée Saint-Cyr.\"",
+        "hyperedge_text": "He was born in Nice, the son of actress Renée Saint-Cyr.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7004215717315674,
+        "fusion_score": 0.1400843143463135,
+        "entity_ids": [
+          "\"ACTRESS\"",
+          "\"NICE\"",
+          "\"RENÉE SAINT-CYR\"",
+          "\"SON\""
+        ],
+        "chunk_ids": [
+          "chunk-578da641f97df96ba05175014d5dfcb6"
+        ],
+        "evidence_texts": [
+          "Georges Lautner Georges Lautner( 24 January 1926 – 22 November 2013) was a French film director and screenwriter, known primarily for his comedies created in collaboration with screenwriter Michel Audiard. Lautner's ventures into other genres were less successful though the thriller Le Professionnel starring Jean- Paul Belmondo was a big commercial hit in France in 1981. He was born in Nice, the son of actress Renée Saint- Cyr.",
+          "He was born in Nice, the son of actress Renée Saint-Cyr."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.700422,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.140084
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Lautner was known primarily for his comedies created in collaboration with screenwriter Michel Audiard.\"",
+        "hyperedge_text": "Georges Lautner was known primarily for his comedies created in collaboration with screenwriter Michel Audiard.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7004215717315674,
+        "fusion_score": 0.1400843143463135,
+        "entity_ids": [
+          "\"COMEDIES\""
+        ],
+        "chunk_ids": [
+          "chunk-578da641f97df96ba05175014d5dfcb6"
+        ],
+        "evidence_texts": [
+          "Georges Lautner Georges Lautner( 24 January 1926 – 22 November 2013) was a French film director and screenwriter, known primarily for his comedies created in collaboration with screenwriter Michel Audiard. Lautner's ventures into other genres were less successful though the thriller Le Professionnel starring Jean- Paul Belmondo was a big commercial hit in France in 1981. He was born in Nice, the son of actress Renée Saint- Cyr.",
+          "Georges Lautner was known primarily for his comedies created in collaboration with screenwriter Michel Audiard."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.700422,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.140084
+        }
+      }
+    ],
+    "answer": "1926",
+    "confidence": 1.0,
+    "reasoning_summary": "Georges Lautner, the director of Salad By The Roots, was born on 24 January 1926.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Georges Lautner (24 January 1926 – 22 November 2013) was a French film director and screenwriter, known primarily for his comedies created in collaboration with screenwriter Michel Audiard.\""
+    ]
+  }
+]

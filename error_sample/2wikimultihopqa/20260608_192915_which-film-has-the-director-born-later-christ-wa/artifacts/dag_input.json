@@ -1,0 +1,130 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Christ Walking On The Water?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p1",
+          "node_texts": [
+            "Christ Walking On The Water",
+            "born",
+            "director"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the director of Christ Walking On The Water."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Christ Walking On The Water"
+      },
+      "one_hop_relation": "director",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of 45 Fathers?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e2_p1",
+          "node_texts": [
+            "45 Fathers",
+            "born",
+            "director"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the director of 45 Fathers."
+        }
+      ],
+      "support_path_ids": [
+        "e2_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "45 Fathers"
+      },
+      "one_hop_relation": "director",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of Christ Walking On The Water born?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps3",
+          "path_id": "e1_p5",
+          "node_texts": [
+            "Christ Walking On The Water",
+            "born",
+            "director"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the birth date of the director of Christ Walking On The Water."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p5"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q1's answer"
+      },
+      "one_hop_relation": "birth date",
+      "answer_type": "Date"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of 45 Fathers born?",
+    "dependencies": [
+      "q2"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps2",
+          "path_id": "e2_p5",
+          "node_texts": [
+            "45 Fathers",
+            "born",
+            "director"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the birth date of the director of 45 Fathers."
+        }
+      ],
+      "support_path_ids": [
+        "e2_p5"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q2's answer"
+      },
+      "one_hop_relation": "birth date",
+      "answer_type": "Date"
+    }
+  }
+]

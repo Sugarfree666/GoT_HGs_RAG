@@ -1,0 +1,26 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "While we identified Infanta María de la Paz of Spain as the mother of Prince Ferdinand of Bavaria, there is no evidence regarding her place of death, leading to insufficient information to answer the original question.",
+  "answer_span_reasoning": "There is no evidence regarding her place of death.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the mother of Prince Ferdinand Of Bavaria?",
+      "answer": "Infanta María de la Paz of Spain",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Infante Ferdinand of Bavaria (Ferdinand Maria Ludwig Franz von Assisi Isabellus Adalbert Ildefons Martin Bonifaz Joseph Isidro; 10 May 1884 – 5 April 1958) was a Spanish prince, the eldest son and child of Ludwig Ferdinand of Bavaria and his wife, Infanta María de la Paz of Spain.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did q1's answer die?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Infante Ferdinand of Bavaria (Ferdinand Maria Ludwig Franz von Assisi Isabellus Adalbert Ildefons Martin Bonifaz Joseph Isidro; 10 May 1884 – 5 April 1958) was a Spanish prince, the eldest son and child of Ludwig Ferdinand of Bavaria and his wife, Infanta María de la Paz of Spain.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

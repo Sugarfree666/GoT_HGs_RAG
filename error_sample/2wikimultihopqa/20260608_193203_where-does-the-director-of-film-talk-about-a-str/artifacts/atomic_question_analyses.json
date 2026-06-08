@@ -1,0 +1,99 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Talk About A Stranger?",
+    "retrieval_question": "Who is the director of Talk About A Stranger?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Talk About A Stranger?",
+      "retrieval_question": "Who is the director of Talk About A Stranger?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Talk About A Stranger"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where does q1's answer work?",
+    "retrieval_question": "Where does q1's answer work?",
+    "dependency_question_rewrite": {
+      "original_question": "Where does q1's answer work?",
+      "retrieval_question": "Where does q1's answer work?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Talk About A Stranger?",
+        "answer": "David Bradley",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Talk About a Stranger' was directed by David Bradley.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The film was directed by David Bradley.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Talk About a Stranger is a 1952 American film noir directed by David Bradley and starring George Murphy, Nancy Davis and Billy Gray.\"",
+            "fusion_score": 0.5377565860748291,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Talk About a Stranger is a 1952 American film noir directed by David Bradley and starring George Murphy, Nancy Davis and Billy Gray.",
+              "Talk About a Stranger Talk About a Stranger is a 1952 American film noir directed by David Bradley and starring George Murphy, Nancy Davis and Billy Gray. The motion picture was shot by noted cinematographer John Alton, A.S.C."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Talk About a Stranger is a 1952 American film noir.\"",
+            "fusion_score": 0.5377565860748291,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Talk About a Stranger is a 1952 American film noir.",
+              "Talk About a Stranger Talk About a Stranger is a 1952 American film noir directed by David Bradley and starring George Murphy, Nancy Davis and Billy Gray. The motion picture was shot by noted cinematographer John Alton, A.S.C."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The motion picture was shot by noted cinematographer John Alton, A.S.C.\"",
+            "fusion_score": 0.1377565860748291,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Talk About a Stranger Talk About a Stranger is a 1952 American film noir directed by David Bradley and starring George Murphy, Nancy Davis and Billy Gray. The motion picture was shot by noted cinematographer John Alton, A.S.C.",
+              "The motion picture was shot by noted cinematographer John Alton, A.S.C."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "David Bradley"
+      ],
+      "relations": [
+        "works at"
+      ],
+      "relation_query": "Where does a person work?",
+      "answer_type": "organization"
+    }
+  }
+]

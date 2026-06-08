@@ -1,0 +1,26 @@
+{
+  "answer": "Aivar Kuusmaa",
+  "candidate_answer": "Aivar Kuusmaa was born first.",
+  "reasoning_summary": "Aivar Kuusmaa was born on 12 June 1967, while Andy Summers was born on 31 December 1942. Since 1942 is earlier than 1967, Aivar Kuusmaa was born first.",
+  "answer_span_reasoning": "Aivar Kuusmaa was identified as being born first.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "When was Aivar Kuusmaa born?",
+      "answer": "12 June 1967",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Aivar Kuusmaa (born 12 June 1967) is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "When was Andy Summers born?",
+      "answer": "31 December 1942",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Andy Summers was born on 31 December 1942 from Poulton-le-Fylde, Lancashire.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

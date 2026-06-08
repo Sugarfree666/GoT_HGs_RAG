@@ -1,0 +1,729 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Airheads?",
+    "analysis": {
+      "entities": [
+        "Airheads"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.\"",
+        "hyperedge_text": "Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6972652673721313,
+        "fusion_score": 0.5394530534744263,
+        "entity_ids": [
+          "\"AIRHEADS\"",
+          "\"RICH WILKES\"",
+          "\"MICHAEL LEHMANN\""
+        ],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.",
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.697265,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.539453
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording.\"",
+        "hyperedge_text": "It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6972652673721313,
+        "fusion_score": 0.13945305347442627,
+        "entity_ids": [
+          "\"RADIO STATION\"",
+          "\"DEMO RECORDING\"",
+          "\"BRENDAN FRASER\"",
+          "\"STEVE BUSCEMI\"",
+          "\"ADAM SANDLER\"",
+          "\"BAND OF LOSER MUSICIANS\""
+        ],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles.",
+          "It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.697265,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.139453
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles.\"",
+        "hyperedge_text": "Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6972652673721313,
+        "fusion_score": 0.13945305347442627,
+        "entity_ids": [
+          "\"JOE MANTEGNA\"",
+          "\"MICHAEL MCKEAN\"",
+          "\"ERNIE HUDSON\"",
+          "\"DAVID ARQUETTE\"",
+          "\"MICHAEL RICHARDS\"",
+          "\"JUDD NELSON\""
+        ],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles.",
+          "Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.697265,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.139453
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Airheads is a 1994 American comedy film.\"",
+        "hyperedge_text": "Airheads is a 1994 American comedy film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6972652673721313,
+        "fusion_score": 0.13945305347442627,
+        "entity_ids": [
+          "\"1994\"",
+          "\"COMEDY FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles.",
+          "Airheads is a 1994 American comedy film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.697265,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.139453
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was written by Rich Wilkes.\"",
+        "hyperedge_text": "The film was written by Rich Wilkes.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6972652673721313,
+        "fusion_score": 0.13945305347442627,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles.",
+          "The film was written by Rich Wilkes."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.697265,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.139453
+        }
+      }
+    ],
+    "answer": "Michael Lehmann",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Airheads' was directed by Michael Lehmann.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Return To Cabin By The Lake?",
+    "analysis": {
+      "entities": [
+        "Return To Cabin By The Lake"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson.\"",
+        "hyperedge_text": "Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6335003972053528,
+        "fusion_score": 0.5267000794410706,
+        "entity_ids": [
+          "\"RETURN TO CABIN BY THE LAKE\"",
+          "\"JUDD NELSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b93638467141714a4f4725ae38f7100"
+        ],
+        "evidence_texts": [
+          "Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson.",
+          "Return to Cabin by the Lake Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson. It was directed by Po-Chih Leong. The movie is a sequel to \"Cabin by the Lake\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.6335,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5267
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Return to Cabin by the Lake is a 2001 American crime comedy telefilm.\"",
+        "hyperedge_text": "Return to Cabin by the Lake is a 2001 American crime comedy telefilm.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6335003972053528,
+        "fusion_score": 0.5267000794410706,
+        "entity_ids": [
+          "\"RETURN TO CABIN BY THE LAKE\"",
+          "\"CRIME COMEDY\"",
+          "\"2001\""
+        ],
+        "chunk_ids": [
+          "chunk-7b93638467141714a4f4725ae38f7100"
+        ],
+        "evidence_texts": [
+          "Return to Cabin by the Lake is a 2001 American crime comedy telefilm.",
+          "Return to Cabin by the Lake Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson. It was directed by Po-Chih Leong. The movie is a sequel to \"Cabin by the Lake\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.6335,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5267
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Po-Chih Leong.\"",
+        "hyperedge_text": "It was directed by Po-Chih Leong.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6335003972053528,
+        "fusion_score": 0.12670007944107056,
+        "entity_ids": [
+          "\"PO-CHIH LEONG\""
+        ],
+        "chunk_ids": [
+          "chunk-7b93638467141714a4f4725ae38f7100"
+        ],
+        "evidence_texts": [
+          "Return to Cabin by the Lake Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson. It was directed by Po-Chih Leong. The movie is a sequel to \"Cabin by the Lake\".",
+          "It was directed by Po-Chih Leong."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.6335,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.1267
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The movie is a sequel to 'Cabin by the Lake'. \"",
+        "hyperedge_text": "The movie is a sequel to 'Cabin by the Lake'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6335003972053528,
+        "fusion_score": 0.12670007944107056,
+        "entity_ids": [
+          "\"CABIN BY THE LAKE\""
+        ],
+        "chunk_ids": [
+          "chunk-7b93638467141714a4f4725ae38f7100"
+        ],
+        "evidence_texts": [
+          "Return to Cabin by the Lake Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson. It was directed by Po-Chih Leong. The movie is a sequel to \"Cabin by the Lake\".",
+          "The movie is a sequel to 'Cabin by the Lake'."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.6335,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.1267
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"starring Judd Nelson.\"",
+        "hyperedge_text": "starring Judd Nelson.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6335003972053528,
+        "fusion_score": 0.12670007944107056,
+        "entity_ids": [
+          "\"JUDD NELSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b93638467141714a4f4725ae38f7100"
+        ],
+        "evidence_texts": [
+          "Return to Cabin by the Lake Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson. It was directed by Po-Chih Leong. The movie is a sequel to \"Cabin by the Lake\".",
+          "starring Judd Nelson."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.6335,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.1267
+        }
+      }
+    ],
+    "answer": "Po-Chih Leong",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'Return to Cabin by the Lake' was directed by Po-Chih Leong, providing clear support for the answer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"It was directed by Po-Chih Leong.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the birth date of q1's answer?",
+    "analysis": {
+      "entities": [
+        "Michael Lehmann",
+        "Airheads"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of the director of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.\"",
+        "hyperedge_text": "Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.13011696934700012,
+        "fusion_score": 0.4260233938694,
+        "entity_ids": [
+          "\"AIRHEADS\"",
+          "\"RICH WILKES\"",
+          "\"MICHAEL LEHMANN\""
+        ],
+        "chunk_ids": [
+          "chunk-5dd018d76c7488e953b3b9a6a7fb976f"
+        ],
+        "evidence_texts": [
+          "Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.",
+          "Airheads Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann. It stars Brendan Fraser, Steve Buscemi, and Adam Sandler as a band of loser musicians who stage a hijacking of a radio station in order to get airplay for their demo recording. Joe Mantegna, Michael McKean, Ernie Hudson, Judd Nelson, David Arquette and Michael Richards play supporting roles."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.130117,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.426023
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Candy Apples is an American pornographic actress born on October 3, 1976.\"",
+        "hyperedge_text": "Candy Apples is an American pornographic actress born on October 3, 1976.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.27679628133773804,
+        "fusion_score": 0.05535925626754761,
+        "entity_ids": [
+          "\"CANDY APPLES\"",
+          "\"AMERICAN PORNOGRAPHIC ACTRESS\"",
+          "\"OCTOBER 3, 1976\""
+        ],
+        "chunk_ids": [
+          "chunk-28a96f9d126d01ea76ca24a9b62dcebf"
+        ],
+        "evidence_texts": [
+          "Candy Apples Candy Apples( born October 3, 1976) is an American pornographic actress.",
+          "Candy Apples is an American pornographic actress born on October 3, 1976."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.276796,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.055359
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Candy Apples is known for her work in the adult film industry.\"",
+        "hyperedge_text": "Candy Apples is known for her work in the adult film industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.27679628133773804,
+        "fusion_score": 0.05535925626754761,
+        "entity_ids": [
+          "\"ADULT FILM INDUSTRY\""
+        ],
+        "chunk_ids": [
+          "chunk-28a96f9d126d01ea76ca24a9b62dcebf"
+        ],
+        "evidence_texts": [
+          "Candy Apples Candy Apples( born October 3, 1976) is an American pornographic actress.",
+          "Candy Apples is known for her work in the adult film industry."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.276796,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.055359
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Candy Apples has gained recognition and a following due to her performances.\"",
+        "hyperedge_text": "Candy Apples has gained recognition and a following due to her performances.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.27679628133773804,
+        "fusion_score": 0.05535925626754761,
+        "entity_ids": [
+          "\"RECOGNITION\"",
+          "\"FOLLOWING\""
+        ],
+        "chunk_ids": [
+          "chunk-28a96f9d126d01ea76ca24a9b62dcebf"
+        ],
+        "evidence_texts": [
+          "Candy Apples Candy Apples( born October 3, 1976) is an American pornographic actress.",
+          "Candy Apples has gained recognition and a following due to her performances."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.276796,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.055359
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Candy Apples has participated in various adult film productions throughout her career.\"",
+        "hyperedge_text": "Candy Apples has participated in various adult film productions throughout her career.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.27679628133773804,
+        "fusion_score": 0.05535925626754761,
+        "entity_ids": [
+          "\"ADULT FILM PRODUCTIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-28a96f9d126d01ea76ca24a9b62dcebf"
+        ],
+        "evidence_texts": [
+          "Candy Apples Candy Apples( born October 3, 1976) is an American pornographic actress.",
+          "Candy Apples has participated in various adult film productions throughout her career."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.276796,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.055359
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the birth date of Michael Lehmann.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Airheads is a 1994 American comedy film written by Rich Wilkes and directed by Michael Lehmann.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the birth date of q2's answer?",
+    "analysis": {
+      "entities": [
+        "Po-Chih Leong",
+        "Return To Cabin By The Lake"
+      ],
+      "relations": [
+        "birth date of"
+      ],
+      "relation_query": "What is the birth date of the director of a work?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Po-Chih Leong.\"",
+        "hyperedge_text": "It was directed by Po-Chih Leong.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.09772328287363052,
+        "fusion_score": 0.2195446565747261,
+        "entity_ids": [
+          "\"PO-CHIH LEONG\""
+        ],
+        "chunk_ids": [
+          "chunk-7b93638467141714a4f4725ae38f7100"
+        ],
+        "evidence_texts": [
+          "It was directed by Po-Chih Leong.",
+          "Return to Cabin by the Lake Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson. It was directed by Po-Chih Leong. The movie is a sequel to \"Cabin by the Lake\"."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.097723,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.219545
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson.\"",
+        "hyperedge_text": "Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.09772328287363052,
+        "fusion_score": 0.2195446565747261,
+        "entity_ids": [
+          "\"RETURN TO CABIN BY THE LAKE\"",
+          "\"JUDD NELSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b93638467141714a4f4725ae38f7100"
+        ],
+        "evidence_texts": [
+          "Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson.",
+          "Return to Cabin by the Lake Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson. It was directed by Po-Chih Leong. The movie is a sequel to \"Cabin by the Lake\"."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.097723,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.219545
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Return to Cabin by the Lake is a 2001 American crime comedy telefilm.\"",
+        "hyperedge_text": "Return to Cabin by the Lake is a 2001 American crime comedy telefilm.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.09772328287363052,
+        "fusion_score": 0.2195446565747261,
+        "entity_ids": [
+          "\"RETURN TO CABIN BY THE LAKE\"",
+          "\"CRIME COMEDY\"",
+          "\"2001\""
+        ],
+        "chunk_ids": [
+          "chunk-7b93638467141714a4f4725ae38f7100"
+        ],
+        "evidence_texts": [
+          "Return to Cabin by the Lake is a 2001 American crime comedy telefilm.",
+          "Return to Cabin by the Lake Return to Cabin by the Lake is a 2001 American crime comedy telefilm, starring Judd Nelson. It was directed by Po-Chih Leong. The movie is a sequel to \"Cabin by the Lake\"."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.097723,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.219545
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Hassan Al-Qeed (born 13 April 1998), he is a Saudi Arabian football player who currently plays as a Midfielder for Al-Shabab.\"",
+        "hyperedge_text": "Hassan Al-Qeed (born 13 April 1998), he is a Saudi Arabian football player who currently plays as a Midfielder for Al-Shabab.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3001044988632202,
+        "fusion_score": 0.06002089977264405,
+        "entity_ids": [
+          "\"FOOTBALL PLAYER\"",
+          "\"HASSAN AL-QEED\"",
+          "\"SAUDI ARABIAN\"",
+          "\"AL-SHABAB\"",
+          "\"MIDFIELDER\""
+        ],
+        "chunk_ids": [
+          "chunk-f631426b82a9754a70994eda0fba9f0e"
+        ],
+        "evidence_texts": [
+          "Hassan Al-Qeed Hassan Al- Qeed( born 13 April 1998), he is a Saudi Arabian football player who currently plays as a Midfielder for Al- Shabab.",
+          "Hassan Al-Qeed (born 13 April 1998), he is a Saudi Arabian football player who currently plays as a Midfielder for Al-Shabab."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.300104,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.060021
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Hassan Al-Qeed was born on 13 April 1998.\"",
+        "hyperedge_text": "Hassan Al-Qeed was born on 13 April 1998.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3001044988632202,
+        "fusion_score": 0.06002089977264405,
+        "entity_ids": [
+          "\"HASSAN AL-QEED\""
+        ],
+        "chunk_ids": [
+          "chunk-f631426b82a9754a70994eda0fba9f0e"
+        ],
+        "evidence_texts": [
+          "Hassan Al-Qeed Hassan Al- Qeed( born 13 April 1998), he is a Saudi Arabian football player who currently plays as a Midfielder for Al- Shabab.",
+          "Hassan Al-Qeed was born on 13 April 1998."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.300104,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.060021
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the birth date of Po-Chih Leong, only information about his directorial work.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"It was directed by Po-Chih Leong.\""
+    ]
+  }
+]

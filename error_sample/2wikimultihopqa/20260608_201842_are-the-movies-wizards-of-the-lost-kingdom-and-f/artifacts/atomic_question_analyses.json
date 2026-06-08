@@ -1,0 +1,51 @@
+[
+  {
+    "node_id": "q1",
+    "question": "What is the country of Wizards Of The Lost Kingdom?",
+    "retrieval_question": "What is the country of Wizards Of The Lost Kingdom?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the country of Wizards Of The Lost Kingdom?",
+      "retrieval_question": "What is the country of Wizards Of The Lost Kingdom?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Wizards Of The Lost Kingdom"
+      ],
+      "relations": [
+        "country of"
+      ],
+      "relation_query": "the country of a work",
+      "answer_type": "country"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the country of Final Exam (1981 Film)?",
+    "retrieval_question": "What is the country of Final Exam (1981 Film)?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the country of Final Exam (1981 Film)?",
+      "retrieval_question": "What is the country of Final Exam (1981 Film)?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Final Exam",
+        "1981 Film"
+      ],
+      "relations": [
+        "country of"
+      ],
+      "relation_query": "What is the country of a work released in a specific year?",
+      "answer_type": "country"
+    }
+  }
+]

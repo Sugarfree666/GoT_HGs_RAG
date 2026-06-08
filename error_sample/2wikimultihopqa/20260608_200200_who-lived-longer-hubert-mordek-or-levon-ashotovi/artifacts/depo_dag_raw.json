@@ -1,0 +1,64 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "When did Hubert Mordek die?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p8",
+            "node_texts": [
+              "Hubert Mordek",
+              "lived"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the death date of Hubert Mordek."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p8"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Hubert Mordek"
+        },
+        "one_hop_relation": "death date",
+        "answer_type": "Date"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "When did Levon Ashotovich Grigorian die?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e2_p10",
+            "node_texts": [
+              "Levon Ashotovich Grigorian",
+              "lived"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the death date of Levon Ashotovich Grigorian."
+          }
+        ],
+        "support_path_ids": [
+          "e2_p10"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Levon Ashotovich Grigorian"
+        },
+        "one_hop_relation": "death date",
+        "answer_type": "Date"
+      }
+    }
+  ]
+}

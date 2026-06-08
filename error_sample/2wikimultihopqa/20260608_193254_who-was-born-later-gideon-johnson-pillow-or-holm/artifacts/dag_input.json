@@ -1,0 +1,62 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Gideon Johnson Pillow born?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps3",
+          "path_id": "e1_p1",
+          "node_texts": [
+            "Gideon Johnson Pillow",
+            "born"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the birth date of Gideon Johnson Pillow."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Gideon Johnson Pillow"
+      },
+      "one_hop_relation": "birth date",
+      "answer_type": "Date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Holm Jølsen born?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps4",
+          "path_id": "e2_p1",
+          "node_texts": [
+            "Holm J",
+            "born"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the birth date of Holm Jølsen."
+        }
+      ],
+      "support_path_ids": [
+        "e2_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Holm Jølsen"
+      },
+      "one_hop_relation": "birth date",
+      "answer_type": "Date"
+    }
+  }
+]

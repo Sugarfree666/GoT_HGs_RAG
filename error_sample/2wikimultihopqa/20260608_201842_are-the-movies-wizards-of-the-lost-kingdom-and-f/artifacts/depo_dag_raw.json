@@ -1,0 +1,64 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "What is the country of Wizards Of The Lost Kingdom?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p4",
+            "node_texts": [
+              "Wizards Of The Lost Kingdom",
+              "country"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the country of Wizards Of The Lost Kingdom."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p4"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Wizards Of The Lost Kingdom"
+        },
+        "one_hop_relation": "country",
+        "answer_type": "Country"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the country of Final Exam (1981 Film)?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e2_p6",
+            "node_texts": [
+              "Final Exam (1981 Film)",
+              "country"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the country of Final Exam (1981 Film)."
+          }
+        ],
+        "support_path_ids": [
+          "e2_p6"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Final Exam (1981 Film)"
+        },
+        "one_hop_relation": "country",
+        "answer_type": "Country"
+      }
+    }
+  ]
+}

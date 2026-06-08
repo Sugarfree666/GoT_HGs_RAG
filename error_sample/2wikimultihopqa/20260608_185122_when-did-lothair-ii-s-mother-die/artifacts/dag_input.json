@@ -1,0 +1,65 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Lothair II?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p1",
+          "node_texts": [
+            "Lothair II",
+            "mother"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the mother of Lothair II."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Lothair II"
+      },
+      "one_hop_relation": "mother",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When did q1's answer die?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p1",
+          "node_texts": [
+            "mother",
+            "die",
+            "When"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the date when Lothair II's mother died."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q1's answer"
+      },
+      "one_hop_relation": "death date",
+      "answer_type": "Date"
+    }
+  }
+]

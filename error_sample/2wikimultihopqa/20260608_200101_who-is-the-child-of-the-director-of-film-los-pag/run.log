@@ -1,0 +1,8 @@
+2026-06-08 20:01:01,447 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 20:01:23,928 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 20:01:23,928 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 20:01:35,355 | INFO | Starting HyperBranch pipeline for question: Who is the child of the director of film Los Pagares De Mendieta?
+2026-06-08 20:01:35,355 | INFO | Executing atomic DAG with 2 node(s)
+2026-06-08 20:01:38,941 | INFO | Atomic retrieval returned 115 hits for question=Who is the director of Los Pagares De Mendieta?
+2026-06-08 20:01:50,995 | INFO | Atomic retrieval returned 105 hits for question=Who is the child of q1's answer?
+2026-06-08 20:01:59,062 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_200101_who-is-the-child-of-the-director-of-film-los-pag

@@ -1,0 +1,101 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Palo Alto (2013 Film)?",
+    "retrieval_question": "Who is the director of Palo Alto (2013 Film)?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Palo Alto (2013 Film)?",
+      "retrieval_question": "Who is the director of Palo Alto (2013 Film)?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Palo Alto",
+        "2013 Film"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work released in 2013",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the father of q1's answer?",
+    "retrieval_question": "Who is the father of q1's answer?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of q1's answer?",
+      "retrieval_question": "Who is the father of q1's answer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Palo Alto (2013 Film)?",
+        "answer": "Gia Coppola",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that the film 'Palo Alto' was written and directed by Gia Coppola.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Palo Alto is a 2013 American drama film written and directed by Gia Coppola, based on James Franco's 2010 short story collection of the same name.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Palo Alto is a 2013 American drama film written and directed by Gia Coppola, based on James Franco's 2010 short story collection of the same name.\"",
+            "fusion_score": 0.3384617567062378,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Palo Alto is a 2013 American drama film written and directed by Gia Coppola, based on James Franco's 2010 short story collection of the same name.",
+              "Palo Alto (2013 film) Palo Alto is a 2013 American drama film written and directed by Gia Coppola, based on James Franco's 2010 short story collection of the same name. The film stars Franco alongside Emma Roberts, Jack Kilmer, Nat Wolff and Zoe Levin."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Palo Alto is a 2013 American drama film.\"",
+            "fusion_score": 0.3384617567062378,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Palo Alto is a 2013 American drama film.",
+              "Palo Alto (2013 film) Palo Alto is a 2013 American drama film written and directed by Gia Coppola, based on James Franco's 2010 short story collection of the same name. The film stars Franco alongside Emma Roberts, Jack Kilmer, Nat Wolff and Zoe Levin."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"She played Emily in the 2013 film 'Palo Alto' and Tasha in 'Beneath the Harvest Sky'.",
+            "fusion_score": 0.2842952609062195,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "\"She played Emily in the 2013 film 'Palo Alto' and Tasha in 'Beneath the Harvest Sky'.",
+              "Zoe Levin Zoe Levin( born November 24, 1993) is an American actress. She played Emily in the 2013 film\" Palo Alto\" and Tasha in\" Beneath the Harvest Sky\". She portrayed Kara Souders in the Fox TV show,\" Red Band Society\". She plays Tiffany\" Tiff\" Chester in the 2019 Netflix dark comedy,\" Bonding\". She is also part of the 2019 film\" The Long Home,\" directed by James Franco."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Gia Coppola"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "Who is the father of the director of a film?",
+      "answer_type": "person"
+    }
+  }
+]

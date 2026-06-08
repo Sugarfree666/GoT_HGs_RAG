@@ -1,0 +1,8 @@
+2026-06-08 20:09:25,680 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 20:09:46,272 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 20:09:46,275 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 20:10:05,335 | INFO | Starting HyperBranch pipeline for question: Who is the child of the director of film An Event?
+2026-06-08 20:10:05,335 | INFO | Executing atomic DAG with 2 node(s)
+2026-06-08 20:10:08,960 | INFO | Atomic retrieval returned 96 hits for question=Who is the director of the film An Event?
+2026-06-08 20:10:15,752 | INFO | Atomic retrieval returned 102 hits for question=Who is the child of q1's answer?
+2026-06-08 20:10:22,710 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_200925_who-is-the-child-of-the-director-of-film-an-even

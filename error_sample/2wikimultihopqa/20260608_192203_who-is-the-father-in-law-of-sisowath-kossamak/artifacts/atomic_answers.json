@@ -1,0 +1,368 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Sisowath Kossamak?",
+    "analysis": {
+      "entities": [
+        "Sisowath Kossamak"
+      ],
+      "relations": [
+        "father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960.\"",
+        "hyperedge_text": "Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6564801931381226,
+        "fusion_score": 0.5312960386276245,
+        "entity_ids": [
+          "\"SISOWATH KOSSAMAK\"",
+          "\"QUEEN CONSORT\"",
+          "\"NORODOM SURAMARIT\""
+        ],
+        "chunk_ids": [
+          "chunk-53cf475673977fbe30a572cacba761c7"
+        ],
+        "evidence_texts": [
+          "Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960.",
+          "Sisowath Kossamak Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960. She then became co-head of state with her only son, Norodom Sihanouk, from 1960 to 1970. Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi. Her official title was Preah Mohasatreiyani Sisowath Monivong Kossamak Nearirath Serey Vathana . Upon the death of Monivong in 1941, Sihanouk took the throne. In 1955, he abdicated in favor of his father Suramarit, who then reigned for five years. After her husband's death, Kossamak became the symbol and representative of the monarchy while Sihanouk assumed a role equal to that of a monarch. Both were overthrown in a 1970 coup, and they went into exile in China. Kossamak died there in 1975."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.65648,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531296
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She then became co-head of state with her only son, Norodom Sihanouk, from 1960 to 1970.\"",
+        "hyperedge_text": "She then became co-head of state with her only son, Norodom Sihanouk, from 1960 to 1970.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6564801931381226,
+        "fusion_score": 0.1312960386276245,
+        "entity_ids": [
+          "\"CO-HEAD OF STATE\"",
+          "\"NORODOM SIHANOUK\""
+        ],
+        "chunk_ids": [
+          "chunk-53cf475673977fbe30a572cacba761c7"
+        ],
+        "evidence_texts": [
+          "Sisowath Kossamak Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960. She then became co-head of state with her only son, Norodom Sihanouk, from 1960 to 1970. Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi. Her official title was Preah Mohasatreiyani Sisowath Monivong Kossamak Nearirath Serey Vathana . Upon the death of Monivong in 1941, Sihanouk took the throne. In 1955, he abdicated in favor of his father Suramarit, who then reigned for five years. After her husband's death, Kossamak became the symbol and representative of the monarchy while Sihanouk assumed a role equal to that of a monarch. Both were overthrown in a 1970 coup, and they went into exile in China. Kossamak died there in 1975.",
+          "She then became co-head of state with her only son, Norodom Sihanouk, from 1960 to 1970."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.65648,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.131296
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi.\"",
+        "hyperedge_text": "Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6564801931381226,
+        "fusion_score": 0.1312960386276245,
+        "entity_ids": [
+          "\"PRINCESS OF CAMBODIA\"",
+          "\"KING SISOWATH MONIVONG\"",
+          "\"NORODOM KANVIMAN NORLEAK TEVI\""
+        ],
+        "chunk_ids": [
+          "chunk-53cf475673977fbe30a572cacba761c7"
+        ],
+        "evidence_texts": [
+          "Sisowath Kossamak Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960. She then became co-head of state with her only son, Norodom Sihanouk, from 1960 to 1970. Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi. Her official title was Preah Mohasatreiyani Sisowath Monivong Kossamak Nearirath Serey Vathana . Upon the death of Monivong in 1941, Sihanouk took the throne. In 1955, he abdicated in favor of his father Suramarit, who then reigned for five years. After her husband's death, Kossamak became the symbol and representative of the monarchy while Sihanouk assumed a role equal to that of a monarch. Both were overthrown in a 1970 coup, and they went into exile in China. Kossamak died there in 1975.",
+          "Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.65648,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.131296
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her official title was Preah Mohasatreiyani Sisowath Monivong Kossamak Nearirath Serey Vathana.\"",
+        "hyperedge_text": "Her official title was Preah Mohasatreiyani Sisowath Monivong Kossamak Nearirath Serey Vathana.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6564801931381226,
+        "fusion_score": 0.1312960386276245,
+        "entity_ids": [
+          "\"PREAH MOHASATREIYANI SISOWATH MONIVONG KOSSAMAK NEARIRATH SEREY VATHANA\""
+        ],
+        "chunk_ids": [
+          "chunk-53cf475673977fbe30a572cacba761c7"
+        ],
+        "evidence_texts": [
+          "Sisowath Kossamak Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960. She then became co-head of state with her only son, Norodom Sihanouk, from 1960 to 1970. Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi. Her official title was Preah Mohasatreiyani Sisowath Monivong Kossamak Nearirath Serey Vathana . Upon the death of Monivong in 1941, Sihanouk took the throne. In 1955, he abdicated in favor of his father Suramarit, who then reigned for five years. After her husband's death, Kossamak became the symbol and representative of the monarchy while Sihanouk assumed a role equal to that of a monarch. Both were overthrown in a 1970 coup, and they went into exile in China. Kossamak died there in 1975.",
+          "Her official title was Preah Mohasatreiyani Sisowath Monivong Kossamak Nearirath Serey Vathana."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.65648,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.131296
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Upon the death of Monivong in 1941, Sihanouk took the throne.\"",
+        "hyperedge_text": "Upon the death of Monivong in 1941, Sihanouk took the throne.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6564801931381226,
+        "fusion_score": 0.1312960386276245,
+        "entity_ids": [
+          "\"THRONE\""
+        ],
+        "chunk_ids": [
+          "chunk-53cf475673977fbe30a572cacba761c7"
+        ],
+        "evidence_texts": [
+          "Sisowath Kossamak Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960. She then became co-head of state with her only son, Norodom Sihanouk, from 1960 to 1970. Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi. Her official title was Preah Mohasatreiyani Sisowath Monivong Kossamak Nearirath Serey Vathana . Upon the death of Monivong in 1941, Sihanouk took the throne. In 1955, he abdicated in favor of his father Suramarit, who then reigned for five years. After her husband's death, Kossamak became the symbol and representative of the monarchy while Sihanouk assumed a role equal to that of a monarch. Both were overthrown in a 1970 coup, and they went into exile in China. Kossamak died there in 1975.",
+          "Upon the death of Monivong in 1941, Sihanouk took the throne."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.65648,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.131296
+        }
+      }
+    ],
+    "answer": "King Sisowath Monivong",
+    "confidence": 0.9,
+    "reasoning_summary": "Sisowath Kossamak was born as the daughter of King Sisowath Monivong, which directly answers the question about her father.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the father-in-law of q1's answer?",
+    "analysis": {
+      "entities": [
+        "King Sisowath Monivong",
+        "Sisowath Kossamak"
+      ],
+      "relations": [
+        "is the father-in-law of"
+      ],
+      "relation_query": "Who is the father-in-law of a person born as the daughter of a person?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi.\"",
+        "hyperedge_text": "Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.17241032421588898,
+        "fusion_score": 0.2344820648431778,
+        "entity_ids": [
+          "\"PRINCESS OF CAMBODIA\"",
+          "\"KING SISOWATH MONIVONG\"",
+          "\"NORODOM KANVIMAN NORLEAK TEVI\""
+        ],
+        "chunk_ids": [
+          "chunk-53cf475673977fbe30a572cacba761c7"
+        ],
+        "evidence_texts": [
+          "Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi.",
+          "Sisowath Kossamak Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960. She then became co-head of state with her only son, Norodom Sihanouk, from 1960 to 1970. Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi. Her official title was Preah Mohasatreiyani Sisowath Monivong Kossamak Nearirath Serey Vathana . Upon the death of Monivong in 1941, Sihanouk took the throne. In 1955, he abdicated in favor of his father Suramarit, who then reigned for five years. After her husband's death, Kossamak became the symbol and representative of the monarchy while Sihanouk assumed a role equal to that of a monarch. Both were overthrown in a 1970 coup, and they went into exile in China. Kossamak died there in 1975."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.17241,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.234482
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960.\"",
+        "hyperedge_text": "Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.17241032421588898,
+        "fusion_score": 0.2344820648431778,
+        "entity_ids": [
+          "\"SISOWATH KOSSAMAK\"",
+          "\"QUEEN CONSORT\"",
+          "\"NORODOM SURAMARIT\""
+        ],
+        "chunk_ids": [
+          "chunk-53cf475673977fbe30a572cacba761c7"
+        ],
+        "evidence_texts": [
+          "Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960.",
+          "Sisowath Kossamak Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960. She then became co-head of state with her only son, Norodom Sihanouk, from 1960 to 1970. Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi. Her official title was Preah Mohasatreiyani Sisowath Monivong Kossamak Nearirath Serey Vathana . Upon the death of Monivong in 1941, Sihanouk took the throne. In 1955, he abdicated in favor of his father Suramarit, who then reigned for five years. After her husband's death, Kossamak became the symbol and representative of the monarchy while Sihanouk assumed a role equal to that of a monarch. Both were overthrown in a 1970 coup, and they went into exile in China. Kossamak died there in 1975."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.17241,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.234482
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abu Ahmad Muhammad bin Ali bin Muhammad al-Karaji, better known as al-Qassab, was a Muslim warrior-scholar, exegete and specialist in Hadith studies.\"",
+        "hyperedge_text": "Abu Ahmad Muhammad bin Ali bin Muhammad al-Karaji, better known as al-Qassab, was a Muslim warrior-scholar, exegete and specialist in Hadith studies.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3675989508628845,
+        "fusion_score": 0.07351979017257691,
+        "entity_ids": [
+          "\"ABU AHMAD MUHAMMAD BIN ALI BIN MUHAMMAD AL-KARAJI\"",
+          "\"AL-QASSAB\"",
+          "\"MUSLIM WARRIOR-SCHOLAR\"",
+          "\"EXEGETE\"",
+          "\"HADITH STUDIES\""
+        ],
+        "chunk_ids": [
+          "chunk-56e920c9f7c45c852790df69b153825d"
+        ],
+        "evidence_texts": [
+          "Al-Qassab Abu Ahmad Muhammad bin Ali bin Muhammad al- Karaji, better known as al- Qassab, was a Muslim warrior- scholar, exegete and specialist in Hadith studies. He has, at times, been confused with his son Abu al- Hasan Ahmad bin Muhammad bin Ali bin Muhammad al- Karaji.",
+          "Abu Ahmad Muhammad bin Ali bin Muhammad al-Karaji, better known as al-Qassab, was a Muslim warrior-scholar, exegete and specialist in Hadith studies."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.367599,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.07352
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has, at times, been confused with his son Abu al-Hasan Ahmad bin Muhammad bin Ali bin Muhammad al-Karaji.\"",
+        "hyperedge_text": "He has, at times, been confused with his son Abu al-Hasan Ahmad bin Muhammad bin Ali bin Muhammad al-Karaji.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3675989508628845,
+        "fusion_score": 0.07351979017257691,
+        "entity_ids": [
+          "\"CONFUSION\"",
+          "\"ABU AL-HASAN AHMAD BIN MUHAMMAD BIN ALI BIN MUHAMMAD AL-KARAJI\""
+        ],
+        "chunk_ids": [
+          "chunk-56e920c9f7c45c852790df69b153825d"
+        ],
+        "evidence_texts": [
+          "Al-Qassab Abu Ahmad Muhammad bin Ali bin Muhammad al- Karaji, better known as al- Qassab, was a Muslim warrior- scholar, exegete and specialist in Hadith studies. He has, at times, been confused with his son Abu al- Hasan Ahmad bin Muhammad bin Ali bin Muhammad al- Karaji.",
+          "He has, at times, been confused with his son Abu al-Hasan Ahmad bin Muhammad bin Ali bin Muhammad al-Karaji."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.367599,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.07352
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Al-Qassab is a prominent figure in Islamic history, known for his scholarly contributions and military prowess.\"",
+        "hyperedge_text": "Al-Qassab is a prominent figure in Islamic history, known for his scholarly contributions and military prowess.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3675989508628845,
+        "fusion_score": 0.07351979017257691,
+        "entity_ids": [
+          "\"ISLAMIC HISTORY\"",
+          "\"SCHOLARLY CONTRIBUTIONS\"",
+          "\"MILITARY PROWESS\""
+        ],
+        "chunk_ids": [
+          "chunk-56e920c9f7c45c852790df69b153825d"
+        ],
+        "evidence_texts": [
+          "Al-Qassab Abu Ahmad Muhammad bin Ali bin Muhammad al- Karaji, better known as al- Qassab, was a Muslim warrior- scholar, exegete and specialist in Hadith studies. He has, at times, been confused with his son Abu al- Hasan Ahmad bin Muhammad bin Ali bin Muhammad al- Karaji.",
+          "Al-Qassab is a prominent figure in Islamic history, known for his scholarly contributions and military prowess."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.367599,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.07352
+        }
+      }
+    ],
+    "answer": "King Norodom Suramarit",
+    "confidence": 0.9,
+    "reasoning_summary": "Sisowath Kossamak was the Queen consort of King Norodom Suramarit, making him the father-in-law of her children.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960.\""
+    ]
+  }
+]

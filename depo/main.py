@@ -149,6 +149,7 @@ def run_pipeline(
     from entity_path_projector import (
         build_entity_start_nodes_from_explicit_entities,
         enumerate_entity_origin_paths,
+        prune_terminal_glue_paths,
     )
     from path_projector import (
         build_undirected_dependency_graph,
@@ -204,17 +205,25 @@ def run_pipeline(
     if not entity_origin_paths:
         raise ValueError("No entity-origin dependency paths were enumerated.")
 
+    pruned_entity_origin_paths, path_pruning_stats = prune_terminal_glue_paths(
+        entity_origin_paths=entity_origin_paths,
+        dependency_graph=dependency_graph,
+        entity_start_nodes=entity_start_nodes,
+    )
+    if not pruned_entity_origin_paths:
+        raise ValueError("No entity-origin dependency paths remained after terminal glue pruning.")
+
     scored_entity_paths, path_scoring_payload = path_semantic_parser.score_entity_paths(
         original_question=record.question,
         restored_question=processing_question,
         entity_start_nodes=entity_start_nodes,
-        entity_origin_paths=entity_origin_paths,
+        entity_origin_paths=pruned_entity_origin_paths,
     )
 
     top_paths_by_entity = select_top_paths_by_entity(
         scored_paths=scored_entity_paths,
         entity_start_nodes=entity_start_nodes,
-        entity_origin_paths=entity_origin_paths,
+        entity_origin_paths=pruned_entity_origin_paths,
         top_k=2,
     )
     path_set_candidates = build_path_set_candidates(
@@ -226,7 +235,7 @@ def run_pipeline(
 
     selected_dependency_path_evidence = build_selected_dependency_path_evidence(
         path_set_candidates=path_set_candidates,
-        entity_origin_paths=entity_origin_paths,
+        entity_origin_paths=pruned_entity_origin_paths,
         max_path_sets=4,
     )
     subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
@@ -249,6 +258,8 @@ def run_pipeline(
         "dependency_graph": dependency_graph,
         "entity_start_nodes": entity_start_nodes,
         "entity_origin_paths": entity_origin_paths,
+        "pruned_entity_origin_paths": pruned_entity_origin_paths,
+        "path_pruning_stats": path_pruning_stats,
         "scored_entity_paths": scored_entity_paths,
         "path_scoring_payload": path_scoring_payload,
         "top_paths_by_entity": top_paths_by_entity,
@@ -313,6 +324,8 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     restored_graph_node_candidates: list[RestoredGraphNodeCandidate] = result["restored_graph_node_candidates"]
     entity_start_nodes: list[EntityStartNode] = result["entity_start_nodes"]
     entity_origin_paths: list[EntityOriginPath] = result["entity_origin_paths"]
+    pruned_entity_origin_paths: list[EntityOriginPath] = result.get("pruned_entity_origin_paths") or entity_origin_paths
+    path_pruning_stats: dict[str, Any] = result.get("path_pruning_stats") or {}
     scored_entity_paths: list[ScoredEntityPath] = result.get("scored_entity_paths", [])
     top_paths_by_entity: dict[str, list[ScoredEntityPath]] = result.get("top_paths_by_entity", {})
     path_set_candidates: list[PathSetCandidate] = result.get("path_set_candidates", [])
@@ -390,12 +403,16 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     _print_entity_origin_paths(entity_origin_paths, include_evidence=debug)
     print()
 
+    print("[7.5 Terminal Glue Path Pruning]")
+    _print_path_pruning_stats(path_pruning_stats, entity_start_nodes)
+    print()
+
     print("[8. LLM Path Scores]")
-    _print_scored_entity_paths(scored_entity_paths, entity_origin_paths)
+    _print_scored_entity_paths(scored_entity_paths, pruned_entity_origin_paths)
     print()
 
     print("[8.1 Top-2 Paths per Entity]")
-    _print_top_paths_by_entity(top_paths_by_entity, entity_origin_paths)
+    _print_top_paths_by_entity(top_paths_by_entity, pruned_entity_origin_paths)
     print()
 
     print("[8.2 Candidate Path Sets]")
@@ -448,6 +465,44 @@ def _print_entity_origin_paths(
                 print(
                     f"    {evidence.get('source_text', evidence.get('source'))}"
                     f" -> {evidence.get('target_text', evidence.get('target'))}{relation_text}"
+                )
+
+
+def _print_path_pruning_stats(
+    pruning_stats: dict[str, Any],
+    entity_start_nodes: list[EntityStartNode],
+) -> None:
+    if not pruning_stats:
+        print("  (none)")
+        return
+    total_raw = int(pruning_stats.get("total_raw_paths") or 0)
+    total_kept = int(pruning_stats.get("total_kept_paths") or 0)
+    total_pruned = int(pruning_stats.get("total_pruned_paths") or 0)
+    total_ratio = float(pruning_stats.get("total_pruned_ratio") or 0.0)
+    print(f"  Total raw paths: {total_raw}")
+    print(f"  Total kept paths: {total_kept}")
+    print(f"  Total pruned paths: {total_pruned}")
+    print(f"  Total pruned ratio: {total_ratio:.2%}")
+    by_entity = pruning_stats.get("by_entity") or {}
+    if not isinstance(by_entity, dict) or not by_entity:
+        return
+    text_by_entity = {entity.entity_id: entity.text for entity in entity_start_nodes}
+    print("  By entity:")
+    for entity_id in sorted(by_entity, key=_entity_sort_key_for_print):
+        stats = by_entity.get(entity_id) or {}
+        entity_text = text_by_entity.get(entity_id, "")
+        heading = f"{entity_id} / {entity_text}" if entity_text else entity_id
+        print(
+            f"    - {heading}: raw={stats.get('raw', 0)} kept={stats.get('kept', 0)} "
+            f"pruned={stats.get('pruned', 0)} fallback_used={bool(stats.get('fallback_used'))}"
+        )
+        examples = stats.get("pruned_examples") or []
+        if examples:
+            print("      examples:")
+            for example in examples[:5]:
+                print(
+                    f"        - {example.get('path_id')}: {example.get('path_text')} "
+                    f"[terminal={example.get('terminal')}, reason={example.get('reason')}]"
                 )
 
 

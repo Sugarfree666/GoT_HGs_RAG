@@ -1,0 +1,765 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Christ Walking On The Water?",
+    "analysis": {
+      "entities": [
+        "Christ Walking On The Water"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5987995862960815,
+        "fusion_score": 0.5197599172592163,
+        "entity_ids": [
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\"",
+          "\"1899\"",
+          "\"FRENCH\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5988,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51976
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is titled Christ Walking on the Water.\"",
+        "hyperedge_text": "The film is titled Christ Walking on the Water.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5987995862960815,
+        "fusion_score": 0.5197599172592163,
+        "entity_ids": [
+          "\"CHRIST WALKING ON THE WATER\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "The film is titled Christ Walking on the Water.",
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.5988,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51976
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced in France.\"",
+        "hyperedge_text": "The film was produced in France.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5987995862960815,
+        "fusion_score": 0.11975991725921631,
+        "entity_ids": [
+          "\"FRANCE\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+          "The film was produced in France."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.5988,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.11976
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is a silent film, meaning it has no synchronized sound.\"",
+        "hyperedge_text": "The film is a silent film, meaning it has no synchronized sound.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5987995862960815,
+        "fusion_score": 0.11975991725921631,
+        "entity_ids": [
+          "\"SILENT FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+          "The film is a silent film, meaning it has no synchronized sound."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.5988,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.11976
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Méliès is known for his innovative techniques in filmmaking.\"",
+        "hyperedge_text": "Georges Méliès is known for his innovative techniques in filmmaking.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5987995862960815,
+        "fusion_score": 0.11975991725921631,
+        "entity_ids": [
+          "\"INNOVATIVE TECHNIQUES\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+          "Georges Méliès is known for his innovative techniques in filmmaking."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.5988,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.11976
+        }
+      }
+    ],
+    "answer": "Georges Méliès",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Christ Walking on the Water' is directed by Georges Méliès.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of 45 Fathers?",
+    "analysis": {
+      "entities": [
+        "45 Fathers"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work titled 45 Fathers",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.\"",
+        "hyperedge_text": "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6036809682846069,
+        "fusion_score": 0.5207361936569215,
+        "entity_ids": [
+          "\"JAMES TINLING\"",
+          "\"20TH CENTURY FOX\"",
+          "\"45 FATHERS\"",
+          "\"FRANCES HYLAND\"",
+          "\"ALBERT RAY\"",
+          "\"JANE WITHERS\"",
+          "\"THOMAS BECK\"",
+          "\"LOUISE HENRY\"",
+          "\"RICHARD CARLE\"",
+          "\"NELLA WALKER\"",
+          "\"ANDREW TOMBES\"",
+          "\"NOVEMBER 26, 1937\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "evidence_texts": [
+          "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+          "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.603681,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.520736
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"45 Fathers is a 1937 American comedy film.\"",
+        "hyperedge_text": "45 Fathers is a 1937 American comedy film.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6036809682846069,
+        "fusion_score": 0.5207361936569215,
+        "entity_ids": [
+          "\"45 FATHERS\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "evidence_texts": [
+          "45 Fathers is a 1937 American comedy film.",
+          "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.603681,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.520736
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by James Tinling.\"",
+        "hyperedge_text": "The film was directed by James Tinling.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6036809682846069,
+        "fusion_score": 0.1207361936569214,
+        "entity_ids": [
+          "\"JAMES TINLING\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "evidence_texts": [
+          "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox.",
+          "The film was directed by James Tinling."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.603681,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.120736
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The screenplay was written by Frances Hyland and Albert Ray.\"",
+        "hyperedge_text": "The screenplay was written by Frances Hyland and Albert Ray.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6036809682846069,
+        "fusion_score": 0.1207361936569214,
+        "entity_ids": [
+          "\"FRANCES HYLAND\"",
+          "\"ALBERT RAY\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "evidence_texts": [
+          "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox.",
+          "The screenplay was written by Frances Hyland and Albert Ray."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.603681,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.120736
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film stars Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker, and Andrew Tombes.\"",
+        "hyperedge_text": "The film stars Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker, and Andrew Tombes.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6036809682846069,
+        "fusion_score": 0.1207361936569214,
+        "entity_ids": [
+          "\"JANE WITHERS\"",
+          "\"THOMAS BECK\"",
+          "\"LOUISE HENRY\"",
+          "\"RICHARD CARLE\"",
+          "\"NELLA WALKER\"",
+          "\"ANDREW TOMBES\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "evidence_texts": [
+          "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox.",
+          "The film stars Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker, and Andrew Tombes."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.603681,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.120736
+        }
+      }
+    ],
+    "answer": "James Tinling",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that '45 Fathers' was directed by James Tinling.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.\"",
+      "<hyperedge>\"The film was directed by James Tinling.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of Christ Walking On The Water born?",
+    "analysis": {
+      "entities": [
+        "Georges Méliès"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.\"",
+        "hyperedge_text": "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.768856406211853,
+        "fusion_score": 0.5537712812423706,
+        "entity_ids": [
+          "\"GEORGES MÉLIÈS\"",
+          "\"FILM DIRECTOR\"",
+          "\"ILLUSIONIST\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "evidence_texts": [
+          "Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.",
+          "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.768856,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.553771
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+        "hyperedge_text": "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.49373090267181396,
+        "fusion_score": 0.4987461805343628,
+        "entity_ids": [
+          "\"CHRIST WALKING ON THE WATER\"",
+          "\"GEORGES MÉLIÈS\"",
+          "\"SHORT SILENT FILM\"",
+          "\"1899\"",
+          "\"FRENCH\""
+        ],
+        "chunk_ids": [
+          "chunk-42ce48a0d7a18b84236f1fd5b11a7d8d"
+        ],
+        "evidence_texts": [
+          "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+          "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.493731,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.498746
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Méliès was well-known for the use of special effects, popularizing techniques such as substitution splices, multiple exposures, time-lapse photography, dissolves, and hand-painted colour.\"",
+        "hyperedge_text": "Méliès was well-known for the use of special effects, popularizing techniques such as substitution splices, multiple exposures, time-lapse photography, dissolves, and hand-painted colour.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.768856406211853,
+        "fusion_score": 0.1537712812423706,
+        "entity_ids": [
+          "\"SPECIAL EFFECTS\"",
+          "\"SUBSTITUTION SPLICES\"",
+          "\"MULTIPLE EXPOSURES\"",
+          "\"TIME-LAPSE PHOTOGRAPHY\"",
+          "\"DISSOLVES\"",
+          "\"HAND-PAINTED COLOUR\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "evidence_texts": [
+          "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy.",
+          "Méliès was well-known for the use of special effects, popularizing techniques such as substitution splices, multiple exposures, time-lapse photography, dissolves, and hand-painted colour."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.768856,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.153771
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was also one of the first filmmakers to use storyboards.\"",
+        "hyperedge_text": "He was also one of the first filmmakers to use storyboards.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.768856406211853,
+        "fusion_score": 0.1537712812423706,
+        "entity_ids": [
+          "\"STORYBOARDS\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "evidence_texts": [
+          "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy.",
+          "He was also one of the first filmmakers to use storyboards."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.768856,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.153771
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His films include 'A Trip to the Moon' (1902) and 'The Impossible Voyage' (1904), both involving strange, surreal journeys somewhat in the style of Jules Verne.\"",
+        "hyperedge_text": "His films include 'A Trip to the Moon' (1902) and 'The Impossible Voyage' (1904), both involving strange, surreal journeys somewhat in the style of Jules Verne.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.768856406211853,
+        "fusion_score": 0.1537712812423706,
+        "entity_ids": [
+          "\"A TRIP TO THE MOON\"",
+          "\"THE IMPOSSIBLE VOYAGE\"",
+          "\"JULES VERNE\""
+        ],
+        "chunk_ids": [
+          "chunk-c0f82c5f0988f7267c3c0063bada4b98"
+        ],
+        "evidence_texts": [
+          "Georges Méliès Marie- Georges- Jean Méliès( 8 December 1861 – 21 January 1938), was a French illusionist and film director who led many technical and narrative developments in the earliest days of cinema. Méliès was well- known for the use of special effects, popularizing such techniques as substitution splices, multiple exposures, time- lapse photography, dissolves, and hand- painted colour. He was also one of the first filmmakers to use storyboards. His films include\" A Trip to the Moon\"( 1902) and\" The Impossible Voyage\"( 1904), both involving strange, surreal journeys somewhat in the style of Jules Verne, and are considered among the most important early science fiction films, though their approach is closer to fantasy.",
+          "His films include 'A Trip to the Moon' (1902) and 'The Impossible Voyage' (1904), both involving strange, surreal journeys somewhat in the style of Jules Verne."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.768856,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.153771
+        }
+      }
+    ],
+    "answer": "8 December 1861",
+    "confidence": 1.0,
+    "reasoning_summary": "Georges Méliès, the director of 'Christ Walking On The Water', was born on 8 December 1861, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Georges Méliès, a French illusionist and film director, led many technical and narrative developments in the earliest days of cinema.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of 45 Fathers born?",
+    "analysis": {
+      "entities": [
+        "James Tinling"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"James Tinling (May 8, 1889 in Seattle – May 14, 1967 in Los Angeles) was an American film director.\"",
+        "hyperedge_text": "James Tinling (May 8, 1889 in Seattle – May 14, 1967 in Los Angeles) was an American film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6873141527175903,
+        "fusion_score": 0.5374628305435181,
+        "entity_ids": [
+          "\"JAMES TINLING\"",
+          "\"LOS ANGELES\"",
+          "\"AMERICAN FILM DIRECTOR\"",
+          "\"SEATTLE\""
+        ],
+        "chunk_ids": [
+          "chunk-eaf71ea765658652a8a9ecfa90fc462c"
+        ],
+        "evidence_texts": [
+          "James Tinling (May 8, 1889 in Seattle – May 14, 1967 in Los Angeles) was an American film director.",
+          "James Tinling James Tinling( May 8, 1889 in Seattle – May 14, 1967 in Los Angeles) was an American film director. He worked during the silent period as a prop boy and stuntman, and directed primarily for 20th Century Fox in the 1930s and 1940s. He has been cited as one of the best B-film directors for Fox, known for directing numerous westerns and lighthearted films, including\" Charlie Chan in Shanghai\"( 1935)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.687314,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.537463
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.\"",
+        "hyperedge_text": "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3110516369342804,
+        "fusion_score": 0.4622103273868561,
+        "entity_ids": [
+          "\"JAMES TINLING\"",
+          "\"20TH CENTURY FOX\"",
+          "\"45 FATHERS\"",
+          "\"FRANCES HYLAND\"",
+          "\"ALBERT RAY\"",
+          "\"JANE WITHERS\"",
+          "\"THOMAS BECK\"",
+          "\"LOUISE HENRY\"",
+          "\"RICHARD CARLE\"",
+          "\"NELLA WALKER\"",
+          "\"ANDREW TOMBES\"",
+          "\"NOVEMBER 26, 1937\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "evidence_texts": [
+          "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+          "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.311052,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.46221
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by James Tinling.\"",
+        "hyperedge_text": "The film was directed by James Tinling.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3110516369342804,
+        "fusion_score": 0.4622103273868561,
+        "entity_ids": [
+          "\"JAMES TINLING\""
+        ],
+        "chunk_ids": [
+          "chunk-847dec19d57aee285853a9860a4c60f7"
+        ],
+        "evidence_texts": [
+          "The film was directed by James Tinling.",
+          "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.311052,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.46221
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He worked during the silent period as a prop boy and stuntman, and directed primarily for 20th Century Fox in the 1930s and 1940s.\"",
+        "hyperedge_text": "He worked during the silent period as a prop boy and stuntman, and directed primarily for 20th Century Fox in the 1930s and 1940s.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6873141527175903,
+        "fusion_score": 0.13746283054351807,
+        "entity_ids": [
+          "\"SILENT PERIOD\"",
+          "\"PROP BOY\"",
+          "\"20TH CENTURY FOX\"",
+          "\"1940S\"",
+          "\"STUNTMAN\"",
+          "\"1930S\""
+        ],
+        "chunk_ids": [
+          "chunk-eaf71ea765658652a8a9ecfa90fc462c"
+        ],
+        "evidence_texts": [
+          "James Tinling James Tinling( May 8, 1889 in Seattle – May 14, 1967 in Los Angeles) was an American film director. He worked during the silent period as a prop boy and stuntman, and directed primarily for 20th Century Fox in the 1930s and 1940s. He has been cited as one of the best B-film directors for Fox, known for directing numerous westerns and lighthearted films, including\" Charlie Chan in Shanghai\"( 1935).",
+          "He worked during the silent period as a prop boy and stuntman, and directed primarily for 20th Century Fox in the 1930s and 1940s."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.687314,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.137463
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has been cited as one of the best B-film directors for Fox, known for directing numerous westerns and lighthearted films, including 'Charlie Chan in Shanghai' (1935).\"",
+        "hyperedge_text": "He has been cited as one of the best B-film directors for Fox, known for directing numerous westerns and lighthearted films, including 'Charlie Chan in Shanghai' (1935).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6873141527175903,
+        "fusion_score": 0.13746283054351807,
+        "entity_ids": [
+          "\"B-FILM DIRECTOR\"",
+          "\"WESTERNS\"",
+          "\"LIGHTHEARTED FILMS\"",
+          "\"CHARLIE CHAN IN SHANGHAI\"",
+          "\"1935\""
+        ],
+        "chunk_ids": [
+          "chunk-eaf71ea765658652a8a9ecfa90fc462c"
+        ],
+        "evidence_texts": [
+          "James Tinling James Tinling( May 8, 1889 in Seattle – May 14, 1967 in Los Angeles) was an American film director. He worked during the silent period as a prop boy and stuntman, and directed primarily for 20th Century Fox in the 1930s and 1940s. He has been cited as one of the best B-film directors for Fox, known for directing numerous westerns and lighthearted films, including\" Charlie Chan in Shanghai\"( 1935).",
+          "He has been cited as one of the best B-film directors for Fox, known for directing numerous westerns and lighthearted films, including 'Charlie Chan in Shanghai' (1935)."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.687314,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.137463
+        }
+      }
+    ],
+    "answer": "May 8, 1889",
+    "confidence": 1.0,
+    "reasoning_summary": "James Tinling, the director of '45 Fathers', was born on May 8, 1889, as stated in the evidence.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"James Tinling (May 8, 1889 in Seattle – May 14, 1967 in Los Angeles) was an American film director.\""
+    ]
+  }
+]

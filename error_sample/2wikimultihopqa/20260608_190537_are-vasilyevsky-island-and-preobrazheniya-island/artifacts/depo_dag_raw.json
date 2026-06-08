@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Which country is Vasilyevsky Island located in?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps3",
+            "path_id": "e1_p4",
+            "node_texts": [
+              "Vasilyevsky Island",
+              "located",
+              "country"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the country that Vasilyevsky Island is located in."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p4"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Vasilyevsky Island"
+        },
+        "one_hop_relation": "located country",
+        "answer_type": "Country"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "Which country is Preobrazheniya Island located in?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps4",
+            "path_id": "e2_p4",
+            "node_texts": [
+              "Preobrazheniya Island",
+              "located",
+              "country"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the country that Preobrazheniya Island is located in."
+          }
+        ],
+        "support_path_ids": [
+          "e2_p4"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Preobrazheniya Island"
+        },
+        "one_hop_relation": "located country",
+        "answer_type": "Country"
+      }
+    }
+  ]
+}

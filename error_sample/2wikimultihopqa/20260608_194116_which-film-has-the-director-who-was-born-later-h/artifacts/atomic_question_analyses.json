@@ -1,0 +1,199 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Henry Goes Arizona?",
+    "retrieval_question": "Who is the director of Henry Goes Arizona?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Henry Goes Arizona?",
+      "retrieval_question": "Who is the director of Henry Goes Arizona?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Henry Goes Arizona"
+      ],
+      "relations": [
+        "is directed by"
+      ],
+      "relation_query": "Who is the director of a work titled 'Henry Goes Arizona'?",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of The Blue Collar Worker And The Hairdresser In A Whirl Of Sex And Politics?",
+    "retrieval_question": "Who is the director of The Blue Collar Worker And The Hairdresser In A Whirl Of Sex And Politics?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of The Blue Collar Worker And The Hairdresser In A Whirl Of Sex And Politics?",
+      "retrieval_question": "Who is the director of The Blue Collar Worker And The Hairdresser In A Whirl Of Sex And Politics?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "The Blue Collar Worker And The Hairdresser In A Whirl Of Sex And Politics"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of q1's answer born?",
+    "retrieval_question": "When was the director of q1's answer born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was the director of q1's answer born?",
+      "retrieval_question": "When was the director of q1's answer born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Henry Goes Arizona?",
+        "answer": "Edwin L. Marin",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that 'The film was directed by Edwin L. Marin,' which directly answers the question.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The film was directed by Edwin L. Marin.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch.\"",
+            "fusion_score": 0.5323229551315308,
+            "branch_support": [
+              "anchor",
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch.",
+              "Henry Goes Arizona Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch. While adjusting to the country there, he is threatened by a gang who is after the ranch. The film was directed by Edwin L. Marin."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Henry Goes Arizona is a 1939 western film.\"",
+            "fusion_score": 0.5323229551315308,
+            "branch_support": [
+              "anchor",
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Henry Goes Arizona is a 1939 western film.",
+              "Henry Goes Arizona Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch. While adjusting to the country there, he is threatened by a gang who is after the ranch. The film was directed by Edwin L. Marin."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The setting of the film is in Arizona.\"",
+            "fusion_score": 0.13232295513153078,
+            "branch_support": [
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The setting of the film is in Arizona.",
+              "Henry Goes Arizona Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch. While adjusting to the country there, he is threatened by a gang who is after the ranch. The film was directed by Edwin L. Marin."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Edwin L. Marin"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was a person born?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of q2's answer born?",
+    "retrieval_question": "When was the director of q2's answer born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was the director of q2's answer born?",
+      "retrieval_question": "When was the director of q2's answer born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "Who is the director of The Blue Collar Worker And The Hairdresser In A Whirl Of Sex And Politics?",
+        "answer": "Lina Wertmüller",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics' is directed by Lina Wertmüller.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics (also known as 'The Worker and the Hairdresser') is a 1996 Italian comedy film directed by Lina Wertmüller.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics (also known as 'The Worker and the Hairdresser') is a 1996 Italian comedy film directed by Lina Wertmüller.\"",
+            "fusion_score": 0.5508025646209718,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics (also known as 'The Worker and the Hairdresser') is a 1996 Italian comedy film directed by Lina Wertmüller.",
+              "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics( also known as\" The Worker and the Hairdresser\") is a 1996 Italian comedy film directed by Lina Wertmüller."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The title 'The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics' suggests a narrative that intertwines themes of labor and personal relationships.\"",
+            "fusion_score": 0.5508025646209718,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The title 'The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics' suggests a narrative that intertwines themes of labor and personal relationships.",
+              "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics( also known as\" The Worker and the Hairdresser\") is a 1996 Italian comedy film directed by Lina Wertmüller."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film's comedic elements are likely to explore the dynamics between different social classes.\"",
+            "fusion_score": 0.1508025646209717,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics( also known as\" The Worker and the Hairdresser\") is a 1996 Italian comedy film directed by Lina Wertmüller.",
+              "The film's comedic elements are likely to explore the dynamics between different social classes."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Lina Wertmüller"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was a person born?",
+      "answer_type": "date"
+    }
+  }
+]

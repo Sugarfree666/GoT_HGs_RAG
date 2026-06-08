@@ -1,0 +1,98 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of B Boy (Song)?",
+    "retrieval_question": "Who is the performer of B Boy (Song)?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the performer of B Boy (Song)?",
+      "retrieval_question": "Who is the performer of B Boy (Song)?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "B Boy (Song)"
+      ],
+      "relations": [
+        "performer of"
+      ],
+      "relation_query": "who is the performer of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was q1's answer detained?",
+    "retrieval_question": "Where was q1's answer detained?",
+    "dependency_question_rewrite": {
+      "original_question": "Where was q1's answer detained?",
+      "retrieval_question": "Where was q1's answer detained?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the performer of B Boy (Song)?",
+        "answer": "Meek Mill",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'B Boy' is a song by American hip hop recording artist Meek Mill.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"B Boy is a song by American hip hop recording artist Meek Mill.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"B Boy is a song by American hip hop recording artist Meek Mill.\"",
+            "fusion_score": 0.36840440034866334,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "B Boy is a song by American hip hop recording artist Meek Mill.",
+              "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"It was released as a third single from 'Dreams Worth More Than Money' on January 3, 2015, by Maybach Music Group and Atlantic Records.\"",
+            "fusion_score": 0.10860491991043092,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg.",
+              "It was released as a third single from 'Dreams Worth More Than Money' on January 3, 2015, by Maybach Music Group and Atlantic Records."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg.\"",
+            "fusion_score": 0.10860491991043092,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg.",
+              "The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Meek Mill"
+      ],
+      "relations": [
+        "detention location"
+      ],
+      "relation_query": "Where was a person detained?",
+      "answer_type": "location"
+    }
+  }
+]

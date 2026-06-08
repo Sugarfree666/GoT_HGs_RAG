@@ -1,0 +1,26 @@
+{
+  "answer": "Sir Thomas Wheate",
+  "candidate_answer": "Sir Thomas Wheate lived longer than Albert Édouard Le Brethon De Caligny.",
+  "reasoning_summary": "Sir Thomas Wheate died on 25 August 1721 at the age of 53, while Albert Édouard Le Brethon De Caligny died on 17 January 1863 at the age of 29. Therefore, Sir Thomas Wheate lived longer.",
+  "answer_span_reasoning": "Sir Thomas Wheate lived longer than Albert Édouard Le Brethon De Caligny.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "When did Sir Thomas Wheate die?",
+      "answer": "25 August 1721",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Sir Thomas Wheate was born on 6 September 1667 and died on 25 August 1721.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "When did Albert Édouard Le Brethon De Caligny die?",
+      "answer": "17 January 1863",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Albert Édouard Le Brethon de Caligny died on 17 January 1863 in Shaoxing.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

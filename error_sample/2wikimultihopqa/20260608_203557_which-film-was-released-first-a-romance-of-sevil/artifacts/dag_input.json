@@ -1,0 +1,99 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was A Romance Of Seville released?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p10",
+          "node_texts": [
+            "A Romance Of Seville",
+            "released",
+            "film"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the release date of A Romance Of Seville."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p10"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "A Romance Of Seville"
+      },
+      "one_hop_relation": "release date",
+      "answer_type": "Date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Pirates Of The Sky released?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e2_p11",
+          "node_texts": [
+            "Pirates Of The Sky",
+            "released",
+            "film"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the release date of Pirates Of The Sky."
+        }
+      ],
+      "support_path_ids": [
+        "e2_p11"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Pirates Of The Sky"
+      },
+      "one_hop_relation": "release date",
+      "answer_type": "Date"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "Which film was released first, the answer of q1 or the answer of q2?",
+    "dependencies": [
+      "q1",
+      "q2"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps3",
+          "path_id": "e1_p12",
+          "node_texts": [
+            "A Romance Of Seville",
+            "Pirates Of The Sky",
+            "released",
+            "first"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking which film was released first based on their release dates."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p12"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "first"
+      },
+      "one_hop_relation": "comparison of release dates",
+      "answer_type": "Film"
+    }
+  }
+]

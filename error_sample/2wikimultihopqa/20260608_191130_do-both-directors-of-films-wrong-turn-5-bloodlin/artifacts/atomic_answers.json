@@ -1,0 +1,749 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who are the directors of Wrong Turn?",
+    "analysis": {
+      "entities": [
+        "Wrong Turn"
+      ],
+      "relations": [
+        "directed by"
+      ],
+      "relation_query": "who are the directors of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"A sequel to Wrong Turn (2003) and the second installment in the Wrong Turn franchise.\"",
+        "hyperedge_text": "A sequel to Wrong Turn (2003) and the second installment in the Wrong Turn franchise.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6114213466644287,
+        "fusion_score": 0.5222842693328857,
+        "entity_ids": [
+          "\"WRONG TURN\"",
+          "\"FRANCHISE\""
+        ],
+        "chunk_ids": [
+          "chunk-1dc49920cf7f6d46c04df143d34c1f11"
+        ],
+        "evidence_texts": [
+          "A sequel to Wrong Turn (2003) and the second installment in the Wrong Turn franchise.",
+          "Wrong Turn 2: Dead End Wrong Turn 2: Dead End is a 2007 American horror film directed by Joe Lynch and starring Erica Leerhsen, Henry Rollins and Texas Battle. A sequel to\" Wrong Turn\"( 2003) and the second installment in the\" Wrong Turn\" franchise. It was released on DVD on October 9, 2007. The film received a positive response from critics making it the best- reviewed film in the franchise. It is followed by( 2009)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.611421,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.522284
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wrong Turn 5: Bloodlines is a 2012 American horror film written and directed by Declan O'Brien.\"",
+        "hyperedge_text": "Wrong Turn 5: Bloodlines is a 2012 American horror film written and directed by Declan O'Brien.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6329452395439148,
+        "fusion_score": 0.12658904790878298,
+        "entity_ids": [
+          "\"WRONG TURN 5: BLOODLINES\"",
+          "\"DECLAN O'BRIEN\""
+        ],
+        "chunk_ids": [
+          "chunk-795e7e8843c2c1ec1bbe0451bcb1bfa9"
+        ],
+        "evidence_texts": [
+          "Wrong Turn 5: Bloodlines Wrong Turn 5: Bloodlines( also known as Wrong Turn 5) is a 2012 American horror film written and directed by Declan O'Brien. The film stars Camilla Arfwedson, Roxanne McKee and Doug Bradley. It is the fifth installment in the\" Wrong Turn\" franchise and a sequel to( 2011), leading the events of the 2003 film\" Wrong Turn\".",
+          "Wrong Turn 5: Bloodlines is a 2012 American horror film written and directed by Declan O'Brien."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.632945,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.126589
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film stars Camilla Arfwedson, Roxanne McKee and Doug Bradley.\"",
+        "hyperedge_text": "The film stars Camilla Arfwedson, Roxanne McKee and Doug Bradley.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6329452395439148,
+        "fusion_score": 0.12658904790878298,
+        "entity_ids": [
+          "\"CAMILLA ARFWEDSON\"",
+          "\"ROXANNE MCKEE\"",
+          "\"DOUG BRADLEY\""
+        ],
+        "chunk_ids": [
+          "chunk-795e7e8843c2c1ec1bbe0451bcb1bfa9"
+        ],
+        "evidence_texts": [
+          "Wrong Turn 5: Bloodlines Wrong Turn 5: Bloodlines( also known as Wrong Turn 5) is a 2012 American horror film written and directed by Declan O'Brien. The film stars Camilla Arfwedson, Roxanne McKee and Doug Bradley. It is the fifth installment in the\" Wrong Turn\" franchise and a sequel to( 2011), leading the events of the 2003 film\" Wrong Turn\".",
+          "The film stars Camilla Arfwedson, Roxanne McKee and Doug Bradley."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.632945,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.126589
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is the fifth installment in the 'Wrong Turn' franchise and a sequel to (2011), leading the events of the 2003 film 'Wrong Turn'.\"",
+        "hyperedge_text": "It is the fifth installment in the 'Wrong Turn' franchise and a sequel to (2011), leading the events of the 2003 film 'Wrong Turn'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6329452395439148,
+        "fusion_score": 0.12658904790878298,
+        "entity_ids": [
+          "\"WRONG TURN FRANCHISE\"",
+          "\"SEQUEL\"",
+          "\"2003 FILM 'WRONG TURN'"
+        ],
+        "chunk_ids": [
+          "chunk-795e7e8843c2c1ec1bbe0451bcb1bfa9"
+        ],
+        "evidence_texts": [
+          "Wrong Turn 5: Bloodlines Wrong Turn 5: Bloodlines( also known as Wrong Turn 5) is a 2012 American horror film written and directed by Declan O'Brien. The film stars Camilla Arfwedson, Roxanne McKee and Doug Bradley. It is the fifth installment in the\" Wrong Turn\" franchise and a sequel to( 2011), leading the events of the 2003 film\" Wrong Turn\".",
+          "It is the fifth installment in the 'Wrong Turn' franchise and a sequel to (2011), leading the events of the 2003 film 'Wrong Turn'."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.632945,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.126589
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wrong Turn 5: Bloodlines is also known as Wrong Turn 5.\"",
+        "hyperedge_text": "Wrong Turn 5: Bloodlines is also known as Wrong Turn 5.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6329452395439148,
+        "fusion_score": 0.12658904790878298,
+        "entity_ids": [
+          "\"WRONG TURN 5\""
+        ],
+        "chunk_ids": [
+          "chunk-795e7e8843c2c1ec1bbe0451bcb1bfa9"
+        ],
+        "evidence_texts": [
+          "Wrong Turn 5: Bloodlines Wrong Turn 5: Bloodlines( also known as Wrong Turn 5) is a 2012 American horror film written and directed by Declan O'Brien. The film stars Camilla Arfwedson, Roxanne McKee and Doug Bradley. It is the fifth installment in the\" Wrong Turn\" franchise and a sequel to( 2011), leading the events of the 2003 film\" Wrong Turn\".",
+          "Wrong Turn 5: Bloodlines is also known as Wrong Turn 5."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.632945,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.126589
+        }
+      }
+    ],
+    "answer": "Declan O'Brien, Joe Lynch",
+    "confidence": 0.75,
+    "reasoning_summary": "The evidence indicates that 'Wrong Turn 5: Bloodlines' was directed by Declan O'Brien, and 'Wrong Turn 2: Dead End' was directed by Joe Lynch. Therefore, these are the directors of the 'Wrong Turn' films mentioned.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Wrong Turn 5: Bloodlines is a 2012 American horror film written and directed by Declan O'Brien.\"",
+      "<hyperedge>\"A sequel to Wrong Turn (2003) and the second installment in the Wrong Turn franchise.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who are the directors of Dark River (2017 Film)?",
+    "analysis": {
+      "entities": [
+        "Dark River",
+        "2017 Film"
+      ],
+      "relations": [
+        "directed by"
+      ],
+      "relation_query": "who directed a work titled 'Dark River' released in 2017",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Dark River is a 2017 British drama film written and directed by Clio Barnard, and starring Ruth Wilson, Mark Stanley, and Sean Bean.\"",
+        "hyperedge_text": "Dark River is a 2017 British drama film written and directed by Clio Barnard, and starring Ruth Wilson, Mark Stanley, and Sean Bean.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.710040807723999,
+        "fusion_score": 0.34200816154479985,
+        "entity_ids": [
+          "\"CLIO BARNARD\"",
+          "\"DARK RIVER\"",
+          "\"RUTH WILSON\"",
+          "\"MARK STANLEY\"",
+          "\"SEAN BEAN\""
+        ],
+        "chunk_ids": [
+          "chunk-050a9390253a1a60eb9c560d99769515"
+        ],
+        "evidence_texts": [
+          "Dark River is a 2017 British drama film written and directed by Clio Barnard, and starring Ruth Wilson, Mark Stanley, and Sean Bean.",
+          "Dark River (2017 film) Dark River is a 2017 British drama film written and directed by Clio Barnard, and starring Ruth Wilson, Mark Stanley, and Sean Bean. The film is loosely based on Rose Tremain's novel\" Trespass\". Originally Barnard intended the film to be a straightforward adaptation of the novel, which was set in southern France and involved two sets of elderly siblings involved in a property dispute. Encouraged by the financiers to make the story her own, Barnard changed the location of the film to Yorkshire, and instead focused on a woman who returns to the home she fled 15 years earlier in order to claim the tenancy of her father's farm, who then becomes involved in a dispute with her brother. It screened in the Platform section at the 2017 Toronto International Film Festival and was released in the United Kingdom on 23 February 2018."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.710041,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.342008
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dark River is a 2017 British drama film written and directed by Clio Barnard.\"",
+        "hyperedge_text": "Dark River is a 2017 British drama film written and directed by Clio Barnard.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.710040807723999,
+        "fusion_score": 0.34200816154479985,
+        "entity_ids": [
+          "\"BRITISH\"",
+          "\"DARK RIVER\"",
+          "\"2017\"",
+          "\"DRAMA\""
+        ],
+        "chunk_ids": [
+          "chunk-050a9390253a1a60eb9c560d99769515"
+        ],
+        "evidence_texts": [
+          "Dark River is a 2017 British drama film written and directed by Clio Barnard.",
+          "Dark River (2017 film) Dark River is a 2017 British drama film written and directed by Clio Barnard, and starring Ruth Wilson, Mark Stanley, and Sean Bean. The film is loosely based on Rose Tremain's novel\" Trespass\". Originally Barnard intended the film to be a straightforward adaptation of the novel, which was set in southern France and involved two sets of elderly siblings involved in a property dispute. Encouraged by the financiers to make the story her own, Barnard changed the location of the film to Yorkshire, and instead focused on a woman who returns to the home she fled 15 years earlier in order to claim the tenancy of her father's farm, who then becomes involved in a dispute with her brother. It screened in the Platform section at the 2017 Toronto International Film Festival and was released in the United Kingdom on 23 February 2018."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.710041,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.342008
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dark River is a 1990 British film featuring Tom Bell, Siân Phillips, Kate Buffery, Ian McNeice and Tony Haygarth, among others.\"",
+        "hyperedge_text": "Dark River is a 1990 British film featuring Tom Bell, Siân Phillips, Kate Buffery, Ian McNeice and Tony Haygarth, among others.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.6429160833358765,
+        "fusion_score": 0.32858321666717527,
+        "entity_ids": [
+          "\"TOM BELL\"",
+          "\"SIÂN PHILLIPS\"",
+          "\"KATE BUFFERY\"",
+          "\"IAN MCNEICE\"",
+          "\"TONY HAYGARTH\"",
+          "\"DARK RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-c928007e7e5f37fb443ca71269bb9de3"
+        ],
+        "evidence_texts": [
+          "Dark River is a 1990 British film featuring Tom Bell, Siân Phillips, Kate Buffery, Ian McNeice and Tony Haygarth, among others.",
+          "Dark River (1990 film) Dark River is a 1990 British film featuring Tom Bell, Siân Phillips, Kate Buffery, Ian McNeice and Tony Haygarth, among others. Dark River was an official selection at the 1990 Montreal Film Festival and the Ghent Film Festival of the same year."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.642916,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.328583
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dark River is a 1990 British film.\"",
+        "hyperedge_text": "Dark River is a 1990 British film.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.6429160833358765,
+        "fusion_score": 0.32858321666717527,
+        "entity_ids": [
+          "\"1990\"",
+          "\"BRITISH\"",
+          "\"DARK RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-c928007e7e5f37fb443ca71269bb9de3"
+        ],
+        "evidence_texts": [
+          "Dark River is a 1990 British film.",
+          "Dark River (1990 film) Dark River is a 1990 British film featuring Tom Bell, Siân Phillips, Kate Buffery, Ian McNeice and Tony Haygarth, among others. Dark River was an official selection at the 1990 Montreal Film Festival and the Ghent Film Festival of the same year."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.642916,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.328583
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He appeared in more than thirty films during his career including 'Dark River' (1952).\"",
+        "hyperedge_text": "He appeared in more than thirty films during his career including 'Dark River' (1952).",
+        "branch_support": [
+          "anchor",
+          "relation"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.3933054208755493,
+        "fusion_score": 0.2786610841751099,
+        "entity_ids": [
+          "\"THIRTY FILMS\"",
+          "\"DARK RIVER\""
+        ],
+        "chunk_ids": [
+          "chunk-020c69f89a1e3c3ba86d49cfb90f6280"
+        ],
+        "evidence_texts": [
+          "He appeared in more than thirty films during his career including 'Dark River' (1952).",
+          "Luis Otero (actor) Luis Otero was an Argentine film actor. He appeared in more than thirty films during his career including\" Dark River\"( 1952)."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.393305,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.278661
+        }
+      }
+    ],
+    "answer": "Clio Barnard",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'Dark River' is written and directed by Clio Barnard.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Dark River is a 2017 British drama film written and directed by Clio Barnard.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the nationality of the directors of Wrong Turn?",
+    "analysis": {
+      "entities": [
+        "Declan O'Brien",
+        "Joe Lynch"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of two directors?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Declan O'Brien is an American writer and director.\"",
+        "hyperedge_text": "Declan O'Brien is an American writer and director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.56853848695755,
+        "fusion_score": 0.31370769739151005,
+        "entity_ids": [
+          "\"DECLAN O'BRIEN\""
+        ],
+        "chunk_ids": [
+          "chunk-652777dc8078f3d6a99a62109cf25d17"
+        ],
+        "evidence_texts": [
+          "Declan O'Brien is an American writer and director.",
+          "Declan O'Brien Declan O'Brien is an American writer and director. O'Brien was known as the director of three films of the\" Wrong Turn\" series( 2009- 2012). O'Brien is the president of Utopia Pictures& Television."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.568538,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.313708
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wrong Turn 5: Bloodlines is a 2012 American horror film written and directed by Declan O'Brien.\"",
+        "hyperedge_text": "Wrong Turn 5: Bloodlines is a 2012 American horror film written and directed by Declan O'Brien.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.29559317231178284,
+        "fusion_score": 0.2591186344623566,
+        "entity_ids": [
+          "\"WRONG TURN 5: BLOODLINES\"",
+          "\"DECLAN O'BRIEN\""
+        ],
+        "chunk_ids": [
+          "chunk-795e7e8843c2c1ec1bbe0451bcb1bfa9"
+        ],
+        "evidence_texts": [
+          "Wrong Turn 5: Bloodlines is a 2012 American horror film written and directed by Declan O'Brien.",
+          "Wrong Turn 5: Bloodlines Wrong Turn 5: Bloodlines( also known as Wrong Turn 5) is a 2012 American horror film written and directed by Declan O'Brien. The film stars Camilla Arfwedson, Roxanne McKee and Doug Bradley. It is the fifth installment in the\" Wrong Turn\" franchise and a sequel to( 2011), leading the events of the 2003 film\" Wrong Turn\"."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.295593,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.259119
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wrong Turn 4: Bloody Beginnings is a 2011 American horror film written and directed by Declan O'Brien.\"",
+        "hyperedge_text": "Wrong Turn 4: Bloody Beginnings is a 2011 American horror film written and directed by Declan O'Brien.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.29302459955215454,
+        "fusion_score": 0.25860491991043094,
+        "entity_ids": [
+          "\"DECLAN O'BRIEN\"",
+          "\"WRONG TURN 4: BLOODY BEGINNINGS\""
+        ],
+        "chunk_ids": [
+          "chunk-06255d289a551e801724db202138c693"
+        ],
+        "evidence_texts": [
+          "Wrong Turn 4: Bloody Beginnings is a 2011 American horror film written and directed by Declan O'Brien.",
+          "Wrong Turn 4: Bloody Beginnings Wrong Turn 4: Bloody Beginnings is a 2011 American horror film written and directed by Declan O'Brien. It is the fourth installment of the\" Wrong Turn\" franchise and served as a prequel to the 2003 film\" Wrong Turn\". The film was followed by( 2012)."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.293025,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.258605
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was written and directed by Declan O'Brien.\"",
+        "hyperedge_text": "The film was written and directed by Declan O'Brien.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.29302459955215454,
+        "fusion_score": 0.25860491991043094,
+        "entity_ids": [
+          "\"DECLAN O'BRIEN\""
+        ],
+        "chunk_ids": [
+          "chunk-06255d289a551e801724db202138c693"
+        ],
+        "evidence_texts": [
+          "The film was written and directed by Declan O'Brien.",
+          "Wrong Turn 4: Bloody Beginnings Wrong Turn 4: Bloody Beginnings is a 2011 American horror film written and directed by Declan O'Brien. It is the fourth installment of the\" Wrong Turn\" franchise and served as a prequel to the 2003 film\" Wrong Turn\". The film was followed by( 2012)."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.293025,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.258605
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Wrong Turn 3: Left for Dead is a 2009 American horror film directed by Declan O'Brien and starring Tom Frederic, Janet Montgomery, and Tamer Hassan.\"",
+        "hyperedge_text": "Wrong Turn 3: Left for Dead is a 2009 American horror film directed by Declan O'Brien and starring Tom Frederic, Janet Montgomery, and Tamer Hassan.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.2801852822303772,
+        "fusion_score": 0.25603705644607544,
+        "entity_ids": [
+          "\"WRONG TURN 3: LEFT FOR DEAD\"",
+          "\"TOM FREDERIC\"",
+          "\"JANET MONTGOMERY\"",
+          "\"TAMER HASSAN\"",
+          "\"DECLAN O'BRIEN\""
+        ],
+        "chunk_ids": [
+          "chunk-21accc3ca93b9703e572901756fd9219"
+        ],
+        "evidence_texts": [
+          "Wrong Turn 3: Left for Dead is a 2009 American horror film directed by Declan O'Brien and starring Tom Frederic, Janet Montgomery, and Tamer Hassan.",
+          "Wrong Turn 3: Left for Dead Wrong Turn 3: Left for Dead is a 2009 American horror film directed by Declan O'Brien and starring Tom Frederic, Janet Montgomery, and Tamer Hassan. It is a sequel to( 2007) and the third installment in the\" Wrong Turn\" franchise. The film was released on DVD on October 20, 2009."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.280185,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.256037
+        }
+      }
+    ],
+    "answer": "American",
+    "confidence": 0.9,
+    "reasoning_summary": "Declan O'Brien is identified as an American writer and director, which supports the nationality of one of the directors of 'Wrong Turn'. Joe Lynch's nationality is not specified in the evidence, but the context suggests he is also American, as both directors are associated with the same film franchise.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Declan O'Brien is an American writer and director.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the nationality of the directors of Dark River (2017 Film)?",
+    "analysis": {
+      "entities": [
+        "Clio Barnard"
+      ],
+      "relations": [
+        "nationality of"
+      ],
+      "relation_query": "What is the nationality of a person?",
+      "answer_type": "nationality"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Clio Barnard is a British director of documentary and feature films.\"",
+        "hyperedge_text": "Clio Barnard is a British director of documentary and feature films.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6554783582687378,
+        "fusion_score": 0.5310956716537476,
+        "entity_ids": [
+          "\"CLIO BARNARD\"",
+          "\"BRITISH CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-4052edb426a0ca34018b44206013e833"
+        ],
+        "evidence_texts": [
+          "Clio Barnard is a British director of documentary and feature films.",
+          "Clio Barnard Clio Barnard is a British director of documentary and feature films. She won widespread critical acclaim and multiple awards for her debut,\" The Arbor\", an experimental documentary about Bradford playwright Andrea Dunbar. In 2013 she was hailed as a significant new voice in British cinema for her film\" The Selfish Giant\", which premiered in the Director's Fortnight section of the Cannes film festival."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.655478,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531096
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Dark River is a 2017 British drama film written and directed by Clio Barnard, and starring Ruth Wilson, Mark Stanley, and Sean Bean.\"",
+        "hyperedge_text": "Dark River is a 2017 British drama film written and directed by Clio Barnard, and starring Ruth Wilson, Mark Stanley, and Sean Bean.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.2897137999534607,
+        "fusion_score": 0.45794275999069217,
+        "entity_ids": [
+          "\"CLIO BARNARD\"",
+          "\"DARK RIVER\"",
+          "\"RUTH WILSON\"",
+          "\"MARK STANLEY\"",
+          "\"SEAN BEAN\""
+        ],
+        "chunk_ids": [
+          "chunk-050a9390253a1a60eb9c560d99769515"
+        ],
+        "evidence_texts": [
+          "Dark River is a 2017 British drama film written and directed by Clio Barnard, and starring Ruth Wilson, Mark Stanley, and Sean Bean.",
+          "Dark River (2017 film) Dark River is a 2017 British drama film written and directed by Clio Barnard, and starring Ruth Wilson, Mark Stanley, and Sean Bean. The film is loosely based on Rose Tremain's novel\" Trespass\". Originally Barnard intended the film to be a straightforward adaptation of the novel, which was set in southern France and involved two sets of elderly siblings involved in a property dispute. Encouraged by the financiers to make the story her own, Barnard changed the location of the film to Yorkshire, and instead focused on a woman who returns to the home she fled 15 years earlier in order to claim the tenancy of her father's farm, who then becomes involved in a dispute with her brother. It screened in the Platform section at the 2017 Toronto International Film Festival and was released in the United Kingdom on 23 February 2018."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.289714,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.457943
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She won widespread critical acclaim and multiple awards for her debut, 'The Arbor', an experimental documentary about Bradford playwright Andrea Dunbar.\"",
+        "hyperedge_text": "She won widespread critical acclaim and multiple awards for her debut, 'The Arbor', an experimental documentary about Bradford playwright Andrea Dunbar.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6554783582687378,
+        "fusion_score": 0.13109567165374755,
+        "entity_ids": [
+          "\"THE ARBOR\"",
+          "\"ANDREA DUNBAR\""
+        ],
+        "chunk_ids": [
+          "chunk-4052edb426a0ca34018b44206013e833"
+        ],
+        "evidence_texts": [
+          "Clio Barnard Clio Barnard is a British director of documentary and feature films. She won widespread critical acclaim and multiple awards for her debut,\" The Arbor\", an experimental documentary about Bradford playwright Andrea Dunbar. In 2013 she was hailed as a significant new voice in British cinema for her film\" The Selfish Giant\", which premiered in the Director's Fortnight section of the Cannes film festival.",
+          "She won widespread critical acclaim and multiple awards for her debut, 'The Arbor', an experimental documentary about Bradford playwright Andrea Dunbar."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.655478,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.131096
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"In 2013 she was hailed as a significant new voice in British cinema for her film 'The Selfish Giant', which premiered in the Director's Fortnight section of the Cannes film festival.\"",
+        "hyperedge_text": "In 2013 she was hailed as a significant new voice in British cinema for her film 'The Selfish Giant', which premiered in the Director's Fortnight section of the Cannes film festival.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6554783582687378,
+        "fusion_score": 0.13109567165374755,
+        "entity_ids": [
+          "\"THE SELFISH GIANT\"",
+          "\"CANNES FILM FESTIVAL\""
+        ],
+        "chunk_ids": [
+          "chunk-4052edb426a0ca34018b44206013e833"
+        ],
+        "evidence_texts": [
+          "Clio Barnard Clio Barnard is a British director of documentary and feature films. She won widespread critical acclaim and multiple awards for her debut,\" The Arbor\", an experimental documentary about Bradford playwright Andrea Dunbar. In 2013 she was hailed as a significant new voice in British cinema for her film\" The Selfish Giant\", which premiered in the Director's Fortnight section of the Cannes film festival.",
+          "In 2013 she was hailed as a significant new voice in British cinema for her film 'The Selfish Giant', which premiered in the Director's Fortnight section of the Cannes film festival."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.655478,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.131096
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Clio Barnard's work has been recognized for its unique storytelling and innovative approach to documentary filmmaking.\"",
+        "hyperedge_text": "Clio Barnard's work has been recognized for its unique storytelling and innovative approach to documentary filmmaking.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6554783582687378,
+        "fusion_score": 0.13109567165374755,
+        "entity_ids": [
+          "\"STORYTELLING\"",
+          "\"DOCUMENTARY FILMMAKING\""
+        ],
+        "chunk_ids": [
+          "chunk-4052edb426a0ca34018b44206013e833"
+        ],
+        "evidence_texts": [
+          "Clio Barnard Clio Barnard is a British director of documentary and feature films. She won widespread critical acclaim and multiple awards for her debut,\" The Arbor\", an experimental documentary about Bradford playwright Andrea Dunbar. In 2013 she was hailed as a significant new voice in British cinema for her film\" The Selfish Giant\", which premiered in the Director's Fortnight section of the Cannes film festival.",
+          "Clio Barnard's work has been recognized for its unique storytelling and innovative approach to documentary filmmaking."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.655478,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.131096
+        }
+      }
+    ],
+    "answer": "British",
+    "confidence": 0.9,
+    "reasoning_summary": "Clio Barnard, the director of 'Dark River', is identified as a British director in the evidence.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Clio Barnard is a British director of documentary and feature films.\"",
+      "<hyperedge>\"Dark River is a 2017 British drama film written and directed by Clio Barnard, and starring Ruth Wilson, Mark Stanley, and Sean Bean.\""
+    ]
+  }
+]

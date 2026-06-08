@@ -1,0 +1,26 @@
+{
+  "answer": "King Norodom Suramarit",
+  "candidate_answer": "King Norodom Suramarit",
+  "reasoning_summary": "Sisowath Kossamak was the Queen consort of King Norodom Suramarit, making him the father-in-law of her children. The evidence strongly supports this relationship.",
+  "answer_span_reasoning": "King Norodom Suramarit is the father-in-law of Sisowath Kossamak.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the father of Sisowath Kossamak?",
+      "answer": "King Sisowath Monivong",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Sisowath Kossamak was born Princess of Cambodia as the daughter of King Sisowath Monivong and his wife Norodom Kanviman Norleak Tevi.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the father-in-law of q1's answer?",
+      "answer": "King Norodom Suramarit",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Sisowath Kossamak (9 April 1904 – 27 April 1975) was the Queen consort of Cambodia by marriage to King Norodom Suramarit from 1955 to his death in 1960.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

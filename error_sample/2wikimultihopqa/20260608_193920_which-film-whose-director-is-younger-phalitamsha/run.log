@@ -1,0 +1,11 @@
+2026-06-08 19:39:20,471 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 19:40:30,039 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 19:40:30,040 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 19:40:41,575 | INFO | Starting HyperBranch pipeline for question: Which film whose director is younger, Phalitamsha or Gladiators Seven?
+2026-06-08 19:40:41,576 | INFO | Executing atomic DAG with 4 node(s)
+2026-06-08 19:40:45,707 | INFO | Atomic retrieval returned 104 hits for question=Who is the director of Phalitamsha?
+2026-06-08 19:40:50,611 | INFO | Atomic retrieval returned 88 hits for question=Who is the director of Gladiators Seven?
+2026-06-08 19:40:57,734 | INFO | Atomic retrieval returned 119 hits for question=What is the birth year of the director of Phalitamsha?
+2026-06-08 19:41:00,294 | INFO | Rewrote retrieval question for q4: What is the birth year of the director of Gladiators Seven? -> What is the birth year of Alberto De Martino?
+2026-06-08 19:41:04,746 | INFO | Atomic retrieval returned 117 hits for question=What is the birth year of Alberto De Martino?
+2026-06-08 19:41:15,698 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_193920_which-film-whose-director-is-younger-phalitamsha

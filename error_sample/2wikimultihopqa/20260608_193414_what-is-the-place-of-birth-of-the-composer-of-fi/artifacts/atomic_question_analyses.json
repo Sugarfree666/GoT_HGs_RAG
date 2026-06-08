@@ -1,0 +1,99 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the composer of Inherent Vice (Film)?",
+    "retrieval_question": "Who is the composer of Inherent Vice (Film)?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the composer of Inherent Vice (Film)?",
+      "retrieval_question": "Who is the composer of Inherent Vice (Film)?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Inherent Vice",
+        "Film"
+      ],
+      "relations": [
+        "is the composer of"
+      ],
+      "relation_query": "who is the composer of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the place of birth of q1's answer?",
+    "retrieval_question": "What is the place of birth of q1's answer?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the place of birth of q1's answer?",
+      "retrieval_question": "What is the place of birth of q1's answer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the composer of Inherent Vice (Film)?",
+        "answer": "Jonny Greenwood",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence indicates that Jonny Greenwood is the composer for the film 'Inherent Vice'.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.\"",
+            "fusion_score": 0.3368919134140015,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon.",
+              "Inherent Vice (film) Inherent Vice is a 2014 American neo-noir period comedy-drama film written and directed by Paul Thomas Anderson, based on the novel of the same name by Thomas Pynchon. The cast includes Joaquin Phoenix, Josh Brolin, Owen Wilson, Katherine Waterston, Eric Roberts, Reese Witherspoon, Benicio del Toro, Jena Malone, Joanna Newsom, Jeannie Berlin, Maya Rudolph, Michael K. Williams and Martin Short. The film follows Larry \"Doc\" Sportello, a stoner hippie and private investigator in 1970, who is embroiled in the Los Angeles criminal underworld while investigating three cases interrelated by the disappearance of his ex-girlfriend and her wealthy boyfriend. Anderson's adaptation of \"Inherent Vice\" had been in development since 2010; it is the first Pynchon novel to be adapted for the screen. It is Anderson's second collaboration with Phoenix, following \"The Master,\" and in..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Ian Barry (director)\"",
+            "fusion_score": 0.2687704741954804,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "Ian Barry (director)",
+              "Ian Barry (director) Ian Barry is an Australian director of film and TV."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film was directed by Doug Liman.\"",
+            "fusion_score": 0.2649826765060425,
+            "branch_support": [
+              "anchor"
+            ],
+            "evidence_texts": [
+              "The film was directed by Doug Liman.",
+              "Getting In Getting In, also known as Student Body, is a 1994 American comedy film directed by Doug Liman starring Andrew McCarthy and Stephen Mailer."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Jonny Greenwood"
+      ],
+      "relations": [
+        "place of birth"
+      ],
+      "relation_query": "What is the place of birth of a person?",
+      "answer_type": "location"
+    }
+  }
+]

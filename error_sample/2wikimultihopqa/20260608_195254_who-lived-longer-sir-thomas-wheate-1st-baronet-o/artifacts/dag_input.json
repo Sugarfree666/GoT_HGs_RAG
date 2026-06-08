@@ -1,0 +1,62 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When did Sir Thomas Wheate die?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p20",
+          "node_texts": [
+            "Sir Thomas Wheate",
+            "lived"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the death date of Sir Thomas Wheate."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p20"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Sir Thomas Wheate"
+      },
+      "one_hop_relation": "death date",
+      "answer_type": "Date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When did Albert Édouard Le Brethon De Caligny die?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p20",
+          "node_texts": [
+            "Le Brethon De Caligny",
+            "lived"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the death date of Albert Édouard Le Brethon De Caligny."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p20"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Albert Édouard Le Brethon De Caligny"
+      },
+      "one_hop_relation": "death date",
+      "answer_type": "Date"
+    }
+  }
+]

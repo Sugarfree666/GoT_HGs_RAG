@@ -1,0 +1,197 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Goose Woman?",
+    "retrieval_question": "Who is the director of The Goose Woman?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of The Goose Woman?",
+      "retrieval_question": "Who is the director of The Goose Woman?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "The Goose Woman"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of You Can No Longer Remain Silent?",
+    "retrieval_question": "Who is the director of You Can No Longer Remain Silent?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of You Can No Longer Remain Silent?",
+      "retrieval_question": "Who is the director of You Can No Longer Remain Silent?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "You Can No Longer Remain Silent"
+      ],
+      "relations": [
+        "is directed by"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "When did the director of q1 die?",
+    "retrieval_question": "When did the director of q1 die?",
+    "dependency_question_rewrite": {
+      "original_question": "When did the director of q1 die?",
+      "retrieval_question": "When did the director of q1 die?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of The Goose Woman?",
+        "answer": "Clarence Brown",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'The Goose Woman' is directed by Clarence Brown.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son.\"",
+            "fusion_score": 0.5294143915176392,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son.",
+              "The Goose Woman The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son. The film was released by Universal Pictures. The Rex Beach short story is based in part on the then already sensational Hall- Mills murder case in which a woman named Jane Gibson is described as a pig woman because of the pigs she raised on her property. Both critics and audiences favorably received the film. \" The Goose Woman\" was remade in 1933 as\" The Past of Mary Holmes\" featuring Helen MacKellar and Jean Arthur."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film is a remake of the silent film 'The Goose Woman' (1925), which is based on a short story by Rex Beach, partly based on the Hall-Mills murder case.\"",
+            "fusion_score": 0.48480972051620486,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film is a remake of the silent film 'The Goose Woman' (1925), which is based on a short story by Rex Beach, partly based on the Hall-Mills murder case.",
+              "The Past of Mary Holmes The Past of Mary Holmes is a 1933 American pre-Code drama film, directed by Slavko Vorkapich and Harlan Thompson, and released by RKO. The film is a remake of the silent film\" The Goose Woman\"( 1925), which is based on a short story by Rex Beach, partly based on the Hall- Mills murder case."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film was released by Universal Pictures.\"",
+            "fusion_score": 0.12941439151763917,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Goose Woman The Goose Woman is a 1925 silent film drama directed by Clarence Brown and starring Louise Dresser with Jack Pickford as her son. The film was released by Universal Pictures. The Rex Beach short story is based in part on the then already sensational Hall- Mills murder case in which a woman named Jane Gibson is described as a pig woman because of the pigs she raised on her property. Both critics and audiences favorably received the film. \" The Goose Woman\" was remade in 1933 as\" The Past of Mary Holmes\" featuring Helen MacKellar and Jean Arthur.",
+              "The film was released by Universal Pictures."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Clarence Brown",
+        "The Goose Woman"
+      ],
+      "relations": [
+        "died"
+      ],
+      "relation_query": "When did the director of a work die?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "When did the director of q2 die?",
+    "retrieval_question": "When did the director of q2 die?",
+    "dependency_question_rewrite": {
+      "original_question": "When did the director of q2 die?",
+      "retrieval_question": "When did the director of q2 die?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "Who is the director of You Can No Longer Remain Silent?",
+        "answer": "Robert A. Stemmle",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'You Can No Longer Remain Silent' is directed by Robert A. Stemmle.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.\"",
+            "fusion_score": 0.5045025110244752,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "You Can No Longer Remain Silent is a 1955 West German romantic drama film directed by Robert A. Stemmle.",
+              "You Can No Longer Remain Silent You Can No Longer Remain Silent( German: Du darfst nicht länger schweigen) is a 1955 West German romantic drama film directed by Robert A. Stemmle and starring Heidemarie Hatheyer, Wilhelm Borchert and Werner Hinz. It is based on the 1929 novel\" Morning of Life\" by Kristmann Gudmundsson. It is set amongst feuding Scandinavian fishing families. The film's sets were designed by the art directors Helmut Nentwig and Karl Weber."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"It is based on the 1929 novel 'Morning of Life' by Kristmann Gudmundsson.\"",
+            "fusion_score": 0.10450251102447511,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "You Can No Longer Remain Silent You Can No Longer Remain Silent( German: Du darfst nicht länger schweigen) is a 1955 West German romantic drama film directed by Robert A. Stemmle and starring Heidemarie Hatheyer, Wilhelm Borchert and Werner Hinz. It is based on the 1929 novel\" Morning of Life\" by Kristmann Gudmundsson. It is set amongst feuding Scandinavian fishing families. The film's sets were designed by the art directors Helmut Nentwig and Karl Weber.",
+              "It is based on the 1929 novel 'Morning of Life' by Kristmann Gudmundsson."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"It is set amongst feuding Scandinavian fishing families.\"",
+            "fusion_score": 0.10450251102447511,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "You Can No Longer Remain Silent You Can No Longer Remain Silent( German: Du darfst nicht länger schweigen) is a 1955 West German romantic drama film directed by Robert A. Stemmle and starring Heidemarie Hatheyer, Wilhelm Borchert and Werner Hinz. It is based on the 1929 novel\" Morning of Life\" by Kristmann Gudmundsson. It is set amongst feuding Scandinavian fishing families. The film's sets were designed by the art directors Helmut Nentwig and Karl Weber.",
+              "It is set amongst feuding Scandinavian fishing families."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Robert A. Stemmle",
+        "You Can No Longer Remain Silent"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of the director of a work?",
+      "answer_type": "date"
+    }
+  }
+]

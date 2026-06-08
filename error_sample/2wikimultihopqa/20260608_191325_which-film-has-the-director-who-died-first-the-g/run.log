@@ -1,0 +1,10 @@
+2026-06-08 19:13:25,848 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 19:14:29,912 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 19:14:29,912 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 19:14:49,307 | INFO | Starting HyperBranch pipeline for question: Which film has the director who died first, The Goose Woman or You Can No Longer Remain Silent?
+2026-06-08 19:14:49,308 | INFO | Executing atomic DAG with 4 node(s)
+2026-06-08 19:14:53,147 | INFO | Atomic retrieval returned 90 hits for question=Who is the director of The Goose Woman?
+2026-06-08 19:14:57,717 | INFO | Atomic retrieval returned 93 hits for question=Who is the director of You Can No Longer Remain Silent?
+2026-06-08 19:15:04,429 | INFO | Atomic retrieval returned 106 hits for question=When did the director of q1 die?
+2026-06-08 19:15:10,859 | INFO | Atomic retrieval returned 132 hits for question=When did the director of q2 die?
+2026-06-08 19:15:19,905 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_191325_which-film-has-the-director-who-died-first-the-g

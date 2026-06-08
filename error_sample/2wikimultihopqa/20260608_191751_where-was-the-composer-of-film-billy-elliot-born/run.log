@@ -1,0 +1,8 @@
+2026-06-08 19:17:51,153 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 19:19:14,190 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 19:19:14,191 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 19:19:26,621 | INFO | Starting HyperBranch pipeline for question: Where was the composer of film Billy Elliot born?
+2026-06-08 19:19:26,621 | INFO | Executing atomic DAG with 2 node(s)
+2026-06-08 19:19:30,217 | INFO | Atomic retrieval returned 107 hits for question=Who is the composer of Billy Elliot?
+2026-06-08 19:19:38,439 | INFO | Atomic retrieval returned 84 hits for question=Where was q1's answer born?
+2026-06-08 19:19:47,179 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_191751_where-was-the-composer-of-film-billy-elliot-born

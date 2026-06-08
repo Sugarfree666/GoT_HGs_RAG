@@ -1,0 +1,44 @@
+{
+  "answer": "El Tonto",
+  "candidate_answer": "El Tonto",
+  "reasoning_summary": "Charlie Day, the director of 'El Tonto', has an unknown birth date, while Robert North Bradbury, the director of 'The Heart Of Doreon', was born on March 23, 1886. Since we cannot determine Charlie Day's birth date, we cannot definitively conclude which director was born first. However, based on the available information, 'El Tonto' is the film whose director's birth date is unresolved, while 'The Heart Of Doreon' has a confirmed birth date.",
+  "answer_span_reasoning": "El Tonto is the film with an unresolved director's birth date.",
+  "confidence": 0.5,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of El Tonto?",
+      "answer": "Charlie Day",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"El Tonto is an upcoming comedy film written and directed by Charlie Day.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the director of The Heart Of Doreon?",
+      "answer": "Robert North Bradbury",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "When was the director of q1 born?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"El Tonto is an upcoming comedy film written and directed by Charlie Day.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "When was the director of q2 born?",
+      "answer": "March 23, 1886",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Bradbury occasionally billed himself as 'Robert North Bradbury', 'R.N. Bradbury', or 'Robert Bradbury'. \""
+      ]
+    }
+  ],
+  "remaining_gaps": [
+    "q3: Birth date of Charlie Day is unknown."
+  ]
+}

@@ -1,0 +1,738 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Henry Goes Arizona?",
+    "analysis": {
+      "entities": [
+        "Henry Goes Arizona"
+      ],
+      "relations": [
+        "is directed by"
+      ],
+      "relation_query": "Who is the director of a work titled 'Henry Goes Arizona'?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch.\"",
+        "hyperedge_text": "Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6616147756576538,
+        "fusion_score": 0.5323229551315308,
+        "entity_ids": [
+          "\"HENRY GOES ARIZONA\"",
+          "\"FRANK MORGAN\"",
+          "\"RANCH\""
+        ],
+        "chunk_ids": [
+          "chunk-987df2804c4976deb71d727410b89f8a"
+        ],
+        "evidence_texts": [
+          "Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch.",
+          "Henry Goes Arizona Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch. While adjusting to the country there, he is threatened by a gang who is after the ranch. The film was directed by Edwin L. Marin."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.661615,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532323
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Henry Goes Arizona is a 1939 western film.\"",
+        "hyperedge_text": "Henry Goes Arizona is a 1939 western film.",
+        "branch_support": [
+          "anchor",
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6616147756576538,
+        "fusion_score": 0.5323229551315308,
+        "entity_ids": [
+          "\"HENRY GOES ARIZONA\""
+        ],
+        "chunk_ids": [
+          "chunk-987df2804c4976deb71d727410b89f8a"
+        ],
+        "evidence_texts": [
+          "Henry Goes Arizona is a 1939 western film.",
+          "Henry Goes Arizona Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch. While adjusting to the country there, he is threatened by a gang who is after the ranch. The film was directed by Edwin L. Marin."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.661615,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532323
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The setting of the film is in Arizona.\"",
+        "hyperedge_text": "The setting of the film is in Arizona.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6616147756576538,
+        "fusion_score": 0.13232295513153078,
+        "entity_ids": [
+          "\"ARIZONA\""
+        ],
+        "chunk_ids": [
+          "chunk-987df2804c4976deb71d727410b89f8a"
+        ],
+        "evidence_texts": [
+          "The setting of the film is in Arizona.",
+          "Henry Goes Arizona Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch. While adjusting to the country there, he is threatened by a gang who is after the ranch. The film was directed by Edwin L. Marin."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.661615,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.132323
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"While adjusting to the country there, he is threatened by a gang who is after the ranch.\"",
+        "hyperedge_text": "While adjusting to the country there, he is threatened by a gang who is after the ranch.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6616147756576538,
+        "fusion_score": 0.13232295513153078,
+        "entity_ids": [
+          "\"GANG\""
+        ],
+        "chunk_ids": [
+          "chunk-987df2804c4976deb71d727410b89f8a"
+        ],
+        "evidence_texts": [
+          "Henry Goes Arizona Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch. While adjusting to the country there, he is threatened by a gang who is after the ranch. The film was directed by Edwin L. Marin.",
+          "While adjusting to the country there, he is threatened by a gang who is after the ranch."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.661615,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.132323
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Edwin L. Marin.\"",
+        "hyperedge_text": "The film was directed by Edwin L. Marin.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6616147756576538,
+        "fusion_score": 0.13232295513153078,
+        "entity_ids": [
+          "\"EDWIN L. MARIN\""
+        ],
+        "chunk_ids": [
+          "chunk-987df2804c4976deb71d727410b89f8a"
+        ],
+        "evidence_texts": [
+          "Henry Goes Arizona Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch. While adjusting to the country there, he is threatened by a gang who is after the ranch. The film was directed by Edwin L. Marin.",
+          "The film was directed by Edwin L. Marin."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.661615,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.132323
+        }
+      }
+    ],
+    "answer": "Edwin L. Marin",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'The film was directed by Edwin L. Marin,' which directly answers the question.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The film was directed by Edwin L. Marin.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of The Blue Collar Worker And The Hairdresser In A Whirl Of Sex And Politics?",
+    "analysis": {
+      "entities": [
+        "The Blue Collar Worker And The Hairdresser In A Whirl Of Sex And Politics"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics (also known as 'The Worker and the Hairdresser') is a 1996 Italian comedy film directed by Lina Wertmüller.\"",
+        "hyperedge_text": "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics (also known as 'The Worker and the Hairdresser') is a 1996 Italian comedy film directed by Lina Wertmüller.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7540128231048584,
+        "fusion_score": 0.5508025646209718,
+        "entity_ids": [
+          "\"THE BLUE COLLAR WORKER AND THE HAIRDRESSER IN A WHIRL OF SEX AND POLITICS\"",
+          "\"THE WORKER AND THE HAIRDRESSER\"",
+          "\"1996\"",
+          "\"ITALIAN COMEDY FILM\"",
+          "\"LINA WERTMÜLLER\""
+        ],
+        "chunk_ids": [
+          "chunk-daec7486af55c68f98137777e1026cfa"
+        ],
+        "evidence_texts": [
+          "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics (also known as 'The Worker and the Hairdresser') is a 1996 Italian comedy film directed by Lina Wertmüller.",
+          "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics( also known as\" The Worker and the Hairdresser\") is a 1996 Italian comedy film directed by Lina Wertmüller."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.754013,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.550803
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The title 'The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics' suggests a narrative that intertwines themes of labor and personal relationships.\"",
+        "hyperedge_text": "The title 'The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics' suggests a narrative that intertwines themes of labor and personal relationships.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7540128231048584,
+        "fusion_score": 0.5508025646209718,
+        "entity_ids": [
+          "\"THE BLUE COLLAR WORKER AND THE HAIRDRESSER IN A WHIRL OF SEX AND POLITICS\"",
+          "\"LABOR\"",
+          "\"PERSONAL RELATIONSHIPS\""
+        ],
+        "chunk_ids": [
+          "chunk-daec7486af55c68f98137777e1026cfa"
+        ],
+        "evidence_texts": [
+          "The title 'The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics' suggests a narrative that intertwines themes of labor and personal relationships.",
+          "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics( also known as\" The Worker and the Hairdresser\") is a 1996 Italian comedy film directed by Lina Wertmüller."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.754013,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.550803
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's comedic elements are likely to explore the dynamics between different social classes.\"",
+        "hyperedge_text": "The film's comedic elements are likely to explore the dynamics between different social classes.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7540128231048584,
+        "fusion_score": 0.1508025646209717,
+        "entity_ids": [
+          "\"SOCIAL CLASSES\"",
+          "\"COMEDIC ELEMENTS\""
+        ],
+        "chunk_ids": [
+          "chunk-daec7486af55c68f98137777e1026cfa"
+        ],
+        "evidence_texts": [
+          "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics( also known as\" The Worker and the Hairdresser\") is a 1996 Italian comedy film directed by Lina Wertmüller.",
+          "The film's comedic elements are likely to explore the dynamics between different social classes."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.754013,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.150803
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lina Wertmüller is known for her unique storytelling style that often blends humor with social commentary.\"",
+        "hyperedge_text": "Lina Wertmüller is known for her unique storytelling style that often blends humor with social commentary.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7540128231048584,
+        "fusion_score": 0.1508025646209717,
+        "entity_ids": [
+          "\"LINA WERTMÜLLER\"",
+          "\"SOCIAL COMMENTARY\"",
+          "\"STORYTELLING STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-daec7486af55c68f98137777e1026cfa"
+        ],
+        "evidence_texts": [
+          "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics( also known as\" The Worker and the Hairdresser\") is a 1996 Italian comedy film directed by Lina Wertmüller.",
+          "Lina Wertmüller is known for her unique storytelling style that often blends humor with social commentary."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.754013,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.150803
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was released in the context of 1990s Italian cinema, which was marked by a variety of innovative films.\"",
+        "hyperedge_text": "The film was released in the context of 1990s Italian cinema, which was marked by a variety of innovative films.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7540128231048584,
+        "fusion_score": 0.1508025646209717,
+        "entity_ids": [
+          "\"1990S ITALIAN CINEMA\"",
+          "\"INNOVATIVE FILMS\""
+        ],
+        "chunk_ids": [
+          "chunk-daec7486af55c68f98137777e1026cfa"
+        ],
+        "evidence_texts": [
+          "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics( also known as\" The Worker and the Hairdresser\") is a 1996 Italian comedy film directed by Lina Wertmüller.",
+          "The film was released in the context of 1990s Italian cinema, which was marked by a variety of innovative films."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.754013,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.150803
+        }
+      }
+    ],
+    "answer": "Lina Wertmüller",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics' is directed by Lina Wertmüller.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics (also known as 'The Worker and the Hairdresser') is a 1996 Italian comedy film directed by Lina Wertmüller.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of q1's answer born?",
+    "analysis": {
+      "entities": [
+        "Edwin L. Marin"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was a person born?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Edwin L. Marin (February 21, 1899 – May 2, 1951) was an American film director who directed 58 films between 1932 and 1951.\"",
+        "hyperedge_text": "Edwin L. Marin (February 21, 1899 – May 2, 1951) was an American film director who directed 58 films between 1932 and 1951.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.20961998403072357,
+        "fusion_score": 0.44192399680614475,
+        "entity_ids": [
+          "\"EDWIN L. MARIN\"",
+          "\"AMERICAN FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-34d1175095756ad8f188718b680985c7"
+        ],
+        "evidence_texts": [
+          "Edwin L. Marin (February 21, 1899 – May 2, 1951) was an American film director who directed 58 films between 1932 and 1951.",
+          "Edwin L. Marin Edwin L. Marin (February 21, 1899 – May 2, 1951) was an American film director who directed 58 films between 1932 and 1951, working with Randolph Scott, Anna May Wong, John Wayne, Peter Lorre, George Raft, Bela Lugosi, Judy Garland, Eddie Cantor, and Hoagy Carmichael, among many others. Marin was born in Jersey City, New Jersey, and died in Los Angeles, California. He was married to actress Ann Morriss. They had three children: Denis Anthony, Reese Andrew and Randi Alexandra. He studied at the University of Pennsylvania and broke into the industry as an assistant director at MGM. He was under contract to MGM for 15 years and RKO for five. When he died he was under contract to Warner Bros."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.20962,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.441924
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The movie was written by Fred F. Finkelhoffe and directed by Edwin L. Marin.\"",
+        "hyperedge_text": "The movie was written by Fred F. Finkelhoffe and directed by Edwin L. Marin.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.18115365505218506,
+        "fusion_score": 0.436230731010437,
+        "entity_ids": [
+          "\"EDWIN L. MARIN\"",
+          "\"FRED F. FINKELHOFFE\""
+        ],
+        "chunk_ids": [
+          "chunk-2e670ca1164026940d2c918b6d5b916a"
+        ],
+        "evidence_texts": [
+          "The movie was written by Fred F. Finkelhoffe and directed by Edwin L. Marin.",
+          "Mr. Ace Mr. Ace is a 1946 American film noir drama film about a society woman( Sylvia Sidney) who taps a gangster( George Raft) for his political support as she runs for Congress. The movie was written by Fred F. Finkelhoffe and directed by Edwin L. Marin. George Raft later appeared in a radio show\" The Cases of Mr. Ace\". Mr Ace was turned into a private detective."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.181154,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.436231
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Edwin L. Marin.\"",
+        "hyperedge_text": "The film was directed by Edwin L. Marin.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.11349482834339142,
+        "fusion_score": 0.4226989656686783,
+        "entity_ids": [
+          "\"EDWIN L. MARIN\""
+        ],
+        "chunk_ids": [
+          "chunk-987df2804c4976deb71d727410b89f8a"
+        ],
+        "evidence_texts": [
+          "The film was directed by Edwin L. Marin.",
+          "Henry Goes Arizona Henry Goes Arizona is a 1939 western film starring Frank Morgan as an actor who inherits his dead brother's ranch. While adjusting to the country there, he is threatened by a gang who is after the ranch. The film was directed by Edwin L. Marin."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.113495,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.422699
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.\"",
+        "hyperedge_text": "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4505188763141632,
+        "fusion_score": 0.09010377526283264,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"RICHARD QUINE\"",
+          "\"ACTOR\"",
+          "\"AMERICAN\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.450519,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.090104
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties.\"",
+        "hyperedge_text": "He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4505188763141632,
+        "fusion_score": 0.09010377526283264,
+        "entity_ids": [
+          "\"VAUDEVILLE\"",
+          "\"CHILD\"",
+          "\"STAGE PRODUCTIONS\"",
+          "\"RADIO\"",
+          "\"METRO-GOLDWYN-MAYER\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.450519,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.090104
+        }
+      }
+    ],
+    "answer": "February 21, 1899",
+    "confidence": 0.9,
+    "reasoning_summary": "Edwin L. Marin was born on February 21, 1899, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Edwin L. Marin (February 21, 1899 – May 2, 1951) was an American film director who directed 58 films between 1932 and 1951.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of q2's answer born?",
+    "analysis": {
+      "entities": [
+        "Lina Wertmüller"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was a person born?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Lina Wertmüller (born 14 August 1928) is an Italian screenwriter and film director.\"",
+        "hyperedge_text": "Lina Wertmüller (born 14 August 1928) is an Italian screenwriter and film director.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.2611379027366638,
+        "fusion_score": 0.4522275805473328,
+        "entity_ids": [
+          "\"ITALIAN\"",
+          "\"LINA WERTMÜLLER\""
+        ],
+        "chunk_ids": [
+          "chunk-591f5fa1a75c1aaacc52d44bf3388b76"
+        ],
+        "evidence_texts": [
+          "Lina Wertmüller (born 14 August 1928) is an Italian screenwriter and film director.",
+          "Lina Wertmüller Lina Wertmüller( born 14 August 1928) is an Italian screenwriter and film director. She was the first woman nominated for an Academy Award for Best Director for\" Seven Beauties\" in 1977. She is also known for her films\" The Seduction of MimiLove and Anarchy\" and\" Swept Away\". In 2019, Wertmüller was announced as one of the four recipients of the Academy Honorary Award for her career."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.261138,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.452228
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lina Wertmüller is an Italian screenwriter and film director.\"",
+        "hyperedge_text": "Lina Wertmüller is an Italian screenwriter and film director.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.2611379027366638,
+        "fusion_score": 0.4522275805473328,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"LINA WERTMÜLLER\"",
+          "\"SCREENWRITER\""
+        ],
+        "chunk_ids": [
+          "chunk-591f5fa1a75c1aaacc52d44bf3388b76"
+        ],
+        "evidence_texts": [
+          "Lina Wertmüller is an Italian screenwriter and film director.",
+          "Lina Wertmüller Lina Wertmüller( born 14 August 1928) is an Italian screenwriter and film director. She was the first woman nominated for an Academy Award for Best Director for\" Seven Beauties\" in 1977. She is also known for her films\" The Seduction of MimiLove and Anarchy\" and\" Swept Away\". In 2019, Wertmüller was announced as one of the four recipients of the Academy Honorary Award for her career."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.261138,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.452228
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics (also known as 'The Worker and the Hairdresser') is a 1996 Italian comedy film directed by Lina Wertmüller.\"",
+        "hyperedge_text": "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics (also known as 'The Worker and the Hairdresser') is a 1996 Italian comedy film directed by Lina Wertmüller.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.21257208287715912,
+        "fusion_score": 0.44251441657543183,
+        "entity_ids": [
+          "\"THE BLUE COLLAR WORKER AND THE HAIRDRESSER IN A WHIRL OF SEX AND POLITICS\"",
+          "\"THE WORKER AND THE HAIRDRESSER\"",
+          "\"1996\"",
+          "\"ITALIAN COMEDY FILM\"",
+          "\"LINA WERTMÜLLER\""
+        ],
+        "chunk_ids": [
+          "chunk-daec7486af55c68f98137777e1026cfa"
+        ],
+        "evidence_texts": [
+          "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics (also known as 'The Worker and the Hairdresser') is a 1996 Italian comedy film directed by Lina Wertmüller.",
+          "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics( also known as\" The Worker and the Hairdresser\") is a 1996 Italian comedy film directed by Lina Wertmüller."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.212572,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.442514
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Lina Wertmüller is known for her unique storytelling style that often blends humor with social commentary.\"",
+        "hyperedge_text": "Lina Wertmüller is known for her unique storytelling style that often blends humor with social commentary.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.21257208287715912,
+        "fusion_score": 0.44251441657543183,
+        "entity_ids": [
+          "\"LINA WERTMÜLLER\"",
+          "\"SOCIAL COMMENTARY\"",
+          "\"STORYTELLING STYLE\""
+        ],
+        "chunk_ids": [
+          "chunk-daec7486af55c68f98137777e1026cfa"
+        ],
+        "evidence_texts": [
+          "Lina Wertmüller is known for her unique storytelling style that often blends humor with social commentary.",
+          "The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics The Blue Collar Worker and the Hairdresser in a Whirl of Sex and Politics( also known as\" The Worker and the Hairdresser\") is a 1996 Italian comedy film directed by Lina Wertmüller."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.212572,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.442514
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"A Joke of Destiny is a 1983 Italian comedy film directed by Lina Wertmüller.\"",
+        "hyperedge_text": "A Joke of Destiny is a 1983 Italian comedy film directed by Lina Wertmüller.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.20639854669570923,
+        "fusion_score": 0.44127970933914185,
+        "entity_ids": [
+          "\"ITALIAN COMEDY FILM\"",
+          "\"LINA WERTMÜLLER\"",
+          "\"A JOKE OF DESTINY\"",
+          "\"1983\""
+        ],
+        "chunk_ids": [
+          "chunk-ae6703753069f10fa864e0633907080b"
+        ],
+        "evidence_texts": [
+          "A Joke of Destiny is a 1983 Italian comedy film directed by Lina Wertmüller.",
+          "A Joke of Destiny A Joke of Destiny is a 1983 Italian comedy film directed by Lina Wertmüller. It was entered into the 14th Moscow International Film Festival."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.206399,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.44128
+        }
+      }
+    ],
+    "answer": "14 August 1928",
+    "confidence": 1.0,
+    "reasoning_summary": "Lina Wertmüller, the director, was born on 14 August 1928, as stated in the evidence.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Lina Wertmüller (born 14 August 1928) is an Italian screenwriter and film director.\""
+    ]
+  }
+]

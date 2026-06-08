@@ -1,0 +1,781 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Interview With A Hitman?",
+    "analysis": {
+      "entities": [
+        "Interview With A Hitman"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal.\"",
+        "hyperedge_text": "Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7722602486610413,
+        "fusion_score": 0.5544520497322083,
+        "entity_ids": [
+          "\"INTERVIEW WITH A HITMAN\"",
+          "\"PERRY BHANDAL\""
+        ],
+        "chunk_ids": [
+          "chunk-e99dd92688f070b082881865714c7bfd"
+        ],
+        "evidence_texts": [
+          "Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal.",
+          "Interview with a Hitman Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal. The film tells the story of Viktor( Luke Goss), a professional Romanian hitman who agrees to tell his story to a disgraced film director desperate to discover a unique story that will help him rebuild his career. It was produced by Kirlian Pictures& Scanner Rhodes with the assistance of Northern Film& Media. The film stars Luke Goss, Caroline Tillette, Stephen Marcus, Danny Midwinter and Elliot Greene."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.77226,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.554452
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Perry Bhandal (born 12 January 1968) is a British film director, screenwriter, and producer of the films 'Interview with a Hitman' and author of _Prelude_, a collection of short stories and artwork.\"",
+        "hyperedge_text": "Perry Bhandal (born 12 January 1968) is a British film director, screenwriter, and producer of the films 'Interview with a Hitman' and author of _Prelude_, a collection of short stories and artwork.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.47619664669036865,
+        "fusion_score": 0.49523932933807374,
+        "entity_ids": [
+          "\"INTERVIEW WITH A HITMAN\"",
+          "\"PERRY BHANDAL\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\"",
+          "\"BRITISH FILM DIRECTOR\"",
+          "\"PRELUDE\"",
+          "\"SHORT STORIES\"",
+          "\"ARTWORK\""
+        ],
+        "chunk_ids": [
+          "chunk-e2d4614340c4dc57c494dabe5d2e6715"
+        ],
+        "evidence_texts": [
+          "Perry Bhandal (born 12 January 1968) is a British film director, screenwriter, and producer of the films 'Interview with a Hitman' and author of _Prelude_, a collection of short stories and artwork.",
+          "Perry Bhandal Perry Bhandal( born 12 January 1968) is a British film director, screenwriter, and producer of the films\" Interview with a Hitman\"&'' and author of _prelude a collection of short stories and artwork."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.476197,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.495239
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has appeared in numerous films including 'Blade II' (2002) as Jared Nomak, 'One Night with the King' (2006) as King Xerxes, 'Hellboy II: The Golden Army' (2008) as Prince Nuada, 'Tekken' (2009) as Steve Fox, 'Interview with a Hitman' (2012) as Viktor, and 'Traffik' (2018) as Red.\"",
+        "hyperedge_text": "He has appeared in numerous films including 'Blade II' (2002) as Jared Nomak, 'One Night with the King' (2006) as King Xerxes, 'Hellboy II: The Golden Army' (2008) as Prince Nuada, 'Tekken' (2009) as Steve Fox, 'Interview with a Hitman' (2012) as Viktor, and 'Traffik' (2018) as Red.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3014254570007324,
+        "fusion_score": 0.4602850914001465,
+        "entity_ids": [
+          "\"BLADE II\"",
+          "\"JARED NOMAK\"",
+          "\"ONE NIGHT WITH THE KING\"",
+          "\"KING XERXES\"",
+          "\"HELLBOY II: THE GOLDEN ARMY\"",
+          "\"PRINCE NUADA\"",
+          "\"TEKKEN\"",
+          "\"STEVE FOX\"",
+          "\"INTERVIEW WITH A HITMAN\"",
+          "\"VIKTOR\"",
+          "\"TRAFFIK\"",
+          "\"RED\""
+        ],
+        "chunk_ids": [
+          "chunk-7f6d1b72341e85cfdbc3b356fac1a5a1"
+        ],
+        "evidence_texts": [
+          "He has appeared in numerous films including 'Blade II' (2002) as Jared Nomak, 'One Night with the King' (2006) as King Xerxes, 'Hellboy II: The Golden Army' (2008) as Prince Nuada, 'Tekken' (2009) as Steve Fox, 'Interview with a Hitman' (2012) as Viktor, and 'Traffik' (2018) as Red.",
+          "Luke Goss Luke Damon Goss( born 29 September 1968) is an English actor, and drummer of the 1980s band Bros. He has appeared in numerous films including\" Blade II\"( 2002) as Jared Nomak,\" One Night with the King\"( 2006) as King Xerxes,( 2008) as Prince Nuada,\" Tekken\"( 2009) as Steve Fox,\" Interview with a Hitman\"( 2012) as Viktor, and\" Traffik\"( 2018) as Red."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.301425,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.460285
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film tells the story of Viktor (Luke Goss), a professional Romanian hitman who agrees to tell his story to a disgraced film director desperate to discover a unique story that will help him rebuild his career.\"",
+        "hyperedge_text": "The film tells the story of Viktor (Luke Goss), a professional Romanian hitman who agrees to tell his story to a disgraced film director desperate to discover a unique story that will help him rebuild his career.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7722602486610413,
+        "fusion_score": 0.15445204973220827,
+        "entity_ids": [
+          "\"LUKE GOSS\"",
+          "\"VIKTOR\"",
+          "\"DISGRACED FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-e99dd92688f070b082881865714c7bfd"
+        ],
+        "evidence_texts": [
+          "Interview with a Hitman Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal. The film tells the story of Viktor( Luke Goss), a professional Romanian hitman who agrees to tell his story to a disgraced film director desperate to discover a unique story that will help him rebuild his career. It was produced by Kirlian Pictures& Scanner Rhodes with the assistance of Northern Film& Media. The film stars Luke Goss, Caroline Tillette, Stephen Marcus, Danny Midwinter and Elliot Greene.",
+          "The film tells the story of Viktor (Luke Goss), a professional Romanian hitman who agrees to tell his story to a disgraced film director desperate to discover a unique story that will help him rebuild his career."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.77226,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.154452
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was produced by Kirlian Pictures & Scanner Rhodes with the assistance of Northern Film & Media.\"",
+        "hyperedge_text": "It was produced by Kirlian Pictures & Scanner Rhodes with the assistance of Northern Film & Media.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7722602486610413,
+        "fusion_score": 0.15445204973220827,
+        "entity_ids": [
+          "\"KIRLIAN PICTURES\"",
+          "\"SCANNER RHODES\"",
+          "\"NORTHERN FILM & MEDIA\""
+        ],
+        "chunk_ids": [
+          "chunk-e99dd92688f070b082881865714c7bfd"
+        ],
+        "evidence_texts": [
+          "Interview with a Hitman Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal. The film tells the story of Viktor( Luke Goss), a professional Romanian hitman who agrees to tell his story to a disgraced film director desperate to discover a unique story that will help him rebuild his career. It was produced by Kirlian Pictures& Scanner Rhodes with the assistance of Northern Film& Media. The film stars Luke Goss, Caroline Tillette, Stephen Marcus, Danny Midwinter and Elliot Greene.",
+          "It was produced by Kirlian Pictures & Scanner Rhodes with the assistance of Northern Film & Media."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.77226,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.154452
+        }
+      }
+    ],
+    "answer": "Perry Bhandal",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Interview with a Hitman' was written and directed by Perry Bhandal.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of The Last Coupon?",
+    "analysis": {
+      "entities": [
+        "The Last Coupon"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Last Coupon is a 1932 British comedy film directed by Frank Launder and starring Leslie Fuller, Mary Jerrold and Molly Lamont.\"",
+        "hyperedge_text": "The Last Coupon is a 1932 British comedy film directed by Frank Launder and starring Leslie Fuller, Mary Jerrold and Molly Lamont.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6531926393508911,
+        "fusion_score": 0.5306385278701783,
+        "entity_ids": [
+          "\"THE LAST COUPON\"",
+          "\"LESLIE FULLER\"",
+          "\"MARY JERROLD\"",
+          "\"MOLLY LAMONT\"",
+          "\"ERNEST BRYAN\"",
+          "\"BOX OFFICE\"",
+          "\"FRANK LAUNDER\"",
+          "\"PLAY\""
+        ],
+        "chunk_ids": [
+          "chunk-4ce55cad3b486cf4d6a18a5316a5f01f"
+        ],
+        "evidence_texts": [
+          "The Last Coupon is a 1932 British comedy film directed by Frank Launder and starring Leslie Fuller, Mary Jerrold and Molly Lamont.",
+          "The Last Coupon The Last Coupon is a 1932 British comedy film directed by Frank Launder and starring Leslie Fuller, Mary Jerrold and Molly Lamont. It was based on a play by Ernest Bryan and was a success at the box office."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.653193,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530639
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Last Coupon is a 1932 British comedy film.\"",
+        "hyperedge_text": "The Last Coupon is a 1932 British comedy film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6531926393508911,
+        "fusion_score": 0.5306385278701783,
+        "entity_ids": [
+          "\"BRITISH\"",
+          "\"THE LAST COUPON\"",
+          "\"1932\"",
+          "\"COMEDY\""
+        ],
+        "chunk_ids": [
+          "chunk-4ce55cad3b486cf4d6a18a5316a5f01f"
+        ],
+        "evidence_texts": [
+          "The Last Coupon is a 1932 British comedy film.",
+          "The Last Coupon The Last Coupon is a 1932 British comedy film directed by Frank Launder and starring Leslie Fuller, Mary Jerrold and Molly Lamont. It was based on a play by Ernest Bryan and was a success at the box office."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.653193,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.530639
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was made by the Associated British Picture Corporation at their Elstree Studios and based on the play 'The Last Coupon' by Ernest E. Bryan.\"",
+        "hyperedge_text": "The film was made by the Associated British Picture Corporation at their Elstree Studios and based on the play 'The Last Coupon' by Ernest E. Bryan.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.283428817987442,
+        "fusion_score": 0.4566857635974884,
+        "entity_ids": [
+          "\"ASSOCIATED BRITISH PICTURE CORPORATION\"",
+          "\"ELSTREE STUDIOS\"",
+          "\"THE LAST COUPON\"",
+          "\"ERNEST E. BRYAN\""
+        ],
+        "chunk_ids": [
+          "chunk-940a205f74939c14f25903375727ec44"
+        ],
+        "evidence_texts": [
+          "The film was made by the Associated British Picture Corporation at their Elstree Studios and based on the play 'The Last Coupon' by Ernest E. Bryan.",
+          "Spring Handicap Spring Handicap is a 1937 British comedy film directed by Herbert Brenon and starring Will Fyffe, Maire O'Neill and Billy Milton. The film was made by the Associated British Picture Corporation at their Elstree Studios and based on the play\" The Last Coupon\" by Ernest E. Bryan."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.283429,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.456686
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is based on the play 'The Last Coupon' by Ernest E. Bryan.\"",
+        "hyperedge_text": "The film is based on the play 'The Last Coupon' by Ernest E. Bryan.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.283428817987442,
+        "fusion_score": 0.4566857635974884,
+        "entity_ids": [
+          "\"THE LAST COUPON\"",
+          "\"ERNEST E. BRYAN\""
+        ],
+        "chunk_ids": [
+          "chunk-940a205f74939c14f25903375727ec44"
+        ],
+        "evidence_texts": [
+          "The film is based on the play 'The Last Coupon' by Ernest E. Bryan.",
+          "Spring Handicap Spring Handicap is a 1937 British comedy film directed by Herbert Brenon and starring Will Fyffe, Maire O'Neill and Billy Milton. The film was made by the Associated British Picture Corporation at their Elstree Studios and based on the play\" The Last Coupon\" by Ernest E. Bryan."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.283429,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.456686
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Last Coupon was directed by Frank Launder.\"",
+        "hyperedge_text": "The Last Coupon was directed by Frank Launder.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6531926393508911,
+        "fusion_score": 0.13063852787017824,
+        "entity_ids": [
+          "\"FRANK LAUNDER\""
+        ],
+        "chunk_ids": [
+          "chunk-4ce55cad3b486cf4d6a18a5316a5f01f"
+        ],
+        "evidence_texts": [
+          "The Last Coupon The Last Coupon is a 1932 British comedy film directed by Frank Launder and starring Leslie Fuller, Mary Jerrold and Molly Lamont. It was based on a play by Ernest Bryan and was a success at the box office.",
+          "The Last Coupon was directed by Frank Launder."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.653193,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.130639
+        }
+      }
+    ],
+    "answer": "Frank Launder",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'The Last Coupon' was directed by Frank Launder.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Last Coupon was directed by Frank Launder.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "What country is the director of q1's answer from?",
+    "analysis": {
+      "entities": [
+        "Perry Bhandal",
+        "Interview With A Hitman"
+      ],
+      "relations": [
+        "is from"
+      ],
+      "relation_query": "What country is a person who directed a work from?",
+      "answer_type": "country"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal.\"",
+        "hyperedge_text": "Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3171718418598175,
+        "fusion_score": 0.4634343683719635,
+        "entity_ids": [
+          "\"INTERVIEW WITH A HITMAN\"",
+          "\"PERRY BHANDAL\""
+        ],
+        "chunk_ids": [
+          "chunk-e99dd92688f070b082881865714c7bfd"
+        ],
+        "evidence_texts": [
+          "Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal.",
+          "Interview with a Hitman Interview with a Hitman is a 2012 British action film written and directed by Perry Bhandal. The film tells the story of Viktor( Luke Goss), a professional Romanian hitman who agrees to tell his story to a disgraced film director desperate to discover a unique story that will help him rebuild his career. It was produced by Kirlian Pictures& Scanner Rhodes with the assistance of Northern Film& Media. The film stars Luke Goss, Caroline Tillette, Stephen Marcus, Danny Midwinter and Elliot Greene."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.317172,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.463434
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Perry Bhandal (born 12 January 1968) is a British film director, screenwriter, and producer of the films 'Interview with a Hitman' and author of _Prelude_, a collection of short stories and artwork.\"",
+        "hyperedge_text": "Perry Bhandal (born 12 January 1968) is a British film director, screenwriter, and producer of the films 'Interview with a Hitman' and author of _Prelude_, a collection of short stories and artwork.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.2804667353630066,
+        "fusion_score": 0.45609334707260135,
+        "entity_ids": [
+          "\"INTERVIEW WITH A HITMAN\"",
+          "\"PERRY BHANDAL\"",
+          "\"SCREENWRITER\"",
+          "\"PRODUCER\"",
+          "\"BRITISH FILM DIRECTOR\"",
+          "\"PRELUDE\"",
+          "\"SHORT STORIES\"",
+          "\"ARTWORK\""
+        ],
+        "chunk_ids": [
+          "chunk-e2d4614340c4dc57c494dabe5d2e6715"
+        ],
+        "evidence_texts": [
+          "Perry Bhandal (born 12 January 1968) is a British film director, screenwriter, and producer of the films 'Interview with a Hitman' and author of _Prelude_, a collection of short stories and artwork.",
+          "Perry Bhandal Perry Bhandal( born 12 January 1968) is a British film director, screenwriter, and producer of the films\" Interview with a Hitman\"&'' and author of _prelude a collection of short stories and artwork."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.280467,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.456093
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Perry Bhandal was born on 12 January 1968.\"",
+        "hyperedge_text": "Perry Bhandal was born on 12 January 1968.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.2804667353630066,
+        "fusion_score": 0.25609334707260134,
+        "entity_ids": [
+          "\"PERRY BHANDAL\"",
+          "\"12 JANUARY 1968\""
+        ],
+        "chunk_ids": [
+          "chunk-e2d4614340c4dc57c494dabe5d2e6715"
+        ],
+        "evidence_texts": [
+          "Perry Bhandal was born on 12 January 1968.",
+          "Perry Bhandal Perry Bhandal( born 12 January 1968) is a British film director, screenwriter, and producer of the films\" Interview with a Hitman\"&'' and author of _prelude a collection of short stories and artwork."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.280467,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.256093
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He has appeared in numerous films including 'Blade II' (2002) as Jared Nomak, 'One Night with the King' (2006) as King Xerxes, 'Hellboy II: The Golden Army' (2008) as Prince Nuada, 'Tekken' (2009) as Steve Fox, 'Interview with a Hitman' (2012) as Viktor, and 'Traffik' (2018) as Red.\"",
+        "hyperedge_text": "He has appeared in numerous films including 'Blade II' (2002) as Jared Nomak, 'One Night with the King' (2006) as King Xerxes, 'Hellboy II: The Golden Army' (2008) as Prince Nuada, 'Tekken' (2009) as Steve Fox, 'Interview with a Hitman' (2012) as Viktor, and 'Traffik' (2018) as Red.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.19694161415100098,
+        "fusion_score": 0.2393883228302002,
+        "entity_ids": [
+          "\"BLADE II\"",
+          "\"JARED NOMAK\"",
+          "\"ONE NIGHT WITH THE KING\"",
+          "\"KING XERXES\"",
+          "\"HELLBOY II: THE GOLDEN ARMY\"",
+          "\"PRINCE NUADA\"",
+          "\"TEKKEN\"",
+          "\"STEVE FOX\"",
+          "\"INTERVIEW WITH A HITMAN\"",
+          "\"VIKTOR\"",
+          "\"TRAFFIK\"",
+          "\"RED\""
+        ],
+        "chunk_ids": [
+          "chunk-7f6d1b72341e85cfdbc3b356fac1a5a1"
+        ],
+        "evidence_texts": [
+          "He has appeared in numerous films including 'Blade II' (2002) as Jared Nomak, 'One Night with the King' (2006) as King Xerxes, 'Hellboy II: The Golden Army' (2008) as Prince Nuada, 'Tekken' (2009) as Steve Fox, 'Interview with a Hitman' (2012) as Viktor, and 'Traffik' (2018) as Red.",
+          "Luke Goss Luke Damon Goss( born 29 September 1968) is an English actor, and drummer of the 1980s band Bros. He has appeared in numerous films including\" Blade II\"( 2002) as Jared Nomak,\" One Night with the King\"( 2006) as King Xerxes,( 2008) as Prince Nuada,\" Tekken\"( 2009) as Steve Fox,\" Interview with a Hitman\"( 2012) as Viktor, and\" Traffik\"( 2018) as Red."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.196942,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.239388
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.\"",
+        "hyperedge_text": "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.38679420948028564,
+        "fusion_score": 0.07735884189605713,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"RICHARD QUINE\"",
+          "\"ACTOR\"",
+          "\"AMERICAN\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.386794,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.077359
+        }
+      }
+    ],
+    "answer": "United Kingdom",
+    "confidence": 1.0,
+    "reasoning_summary": "Perry Bhandal is identified as a British film director, which indicates he is from the United Kingdom.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Perry Bhandal (born 12 January 1968) is a British film director, screenwriter, and producer of the films 'Interview with a Hitman' and author of _Prelude_, a collection of short stories and artwork.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "What country is the director of q2's answer from?",
+    "analysis": {
+      "entities": [
+        "Frank Launder",
+        "The Last Coupon"
+      ],
+      "relations": [
+        "is from"
+      ],
+      "relation_query": "What country is the director of a work from?",
+      "answer_type": "country"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Last Coupon is a 1932 British comedy film directed by Frank Launder and starring Leslie Fuller, Mary Jerrold and Molly Lamont.\"",
+        "hyperedge_text": "The Last Coupon is a 1932 British comedy film directed by Frank Launder and starring Leslie Fuller, Mary Jerrold and Molly Lamont.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.14583054184913635,
+        "fusion_score": 0.42916610836982727,
+        "entity_ids": [
+          "\"THE LAST COUPON\"",
+          "\"LESLIE FULLER\"",
+          "\"MARY JERROLD\"",
+          "\"MOLLY LAMONT\"",
+          "\"ERNEST BRYAN\"",
+          "\"BOX OFFICE\"",
+          "\"FRANK LAUNDER\"",
+          "\"PLAY\""
+        ],
+        "chunk_ids": [
+          "chunk-4ce55cad3b486cf4d6a18a5316a5f01f"
+        ],
+        "evidence_texts": [
+          "The Last Coupon is a 1932 British comedy film directed by Frank Launder and starring Leslie Fuller, Mary Jerrold and Molly Lamont.",
+          "The Last Coupon The Last Coupon is a 1932 British comedy film directed by Frank Launder and starring Leslie Fuller, Mary Jerrold and Molly Lamont. It was based on a play by Ernest Bryan and was a success at the box office."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.145831,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.429166
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Frank Launder (28 January 1906 – 23 February 1997) was a British writer, film director and producer, who made more than 40 films, many of them in collaboration with Sidney Gilliat.\"",
+        "hyperedge_text": "Frank Launder (28 January 1906 – 23 February 1997) was a British writer, film director and producer, who made more than 40 films, many of them in collaboration with Sidney Gilliat.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.1827663779258728,
+        "fusion_score": 0.23655327558517458,
+        "entity_ids": [
+          "\"FRANK LAUNDER\"",
+          "\"SIDNEY GILLIAT\""
+        ],
+        "chunk_ids": [
+          "chunk-659db16e0e8c6679a116a6990c98374c"
+        ],
+        "evidence_texts": [
+          "Frank Launder (28 January 1906 – 23 February 1997) was a British writer, film director and producer, who made more than 40 films, many of them in collaboration with Sidney Gilliat.",
+          "Frank Launder Frank Launder (28 January 1906 – 23 February 1997) was a British writer, film director and producer, who made more than 40 films, many of them in collaboration with Sidney Gilliat. He was born in Hitchin, Hertfordshire, England and worked briefly as a clerk before becoming an actor and then a playwright. He began working as a screenwriter on British films in the 1930s, contributing the original story for the classic Will Hay comedy \" Oh, Mr Porter!\" (1937). After writing a number of screenplays with Gilliat, including \"The Lady Vanishes\" (1938) for Alfred Hitchcock, and \"Night Train to Munich\" for Carol Reed; the two men wrote and directed the wartime drama \"Millions Like Us\" (1943). After founding their own production company Individual Pictures, they produced a number of memorable dramas and thrillers including \"I See a Dark Stranger\" (1945) and \"Green for Danger\" (194..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.182766,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.236553
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Frank Launder (28 January 1906 – 23 February 1997) was a British writer, film director and producer, who made more than 40 films.\"",
+        "hyperedge_text": "Frank Launder (28 January 1906 – 23 February 1997) was a British writer, film director and producer, who made more than 40 films.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.1827663779258728,
+        "fusion_score": 0.23655327558517458,
+        "entity_ids": [
+          "\"BRITISH\"",
+          "\"FRANK LAUNDER\""
+        ],
+        "chunk_ids": [
+          "chunk-659db16e0e8c6679a116a6990c98374c"
+        ],
+        "evidence_texts": [
+          "Frank Launder (28 January 1906 – 23 February 1997) was a British writer, film director and producer, who made more than 40 films.",
+          "Frank Launder Frank Launder (28 January 1906 – 23 February 1997) was a British writer, film director and producer, who made more than 40 films, many of them in collaboration with Sidney Gilliat. He was born in Hitchin, Hertfordshire, England and worked briefly as a clerk before becoming an actor and then a playwright. He began working as a screenwriter on British films in the 1930s, contributing the original story for the classic Will Hay comedy \" Oh, Mr Porter!\" (1937). After writing a number of screenplays with Gilliat, including \"The Lady Vanishes\" (1938) for Alfred Hitchcock, and \"Night Train to Munich\" for Carol Reed; the two men wrote and directed the wartime drama \"Millions Like Us\" (1943). After founding their own production company Individual Pictures, they produced a number of memorable dramas and thrillers including \"I See a Dark Stranger\" (1945) and \"Green for Danger\" (194..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.182766,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.236553
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman.\"",
+        "hyperedge_text": "Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.17883160710334778,
+        "fusion_score": 0.23576632142066956,
+        "entity_ids": [
+          "\"ALASTAIR SIM\"",
+          "\"FOLLY TO BE WISE\"",
+          "\"ELIZABETH ALLAN\"",
+          "\"COLIN GORDON\"",
+          "\"MARTITA HUNT\"",
+          "\"EDWARD CHAPMAN\"",
+          "\"FRANK LAUNDER\"",
+          "\"ROLAND CULVER\""
+        ],
+        "chunk_ids": [
+          "chunk-57669db8b3e29849447716ef99989c00"
+        ],
+        "evidence_texts": [
+          "Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman.",
+          "Folly to Be Wise Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman. It is based on the play \" It Depends What You Mean\" by James Bridie. The film follows the efforts of a British Army chaplain attempting to recruit entertainment acts to perform for the troops and the complications that ensue when he does. The title is taken from the line by Thomas Gray \"where ignorance is bliss, 'tis folly to be wise\"."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.178832,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.235766
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film is directed by Frank Launder, known for his work in British cinema.\"",
+        "hyperedge_text": "The film is directed by Frank Launder, known for his work in British cinema.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.17883160710334778,
+        "fusion_score": 0.23576632142066956,
+        "entity_ids": [
+          "\"FRANK LAUNDER\""
+        ],
+        "chunk_ids": [
+          "chunk-57669db8b3e29849447716ef99989c00"
+        ],
+        "evidence_texts": [
+          "The film is directed by Frank Launder, known for his work in British cinema.",
+          "Folly to Be Wise Folly to Be Wise is a 1953 British comedy film directed by Frank Launder and starring Alastair Sim, Elizabeth Allan, Roland Culver, Colin Gordon, Martita Hunt and Edward Chapman. It is based on the play \" It Depends What You Mean\" by James Bridie. The film follows the efforts of a British Army chaplain attempting to recruit entertainment acts to perform for the troops and the complications that ensue when he does. The title is taken from the line by Thomas Gray \"where ignorance is bliss, 'tis folly to be wise\"."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.178832,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.235766
+        }
+      }
+    ],
+    "answer": "United Kingdom",
+    "confidence": 1.0,
+    "reasoning_summary": "Frank Launder, the director of 'The Last Coupon', is identified as a British writer and film director, confirming his country of origin as the United Kingdom.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Frank Launder (28 January 1906 – 23 February 1997) was a British writer, film director and producer, who made more than 40 films, many of them in collaboration with Sidney Gilliat.\""
+    ]
+  }
+]

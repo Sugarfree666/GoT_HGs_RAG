@@ -1,0 +1,371 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Abdul-Aziz Bin Muhammad?",
+    "analysis": {
+      "entities": [
+        "Abdul-Aziz Bin Muhammad"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State and son of Muhammad bin Saud.\"",
+        "hyperedge_text": "Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State and son of Muhammad bin Saud.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6606457829475403,
+        "fusion_score": 0.5321291565895081,
+        "entity_ids": [
+          "\"FIRST SAUDI STATE\"",
+          "\"ABDUL-AZIZ BIN MUHAMMAD\"",
+          "\"MUHAMMAD BIN SAUD\"",
+          "\"MUHAMMAD BIN ABDUL WAHHAB\""
+        ],
+        "chunk_ids": [
+          "chunk-1b1c5b3444b4264380f8218a2afd2986"
+        ],
+        "evidence_texts": [
+          "Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State and son of Muhammad bin Saud.",
+          "Abdul-Aziz bin Muhammad Imam Abdul Aziz bin Muhammad bin Saud (d. 1803) was the second ruler of the First Saudi State and son of Muhammad bin Saud. He was also the son-in-law of Muhammad bin Abdul Wahhab. He ruled from 1765 until 1803."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.660646,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532129
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdul-Aziz bin Muhammad was the son of Muhammad bin Saud.\"",
+        "hyperedge_text": "Abdul-Aziz bin Muhammad was the son of Muhammad bin Saud.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6606457829475403,
+        "fusion_score": 0.5321291565895081,
+        "entity_ids": [
+          "\"ABDUL-AZIZ BIN MUHAMMAD\"",
+          "\"MUHAMMAD BIN SAUD\""
+        ],
+        "chunk_ids": [
+          "chunk-1b1c5b3444b4264380f8218a2afd2986"
+        ],
+        "evidence_texts": [
+          "Abdul-Aziz bin Muhammad was the son of Muhammad bin Saud.",
+          "Abdul-Aziz bin Muhammad Imam Abdul Aziz bin Muhammad bin Saud (d. 1803) was the second ruler of the First Saudi State and son of Muhammad bin Saud. He was also the son-in-law of Muhammad bin Abdul Wahhab. He ruled from 1765 until 1803."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.660646,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.532129
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He ruled from 1765 until 1803.\"",
+        "hyperedge_text": "He ruled from 1765 until 1803.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6606457829475403,
+        "fusion_score": 0.13212915658950805,
+        "entity_ids": [
+          "\"1765\"",
+          "\"1803\""
+        ],
+        "chunk_ids": [
+          "chunk-1b1c5b3444b4264380f8218a2afd2986"
+        ],
+        "evidence_texts": [
+          "Abdul-Aziz bin Muhammad Imam Abdul Aziz bin Muhammad bin Saud (d. 1803) was the second ruler of the First Saudi State and son of Muhammad bin Saud. He was also the son-in-law of Muhammad bin Abdul Wahhab. He ruled from 1765 until 1803.",
+          "He ruled from 1765 until 1803."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.660646,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.132129
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was also the son-in-law of Muhammad bin Abdul Wahhab.\"",
+        "hyperedge_text": "He was also the son-in-law of Muhammad bin Abdul Wahhab.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6606457829475403,
+        "fusion_score": 0.13212915658950805,
+        "entity_ids": [
+          "\"MUHAMMAD BIN ABDUL WAHHAB\""
+        ],
+        "chunk_ids": [
+          "chunk-1b1c5b3444b4264380f8218a2afd2986"
+        ],
+        "evidence_texts": [
+          "Abdul-Aziz bin Muhammad Imam Abdul Aziz bin Muhammad bin Saud (d. 1803) was the second ruler of the First Saudi State and son of Muhammad bin Saud. He was also the son-in-law of Muhammad bin Abdul Wahhab. He ruled from 1765 until 1803.",
+          "He was also the son-in-law of Muhammad bin Abdul Wahhab."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.660646,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.132129
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State.\"",
+        "hyperedge_text": "Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6606457829475403,
+        "fusion_score": 0.13212915658950805,
+        "entity_ids": [
+          "\"FIRST SAUDI STATE\"",
+          "\"SECOND RULER\""
+        ],
+        "chunk_ids": [
+          "chunk-1b1c5b3444b4264380f8218a2afd2986"
+        ],
+        "evidence_texts": [
+          "Abdul-Aziz bin Muhammad Imam Abdul Aziz bin Muhammad bin Saud (d. 1803) was the second ruler of the First Saudi State and son of Muhammad bin Saud. He was also the son-in-law of Muhammad bin Abdul Wahhab. He ruled from 1765 until 1803.",
+          "Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.660646,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.132129
+        }
+      }
+    ],
+    "answer": "Muhammad bin Saud",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that Abdul-Aziz bin Muhammad is the son of Muhammad bin Saud.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Abdul-Aziz bin Muhammad was the son of Muhammad bin Saud.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did q1's answer die?",
+    "analysis": {
+      "entities": [
+        "Abdul-Aziz bin Muhammad",
+        "Muhammad bin Saud"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State and son of Muhammad bin Saud.\"",
+        "hyperedge_text": "Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State and son of Muhammad bin Saud.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.14997825026512146,
+        "fusion_score": 0.4299956500530243,
+        "entity_ids": [
+          "\"FIRST SAUDI STATE\"",
+          "\"ABDUL-AZIZ BIN MUHAMMAD\"",
+          "\"MUHAMMAD BIN SAUD\"",
+          "\"MUHAMMAD BIN ABDUL WAHHAB\""
+        ],
+        "chunk_ids": [
+          "chunk-1b1c5b3444b4264380f8218a2afd2986"
+        ],
+        "evidence_texts": [
+          "Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State and son of Muhammad bin Saud.",
+          "Abdul-Aziz bin Muhammad Imam Abdul Aziz bin Muhammad bin Saud (d. 1803) was the second ruler of the First Saudi State and son of Muhammad bin Saud. He was also the son-in-law of Muhammad bin Abdul Wahhab. He ruled from 1765 until 1803."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.149978,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.429996
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Abdul-Aziz bin Muhammad was the son of Muhammad bin Saud.\"",
+        "hyperedge_text": "Abdul-Aziz bin Muhammad was the son of Muhammad bin Saud.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.14997825026512146,
+        "fusion_score": 0.4299956500530243,
+        "entity_ids": [
+          "\"ABDUL-AZIZ BIN MUHAMMAD\"",
+          "\"MUHAMMAD BIN SAUD\""
+        ],
+        "chunk_ids": [
+          "chunk-1b1c5b3444b4264380f8218a2afd2986"
+        ],
+        "evidence_texts": [
+          "Abdul-Aziz bin Muhammad was the son of Muhammad bin Saud.",
+          "Abdul-Aziz bin Muhammad Imam Abdul Aziz bin Muhammad bin Saud (d. 1803) was the second ruler of the First Saudi State and son of Muhammad bin Saud. He was also the son-in-law of Muhammad bin Abdul Wahhab. He ruled from 1765 until 1803."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.149978,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.429996
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.\"",
+        "hyperedge_text": "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3245806097984314,
+        "fusion_score": 0.06491612195968628,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"RICHARD QUINE\"",
+          "\"ACTOR\"",
+          "\"AMERICAN\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.324581,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.064916
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties.\"",
+        "hyperedge_text": "He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3245806097984314,
+        "fusion_score": 0.06491612195968628,
+        "entity_ids": [
+          "\"VAUDEVILLE\"",
+          "\"CHILD\"",
+          "\"STAGE PRODUCTIONS\"",
+          "\"RADIO\"",
+          "\"METRO-GOLDWYN-MAYER\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.324581,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.064916
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"When his acting career began to wane after World War II, Quine began working as a film director.\"",
+        "hyperedge_text": "When his acting career began to wane after World War II, Quine began working as a film director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3245806097984314,
+        "fusion_score": 0.06491612195968628,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"WORLD WAR II\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "When his acting career began to wane after World War II, Quine began working as a film director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.324581,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.064916
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "There is no evidence provided regarding the location of Abdul-Aziz bin Muhammad's death.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State and son of Muhammad bin Saud.\""
+    ]
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of A Nest Of Noblemen?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e1_p2",
+            "node_texts": [
+              "A Nest Of Noblemen",
+              "work",
+              "director"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the director of A Nest Of Noblemen."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p2"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "A Nest Of Noblemen"
+        },
+        "one_hop_relation": "director",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "Where does q1's answer work?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "A Nest Of Noblemen",
+              "work",
+              "director"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking where the director of A Nest Of Noblemen works."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1's answer"
+        },
+        "one_hop_relation": "work",
+        "answer_type": "Organization"
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of My Three Merry Widows?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "My Three Merry Widows",
+              "director"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the director of My Three Merry Widows."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "My Three Merry Widows"
+        },
+        "one_hop_relation": "director",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the spouse of q1's answer?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "director",
+              "spouse"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the spouse of the director obtained from q1."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1"
+        },
+        "one_hop_relation": "spouse",
+        "answer_type": "Person"
+      }
+    }
+  ]
+}

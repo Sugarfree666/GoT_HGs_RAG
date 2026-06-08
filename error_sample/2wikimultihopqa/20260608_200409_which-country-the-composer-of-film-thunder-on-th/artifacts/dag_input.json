@@ -1,0 +1,64 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the composer of Thunder On The Hill?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p1",
+          "node_texts": [
+            "Thunder On The Hill",
+            "composer"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the composer of Thunder On The Hill."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Thunder On The Hill"
+      },
+      "one_hop_relation": "composer",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Which country is the composer of q1's answer from?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps2",
+          "path_id": "e1_p2",
+          "node_texts": [
+            "composer",
+            "country"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the country of the composer."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p2"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q1's answer"
+      },
+      "one_hop_relation": "country",
+      "answer_type": "Country"
+    }
+  }
+]

@@ -1,0 +1,134 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of The Marriage Of Princess Demidoff?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "The Marriage Of Princess Demidoff",
+              "born",
+              "one",
+              "director"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the director of The Marriage Of Princess Demidoff."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "The Marriage Of Princess Demidoff"
+        },
+        "one_hop_relation": "director",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the director of The Pocket-Knife?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e2_p1",
+            "node_texts": [
+              "The Pocket-Knife",
+              "born",
+              "one",
+              "director"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the director of The Pocket-Knife."
+          }
+        ],
+        "support_path_ids": [
+          "e2_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "The Pocket-Knife"
+        },
+        "one_hop_relation": "director",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q3",
+      "question": "When was the director of The Marriage Of Princess Demidoff born?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "born",
+              "one",
+              "director"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the birth date of the director of The Marriage Of Princess Demidoff."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1's answer"
+        },
+        "one_hop_relation": "birth date",
+        "answer_type": "Date"
+      }
+    },
+    {
+      "node_id": "q4",
+      "question": "When was the director of The Pocket-Knife born?",
+      "dependencies": [
+        "q2"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e2_p2",
+            "node_texts": [
+              "born",
+              "one",
+              "director"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the birth date of the director of The Pocket-Knife."
+          }
+        ],
+        "support_path_ids": [
+          "e2_p2"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q2's answer"
+        },
+        "one_hop_relation": "birth date",
+        "answer_type": "Date"
+      }
+    }
+  ]
+}

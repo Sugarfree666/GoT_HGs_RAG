@@ -1,0 +1,380 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of the film Gaby: A True Story?",
+    "analysis": {
+      "entities": [
+        "Gaby: A True Story"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a film",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Gaby: A True Story is a 1987 American-Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall, Norma Aleandro, Liv Ullmann, and Robert Loggia.\"",
+        "hyperedge_text": "Gaby: A True Story is a 1987 American-Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall, Norma Aleandro, Liv Ullmann, and Robert Loggia.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7460650205612183,
+        "fusion_score": 0.5492130041122437,
+        "entity_ids": [
+          "\"LIV ULLMANN\"",
+          "\"GABY: A TRUE STORY\"",
+          "\"LUIS MANDOKI\"",
+          "\"RACHEL CHAGALL\"",
+          "\"NORMA ALEANDRO\"",
+          "\"ROBERT LOGGIA\"",
+          "\"MICHAEL LOVE\"",
+          "\"MARTÍN SALINAS\""
+        ],
+        "chunk_ids": [
+          "chunk-a2bbb3494ee4e8f17820b6211c617573"
+        ],
+        "evidence_texts": [
+          "Gaby: A True Story is a 1987 American-Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall, Norma Aleandro, Liv Ullmann, and Robert Loggia.",
+          "Gaby: A True Story Gaby: A True Story is a 1987 American- Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall( who, at the time, was billed under her real name, Rachel Levin), Norma Aleandro, Liv Ullmann, and Robert Loggia. It was written by Michael Love and Martín Salinas. It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist, and her caretaker, Florencia Sánchez Morales."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.746065,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549213
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gaby: A True Story is a 1987 American-Mexican drama biographical film directed by Luis Mandoki.\"",
+        "hyperedge_text": "Gaby: A True Story is a 1987 American-Mexican drama biographical film directed by Luis Mandoki.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7460650205612183,
+        "fusion_score": 0.5492130041122437,
+        "entity_ids": [
+          "\"GABY: A TRUE STORY\"",
+          "\"1987\"",
+          "\"AMERICAN-MEXICAN\""
+        ],
+        "chunk_ids": [
+          "chunk-a2bbb3494ee4e8f17820b6211c617573"
+        ],
+        "evidence_texts": [
+          "Gaby: A True Story is a 1987 American-Mexican drama biographical film directed by Luis Mandoki.",
+          "Gaby: A True Story Gaby: A True Story is a 1987 American- Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall( who, at the time, was billed under her real name, Rachel Levin), Norma Aleandro, Liv Ullmann, and Robert Loggia. It was written by Michael Love and Martín Salinas. It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist, and her caretaker, Florencia Sánchez Morales."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.746065,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.549213
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist, and her caretaker, Florencia Sánchez Morales.\"",
+        "hyperedge_text": "It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist, and her caretaker, Florencia Sánchez Morales.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7460650205612183,
+        "fusion_score": 0.14921300411224367,
+        "entity_ids": [
+          "\"GABRIELA BRIMMER\"",
+          "\"FLORENCIA SÁNCHEZ MORALES\""
+        ],
+        "chunk_ids": [
+          "chunk-a2bbb3494ee4e8f17820b6211c617573"
+        ],
+        "evidence_texts": [
+          "Gaby: A True Story Gaby: A True Story is a 1987 American- Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall( who, at the time, was billed under her real name, Rachel Levin), Norma Aleandro, Liv Ullmann, and Robert Loggia. It was written by Michael Love and Martín Salinas. It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist, and her caretaker, Florencia Sánchez Morales.",
+          "It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist, and her caretaker, Florencia Sánchez Morales."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.746065,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.149213
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was written by Michael Love and Martín Salinas.\"",
+        "hyperedge_text": "The film was written by Michael Love and Martín Salinas.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7460650205612183,
+        "fusion_score": 0.14921300411224367,
+        "entity_ids": [
+          "\"MICHAEL LOVE\"",
+          "\"MARTÍN SALINAS\""
+        ],
+        "chunk_ids": [
+          "chunk-a2bbb3494ee4e8f17820b6211c617573"
+        ],
+        "evidence_texts": [
+          "Gaby: A True Story Gaby: A True Story is a 1987 American- Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall( who, at the time, was billed under her real name, Rachel Levin), Norma Aleandro, Liv Ullmann, and Robert Loggia. It was written by Michael Love and Martín Salinas. It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist, and her caretaker, Florencia Sánchez Morales.",
+          "The film was written by Michael Love and Martín Salinas."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.746065,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.149213
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist.\"",
+        "hyperedge_text": "It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7460650205612183,
+        "fusion_score": 0.14921300411224367,
+        "entity_ids": [
+          "\"MEXICAN WRITER\"",
+          "\"DISABILITY RIGHTS ACTIVIST\""
+        ],
+        "chunk_ids": [
+          "chunk-a2bbb3494ee4e8f17820b6211c617573"
+        ],
+        "evidence_texts": [
+          "Gaby: A True Story Gaby: A True Story is a 1987 American- Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall( who, at the time, was billed under her real name, Rachel Levin), Norma Aleandro, Liv Ullmann, and Robert Loggia. It was written by Michael Love and Martín Salinas. It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist, and her caretaker, Florencia Sánchez Morales.",
+          "It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.746065,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.149213
+        }
+      }
+    ],
+    "answer": "Luis Mandoki",
+    "confidence": 1.0,
+    "reasoning_summary": "The film 'Gaby: A True Story' is directed by Luis Mandoki, as stated in the evidence.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Gaby: A True Story is a 1987 American-Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall, Norma Aleandro, Liv Ullmann, and Robert Loggia.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the place of birth of q1's answer?",
+    "analysis": {
+      "entities": [
+        "Luis Mandoki"
+      ],
+      "relations": [
+        "place of birth"
+      ],
+      "relation_query": "What is the place of birth of a person who directed a specific film?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood.\"",
+        "hyperedge_text": "Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.06083379313349724,
+        "fusion_score": 0.4121667586266995,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"LUIS MANDOKI\"",
+          "\"MEXICO CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-1bcef194d0588a1fde0838b46fa26f9e"
+        ],
+        "evidence_texts": [
+          "Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood.",
+          "Luis Mandoki Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood. Luis Mandoki studied Fine Arts in Mexico and at the San Francisco Art Institute, the London College of Printing, and the London International Film School. While attending this last institution he directed his first short film \"Silent Music\" which won an award at the International Amateur Film Festival of Cannes Film Festival in 1976. Back in Mexico he directed short films and documentaries for the Instituto Nacional Indigenista (the National Institute for the Indigenous), Conacine (National Commission of Film) and the Centro de Produccion de Cortometraje (Center for the Production of Short Films). In 1980 he received an Ariel Award of the Mexican Academy of Film for his short film \"El secreto\". Four years later, his film \"Motel\" was selected to represent Mexico i..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.060834,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.412167
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gaby: A True Story is a 1987 American-Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall, Norma Aleandro, Liv Ullmann, and Robert Loggia.\"",
+        "hyperedge_text": "Gaby: A True Story is a 1987 American-Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall, Norma Aleandro, Liv Ullmann, and Robert Loggia.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.04817819967865944,
+        "fusion_score": 0.40963563993573193,
+        "entity_ids": [
+          "\"LIV ULLMANN\"",
+          "\"GABY: A TRUE STORY\"",
+          "\"LUIS MANDOKI\"",
+          "\"RACHEL CHAGALL\"",
+          "\"NORMA ALEANDRO\"",
+          "\"ROBERT LOGGIA\"",
+          "\"MICHAEL LOVE\"",
+          "\"MARTÍN SALINAS\""
+        ],
+        "chunk_ids": [
+          "chunk-a2bbb3494ee4e8f17820b6211c617573"
+        ],
+        "evidence_texts": [
+          "Gaby: A True Story is a 1987 American-Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall, Norma Aleandro, Liv Ullmann, and Robert Loggia.",
+          "Gaby: A True Story Gaby: A True Story is a 1987 American- Mexican drama biographical film directed by Luis Mandoki, and starring Rachel Chagall( who, at the time, was billed under her real name, Rachel Levin), Norma Aleandro, Liv Ullmann, and Robert Loggia. It was written by Michael Love and Martín Salinas. It chronicles the lives of Gabriela Brimmer, a Mexican writer and disability rights activist, and her caretaker, Florencia Sánchez Morales."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.048178,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.409636
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4190850555896759,
+        "fusion_score": 0.08381701111793519,
+        "entity_ids": [
+          "\"PLACE OF BIRTH\"",
+          "\"PERSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place.",
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.419085,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.083817
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.\"",
+        "hyperedge_text": "This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4190850555896759,
+        "fusion_score": 0.08381701111793519,
+        "entity_ids": [
+          "\"LEGAL DOCUMENTS\"",
+          "\"NAME\"",
+          "\"DATE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place.",
+          "This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.419085,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.083817
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"As a general rule with respect to passports, the place of birth is determined to be the country that currently has sovereignty over the actual place of birth, regardless of when the birth actually occurred.\"",
+        "hyperedge_text": "As a general rule with respect to passports, the place of birth is determined to be the country that currently has sovereignty over the actual place of birth, regardless of when the birth actually occurred.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4190850555896759,
+        "fusion_score": 0.08381701111793519,
+        "entity_ids": [
+          "\"PASSPORTS\"",
+          "\"SOVEREIGNTY\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place.",
+          "As a general rule with respect to passports, the place of birth is determined to be the country that currently has sovereignty over the actual place of birth, regardless of when the birth actually occurred.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.419085,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.083817
+        }
+      }
+    ],
+    "answer": "Mexico City",
+    "confidence": 1.0,
+    "reasoning_summary": "Luis Mandoki was born in Mexico City, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood.\""
+    ]
+  }
+]

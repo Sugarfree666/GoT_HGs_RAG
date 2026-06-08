@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the composer of The Straw Hat?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "The Straw Hat",
+              "composer"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the composer of The Straw Hat."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "The Straw Hat"
+        },
+        "one_hop_relation": "composer",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did q1's answer die?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "composer",
+              "die"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking where the composer died."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1"
+        },
+        "one_hop_relation": "die",
+        "answer_type": "Location"
+      }
+    }
+  ]
+}

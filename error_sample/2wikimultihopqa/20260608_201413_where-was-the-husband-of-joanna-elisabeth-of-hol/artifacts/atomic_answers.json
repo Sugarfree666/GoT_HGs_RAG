@@ -1,0 +1,370 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the husband of Joanna Elisabeth Of Holstein-Gottorp?",
+    "analysis": {
+      "entities": [
+        "Joanna Elisabeth Of Holstein-Gottorp"
+      ],
+      "relations": [
+        "is the husband of"
+      ],
+      "relation_query": "Who is the husband of a person?",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.\"",
+        "hyperedge_text": "She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.6613829135894775,
+        "relation_score": 0.0,
+        "semantic_score": 0.6392744779586792,
+        "fusion_score": 0.3924080610275269,
+        "entity_ids": [
+          "\"GOTTORP\"",
+          "\"CHRISTIAN AUGUST, DUKE OF HOLSTEIN-GOTTORP\"",
+          "\"ALBERTINA FREDERICA OF BADEN-DURLACH\"",
+          "\"DAUGHTER\""
+        ],
+        "chunk_ids": [
+          "chunk-02ea42570d1889a30b5f3068481a4db0"
+        ],
+        "evidence_texts": [
+          "She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+          "Joanna Elisabeth of Holstein-Gottorp Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus. She is best known as the mother of Catherine the Great of Russia. She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach."
+        ],
+        "score_breakdown": {
+          "A": 0.661383,
+          "R": 0.0,
+          "S": 0.639274,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.392408
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus.\"",
+        "hyperedge_text": "Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6392744779586792,
+        "fusion_score": 0.12785489559173585,
+        "entity_ids": [
+          "\"JOHANNA ELISABETH OF HOLSTEIN-GOTTORP\"",
+          "\"CHRISTIAN AUGUST\"",
+          "\"ANHALT-ZERBST\"",
+          "\"FREDERICK AUGUSTUS\""
+        ],
+        "chunk_ids": [
+          "chunk-02ea42570d1889a30b5f3068481a4db0"
+        ],
+        "evidence_texts": [
+          "Joanna Elisabeth of Holstein-Gottorp Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus. She is best known as the mother of Catherine the Great of Russia. She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+          "Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.639274,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.127855
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is best known as the mother of Catherine the Great of Russia.\"",
+        "hyperedge_text": "She is best known as the mother of Catherine the Great of Russia.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6392744779586792,
+        "fusion_score": 0.12785489559173585,
+        "entity_ids": [
+          "\"CATHERINE THE GREAT\""
+        ],
+        "chunk_ids": [
+          "chunk-02ea42570d1889a30b5f3068481a4db0"
+        ],
+        "evidence_texts": [
+          "Joanna Elisabeth of Holstein-Gottorp Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus. She is best known as the mother of Catherine the Great of Russia. She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+          "She is best known as the mother of Catherine the Great of Russia."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.639274,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.127855
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent.\"",
+        "hyperedge_text": "Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6392744779586792,
+        "fusion_score": 0.12785489559173585,
+        "entity_ids": [
+          "\"JOHANNA ELISABETH OF HOLSTEIN-GOTTORP\""
+        ],
+        "chunk_ids": [
+          "chunk-02ea42570d1889a30b5f3068481a4db0"
+        ],
+        "evidence_texts": [
+          "Joanna Elisabeth of Holstein-Gottorp Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus. She is best known as the mother of Catherine the Great of Russia. She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+          "Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.639274,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.127855
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Johanna Elisabeth was Princess of Anhalt-Zerbst by marriage to Christian August.\"",
+        "hyperedge_text": "Johanna Elisabeth was Princess of Anhalt-Zerbst by marriage to Christian August.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6392744779586792,
+        "fusion_score": 0.12785489559173585,
+        "entity_ids": [
+          "\"PRINCESS OF ANHALT-ZERBST\""
+        ],
+        "chunk_ids": [
+          "chunk-02ea42570d1889a30b5f3068481a4db0"
+        ],
+        "evidence_texts": [
+          "Joanna Elisabeth of Holstein-Gottorp Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus. She is best known as the mother of Catherine the Great of Russia. She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+          "Johanna Elisabeth was Princess of Anhalt-Zerbst by marriage to Christian August."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.639274,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.127855
+        }
+      }
+    ],
+    "answer": "Christian August, Prince of Anhalt-Zerbst",
+    "confidence": 0.9,
+    "reasoning_summary": "Joanna Elisabeth of Holstein-Gottorp was a Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, which directly answers the question.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Johanna Elisabeth was Princess of Anhalt-Zerbst by marriage to Christian August.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was q1's answer born?",
+    "analysis": {
+      "entities": [
+        "Joanna Elisabeth Of Holstein-Gottorp",
+        "Christian August, Prince of Anhalt-Zerbst",
+        "Gottorp"
+      ],
+      "relations": [
+        "was born at"
+      ],
+      "relation_query": "Where was a person born?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.\"",
+        "hyperedge_text": "She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5634504159291586,
+        "relation_score": 0.0,
+        "semantic_score": 0.1883411705493927,
+        "fusion_score": 0.263048400481542,
+        "entity_ids": [
+          "\"GOTTORP\"",
+          "\"CHRISTIAN AUGUST, DUKE OF HOLSTEIN-GOTTORP\"",
+          "\"ALBERTINA FREDERICA OF BADEN-DURLACH\"",
+          "\"DAUGHTER\""
+        ],
+        "chunk_ids": [
+          "chunk-02ea42570d1889a30b5f3068481a4db0"
+        ],
+        "evidence_texts": [
+          "She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.",
+          "Joanna Elisabeth of Holstein-Gottorp Johanna Elisabeth of Holstein-Gottorp (24 October 1712 – 30 May 1760) was a German regent, Princess of Anhalt-Zerbst by marriage to Christian August, Prince of Anhalt-Zerbst, and regent of Anhalt-Zerbst from 1747 to 1752 for her minor son, Frederick Augustus. She is best known as the mother of Catherine the Great of Russia. She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach."
+        ],
+        "score_breakdown": {
+          "A": 0.56345,
+          "R": 0.0,
+          "S": 0.188341,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.263048
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Christian August was a ruler of the entire Principality of Anhalt-Zerbst starting from 1742.\"",
+        "hyperedge_text": "Christian August was a ruler of the entire Principality of Anhalt-Zerbst starting from 1742.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.2321807543436686,
+        "relation_score": 0.0,
+        "semantic_score": 0.23796609044075012,
+        "fusion_score": 0.14046551982561747,
+        "entity_ids": [
+          "\"PRINCIPALITY OF ANHALT-ZERBST\""
+        ],
+        "chunk_ids": [
+          "chunk-f060ded95f6a90bd0299d81ae73684f4"
+        ],
+        "evidence_texts": [
+          "Christian August was a ruler of the entire Principality of Anhalt-Zerbst starting from 1742.",
+          "Christian August, Prince of Anhalt-Zerbst Christian August, Prince of Anhalt-Zerbst (29 November 1690, in Dornburg – 16 March 1747, in Zerbst) was a German prince of the House of Ascania. He was a ruler of the Principality of Anhalt-Dornburg, then, from 1742, a ruler of the entire Principality of Anhalt-Zerbst. He was also a Prussian \"Generalfeldmarschall\", but is best known for being the father of Catherine the Great of Russia."
+        ],
+        "score_breakdown": {
+          "A": 0.232181,
+          "R": 0.0,
+          "S": 0.237966,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.140466
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth (POB) or birthplace is the place where a person was born.\"",
+        "hyperedge_text": "The place of birth (POB) or birthplace is the place where a person was born.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3306940495967865,
+        "fusion_score": 0.0661388099193573,
+        "entity_ids": [
+          "\"PLACE OF BIRTH\"",
+          "\"PERSON\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth (POB) or birthplace is the place where a person was born.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe...",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.330694,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.066139
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).\"",
+        "hyperedge_text": "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3306940495967865,
+        "fusion_score": 0.0661388099193573,
+        "entity_ids": [
+          "\"LAW\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality(ies) of the parents and/or the location of the plane or ship (if the birth occurs in the territorial waters or airspace of a country).",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe...",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.330694,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.066139
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.\"",
+        "hyperedge_text": "This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3306940495967865,
+        "fusion_score": 0.0661388099193573,
+        "entity_ids": [
+          "\"LEGAL DOCUMENTS\"",
+          "\"NAME\"",
+          "\"DATE OF BIRTH\""
+        ],
+        "chunk_ids": [
+          "chunk-7b8e94efef1f8a7aac3f33d12d332073"
+        ],
+        "evidence_texts": [
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Sweden has used the concept of\" födelsehemortdomicile of birth\") since 1947. This means that the domicile of the baby's mother is the registered place of birth. The location of the maternity ward or other physical birthplace is considered unimportant. Similarly, Switzerland uses the concept of\" Heimatortlieu d'origineluogo d'origineplace of origin\" in German, French and Italian respectively). A child born to Swiss parents is automatically assigned the place of origin of the parent with the same last name, so the child either gets their mother's or father's place of origin. A child born to one Swiss parent and one foreign parent acquires the place of origin of their Swiss parent. In a Swiss passport and identity card, the holder's place of origin is stated, not their place of birth. In some countries( primarily in the Americas), the place of birth automatically determines the nationality of the baby, a practice often referred to by the Latin phrase\" jus soli\". Almost all countries outside the Americas instead attribute nationality based on the nationality( ies) of the baby's parents( referred to as\" jus sanguinis\"). There can be some confusion regarding the place of birth if the birth takes place in an unusual way: when babies are born on an airplane or at sea, difficulties can arise. The place of birth of such a person depends on the law of the countries involved, which include the nationality of the plane or ship, the nationality( ies) of the parents and/ or the location of the plane or ship( if the birth occurs in the territorial waters or airspace of a country). Some administrative forms may request the applicant's\" country of birth\". It is important to determine from the requester whether the information requested refers to the applicant's\" place of birth\" or\" nationality at birth\". For US citizens born abroad who under the US Constitution acquire US citizenship at the time of birth, the nationality at birth will be USA( American), while the place of birth would be the country in which the actual birth takes place.",
+          "This place is often used in legal documents, together with name and date of birth, to uniquely identify a person.",
+          "Place of birth The place of birth( POB) or birthplace is the place where a person was born. This place is often used in legal documents, together with name and date of birth, to uniquely identify a person. As a general rule with respect to passports, the place of birth is determined to be the country that currently has\" sovereignty\" over the actual place of birth, regardless of when the birth actually occurred. The place of birth is not necessarily the place where the parents of the new baby live. If the baby is born in a hospital in another place, that place is the place of birth. In many countries, this also means that the government requires that the birth of the new baby is registered in the place of birth. Some countries place less or no importance on the place of birth, instead using alternative geographical characteristics for the purpose of identity documents. For example, Swe..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.330694,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.066139
+        }
+      }
+    ],
+    "answer": "Gottorp",
+    "confidence": 0.9,
+    "reasoning_summary": "Joanna Elisabeth of Holstein-Gottorp was born at Gottorp, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"She was born at Gottorp, the daughter of Christian August, Duke of Holstein-Gottorp and Albertina Frederica of Baden-Durlach.\""
+    ]
+  }
+]

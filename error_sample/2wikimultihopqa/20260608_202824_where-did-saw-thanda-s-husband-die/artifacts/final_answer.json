@@ -1,0 +1,29 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "While it is established that Saw Thanda's husband is King Dikkha, King Saw Hla, King Sekkya, and King Phalaung, there is no evidence provided that specifies where any of these kings died, leading to insufficient information to answer the original question.",
+  "answer_span_reasoning": "There is no evidence specifying where Saw Thanda's husband died.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is Saw Thanda's husband?",
+      "answer": "King Dikkha, King Saw Hla, King Sekkya, King Phalaung",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Saw Thanda Dewi was queen consort to four consecutive kings of Arakan.\"",
+        "<hyperedge>\"She was the chief queen of King Dikkha (r. 1554–56).\"",
+        "<hyperedge>\"She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons.\"",
+        "<hyperedge>\"and later to King Phalaung (r. 1572–93).\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did q1's answer die?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"She later became queen to King Saw Hla (r. 1556–64) and King Sekkya (1564–72), both of whom were her step-sons.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

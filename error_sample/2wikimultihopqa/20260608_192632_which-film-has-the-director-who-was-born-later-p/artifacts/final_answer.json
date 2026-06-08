@@ -1,0 +1,42 @@
+{
+  "answer": "Playing It Wild",
+  "candidate_answer": "Playing It Wild",
+  "reasoning_summary": "William Duncan, the director of 'Playing It Wild', was born on December 16, 1879, while Dino Risi, the director of 'I'll Be Going Now', was born later on December 23, 1916. Therefore, 'Playing It Wild' is the film directed by the earlier-born director.",
+  "answer_span_reasoning": "The answer is based on the director's birth dates.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Playing It Wild?",
+      "answer": "William Duncan",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Playing It Wild is a 1923 American silent western film directed by William Duncan and starring Duncan, Edith Johnson and Francis Powers.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the director of I'Ll Be Going Now?",
+      "answer": "Dino Risi",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Tolgo il disturbo, internationally released as I'll Be Going Now, is a 1990 Italian comedy-drama film directed by Dino Risi.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "When was the director of Playing It Wild born?",
+      "answer": "December 16, 1879",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"William Duncan (December 16, 1879 – February 7, 1961), born in Dundee, Scotland was an actor, producer, writer, and director of film serials.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "When was the director of I'Ll Be Going Now born?",
+      "answer": "23 December 1916",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Dino Risi (23 December 1916 – 7 June 2008) was an Italian film director.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

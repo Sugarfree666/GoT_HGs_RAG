@@ -1,0 +1,12 @@
+2026-06-08 19:29:15,479 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 19:30:20,470 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 19:30:20,470 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 19:30:32,751 | INFO | Starting HyperBranch pipeline for question: Which film has the director born later, Christ Walking On The Water or 45 Fathers?
+2026-06-08 19:30:32,751 | INFO | Executing atomic DAG with 4 node(s)
+2026-06-08 19:30:36,693 | INFO | Atomic retrieval returned 97 hits for question=Who is the director of Christ Walking On The Water?
+2026-06-08 19:30:42,613 | INFO | Atomic retrieval returned 102 hits for question=Who is the director of 45 Fathers?
+2026-06-08 19:30:46,146 | INFO | Rewrote retrieval question for q3: When was the director of Christ Walking On The Water born? -> When was Georges Méliès born?
+2026-06-08 19:30:50,515 | INFO | Atomic retrieval returned 76 hits for question=When was Georges Méliès born?
+2026-06-08 19:30:52,711 | INFO | Rewrote retrieval question for q4: When was the director of 45 Fathers born? -> When was James Tinling born?
+2026-06-08 19:30:55,540 | INFO | Atomic retrieval returned 93 hits for question=When was James Tinling born?
+2026-06-08 19:31:06,831 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_192915_which-film-has-the-director-born-later-christ-wa

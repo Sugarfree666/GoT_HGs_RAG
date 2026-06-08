@@ -1,0 +1,98 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the mother of Prince Ferdinand Of Bavaria?",
+    "retrieval_question": "Who is the mother of Prince Ferdinand Of Bavaria?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the mother of Prince Ferdinand Of Bavaria?",
+      "retrieval_question": "Who is the mother of Prince Ferdinand Of Bavaria?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Prince Ferdinand Of Bavaria"
+      ],
+      "relations": [
+        "is the mother of"
+      ],
+      "relation_query": "who is the mother of a royal figure",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did q1's answer die?",
+    "retrieval_question": "Where did q1's answer die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did q1's answer die?",
+      "retrieval_question": "Where did q1's answer die?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the mother of Prince Ferdinand Of Bavaria?",
+        "answer": "Infanta María de la Paz of Spain",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that Infante Ferdinand of Bavaria is the eldest son of Ludwig Ferdinand of Bavaria and his wife, Infanta María de la Paz of Spain, directly identifying her as his mother.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Infante Ferdinand of Bavaria (Ferdinand Maria Ludwig Franz von Assisi Isabellus Adalbert Ildefons Martin Bonifaz Joseph Isidro; 10 May 1884 – 5 April 1958) was a Spanish prince, the eldest son and child of Ludwig Ferdinand of Bavaria and his wife, Infanta María de la Paz of Spain.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Infante Ferdinand of Bavaria (Ferdinand Maria Ludwig Franz von Assisi Isabellus Adalbert Ildefons Martin Bonifaz Joseph Isidro; 10 May 1884 – 5 April 1958) was a Spanish prince, the eldest son and child of Ludwig Ferdinand of Bavaria and his wife, Infanta María de la Paz of Spain.\"",
+            "fusion_score": 0.13952310085296632,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Prince Ferdinand of Bavaria Infante Ferdinand of Bavaria (Ferdinand Maria Ludwig Franz von Assisi Isabellus Adalbert Ildefons Martin Bonifaz Joseph Isidro; 10 May 1884 – 5 April 1958) was a Spanish prince, the eldest son and child of Ludwig Ferdinand of Bavaria and his wife, Infanta María de la Paz of Spain. Ferdinand became an Infante of Spain on 20 October 1905 and renounced his rights to the throne of the Kingdom of Bavaria in 1914.",
+              "Infante Ferdinand of Bavaria (Ferdinand Maria Ludwig Franz von Assisi Isabellus Adalbert Ildefons Martin Bonifaz Joseph Isidro; 10 May 1884 – 5 April 1958) was a Spanish prince, the eldest son and child of Ludwig Ferdinand of Bavaria and his wife, Infanta María de la Paz of Spain."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Ferdinand became an Infante of Spain on 20 October 1905 and renounced his rights to the throne of the Kingdom of Bavaria in 1914.\"",
+            "fusion_score": 0.13952310085296632,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Prince Ferdinand of Bavaria Infante Ferdinand of Bavaria (Ferdinand Maria Ludwig Franz von Assisi Isabellus Adalbert Ildefons Martin Bonifaz Joseph Isidro; 10 May 1884 – 5 April 1958) was a Spanish prince, the eldest son and child of Ludwig Ferdinand of Bavaria and his wife, Infanta María de la Paz of Spain. Ferdinand became an Infante of Spain on 20 October 1905 and renounced his rights to the throne of the Kingdom of Bavaria in 1914.",
+              "Ferdinand became an Infante of Spain on 20 October 1905 and renounced his rights to the throne of the Kingdom of Bavaria in 1914."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Infante Ferdinand of Bavaria (Ferdinand Maria Ludwig Franz von Assisi Isabellus Adalbert Ildefons Martin Bonifaz Joseph Isidro; 10 May 1884 – 5 April 1958) was a Spanish prince.\"",
+            "fusion_score": 0.13952310085296632,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Prince Ferdinand of Bavaria Infante Ferdinand of Bavaria (Ferdinand Maria Ludwig Franz von Assisi Isabellus Adalbert Ildefons Martin Bonifaz Joseph Isidro; 10 May 1884 – 5 April 1958) was a Spanish prince, the eldest son and child of Ludwig Ferdinand of Bavaria and his wife, Infanta María de la Paz of Spain. Ferdinand became an Infante of Spain on 20 October 1905 and renounced his rights to the throne of the Kingdom of Bavaria in 1914.",
+              "Infante Ferdinand of Bavaria (Ferdinand Maria Ludwig Franz von Assisi Isabellus Adalbert Ildefons Martin Bonifaz Joseph Isidro; 10 May 1884 – 5 April 1958) was a Spanish prince."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Infanta María de la Paz of Spain",
+        "Prince Ferdinand Of Bavaria"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

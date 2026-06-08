@@ -1,0 +1,742 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of El Tonto?",
+    "analysis": {
+      "entities": [
+        "El Tonto"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"El Tonto is an upcoming comedy film written and directed by Charlie Day.\"",
+        "hyperedge_text": "El Tonto is an upcoming comedy film written and directed by Charlie Day.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5643917322158813,
+        "fusion_score": 0.5128783464431763,
+        "entity_ids": [
+          "\"EL TONTO\"",
+          "\"CHARLIE DAY\""
+        ],
+        "chunk_ids": [
+          "chunk-6645b5c654a727fe2c4250a25b991fd2"
+        ],
+        "evidence_texts": [
+          "El Tonto is an upcoming comedy film written and directed by Charlie Day.",
+          "El Tonto El Tonto is an upcoming comedy film written and directed by Charlie Day."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.564392,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.512878
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"El Tonto is an upcoming comedy film.\"",
+        "hyperedge_text": "El Tonto is an upcoming comedy film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5643917322158813,
+        "fusion_score": 0.5128783464431763,
+        "entity_ids": [
+          "\"EL TONTO\""
+        ],
+        "chunk_ids": [
+          "chunk-6645b5c654a727fe2c4250a25b991fd2"
+        ],
+        "evidence_texts": [
+          "El Tonto is an upcoming comedy film.",
+          "El Tonto El Tonto is an upcoming comedy film written and directed by Charlie Day."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.564392,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.512878
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"El Tonto is written and directed by Charlie Day.\"",
+        "hyperedge_text": "El Tonto is written and directed by Charlie Day.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5643917322158813,
+        "fusion_score": 0.11287834644317628,
+        "entity_ids": [
+          "\"CHARLIE DAY\""
+        ],
+        "chunk_ids": [
+          "chunk-6645b5c654a727fe2c4250a25b991fd2"
+        ],
+        "evidence_texts": [
+          "El Tonto El Tonto is an upcoming comedy film written and directed by Charlie Day.",
+          "El Tonto is written and directed by Charlie Day."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.564392,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.112878
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood.\"",
+        "hyperedge_text": "Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48519328236579895,
+        "fusion_score": 0.09703865647315979,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"LUIS MANDOKI\"",
+          "\"MEXICO CITY\""
+        ],
+        "chunk_ids": [
+          "chunk-1bcef194d0588a1fde0838b46fa26f9e"
+        ],
+        "evidence_texts": [
+          "Luis Mandoki Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood. Luis Mandoki studied Fine Arts in Mexico and at the San Francisco Art Institute, the London College of Printing, and the London International Film School. While attending this last institution he directed his first short film \"Silent Music\" which won an award at the International Amateur Film Festival of Cannes Film Festival in 1976. Back in Mexico he directed short films and documentaries for the Instituto Nacional Indigenista (the National Institute for the Indigenous), Conacine (National Commission of Film) and the Centro de Produccion de Cortometraje (Center for the Production of Short Films). In 1980 he received an Ariel Award of the Mexican Academy of Film for his short film \"El secreto\". Four years later, his film \"Motel\" was selected to represent Mexico in film festivals around the globe. At the age of 30 he developed, wrote, produced and directed , a movie about the struggles of handicapped Gaby Brimer. This film was nominated for both the Academy and Golden Globe Awards. For the next 15 years he filmed only in English until the critically acclaimed \"Voces inocentes\" of 2004. This film gave him a \"Best Director\" nomination for the Ariel Award in 2005. The film also received three awards and was nominated for \"Best Film\". The film was selected to represent Mexico for the Academy Award for Best Foreign Language Film and had a box-office output of 49.4 million pesos (roughly 4.5 million U.S. dollars) and was seen by 1.5 million people. Luis Mandoki currently resides in Mexico City with his wife, Olivia, and three children Camille, Daniel and Michelle.",
+          "Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood.",
+          "Luis Mandoki Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood. Luis Mandoki studied Fine Arts in Mexico and at the San Francisco Art Institute, the London College of Printing, and the London International Film School. While attending this last institution he directed his first short film \"Silent Music\" which won an award at the International Amateur Film Festival of Cannes Film Festival in 1976. Back in Mexico he directed short films and documentaries for the Instituto Nacional Indigenista (the National Institute for the Indigenous), Conacine (National Commission of Film) and the Centro de Produccion de Cortometraje (Center for the Production of Short Films). In 1980 he received an Ariel Award of the Mexican Academy of Film for his short film \"El secreto\". Four years later, his film \"Motel\" was selected to represent Mexico i..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.485193,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.097039
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Luis Mandoki studied Fine Arts in Mexico and at the San Francisco Art Institute, the London College of Printing, and the London International Film School.\"",
+        "hyperedge_text": "Luis Mandoki studied Fine Arts in Mexico and at the San Francisco Art Institute, the London College of Printing, and the London International Film School.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48519328236579895,
+        "fusion_score": 0.09703865647315979,
+        "entity_ids": [
+          "\"FINE ARTS\"",
+          "\"SAN FRANCISCO ART INSTITUTE\"",
+          "\"LONDON COLLEGE OF PRINTING\"",
+          "\"LONDON INTERNATIONAL FILM SCHOOL\""
+        ],
+        "chunk_ids": [
+          "chunk-1bcef194d0588a1fde0838b46fa26f9e"
+        ],
+        "evidence_texts": [
+          "Luis Mandoki Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood. Luis Mandoki studied Fine Arts in Mexico and at the San Francisco Art Institute, the London College of Printing, and the London International Film School. While attending this last institution he directed his first short film \"Silent Music\" which won an award at the International Amateur Film Festival of Cannes Film Festival in 1976. Back in Mexico he directed short films and documentaries for the Instituto Nacional Indigenista (the National Institute for the Indigenous), Conacine (National Commission of Film) and the Centro de Produccion de Cortometraje (Center for the Production of Short Films). In 1980 he received an Ariel Award of the Mexican Academy of Film for his short film \"El secreto\". Four years later, his film \"Motel\" was selected to represent Mexico in film festivals around the globe. At the age of 30 he developed, wrote, produced and directed , a movie about the struggles of handicapped Gaby Brimer. This film was nominated for both the Academy and Golden Globe Awards. For the next 15 years he filmed only in English until the critically acclaimed \"Voces inocentes\" of 2004. This film gave him a \"Best Director\" nomination for the Ariel Award in 2005. The film also received three awards and was nominated for \"Best Film\". The film was selected to represent Mexico for the Academy Award for Best Foreign Language Film and had a box-office output of 49.4 million pesos (roughly 4.5 million U.S. dollars) and was seen by 1.5 million people. Luis Mandoki currently resides in Mexico City with his wife, Olivia, and three children Camille, Daniel and Michelle.",
+          "Luis Mandoki studied Fine Arts in Mexico and at the San Francisco Art Institute, the London College of Printing, and the London International Film School.",
+          "Luis Mandoki Luis Mandoki (born August 17, 1954 in Mexico City) is a Mexican film director working in Mexico and Hollywood. Luis Mandoki studied Fine Arts in Mexico and at the San Francisco Art Institute, the London College of Printing, and the London International Film School. While attending this last institution he directed his first short film \"Silent Music\" which won an award at the International Amateur Film Festival of Cannes Film Festival in 1976. Back in Mexico he directed short films and documentaries for the Instituto Nacional Indigenista (the National Institute for the Indigenous), Conacine (National Commission of Film) and the Centro de Produccion de Cortometraje (Center for the Production of Short Films). In 1980 he received an Ariel Award of the Mexican Academy of Film for his short film \"El secreto\". Four years later, his film \"Motel\" was selected to represent Mexico i..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.485193,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.097039
+        }
+      }
+    ],
+    "answer": "Charlie Day",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'El Tonto is an upcoming comedy film written and directed by Charlie Day.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"El Tonto is an upcoming comedy film written and directed by Charlie Day.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of The Heart Of Doreon?",
+    "analysis": {
+      "entities": [
+        "The Heart Of Doreon"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange.\"",
+        "hyperedge_text": "The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6813037991523743,
+        "fusion_score": 0.5362607598304749,
+        "entity_ids": [
+          "\"THE HEART OF DOREON\"",
+          "\"CYRUS J. WILLIAMS\"",
+          "\"PATHÉ EXCHANGE\""
+        ],
+        "chunk_ids": [
+          "chunk-9063c2b0c4b0d185e4f4f1e67b81f73a"
+        ],
+        "evidence_texts": [
+          "The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange.",
+          "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.681304,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536261
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film.\"",
+        "hyperedge_text": "The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6813037991523743,
+        "fusion_score": 0.5362607598304749,
+        "entity_ids": [
+          "\"THE HEART OF DOREON\"",
+          "\"IN THE HEART OF DOREON\"",
+          "\"THE HEART OF DOREAN\""
+        ],
+        "chunk_ids": [
+          "chunk-9063c2b0c4b0d185e4f4f1e67b81f73a"
+        ],
+        "evidence_texts": [
+          "The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film.",
+          "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.681304,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536261
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse.\"",
+        "hyperedge_text": "It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6813037991523743,
+        "fusion_score": 0.13626075983047486,
+        "entity_ids": [
+          "\"ROBERT NORTH BRADBURY\"",
+          "\"TOM SANTSCHI\"",
+          "\"RUTH STONEHOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-9063c2b0c4b0d185e4f4f1e67b81f73a"
+        ],
+        "evidence_texts": [
+          "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon.",
+          "It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.681304,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.136261
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"This short film was part of the 'Santschi Series', which included the other short films 'The Honor of Rameriz', 'The Spirit of the Lake', 'Lorraine of the Timberlands', and 'Mother o' Dreams', all of which starred Santschi.\"",
+        "hyperedge_text": "This short film was part of the 'Santschi Series', which included the other short films 'The Honor of Rameriz', 'The Spirit of the Lake', 'Lorraine of the Timberlands', and 'Mother o' Dreams', all of which starred Santschi.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6813037991523743,
+        "fusion_score": 0.13626075983047486,
+        "entity_ids": [
+          "\"SANTSCHI SERIES\"",
+          "\"THE HONOR OF RAMERIZ\"",
+          "\"THE SPIRIT OF THE LAKE\"",
+          "\"LORRAINE OF THE TIMBERLANDS\"",
+          "\"MOTHER O' DREAMS\""
+        ],
+        "chunk_ids": [
+          "chunk-9063c2b0c4b0d185e4f4f1e67b81f73a"
+        ],
+        "evidence_texts": [
+          "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon.",
+          "This short film was part of the 'Santschi Series', which included the other short films 'The Honor of Rameriz', 'The Spirit of the Lake', 'Lorraine of the Timberlands', and 'Mother o' Dreams', all of which starred Santschi."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.681304,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.136261
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"An 8-minute version of the film survives, which has been released by Harpodeon.\"",
+        "hyperedge_text": "An 8-minute version of the film survives, which has been released by Harpodeon.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6813037991523743,
+        "fusion_score": 0.13626075983047486,
+        "entity_ids": [
+          "\"8-MINUTE VERSION\"",
+          "\"HARPODEON\""
+        ],
+        "chunk_ids": [
+          "chunk-9063c2b0c4b0d185e4f4f1e67b81f73a"
+        ],
+        "evidence_texts": [
+          "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon.",
+          "An 8-minute version of the film survives, which has been released by Harpodeon."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.681304,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.136261
+        }
+      }
+    ],
+    "answer": "Robert North Bradbury",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence clearly states that 'The Heart of Doreon' was directed by Robert North Bradbury.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of q1 born?",
+    "analysis": {
+      "entities": [
+        "Charlie Day",
+        "El Tonto"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was a person born?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"El Tonto is an upcoming comedy film written and directed by Charlie Day.\"",
+        "hyperedge_text": "El Tonto is an upcoming comedy film written and directed by Charlie Day.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.17629531025886536,
+        "fusion_score": 0.4352590620517731,
+        "entity_ids": [
+          "\"EL TONTO\"",
+          "\"CHARLIE DAY\""
+        ],
+        "chunk_ids": [
+          "chunk-6645b5c654a727fe2c4250a25b991fd2"
+        ],
+        "evidence_texts": [
+          "El Tonto is an upcoming comedy film written and directed by Charlie Day.",
+          "El Tonto El Tonto is an upcoming comedy film written and directed by Charlie Day."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.176295,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.435259
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"El Tonto is written and directed by Charlie Day.\"",
+        "hyperedge_text": "El Tonto is written and directed by Charlie Day.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.17629531025886536,
+        "fusion_score": 0.23525906205177308,
+        "entity_ids": [
+          "\"CHARLIE DAY\""
+        ],
+        "chunk_ids": [
+          "chunk-6645b5c654a727fe2c4250a25b991fd2"
+        ],
+        "evidence_texts": [
+          "El Tonto is written and directed by Charlie Day.",
+          "El Tonto El Tonto is an upcoming comedy film written and directed by Charlie Day."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.176295,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.235259
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"El Tonto is an upcoming comedy film.\"",
+        "hyperedge_text": "El Tonto is an upcoming comedy film.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.17629531025886536,
+        "fusion_score": 0.23525906205177308,
+        "entity_ids": [
+          "\"EL TONTO\""
+        ],
+        "chunk_ids": [
+          "chunk-6645b5c654a727fe2c4250a25b991fd2"
+        ],
+        "evidence_texts": [
+          "El Tonto is an upcoming comedy film.",
+          "El Tonto El Tonto is an upcoming comedy film written and directed by Charlie Day."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.176295,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.235259
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.\"",
+        "hyperedge_text": "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48328468203544617,
+        "fusion_score": 0.09665693640708924,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"RICHARD QUINE\"",
+          "\"ACTOR\"",
+          "\"AMERICAN\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.483285,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.096657
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties.\"",
+        "hyperedge_text": "He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48328468203544617,
+        "fusion_score": 0.09665693640708924,
+        "entity_ids": [
+          "\"VAUDEVILLE\"",
+          "\"CHILD\"",
+          "\"STAGE PRODUCTIONS\"",
+          "\"RADIO\"",
+          "\"METRO-GOLDWYN-MAYER\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.483285,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.096657
+        }
+      }
+    ],
+    "answer": "INSUFFICIENT_EVIDENCE",
+    "confidence": 0.0,
+    "reasoning_summary": "The evidence provides information about Charlie Day as the director of El Tonto but does not include his birth date.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"El Tonto is an upcoming comedy film written and directed by Charlie Day.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of q2 born?",
+    "analysis": {
+      "entities": [
+        "Robert North Bradbury",
+        "The Heart Of Doreon"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was the director of a work born?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Bradbury occasionally billed himself as 'Robert North Bradbury', 'R.N. Bradbury', or 'Robert Bradbury'. \"",
+        "hyperedge_text": "Bradbury occasionally billed himself as 'Robert North Bradbury', 'R.N. Bradbury', or 'Robert Bradbury'.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.28273528814315796,
+        "fusion_score": 0.2565470576286316,
+        "entity_ids": [
+          "\"ROBERT NORTH BRADBURY\"",
+          "\"R.N. BRADBURY\"",
+          "\"ROBERT BRADBURY\""
+        ],
+        "chunk_ids": [
+          "chunk-8b13d8fa838655952a09b58272c87404"
+        ],
+        "evidence_texts": [
+          "Bradbury occasionally billed himself as 'Robert North Bradbury', 'R.N. Bradbury', or 'Robert Bradbury'.",
+          "Robert North Bradbury Robert N. Bradbury( March 23, 1886 – November 24, 1949)( born Ronald E. Bradbury) was an American film director and screenwriter who directed 125 movies between 1918 and 1941. He is most famous for directing early Western films starring John Wayne in the 1930s, including\" Riders of Destiny\"( 1933; an early singing- cowboy movie),\" The Lucky Texan\"( 1934),\" West of the Divide\"( 1934),\" Blue Steel\"( 1934),\" The Man From Utah\"( 1934),\" The Star Packer\"( 1934),\" The Trail Beyond\"( 1934; co-starring Noah Beery, Sr. and Noah Beery, Jr.),\" The Lawless Frontier\"( 1934),\" Texas Terror\"( 1935),\" Rainbow Valley\"( 1935),\" The Dawn Rider\"( 1935),\" Westward Ho\"( 1935), and\" Lawless Range\"( 1935). These were inexpensively shot\" Poverty Row\" movies; many were also written by Bradbury and almost all of them featured character actor George\" Gabby\" Hayes. Bradbury also shot numerou..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.282735,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.256547
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse.\"",
+        "hyperedge_text": "It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.1892954707145691,
+        "fusion_score": 0.23785909414291384,
+        "entity_ids": [
+          "\"ROBERT NORTH BRADBURY\"",
+          "\"TOM SANTSCHI\"",
+          "\"RUTH STONEHOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-9063c2b0c4b0d185e4f4f1e67b81f73a"
+        ],
+        "evidence_texts": [
+          "It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse.",
+          "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.189295,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.237859
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange.\"",
+        "hyperedge_text": "The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.1892954707145691,
+        "fusion_score": 0.23785909414291384,
+        "entity_ids": [
+          "\"THE HEART OF DOREON\"",
+          "\"CYRUS J. WILLIAMS\"",
+          "\"PATHÉ EXCHANGE\""
+        ],
+        "chunk_ids": [
+          "chunk-9063c2b0c4b0d185e4f4f1e67b81f73a"
+        ],
+        "evidence_texts": [
+          "The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange.",
+          "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.189295,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.237859
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film.\"",
+        "hyperedge_text": "The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.1892954707145691,
+        "fusion_score": 0.23785909414291384,
+        "entity_ids": [
+          "\"THE HEART OF DOREON\"",
+          "\"IN THE HEART OF DOREON\"",
+          "\"THE HEART OF DOREAN\""
+        ],
+        "chunk_ids": [
+          "chunk-9063c2b0c4b0d185e4f4f1e67b81f73a"
+        ],
+        "evidence_texts": [
+          "The Heart of Doreon (also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film.",
+          "The Heart of Doreon The Heart of Doreon( also known as In the Heart of Doreon and misspelled as The Heart of Dorean) is a 1921 American silent short Western romantic drama film produced by Cyrus J. Williams and distributed by Pathé Exchange. It was directed by Robert North Bradbury and stars Tom Santschi and Ruth Stonehouse. This short film was part of the\" Santschi Series\", which included the other short films\" The Honor of Rameriz The Spirit of the LakeLorraine of the Timberlands\", and\" Mother o' Dreams\", all of which starred Santschi. An 8- minute version of the film survives, which has been released by Harpodeon."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.189295,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.237859
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.\"",
+        "hyperedge_text": "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4913439154624939,
+        "fusion_score": 0.09826878309249878,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"RICHARD QUINE\"",
+          "\"ACTOR\"",
+          "\"AMERICAN\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.491344,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.098269
+        }
+      }
+    ],
+    "answer": "March 23, 1886",
+    "confidence": 0.9,
+    "reasoning_summary": "Robert North Bradbury, the director of 'The Heart of Doreon', was born on March 23, 1886, as supported by the evidence.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Bradbury occasionally billed himself as 'Robert North Bradbury', 'R.N. Bradbury', or 'Robert Bradbury'. \""
+    ]
+  }
+]

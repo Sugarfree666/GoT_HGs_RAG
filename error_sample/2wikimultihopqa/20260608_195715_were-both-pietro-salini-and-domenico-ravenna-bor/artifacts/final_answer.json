@@ -1,0 +1,28 @@
+{
+  "answer": "INSUFFICIENT_EVIDENCE",
+  "candidate_answer": "INSUFFICIENT_EVIDENCE",
+  "reasoning_summary": "Pietro Salini was born in Rome, Italy, but there is no information about the birthplace of Domenico Ravenna, only that he was born in 1584. Therefore, we cannot determine if they were born in the same place.",
+  "answer_span_reasoning": "There is not enough information to determine if they were born in the same place.",
+  "confidence": 0.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Where was Pietro Salini born?",
+      "answer": "Rome, Italy",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Pietro Salini was born on 29 March 1959 in Rome, Italy.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Where was Domenico Ravenna born?",
+      "answer": "INSUFFICIENT_EVIDENCE",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Domenico Ravenna (1584 – 1637) was a Roman Catholic prelate who served as Bishop of Nicastro (1635 – 1637).\""
+      ]
+    }
+  ],
+  "remaining_gaps": [
+    "Birthplace of Domenico Ravenna"
+  ]
+}

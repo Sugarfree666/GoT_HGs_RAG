@@ -252,6 +252,7 @@ def build_decomposition_payload(
             "5_undirected_dependency_graph": _graph_payload(dependency_graph),
             "6_entity_start_nodes": [_dataclass_to_jsonable(entity) for entity in result["entity_start_nodes"]],
             "7_entity_origin_paths": [_dataclass_to_jsonable(path) for path in result["entity_origin_paths"]],
+            "7_5_terminal_glue_path_pruning": _dataclass_to_jsonable(result.get("path_pruning_stats") or {}),
             "8_path_scores": [_dataclass_to_jsonable(path) for path in result.get("scored_entity_paths", [])],
             "8_1_top_paths_by_entity": top_paths_by_entity,
             "8_2_path_set_candidates": [_dataclass_to_jsonable(candidate) for candidate in result.get("path_set_candidates", [])],
@@ -355,6 +356,43 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     for path in stages["7_entity_origin_paths"]:
         lines.append(f"- {path.get('path_id')} ({path.get('entity_id')}): {' -- '.join(path.get('nodes', []))}")
     if not stages["7_entity_origin_paths"]:
+        lines.append("(none)")
+    lines.append("")
+
+    lines.append("## 7.5 Terminal Glue Path Pruning")
+    pruning_stats = stages.get("7_5_terminal_glue_path_pruning") or {}
+    if pruning_stats:
+        lines.append(f"Total raw paths: {pruning_stats.get('total_raw_paths', 0)}")
+        lines.append(f"Total kept paths: {pruning_stats.get('total_kept_paths', 0)}")
+        lines.append(f"Total pruned paths: {pruning_stats.get('total_pruned_paths', 0)}")
+        ratio = float(pruning_stats.get("total_pruned_ratio") or 0.0)
+        lines.append(f"Total pruned ratio: {ratio:.2%}")
+        by_entity = pruning_stats.get("by_entity") or {}
+        if by_entity:
+            lines.append("")
+            lines.append("### By Entity")
+            entity_text_by_id = {
+                entity.get("entity_id"): entity.get("text")
+                for entity in stages.get("6_entity_start_nodes", [])
+                if isinstance(entity, dict)
+            }
+            for entity_id, stats in by_entity.items():
+                label = entity_text_by_id.get(entity_id)
+                heading = f"{entity_id} / {label}" if label else str(entity_id)
+                lines.append(f"- {heading}")
+                lines.append(f"  - raw: {stats.get('raw', 0)}")
+                lines.append(f"  - kept: {stats.get('kept', 0)}")
+                lines.append(f"  - pruned: {stats.get('pruned', 0)}")
+                lines.append(f"  - fallback_used: {stats.get('fallback_used', False)}")
+                examples = stats.get("pruned_examples") or []
+                if examples:
+                    lines.append("  - examples:")
+                    for example in examples[:5]:
+                        lines.append(
+                            f"    - {example.get('path_id')}: {example.get('path_text')} "
+                            f"[terminal={example.get('terminal')}, reason={example.get('reason')}]"
+                        )
+    else:
         lines.append("(none)")
     lines.append("")
 

@@ -1,0 +1,99 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of film The Circus Cyclone?",
+    "retrieval_question": "Who is the director of film The Circus Cyclone?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of film The Circus Cyclone?",
+      "retrieval_question": "Who is the director of film The Circus Cyclone?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "The Circus Cyclone"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a film",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was q1's answer born?",
+    "retrieval_question": "Where was q1's answer born?",
+    "dependency_question_rewrite": {
+      "original_question": "Where was q1's answer born?",
+      "retrieval_question": "Where was q1's answer born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of film The Circus Cyclone?",
+        "answer": "Albert S. Rogell",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'The Circus Cyclone' was written and directed by Albert S. Rogell.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The Circus Cyclone is a 1925 American Western film written and directed by Albert S. Rogell.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The Circus Cyclone is a 1925 American Western film written and directed by Albert S. Rogell.\"",
+            "fusion_score": 0.5369496107101441,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Circus Cyclone is a 1925 American Western film written and directed by Albert S. Rogell.",
+              "The Circus Cyclone The Circus Cyclone is a 1925 American Western film written and directed by Albert S. Rogell. The film stars Art Acord, Moe McCrea, Nancy Deaver, Cesare Gravina, Albert J. Smith and Hilliard Karr. The film was released on October 4, 1925, by Universal Pictures."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The Circus Cyclone is a 1925 American Western film.\"",
+            "fusion_score": 0.5369496107101441,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Circus Cyclone is a 1925 American Western film.",
+              "The Circus Cyclone The Circus Cyclone is a 1925 American Western film written and directed by Albert S. Rogell. The film stars Art Acord, Moe McCrea, Nancy Deaver, Cesare Gravina, Albert J. Smith and Hilliard Karr. The film was released on October 4, 1925, by Universal Pictures."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film stars Art Acord, Moe McCrea, Nancy Deaver, Cesare Gravina, Albert J. Smith and Hilliard Karr.\"",
+            "fusion_score": 0.13694961071014405,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Circus Cyclone The Circus Cyclone is a 1925 American Western film written and directed by Albert S. Rogell. The film stars Art Acord, Moe McCrea, Nancy Deaver, Cesare Gravina, Albert J. Smith and Hilliard Karr. The film was released on October 4, 1925, by Universal Pictures.",
+              "The film stars Art Acord, Moe McCrea, Nancy Deaver, Cesare Gravina, Albert J. Smith and Hilliard Karr."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Albert S. Rogell"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "Where was a person born?",
+      "answer_type": "location"
+    }
+  }
+]

@@ -95,6 +95,66 @@ FUNCTION_SURFACES = {
     "with",
 }
 
+TERMINAL_GLUE_TOKENS = {
+    "the",
+    "a",
+    "an",
+    "of",
+    "in",
+    "on",
+    "at",
+    "by",
+    "for",
+    "from",
+    "to",
+    "with",
+    "about",
+    "as",
+    "into",
+    "over",
+    "under",
+    "is",
+    "are",
+    "was",
+    "were",
+    "be",
+    "been",
+    "being",
+    "do",
+    "does",
+    "did",
+    "has",
+    "have",
+    "had",
+    "and",
+    "or",
+    "but",
+    "?",
+    ".",
+    ",",
+    ";",
+    ":",
+    "!",
+    "'",
+    '"',
+    "``",
+    "''",
+}
+
+TERMINAL_GLUE_DEP_LABELS = {
+    "det",
+    "case",
+    "aux",
+    "aux:pass",
+    "punct",
+    "cop",
+    "cc",
+    "mark",
+}
+
+WH_TOKENS = {"who", "what", "when", "where", "which", "whom", "whose"}
+_TERMINAL_STRIP_CHARS = " \t\r\n.,;:!?\"'`“”‘’()[]{}"
+
 ANSWER_CUES = {
     "age",
     "city",
@@ -339,6 +399,105 @@ def enumerate_entity_origin_paths(
                 )
             )
     return result
+
+
+def prune_terminal_glue_paths(
+    entity_origin_paths: list[EntityOriginPath],
+    dependency_graph: nx.Graph | None = None,
+    entity_start_nodes: list[EntityStartNode] | None = None,
+    *,
+    min_keep_per_entity: int = 3,
+    keep_wh_terminals: bool = True,
+) -> tuple[list[EntityOriginPath], dict[str, Any]]:
+    """Remove paths whose terminal node is glue/function syntax.
+
+    Paths may contain glue/function tokens internally. This pruning only removes
+    paths whose terminal node is a glue/function token.
+    """
+
+    grouped: dict[str, list[EntityOriginPath]] = {}
+    entity_order: list[str] = []
+    for path in entity_origin_paths:
+        grouped.setdefault(path.entity_id, []).append(path)
+        if path.entity_id not in entity_order:
+            entity_order.append(path.entity_id)
+
+    if entity_start_nodes:
+        ordered_from_entities = [entity.entity_id for entity in entity_start_nodes]
+        entity_order = [
+            *[entity_id for entity_id in ordered_from_entities if entity_id in grouped],
+            *[entity_id for entity_id in entity_order if entity_id not in ordered_from_entities],
+        ]
+
+    pruned_paths: list[EntityOriginPath] = []
+    stats_by_entity: dict[str, dict[str, Any]] = {}
+    total_raw = 0
+    total_kept = 0
+
+    for entity_id in entity_order:
+        raw_paths = grouped.get(entity_id, [])
+        total_raw += len(raw_paths)
+        kept_for_entity: list[EntityOriginPath] = []
+        pruned_reasons: dict[str, str] = {}
+
+        for path in raw_paths:
+            reason = _terminal_glue_prune_reason(
+                path,
+                dependency_graph=dependency_graph,
+                keep_wh_terminals=keep_wh_terminals,
+            )
+            if reason:
+                pruned_reasons[path.path_id] = reason
+                continue
+            kept_for_entity.append(path)
+
+        fallback_used = False
+        if raw_paths and not kept_for_entity:
+            fallback_used = True
+            fallback_count = min(max(min_keep_per_entity, 1), len(raw_paths))
+            kept_for_entity = sorted(raw_paths, key=_terminal_glue_fallback_sort_key)[:fallback_count]
+
+        kept_ids = {path.path_id for path in kept_for_entity}
+        dropped_paths = [path for path in raw_paths if path.path_id not in kept_ids]
+        pruned_paths.extend(kept_for_entity)
+        total_kept += len(kept_for_entity)
+
+        examples = [
+            {
+                "path_id": path.path_id,
+                "terminal": _path_terminal_text(path),
+                "reason": pruned_reasons.get(path.path_id)
+                or _terminal_glue_prune_reason(
+                    path,
+                    dependency_graph=dependency_graph,
+                    keep_wh_terminals=keep_wh_terminals,
+                )
+                or "terminal_glue_path_pruned",
+                "path_text": " -> ".join(path.nodes),
+            }
+            for path in dropped_paths[:5]
+        ]
+        raw_count = len(raw_paths)
+        kept_count = len(kept_for_entity)
+        pruned_count = raw_count - kept_count
+        stats_by_entity[entity_id] = {
+            "raw": raw_count,
+            "kept": kept_count,
+            "pruned": pruned_count,
+            "pruned_ratio": (pruned_count / raw_count) if raw_count else 0.0,
+            "fallback_used": fallback_used,
+            "pruned_examples": examples,
+        }
+
+    total_pruned = total_raw - total_kept
+    stats = {
+        "total_raw_paths": total_raw,
+        "total_kept_paths": total_kept,
+        "total_pruned_paths": total_pruned,
+        "total_pruned_ratio": (total_pruned / total_raw) if total_raw else 0.0,
+        "by_entity": stats_by_entity,
+    }
+    return pruned_paths, stats
 
 
 def undirected_graph_edge_payloads(dependency_graph: nx.Graph) -> list[dict[str, Any]]:
@@ -784,6 +943,99 @@ def _path_useful_surfaces(path: EntityOriginPath) -> set[str]:
 def _is_content_text(text: str) -> bool:
     normalized = _norm(text)
     return bool(normalized) and normalized not in FUNCTION_SURFACES and not re.fullmatch(r"\W+", text)
+
+
+def _terminal_glue_prune_reason(
+    path: EntityOriginPath,
+    *,
+    dependency_graph: nx.Graph | None,
+    keep_wh_terminals: bool,
+) -> str | None:
+    terminal = _path_terminal_text(path)
+    raw_normalized, stripped_normalized = _terminal_token_forms(terminal)
+    if keep_wh_terminals and (raw_normalized in WH_TOKENS or stripped_normalized in WH_TOKENS):
+        return None
+    if raw_normalized in TERMINAL_GLUE_TOKENS or stripped_normalized in TERMINAL_GLUE_TOKENS:
+        return "terminal_glue_token"
+    if _terminal_incoming_dependency_label_is_glue(path, dependency_graph=dependency_graph):
+        return "terminal_glue_dependency_label"
+    return None
+
+
+def _path_terminal_text(path: EntityOriginPath) -> str:
+    if path.nodes:
+        return str(path.nodes[-1])
+    return ""
+
+
+def _terminal_token_forms(text: str) -> tuple[str, str]:
+    raw = str(text or "").strip().lower()
+    stripped = raw.strip(_TERMINAL_STRIP_CHARS)
+    return raw, stripped
+
+
+def _terminal_incoming_dependency_label_is_glue(
+    path: EntityOriginPath,
+    *,
+    dependency_graph: nx.Graph | None,
+) -> bool:
+    if len(path.node_ids) < 2:
+        return False
+    terminal_node_id = str(path.node_ids[-1])
+    edge_evidence = path.evidence[-1] if path.evidence else None
+    if edge_evidence is None and dependency_graph is not None:
+        previous = str(path.node_ids[-2])
+        if dependency_graph.has_edge(previous, terminal_node_id):
+            attrs = dependency_graph.edges[previous, terminal_node_id]
+            edge_evidence = {
+                "relations": list(attrs.get("relations", [])),
+                "directed_edges": list(attrs.get("directed_edges", [])),
+            }
+    if not isinstance(edge_evidence, dict):
+        return False
+
+    for directed_edge in edge_evidence.get("directed_edges", []) or []:
+        if not isinstance(directed_edge, dict):
+            continue
+        relation = _dependency_label_for_pruning(directed_edge)
+        if not _dependency_label_is_terminal_glue(relation):
+            continue
+        dependent_ids = {
+            str(value)
+            for value in (
+                directed_edge.get("dependent"),
+                directed_edge.get("dependent_index"),
+                directed_edge.get("target_index"),
+            )
+            if value is not None
+        }
+        if terminal_node_id in dependent_ids:
+            return True
+    return False
+
+
+def _dependency_label_for_pruning(directed_edge: dict[str, Any]) -> str:
+    return str(
+        directed_edge.get("dependency_label")
+        or directed_edge.get("relation")
+        or ""
+    ).strip()
+
+
+def _dependency_label_is_terminal_glue(label: str) -> bool:
+    normalized = str(label or "").strip()
+    if not normalized:
+        return False
+    return normalized in TERMINAL_GLUE_DEP_LABELS or normalized.split(":", 1)[0] in TERMINAL_GLUE_DEP_LABELS
+
+
+def _terminal_glue_fallback_sort_key(path: EntityOriginPath) -> tuple[int, int, int, int, str]:
+    terminal = _path_terminal_text(path)
+    raw_normalized, stripped_normalized = _terminal_token_forms(terminal)
+    is_punctuation = 1 if re.fullmatch(r"\W+", str(terminal or "").strip()) else 0
+    is_glue = 1 if raw_normalized in TERMINAL_GLUE_TOKENS or stripped_normalized in TERMINAL_GLUE_TOKENS else 0
+    is_function = 1 if raw_normalized in FUNCTION_SURFACES or stripped_normalized in FUNCTION_SURFACES else 0
+    return (is_punctuation, is_glue, is_function, path.length, path.path_id)
 
 
 def _dependency_edge_evidence(dependency_graph: nx.Graph, node_ids: list[str]) -> list[dict[str, Any]]:

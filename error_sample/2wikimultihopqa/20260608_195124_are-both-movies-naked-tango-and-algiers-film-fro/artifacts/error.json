@@ -1,0 +1,11 @@
+{
+  "question": "Are both movies, Naked Tango and Algiers (Film), from the same country?",
+  "error_type": "RuntimeError",
+  "error_message": "DEPO failed to generate an atomic DAG: Grounded Atomic DAG support validation failed after retry: Node q2 support #1 cites invalid path_set_id/path_id 'ps2'/'e2_p26'.\nNode q2 has no valid selected dependency path support.",
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\GitHub\\HyperBranch\\hyper_branch\\depo_adapter.py\", line 79, in generate_atomic_dag_with_depo\n    result = main_module.run_pipeline(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\GitHub\\HyperBranch\\depo\\main.py\", line 241, in run_pipeline\n    subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(\n                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\GitHub\\HyperBranch\\depo\\entity_path_pipeline.py\", line 111, in build_grounded_atomic_dag\n    raise ValueError(\nValueError: Grounded Atomic DAG support validation failed after retry: Node q2 support #1 cites invalid path_set_id/path_id 'ps2'/'e2_p26'.\nNode q2 has no valid selected dependency path support.\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\GitHub\\HyperBranch\\hyper_branch\\cli.py\", line 51, in main\n    dag_payload = generate_atomic_dag_with_depo(\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\GitHub\\HyperBranch\\hyper_branch\\depo_adapter.py\", line 92, in generate_atomic_dag_with_depo\n    raise RuntimeError(f\"DEPO failed to generate an atomic DAG: {exc}\") from exc\nRuntimeError: DEPO failed to generate an atomic DAG: Grounded Atomic DAG support validation failed after retry: Node q2 support #1 cites invalid path_set_id/path_id 'ps2'/'e2_p26'.\nNode q2 has no valid selected dependency path support.\n",
+  "config": {
+    "mock_llm": false,
+    "model": "gpt-4o-mini",
+    "embedding_model": "text-embedding-3-small"
+  }
+}

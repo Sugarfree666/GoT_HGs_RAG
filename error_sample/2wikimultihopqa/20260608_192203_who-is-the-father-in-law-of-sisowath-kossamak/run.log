@@ -1,0 +1,8 @@
+2026-06-08 19:22:03,201 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 19:22:24,779 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 19:22:24,780 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 19:22:37,110 | INFO | Starting HyperBranch pipeline for question: Who is the father-in-law of Sisowath Kossamak?
+2026-06-08 19:22:37,111 | INFO | Executing atomic DAG with 2 node(s)
+2026-06-08 19:22:40,694 | INFO | Atomic retrieval returned 91 hits for question=Who is the father of Sisowath Kossamak?
+2026-06-08 19:22:47,598 | INFO | Atomic retrieval returned 76 hits for question=Who is the father-in-law of q1's answer?
+2026-06-08 19:22:55,864 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_192203_who-is-the-father-in-law-of-sisowath-kossamak

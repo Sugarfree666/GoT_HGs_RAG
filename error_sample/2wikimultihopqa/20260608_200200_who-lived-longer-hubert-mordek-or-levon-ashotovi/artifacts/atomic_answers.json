@@ -1,0 +1,366 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When did Hubert Mordek die?",
+    "analysis": {
+      "entities": [
+        "Hubert Mordek"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "the date of death of a person",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Hubert Mordek was a German historian.\"",
+        "hyperedge_text": "Hubert Mordek was a German historian.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7908397316932678,
+        "fusion_score": 0.5581679463386536,
+        "entity_ids": [
+          "\"HUBERT MORDEK\"",
+          "\"GERMAN HISTORIAN\"",
+          "\"NAMSLAU\"",
+          "\"KARLSBAD-LANGENSTEINBACH\"",
+          "\"8 MAY 1939\"",
+          "\"17 MARCH 2006\""
+        ],
+        "chunk_ids": [
+          "chunk-6f15e165e14b65735fdaa656958fa7ab"
+        ],
+        "evidence_texts": [
+          "Hubert Mordek was a German historian.",
+          "Hubert Mordek Hubert Mordek( 8 May 1939, Namslau- 17 March 2006, Karlsbad-Langensteinbach) was a German historian."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.79084,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.558168
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"A student of Hubert Mordek, he is the author of 'Bonifatius und das Sakrileg' (2004), a study of the saint's influence on the concept of sacrilege in the 8th-century church and afterward.\"",
+        "hyperedge_text": "A student of Hubert Mordek, he is the author of 'Bonifatius und das Sakrileg' (2004), a study of the saint's influence on the concept of sacrilege in the 8th-century church and afterward.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.30007004737854004,
+        "fusion_score": 0.46001400947570803,
+        "entity_ids": [
+          "\"AUTHOR\"",
+          "\"BONIFATIUS UND DAS SAKRILEG\"",
+          "\"SACRILEGE\"",
+          "\"HUBERT MORDEK\""
+        ],
+        "chunk_ids": [
+          "chunk-07c0361d42f230d9810be6cae91dfb1d"
+        ],
+        "evidence_texts": [
+          "A student of Hubert Mordek, he is the author of 'Bonifatius und das Sakrileg' (2004), a study of the saint's influence on the concept of sacrilege in the 8th-century church and afterward.",
+          "Michael Glatthaar Michael Glatthaar( born 3 May 1953) is a German scholar of the Middle Ages, specializing in the documents of the Carolingians and the study of Saint Boniface. A student of Hubert Mordek, he is the author of\" Bonifatius und das Sakrileg\"( 2004), a study of the saint's influence on the concept of sacrilege in the 8th- century church and afterward. In his study he identifies a number of\" sententiae\" in a Wurzburg manuscript( an important witness for the Collectio canonum Hibernensis) as connected to Boniface, proposing the title\" Sententiae Bonifantianae Wirceburgensis\" for the fifty- four\" capitula\" and chapter headings in the manuscript. He has argued for the authenticity of the 716 capitulary of Pope Gregory II which invested three papal legates with the organization of the church in Bavaria, and for its close connection to Boniface's sphere of influence. With Hubert..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.30007,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.460014
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Hubert Mordek was born on 8 May 1939 in Namslau.\"",
+        "hyperedge_text": "Hubert Mordek was born on 8 May 1939 in Namslau.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7908397316932678,
+        "fusion_score": 0.15816794633865358,
+        "entity_ids": [
+          "\"NAMSLAU\"",
+          "\"8 MAY 1939\""
+        ],
+        "chunk_ids": [
+          "chunk-6f15e165e14b65735fdaa656958fa7ab"
+        ],
+        "evidence_texts": [
+          "Hubert Mordek Hubert Mordek( 8 May 1939, Namslau- 17 March 2006, Karlsbad-Langensteinbach) was a German historian.",
+          "Hubert Mordek was born on 8 May 1939 in Namslau."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.79084,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.158168
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Hubert Mordek passed away on 17 March 2006 in Karlsbad-Langensteinbach.\"",
+        "hyperedge_text": "Hubert Mordek passed away on 17 March 2006 in Karlsbad-Langensteinbach.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7908397316932678,
+        "fusion_score": 0.15816794633865358,
+        "entity_ids": [
+          "\"KARLSBAD-LANGENSTEINBACH\"",
+          "\"17 MARCH 2006\""
+        ],
+        "chunk_ids": [
+          "chunk-6f15e165e14b65735fdaa656958fa7ab"
+        ],
+        "evidence_texts": [
+          "Hubert Mordek Hubert Mordek( 8 May 1939, Namslau- 17 March 2006, Karlsbad-Langensteinbach) was a German historian.",
+          "Hubert Mordek passed away on 17 March 2006 in Karlsbad-Langensteinbach."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.79084,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.158168
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Hubert Mordek was a historian.\"",
+        "hyperedge_text": "Hubert Mordek was a historian.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7908397316932678,
+        "fusion_score": 0.15816794633865358,
+        "entity_ids": [
+          "\"HISTORIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-6f15e165e14b65735fdaa656958fa7ab"
+        ],
+        "evidence_texts": [
+          "Hubert Mordek Hubert Mordek( 8 May 1939, Namslau- 17 March 2006, Karlsbad-Langensteinbach) was a German historian.",
+          "Hubert Mordek was a historian."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.79084,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.158168
+        }
+      }
+    ],
+    "answer": "17 March 2006",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that Hubert Mordek passed away on 17 March 2006 in Karlsbad-Langensteinbach, providing clear support for the answer.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Hubert Mordek passed away on 17 March 2006 in Karlsbad-Langensteinbach.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When did Levon Ashotovich Grigorian die?",
+    "analysis": {
+      "entities": [
+        "Levon Ashotovich Grigorian"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "the date of death of a person",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Levon Ashotovich Grigorian (7 September 1947 – 29 November 1975), was a Soviet Armenian chess player and son of the poet Ashot Grashi.\"",
+        "hyperedge_text": "Levon Ashotovich Grigorian (7 September 1947 – 29 November 1975), was a Soviet Armenian chess player and son of the poet Ashot Grashi.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8003243207931519,
+        "fusion_score": 0.5600648641586304,
+        "entity_ids": [
+          "\"LEVON ASHOTOVICH GRIGORIAN\"",
+          "\"ASHOT GRASHI\""
+        ],
+        "chunk_ids": [
+          "chunk-fabf6e2a4982f7847a39d21c79ce36fa"
+        ],
+        "evidence_texts": [
+          "Levon Ashotovich Grigorian (7 September 1947 – 29 November 1975), was a Soviet Armenian chess player and son of the poet Ashot Grashi.",
+          "Levon Ashotovich Grigorian Levon Ashotovich Grigorian ( 7 September 1947 – 29 November 1975), was a Soviet Armenian chess player and son of the poet Ashot Grashi. He won Armenian Chess Championships in 1964, 1966, 1968, 1969, 1971, 1972 and Uzbekistani Chess Championships in 1974 and 1975. Grigorian was born in Yerevan, Armenia and died in Tashkent, Uzbekistan. His brother Karen Grigorian was a chess International Master."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.800324,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.560065
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Levon Ashotovich Grigorian was a Soviet Armenian chess player.\"",
+        "hyperedge_text": "Levon Ashotovich Grigorian was a Soviet Armenian chess player.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8003243207931519,
+        "fusion_score": 0.5600648641586304,
+        "entity_ids": [
+          "\"LEVON ASHOTOVICH GRIGORIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-fabf6e2a4982f7847a39d21c79ce36fa"
+        ],
+        "evidence_texts": [
+          "Levon Ashotovich Grigorian was a Soviet Armenian chess player.",
+          "Levon Ashotovich Grigorian Levon Ashotovich Grigorian ( 7 September 1947 – 29 November 1975), was a Soviet Armenian chess player and son of the poet Ashot Grashi. He won Armenian Chess Championships in 1964, 1966, 1968, 1969, 1971, 1972 and Uzbekistani Chess Championships in 1974 and 1975. Grigorian was born in Yerevan, Armenia and died in Tashkent, Uzbekistan. His brother Karen Grigorian was a chess International Master."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.800324,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.560065
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He won Armenian Chess Championships in 1964, 1966, 1968, 1969, 1971, 1972 and Uzbekistani Chess Championships in 1974 and 1975.\"",
+        "hyperedge_text": "He won Armenian Chess Championships in 1964, 1966, 1968, 1969, 1971, 1972 and Uzbekistani Chess Championships in 1974 and 1975.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8003243207931519,
+        "fusion_score": 0.1600648641586304,
+        "entity_ids": [
+          "\"ARMENIAN CHESS CHAMPIONSHIPS\"",
+          "\"UZBEKISTANI CHESS CHAMPIONSHIPS\""
+        ],
+        "chunk_ids": [
+          "chunk-fabf6e2a4982f7847a39d21c79ce36fa"
+        ],
+        "evidence_texts": [
+          "Levon Ashotovich Grigorian Levon Ashotovich Grigorian ( 7 September 1947 – 29 November 1975), was a Soviet Armenian chess player and son of the poet Ashot Grashi. He won Armenian Chess Championships in 1964, 1966, 1968, 1969, 1971, 1972 and Uzbekistani Chess Championships in 1974 and 1975. Grigorian was born in Yerevan, Armenia and died in Tashkent, Uzbekistan. His brother Karen Grigorian was a chess International Master.",
+          "He won Armenian Chess Championships in 1964, 1966, 1968, 1969, 1971, 1972 and Uzbekistani Chess Championships in 1974 and 1975."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.800324,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.160065
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Grigorian was born in Yerevan, Armenia and died in Tashkent, Uzbekistan.\"",
+        "hyperedge_text": "Grigorian was born in Yerevan, Armenia and died in Tashkent, Uzbekistan.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8003243207931519,
+        "fusion_score": 0.1600648641586304,
+        "entity_ids": [
+          "\"UZBEKISTAN\"",
+          "\"YEREVAN\"",
+          "\"ARMENIA\"",
+          "\"TASHKENT\""
+        ],
+        "chunk_ids": [
+          "chunk-fabf6e2a4982f7847a39d21c79ce36fa"
+        ],
+        "evidence_texts": [
+          "Levon Ashotovich Grigorian Levon Ashotovich Grigorian ( 7 September 1947 – 29 November 1975), was a Soviet Armenian chess player and son of the poet Ashot Grashi. He won Armenian Chess Championships in 1964, 1966, 1968, 1969, 1971, 1972 and Uzbekistani Chess Championships in 1974 and 1975. Grigorian was born in Yerevan, Armenia and died in Tashkent, Uzbekistan. His brother Karen Grigorian was a chess International Master.",
+          "Grigorian was born in Yerevan, Armenia and died in Tashkent, Uzbekistan."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.800324,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.160065
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His brother Karen Grigorian was a chess International Master.\"",
+        "hyperedge_text": "His brother Karen Grigorian was a chess International Master.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.8003243207931519,
+        "fusion_score": 0.1600648641586304,
+        "entity_ids": [
+          "\"KAREN GRIGORIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-fabf6e2a4982f7847a39d21c79ce36fa"
+        ],
+        "evidence_texts": [
+          "Levon Ashotovich Grigorian Levon Ashotovich Grigorian ( 7 September 1947 – 29 November 1975), was a Soviet Armenian chess player and son of the poet Ashot Grashi. He won Armenian Chess Championships in 1964, 1966, 1968, 1969, 1971, 1972 and Uzbekistani Chess Championships in 1974 and 1975. Grigorian was born in Yerevan, Armenia and died in Tashkent, Uzbekistan. His brother Karen Grigorian was a chess International Master.",
+          "His brother Karen Grigorian was a chess International Master."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.800324,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.160065
+        }
+      }
+    ],
+    "answer": "29 November 1975",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that Levon Ashotovich Grigorian died on 29 November 1975.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Levon Ashotovich Grigorian (7 September 1947 – 29 November 1975), was a Soviet Armenian chess player and son of the poet Ashot Grashi.\""
+    ]
+  }
+]

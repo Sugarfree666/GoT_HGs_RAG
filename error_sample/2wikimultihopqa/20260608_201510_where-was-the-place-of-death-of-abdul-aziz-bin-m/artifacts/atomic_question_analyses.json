@@ -1,0 +1,100 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the father of Abdul-Aziz Bin Muhammad?",
+    "retrieval_question": "Who is the father of Abdul-Aziz Bin Muhammad?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the father of Abdul-Aziz Bin Muhammad?",
+      "retrieval_question": "Who is the father of Abdul-Aziz Bin Muhammad?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Abdul-Aziz Bin Muhammad"
+      ],
+      "relations": [
+        "is the father of"
+      ],
+      "relation_query": "who is the father of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did q1's answer die?",
+    "retrieval_question": "Where did q1's answer die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did q1's answer die?",
+      "retrieval_question": "Where did q1's answer die?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the father of Abdul-Aziz Bin Muhammad?",
+        "answer": "Muhammad bin Saud",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that Abdul-Aziz bin Muhammad is the son of Muhammad bin Saud.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Abdul-Aziz bin Muhammad was the son of Muhammad bin Saud.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State and son of Muhammad bin Saud.\"",
+            "fusion_score": 0.5321291565895081,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Imam Abdul Aziz bin Muhammad was the second ruler of the First Saudi State and son of Muhammad bin Saud.",
+              "Abdul-Aziz bin Muhammad Imam Abdul Aziz bin Muhammad bin Saud (d. 1803) was the second ruler of the First Saudi State and son of Muhammad bin Saud. He was also the son-in-law of Muhammad bin Abdul Wahhab. He ruled from 1765 until 1803."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Abdul-Aziz bin Muhammad was the son of Muhammad bin Saud.\"",
+            "fusion_score": 0.5321291565895081,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Abdul-Aziz bin Muhammad was the son of Muhammad bin Saud.",
+              "Abdul-Aziz bin Muhammad Imam Abdul Aziz bin Muhammad bin Saud (d. 1803) was the second ruler of the First Saudi State and son of Muhammad bin Saud. He was also the son-in-law of Muhammad bin Abdul Wahhab. He ruled from 1765 until 1803."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"He ruled from 1765 until 1803.\"",
+            "fusion_score": 0.13212915658950805,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Abdul-Aziz bin Muhammad Imam Abdul Aziz bin Muhammad bin Saud (d. 1803) was the second ruler of the First Saudi State and son of Muhammad bin Saud. He was also the son-in-law of Muhammad bin Abdul Wahhab. He ruled from 1765 until 1803.",
+              "He ruled from 1765 until 1803."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Abdul-Aziz bin Muhammad",
+        "Muhammad bin Saud"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

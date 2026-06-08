@@ -1,0 +1,64 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When did 3 Dots come out?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p10",
+          "node_texts": [
+            "3 Dots",
+            "came",
+            "film"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the release date of 3 Dots."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p10"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "3 Dots"
+      },
+      "one_hop_relation": "release date",
+      "answer_type": "Date"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "When did Dying God come out?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e2_p11",
+          "node_texts": [
+            "Dying God",
+            "came",
+            "film"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the release date of Dying God."
+        }
+      ],
+      "support_path_ids": [
+        "e2_p11"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Dying God"
+      },
+      "one_hop_relation": "release date",
+      "answer_type": "Date"
+    }
+  }
+]

@@ -1,0 +1,211 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Christ Walking On The Water?",
+    "retrieval_question": "Who is the director of Christ Walking On The Water?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Christ Walking On The Water?",
+      "retrieval_question": "Who is the director of Christ Walking On The Water?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Christ Walking On The Water"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of 45 Fathers?",
+    "retrieval_question": "Who is the director of 45 Fathers?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of 45 Fathers?",
+      "retrieval_question": "Who is the director of 45 Fathers?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "45 Fathers"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work titled 45 Fathers",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of Christ Walking On The Water born?",
+    "retrieval_question": "When was Georges Méliès born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was the director of Christ Walking On The Water born?",
+      "retrieval_question": "When was Georges Méliès born?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of Christ Walking On The Water",
+      "replacement_answer": "Georges Méliès",
+      "replacements": [
+        {
+          "dependency_node_id": "q1",
+          "replacement_span": "the director of Christ Walking On The Water",
+          "replacement_answer": "Georges Méliès"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Christ Walking On The Water?",
+        "answer": "Georges Méliès",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Christ Walking on the Water' is directed by Georges Méliès.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.\"",
+            "fusion_score": 0.5197599172592163,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+              "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film is titled Christ Walking on the Water.\"",
+            "fusion_score": 0.5197599172592163,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The film is titled Christ Walking on the Water.",
+              "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film was produced in France.\"",
+            "fusion_score": 0.11975991725921631,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Christ Walking on the Water Christ Walking on the Water is an 1899 French short silent film directed by Georges Méliès.",
+              "The film was produced in France."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Georges Méliès"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of 45 Fathers born?",
+    "retrieval_question": "When was James Tinling born?",
+    "dependency_question_rewrite": {
+      "original_question": "When was the director of 45 Fathers born?",
+      "retrieval_question": "When was James Tinling born?",
+      "whether_rewritten": true,
+      "replacement_span": "the director of 45 Fathers",
+      "replacement_answer": "James Tinling",
+      "replacements": [
+        {
+          "dependency_node_id": "q2",
+          "replacement_span": "the director of 45 Fathers",
+          "replacement_answer": "James Tinling"
+        }
+      ]
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q2",
+        "question": "Who is the director of 45 Fathers?",
+        "answer": "James Tinling",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that '45 Fathers' was directed by James Tinling.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.\"",
+          "<hyperedge>\"The film was directed by James Tinling.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.\"",
+            "fusion_score": 0.5207361936569215,
+            "branch_support": [
+              "anchor",
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes.",
+              "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"45 Fathers is a 1937 American comedy film.\"",
+            "fusion_score": 0.5207361936569215,
+            "branch_support": [
+              "anchor",
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "45 Fathers is a 1937 American comedy film.",
+              "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film was directed by James Tinling.\"",
+            "fusion_score": 0.1207361936569214,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "45 Fathers 45 Fathers is a 1937 American comedy film directed by James Tinling, written by Frances Hyland and Albert Ray, and starring Jane Withers, Thomas Beck, Louise Henry, Richard Carle, Nella Walker and Andrew Tombes. It was released on November 26, 1937, by 20th Century Fox.",
+              "The film was directed by James Tinling."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "James Tinling"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    }
+  }
+]

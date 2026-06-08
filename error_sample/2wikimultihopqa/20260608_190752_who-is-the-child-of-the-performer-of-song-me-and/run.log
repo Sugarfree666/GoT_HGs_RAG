@@ -1,0 +1,8 @@
+2026-06-08 19:07:52,166 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 19:08:14,434 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 19:08:14,434 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 19:08:26,187 | INFO | Starting HyperBranch pipeline for question: Who is the child of the performer of song Me And Bobby Mcgee?
+2026-06-08 19:08:26,188 | INFO | Executing atomic DAG with 2 node(s)
+2026-06-08 19:08:30,209 | INFO | Atomic retrieval returned 153 hits for question=Who is the performer of the song Me And Bobby Mcgee?
+2026-06-08 19:08:37,904 | INFO | Atomic retrieval returned 104 hits for question=Who is the child of q1's answer?
+2026-06-08 19:08:44,855 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_190752_who-is-the-child-of-the-performer-of-song-me-and

@@ -1,0 +1,728 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Marriage Of Princess Demidoff?",
+    "analysis": {
+      "entities": [
+        "The Marriage Of Princess Demidoff"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Marriage of Princess Demidoff (German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg.\"",
+        "hyperedge_text": "The Marriage of Princess Demidoff (German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7415915727615356,
+        "fusion_score": 0.5483183145523072,
+        "entity_ids": [
+          "\"FREDERIC ZELNIK\"",
+          "\"THE MARRIAGE OF PRINCESS DEMIDOFF\"",
+          "\"LYA MARA\"",
+          "\"CHARLES WILLY KAYSER\"",
+          "\"OLGA LIMBURG\""
+        ],
+        "chunk_ids": [
+          "chunk-48f982f9b337175c4aea87af7ad9106c"
+        ],
+        "evidence_texts": [
+          "The Marriage of Princess Demidoff (German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg.",
+          "The Marriage of Princess Demidoff The Marriage of Princess Demidoff( German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg. It premiered at the Marmorhaus cinema in Berlin. The film's sets were designed by the art director Fritz Lederer."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.741592,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.548318
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It premiered at the Marmorhaus cinema in Berlin.\"",
+        "hyperedge_text": "It premiered at the Marmorhaus cinema in Berlin.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7415915727615356,
+        "fusion_score": 0.14831831455230712,
+        "entity_ids": [
+          "\"MARMORHAUS CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-48f982f9b337175c4aea87af7ad9106c"
+        ],
+        "evidence_texts": [
+          "The Marriage of Princess Demidoff The Marriage of Princess Demidoff( German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg. It premiered at the Marmorhaus cinema in Berlin. The film's sets were designed by the art director Fritz Lederer.",
+          "It premiered at the Marmorhaus cinema in Berlin."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.741592,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.148318
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film's sets were designed by the art director Fritz Lederer.\"",
+        "hyperedge_text": "The film's sets were designed by the art director Fritz Lederer.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7415915727615356,
+        "fusion_score": 0.14831831455230712,
+        "entity_ids": [
+          "\"FRITZ LEDERER\"",
+          "\"SETS\""
+        ],
+        "chunk_ids": [
+          "chunk-48f982f9b337175c4aea87af7ad9106c"
+        ],
+        "evidence_texts": [
+          "The Marriage of Princess Demidoff The Marriage of Princess Demidoff( German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg. It premiered at the Marmorhaus cinema in Berlin. The film's sets were designed by the art director Fritz Lederer.",
+          "The film's sets were designed by the art director Fritz Lederer."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.741592,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.148318
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Marriage of Princess Demidoff (German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film.\"",
+        "hyperedge_text": "The Marriage of Princess Demidoff (German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7415915727615356,
+        "fusion_score": 0.14831831455230712,
+        "entity_ids": [
+          "\"DIE EHE DER FÜRSTIN DEMIDOFF\"",
+          "\"1922\"",
+          "\"GERMAN\"",
+          "\"SILENT DRAMA FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-48f982f9b337175c4aea87af7ad9106c"
+        ],
+        "evidence_texts": [
+          "The Marriage of Princess Demidoff The Marriage of Princess Demidoff( German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg. It premiered at the Marmorhaus cinema in Berlin. The film's sets were designed by the art director Fritz Lederer.",
+          "The Marriage of Princess Demidoff (German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.741592,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.148318
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Frederic Zelnik.\"",
+        "hyperedge_text": "The film was directed by Frederic Zelnik.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7415915727615356,
+        "fusion_score": 0.14831831455230712,
+        "entity_ids": [],
+        "chunk_ids": [
+          "chunk-48f982f9b337175c4aea87af7ad9106c"
+        ],
+        "evidence_texts": [
+          "The Marriage of Princess Demidoff The Marriage of Princess Demidoff( German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg. It premiered at the Marmorhaus cinema in Berlin. The film's sets were designed by the art director Fritz Lederer.",
+          "The film was directed by Frederic Zelnik."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.741592,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.148318
+        }
+      }
+    ],
+    "answer": "Frederic Zelnik",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'The film was directed by Frederic Zelnik.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The film was directed by Frederic Zelnik.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of The Pocket-Knife?",
+    "analysis": {
+      "entities": [
+        "The Pocket-Knife"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"The Pocket-knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart.\"",
+        "hyperedge_text": "The Pocket-knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.571049690246582,
+        "fusion_score": 0.5142099380493165,
+        "entity_ids": [
+          "\"BEN SOMBOGAART\"",
+          "\"THE POCKET-KNIFE\"",
+          "\"HET ZAKMES\""
+        ],
+        "chunk_ids": [
+          "chunk-1e30b640462bccb8ed5b2707c5b54ea7"
+        ],
+        "evidence_texts": [
+          "The Pocket-knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart.",
+          "The Pocket-knife The Pocket- knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart. It is based on Sjoerd Kuyper's novel\" Het Zakmes\". The film won several awards, including a Golden Calf Best Director Award."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.57105,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.51421
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is based on Sjoerd Kuyper's novel 'Het Zakmes'. \"",
+        "hyperedge_text": "It is based on Sjoerd Kuyper's novel 'Het Zakmes'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.571049690246582,
+        "fusion_score": 0.11420993804931641,
+        "entity_ids": [
+          "\"SJOERD KUYPER\""
+        ],
+        "chunk_ids": [
+          "chunk-1e30b640462bccb8ed5b2707c5b54ea7"
+        ],
+        "evidence_texts": [
+          "The Pocket-knife The Pocket- knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart. It is based on Sjoerd Kuyper's novel\" Het Zakmes\". The film won several awards, including a Golden Calf Best Director Award.",
+          "It is based on Sjoerd Kuyper's novel 'Het Zakmes'."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.57105,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.11421
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film won several awards, including a Golden Calf Best Director Award.\"",
+        "hyperedge_text": "The film won several awards, including a Golden Calf Best Director Award.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.571049690246582,
+        "fusion_score": 0.11420993804931641,
+        "entity_ids": [
+          "\"GOLDEN CALF BEST DIRECTOR AWARD\"",
+          "\"AWARDS\""
+        ],
+        "chunk_ids": [
+          "chunk-1e30b640462bccb8ed5b2707c5b54ea7"
+        ],
+        "evidence_texts": [
+          "The Pocket-knife The Pocket- knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart. It is based on Sjoerd Kuyper's novel\" Het Zakmes\". The film won several awards, including a Golden Calf Best Director Award.",
+          "The film won several awards, including a Golden Calf Best Director Award."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.57105,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.11421
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Pocket-knife or Het Zakmes is a 1992 Dutch children's film.\"",
+        "hyperedge_text": "The Pocket-knife or Het Zakmes is a 1992 Dutch children's film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.571049690246582,
+        "fusion_score": 0.11420993804931641,
+        "entity_ids": [
+          "\"DUTCH\"",
+          "\"CHILDREN'S FILM\"",
+          "\"1992\""
+        ],
+        "chunk_ids": [
+          "chunk-1e30b640462bccb8ed5b2707c5b54ea7"
+        ],
+        "evidence_texts": [
+          "The Pocket-knife The Pocket- knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart. It is based on Sjoerd Kuyper's novel\" Het Zakmes\". The film won several awards, including a Golden Calf Best Director Award.",
+          "The Pocket-knife or Het Zakmes is a 1992 Dutch children's film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.57105,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.11421
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is based on Sjoerd Kuyper's novel 'Het Zakmes'.\"",
+        "hyperedge_text": "It is based on Sjoerd Kuyper's novel 'Het Zakmes'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.571049690246582,
+        "fusion_score": 0.11420993804931641,
+        "entity_ids": [
+          "\"NOVEL\""
+        ],
+        "chunk_ids": [
+          "chunk-1e30b640462bccb8ed5b2707c5b54ea7"
+        ],
+        "evidence_texts": [
+          "The Pocket-knife The Pocket- knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart. It is based on Sjoerd Kuyper's novel\" Het Zakmes\". The film won several awards, including a Golden Calf Best Director Award.",
+          "It is based on Sjoerd Kuyper's novel 'Het Zakmes'."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.57105,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.11421
+        }
+      }
+    ],
+    "answer": "Ben Sombogaart",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'The Pocket-knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The Pocket-knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of The Marriage Of Princess Demidoff born?",
+    "analysis": {
+      "entities": [
+        "Frederic Zelnik"
+      ],
+      "relations": [
+        "born"
+      ],
+      "relation_query": "When was a person born?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Frederic Zelnik (17 May 1885 – 29 November 1950) was one of the most important producers-directors of the German silent cinema.\"",
+        "hyperedge_text": "Frederic Zelnik (17 May 1885 – 29 November 1950) was one of the most important producers-directors of the German silent cinema.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7538057565689087,
+        "fusion_score": 0.5507611513137818,
+        "entity_ids": [
+          "\"FREDERIC ZELNIK\"",
+          "\"GERMAN SILENT CINEMA\""
+        ],
+        "chunk_ids": [
+          "chunk-5ebfb188c7ff9a78c9dc763622b58287"
+        ],
+        "evidence_texts": [
+          "Frederic Zelnik (17 May 1885 – 29 November 1950) was one of the most important producers-directors of the German silent cinema.",
+          "Frederic Zelnik Frederic Zelnik( 17 May 1885 – 29 November 1950) was one of the most important producers- directors of the German silent cinema. Zelnik became a successful director and also producer of period operetta films in 1920s and 1930s. He also appeared on screen as an actor."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.753806,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.550761
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Frederic Zelnik was born on 17 May 1885.\"",
+        "hyperedge_text": "Frederic Zelnik was born on 17 May 1885.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7538057565689087,
+        "fusion_score": 0.5507611513137818,
+        "entity_ids": [
+          "\"FREDERIC ZELNIK\""
+        ],
+        "chunk_ids": [
+          "chunk-5ebfb188c7ff9a78c9dc763622b58287"
+        ],
+        "evidence_texts": [
+          "Frederic Zelnik was born on 17 May 1885.",
+          "Frederic Zelnik Frederic Zelnik( 17 May 1885 – 29 November 1950) was one of the most important producers- directors of the German silent cinema. Zelnik became a successful director and also producer of period operetta films in 1920s and 1930s. He also appeared on screen as an actor."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.753806,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.550761
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Lilac Domino is a 1937 British operetta film directed by Frederic Zelnik and starring Michael Bartlett, June Knight and Fred Emney.\"",
+        "hyperedge_text": "The Lilac Domino is a 1937 British operetta film directed by Frederic Zelnik and starring Michael Bartlett, June Knight and Fred Emney.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.31205883622169495,
+        "fusion_score": 0.462411767244339,
+        "entity_ids": [
+          "\"FREDERIC ZELNIK\"",
+          "\"THE LILAC DOMINO\"",
+          "\"MICHAEL BARTLETT\"",
+          "\"JUNE KNIGHT\"",
+          "\"FRED EMNEY\""
+        ],
+        "chunk_ids": [
+          "chunk-c8c5f5a1f278433108343b992b640be6"
+        ],
+        "evidence_texts": [
+          "The Lilac Domino is a 1937 British operetta film directed by Frederic Zelnik and starring Michael Bartlett, June Knight and Fred Emney.",
+          "The Lilac Domino (film) The Lilac Domino is a 1937 British operetta film directed by Frederic Zelnik and starring Michael Bartlett, June Knight and Fred Emney. It was made at Welwyn Studios with sets designed by Oscar Friedrich Werndorff. It is based on the 1918 version of the operetta\" The Lilac Domino\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.312059,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.462412
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was directed by Frederic Zelnik.\"",
+        "hyperedge_text": "It was directed by Frederic Zelnik.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.31205883622169495,
+        "fusion_score": 0.462411767244339,
+        "entity_ids": [
+          "\"FREDERIC ZELNIK\""
+        ],
+        "chunk_ids": [
+          "chunk-c8c5f5a1f278433108343b992b640be6"
+        ],
+        "evidence_texts": [
+          "It was directed by Frederic Zelnik.",
+          "The Lilac Domino (film) The Lilac Domino is a 1937 British operetta film directed by Frederic Zelnik and starring Michael Bartlett, June Knight and Fred Emney. It was made at Welwyn Studios with sets designed by Oscar Friedrich Werndorff. It is based on the 1918 version of the operetta\" The Lilac Domino\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.312059,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.462412
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Marriage of Princess Demidoff (German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg.\"",
+        "hyperedge_text": "The Marriage of Princess Demidoff (German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.2878842055797577,
+        "fusion_score": 0.45757684111595154,
+        "entity_ids": [
+          "\"FREDERIC ZELNIK\"",
+          "\"THE MARRIAGE OF PRINCESS DEMIDOFF\"",
+          "\"LYA MARA\"",
+          "\"CHARLES WILLY KAYSER\"",
+          "\"OLGA LIMBURG\""
+        ],
+        "chunk_ids": [
+          "chunk-48f982f9b337175c4aea87af7ad9106c"
+        ],
+        "evidence_texts": [
+          "The Marriage of Princess Demidoff (German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg.",
+          "The Marriage of Princess Demidoff The Marriage of Princess Demidoff( German: Die Ehe der Fürstin Demidoff) is a 1922 German silent drama film directed by Frederic Zelnik and starring Lya Mara, Charles Willy Kayser and Olga Limburg. It premiered at the Marmorhaus cinema in Berlin. The film's sets were designed by the art director Fritz Lederer."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.287884,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.457577
+        }
+      }
+    ],
+    "answer": "17 May 1885",
+    "confidence": 1.0,
+    "reasoning_summary": "Frederic Zelnik was born on 17 May 1885, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Frederic Zelnik was born on 17 May 1885.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of The Pocket-Knife born?",
+    "analysis": {
+      "entities": [
+        "Ben Sombogaart"
+      ],
+      "relations": [
+        "birthdate"
+      ],
+      "relation_query": "What is the birthdate of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Ben Sombogaart (born 8 August 1947) is a Dutch film and TV director.\"",
+        "hyperedge_text": "Ben Sombogaart (born 8 August 1947) is a Dutch film and TV director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7639683485031128,
+        "fusion_score": 0.5527936697006226,
+        "entity_ids": [
+          "\"BEN SOMBOGAART\"",
+          "\"TWIN SISTERS\"",
+          "\"ACADEMY AWARD FOR BEST FOREIGN LANGUAGE FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-22120a8ecbc28e7c1387f0980fd6ade2"
+        ],
+        "evidence_texts": [
+          "Ben Sombogaart (born 8 August 1947) is a Dutch film and TV director.",
+          "Ben Sombogaart Ben Sombogaart( born 8 August 1947) is a Dutch film and TV director. His film\" Twin Sisters\"( 2002) was nominated for the Academy Award for Best Foreign Language Film."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.763968,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.552794
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The Pocket-knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart.\"",
+        "hyperedge_text": "The Pocket-knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.33487629890441895,
+        "fusion_score": 0.46697525978088383,
+        "entity_ids": [
+          "\"BEN SOMBOGAART\"",
+          "\"THE POCKET-KNIFE\"",
+          "\"HET ZAKMES\""
+        ],
+        "chunk_ids": [
+          "chunk-1e30b640462bccb8ed5b2707c5b54ea7"
+        ],
+        "evidence_texts": [
+          "The Pocket-knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart.",
+          "The Pocket-knife The Pocket- knife or Het Zakmes is a 1992 Dutch children's film directed by Ben Sombogaart. It is based on Sjoerd Kuyper's novel\" Het Zakmes\". The film won several awards, including a Golden Calf Best Director Award."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.334876,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.466975
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ben Sombogaart was born on 8 August 1947.\"",
+        "hyperedge_text": "Ben Sombogaart was born on 8 August 1947.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7639683485031128,
+        "fusion_score": 0.15279366970062258,
+        "entity_ids": [
+          "\"8 AUGUST 1947\""
+        ],
+        "chunk_ids": [
+          "chunk-22120a8ecbc28e7c1387f0980fd6ade2"
+        ],
+        "evidence_texts": [
+          "Ben Sombogaart Ben Sombogaart( born 8 August 1947) is a Dutch film and TV director. His film\" Twin Sisters\"( 2002) was nominated for the Academy Award for Best Foreign Language Film.",
+          "Ben Sombogaart was born on 8 August 1947."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.763968,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.152794
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Ben Sombogaart is a Dutch film and TV director.\"",
+        "hyperedge_text": "Ben Sombogaart is a Dutch film and TV director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7639683485031128,
+        "fusion_score": 0.15279366970062258,
+        "entity_ids": [
+          "\"DUTCH\""
+        ],
+        "chunk_ids": [
+          "chunk-22120a8ecbc28e7c1387f0980fd6ade2"
+        ],
+        "evidence_texts": [
+          "Ben Sombogaart Ben Sombogaart( born 8 August 1947) is a Dutch film and TV director. His film\" Twin Sisters\"( 2002) was nominated for the Academy Award for Best Foreign Language Film.",
+          "Ben Sombogaart is a Dutch film and TV director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.763968,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.152794
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"His film 'Twin Sisters' was nominated for the Academy Award for Best Foreign Language Film.\"",
+        "hyperedge_text": "His film 'Twin Sisters' was nominated for the Academy Award for Best Foreign Language Film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7639683485031128,
+        "fusion_score": 0.15279366970062258,
+        "entity_ids": [
+          "\"NOMINATED\"",
+          "\"BEST FOREIGN LANGUAGE FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-22120a8ecbc28e7c1387f0980fd6ade2"
+        ],
+        "evidence_texts": [
+          "Ben Sombogaart Ben Sombogaart( born 8 August 1947) is a Dutch film and TV director. His film\" Twin Sisters\"( 2002) was nominated for the Academy Award for Best Foreign Language Film.",
+          "His film 'Twin Sisters' was nominated for the Academy Award for Best Foreign Language Film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.763968,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.152794
+        }
+      }
+    ],
+    "answer": "8 August 1947",
+    "confidence": 1.0,
+    "reasoning_summary": "Ben Sombogaart, the director of The Pocket-Knife, was born on 8 August 1947, as stated in the evidence.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Ben Sombogaart (born 8 August 1947) is a Dutch film and TV director.\""
+    ]
+  }
+]

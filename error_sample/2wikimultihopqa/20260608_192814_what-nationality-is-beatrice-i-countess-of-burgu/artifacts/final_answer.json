@@ -1,0 +1,26 @@
+{
+  "answer": "German",
+  "candidate_answer": "German",
+  "reasoning_summary": "Beatrice I's husband is Frederick Barbarossa, who was the Holy Roman Emperor, indicating a German nationality. This is strongly supported by the evidence provided.",
+  "answer_span_reasoning": "The answer is based on the nationality of Frederick Barbarossa, Beatrice I's husband.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is Beatrice I's husband?",
+      "answer": "Frederick Barbarossa",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Beatrice I, Countess of Burgundy was Countess of Burgundy from 1148 until her death, and was also Holy Roman Empress by marriage to Frederick Barbarossa.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the nationality of q1's answer?",
+      "answer": "German",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Frederick Barbarossa (1122 – 10 June 1190), also known as Frederick I, was the Holy Roman Emperor from 2 January 1155 until his death.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

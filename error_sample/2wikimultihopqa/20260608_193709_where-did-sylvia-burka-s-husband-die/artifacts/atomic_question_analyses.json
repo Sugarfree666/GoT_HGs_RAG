@@ -1,0 +1,98 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is Sylvia Burka's husband?",
+    "retrieval_question": "Who is Sylvia Burka's husband?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is Sylvia Burka's husband?",
+      "retrieval_question": "Who is Sylvia Burka's husband?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Sylvia Burka"
+      ],
+      "relations": [
+        "is the husband of"
+      ],
+      "relation_query": "who is the husband of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did q1's answer die?",
+    "retrieval_question": "Where did q1's answer die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did q1's answer die?",
+      "retrieval_question": "Where did q1's answer die?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is Sylvia Burka's husband?",
+        "answer": "Jocelyn Lovell",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence states that Sylvia Burka was married to Jocelyn Lovell, an Olympic cyclist.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan.\"",
+            "fusion_score": 0.5196313858032227,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan.",
+              "Sylvia Burka Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan. She was the first person in history to win a World Championship in both Allround and Sprint disciplines (1976 and 1977). She never won an Olympic medal, with her best Olympic result being the fourth place in 1000 m in 1976. In 1977, she was inducted into Canada's Sports Hall of Fame. In 1983 she was inducted into the Manitoba Sports Hall of Fame and Museum. She was married to Jocelyn Lovell, an Olympic cyclist."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"She was the first person in history to win a World Championship in both Allround and Sprint disciplines (1976 and 1977).\"",
+            "fusion_score": 0.11963138580322266,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Sylvia Burka Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan. She was the first person in history to win a World Championship in both Allround and Sprint disciplines (1976 and 1977). She never won an Olympic medal, with her best Olympic result being the fourth place in 1000 m in 1976. In 1977, she was inducted into Canada's Sports Hall of Fame. In 1983 she was inducted into the Manitoba Sports Hall of Fame and Museum. She was married to Jocelyn Lovell, an Olympic cyclist.",
+              "She was the first person in history to win a World Championship in both Allround and Sprint disciplines (1976 and 1977)."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"She never won an Olympic medal, with her best Olympic result being the fourth place in 1000 m in 1976.\"",
+            "fusion_score": 0.11963138580322266,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Sylvia Burka Sylvia Burka (born May 4, 1954 in Winnipeg, Manitoba) is a former ice speed skater and track cyclist from Canada of Latvian descent, who represented her native country at three consecutive Winter Olympics, starting in 1972 in Sapporo, Japan. She was the first person in history to win a World Championship in both Allround and Sprint disciplines (1976 and 1977). She never won an Olympic medal, with her best Olympic result being the fourth place in 1000 m in 1976. In 1977, she was inducted into Canada's Sports Hall of Fame. In 1983 she was inducted into the Manitoba Sports Hall of Fame and Museum. She was married to Jocelyn Lovell, an Olympic cyclist.",
+              "She never won an Olympic medal, with her best Olympic result being the fourth place in 1000 m in 1976."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Jocelyn Lovell"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

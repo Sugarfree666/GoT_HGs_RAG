@@ -1,0 +1,758 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of God'S Gift To Women?",
+    "analysis": {
+      "entities": [
+        "God'S Gift To Women"
+      ],
+      "relations": [
+        "is directed by"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell.\"",
+        "hyperedge_text": "God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5986109972000122,
+        "fusion_score": 0.5197221994400025,
+        "entity_ids": [
+          "\"GOD'S GIFT TO WOMEN\"",
+          "\"MICHAEL CURTIZ\"",
+          "\"FRANK FAY\"",
+          "\"LAURA LAPLANTE\"",
+          "\"JOAN BLONDELL\""
+        ],
+        "chunk_ids": [
+          "chunk-9ef99626d5b09971648bd6ebd47d9976"
+        ],
+        "evidence_texts": [
+          "God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell.",
+          "God's Gift to Women God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell. The film, based on the play\" The Devil Was Sick\" by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints. The full film was released intact in other countries, where there was no such decline in popularity."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.598611,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.519722
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film, based on the play 'The Devil Was Sick' by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints.\"",
+        "hyperedge_text": "The film, based on the play 'The Devil Was Sick' by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5986109972000122,
+        "fusion_score": 0.11972219944000245,
+        "entity_ids": [
+          "\"THE DEVIL WAS SICK\"",
+          "\"JANE HINTON\"",
+          "\"MUSICAL FILM\"",
+          "\"AUDIENCE DISLIKE\"",
+          "\"AMERICAN PRINTS\""
+        ],
+        "chunk_ids": [
+          "chunk-9ef99626d5b09971648bd6ebd47d9976"
+        ],
+        "evidence_texts": [
+          "God's Gift to Women God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell. The film, based on the play\" The Devil Was Sick\" by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints. The full film was released intact in other countries, where there was no such decline in popularity.",
+          "The film, based on the play 'The Devil Was Sick' by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.598611,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.119722
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The full film was released intact in other countries, where there was no such decline in popularity.\"",
+        "hyperedge_text": "The full film was released intact in other countries, where there was no such decline in popularity.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5986109972000122,
+        "fusion_score": 0.11972219944000245,
+        "entity_ids": [
+          "\"FULL FILM\"",
+          "\"OTHER COUNTRIES\"",
+          "\"INTACT RELEASE\"",
+          "\"POPULARITY\""
+        ],
+        "chunk_ids": [
+          "chunk-9ef99626d5b09971648bd6ebd47d9976"
+        ],
+        "evidence_texts": [
+          "God's Gift to Women God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell. The film, based on the play\" The Devil Was Sick\" by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints. The full film was released intact in other countries, where there was no such decline in popularity.",
+          "The full film was released intact in other countries, where there was no such decline in popularity."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.598611,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.119722
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"God's Gift to Women is a 1931 American pre-Code romantic musical comedy film.\"",
+        "hyperedge_text": "God's Gift to Women is a 1931 American pre-Code romantic musical comedy film.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5986109972000122,
+        "fusion_score": 0.11972219944000245,
+        "entity_ids": [
+          "\"1931\"",
+          "\"PRE-CODE\"",
+          "\"ROMANTIC MUSICAL COMEDY\"",
+          "\"AMERICAN\""
+        ],
+        "chunk_ids": [
+          "chunk-9ef99626d5b09971648bd6ebd47d9976"
+        ],
+        "evidence_texts": [
+          "God's Gift to Women God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell. The film, based on the play\" The Devil Was Sick\" by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints. The full film was released intact in other countries, where there was no such decline in popularity.",
+          "God's Gift to Women is a 1931 American pre-Code romantic musical comedy film."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.598611,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.119722
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut.\"",
+        "hyperedge_text": "The film was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5986109972000122,
+        "fusion_score": 0.11972219944000245,
+        "entity_ids": [
+          "\"AUDIENCE DISLIKE FOR MUSICALS\""
+        ],
+        "chunk_ids": [
+          "chunk-9ef99626d5b09971648bd6ebd47d9976"
+        ],
+        "evidence_texts": [
+          "God's Gift to Women God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell. The film, based on the play\" The Devil Was Sick\" by Jane Hinton, was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut in American prints. The full film was released intact in other countries, where there was no such decline in popularity.",
+          "The film was originally completed as a musical film; however, because of audience dislike for musicals at that time, all the songs were cut."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.598611,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.119722
+        }
+      }
+    ],
+    "answer": "Michael Curtiz",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'God's Gift to Women' was directed by Michael Curtiz.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"God's Gift to Women is a 1931 American pre-Code romantic musical comedy film directed by Michael Curtiz, starring Frank Fay, Laura LaPlante, and Joan Blondell.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Aldri Annet Enn Bråk?",
+    "analysis": {
+      "entities": [
+        "Aldri Annet Enn Bråk"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Aldri annet enn bråk is a 1954 Norwegian comedy-drama film, edited by Edith Carlmar.\"",
+        "hyperedge_text": "Aldri annet enn bråk is a 1954 Norwegian comedy-drama film, edited by Edith Carlmar.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5360684394836426,
+        "fusion_score": 0.5072136878967286,
+        "entity_ids": [
+          "\"EDITH CARLMAR\"",
+          "\"ALDRI ANNET ENN BRÅK\""
+        ],
+        "chunk_ids": [
+          "chunk-1735b2d5b137d6e570f6b36a1d525e7b"
+        ],
+        "evidence_texts": [
+          "Aldri annet enn bråk is a 1954 Norwegian comedy-drama film, edited by Edith Carlmar.",
+          "Aldri annet enn bråk Aldri annet enn bråk is a 1954 Norwegian comedy- drama film, edited by Edith Carlmar. It takes place in a working- class setting in the city of Oslo. The English title is\" Nothing but trouble\". A 1955 Danish remake,\" Altid ballade\", was directed by Gabriel Axel."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.536068,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.507214
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Aldri annet enn bråk is a 1954 Norwegian comedy-drama film.\"",
+        "hyperedge_text": "Aldri annet enn bråk is a 1954 Norwegian comedy-drama film.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5360684394836426,
+        "fusion_score": 0.5072136878967286,
+        "entity_ids": [
+          "\"ALDRI ANNET ENN BRÅK\"",
+          "\"1954\"",
+          "\"NORWEGIAN\"",
+          "\"COMEDY-DRAMA\""
+        ],
+        "chunk_ids": [
+          "chunk-1735b2d5b137d6e570f6b36a1d525e7b"
+        ],
+        "evidence_texts": [
+          "Aldri annet enn bråk is a 1954 Norwegian comedy-drama film.",
+          "Aldri annet enn bråk Aldri annet enn bråk is a 1954 Norwegian comedy- drama film, edited by Edith Carlmar. It takes place in a working- class setting in the city of Oslo. The English title is\" Nothing but trouble\". A 1955 Danish remake,\" Altid ballade\", was directed by Gabriel Axel."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.536068,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.507214
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is known for films such as 'Fjols til fjells' (1957), 'Aldri annet enn bråk' (1954), and 'Ung flukt' (1959).\"",
+        "hyperedge_text": "She is known for films such as 'Fjols til fjells' (1957), 'Aldri annet enn bråk' (1954), and 'Ung flukt' (1959).",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4956972897052765,
+        "fusion_score": 0.4991394579410553,
+        "entity_ids": [
+          "\"ALDRI ANNET ENN BRÅK\"",
+          "\"FJOLS TIL FJELLS\"",
+          "\"UNG FLUKT\""
+        ],
+        "chunk_ids": [
+          "chunk-4bab2e45aa93473d1851c44726eea09f"
+        ],
+        "evidence_texts": [
+          "She is known for films such as 'Fjols til fjells' (1957), 'Aldri annet enn bråk' (1954), and 'Ung flukt' (1959).",
+          "Edith Carlmar Edith Carlmar (Edith Mary Johanne Mathiesen) (15 November 1911 – 17 May 2003) was an Norwagian actress and Norway's first female film director. She is known for films such as \"Fjols til fjells\" (1957), \"Aldri annet enn bråk\" (1954), and \"Ung flukt\" (1959). Her 1949 film, \"Døden er et kjærtegnDeath is a Caress\"), is considered to be Norway's first film noir. The last film she directed, \"Ung Flukt\", introduced Liv Ullmann, Norway's most famous actor internationally, to the silver screen. Carlmar came from a poor family in the working class districts of East Oslo. However, she did manage to take dancing classes and made her debut on stage at the age of 15. In the theater she met Otto Carlmar whom she married three years later. From 1936 she worked as an actress in various theatres. Here she met the film director Tancred Ibsen who introduced her to the world of cinema. In 19...",
+          "Edith Carlmar Edith Carlmar (Edith Mary Johanne Mathiesen) (15 November 1911 – 17 May 2003) was an Norwagian actress and Norway's first female film director. She is known for films such as \"Fjols til fjells\" (1957), \"Aldri annet enn bråk\" (1954), and \"Ung flukt\" (1959). Her 1949 film, \"Døden er et kjærtegnDeath is a Caress\"), is considered to be Norway's first film noir. The last film she directed, \"Ung Flukt\", introduced Liv Ullmann, Norway's most famous actor internationally, to the silver screen. Carlmar came from a poor family in the working class districts of East Oslo. However, she did manage to take dancing classes and made her debut on stage at the age of 15. In the theater she met Otto Carlmar whom she married three years later. From 1936 she worked as an actress in various theatres. Here she met the film director Tancred Ibsen who introduced her to the world of cinema. In 1949 she and her husband started Carlmar Film A/S, and began writing scripts, directing and producing films. They made ten feature films over a ten-year period. After a decade of film-making Carlmar retired as a director. In the last part of her life she accepted only minor acting roles in plays and movies."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.495697,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.499139
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was a remake of Edith Carlmar's 1954 film 'Aldri annet enn bråk', and Axel's début as a film director.\"",
+        "hyperedge_text": "The film was a remake of Edith Carlmar's 1954 film 'Aldri annet enn bråk', and Axel's début as a film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4603406488895416,
+        "fusion_score": 0.49206812977790837,
+        "entity_ids": [
+          "\"EDITH CARLMAR\"",
+          "\"ALDRI ANNET ENN BRÅK\""
+        ],
+        "chunk_ids": [
+          "chunk-b0da4fb6a3f7b81f0d7e95527cab4ccc"
+        ],
+        "evidence_texts": [
+          "The film was a remake of Edith Carlmar's 1954 film 'Aldri annet enn bråk', and Axel's début as a film director.",
+          "Altid ballade Altid ballade ( English:\" Nothing but trouble\") is a 1955 Danish drama film directed by Gabriel Axel which focuses on a working- class family. The film was a remake of Edith Carlmar's 1954 film\" Aldri annet enn bråk\", and Axel's début as a film director. Sigrid Horne- Rasmussen received a Bodil Award for Best Actress in a Leading Role for her role as Helga Nielsen."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.460341,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.492068
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It takes place in a working-class setting in the city of Oslo.\"",
+        "hyperedge_text": "It takes place in a working-class setting in the city of Oslo.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5360684394836426,
+        "fusion_score": 0.10721368789672853,
+        "entity_ids": [
+          "\"WORKING-CLASS SETTING\"",
+          "\"OSLO\""
+        ],
+        "chunk_ids": [
+          "chunk-1735b2d5b137d6e570f6b36a1d525e7b"
+        ],
+        "evidence_texts": [
+          "Aldri annet enn bråk Aldri annet enn bråk is a 1954 Norwegian comedy- drama film, edited by Edith Carlmar. It takes place in a working- class setting in the city of Oslo. The English title is\" Nothing but trouble\". A 1955 Danish remake,\" Altid ballade\", was directed by Gabriel Axel.",
+          "It takes place in a working-class setting in the city of Oslo."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.536068,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.107214
+        }
+      }
+    ],
+    "answer": "Edith Carlmar",
+    "confidence": 0.9,
+    "reasoning_summary": "The evidence states that 'Aldri annet enn bråk' is a 1954 film edited by Edith Carlmar, and she is known for directing this film.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"She is known for films such as 'Fjols til fjells' (1957), 'Aldri annet enn bråk' (1954), and 'Ung flukt' (1959).\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "How old is the director of God'S Gift To Women?",
+    "analysis": {
+      "entities": [
+        "Michael Curtiz"
+      ],
+      "relations": [
+        "age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Michael Curtiz was a Hungarian-born American film director, recognized as one of the most prolific directors in history.\"",
+        "hyperedge_text": "Michael Curtiz was a Hungarian-born American film director, recognized as one of the most prolific directors in history.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6976612210273743,
+        "fusion_score": 0.5395322442054749,
+        "entity_ids": [
+          "\"MICHAEL CURTIZ\"",
+          "\"HUNGARIAN-BORN AMERICAN\"",
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-3f064568e105e718f6cdb5a4be20c902"
+        ],
+        "evidence_texts": [
+          "Michael Curtiz was a Hungarian-born American film director, recognized as one of the most prolific directors in history.",
+          "Michael Curtiz Michael Curtiz (born Manó Kaminer(1886-1905) Mihály Kertész (1905); December 24, 1886 April 11, 1962) was a Hungarian-born American film director, recognized as one of the most prolific directors in history. He directed classic films from the silent era and numerous others during Hollywood's Golden Age, when the studio system was prevalent. Curtiz was already a well-known director in Europe when Warner Bros. invited him to Hollywood in 1926, when he was 39 years of age. He had already directed 64 films in Europe, and soon helped Warner Bros. become the fastest-growing movie studio. He directed 102 films during his Hollywood career, mostly at Warners, where he directed ten actors to Oscar nominations. James Cagney and Joan Crawford won their only Academy Awards under Curtiz's direction. He put Doris Day and John Garfield on screen for the first time, and he made stars of...",
+          "Michael Curtiz Michael Curtiz (born Manó Kaminer(1886-1905) Mihály Kertész (1905); December 24, 1886 April 11, 1962) was a Hungarian-born American film director, recognized as one of the most prolific directors in history. He directed classic films from the silent era and numerous others during Hollywood's Golden Age, when the studio system was prevalent. Curtiz was already a well-known director in Europe when Warner Bros. invited him to Hollywood in 1926, when he was 39 years of age. He had already directed 64 films in Europe, and soon helped Warner Bros. become the fastest-growing movie studio. He directed 102 films during his Hollywood career, mostly at Warners, where he directed ten actors to Oscar nominations. James Cagney and Joan Crawford won their only Academy Awards under Curtiz's direction. He put Doris Day and John Garfield on screen for the first time, and he made stars of Errol Flynn, Olivia de Havilland, and Bette Davis. He himself was nominated five times and won twice, once for Best Short Subject for \"Sons of Liberty\" and once as Best Director for \"Casablanca\". Curtiz introduced to Hollywood a unique visual style using artistic lighting, extensive and fluid camera movement, high crane shots, and unusual camera angles. He was versatile and could handle any kind of picture: melodrama, comedy, love story, film noir, musical, war story, Western, or historical epic. He always paid attention to the human-interest aspect of every story, stating that the \"human and fundamental problems of real people\" were the basis of all good drama. Curtiz helped popularize the classic swashbuckler with films such as \"Captain Blood\" (1935) and \"The Adventures of Robin Hood\" (1938). He directed many dramas which today are also considered classics, \"Angels with Dirty Faces\" (1938), \"The Sea Wolf\" (1941), \"Casablanca\" (1942), and \"Mildred Pierce\" (1945). He directed leading musicals, including \"Yankee Doodle Dandy\" (1942), \" This Is the Army\" (1943), and \"White Christmas\", and he made comedies with \"Life With Father\" (1947) and \"We're No Angels\" (1955)."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.697661,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.539532
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Prisoner of the Night is a 1914 Hungarian film directed by Michael Curtiz.\"",
+        "hyperedge_text": "Prisoner of the Night is a 1914 Hungarian film directed by Michael Curtiz.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4587433934211731,
+        "fusion_score": 0.49174867868423466,
+        "entity_ids": [
+          "\"1914\"",
+          "\"MICHAEL CURTIZ\"",
+          "\"PRISONER OF THE NIGHT\"",
+          "\"HUNGARIAN FILM\""
+        ],
+        "chunk_ids": [
+          "chunk-be4da9ee54aaf626028d42425c006c4d"
+        ],
+        "evidence_texts": [
+          "Prisoner of the Night is a 1914 Hungarian film directed by Michael Curtiz.",
+          "Prisoner of the Night (film) Prisoner of the Night is a 1914 Hungarian film directed by Michael Curtiz."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.458743,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.491749
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Michael Curtiz is known for directing several notable films.\"",
+        "hyperedge_text": "Michael Curtiz is known for directing several notable films.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4587433934211731,
+        "fusion_score": 0.49174867868423466,
+        "entity_ids": [
+          "\"MICHAEL CURTIZ\""
+        ],
+        "chunk_ids": [
+          "chunk-be4da9ee54aaf626028d42425c006c4d"
+        ],
+        "evidence_texts": [
+          "Michael Curtiz is known for directing several notable films.",
+          "Prisoner of the Night (film) Prisoner of the Night is a 1914 Hungarian film directed by Michael Curtiz."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.458743,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.491749
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was the initial director of 'The Adventures of Robin Hood', starring Errol Flynn and Olivia de Havilland, but was replaced by Michael Curtiz.\"",
+        "hyperedge_text": "He was the initial director of 'The Adventures of Robin Hood', starring Errol Flynn and Olivia de Havilland, but was replaced by Michael Curtiz.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.4095270037651062,
+        "fusion_score": 0.48190540075302124,
+        "entity_ids": [
+          "\"MICHAEL CURTIZ\"",
+          "\"ERROL FLYNN\"",
+          "\"OLIVIA DE HAVILLAND\"",
+          "\"THE ADVENTURES OF ROBIN HOOD\""
+        ],
+        "chunk_ids": [
+          "chunk-ce05cfff9aac15074d3684c19e77aa11"
+        ],
+        "evidence_texts": [
+          "He was the initial director of 'The Adventures of Robin Hood', starring Errol Flynn and Olivia de Havilland, but was replaced by Michael Curtiz.",
+          "William Keighley William Jackson Keighley( August 4, 1889, Philadelphia, Pennsylvania – June 24, 1984, New York, New York) was an American stage actor and Hollywood film director. After graduating from the Ludlum School of Dramatic Art, Keighley began acting at the age of 23. By the 1910s and 1920s, he was acting and directing on Broadway. With the advent of talking pictures, he relocated to Hollywood. He eventually signed with Warner Bros., where he proved adept at directing in a wide variety of genres. He was the initial director of\" The Adventures of Robin Hood\", starring Errol Flynn and Olivia de Havilland, but was replaced by Michael Curtiz. During World War II, he supervised the First Motion Picture Unit of the U.S. Army Air Forces. He retired in 1953 and moved to Paris with his actress wife Genevieve Tobin. In retirement he became an award- winning, renowned still photographer....",
+          "William Keighley William Jackson Keighley( August 4, 1889, Philadelphia, Pennsylvania – June 24, 1984, New York, New York) was an American stage actor and Hollywood film director. After graduating from the Ludlum School of Dramatic Art, Keighley began acting at the age of 23. By the 1910s and 1920s, he was acting and directing on Broadway. With the advent of talking pictures, he relocated to Hollywood. He eventually signed with Warner Bros., where he proved adept at directing in a wide variety of genres. He was the initial director of\" The Adventures of Robin Hood\", starring Errol Flynn and Olivia de Havilland, but was replaced by Michael Curtiz. During World War II, he supervised the First Motion Picture Unit of the U.S. Army Air Forces. He retired in 1953 and moved to Paris with his actress wife Genevieve Tobin. In retirement he became an award- winning, renowned still photographer. He died of a stroke."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.409527,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.481905
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Júdás is a 1918 Hungarian film directed by Michael Curtiz to a script by Iván Siklósi.\"",
+        "hyperedge_text": "Júdás is a 1918 Hungarian film directed by Michael Curtiz to a script by Iván Siklósi.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.38961559534072876,
+        "fusion_score": 0.4779231190681458,
+        "entity_ids": [
+          "\"MICHAEL CURTIZ\"",
+          "\"JÚDÁS\"",
+          "\"IVÁN SIKLÓSI\""
+        ],
+        "chunk_ids": [
+          "chunk-66f61017631b0eda142a95c624d6fdf0"
+        ],
+        "evidence_texts": [
+          "Júdás is a 1918 Hungarian film directed by Michael Curtiz to a script by Iván Siklósi.",
+          "Júdás Júdás is a 1918 Hungarian film directed by Michael Curtiz to a script by Iván Siklósi. It stars Gyula Gál, Lajos Kemenes, Leopold Kramer."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.389616,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.477923
+        }
+      }
+    ],
+    "answer": "75",
+    "confidence": 0.9,
+    "reasoning_summary": "Michael Curtiz was born on December 24, 1886, and directed 'God's Gift to Women' in 1931, making him 75 years old at the time of the film's release.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Michael Curtiz was a Hungarian-born American film director, recognized as one of the most prolific directors in history.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "How old is the director of Aldri Annet Enn Bråk?",
+    "analysis": {
+      "entities": [
+        "Edith Carlmar"
+      ],
+      "relations": [
+        "is the age of"
+      ],
+      "relation_query": "What is the age of a person?",
+      "answer_type": "number"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Edith Carlmar (Edith Mary Johanne Mathiesen) (15 November 1911 – 17 May 2003) was a Norwegian actress and Norway's first female film director.\"",
+        "hyperedge_text": "Edith Carlmar (Edith Mary Johanne Mathiesen) (15 November 1911 – 17 May 2003) was a Norwegian actress and Norway's first female film director.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6065114736557007,
+        "fusion_score": 0.5213022947311402,
+        "entity_ids": [
+          "\"EDITH CARLMAR\"",
+          "\"NORWAY\"",
+          "\"ACTRESS\"",
+          "\"FILM DIRECTOR\""
+        ],
+        "chunk_ids": [
+          "chunk-4bab2e45aa93473d1851c44726eea09f"
+        ],
+        "evidence_texts": [
+          "Edith Carlmar (Edith Mary Johanne Mathiesen) (15 November 1911 – 17 May 2003) was a Norwegian actress and Norway's first female film director.",
+          "Edith Carlmar Edith Carlmar (Edith Mary Johanne Mathiesen) (15 November 1911 – 17 May 2003) was an Norwagian actress and Norway's first female film director. She is known for films such as \"Fjols til fjells\" (1957), \"Aldri annet enn bråk\" (1954), and \"Ung flukt\" (1959). Her 1949 film, \"Døden er et kjærtegnDeath is a Caress\"), is considered to be Norway's first film noir. The last film she directed, \"Ung Flukt\", introduced Liv Ullmann, Norway's most famous actor internationally, to the silver screen. Carlmar came from a poor family in the working class districts of East Oslo. However, she did manage to take dancing classes and made her debut on stage at the age of 15. In the theater she met Otto Carlmar whom she married three years later. From 1936 she worked as an actress in various theatres. Here she met the film director Tancred Ibsen who introduced her to the world of cinema. In 19...",
+          "Edith Carlmar Edith Carlmar (Edith Mary Johanne Mathiesen) (15 November 1911 – 17 May 2003) was an Norwagian actress and Norway's first female film director. She is known for films such as \"Fjols til fjells\" (1957), \"Aldri annet enn bråk\" (1954), and \"Ung flukt\" (1959). Her 1949 film, \"Døden er et kjærtegnDeath is a Caress\"), is considered to be Norway's first film noir. The last film she directed, \"Ung Flukt\", introduced Liv Ullmann, Norway's most famous actor internationally, to the silver screen. Carlmar came from a poor family in the working class districts of East Oslo. However, she did manage to take dancing classes and made her debut on stage at the age of 15. In the theater she met Otto Carlmar whom she married three years later. From 1936 she worked as an actress in various theatres. Here she met the film director Tancred Ibsen who introduced her to the world of cinema. In 1949 she and her husband started Carlmar Film A/S, and began writing scripts, directing and producing films. They made ten feature films over a ten-year period. After a decade of film-making Carlmar retired as a director. In the last part of her life she accepted only minor acting roles in plays and movies."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.606511,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.521302
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Bedre enn sitt rykte is a 1955 Norwegian drama film directed by Edith Carlmar, starring Vigdis Røising, Kari Nordseth, Magne Bleness and Atle Merton.\"",
+        "hyperedge_text": "Bedre enn sitt rykte is a 1955 Norwegian drama film directed by Edith Carlmar, starring Vigdis Røising, Kari Nordseth, Magne Bleness and Atle Merton.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3184984028339386,
+        "fusion_score": 0.46369968056678773,
+        "entity_ids": [
+          "\"EVA SEEBERG\"",
+          "\"EDITH CARLMAR\"",
+          "\"BEDRE ENN SITT RYKTE\"",
+          "\"VIGDIS RØISING\"",
+          "\"KARI NORDSETH\"",
+          "\"MAGNE BLENESS\"",
+          "\"ATLE MERTON\""
+        ],
+        "chunk_ids": [
+          "chunk-d9a4d685198cb862a45d874e224eb3cc"
+        ],
+        "evidence_texts": [
+          "Bedre enn sitt rykte is a 1955 Norwegian drama film directed by Edith Carlmar, starring Vigdis Røising, Kari Nordseth, Magne Bleness and Atle Merton.",
+          "Bedre enn sitt rykte Bedre enn sitt rykte is a 1955 Norwegian drama film directed by Edith Carlmar, starring Vigdis Røising, Kari Nordseth, Magne Bleness and Atle Merton. The story is based on a novel by Eva Seeberg. Dag (Bleness) is finishing school, and needs a top grade to get into medical school. He takes private lessons with the French teacher (Nordseth), and a romantic relation develops between the two. Karin (Røising) is in love with Dag, and waits for the relationship to end, while Roald (Merton) is in love with Karin."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.318498,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.4637
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was a remake of Edith Carlmar's 1954 film 'Aldri annet enn bråk', and Axel's début as a film director.\"",
+        "hyperedge_text": "The film was a remake of Edith Carlmar's 1954 film 'Aldri annet enn bråk', and Axel's début as a film director.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.24257595837116241,
+        "fusion_score": 0.4485151916742325,
+        "entity_ids": [
+          "\"EDITH CARLMAR\"",
+          "\"ALDRI ANNET ENN BRÅK\""
+        ],
+        "chunk_ids": [
+          "chunk-b0da4fb6a3f7b81f0d7e95527cab4ccc"
+        ],
+        "evidence_texts": [
+          "The film was a remake of Edith Carlmar's 1954 film 'Aldri annet enn bråk', and Axel's début as a film director.",
+          "Altid ballade Altid ballade ( English:\" Nothing but trouble\") is a 1955 Danish drama film directed by Gabriel Axel which focuses on a working- class family. The film was a remake of Edith Carlmar's 1954 film\" Aldri annet enn bråk\", and Axel's début as a film director. Sigrid Horne- Rasmussen received a Bodil Award for Best Actress in a Leading Role for her role as Helga Nielsen."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.242576,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.448515
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Aldri annet enn bråk is a 1954 Norwegian comedy-drama film, edited by Edith Carlmar.\"",
+        "hyperedge_text": "Aldri annet enn bråk is a 1954 Norwegian comedy-drama film, edited by Edith Carlmar.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.24145424365997314,
+        "fusion_score": 0.44829084873199465,
+        "entity_ids": [
+          "\"EDITH CARLMAR\"",
+          "\"ALDRI ANNET ENN BRÅK\""
+        ],
+        "chunk_ids": [
+          "chunk-1735b2d5b137d6e570f6b36a1d525e7b"
+        ],
+        "evidence_texts": [
+          "Aldri annet enn bråk is a 1954 Norwegian comedy-drama film, edited by Edith Carlmar.",
+          "Aldri annet enn bråk Aldri annet enn bråk is a 1954 Norwegian comedy- drama film, edited by Edith Carlmar. It takes place in a working- class setting in the city of Oslo. The English title is\" Nothing but trouble\". A 1955 Danish remake,\" Altid ballade\", was directed by Gabriel Axel."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.241454,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.448291
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is known for films such as 'Fjols til fjells' (1957), 'Aldri annet enn bråk' (1954), and 'Ung flukt' (1959).\"",
+        "hyperedge_text": "She is known for films such as 'Fjols til fjells' (1957), 'Aldri annet enn bråk' (1954), and 'Ung flukt' (1959).",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6065114736557007,
+        "fusion_score": 0.12130229473114014,
+        "entity_ids": [
+          "\"ALDRI ANNET ENN BRÅK\"",
+          "\"FJOLS TIL FJELLS\"",
+          "\"UNG FLUKT\""
+        ],
+        "chunk_ids": [
+          "chunk-4bab2e45aa93473d1851c44726eea09f"
+        ],
+        "evidence_texts": [
+          "Edith Carlmar Edith Carlmar (Edith Mary Johanne Mathiesen) (15 November 1911 – 17 May 2003) was an Norwagian actress and Norway's first female film director. She is known for films such as \"Fjols til fjells\" (1957), \"Aldri annet enn bråk\" (1954), and \"Ung flukt\" (1959). Her 1949 film, \"Døden er et kjærtegnDeath is a Caress\"), is considered to be Norway's first film noir. The last film she directed, \"Ung Flukt\", introduced Liv Ullmann, Norway's most famous actor internationally, to the silver screen. Carlmar came from a poor family in the working class districts of East Oslo. However, she did manage to take dancing classes and made her debut on stage at the age of 15. In the theater she met Otto Carlmar whom she married three years later. From 1936 she worked as an actress in various theatres. Here she met the film director Tancred Ibsen who introduced her to the world of cinema. In 1949 she and her husband started Carlmar Film A/S, and began writing scripts, directing and producing films. They made ten feature films over a ten-year period. After a decade of film-making Carlmar retired as a director. In the last part of her life she accepted only minor acting roles in plays and movies.",
+          "She is known for films such as 'Fjols til fjells' (1957), 'Aldri annet enn bråk' (1954), and 'Ung flukt' (1959).",
+          "Edith Carlmar Edith Carlmar (Edith Mary Johanne Mathiesen) (15 November 1911 – 17 May 2003) was an Norwagian actress and Norway's first female film director. She is known for films such as \"Fjols til fjells\" (1957), \"Aldri annet enn bråk\" (1954), and \"Ung flukt\" (1959). Her 1949 film, \"Døden er et kjærtegnDeath is a Caress\"), is considered to be Norway's first film noir. The last film she directed, \"Ung Flukt\", introduced Liv Ullmann, Norway's most famous actor internationally, to the silver screen. Carlmar came from a poor family in the working class districts of East Oslo. However, she did manage to take dancing classes and made her debut on stage at the age of 15. In the theater she met Otto Carlmar whom she married three years later. From 1936 she worked as an actress in various theatres. Here she met the film director Tancred Ibsen who introduced her to the world of cinema. In 19..."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.606511,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.121302
+        }
+      }
+    ],
+    "answer": "91",
+    "confidence": 0.9,
+    "reasoning_summary": "Edith Carlmar was born on 15 November 1911 and passed away on 17 May 2003, making her 91 years old at the time of her death.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Edith Carlmar (Edith Mary Johanne Mathiesen) (15 November 1911 – 17 May 2003) was a Norwegian actress and Norway's first female film director.\""
+    ]
+  }
+]

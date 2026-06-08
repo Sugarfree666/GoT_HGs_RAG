@@ -1,0 +1,100 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of My Three Merry Widows?",
+    "retrieval_question": "Who is the director of My Three Merry Widows?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of My Three Merry Widows?",
+      "retrieval_question": "Who is the director of My Three Merry Widows?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "My Three Merry Widows"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the spouse of q1's answer?",
+    "retrieval_question": "Who is the spouse of q1's answer?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the spouse of q1's answer?",
+      "retrieval_question": "Who is the spouse of q1's answer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of My Three Merry Widows?",
+        "answer": "Fernando Cortés",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'My Three Merry Widows' is directed by Fernando Cortés.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"My Three Merry Widows (in Spanish Mis tres viudas alegres) is a Mexican comedy film directed by Fernando Cortés.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"My Three Merry Widows (in Spanish Mis tres viudas alegres) is a Mexican comedy film directed by Fernando Cortés.\"",
+            "fusion_score": 0.5367677211761475,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "My Three Merry Widows (in Spanish Mis tres viudas alegres) is a Mexican comedy film directed by Fernando Cortés.",
+              "My Three Merry Widows My Three Merry Widows (in Spanish Mis tres viudas alegres) is a Mexican comedy film directed by Fernando Cortés. It was filmed in 1953 and starring Amalia Aguilar, Lilia del Valle and Silvia Pinal."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"My Three Merry Widows (in Spanish Mis tres viudas alegres) is a Mexican comedy film.\"",
+            "fusion_score": 0.5367677211761475,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "My Three Merry Widows (in Spanish Mis tres viudas alegres) is a Mexican comedy film.",
+              "My Three Merry Widows My Three Merry Widows (in Spanish Mis tres viudas alegres) is a Mexican comedy film directed by Fernando Cortés. It was filmed in 1953 and starring Amalia Aguilar, Lilia del Valle and Silvia Pinal."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"It was filmed in 1953 and starring Amalia Aguilar, Lilia del Valle and Silvia Pinal.\"",
+            "fusion_score": 0.13676772117614747,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "My Three Merry Widows My Three Merry Widows (in Spanish Mis tres viudas alegres) is a Mexican comedy film directed by Fernando Cortés. It was filmed in 1953 and starring Amalia Aguilar, Lilia del Valle and Silvia Pinal.",
+              "It was filmed in 1953 and starring Amalia Aguilar, Lilia del Valle and Silvia Pinal."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Fernando Cortés",
+        "My Three Merry Widows"
+      ],
+      "relations": [
+        "is the spouse of"
+      ],
+      "relation_query": "Who is the spouse of the director of a work?",
+      "answer_type": "person"
+    }
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "answer": "Tombstone Rashomon",
+  "candidate_answer": "Tombstone Rashomon",
+  "reasoning_summary": "The director of 'Tombstone Rashomon', Alex Cox, was born on 15 December 1954, while the director of 'Waiting For The Clouds', Yeşim Ustaoğlu, was born on 18 November 1960. Since Alex Cox was born earlier, 'Tombstone Rashomon' is the film associated with the earlier-born director.",
+  "answer_span_reasoning": "The film 'Tombstone Rashomon' is associated with the earlier-born director Alex Cox.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Tombstone Rashomon?",
+      "answer": "Alex Cox",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the director of Waiting For The Clouds?",
+      "answer": "Yeşim Ustaoğlu",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"The film was directed by Yeşim Ustaoğlu.\""
+      ]
+    },
+    {
+      "node_id": "q3",
+      "question": "When was the director of Tombstone Rashomon born?",
+      "answer": "15 December 1954",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Alexander B. H. Cox (born 15 December 1954) is an English film director, screenwriter, nonfiction author, broadcaster and sometime actor.\""
+      ]
+    },
+    {
+      "node_id": "q4",
+      "question": "When was the director of Waiting For The Clouds born?",
+      "answer": "18 November 1960",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Yeşim Ustaoğlu was born on 18 November 1960.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

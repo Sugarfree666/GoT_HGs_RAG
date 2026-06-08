@@ -1,0 +1,382 @@
+[
+  {
+    "node_id": "q1",
+    "question": "When was Aivar Kuusmaa born?",
+    "analysis": {
+      "entities": [
+        "Aivar Kuusmaa"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Aivar Kuusmaa (born 12 June 1967) is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position.\"",
+        "hyperedge_text": "Aivar Kuusmaa (born 12 June 1967) is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7019604444503784,
+        "fusion_score": 0.5403920888900757,
+        "entity_ids": [
+          "\"AIVAR KUUSMAA\"",
+          "\"ESTONIAN\"",
+          "\"BASKETBALL COACH\"",
+          "\"FORMER PROFESSIONAL BASKETBALL PLAYER\"",
+          "\"SHOOTING GUARD\""
+        ],
+        "chunk_ids": [
+          "chunk-e677605dcc91d04b68148f6eca676e69"
+        ],
+        "evidence_texts": [
+          "Aivar Kuusmaa (born 12 June 1967) is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position.",
+          "Aivar Kuusmaa Aivar Kuusmaa( born 12 June 1967) is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position. He won the USSR Premier Basketball League in 1991 as a member of the Tallinn Kalev basketball team. Kuusmaa mostly played in Estonia, but he also spent three seasons in Greece, with Panathinaikos and one season in Belgium, with Liege Basket. Also, during the service in the Soviet Army, Kuusmaa was stationed in Latvian SSR and played in the local army sports club Rīgas ASK. After retiring in 2005 he has been coaching BC Kalev/ Cramo( 2005 – 2007& 2010– 2012), TTÜ KK( 2007– 2010) and AVIS Utilitas Rapla( 2014–2018). Kuusmaa has also greek citizenship under the surname Magoulas."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.70196,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540392
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Aivar Kuusmaa is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position.\"",
+        "hyperedge_text": "Aivar Kuusmaa is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7019604444503784,
+        "fusion_score": 0.5403920888900757,
+        "entity_ids": [
+          "\"AIVAR KUUSMAA\"",
+          "\"BASKETBALL\""
+        ],
+        "chunk_ids": [
+          "chunk-e677605dcc91d04b68148f6eca676e69"
+        ],
+        "evidence_texts": [
+          "Aivar Kuusmaa is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position.",
+          "Aivar Kuusmaa Aivar Kuusmaa( born 12 June 1967) is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position. He won the USSR Premier Basketball League in 1991 as a member of the Tallinn Kalev basketball team. Kuusmaa mostly played in Estonia, but he also spent three seasons in Greece, with Panathinaikos and one season in Belgium, with Liege Basket. Also, during the service in the Soviet Army, Kuusmaa was stationed in Latvian SSR and played in the local army sports club Rīgas ASK. After retiring in 2005 he has been coaching BC Kalev/ Cramo( 2005 – 2007& 2010– 2012), TTÜ KK( 2007– 2010) and AVIS Utilitas Rapla( 2014–2018). Kuusmaa has also greek citizenship under the surname Magoulas."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.70196,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.540392
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He won the USSR Premier Basketball League in 1991 as a member of the Tallinn Kalev basketball team.\"",
+        "hyperedge_text": "He won the USSR Premier Basketball League in 1991 as a member of the Tallinn Kalev basketball team.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7019604444503784,
+        "fusion_score": 0.14039208889007568,
+        "entity_ids": [
+          "\"USSR PREMIER BASKETBALL LEAGUE\"",
+          "\"TALLINN KALEV\"",
+          "\"1991\"",
+          "\"USSR\""
+        ],
+        "chunk_ids": [
+          "chunk-e677605dcc91d04b68148f6eca676e69"
+        ],
+        "evidence_texts": [
+          "Aivar Kuusmaa Aivar Kuusmaa( born 12 June 1967) is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position. He won the USSR Premier Basketball League in 1991 as a member of the Tallinn Kalev basketball team. Kuusmaa mostly played in Estonia, but he also spent three seasons in Greece, with Panathinaikos and one season in Belgium, with Liege Basket. Also, during the service in the Soviet Army, Kuusmaa was stationed in Latvian SSR and played in the local army sports club Rīgas ASK. After retiring in 2005 he has been coaching BC Kalev/ Cramo( 2005 – 2007& 2010– 2012), TTÜ KK( 2007– 2010) and AVIS Utilitas Rapla( 2014–2018). Kuusmaa has also greek citizenship under the surname Magoulas.",
+          "He won the USSR Premier Basketball League in 1991 as a member of the Tallinn Kalev basketball team."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.70196,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.140392
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Kuusmaa mostly played in Estonia, but he also spent three seasons in Greece, with Panathinaikos and one season in Belgium, with Liege Basket.\"",
+        "hyperedge_text": "Kuusmaa mostly played in Estonia, but he also spent three seasons in Greece, with Panathinaikos and one season in Belgium, with Liege Basket.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7019604444503784,
+        "fusion_score": 0.14039208889007568,
+        "entity_ids": [
+          "\"ESTONIA\"",
+          "\"GREECE\"",
+          "\"PANATHINAIKOS\"",
+          "\"BELGIUM\"",
+          "\"LIEGE BASKET\"",
+          "\"THREE SEASONS\"",
+          "\"ONE SEASON\""
+        ],
+        "chunk_ids": [
+          "chunk-e677605dcc91d04b68148f6eca676e69"
+        ],
+        "evidence_texts": [
+          "Aivar Kuusmaa Aivar Kuusmaa( born 12 June 1967) is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position. He won the USSR Premier Basketball League in 1991 as a member of the Tallinn Kalev basketball team. Kuusmaa mostly played in Estonia, but he also spent three seasons in Greece, with Panathinaikos and one season in Belgium, with Liege Basket. Also, during the service in the Soviet Army, Kuusmaa was stationed in Latvian SSR and played in the local army sports club Rīgas ASK. After retiring in 2005 he has been coaching BC Kalev/ Cramo( 2005 – 2007& 2010– 2012), TTÜ KK( 2007– 2010) and AVIS Utilitas Rapla( 2014–2018). Kuusmaa has also greek citizenship under the surname Magoulas.",
+          "Kuusmaa mostly played in Estonia, but he also spent three seasons in Greece, with Panathinaikos and one season in Belgium, with Liege Basket."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.70196,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.140392
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Also, during the service in the Soviet Army, Kuusmaa was stationed in Latvian SSR and played in the local army sports club Rīgas ASK.\"",
+        "hyperedge_text": "Also, during the service in the Soviet Army, Kuusmaa was stationed in Latvian SSR and played in the local army sports club Rīgas ASK.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7019604444503784,
+        "fusion_score": 0.14039208889007568,
+        "entity_ids": [
+          "\"SOVIET ARMY\"",
+          "\"LATVIAN SSR\"",
+          "\"RĪGAS ASK\"",
+          "\"LOCAL ARMY SPORTS CLUB\""
+        ],
+        "chunk_ids": [
+          "chunk-e677605dcc91d04b68148f6eca676e69"
+        ],
+        "evidence_texts": [
+          "Aivar Kuusmaa Aivar Kuusmaa( born 12 June 1967) is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position. He won the USSR Premier Basketball League in 1991 as a member of the Tallinn Kalev basketball team. Kuusmaa mostly played in Estonia, but he also spent three seasons in Greece, with Panathinaikos and one season in Belgium, with Liege Basket. Also, during the service in the Soviet Army, Kuusmaa was stationed in Latvian SSR and played in the local army sports club Rīgas ASK. After retiring in 2005 he has been coaching BC Kalev/ Cramo( 2005 – 2007& 2010– 2012), TTÜ KK( 2007– 2010) and AVIS Utilitas Rapla( 2014–2018). Kuusmaa has also greek citizenship under the surname Magoulas.",
+          "Also, during the service in the Soviet Army, Kuusmaa was stationed in Latvian SSR and played in the local army sports club Rīgas ASK."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.70196,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.140392
+        }
+      }
+    ],
+    "answer": "12 June 1967",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence explicitly states that Aivar Kuusmaa was born on 12 June 1967.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Aivar Kuusmaa (born 12 June 1967) is an Estonian basketball coach and former professional basketball player who played mostly at the shooting guard position.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "When was Andy Summers born?",
+    "analysis": {
+      "entities": [
+        "Andy Summers"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "the birth date of a person",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Andrew James Somers, known professionally as Andy Summers, is an English singer and guitarist who was a member of the rock band the Police.\"",
+        "hyperedge_text": "Andrew James Somers, known professionally as Andy Summers, is an English singer and guitarist who was a member of the rock band the Police.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7389432191848755,
+        "fusion_score": 0.5477886438369751,
+        "entity_ids": [
+          "\"ANDY SUMMERS\"",
+          "\"ANDREW JAMES SOMERS\"",
+          "\"ROCK BAND THE POLICE\""
+        ],
+        "chunk_ids": [
+          "chunk-1210e402754f222717bb131460e8ea1a"
+        ],
+        "evidence_texts": [
+          "Andrew James Somers, known professionally as Andy Summers, is an English singer and guitarist who was a member of the rock band the Police.",
+          "Andy Summers Andrew James Somers( born 31 December 1942 from Poulton- le- Fylde, Lancashire), known professionally as Andy Summers, is an English singer and guitarist who was a member of the rock band the Police. He was inducted into the Rock and Roll Hall of Fame as a member of the band in 2003. Summers has recorded solo albums, collaborated with other musicians, composed film scores, and exhibited his photography in galleries."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.738943,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.547789
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He was inducted into the Rock and Roll Hall of Fame as a member of the band in 2003.\"",
+        "hyperedge_text": "He was inducted into the Rock and Roll Hall of Fame as a member of the band in 2003.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7389432191848755,
+        "fusion_score": 0.1477886438369751,
+        "entity_ids": [
+          "\"ROCK AND ROLL HALL OF FAME\"",
+          "\"2003\""
+        ],
+        "chunk_ids": [
+          "chunk-1210e402754f222717bb131460e8ea1a"
+        ],
+        "evidence_texts": [
+          "Andy Summers Andrew James Somers( born 31 December 1942 from Poulton- le- Fylde, Lancashire), known professionally as Andy Summers, is an English singer and guitarist who was a member of the rock band the Police. He was inducted into the Rock and Roll Hall of Fame as a member of the band in 2003. Summers has recorded solo albums, collaborated with other musicians, composed film scores, and exhibited his photography in galleries.",
+          "He was inducted into the Rock and Roll Hall of Fame as a member of the band in 2003."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.738943,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.147789
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Summers has recorded solo albums, collaborated with other musicians, composed film scores, and exhibited his photography in galleries.\"",
+        "hyperedge_text": "Summers has recorded solo albums, collaborated with other musicians, composed film scores, and exhibited his photography in galleries.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7389432191848755,
+        "fusion_score": 0.1477886438369751,
+        "entity_ids": [
+          "\"SOLO ALBUMS\"",
+          "\"COLLABORATED WITH OTHER MUSICIANS\"",
+          "\"FILM SCORES\"",
+          "\"PHOTOGRAPHY\"",
+          "\"GALLERIES\"",
+          "\"COMPOSED\"",
+          "\"EXHIBITED\"",
+          "\"COLLABORATION\""
+        ],
+        "chunk_ids": [
+          "chunk-1210e402754f222717bb131460e8ea1a"
+        ],
+        "evidence_texts": [
+          "Andy Summers Andrew James Somers( born 31 December 1942 from Poulton- le- Fylde, Lancashire), known professionally as Andy Summers, is an English singer and guitarist who was a member of the rock band the Police. He was inducted into the Rock and Roll Hall of Fame as a member of the band in 2003. Summers has recorded solo albums, collaborated with other musicians, composed film scores, and exhibited his photography in galleries.",
+          "Summers has recorded solo albums, collaborated with other musicians, composed film scores, and exhibited his photography in galleries."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.738943,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.147789
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Andy Summers was born on 31 December 1942 from Poulton-le-Fylde, Lancashire.\"",
+        "hyperedge_text": "Andy Summers was born on 31 December 1942 from Poulton-le-Fylde, Lancashire.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7389432191848755,
+        "fusion_score": 0.1477886438369751,
+        "entity_ids": [
+          "\"31 DECEMBER 1942\"",
+          "\"POULTON-LE-FYLDE\"",
+          "\"LANCASHIRE\""
+        ],
+        "chunk_ids": [
+          "chunk-1210e402754f222717bb131460e8ea1a"
+        ],
+        "evidence_texts": [
+          "Andy Summers Andrew James Somers( born 31 December 1942 from Poulton- le- Fylde, Lancashire), known professionally as Andy Summers, is an English singer and guitarist who was a member of the rock band the Police. He was inducted into the Rock and Roll Hall of Fame as a member of the band in 2003. Summers has recorded solo albums, collaborated with other musicians, composed film scores, and exhibited his photography in galleries.",
+          "Andy Summers was born on 31 December 1942 from Poulton-le-Fylde, Lancashire."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.738943,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.147789
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Andy Summers is known professionally as Andy Summers.\"",
+        "hyperedge_text": "Andy Summers is known professionally as Andy Summers.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7389432191848755,
+        "fusion_score": 0.1477886438369751,
+        "entity_ids": [
+          "\"ENGLISH\"",
+          "\"GUITARIST\"",
+          "\"SINGER\""
+        ],
+        "chunk_ids": [
+          "chunk-1210e402754f222717bb131460e8ea1a"
+        ],
+        "evidence_texts": [
+          "Andy Summers Andrew James Somers( born 31 December 1942 from Poulton- le- Fylde, Lancashire), known professionally as Andy Summers, is an English singer and guitarist who was a member of the rock band the Police. He was inducted into the Rock and Roll Hall of Fame as a member of the band in 2003. Summers has recorded solo albums, collaborated with other musicians, composed film scores, and exhibited his photography in galleries.",
+          "Andy Summers is known professionally as Andy Summers."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.738943,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.147789
+        }
+      }
+    ],
+    "answer": "31 December 1942",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence explicitly states that Andy Summers was born on 31 December 1942.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Andy Summers was born on 31 December 1942 from Poulton-le-Fylde, Lancashire.\""
+    ]
+  }
+]

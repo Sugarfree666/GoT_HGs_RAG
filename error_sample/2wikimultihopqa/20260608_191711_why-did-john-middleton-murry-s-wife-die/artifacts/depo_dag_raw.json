@@ -1,0 +1,35 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "What is the cause of death for John Middleton Murry's wife?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "John Middleton Murry",
+              "wife",
+              "die"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the cause of death of John Middleton Murry's wife."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "John Middleton Murry's wife"
+        },
+        "one_hop_relation": "cause of death",
+        "answer_type": "Cause"
+      }
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of Madame La Presidente?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "Madame La Presidente",
+              "director"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the director of Madame La Presidente."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Madame La Presidente"
+        },
+        "one_hop_relation": "director",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "What is the date of death of q1's answer?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "director",
+              "death",
+              "date"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the date of death of the director."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1"
+        },
+        "one_hop_relation": "death date",
+        "answer_type": "Date"
+      }
+    }
+  ]
+}

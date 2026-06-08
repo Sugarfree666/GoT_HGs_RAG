@@ -1,0 +1,98 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Madame La Presidente?",
+    "retrieval_question": "Who is the director of Madame La Presidente?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of Madame La Presidente?",
+      "retrieval_question": "Who is the director of Madame La Presidente?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Madame La Presidente"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "What is the date of death of q1's answer?",
+    "retrieval_question": "What is the date of death of q1's answer?",
+    "dependency_question_rewrite": {
+      "original_question": "What is the date of death of q1's answer?",
+      "retrieval_question": "What is the date of death of q1's answer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of Madame La Presidente?",
+        "answer": "Frank Lloyd",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'Madame la Presidente' was directed by Frank Lloyd.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Madame la Presidente is a surviving 1916 silent film comedy produced by Oliver Morosco and directed by Frank Lloyd.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Madame la Presidente is a surviving 1916 silent film comedy produced by Oliver Morosco and directed by Frank Lloyd.\"",
+            "fusion_score": 0.5340142011642457,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Madame la Presidente is a surviving 1916 silent film comedy produced by Oliver Morosco and directed by Frank Lloyd.",
+              "Madame la Presidente Madame la Presidente is a surviving 1916 silent film comedy produced by Oliver Morosco and directed by Frank Lloyd. It was distributed by Paramount Pictures and stars Broadway legend and musical comedy star Anna Held in what would be her final and only feature-length film. The film is based on a play, \"Madame Presidente\", that starred Fannie Ward on Broadway."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"It was distributed by Paramount Pictures and stars Broadway legend and musical comedy star Anna Held in what would be her final and only feature-length film.\"",
+            "fusion_score": 0.13401420116424562,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Madame la Presidente Madame la Presidente is a surviving 1916 silent film comedy produced by Oliver Morosco and directed by Frank Lloyd. It was distributed by Paramount Pictures and stars Broadway legend and musical comedy star Anna Held in what would be her final and only feature-length film. The film is based on a play, \"Madame Presidente\", that starred Fannie Ward on Broadway.",
+              "It was distributed by Paramount Pictures and stars Broadway legend and musical comedy star Anna Held in what would be her final and only feature-length film."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The film is based on a play, 'Madame Presidente', that starred Fannie Ward on Broadway.\"",
+            "fusion_score": 0.13401420116424562,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Madame la Presidente Madame la Presidente is a surviving 1916 silent film comedy produced by Oliver Morosco and directed by Frank Lloyd. It was distributed by Paramount Pictures and stars Broadway legend and musical comedy star Anna Held in what would be her final and only feature-length film. The film is based on a play, \"Madame Presidente\", that starred Fannie Ward on Broadway.",
+              "The film is based on a play, 'Madame Presidente', that starred Fannie Ward on Broadway."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Frank Lloyd"
+      ],
+      "relations": [
+        "date of death"
+      ],
+      "relation_query": "What is the date of death of a person who directed a specific work?",
+      "answer_type": "date"
+    }
+  }
+]

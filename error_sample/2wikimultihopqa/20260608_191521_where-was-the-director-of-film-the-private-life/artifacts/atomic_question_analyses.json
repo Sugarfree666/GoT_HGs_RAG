@@ -1,0 +1,99 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of The Private Life Of Cinema?",
+    "retrieval_question": "Who is the director of The Private Life Of Cinema?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the director of The Private Life Of Cinema?",
+      "retrieval_question": "Who is the director of The Private Life Of Cinema?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "The Private Life Of Cinema"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was q1's answer born?",
+    "retrieval_question": "Where was q1's answer born?",
+    "dependency_question_rewrite": {
+      "original_question": "Where was q1's answer born?",
+      "retrieval_question": "Where was q1's answer born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the director of The Private Life Of Cinema?",
+        "answer": "Denys Desjardins",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that 'The Private Life of Cinema was directed by Denys Desjardins.'",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"The Private Life of Cinema was directed by Denys Desjardins.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"The Private Life of Cinema is a 2011 documentary by Quebec film director and producer Denys Desjardins.\"",
+            "fusion_score": 0.5417163372039795,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Private Life of Cinema is a 2011 documentary by Quebec film director and producer Denys Desjardins.",
+              "The Private Life of Cinema The Private Life of Cinema is a 2011 documentary by Quebec film director and producer Denys Desjardins."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The Private Life of Cinema is a documentary.\"",
+            "fusion_score": 0.5417163372039795,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Private Life of Cinema is a documentary.",
+              "The Private Life of Cinema The Private Life of Cinema is a 2011 documentary by Quebec film director and producer Denys Desjardins."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The Private Life of Cinema was directed by Denys Desjardins.\"",
+            "fusion_score": 0.1417163372039795,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "The Private Life of Cinema The Private Life of Cinema is a 2011 documentary by Quebec film director and producer Denys Desjardins.",
+              "The Private Life of Cinema was directed by Denys Desjardins."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Denys Desjardins"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "Where was a person born?",
+      "answer_type": "location"
+    }
+  }
+]

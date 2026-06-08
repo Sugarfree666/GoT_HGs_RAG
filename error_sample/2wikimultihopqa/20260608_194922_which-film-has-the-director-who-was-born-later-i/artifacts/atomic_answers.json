@@ -1,0 +1,737 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Illusions (1982 Film)?",
+    "analysis": {
+      "entities": [
+        "Illusions",
+        "1982 Film"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work released in 1982",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Illusions is a 1982 film written and directed by Julie Dash.\"",
+        "hyperedge_text": "Illusions is a 1982 film written and directed by Julie Dash.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.7127325534820557,
+        "fusion_score": 0.3425465106964112,
+        "entity_ids": [
+          "\"ILLUSIONS\"",
+          "\"JULIE DASH\""
+        ],
+        "chunk_ids": [
+          "chunk-4056cb8db92bc6896f6e880b3a11c091"
+        ],
+        "evidence_texts": [
+          "Illusions is a 1982 film written and directed by Julie Dash.",
+          "Illusions (1982 film) Illusions is a 1982 film written and directed by Julie Dash. The short film depicts the life of an African American woman passing as a white woman working in the film industry during the 1940s. It calls attention to the lack of African Americans in the film industry during that era."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.712733,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.342547
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Her performances often included elaborate illusions and theatrical presentations, captivating audiences across the United States.\"",
+        "hyperedge_text": "Her performances often included elaborate illusions and theatrical presentations, captivating audiences across the United States.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.17472168803215027,
+        "fusion_score": 0.23494433760643008,
+        "entity_ids": [
+          "\"PERFORMANCES\"",
+          "\"ILLUSIONS\"",
+          "\"THEATRICAL PRESENTATIONS\""
+        ],
+        "chunk_ids": [
+          "chunk-d80485600c284b7f6f5d9101e784692a"
+        ],
+        "evidence_texts": [
+          "Her performances often included elaborate illusions and theatrical presentations, captivating audiences across the United States.",
+          "Adelaide Herrmann Adelaide Herrmann( 1853–1932) was a well- known American magician and vaudeville performer billed as\" the Queen of Magic.\" She was married to Alexander Herrmann, another magician."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.174722,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.234944
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The short film depicts the life of an African American woman passing as a white woman working in the film industry during the 1940s.\"",
+        "hyperedge_text": "The short film depicts the life of an African American woman passing as a white woman working in the film industry during the 1940s.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7127325534820557,
+        "fusion_score": 0.14254651069641114,
+        "entity_ids": [
+          "\"AFRICAN AMERICAN WOMAN\"",
+          "\"WHITE WOMAN\"",
+          "\"FILM INDUSTRY\""
+        ],
+        "chunk_ids": [
+          "chunk-4056cb8db92bc6896f6e880b3a11c091"
+        ],
+        "evidence_texts": [
+          "Illusions (1982 film) Illusions is a 1982 film written and directed by Julie Dash. The short film depicts the life of an African American woman passing as a white woman working in the film industry during the 1940s. It calls attention to the lack of African Americans in the film industry during that era.",
+          "The short film depicts the life of an African American woman passing as a white woman working in the film industry during the 1940s."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.712733,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.142547
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It calls attention to the lack of African Americans in the film industry during that era.\"",
+        "hyperedge_text": "It calls attention to the lack of African Americans in the film industry during that era.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7127325534820557,
+        "fusion_score": 0.14254651069641114,
+        "entity_ids": [
+          "\"1940S\"",
+          "\"LACK OF AFRICAN AMERICANS\""
+        ],
+        "chunk_ids": [
+          "chunk-4056cb8db92bc6896f6e880b3a11c091"
+        ],
+        "evidence_texts": [
+          "Illusions (1982 film) Illusions is a 1982 film written and directed by Julie Dash. The short film depicts the life of an African American woman passing as a white woman working in the film industry during the 1940s. It calls attention to the lack of African Americans in the film industry during that era.",
+          "It calls attention to the lack of African Americans in the film industry during that era."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.712733,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.142547
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film highlights the challenges faced by African Americans in a predominantly white industry.\"",
+        "hyperedge_text": "The film highlights the challenges faced by African Americans in a predominantly white industry.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7127325534820557,
+        "fusion_score": 0.14254651069641114,
+        "entity_ids": [
+          "\"CHALLENGES\""
+        ],
+        "chunk_ids": [
+          "chunk-4056cb8db92bc6896f6e880b3a11c091"
+        ],
+        "evidence_texts": [
+          "Illusions (1982 film) Illusions is a 1982 film written and directed by Julie Dash. The short film depicts the life of an African American woman passing as a white woman working in the film industry during the 1940s. It calls attention to the lack of African Americans in the film industry during that era.",
+          "The film highlights the challenges faced by African Americans in a predominantly white industry."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.712733,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.142547
+        }
+      }
+    ],
+    "answer": "Julie Dash",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Illusions is a 1982 film written and directed by Julie Dash.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Illusions is a 1982 film written and directed by Julie Dash.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of It'S A Wonderful Afterlife?",
+    "analysis": {
+      "entities": [
+        "It'S A Wonderful Afterlife"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha.\"",
+        "hyperedge_text": "It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6455016136169434,
+        "fusion_score": 0.5291003227233887,
+        "entity_ids": [
+          "\"IT'S A WONDERFUL AFTERLIFE\"",
+          "\"GURINDER CHADHA\""
+        ],
+        "chunk_ids": [
+          "chunk-3aa3169d8de7f8fc4098d25caa8f60e9"
+        ],
+        "evidence_texts": [
+          "It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha.",
+          "It's a Wonderful Afterlife It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha. The screenplay centres on an Indian mother whose obsession with marrying off her daughter leads her into the realm of serial murder. It was filmed primarily in English, with some Hindi and Punjabi dialogue. The title is a reference to Chadha's personal attachment to Frank Capra's film\" It's a Wonderful Life.\" Chadha also co-produced the film, and co-wrote the screenplay with her husband and producing partner, Paul Mayeda Berges. The lead role is played by newcomer Goldy Notay, joining Shabana Azmi, Shaheen Khan, Sendhil Ramamurthy and Sally Hawkins in the cast."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.645502,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.5291
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She played 'Roopi' as the lead role in the Gurinder Chadha film 'It's A Wonderful Afterlife'. \"",
+        "hyperedge_text": "She played 'Roopi' as the lead role in the Gurinder Chadha film 'It's A Wonderful Afterlife'.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.35080796480178833,
+        "fusion_score": 0.4701615929603577,
+        "entity_ids": [
+          "\"IT'S A WONDERFUL AFTERLIFE\"",
+          "\"GURINDER CHADHA\"",
+          "\"ROOPI\""
+        ],
+        "chunk_ids": [
+          "chunk-af0e535b857efcf61bfd23bdb6f2b230"
+        ],
+        "evidence_texts": [
+          "She played 'Roopi' as the lead role in the Gurinder Chadha film 'It's A Wonderful Afterlife'.",
+          "Goldy Notay Goldy Notay is a British- Canadian film, television and stage actress. She played' Roopi' as the lead role in the Gurinder Chadha film\" It's A Wonderful Afterlife\". She has appeared as Shireen in the Mike Bartlett drama\" The Town\" and Amar Akbar& Tony a comedy Brit flick on Netflix. She is currently in the 6 part ITV series Beecham House, directed by Gurinder Chadha."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.350808,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.470162
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).\"",
+        "hyperedge_text": "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.2806473970413208,
+        "fusion_score": 0.4561294794082642,
+        "entity_ids": [
+          "\"IT'S A WONDERFUL AFTERLIFE\"",
+          "\"BHAJI ON THE BEACH\"",
+          "\"BEND IT LIKE BECKHAM\"",
+          "\"BRIDE AND PREJUDICE\"",
+          "\"ANGUS, THONGS AND PERFECT SNOGGING\"",
+          "\"VICEROY'S HOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-925d1e5e4bf757498552ef7540d75ea8"
+        ],
+        "evidence_texts": [
+          "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+          "Gurinder Chadha Gurinder Chadha,( born 10 January 1960) is an English film director of Indian origin. Most of her films explore the lives of Indians living in England. The common theme among her work showcases the trials of Indian women living in England and how they must reconcile their converging traditional and modern cultures. Although many of her films seem like simple quirky comedies about Indian women, they actually address many social and emotional issues, especially ones faced by immigrants caught between two worlds. Much of her work also consists of adaptations from book to film, but with a different flair. She is best known for the hit films\" Bhaji on the Beach\"( 1993),\" Bend It Like Beckham\"( 2002),\" Bride and Prejudice\"( 2004),\" Angus, Thongs and Perfect Snogging\"( 2008),\" It's a Wonderful Afterlife\"( 2010) and\" Viceroy's House\"( 2017). Her latest features are the biograp..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.280647,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.456129
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The screenplay centres on an Indian mother whose obsession with marrying off her daughter leads her into the realm of serial murder.\"",
+        "hyperedge_text": "The screenplay centres on an Indian mother whose obsession with marrying off her daughter leads her into the realm of serial murder.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6455016136169434,
+        "fusion_score": 0.12910032272338867,
+        "entity_ids": [
+          "\"INDIAN MOTHER\"",
+          "\"SCREENPLAY\"",
+          "\"DAUGHTER\""
+        ],
+        "chunk_ids": [
+          "chunk-3aa3169d8de7f8fc4098d25caa8f60e9"
+        ],
+        "evidence_texts": [
+          "It's a Wonderful Afterlife It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha. The screenplay centres on an Indian mother whose obsession with marrying off her daughter leads her into the realm of serial murder. It was filmed primarily in English, with some Hindi and Punjabi dialogue. The title is a reference to Chadha's personal attachment to Frank Capra's film\" It's a Wonderful Life.\" Chadha also co-produced the film, and co-wrote the screenplay with her husband and producing partner, Paul Mayeda Berges. The lead role is played by newcomer Goldy Notay, joining Shabana Azmi, Shaheen Khan, Sendhil Ramamurthy and Sally Hawkins in the cast.",
+          "The screenplay centres on an Indian mother whose obsession with marrying off her daughter leads her into the realm of serial murder."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.645502,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.1291
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was filmed primarily in English, with some Hindi and Punjabi dialogue.\"",
+        "hyperedge_text": "It was filmed primarily in English, with some Hindi and Punjabi dialogue.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6455016136169434,
+        "fusion_score": 0.12910032272338867,
+        "entity_ids": [
+          "\"ENGLISH\"",
+          "\"PUNJABI\"",
+          "\"HINDI\""
+        ],
+        "chunk_ids": [
+          "chunk-3aa3169d8de7f8fc4098d25caa8f60e9"
+        ],
+        "evidence_texts": [
+          "It's a Wonderful Afterlife It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha. The screenplay centres on an Indian mother whose obsession with marrying off her daughter leads her into the realm of serial murder. It was filmed primarily in English, with some Hindi and Punjabi dialogue. The title is a reference to Chadha's personal attachment to Frank Capra's film\" It's a Wonderful Life.\" Chadha also co-produced the film, and co-wrote the screenplay with her husband and producing partner, Paul Mayeda Berges. The lead role is played by newcomer Goldy Notay, joining Shabana Azmi, Shaheen Khan, Sendhil Ramamurthy and Sally Hawkins in the cast.",
+          "It was filmed primarily in English, with some Hindi and Punjabi dialogue."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.645502,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.1291
+        }
+      }
+    ],
+    "answer": "Gurinder Chadha",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'It's a Wonderful Afterlife' is directed by Gurinder Chadha.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of q1 born?",
+    "analysis": {
+      "entities": [
+        "Julie Dash"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was a person born?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Julie Ethel Dash (born October 22, 1952) is an American film director, writer and producer.\"",
+        "hyperedge_text": "Julie Ethel Dash (born October 22, 1952) is an American film director, writer and producer.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.2921730875968933,
+        "fusion_score": 0.4584346175193787,
+        "entity_ids": [
+          "\"JULIE DASH\""
+        ],
+        "chunk_ids": [
+          "chunk-52a55fad4ce5e4eebcba1f1270b339c5"
+        ],
+        "evidence_texts": [
+          "Julie Ethel Dash (born October 22, 1952) is an American film director, writer and producer.",
+          "Julie Dash Julie Ethel Dash( born October 22, 1952) is an American film director, writer and producer. Dash received her MFA in 1985 at the UCLA Film School and is one of the graduates and filmmakers born out of a time known as the L.A. Rebellion. After she had written and directed several shorts, her 1991 feature\" Daughters of the Dust\" became the first full- length film directed by an African- American woman to obtain general theatrical release in the United States. \" Daughters of the Dust\" is a fictionalized telling of her father's Gullah family who lived off the coast of the Southeastern United States. The film features black women's stories, striking visuals shot on location and a non-linear narrative. It's included in the National Film Registry of the Library of Congress for its cultural, historical and aesthetic significance.\" Dash has written two books on\" Daughters of the Dus..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.292173,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.458435
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Illusions is a 1982 film written and directed by Julie Dash.\"",
+        "hyperedge_text": "Illusions is a 1982 film written and directed by Julie Dash.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.19872719049453735,
+        "fusion_score": 0.4397454380989075,
+        "entity_ids": [
+          "\"ILLUSIONS\"",
+          "\"JULIE DASH\""
+        ],
+        "chunk_ids": [
+          "chunk-4056cb8db92bc6896f6e880b3a11c091"
+        ],
+        "evidence_texts": [
+          "Illusions is a 1982 film written and directed by Julie Dash.",
+          "Illusions (1982 film) Illusions is a 1982 film written and directed by Julie Dash. The short film depicts the life of an African American woman passing as a white woman working in the film industry during the 1940s. It calls attention to the lack of African Americans in the film industry during that era."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.198727,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.439745
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.\"",
+        "hyperedge_text": "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48328468203544617,
+        "fusion_score": 0.09665693640708924,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"RICHARD QUINE\"",
+          "\"ACTOR\"",
+          "\"AMERICAN\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "Richard Quine (November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.483285,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.096657
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties.\"",
+        "hyperedge_text": "He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48328468203544617,
+        "fusion_score": 0.09665693640708924,
+        "entity_ids": [
+          "\"VAUDEVILLE\"",
+          "\"CHILD\"",
+          "\"STAGE PRODUCTIONS\"",
+          "\"RADIO\"",
+          "\"METRO-GOLDWYN-MAYER\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro-Goldwyn-Mayer in his early twenties."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.483285,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.096657
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"When his acting career began to wane after World War II, Quine began working as a film director.\"",
+        "hyperedge_text": "When his acting career began to wane after World War II, Quine began working as a film director.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.48328468203544617,
+        "fusion_score": 0.09665693640708924,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"WORLD WAR II\""
+        ],
+        "chunk_ids": [
+          "chunk-927a478b587bb3843701b5e93a43fb2f"
+        ],
+        "evidence_texts": [
+          "Richard Quine Richard Quine( November 12, 1920 – June 10, 1989) was an American stage, film, and radio actor and, later, a film director. He began acting as a child in radio, vaudeville, and stage productions before being signed to Metro- Goldwyn- Mayer in his early twenties. When his acting career began to wane after World War II, Quine began working as a film director. He later moved into producing and directing television. Quine's films as director include\" Bell Book and Candle\"( 1958),\" The World of Suzie Wong\"( 1960),\" Paris When It Sizzles\"( 1964),\" How to Murder Your Wife\"( 1965), and\" The Prisoner of Zenda\"( 1979). Depressed over poor health, Quine died of a self- inflicted gunshot wound in June 1989 at the age of 68.",
+          "When his acting career began to wane after World War II, Quine began working as a film director."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.483285,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.096657
+        }
+      }
+    ],
+    "answer": "October 22, 1952",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence states that Julie Dash was born on October 22, 1952.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Julie Ethel Dash (born October 22, 1952) is an American film director, writer and producer.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of q2 born?",
+    "analysis": {
+      "entities": [
+        "Gurinder Chadha",
+        "It's A Wonderful Afterlife"
+      ],
+      "relations": [
+        "was born"
+      ],
+      "relation_query": "When was a person who directed a work born?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"She played 'Roopi' as the lead role in the Gurinder Chadha film 'It's A Wonderful Afterlife'. \"",
+        "hyperedge_text": "She played 'Roopi' as the lead role in the Gurinder Chadha film 'It's A Wonderful Afterlife'.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.23670798540115356,
+        "fusion_score": 0.44734159708023075,
+        "entity_ids": [
+          "\"IT'S A WONDERFUL AFTERLIFE\"",
+          "\"GURINDER CHADHA\"",
+          "\"ROOPI\""
+        ],
+        "chunk_ids": [
+          "chunk-af0e535b857efcf61bfd23bdb6f2b230"
+        ],
+        "evidence_texts": [
+          "She played 'Roopi' as the lead role in the Gurinder Chadha film 'It's A Wonderful Afterlife'.",
+          "Goldy Notay Goldy Notay is a British- Canadian film, television and stage actress. She played' Roopi' as the lead role in the Gurinder Chadha film\" It's A Wonderful Afterlife\". She has appeared as Shireen in the Mike Bartlett drama\" The Town\" and Amar Akbar& Tony a comedy Brit flick on Netflix. She is currently in the 6 part ITV series Beecham House, directed by Gurinder Chadha."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.236708,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.447342
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha.\"",
+        "hyperedge_text": "It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.23416391015052795,
+        "fusion_score": 0.4468327820301056,
+        "entity_ids": [
+          "\"IT'S A WONDERFUL AFTERLIFE\"",
+          "\"GURINDER CHADHA\""
+        ],
+        "chunk_ids": [
+          "chunk-3aa3169d8de7f8fc4098d25caa8f60e9"
+        ],
+        "evidence_texts": [
+          "It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha.",
+          "It's a Wonderful Afterlife It's a Wonderful Afterlife is a 2010 British comedy film directed by Gurinder Chadha. The screenplay centres on an Indian mother whose obsession with marrying off her daughter leads her into the realm of serial murder. It was filmed primarily in English, with some Hindi and Punjabi dialogue. The title is a reference to Chadha's personal attachment to Frank Capra's film\" It's a Wonderful Life.\" Chadha also co-produced the film, and co-wrote the screenplay with her husband and producing partner, Paul Mayeda Berges. The lead role is played by newcomer Goldy Notay, joining Shabana Azmi, Shaheen Khan, Sendhil Ramamurthy and Sally Hawkins in the cast."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.234164,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.446833
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gurinder Chadha, born 10 January 1960, is an English film director of Indian origin.\"",
+        "hyperedge_text": "Gurinder Chadha, born 10 January 1960, is an English film director of Indian origin.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.3125516176223755,
+        "fusion_score": 0.2625103235244751,
+        "entity_ids": [
+          "\"GURINDER CHADHA\""
+        ],
+        "chunk_ids": [
+          "chunk-925d1e5e4bf757498552ef7540d75ea8"
+        ],
+        "evidence_texts": [
+          "Gurinder Chadha, born 10 January 1960, is an English film director of Indian origin.",
+          "Gurinder Chadha Gurinder Chadha,( born 10 January 1960) is an English film director of Indian origin. Most of her films explore the lives of Indians living in England. The common theme among her work showcases the trials of Indian women living in England and how they must reconcile their converging traditional and modern cultures. Although many of her films seem like simple quirky comedies about Indian women, they actually address many social and emotional issues, especially ones faced by immigrants caught between two worlds. Much of her work also consists of adaptations from book to film, but with a different flair. She is best known for the hit films\" Bhaji on the Beach\"( 1993),\" Bend It Like Beckham\"( 2002),\" Bride and Prejudice\"( 2004),\" Angus, Thongs and Perfect Snogging\"( 2008),\" It's a Wonderful Afterlife\"( 2010) and\" Viceroy's House\"( 2017). Her latest features are the biograp..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.312552,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.26251
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Gurinder Chadha is an English film director of Indian origin.\"",
+        "hyperedge_text": "Gurinder Chadha is an English film director of Indian origin.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.3125516176223755,
+        "fusion_score": 0.2625103235244751,
+        "entity_ids": [
+          "\"GURINDER CHADHA\""
+        ],
+        "chunk_ids": [
+          "chunk-925d1e5e4bf757498552ef7540d75ea8"
+        ],
+        "evidence_texts": [
+          "Gurinder Chadha is an English film director of Indian origin.",
+          "Gurinder Chadha Gurinder Chadha,( born 10 January 1960) is an English film director of Indian origin. Most of her films explore the lives of Indians living in England. The common theme among her work showcases the trials of Indian women living in England and how they must reconcile their converging traditional and modern cultures. Although many of her films seem like simple quirky comedies about Indian women, they actually address many social and emotional issues, especially ones faced by immigrants caught between two worlds. Much of her work also consists of adaptations from book to film, but with a different flair. She is best known for the hit films\" Bhaji on the Beach\"( 1993),\" Bend It Like Beckham\"( 2002),\" Bride and Prejudice\"( 2004),\" Angus, Thongs and Perfect Snogging\"( 2008),\" It's a Wonderful Afterlife\"( 2010) and\" Viceroy's House\"( 2017). Her latest features are the biograp..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.312552,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.26251
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).\"",
+        "hyperedge_text": "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 0.5,
+        "relation_score": 0.0,
+        "semantic_score": 0.3125516176223755,
+        "fusion_score": 0.2625103235244751,
+        "entity_ids": [
+          "\"IT'S A WONDERFUL AFTERLIFE\"",
+          "\"BHAJI ON THE BEACH\"",
+          "\"BEND IT LIKE BECKHAM\"",
+          "\"BRIDE AND PREJUDICE\"",
+          "\"ANGUS, THONGS AND PERFECT SNOGGING\"",
+          "\"VICEROY'S HOUSE\""
+        ],
+        "chunk_ids": [
+          "chunk-925d1e5e4bf757498552ef7540d75ea8"
+        ],
+        "evidence_texts": [
+          "She is best known for the hit films 'Bhaji on the Beach' (1993), 'Bend It Like Beckham' (2002), 'Bride and Prejudice' (2004), 'Angus, Thongs and Perfect Snogging' (2008), 'It's a Wonderful Afterlife' (2010) and 'Viceroy's House' (2017).",
+          "Gurinder Chadha Gurinder Chadha,( born 10 January 1960) is an English film director of Indian origin. Most of her films explore the lives of Indians living in England. The common theme among her work showcases the trials of Indian women living in England and how they must reconcile their converging traditional and modern cultures. Although many of her films seem like simple quirky comedies about Indian women, they actually address many social and emotional issues, especially ones faced by immigrants caught between two worlds. Much of her work also consists of adaptations from book to film, but with a different flair. She is best known for the hit films\" Bhaji on the Beach\"( 1993),\" Bend It Like Beckham\"( 2002),\" Bride and Prejudice\"( 2004),\" Angus, Thongs and Perfect Snogging\"( 2008),\" It's a Wonderful Afterlife\"( 2010) and\" Viceroy's House\"( 2017). Her latest features are the biograp..."
+        ],
+        "score_breakdown": {
+          "A": 0.5,
+          "R": 0.0,
+          "S": 0.312552,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.26251
+        }
+      }
+    ],
+    "answer": "10 January 1960",
+    "confidence": 1.0,
+    "reasoning_summary": "Gurinder Chadha, the director of 'It's A Wonderful Afterlife', was born on 10 January 1960, as stated in the evidence.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Gurinder Chadha, born 10 January 1960, is an English film director of Indian origin.\""
+    ]
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is Coulson Wallop's father?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e1_p3",
+            "node_texts": [
+              "Coulson Wallop",
+              "father"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for Coulson Wallop's father."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p3"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Coulson Wallop"
+        },
+        "one_hop_relation": "father",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did q1's answer study?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "father",
+              "study",
+              "Where"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking where Coulson Wallop's father studied."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1"
+        },
+        "one_hop_relation": "study",
+        "answer_type": "Location"
+      }
+    }
+  ]
+}

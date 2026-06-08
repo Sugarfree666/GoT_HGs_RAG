@@ -22,6 +22,7 @@ from entity_path_projector import (  # noqa: E402
     enumerate_entity_origin_paths,
     extract_entity_start_nodes,
     parse_path_pruned_ast_payload,
+    prune_terminal_glue_paths,
     undirected_graph_edge_payloads,
     validate_selected_entity_paths,
 )
@@ -347,6 +348,45 @@ class EntityOriginPipelineTest(unittest.TestCase):
             ],
         )
 
+    def test_prune_terminal_glue_paths_only_checks_terminal(self) -> None:
+        paths = [
+            _entity_path("e1_p1", "e1", ["Changed It", "performer", "of"]),
+            _entity_path("e1_p2", "e1", ["Changed It", "of", "performer"]),
+            _entity_path("e2_p1", "e2", ["Lothair II", "did"]),
+            _entity_path("e2_p2", "e2", ["Lothair II", "mother"]),
+            _entity_path("e3_p1", "e3", ["MovieA", "When"]),
+            _entity_path("e3_p2", "e3", ["MovieA", "what"]),
+        ]
+
+        pruned, stats = prune_terminal_glue_paths(paths, keep_wh_terminals=True)
+
+        self.assertEqual(
+            [path.path_id for path in pruned],
+            ["e1_p2", "e2_p2", "e3_p1", "e3_p2"],
+        )
+        self.assertEqual(stats["total_raw_paths"], 6)
+        self.assertEqual(stats["total_kept_paths"], 4)
+        self.assertEqual(stats["total_pruned_paths"], 2)
+        self.assertFalse(stats["by_entity"]["e1"]["fallback_used"])
+        self.assertEqual(stats["by_entity"]["e1"]["pruned_examples"][0]["terminal"], "of")
+        self.assertEqual(stats["by_entity"]["e2"]["pruned_examples"][0]["terminal"], "did")
+
+    def test_prune_terminal_glue_paths_fallback_keeps_entity_nonempty(self) -> None:
+        paths = [
+            _entity_path("e1_p1", "e1", ["MovieA", "of"]),
+            _entity_path("e1_p2", "e1", ["MovieA", "?"]),
+            _entity_path("e1_p3", "e1", ["MovieA", "did"]),
+            _entity_path("e1_p4", "e1", ["MovieA", "the"]),
+        ]
+
+        pruned, stats = prune_terminal_glue_paths(paths, min_keep_per_entity=2)
+
+        self.assertEqual(len(pruned), 2)
+        self.assertEqual({path.entity_id for path in pruned}, {"e1"})
+        self.assertTrue(stats["by_entity"]["e1"]["fallback_used"])
+        self.assertEqual(stats["by_entity"]["e1"]["kept"], 2)
+        self.assertEqual(stats["by_entity"]["e1"]["pruned"], 2)
+
     def test_grounded_atomic_dag_generation_uses_path_support(self) -> None:
         paths = [
             _entity_path("e1_p1", "e1", ["El Tonto", "director", "born"]),
@@ -515,7 +555,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
             )
         self.assertEqual(llm.call_count, 2)
 
-    def test_support_node_texts_must_come_from_path(self) -> None:
+    def test_support_node_texts_mismatch_retries_then_warns(self) -> None:
         evidence = _selected_dependency_path_evidence_for_alphago()
         llm = SequenceGroundedAtomicLLM(
             [
@@ -555,11 +595,17 @@ class EntityOriginPipelineTest(unittest.TestCase):
         )
         parser = EntityPathSemanticParser(llm)
 
-        with self.assertRaisesRegex(ValueError, "university"):
-            parser.build_grounded_atomic_dag(
-                original_question="Which university developed AlphaGo?",
-                selected_dependency_path_evidence=evidence,
-            )
+        dag, payload = parser.build_grounded_atomic_dag(
+            original_question="Which university developed AlphaGo?",
+            selected_dependency_path_evidence=evidence,
+        )
+
+        self.assertEqual(llm.call_count, 2)
+        self.assertEqual(dag.nodes[0].metadata["support"][0]["node_texts"], ["AlphaGo", "university"])
+        self.assertIn("node_text_warnings", dag.nodes[0].metadata["support"][0])
+        warnings = "\n".join(payload.get("normalization_warnings") or [])
+        self.assertIn("university", warnings)
+        self.assertIn("Previous output failed grounding validation", llm.prompts[1])
 
     def test_atomic_node_one_hop_fields_preserved(self) -> None:
         evidence = _selected_dependency_path_evidence_for_alphago()

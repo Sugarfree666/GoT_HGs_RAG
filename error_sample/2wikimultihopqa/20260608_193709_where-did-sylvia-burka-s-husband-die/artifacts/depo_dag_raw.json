@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "Who is Sylvia Burka's husband?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p1",
+            "node_texts": [
+              "Sylvia Burka",
+              "husband"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for Sylvia Burka's husband."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p1"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Sylvia Burka"
+        },
+        "one_hop_relation": "husband",
+        "answer_type": "Person"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "Where did q1's answer die?",
+      "dependencies": [
+        "q1"
+      ],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps2",
+            "path_id": "e1_p2",
+            "node_texts": [
+              "husband",
+              "die"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the place where Sylvia Burka's husband died."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p2"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "q1"
+        },
+        "one_hop_relation": "place of death",
+        "answer_type": "Location"
+      }
+    }
+  ]
+}

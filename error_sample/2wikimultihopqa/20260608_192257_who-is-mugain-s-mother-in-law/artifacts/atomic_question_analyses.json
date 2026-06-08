@@ -1,0 +1,99 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is Mugain's mother?",
+    "retrieval_question": "Who is Mugain's mother?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is Mugain's mother?",
+      "retrieval_question": "Who is Mugain's mother?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Mugain"
+      ],
+      "relations": [
+        "is the mother of"
+      ],
+      "relation_query": "who is the mother of a person",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the mother-in-law of q1's answer?",
+    "retrieval_question": "Who is the mother-in-law of q1's answer?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the mother-in-law of q1's answer?",
+      "retrieval_question": "Who is the mother-in-law of q1's answer?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is Mugain's mother?",
+        "answer": "Eochaid Feidlech",
+        "confidence": 0.9,
+        "answer_type": "person",
+        "reasoning_summary": "Mugain is identified as the daughter of Eochaid Feidlech in the evidence provided, which directly answers the question about her mother.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.\"",
+            "fusion_score": 0.5166248559951783,
+            "branch_support": [
+              "anchor",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mugain, daughter of Eochaid Feidlech, is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the 'Strumpet wife of Conchobar mac Nessa', the king of Ulster.",
+              "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair..."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"Also styled Mumain, she bore him a son named Glaisne.\"",
+            "fusion_score": 0.11662485599517823,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair with Áed, Conchobar's poet, led to the death of Lóegaire Búadach. The Ulstermen took her life, out of the love of her, though they seldom engaged in femicide. p.23",
+              "Also styled Mumain, she bore him a son named Glaisne."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"She was also a sister of Medb by paternity.\"",
+            "fusion_score": 0.11662485599517823,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "Mugain Mugain, daughter of Eochaid Feidlech, , is a legendary queen in the Ulster Cycle of Irish mythology; characterized as the \"Strumpet wife of Conchobar mac Nessa\", the king of Ulster. Also styled Mumain , she bore him a son named Glaisne. She was also a sister of Medb by paternity. Her epithet, \"Aitinchairchech\", literally means \"having gorse-like body hair\", or perhaps more specifically pubic hair. When Cúchulainn returned to Emain Macha after his first foray, his fury was so great the Ulstermen feared he would destroy them. Mugain led her maidens out, and they bared their breasts in front of him. Cúchulainn averted his eyes, and the Ulstermen were able to wrestle him into a barrel of cold water, which exploded from the heat of his body. They put him in a second barrel, and the water boiled; and finally a third barrel, which merely warmed up to a pleasant temperature. Her affair with Áed, Conchobar's poet, led to the death of Lóegaire Búadach. The Ulstermen took her life, out of the love of her, though they seldom engaged in femicide. p.23",
+              "She was also a sister of Medb by paternity."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Mugain",
+        "Eochaid Feidlech"
+      ],
+      "relations": [
+        "is the mother-in-law of"
+      ],
+      "relation_query": "Who is the mother-in-law of a person who is the daughter of a specific person?",
+      "answer_type": "person"
+    }
+  }
+]

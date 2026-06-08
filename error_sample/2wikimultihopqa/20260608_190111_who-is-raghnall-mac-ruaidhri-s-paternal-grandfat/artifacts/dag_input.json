@@ -1,0 +1,64 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is Raghnall Mac Ruaidhr's grandfather?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p1",
+          "node_texts": [
+            "Raghnall Mac Ruaidhr",
+            "grandfather"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for Raghnall Mac Ruaidhr's grandfather."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Raghnall Mac Ruaidhr"
+      },
+      "one_hop_relation": "grandfather",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the paternal grandfather of Raghnall Mac Ruaidhr?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p1",
+          "node_texts": [
+            "grandfather",
+            "paternal"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the paternal aspect of Raghnall Mac Ruaidhr's grandfather."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q1's answer"
+      },
+      "one_hop_relation": "paternal grandfather",
+      "answer_type": "Person"
+    }
+  }
+]

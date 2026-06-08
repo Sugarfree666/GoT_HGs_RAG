@@ -1,0 +1,743 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the director of Tombstone Rashomon?",
+    "analysis": {
+      "entities": [
+        "Tombstone Rashomon"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher.\"",
+        "hyperedge_text": "Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6829026937484741,
+        "fusion_score": 0.5365805387496949,
+        "entity_ids": [
+          "\"TOMBSTONE RASHOMON\"",
+          "\"ALEX COX\"",
+          "\"ADAM NEWBERRY\"",
+          "\"ERIC SCHUMACHER\""
+        ],
+        "chunk_ids": [
+          "chunk-2572de4191916b5221d971c4d44e123d"
+        ],
+        "evidence_texts": [
+          "Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher.",
+          "Tombstone Rashomon Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher. It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory from multiple differing perspectives in the style of Akira Kurosawa's 1950 film\" Rashomon\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.682903,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536581
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tombstone Rashomon is a 2017 Western film directed by Alex Cox.\"",
+        "hyperedge_text": "Tombstone Rashomon is a 2017 Western film directed by Alex Cox.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6829026937484741,
+        "fusion_score": 0.5365805387496949,
+        "entity_ids": [
+          "\"2017\"",
+          "\"WESTERN\"",
+          "\"TOMBSTONE RASHOMON\"",
+          "\"ALEX COX\""
+        ],
+        "chunk_ids": [
+          "chunk-2572de4191916b5221d971c4d44e123d"
+        ],
+        "evidence_texts": [
+          "Tombstone Rashomon is a 2017 Western film directed by Alex Cox.",
+          "Tombstone Rashomon Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher. It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory from multiple differing perspectives in the style of Akira Kurosawa's 1950 film\" Rashomon\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.682903,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.536581
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory from multiple differing perspectives in the style of Akira Kurosawa's 1950 film Rashomon.\"",
+        "hyperedge_text": "It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory from multiple differing perspectives in the style of Akira Kurosawa's 1950 film Rashomon.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6829026937484741,
+        "fusion_score": 0.13658053874969484,
+        "entity_ids": [
+          "\"GUNFIGHT AT THE O.K. CORRAL\"",
+          "\"TOMBSTONE\"",
+          "\"ARIZONA TERRITORY\"",
+          "\"AKIRA KUROSAWA\"",
+          "\"RASHOMON\""
+        ],
+        "chunk_ids": [
+          "chunk-2572de4191916b5221d971c4d44e123d"
+        ],
+        "evidence_texts": [
+          "Tombstone Rashomon Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher. It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory from multiple differing perspectives in the style of Akira Kurosawa's 1950 film\" Rashomon\".",
+          "It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory from multiple differing perspectives in the style of Akira Kurosawa's 1950 film Rashomon."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.682903,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.136581
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film stars Adam Newberry and Eric Schumacher.\"",
+        "hyperedge_text": "The film stars Adam Newberry and Eric Schumacher.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6829026937484741,
+        "fusion_score": 0.13658053874969484,
+        "entity_ids": [
+          "\"ADAM NEWBERRY\"",
+          "\"ERIC SCHUMACHER\""
+        ],
+        "chunk_ids": [
+          "chunk-2572de4191916b5221d971c4d44e123d"
+        ],
+        "evidence_texts": [
+          "Tombstone Rashomon Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher. It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory from multiple differing perspectives in the style of Akira Kurosawa's 1950 film\" Rashomon\".",
+          "The film stars Adam Newberry and Eric Schumacher."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.682903,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.136581
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory.\"",
+        "hyperedge_text": "It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6829026937484741,
+        "fusion_score": 0.13658053874969484,
+        "entity_ids": [
+          "\"GUNFIGHT AT THE O.K. CORRAL\"",
+          "\"TOMBSTONE\"",
+          "\"ARIZONA TERRITORY\""
+        ],
+        "chunk_ids": [
+          "chunk-2572de4191916b5221d971c4d44e123d"
+        ],
+        "evidence_texts": [
+          "Tombstone Rashomon Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher. It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory from multiple differing perspectives in the style of Akira Kurosawa's 1950 film\" Rashomon\".",
+          "It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.682903,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.136581
+        }
+      }
+    ],
+    "answer": "Alex Cox",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'Tombstone Rashomon is a 2017 Western film directed by Alex Cox.'",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Who is the director of Waiting For The Clouds?",
+    "analysis": {
+      "entities": [
+        "Waiting For The Clouds"
+      ],
+      "relations": [
+        "is the director of"
+      ],
+      "relation_query": "who is the director of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Waiting for the Clouds (Bulutlari Beklerken) is a film from 2003, Turkey.\"",
+        "hyperedge_text": "Waiting for the Clouds (Bulutlari Beklerken) is a film from 2003, Turkey.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6586033701896667,
+        "fusion_score": 0.5317206740379334,
+        "entity_ids": [
+          "\"WAITING FOR THE CLOUDS\"",
+          "\"TURKEY\""
+        ],
+        "chunk_ids": [
+          "chunk-a90d4ed8f25bfa991699eed6176057ce"
+        ],
+        "evidence_texts": [
+          "Waiting for the Clouds (Bulutlari Beklerken) is a film from 2003, Turkey.",
+          "Waiting for the Clouds Waiting for the Clouds( Bulutlari Beklerken) is a film from 2003, Turkey. The film was directed by Yeşim Ustaoğlu. It is based on a novel by Georgios Andreadis titled\" Tamama\". The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian. The film was nominated in Montréal World Film Festival 2004."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.658603,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531721
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Waiting for the Clouds (Bulutlari Beklerken) is a film from 2003.\"",
+        "hyperedge_text": "Waiting for the Clouds (Bulutlari Beklerken) is a film from 2003.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6586033701896667,
+        "fusion_score": 0.5317206740379334,
+        "entity_ids": [
+          "\"WAITING FOR THE CLOUDS\""
+        ],
+        "chunk_ids": [
+          "chunk-a90d4ed8f25bfa991699eed6176057ce"
+        ],
+        "evidence_texts": [
+          "Waiting for the Clouds (Bulutlari Beklerken) is a film from 2003.",
+          "Waiting for the Clouds Waiting for the Clouds( Bulutlari Beklerken) is a film from 2003, Turkey. The film was directed by Yeşim Ustaoğlu. It is based on a novel by Georgios Andreadis titled\" Tamama\". The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian. The film was nominated in Montréal World Film Festival 2004."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.658603,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.531721
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Yeşim Ustaoğlu.\"",
+        "hyperedge_text": "The film was directed by Yeşim Ustaoğlu.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6586033701896667,
+        "fusion_score": 0.13172067403793336,
+        "entity_ids": [
+          "\"YEŞIM USTAOĞLU\""
+        ],
+        "chunk_ids": [
+          "chunk-a90d4ed8f25bfa991699eed6176057ce"
+        ],
+        "evidence_texts": [
+          "Waiting for the Clouds Waiting for the Clouds( Bulutlari Beklerken) is a film from 2003, Turkey. The film was directed by Yeşim Ustaoğlu. It is based on a novel by Georgios Andreadis titled\" Tamama\". The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian. The film was nominated in Montréal World Film Festival 2004.",
+          "The film was directed by Yeşim Ustaoğlu."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.658603,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.131721
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It is based on a novel by Georgios Andreadis titled 'Tamama'.\"",
+        "hyperedge_text": "It is based on a novel by Georgios Andreadis titled 'Tamama'.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6586033701896667,
+        "fusion_score": 0.13172067403793336,
+        "entity_ids": [
+          "\"GEORGIOS ANDREADIS\"",
+          "\"TAMAMA\""
+        ],
+        "chunk_ids": [
+          "chunk-a90d4ed8f25bfa991699eed6176057ce"
+        ],
+        "evidence_texts": [
+          "Waiting for the Clouds Waiting for the Clouds( Bulutlari Beklerken) is a film from 2003, Turkey. The film was directed by Yeşim Ustaoğlu. It is based on a novel by Georgios Andreadis titled\" Tamama\". The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian. The film was nominated in Montréal World Film Festival 2004.",
+          "It is based on a novel by Georgios Andreadis titled 'Tamama'."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.658603,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.131721
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian.\"",
+        "hyperedge_text": "The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.6586033701896667,
+        "fusion_score": 0.13172067403793336,
+        "entity_ids": [
+          "\"SETARH FARSI\"",
+          "\"HELGE ALBERS\"",
+          "\"BEHROOZ HASHEMIAN\""
+        ],
+        "chunk_ids": [
+          "chunk-a90d4ed8f25bfa991699eed6176057ce"
+        ],
+        "evidence_texts": [
+          "Waiting for the Clouds Waiting for the Clouds( Bulutlari Beklerken) is a film from 2003, Turkey. The film was directed by Yeşim Ustaoğlu. It is based on a novel by Georgios Andreadis titled\" Tamama\". The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian. The film was nominated in Montréal World Film Festival 2004.",
+          "The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.658603,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.131721
+        }
+      }
+    ],
+    "answer": "Yeşim Ustaoğlu",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that the film 'Waiting for the Clouds' was directed by Yeşim Ustaoğlu.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"The film was directed by Yeşim Ustaoğlu.\""
+    ]
+  },
+  {
+    "node_id": "q3",
+    "question": "When was the director of Tombstone Rashomon born?",
+    "analysis": {
+      "entities": [
+        "Alex Cox"
+      ],
+      "relations": [
+        "birth date"
+      ],
+      "relation_query": "What is the birth date of a person?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher.\"",
+        "hyperedge_text": "Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.2882983982563019,
+        "fusion_score": 0.4576596796512604,
+        "entity_ids": [
+          "\"TOMBSTONE RASHOMON\"",
+          "\"ALEX COX\"",
+          "\"ADAM NEWBERRY\"",
+          "\"ERIC SCHUMACHER\""
+        ],
+        "chunk_ids": [
+          "chunk-2572de4191916b5221d971c4d44e123d"
+        ],
+        "evidence_texts": [
+          "Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher.",
+          "Tombstone Rashomon Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher. It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory from multiple differing perspectives in the style of Akira Kurosawa's 1950 film\" Rashomon\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.288298,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.45766
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Tombstone Rashomon is a 2017 Western film directed by Alex Cox.\"",
+        "hyperedge_text": "Tombstone Rashomon is a 2017 Western film directed by Alex Cox.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.2882983982563019,
+        "fusion_score": 0.4576596796512604,
+        "entity_ids": [
+          "\"2017\"",
+          "\"WESTERN\"",
+          "\"TOMBSTONE RASHOMON\"",
+          "\"ALEX COX\""
+        ],
+        "chunk_ids": [
+          "chunk-2572de4191916b5221d971c4d44e123d"
+        ],
+        "evidence_texts": [
+          "Tombstone Rashomon is a 2017 Western film directed by Alex Cox.",
+          "Tombstone Rashomon Tombstone Rashomon is a 2017 Western film directed by Alex Cox and starring Adam Newberry and Eric Schumacher. It tells the story of the Gunfight at the O.K. Corral in Tombstone, Arizona Territory from multiple differing perspectives in the style of Akira Kurosawa's 1950 film\" Rashomon\"."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.288298,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.45766
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Alexander B. H. Cox (born 15 December 1954) is an English film director, screenwriter, nonfiction author, broadcaster and sometime actor.\"",
+        "hyperedge_text": "Alexander B. H. Cox (born 15 December 1954) is an English film director, screenwriter, nonfiction author, broadcaster and sometime actor.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7083116769790649,
+        "fusion_score": 0.141662335395813,
+        "entity_ids": [
+          "\"FILM DIRECTOR\"",
+          "\"ACTOR\"",
+          "\"SCREENWRITER\"",
+          "\"BROADCASTER\"",
+          "\"ALEXANDER B. H. COX\"",
+          "\"NONFICTION AUTHOR\""
+        ],
+        "chunk_ids": [
+          "chunk-4876b842fd8b0383ee37effdd9c0604f"
+        ],
+        "evidence_texts": [
+          "Alex Cox Alexander B. H. Cox( born 15 December 1954) is an English film director, screenwriter, nonfiction author, broadcaster and sometime actor. Cox experienced success early in his career with\" Repo Man\" and\" Sid and Nancy\", but since the release and commercial failure of\" Walker\", he has directed his career towards independent films. Cox received a co-writer credit for the screenplay of Terry Gilliam's\" Fear and Loathing in Las Vegas\"( 1998) for previous work on the script before it was completely rewritten by Gilliam. As of 2012, Cox has taught screenwriting and film production at the University of Colorado, Boulder.",
+          "Alexander B. H. Cox (born 15 December 1954) is an English film director, screenwriter, nonfiction author, broadcaster and sometime actor."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.708312,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.141662
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cox experienced success early in his career with 'Repo Man' and 'Sid and Nancy', but since the release and commercial failure of 'Walker', he has directed his career towards independent films.\"",
+        "hyperedge_text": "Cox experienced success early in his career with 'Repo Man' and 'Sid and Nancy', but since the release and commercial failure of 'Walker', he has directed his career towards independent films.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7083116769790649,
+        "fusion_score": 0.141662335395813,
+        "entity_ids": [
+          "\"CAREER\"",
+          "\"SUCCESS\"",
+          "\"REPO MAN\"",
+          "\"SID AND NANCY\"",
+          "\"WALKER\"",
+          "\"INDEPENDENT FILMS\"",
+          "\"COMMERCIAL FAILURE\""
+        ],
+        "chunk_ids": [
+          "chunk-4876b842fd8b0383ee37effdd9c0604f"
+        ],
+        "evidence_texts": [
+          "Alex Cox Alexander B. H. Cox( born 15 December 1954) is an English film director, screenwriter, nonfiction author, broadcaster and sometime actor. Cox experienced success early in his career with\" Repo Man\" and\" Sid and Nancy\", but since the release and commercial failure of\" Walker\", he has directed his career towards independent films. Cox received a co-writer credit for the screenplay of Terry Gilliam's\" Fear and Loathing in Las Vegas\"( 1998) for previous work on the script before it was completely rewritten by Gilliam. As of 2012, Cox has taught screenwriting and film production at the University of Colorado, Boulder.",
+          "Cox experienced success early in his career with 'Repo Man' and 'Sid and Nancy', but since the release and commercial failure of 'Walker', he has directed his career towards independent films."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.708312,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.141662
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Cox received a co-writer credit for the screenplay of Terry Gilliam's 'Fear and Loathing in Las Vegas' (1998) for previous work on the script before it was completely rewritten by Gilliam.\"",
+        "hyperedge_text": "Cox received a co-writer credit for the screenplay of Terry Gilliam's 'Fear and Loathing in Las Vegas' (1998) for previous work on the script before it was completely rewritten by Gilliam.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7083116769790649,
+        "fusion_score": 0.141662335395813,
+        "entity_ids": [
+          "\"FEAR AND LOATHING IN LAS VEGAS\"",
+          "\"TERRY GILLIAM\""
+        ],
+        "chunk_ids": [
+          "chunk-4876b842fd8b0383ee37effdd9c0604f"
+        ],
+        "evidence_texts": [
+          "Alex Cox Alexander B. H. Cox( born 15 December 1954) is an English film director, screenwriter, nonfiction author, broadcaster and sometime actor. Cox experienced success early in his career with\" Repo Man\" and\" Sid and Nancy\", but since the release and commercial failure of\" Walker\", he has directed his career towards independent films. Cox received a co-writer credit for the screenplay of Terry Gilliam's\" Fear and Loathing in Las Vegas\"( 1998) for previous work on the script before it was completely rewritten by Gilliam. As of 2012, Cox has taught screenwriting and film production at the University of Colorado, Boulder.",
+          "Cox received a co-writer credit for the screenplay of Terry Gilliam's 'Fear and Loathing in Las Vegas' (1998) for previous work on the script before it was completely rewritten by Gilliam."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.708312,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.141662
+        }
+      }
+    ],
+    "answer": "15 December 1954",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence states that Alex Cox was born on 15 December 1954, which directly answers the question about the director of Tombstone Rashomon.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Alexander B. H. Cox (born 15 December 1954) is an English film director, screenwriter, nonfiction author, broadcaster and sometime actor.\""
+    ]
+  },
+  {
+    "node_id": "q4",
+    "question": "When was the director of Waiting For The Clouds born?",
+    "analysis": {
+      "entities": [
+        "Yeşim Ustaoğlu"
+      ],
+      "relations": [
+        "born"
+      ],
+      "relation_query": "When was a person born?",
+      "answer_type": "date"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Yeşim Ustaoğlu is a Turkish filmmaker and screenwriter.\"",
+        "hyperedge_text": "Yeşim Ustaoğlu is a Turkish filmmaker and screenwriter.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7800866365432739,
+        "fusion_score": 0.5560173273086548,
+        "entity_ids": [
+          "\"SCREENWRITER\"",
+          "\"TURKEY\"",
+          "\"YEŞIM USTAOĞLU\"",
+          "\"FILMMAKER\"",
+          "\"18 NOVEMBER 1960\""
+        ],
+        "chunk_ids": [
+          "chunk-e4364b30aebd6f6602bbfbcb0976397a"
+        ],
+        "evidence_texts": [
+          "Yeşim Ustaoğlu is a Turkish filmmaker and screenwriter.",
+          "Yeşim Ustaoğlu Yeşim Ustaoğlu( born 18 November 1960) is a Turkish filmmaker and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.780087,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.556017
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Yeşim Ustaoğlu was born on 18 November 1960.\"",
+        "hyperedge_text": "Yeşim Ustaoğlu was born on 18 November 1960.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7800866365432739,
+        "fusion_score": 0.5560173273086548,
+        "entity_ids": [
+          "\"YEŞIM USTAOĞLU\""
+        ],
+        "chunk_ids": [
+          "chunk-e4364b30aebd6f6602bbfbcb0976397a"
+        ],
+        "evidence_texts": [
+          "Yeşim Ustaoğlu was born on 18 November 1960.",
+          "Yeşim Ustaoğlu Yeşim Ustaoğlu( born 18 November 1960) is a Turkish filmmaker and screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.780087,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.556017
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The film was directed by Yeşim Ustaoğlu.\"",
+        "hyperedge_text": "The film was directed by Yeşim Ustaoğlu.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3003385663032532,
+        "fusion_score": 0.46006771326065066,
+        "entity_ids": [
+          "\"YEŞIM USTAOĞLU\""
+        ],
+        "chunk_ids": [
+          "chunk-a90d4ed8f25bfa991699eed6176057ce"
+        ],
+        "evidence_texts": [
+          "The film was directed by Yeşim Ustaoğlu.",
+          "Waiting for the Clouds Waiting for the Clouds( Bulutlari Beklerken) is a film from 2003, Turkey. The film was directed by Yeşim Ustaoğlu. It is based on a novel by Georgios Andreadis titled\" Tamama\". The film was produced by Setarh Farsi, Helge Albers and Behrooz Hashemian. The film was nominated in Montréal World Film Festival 2004."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.300339,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.460068
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Yeşim Ustaoğlu is a Turkish filmmaker.\"",
+        "hyperedge_text": "Yeşim Ustaoğlu is a Turkish filmmaker.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7800866365432739,
+        "fusion_score": 0.1560173273086548,
+        "entity_ids": [
+          "\"FILMMAKER\""
+        ],
+        "chunk_ids": [
+          "chunk-e4364b30aebd6f6602bbfbcb0976397a"
+        ],
+        "evidence_texts": [
+          "Yeşim Ustaoğlu Yeşim Ustaoğlu( born 18 November 1960) is a Turkish filmmaker and screenwriter.",
+          "Yeşim Ustaoğlu is a Turkish filmmaker."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.780087,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.156017
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Yeşim Ustaoğlu is a screenwriter.\"",
+        "hyperedge_text": "Yeşim Ustaoğlu is a screenwriter.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.7800866365432739,
+        "fusion_score": 0.1560173273086548,
+        "entity_ids": [
+          "\"SCREENWRITER\""
+        ],
+        "chunk_ids": [
+          "chunk-e4364b30aebd6f6602bbfbcb0976397a"
+        ],
+        "evidence_texts": [
+          "Yeşim Ustaoğlu Yeşim Ustaoğlu( born 18 November 1960) is a Turkish filmmaker and screenwriter.",
+          "Yeşim Ustaoğlu is a screenwriter."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.780087,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.156017
+        }
+      }
+    ],
+    "answer": "18 November 1960",
+    "confidence": 1.0,
+    "reasoning_summary": "Yeşim Ustaoğlu, the director of 'Waiting For The Clouds', was born on 18 November 1960, as stated in the evidence.",
+    "used_dependencies": [
+      "q2"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Yeşim Ustaoğlu was born on 18 November 1960.\""
+    ]
+  }
+]

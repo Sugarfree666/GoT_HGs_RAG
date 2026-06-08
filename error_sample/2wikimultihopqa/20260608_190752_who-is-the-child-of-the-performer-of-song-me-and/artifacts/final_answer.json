@@ -1,0 +1,26 @@
+{
+  "answer": "Ben Miller",
+  "candidate_answer": "Ben Miller",
+  "reasoning_summary": "The performer of 'Me And Bobby McGee' is Roger Miller, and it is established that Ben Miller is one of his brothers, making him a child of Roger Miller. The evidence supports this relationship.",
+  "answer_span_reasoning": "Ben Miller is identified as a child of Roger Miller.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the performer of the song Me And Bobby Mcgee?",
+      "answer": "Roger Miller",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Me and Bobby McGee\" is a song written by American singer-songwriter Kris Kristofferson and songwriter Fred Foster, originally performed by Roger Miller.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the child of q1's answer?",
+      "answer": "Ben Miller",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"M3 was an American experimental rock group, founded by the brothers Roger Miller, Ben Miller and Larry Miller.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

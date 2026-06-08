@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "node_id": "q1",
+      "question": "What country is Gare De La Roche-Sur-Yon located in?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e1_p11",
+            "node_texts": [
+              "Gare De La Roche-Sur-Yon",
+              "located",
+              "country"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the country that Gare De La Roche-Sur-Yon is located in."
+          }
+        ],
+        "support_path_ids": [
+          "e1_p11"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Gare De La Roche-Sur-Yon"
+        },
+        "one_hop_relation": "located",
+        "answer_type": "Country"
+      }
+    },
+    {
+      "node_id": "q2",
+      "question": "What country is Gare De Namps-Quevauvillers located in?",
+      "dependencies": [],
+      "metadata": {
+        "source": "grounded_atomic_dag",
+        "support": [
+          {
+            "path_set_id": "ps1",
+            "path_id": "e2_p12",
+            "node_texts": [
+              "Gare De Namps-Quevauvillers",
+              "located",
+              "country"
+            ],
+            "node_ids": [],
+            "reason": "This path segment supports asking for the country that Gare De Namps-Quevauvillers is located in."
+          }
+        ],
+        "support_path_ids": [
+          "e2_p12"
+        ],
+        "operation": "lookup",
+        "input": {
+          "type": "entity",
+          "text": "Gare De Namps-Quevauvillers"
+        },
+        "one_hop_relation": "located",
+        "answer_type": "Country"
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Where was Pietro Salini born?",
+    "retrieval_question": "Where was Pietro Salini born?",
+    "dependency_question_rewrite": {
+      "original_question": "Where was Pietro Salini born?",
+      "retrieval_question": "Where was Pietro Salini born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Pietro Salini"
+      ],
+      "relations": [
+        "birthplace"
+      ],
+      "relation_query": "the birthplace of a person",
+      "answer_type": "location"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was Domenico Ravenna born?",
+    "retrieval_question": "Where was Domenico Ravenna born?",
+    "dependency_question_rewrite": {
+      "original_question": "Where was Domenico Ravenna born?",
+      "retrieval_question": "Where was Domenico Ravenna born?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "Domenico Ravenna"
+      ],
+      "relations": [
+        "birthplace"
+      ],
+      "relation_query": "the birthplace of a person",
+      "answer_type": "location"
+    }
+  }
+]

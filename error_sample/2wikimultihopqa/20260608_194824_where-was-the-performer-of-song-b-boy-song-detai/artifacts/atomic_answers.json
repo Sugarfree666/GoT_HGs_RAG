@@ -1,0 +1,367 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of B Boy (Song)?",
+    "analysis": {
+      "entities": [
+        "B Boy (Song)"
+      ],
+      "relations": [
+        "performer of"
+      ],
+      "relation_query": "who is the performer of a work",
+      "answer_type": "person"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"B Boy is a song by American hip hop recording artist Meek Mill.\"",
+        "hyperedge_text": "B Boy is a song by American hip hop recording artist Meek Mill.",
+        "branch_support": [
+          "anchor",
+          "semantic"
+        ],
+        "anchor_score": 0.649498701095581,
+        "relation_score": 0.0,
+        "semantic_score": 0.5430245995521545,
+        "fusion_score": 0.36840440034866334,
+        "entity_ids": [
+          "\"B BOY\"",
+          "\"MEEK MILL\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy is a song by American hip hop recording artist Meek Mill.",
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 0.649499,
+          "R": 0.0,
+          "S": 0.543025,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.368404
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"It was released as a third single from 'Dreams Worth More Than Money' on January 3, 2015, by Maybach Music Group and Atlantic Records.\"",
+        "hyperedge_text": "It was released as a third single from 'Dreams Worth More Than Money' on January 3, 2015, by Maybach Music Group and Atlantic Records.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5430245995521545,
+        "fusion_score": 0.10860491991043092,
+        "entity_ids": [
+          "\"MAYBACH MUSIC GROUP\"",
+          "\"DREAMS WORTH MORE THAN MONEY\"",
+          "\"ATLANTIC RECORDS\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg.",
+          "It was released as a third single from 'Dreams Worth More Than Money' on January 3, 2015, by Maybach Music Group and Atlantic Records."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.543025,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.108605
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg.\"",
+        "hyperedge_text": "The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5430245995521545,
+        "fusion_score": 0.10860491991043092,
+        "entity_ids": [
+          "\"SAP\"",
+          "\"BIG SEAN\"",
+          "\"ASAP FERG\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg.",
+          "The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.543025,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.108605
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The song was released on January 3, 2015.\"",
+        "hyperedge_text": "The song was released on January 3, 2015.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5430245995521545,
+        "fusion_score": 0.10860491991043092,
+        "entity_ids": [
+          "\"JANUARY 3, 2015\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg.",
+          "The song was released on January 3, 2015."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.543025,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.108605
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"B Boy is a third single from the album Dreams Worth More Than Money.\"",
+        "hyperedge_text": "B Boy is a third single from the album Dreams Worth More Than Money.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.5430245995521545,
+        "fusion_score": 0.10860491991043092,
+        "entity_ids": [
+          "\"THIRD SINGLE\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg.",
+          "B Boy is a third single from the album Dreams Worth More Than Money."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.543025,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.108605
+        }
+      }
+    ],
+    "answer": "Meek Mill",
+    "confidence": 1.0,
+    "reasoning_summary": "The evidence clearly states that 'B Boy' is a song by American hip hop recording artist Meek Mill.",
+    "used_dependencies": [],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"B Boy is a song by American hip hop recording artist Meek Mill.\""
+    ]
+  },
+  {
+    "node_id": "q2",
+    "question": "Where was q1's answer detained?",
+    "analysis": {
+      "entities": [
+        "Meek Mill"
+      ],
+      "relations": [
+        "detention location"
+      ],
+      "relation_query": "Where was a person detained?",
+      "answer_type": "location"
+    },
+    "evidence": [
+      {
+        "hyperedge_id": "<hyperedge>\"Robert Rihmeek Williams (born May 6, 1987), known professionally as Meek Mill, is an American rapper, songwriter, and activist.\"",
+        "hyperedge_text": "Robert Rihmeek Williams (born May 6, 1987), known professionally as Meek Mill, is an American rapper, songwriter, and activist.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.11153092980384827,
+        "fusion_score": 0.4223061859607697,
+        "entity_ids": [
+          "\"MEEK MILL\"",
+          "\"ROBERT RIHMEEK WILLIAMS\""
+        ],
+        "chunk_ids": [
+          "chunk-17362e66da800d82b1365c97eb4419f2"
+        ],
+        "evidence_texts": [
+          "Robert Rihmeek Williams (born May 6, 1987), known professionally as Meek Mill, is an American rapper, songwriter, and activist.",
+          "Meek Mill Robert Rihmeek Williams (born May 6, 1987), known professionally as Meek Mill, is an American rapper, songwriter, and activist. Born and raised in Philadelphia, he embarked on his music career as a battle rapper, and later formed a short-lived rap group, The Bloodhoundz. In 2008, Atlanta-based rapper T.I. signed Meek Mill to his first record deal. In February 2011, after leaving Grand Hustle Records, Mill signed with Miami-based rapper Rick Ross's Maybach Music Group (MMG). Mill's debut album, \"Dreams and Nightmares\", was released in 2012 under MMG and Warner Bros. Records. The album, preceded by the lead single \"Amen\" (featuring Drake), debuted at number two on the U.S. \"Billboard\" 200. In October 2012, Mill announced the launch of his own label imprint, Dream Chasers Records, named after his mixtape series. Meek Mill often collaborates with fellow MMG label-mates; he is al..."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.111531,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.422306
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"B Boy is a song by American hip hop recording artist Meek Mill.\"",
+        "hyperedge_text": "B Boy is a song by American hip hop recording artist Meek Mill.",
+        "branch_support": [
+          "anchor"
+        ],
+        "anchor_score": 1.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.04922862350940704,
+        "fusion_score": 0.4098457247018814,
+        "entity_ids": [
+          "\"B BOY\"",
+          "\"MEEK MILL\""
+        ],
+        "chunk_ids": [
+          "chunk-54c65a144143c5d15db880dd03c00c6f"
+        ],
+        "evidence_texts": [
+          "B Boy is a song by American hip hop recording artist Meek Mill.",
+          "B Boy (song) \"B Boy\" is a song by American hip hop recording artist Meek Mill. It was released as a third single from \"Dreams Worth More Than Money\" on January 3, 2015, by Maybach Music Group and Atlantic Records. The song, which was produced by Sap, features guest appearances from Big Sean and ASAP Ferg."
+        ],
+        "score_breakdown": {
+          "A": 1.0,
+          "R": 0.0,
+          "S": 0.049229,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.409846
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"The United States Guantanamo Bay detention camps are known for holding individuals in extrajudicial detention.\"",
+        "hyperedge_text": "The United States Guantanamo Bay detention camps are known for holding individuals in extrajudicial detention.",
+        "branch_support": [
+          "relation",
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3635299801826477,
+        "fusion_score": 0.07270599603652954,
+        "entity_ids": [
+          "\"EXTRAJUDICIAL DETENTION\""
+        ],
+        "chunk_ids": [
+          "chunk-ce3773fc0442716a4ad2c083df5b3bde"
+        ],
+        "evidence_texts": [
+          "The United States Guantanamo Bay detention camps are known for holding individuals in extrajudicial detention.",
+          "Salman Ebrahim Mohamed Ali Al Khalifa Salman Ebrahim Mohamed Ali Al Khalifa is a citizen of Bahrain who was held in extrajudicial detention in the United States Guantanamo Bay detention camps, in Cuba. The Department of Defense reports that Al Khalifa was born on July 24, 1979, in Rifah, Bahrain. He is a member of the Al Khalifa royal family of Bahrain, related to the king of Bahrain. Al Khalifa is a second cousin of the King of Bahrain. Al Khalifa, like the other Bahrainis held in Guantanamo, has Joshua Colangelo- Bryan as his lawyer."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.36353,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.072706
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Salman Ebrahim Mohamed Ali Al Khalifa is a citizen of Bahrain who was held in extrajudicial detention in the United States Guantanamo Bay detention camps, in Cuba.\"",
+        "hyperedge_text": "Salman Ebrahim Mohamed Ali Al Khalifa is a citizen of Bahrain who was held in extrajudicial detention in the United States Guantanamo Bay detention camps, in Cuba.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3635299801826477,
+        "fusion_score": 0.07270599603652954,
+        "entity_ids": [
+          "\"SALMAN EBRAHIM MOHAMED ALI AL KHALIFA\"",
+          "\"GUANTANAMO BAY DETENTION CAMPS\"",
+          "\"DEPARTMENT OF DEFENSE\"",
+          "\"RIFAH\"",
+          "\"JULY 24, 1979\"",
+          "\"AL KHALIFA ROYAL FAMILY\"",
+          "\"JOSHUA COLANGELO-BRYAN\"",
+          "\"KING OF BAHRAIN\"",
+          "\"BAHRAIN\""
+        ],
+        "chunk_ids": [
+          "chunk-ce3773fc0442716a4ad2c083df5b3bde"
+        ],
+        "evidence_texts": [
+          "Salman Ebrahim Mohamed Ali Al Khalifa Salman Ebrahim Mohamed Ali Al Khalifa is a citizen of Bahrain who was held in extrajudicial detention in the United States Guantanamo Bay detention camps, in Cuba. The Department of Defense reports that Al Khalifa was born on July 24, 1979, in Rifah, Bahrain. He is a member of the Al Khalifa royal family of Bahrain, related to the king of Bahrain. Al Khalifa is a second cousin of the King of Bahrain. Al Khalifa, like the other Bahrainis held in Guantanamo, has Joshua Colangelo- Bryan as his lawyer.",
+          "Salman Ebrahim Mohamed Ali Al Khalifa is a citizen of Bahrain who was held in extrajudicial detention in the United States Guantanamo Bay detention camps, in Cuba."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.36353,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.072706
+        }
+      },
+      {
+        "hyperedge_id": "<hyperedge>\"Al Khalifa is a second cousin of the King of Bahrain.\"",
+        "hyperedge_text": "Al Khalifa is a second cousin of the King of Bahrain.",
+        "branch_support": [
+          "semantic"
+        ],
+        "anchor_score": 0.0,
+        "relation_score": 0.0,
+        "semantic_score": 0.3635299801826477,
+        "fusion_score": 0.07270599603652954,
+        "entity_ids": [
+          "\"SECOND COUSIN\""
+        ],
+        "chunk_ids": [
+          "chunk-ce3773fc0442716a4ad2c083df5b3bde"
+        ],
+        "evidence_texts": [
+          "Salman Ebrahim Mohamed Ali Al Khalifa Salman Ebrahim Mohamed Ali Al Khalifa is a citizen of Bahrain who was held in extrajudicial detention in the United States Guantanamo Bay detention camps, in Cuba. The Department of Defense reports that Al Khalifa was born on July 24, 1979, in Rifah, Bahrain. He is a member of the Al Khalifa royal family of Bahrain, related to the king of Bahrain. Al Khalifa is a second cousin of the King of Bahrain. Al Khalifa, like the other Bahrainis held in Guantanamo, has Joshua Colangelo- Bryan as his lawyer.",
+          "Al Khalifa is a second cousin of the King of Bahrain."
+        ],
+        "score_breakdown": {
+          "A": 0.0,
+          "R": 0.0,
+          "S": 0.36353,
+          "anchor_weight": 0.4,
+          "relation_weight": 0.4,
+          "semantic_weight": 0.2,
+          "fusion_score": 0.072706
+        }
+      }
+    ],
+    "answer": "Guantanamo Bay",
+    "confidence": 0.9,
+    "reasoning_summary": "Salman Ebrahim Mohamed Ali Al Khalifa was held in extrajudicial detention in the United States Guantanamo Bay detention camps, as stated in the evidence.",
+    "used_dependencies": [
+      "q1"
+    ],
+    "used_hyperedge_ids": [
+      "<hyperedge>\"Salman Ebrahim Mohamed Ali Al Khalifa is a citizen of Bahrain who was held in extrajudicial detention in the United States Guantanamo Bay detention camps, in Cuba.\""
+    ]
+  }
+]

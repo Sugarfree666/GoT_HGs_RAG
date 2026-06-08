@@ -1,0 +1,8 @@
+2026-06-08 19:58:51,226 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 19:59:23,095 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 19:59:23,095 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 19:59:34,696 | INFO | Starting HyperBranch pipeline for question: Who is the father-in-law of John Ernest, Duke Of Saxe-Eisenach?
+2026-06-08 19:59:34,696 | INFO | Executing atomic DAG with 2 node(s)
+2026-06-08 19:59:41,732 | INFO | Atomic retrieval returned 82 hits for question=Who is the father of John Ernest?
+2026-06-08 19:59:48,438 | INFO | Atomic retrieval returned 75 hits for question=Who is the father-in-law of q1's answer?
+2026-06-08 19:59:56,233 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_195851_who-is-the-father-in-law-of-john-ernest-duke-of

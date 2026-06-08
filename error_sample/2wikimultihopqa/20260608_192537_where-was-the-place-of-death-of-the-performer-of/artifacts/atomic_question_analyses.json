@@ -1,0 +1,99 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who is the performer of the song I Can'T See Myself Leaving You?",
+    "retrieval_question": "Who is the performer of the song I Can'T See Myself Leaving You?",
+    "dependency_question_rewrite": {
+      "original_question": "Who is the performer of the song I Can'T See Myself Leaving You?",
+      "retrieval_question": "Who is the performer of the song I Can'T See Myself Leaving You?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [],
+    "analysis": {
+      "entities": [
+        "I Can'T See Myself Leaving You"
+      ],
+      "relations": [
+        "performer of the song"
+      ],
+      "relation_query": "who is the performer of a song titled 'I Can'T See Myself Leaving You'",
+      "answer_type": "person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Where did q1's answer die?",
+    "retrieval_question": "Where did q1's answer die?",
+    "dependency_question_rewrite": {
+      "original_question": "Where did q1's answer die?",
+      "retrieval_question": "Where did q1's answer die?",
+      "whether_rewritten": false,
+      "replacement_span": "",
+      "replacement_answer": "",
+      "replacements": []
+    },
+    "dependency_answers": [
+      {
+        "node_id": "q1",
+        "question": "Who is the performer of the song I Can'T See Myself Leaving You?",
+        "answer": "Aretha Franklin",
+        "confidence": 1.0,
+        "answer_type": "person",
+        "reasoning_summary": "The evidence clearly states that the song 'I Can't See Myself Leaving You' is performed by Aretha Franklin.",
+        "used_hyperedge_ids": [
+          "<hyperedge>\"I Can't See Myself Leaving You is a song written by Ronnie Shannon and performed by Aretha Franklin.\""
+        ],
+        "evidence_summary": [
+          {
+            "hyperedge_id": "<hyperedge>\"I Can't See Myself Leaving You is a song written by Ronnie Shannon and performed by Aretha Franklin.\"",
+            "fusion_score": 0.5215533614158631,
+            "branch_support": [
+              "anchor",
+              "relation",
+              "semantic"
+            ],
+            "evidence_texts": [
+              "I Can't See Myself Leaving You is a song written by Ronnie Shannon and performed by Aretha Franklin.",
+              "I Can't See Myself Leaving You \"I Can't See Myself Leaving You\" is a song written by Ronnie Shannon and performed by Aretha Franklin. The song reached #3 on the U.S. R&B chart and #28 on the \"Billboard\" Hot 100 in 1969. The song was produced by Jerry Wexler and appeared as the closing track on Franklin's 1968 album, \"Aretha Now\"."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The song reached #3 on the U.S. R&B chart and #28 on the Billboard Hot 100 in 1969.\"",
+            "fusion_score": 0.12155336141586304,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "I Can't See Myself Leaving You \"I Can't See Myself Leaving You\" is a song written by Ronnie Shannon and performed by Aretha Franklin. The song reached #3 on the U.S. R&B chart and #28 on the \"Billboard\" Hot 100 in 1969. The song was produced by Jerry Wexler and appeared as the closing track on Franklin's 1968 album, \"Aretha Now\".",
+              "The song reached #3 on the U.S. R&B chart and #28 on the Billboard Hot 100 in 1969."
+            ]
+          },
+          {
+            "hyperedge_id": "<hyperedge>\"The song was produced by Jerry Wexler and appeared as the closing track on Franklin's 1968 album, Aretha Now.\"",
+            "fusion_score": 0.12155336141586304,
+            "branch_support": [
+              "semantic"
+            ],
+            "evidence_texts": [
+              "I Can't See Myself Leaving You \"I Can't See Myself Leaving You\" is a song written by Ronnie Shannon and performed by Aretha Franklin. The song reached #3 on the U.S. R&B chart and #28 on the \"Billboard\" Hot 100 in 1969. The song was produced by Jerry Wexler and appeared as the closing track on Franklin's 1968 album, \"Aretha Now\".",
+              "The song was produced by Jerry Wexler and appeared as the closing track on Franklin's 1968 album, Aretha Now."
+            ]
+          }
+        ]
+      }
+    ],
+    "analysis": {
+      "entities": [
+        "Aretha Franklin"
+      ],
+      "relations": [
+        "died in"
+      ],
+      "relation_query": "Where did a person die?",
+      "answer_type": "location"
+    }
+  }
+]

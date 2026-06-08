@@ -1,0 +1,131 @@
+[
+  {
+    "node_id": "q1",
+    "question": "Who are the directors of Wrong Turn?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e1_p3",
+          "node_texts": [
+            "Wrong Turn",
+            "directors"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the directors of Wrong Turn."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p3"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Wrong Turn"
+      },
+      "one_hop_relation": "directors",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q2",
+    "question": "Who are the directors of Dark River (2017 Film)?",
+    "dependencies": [],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps1",
+          "path_id": "e2_p4",
+          "node_texts": [
+            "Dark River (2017 Film)",
+            "Bloodlines",
+            "have",
+            "nationality"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the directors of Dark River (2017 Film)."
+        }
+      ],
+      "support_path_ids": [
+        "e2_p4"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "Dark River (2017 Film)"
+      },
+      "one_hop_relation": "directors",
+      "answer_type": "Person"
+    }
+  },
+  {
+    "node_id": "q3",
+    "question": "What is the nationality of the directors of Wrong Turn?",
+    "dependencies": [
+      "q1"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps3",
+          "path_id": "e1_p1",
+          "node_texts": [
+            "Wrong Turn",
+            "directors",
+            "have",
+            "nationality"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the nationality of the directors of Wrong Turn."
+        }
+      ],
+      "support_path_ids": [
+        "e1_p1"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q1"
+      },
+      "one_hop_relation": "nationality",
+      "answer_type": "Country"
+    }
+  },
+  {
+    "node_id": "q4",
+    "question": "What is the nationality of the directors of Dark River (2017 Film)?",
+    "dependencies": [
+      "q2"
+    ],
+    "metadata": {
+      "source": "grounded_atomic_dag",
+      "support": [
+        {
+          "path_set_id": "ps4",
+          "path_id": "e2_p12",
+          "node_texts": [
+            "Dark River (2017 Film)",
+            "have",
+            "nationality"
+          ],
+          "node_ids": [],
+          "reason": "This path segment supports asking for the nationality of the directors of Dark River (2017 Film)."
+        }
+      ],
+      "support_path_ids": [
+        "e2_p12"
+      ],
+      "operation": "lookup",
+      "input": {
+        "type": "entity",
+        "text": "q2"
+      },
+      "one_hop_relation": "nationality",
+      "answer_type": "Country"
+    }
+  }
+]

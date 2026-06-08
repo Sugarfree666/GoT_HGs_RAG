@@ -1,0 +1,26 @@
+{
+  "answer": "Werner Mensching",
+  "candidate_answer": "Werner Mensching died earlier than Karel Zich.",
+  "reasoning_summary": "Werner Mensching died on June 21, 1997, while Karel Zich died on July 13, 2004. Therefore, Mensching died earlier.",
+  "answer_span_reasoning": "The answer identifies the person who died earlier.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "When did Werner Mensching die?",
+      "answer": "June 21, 1997",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Werner Mensching (December 23, 1933 – June 21, 1997) was a West German pair skater.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "When did Karel Zich die?",
+      "answer": "13 July 2004",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Karel Zich passed away on 13 July 2004.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

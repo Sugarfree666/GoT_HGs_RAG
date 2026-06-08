@@ -1,0 +1,26 @@
+{
+  "answer": "María del Pilar Cordero",
+  "candidate_answer": "María del Pilar Cordero",
+  "reasoning_summary": "The director of 'My Three Merry Widows' is Fernando Cortés, and he was married to María del Pilar Cordero, who adopted the stage name Mapy Cortés. This information is well-supported by the evidence.",
+  "answer_span_reasoning": "María del Pilar Cordero is the spouse of the director Fernando Cortés.",
+  "confidence": 1.0,
+  "atomic_answer_trace": [
+    {
+      "node_id": "q1",
+      "question": "Who is the director of My Three Merry Widows?",
+      "answer": "Fernando Cortés",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"My Three Merry Widows (in Spanish Mis tres viudas alegres) is a Mexican comedy film directed by Fernando Cortés.\""
+      ]
+    },
+    {
+      "node_id": "q2",
+      "question": "Who is the spouse of q1's answer?",
+      "answer": "María del Pilar Cordero",
+      "used_hyperedge_ids": [
+        "<hyperedge>\"Fernando 'Papi' Cortés (October 4, 1909 – 1979) was a Puerto Rican film actor, writer and director.\""
+      ]
+    }
+  ],
+  "remaining_gaps": []
+}

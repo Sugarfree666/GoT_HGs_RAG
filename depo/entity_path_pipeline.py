@@ -88,6 +88,7 @@ class EntityPathSemanticParser:
             )
         validation_feedback: str | None = None
         last_payload: dict[str, Any] = {}
+        final_support_warnings: list[str] = []
         for attempt in range(2):
             payload = self.llm_client.chat_json(
                 GROUNDED_ATOMIC_DAG_SYSTEM,
@@ -99,25 +100,31 @@ class EntityPathSemanticParser:
             )
             raw_payload = payload if isinstance(payload, dict) else {}
             last_payload = raw_payload
-            errors = validate_grounded_atomic_dag_support(
+            hard_errors, support_warnings = _grounded_atomic_dag_support_issues(
                 raw_payload,
                 selected_dependency_path_evidence,
             )
-            if errors:
-                validation_feedback = "\n".join(errors)
+            final_support_warnings = support_warnings
+            if hard_errors:
+                validation_feedback = "\n".join(hard_errors)
                 if attempt == 1:
                     raise ValueError(
                         "Grounded Atomic DAG support validation failed after retry: "
                         + validation_feedback
-                    )
+                )
                 continue
+            if support_warnings:
+                validation_feedback = "\n".join(support_warnings)
+                if attempt == 0:
+                    continue
 
             dag, warnings = _parse_grounded_atomic_dag_payload(
                 raw_payload,
                 selected_dependency_path_evidence=selected_dependency_path_evidence,
             )
-            if warnings:
-                raw_payload["normalization_warnings"] = warnings
+            all_warnings = [*final_support_warnings, *warnings]
+            if all_warnings:
+                raw_payload["normalization_warnings"] = all_warnings
             raw_payload.setdefault("selected_dependency_path_evidence", selected_dependency_path_evidence)
             return dag, raw_payload
         raise ValueError("Grounded Atomic DAG generation failed. Last payload: " + repr(last_payload))
@@ -352,17 +359,29 @@ def validate_grounded_atomic_dag_support(
     payload: dict[str, Any],
     selected_dependency_path_evidence: list[dict[str, Any]],
 ) -> list[str]:
-    errors: list[str] = []
+    hard_errors, soft_warnings = _grounded_atomic_dag_support_issues(
+        payload,
+        selected_dependency_path_evidence,
+    )
+    return [*hard_errors, *soft_warnings]
+
+
+def _grounded_atomic_dag_support_issues(
+    payload: dict[str, Any],
+    selected_dependency_path_evidence: list[dict[str, Any]],
+) -> tuple[list[str], list[str]]:
+    hard_errors: list[str] = []
+    soft_warnings: list[str] = []
     support_index = _selected_dependency_support_index(selected_dependency_path_evidence)
     raw_nodes = payload.get("nodes")
     if raw_nodes is None:
         raw_nodes = payload.get("atomic_questions") or payload.get("subquestions")
     if not isinstance(raw_nodes, list) or not raw_nodes:
-        return ["Grounded Atomic DAG payload must contain a non-empty nodes list."]
+        return ["Grounded Atomic DAG payload must contain a non-empty nodes list."], []
 
     for index, raw_node in enumerate(raw_nodes, start=1):
         if not isinstance(raw_node, dict):
-            errors.append(f"Node at position {index} is not a JSON object.")
+            hard_errors.append(f"Node at position {index} is not a JSON object.")
             continue
         node_id = str(raw_node.get("node_id") or raw_node.get("id") or f"q{index}").strip()
         raw_support = raw_node.get("support")
@@ -371,29 +390,29 @@ def validate_grounded_atomic_dag_support(
         elif isinstance(raw_support, list):
             support_items = raw_support
         else:
-            errors.append(f"Node {node_id} has no support list.")
+            hard_errors.append(f"Node {node_id} has no support list.")
             continue
         if not support_items:
-            errors.append(f"Node {node_id} has an empty support list.")
+            hard_errors.append(f"Node {node_id} has an empty support list.")
             continue
 
         valid_support_count = 0
         for support_index_in_node, support in enumerate(support_items, start=1):
             if not isinstance(support, dict):
-                errors.append(f"Node {node_id} support #{support_index_in_node} is not a JSON object.")
+                hard_errors.append(f"Node {node_id} support #{support_index_in_node} is not a JSON object.")
                 continue
             path_set_id = str(support.get("path_set_id") or "").strip()
             path_id = str(support.get("path_id") or "").strip()
             key = (path_set_id, path_id)
             if key not in support_index:
-                errors.append(
+                hard_errors.append(
                     f"Node {node_id} support #{support_index_in_node} cites invalid path_set_id/path_id "
                     f"{path_set_id!r}/{path_id!r}."
                 )
                 continue
             node_texts = _str_list(support.get("node_texts"))
             if not node_texts:
-                errors.append(f"Node {node_id} support #{support_index_in_node} has empty node_texts.")
+                hard_errors.append(f"Node {node_id} support #{support_index_in_node} has empty node_texts.")
                 continue
             available = support_index[key]["normalized_node_texts"]
             missing = [
@@ -402,15 +421,14 @@ def validate_grounded_atomic_dag_support(
                 if _normalize_support_text(text) not in available
             ]
             if missing:
-                errors.append(
+                soft_warnings.append(
                     f"Node {node_id} support #{support_index_in_node} cites node_texts not present in "
                     f"{path_set_id}/{path_id}: {missing}."
                 )
-                continue
             valid_support_count += 1
         if valid_support_count == 0:
-            errors.append(f"Node {node_id} has no valid selected dependency path support.")
-    return errors
+            hard_errors.append(f"Node {node_id} has no valid selected dependency path support.")
+    return hard_errors, soft_warnings
 
 
 def _paths_grouped_for_prompt(
@@ -679,19 +697,21 @@ def _normalize_grounded_support(
         ]
         if invalid_node_texts:
             warnings.append(
-                f"Ignored support for {node_id}; node_texts are not in selected path {path_set_id}/{path_id}: "
+                f"Accepted support for {node_id} with node_texts not present in selected path {path_set_id}/{path_id}: "
                 f"{invalid_node_texts}."
             )
-            continue
-        support.append(
-            {
-                "path_set_id": path_set_id,
-                "path_id": path_id,
-                "node_texts": node_texts,
-                "node_ids": _str_list(item.get("node_ids")),
-                "reason": str(item.get("reason") or "").strip(),
-            }
-        )
+        normalized_item = {
+            "path_set_id": path_set_id,
+            "path_id": path_id,
+            "node_texts": node_texts,
+            "node_ids": _str_list(item.get("node_ids")),
+            "reason": str(item.get("reason") or "").strip(),
+        }
+        if invalid_node_texts:
+            normalized_item["node_text_warnings"] = [
+                f"node_texts not present in selected path: {invalid_node_texts}"
+            ]
+        support.append(normalized_item)
     return support
 
 

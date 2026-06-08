@@ -1,0 +1,8 @@
+2026-06-08 20:03:14,448 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 20:03:37,756 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 20:03:37,756 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 20:03:49,311 | INFO | Starting HyperBranch pipeline for question: Who is the spouse of the director of film My Three Merry Widows?
+2026-06-08 20:03:49,311 | INFO | Executing atomic DAG with 2 node(s)
+2026-06-08 20:03:53,467 | INFO | Atomic retrieval returned 91 hits for question=Who is the director of My Three Merry Widows?
+2026-06-08 20:04:00,135 | INFO | Atomic retrieval returned 80 hits for question=Who is the spouse of q1's answer?
+2026-06-08 20:04:08,087 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_200314_who-is-the-spouse-of-the-director-of-film-my-thr

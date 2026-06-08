@@ -1,0 +1,8 @@
+2026-06-08 19:22:57,002 | INFO | Generating atomic question DAG with DEPO.
+2026-06-08 19:23:15,054 | INFO | Loading dataset from D:\GitHub\HyperBranch\datasets\2wikimultihopqa
+2026-06-08 19:23:15,054 | INFO | Using GraphML file graph_chunk_entity_relation.graphml
+2026-06-08 19:23:27,288 | INFO | Starting HyperBranch pipeline for question: Who is Mugain's mother-in-law?
+2026-06-08 19:23:27,289 | INFO | Executing atomic DAG with 2 node(s)
+2026-06-08 19:23:32,174 | INFO | Atomic retrieval returned 86 hits for question=Who is Mugain's mother?
+2026-06-08 19:23:39,090 | INFO | Atomic retrieval returned 85 hits for question=Who is the mother-in-law of q1's answer?
+2026-06-08 19:23:46,556 | INFO | Pipeline finished. Artifacts saved under D:\GitHub\HyperBranch\runs\depo_hyperbranch\2wikimultihopqa\20260608_192257_who-is-mugain-s-mother-in-law
