@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from itertools import product
 from typing import Any
 
@@ -104,6 +105,7 @@ class EntityPathSemanticParser:
                 raw_payload,
                 selected_dependency_path_evidence,
             )
+            hard_errors.extend(_grounded_dependency_variable_reference_errors(raw_payload))
             final_support_warnings = support_warnings
             if hard_errors:
                 validation_feedback = "\n".join(hard_errors)
@@ -403,17 +405,25 @@ def _grounded_atomic_dag_support_issues(
                 continue
             path_set_id = str(support.get("path_set_id") or "").strip()
             path_id = str(support.get("path_id") or "").strip()
-            key = (path_set_id, path_id)
-            if key not in support_index:
-                hard_errors.append(
-                    f"Node {node_id} support #{support_index_in_node} cites invalid path_set_id/path_id "
-                    f"{path_set_id!r}/{path_id!r}."
-                )
-                continue
             node_texts = _str_list(support.get("node_texts"))
             if not node_texts:
                 hard_errors.append(f"Node {node_id} support #{support_index_in_node} has empty node_texts.")
                 continue
+            key = (path_set_id, path_id)
+            if key not in support_index:
+                repaired_key = _best_support_key_for_node_texts(node_texts, support_index)
+                if repaired_key is None:
+                    hard_errors.append(
+                        f"Node {node_id} support #{support_index_in_node} cites invalid path_set_id/path_id "
+                        f"{path_set_id!r}/{path_id!r} and node_texts do not match any selected path."
+                    )
+                    continue
+                soft_warnings.append(
+                    f"Node {node_id} support #{support_index_in_node} cites invalid path_set_id/path_id "
+                    f"{path_set_id!r}/{path_id!r}; repaired to {repaired_key[0]!r}/{repaired_key[1]!r} "
+                    "by node_text overlap."
+                )
+                key = repaired_key
             available = support_index[key]["normalized_node_texts"]
             missing = [
                 text
@@ -429,6 +439,68 @@ def _grounded_atomic_dag_support_issues(
         if valid_support_count == 0:
             hard_errors.append(f"Node {node_id} has no valid selected dependency path support.")
     return hard_errors, soft_warnings
+
+
+def _grounded_dependency_variable_reference_errors(payload: dict[str, Any]) -> list[str]:
+    raw_nodes = payload.get("nodes")
+    if raw_nodes is None:
+        raw_nodes = payload.get("atomic_questions") or payload.get("subquestions")
+    if not isinstance(raw_nodes, list):
+        return []
+
+    errors: list[str] = []
+    seen_ids: set[str] = set()
+    for index, raw_node in enumerate(raw_nodes, start=1):
+        if not isinstance(raw_node, dict):
+            continue
+        node_id = str(raw_node.get("node_id") or raw_node.get("id") or f"q{index}").strip()
+        question = str(raw_node.get("question") or raw_node.get("subquestion") or raw_node.get("sub_question") or "").strip()
+        raw_dependencies = raw_node.get("dependencies") if "dependencies" in raw_node else raw_node.get("depends_on")
+        dependencies = _raw_dependency_ids(raw_dependencies)
+        valid_dependencies = [dependency for dependency in dependencies if dependency in seen_ids]
+        missing = [
+            dependency
+            for dependency in valid_dependencies
+            if not _question_mentions_dependency_answer(question, dependency)
+        ]
+        if missing:
+            errors.append(
+                f"Node {node_id} declares dependencies {missing} but its question must reference each one "
+                "using qX's answer, for example q1's answer."
+            )
+        if node_id:
+            seen_ids.add(node_id)
+    return errors
+
+
+def _raw_dependency_ids(raw: Any) -> list[str]:
+    if raw is None:
+        return []
+    if isinstance(raw, str):
+        candidates = [raw]
+    elif isinstance(raw, list):
+        candidates = raw
+    else:
+        return []
+    result: list[str] = []
+    for item in candidates:
+        dependency = str(item).strip()
+        if dependency and dependency not in result:
+            result.append(dependency)
+    return result
+
+
+def _question_mentions_dependency_answer(question: str, dependency_id: str) -> bool:
+    qid = re.escape(str(dependency_id).strip())
+    if not qid:
+        return False
+    patterns = (
+        rf"\{{\s*{qid}\.answer\s*\}}",
+        rf"\b{qid}\s*['\u2019]s\s+answer\b",
+        rf"\b{qid}\s+answer\b",
+        rf"\banswer\s+(?:of|to)\s+{qid}\b",
+    )
+    return any(re.search(pattern, question, flags=re.IGNORECASE) for pattern in patterns)
 
 
 def _paths_grouped_for_prompt(
@@ -568,6 +640,16 @@ def _parse_grounded_atomic_dag_payload(
             node_id=node_id,
             warnings=warnings,
         )
+        missing_dependency_variables = [
+            dependency
+            for dependency in dependencies
+            if not _question_mentions_dependency_answer(question, dependency)
+        ]
+        if missing_dependency_variables:
+            raise ValueError(
+                f"Node {node_id} depends on {missing_dependency_variables} but question does not "
+                "reference each dependency as qX's answer."
+            )
         support = _normalize_grounded_support(
             raw_node.get("support"),
             support_index=support_index,
@@ -681,14 +763,22 @@ def _normalize_grounded_support(
             continue
         path_set_id = str(item.get("path_set_id") or "").strip()
         path_id = str(item.get("path_id") or "").strip()
-        key = (path_set_id, path_id)
-        if key not in support_index:
-            warnings.append(f"Ignored invalid support path_set/path {path_set_id!r}/{path_id!r} for {node_id}.")
-            continue
         node_texts = _str_list(item.get("node_texts"))
         if not node_texts:
             warnings.append(f"Ignored support with empty node_texts for {node_id}.")
             continue
+        key = (path_set_id, path_id)
+        if key not in support_index:
+            repaired_key = _best_support_key_for_node_texts(node_texts, support_index)
+            if repaired_key is None:
+                warnings.append(f"Ignored invalid support path_set/path {path_set_id!r}/{path_id!r} for {node_id}.")
+                continue
+            warnings.append(
+                f"Repaired invalid support path_set/path {path_set_id!r}/{path_id!r} for {node_id} "
+                f"to {repaired_key[0]!r}/{repaired_key[1]!r} by node_text overlap."
+            )
+            path_set_id, path_id = repaired_key
+            key = repaired_key
         available = support_index[key]["normalized_node_texts"]
         invalid_node_texts = [
             text
@@ -713,6 +803,35 @@ def _normalize_grounded_support(
             ]
         support.append(normalized_item)
     return support
+
+
+def _best_support_key_for_node_texts(
+    node_texts: list[str],
+    support_index: dict[tuple[str, str], dict[str, Any]],
+) -> tuple[str, str] | None:
+    normalized_texts = [
+        text
+        for text in (_normalize_support_text(value) for value in node_texts)
+        if text
+    ]
+    if not normalized_texts:
+        return None
+
+    best: tuple[tuple[str, str], int] | None = None
+    for key, payload in support_index.items():
+        available = payload["normalized_node_texts"]
+        overlap = sum(1 for text in normalized_texts if text in available)
+        if overlap == 0:
+            continue
+        if best is None or overlap > best[1] or (overlap == best[1] and key < best[0]):
+            best = (key, overlap)
+    if best is None:
+        return None
+
+    required_overlap = len(normalized_texts) if len(normalized_texts) <= 2 else 2
+    if best[1] < required_overlap:
+        return None
+    return best[0]
 
 
 def _selected_dependency_support_index(

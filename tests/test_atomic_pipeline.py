@@ -20,6 +20,7 @@ from hyper_branch.atomic import (
     FinalAnswerComposer,
     FusedHyperedgeCandidate,
 )
+from hyper_branch.atomic.dependency_rewrite import resolve_dependency_question
 from hyper_branch.config import RetrievalConfig, load_config
 from hyper_branch.data.vector_store import VectorStore
 from hyper_branch.llm import MockAtomicLLMService
@@ -31,6 +32,54 @@ from tests.agriculture_fixture import ensure_agriculture_fixture
 
 
 class AtomicDagAdapterTest(unittest.TestCase):
+    def test_dependency_variable_rewrite_apostrophe_answer(self) -> None:
+        rewrite = resolve_dependency_question(
+            "When did q1's answer die?",
+            [{"node_id": "q1", "answer": "Ermengarde of Tours"}],
+        )
+
+        self.assertEqual(rewrite.retrieval_question, "When did Ermengarde of Tours die?")
+        self.assertEqual(rewrite.primary_anchor_entities, ["Ermengarde of Tours"])
+        self.assertTrue(rewrite.whether_rewritten)
+
+    def test_dependency_variable_rewrite_curly_apostrophe_answer(self) -> None:
+        rewrite = resolve_dependency_question(
+            "When did q1\u2019s answer die?",
+            [{"node_id": "q1", "answer": "Ermengarde of Tours"}],
+        )
+
+        self.assertEqual(rewrite.retrieval_question, "When did Ermengarde of Tours die?")
+
+    def test_dependency_variable_rewrite_braced_answer(self) -> None:
+        rewrite = resolve_dependency_question(
+            "When did {q1.answer} die?",
+            [{"node_id": "q1", "answer": "Ermengarde of Tours"}],
+        )
+
+        self.assertEqual(rewrite.retrieval_question, "When did Ermengarde of Tours die?")
+
+    def test_dependency_variable_rewrite_multiple_dependencies(self) -> None:
+        rewrite = resolve_dependency_question(
+            "Which is older, q1's answer or q2's answer?",
+            [
+                {"node_id": "q1", "answer": "A"},
+                {"node_id": "q2", "answer": "B"},
+            ],
+        )
+
+        self.assertEqual(rewrite.retrieval_question, "Which is older, A or B?")
+        self.assertEqual(rewrite.primary_anchor_entities, ["A", "B"])
+
+    def test_dependency_variable_rewrite_missing_answer_records_unresolved(self) -> None:
+        rewrite = resolve_dependency_question(
+            "When did q1's answer die?",
+            [{"node_id": "q1", "answer": ""}],
+        )
+
+        self.assertEqual(rewrite.retrieval_question, "When did q1's answer die?")
+        self.assertFalse(rewrite.whether_rewritten)
+        self.assertEqual(rewrite.unresolved_dependencies[0]["node_id"], "q1")
+
     def test_depo_entity_inputs_are_not_dependencies_when_depends_on_is_empty(self) -> None:
         dag = {
             "nodes": [
@@ -153,12 +202,43 @@ class AtomicDagAdapterTest(unittest.TestCase):
         self.assertEqual(analyzer.questions[1], "When did Ermengarde of Tours die?")
         self.assertEqual(retriever.questions[1], "When did Ermengarde of Tours die?")
         self.assertEqual(fusion.questions[1], "When did Ermengarde of Tours die?")
-        self.assertEqual(result.atomic_results[1].question, "When did the mother of Lothair II die?")
+        self.assertEqual(result.atomic_results[1].question, "When did Ermengarde of Tours die?")
         rewrite = result.artifacts["atomic_question_analyses"][1]["dependency_question_rewrite"]
         self.assertTrue(rewrite["whether_rewritten"])
         self.assertEqual(rewrite["replacement_span"], "the mother of Lothair II")
         self.assertEqual(rewrite["replacement_answer"], "Ermengarde of Tours")
         self.assertEqual(rewrite["retrieval_question"], "When did Ermengarde of Tours die?")
+        self.assertEqual(result.artifacts["atomic_question_analyses"][1]["original_question"], "When did the mother of Lothair II die?")
+        self.assertEqual(result.artifacts["atomic_question_analyses"][1]["resolved_question"], "When did Ermengarde of Tours die?")
+
+    def test_executor_resolves_dependency_answer_variables_before_all_atomic_stages(self) -> None:
+        analyzer = RecordingAnalyzer()
+        retriever = RecordingRetriever()
+        fusion = RecordingFusion()
+        executor = AtomicDagExecutor(
+            analyzer=analyzer,
+            retriever=retriever,
+            fusion=fusion,
+            composer=StaticComposer(),
+            llm_service=DependencyRewriteLLM({"q1": ("Ermengarde of Tours", 0.85), "q2": ("20 March 851", 0.9)}),
+        )
+        dag = {
+            "nodes": [
+                {"node_id": "q1", "question": "Who is the mother of Lothair II?", "dependencies": []},
+                {"node_id": "q2", "question": "When did q1's answer die?", "dependencies": ["q1"]},
+            ]
+        }
+
+        result = executor.run("When did Lothair II's mother die?", dag)
+
+        self.assertEqual(analyzer.questions[1], "When did Ermengarde of Tours die?")
+        self.assertEqual(retriever.questions[1], "When did Ermengarde of Tours die?")
+        self.assertEqual(fusion.questions[1], "When did Ermengarde of Tours die?")
+        self.assertEqual(result.atomic_results[1].question, "When did Ermengarde of Tours die?")
+        artifact = result.artifacts["atomic_question_analyses"][1]
+        self.assertEqual(artifact["original_question"], "When did q1's answer die?")
+        self.assertEqual(artifact["resolved_question"], "When did Ermengarde of Tours die?")
+        self.assertEqual(artifact["primary_anchor_entities"], ["Ermengarde of Tours"])
 
     def test_dependency_answer_does_not_rewrite_when_low_confidence_or_non_entity(self) -> None:
         analyzer = RecordingAnalyzer()
@@ -917,6 +997,220 @@ class FinalAnswerComposerTest(unittest.TestCase):
         self.assertEqual(payload["answer"], "A")
         self.assertEqual(payload["atomic_answer_trace"][0]["node_id"], "q1")
 
+    def test_final_synthesis_corrects_born_first_from_atomic_dates(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("El Tonto"))
+        dag_nodes = [
+            AtomicQuestionNode(node_id="q1", question="Who is the director of El Tonto?"),
+            AtomicQuestionNode(node_id="q2", question="Who is the director of The Heart Of Doreon?"),
+            AtomicQuestionNode(node_id="q3", question="When was q1's answer born?", dependencies=["q1"]),
+            AtomicQuestionNode(node_id="q4", question="When was q2's answer born?", dependencies=["q2"]),
+        ]
+        results = [
+            _atomic_result("q1", "Who is the director of El Tonto?", "Charlie Day"),
+            _atomic_result("q2", "Who is the director of The Heart Of Doreon?", "Robert North Bradbury"),
+            _atomic_result("q3", "When was Charlie Day born?", "February 9, 1976", dependencies=["q1"]),
+            _atomic_result("q4", "When was Robert North Bradbury born?", "March 23, 1886", dependencies=["q2"]),
+        ]
+
+        payload = composer.compose(
+            "Which film whose director was born first, El Tonto or The Heart Of Doreon?",
+            results,
+            dag_nodes=dag_nodes,
+        )
+
+        self.assertEqual(payload["answer"], "The Heart Of Doreon")
+        self.assertEqual(payload["deterministic_final_correction"]["selected_node_id"], "q4")
+
+    def test_final_synthesis_corrects_older_from_birth_years(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("Airheads"))
+        dag_nodes = [
+            AtomicQuestionNode(node_id="q1", question="Who is the director of Airheads?"),
+            AtomicQuestionNode(node_id="q2", question="Who is the director of Return To Cabin By The Lake?"),
+            AtomicQuestionNode(node_id="q3", question="When was q1's answer born?", dependencies=["q1"]),
+            AtomicQuestionNode(node_id="q4", question="When was q2's answer born?", dependencies=["q2"]),
+        ]
+        results = [
+            _atomic_result("q1", "Who is the director of Airheads?", "Michael Lehmann"),
+            _atomic_result("q2", "Who is the director of Return To Cabin By The Lake?", "Po-Chih Leong"),
+            _atomic_result("q3", "When was Michael Lehmann born?", "1957", dependencies=["q1"]),
+            _atomic_result("q4", "When was Po-Chih Leong born?", "1939", dependencies=["q2"]),
+        ]
+
+        payload = composer.compose(
+            "Which film has the director who is older, Airheads or Return To Cabin By The Lake?",
+            results,
+            dag_nodes=dag_nodes,
+        )
+
+        self.assertEqual(payload["answer"], "Return To Cabin By The Lake")
+
+    def test_final_span_selects_minimal_candidate_name(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("Phoolwari was released first in 1946."))
+
+        payload = composer.compose(
+            "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+            [_atomic_result("q1", "When was Phoolwari released?", "1946")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="When was Phoolwari released?")],
+        )
+
+        self.assertEqual(payload["answer"], "Phoolwari")
+
+    def test_final_synthesis_same_question_compares_terminal_branch_answers(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("yes"))
+        dag_nodes = [
+            AtomicQuestionNode(node_id="q1", question="Who is the director of Film A?"),
+            AtomicQuestionNode(node_id="q2", question="What is the nationality of q1's answer?", dependencies=["q1"]),
+            AtomicQuestionNode(node_id="q3", question="Who is the director of Film B?"),
+            AtomicQuestionNode(node_id="q4", question="What is the nationality of q3's answer?", dependencies=["q3"]),
+        ]
+        results = [
+            _atomic_result("q1", "Who is the director of Film A?", "Director A"),
+            _atomic_result("q2", "What is the nationality of Director A?", "American", dependencies=["q1"]),
+            _atomic_result("q3", "Who is the director of Film B?", "Director B"),
+            _atomic_result("q4", "What is the nationality of Director B?", "Canadian", dependencies=["q3"]),
+        ]
+
+        payload = composer.compose(
+            "Do director of Film A and director of Film B share the same nationality?",
+            results,
+            dag_nodes=dag_nodes,
+        )
+
+        self.assertEqual(payload["answer"], "no")
+
+    def test_final_synthesis_uses_explicit_terminal_yes_no_answer(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("no"))
+        dag_nodes = [
+            AtomicQuestionNode(node_id="q1", question="Which country did Inside The Room originate from?"),
+            AtomicQuestionNode(node_id="q2", question="Which country did Crude Set Drama originate from?"),
+            AtomicQuestionNode(
+                node_id="q3",
+                question="Is q1's answer the same as q2's answer?",
+                dependencies=["q1", "q2"],
+            ),
+        ]
+        results = [
+            _atomic_result("q1", "Which country did Inside The Room originate from?", "United Kingdom"),
+            _atomic_result("q2", "Which country did Crude Set Drama originate from?", "United Kingdom"),
+            _atomic_result("q3", "Is United Kingdom the same as United Kingdom?", "yes", dependencies=["q1", "q2"]),
+        ]
+
+        payload = composer.compose(
+            "Did the movies Inside The Room and Crude Set Drama originate from the same country?",
+            results,
+            dag_nodes=dag_nodes,
+        )
+
+        self.assertEqual(payload["answer"], "yes")
+
+    def test_final_synthesis_born_later_ignores_first_inside_candidate_title(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("The First Day Of Freedom"))
+        dag_nodes = [
+            AtomicQuestionNode(node_id="q1", question="Who is the director of The First Day Of Freedom?"),
+            AtomicQuestionNode(node_id="q2", question="Who is the director of Malabimba - The Malicious Whore?"),
+            AtomicQuestionNode(node_id="q3", question="When was q1's answer born?", dependencies=["q1"]),
+            AtomicQuestionNode(node_id="q4", question="When was q2's answer born?", dependencies=["q2"]),
+        ]
+        results = [
+            _atomic_result("q1", "Who is the director of The First Day Of Freedom?", "Aleksander Ford"),
+            _atomic_result("q2", "Who is the director of Malabimba - The Malicious Whore?", "Andrea Bianchi"),
+            _atomic_result("q3", "When was Aleksander Ford born?", "24 November 1908", dependencies=["q1"]),
+            _atomic_result("q4", "When was Andrea Bianchi born?", "March 31, 1925", dependencies=["q2"]),
+        ]
+
+        payload = composer.compose(
+            "Which film has the director who was born later, The First Day Of Freedom or Malabimba - The Malicious Whore?",
+            results,
+            dag_nodes=dag_nodes,
+        )
+
+        self.assertEqual(payload["answer"], "Malabimba - The Malicious Whore")
+
+    def test_final_span_recovers_full_candidate_with_comma_title(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("Honor And Oh-Baby!"))
+
+        payload = composer.compose(
+            "Which film has the director who died later, Love, Honor And Oh-Baby! or I Cover The Underworld?",
+            [_atomic_result("q1", "When did Charles Lamont die?", "September 12, 1993")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="When did Charles Lamont die?")],
+        )
+
+        self.assertEqual(payload["answer"], "Love, Honor And Oh-Baby!")
+
+    def test_final_span_strips_question_auxiliary_and_recovers_accented_candidate(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("Was Juan Carlos Falc"))
+
+        payload = composer.compose(
+            "Was Angus Wagner or Juan Carlos Falcón born first?",
+            [_atomic_result("q1", "When was Juan Carlos Falcón born?", "19 November 1979")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="When was Juan Carlos Falcón born?")],
+        )
+
+        self.assertEqual(payload["answer"], "Juan Carlos Falcón")
+
+    def test_final_synthesis_candidate_label_does_not_include_question_auxiliary(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("Was Sammy Hagar"))
+        dag_nodes = [
+            AtomicQuestionNode(node_id="q1", question="When was Sammy Hagar born?"),
+            AtomicQuestionNode(node_id="q2", question="When was Renaud Garcia-Fons born?"),
+        ]
+        results = [
+            _atomic_result("q1", "When was Sammy Hagar born?", "October 13, 1947"),
+            _atomic_result("q2", "When was Renaud Garcia-Fons born?", "December 24, 1962"),
+        ]
+
+        payload = composer.compose(
+            "Was Sammy Hagar or Renaud Garcia-Fons born first?",
+            results,
+            dag_nodes=dag_nodes,
+        )
+
+        self.assertEqual(payload["answer"], "Sammy Hagar")
+
+    def test_final_span_prefers_parenthetical_person_alias(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("María del Pilar Cordero"))
+
+        payload = composer.compose(
+            "Who is the spouse of the director of film My Three Merry Widows?",
+            [_atomic_result("q1", "Who is the spouse of Fernando Cortés?", "María del Pilar Cordero (Mapy Cortés)")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="Who is the spouse of Fernando Cortés?")],
+        )
+
+        self.assertEqual(payload["answer"], "Mapy Cortés")
+
+    def test_final_span_prefers_parenthetical_nationality_alias(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("Greek (Athenian)"))
+
+        payload = composer.compose(
+            "What nationality is Lamprocles's father?",
+            [_atomic_result("q1", "What is the nationality of Socrates?", "Greek (Athenian)")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="What is the nationality of Socrates?")],
+        )
+
+        self.assertEqual(payload["answer"], "Athenian")
+
+    def test_final_span_canonicalizes_common_nationality_demonym(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("German"))
+
+        payload = composer.compose(
+            "What nationality is Beatrice I's husband?",
+            [_atomic_result("q1", "What is the nationality of Frederick Barbarossa?", "German")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="What is the nationality of Frederick Barbarossa?")],
+        )
+
+        self.assertEqual(payload["answer"], "Germany")
+
+    def test_final_span_uses_primary_component_for_compound_nationality(self) -> None:
+        composer = FinalAnswerComposer(StaticFinalLLM("Chinese American"))
+
+        payload = composer.compose(
+            "What nationality is the director of film Blood Street?",
+            [_atomic_result("q1", "What is the nationality of Leo Fong?", "Chinese American")],
+            dag_nodes=[AtomicQuestionNode(node_id="q1", question="What is the nationality of Leo Fong?")],
+        )
+
+        self.assertEqual(payload["answer"], "Chinese")
+
 
 class TwoStageLLM:
     def __init__(self) -> None:
@@ -961,6 +1255,61 @@ class TwoStageLLM:
             "confidence": 0.9,
             "answer_span_reasoning": "The selected candidate is A.",
         }
+
+
+class StaticFinalLLM:
+    def __init__(self, final_answer: str) -> None:
+        self.final_answer = final_answer
+
+    def analyze_atomic_question(self, atomic_question, dependency_answers):
+        raise NotImplementedError
+
+    def answer_atomic_question(self, atomic_question, dependency_answers, evidence):
+        raise NotImplementedError
+
+    def compose_final_answer(self, original_question, dag_nodes, atomic_results):
+        return {
+            "candidate_answer": self.final_answer,
+            "reasoning_summary": "static candidate",
+            "confidence": 0.6,
+            "atomic_answer_trace": [
+                {
+                    "node_id": item.get("node_id", ""),
+                    "question": item.get("question", ""),
+                    "answer": item.get("answer", ""),
+                    "used_hyperedge_ids": item.get("used_hyperedge_ids", []),
+                }
+                for item in atomic_results
+            ],
+            "remaining_gaps": [],
+        }
+
+    def finalize_answer_span(self, original_question, synthesis_candidate):
+        return {
+            "answer": self.final_answer,
+            "confidence": 0.6,
+            "answer_span_reasoning": "static span",
+        }
+
+
+def _atomic_result(
+    node_id: str,
+    question: str,
+    answer: str,
+    *,
+    dependencies: list[str] | None = None,
+) -> AtomicAnswerResult:
+    return AtomicAnswerResult(
+        node_id=node_id,
+        question=question,
+        analysis=AtomicQuestionAnalysis(),
+        evidence=[],
+        answer=answer,
+        confidence=0.9,
+        reasoning_summary="test atomic answer",
+        used_dependencies=dependencies or [],
+        used_hyperedge_ids=[],
+    )
 
 
 class AtomicPipelineSmokeTest(unittest.TestCase):

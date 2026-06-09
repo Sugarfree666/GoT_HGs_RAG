@@ -421,7 +421,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
                     },
                     {
                         "node_id": "q2",
-                        "question": "When was the director of El Tonto born?",
+                        "question": "When was q1's answer born?",
                         "dependencies": ["q1"],
                         "support": [
                             {
@@ -449,6 +449,78 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual(dag.nodes[0].metadata["support_path_ids"], ["e1_p1"])
         self.assertEqual(dag.nodes[0].metadata["support"][0]["node_texts"], ["El Tonto", "director"])
         self.assertEqual(payload["selected_path_set_ids"], ["ps1"])
+
+    def test_grounded_dag_requires_dependency_answer_variables(self) -> None:
+        evidence = _selected_dependency_path_evidence_for_alphago()
+        llm = SequenceGroundedAtomicLLM(
+            [
+                {
+                    "nodes": [
+                        {
+                            "node_id": "q1",
+                            "question": "Which company developed AlphaGo?",
+                            "dependencies": [],
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "e1_p1",
+                                    "node_texts": ["AlphaGo", "developed", "company"],
+                                }
+                            ],
+                        },
+                        {
+                            "node_id": "q2",
+                            "question": "Who is the CEO of the company that developed AlphaGo?",
+                            "dependencies": ["q1"],
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "e1_p1",
+                                    "node_texts": ["company", "CEO"],
+                                }
+                            ],
+                        },
+                    ]
+                },
+                {
+                    "nodes": [
+                        {
+                            "node_id": "q1",
+                            "question": "Which company developed AlphaGo?",
+                            "dependencies": [],
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "e1_p1",
+                                    "node_texts": ["AlphaGo", "developed", "company"],
+                                }
+                            ],
+                        },
+                        {
+                            "node_id": "q2",
+                            "question": "Who is the CEO of q1's answer?",
+                            "dependencies": ["q1"],
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "e1_p1",
+                                    "node_texts": ["company", "CEO"],
+                                }
+                            ],
+                        },
+                    ]
+                },
+            ]
+        )
+        parser = EntityPathSemanticParser(llm)
+
+        dag, _ = parser.build_grounded_atomic_dag(
+            original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
+            selected_dependency_path_evidence=evidence,
+        )
+
+        self.assertEqual(llm.call_count, 2)
+        self.assertEqual(dag.nodes[1].question, "Who is the CEO of q1's answer?")
 
     def test_step9_prompt_only_contains_question_and_selected_path_evidence(self) -> None:
         evidence = [
@@ -508,7 +580,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual([node.question for node in dag.nodes], ["Which company developed AlphaGo?"])
         self.assertIn("Previous output failed grounding validation", llm.prompts[1])
 
-    def test_invalid_support_path_id_rejected(self) -> None:
+    def test_invalid_support_path_id_repaired_by_node_text_overlap(self) -> None:
         evidence = _selected_dependency_path_evidence_for_alphago()
         llm = SequenceGroundedAtomicLLM(
             [
@@ -539,6 +611,57 @@ class EntityOriginPipelineTest(unittest.TestCase):
                                     "path_set_id": "ps1",
                                     "path_id": "fake_path",
                                     "node_texts": ["AlphaGo", "developed", "company"],
+                                }
+                            ],
+                        }
+                    ]
+                },
+            ]
+        )
+        parser = EntityPathSemanticParser(llm)
+
+        dag, payload = parser.build_grounded_atomic_dag(
+            original_question="Which company developed AlphaGo?",
+            selected_dependency_path_evidence=evidence,
+        )
+
+        self.assertEqual(llm.call_count, 2)
+        self.assertEqual(dag.nodes[0].metadata["support"][0]["path_id"], "e1_p1")
+        warnings = "\n".join(payload.get("normalization_warnings") or [])
+        self.assertIn("fake_path", warnings)
+        self.assertIn("Repaired invalid support", warnings)
+
+    def test_invalid_support_path_id_rejected_without_node_text_overlap(self) -> None:
+        evidence = _selected_dependency_path_evidence_for_alphago()
+        llm = SequenceGroundedAtomicLLM(
+            [
+                {
+                    "nodes": [
+                        {
+                            "node_id": "q1",
+                            "question": "Which company developed AlphaGo?",
+                            "dependencies": [],
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "fake_path",
+                                    "node_texts": ["unrelated", "nodes"],
+                                }
+                            ],
+                        }
+                    ]
+                },
+                {
+                    "nodes": [
+                        {
+                            "node_id": "q1",
+                            "question": "Which company developed AlphaGo?",
+                            "dependencies": [],
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "fake_path",
+                                    "node_texts": ["unrelated", "nodes"],
                                 }
                             ],
                         }

@@ -1,0 +1,6084 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 6,
+  "qid": null,
+  "question": "Which film whose director was born first, El Tonto or The Heart Of Doreon?",
+  "raw_question_item": {
+    "question": "Which film whose director was born first, El Tonto or The Heart Of Doreon?",
+    "answer": "The Heart Of Doreon"
+  },
+  "gold_answer": "The Heart Of Doreon",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "Which film whose director was born first, El Tonto or The Heart Of Doreon?",
+      "normalized_question": "Which film, whose director was born first, El Tonto or The Heart Of Doreon?",
+      "changed": true,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "Which film, whose director was born first, El Tonto or The Heart Of Doreon?",
+        "changed": true,
+        "rewrite_type": "grammar_repair",
+        "added_type_variables": [],
+        "reason": "Added a comma for clarity in the question structure."
+      }
+    },
+    "2_explicit_entities": {
+      "entities": [
+        {
+          "text": "El Tonto",
+          "start_char": 43,
+          "end_char": 51,
+          "semantic_type_hint": "Film",
+          "confidence": 0.95,
+          "reason": "El Tonto is a film title mentioned in the question."
+        },
+        {
+          "text": "The Heart Of Doreon",
+          "start_char": 55,
+          "end_char": 74,
+          "semantic_type_hint": "Film",
+          "confidence": 0.95,
+          "reason": "The Heart Of Doreon is a film title mentioned in the question."
+        }
+      ],
+      "warnings": [
+        "Corrected explicit entity span for text='El Tonto' from (36, 44) to (43, 51).",
+        "Corrected explicit entity span for text='The Heart Of Doreon' from (48, 68) to (55, 74)."
+      ],
+      "raw_payload": {
+        "entities": [
+          {
+            "text": "El Tonto",
+            "start_char": 36,
+            "end_char": 44,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "El Tonto is a film title mentioned in the question."
+          },
+          {
+            "text": "The Heart Of Doreon",
+            "start_char": 48,
+            "end_char": 68,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "The Heart Of Doreon is a film title mentioned in the question."
+          }
+        ]
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "El Tonto",
+          "start_char": 43,
+          "end_char": 51,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "reason": "El Tonto is a film title mentioned in the question."
+        },
+        {
+          "text": "The Heart Of Doreon",
+          "start_char": 55,
+          "end_char": 74,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "reason": "The Heart Of Doreon is a film title mentioned in the question."
+        }
+      ],
+      "warnings": [
+        "Corrected explicit entity span for text='El Tonto' from (36, 44) to (43, 51).",
+        "Corrected explicit entity span for text='The Heart Of Doreon' from (48, 68) to (55, 74)."
+      ],
+      "raw_payload": {
+        "entities": [
+          {
+            "text": "El Tonto",
+            "start_char": 36,
+            "end_char": 44,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "El Tonto is a film title mentioned in the question."
+          },
+          {
+            "text": "The Heart Of Doreon",
+            "start_char": 48,
+            "end_char": 68,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "The Heart Of Doreon is a film title mentioned in the question."
+          }
+        ]
+      }
+    },
+    "3_entity_masking": {
+      "masked_question": "Which film, whose director was born first, FilmA or FilmB?",
+      "mask_mappings": [
+        {
+          "placeholder": "FilmA",
+          "original_text": "El Tonto",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "original_char_span": [
+            43,
+            51
+          ],
+          "masked_char_span": [
+            43,
+            48
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "FilmB",
+          "original_text": "The Heart Of Doreon",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "original_char_span": [
+            55,
+            74
+          ],
+          "masked_char_span": [
+            52,
+            57
+          ],
+          "token_indices": []
+        }
+      ]
+    },
+    "3_selective_masked_question": "Which film, whose director was born first, FilmA or FilmB?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "Which",
+          "character_offset_begin": 0,
+          "character_offset_end": 5,
+          "lemma": "which",
+          "pos": "WDT"
+        },
+        {
+          "index": 2,
+          "word": "film",
+          "character_offset_begin": 6,
+          "character_offset_end": 10,
+          "lemma": "film",
+          "pos": "NN"
+        },
+        {
+          "index": 3,
+          "word": ",",
+          "character_offset_begin": 10,
+          "character_offset_end": 11,
+          "lemma": ",",
+          "pos": ","
+        },
+        {
+          "index": 4,
+          "word": "whose",
+          "character_offset_begin": 12,
+          "character_offset_end": 17,
+          "lemma": "whose",
+          "pos": "WP$"
+        },
+        {
+          "index": 5,
+          "word": "director",
+          "character_offset_begin": 18,
+          "character_offset_end": 26,
+          "lemma": "director",
+          "pos": "NN"
+        },
+        {
+          "index": 6,
+          "word": "was",
+          "character_offset_begin": 27,
+          "character_offset_end": 30,
+          "lemma": "be",
+          "pos": "VBD"
+        },
+        {
+          "index": 7,
+          "word": "born",
+          "character_offset_begin": 31,
+          "character_offset_end": 35,
+          "lemma": "bear",
+          "pos": "VBN"
+        },
+        {
+          "index": 8,
+          "word": "first",
+          "character_offset_begin": 36,
+          "character_offset_end": 41,
+          "lemma": "first",
+          "pos": "RB"
+        },
+        {
+          "index": 9,
+          "word": ",",
+          "character_offset_begin": 41,
+          "character_offset_end": 42,
+          "lemma": ",",
+          "pos": ","
+        },
+        {
+          "index": 10,
+          "word": "FilmA",
+          "character_offset_begin": 43,
+          "character_offset_end": 48,
+          "lemma": "filma",
+          "pos": "NN"
+        },
+        {
+          "index": 11,
+          "word": "or",
+          "character_offset_begin": 49,
+          "character_offset_end": 51,
+          "lemma": "or",
+          "pos": "CC"
+        },
+        {
+          "index": 12,
+          "word": "FilmB",
+          "character_offset_begin": 52,
+          "character_offset_end": 57,
+          "lemma": "filmb",
+          "pos": "NN"
+        },
+        {
+          "index": 13,
+          "word": "?",
+          "character_offset_begin": 57,
+          "character_offset_end": 58,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "film",
+          "relation": "det",
+          "target": "Which",
+          "source_index": 2,
+          "target_index": 1
+        },
+        {
+          "source": "film",
+          "relation": "punct",
+          "target": ",",
+          "source_index": 2,
+          "target_index": 3
+        },
+        {
+          "source": "director",
+          "relation": "nmod:poss",
+          "target": "whose",
+          "source_index": 5,
+          "target_index": 4
+        },
+        {
+          "source": "born",
+          "relation": "nsubj:pass",
+          "target": "director",
+          "source_index": 7,
+          "target_index": 5
+        },
+        {
+          "source": "born",
+          "relation": "aux:pass",
+          "target": "was",
+          "source_index": 7,
+          "target_index": 6
+        },
+        {
+          "source": "film",
+          "relation": "dep",
+          "target": "born",
+          "source_index": 2,
+          "target_index": 7
+        },
+        {
+          "source": "born",
+          "relation": "advmod",
+          "target": "first",
+          "source_index": 7,
+          "target_index": 8
+        },
+        {
+          "source": "born",
+          "relation": "punct",
+          "target": ",",
+          "source_index": 7,
+          "target_index": 9
+        },
+        {
+          "source": "born",
+          "relation": "obj",
+          "target": "FilmA",
+          "source_index": 7,
+          "target_index": 10
+        },
+        {
+          "source": "FilmB",
+          "relation": "cc",
+          "target": "or",
+          "source_index": 12,
+          "target_index": 11
+        },
+        {
+          "source": "born",
+          "relation": "obj",
+          "target": "FilmB",
+          "source_index": 7,
+          "target_index": 12
+        },
+        {
+          "source": "FilmA",
+          "relation": "conj:or",
+          "target": "FilmB",
+          "source_index": 10,
+          "target_index": 12
+        },
+        {
+          "source": "film",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 2,
+          "target_index": 13
+        }
+      ],
+      "edge_display": [
+        "film[2] --det--> Which[1]",
+        "film[2] --punct--> ,[3]",
+        "director[5] --nmod:poss--> whose[4]",
+        "born[7] --nsubj:pass--> director[5]",
+        "born[7] --aux:pass--> was[6]",
+        "film[2] --dep--> born[7]",
+        "born[7] --advmod--> first[8]",
+        "born[7] --punct--> ,[9]",
+        "born[7] --obj--> FilmA[10]",
+        "FilmB[12] --cc--> or[11]",
+        "born[7] --obj--> FilmB[12]",
+        "FilmA[10] --conj:or--> FilmB[12]",
+        "film[2] --punct--> ?[13]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "Which",
+          "graph_text": "Which",
+          "text": "Which",
+          "label": "Which[1]",
+          "order": 1,
+          "pos": "WDT",
+          "lemma": "which",
+          "character_offset_begin": 0,
+          "character_offset_end": 5
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "film",
+          "graph_text": "film",
+          "text": "film",
+          "label": "film[2]",
+          "order": 2,
+          "pos": "NN",
+          "lemma": "film",
+          "character_offset_begin": 6,
+          "character_offset_end": 10
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": ",",
+          "graph_text": ",",
+          "text": ",",
+          "label": ",[3]",
+          "order": 3,
+          "pos": ",",
+          "lemma": ",",
+          "character_offset_begin": 10,
+          "character_offset_end": 11
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "whose",
+          "graph_text": "whose",
+          "text": "whose",
+          "label": "whose[4]",
+          "order": 4,
+          "pos": "WP$",
+          "lemma": "whose",
+          "character_offset_begin": 12,
+          "character_offset_end": 17
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "director",
+          "graph_text": "director",
+          "text": "director",
+          "label": "director[5]",
+          "order": 5,
+          "pos": "NN",
+          "lemma": "director",
+          "character_offset_begin": 18,
+          "character_offset_end": 26
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "was",
+          "graph_text": "was",
+          "text": "was",
+          "label": "was[6]",
+          "order": 6,
+          "pos": "VBD",
+          "lemma": "be",
+          "character_offset_begin": 27,
+          "character_offset_end": 30
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "born",
+          "graph_text": "born",
+          "text": "born",
+          "label": "born[7]",
+          "order": 7,
+          "pos": "VBN",
+          "lemma": "bear",
+          "character_offset_begin": 31,
+          "character_offset_end": 35
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "first",
+          "graph_text": "first",
+          "text": "first",
+          "label": "first[8]",
+          "order": 8,
+          "pos": "RB",
+          "lemma": "first",
+          "character_offset_begin": 36,
+          "character_offset_end": 41
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": ",",
+          "graph_text": ",",
+          "text": ",",
+          "label": ",[9]",
+          "order": 9,
+          "pos": ",",
+          "lemma": ",",
+          "character_offset_begin": 41,
+          "character_offset_end": 42
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "FilmA",
+          "graph_text": "FilmA",
+          "text": "El Tonto",
+          "label": "El Tonto[10]",
+          "order": 10,
+          "pos": "NN",
+          "lemma": "filma",
+          "character_offset_begin": 43,
+          "character_offset_end": 48
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "or",
+          "graph_text": "or",
+          "text": "or",
+          "label": "or[11]",
+          "order": 11,
+          "pos": "CC",
+          "lemma": "or",
+          "character_offset_begin": 49,
+          "character_offset_end": 51
+        },
+        {
+          "id": "12",
+          "token_index": 12,
+          "word": "FilmB",
+          "graph_text": "FilmB",
+          "text": "The Heart Of Doreon",
+          "label": "The Heart Of Doreon[12]",
+          "order": 12,
+          "pos": "NN",
+          "lemma": "filmb",
+          "character_offset_begin": 52,
+          "character_offset_end": 57
+        },
+        {
+          "id": "13",
+          "token_index": 13,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[13]",
+          "order": 13,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 57,
+          "character_offset_end": 58
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "2",
+          "source_text": "Which",
+          "target_text": "film",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "1",
+              "governor_text": "film",
+              "dependent_text": "Which",
+              "governor_graph_text": "film",
+              "dependent_graph_text": "Which",
+              "governor_index": 2,
+              "dependent_index": 1,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "1",
+          "dependency_label": "det",
+          "token_text": {
+            "2": "film",
+            "1": "Which"
+          },
+          "token_index": {
+            "2": 2,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "3",
+          "source_text": "film",
+          "target_text": ",",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "3",
+              "governor_text": "film",
+              "dependent_text": ",",
+              "governor_graph_text": "film",
+              "dependent_graph_text": ",",
+              "governor_index": 2,
+              "dependent_index": 3,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "3",
+          "dependency_label": "punct",
+          "token_text": {
+            "2": "film",
+            "3": ","
+          },
+          "token_index": {
+            "2": 2,
+            "3": 3
+          }
+        },
+        {
+          "source": "2",
+          "target": "7",
+          "source_text": "film",
+          "target_text": "born",
+          "relation": "dep",
+          "relations": [
+            "dep"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "7",
+              "governor_text": "film",
+              "dependent_text": "born",
+              "governor_graph_text": "film",
+              "dependent_graph_text": "born",
+              "governor_index": 2,
+              "dependent_index": 7,
+              "dependency_label": "dep"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "7",
+          "dependency_label": "dep",
+          "token_text": {
+            "2": "film",
+            "7": "born"
+          },
+          "token_index": {
+            "2": 2,
+            "7": 7
+          }
+        },
+        {
+          "source": "2",
+          "target": "13",
+          "source_text": "film",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "13",
+              "governor_text": "film",
+              "dependent_text": "?",
+              "governor_graph_text": "film",
+              "dependent_graph_text": "?",
+              "governor_index": 2,
+              "dependent_index": 13,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "13",
+          "dependency_label": "punct",
+          "token_text": {
+            "2": "film",
+            "13": "?"
+          },
+          "token_index": {
+            "2": 2,
+            "13": 13
+          }
+        },
+        {
+          "source": "4",
+          "target": "5",
+          "source_text": "whose",
+          "target_text": "director",
+          "relation": "nmod:poss",
+          "relations": [
+            "nmod:poss"
+          ],
+          "directed_edges": [
+            {
+              "governor": "5",
+              "dependent": "4",
+              "governor_text": "director",
+              "dependent_text": "whose",
+              "governor_graph_text": "director",
+              "dependent_graph_text": "whose",
+              "governor_index": 5,
+              "dependent_index": 4,
+              "dependency_label": "nmod:poss"
+            }
+          ],
+          "original_governor": "5",
+          "original_dependent": "4",
+          "dependency_label": "nmod:poss",
+          "token_text": {
+            "5": "director",
+            "4": "whose"
+          },
+          "token_index": {
+            "5": 5,
+            "4": 4
+          }
+        },
+        {
+          "source": "5",
+          "target": "7",
+          "source_text": "director",
+          "target_text": "born",
+          "relation": "nsubj:pass",
+          "relations": [
+            "nsubj:pass"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "5",
+              "governor_text": "born",
+              "dependent_text": "director",
+              "governor_graph_text": "born",
+              "dependent_graph_text": "director",
+              "governor_index": 7,
+              "dependent_index": 5,
+              "dependency_label": "nsubj:pass"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "5",
+          "dependency_label": "nsubj:pass",
+          "token_text": {
+            "7": "born",
+            "5": "director"
+          },
+          "token_index": {
+            "7": 7,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "7",
+          "source_text": "was",
+          "target_text": "born",
+          "relation": "aux:pass",
+          "relations": [
+            "aux:pass"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "6",
+              "governor_text": "born",
+              "dependent_text": "was",
+              "governor_graph_text": "born",
+              "dependent_graph_text": "was",
+              "governor_index": 7,
+              "dependent_index": 6,
+              "dependency_label": "aux:pass"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "6",
+          "dependency_label": "aux:pass",
+          "token_text": {
+            "7": "born",
+            "6": "was"
+          },
+          "token_index": {
+            "7": 7,
+            "6": 6
+          }
+        },
+        {
+          "source": "7",
+          "target": "8",
+          "source_text": "born",
+          "target_text": "first",
+          "relation": "advmod",
+          "relations": [
+            "advmod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "8",
+              "governor_text": "born",
+              "dependent_text": "first",
+              "governor_graph_text": "born",
+              "dependent_graph_text": "first",
+              "governor_index": 7,
+              "dependent_index": 8,
+              "dependency_label": "advmod"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "8",
+          "dependency_label": "advmod",
+          "token_text": {
+            "7": "born",
+            "8": "first"
+          },
+          "token_index": {
+            "7": 7,
+            "8": 8
+          }
+        },
+        {
+          "source": "7",
+          "target": "9",
+          "source_text": "born",
+          "target_text": ",",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "9",
+              "governor_text": "born",
+              "dependent_text": ",",
+              "governor_graph_text": "born",
+              "dependent_graph_text": ",",
+              "governor_index": 7,
+              "dependent_index": 9,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "9",
+          "dependency_label": "punct",
+          "token_text": {
+            "7": "born",
+            "9": ","
+          },
+          "token_index": {
+            "7": 7,
+            "9": 9
+          }
+        },
+        {
+          "source": "7",
+          "target": "10",
+          "source_text": "born",
+          "target_text": "El Tonto",
+          "relation": "obj",
+          "relations": [
+            "obj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "10",
+              "governor_text": "born",
+              "dependent_text": "El Tonto",
+              "governor_graph_text": "born",
+              "dependent_graph_text": "FilmA",
+              "governor_index": 7,
+              "dependent_index": 10,
+              "dependency_label": "obj"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "10",
+          "dependency_label": "obj",
+          "token_text": {
+            "7": "born",
+            "10": "El Tonto"
+          },
+          "token_index": {
+            "7": 7,
+            "10": 10
+          }
+        },
+        {
+          "source": "7",
+          "target": "12",
+          "source_text": "born",
+          "target_text": "The Heart Of Doreon",
+          "relation": "obj",
+          "relations": [
+            "obj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "12",
+              "governor_text": "born",
+              "dependent_text": "The Heart Of Doreon",
+              "governor_graph_text": "born",
+              "dependent_graph_text": "FilmB",
+              "governor_index": 7,
+              "dependent_index": 12,
+              "dependency_label": "obj"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "12",
+          "dependency_label": "obj",
+          "token_text": {
+            "7": "born",
+            "12": "The Heart Of Doreon"
+          },
+          "token_index": {
+            "7": 7,
+            "12": 12
+          }
+        },
+        {
+          "source": "10",
+          "target": "12",
+          "source_text": "El Tonto",
+          "target_text": "The Heart Of Doreon",
+          "relation": "conj:or",
+          "relations": [
+            "conj:or"
+          ],
+          "directed_edges": [
+            {
+              "governor": "10",
+              "dependent": "12",
+              "governor_text": "El Tonto",
+              "dependent_text": "The Heart Of Doreon",
+              "governor_graph_text": "FilmA",
+              "dependent_graph_text": "FilmB",
+              "governor_index": 10,
+              "dependent_index": 12,
+              "dependency_label": "conj:or"
+            }
+          ],
+          "original_governor": "10",
+          "original_dependent": "12",
+          "dependency_label": "conj:or",
+          "token_text": {
+            "10": "El Tonto",
+            "12": "The Heart Of Doreon"
+          },
+          "token_index": {
+            "10": 10,
+            "12": 12
+          }
+        },
+        {
+          "source": "11",
+          "target": "12",
+          "source_text": "or",
+          "target_text": "The Heart Of Doreon",
+          "relation": "cc",
+          "relations": [
+            "cc"
+          ],
+          "directed_edges": [
+            {
+              "governor": "12",
+              "dependent": "11",
+              "governor_text": "The Heart Of Doreon",
+              "dependent_text": "or",
+              "governor_graph_text": "FilmB",
+              "dependent_graph_text": "or",
+              "governor_index": 12,
+              "dependent_index": 11,
+              "dependency_label": "cc"
+            }
+          ],
+          "original_governor": "12",
+          "original_dependent": "11",
+          "dependency_label": "cc",
+          "token_text": {
+            "12": "The Heart Of Doreon",
+            "11": "or"
+          },
+          "token_index": {
+            "12": 12,
+            "11": 11
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "El Tonto",
+        "graph_node_ids": [
+          "10"
+        ],
+        "token_ids": [
+          10
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Film"
+      },
+      {
+        "entity_id": "e2",
+        "text": "The Heart Of Doreon",
+        "graph_node_ids": [
+          "12"
+        ],
+        "token_ids": [
+          12
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Film"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          "film",
+          "Which"
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "2",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "film",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "film",
+                "dependent_text": "Which",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "Which",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          "director"
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "born",
+            "target_text": "director",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          "director",
+          "whose"
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "5",
+          "4"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "born",
+            "target_text": "director",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "4",
+            "source_text": "director",
+            "target_text": "whose",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "4",
+                "governor_text": "director",
+                "dependent_text": "whose",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "whose",
+                "governor_index": 5,
+                "dependent_index": 4,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          "film"
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "2"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          "first"
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "8"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "8",
+            "source_text": "born",
+            "target_text": "first",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "8",
+                "governor_text": "born",
+                "dependent_text": "first",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "first",
+                "governor_index": 7,
+                "dependent_index": 8,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          "film",
+          ","
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "2",
+          "3"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "3",
+            "source_text": "film",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "3",
+                "governor_text": "film",
+                "dependent_text": ",",
+                "governor_graph_text": "film",
+                "dependent_graph_text": ",",
+                "governor_index": 2,
+                "dependent_index": 3,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          "film",
+          "?"
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "2",
+          "13"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "13",
+            "source_text": "film",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "13",
+                "governor_text": "film",
+                "dependent_text": "?",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "?",
+                "governor_index": 2,
+                "dependent_index": 13,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born"
+        ],
+        "node_ids": [
+          "10",
+          "7"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          "was"
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "6"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "6",
+            "source_text": "born",
+            "target_text": "was",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "born",
+                "dependent_text": "was",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "was",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          ","
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "9"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "born",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "born",
+                "dependent_text": ",",
+                "governor_graph_text": "born",
+                "dependent_graph_text": ",",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p11",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          "The Heart Of Doreon"
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "12"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "12",
+            "source_text": "born",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p12",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon"
+        ],
+        "node_ids": [
+          "10",
+          "12"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p13",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "born",
+          "film",
+          "Which"
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "7",
+          "2",
+          "1"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "film",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "film",
+                "dependent_text": "Which",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "Which",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p14",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "born",
+          "director"
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "7",
+          "5"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "born",
+            "target_text": "director",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p15",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "born",
+          "director",
+          "whose"
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "7",
+          "5",
+          "4"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "born",
+            "target_text": "director",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "4",
+            "source_text": "director",
+            "target_text": "whose",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "4",
+                "governor_text": "director",
+                "dependent_text": "whose",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "whose",
+                "governor_index": 5,
+                "dependent_index": 4,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p16",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "born",
+          "film"
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "7",
+          "2"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p17",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "born",
+          "first"
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "7",
+          "8"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "8",
+            "source_text": "born",
+            "target_text": "first",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "8",
+                "governor_text": "born",
+                "dependent_text": "first",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "first",
+                "governor_index": 7,
+                "dependent_index": 8,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p18",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "born",
+          "film",
+          ","
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "7",
+          "2",
+          "3"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "3",
+            "source_text": "film",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "3",
+                "governor_text": "film",
+                "dependent_text": ",",
+                "governor_graph_text": "film",
+                "dependent_graph_text": ",",
+                "governor_index": 2,
+                "dependent_index": 3,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p19",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "born",
+          "film",
+          "?"
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "7",
+          "2",
+          "13"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "13",
+            "source_text": "film",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "13",
+                "governor_text": "film",
+                "dependent_text": "?",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "?",
+                "governor_index": 2,
+                "dependent_index": 13,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p20",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "born"
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "7"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p21",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "born",
+          "The Heart Of Doreon",
+          "or"
+        ],
+        "node_ids": [
+          "10",
+          "7",
+          "12",
+          "11"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "12",
+            "source_text": "born",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "11",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "or",
+            "relations": [
+              "cc"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "11",
+                "governor_text": "The Heart Of Doreon",
+                "dependent_text": "or",
+                "governor_graph_text": "FilmB",
+                "dependent_graph_text": "or",
+                "governor_index": 12,
+                "dependent_index": 11,
+                "dependency_label": "cc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p22",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "born",
+          "was"
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "7",
+          "6"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "6",
+            "source_text": "born",
+            "target_text": "was",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "born",
+                "dependent_text": "was",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "was",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p23",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "born",
+          ","
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "7",
+          "9"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "born",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "born",
+                "dependent_text": ",",
+                "governor_graph_text": "born",
+                "dependent_graph_text": ",",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p24",
+        "entity_id": "e1",
+        "entity_text": "El Tonto",
+        "nodes": [
+          "El Tonto",
+          "The Heart Of Doreon",
+          "or"
+        ],
+        "node_ids": [
+          "10",
+          "12",
+          "11"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "10",
+            "target": "12",
+            "source_text": "El Tonto",
+            "target_text": "The Heart Of Doreon",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "12",
+            "target": "11",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "or",
+            "relations": [
+              "cc"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "11",
+                "governor_text": "The Heart Of Doreon",
+                "dependent_text": "or",
+                "governor_graph_text": "FilmB",
+                "dependent_graph_text": "or",
+                "governor_index": 12,
+                "dependent_index": 11,
+                "dependency_label": "cc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p1",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born",
+          "film",
+          "Which"
+        ],
+        "node_ids": [
+          "12",
+          "7",
+          "2",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "film",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "film",
+                "dependent_text": "Which",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "Which",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p2",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born",
+          "director"
+        ],
+        "node_ids": [
+          "12",
+          "7",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "born",
+            "target_text": "director",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p3",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born",
+          "director",
+          "whose"
+        ],
+        "node_ids": [
+          "12",
+          "7",
+          "5",
+          "4"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "born",
+            "target_text": "director",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "4",
+            "source_text": "director",
+            "target_text": "whose",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "4",
+                "governor_text": "director",
+                "dependent_text": "whose",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "whose",
+                "governor_index": 5,
+                "dependent_index": 4,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p4",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born",
+          "film"
+        ],
+        "node_ids": [
+          "12",
+          "7",
+          "2"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p5",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born",
+          "first"
+        ],
+        "node_ids": [
+          "12",
+          "7",
+          "8"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "8",
+            "source_text": "born",
+            "target_text": "first",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "8",
+                "governor_text": "born",
+                "dependent_text": "first",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "first",
+                "governor_index": 7,
+                "dependent_index": 8,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p6",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born",
+          "film",
+          ","
+        ],
+        "node_ids": [
+          "12",
+          "7",
+          "2",
+          "3"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "3",
+            "source_text": "film",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "3",
+                "governor_text": "film",
+                "dependent_text": ",",
+                "governor_graph_text": "film",
+                "dependent_graph_text": ",",
+                "governor_index": 2,
+                "dependent_index": 3,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p7",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born",
+          "film",
+          "?"
+        ],
+        "node_ids": [
+          "12",
+          "7",
+          "2",
+          "13"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "13",
+            "source_text": "film",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "13",
+                "governor_text": "film",
+                "dependent_text": "?",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "?",
+                "governor_index": 2,
+                "dependent_index": 13,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p8",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born"
+        ],
+        "node_ids": [
+          "12",
+          "7"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p9",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born",
+          "was"
+        ],
+        "node_ids": [
+          "12",
+          "7",
+          "6"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "6",
+            "source_text": "born",
+            "target_text": "was",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "born",
+                "dependent_text": "was",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "was",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p10",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born",
+          ","
+        ],
+        "node_ids": [
+          "12",
+          "7",
+          "9"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "born",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "born",
+                "dependent_text": ",",
+                "governor_graph_text": "born",
+                "dependent_graph_text": ",",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p11",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "or"
+        ],
+        "node_ids": [
+          "12",
+          "11"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "11",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "or",
+            "relations": [
+              "cc"
+            ],
+            "directed_edges": [
+              {
+                "governor": "12",
+                "dependent": "11",
+                "governor_text": "The Heart Of Doreon",
+                "dependent_text": "or",
+                "governor_graph_text": "FilmB",
+                "dependent_graph_text": "or",
+                "governor_index": 12,
+                "dependent_index": 11,
+                "dependency_label": "cc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p12",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "born",
+          "El Tonto"
+        ],
+        "node_ids": [
+          "12",
+          "7",
+          "10"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "7",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "12",
+                "governor_text": "born",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 12,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "10",
+            "source_text": "born",
+            "target_text": "El Tonto",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p13",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto"
+        ],
+        "node_ids": [
+          "12",
+          "10"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p14",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto",
+          "born",
+          "film",
+          "Which"
+        ],
+        "node_ids": [
+          "12",
+          "10",
+          "7",
+          "2",
+          "1"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "film",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "film",
+                "dependent_text": "Which",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "Which",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p15",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto",
+          "born",
+          "director"
+        ],
+        "node_ids": [
+          "12",
+          "10",
+          "7",
+          "5"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "born",
+            "target_text": "director",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p16",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto",
+          "born",
+          "director",
+          "whose"
+        ],
+        "node_ids": [
+          "12",
+          "10",
+          "7",
+          "5",
+          "4"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "born",
+            "target_text": "director",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "5",
+            "target": "4",
+            "source_text": "director",
+            "target_text": "whose",
+            "relations": [
+              "nmod:poss"
+            ],
+            "directed_edges": [
+              {
+                "governor": "5",
+                "dependent": "4",
+                "governor_text": "director",
+                "dependent_text": "whose",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "whose",
+                "governor_index": 5,
+                "dependent_index": 4,
+                "dependency_label": "nmod:poss"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p17",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto",
+          "born",
+          "film"
+        ],
+        "node_ids": [
+          "12",
+          "10",
+          "7",
+          "2"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p18",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto",
+          "born",
+          "first"
+        ],
+        "node_ids": [
+          "12",
+          "10",
+          "7",
+          "8"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "8",
+            "source_text": "born",
+            "target_text": "first",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "8",
+                "governor_text": "born",
+                "dependent_text": "first",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "first",
+                "governor_index": 7,
+                "dependent_index": 8,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p19",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto",
+          "born",
+          "film",
+          ","
+        ],
+        "node_ids": [
+          "12",
+          "10",
+          "7",
+          "2",
+          "3"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "3",
+            "source_text": "film",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "3",
+                "governor_text": "film",
+                "dependent_text": ",",
+                "governor_graph_text": "film",
+                "dependent_graph_text": ",",
+                "governor_index": 2,
+                "dependent_index": 3,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p20",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto",
+          "born",
+          "film",
+          "?"
+        ],
+        "node_ids": [
+          "12",
+          "10",
+          "7",
+          "2",
+          "13"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "film",
+            "relations": [
+              "dep"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "7",
+                "governor_text": "film",
+                "dependent_text": "born",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "born",
+                "governor_index": 2,
+                "dependent_index": 7,
+                "dependency_label": "dep"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "13",
+            "source_text": "film",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "13",
+                "governor_text": "film",
+                "dependent_text": "?",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "?",
+                "governor_index": 2,
+                "dependent_index": 13,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p21",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto",
+          "born"
+        ],
+        "node_ids": [
+          "12",
+          "10",
+          "7"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p22",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto",
+          "born",
+          "was"
+        ],
+        "node_ids": [
+          "12",
+          "10",
+          "7",
+          "6"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "6",
+            "source_text": "born",
+            "target_text": "was",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "born",
+                "dependent_text": "was",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "was",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p23",
+        "entity_id": "e2",
+        "entity_text": "The Heart Of Doreon",
+        "nodes": [
+          "The Heart Of Doreon",
+          "El Tonto",
+          "born",
+          ","
+        ],
+        "node_ids": [
+          "12",
+          "10",
+          "7",
+          "9"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "12",
+            "target": "10",
+            "source_text": "The Heart Of Doreon",
+            "target_text": "El Tonto",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "10",
+                "dependent": "12",
+                "governor_text": "El Tonto",
+                "dependent_text": "The Heart Of Doreon",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 10,
+                "dependent_index": 12,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "10",
+            "target": "7",
+            "source_text": "El Tonto",
+            "target_text": "born",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "El Tonto",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 7,
+                "dependent_index": 10,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "born",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "born",
+                "dependent_text": ",",
+                "governor_graph_text": "born",
+                "dependent_graph_text": ",",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "7_5_terminal_glue_path_pruning": {
+      "total_raw_paths": 47,
+      "total_kept_paths": 28,
+      "total_pruned_paths": 19,
+      "total_pruned_ratio": 0.40425531914893614,
+      "by_entity": {
+        "e1": {
+          "raw": 24,
+          "kept": 14,
+          "pruned": 10,
+          "pruned_ratio": 0.4166666666666667,
+          "fallback_used": false,
+          "pruned_examples": [
+            {
+              "path_id": "e1_p6",
+              "terminal": ",",
+              "reason": "terminal_glue_token",
+              "path_text": "El Tonto -> born -> film -> ,"
+            },
+            {
+              "path_id": "e1_p7",
+              "terminal": "?",
+              "reason": "terminal_glue_token",
+              "path_text": "El Tonto -> born -> film -> ?"
+            },
+            {
+              "path_id": "e1_p9",
+              "terminal": "was",
+              "reason": "terminal_glue_token",
+              "path_text": "El Tonto -> born -> was"
+            },
+            {
+              "path_id": "e1_p10",
+              "terminal": ",",
+              "reason": "terminal_glue_token",
+              "path_text": "El Tonto -> born -> ,"
+            },
+            {
+              "path_id": "e1_p18",
+              "terminal": ",",
+              "reason": "terminal_glue_token",
+              "path_text": "El Tonto -> The Heart Of Doreon -> born -> film -> ,"
+            }
+          ]
+        },
+        "e2": {
+          "raw": 23,
+          "kept": 14,
+          "pruned": 9,
+          "pruned_ratio": 0.391304347826087,
+          "fallback_used": false,
+          "pruned_examples": [
+            {
+              "path_id": "e2_p6",
+              "terminal": ",",
+              "reason": "terminal_glue_token",
+              "path_text": "The Heart Of Doreon -> born -> film -> ,"
+            },
+            {
+              "path_id": "e2_p7",
+              "terminal": "?",
+              "reason": "terminal_glue_token",
+              "path_text": "The Heart Of Doreon -> born -> film -> ?"
+            },
+            {
+              "path_id": "e2_p9",
+              "terminal": "was",
+              "reason": "terminal_glue_token",
+              "path_text": "The Heart Of Doreon -> born -> was"
+            },
+            {
+              "path_id": "e2_p10",
+              "terminal": ",",
+              "reason": "terminal_glue_token",
+              "path_text": "The Heart Of Doreon -> born -> ,"
+            },
+            {
+              "path_id": "e2_p11",
+              "terminal": "or",
+              "reason": "terminal_glue_token",
+              "path_text": "The Heart Of Doreon -> or"
+            }
+          ]
+        }
+      }
+    },
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "which"
+        ],
+        "missing_cues": [
+          "director",
+          "first"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto and reaches the film node but lacks coverage of the director and the first cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p2",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "director",
+        "semantic_chain_hint": [
+          "director"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto and covers the born predicate and director but misses the first and which cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p3",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "whose",
+        "semantic_chain_hint": [
+          "director",
+          "whose"
+        ],
+        "covered_cues": [
+          "born",
+          "whose"
+        ],
+        "missing_cues": [
+          "first",
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto, covers the born predicate, includes the director and whose cues, but misses first and which."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p4",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which",
+          "director"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto and reaches the film node but lacks coverage of the director, first, and which cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p5",
+        "score": 80.0,
+        "valid": true,
+        "terminal_hint": "first",
+        "semantic_chain_hint": [
+          "first"
+        ],
+        "covered_cues": [
+          "born",
+          "first"
+        ],
+        "missing_cues": [
+          "which",
+          "director"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto, covers the born predicate and first cue, but misses the director and which cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p8",
+        "score": 30.0,
+        "valid": true,
+        "terminal_hint": "born",
+        "semantic_chain_hint": [
+          "born"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "first",
+          "which",
+          "director",
+          "film"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto and only covers the born predicate, missing all other necessary cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p11",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which",
+          "director"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto, covers the born predicate and includes The Heart Of Doreon, but misses first, which, and director."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p12",
+        "score": 40.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "first",
+          "which",
+          "director",
+          "born"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto and only connects to The Heart Of Doreon, missing all necessary cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p13",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "which"
+        ],
+        "missing_cues": [
+          "first",
+          "director"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto, connects to The Heart Of Doreon, and covers the film node but misses first and director."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p14",
+        "score": 80.0,
+        "valid": true,
+        "terminal_hint": "director",
+        "semantic_chain_hint": [
+          "director"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto, connects to The Heart Of Doreon, covers the born predicate and director but misses first and which."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p15",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "whose",
+        "semantic_chain_hint": [
+          "director",
+          "whose"
+        ],
+        "covered_cues": [
+          "born",
+          "whose"
+        ],
+        "missing_cues": [
+          "first",
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto, connects to The Heart Of Doreon, covers the born predicate, includes the director and whose cues, but misses first and which."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p16",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which",
+          "director"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto, connects to The Heart Of Doreon, covers the film node but lacks coverage of the director, first, and which cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p17",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which",
+          "director"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto, connects to The Heart Of Doreon, covers the born predicate and includes the film node but misses first, which, and director."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p20",
+        "score": 60.0,
+        "valid": true,
+        "terminal_hint": "born",
+        "semantic_chain_hint": [
+          "born"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "first",
+          "which",
+          "director",
+          "film"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from El Tonto and connects to The Heart Of Doreon but lacks coverage of all necessary cues."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p1",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "which"
+        ],
+        "missing_cues": [
+          "director",
+          "first"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon and reaches the film node but lacks coverage of the director and the first cue."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p2",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "director",
+        "semantic_chain_hint": [
+          "director"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon and covers the born predicate and director but misses the first and which cues."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p3",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "whose",
+        "semantic_chain_hint": [
+          "director",
+          "whose"
+        ],
+        "covered_cues": [
+          "born",
+          "whose"
+        ],
+        "missing_cues": [
+          "first",
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon, covers the born predicate, includes the director and whose cues, but misses first and which."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p4",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which",
+          "director"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon and reaches the film node but lacks coverage of the director, first, and which cues."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p5",
+        "score": 80.0,
+        "valid": true,
+        "terminal_hint": "first",
+        "semantic_chain_hint": [
+          "first"
+        ],
+        "covered_cues": [
+          "born",
+          "first"
+        ],
+        "missing_cues": [
+          "which",
+          "director"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon, covers the born predicate and first cue, but misses the director and which cues."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p8",
+        "score": 30.0,
+        "valid": true,
+        "terminal_hint": "born",
+        "semantic_chain_hint": [
+          "born"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "first",
+          "which",
+          "director",
+          "film"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon and only covers the born predicate, missing all other necessary cues."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p12",
+        "score": 40.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "first",
+          "which",
+          "director",
+          "born"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon and only connects to El Tonto, missing all necessary cues."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p13",
+        "score": 55.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "which"
+        ],
+        "missing_cues": [
+          "director",
+          "first"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon and reaches El Tonto but lacks coverage of the director and the first cue."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p14",
+        "score": 80.0,
+        "valid": true,
+        "terminal_hint": "director",
+        "semantic_chain_hint": [
+          "director"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon, covers the born predicate and director but misses first and which."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p15",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "whose",
+        "semantic_chain_hint": [
+          "director",
+          "whose"
+        ],
+        "covered_cues": [
+          "born",
+          "whose"
+        ],
+        "missing_cues": [
+          "first",
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon, covers the born predicate, includes the director and whose cues, but misses first and which."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p16",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which",
+          "director"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon, connects to El Tonto, and covers the film node but lacks coverage of the director, first, and which cues."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p17",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "film",
+        "semantic_chain_hint": [
+          "film"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "first",
+          "which",
+          "director"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon, connects to El Tonto, covers the born predicate and includes the film node but misses first, which, and director."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p18",
+        "score": 0.0,
+        "valid": false,
+        "terminal_hint": null,
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [],
+        "fatal_errors": [
+          "missing_from_llm_output"
+        ],
+        "reason": "missing from LLM output"
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p21",
+        "score": 60.0,
+        "valid": true,
+        "terminal_hint": "born",
+        "semantic_chain_hint": [
+          "born"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "first",
+          "which",
+          "director",
+          "film"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Heart Of Doreon and connects to El Tonto but lacks coverage of all necessary cues."
+      }
+    ],
+    "8_1_top_paths_by_entity": {
+      "e1": [
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p15",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "whose",
+          "semantic_chain_hint": [
+            "director",
+            "whose"
+          ],
+          "covered_cues": [
+            "born",
+            "whose"
+          ],
+          "missing_cues": [
+            "first",
+            "which"
+          ],
+          "fatal_errors": [],
+          "reason": "The path starts from El Tonto, connects to The Heart Of Doreon, covers the born predicate, includes the director and whose cues, but misses first and which."
+        },
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p3",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "whose",
+          "semantic_chain_hint": [
+            "director",
+            "whose"
+          ],
+          "covered_cues": [
+            "born",
+            "whose"
+          ],
+          "missing_cues": [
+            "first",
+            "which"
+          ],
+          "fatal_errors": [],
+          "reason": "The path starts from El Tonto, covers the born predicate, includes the director and whose cues, but misses first and which."
+        }
+      ],
+      "e2": [
+        {
+          "entity_id": "e2",
+          "path_id": "e2_p15",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "whose",
+          "semantic_chain_hint": [
+            "director",
+            "whose"
+          ],
+          "covered_cues": [
+            "born",
+            "whose"
+          ],
+          "missing_cues": [
+            "first",
+            "which"
+          ],
+          "fatal_errors": [],
+          "reason": "The path starts from The Heart Of Doreon, covers the born predicate, includes the director and whose cues, but misses first and which."
+        },
+        {
+          "entity_id": "e2",
+          "path_id": "e2_p3",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "whose",
+          "semantic_chain_hint": [
+            "director",
+            "whose"
+          ],
+          "covered_cues": [
+            "born",
+            "whose"
+          ],
+          "missing_cues": [
+            "first",
+            "which"
+          ],
+          "fatal_errors": [],
+          "reason": "The path starts from The Heart Of Doreon, covers the born predicate, includes the director and whose cues, but misses first and which."
+        }
+      ]
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p15",
+          "e2": "e2_p15"
+        },
+        "mean_path_score": 90.0
+      },
+      {
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p15",
+          "e2": "e2_p3"
+        },
+        "mean_path_score": 90.0
+      },
+      {
+        "path_set_id": "ps3",
+        "path_ids_by_entity": {
+          "e1": "e1_p3",
+          "e2": "e2_p15"
+        },
+        "mean_path_score": 90.0
+      },
+      {
+        "path_set_id": "ps4",
+        "path_ids_by_entity": {
+          "e1": "e1_p3",
+          "e2": "e2_p3"
+        },
+        "mean_path_score": 90.0
+      }
+    ],
+    "9_selected_dependency_path_evidence": [
+      {
+        "path_set_id": "ps1",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "El Tonto",
+            "path_id": "e1_p15",
+            "path_text": "El Tonto -> The Heart Of Doreon -> born -> director -> whose",
+            "node_texts": [
+              "El Tonto",
+              "The Heart Of Doreon",
+              "born",
+              "director",
+              "whose"
+            ],
+            "node_ids": [
+              "10",
+              "12",
+              "7",
+              "5",
+              "4"
+            ]
+          },
+          {
+            "entity_id": "e2",
+            "entity_text": "The Heart Of Doreon",
+            "path_id": "e2_p15",
+            "path_text": "The Heart Of Doreon -> El Tonto -> born -> director",
+            "node_texts": [
+              "The Heart Of Doreon",
+              "El Tonto",
+              "born",
+              "director"
+            ],
+            "node_ids": [
+              "12",
+              "10",
+              "7",
+              "5"
+            ]
+          }
+        ]
+      },
+      {
+        "path_set_id": "ps2",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "El Tonto",
+            "path_id": "e1_p15",
+            "path_text": "El Tonto -> The Heart Of Doreon -> born -> director -> whose",
+            "node_texts": [
+              "El Tonto",
+              "The Heart Of Doreon",
+              "born",
+              "director",
+              "whose"
+            ],
+            "node_ids": [
+              "10",
+              "12",
+              "7",
+              "5",
+              "4"
+            ]
+          },
+          {
+            "entity_id": "e2",
+            "entity_text": "The Heart Of Doreon",
+            "path_id": "e2_p3",
+            "path_text": "The Heart Of Doreon -> born -> director -> whose",
+            "node_texts": [
+              "The Heart Of Doreon",
+              "born",
+              "director",
+              "whose"
+            ],
+            "node_ids": [
+              "12",
+              "7",
+              "5",
+              "4"
+            ]
+          }
+        ]
+      },
+      {
+        "path_set_id": "ps3",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "El Tonto",
+            "path_id": "e1_p3",
+            "path_text": "El Tonto -> born -> director -> whose",
+            "node_texts": [
+              "El Tonto",
+              "born",
+              "director",
+              "whose"
+            ],
+            "node_ids": [
+              "10",
+              "7",
+              "5",
+              "4"
+            ]
+          },
+          {
+            "entity_id": "e2",
+            "entity_text": "The Heart Of Doreon",
+            "path_id": "e2_p15",
+            "path_text": "The Heart Of Doreon -> El Tonto -> born -> director",
+            "node_texts": [
+              "The Heart Of Doreon",
+              "El Tonto",
+              "born",
+              "director"
+            ],
+            "node_ids": [
+              "12",
+              "10",
+              "7",
+              "5"
+            ]
+          }
+        ]
+      },
+      {
+        "path_set_id": "ps4",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "El Tonto",
+            "path_id": "e1_p3",
+            "path_text": "El Tonto -> born -> director -> whose",
+            "node_texts": [
+              "El Tonto",
+              "born",
+              "director",
+              "whose"
+            ],
+            "node_ids": [
+              "10",
+              "7",
+              "5",
+              "4"
+            ]
+          },
+          {
+            "entity_id": "e2",
+            "entity_text": "The Heart Of Doreon",
+            "path_id": "e2_p3",
+            "path_text": "The Heart Of Doreon -> born -> director -> whose",
+            "node_texts": [
+              "The Heart Of Doreon",
+              "born",
+              "director",
+              "whose"
+            ],
+            "node_ids": [
+              "12",
+              "7",
+              "5",
+              "4"
+            ]
+          }
+        ]
+      }
+    ],
+    "9_grounded_atomic_dag_generation": {
+      "nodes": [
+        {
+          "node_id": "q1",
+          "question": "Who is the director of El Tonto?",
+          "operation": "lookup",
+          "input": {
+            "type": "entity",
+            "text": "El Tonto"
+          },
+          "one_hop_relation": "director",
+          "answer_type": "Person",
+          "dependencies": [],
+          "support": [
+            {
+              "path_set_id": "ps1",
+              "path_id": "e1_p15",
+              "node_texts": [
+                "El Tonto",
+                "director"
+              ],
+              "reason": "This path segment supports asking for the director of El Tonto."
+            }
+          ]
+        },
+        {
+          "node_id": "q2",
+          "question": "Who is the director of The Heart Of Doreon?",
+          "operation": "lookup",
+          "input": {
+            "type": "entity",
+            "text": "The Heart Of Doreon"
+          },
+          "one_hop_relation": "director",
+          "answer_type": "Person",
+          "dependencies": [],
+          "support": [
+            {
+              "path_set_id": "ps2",
+              "path_id": "e2_p3",
+              "node_texts": [
+                "The Heart Of Doreon",
+                "director"
+              ],
+              "reason": "This path segment supports asking for the director of The Heart Of Doreon."
+            }
+          ]
+        },
+        {
+          "node_id": "q3",
+          "question": "When was the director of El Tonto born?",
+          "operation": "lookup",
+          "input": {
+            "type": "entity",
+            "text": "q1"
+          },
+          "one_hop_relation": "birth date",
+          "answer_type": "Date",
+          "dependencies": [
+            "q1"
+          ],
+          "support": [
+            {
+              "path_set_id": "ps3",
+              "path_id": "e1_p3",
+              "node_texts": [
+                "El Tonto",
+                "born",
+                "director"
+              ],
+              "reason": "This path segment supports asking for the birth date of the director of El Tonto."
+            }
+          ]
+        },
+        {
+          "node_id": "q4",
+          "question": "When was the director of The Heart Of Doreon born?",
+          "operation": "lookup",
+          "input": {
+            "type": "entity",
+            "text": "q2"
+          },
+          "one_hop_relation": "birth date",
+          "answer_type": "Date",
+          "dependencies": [
+            "q2"
+          ],
+          "support": [
+            {
+              "path_set_id": "ps4",
+              "path_id": "e2_p3",
+              "node_texts": [
+                "The Heart Of Doreon",
+                "born",
+                "director"
+              ],
+              "reason": "This path segment supports asking for the birth date of the director of The Heart Of Doreon."
+            }
+          ]
+        }
+      ],
+      "selected_path_set_ids": [
+        "ps1",
+        "ps2",
+        "ps3",
+        "ps4"
+      ],
+      "reason": "The DAG decomposes the question into one-hop lookup questions grounded by selected dependency path evidence.",
+      "selected_dependency_path_evidence": [
+        {
+          "path_set_id": "ps1",
+          "paths": [
+            {
+              "entity_id": "e1",
+              "entity_text": "El Tonto",
+              "path_id": "e1_p15",
+              "path_text": "El Tonto -> The Heart Of Doreon -> born -> director -> whose",
+              "node_texts": [
+                "El Tonto",
+                "The Heart Of Doreon",
+                "born",
+                "director",
+                "whose"
+              ],
+              "node_ids": [
+                "10",
+                "12",
+                "7",
+                "5",
+                "4"
+              ]
+            },
+            {
+              "entity_id": "e2",
+              "entity_text": "The Heart Of Doreon",
+              "path_id": "e2_p15",
+              "path_text": "The Heart Of Doreon -> El Tonto -> born -> director",
+              "node_texts": [
+                "The Heart Of Doreon",
+                "El Tonto",
+                "born",
+                "director"
+              ],
+              "node_ids": [
+                "12",
+                "10",
+                "7",
+                "5"
+              ]
+            }
+          ]
+        },
+        {
+          "path_set_id": "ps2",
+          "paths": [
+            {
+              "entity_id": "e1",
+              "entity_text": "El Tonto",
+              "path_id": "e1_p15",
+              "path_text": "El Tonto -> The Heart Of Doreon -> born -> director -> whose",
+              "node_texts": [
+                "El Tonto",
+                "The Heart Of Doreon",
+                "born",
+                "director",
+                "whose"
+              ],
+              "node_ids": [
+                "10",
+                "12",
+                "7",
+                "5",
+                "4"
+              ]
+            },
+            {
+              "entity_id": "e2",
+              "entity_text": "The Heart Of Doreon",
+              "path_id": "e2_p3",
+              "path_text": "The Heart Of Doreon -> born -> director -> whose",
+              "node_texts": [
+                "The Heart Of Doreon",
+                "born",
+                "director",
+                "whose"
+              ],
+              "node_ids": [
+                "12",
+                "7",
+                "5",
+                "4"
+              ]
+            }
+          ]
+        },
+        {
+          "path_set_id": "ps3",
+          "paths": [
+            {
+              "entity_id": "e1",
+              "entity_text": "El Tonto",
+              "path_id": "e1_p3",
+              "path_text": "El Tonto -> born -> director -> whose",
+              "node_texts": [
+                "El Tonto",
+                "born",
+                "director",
+                "whose"
+              ],
+              "node_ids": [
+                "10",
+                "7",
+                "5",
+                "4"
+              ]
+            },
+            {
+              "entity_id": "e2",
+              "entity_text": "The Heart Of Doreon",
+              "path_id": "e2_p15",
+              "path_text": "The Heart Of Doreon -> El Tonto -> born -> director",
+              "node_texts": [
+                "The Heart Of Doreon",
+                "El Tonto",
+                "born",
+                "director"
+              ],
+              "node_ids": [
+                "12",
+                "10",
+                "7",
+                "5"
+              ]
+            }
+          ]
+        },
+        {
+          "path_set_id": "ps4",
+          "paths": [
+            {
+              "entity_id": "e1",
+              "entity_text": "El Tonto",
+              "path_id": "e1_p3",
+              "path_text": "El Tonto -> born -> director -> whose",
+              "node_texts": [
+                "El Tonto",
+                "born",
+                "director",
+                "whose"
+              ],
+              "node_ids": [
+                "10",
+                "7",
+                "5",
+                "4"
+              ]
+            },
+            {
+              "entity_id": "e2",
+              "entity_text": "The Heart Of Doreon",
+              "path_id": "e2_p3",
+              "path_text": "The Heart Of Doreon -> born -> director -> whose",
+              "node_texts": [
+                "The Heart Of Doreon",
+                "born",
+                "director",
+                "whose"
+              ],
+              "node_ids": [
+                "12",
+                "7",
+                "5",
+                "4"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "10_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the director of El Tonto?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "path_set_id": "ps1",
+                "path_id": "e1_p15",
+                "node_texts": [
+                  "El Tonto",
+                  "director"
+                ],
+                "node_ids": [],
+                "reason": "This path segment supports asking for the director of El Tonto."
+              }
+            ],
+            "support_path_ids": [
+              "e1_p15"
+            ],
+            "operation": "lookup",
+            "input": {
+              "type": "entity",
+              "text": "El Tonto"
+            },
+            "one_hop_relation": "director",
+            "answer_type": "Person"
+          },
+          "source": "grounded_atomic_dag"
+        },
+        {
+          "id": "q2",
+          "question": "Who is the director of The Heart Of Doreon?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X2",
+          "depends_on": [],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "path_set_id": "ps2",
+                "path_id": "e2_p3",
+                "node_texts": [
+                  "The Heart Of Doreon",
+                  "director"
+                ],
+                "node_ids": [],
+                "reason": "This path segment supports asking for the director of The Heart Of Doreon."
+              }
+            ],
+            "support_path_ids": [
+              "e2_p3"
+            ],
+            "operation": "lookup",
+            "input": {
+              "type": "entity",
+              "text": "The Heart Of Doreon"
+            },
+            "one_hop_relation": "director",
+            "answer_type": "Person"
+          },
+          "source": "grounded_atomic_dag"
+        },
+        {
+          "id": "q3",
+          "question": "When was the director of El Tonto born?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X3",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "path_set_id": "ps3",
+                "path_id": "e1_p3",
+                "node_texts": [
+                  "El Tonto",
+                  "born",
+                  "director"
+                ],
+                "node_ids": [],
+                "reason": "This path segment supports asking for the birth date of the director of El Tonto."
+              }
+            ],
+            "support_path_ids": [
+              "e1_p3"
+            ],
+            "operation": "lookup",
+            "input": {
+              "type": "entity",
+              "text": "q1"
+            },
+            "one_hop_relation": "birth date",
+            "answer_type": "Date"
+          },
+          "source": "grounded_atomic_dag"
+        },
+        {
+          "id": "q4",
+          "question": "When was the director of The Heart Of Doreon born?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X4",
+          "depends_on": [
+            "q2"
+          ],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "path_set_id": "ps4",
+                "path_id": "e2_p3",
+                "node_texts": [
+                  "The Heart Of Doreon",
+                  "born",
+                  "director"
+                ],
+                "node_ids": [],
+                "reason": "This path segment supports asking for the birth date of the director of The Heart Of Doreon."
+              }
+            ],
+            "support_path_ids": [
+              "e2_p3"
+            ],
+            "operation": "lookup",
+            "input": {
+              "type": "entity",
+              "text": "q2"
+            },
+            "one_hop_relation": "birth date",
+            "answer_type": "Date"
+          },
+          "source": "grounded_atomic_dag"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q3",
+          "variable": "X1"
+        },
+        {
+          "source": "q2",
+          "target": "q4",
+          "variable": "X2"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2",
+        "X3": "q3",
+        "X4": "q4"
+      },
+      "warnings": []
+    },
+    "10_subquestions": [
+      {
+        "index": 1,
+        "question": "Who is the director of El Tonto?",
+        "answer_variable": "X1",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      },
+      {
+        "index": 2,
+        "question": "Who is the director of The Heart Of Doreon?",
+        "answer_variable": "X2",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      },
+      {
+        "index": 3,
+        "question": "When was the director of El Tonto born?",
+        "answer_variable": "X3",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      },
+      {
+        "index": 4,
+        "question": "When was the director of The Heart Of Doreon born?",
+        "answer_variable": "X4",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      }
+    ]
+  }
+}

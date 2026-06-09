@@ -53,26 +53,28 @@ class AtomicDagExecutor:
         for node in order:
             dependency_answers = self._dependency_context(node.dependencies, results_by_id)
             dependency_rewrite = resolve_dependency_question(node.question, dependency_answers)
-            retrieval_question = dependency_rewrite.retrieval_question
+            resolved_question = dependency_rewrite.retrieval_question
             if dependency_rewrite.whether_rewritten:
                 self.logger.info(
-                    "Rewrote retrieval question for %s: %s -> %s",
+                    "Resolved dependency question for %s: %s -> %s",
                     node.node_id,
                     node.question,
-                    retrieval_question,
+                    resolved_question,
                 )
-            analysis = self.analyzer.analyze(retrieval_question, dependency_answers)
-            branch_hits = self.retriever.retrieve(retrieval_question, analysis)
-            fused_evidence = self.fusion.fuse(retrieval_question, analysis, branch_hits)
+            analysis = self.analyzer.analyze(resolved_question, dependency_answers)
+            _prepend_primary_anchor_entities(analysis, dependency_rewrite.primary_anchor_entities)
+            branch_hits = self.retriever.retrieve(resolved_question, analysis)
+            fused_evidence = self.fusion.fuse(resolved_question, analysis, branch_hits)
             answer_payload = self._answer_atomic_question(
                 node=node,
+                atomic_question=resolved_question,
                 analysis=analysis,
                 evidence=fused_evidence,
                 dependency_answers=dependency_answers,
             )
             result = AtomicAnswerResult(
                 node_id=node.node_id,
-                question=node.question,
+                question=resolved_question,
                 analysis=analysis,
                 evidence=fused_evidence,
                 answer=str(answer_payload.get("answer", "") or ""),
@@ -85,19 +87,31 @@ class AtomicDagExecutor:
             analyses_artifact.append(
                 {
                     "node_id": node.node_id,
-                    "question": node.question,
-                    "retrieval_question": retrieval_question,
+                    "question": resolved_question,
+                    "original_question": node.question,
+                    "resolved_question": resolved_question,
+                    "retrieval_question": resolved_question,
                     "dependency_question_rewrite": dependency_rewrite.to_dict(),
+                    "dependency_replacements": dependency_rewrite.to_dict()["dependency_replacements"],
                     "dependency_answers": dependency_answers,
+                    "dependency_answers_used": dependency_rewrite.dependency_answers_used,
+                    "unresolved_dependency": dependency_rewrite.unresolved_dependencies,
+                    "primary_anchor_entities": dependency_rewrite.primary_anchor_entities,
                     "analysis": analysis.to_dict(),
                 }
             )
             retrieval_artifact.append(
                 {
                     "node_id": node.node_id,
-                    "question": node.question,
-                    "retrieval_question": retrieval_question,
+                    "question": resolved_question,
+                    "original_question": node.question,
+                    "resolved_question": resolved_question,
+                    "retrieval_question": resolved_question,
                     "dependency_question_rewrite": dependency_rewrite.to_dict(),
+                    "dependency_replacements": dependency_rewrite.to_dict()["dependency_replacements"],
+                    "dependency_answers_used": dependency_rewrite.dependency_answers_used,
+                    "unresolved_dependency": dependency_rewrite.unresolved_dependencies,
+                    "primary_anchor_entities": dependency_rewrite.primary_anchor_entities,
                     "branch_hits": [hit.to_dict() for hit in branch_hits],
                     "top_evidence": [candidate.to_dict() for candidate in fused_evidence],
                 }
@@ -301,6 +315,7 @@ class AtomicDagExecutor:
     def _answer_atomic_question(
         self,
         node: AtomicQuestionNode,
+        atomic_question: str,
         analysis: AtomicQuestionAnalysis,
         evidence: list[FusedHyperedgeCandidate],
         dependency_answers: list[dict[str, Any]],
@@ -308,13 +323,13 @@ class AtomicDagExecutor:
         evidence_payload = [item.to_dict() for item in evidence]
         if self.llm_service is not None:
             payload = self.llm_service.answer_atomic_question(
-                atomic_question=node.question,
+                atomic_question=atomic_question,
                 dependency_answers=dependency_answers,
                 evidence=evidence_payload,
             )
         else:
-            payload = self._fallback_answer(node.question, analysis, evidence, dependency_answers)
-        return self._coerce_answer_payload(payload, node.question, analysis, evidence, dependency_answers)
+            payload = self._fallback_answer(atomic_question, analysis, evidence, dependency_answers)
+        return self._coerce_answer_payload(payload, atomic_question, analysis, evidence, dependency_answers)
 
     def _fallback_answer(
         self,
@@ -386,6 +401,16 @@ class AtomicDagExecutor:
         if used:
             return used
         return [item.hyperedge_id for item in evidence[:1]]
+
+
+def _prepend_primary_anchor_entities(
+    analysis: AtomicQuestionAnalysis,
+    primary_anchor_entities: Iterable[str],
+) -> None:
+    for entity in reversed([str(item).strip() for item in primary_anchor_entities if str(item).strip()]):
+        existing = {normalize_label(item).lower() for item in analysis.entities}
+        if normalize_label(entity).lower() not in existing:
+            analysis.entities.insert(0, entity)
 
 
 def _to_plain_payload(payload: Any) -> Any:

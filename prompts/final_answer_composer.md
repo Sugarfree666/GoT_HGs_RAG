@@ -41,6 +41,16 @@ Reasoning rules:
 - Preserve distinctions between intermediate answers and the final answer.
 - Do not expose hidden chain-of-thought; provide only a short reasoning_summary.
 
+Comparison and selection rules:
+- Treat the atomic answers as structured facts. Do not choose a candidate whose atomic comparison value contradicts the operation in the original question.
+- For "born first", "born earlier", or "older" questions over people, select the branch with the earliest birth date or smallest birth year.
+- For "younger" or "born later" questions over people, select the branch with the latest birth date or largest birth year.
+- For "released first" or "released earlier" questions, select the branch with the earliest release date or smallest release year.
+- For "released later", select the branch with the latest release date or largest release year.
+- For "died first" or "died earlier", select the branch with the earliest death date. For "died later", select the latest death date.
+- For yes/no same/different questions, compare the final branch values directly and answer yes/no according to the original wording.
+- When the final answer is one of the original candidates, candidate_answer must name that candidate, not the intermediate person, date, or evidence sentence.
+
 Handling insufficient atomic answers:
 - If one or more atomic answers are insufficient but the candidate answer can still be determined from other strong atomic answers, evidence, or reliable general knowledge, answer with reduced confidence and list unresolved nodes in remaining_gaps.
 - If a missing atomic answer is essential and cannot be filled reliably, set candidate_answer to "INSUFFICIENT_EVIDENCE", confidence to 0.0, and list the missing node IDs or short issue descriptions in remaining_gaps.

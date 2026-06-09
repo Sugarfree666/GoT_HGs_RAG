@@ -1,0 +1,376 @@
+====================================================================================================
+#3 F1=0.0 status=success
+Q: What is the place of birth of the performer of song Changed It?
+Gold: ['Port of Spain']
+Pred: Saint James, Trinidad and Tobago
+DAG: [('q1', 'Who is the performer of the song Changed It?', None), ('q2', "What is the place of birth of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the performer of the song Changed It?', 'Nicki Minaj and Lil Wayne', 0.9), ('q2', 'What is the place of birth of Nicki Minaj and Lil Wayne?', 'Saint James, Trinidad and Tobago; New York City, USA', 0.75)]
+Final: Saint James, Trinidad and Tobago | The performer of the song 'Changed It' is Nicki Minaj and Lil Wayne. Nicki Minaj was born in Saint James, Trinidad and Tobago, and raised in Queens, New York City. While Lil Wayne's exact birthplace isn't explicitly mentioned, he is commonly known to
+====================================================================================================
+#10 F1=0.6666666666666666 status=success
+Q: What nationality is the director of film Blood Street?
+Gold: ['Chinese']
+Pred: Chinese American
+DAG: [('q1', 'Who is the director of Blood Street?', None), ('q2', "What is the nationality of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the director of Blood Street?', 'Leo Fong', 1.0), ('q2', 'What is the nationality of Leo Fong?', 'Chinese American', 1.0)]
+Final: Chinese American | The director of Blood Street is Leo Fong, who is identified as a Chinese American actor. This directly answers the question about his nationality.
+====================================================================================================
+#13 F1=0.0 status=success
+Q: What nationality is the performer of song When The Stars Go Blue?
+Gold: ['America']
+Pred: American
+DAG: [('q1', 'Who is the performer of the song When The Stars Go Blue?', None), ('q2', "What is the nationality of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the performer of the song When The Stars Go Blue?', 'Ryan Adams', 1.0), ('q2', 'What is the nationality of Ryan Adams?', 'American', 1.0)]
+Final: American | The performer of 'When The Stars Go Blue' is Ryan Adams, who is identified as an American singer-songwriter. Both atomic answers are strongly supported by evidence.
+====================================================================================================
+#14 F1=0.0 status=success
+Q: Who is the child of the performer of song Me And Bobby Mcgee?
+Gold: ['Dean Miller']
+Pred: INSUFFICIENT_EVIDENCE
+DAG: [('q1', 'Who is the performer of the song Me And Bobby Mcgee?', None), ('q2', "Who is the child of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the performer of the song Me And Bobby Mcgee?', 'Roger Miller', 0.75), ('q2', 'Who is the child of Roger Miller?', 'INSUFFICIENT_EVIDENCE', 0.0)]
+Final: INSUFFICIENT_EVIDENCE | The evidence does not provide any information regarding Roger Miller's children, making it impossible to determine the answer to the question.
+====================================================================================================
+#15 F1=0.0 status=success
+Q: Where was the place of death of Maurice, Prince Of Orange's father?
+Gold: ['Delft']
+Pred: Dordrecht
+DAG: [('q1', 'Who is the father of Prince Of Orange?', None), ('q2', "Where did q1's answer die?", ['q1'])]
+Atomic: [('q1', 'Who is the father of Prince Of Orange?', 'William the Silent', 0.9), ('q2', 'Where did William the Silent die?', 'Dordrecht', 0.9)]
+Final: Dordrecht | William the Silent, identified as the father of Maurice, Prince of Orange, died in Dordrecht, which is well-supported by historical records.
+====================================================================================================
+#16 F1=0.0 status=success
+Q: Which country Aleksander Koniecpolski (1620–1659)'s father is from?
+Gold: ['Polish-Lithuanian Commonwealth']
+Pred: Poland
+DAG: [('q1', 'Which country is Aleksander Koniecpolski from?', None), ('q2', "Who is q1's answer's father?", ['q1']), ('q3', "Which country is q2's answer from?", ['q2'])]
+Atomic: [('q1', 'Which country is Aleksander Koniecpolski from?', 'Poland', 0.9), ('q2', "Who is Poland's father?", 'King John III Sobieski', 0.75), ('q3', 'Which country is King John III Sobieski from?', 'Poland', 0.9)]
+Final: Poland | Aleksander Koniecpolski is from Poland, and his father, King John III Sobieski, is also associated with Poland. Therefore, the country of Aleksander Koniecpolski's father is Poland.
+====================================================================================================
+#21 F1=0.0 status=success
+Q: Where did Coulson Wallop's father study?
+Gold: ['Oxford']
+Pred: Eton
+DAG: [('q1', 'Who is the father of Coulson Wallop?', None), ('q2', "Where did q1's answer study?", ['q1'])]
+Atomic: [('q1', 'Who is the father of Coulson Wallop?', 'John Wallop, 2nd Earl of Portsmouth', 0.9), ('q2', 'Where did John Wallop, 2nd Earl of Portsmouth study?', 'Eton', 0.9)]
+Final: Eton | Coulson Wallop's father, John Wallop, 2nd Earl of Portsmouth, is likely to have studied at Eton, as Coulson Wallop himself was educated there. This connection supports the conclusion that John Wallop had a similar educational background.
+====================================================================================================
+#22 F1=0.0 status=success
+Q: Why did John Middleton Murry's wife die?
+Gold: ['tuberculosis']
+Pred: INSUFFICIENT_EVIDENCE
+DAG: [('q1', "What is the cause of death for John Middleton Murry's wife?", None)]
+Atomic: [('q1', "What is the cause of death for John Middleton Murry's wife?", 'INSUFFICIENT_EVIDENCE', 0.0)]
+Final: INSUFFICIENT_EVIDENCE | There is no evidence provided regarding the cause of death for John Middleton Murry's wife, leading to insufficient information to answer the question.
+====================================================================================================
+#24 F1=0.6666666666666666 status=success
+Q: What is the place of birth of Lisbeth Palme's husband?
+Gold: ['Stockholm']
+Pred: Stockholm, Sweden
+DAG: [('q1', "Who is Lisbeth Palme's husband?", None), ('q2', "What is the place of birth of q1's answer?", ['q1'])]
+Atomic: [('q1', "Who is Lisbeth Palme's husband?", 'Olof Palme', 1.0), ('q2', 'What is the place of birth of Olof Palme?', 'Stockholm, Sweden', 0.75)]
+Final: Stockholm, Sweden | Lisbeth Palme's husband is Olof Palme, whose place of birth is widely known to be Stockholm, Sweden. Although the evidence does not explicitly state this, it is supported by general knowledge, leading to a moderately high confidence in the answer.
+====================================================================================================
+#26 F1=0.0 status=success
+Q: Who is the father-in-law of Sisowath Kossamak?
+Gold: ['Norodom Sutharot']
+Pred: Sisowath Monivong
+DAG: [('q1', 'Who is the father of Sisowath Kossamak?', None), ('q2', "Who is the law of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the father of Sisowath Kossamak?', 'Sisowath Monivong', 0.9), ('q2', 'Who is the law of Sisowath Monivong?', 'Sisowath Monivong', 0.9)]
+Final: Sisowath Monivong | Sisowath Monivong is identified as the father of Sisowath Kossamak, and since the father-in-law of Sisowath Kossamak is the same person, the answer is confirmed.
+====================================================================================================
+#27 F1=0.0 status=success
+Q: Who is Mugain's mother-in-law?
+Gold: ['Ness']
+Pred: Eochaid Feidlech
+DAG: [('q1', 'Who is the mother of Mugain?', None), ('q2', "Who is the mother-in-law of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the mother of Mugain?', 'Eochaid Feidlech', 0.9), ('q2', 'Who is the mother-in-law of Eochaid Feidlech?', 'Mugain', 0.9)]
+Final: Eochaid Feidlech | Mugain is identified as the daughter of Eochaid Feidlech, making her the mother-in-law of Eochaid Feidlech's son-in-law, Conchobar mac Nessa. This relationship directly answers the question about Mugain's mother-in-law.
+====================================================================================================
+#28 F1=0.0 status=failed
+Q: Where did Theodore Salisbury Woolsey's father study?
+Gold: ['Yale College']
+Pred: 
+DAG: missing
+Atomic: missing
+Final: missing
+====================================================================================================
+#29 F1=0.5 status=success
+Q: What is the place of birth of the director of film The Return Of Swamp Thing?
+Gold: ['New York']
+Pred: Glen Cove, Long Island, New York
+DAG: [('q1', 'Who is the director of The Return Of Swamp Thing?', None), ('q2', "What is the place of birth of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the director of The Return Of Swamp Thing?', 'Jim Wynorski', 0.9), ('q2', 'What is the place of birth of Jim Wynorski?', 'Glen Cove, Long Island, New York', 1.0)]
+Final: Glen Cove, Long Island, New York | The director of 'The Return Of Swamp Thing' is Jim Wynorski, who was born in Glen Cove, Long Island, New York. This information is directly supported by the evidence.
+====================================================================================================
+#30 F1=0.6666666666666666 status=success
+Q: Where was the place of death of the performer of song I Can'T See Myself Leaving You?
+Gold: ['Detroit']
+Pred: Detroit, Michigan
+DAG: [('q1', "Who is the performer of the song I Can'T See Myself Leaving You?", None), ('q2', "Where did q1's answer die?", ['q1'])]
+Atomic: [('q1', "Who is the performer of the song I Can'T See Myself Leaving You?", 'Aretha Franklin', 1.0), ('q2', 'Where did Aretha Franklin die?', 'Detroit, Michigan', 0.75)]
+Final: Detroit, Michigan | Aretha Franklin, the performer of the song 'I Can't See Myself Leaving You', died in Detroit, Michigan. This conclusion is supported by her early career beginnings in the city, which is a significant location in her life.
+====================================================================================================
+#32 F1=0.0 status=success
+Q: What nationality is Beatrice I, Countess Of Burgundy's husband?
+Gold: ['Germany']
+Pred: German
+DAG: [('q1', "Who is Beatrice I's husband?", None), ('q2', "What is the nationality of q1's answer?", ['q1'])]
+Atomic: [('q1', "Who is Beatrice I's husband?", 'Frederick Barbarossa', 0.9), ('q2', 'What is the nationality of Frederick Barbarossa?', 'German', 0.9)]
+Final: German | Beatrice I's husband is Frederick Barbarossa, who was the Holy Roman Emperor and is identified as German due to his election as King of Germany. The evidence strongly supports this conclusion.
+====================================================================================================
+#34 F1=0.5 status=success
+Q: Where was the performer of song Come Dance With Me (Song) born?
+Gold: ['Hoboken']
+Pred: Hoboken, New Jersey
+DAG: [('q1', 'Who is the performer of the song Come Dance With Me?', None), ('q2', "Where was q1's answer born?", ['q1'])]
+Atomic: [('q1', 'Who is the performer of the song Come Dance With Me?', 'Frank Sinatra', 0.9), ('q2', 'Where was Frank Sinatra born?', 'Hoboken, New Jersey', 0.9)]
+Final: Hoboken, New Jersey | The performer of 'Come Dance With Me' is Frank Sinatra, who was born in Hoboken, New Jersey. Both atomic answers are strongly supported by evidence.
+====================================================================================================
+#35 F1=0.2857142857142857 status=success
+Q: Where does the director of film Talk About A Stranger work at?
+Gold: ['UCLA']
+Pred: UCLA and Santa Monica City College
+DAG: [('q1', 'Who is the director of Talk About A Stranger?', None), ('q2', "Where does q1's answer work?", ['q1'])]
+Atomic: [('q1', 'Who is the director of Talk About A Stranger?', 'David Bradley', 1.0), ('q2', 'Where does David Bradley work?', 'UCLA and Santa Monica City College', 0.75)]
+Final: UCLA and Santa Monica City College | The director of 'Talk About A Stranger', David Bradley, worked at UCLA and Santa Monica City College, as indicated by the evidence. The confidence is moderate due to the reliance on general knowledge about his teaching roles.
+====================================================================================================
+#37 F1=0.0 status=success
+Q: What is the place of birth of the composer of film Inherent Vice (Film)?
+Gold: ['Oxford']
+Pred: Abingdon, England
+DAG: [('q1', 'Who is the composer of Inherent Vice (Film)?', None), ('q2', "What is the place of birth of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the composer of Inherent Vice (Film)?', 'Jonny Greenwood', 0.9), ('q2', 'What is the place of birth of Jonny Greenwood?', 'Abingdon, England', 0.9)]
+Final: Abingdon, England | The composer of 'Inherent Vice' is Jonny Greenwood, who was born in Abingdon, England. This is supported by evidence indicating his attendance at Abingdon School, which suggests his place of birth is in that area.
+====================================================================================================
+#39 F1=0.0 status=success
+Q: Where did Sylvia Burka's husband die?
+Gold: ['Toronto']
+Pred: Halton Region, Ontario
+DAG: [('q1', "Who is Sylvia Burka's husband?", None), ('q2', "Where did q1's answer die?", ['q1'])]
+Atomic: [('q1', "Who is Sylvia Burka's husband?", 'Jocelyn Lovell', 1.0), ('q2', 'Where did Jocelyn Lovell die?', 'Halton Region, Ontario', 0.75)]
+Final: Halton Region, Ontario | Sylvia Burka's husband, Jocelyn Lovell, died in Halton Region, Ontario, after a collision while training, as confirmed by the evidence.
+====================================================================================================
+#40 F1=0.0 status=success
+Q: Who lived longer, Ludwig Elsbett or Pamela Ann Rymer?
+Gold: ['Ludwig Elsbett']
+Pred: Pamela Ann Rymer
+DAG: [('q1', 'When did Ludwig Elsbett die?', None), ('q2', 'When did Pamela Ann Rymer die?', None)]
+Atomic: [('q1', 'When did Ludwig Elsbett die?', 'March 28, 2003', 1.0), ('q2', 'When did Pamela Ann Rymer die?', 'September 21, 2011', 1.0)]
+Final: Pamela Ann Rymer | Ludwig Elsbett died on March 28, 2003, and Pamela Ann Rymer died on September 21, 2011. Since Pamela Ann Rymer died later, she lived longer than Ludwig Elsbett.
+====================================================================================================
+#45 F1=0.9090909090909091 status=success
+Q: Where was the performer of song B Boy (Song) detained?
+Gold: ['State Correctional Institution – Chester']
+Pred: State Correctional Institution – Chester, Pennsylvania
+DAG: [('q1', 'Who is the performer of B Boy (Song)?', None), ('q2', "Where was q1's answer detained?", ['q1'])]
+Atomic: [('q1', 'Who is the performer of B Boy (Song)?', 'Meek Mill', 1.0), ('q2', 'Where was Meek Mill detained?', 'State Correctional Institution – Chester, Pennsylvania', 0.9)]
+Final: State Correctional Institution – Chester, Pennsylvania | The performer of 'B Boy', Meek Mill, was detained at the State Correctional Institution – Chester in Pennsylvania due to a parole violation. This information is well-supported by the evidence.
+====================================================================================================
+#47 F1=0.0 status=success
+Q: Are both movies, Naked Tango and Algiers (Film), from the same country?
+Gold: ['yes']
+Pred: no
+DAG: [('q1', 'What is the country of Naked Tango?', None), ('q2', 'What is the country of Algiers (Film)?', None), ('q3', "Are q1's answer and q2's answer the same?", ['q1', 'q2'])]
+Atomic: [('q1', 'What is the country of Naked Tango?', 'Argentina', 0.9), ('q2', 'What is the country of Algiers (Film)?', 'United States', 0.9), ('q3', 'Are Argentina and United States the same?', 'no', 1.0)]
+Final: no | Naked Tango is from Argentina, while Algiers (Film) is from the United States. Since these are distinct countries, the answer to the question is no.
+====================================================================================================
+#48 F1=0.7499999999999999 status=success
+Q: Who lived longer, Sir Thomas Wheate, 1St Baronet or Albert Édouard Le Brethon De Caligny?
+Gold: ['Sir Thomas Wheate, 1St Baronet']
+Pred: Sir Thomas Wheate
+DAG: [('q1', 'When did Sir Thomas Wheate live?', None), ('q2', 'When did Le Brethon De Caligny live?', None), ('q3', "Who lived longer, q1's answer or q2's answer?", ['q1', 'q2'])]
+Atomic: [('q1', 'When did Sir Thomas Wheate live?', '1667-1721', 0.9), ('q2', 'When did Le Brethon De Caligny live?', '1833-1863', 0.9), ('q3', 'Who lived longer, 1667-1721 or 1833-1863?', '1667-1721', 0.9)]
+Final: Sir Thomas Wheate | Sir Thomas Wheate lived from 1667 to 1721, totaling 54 years, while Albert Édouard Le Brethon de Caligny lived from 1833 to 1863, totaling 30 years. Therefore, Wheate lived longer.
+====================================================================================================
+#49 F1=0.2857142857142857 status=success
+Q: Where did the composer of film The Straw Hat die?
+Gold: ['Siversky']
+Pred: Siversky, near Saint Petersburg, Russian Federation
+DAG: [('q1', 'Who is the composer of The Straw Hat?', None), ('q2', "Where did q1's answer die?", ['q1'])]
+Atomic: [('q1', 'Who is the composer of The Straw Hat?', 'Isaac Schwartz', 0.9), ('q2', 'Where did Isaac Schwartz die?', 'Siversky, near Saint Petersburg, Russian Federation', 0.9)]
+Final: Siversky, near Saint Petersburg, Russian Federation | The composer of 'The Straw Hat' is Isaac Schwartz, who died in Siversky, near Saint Petersburg, as confirmed by the evidence.
+====================================================================================================
+#51 F1=0.0 status=success
+Q: Were both Pietro Salini and Domenico Ravenna, born in the same place?
+Gold: ['yes']
+Pred: no
+DAG: [('q1', 'Where was Pietro Salini born?', None), ('q2', 'Where was Domenico Ravenna born?', None)]
+Atomic: [('q1', 'Where was Pietro Salini born?', 'Rome, Italy', 1.0), ('q2', 'Where was Domenico Ravenna born?', 'INSUFFICIENT_EVIDENCE', 0.0)]
+Final: no | Pietro Salini was born in Rome, Italy, while there is insufficient evidence to determine the birthplace of Domenico Ravenna. Therefore, we cannot conclude that they were born in the same place.
+====================================================================================================
+#52 F1=0.0 status=success
+Q: Who is the father-in-law of John Ernest, Duke Of Saxe-Eisenach?
+Gold: ['William IV, Landgrave of Hesse-Kassel']
+Pred: INSUFFICIENT_EVIDENCE
+DAG: [('q1', 'Who is the spouse of John Ernest?', None), ('q2', "Who is the father of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the spouse of John Ernest?', 'INSUFFICIENT_EVIDENCE', 0.0), ('q2', "Who is the father of q1's answer?", 'William, Duke of Saxe-Weimar', 0.9)]
+Final: INSUFFICIENT_EVIDENCE | The first atomic answer regarding the spouse of John Ernest is insufficient, which prevents determining the father-in-law. Without knowing the spouse, we cannot identify their father.
+====================================================================================================
+#56 F1=0.0 status=success
+Q: Who is the spouse of the director of film My Three Merry Widows?
+Gold: ['Mapy Cortés']
+Pred: María del Pilar Cordero
+DAG: [('q1', 'Who is the director of My Three Merry Widows?', None), ('q2', "Who is the spouse of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the director of My Three Merry Widows?', 'Fernando Cortés', 1.0), ('q2', 'Who is the spouse of Fernando Cortés?', 'María del Pilar Cordero (Mapy Cortés)', 0.9)]
+Final: María del Pilar Cordero | The director of 'My Three Merry Widows' is Fernando Cortés, who is married to María del Pilar Cordero, known by her stage name Mapy Cortés. The evidence strongly supports this relationship.
+====================================================================================================
+#57 F1=0.0 status=success
+Q: Which country the composer of film Thunder On The Hill is from?
+Gold: ['Austrian']
+Pred: Austria
+DAG: [('q1', 'Who is the composer of Thunder On The Hill?', None), ('q2', "Which country is q1's answer from?", ['q1'])]
+Atomic: [('q1', 'Who is the composer of Thunder On The Hill?', 'Hans J. Salter', 0.75), ('q2', 'Which country is Hans J. Salter from?', 'Austria', 0.9)]
+Final: Austria | The composer of 'Thunder On The Hill' is Hans J. Salter, who is identified as being from Austria, thus making Austria the answer to the original question.
+====================================================================================================
+#60 F1=0.5 status=success
+Q: Where did Prince Ferdinand Of Bavaria's mother die?
+Gold: ['Munich']
+Pred: Schloss Nymphenburg, Munich
+DAG: [('q1', 'Who is the mother of Prince Ferdinand Of Bavaria?', None), ('q2', "Where did q1's answer die?", ['q1'])]
+Atomic: [('q1', 'Who is the mother of Prince Ferdinand Of Bavaria?', 'Infanta María de la Paz of Spain', 0.9), ('q2', 'Where did Infanta María de la Paz of Spain die?', 'Schloss Nymphenburg, Munich', 0.9)]
+Final: Schloss Nymphenburg, Munich | Infanta María de la Paz of Spain, the mother of Prince Ferdinand of Bavaria, died on 4 December 1946 at Schloss Nymphenburg in Munich, as confirmed by the evidence.
+====================================================================================================
+#62 F1=0.0 status=success
+Q: What nationality is the director of film Good People (Film)?
+Gold: ['Denmark']
+Pred: Danish
+DAG: [('q1', 'Who is the director of Good People (Film)?', None), ('q2', "What is the nationality of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the director of Good People (Film)?', 'Henrik Ruben Genz', 1.0), ('q2', 'What is the nationality of Henrik Ruben Genz?', 'Danish', 1.0)]
+Final: Danish | The director of 'Good People' is Henrik Ruben Genz, who is confirmed to be Danish. Both atomic answers are strongly supported by evidence.
+====================================================================================================
+#64 F1=0.0 status=success
+Q: What is the place of birth of the director of film Fortunella (Film)?
+Gold: ['Neapolitan']
+Pred: Naples
+DAG: [('q1', 'Who is the director of Fortunella (Film)?', None), ('q2', "What is the place of birth of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the director of Fortunella (Film)?', 'Eduardo De Filippo', 1.0), ('q2', 'What is the place of birth of Eduardo De Filippo?', 'Naples', 0.75)]
+Final: Naples | The director of Fortunella is Eduardo De Filippo, and while the evidence strongly suggests he was associated with Naples, it does not explicitly confirm it as his birthplace. However, given the context of his works and background, Naples is the most 
+====================================================================================================
+#67 F1=0.8571428571428571 status=success
+Q: Which film has the director who died later, Love, Honor And Oh-Baby! or I Cover The Underworld?
+Gold: ['Love, Honor And Oh-Baby!']
+Pred: Honor And Oh-Baby!
+DAG: [('q1', 'Who is the director of Love, Honor And Oh-Baby!', None), ('q2', "When did q1's answer die?", ['q1']), ('q3', 'Who is the director of I Cover The Underworld?', None), ('q4', "When did q3's answer die?", ['q3'])]
+Atomic: [('q1', 'Who is the director of Love, Honor And Oh-Baby!', 'Charles Lamont', 1.0), ('q3', 'Who is the director of I Cover The Underworld?', 'R. G. Springsteen', 1.0), ('q2', 'When did Charles Lamont die?', 'September 12, 1993', 1.0), ('q4', 'When did R. G. Springsteen die?', 'December 9, 1989', 1.0)]
+Final: Honor And Oh-Baby! | Charles Lamont, the director of 'Love, Honor And Oh-Baby!', died on September 12, 1993, while R. G. Springsteen, the director of 'I Cover The Underworld', died earlier on December 9, 1989. Therefore, 'Love, Honor And Oh-Baby!' has the director who di
+====================================================================================================
+#71 F1=0.0 status=success
+Q: Are Christopher Newton (Criminal) and Frances M. Vega of the same nationality?
+Gold: ['yes']
+Pred: no
+DAG: [('q1', 'What is the nationality of Christopher Newton?', None), ('q2', 'What is the nationality of Frances M. Vega?', None)]
+Atomic: [('q1', 'What is the nationality of Christopher Newton?', 'Canadian', 0.9), ('q2', 'What is the nationality of Frances M. Vega?', 'Puerto Rican', 0.9)]
+Final: no | Christopher Newton is Canadian, while Frances M. Vega is Puerto Rican. Since their nationalities differ, the answer to whether they are of the same nationality is 'No'.
+====================================================================================================
+#73 F1=0.0 status=success
+Q: Where did Saw Thanda's husband die?
+Gold: ['Mrauk U']
+Pred: INSUFFICIENT_EVIDENCE
+DAG: [('q1', "Who is Saw Thanda's husband?", None), ('q2', "Where did q1's answer die?", ['q1'])]
+Atomic: [('q1', "Who is Saw Thanda's husband?", 'King Dikkha, King Saw Hla, King Sekkya, King Phalaung', 0.75), ('q2', 'Where did King Dikkha, King Saw Hla, King Sekkya, King Phalaung die?', 'INSUFFICIENT_EVIDENCE', 0.0)]
+Final: INSUFFICIENT_EVIDENCE | The evidence does not provide any information about the locations where King Dikkha, King Saw Hla, King Sekkya, and King Phalaung died. Therefore, it is not possible to determine where Saw Thanda's husband died.
+====================================================================================================
+#74 F1=0.0 status=success
+Q: Did the movies Inside The Room and Crude Set Drama, originate from the same country?
+Gold: ['yes']
+Pred: no
+DAG: [('q1', 'Which country did Inside The Room originate from?', None), ('q2', 'Which country did Crude Set Drama originate from?', None), ('q3', "Is q1's answer the same as q2's answer?", ['q1', 'q2'])]
+Atomic: [('q1', 'Which country did Inside The Room originate from?', 'United Kingdom', 0.9), ('q2', 'Which country did Crude Set Drama originate from?', 'United Kingdom', 0.9), ('q3', 'Is United Kingdom the same as United Kingdom?', 'yes', 1.0)]
+Final: no | Both movies, 'Inside The Room' and 'Crude Set Drama', originated from the United Kingdom, making the answer to the question about their country of origin the same.
+====================================================================================================
+#79 F1=0.0 status=success
+Q: What nationality is the performer of song Am I Wrong (Étienne De Crécy Song)?
+Gold: ['France']
+Pred: French
+DAG: [('q1', 'Who is the performer of the song Am I Wrong (Étienne De Crécy Song)?', None), ('q2', "What is the nationality of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the performer of the song Am I Wrong (Étienne De Crécy Song)?', 'Étienne de Crécy', 0.9), ('q2', 'What is the nationality of Étienne de Crécy?', 'French', 1.0)]
+Final: French | The performer of the song 'Am I Wrong' is Étienne de Crécy, who is identified as a French DJ and producer, confirming his nationality as French.
+====================================================================================================
+#82 F1=0.6666666666666666 status=success
+Q: Was Angus Wagner or Juan Carlos Falcón born first?
+Gold: ['Juan Carlos Falcón']
+Pred: Juan Carlos Falc
+DAG: [('q1', 'When was Angus Wagner born?', None), ('q2', 'When was Juan Carlos Falcón born?', None)]
+Atomic: [('q1', 'When was Angus Wagner born?', '30 October 1997', 0.9), ('q2', 'When was Juan Carlos Falcón born?', '19 November 1979', 1.0)]
+Final: Juan Carlos Falc | Angus Wagner was born on 30 October 1997, while Juan Carlos Falcón was born earlier on 19 November 1979. Therefore, Juan Carlos Falcón was born first.
+====================================================================================================
+#83 F1=0.0 status=success
+Q: What is the date of birth of Henry I Of Ziębice's father?
+Gold: ['1322']
+Pred: 1322/1327
+DAG: [('q1', 'Who is the father of Henry I Of Ziębice?', None), ('q2', "What is the date of birth of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the father of Henry I Of Ziębice?', 'Nicholas the Small', 0.9), ('q2', 'What is the date of birth of Nicholas the Small?', '1322/1327', 0.75)]
+Final: 1322/1327 | The father of Henry I Of Ziębice is Nicholas the Small, who was born between 1322 and 1327. This range is supported by the evidence, although the exact date is not specified, leading to a coarser answer.
+====================================================================================================
+#84 F1=0.8 status=success
+Q: Was Sammy Hagar or Renaud Garcia-Fons born first?
+Gold: ['Sammy Hagar']
+Pred: Was Sammy Hagar
+DAG: [('q1', 'When was Sammy Hagar born?', None), ('q2', 'When was Renaud Garcia-Fons born?', None)]
+Atomic: [('q1', 'When was Sammy Hagar born?', 'October 13, 1947', 1.0), ('q2', 'When was Renaud Garcia-Fons born?', 'December 24, 1962', 1.0)]
+Final: Was Sammy Hagar | Sammy Hagar was born on October 13, 1947, while Renaud Garcia-Fons was born on December 24, 1962. Since 1947 is earlier than 1962, Sammy Hagar was born first.
+====================================================================================================
+#85 F1=0.0 status=success
+Q: Do David Elliot (Illustrator) and Eustace William Ferguson share the same nationality?
+Gold: ['yes']
+Pred: no
+DAG: [('q1', 'What is the nationality of David Elliot?', None), ('q2', 'What is the nationality of Eustace William Ferguson?', None)]
+Atomic: [('q1', 'What is the nationality of David Elliot?', 'Scottish', 1.0), ('q2', 'What is the nationality of Eustace William Ferguson?', 'New Zealand', 1.0)]
+Final: no | David Elliot is Scottish, while Eustace William Ferguson is New Zealand. Since they have different nationalities, they do not share the same nationality.
+====================================================================================================
+#88 F1=0.0 status=success
+Q: Which film has the director who was born later, The First Day Of Freedom or Malabimba – The Malicious Whore?
+Gold: ['Malabimba – The Malicious Whore']
+Pred: The First Day Of Freedom
+DAG: [('q1', 'Who is the director of The First Day Of Freedom?', None), ('q2', 'Who is the director of Malabimba – The Malicious Whore?', None), ('q3', "When was q1's answer born?", ['q1']), ('q4', "When was q2's answer born?", ['q2'])]
+Atomic: [('q1', 'Who is the director of The First Day Of Freedom?', 'Aleksander Ford', 1.0), ('q2', 'Who is the director of Malabimba – The Malicious Whore?', 'Andrea Bianchi', 1.0), ('q3', 'When was Aleksander Ford born?', '24 November 1908', 1.0), ('q4', 'When was Andrea Bianchi born?', 'March 31, 1925', 1.0)]
+Final: The First Day Of Freedom | The director of 'The First Day Of Freedom', Aleksander Ford, was born on November 24, 1908, while the director of 'Malabimba – The Malicious Whore', Andrea Bianchi, was born later on March 31, 1925. Therefore, 'Malabimba – The Malicious Whore' has th
+====================================================================================================
+#89 F1=0.8 status=success
+Q: Was Jorge Ledezma or Yuliya Baraley born first?
+Gold: ['Jorge Ledezma']
+Pred: Was Jorge Ledezma
+DAG: [('q1', 'When was Jorge Ledezma born?', None), ('q2', 'When was Yuliya Baraley born?', None)]
+Atomic: [('q1', 'When was Jorge Ledezma born?', '24 August 1963', 1.0), ('q2', 'When was Yuliya Baraley born?', '25 April 1990', 1.0)]
+Final: Was Jorge Ledezma | Jorge Ledezma was born on 24 August 1963, while Yuliya Baraley was born on 25 April 1990. Therefore, Jorge Ledezma was born first.
+====================================================================================================
+#92 F1=0.0 status=success
+Q: Who is Godomar Ii's stepmother?
+Gold: ['Caretene']
+Pred: INSUFFICIENT_EVIDENCE
+DAG: [('q1', 'Who is the stepmother of Godomar Ii?', None)]
+Atomic: [('q1', 'Who is the stepmother of Godomar Ii?', 'INSUFFICIENT_EVIDENCE', 0.0)]
+Final: INSUFFICIENT_EVIDENCE | There is no evidence provided that identifies the stepmother of Godomar II, leading to insufficient information to answer the question.
+====================================================================================================
+#93 F1=0.8 status=success
+Q: Where was the director of film The Outlaw Express born?
+Gold: ['Santa Rosa']
+Pred: Santa Rosa, California
+DAG: [('q1', 'Who is the director of The Outlaw Express?', None), ('q2', "Where was q1's answer born?", ['q1'])]
+Atomic: [('q1', 'Who is the director of The Outlaw Express?', 'Leo D. Maloney', 1.0), ('q2', 'Where was Leo D. Maloney born?', 'Santa Rosa, California', 1.0)]
+Final: Santa Rosa, California | The director of The Outlaw Express, Leo D. Maloney, was born in Santa Rosa, California, as confirmed by strong evidence.
+====================================================================================================
+#95 F1=0.6666666666666666 status=success
+Q: What nationality is Lamprocles's father?
+Gold: ['Athenian']
+Pred: Greek (Athenian)
+DAG: [('q1', 'Who is the father of Lamprocles?', None), ('q2', "What is the nationality of q1's answer?", ['q1'])]
+Atomic: [('q1', 'Who is the father of Lamprocles?', 'Socrates', 1.0), ('q2', 'What is the nationality of Socrates?', 'Greek (Athenian)', 1.0)]
+Final: Greek (Athenian) | Socrates, identified as the father of Lamprocles, is a classical Greek (Athenian) philosopher, which establishes his nationality as Greek (Athenian). Both atomic answers are strongly supported with high confidence.
+====================================================================================================
+#96 F1=0.0 status=success
+Q: Which country the performer of song I Like Control is from?
+Gold: ['American']
+Pred: Panamanian-American
+DAG: [('q1', 'Who is the performer of the song I Like Control?', None), ('q2', "Which country is q1's answer from?", ['q1'])]
+Atomic: [('q1', 'Who is the performer of the song I Like Control?', 'DJ Clue? featuring Missy Elliott, Nicole Wray, and Mocha', 0.9), ('q2', 'Which country is DJ Clue? featuring Missy Elliott, Nicole Wray, and Mocha from?', 'Panamanian-American', 0.9)]
+Final: Panamanian-American | The performer of 'I Like Control' is DJ Clue?, who is identified as Panamanian-American. This is well-supported by the evidence regarding his nationality.
+====================================================================================================
+#100 F1=0.5 status=success
+Q: Who is Marianus V Of Arborea's mother?
+Gold: ['Eleanor of Arborea']
+Pred: Eleanor
+DAG: [('q1', 'Who is the mother of Marianus V Of Arborea?', None)]
+Atomic: [('q1', 'Who is the mother of Marianus V Of Arborea?', 'Eleanor', 0.9)]
+Final: Eleanor | The evidence confirms that Marianus V of Arborea was under the tutelage of his mother, Eleanor, establishing her as his mother. The confidence in this answer is high due to strong supporting evidence.

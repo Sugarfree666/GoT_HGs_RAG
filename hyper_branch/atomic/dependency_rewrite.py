@@ -87,15 +87,23 @@ class DependencyQuestionRewrite:
     replacement_span: str = ""
     replacement_answer: str = ""
     replacements: list[DependencyReplacement] = field(default_factory=list)
+    unresolved_dependencies: list[dict[str, Any]] = field(default_factory=list)
+    primary_anchor_entities: list[str] = field(default_factory=list)
+    dependency_answers_used: list[dict[str, Any]] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "original_question": self.original_question,
+            "resolved_question": self.retrieval_question,
             "retrieval_question": self.retrieval_question,
             "whether_rewritten": self.whether_rewritten,
             "replacement_span": self.replacement_span,
             "replacement_answer": self.replacement_answer,
             "replacements": [item.to_dict() for item in self.replacements],
+            "dependency_replacements": [item.to_dict() for item in self.replacements],
+            "unresolved_dependencies": list(self.unresolved_dependencies),
+            "primary_anchor_entities": list(self.primary_anchor_entities),
+            "dependency_answers_used": list(self.dependency_answers_used),
         }
 
 
@@ -105,10 +113,70 @@ def resolve_dependency_question(
     *,
     confidence_threshold: float = 0.7,
 ) -> DependencyQuestionRewrite:
-    """Rewrite only resolved intermediate phrases using high-confidence entity answers."""
+    """Resolve explicit dependency-answer variables before legacy phrase rewriting."""
 
     retrieval_question = question
     replacements: list[DependencyReplacement] = []
+    unresolved_dependencies: list[dict[str, Any]] = []
+    primary_anchor_entities: list[str] = []
+    dependency_answers_used: list[dict[str, Any]] = []
+
+    for dependency in dependency_answers:
+        dependency_node_id = str(dependency.get("node_id", "") or "").strip()
+        if not dependency_node_id:
+            continue
+        matches = _find_dependency_variable_matches(retrieval_question, dependency_node_id)
+        if not matches:
+            continue
+        answer = str(dependency.get("answer", "") or "").strip()
+        confidence = _safe_float(dependency.get("confidence", 1.0))
+        has_confidence = "confidence" in dependency
+        if (
+            not answer
+            or normalize_label(answer).lower() in _INSUFFICIENT_ANSWERS
+            or (has_confidence and confidence <= 0.0)
+        ):
+            unresolved_dependencies.append(
+                {
+                    "node_id": dependency_node_id,
+                    "reason": "missing_or_low_confidence_answer",
+                    "answer": answer,
+                    "confidence": confidence,
+                }
+            )
+            continue
+        for match in reversed(matches):
+            retrieval_question = (
+                retrieval_question[: match.start()]
+                + answer
+                + retrieval_question[match.end() :]
+            )
+            replacements.insert(
+                0,
+                DependencyReplacement(
+                    dependency_node_id=dependency_node_id,
+                    replacement_span=match.group(0),
+                    replacement_answer=answer,
+                ),
+            )
+        if answer not in primary_anchor_entities:
+            primary_anchor_entities.append(answer)
+        dependency_answers_used.append(_dependency_answer_summary(dependency))
+
+    if replacements:
+        first_replacement = replacements[0]
+        return DependencyQuestionRewrite(
+            original_question=question,
+            retrieval_question=retrieval_question,
+            whether_rewritten=True,
+            replacement_span=first_replacement.replacement_span,
+            replacement_answer=first_replacement.replacement_answer,
+            replacements=replacements,
+            unresolved_dependencies=unresolved_dependencies,
+            primary_anchor_entities=primary_anchor_entities,
+            dependency_answers_used=dependency_answers_used,
+        )
+
     for dependency in dependency_answers:
         answer = str(dependency.get("answer", "") or "").strip()
         confidence = _safe_float(dependency.get("confidence", 0.0))
@@ -134,6 +202,9 @@ def resolve_dependency_question(
                 replacement_answer=answer,
             )
         )
+        if answer not in primary_anchor_entities:
+            primary_anchor_entities.append(answer)
+        dependency_answers_used.append(_dependency_answer_summary(dependency))
 
     first_replacement = replacements[0] if replacements else None
     return DependencyQuestionRewrite(
@@ -143,7 +214,40 @@ def resolve_dependency_question(
         replacement_span=first_replacement.replacement_span if first_replacement else "",
         replacement_answer=first_replacement.replacement_answer if first_replacement else "",
         replacements=replacements,
+        unresolved_dependencies=unresolved_dependencies,
+        primary_anchor_entities=primary_anchor_entities,
+        dependency_answers_used=dependency_answers_used,
     )
+
+
+def _find_dependency_variable_matches(question: str, dependency_node_id: str) -> list[re.Match[str]]:
+    qid = re.escape(dependency_node_id)
+    patterns = (
+        rf"\{{\s*{qid}\.answer\s*\}}",
+        rf"\b{qid}\s*['\u2019]s\s+answer\b",
+        rf"\b{qid}\s+answer\b",
+        rf"\banswer\s+(?:of|to)\s+{qid}\b",
+    )
+    matches: list[re.Match[str]] = []
+    occupied: list[tuple[int, int]] = []
+    for pattern in patterns:
+        for match in re.finditer(pattern, question, flags=re.IGNORECASE):
+            span = (match.start(), match.end())
+            if any(not (span[1] <= used[0] or span[0] >= used[1]) for used in occupied):
+                continue
+            matches.append(match)
+            occupied.append(span)
+    return sorted(matches, key=lambda item: item.start())
+
+
+def _dependency_answer_summary(dependency: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "node_id": str(dependency.get("node_id", "") or ""),
+        "question": str(dependency.get("question", "") or ""),
+        "answer": str(dependency.get("answer", "") or ""),
+        "confidence": _safe_float(dependency.get("confidence", 0.0)),
+        "answer_type": str(dependency.get("answer_type", "") or ""),
+    }
 
 
 def is_entity_like_answer(answer: str, answer_type: Any = None) -> bool:

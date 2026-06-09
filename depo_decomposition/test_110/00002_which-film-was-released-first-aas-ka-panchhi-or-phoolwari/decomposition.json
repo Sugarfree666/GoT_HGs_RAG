@@ -1,0 +1,4371 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 2,
+  "qid": null,
+  "question": "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+  "raw_question_item": {
+    "question": "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+    "answer": "Phoolwari"
+  },
+  "gold_answer": "Phoolwari",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+      "normalized_question": "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+      "changed": false,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "Which film was released first, Aas Ka Panchhi or Phoolwari?",
+        "changed": false,
+        "rewrite_type": "identity",
+        "added_type_variables": [],
+        "reason": "The original question is already grammatically correct and does not present any syntactic risks for dependency parsing."
+      }
+    },
+    "2_explicit_entities": {
+      "entities": [
+        {
+          "text": "Aas Ka Panchhi",
+          "start_char": 31,
+          "end_char": 45,
+          "semantic_type_hint": "Film",
+          "confidence": 0.95,
+          "reason": "explicit title of a film"
+        },
+        {
+          "text": "Phoolwari",
+          "start_char": 49,
+          "end_char": 58,
+          "semantic_type_hint": "Film",
+          "confidence": 0.95,
+          "reason": "explicit title of a film"
+        }
+      ],
+      "warnings": [
+        "Corrected explicit entity span for text='Aas Ka Panchhi' from (30, 45) to (31, 45)."
+      ],
+      "raw_payload": {
+        "entities": [
+          {
+            "text": "Aas Ka Panchhi",
+            "start_char": 30,
+            "end_char": 45,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "explicit title of a film"
+          },
+          {
+            "text": "Phoolwari",
+            "start_char": 49,
+            "end_char": 58,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "explicit title of a film"
+          }
+        ]
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "Aas Ka Panchhi",
+          "start_char": 31,
+          "end_char": 45,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "reason": "explicit title of a film"
+        },
+        {
+          "text": "Phoolwari",
+          "start_char": 49,
+          "end_char": 58,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "reason": "explicit title of a film"
+        }
+      ],
+      "warnings": [
+        "Corrected explicit entity span for text='Aas Ka Panchhi' from (30, 45) to (31, 45)."
+      ],
+      "raw_payload": {
+        "entities": [
+          {
+            "text": "Aas Ka Panchhi",
+            "start_char": 30,
+            "end_char": 45,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "explicit title of a film"
+          },
+          {
+            "text": "Phoolwari",
+            "start_char": 49,
+            "end_char": 58,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "explicit title of a film"
+          }
+        ]
+      }
+    },
+    "3_entity_masking": {
+      "masked_question": "Which film was released first, FilmA or FilmB?",
+      "mask_mappings": [
+        {
+          "placeholder": "FilmA",
+          "original_text": "Aas Ka Panchhi",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "original_char_span": [
+            31,
+            45
+          ],
+          "masked_char_span": [
+            31,
+            36
+          ],
+          "token_indices": []
+        },
+        {
+          "placeholder": "FilmB",
+          "original_text": "Phoolwari",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "original_char_span": [
+            49,
+            58
+          ],
+          "masked_char_span": [
+            40,
+            45
+          ],
+          "token_indices": []
+        }
+      ]
+    },
+    "3_selective_masked_question": "Which film was released first, FilmA or FilmB?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "Which",
+          "character_offset_begin": 0,
+          "character_offset_end": 5,
+          "lemma": "which",
+          "pos": "WDT"
+        },
+        {
+          "index": 2,
+          "word": "film",
+          "character_offset_begin": 6,
+          "character_offset_end": 10,
+          "lemma": "film",
+          "pos": "NN"
+        },
+        {
+          "index": 3,
+          "word": "was",
+          "character_offset_begin": 11,
+          "character_offset_end": 14,
+          "lemma": "be",
+          "pos": "VBD"
+        },
+        {
+          "index": 4,
+          "word": "released",
+          "character_offset_begin": 15,
+          "character_offset_end": 23,
+          "lemma": "release",
+          "pos": "VBN"
+        },
+        {
+          "index": 5,
+          "word": "first",
+          "character_offset_begin": 24,
+          "character_offset_end": 29,
+          "lemma": "first",
+          "pos": "RB"
+        },
+        {
+          "index": 6,
+          "word": ",",
+          "character_offset_begin": 29,
+          "character_offset_end": 30,
+          "lemma": ",",
+          "pos": ","
+        },
+        {
+          "index": 7,
+          "word": "FilmA",
+          "character_offset_begin": 31,
+          "character_offset_end": 36,
+          "lemma": "filma",
+          "pos": "NN"
+        },
+        {
+          "index": 8,
+          "word": "or",
+          "character_offset_begin": 37,
+          "character_offset_end": 39,
+          "lemma": "or",
+          "pos": "CC"
+        },
+        {
+          "index": 9,
+          "word": "FilmB",
+          "character_offset_begin": 40,
+          "character_offset_end": 45,
+          "lemma": "filmb",
+          "pos": "NN"
+        },
+        {
+          "index": 10,
+          "word": "?",
+          "character_offset_begin": 45,
+          "character_offset_end": 46,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "film",
+          "relation": "det",
+          "target": "Which",
+          "source_index": 2,
+          "target_index": 1
+        },
+        {
+          "source": "released",
+          "relation": "nsubj:pass",
+          "target": "film",
+          "source_index": 4,
+          "target_index": 2
+        },
+        {
+          "source": "released",
+          "relation": "aux:pass",
+          "target": "was",
+          "source_index": 4,
+          "target_index": 3
+        },
+        {
+          "source": "released",
+          "relation": "advmod",
+          "target": "first",
+          "source_index": 4,
+          "target_index": 5
+        },
+        {
+          "source": "released",
+          "relation": "punct",
+          "target": ",",
+          "source_index": 4,
+          "target_index": 6
+        },
+        {
+          "source": "released",
+          "relation": "obj",
+          "target": "FilmA",
+          "source_index": 4,
+          "target_index": 7
+        },
+        {
+          "source": "FilmB",
+          "relation": "cc",
+          "target": "or",
+          "source_index": 9,
+          "target_index": 8
+        },
+        {
+          "source": "released",
+          "relation": "obj",
+          "target": "FilmB",
+          "source_index": 4,
+          "target_index": 9
+        },
+        {
+          "source": "FilmA",
+          "relation": "conj:or",
+          "target": "FilmB",
+          "source_index": 7,
+          "target_index": 9
+        },
+        {
+          "source": "released",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 4,
+          "target_index": 10
+        }
+      ],
+      "edge_display": [
+        "film[2] --det--> Which[1]",
+        "released[4] --nsubj:pass--> film[2]",
+        "released[4] --aux:pass--> was[3]",
+        "released[4] --advmod--> first[5]",
+        "released[4] --punct--> ,[6]",
+        "released[4] --obj--> FilmA[7]",
+        "FilmB[9] --cc--> or[8]",
+        "released[4] --obj--> FilmB[9]",
+        "FilmA[7] --conj:or--> FilmB[9]",
+        "released[4] --punct--> ?[10]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "Which",
+          "graph_text": "Which",
+          "text": "Which",
+          "label": "Which[1]",
+          "order": 1,
+          "pos": "WDT",
+          "lemma": "which",
+          "character_offset_begin": 0,
+          "character_offset_end": 5
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "film",
+          "graph_text": "film",
+          "text": "film",
+          "label": "film[2]",
+          "order": 2,
+          "pos": "NN",
+          "lemma": "film",
+          "character_offset_begin": 6,
+          "character_offset_end": 10
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "was",
+          "graph_text": "was",
+          "text": "was",
+          "label": "was[3]",
+          "order": 3,
+          "pos": "VBD",
+          "lemma": "be",
+          "character_offset_begin": 11,
+          "character_offset_end": 14
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "released",
+          "graph_text": "released",
+          "text": "released",
+          "label": "released[4]",
+          "order": 4,
+          "pos": "VBN",
+          "lemma": "release",
+          "character_offset_begin": 15,
+          "character_offset_end": 23
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "first",
+          "graph_text": "first",
+          "text": "first",
+          "label": "first[5]",
+          "order": 5,
+          "pos": "RB",
+          "lemma": "first",
+          "character_offset_begin": 24,
+          "character_offset_end": 29
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": ",",
+          "graph_text": ",",
+          "text": ",",
+          "label": ",[6]",
+          "order": 6,
+          "pos": ",",
+          "lemma": ",",
+          "character_offset_begin": 29,
+          "character_offset_end": 30
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "FilmA",
+          "graph_text": "FilmA",
+          "text": "Aas Ka Panchhi",
+          "label": "Aas Ka Panchhi[7]",
+          "order": 7,
+          "pos": "NN",
+          "lemma": "filma",
+          "character_offset_begin": 31,
+          "character_offset_end": 36
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "or",
+          "graph_text": "or",
+          "text": "or",
+          "label": "or[8]",
+          "order": 8,
+          "pos": "CC",
+          "lemma": "or",
+          "character_offset_begin": 37,
+          "character_offset_end": 39
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "FilmB",
+          "graph_text": "FilmB",
+          "text": "Phoolwari",
+          "label": "Phoolwari[9]",
+          "order": 9,
+          "pos": "NN",
+          "lemma": "filmb",
+          "character_offset_begin": 40,
+          "character_offset_end": 45
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[10]",
+          "order": 10,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 45,
+          "character_offset_end": 46
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "2",
+          "source_text": "Which",
+          "target_text": "film",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "1",
+              "governor_text": "film",
+              "dependent_text": "Which",
+              "governor_graph_text": "film",
+              "dependent_graph_text": "Which",
+              "governor_index": 2,
+              "dependent_index": 1,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "1",
+          "dependency_label": "det",
+          "token_text": {
+            "2": "film",
+            "1": "Which"
+          },
+          "token_index": {
+            "2": 2,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "4",
+          "source_text": "film",
+          "target_text": "released",
+          "relation": "nsubj:pass",
+          "relations": [
+            "nsubj:pass"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "2",
+              "governor_text": "released",
+              "dependent_text": "film",
+              "governor_graph_text": "released",
+              "dependent_graph_text": "film",
+              "governor_index": 4,
+              "dependent_index": 2,
+              "dependency_label": "nsubj:pass"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "2",
+          "dependency_label": "nsubj:pass",
+          "token_text": {
+            "4": "released",
+            "2": "film"
+          },
+          "token_index": {
+            "4": 4,
+            "2": 2
+          }
+        },
+        {
+          "source": "3",
+          "target": "4",
+          "source_text": "was",
+          "target_text": "released",
+          "relation": "aux:pass",
+          "relations": [
+            "aux:pass"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "3",
+              "governor_text": "released",
+              "dependent_text": "was",
+              "governor_graph_text": "released",
+              "dependent_graph_text": "was",
+              "governor_index": 4,
+              "dependent_index": 3,
+              "dependency_label": "aux:pass"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "3",
+          "dependency_label": "aux:pass",
+          "token_text": {
+            "4": "released",
+            "3": "was"
+          },
+          "token_index": {
+            "4": 4,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "5",
+          "source_text": "released",
+          "target_text": "first",
+          "relation": "advmod",
+          "relations": [
+            "advmod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "5",
+              "governor_text": "released",
+              "dependent_text": "first",
+              "governor_graph_text": "released",
+              "dependent_graph_text": "first",
+              "governor_index": 4,
+              "dependent_index": 5,
+              "dependency_label": "advmod"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "5",
+          "dependency_label": "advmod",
+          "token_text": {
+            "4": "released",
+            "5": "first"
+          },
+          "token_index": {
+            "4": 4,
+            "5": 5
+          }
+        },
+        {
+          "source": "4",
+          "target": "6",
+          "source_text": "released",
+          "target_text": ",",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "6",
+              "governor_text": "released",
+              "dependent_text": ",",
+              "governor_graph_text": "released",
+              "dependent_graph_text": ",",
+              "governor_index": 4,
+              "dependent_index": 6,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "6",
+          "dependency_label": "punct",
+          "token_text": {
+            "4": "released",
+            "6": ","
+          },
+          "token_index": {
+            "4": 4,
+            "6": 6
+          }
+        },
+        {
+          "source": "4",
+          "target": "7",
+          "source_text": "released",
+          "target_text": "Aas Ka Panchhi",
+          "relation": "obj",
+          "relations": [
+            "obj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "7",
+              "governor_text": "released",
+              "dependent_text": "Aas Ka Panchhi",
+              "governor_graph_text": "released",
+              "dependent_graph_text": "FilmA",
+              "governor_index": 4,
+              "dependent_index": 7,
+              "dependency_label": "obj"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "7",
+          "dependency_label": "obj",
+          "token_text": {
+            "4": "released",
+            "7": "Aas Ka Panchhi"
+          },
+          "token_index": {
+            "4": 4,
+            "7": 7
+          }
+        },
+        {
+          "source": "4",
+          "target": "9",
+          "source_text": "released",
+          "target_text": "Phoolwari",
+          "relation": "obj",
+          "relations": [
+            "obj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "9",
+              "governor_text": "released",
+              "dependent_text": "Phoolwari",
+              "governor_graph_text": "released",
+              "dependent_graph_text": "FilmB",
+              "governor_index": 4,
+              "dependent_index": 9,
+              "dependency_label": "obj"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "9",
+          "dependency_label": "obj",
+          "token_text": {
+            "4": "released",
+            "9": "Phoolwari"
+          },
+          "token_index": {
+            "4": 4,
+            "9": 9
+          }
+        },
+        {
+          "source": "4",
+          "target": "10",
+          "source_text": "released",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "10",
+              "governor_text": "released",
+              "dependent_text": "?",
+              "governor_graph_text": "released",
+              "dependent_graph_text": "?",
+              "governor_index": 4,
+              "dependent_index": 10,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "10",
+          "dependency_label": "punct",
+          "token_text": {
+            "4": "released",
+            "10": "?"
+          },
+          "token_index": {
+            "4": 4,
+            "10": 10
+          }
+        },
+        {
+          "source": "7",
+          "target": "9",
+          "source_text": "Aas Ka Panchhi",
+          "target_text": "Phoolwari",
+          "relation": "conj:or",
+          "relations": [
+            "conj:or"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "9",
+              "governor_text": "Aas Ka Panchhi",
+              "dependent_text": "Phoolwari",
+              "governor_graph_text": "FilmA",
+              "dependent_graph_text": "FilmB",
+              "governor_index": 7,
+              "dependent_index": 9,
+              "dependency_label": "conj:or"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "9",
+          "dependency_label": "conj:or",
+          "token_text": {
+            "7": "Aas Ka Panchhi",
+            "9": "Phoolwari"
+          },
+          "token_index": {
+            "7": 7,
+            "9": 9
+          }
+        },
+        {
+          "source": "8",
+          "target": "9",
+          "source_text": "or",
+          "target_text": "Phoolwari",
+          "relation": "cc",
+          "relations": [
+            "cc"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "8",
+              "governor_text": "Phoolwari",
+              "dependent_text": "or",
+              "governor_graph_text": "FilmB",
+              "dependent_graph_text": "or",
+              "governor_index": 9,
+              "dependent_index": 8,
+              "dependency_label": "cc"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "8",
+          "dependency_label": "cc",
+          "token_text": {
+            "9": "Phoolwari",
+            "8": "or"
+          },
+          "token_index": {
+            "9": 9,
+            "8": 8
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "Aas Ka Panchhi",
+        "graph_node_ids": [
+          "7"
+        ],
+        "token_ids": [
+          7
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Film"
+      },
+      {
+        "entity_id": "e2",
+        "text": "Phoolwari",
+        "graph_node_ids": [
+          "9"
+        ],
+        "token_ids": [
+          9
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Film"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "released",
+          "film",
+          "Which"
+        ],
+        "node_ids": [
+          "7",
+          "4",
+          "2",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "released",
+            "target_text": "film",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "released",
+                "dependent_text": "film",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "film",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "film",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "film",
+                "dependent_text": "Which",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "Which",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "released",
+          "film"
+        ],
+        "node_ids": [
+          "7",
+          "4",
+          "2"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "released",
+            "target_text": "film",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "released",
+                "dependent_text": "film",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "film",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "released",
+          "first"
+        ],
+        "node_ids": [
+          "7",
+          "4",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "5",
+            "source_text": "released",
+            "target_text": "first",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "5",
+                "governor_text": "released",
+                "dependent_text": "first",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "first",
+                "governor_index": 4,
+                "dependent_index": 5,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "released"
+        ],
+        "node_ids": [
+          "7",
+          "4"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "released",
+          "was"
+        ],
+        "node_ids": [
+          "7",
+          "4",
+          "3"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "released",
+            "target_text": "was",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "released",
+                "dependent_text": "was",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "was",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "released",
+          ","
+        ],
+        "node_ids": [
+          "7",
+          "4",
+          "6"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "released",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "released",
+                "dependent_text": ",",
+                "governor_graph_text": "released",
+                "dependent_graph_text": ",",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "released",
+          "?"
+        ],
+        "node_ids": [
+          "7",
+          "4",
+          "10"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "10",
+            "source_text": "released",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "10",
+                "governor_text": "released",
+                "dependent_text": "?",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "?",
+                "governor_index": 4,
+                "dependent_index": 10,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "released",
+          "Phoolwari"
+        ],
+        "node_ids": [
+          "7",
+          "4",
+          "9"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "9",
+            "source_text": "released",
+            "target_text": "Phoolwari",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "Phoolwari"
+        ],
+        "node_ids": [
+          "7",
+          "9"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "Phoolwari",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "Phoolwari",
+          "released",
+          "film",
+          "Which"
+        ],
+        "node_ids": [
+          "7",
+          "9",
+          "4",
+          "2",
+          "1"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "Phoolwari",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "released",
+            "target_text": "film",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "released",
+                "dependent_text": "film",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "film",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "film",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "film",
+                "dependent_text": "Which",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "Which",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p11",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "Phoolwari",
+          "released",
+          "film"
+        ],
+        "node_ids": [
+          "7",
+          "9",
+          "4",
+          "2"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "Phoolwari",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "released",
+            "target_text": "film",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "released",
+                "dependent_text": "film",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "film",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p12",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "Phoolwari",
+          "released",
+          "first"
+        ],
+        "node_ids": [
+          "7",
+          "9",
+          "4",
+          "5"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "Phoolwari",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "5",
+            "source_text": "released",
+            "target_text": "first",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "5",
+                "governor_text": "released",
+                "dependent_text": "first",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "first",
+                "governor_index": 4,
+                "dependent_index": 5,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p13",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "Phoolwari",
+          "released"
+        ],
+        "node_ids": [
+          "7",
+          "9",
+          "4"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "Phoolwari",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p14",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "released",
+          "Phoolwari",
+          "or"
+        ],
+        "node_ids": [
+          "7",
+          "4",
+          "9",
+          "8"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "9",
+            "source_text": "released",
+            "target_text": "Phoolwari",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "8",
+            "source_text": "Phoolwari",
+            "target_text": "or",
+            "relations": [
+              "cc"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "8",
+                "governor_text": "Phoolwari",
+                "dependent_text": "or",
+                "governor_graph_text": "FilmB",
+                "dependent_graph_text": "or",
+                "governor_index": 9,
+                "dependent_index": 8,
+                "dependency_label": "cc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p15",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "Phoolwari",
+          "released",
+          "was"
+        ],
+        "node_ids": [
+          "7",
+          "9",
+          "4",
+          "3"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "Phoolwari",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "released",
+            "target_text": "was",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "released",
+                "dependent_text": "was",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "was",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p16",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "Phoolwari",
+          "released",
+          ","
+        ],
+        "node_ids": [
+          "7",
+          "9",
+          "4",
+          "6"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "Phoolwari",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "released",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "released",
+                "dependent_text": ",",
+                "governor_graph_text": "released",
+                "dependent_graph_text": ",",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p17",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "Phoolwari",
+          "released",
+          "?"
+        ],
+        "node_ids": [
+          "7",
+          "9",
+          "4",
+          "10"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "Phoolwari",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "10",
+            "source_text": "released",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "10",
+                "governor_text": "released",
+                "dependent_text": "?",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "?",
+                "governor_index": 4,
+                "dependent_index": 10,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p18",
+        "entity_id": "e1",
+        "entity_text": "Aas Ka Panchhi",
+        "nodes": [
+          "Aas Ka Panchhi",
+          "Phoolwari",
+          "or"
+        ],
+        "node_ids": [
+          "7",
+          "9",
+          "8"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "7",
+            "target": "9",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "Phoolwari",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "8",
+            "source_text": "Phoolwari",
+            "target_text": "or",
+            "relations": [
+              "cc"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "8",
+                "governor_text": "Phoolwari",
+                "dependent_text": "or",
+                "governor_graph_text": "FilmB",
+                "dependent_graph_text": "or",
+                "governor_index": 9,
+                "dependent_index": 8,
+                "dependency_label": "cc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p1",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "released",
+          "film",
+          "Which"
+        ],
+        "node_ids": [
+          "9",
+          "4",
+          "2",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "released",
+            "target_text": "film",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "released",
+                "dependent_text": "film",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "film",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "film",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "film",
+                "dependent_text": "Which",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "Which",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p2",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "released",
+          "film"
+        ],
+        "node_ids": [
+          "9",
+          "4",
+          "2"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "released",
+            "target_text": "film",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "released",
+                "dependent_text": "film",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "film",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p3",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "released",
+          "first"
+        ],
+        "node_ids": [
+          "9",
+          "4",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "5",
+            "source_text": "released",
+            "target_text": "first",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "5",
+                "governor_text": "released",
+                "dependent_text": "first",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "first",
+                "governor_index": 4,
+                "dependent_index": 5,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p4",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "released"
+        ],
+        "node_ids": [
+          "9",
+          "4"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p5",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "released",
+          "was"
+        ],
+        "node_ids": [
+          "9",
+          "4",
+          "3"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "released",
+            "target_text": "was",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "released",
+                "dependent_text": "was",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "was",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p6",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "released",
+          ","
+        ],
+        "node_ids": [
+          "9",
+          "4",
+          "6"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "released",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "released",
+                "dependent_text": ",",
+                "governor_graph_text": "released",
+                "dependent_graph_text": ",",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p7",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "released",
+          "?"
+        ],
+        "node_ids": [
+          "9",
+          "4",
+          "10"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "10",
+            "source_text": "released",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "10",
+                "governor_text": "released",
+                "dependent_text": "?",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "?",
+                "governor_index": 4,
+                "dependent_index": 10,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p8",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "or"
+        ],
+        "node_ids": [
+          "9",
+          "8"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "8",
+            "source_text": "Phoolwari",
+            "target_text": "or",
+            "relations": [
+              "cc"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "8",
+                "governor_text": "Phoolwari",
+                "dependent_text": "or",
+                "governor_graph_text": "FilmB",
+                "dependent_graph_text": "or",
+                "governor_index": 9,
+                "dependent_index": 8,
+                "dependency_label": "cc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p9",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "released",
+          "Aas Ka Panchhi"
+        ],
+        "node_ids": [
+          "9",
+          "4",
+          "7"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "4",
+            "source_text": "Phoolwari",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "9",
+                "governor_text": "released",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 4,
+                "dependent_index": 9,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "7",
+            "source_text": "released",
+            "target_text": "Aas Ka Panchhi",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p10",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "Aas Ka Panchhi"
+        ],
+        "node_ids": [
+          "9",
+          "7"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "7",
+            "source_text": "Phoolwari",
+            "target_text": "Aas Ka Panchhi",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p11",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "Aas Ka Panchhi",
+          "released",
+          "film",
+          "Which"
+        ],
+        "node_ids": [
+          "9",
+          "7",
+          "4",
+          "2",
+          "1"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "7",
+            "source_text": "Phoolwari",
+            "target_text": "Aas Ka Panchhi",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "released",
+            "target_text": "film",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "released",
+                "dependent_text": "film",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "film",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "film",
+            "target_text": "Which",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "film",
+                "dependent_text": "Which",
+                "governor_graph_text": "film",
+                "dependent_graph_text": "Which",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p12",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "Aas Ka Panchhi",
+          "released",
+          "film"
+        ],
+        "node_ids": [
+          "9",
+          "7",
+          "4",
+          "2"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "7",
+            "source_text": "Phoolwari",
+            "target_text": "Aas Ka Panchhi",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "2",
+            "source_text": "released",
+            "target_text": "film",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "2",
+                "governor_text": "released",
+                "dependent_text": "film",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "film",
+                "governor_index": 4,
+                "dependent_index": 2,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p13",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "Aas Ka Panchhi",
+          "released",
+          "first"
+        ],
+        "node_ids": [
+          "9",
+          "7",
+          "4",
+          "5"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "7",
+            "source_text": "Phoolwari",
+            "target_text": "Aas Ka Panchhi",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "5",
+            "source_text": "released",
+            "target_text": "first",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "5",
+                "governor_text": "released",
+                "dependent_text": "first",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "first",
+                "governor_index": 4,
+                "dependent_index": 5,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p14",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "Aas Ka Panchhi",
+          "released"
+        ],
+        "node_ids": [
+          "9",
+          "7",
+          "4"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "7",
+            "source_text": "Phoolwari",
+            "target_text": "Aas Ka Panchhi",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p15",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "Aas Ka Panchhi",
+          "released",
+          "was"
+        ],
+        "node_ids": [
+          "9",
+          "7",
+          "4",
+          "3"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "7",
+            "source_text": "Phoolwari",
+            "target_text": "Aas Ka Panchhi",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "released",
+            "target_text": "was",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "released",
+                "dependent_text": "was",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "was",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p16",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "Aas Ka Panchhi",
+          "released",
+          ","
+        ],
+        "node_ids": [
+          "9",
+          "7",
+          "4",
+          "6"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "7",
+            "source_text": "Phoolwari",
+            "target_text": "Aas Ka Panchhi",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "6",
+            "source_text": "released",
+            "target_text": ",",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "6",
+                "governor_text": "released",
+                "dependent_text": ",",
+                "governor_graph_text": "released",
+                "dependent_graph_text": ",",
+                "governor_index": 4,
+                "dependent_index": 6,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e2_p17",
+        "entity_id": "e2",
+        "entity_text": "Phoolwari",
+        "nodes": [
+          "Phoolwari",
+          "Aas Ka Panchhi",
+          "released",
+          "?"
+        ],
+        "node_ids": [
+          "9",
+          "7",
+          "4",
+          "10"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "9",
+            "target": "7",
+            "source_text": "Phoolwari",
+            "target_text": "Aas Ka Panchhi",
+            "relations": [
+              "conj:or"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "9",
+                "governor_text": "Aas Ka Panchhi",
+                "dependent_text": "Phoolwari",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "FilmB",
+                "governor_index": 7,
+                "dependent_index": 9,
+                "dependency_label": "conj:or"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "Aas Ka Panchhi",
+            "target_text": "released",
+            "relations": [
+              "obj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "released",
+                "dependent_text": "Aas Ka Panchhi",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "obj"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "10",
+            "source_text": "released",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "10",
+                "governor_text": "released",
+                "dependent_text": "?",
+                "governor_graph_text": "released",
+                "dependent_graph_text": "?",
+                "governor_index": 4,
+                "dependent_index": 10,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "7_5_terminal_glue_path_pruning": {
+      "total_raw_paths": 35,
+      "total_kept_paths": 20,
+      "total_pruned_paths": 15,
+      "total_pruned_ratio": 0.42857142857142855,
+      "by_entity": {
+        "e1": {
+          "raw": 18,
+          "kept": 10,
+          "pruned": 8,
+          "pruned_ratio": 0.4444444444444444,
+          "fallback_used": false,
+          "pruned_examples": [
+            {
+              "path_id": "e1_p5",
+              "terminal": "was",
+              "reason": "terminal_glue_token",
+              "path_text": "Aas Ka Panchhi -> released -> was"
+            },
+            {
+              "path_id": "e1_p6",
+              "terminal": ",",
+              "reason": "terminal_glue_token",
+              "path_text": "Aas Ka Panchhi -> released -> ,"
+            },
+            {
+              "path_id": "e1_p7",
+              "terminal": "?",
+              "reason": "terminal_glue_token",
+              "path_text": "Aas Ka Panchhi -> released -> ?"
+            },
+            {
+              "path_id": "e1_p14",
+              "terminal": "or",
+              "reason": "terminal_glue_token",
+              "path_text": "Aas Ka Panchhi -> released -> Phoolwari -> or"
+            },
+            {
+              "path_id": "e1_p15",
+              "terminal": "was",
+              "reason": "terminal_glue_token",
+              "path_text": "Aas Ka Panchhi -> Phoolwari -> released -> was"
+            }
+          ]
+        },
+        "e2": {
+          "raw": 17,
+          "kept": 10,
+          "pruned": 7,
+          "pruned_ratio": 0.4117647058823529,
+          "fallback_used": false,
+          "pruned_examples": [
+            {
+              "path_id": "e2_p5",
+              "terminal": "was",
+              "reason": "terminal_glue_token",
+              "path_text": "Phoolwari -> released -> was"
+            },
+            {
+              "path_id": "e2_p6",
+              "terminal": ",",
+              "reason": "terminal_glue_token",
+              "path_text": "Phoolwari -> released -> ,"
+            },
+            {
+              "path_id": "e2_p7",
+              "terminal": "?",
+              "reason": "terminal_glue_token",
+              "path_text": "Phoolwari -> released -> ?"
+            },
+            {
+              "path_id": "e2_p8",
+              "terminal": "or",
+              "reason": "terminal_glue_token",
+              "path_text": "Phoolwari -> or"
+            },
+            {
+              "path_id": "e2_p15",
+              "terminal": "was",
+              "reason": "terminal_glue_token",
+              "path_text": "Phoolwari -> Aas Ka Panchhi -> released -> was"
+            }
+          ]
+        }
+      }
+    },
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "which",
+          "released"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Aas Ka Panchhi, reaches the released predicate, and includes the which cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p2",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Aas Ka Panchhi and reaches the released predicate but misses the which cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p3",
+        "score": 80.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released",
+          "first"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Aas Ka Panchhi, reaches the released predicate, and includes the first cue but misses the which cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p4",
+        "score": 60.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Aas Ka Panchhi and reaches the released predicate but lacks coverage for the answer intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p8",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Aas Ka Panchhi, reaches the released predicate, and includes the necessary cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p9",
+        "score": 50.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "which",
+          "released"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Aas Ka Panchhi but only connects to Phoolwari without reaching the necessary predicates."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p10",
+        "score": 95.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released",
+          "which"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Aas Ka Panchhi, connects to Phoolwari, and includes the released predicate and the which cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p11",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Aas Ka Panchhi, connects to Phoolwari, and includes the released predicate but misses the which cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p12",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released",
+          "first"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Aas Ka Panchhi, connects to Phoolwari, and includes the released predicate and the first cue but misses the which cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p13",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "which",
+          "released"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Aas Ka Panchhi, connects to Phoolwari, but lacks coverage for the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p1",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released",
+          "which"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Phoolwari, reaches the released predicate, and includes the which cue."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p2",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Phoolwari and reaches the released predicate but misses the which cue."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p3",
+        "score": 80.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released",
+          "first"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Phoolwari, reaches the released predicate, and includes the first cue but misses the which cue."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p4",
+        "score": 60.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Phoolwari and reaches the released predicate but lacks coverage for the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p9",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Phoolwari, reaches the released predicate, and includes the necessary cues."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p10",
+        "score": 50.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "which",
+          "released"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Phoolwari but only connects to Aas Ka Panchhi without reaching the necessary predicates."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p11",
+        "score": 95.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released",
+          "which"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from Phoolwari, connects to Aas Ka Panchhi, and includes the released predicate and the which cue."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p12",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [
+          "released",
+          "first"
+        ],
+        "missing_cues": [
+          "which"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Phoolwari, connects to Aas Ka Panchhi, and includes the released predicate and the first cue but misses the which cue."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p13",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "which",
+          "released"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Phoolwari, connects to Aas Ka Panchhi, but lacks coverage for the answer intent."
+      },
+      {
+        "entity_id": "e2",
+        "path_id": "e2_p14",
+        "score": 70.0,
+        "valid": true,
+        "terminal_hint": "release_date",
+        "semantic_chain_hint": [
+          "film",
+          "release_date"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "which",
+          "released"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from Phoolwari, connects to Aas Ka Panchhi, but lacks coverage for the answer intent."
+      }
+    ],
+    "8_1_top_paths_by_entity": {
+      "e1": [
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p10",
+          "score": 95.0,
+          "valid": true,
+          "terminal_hint": "release_date",
+          "semantic_chain_hint": [
+            "film",
+            "release_date"
+          ],
+          "covered_cues": [
+            "released",
+            "which"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Aas Ka Panchhi, connects to Phoolwari, and includes the released predicate and the which cue."
+        },
+        {
+          "entity_id": "e1",
+          "path_id": "e1_p1",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "release_date",
+          "semantic_chain_hint": [
+            "film",
+            "release_date"
+          ],
+          "covered_cues": [
+            "which",
+            "released"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Aas Ka Panchhi, reaches the released predicate, and includes the which cue."
+        }
+      ],
+      "e2": [
+        {
+          "entity_id": "e2",
+          "path_id": "e2_p11",
+          "score": 95.0,
+          "valid": true,
+          "terminal_hint": "release_date",
+          "semantic_chain_hint": [
+            "film",
+            "release_date"
+          ],
+          "covered_cues": [
+            "released",
+            "which"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Phoolwari, connects to Aas Ka Panchhi, and includes the released predicate and the which cue."
+        },
+        {
+          "entity_id": "e2",
+          "path_id": "e2_p1",
+          "score": 90.0,
+          "valid": true,
+          "terminal_hint": "release_date",
+          "semantic_chain_hint": [
+            "film",
+            "release_date"
+          ],
+          "covered_cues": [
+            "released",
+            "which"
+          ],
+          "missing_cues": [],
+          "fatal_errors": [],
+          "reason": "The path starts from Phoolwari, reaches the released predicate, and includes the which cue."
+        }
+      ]
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p10",
+          "e2": "e2_p11"
+        },
+        "mean_path_score": 95.0
+      },
+      {
+        "path_set_id": "ps2",
+        "path_ids_by_entity": {
+          "e1": "e1_p10",
+          "e2": "e2_p1"
+        },
+        "mean_path_score": 92.5
+      },
+      {
+        "path_set_id": "ps3",
+        "path_ids_by_entity": {
+          "e1": "e1_p1",
+          "e2": "e2_p11"
+        },
+        "mean_path_score": 92.5
+      },
+      {
+        "path_set_id": "ps4",
+        "path_ids_by_entity": {
+          "e1": "e1_p1",
+          "e2": "e2_p1"
+        },
+        "mean_path_score": 90.0
+      }
+    ],
+    "9_selected_dependency_path_evidence": [
+      {
+        "path_set_id": "ps1",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "Aas Ka Panchhi",
+            "path_id": "e1_p10",
+            "path_text": "Aas Ka Panchhi -> Phoolwari -> released -> film -> Which",
+            "node_texts": [
+              "Aas Ka Panchhi",
+              "Phoolwari",
+              "released",
+              "film",
+              "Which"
+            ],
+            "node_ids": [
+              "7",
+              "9",
+              "4",
+              "2",
+              "1"
+            ]
+          },
+          {
+            "entity_id": "e2",
+            "entity_text": "Phoolwari",
+            "path_id": "e2_p11",
+            "path_text": "Phoolwari -> Aas Ka Panchhi -> released -> film -> Which",
+            "node_texts": [
+              "Phoolwari",
+              "Aas Ka Panchhi",
+              "released",
+              "film",
+              "Which"
+            ],
+            "node_ids": [
+              "9",
+              "7",
+              "4",
+              "2",
+              "1"
+            ]
+          }
+        ]
+      },
+      {
+        "path_set_id": "ps2",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "Aas Ka Panchhi",
+            "path_id": "e1_p10",
+            "path_text": "Aas Ka Panchhi -> Phoolwari -> released -> film -> Which",
+            "node_texts": [
+              "Aas Ka Panchhi",
+              "Phoolwari",
+              "released",
+              "film",
+              "Which"
+            ],
+            "node_ids": [
+              "7",
+              "9",
+              "4",
+              "2",
+              "1"
+            ]
+          },
+          {
+            "entity_id": "e2",
+            "entity_text": "Phoolwari",
+            "path_id": "e2_p1",
+            "path_text": "Phoolwari -> released -> film -> Which",
+            "node_texts": [
+              "Phoolwari",
+              "released",
+              "film",
+              "Which"
+            ],
+            "node_ids": [
+              "9",
+              "4",
+              "2",
+              "1"
+            ]
+          }
+        ]
+      },
+      {
+        "path_set_id": "ps3",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "Aas Ka Panchhi",
+            "path_id": "e1_p1",
+            "path_text": "Aas Ka Panchhi -> released -> film -> Which",
+            "node_texts": [
+              "Aas Ka Panchhi",
+              "released",
+              "film",
+              "Which"
+            ],
+            "node_ids": [
+              "7",
+              "4",
+              "2",
+              "1"
+            ]
+          },
+          {
+            "entity_id": "e2",
+            "entity_text": "Phoolwari",
+            "path_id": "e2_p11",
+            "path_text": "Phoolwari -> Aas Ka Panchhi -> released -> film -> Which",
+            "node_texts": [
+              "Phoolwari",
+              "Aas Ka Panchhi",
+              "released",
+              "film",
+              "Which"
+            ],
+            "node_ids": [
+              "9",
+              "7",
+              "4",
+              "2",
+              "1"
+            ]
+          }
+        ]
+      },
+      {
+        "path_set_id": "ps4",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "Aas Ka Panchhi",
+            "path_id": "e1_p1",
+            "path_text": "Aas Ka Panchhi -> released -> film -> Which",
+            "node_texts": [
+              "Aas Ka Panchhi",
+              "released",
+              "film",
+              "Which"
+            ],
+            "node_ids": [
+              "7",
+              "4",
+              "2",
+              "1"
+            ]
+          },
+          {
+            "entity_id": "e2",
+            "entity_text": "Phoolwari",
+            "path_id": "e2_p1",
+            "path_text": "Phoolwari -> released -> film -> Which",
+            "node_texts": [
+              "Phoolwari",
+              "released",
+              "film",
+              "Which"
+            ],
+            "node_ids": [
+              "9",
+              "4",
+              "2",
+              "1"
+            ]
+          }
+        ]
+      }
+    ],
+    "9_grounded_atomic_dag_generation": {
+      "nodes": [
+        {
+          "node_id": "q1",
+          "question": "When was Aas Ka Panchhi released?",
+          "operation": "lookup",
+          "input": {
+            "type": "entity",
+            "text": "Aas Ka Panchhi"
+          },
+          "one_hop_relation": "release date",
+          "answer_type": "Date",
+          "dependencies": [],
+          "support": [
+            {
+              "path_set_id": "ps3",
+              "path_id": "e1_p1",
+              "node_texts": [
+                "Aas Ka Panchhi",
+                "released"
+              ],
+              "reason": "This path segment supports asking for the release date of Aas Ka Panchhi."
+            }
+          ]
+        },
+        {
+          "node_id": "q2",
+          "question": "When was Phoolwari released?",
+          "operation": "lookup",
+          "input": {
+            "type": "entity",
+            "text": "Phoolwari"
+          },
+          "one_hop_relation": "release date",
+          "answer_type": "Date",
+          "dependencies": [],
+          "support": [
+            {
+              "path_set_id": "ps4",
+              "path_id": "e2_p1",
+              "node_texts": [
+                "Phoolwari",
+                "released"
+              ],
+              "reason": "This path segment supports asking for the release date of Phoolwari."
+            }
+          ]
+        }
+      ],
+      "selected_path_set_ids": [
+        "ps3",
+        "ps4"
+      ],
+      "reason": "The DAG decomposes the question into one-hop lookup questions grounded by selected dependency path evidence.",
+      "selected_dependency_path_evidence": [
+        {
+          "path_set_id": "ps1",
+          "paths": [
+            {
+              "entity_id": "e1",
+              "entity_text": "Aas Ka Panchhi",
+              "path_id": "e1_p10",
+              "path_text": "Aas Ka Panchhi -> Phoolwari -> released -> film -> Which",
+              "node_texts": [
+                "Aas Ka Panchhi",
+                "Phoolwari",
+                "released",
+                "film",
+                "Which"
+              ],
+              "node_ids": [
+                "7",
+                "9",
+                "4",
+                "2",
+                "1"
+              ]
+            },
+            {
+              "entity_id": "e2",
+              "entity_text": "Phoolwari",
+              "path_id": "e2_p11",
+              "path_text": "Phoolwari -> Aas Ka Panchhi -> released -> film -> Which",
+              "node_texts": [
+                "Phoolwari",
+                "Aas Ka Panchhi",
+                "released",
+                "film",
+                "Which"
+              ],
+              "node_ids": [
+                "9",
+                "7",
+                "4",
+                "2",
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "path_set_id": "ps2",
+          "paths": [
+            {
+              "entity_id": "e1",
+              "entity_text": "Aas Ka Panchhi",
+              "path_id": "e1_p10",
+              "path_text": "Aas Ka Panchhi -> Phoolwari -> released -> film -> Which",
+              "node_texts": [
+                "Aas Ka Panchhi",
+                "Phoolwari",
+                "released",
+                "film",
+                "Which"
+              ],
+              "node_ids": [
+                "7",
+                "9",
+                "4",
+                "2",
+                "1"
+              ]
+            },
+            {
+              "entity_id": "e2",
+              "entity_text": "Phoolwari",
+              "path_id": "e2_p1",
+              "path_text": "Phoolwari -> released -> film -> Which",
+              "node_texts": [
+                "Phoolwari",
+                "released",
+                "film",
+                "Which"
+              ],
+              "node_ids": [
+                "9",
+                "4",
+                "2",
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "path_set_id": "ps3",
+          "paths": [
+            {
+              "entity_id": "e1",
+              "entity_text": "Aas Ka Panchhi",
+              "path_id": "e1_p1",
+              "path_text": "Aas Ka Panchhi -> released -> film -> Which",
+              "node_texts": [
+                "Aas Ka Panchhi",
+                "released",
+                "film",
+                "Which"
+              ],
+              "node_ids": [
+                "7",
+                "4",
+                "2",
+                "1"
+              ]
+            },
+            {
+              "entity_id": "e2",
+              "entity_text": "Phoolwari",
+              "path_id": "e2_p11",
+              "path_text": "Phoolwari -> Aas Ka Panchhi -> released -> film -> Which",
+              "node_texts": [
+                "Phoolwari",
+                "Aas Ka Panchhi",
+                "released",
+                "film",
+                "Which"
+              ],
+              "node_ids": [
+                "9",
+                "7",
+                "4",
+                "2",
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "path_set_id": "ps4",
+          "paths": [
+            {
+              "entity_id": "e1",
+              "entity_text": "Aas Ka Panchhi",
+              "path_id": "e1_p1",
+              "path_text": "Aas Ka Panchhi -> released -> film -> Which",
+              "node_texts": [
+                "Aas Ka Panchhi",
+                "released",
+                "film",
+                "Which"
+              ],
+              "node_ids": [
+                "7",
+                "4",
+                "2",
+                "1"
+              ]
+            },
+            {
+              "entity_id": "e2",
+              "entity_text": "Phoolwari",
+              "path_id": "e2_p1",
+              "path_text": "Phoolwari -> released -> film -> Which",
+              "node_texts": [
+                "Phoolwari",
+                "released",
+                "film",
+                "Which"
+              ],
+              "node_ids": [
+                "9",
+                "4",
+                "2",
+                "1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "10_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "When was Aas Ka Panchhi released?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "path_set_id": "ps3",
+                "path_id": "e1_p1",
+                "node_texts": [
+                  "Aas Ka Panchhi",
+                  "released"
+                ],
+                "node_ids": [],
+                "reason": "This path segment supports asking for the release date of Aas Ka Panchhi."
+              }
+            ],
+            "support_path_ids": [
+              "e1_p1"
+            ],
+            "operation": "lookup",
+            "input": {
+              "type": "entity",
+              "text": "Aas Ka Panchhi"
+            },
+            "one_hop_relation": "release date",
+            "answer_type": "Date"
+          },
+          "source": "grounded_atomic_dag"
+        },
+        {
+          "id": "q2",
+          "question": "When was Phoolwari released?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X2",
+          "depends_on": [],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "path_set_id": "ps4",
+                "path_id": "e2_p1",
+                "node_texts": [
+                  "Phoolwari",
+                  "released"
+                ],
+                "node_ids": [],
+                "reason": "This path segment supports asking for the release date of Phoolwari."
+              }
+            ],
+            "support_path_ids": [
+              "e2_p1"
+            ],
+            "operation": "lookup",
+            "input": {
+              "type": "entity",
+              "text": "Phoolwari"
+            },
+            "one_hop_relation": "release date",
+            "answer_type": "Date"
+          },
+          "source": "grounded_atomic_dag"
+        }
+      ],
+      "edges": [],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "10_subquestions": [
+      {
+        "index": 1,
+        "question": "When was Aas Ka Panchhi released?",
+        "answer_variable": "X1",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      },
+      {
+        "index": 2,
+        "question": "When was Phoolwari released?",
+        "answer_variable": "X2",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      }
+    ]
+  }
+}

@@ -22,6 +22,7 @@ Rules:
 - If the candidate answer is "INSUFFICIENT_EVIDENCE" or clearly lacks an answer, return "INSUFFICIENT_EVIDENCE" with confidence 0.0.
 - For yes/no questions, return only "yes" or "no".
 - For candidate-selection questions, return only the selected candidate name, not the comparison values or explanation.
+- If the original question lists alternatives such as "A or B" or "A and B" and the candidate_answer explains why one alternative is selected, return exactly the selected alternative surface span from the original question.
 - For person, organization, work, place, date, year, number, nationality, or country questions, return only the minimal answer span.
 - Remove explanatory clauses, evidence descriptions, dates attached to a selected person unless the original question asks for the date, and sentences such as "X was born first because...".
 - Preserve the answer's surface form when it matters, especially names, titles, dates, and capitalization.
@@ -35,6 +36,9 @@ Examples:
 - original_question: "Which person was born first, Jorge Ledezma or Yuliya Baraley?"
   candidate_answer: "Jorge Ledezma was born first on 24 August 1963."
   answer: "Jorge Ledezma"
+- original_question: "Which film was released first, Aas Ka Panchhi or Phoolwari?"
+  candidate_answer: "Phoolwari was released first in 1946."
+  answer: "Phoolwari"
 - original_question: "Where was Frank Sinatra born?"
   candidate_answer: "Hoboken, New Jersey"
   answer: "Hoboken, New Jersey"

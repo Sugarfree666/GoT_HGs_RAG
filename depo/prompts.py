@@ -582,6 +582,11 @@ Every DAG node must cite dependency path support.
 The support may be a short segment of a selected path, not necessarily one dependency edge.
 However, the cited path segment must justify the one-hop relation being asked.
 
+Dependency variable rule:
+If a node depends on an earlier node, its question field must explicitly use that dependency answer variable.
+Use the exact form q1's answer, q2's answer, etc.
+Do not write a complete bridge question that repeats the original entity chain.
+
 Do not generate:
 
 * a Semantic AST
@@ -625,6 +630,26 @@ def build_grounded_atomic_dag_prompt(
                         "path_id": "e1_p1",
                         "node_texts": ["AlphaGo", "developed", "company"],
                         "reason": "This path segment supports asking for the company that developed AlphaGo.",
+                    }
+                ],
+            },
+            {
+                "node_id": "q2",
+                "question": "Who is the CEO of q1's answer?",
+                "operation": "lookup",
+                "input": {
+                    "type": "previous_answer",
+                    "ref": "q1",
+                },
+                "one_hop_relation": "CEO",
+                "answer_type": "Person",
+                "dependencies": ["q1"],
+                "support": [
+                    {
+                        "path_set_id": "ps1",
+                        "path_id": "e1_p1",
+                        "node_texts": ["company", "CEO"],
+                        "reason": "This path segment supports asking for the CEO of the previous company answer.",
                     }
                 ],
             }
@@ -692,9 +717,19 @@ Decomposition rules:
 
 1. Use q1, q2, q3, ... in solve order.
 2. dependencies must reference only earlier node_id values.
-3. If a node depends on q1, write the question so q1's answer can be substituted naturally.
-4. Do not expose internal variables like X1.
-5. Use natural atomic questions.
+3. If a node depends on q1, the question must contain q1's answer.
+4. If a node depends on q1 and q2, the question must contain both q1's answer and q2's answer.
+5. Do not output complete bridge questions for dependent nodes.
+   Bad: q2: "When did Lothair II's mother die?" with dependencies ["q1"].
+   Good: q1: "Who is the mother of Lothair II?"; q2: "When did q1's answer die?".
+6. For branch comparison inputs, use dependency variables per branch.
+   Good:
+   q1: "Who is the director of The Gorgeous Hussy?"
+   q2: "When did q1's answer die?"
+   q3: "Who is the director of Mr. Ace?"
+   q4: "When did q3's answer die?"
+7. Do not expose internal variables like X1.
+8. Use natural atomic questions.
 
 Final-reasoning rules:
 
@@ -712,6 +747,14 @@ Examples of desired decomposition patterns:
 * "director born first/later" -> director lookup for each film, then birth-date lookup for each director.
 * "same nationality" -> per-entity or per-branch nationality lookup only; no final yes/no node.
 * "X's mother/father/spouse/wife/husband/author/director" -> first lookup that role, then ask the next attribute about that role answer.
+* Possessive role chains must be decomposed into executable role lookups instead of copied as one full bridge question.
+* "X's father/mother/spouse/wife/husband/child/sibling" -> ask that role of X first, then ask downstream facts about q1's answer.
+* "X's father-in-law" -> spouse lookup for X, then father lookup for q1's answer. Use the same pattern for mother-in-law.
+* "X's paternal grandfather" -> father of X, then father of q1's answer.
+* "X's maternal grandfather" -> mother of X, then father of q1's answer.
+* "X's paternal grandmother" -> father of X, then mother of q1's answer.
+* "X's maternal grandmother" -> mother of X, then mother of q1's answer.
+* For any multi-hop kinship expression, generate one node per kinship hop and use qX's answer in dependent questions.
 * "when did X die" -> death-date lookup.
 * "where did X die" -> death-place lookup.
 * "why did X die" -> death-reason lookup.

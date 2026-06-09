@@ -110,7 +110,14 @@ class OpenAICompatibleClient:
                 raise RuntimeError(
                     f"LLM request failed with HTTP {exc.code} after {attempt} attempt(s): {body}"
                 ) from exc
-            except (error.URLError, TimeoutError, socket.timeout, ssl.SSLError, http.client.IncompleteRead) as exc:
+            except (
+                error.URLError,
+                TimeoutError,
+                socket.timeout,
+                ssl.SSLError,
+                http.client.IncompleteRead,
+                http.client.RemoteDisconnected,
+            ) as exc:
                 reason = exc.reason if isinstance(exc, error.URLError) else exc
                 if self._should_retry_transport(reason) and attempt < attempts:
                     self._before_retry(endpoint, attempt, attempts, reason)
@@ -140,7 +147,17 @@ class OpenAICompatibleClient:
         return status_code in {408, 409, 425, 429, 500, 502, 503, 504}
 
     def _should_retry_transport(self, reason: object) -> bool:
-        if isinstance(reason, (TimeoutError, socket.timeout, ssl.SSLError, ConnectionResetError, http.client.IncompleteRead)):
+        if isinstance(
+            reason,
+            (
+                TimeoutError,
+                socket.timeout,
+                ssl.SSLError,
+                ConnectionResetError,
+                http.client.IncompleteRead,
+                http.client.RemoteDisconnected,
+            ),
+        ):
             return True
         text = str(reason).lower()
         transient_markers = (
