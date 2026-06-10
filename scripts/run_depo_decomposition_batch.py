@@ -221,9 +221,9 @@ def build_decomposition_payload(
     subquestion_dag = result.get("subquestion_dag")
     subquestions = result.get("subquestions", [])
 
-    top_paths_by_entity = {
-        entity_id: [_dataclass_to_jsonable(path) for path in paths]
-        for entity_id, paths in (result.get("top_paths_by_entity") or {}).items()
+    best_paths_by_entity = {
+        entity_id: _dataclass_to_jsonable(path)
+        for entity_id, path in (result.get("best_paths_by_entity") or {}).items()
     }
 
     payload: dict[str, Any] = {
@@ -254,7 +254,7 @@ def build_decomposition_payload(
             "7_entity_origin_paths": [_dataclass_to_jsonable(path) for path in result["entity_origin_paths"]],
             "7_5_terminal_glue_path_pruning": _dataclass_to_jsonable(result.get("path_pruning_stats") or {}),
             "8_path_scores": [_dataclass_to_jsonable(path) for path in result.get("scored_entity_paths", [])],
-            "8_1_top_paths_by_entity": top_paths_by_entity,
+            "8_1_best_paths_by_entity": best_paths_by_entity,
             "8_2_path_set_candidates": [_dataclass_to_jsonable(candidate) for candidate in result.get("path_set_candidates", [])],
             "9_selected_dependency_path_evidence": _dataclass_to_jsonable(result.get("selected_dependency_path_evidence") or []),
             "9_grounded_atomic_dag_generation": _dataclass_to_jsonable(result.get("grounded_atomic_dag_payload") or {}),
@@ -410,14 +410,14 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 8.1 Top-2 Paths per Entity")
-    for entity_id, paths in stages["8_1_top_paths_by_entity"].items():
-        lines.append(f"- {entity_id}: {', '.join(path.get('path_id', '') for path in paths)}")
-    if not stages["8_1_top_paths_by_entity"]:
+    lines.append("## 8.1 Highest-Scored Path per Entity")
+    for entity_id, path in stages["8_1_best_paths_by_entity"].items():
+        lines.append(f"- {entity_id}: {path.get('path_id', '')} score={path.get('score')}")
+    if not stages["8_1_best_paths_by_entity"]:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 8.2 Candidate Path Sets")
+    lines.append("## 8.2 Selected Path Set")
     for candidate in stages["8_2_path_set_candidates"]:
         lines.append(
             f"- {candidate.get('path_set_id')}: {candidate.get('path_ids_by_entity')} "

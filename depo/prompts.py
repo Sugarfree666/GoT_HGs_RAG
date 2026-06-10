@@ -766,6 +766,318 @@ Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 """.strip()
 
+
+SEMANTIC_REASONING_PATH_SYSTEM = """
+You are implementing DEPO Step 9: Semantic Reasoning Path Induction.
+
+Your task is to convert selected dependency path evidence into branch-level semantic reasoning paths.
+
+Dependency paths are syntactic evidence only.
+They are not semantic nodes.
+They are not a Semantic AST.
+Do not copy dependency tokens directly into semantic nodes.
+
+Semantic reasoning path nodes are semantic objects:
+1. explicit named entities from the original question;
+2. intermediate semantic objects licensed by the question, such as author, director, performer, wife, company, CEO;
+3. final value slots, such as nationality, birth_date, death_place, death_reason, university.
+
+Semantic reasoning path edges are executable one-hop semantic relations:
+performer of song, place of death, director of film, nationality of person, CEO of company.
+
+One selected entity-origin path should normally produce one semantic reasoning path.
+Preserve branch-specific variables for multi-entity questions.
+
+Do not generate atomic questions here except optional atomic_question_template per edge.
+Do not generate final comparison, ranking, boolean, intersection, union, or common-answer nodes/questions.
+For same/share/both/comparison questions, keep per-entity branches separate and place final intent only in operator_intent metadata.
+
+Return strict JSON only.
+""".strip()
+
+
+def build_semantic_reasoning_path_prompt(
+    original_question: str,
+    restored_question: str,
+    selected_dependency_path_evidence: list[dict[str, object]],
+    validation_feedback: str | None = None,
+) -> str:
+    schema = {
+        "semantic_reasoning_paths": [
+            {
+                "branch_id": "b1",
+                "entity_id": "e1",
+                "source_path_id": "e1_p1",
+                "nodes": [
+                    {
+                        "node_id": "b1_n1",
+                        "label": "I Can'T See Myself Leaving You",
+                        "kind": "entity",
+                        "semantic_type": "Song",
+                        "source_path_id": "e1_p1",
+                        "source_node_texts": ["I Can'T See Myself Leaving You"],
+                        "source_node_ids": ["1"],
+                    },
+                    {
+                        "node_id": "b1_n2",
+                        "label": "performer",
+                        "kind": "semantic_object",
+                        "semantic_type": "Person",
+                        "source_path_id": "e1_p1",
+                        "source_node_texts": ["performer"],
+                        "source_node_ids": ["2"],
+                    },
+                    {
+                        "node_id": "b1_n3",
+                        "label": "death_place",
+                        "kind": "value_slot",
+                        "semantic_type": "Location",
+                        "source_path_id": "e1_p1",
+                        "source_node_texts": ["die", "where"],
+                        "source_node_ids": ["3", "4"],
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "b1_e1",
+                        "source": "b1_n1",
+                        "target": "b1_n2",
+                        "relation": "performer of song",
+                        "answer_type": "Person",
+                        "is_one_hop": True,
+                        "support": [
+                            {
+                                "path_set_id": "ps1",
+                                "path_id": "e1_p1",
+                                "node_texts": ["I Can'T See Myself Leaving You", "performer"],
+                                "node_ids": ["1", "2"],
+                                "reason": "This path segment supports asking for the performer of the song.",
+                            }
+                        ],
+                        "atomic_question_template": "Who performed I Can'T See Myself Leaving You?",
+                    },
+                    {
+                        "edge_id": "b1_e2",
+                        "source": "b1_n2",
+                        "target": "b1_n3",
+                        "relation": "place of death",
+                        "answer_type": "Location",
+                        "is_one_hop": True,
+                        "support": [
+                            {
+                                "path_set_id": "ps1",
+                                "path_id": "e1_p1",
+                                "node_texts": ["performer", "die", "where"],
+                                "node_ids": ["2", "3", "4"],
+                                "reason": "The original question asks where the performer died.",
+                            }
+                        ],
+                        "atomic_question_template": "Where did b1_n2's answer die?",
+                    },
+                ],
+                "terminal_node_id": "b1_n3",
+                "score": 95,
+                "warnings": [],
+            }
+        ],
+        "operator_intent": {
+            "type": "NONE",
+            "handled_downstream": True,
+            "surface_cues": [],
+        },
+        "score": 95,
+        "score_breakdown": {
+            "question_intent_coverage": 25,
+            "grounding_fidelity": 25,
+            "one_hop_decomposability": 25,
+            "minimality": 15,
+            "branch_consistency": 10,
+        },
+        "warnings": [],
+        "reason": "The semantic reasoning paths cover the required branch-level lookups.",
+    }
+    feedback = ""
+    if validation_feedback:
+        feedback = f"""
+
+Previous output failed Semantic Reasoning Path validation:
+{validation_feedback}
+
+Regenerate the full JSON.
+Every semantic edge must be one-hop and must cite valid support from the selected dependency path evidence.
+"""
+    return f"""
+Induce Semantic Reasoning Paths for DEPO.
+
+Original question:
+{original_question}
+
+Restored/normalized question:
+{restored_question}
+
+Selected dependency path evidence:
+{json.dumps(selected_dependency_path_evidence, ensure_ascii=False, indent=2)}
+
+Task:
+Convert the selected dependency path evidence into branch-level semantic reasoning paths.
+
+Core rules:
+1. Output one semantic_reasoning_paths item per selected entity-origin path.
+2. The first node of each path must be the explicit entity from that path.
+3. Every node must be a semantic object, not a raw dependency token.
+4. Every edge must be one executable semantic lookup hop.
+5. Every edge must have non-empty support.
+6. support.path_set_id and support.path_id must come from the selected dependency path evidence.
+7. support.node_texts must be copied from the supplied dependency path node_texts.
+8. Do not invent entities or unsupported relations.
+9. Do not create final comparison/ranking/boolean/common-answer nodes.
+10. For same/share/both/comparison questions, keep per-entity branches separate and put final intent only in operator_intent.
+
+Forbidden semantic nodes:
+- wh words: who, what, which, where, when, why
+- auxiliaries: do, did, does, is, was, were
+- determiners/prepositions: the, a, an, of, in, by, to, from, with, for
+- punctuation
+- comparison cues: same, share, different, older, younger, first, later, earlier
+- final operator nodes: compare, ranking, intersection, common answer, yes/no
+
+Predicate/value-slot conversions:
+- where + die/death -> death_place
+- when + die/death -> death_date
+- why + die/death -> death_reason or cause_of_death
+- born + when -> birth_date
+- born + where -> birthplace
+- same nationality -> each branch terminal is nationality; no final comparison node
+
+Example semantic path:
+I Can'T See Myself Leaving You
+  --performer of song-->
+performer
+  --place of death-->
+death_place
+{feedback}
+Return strict JSON only.
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
+
+ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM = """
+You are implementing DEPO Step 10: Atomic DAG Compilation from Semantic Reasoning Paths.
+
+The Semantic Reasoning Path is the skeleton.
+Compile each one-hop semantic edge into exactly one atomic lookup node.
+
+Do not skip semantic edges.
+Do not merge multiple semantic edges into one atomic question.
+Do not add unsupported lookup nodes.
+Do not generate final comparison, ranking, yes/no, aggregation, intersection, union, or common-answer questions.
+Every output node must cite support copied from the source semantic reasoning edge.
+
+Return strict JSON only.
+""".strip()
+
+
+def build_atomic_dag_from_semantic_reasoning_path_prompt(
+    original_question: str,
+    semantic_reasoning_paths: dict[str, object],
+    selected_dependency_path_evidence: list[dict[str, object]],
+    validation_feedback: str | None = None,
+) -> str:
+    schema = {
+        "nodes": [
+            {
+                "node_id": "q1",
+                "question": "Who performed I Can'T See Myself Leaving You?",
+                "operation": "lookup",
+                "input": {
+                    "type": "entity",
+                    "text": "I Can'T See Myself Leaving You",
+                },
+                "one_hop_relation": "performer of song",
+                "answer_type": "Person",
+                "dependencies": [],
+                "support": [
+                    {
+                        "path_set_id": "ps1",
+                        "path_id": "e1_p1",
+                        "node_texts": ["I Can'T See Myself Leaving You", "performer"],
+                        "reason": "Copied from semantic reasoning edge b1_e1.",
+                    }
+                ],
+                "source_semantic_path_id": "b1",
+                "source_semantic_edge_id": "b1_e1",
+            },
+            {
+                "node_id": "q2",
+                "question": "Where did q1's answer die?",
+                "operation": "lookup",
+                "input": {
+                    "type": "previous_answer",
+                    "ref": "q1",
+                },
+                "one_hop_relation": "place of death",
+                "answer_type": "Location",
+                "dependencies": ["q1"],
+                "support": [
+                    {
+                        "path_set_id": "ps1",
+                        "path_id": "e1_p1",
+                        "node_texts": ["performer", "die", "where"],
+                        "reason": "Copied from semantic reasoning edge b1_e2.",
+                    }
+                ],
+                "source_semantic_path_id": "b1",
+                "source_semantic_edge_id": "b1_e2",
+            },
+        ],
+        "selected_path_set_ids": ["ps1"],
+        "reason": "The DAG compiles each semantic reasoning edge into one atomic lookup.",
+    }
+    feedback = ""
+    if validation_feedback:
+        feedback = f"""
+
+Previous output failed Atomic DAG validation:
+{validation_feedback}
+
+Regenerate the full JSON.
+Every node must compile exactly one semantic reasoning edge and must cite valid support.
+Dependent questions must explicitly use qX's answer.
+"""
+    return f"""
+Compile an Atomic Subquestion DAG from Semantic Reasoning Paths.
+
+Original question:
+{original_question}
+
+Semantic Reasoning Paths:
+{json.dumps(semantic_reasoning_paths, ensure_ascii=False, indent=2)}
+
+Selected dependency path evidence:
+{json.dumps(selected_dependency_path_evidence, ensure_ascii=False, indent=2)}
+
+Compilation rules:
+1. Compile each one-hop semantic edge into one atomic lookup node.
+2. Do not skip semantic edges.
+3. Do not merge multiple semantic edges into one atomic question.
+4. Do not add unsupported lookup nodes.
+5. Use q1, q2, q3, ... in solve order.
+6. Every node must have operation = "lookup".
+7. If an edge source is an explicit entity node, dependencies = [].
+8. If an edge source is the target of a previous edge, the node must depend on that previous q node.
+9. If a node depends on q1, its question must explicitly contain q1's answer.
+10. If a node depends on q1 and q2, its question must explicitly contain both q1's answer and q2's answer.
+11. Every node support must be copied from the semantic edge support.
+12. Preserve source_semantic_path_id and source_semantic_edge_id for each output node.
+13. Keep final comparison/ranking/yes-no/intersection/common-answer out of the DAG.
+14. operator_intent remains metadata only and must not become a node.
+{feedback}
+Return strict JSON only.
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
 SELECTED_PATH_SEMANTIC_TRANSDUCTION_SYSTEM = """
 You are implementing DEPO Step 9: Candidate Path-Set Semantic Transduction.
 This is the compatible Selected Path Semantic Transduction interface for one path-set at a time.

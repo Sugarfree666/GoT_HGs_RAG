@@ -20,6 +20,7 @@ from models import (
     EntityStartNode,
     PathSetCandidate,
     ScoredEntityPath,
+    SemanticReasoningPathResult,
     SemanticNormalizationResult,
 )
 
@@ -32,8 +33,8 @@ if TYPE_CHECKING:
     from entity_path_pipeline import (
         EntityPathSemanticParser,
         build_selected_dependency_path_evidence,
-        build_path_set_candidates,
-        select_top_paths_by_entity,
+        build_single_path_set_candidate,
+        select_best_path_by_entity,
     )
     from question_normalizer import SemanticQuestionNormalizer
     from subquestion_generator import SubquestionGenerator
@@ -143,8 +144,8 @@ def run_pipeline(
     from entity_path_pipeline import (
         EntityPathSemanticParser,
         build_selected_dependency_path_evidence,
-        build_path_set_candidates,
-        select_top_paths_by_entity,
+        build_single_path_set_candidate,
+        select_best_path_by_entity,
     )
     from entity_path_projector import (
         build_entity_start_nodes_from_explicit_entities,
@@ -220,15 +221,13 @@ def run_pipeline(
         entity_origin_paths=pruned_entity_origin_paths,
     )
 
-    top_paths_by_entity = select_top_paths_by_entity(
+    best_paths_by_entity = select_best_path_by_entity(
         scored_paths=scored_entity_paths,
         entity_start_nodes=entity_start_nodes,
         entity_origin_paths=pruned_entity_origin_paths,
-        top_k=2,
     )
-    path_set_candidates = build_path_set_candidates(
-        top_paths_by_entity=top_paths_by_entity,
-        max_path_sets=16,
+    path_set_candidates = build_single_path_set_candidate(
+        best_paths_by_entity=best_paths_by_entity,
     )
     if not path_set_candidates:
         raise ValueError("No candidate path sets were constructed for entity-origin path pipeline.")
@@ -236,11 +235,17 @@ def run_pipeline(
     selected_dependency_path_evidence = build_selected_dependency_path_evidence(
         path_set_candidates=path_set_candidates,
         entity_origin_paths=pruned_entity_origin_paths,
-        max_path_sets=4,
+        max_path_sets=1,
+    )
+    semantic_reasoning_paths, semantic_reasoning_path_payload = path_semantic_parser.build_semantic_reasoning_paths(
+        original_question=record.question,
+        restored_question=processing_question,
+        selected_dependency_path_evidence=selected_dependency_path_evidence,
     )
     subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
         original_question=record.question,
         selected_dependency_path_evidence=selected_dependency_path_evidence,
+        semantic_reasoning_paths=semantic_reasoning_paths,
     )
     subquestions = subquestion_dag.to_subquestions()
     return {
@@ -262,9 +267,11 @@ def run_pipeline(
         "path_pruning_stats": path_pruning_stats,
         "scored_entity_paths": scored_entity_paths,
         "path_scoring_payload": path_scoring_payload,
-        "top_paths_by_entity": top_paths_by_entity,
+        "best_paths_by_entity": best_paths_by_entity,
         "path_set_candidates": path_set_candidates,
         "selected_dependency_path_evidence": selected_dependency_path_evidence,
+        "semantic_reasoning_paths": semantic_reasoning_paths,
+        "semantic_reasoning_path_payload": semantic_reasoning_path_payload,
         "grounded_atomic_dag_payload": grounded_atomic_dag_payload,
         "subquestions": subquestions,
         "subquestion_dag": subquestion_dag,
@@ -313,23 +320,20 @@ def _mask_span_result_from_explicit_entities(explicit_entities: ExplicitEntityRe
 
 
 def print_result(index: int, record: QuestionRecord, result: dict[str, Any], debug: bool = False) -> None:
-    from graph_builder import format_undirected_graph_edges
-
     semantic_normalization: SemanticNormalizationResult = result["semantic_normalization"]
     explicit_entities: ExplicitEntityResult = result.get("explicit_entities") or ExplicitEntityResult()
     mask_spans: MaskSpanResult = result["mask_spans"]
     replacement: MaskReplacement = result["replacement"]
     dependency_parse = result["dependency_parse"]
-    dependency_graph = result.get("dependency_graph", result["weighted_graph"])
-    restored_graph_node_candidates: list[RestoredGraphNodeCandidate] = result["restored_graph_node_candidates"]
     entity_start_nodes: list[EntityStartNode] = result["entity_start_nodes"]
     entity_origin_paths: list[EntityOriginPath] = result["entity_origin_paths"]
     pruned_entity_origin_paths: list[EntityOriginPath] = result.get("pruned_entity_origin_paths") or entity_origin_paths
     path_pruning_stats: dict[str, Any] = result.get("path_pruning_stats") or {}
     scored_entity_paths: list[ScoredEntityPath] = result.get("scored_entity_paths", [])
-    top_paths_by_entity: dict[str, list[ScoredEntityPath]] = result.get("top_paths_by_entity", {})
+    best_paths_by_entity: dict[str, ScoredEntityPath] = result.get("best_paths_by_entity", {})
     path_set_candidates: list[PathSetCandidate] = result.get("path_set_candidates", [])
     selected_dependency_path_evidence: list[dict[str, Any]] = result.get("selected_dependency_path_evidence", [])
+    semantic_reasoning_paths: SemanticReasoningPathResult | None = result.get("semantic_reasoning_paths")
     grounded_atomic_dag_payload: dict[str, Any] = result.get("grounded_atomic_dag_payload") or {}
     subquestions: list[AtomicSubquestion] = result["subquestions"]
     subquestion_dag: AtomicQuestionDAG | None = result.get("subquestion_dag")
@@ -348,7 +352,10 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     print()
 
     print("[1. Semantic-Normalized Question]")
-    print(semantic_normalization.normalized_question)
+    if semantic_normalization.normalized_question == record.question:
+        print("  unchanged")
+    else:
+        print(f"  {semantic_normalization.normalized_question}")
     if debug:
         _print_warnings(semantic_normalization.warnings)
     print()
@@ -373,26 +380,17 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
             print(f"  - {mapping.placeholder} -> {mapping.original_text}")
     else:
         print("  (none)")
-    print("Masked question:")
-    print(replacement.masked_question)
+    print(f"  Masked question: {replacement.masked_question}")
     print()
 
     print("[4. CoreNLP Dependency Parse]")
-    print("Edges:")
-    if dependency_parse.edges:
-        for edge in dependency_parse.edges:
-            print(f"  - {edge.display()}")
-    else:
-        print("  (no dependency edges)")
+    print(f"  tokens={len(dependency_parse.tokens)} edges={len(dependency_parse.edges)}")
+    _print_sample_dependency_edges(dependency_parse.edges)
     print()
 
     print("[5. Undirected Dependency Graph]")
-    graph_lines = format_undirected_graph_edges(dependency_graph)
-    if graph_lines:
-        for line in graph_lines:
-            print(line)
-    else:
-        print("  (no dependency graph edges)")
+    graph = result.get("dependency_graph", result["weighted_graph"])
+    print(f"  nodes={graph.number_of_nodes()} edges={graph.number_of_edges()}")
     print()
 
     print("[6. Entity Start Nodes from Explicit Entities]")
@@ -400,7 +398,7 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     print()
 
     print("[7. Entity-Origin Dependency Paths]")
-    _print_entity_origin_paths(entity_origin_paths, include_evidence=debug)
+    _print_entity_path_summary(entity_origin_paths, entity_start_nodes)
     print()
 
     print("[7.5 Terminal Glue Path Pruning]")
@@ -408,26 +406,28 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     print()
 
     print("[8. LLM Path Scores]")
-    _print_scored_entity_paths(scored_entity_paths, pruned_entity_origin_paths)
+    _print_scored_path_summary(scored_entity_paths)
     print()
 
-    print("[8.1 Top-2 Paths per Entity]")
-    _print_top_paths_by_entity(top_paths_by_entity, pruned_entity_origin_paths)
+    print("[8.1 Highest-Scored Path per Entity]")
+    _print_best_paths_by_entity(best_paths_by_entity, pruned_entity_origin_paths)
     print()
 
-    print("[8.2 Candidate Path Sets]")
+    print("[8.2 Selected Path Set]")
     _print_path_set_candidates(path_set_candidates)
     print()
 
-    print("[9. Grounded Atomic DAG Generation]")
-    print("Inputs:")
-    print(f"  Original question: {record.question}")
+    print("[9. Semantic Reasoning Path Induction]")
     _print_selected_dependency_path_evidence(selected_dependency_path_evidence)
+    _print_semantic_reasoning_paths(semantic_reasoning_paths)
+    print()
+
+    print("[10. Atomic DAG Compilation from Semantic Reasoning Path]")
     print("Output:")
     _print_grounded_atomic_dag_payload(grounded_atomic_dag_payload)
     print()
 
-    print("[10. Atomic Subquestion DAG]")
+    print("[11. Atomic Subquestion DAG]")
     if subquestion_dag is not None:
         _print_atomic_question_dag(subquestion_dag)
     elif not subquestions:
@@ -444,8 +444,17 @@ def _print_entity_start_nodes(entity_start_nodes: list[EntityStartNode]) -> None
         return
     for entity in entity_start_nodes:
         semantic = f" semantic_type={entity.semantic_type_hint}" if entity.semantic_type_hint else ""
-        tokens = f" token_ids={entity.token_ids}" if entity.token_ids else ""
-        print(f"  - {entity.entity_id}: {entity.text} graph_node_ids={entity.graph_node_ids}{tokens}{semantic}")
+        print(f"  - {entity.entity_id}: {entity.text} graph_node_ids={entity.graph_node_ids}{semantic}")
+
+
+def _print_sample_dependency_edges(edges: list[Any], limit: int = 5) -> None:
+    if not edges:
+        return
+    for edge in edges[:limit]:
+        print(f"  - {edge.display()}")
+    remaining = len(edges) - limit
+    if remaining > 0:
+        print(f"  ... {remaining} more edges")
 
 
 def _print_entity_origin_paths(
@@ -466,6 +475,27 @@ def _print_entity_origin_paths(
                     f"    {evidence.get('source_text', evidence.get('source'))}"
                     f" -> {evidence.get('target_text', evidence.get('target'))}{relation_text}"
                 )
+
+
+def _print_entity_path_summary(
+    entity_origin_paths: list[EntityOriginPath],
+    entity_start_nodes: list[EntityStartNode],
+) -> None:
+    if not entity_origin_paths:
+        print("  (none)")
+        return
+    text_by_entity = {entity.entity_id: entity.text for entity in entity_start_nodes}
+    paths_by_entity: dict[str, list[EntityOriginPath]] = {}
+    for path in entity_origin_paths:
+        paths_by_entity.setdefault(path.entity_id, []).append(path)
+    print(f"  total_paths={len(entity_origin_paths)}")
+    for entity_id in sorted(paths_by_entity, key=_entity_sort_key_for_print):
+        paths = paths_by_entity[entity_id]
+        shortest = min((path.length for path in paths), default=0)
+        longest = max((path.length for path in paths), default=0)
+        entity_text = text_by_entity.get(entity_id, "")
+        label = f"{entity_id} / {entity_text}" if entity_text else entity_id
+        print(f"  - {label}: paths={len(paths)} length_range={shortest}-{longest}")
 
 
 def _print_path_pruning_stats(
@@ -496,14 +526,6 @@ def _print_path_pruning_stats(
             f"    - {heading}: raw={stats.get('raw', 0)} kept={stats.get('kept', 0)} "
             f"pruned={stats.get('pruned', 0)} fallback_used={bool(stats.get('fallback_used'))}"
         )
-        examples = stats.get("pruned_examples") or []
-        if examples:
-            print("      examples:")
-            for example in examples[:5]:
-                print(
-                    f"        - {example.get('path_id')}: {example.get('path_text')} "
-                    f"[terminal={example.get('terminal')}, reason={example.get('reason')}]"
-                )
 
 
 def _print_scored_entity_paths(
@@ -526,21 +548,37 @@ def _print_scored_entity_paths(
         )
 
 
-def _print_top_paths_by_entity(
-    top_paths_by_entity: dict[str, list[ScoredEntityPath]],
+def _print_scored_path_summary(scored_paths: list[ScoredEntityPath]) -> None:
+    if not scored_paths:
+        print("  (none)")
+        return
+    scores_by_entity: dict[str, list[ScoredEntityPath]] = {}
+    for score in scored_paths:
+        scores_by_entity.setdefault(score.entity_id, []).append(score)
+    print(f"  scored_paths={len(scored_paths)}")
+    for entity_id in sorted(scores_by_entity, key=_entity_sort_key_for_print):
+        scores = scores_by_entity[entity_id]
+        best = max(scores, key=lambda item: item.score)
+        valid_count = sum(1 for item in scores if item.valid)
+        print(
+            f"  - {entity_id}: scored={len(scores)} valid={valid_count} "
+            f"best={best.path_id}:{best.score:.1f}"
+        )
+
+
+def _print_best_paths_by_entity(
+    best_paths_by_entity: dict[str, ScoredEntityPath],
     entity_origin_paths: list[EntityOriginPath],
 ) -> None:
-    if not top_paths_by_entity:
+    if not best_paths_by_entity:
         print("  (none)")
         return
     path_by_id = {path.path_id: path for path in entity_origin_paths}
-    for entity_id in sorted(top_paths_by_entity, key=_entity_sort_key_for_print):
-        parts = []
-        for score in top_paths_by_entity[entity_id]:
-            path = path_by_id.get(score.path_id)
-            path_text = f" ({' -- '.join(path.nodes)})" if path is not None else ""
-            parts.append(f"{score.path_id}:{score.score:.1f}{path_text}")
-        print(f"  - {entity_id}: {', '.join(parts)}")
+    for entity_id in sorted(best_paths_by_entity, key=_entity_sort_key_for_print):
+        score = best_paths_by_entity[entity_id]
+        path = path_by_id.get(score.path_id)
+        path_text = f" ({' -- '.join(path.nodes)})" if path is not None else ""
+        print(f"  - {entity_id}: {score.path_id}:{score.score:.1f}{path_text}")
 
 
 def _print_path_set_candidates(path_set_candidates: list[PathSetCandidate]) -> None:
@@ -575,6 +613,41 @@ def _print_selected_dependency_path_evidence(evidence: list[dict[str, Any]]) -> 
             print(f"      - {path.get('path_id')}: {path.get('path_text')}")
 
 
+def _print_semantic_reasoning_paths(result: SemanticReasoningPathResult | None) -> None:
+    if result is None or not result.paths:
+        print("  (none)")
+        return
+    if result.selected_path_set_ids:
+        print(f"  selected_path_set_ids={result.selected_path_set_ids}")
+    if result.operator_intent:
+        print(f"  operator_intent={result.operator_intent}")
+    if result.score:
+        print(f"  score={result.score:.1f}")
+    for path in result.paths:
+        print(
+          f"  - {path.branch_id}: entity_id={path.entity_id} "
+            f"source_path_id={path.source_path_id} score={path.score:.1f}"
+        )
+        for edge in path.edges:
+            support_ids = [
+                str(item.get("path_id"))
+                for item in edge.support
+                if isinstance(item, dict) and item.get("path_id")
+            ]
+            print(
+                f"    - {edge.edge_id}: {edge.source} --{edge.relation}--> {edge.target} "
+                f"support={support_ids or 'none'}"
+            )
+        if path.warnings:
+            print("    Warnings:")
+            for warning in path.warnings:
+                print(f"      - {warning}")
+    if result.warnings:
+        print("  Warnings:")
+        for warning in result.warnings:
+            print(f"    - {warning}")
+
+
 def _print_grounded_atomic_dag_payload(payload: dict[str, Any]) -> None:
     if not payload:
         print("  (none)")
@@ -593,10 +666,12 @@ def _print_grounded_atomic_dag_payload(payload: dict[str, Any]) -> None:
                 continue
             dependencies = node.get("dependencies") or []
             support = node.get("support") or []
+            semantic_edge_id = node.get("source_semantic_edge_id")
             support_ids = []
             if isinstance(support, list):
                 support_ids = [str(item.get("path_id")) for item in support if isinstance(item, dict) and item.get("path_id")]
-            print(f"    - {node.get('node_id')}: depends_on={dependencies or 'none'} support={support_ids or 'none'}")
+            semantic = f" source_semantic_edge_id={semantic_edge_id}" if semantic_edge_id else ""
+            print(f"    - {node.get('node_id')}: depends_on={dependencies or 'none'} support={support_ids or 'none'}{semantic}")
             print(f"      {node.get('question')}")
     warnings = payload.get("normalization_warnings") or []
     if warnings:
@@ -612,15 +687,12 @@ def _print_atomic_question_dag(dag: AtomicQuestionDAG) -> None:
 
     print("Nodes:")
     for node in dag.nodes:
-        inputs = ", ".join(node.inputs) if node.inputs else "none"
         depends_on = ", ".join(node.depends_on) if node.depends_on else "none"
-        print(f"  - {node.id} [{node.type}]: inputs=({inputs}) -> {node.output}; depends_on={depends_on}")
+        print(f"  - {node.id}: depends_on={depends_on}")
         print(f"    {node.question}")
         support_ids = node.metadata.get("support_path_ids") if isinstance(node.metadata, dict) else None
         if support_ids:
             print(f"    support_path_ids={support_ids}")
-        if node.candidate_bindings:
-            print(f"    candidate_bindings={node.candidate_bindings}")
 
     print("Edges:")
     if dag.edges:

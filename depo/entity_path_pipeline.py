@@ -19,15 +19,23 @@ from models import (
     ScoredEntityPath,
     SelectedEntityPath,
     SemanticASTResult,
+    SemanticReasoningEdge,
+    SemanticReasoningNode,
+    SemanticReasoningPath,
+    SemanticReasoningPathResult,
 )
 from prompts import (
+    ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM,
     ENTITY_PATH_SCORING_SYSTEM,
     ENTITY_PATH_SELECTION_SYSTEM,
     GROUNDED_ATOMIC_DAG_SYSTEM,
     SELECTED_PATH_SEMANTIC_TRANSDUCTION_SYSTEM,
+    SEMANTIC_REASONING_PATH_SYSTEM,
+    build_atomic_dag_from_semantic_reasoning_path_prompt,
     build_grounded_atomic_dag_prompt,
     build_score_entity_paths_prompt,
     build_select_entity_paths_prompt,
+    build_semantic_reasoning_path_prompt,
     build_selected_path_semantic_transduction_prompt,
 )
 
@@ -70,9 +78,14 @@ class EntityPathSemanticParser:
         *,
         original_question: str,
         selected_dependency_path_evidence: list[dict[str, object]] | None = None,
+        semantic_reasoning_paths: SemanticReasoningPathResult | dict[str, Any] | None = None,
         **legacy_kwargs: Any,
     ) -> tuple[AtomicQuestionDAG, dict[str, Any]]:
-        """Generate a grounded Atomic DAG directly from top path-set evidence."""
+        """Generate a grounded Atomic DAG.
+
+        New main flow compiles from Semantic Reasoning Paths. The direct
+        dependency-evidence-to-DAG behavior is retained for legacy callers.
+        """
         if selected_dependency_path_evidence is None:
             path_set_candidates = legacy_kwargs.get("path_set_candidates")
             entity_origin_paths = legacy_kwargs.get("entity_origin_paths")
@@ -86,6 +99,12 @@ class EntityPathSemanticParser:
                 path_set_candidates=path_set_candidates,
                 entity_origin_paths=entity_origin_paths,
                 max_path_sets=4,
+            )
+        if semantic_reasoning_paths is not None:
+            return self._build_atomic_dag_from_semantic_reasoning_paths(
+                original_question=original_question,
+                selected_dependency_path_evidence=selected_dependency_path_evidence,
+                semantic_reasoning_paths=semantic_reasoning_paths,
             )
         validation_feedback: str | None = None
         last_payload: dict[str, Any] = {}
@@ -101,6 +120,7 @@ class EntityPathSemanticParser:
             )
             raw_payload = payload if isinstance(payload, dict) else {}
             last_payload = raw_payload
+            dependency_repairs = _repair_dependency_variable_questions(raw_payload)
             hard_errors, support_warnings = _grounded_atomic_dag_support_issues(
                 raw_payload,
                 selected_dependency_path_evidence,
@@ -125,11 +145,133 @@ class EntityPathSemanticParser:
                 selected_dependency_path_evidence=selected_dependency_path_evidence,
             )
             all_warnings = [*final_support_warnings, *warnings]
+            if dependency_repairs:
+                all_warnings.extend(
+                    f"Repaired dependency variable question for {repair['node_id']}: "
+                    f"{repair['before']!r} -> {repair['after']!r}"
+                    for repair in dependency_repairs
+                )
             if all_warnings:
                 raw_payload["normalization_warnings"] = all_warnings
             raw_payload.setdefault("selected_dependency_path_evidence", selected_dependency_path_evidence)
             return dag, raw_payload
         raise ValueError("Grounded Atomic DAG generation failed. Last payload: " + repr(last_payload))
+
+    def build_semantic_reasoning_paths(
+        self,
+        *,
+        original_question: str,
+        restored_question: str,
+        selected_dependency_path_evidence: list[dict[str, object]],
+    ) -> tuple[SemanticReasoningPathResult, dict[str, Any]]:
+        validation_feedback: str | None = None
+        last_payload: dict[str, Any] = {}
+        for attempt in range(2):
+            payload = self.llm_client.chat_json(
+                SEMANTIC_REASONING_PATH_SYSTEM,
+                build_semantic_reasoning_path_prompt(
+                    original_question=original_question,
+                    restored_question=restored_question,
+                    selected_dependency_path_evidence=selected_dependency_path_evidence,
+                    validation_feedback=validation_feedback,
+                ),
+            )
+            raw_payload = payload if isinstance(payload, dict) else {}
+            last_payload = raw_payload
+            try:
+                result = _parse_semantic_reasoning_path_payload(
+                    raw_payload,
+                    selected_dependency_path_evidence=selected_dependency_path_evidence,
+                )
+            except ValueError as exc:
+                validation_feedback = str(exc)
+                if attempt == 1:
+                    raise ValueError(
+                        "Semantic Reasoning Path induction failed after retry: "
+                        + validation_feedback
+                    ) from exc
+                continue
+            issues = _semantic_reasoning_path_support_issues(
+                result,
+                selected_dependency_path_evidence,
+            )
+            if issues:
+                validation_feedback = "\n".join(issues)
+                if attempt == 1:
+                    raise ValueError(
+                        "Semantic Reasoning Path validation failed after retry: "
+                        + validation_feedback
+                    )
+                continue
+            raw_payload.setdefault("selected_dependency_path_evidence", selected_dependency_path_evidence)
+            result.raw_payload = raw_payload
+            return result, raw_payload
+        raise ValueError("Semantic Reasoning Path induction failed. Last payload: " + repr(last_payload))
+
+    def _build_atomic_dag_from_semantic_reasoning_paths(
+        self,
+        *,
+        original_question: str,
+        selected_dependency_path_evidence: list[dict[str, object]],
+        semantic_reasoning_paths: SemanticReasoningPathResult | dict[str, Any],
+    ) -> tuple[AtomicQuestionDAG, dict[str, Any]]:
+        semantic_payload = (
+            semantic_reasoning_paths.to_dict()
+            if isinstance(semantic_reasoning_paths, SemanticReasoningPathResult)
+            else semantic_reasoning_paths
+        )
+        validation_feedback: str | None = None
+        last_payload: dict[str, Any] = {}
+        final_support_warnings: list[str] = []
+        for attempt in range(2):
+            payload = self.llm_client.chat_json(
+                ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM,
+                build_atomic_dag_from_semantic_reasoning_path_prompt(
+                    original_question=original_question,
+                    semantic_reasoning_paths=semantic_payload,
+                    selected_dependency_path_evidence=selected_dependency_path_evidence,
+                    validation_feedback=validation_feedback,
+                ),
+            )
+            raw_payload = payload if isinstance(payload, dict) else {}
+            last_payload = raw_payload
+            dependency_repairs = _repair_dependency_variable_questions(raw_payload, semantic_payload=semantic_payload)
+            hard_errors, support_warnings = _grounded_atomic_dag_support_issues(
+                raw_payload,
+                selected_dependency_path_evidence,
+            )
+            hard_errors.extend(_grounded_dependency_variable_reference_errors(raw_payload))
+            hard_errors.extend(_semantic_edge_source_errors(raw_payload, semantic_payload))
+            final_support_warnings = support_warnings
+            if hard_errors:
+                validation_feedback = "\n".join(hard_errors)
+                if attempt == 1:
+                    raise ValueError(
+                        "Atomic DAG compilation from Semantic Reasoning Path failed after retry: "
+                        + validation_feedback
+                    )
+                continue
+            if support_warnings:
+                validation_feedback = "\n".join(support_warnings)
+                if attempt == 0:
+                    continue
+            dag, warnings = _parse_grounded_atomic_dag_payload(
+                raw_payload,
+                selected_dependency_path_evidence=selected_dependency_path_evidence,
+            )
+            all_warnings = [*final_support_warnings, *warnings]
+            if dependency_repairs:
+                all_warnings.extend(
+                    f"Repaired dependency variable question for {repair['node_id']}: "
+                    f"{repair['before']!r} -> {repair['after']!r}"
+                    for repair in dependency_repairs
+                )
+            if all_warnings:
+                raw_payload["normalization_warnings"] = all_warnings
+            raw_payload.setdefault("selected_dependency_path_evidence", selected_dependency_path_evidence)
+            raw_payload.setdefault("semantic_reasoning_paths", semantic_payload)
+            return dag, raw_payload
+        raise ValueError("Atomic DAG compilation failed. Last payload: " + repr(last_payload))
 
     # Legacy methods kept for tests and compatibility. The main pipeline no
     # longer uses exactly-one path selection.
@@ -229,19 +371,330 @@ class EntityPathSemanticParser:
         )
 
 
-def select_top_paths_by_entity(
+FORBIDDEN_SEMANTIC_NODE_LABELS = {
+    "?",
+    "a",
+    "an",
+    "by",
+    "compare",
+    "common answer",
+    "did",
+    "different",
+    "do",
+    "does",
+    "earlier",
+    "first",
+    "for",
+    "from",
+    "in",
+    "intersection",
+    "is",
+    "later",
+    "of",
+    "older",
+    "ranking",
+    "same",
+    "share",
+    "the",
+    "to",
+    "was",
+    "were",
+    "what",
+    "when",
+    "where",
+    "which",
+    "who",
+    "why",
+    "with",
+    "yes/no",
+    "younger",
+}
+
+
+def _parse_semantic_reasoning_path_payload(
+    payload: dict[str, Any],
+    *,
+    selected_dependency_path_evidence: list[dict[str, Any]],
+) -> SemanticReasoningPathResult:
+    raw_paths = payload.get("semantic_reasoning_paths")
+    if raw_paths is None:
+        raw_paths = payload.get("paths")
+    if not isinstance(raw_paths, list) or not raw_paths:
+        raise ValueError("Semantic Reasoning Path payload must contain a non-empty semantic_reasoning_paths list.")
+
+    selected_path_ids = _selected_dependency_path_ids(selected_dependency_path_evidence)
+    selected_path_set_ids = _selected_dependency_path_set_ids(selected_dependency_path_evidence)
+    paths: list[SemanticReasoningPath] = []
+    for index, raw_path in enumerate(raw_paths, start=1):
+        if not isinstance(raw_path, dict):
+            raise ValueError(f"semantic_reasoning_paths[{index}] must be a JSON object.")
+        branch_id = str(raw_path.get("branch_id") or f"b{index}").strip()
+        entity_id = str(raw_path.get("entity_id") or "").strip()
+        source_path_id = str(raw_path.get("source_path_id") or raw_path.get("path_id") or "").strip()
+        if not branch_id or not entity_id or not source_path_id:
+            raise ValueError(f"Semantic reasoning path #{index} missing branch_id/entity_id/source_path_id.")
+        if source_path_id not in selected_path_ids:
+            raise ValueError(f"Semantic reasoning path {branch_id} references unselected source_path_id={source_path_id!r}.")
+
+        nodes = _parse_semantic_reasoning_nodes(raw_path.get("nodes"), branch_id)
+        edges = _parse_semantic_reasoning_edges(raw_path.get("edges"), branch_id)
+        if len(nodes) < 2:
+            raise ValueError(f"Semantic reasoning path {branch_id} must contain at least 2 nodes.")
+        if not edges:
+            raise ValueError(f"Semantic reasoning path {branch_id} must contain at least 1 edge.")
+        node_ids = {node.node_id for node in nodes}
+        for node in nodes:
+            if _forbidden_semantic_node_label(node.label):
+                raise ValueError(f"Semantic reasoning path {branch_id} contains forbidden semantic node label={node.label!r}.")
+        for edge in edges:
+            if edge.source not in node_ids or edge.target not in node_ids:
+                raise ValueError(f"Semantic reasoning edge {edge.edge_id} references missing source/target node.")
+            if edge.source == edge.target:
+                raise ValueError(f"Semantic reasoning edge {edge.edge_id} has identical source and target.")
+            if not edge.relation:
+                raise ValueError(f"Semantic reasoning edge {edge.edge_id} has empty relation.")
+            if not edge.is_one_hop:
+                raise ValueError(f"Semantic reasoning edge {edge.edge_id} must be one-hop.")
+            if not edge.support:
+                raise ValueError(f"Semantic reasoning edge {edge.edge_id} has empty support.")
+            for support in edge.support:
+                path_set_id = str(support.get("path_set_id") or "").strip()
+                path_id = str(support.get("path_id") or "").strip()
+                if path_set_id not in selected_path_set_ids or path_id not in selected_path_ids:
+                    raise ValueError(
+                        f"Semantic reasoning edge {edge.edge_id} has invalid support path_set/path "
+                        f"{path_set_id!r}/{path_id!r}."
+                    )
+                if not _str_list(support.get("node_texts")):
+                    raise ValueError(f"Semantic reasoning edge {edge.edge_id} support has empty node_texts.")
+
+        terminal_node_id = str(raw_path.get("terminal_node_id") or "").strip() or (edges[-1].target if edges else None)
+        if terminal_node_id and terminal_node_id not in node_ids:
+            raise ValueError(f"Semantic reasoning path {branch_id} terminal_node_id references a missing node.")
+        paths.append(
+            SemanticReasoningPath(
+                branch_id=branch_id,
+                entity_id=entity_id,
+                source_path_id=source_path_id,
+                nodes=nodes,
+                edges=edges,
+                terminal_node_id=terminal_node_id,
+                score=_clamp_score(raw_path.get("score")),
+                warnings=_str_list(raw_path.get("warnings")),
+            )
+        )
+
+    score_breakdown = {
+        str(key): float(value)
+        for key, value in (payload.get("score_breakdown") or {}).items()
+        if isinstance(value, (int, float))
+    } if isinstance(payload.get("score_breakdown"), dict) else {}
+    selected_ids = _str_list(payload.get("selected_path_set_ids")) or sorted(selected_path_set_ids)
+    return SemanticReasoningPathResult(
+        paths=paths,
+        selected_path_set_ids=selected_ids,
+        operator_intent=payload.get("operator_intent") if isinstance(payload.get("operator_intent"), dict) else {},
+        score=_clamp_score(payload.get("score")),
+        score_breakdown=score_breakdown,
+        warnings=_str_list(payload.get("warnings")),
+        raw_payload=payload,
+    )
+
+
+def _parse_semantic_reasoning_nodes(raw: Any, branch_id: str) -> list[SemanticReasoningNode]:
+    if not isinstance(raw, list):
+        raise ValueError(f"Semantic reasoning path {branch_id} nodes must be a list.")
+    nodes: list[SemanticReasoningNode] = []
+    seen: set[str] = set()
+    for index, item in enumerate(raw, start=1):
+        if not isinstance(item, dict):
+            raise ValueError(f"Semantic reasoning path {branch_id} node #{index} must be an object.")
+        node_id = _normalize_semantic_reasoning_node_id(item.get("node_id") or item.get("id"), branch_id, index, seen)
+        label = str(item.get("label") or item.get("text") or "").strip()
+        kind = str(item.get("kind") or "").strip()
+        if not label or not kind:
+            raise ValueError(f"Semantic reasoning node {node_id} missing label/kind.")
+        nodes.append(
+            SemanticReasoningNode(
+                node_id=node_id,
+                label=label,
+                kind=kind,
+                semantic_type=_optional_str(item.get("semantic_type")),
+                source_path_id=_optional_str(item.get("source_path_id")),
+                source_node_texts=_str_list(item.get("source_node_texts")),
+                source_node_ids=_str_list(item.get("source_node_ids")),
+            )
+        )
+    return nodes
+
+
+def _parse_semantic_reasoning_edges(raw: Any, branch_id: str) -> list[SemanticReasoningEdge]:
+    if not isinstance(raw, list):
+        raise ValueError(f"Semantic reasoning path {branch_id} edges must be a list.")
+    edges: list[SemanticReasoningEdge] = []
+    seen: set[str] = set()
+    for index, item in enumerate(raw, start=1):
+        if not isinstance(item, dict):
+            raise ValueError(f"Semantic reasoning path {branch_id} edge #{index} must be an object.")
+        edge_id = str(item.get("edge_id") or item.get("id") or f"{branch_id}_e{index}").strip()
+        if not edge_id:
+            edge_id = f"{branch_id}_e{index}"
+        if edge_id in seen:
+            edge_id = f"{branch_id}_e{index}"
+        seen.add(edge_id)
+        support = _normalize_semantic_reasoning_support(item.get("support"))
+        edges.append(
+            SemanticReasoningEdge(
+                edge_id=edge_id,
+                source=str(item.get("source") or "").strip(),
+                target=str(item.get("target") or "").strip(),
+                relation=str(item.get("relation") or "").strip(),
+                answer_type=_optional_str(item.get("answer_type")),
+                is_one_hop=_bool_value(item.get("is_one_hop"), default=True),
+                support=support,
+                atomic_question_template=_optional_str(item.get("atomic_question_template")),
+            )
+        )
+    return edges
+
+
+def _normalize_semantic_reasoning_node_id(raw: Any, branch_id: str, index: int, seen: set[str]) -> str:
+    node_id = str(raw or f"{branch_id}_n{index}").strip()
+    if not node_id:
+        node_id = f"{branch_id}_n{index}"
+    if node_id in seen:
+        node_id = f"{branch_id}_n{index}"
+    seen.add(node_id)
+    return node_id
+
+
+def _normalize_semantic_reasoning_support(raw: Any) -> list[dict[str, Any]]:
+    if isinstance(raw, dict):
+        raw_items = [raw]
+    elif isinstance(raw, list):
+        raw_items = raw
+    else:
+        return []
+    result: list[dict[str, Any]] = []
+    for item in raw_items:
+        if not isinstance(item, dict):
+            continue
+        result.append(
+            {
+                "path_set_id": str(item.get("path_set_id") or "").strip(),
+                "path_id": str(item.get("path_id") or "").strip(),
+                "node_texts": _str_list(item.get("node_texts")),
+                "node_ids": _str_list(item.get("node_ids")),
+                "reason": str(item.get("reason") or "").strip(),
+            }
+        )
+    return result
+
+
+def _semantic_reasoning_path_support_issues(
+    result: SemanticReasoningPathResult,
+    selected_dependency_path_evidence: list[dict[str, Any]],
+) -> list[str]:
+    support_index = _selected_dependency_support_index(selected_dependency_path_evidence)
+    issues: list[str] = []
+    for path in result.paths:
+        for edge in path.edges:
+            for support_index_in_edge, support in enumerate(edge.support, start=1):
+                path_set_id = str(support.get("path_set_id") or "").strip()
+                path_id = str(support.get("path_id") or "").strip()
+                node_texts = _str_list(support.get("node_texts"))
+                key = (path_set_id, path_id)
+                if key not in support_index:
+                    issues.append(
+                        f"Semantic edge {edge.edge_id} support #{support_index_in_edge} cites invalid "
+                        f"path_set_id/path_id {path_set_id!r}/{path_id!r}."
+                    )
+                    continue
+                available = support_index[key]["normalized_node_texts"]
+                missing = [
+                    text
+                    for text in node_texts
+                    if _normalize_support_text(text) not in available
+                ]
+                if missing:
+                    issues.append(
+                        f"Semantic edge {edge.edge_id} support #{support_index_in_edge} cites node_texts "
+                        f"not present in selected path {path_set_id}/{path_id}: {missing}."
+                    )
+    return issues
+
+
+def _semantic_edge_source_errors(payload: dict[str, Any], semantic_payload: dict[str, Any]) -> list[str]:
+    expected_edge_ids = {
+        str(edge.get("edge_id") or "").strip()
+        for path in semantic_payload.get("paths", semantic_payload.get("semantic_reasoning_paths", []))
+        if isinstance(path, dict)
+        for edge in path.get("edges", [])
+        if isinstance(edge, dict)
+    }
+    expected_edge_ids.discard("")
+    if not expected_edge_ids:
+        return []
+    raw_nodes = payload.get("nodes")
+    if raw_nodes is None:
+        raw_nodes = payload.get("atomic_questions") or payload.get("subquestions")
+    if not isinstance(raw_nodes, list):
+        return []
+    errors: list[str] = []
+    used_edge_ids: set[str] = set()
+    for index, node in enumerate(raw_nodes, start=1):
+        if not isinstance(node, dict):
+            continue
+        node_id = str(node.get("node_id") or node.get("id") or f"q{index}").strip()
+        edge_id = str(node.get("source_semantic_edge_id") or "").strip()
+        if not edge_id:
+            errors.append(f"Atomic node {node_id} is missing source_semantic_edge_id.")
+            continue
+        if edge_id not in expected_edge_ids:
+            errors.append(f"Atomic node {node_id} references unknown source_semantic_edge_id={edge_id!r}.")
+            continue
+        used_edge_ids.add(edge_id)
+    missing = sorted(expected_edge_ids - used_edge_ids)
+    if missing:
+        errors.append(f"Atomic DAG skipped semantic reasoning edges: {missing}.")
+    return errors
+
+
+def _selected_dependency_path_ids(selected_dependency_path_evidence: list[dict[str, Any]]) -> set[str]:
+    return {
+        str(path.get("path_id") or "").strip()
+        for path_set in selected_dependency_path_evidence
+        if isinstance(path_set, dict)
+        for path in path_set.get("paths", [])
+        if isinstance(path, dict) and str(path.get("path_id") or "").strip()
+    }
+
+
+def _selected_dependency_path_set_ids(selected_dependency_path_evidence: list[dict[str, Any]]) -> set[str]:
+    return {
+        str(path_set.get("path_set_id") or "").strip()
+        for path_set in selected_dependency_path_evidence
+        if isinstance(path_set, dict) and str(path_set.get("path_set_id") or "").strip()
+    }
+
+
+def _forbidden_semantic_node_label(label: str) -> bool:
+    normalized = re.sub(r"[^a-z0-9/ ]+", " ", str(label or "").lower())
+    normalized = " ".join(normalized.split())
+    return normalized in FORBIDDEN_SEMANTIC_NODE_LABELS
+
+
+def select_best_path_by_entity(
     *,
     scored_paths: list[ScoredEntityPath],
     entity_start_nodes: list[EntityStartNode],
     entity_origin_paths: list[EntityOriginPath],
-    top_k: int = 2,
     min_valid_score: float = 55.0,
-) -> dict[str, list[ScoredEntityPath]]:
-    if top_k <= 0:
-        raise ValueError("top_k must be positive.")
+) -> dict[str, ScoredEntityPath]:
+    """Select exactly one highest-scoring path for each explicit entity."""
     path_by_id = {path.path_id: path for path in entity_origin_paths}
     score_by_path_id = {score.path_id: score for score in scored_paths if score.path_id in path_by_id}
-    result: dict[str, list[ScoredEntityPath]] = {}
+    result: dict[str, ScoredEntityPath] = {}
     for entity in entity_start_nodes:
         entity_paths = [path for path in entity_origin_paths if path.entity_id == entity.entity_id]
         if not entity_paths:
@@ -258,38 +711,56 @@ def select_top_paths_by_entity(
             for path in entity_paths
         ]
         ordered = sorted(entity_scores, key=lambda item: (-item.score, item.path_id))
-        selected = [
+        eligible = [
             item
             for item in ordered
             if item.valid and item.score >= min_valid_score
-        ][:top_k]
-        if len(selected) < min(top_k, len(ordered)):
-            selected_ids = {item.path_id for item in selected}
-            selected.extend(
-                item
-                for item in ordered
-                if item.path_id not in selected_ids
-            )
-        result[entity.entity_id] = selected[: min(top_k, len(ordered))]
-        if not result[entity.entity_id]:
+        ]
+        selected = eligible[0] if eligible else ordered[0]
+        result[entity.entity_id] = selected
+        if not result[entity.entity_id].path_id:
             raise ValueError(f"No top path could be selected for entity_id={entity.entity_id!r}.")
     return result
 
 
+def build_single_path_set_candidate(
+    *,
+    best_paths_by_entity: dict[str, ScoredEntityPath],
+) -> list[PathSetCandidate]:
+    if not best_paths_by_entity:
+        return []
+    path_ids_by_entity: dict[str, str] = {}
+    scores: list[float] = []
+    for entity_id in sorted(best_paths_by_entity, key=_entity_id_sort_key):
+        scored_path = best_paths_by_entity[entity_id]
+        if not scored_path.path_id:
+            raise ValueError(f"Entity {entity_id!r} has no selected best path.")
+        path_ids_by_entity[entity_id] = scored_path.path_id
+        scores.append(scored_path.score)
+    mean_score = sum(scores) / len(scores) if scores else 0.0
+    return [
+        PathSetCandidate(
+            path_set_id="ps1",
+            path_ids_by_entity=path_ids_by_entity,
+            mean_path_score=mean_score,
+        )
+    ]
+
+
 def build_path_set_candidates(
     *,
-    top_paths_by_entity: dict[str, list[ScoredEntityPath]],
+    paths_by_entity: dict[str, list[ScoredEntityPath]],
     max_path_sets: int | None = None,
 ) -> list[PathSetCandidate]:
-    if not top_paths_by_entity:
+    if not paths_by_entity:
         return []
-    entity_ids = sorted(top_paths_by_entity, key=_entity_id_sort_key)
+    entity_ids = sorted(paths_by_entity, key=_entity_id_sort_key)
     for entity_id in entity_ids:
-        if not top_paths_by_entity[entity_id]:
-            raise ValueError(f"Entity {entity_id!r} has no top paths.")
+        if not paths_by_entity[entity_id]:
+            raise ValueError(f"Entity {entity_id!r} has no selected paths.")
 
     raw_candidates: list[tuple[dict[str, str], float]] = []
-    for combo in product(*(top_paths_by_entity[entity_id] for entity_id in entity_ids)):
+    for combo in product(*(paths_by_entity[entity_id] for entity_id in entity_ids)):
         path_ids_by_entity = {
             entity_id: scored_path.path_id
             for entity_id, scored_path in zip(entity_ids, combo, strict=True)
@@ -471,6 +942,269 @@ def _grounded_dependency_variable_reference_errors(payload: dict[str, Any]) -> l
         if node_id:
             seen_ids.add(node_id)
     return errors
+
+
+def _repair_dependency_variable_questions(
+    payload: dict[str, Any],
+    *,
+    semantic_payload: dict[str, Any] | None = None,
+) -> list[dict[str, str]]:
+    """Repair dependent atomic questions that forgot to mention qX's answer.
+
+    The LLM sometimes declares dependencies correctly but emits a fully expanded
+    bridge question. HyperBranch needs explicit variables for deterministic
+    answer substitution, so this function mutates the raw payload before strict
+    validation.
+    """
+    raw_nodes = payload.get("nodes")
+    if raw_nodes is None:
+        raw_nodes = payload.get("atomic_questions") or payload.get("subquestions")
+    if not isinstance(raw_nodes, list):
+        return []
+
+    semantic_context = _semantic_reasoning_context(semantic_payload or {})
+    repairs: list[dict[str, str]] = []
+    seen_ids: set[str] = set()
+    for index, raw_node in enumerate(raw_nodes, start=1):
+        if not isinstance(raw_node, dict):
+            continue
+        node_id = str(raw_node.get("node_id") or raw_node.get("id") or f"q{index}").strip()
+        question = str(raw_node.get("question") or raw_node.get("subquestion") or raw_node.get("sub_question") or "").strip()
+        raw_dependencies = raw_node.get("dependencies") if "dependencies" in raw_node else raw_node.get("depends_on")
+        dependencies = _raw_dependency_ids(raw_dependencies)
+        valid_dependencies = [dependency for dependency in dependencies if dependency in seen_ids]
+        missing = [
+            dependency
+            for dependency in valid_dependencies
+            if not _question_mentions_dependency_answer(question, dependency)
+        ]
+        if missing and question:
+            repaired_question = _dependency_variable_repaired_question(
+                question=question,
+                missing_dependencies=missing,
+                raw_node=raw_node,
+                semantic_context=semantic_context,
+            )
+            if repaired_question != question:
+                raw_node.setdefault("question_before_dependency_variable_repair", question)
+                raw_node["question"] = repaired_question
+                repairs.append(
+                    {
+                        "node_id": node_id,
+                        "dependencies": ", ".join(missing),
+                        "before": question,
+                        "after": repaired_question,
+                    }
+                )
+        if node_id:
+            seen_ids.add(node_id)
+
+    if repairs:
+        existing = payload.get("dependency_variable_repairs")
+        if isinstance(existing, list):
+            existing.extend(repairs)
+        else:
+            payload["dependency_variable_repairs"] = repairs
+    return repairs
+
+
+def _dependency_variable_repaired_question(
+    *,
+    question: str,
+    missing_dependencies: list[str],
+    raw_node: dict[str, Any],
+    semantic_context: dict[str, Any],
+) -> str:
+    edge_id = str(raw_node.get("source_semantic_edge_id") or "").strip()
+    edge = semantic_context.get("edges", {}).get(edge_id) if edge_id else None
+    dependency_id = _dependency_ref_for_node(raw_node, missing_dependencies)
+    dependency_variable = f"{dependency_id}'s answer" if dependency_id else _dependency_variable_phrase(missing_dependencies)
+
+    if isinstance(edge, dict):
+        template = str(edge.get("atomic_question_template") or "").strip()
+        repaired_from_template = _repair_question_from_semantic_template(
+            template=template,
+            edge=edge,
+            dependency_variable=dependency_variable,
+            missing_dependencies=missing_dependencies,
+        )
+        if repaired_from_template:
+            return repaired_from_template
+
+        repaired_from_edge = _question_from_semantic_edge(
+            edge=edge,
+            dependency_variable=dependency_variable,
+            original_question=question,
+        )
+        if repaired_from_edge and _all_dependency_variables_present(repaired_from_edge, missing_dependencies):
+            return repaired_from_edge
+
+        source_label = str(edge.get("source_label") or "").strip()
+        if source_label:
+            replaced = _replace_label_with_dependency_variable(question, source_label, dependency_variable)
+            if _all_dependency_variables_present(replaced, missing_dependencies):
+                return replaced
+
+    prefixed = f"Using {_dependency_variable_phrase(missing_dependencies)}, {question[0].lower()}{question[1:]}" if question else question
+    return prefixed if _all_dependency_variables_present(prefixed, missing_dependencies) else question
+
+
+def _dependency_ref_for_node(raw_node: dict[str, Any], dependencies: list[str]) -> str:
+    raw_input = raw_node.get("input")
+    if isinstance(raw_input, dict):
+        ref = str(raw_input.get("ref") or "").strip()
+        if ref in dependencies:
+            return ref
+    return dependencies[0] if dependencies else ""
+
+
+def _dependency_variable_phrase(dependencies: list[str]) -> str:
+    variables = [f"{dependency}'s answer" for dependency in dependencies]
+    if not variables:
+        return "the previous answer"
+    if len(variables) == 1:
+        return variables[0]
+    return " and ".join(variables)
+
+
+def _all_dependency_variables_present(question: str, dependencies: list[str]) -> bool:
+    return all(_question_mentions_dependency_answer(question, dependency) for dependency in dependencies)
+
+
+def _repair_question_from_semantic_template(
+    *,
+    template: str,
+    edge: dict[str, Any],
+    dependency_variable: str,
+    missing_dependencies: list[str],
+) -> str:
+    if not template:
+        return ""
+    source_id = str(edge.get("source") or "").strip()
+    source_label = str(edge.get("source_label") or "").strip()
+    repaired = template
+    if source_id:
+        repaired = re.sub(rf"\b{re.escape(source_id)}\s*['\u2019]s\s+answer\b", dependency_variable, repaired)
+        repaired = re.sub(rf"\{{\s*{re.escape(source_id)}\.answer\s*\}}", dependency_variable, repaired)
+    if source_label:
+        repaired = _replace_label_with_dependency_variable(repaired, source_label, dependency_variable)
+    return repaired if _all_dependency_variables_present(repaired, missing_dependencies) else ""
+
+
+def _question_from_semantic_edge(
+    *,
+    edge: dict[str, Any],
+    dependency_variable: str,
+    original_question: str,
+) -> str:
+    relation = str(edge.get("relation") or "").strip()
+    target_label = str(edge.get("target_label") or "").strip()
+    answer_type = str(edge.get("answer_type") or edge.get("target_semantic_type") or "").strip()
+    context = " ".join([relation, target_label, answer_type, original_question]).lower()
+    target = _humanize_semantic_label(target_label)
+
+    if "north" in context:
+        return f"What region is immediately north of {dependency_variable}?"
+    if "south" in context:
+        return f"What region is immediately south of {dependency_variable}?"
+    if "east" in context:
+        return f"What region is immediately east of {dependency_variable}?"
+    if "west" in context:
+        return f"What region is immediately west of {dependency_variable}?"
+    if "death" in context or " die" in f" {context}":
+        if "reason" in context or "cause" in context or original_question.lower().startswith("why "):
+            return f"Why did {dependency_variable} die?"
+        if "place" in context or "location" in context or original_question.lower().startswith("where "):
+            return f"Where did {dependency_variable} die?"
+        return f"When did {dependency_variable} die?"
+    if "birth" in context or " born" in f" {context}":
+        if "place" in context or "location" in context or original_question.lower().startswith("where "):
+            return f"Where was {dependency_variable} born?"
+        return f"When was {dependency_variable} born?"
+    if "graduat" in context and ("university" in context or "school" in context):
+        return f"Which university did {dependency_variable} graduate from?"
+    if "nationality" in context:
+        return f"What is the nationality of {dependency_variable}?"
+    if "created" in context or "creation" in context:
+        return f"When was {dependency_variable} created?"
+    if "released" in context or "release" in context:
+        return f"When was {dependency_variable} released?"
+    if "located" in context or "location" in context:
+        if "country" in context:
+            return f"What country is {dependency_variable} located in?"
+        if "city" in context:
+            return f"What city is {dependency_variable} located in?"
+        return f"Where is {dependency_variable} located?"
+    if "ceo" in context:
+        return f"Who is the CEO of {dependency_variable}?"
+    if "director" in context:
+        return f"Who is the director of {dependency_variable}?"
+    if "author" in context:
+        return f"Who is the author of {dependency_variable}?"
+    if "performer" in context:
+        return f"Who is the performer of {dependency_variable}?"
+    if any(role in context for role in ("mother", "father", "wife", "husband", "spouse")):
+        role = next(role for role in ("mother", "father", "wife", "husband", "spouse") if role in context)
+        return f"Who is the {role} of {dependency_variable}?"
+
+    if target:
+        if answer_type.lower() == "person":
+            return f"Who is the {target} of {dependency_variable}?"
+        return f"What is the {target} of {dependency_variable}?"
+    return ""
+
+
+def _humanize_semantic_label(label: str) -> str:
+    return re.sub(r"\s+", " ", label.replace("_", " ").strip())
+
+
+def _replace_label_with_dependency_variable(question: str, label: str, dependency_variable: str) -> str:
+    label = label.strip()
+    if not label:
+        return question
+    pattern = re.compile(re.escape(label), flags=re.IGNORECASE)
+    if pattern.search(question):
+        return pattern.sub(dependency_variable, question, count=1)
+    return question
+
+
+def _semantic_reasoning_context(semantic_payload: dict[str, Any]) -> dict[str, Any]:
+    raw_paths = semantic_payload.get("paths")
+    if raw_paths is None:
+        raw_paths = semantic_payload.get("semantic_reasoning_paths")
+    if not isinstance(raw_paths, list):
+        return {"edges": {}}
+    edges: dict[str, dict[str, Any]] = {}
+    for path in raw_paths:
+        if not isinstance(path, dict):
+            continue
+        raw_nodes = path.get("nodes")
+        raw_edges = path.get("edges")
+        if not isinstance(raw_nodes, list) or not isinstance(raw_edges, list):
+            continue
+        nodes_by_id = {
+            str(node.get("node_id") or node.get("id") or "").strip(): node
+            for node in raw_nodes
+            if isinstance(node, dict) and str(node.get("node_id") or node.get("id") or "").strip()
+        }
+        for edge in raw_edges:
+            if not isinstance(edge, dict):
+                continue
+            edge_id = str(edge.get("edge_id") or edge.get("id") or "").strip()
+            if not edge_id:
+                continue
+            enriched = dict(edge)
+            source = str(edge.get("source") or "").strip()
+            target = str(edge.get("target") or "").strip()
+            source_node = nodes_by_id.get(source) or {}
+            target_node = nodes_by_id.get(target) or {}
+            enriched["source_label"] = str(source_node.get("label") or source_node.get("text") or "").strip()
+            enriched["target_label"] = str(target_node.get("label") or target_node.get("text") or "").strip()
+            enriched["source_kind"] = str(source_node.get("kind") or "").strip()
+            enriched["target_kind"] = str(target_node.get("kind") or "").strip()
+            enriched["target_semantic_type"] = str(target_node.get("semantic_type") or "").strip()
+            edges[edge_id] = enriched
+    return {"edges": edges}
 
 
 def _raw_dependency_ids(raw: Any) -> list[str]:
@@ -666,6 +1400,11 @@ def _parse_grounded_atomic_dag_payload(
         for metadata_key in ("operation", "input", "one_hop_relation", "answer_type"):
             if metadata_key in raw_node:
                 metadata[metadata_key] = raw_node.get(metadata_key)
+        for metadata_key in ("source_semantic_path_id", "source_semantic_edge_id"):
+            if metadata_key in raw_node:
+                metadata[metadata_key] = raw_node.get(metadata_key)
+        if "source_semantic_edge_id" in metadata:
+            metadata["semantic_reasoning_path_source"] = True
         output = str(raw_node.get("output") or f"X{len(nodes) + 1}").strip()
         node = AtomicQuestionNode(
             id=node_id,

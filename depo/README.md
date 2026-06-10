@@ -61,27 +61,37 @@ anchor decisions are made on restored original question text.
    independently. It does not choose a single final path, generate candidate
    nodes, create a Problem Frame, build an AST, or generate atomic questions.
 
-8.1. **Top-2 paths per entity**
-   The program keeps the top two paths for each entity by score, with fallback
-   to the best raw paths if an entity has no valid high-scoring path.
+8.1. **Highest-scored path per entity**
+   The program selects exactly one path for each explicit entity: the
+   highest-scoring valid path, with fallback to the highest-scoring raw path if
+   no valid high-scoring path exists.
 
-8.2. **Candidate path-set construction**
-   The program builds Cartesian path-set candidates from the per-entity top-2
-   paths. For two entities, top-2 by top-2 yields up to four path sets.
+8.2. **Selected path set**
+   The selected best paths for all entities are combined into exactly one path
+   set, `ps1`. For a two-entity question this means the two highest-scoring
+   entity-specific paths are used directly.
 
-9. **Grounded Atomic DAG generation**
-   The LLM generates the Atomic Subquestion DAG directly from only the original
-   question and compact selected dependency path evidence built from top
-   path-set candidates. Step 9 does not receive path scores, entity-start
-   metadata, full graph edges, rejected paths, restored graph metadata, or a
-   direct decomposition draft. It does not generate a Semantic AST, does not
-   call a Best-AST judge, and does not produce a final comparison or operator
-   question. Each atomic node must be one semantic lookup hop and must cite at
-   least one supporting `path_set_id`, `path_id`, and `node_texts` segment from
-   the supplied selected dependency paths.
+9. **Semantic Reasoning Path induction**
+   The LLM receives the original question, restored question, and compact
+   selected dependency path evidence for `ps1`. It converts the syntactic
+   dependency evidence into branch-level Semantic Reasoning Paths. These paths
+   are not dependency paths and are not a Semantic AST: their nodes are semantic
+   objects such as explicit entities, licensed intermediate objects
+   (`performer`, `director`, `company`, `CEO`), or value slots (`nationality`,
+   `birth_date`, `death_place`, `university`). Their edges are executable
+   one-hop semantic relations such as `performer of song` or `place of death`.
+   Final comparison, ranking, boolean, intersection, and common-answer intent is
+   stored only as metadata for downstream composition.
 
-10. **Atomic Subquestion DAG**
-   The generated DAG contains only one-hop lookup subquestions and explicit
+10. **Atomic DAG compilation**
+   The LLM compiles each Semantic Reasoning Path edge into exactly one atomic
+   lookup question. Dependent questions must use explicit dependency variables
+   such as `q1's answer`. Each atomic node keeps support copied from the source
+   semantic edge and remains traceable to `source_semantic_path_id` and
+   `source_semantic_edge_id`.
+
+11. **Atomic Subquestion DAG**
+   The final DAG contains only one-hop lookup subquestions and explicit
    dependencies between them. Final comparison, ranking, set, boolean, or
    synthesis reasoning is left to the HyperBranch final answer composer, which
    receives the original question plus atomic answers and evidence.

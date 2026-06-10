@@ -463,6 +463,64 @@ class PathSetCandidate:
 
 
 @dataclass
+class SemanticReasoningNode:
+    node_id: str
+    label: str
+    kind: str
+    semantic_type: str | None = None
+    source_path_id: str | None = None
+    source_node_texts: list[str] = field(default_factory=list)
+    source_node_ids: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class SemanticReasoningEdge:
+    edge_id: str
+    source: str
+    target: str
+    relation: str
+    answer_type: str | None = None
+    is_one_hop: bool = True
+    support: list[dict[str, Any]] = field(default_factory=list)
+    atomic_question_template: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class SemanticReasoningPath:
+    branch_id: str
+    entity_id: str
+    source_path_id: str
+    nodes: list[SemanticReasoningNode] = field(default_factory=list)
+    edges: list[SemanticReasoningEdge] = field(default_factory=list)
+    terminal_node_id: str | None = None
+    score: float = 0.0
+    warnings: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class SemanticReasoningPathResult:
+    paths: list[SemanticReasoningPath] = field(default_factory=list)
+    selected_path_set_ids: list[str] = field(default_factory=list)
+    operator_intent: dict[str, Any] = field(default_factory=dict)
+    score: float = 0.0
+    score_breakdown: dict[str, float] = field(default_factory=dict)
+    warnings: list[str] = field(default_factory=list)
+    raw_payload: dict[str, Any] | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
 class ASTSkeleton:
     """Program-built semantic AST skeleton derived only from selected paths."""
 

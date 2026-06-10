@@ -14,9 +14,9 @@ if str(DEPO_ROOT) not in sys.path:
 
 from entity_path_pipeline import (  # noqa: E402
     EntityPathSemanticParser,
-    build_path_set_candidates,
+    build_single_path_set_candidate,
     build_selected_dependency_path_evidence,
-    select_top_paths_by_entity,
+    select_best_path_by_entity,
 )
 from entity_path_projector import (  # noqa: E402
     enumerate_entity_origin_paths,
@@ -50,10 +50,12 @@ from models import (  # noqa: E402
 )
 from path_projector import build_undirected_dependency_graph  # noqa: E402
 from prompts import (  # noqa: E402
+    ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM,
     CANDIDATE_NODES_SYSTEM,
     ENTITY_PATH_SCORING_SYSTEM,
     GROUNDED_ATOMIC_DAG_SYSTEM,
     PROBLEM_FRAME_SYSTEM,
+    SEMANTIC_REASONING_PATH_SYSTEM,
     build_grounded_atomic_dag_prompt,
 )
 from subquestion_generator import SubquestionGenerator  # noqa: E402
@@ -290,7 +292,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
                 entity_origin_paths=paths,
             )
 
-    def test_path_scoring_keeps_top2_per_entity(self) -> None:
+    def test_path_scoring_selects_best_path_per_entity(self) -> None:
         entity = EntityStartNode(entity_id="e1", text="Entity A", graph_node_ids=["1"])
         paths = [
             _entity_path("e1_p1", "e1", ["Entity A", "weak"]),
@@ -315,36 +317,26 @@ class EntityOriginPipelineTest(unittest.TestCase):
             entity_start_nodes=[entity],
             entity_origin_paths=paths,
         )
-        top = select_top_paths_by_entity(
+        best = select_best_path_by_entity(
             scored_paths=scored,
             entity_start_nodes=[entity],
             entity_origin_paths=paths,
-            top_k=2,
         )
 
-        self.assertEqual([item.path_id for item in top["e1"]], ["e1_p3", "e1_p2"])
+        self.assertEqual(best["e1"].path_id, "e1_p3")
 
-    def test_two_entity_top2_cartesian_path_sets(self) -> None:
-        top = {
-            "e1": [
-                ScoredEntityPath(entity_id="e1", path_id="e1_p1", score=95),
-                ScoredEntityPath(entity_id="e1", path_id="e1_p2", score=80),
-            ],
-            "e2": [
-                ScoredEntityPath(entity_id="e2", path_id="e2_p1", score=90),
-                ScoredEntityPath(entity_id="e2", path_id="e2_p2", score=70),
-            ],
+    def test_two_entity_best_paths_build_single_path_set(self) -> None:
+        best = {
+            "e1": ScoredEntityPath(entity_id="e1", path_id="e1_p1", score=95),
+            "e2": ScoredEntityPath(entity_id="e2", path_id="e2_p1", score=90),
         }
 
-        path_sets = build_path_set_candidates(top_paths_by_entity=top)
+        path_sets = build_single_path_set_candidate(best_paths_by_entity=best)
 
         self.assertEqual(
             [(item.path_set_id, item.path_ids_by_entity) for item in path_sets],
             [
                 ("ps1", {"e1": "e1_p1", "e2": "e2_p1"}),
-                ("ps2", {"e1": "e1_p1", "e2": "e2_p2"}),
-                ("ps3", {"e1": "e1_p2", "e2": "e2_p1"}),
-                ("ps4", {"e1": "e1_p2", "e2": "e2_p2"}),
             ],
         )
 
@@ -750,6 +742,90 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual(metadata["one_hop_relation"], "developer company")
         self.assertEqual(metadata["answer_type"], "Organization")
 
+    def test_atomic_dag_compilation_repairs_missing_dependency_variable_question(self) -> None:
+        evidence = [
+            {
+                "path_set_id": "ps1",
+                "paths": [
+                    {
+                        "entity_id": "e1",
+                        "entity_text": "Israel",
+                        "path_id": "e1_p1",
+                        "path_text": "Israel -> located -> region -> north_region",
+                        "node_texts": ["Israel", "located", "region", "north_region"],
+                    }
+                ],
+            }
+        ]
+        semantic_payload = {
+            "paths": [
+                {
+                    "branch_id": "b1",
+                    "entity_id": "e1",
+                    "source_path_id": "e1_p1",
+                    "nodes": [
+                        {"node_id": "b1_n1", "label": "Israel", "kind": "entity", "semantic_type": "Country"},
+                        {"node_id": "b1_n2", "label": "region where Israel is located", "kind": "semantic_object", "semantic_type": "Region"},
+                        {"node_id": "b1_n3", "label": "region immediately north", "kind": "semantic_object", "semantic_type": "Region"},
+                    ],
+                    "edges": [
+                        {
+                            "edge_id": "b1_e1",
+                            "source": "b1_n1",
+                            "target": "b1_n2",
+                            "relation": "region where Israel is located",
+                            "answer_type": "Region",
+                            "is_one_hop": True,
+                        },
+                        {
+                            "edge_id": "b1_e2",
+                            "source": "b1_n2",
+                            "target": "b1_n3",
+                            "relation": "region immediately north of region",
+                            "answer_type": "Region",
+                            "is_one_hop": True,
+                        },
+                    ],
+                }
+            ],
+            "selected_path_set_ids": ["ps1"],
+        }
+        dag_payload = {
+            "nodes": [
+                {
+                    "node_id": "q1",
+                    "question": "What region is Israel located in?",
+                    "operation": "lookup",
+                    "dependencies": [],
+                    "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["Israel", "located", "region"]}],
+                    "source_semantic_path_id": "b1",
+                    "source_semantic_edge_id": "b1_e1",
+                },
+                {
+                    "node_id": "q2",
+                    "question": "What region is immediately north of the region where Israel is located?",
+                    "operation": "lookup",
+                    "input": {"type": "previous_answer", "ref": "q1"},
+                    "dependencies": ["q1"],
+                    "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["region", "north_region"]}],
+                    "source_semantic_path_id": "b1",
+                    "source_semantic_edge_id": "b1_e2",
+                },
+            ],
+            "selected_path_set_ids": ["ps1"],
+        }
+
+        parser = EntityPathSemanticParser(SemanticAtomicLLM(dag_payload))
+        dag, payload = parser.build_grounded_atomic_dag(
+            original_question="When was the region immediately north of the region where Israel is located created?",
+            selected_dependency_path_evidence=evidence,
+            semantic_reasoning_paths=semantic_payload,
+        )
+
+        self.assertEqual(dag.nodes[1].question, "What region is immediately north of q1's answer?")
+        self.assertEqual(payload["dependency_variable_repairs"][0]["node_id"], "q2")
+        self.assertIn("q1's answer", payload["dependency_variable_repairs"][0]["after"])
+
     def test_no_final_operator_question_in_prompt(self) -> None:
         prompt = build_grounded_atomic_dag_prompt(
             original_question="Are AlphaGo and Lee Sedol from the same country?",
@@ -796,10 +872,20 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual([entity.text for entity in result["entity_start_nodes"]], ["AlphaGo"])
         self.assertTrue(result["scored_entity_paths"])
         self.assertTrue(result["path_set_candidates"])
+        self.assertEqual(set(result["best_paths_by_entity"]), {"e1"})
+        self.assertEqual([candidate.path_set_id for candidate in result["path_set_candidates"]], ["ps1"])
+        self.assertEqual([path_set["path_set_id"] for path_set in result["selected_dependency_path_evidence"]], ["ps1"])
         self.assertIn("grounded_atomic_dag_payload", result)
         self.assertNotIn("candidate_asts", result)
         self.assertNotIn("semantic_ast", result)
-        self.assertEqual([node.question for node in result["subquestion_dag"].nodes], ["Which company developed AlphaGo?"])
+        self.assertEqual(
+            [node.question for node in result["subquestion_dag"].nodes],
+            [
+                "Which company developed AlphaGo?",
+                "Who is the CEO of q1's answer?",
+                "Which university did q2's answer graduate from?",
+            ],
+        )
         self.assertNotIn("problem_frame", result)
         self.assertNotIn("candidate_nodes", result)
 
@@ -839,9 +925,20 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertNotIn("candidate_asts", result)
         self.assertNotIn("semantic_ast", result)
         self.assertIn("grounded_atomic_dag_payload", result)
+        self.assertIn("semantic_reasoning_paths", result)
+        self.assertEqual(set(result["best_paths_by_entity"]), {"e1"})
+        self.assertEqual([candidate.path_set_id for candidate in result["path_set_candidates"]], ["ps1"])
         self.assertIsNotNone(result["subquestion_dag"])
-        self.assertEqual([node.question for node in result["subquestion_dag"].nodes], ["Which company developed AlphaGo?"])
+        self.assertEqual(
+            [node.question for node in result["subquestion_dag"].nodes],
+            [
+                "Which company developed AlphaGo?",
+                "Who is the CEO of q1's answer?",
+                "Which university did q2's answer graduate from?",
+            ],
+        )
         self.assertEqual(result["subquestion_dag"].nodes[0].metadata["support_path_ids"], ["e1_p1"])
+        self.assertEqual(result["subquestion_dag"].nodes[0].metadata["source_semantic_edge_id"], "b1_e1")
 
     def test_ordered_comparison_infers_age_from_younger_cue(self) -> None:
         selected_paths = [
@@ -1063,6 +1160,17 @@ class GroundedAtomicLLM:
         raise AssertionError(f"Unexpected prompt: {system_prompt}")
 
 
+class SemanticAtomicLLM:
+    def __init__(self, dag_payload: dict[str, Any]) -> None:
+        self.dag_payload = dag_payload
+
+    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
+        del prompt
+        if system_prompt != ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM:
+            raise AssertionError(f"Unexpected prompt: {system_prompt}")
+        return json.loads(json.dumps(self.dag_payload))
+
+
 class SequenceGroundedAtomicLLM:
     def __init__(self, dag_payloads: list[dict[str, Any]]) -> None:
         self.dag_payloads = dag_payloads
@@ -1121,6 +1229,10 @@ class NoCandidatePromptLLM:
                 ],
                 "branch_terminals": {"e1": "university"},
             }
+        if system_prompt == SEMANTIC_REASONING_PATH_SYSTEM:
+            return _semantic_alphago_payload()
+        if system_prompt == ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM:
+            return _atomic_alphago_from_semantic_payload()
         if system_prompt == GROUNDED_ATOMIC_DAG_SYSTEM:
             return {
                 "nodes": [
@@ -1228,6 +1340,186 @@ def _grounded_alphago_payload() -> dict[str, Any]:
         ],
         "selected_path_set_ids": ["ps1"],
         "reason": "test grounded DAG",
+    }
+
+
+def _semantic_alphago_payload() -> dict[str, Any]:
+    return {
+        "semantic_reasoning_paths": [
+            {
+                "branch_id": "b1",
+                "entity_id": "e1",
+                "source_path_id": "e1_p1",
+                "nodes": [
+                    {
+                        "node_id": "b1_n1",
+                        "label": "AlphaGo",
+                        "kind": "entity",
+                        "semantic_type": "Game",
+                        "source_path_id": "e1_p1",
+                        "source_node_texts": ["AlphaGo"],
+                        "source_node_ids": ["1"],
+                    },
+                    {
+                        "node_id": "b1_n2",
+                        "label": "company",
+                        "kind": "semantic_object",
+                        "semantic_type": "Organization",
+                        "source_path_id": "e1_p1",
+                        "source_node_texts": ["developed", "company"],
+                        "source_node_ids": ["2", "3"],
+                    },
+                    {
+                        "node_id": "b1_n3",
+                        "label": "CEO",
+                        "kind": "semantic_object",
+                        "semantic_type": "Person",
+                        "source_path_id": "e1_p1",
+                        "source_node_texts": ["company", "CEO"],
+                        "source_node_ids": ["3", "4"],
+                    },
+                    {
+                        "node_id": "b1_n4",
+                        "label": "university",
+                        "kind": "value_slot",
+                        "semantic_type": "University",
+                        "source_path_id": "e1_p1",
+                        "source_node_texts": ["CEO", "graduated", "university"],
+                        "source_node_ids": ["4", "5", "6"],
+                    },
+                ],
+                "edges": [
+                    {
+                        "edge_id": "b1_e1",
+                        "source": "b1_n1",
+                        "target": "b1_n2",
+                        "relation": "developer company",
+                        "answer_type": "Organization",
+                        "is_one_hop": True,
+                        "support": [
+                            {
+                                "path_set_id": "ps1",
+                                "path_id": "e1_p1",
+                                "node_texts": ["AlphaGo", "developed", "company"],
+                                "node_ids": ["1", "2", "3"],
+                                "reason": "supports developer company lookup",
+                            }
+                        ],
+                        "atomic_question_template": "Which company developed AlphaGo?",
+                    },
+                    {
+                        "edge_id": "b1_e2",
+                        "source": "b1_n2",
+                        "target": "b1_n3",
+                        "relation": "CEO of company",
+                        "answer_type": "Person",
+                        "is_one_hop": True,
+                        "support": [
+                            {
+                                "path_set_id": "ps1",
+                                "path_id": "e1_p1",
+                                "node_texts": ["company", "CEO"],
+                                "node_ids": ["3", "4"],
+                                "reason": "supports CEO lookup",
+                            }
+                        ],
+                        "atomic_question_template": "Who is the CEO of b1_n2's answer?",
+                    },
+                    {
+                        "edge_id": "b1_e3",
+                        "source": "b1_n3",
+                        "target": "b1_n4",
+                        "relation": "university graduated from",
+                        "answer_type": "University",
+                        "is_one_hop": True,
+                        "support": [
+                            {
+                                "path_set_id": "ps1",
+                                "path_id": "e1_p1",
+                                "node_texts": ["CEO", "graduated", "university"],
+                                "node_ids": ["4", "5", "6"],
+                                "reason": "supports university lookup",
+                            }
+                        ],
+                        "atomic_question_template": "Which university did b1_n3's answer graduate from?",
+                    },
+                ],
+                "terminal_node_id": "b1_n4",
+                "score": 95,
+                "warnings": [],
+            }
+        ],
+        "operator_intent": {"type": "NONE", "handled_downstream": True, "surface_cues": []},
+        "score": 95,
+        "score_breakdown": {},
+        "warnings": [],
+        "reason": "test semantic reasoning path",
+    }
+
+
+def _atomic_alphago_from_semantic_payload() -> dict[str, Any]:
+    return {
+        "nodes": [
+            {
+                "node_id": "q1",
+                "question": "Which company developed AlphaGo?",
+                "operation": "lookup",
+                "input": {"type": "entity", "text": "AlphaGo"},
+                "one_hop_relation": "developer company",
+                "answer_type": "Organization",
+                "dependencies": [],
+                "support": [
+                    {
+                        "path_set_id": "ps1",
+                        "path_id": "e1_p1",
+                        "node_texts": ["AlphaGo", "developed", "company"],
+                        "reason": "Copied from semantic reasoning edge b1_e1.",
+                    }
+                ],
+                "source_semantic_path_id": "b1",
+                "source_semantic_edge_id": "b1_e1",
+            },
+            {
+                "node_id": "q2",
+                "question": "Who is the CEO of q1's answer?",
+                "operation": "lookup",
+                "input": {"type": "previous_answer", "ref": "q1"},
+                "one_hop_relation": "CEO of company",
+                "answer_type": "Person",
+                "dependencies": ["q1"],
+                "support": [
+                    {
+                        "path_set_id": "ps1",
+                        "path_id": "e1_p1",
+                        "node_texts": ["company", "CEO"],
+                        "reason": "Copied from semantic reasoning edge b1_e2.",
+                    }
+                ],
+                "source_semantic_path_id": "b1",
+                "source_semantic_edge_id": "b1_e2",
+            },
+            {
+                "node_id": "q3",
+                "question": "Which university did q2's answer graduate from?",
+                "operation": "lookup",
+                "input": {"type": "previous_answer", "ref": "q2"},
+                "one_hop_relation": "university graduated from",
+                "answer_type": "University",
+                "dependencies": ["q2"],
+                "support": [
+                    {
+                        "path_set_id": "ps1",
+                        "path_id": "e1_p1",
+                        "node_texts": ["CEO", "graduated", "university"],
+                        "reason": "Copied from semantic reasoning edge b1_e3.",
+                    }
+                ],
+                "source_semantic_path_id": "b1",
+                "source_semantic_edge_id": "b1_e3",
+            },
+        ],
+        "selected_path_set_ids": ["ps1"],
+        "reason": "compiled from semantic reasoning path",
     }
 
 
