@@ -1286,7 +1286,7 @@ Correct:
 
 8. Coordination and comparison
 In coordinated or compared alternatives, return each independent entity separately.
-Do not return the whole coordinated phrase unless it is one official title.
+Do not return the whole coordinated phrase unless it is one official title or official named event/designation.
 
 Correct:
 - "Aas Ka Panchhi or Phoolwari" -> two entities
@@ -1298,7 +1298,23 @@ Correct:
 Incorrect:
 - "Marufabad and Nasamkhrali"
 
-9. Entity-type consistency in parallel questions
+9. Internal coordination inside official named events/designations
+Some official named entities contain "and" internally. Do not split these into separate entity mentions.
+This is especially important for named events, battles, treaties, wars, operations, sieges, conferences, councils, and named geographic/designation phrases introduced by a head such as "Battle of", "Treaty of", "War of", or "Siege of".
+
+Correct:
+- "Battle of Qurah and Umm al Maradim" -> one Event entity mention
+- "Treaty of Peace and Friendship" -> one Event entity mention
+Incorrect:
+- "Battle of Qurah" and "Umm al Maradim" as two separate entities when the surface span is the single event name "Battle of Qurah and Umm al Maradim"
+- "Qurah" and "Umm al Maradim" as separate entities when they are only parts of the named battle/event
+
+Contrast:
+- "Aas Ka Panchhi or Phoolwari" are two film alternatives, so return two Film entities.
+- "Marufabad and Nasamkhrali" are two location alternatives, so return two Location entities.
+- "Battle of Qurah and Umm al Maradim" is one named event/designation, so return one Event entity.
+
+10. Entity-type consistency in parallel questions
 When two coordinated or compared entities play the same role, use the same semantic_type_hint when the local context supports it.
 Example:
 - films Wrong Turn 5: Bloodlines and Dark River (2017 Film)
@@ -1306,12 +1322,13 @@ Example:
 - locations Marufabad and Nasamkhrali
   -> both Location
 
-10. When uncertain about boundary
+11. When uncertain about boundary
 Prefer the full conventional name/title/designation over a truncated substring.
 Prefer:
 - "When The Stars Go Blue" over "The Stars Go Blue"
 - "Wrong Turn 5: Bloodlines" over "Wrong Turn"
 - "Maurice, Prince Of Orange" over "Maurice" + "Prince Of Orange"
+- "Battle of Qurah and Umm al Maradim" over "Battle of Qurah" + "Umm al Maradim"
 
 Semantic type hint rules:
 - Use Person for human names and person designations.
@@ -1486,14 +1503,30 @@ Return:
 Do not return:
 - "Gideon Johnson Pillow or Holm Jølsen"
 
+Example 11: Internal "and" inside a named event
+Question: "When was the region immediately north of the region where Israel is located and the location of the Battle of Qurah and Umm al Maradim created?"
+Return:
+- "Israel", semantic_type_hint "Country"
+- "Battle of Qurah and Umm al Maradim", semantic_type_hint "Event"
+Do not return:
+- "Battle of Qurah"
+- "Qurah"
+- "Umm al Maradim"
+- "Battle of Qurah" and "Umm al Maradim" as two separate entity mentions
+- "location"
+- "region"
+
+Explanation:
+Here, "Battle of Qurah and Umm al Maradim" is one named event/designation. The word "and" is internal to the official event name, not a coordination between two independent entity starts.
 Decision checklist before final JSON:
 1. Did I return only explicit named entities?
 2. Did I exclude roles, relation words, type words, answer slots, and operators?
 3. Did I include the full title when a work has an initial wh-like title word, number, colon subtitle, or parenthetical disambiguator?
 4. Did I avoid truncating titles such as "When The Stars Go Blue" or "Wrong Turn 5: Bloodlines"?
 5. Did I avoid splitting comma appositive person designations such as "Maurice, Prince Of Orange"?
-6. Did I split true coordinated alternatives joined by and/or into separate entities?
-7. Do all start_char/end_char offsets exactly match the returned text?
+6. Did I keep internal "and" inside official named events/designations such as "Battle of Qurah and Umm al Maradim"?
+7. Did I split true coordinated alternatives joined by and/or into separate entities?
+8. Do all start_char/end_char offsets exactly match the returned text?
 
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
@@ -2571,3 +2604,4 @@ Rules:
 Output JSON with exactly this shape:
 {json.dumps(schema, indent=2)}
 """.strip()
+

@@ -143,6 +143,43 @@ CONTEXT_SEMANTIC_TYPE_CUES = [
     ("place", "Location"),
 ]
 
+COORDINATED_DESIGNATION_HEAD_TYPES = {
+    "battle": "Event",
+    "battles": "Event",
+    "campaign": "Event",
+    "conference": "Event",
+    "congress": "Event",
+    "council": "Event",
+    "operation": "Event",
+    "rebellion": "Event",
+    "revolt": "Event",
+    "siege": "Event",
+    "treaty": "Event",
+    "war": "Event",
+}
+COORDINATED_DESIGNATION_PREPOSITIONS = {"at", "between", "for", "in", "near", "of", "on"}
+INTERNAL_NAME_CONNECTORS = {
+    "al",
+    "bin",
+    "da",
+    "de",
+    "del",
+    "der",
+    "di",
+    "el",
+    "ibn",
+    "la",
+    "le",
+    "mac",
+    "mc",
+    "of",
+    "saint",
+    "st",
+    "the",
+    "van",
+    "von",
+}
+
 CLAUSE_BOUNDARY = {
     "and",
     "or",
@@ -184,7 +221,14 @@ class ExplicitEntityExtractor:
                 llm_entities = self._parse_payload(question, raw_payload, warnings)
                 heuristic_entities = _heuristic_explicit_entities(question)
                 return ExplicitEntityResult(
-                    entities=_merge_explicit_entities([*llm_entities, *heuristic_entities], warnings),
+                    entities=_merge_explicit_entities(
+                        _with_coordinated_designation_entities(
+                            question,
+                            [*llm_entities, *heuristic_entities],
+                            warnings,
+                        ),
+                        warnings,
+                    ),
                     warnings=warnings,
                     raw_payload=raw_payload,
                 )
@@ -192,7 +236,14 @@ class ExplicitEntityExtractor:
                 warnings.append(f"Explicit entity LLM failed; using heuristic fallback: {exc}")
 
         return ExplicitEntityResult(
-            entities=_heuristic_explicit_entities(question),
+            entities=_merge_explicit_entities(
+                _with_coordinated_designation_entities(
+                    question,
+                    _heuristic_explicit_entities(question),
+                    warnings,
+                ),
+                warnings,
+            ),
             warnings=warnings,
             raw_payload=raw_payload,
         )
@@ -288,6 +339,110 @@ def _heuristic_explicit_entities(question: str) -> list[ExplicitEntity]:
         if span.kind_hint == "entity" and not _is_forbidden_explicit_entity(span.text)
     ]
     return _merge_explicit_entities(entities, [])
+
+
+def _with_coordinated_designation_entities(
+    question: str,
+    entities: list[ExplicitEntity],
+    warnings: list[str],
+) -> list[ExplicitEntity]:
+    additions = _coordinated_designation_entities(question)
+    if not additions:
+        return entities
+    existing_spans = {(entity.start_char, entity.end_char) for entity in entities}
+    for entity in additions:
+        if (entity.start_char, entity.end_char) not in existing_spans:
+            warnings.append(f"Added complete coordinated named designation entity text={entity.text!r}.")
+            entities.append(entity)
+    return entities
+
+
+def _coordinated_designation_entities(question: str) -> list[ExplicitEntity]:
+    """Find official names like 'Battle of X and Y' where 'and' is internal."""
+    entities: list[ExplicitEntity] = []
+    head_pattern = "|".join(re.escape(head) for head in sorted(COORDINATED_DESIGNATION_HEAD_TYPES, key=len, reverse=True))
+    prep_pattern = "|".join(re.escape(prep) for prep in sorted(COORDINATED_DESIGNATION_PREPOSITIONS, key=len, reverse=True))
+    pattern = re.compile(rf"\b(?P<head>{head_pattern})\s+(?P<prep>{prep_pattern})\s+", flags=re.IGNORECASE)
+    for match in pattern.finditer(question):
+        start = match.start()
+        body_start = match.end()
+        end = _find_internal_coordinated_name_end(question, body_start)
+        if end is None or end <= body_start:
+            continue
+        text = question[start:end].strip()
+        if not _is_complete_coordinated_designation(text):
+            continue
+        semantic_type = COORDINATED_DESIGNATION_HEAD_TYPES.get(match.group("head").lower(), "Entity")
+        entities.append(
+            ExplicitEntity(
+                text=text,
+                start_char=start,
+                end_char=end,
+                semantic_type_hint=semantic_type,
+                confidence=0.9,
+                reason="complete coordinated named designation",
+            )
+        )
+    return entities
+
+
+def _find_internal_coordinated_name_end(question: str, start: int) -> int | None:
+    token_matches = list(re.finditer(r"\S+", question[start:]))
+    if not token_matches:
+        return None
+    content_count = 0
+    saw_and = False
+    saw_content_after_and = False
+    expecting_after_and = False
+    last_content_end: int | None = None
+    current_end = start
+
+    for match in token_matches:
+        token_start = start + match.start()
+        token_end = start + match.end()
+        raw_token = match.group(0)
+        cleaned = raw_token.strip(" \t\r\n?.,;:!\"'()[]{}")
+        lowered = cleaned.lower().strip(".")
+        if not cleaned:
+            break
+        if lowered == "and":
+            if content_count > 0 and _looks_like_title_continuation(question, token_end):
+                saw_and = True
+                expecting_after_and = True
+                current_end = token_end
+                continue
+            break
+        if _is_internal_name_content_token(cleaned):
+            content_count += 1
+            if expecting_after_and:
+                saw_content_after_and = True
+            current_end = token_end
+            last_content_end = token_end
+            continue
+        if lowered in INTERNAL_NAME_CONNECTORS and content_count > 0:
+            current_end = token_end
+            continue
+        break
+
+    del current_end
+    if saw_and and saw_content_after_and and content_count >= 2:
+        return last_content_end
+    return None
+
+
+def _is_internal_name_content_token(token: str) -> bool:
+    return bool(token[:1].isupper() or token.isupper() or re.search(r"\d", token))
+
+
+def _is_complete_coordinated_designation(text: str) -> bool:
+    lowered = re.sub(r"\s+", " ", text.strip().lower())
+    if " and " not in lowered:
+        return False
+    for head in COORDINATED_DESIGNATION_HEAD_TYPES:
+        for prep in COORDINATED_DESIGNATION_PREPOSITIONS:
+            if lowered.startswith(f"{head} {prep} "):
+                return True
+    return False
 
 
 def _resolve_explicit_entity_span(
@@ -452,10 +607,7 @@ def _merge_explicit_entities(
         if existing is None or normalized.confidence > existing.confidence:
             by_span[key] = normalized
 
-    ordered = sorted(
-        by_span.values(),
-        key=lambda item: ((item.end_char - item.start_char), -item.confidence, item.start_char),
-    )
+    ordered = sorted(by_span.values(), key=_explicit_entity_merge_key)
     kept: list[ExplicitEntity] = []
     occupied: list[tuple[int, int]] = []
     for entity in ordered:
@@ -467,14 +619,36 @@ def _merge_explicit_entities(
     return sorted(kept, key=lambda item: item.start_char)
 
 
+def _explicit_entity_merge_key(entity: ExplicitEntity) -> tuple[int, int, float, int]:
+    length = entity.end_char - entity.start_char
+    if _is_complete_coordinated_designation(entity.text):
+        return (0, -length, -entity.confidence, entity.start_char)
+    return (1, length, -entity.confidence, entity.start_char)
+
+
 def _heuristic_mask_spans(question: str) -> list[MaskSpan]:
     spans: list[MaskSpan] = []
+    spans.extend(_coordinated_designation_mask_spans(question))
     spans.extend(_title_spans_after_type_heads(question))
     spans.extend(_parenthetical_entity_spans(question))
     spans.extend(_quoted_spans(question))
     spans.extend(_person_name_token_spans(question))
     spans.extend(_capitalized_entity_spans(question))
     return _merge_spans(question, spans, [])
+
+
+def _coordinated_designation_mask_spans(question: str) -> list[MaskSpan]:
+    return [
+        MaskSpan(
+            text=entity.text,
+            start_char=entity.start_char,
+            end_char=entity.end_char,
+            kind_hint="entity",
+            semantic_type_hint=entity.semantic_type_hint,
+            reason=entity.reason,
+        )
+        for entity in _coordinated_designation_entities(question)
+    ]
 
 
 def _title_spans_after_type_heads(question: str) -> list[MaskSpan]:

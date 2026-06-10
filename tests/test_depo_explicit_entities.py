@@ -123,6 +123,46 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
         self.assertNotIn("was released first, Aas Ka Panchhi or Phoolwari", replacement.mapping.values())
         self.assertEqual([entity.text for entity in starts], ["Aas Ka Panchhi", "Phoolwari"])
 
+    def test_internal_and_inside_named_event_is_not_split(self) -> None:
+        question = (
+            "When was the region immediately north of the region where Israel is located and "
+            "the location of the Battle of Qurah and Umm al Maradim created?"
+        )
+        result = ExplicitEntityExtractor(
+            StaticEntityLLM(
+                [
+                    _entity(question, "Israel", "Country"),
+                    _entity(question, "Battle of Qurah", "Event"),
+                    _entity(question, "Umm al Maradim", "Location"),
+                ]
+            )
+        ).extract(question)
+        replacement = selective_entity_masking(
+            question=question,
+            mask_spans=MaskSpanExtractor(
+                StaticEntityLLM(
+                    [
+                        _entity(question, "Israel", "Country"),
+                        _entity(question, "Battle of Qurah", "Event"),
+                        _entity(question, "Umm al Maradim", "Location"),
+                    ]
+                )
+            ).extract(question),
+        )
+
+        self.assertEqual(
+            [entity.text for entity in result.entities],
+            ["Israel", "Battle of Qurah and Umm al Maradim"],
+        )
+        self.assertNotIn("Battle of Qurah", replacement.mapping.values())
+        self.assertNotIn("Umm al Maradim", replacement.mapping.values())
+        self.assertIn("Battle of Qurah and Umm al Maradim", replacement.mapping.values())
+        self.assertEqual(
+            replacement.masked_question,
+            "When was the region immediately north of the region where CountryA is located and "
+            "the location of the EventA created?",
+        )
+
     def test_step6_does_not_redetect_extra_entities(self) -> None:
         replacement = _replacement_for_one_entity()
         graph = _graph_with_placeholders(["FilmA", "OtherNNP", "director"])

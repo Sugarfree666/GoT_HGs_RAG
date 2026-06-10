@@ -1,8 +1,8 @@
-﻿dataset:
-  root: datasets/2wikimultihopqa
+dataset:
+  root: datasets/hotpotqa
 
 runtime:
-  base_run_dir: runs/depo_hyperbranch/2wikimultihopqa
+  base_run_dir: runs/depo_hyperbranch/hotpotqa
   log_level: INFO
 
 retrieval:
@@ -28,5 +28,3 @@ llm:
 
 prompts:
   dir: prompts
-
-
