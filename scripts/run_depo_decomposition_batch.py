@@ -260,7 +260,9 @@ def build_decomposition_payload(
             "8_1_best_paths_by_entity": best_paths_by_entity,
             "8_2_path_set_candidates": [_dataclass_to_jsonable(candidate) for candidate in result.get("path_set_candidates", [])],
             "9_selected_dependency_path_evidence": _dataclass_to_jsonable(result.get("selected_dependency_path_evidence") or []),
-            "9_grounded_atomic_dag_generation": _dataclass_to_jsonable(result.get("grounded_atomic_dag_payload") or {}),
+            "9a_evidence_atoms": _dataclass_to_jsonable(result.get("evidence_atoms") or []),
+            "9b_semantic_reasoning_paths": _dataclass_to_jsonable(result.get("semantic_reasoning_paths")),
+            "10_grounded_atomic_dag_generation": _dataclass_to_jsonable(result.get("grounded_atomic_dag_payload") or {}),
             "10_atomic_subquestion_dag": _dataclass_to_jsonable(subquestion_dag) if subquestion_dag else None,
             "10_subquestions": [_dataclass_to_jsonable(item) for item in subquestions],
         },
@@ -460,7 +462,7 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 9. Grounded Atomic DAG Generation")
+    lines.append("## 9. Semantic Reasoning Path Induction")
     lines.append("Inputs:")
     lines.append(f"- Original question: {payload['question']}")
     selected_evidence = stages.get("9_selected_dependency_path_evidence") or []
@@ -471,8 +473,44 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     if not selected_evidence:
         lines.append("- Selected dependency path evidence: (none)")
     lines.append("")
+
+    evidence_atoms = stages.get("9a_evidence_atoms") or []
+    lines.append("### 9A Evidence Atoms")
+    for atom in evidence_atoms:
+        lines.append(
+            f"- {atom.get('id')}: {atom.get('text')} "
+            f"(path={atom.get('path_id')}, source={atom.get('source')}, relation_hint={atom.get('relation_hint')}, target={atom.get('target')})"
+        )
+    if not evidence_atoms:
+        lines.append("(none)")
+    lines.append("")
+
+    lines.append("### 9B Semantic Reasoning Paths")
+    semantic_payload = stages.get("9b_semantic_reasoning_paths") or {}
+    for path in semantic_payload.get("paths", []) if isinstance(semantic_payload, dict) else []:
+        lines.append(f"- {path.get('branch_id')} entity={path.get('entity_id')} source_path={path.get('source_path_id')}")
+        node_labels = {
+            node.get("node_id"): node.get("label")
+            for node in path.get("nodes", [])
+            if isinstance(node, dict)
+        }
+        for edge in path.get("edges", []):
+            supported_by = []
+            for support in edge.get("support", []) or []:
+                if isinstance(support, dict):
+                    supported_by.extend(support.get("atom_ids") or support.get("supported_by") or [])
+            lines.append(
+                f"  - {node_labels.get(edge.get('source'), edge.get('source'))} "
+                f"--{edge.get('relation')}--> {node_labels.get(edge.get('target'), edge.get('target'))} "
+                f"supported_by={supported_by}"
+            )
+    if not isinstance(semantic_payload, dict) or not semantic_payload.get("paths"):
+        lines.append("(none)")
+    lines.append("")
+
+    lines.append("## 10. Grounded Atomic DAG Generation")
     lines.append("Output:")
-    grounded_payload = stages.get("9_grounded_atomic_dag_generation") or {}
+    grounded_payload = stages.get("10_grounded_atomic_dag_generation") or {}
     if grounded_payload.get("selected_path_set_ids"):
         lines.append(f"- selected_path_set_ids: {grounded_payload.get('selected_path_set_ids')}")
     if grounded_payload.get("reason"):

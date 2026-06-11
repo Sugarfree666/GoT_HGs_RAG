@@ -16,6 +16,7 @@ from entity_path_pipeline import (  # noqa: E402
     EntityPathSemanticParser,
     build_single_path_set_candidate,
     build_selected_dependency_path_evidence,
+    extract_evidence_atoms,
     select_best_path_by_entity,
 )
 from entity_path_projector import (  # noqa: E402
@@ -1147,6 +1148,71 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
         self.assertEqual([edge.relation for edge in result.paths[0].edges], ["performer of song", "nationality of person"])
 
+    def test_step9_extracts_evidence_atoms_and_requires_supported_by_atoms(self) -> None:
+        evidence = [
+            {
+                "path_set_id": "ps1",
+                "paths": [
+                    {
+                        "entity_id": "e1",
+                        "entity_text": "The Apple Dumpling Gang",
+                        "path_id": "e1_p1",
+                        "path_text": "The Apple Dumpling Gang -> produced first -> Walt Disney film",
+                        "node_texts": ["The Apple Dumpling Gang", "produced first", "Walt Disney film"],
+                        "node_ids": ["8", "5", "3"],
+                    }
+                ],
+            }
+        ]
+        atoms = extract_evidence_atoms(evidence)
+        self.assertEqual(atoms[0].id, "atom_1")
+        self.assertEqual(atoms[0].text, "The Apple Dumpling Gang ---- produced first")
+
+        llm = EvidenceGroundedSemanticLLM(
+            {
+                "semantic_reasoning_path": [
+                    {
+                        "source": "The Apple Dumpling Gang",
+                        "semantic_relation": "production/release date",
+                        "target": "date_1",
+                        "supported_by": ["atom_1"],
+                        "reason": "The question asks which film was produced first.",
+                    },
+                    {
+                        "source": "date_1",
+                        "semantic_relation": "compare earlier date",
+                        "target": "answer",
+                        "supported_by": ["atom_1"],
+                        "reason": "The phrase produced first indicates an earlier-date comparison.",
+                    },
+                ],
+                "operator_intent": {"type": "ARGMIN", "handled_downstream": True},
+            }
+        )
+        parser = EntityPathSemanticParser(llm)
+
+        result, payload = parser.build_semantic_reasoning_paths(
+            original_question=(
+                "Which Walt Disney film was produced first, "
+                "The Apple Dumpling Gang or Something Wicked This Way Comes?"
+            ),
+            restored_question=(
+                "Which Walt Disney film was produced first, "
+                "The Apple Dumpling Gang or Something Wicked This Way Comes?"
+            ),
+            selected_dependency_path_evidence=evidence,
+        )
+
+        self.assertIn("Evidence atoms extracted from selected collapsed dependency paths", llm.prompts[0])
+        self.assertIn("Do NOT directly convert dependency paths", llm.prompts[0])
+        self.assertEqual(payload["evidence_atoms"][0]["text"], "The Apple Dumpling Gang ---- produced first")
+        self.assertEqual(
+            [edge.relation for edge in result.paths[0].edges],
+            ["production/release date", "compare earlier date"],
+        )
+        self.assertEqual(result.paths[0].edges[0].support[0]["atom_ids"], ["atom_1"])
+        self.assertEqual(result.paths[0].edges[1].support[0]["supported_by"], ["atom_1"])
+
     def test_parallel_nationality_semantic_paths_compile_to_branch_lookup_dag(self) -> None:
         question = (
             "Do director of film Ten9Eight: Shoot For The Moon and director of film "
@@ -1297,6 +1363,18 @@ class SemanticReasoningFlowLLM:
         if system_prompt == ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM:
             return json.loads(json.dumps(self.atomic_payload))
         raise AssertionError(f"Unexpected prompt: {system_prompt}")
+
+
+class EvidenceGroundedSemanticLLM:
+    def __init__(self, payload: dict[str, Any]) -> None:
+        self.payload = payload
+        self.prompts: list[str] = []
+
+    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
+        self.prompts.append(prompt)
+        if system_prompt != SEMANTIC_REASONING_PATH_SYSTEM:
+            raise AssertionError(f"Unexpected prompt: {system_prompt}")
+        return json.loads(json.dumps(self.payload))
 
 
 class SequenceGroundedAtomicLLM:

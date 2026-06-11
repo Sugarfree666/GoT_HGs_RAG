@@ -463,6 +463,25 @@ class PathSetCandidate:
 
 
 @dataclass
+class EvidenceAtom:
+    id: str
+    text: str
+    source: str
+    relation_hint: str
+    target: str | None = None
+    origin_path: str = ""
+    path_set_id: str = ""
+    path_id: str = ""
+    entity_id: str = ""
+    entity_text: str = ""
+    node_texts: list[str] = field(default_factory=list)
+    node_ids: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
 class SemanticReasoningNode:
     node_id: str
     label: str

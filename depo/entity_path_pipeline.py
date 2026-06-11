@@ -10,6 +10,7 @@ from models import (
     AtomicQuestionNode,
     EntityOriginPath,
     EntityStartNode,
+    EvidenceAtom,
     PathSetCandidate,
     ScoredEntityPath,
     SemanticReasoningEdge,
@@ -153,6 +154,8 @@ class EntityPathSemanticParser:
         restored_question: str,
         selected_dependency_path_evidence: list[dict[str, object]],
     ) -> tuple[SemanticReasoningPathResult, dict[str, Any]]:
+        evidence_atoms = extract_evidence_atoms(selected_dependency_path_evidence)
+        evidence_atom_payload = [atom.to_dict() for atom in evidence_atoms]
         validation_feedback: str | None = None
         last_payload: dict[str, Any] = {}
         for attempt in range(2):
@@ -162,6 +165,7 @@ class EntityPathSemanticParser:
                     original_question=original_question,
                     restored_question=restored_question,
                     selected_dependency_path_evidence=selected_dependency_path_evidence,
+                    evidence_atoms=evidence_atom_payload,
                     validation_feedback=validation_feedback,
                 ),
             )
@@ -171,6 +175,7 @@ class EntityPathSemanticParser:
                 result = _parse_semantic_reasoning_path_payload(
                     raw_payload,
                     selected_dependency_path_evidence=selected_dependency_path_evidence,
+                    evidence_atoms=evidence_atoms,
                 )
             except ValueError as exc:
                 validation_feedback = str(exc)
@@ -183,6 +188,7 @@ class EntityPathSemanticParser:
             issues = _semantic_reasoning_path_support_issues(
                 result,
                 selected_dependency_path_evidence,
+                evidence_atoms,
             )
             if issues:
                 validation_feedback = "\n".join(issues)
@@ -193,6 +199,8 @@ class EntityPathSemanticParser:
                     )
                 continue
             raw_payload.setdefault("selected_dependency_path_evidence", selected_dependency_path_evidence)
+            raw_payload.setdefault("semantic_reasoning_paths", [path.to_dict() for path in result.paths])
+            raw_payload["evidence_atoms"] = evidence_atom_payload
             result.raw_payload = raw_payload
             return result, raw_payload
         raise ValueError("Semantic Reasoning Path induction failed. Last payload: " + repr(last_payload))
@@ -297,7 +305,13 @@ def _parse_semantic_reasoning_path_payload(
     payload: dict[str, Any],
     *,
     selected_dependency_path_evidence: list[dict[str, Any]],
+    evidence_atoms: list[EvidenceAtom],
 ) -> SemanticReasoningPathResult:
+    payload = _coerce_flat_semantic_reasoning_payload(
+        payload,
+        evidence_atoms=evidence_atoms,
+        selected_dependency_path_evidence=selected_dependency_path_evidence,
+    )
     raw_paths = payload.get("semantic_reasoning_paths")
     if raw_paths is None:
         raw_paths = payload.get("paths")
@@ -319,7 +333,7 @@ def _parse_semantic_reasoning_path_payload(
             raise ValueError(f"Semantic reasoning path {branch_id} references unselected source_path_id={source_path_id!r}.")
 
         nodes = _parse_semantic_reasoning_nodes(raw_path.get("nodes"), branch_id)
-        edges = _parse_semantic_reasoning_edges(raw_path.get("edges"), branch_id)
+        edges = _parse_semantic_reasoning_edges(raw_path.get("edges"), branch_id, evidence_atoms=evidence_atoms)
         if len(nodes) < 2:
             raise ValueError(f"Semantic reasoning path {branch_id} must contain at least 2 nodes.")
         if not edges:
@@ -340,15 +354,12 @@ def _parse_semantic_reasoning_path_payload(
             if not edge.support:
                 raise ValueError(f"Semantic reasoning edge {edge.edge_id} has empty support.")
             for support in edge.support:
-                path_set_id = str(support.get("path_set_id") or "").strip()
-                path_id = str(support.get("path_id") or "").strip()
-                if path_set_id not in selected_path_set_ids or path_id not in selected_path_ids:
-                    raise ValueError(
-                        f"Semantic reasoning edge {edge.edge_id} has invalid support path_set/path "
-                        f"{path_set_id!r}/{path_id!r}."
-                    )
-                if not _str_list(support.get("node_texts")):
-                    raise ValueError(f"Semantic reasoning edge {edge.edge_id} support has empty node_texts.")
+                atom_ids = _str_list(support.get("atom_ids") or support.get("supported_by"))
+                if not atom_ids:
+                    raise ValueError(f"Semantic reasoning edge {edge.edge_id} support has empty supported_by atom ids.")
+                unknown_atom_ids = [atom_id for atom_id in atom_ids if atom_id not in {atom.id for atom in evidence_atoms}]
+                if unknown_atom_ids:
+                    raise ValueError(f"Semantic reasoning edge {edge.edge_id} cites unknown evidence atoms: {unknown_atom_ids}.")
 
         terminal_node_id = str(raw_path.get("terminal_node_id") or "").strip() or (edges[-1].target if edges else None)
         if terminal_node_id and terminal_node_id not in node_ids:
@@ -383,6 +394,99 @@ def _parse_semantic_reasoning_path_payload(
     )
 
 
+def _coerce_flat_semantic_reasoning_payload(
+    payload: dict[str, Any],
+    *,
+    evidence_atoms: list[EvidenceAtom],
+    selected_dependency_path_evidence: list[dict[str, Any]],
+) -> dict[str, Any]:
+    if isinstance(payload.get("semantic_reasoning_paths"), list) or isinstance(payload.get("paths"), list):
+        return payload
+    raw_edges = payload.get("semantic_reasoning_path")
+    if not isinstance(raw_edges, list) or not raw_edges:
+        return payload
+
+    atom_by_id = {atom.id: atom for atom in evidence_atoms}
+    default_path = _first_selected_path_payload(selected_dependency_path_evidence)
+    branch_id = "b1"
+    entity_id = str(default_path.get("entity_id") or "e1")
+    source_path_id = str(default_path.get("path_id") or "")
+    nodes: list[dict[str, Any]] = []
+    node_id_by_label: dict[str, str] = {}
+    edges: list[dict[str, Any]] = []
+
+    def node_id_for(label: str, *, preferred_kind: str = "semantic_object") -> str:
+        normalized = str(label or "").strip()
+        if normalized in node_id_by_label:
+            return node_id_by_label[normalized]
+        node_id = f"{branch_id}_n{len(nodes) + 1}"
+        node_id_by_label[normalized] = node_id
+        kind = preferred_kind
+        lower = normalized.lower()
+        if len(nodes) == 0:
+            kind = "entity"
+        elif lower in {"answer"} or lower.endswith("_date") or lower.endswith("_place") or "date" in lower:
+            kind = "value_slot"
+        nodes.append({"node_id": node_id, "label": normalized, "kind": kind})
+        return node_id
+
+    for index, raw_edge in enumerate(raw_edges, start=1):
+        if not isinstance(raw_edge, dict):
+            continue
+        supported_by = _str_list(raw_edge.get("supported_by"))
+        first_atom = atom_by_id.get(supported_by[0]) if supported_by else None
+        if first_atom is not None:
+            entity_id = entity_id or first_atom.entity_id
+            source_path_id = source_path_id or first_atom.path_id
+        source_label = str(raw_edge.get("source") or "").strip()
+        target_label = str(raw_edge.get("target") or "").strip()
+        relation = str(raw_edge.get("semantic_relation") or raw_edge.get("relation") or "").strip()
+        if not source_label or not target_label or not relation:
+            continue
+        source_id = node_id_for(source_label)
+        target_id = node_id_for(target_label)
+        edges.append(
+            {
+                "edge_id": str(raw_edge.get("edge_id") or raw_edge.get("id") or f"{branch_id}_e{index}"),
+                "source": source_id,
+                "target": target_id,
+                "relation": relation,
+                "answer_type": raw_edge.get("answer_type"),
+                "is_one_hop": True,
+                "supported_by": supported_by,
+                "support": [{"supported_by": supported_by, "reason": str(raw_edge.get("reason") or "")}],
+                "atomic_question_template": raw_edge.get("atomic_question_template"),
+            }
+        )
+
+    if not edges:
+        return payload
+    coerced = dict(payload)
+    coerced["semantic_reasoning_paths"] = [
+        {
+            "branch_id": branch_id,
+            "entity_id": entity_id,
+            "source_path_id": source_path_id,
+            "nodes": nodes,
+            "edges": edges,
+            "terminal_node_id": edges[-1]["target"],
+            "score": payload.get("score", 0),
+            "warnings": _str_list(payload.get("warnings")),
+        }
+    ]
+    return coerced
+
+
+def _first_selected_path_payload(selected_dependency_path_evidence: list[dict[str, Any]]) -> dict[str, Any]:
+    for path_set in selected_dependency_path_evidence:
+        if not isinstance(path_set, dict):
+            continue
+        for path in path_set.get("paths", []) or []:
+            if isinstance(path, dict):
+                return path
+    return {}
+
+
 def _parse_semantic_reasoning_nodes(raw: Any, branch_id: str) -> list[SemanticReasoningNode]:
     if not isinstance(raw, list):
         raise ValueError(f"Semantic reasoning path {branch_id} nodes must be a list.")
@@ -410,7 +514,12 @@ def _parse_semantic_reasoning_nodes(raw: Any, branch_id: str) -> list[SemanticRe
     return nodes
 
 
-def _parse_semantic_reasoning_edges(raw: Any, branch_id: str) -> list[SemanticReasoningEdge]:
+def _parse_semantic_reasoning_edges(
+    raw: Any,
+    branch_id: str,
+    *,
+    evidence_atoms: list[EvidenceAtom],
+) -> list[SemanticReasoningEdge]:
     if not isinstance(raw, list):
         raise ValueError(f"Semantic reasoning path {branch_id} edges must be a list.")
     edges: list[SemanticReasoningEdge] = []
@@ -424,13 +533,17 @@ def _parse_semantic_reasoning_edges(raw: Any, branch_id: str) -> list[SemanticRe
         if edge_id in seen:
             edge_id = f"{branch_id}_e{index}"
         seen.add(edge_id)
-        support = _normalize_semantic_reasoning_support(item.get("support"))
+        support = _normalize_semantic_reasoning_support(
+            item.get("support"),
+            evidence_atoms=evidence_atoms,
+            edge_supported_by=item.get("supported_by"),
+        )
         edges.append(
             SemanticReasoningEdge(
                 edge_id=edge_id,
                 source=str(item.get("source") or "").strip(),
                 target=str(item.get("target") or "").strip(),
-                relation=str(item.get("relation") or "").strip(),
+                relation=str(item.get("relation") or item.get("semantic_relation") or "").strip(),
                 answer_type=_optional_str(item.get("answer_type")),
                 is_one_hop=_bool_value(item.get("is_one_hop"), default=True),
                 support=support,
@@ -450,7 +563,17 @@ def _normalize_semantic_reasoning_node_id(raw: Any, branch_id: str, index: int, 
     return node_id
 
 
-def _normalize_semantic_reasoning_support(raw: Any) -> list[dict[str, Any]]:
+def _normalize_semantic_reasoning_support(
+    raw: Any,
+    *,
+    evidence_atoms: list[EvidenceAtom],
+    edge_supported_by: Any = None,
+) -> list[dict[str, Any]]:
+    atom_by_id = {atom.id: atom for atom in evidence_atoms}
+    supported_by = _str_list(edge_supported_by)
+    if supported_by and raw is None:
+        return [_support_from_atom(atom_by_id[atom_id]) for atom_id in supported_by if atom_id in atom_by_id]
+
     if isinstance(raw, dict):
         raw_items = [raw]
     elif isinstance(raw, list):
@@ -461,43 +584,120 @@ def _normalize_semantic_reasoning_support(raw: Any) -> list[dict[str, Any]]:
     for item in raw_items:
         if not isinstance(item, dict):
             continue
+        atom_ids = _str_list(item.get("atom_ids") or item.get("supported_by"))
+        if not atom_ids and supported_by:
+            atom_ids = supported_by
+        path_set_id = str(item.get("path_set_id") or "").strip()
+        path_id = str(item.get("path_id") or "").strip()
+        node_texts = _str_list(item.get("node_texts"))
+        node_ids = _str_list(item.get("node_ids"))
+        if not atom_ids:
+            atom_ids = _matching_atom_ids_for_support(
+                evidence_atoms,
+                path_set_id=path_set_id,
+                path_id=path_id,
+                node_texts=node_texts,
+            )
+        if atom_ids and (not path_set_id or not path_id or not node_texts):
+            first_atom = atom_by_id.get(atom_ids[0])
+            if first_atom is not None:
+                path_set_id = path_set_id or first_atom.path_set_id
+                path_id = path_id or first_atom.path_id
+                node_texts = node_texts or list(first_atom.node_texts)
+                node_ids = node_ids or list(first_atom.node_ids)
         result.append(
             {
-                "path_set_id": str(item.get("path_set_id") or "").strip(),
-                "path_id": str(item.get("path_id") or "").strip(),
-                "node_texts": _str_list(item.get("node_texts")),
-                "node_ids": _str_list(item.get("node_ids")),
+                "path_set_id": path_set_id,
+                "path_id": path_id,
+                "node_texts": node_texts,
+                "node_ids": node_ids,
+                "atom_ids": atom_ids,
+                "supported_by": atom_ids,
                 "reason": str(item.get("reason") or "").strip(),
             }
         )
     return result
 
 
+def _support_from_atom(atom: EvidenceAtom) -> dict[str, Any]:
+    return {
+        "path_set_id": atom.path_set_id,
+        "path_id": atom.path_id,
+        "node_texts": list(atom.node_texts),
+        "node_ids": list(atom.node_ids),
+        "atom_ids": [atom.id],
+        "supported_by": [atom.id],
+        "reason": "",
+    }
+
+
+def _matching_atom_ids_for_support(
+    evidence_atoms: list[EvidenceAtom],
+    *,
+    path_set_id: str,
+    path_id: str,
+    node_texts: list[str],
+) -> list[str]:
+    if not path_id and not node_texts:
+        return []
+    normalized_support_texts = {_normalize_support_text(text) for text in node_texts}
+    normalized_support_texts.discard("")
+    matches: list[str] = []
+    for atom in evidence_atoms:
+        if path_set_id and atom.path_set_id != path_set_id:
+            continue
+        if path_id and atom.path_id != path_id:
+            continue
+        atom_texts = {_normalize_support_text(text) for text in atom.node_texts}
+        atom_texts.discard("")
+        if normalized_support_texts and normalized_support_texts.issubset(atom_texts):
+            matches.append(atom.id)
+    if matches:
+        return matches[:3]
+    for atom in evidence_atoms:
+        if path_id and atom.path_id != path_id:
+            continue
+        atom_texts = {_normalize_support_text(text) for text in atom.node_texts}
+        if normalized_support_texts & atom_texts:
+            matches.append(atom.id)
+    return matches[:3]
+
+
 def _semantic_reasoning_path_support_issues(
     result: SemanticReasoningPathResult,
     selected_dependency_path_evidence: list[dict[str, Any]],
+    evidence_atoms: list[EvidenceAtom],
 ) -> list[str]:
-    """Validate that semantic edges cite selected paths, not exact dependency tokens.
-
-    Step 9 induces semantic reasoning paths from dependency evidence and the
-    original question. Semantic nodes are allowed to be normalized objects/value
-    slots that do not literally occur as dependency path tokens, so support
-    node_texts are intentionally not required to be a subset of the selected
-    dependency path node_texts.
-    """
+    """Validate that semantic edges are grounded by evidence atom ids."""
     support_index = _selected_dependency_support_index(selected_dependency_path_evidence)
+    atom_ids = {atom.id for atom in evidence_atoms}
     issues: list[str] = []
     for path in result.paths:
         for edge in path.edges:
+            edge_atom_ids: set[str] = set()
             for support_index_in_edge, support in enumerate(edge.support, start=1):
+                support_atom_ids = set(_str_list(support.get("atom_ids") or support.get("supported_by")))
+                if not support_atom_ids:
+                    issues.append(f"Semantic edge {edge.edge_id} support #{support_index_in_edge} has empty supported_by.")
+                    continue
+                unknown = sorted(support_atom_ids - atom_ids)
+                if unknown:
+                    issues.append(
+                        f"Semantic edge {edge.edge_id} support #{support_index_in_edge} cites unknown evidence atoms {unknown}."
+                    )
+                    continue
+                edge_atom_ids.update(support_atom_ids)
                 path_set_id = str(support.get("path_set_id") or "").strip()
                 path_id = str(support.get("path_id") or "").strip()
-                key = (path_set_id, path_id)
-                if key not in support_index:
-                    issues.append(
-                        f"Semantic edge {edge.edge_id} support #{support_index_in_edge} cites invalid "
-                        f"path_set_id/path_id {path_set_id!r}/{path_id!r}."
-                    )
+                if path_set_id or path_id:
+                    key = (path_set_id, path_id)
+                    if key not in support_index:
+                        issues.append(
+                            f"Semantic edge {edge.edge_id} support #{support_index_in_edge} cites invalid "
+                            f"path_set_id/path_id {path_set_id!r}/{path_id!r}."
+                        )
+            if not edge_atom_ids:
+                issues.append(f"Semantic edge {edge.edge_id} has no valid evidence atom support.")
     return issues
 
 
@@ -749,6 +949,76 @@ def build_selected_dependency_path_evidence(
     if not evidence:
         raise ValueError("Selected dependency path evidence is empty after path-set de-duplication.")
     return evidence
+
+
+def extract_evidence_atoms(selected_dependency_path_evidence: list[dict[str, Any]]) -> list[EvidenceAtom]:
+    """Decompose selected collapsed dependency paths into local evidence atoms.
+
+    Evidence atoms are structural snippets, not semantic reasoning steps. They
+    preserve path provenance so Step 9B can ground every semantic edge in at
+    least one atom id.
+    """
+
+    atoms: list[EvidenceAtom] = []
+    next_id = 1
+    for path_set in selected_dependency_path_evidence:
+        if not isinstance(path_set, dict):
+            continue
+        path_set_id = str(path_set.get("path_set_id") or "").strip()
+        for path in path_set.get("paths", []) or []:
+            if not isinstance(path, dict):
+                continue
+            node_texts = _str_list(path.get("node_texts"))
+            if len(node_texts) < 2:
+                continue
+            node_ids = _str_list(path.get("node_ids"))
+            origin_path = str(path.get("path_text") or " ---- ".join(node_texts)).strip()
+            path_id = str(path.get("path_id") or "").strip()
+            entity_id = str(path.get("entity_id") or "").strip()
+            entity_text = str(path.get("entity_text") or "").strip()
+
+            for index in range(len(node_texts) - 1):
+                atom_node_texts = node_texts[index : index + 2]
+                atom_node_ids = node_ids[index : index + 2] if node_ids else []
+                atoms.append(
+                    EvidenceAtom(
+                        id=f"atom_{next_id}",
+                        text=" ---- ".join(atom_node_texts),
+                        source=atom_node_texts[0],
+                        relation_hint=atom_node_texts[1],
+                        target=None,
+                        origin_path=origin_path,
+                        path_set_id=path_set_id,
+                        path_id=path_id,
+                        entity_id=entity_id,
+                        entity_text=entity_text,
+                        node_texts=atom_node_texts,
+                        node_ids=atom_node_ids,
+                    )
+                )
+                next_id += 1
+
+                if index + 2 < len(node_texts):
+                    atom_node_texts = node_texts[index : index + 3]
+                    atom_node_ids = node_ids[index : index + 3] if node_ids else []
+                    atoms.append(
+                        EvidenceAtom(
+                            id=f"atom_{next_id}",
+                            text=" ---- ".join(atom_node_texts),
+                            source=atom_node_texts[0],
+                            relation_hint=atom_node_texts[1],
+                            target=atom_node_texts[2],
+                            origin_path=origin_path,
+                            path_set_id=path_set_id,
+                            path_id=path_id,
+                            entity_id=entity_id,
+                            entity_text=entity_text,
+                            node_texts=atom_node_texts,
+                            node_ids=atom_node_ids,
+                        )
+                    )
+                    next_id += 1
+    return atoms
 
 
 def validate_grounded_atomic_dag_support(
