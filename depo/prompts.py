@@ -378,74 +378,6 @@ Output JSON with exactly this shape:
 """.strip()
 
 
-ENTITY_PATH_SELECTION_SYSTEM = """
-You are implementing a DEPO entity-origin dependency-path pipeline.
-
-Current step: for each given entity, choose exactly one provided dependency path that is most useful for reasoning about the original multi-hop question.
-
-You must only select from the supplied path_id values.
-Do not invent paths.
-Do not generate candidate nodes.
-Do not generate a Problem Frame.
-Do not generate an AST.
-Do not generate atomic questions.
-Return valid JSON only.
-""".strip()
-
-
-def build_select_entity_paths_prompt(
-    original_question: str,
-    restored_question: str,
-    entity_start_nodes: list[dict[str, object]],
-    entity_origin_paths_by_entity: dict[str, list[dict[str, object]]],
-    validation_feedback: str | None = None,
-) -> str:
-    schema = {
-        "selected_paths": [
-            {
-                "entity_id": "e1",
-                "path_id": "e1_p7",
-                "reason": "This path follows the useful reasoning chain from the entity through author to spouse.",
-            }
-        ]
-    }
-    feedback = f"\nPrevious selection failed validation:\n{validation_feedback}\n" if validation_feedback else ""
-    return f"""
-Select one entity-origin dependency path for each entity.
-
-Original question:
-{original_question}
-
-Restored/normalized question:
-{restored_question}
-
-Entity start nodes:
-{json.dumps(entity_start_nodes, ensure_ascii=False, indent=2)}
-
-Entity-origin dependency paths:
-{json.dumps(entity_origin_paths_by_entity, ensure_ascii=False, indent=2)}
-{feedback}
-Rules:
-1. For every entity_id in Entity start nodes, choose exactly one path.
-2. The selected path_id must exist in that entity_id's provided path list.
-3. The selected path must start from that entity.
-4. Prefer paths that express the useful reasoning chain from a known entity to the final answer slot or comparison attribute.
-5. For serial multi-hop questions, prefer the longest useful reasoning path over local short edges.
-6. For parallel/comparison questions, choose one path from each entity to its corresponding compared attribute or value slot.
-7. Prefer paths where passes_through_other_entity_start is false.
-8. Do not choose a path that passes through a different entity start as an intermediate node when a path from the current entity to the answer slot exists.
-9. For common-answer questions with cues such as both/share/common, each entity should normally choose its own path to the shared answer slot, e.g. PersonA -- worked -- screenplay, not PersonA -- PersonB -- worked -- screenplay.
-10. Paths may include noisy nodes such as of, the, who, ?, share, and punctuation if the overall path is useful. The next AST step will prune noise.
-11. Do not choose a path merely because it is short. Avoid meaningless paths such as entity--of or entity--the.
-12. Do not select paths that only end at punctuation, determiners, or prepositions unless they pass through a useful role/slot chain.
-13. Do not generate candidate nodes, a Problem Frame, an AST, or atomic questions.
-
-Return strict JSON only.
-Output JSON with exactly this shape:
-{json.dumps(schema, ensure_ascii=False, indent=2)}
-""".strip()
-
-
 ENTITY_PATH_SCORING_SYSTEM = """
 You are a dependency-path judge for DEPO.
 
@@ -963,16 +895,27 @@ Output JSON with exactly this shape:
 
 
 ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM = """
-You are implementing DEPO Step 10: Atomic DAG Compilation from Semantic Reasoning Paths.
+You are implementing DEPO Step 10: Semantic-Path-Guided Atomic DAG Generation.
 
-The Semantic Reasoning Path is the skeleton.
-Compile each one-hop semantic edge into exactly one atomic lookup node.
+Given the original question and the full Semantic Reasoning Paths, generate a retrieval-friendly Atomic Question DAG in one pass.
+Use the complete semantic reasoning path as global context, but align each atomic question node to exactly one semantic edge.
 
-Do not skip semantic edges.
-Do not merge multiple semantic edges into one atomic question.
-Do not add unsupported lookup nodes.
+Use only the original question and Semantic Reasoning Paths.
+Semantic Reasoning Paths are already distilled from dependency evidence.
+Use the full semantic reasoning path, not isolated edges.
+
+Generate retrieval-friendly, contextualized, self-contained atomic questions.
+Do not use variable placeholders such as q1's answer, q2's answer, previous answer, the answer to q1, or the result of q1.
+Each question should include enough context from the original anchor entity to be directly searchable.
+
+Hard alignment constraints:
+- Each atomic node must correspond to exactly one semantic edge.
+- Do not skip semantic edges.
+- Do not merge multiple semantic edges into one atomic question.
+- Do not add unsupported lookup nodes.
+- Preserve source_semantic_path_id and source_semantic_edge_id for each output node.
+
 Do not generate final comparison, ranking, yes/no, aggregation, intersection, union, or common-answer questions.
-Every output node must cite support copied from the source semantic reasoning edge.
 
 Return strict JSON only.
 """.strip()
@@ -981,57 +924,40 @@ Return strict JSON only.
 def build_atomic_dag_from_semantic_reasoning_path_prompt(
     original_question: str,
     semantic_reasoning_paths: dict[str, object],
-    selected_dependency_path_evidence: list[dict[str, object]],
     validation_feedback: str | None = None,
 ) -> str:
+    semantic_reasoning_paths_for_prompt = _atomic_dag_semantic_prompt_payload(semantic_reasoning_paths)
     schema = {
         "nodes": [
             {
                 "node_id": "q1",
-                "question": "Who performed I Can'T See Myself Leaving You?",
+                "question": "Who was the mother of Lothair II?",
                 "operation": "lookup",
-                "input": {
-                    "type": "entity",
-                    "text": "I Can'T See Myself Leaving You",
-                },
-                "one_hop_relation": "performer of song",
+                "one_hop_relation": "mother of person",
                 "answer_type": "Person",
                 "dependencies": [],
-                "support": [
-                    {
-                        "path_set_id": "ps1",
-                        "path_id": "e1_p1",
-                        "node_texts": ["I Can'T See Myself Leaving You", "performer"],
-                        "reason": "Copied from semantic reasoning edge b1_e1.",
-                    }
-                ],
+                "support": {
+                    "semantic_path_id": "b1",
+                    "semantic_edge_id": "b1_e1",
+                },
                 "source_semantic_path_id": "b1",
                 "source_semantic_edge_id": "b1_e1",
             },
             {
                 "node_id": "q2",
-                "question": "Where did q1's answer die?",
+                "question": "When did Lothair II's mother die?",
                 "operation": "lookup",
-                "input": {
-                    "type": "previous_answer",
-                    "ref": "q1",
-                },
-                "one_hop_relation": "place of death",
-                "answer_type": "Location",
+                "one_hop_relation": "date of death of person",
+                "answer_type": "Date",
                 "dependencies": ["q1"],
-                "support": [
-                    {
-                        "path_set_id": "ps1",
-                        "path_id": "e1_p1",
-                        "node_texts": ["performer", "die", "where"],
-                        "reason": "Copied from semantic reasoning edge b1_e2.",
-                    }
-                ],
+                "support": {
+                    "semantic_path_id": "b1",
+                    "semantic_edge_id": "b1_e2",
+                },
                 "source_semantic_path_id": "b1",
                 "source_semantic_edge_id": "b1_e2",
             },
         ],
-        "selected_path_set_ids": ["ps1"],
         "reason": "The DAG compiles each semantic reasoning edge into one atomic lookup.",
     }
     feedback = ""
@@ -1042,418 +968,115 @@ Previous output failed Atomic DAG validation:
 {validation_feedback}
 
 Regenerate the full JSON.
-Every node must compile exactly one semantic reasoning edge and must cite valid support.
-Dependent questions must explicitly use qX's answer.
+Every node must align to exactly one semantic reasoning edge.
+Every question must be self-contained and must not use qX's answer or previous-answer placeholders.
 """
     return f"""
-Compile an Atomic Subquestion DAG from Semantic Reasoning Paths.
+Generate a Semantic-Path-Guided Atomic Question DAG.
 
-Original question:
+Original Question:
 {original_question}
 
 Semantic Reasoning Paths:
-{json.dumps(semantic_reasoning_paths, ensure_ascii=False, indent=2)}
-
-Selected dependency path evidence:
-{json.dumps(selected_dependency_path_evidence, ensure_ascii=False, indent=2)}
+{json.dumps(semantic_reasoning_paths_for_prompt, ensure_ascii=False, indent=2)}
 
 Compilation rules:
-1. Compile each one-hop semantic edge into one atomic lookup node.
-2. Do not skip semantic edges.
-3. Do not merge multiple semantic edges into one atomic question.
-4. Do not add unsupported lookup nodes.
-5. Use q1, q2, q3, ... in solve order.
-6. Every node must have operation = "lookup".
-7. If an edge source is an explicit entity node, dependencies = [].
-8. If an edge source is the target of a previous edge, the node must depend on that previous q node.
-9. If a node depends on q1, its question must explicitly contain q1's answer.
-10. If a node depends on q1 and q2, its question must explicitly contain both q1's answer and q2's answer.
-11. Every node support must be copied from the semantic edge support.
+1. Generate the complete Atomic Question DAG in one pass.
+2. Use the full semantic reasoning path as global context, not isolated edges.
+3. Each atomic node must align to exactly one semantic edge.
+4. Do not skip semantic edges.
+5. Do not merge multiple semantic edges into one atomic question.
+6. Do not add unsupported lookup nodes.
+7. Use q1, q2, q3, ... in solve order.
+8. Every node must have operation = "lookup".
+9. dependencies may preserve DAG order metadata, but the natural-language question must be self-contained.
+10. Do not use variable placeholders such as q1's answer, q2's answer, previous answer, answer to q1, answer of q1, or result of q1.
+11. Each question should include enough original anchor context to be directly searchable.
 12. Preserve source_semantic_path_id and source_semantic_edge_id for each output node.
-13. Keep final comparison/ranking/yes-no/intersection/common-answer out of the DAG.
-14. operator_intent remains metadata only and must not become a node.
+13. Optional support should cite the semantic edge, e.g. {{"semantic_path_id": "b1", "semantic_edge_id": "b1_e1"}}.
+14. Keep final comparison/ranking/yes-no/intersection/common-answer out of the DAG.
+15. operator_intent remains metadata only and must not become a node.
+
+Examples:
+- Semantic path: Lothair II --mother of person--> mother --date of death of person--> death_date
+  Good q1: "Who was the mother of Lothair II?"
+  Good q2: "When did Lothair II's mother die?"
+  Bad q2: "When did q1's answer die?"
+  Bad q2: "When did the mother die?"
+- Parallel semantic paths for film directors and nationality:
+  Good: "Who directed Ten9Eight: Shoot For The Moon?"
+  Good: "What is the nationality of the director of Ten9Eight: Shoot For The Moon?"
+  Good: "Who directed Sabotage (1936 Film)?"
+  Good: "What is the nationality of the director of Sabotage (1936 Film)?"
+  Bad: "What is q1's answer's nationality?"
+  Bad: "Do they share the same nationality?"
+
+Required fields for every node:
+- node_id
+- question
+- operation = "lookup"
+- one_hop_relation
+- answer_type
+- dependencies
+- source_semantic_path_id
+- source_semantic_edge_id
 {feedback}
 Return strict JSON only.
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 """.strip()
 
-SELECTED_PATH_SEMANTIC_TRANSDUCTION_SYSTEM = """
-You are implementing DEPO Step 9: Candidate Path-Set Semantic Transduction.
-This is the compatible Selected Path Semantic Transduction interface for one path-set at a time.
-You receive a selected entity-origin dependency path-set whose paths start from question entities.
-Your task is to convert the complete path-set into executable branch-level semantic relation chains.
 
-You may only use information supported by:
-1. the original question, and
-2. the selected dependency paths in this path-set.
-
-The selected dependency path is syntactic evidence, not the final semantic graph.
-Do not copy dependency tokens directly into AST nodes.
-AST nodes must be query endpoints: fixed named entities, intermediate variables licensed by the question, or final answer/value slots.
-Edges must be executable one-hop lookup relations.
-Wh words must not become AST nodes; use the original question wording to infer the appropriate final branch slot.
-
-You must not merge multiple selected paths into one shared branch.
-Do not generate final operator nodes, final comparison questions, intersection nodes, set nodes, logical nodes, or ranking nodes.
-Return valid JSON only.
-""".strip()
-
-
-def build_selected_path_semantic_transduction_prompt(
-    original_question: str,
-    restored_question: str,
-    selected_entity_paths: list[dict[str, object]],
-    undirected_graph_edges: list[dict[str, object]],
-) -> str:
-    schema = {
-        "nodes": [
-            {
-                "id": "john_middleton_murry",
-                "label": "John Middleton Murry",
-                "kind": "entity",
-                "semantic_type": "Person",
-                "source_path_ids": ["e1_p1"],
-                "source_node_ids": ["1"],
-            },
-            {
-                "id": "wife",
-                "label": "wife",
-                "kind": "type_variable",
-                "semantic_type": "Person",
-                "source_path_ids": ["e1_p1"],
-                "source_node_ids": ["2"],
-            },
-            {
-                "id": "death_reason",
-                "label": "death_reason",
-                "kind": "value_slot",
-                "semantic_type": "Reason",
-                "source_path_ids": ["e1_p1"],
-                "source_node_ids": ["3", "4"],
-            },
-        ],
-        "edges": [
-            {
-                "source": "john_middleton_murry",
-                "target": "wife",
-                "relation": "wife of John Middleton Murry",
-                "support_path_id": "e1_p1",
-                "support_node_ids": ["1", "2"],
-            },
-            {
-                "source": "wife",
-                "target": "death_reason",
-                "relation": "reason why the wife died",
-                "support_path_id": "e1_p1",
-                "support_node_ids": ["2", "3", "4"],
+def _atomic_dag_semantic_prompt_payload(payload: dict[str, object]) -> dict[str, object]:
+    raw_paths = payload.get("semantic_reasoning_paths")
+    if raw_paths is None:
+        raw_paths = payload.get("paths")
+    semantic_paths: list[dict[str, object]] = []
+    if isinstance(raw_paths, list):
+        for raw_path in raw_paths:
+            if not isinstance(raw_path, dict):
+                continue
+            path_payload: dict[str, object] = {
+                "branch_id": raw_path.get("branch_id"),
+                "entity_id": raw_path.get("entity_id"),
+                "nodes": [],
+                "edges": [],
+                "terminal_node_id": raw_path.get("terminal_node_id"),
             }
-        ],
-        "branch_terminals": {"e1": "death_reason"},
-    }
-    return f"""
-Construct a branch-level Semantic AST by transducing selected dependency paths into executable semantic lookup chains.
+            nodes = raw_path.get("nodes")
+            if isinstance(nodes, list):
+                path_payload["nodes"] = [
+                    {
+                        "node_id": node.get("node_id") or node.get("id"),
+                        "label": node.get("label") or node.get("text"),
+                        "kind": node.get("kind"),
+                        "semantic_type": node.get("semantic_type"),
+                    }
+                    for node in nodes
+                    if isinstance(node, dict)
+                ]
+            edges = raw_path.get("edges")
+            if isinstance(edges, list):
+                path_payload["edges"] = [
+                    {
+                        "edge_id": edge.get("edge_id") or edge.get("id"),
+                        "source": edge.get("source"),
+                        "target": edge.get("target"),
+                        "relation": edge.get("relation"),
+                        "answer_type": edge.get("answer_type"),
+                        "is_one_hop": edge.get("is_one_hop", True),
+                        "atomic_question_template": edge.get("atomic_question_template"),
+                    }
+                    for edge in edges
+                    if isinstance(edge, dict)
+                ]
+            semantic_paths.append(path_payload)
 
-Original question:
-{original_question}
-
-Restored/normalized question:
-{restored_question}
-
-Selected entity-origin dependency paths:
-{json.dumps(selected_entity_paths, ensure_ascii=False, indent=2)}
-
-Full undirected graph edges for debugging:
-{json.dumps(undirected_graph_edges, ensure_ascii=False, indent=2)}
-Goal:
-Convert each selected entity-origin dependency path into an executable branch-level semantic relation chain.
-The selected path is syntactic evidence, not the final semantic graph.
-
-AST node contract:
-Allowed AST nodes:
-1. Fixed named entities given in the question.
-2. Intermediate variables explicitly licensed by the question, such as mother, father, author, CEO, company, director, spouse, performer.
-3. Final answer slots or value slots, such as university, nationality, death_date, death_reason, cause_of_death, birth_date, birthplace, location, city, release_date, screenplay, count.
-
-Forbidden AST nodes:
-1. wh words: who, what, which, where, when, why.
-2. auxiliaries: do, did, does, is, was, were.
-3. determiners and prepositions: the, a, an, of, in, by, from, to.
-4. punctuation.
-5. pure predicate/event words when they should be represented as relation labels or value slots: die, died, born, developed, graduated, located, released, worked.
-6. comparison/operator cues: same, share, different, later, earlier, older, younger, first.
-
-Predicate/value-slot conversion:
-- The wh cue / answer phrase in the original question determines the answer dimension.
-- The selected path predicate determines the event or relation domain.
-- why/reason + die/death -> death_reason or cause_of_death.
-- when/temporal + die/death -> death_date.
-- where/location + die/death -> death_place.
-- how/manner + die/death -> death_manner or cause_of_death.
-- when/temporal + born/birth -> birth_date.
-- where/location + born/birth -> birthplace.
-- Which university + graduate from -> university.
-- Which company + developed -> company.
-- same nationality -> nationality branch terminal, with no COMPARE_SAME operator.
-- released first / earlier / later -> release_date branch terminal, with no final comparison node.
-
-Possessive / compound rule:
-Do not merge a known entity and its possessed role into one AST node.
-- Incorrect: "Lothair II's mother" as one node.
-- Correct: Lothair II -> mother.
-
-Rules:
-1. Each selected entity path must become one independent reasoning branch.
-2. Do not copy dependency tokens directly into AST nodes.
-3. Use dependency tokens only as evidence to infer query endpoints and lookup relations.
-4. Keep fixed named entities as root nodes.
-5. Keep semantic role/value nodes when they are needed as query endpoints.
-6. Convert pure predicates into relation labels or value slots.
-7. Do not create shortcut multi-hop edges. If a selected path supports AlphaGo -- developed -- company -- CEO -- graduated -- university, the AST must use AlphaGo -> company -> CEO -> university, not AlphaGo -> university.
-8. Do not emit dependency-style edges such as when -> die, mother -> die, did -> die, or screenplay -> worked.
-9. Do not emit wh words, auxiliaries, prepositions, determiners, punctuation, pure predicate/event words, or comparison/operator cues as nodes.
-10. Do not merge a known entity and a possessed role into one AST node.
-11. Wh words must not be AST nodes, but they should guide the final branch slot.
-12. For "When did Lothair II's mother die?" with selected path Lothair II's -- mother -- die -- When, output Lothair II -> mother -> death_date.
-13. For "Why did John Middleton Murry's wife die?" with selected path John Middleton Murry -- wife -- die -- Why, output John Middleton Murry -> wife -> death_reason or cause_of_death.
-14. Edge relation labels must be executable one-hop lookup relations.
-    - Lothair II -> mother means "mother of Lothair II".
-    - mother -> death_date means "date of death of the mother".
-    - wife -> death_reason means "reason why the wife died".
-15. Do not generate final operator nodes, final comparison questions, intersection nodes, set nodes, logical nodes, ranking nodes, or atomic subquestions.
-16. branch_terminals must map every selected entity_id to that branch's final answer/value slot node id.
-17. Preserve branch-specific variable clones for every multi-entity question. Do not merge shared labels or shared dependency tokens across selected paths.
-   - Correct: edward_carfagno -> screenplay_e1 and miklos_rozsa -> screenplay_e2, with worked-on semantics in the relation labels.
-   - Incorrect: edward_carfagno -> worked <- miklos_rozsa and worked -> screenplay.
-   - Correct: director_r1/nationality_r1 and director_r2/nationality_r2.
-18. For serial multi-hop questions, keep one-hop semantic edges in solve order.
-19. For same/share/both/common questions, keep the per-entity lookup branches separate. Final answer synthesis will compare or intersect the branch answers.
-20. Ordered comparison cue words are not ordinary semantic targets. Do not emit nodes or edges like film -> younger or director -> younger.
-21. If a selected path reaches only an ordered comparison cue, infer an explicit compared value slot supported by that cue:
-   - older/younger -> age, or date_of_birth when birth-date evidence is the intended retrievable value;
-   - earlier/later/first/latest with films/events -> release_date/date when that is the compared value;
-   - larger/smaller/greater/less/more/fewer -> the explicit measurable attribute in the question or path.
-22. Ground inferred value-slot nodes to the selected path and cue token: include source_path_ids and source_node_ids for the cue node that licenses the implicit value slot.
-23. For "Which film whose director is younger, Term Of Trial or Would You Marry Me??", use Term Of Trial -> director_r1 -> age_r1 and Would You Marry Me? -> director_r2 -> age_r2. Do not use Term Of Trial -> younger.
-24. Return strict JSON only.
-
-Examples:
-- Young Man Luther -> author: relation "author of Young Man Luther"; author -> spouse: relation "spouse of the author".
-- ten9eight_shoot_for_the_moon -> director_r1 -> nationality_r1 and sabotage_1936_film -> director_r2 -> nationality_r2.
-- edward_carfagno -> screenplay_e1 and miklos_rozsa -> screenplay_e2, with relation labels "screenplay worked on by Edward Carfagno" and "screenplay worked on by Miklos Rozsa". HyperBranch final synthesis will infer the common screenplay from the atomic answers.
-- term_of_trial -> director_r1 -> age_r1 and would_you_marry_me -> director_r2 -> age_r2. The age nodes are inferred from the "younger" cue and grounded to that cue's source_node_ids.
-- AlphaGo -> company: relation "company that developed AlphaGo"; company -> CEO: relation "CEO of the company"; CEO -> university: relation "university the CEO graduated from".
-- Lothair II -> mother: relation "mother of Lothair II"; mother -> death_date: relation "date of death of the mother".
-- John Middleton Murry -> wife: relation "wife of John Middleton Murry"; wife -> death_reason: relation "reason why the wife died".
-
-Output JSON with exactly this shape:
-{json.dumps(schema, ensure_ascii=False, indent=2)}
-""".strip()
-
-
-PATH_PRUNED_AST_SYSTEM = SELECTED_PATH_SEMANTIC_TRANSDUCTION_SYSTEM
-
-
-def build_path_pruned_ast_prompt(
-    original_question: str,
-    restored_question: str,
-    selected_entity_paths: list[dict[str, object]],
-    undirected_graph_edges: list[dict[str, object]],
-    validation_feedback: str | None = None,
-) -> str:
-    del validation_feedback
-    return build_selected_path_semantic_transduction_prompt(
-        original_question=original_question,
-        restored_question=restored_question,
-        selected_entity_paths=selected_entity_paths,
-        undirected_graph_edges=undirected_graph_edges,
-    )
-
-MASK_SPAN_EXTRACTION_SYSTEM = """
-You are implementing DEPO Step 1: selective mask span extraction before CoreNLP dependency parsing.
-
-Your task is parser-protection span detection only.
-You must find contiguous surface spans that should be collapsed into one placeholder token before dependency parsing.
-
-This is not named entity recognition in general.
-This is not anchor extraction.
-This is not type-variable extraction.
-This is not relation extraction.
-This is not AST construction.
-This is not question decomposition.
-
-The goal of masking is to protect CoreNLP from incorrectly splitting complex multi-token names, titles, and compact compound noun phrases.
-
-Most important requirement:
-Every mask span must receive a semantic_type_hint that allows the downstream placeholder to have the same syntactic/semantic type as the original span.
-For example:
-- multi-token person names -> Person, so they can become PersonA, PersonB;
-- film/movie titles -> Film, so they can become FilmA, FilmB;
-- book titles -> Book;
-- organizations/companies -> Organization or Company;
-- universities/schools -> University or Institution;
-- cities/countries/regions/locations -> City, Country, Region, or Location;
-- compact type phrases headed by "company" -> Company.
-
-Only mask spans with at least two lexical tokens, except when a named title contains punctuation, digits, subtitles, or a parenthetical qualifier that makes it parser-fragile.
-Do not mask ordinary single-token entities.
-
-Return valid JSON only.
-""".strip()
-
-
-def build_mask_span_extraction_prompt(question: str) -> str:
-    schema = {
-        "mask_spans": [
-            {
-                "text": "exact contiguous span copied from the original question",
-                "start_char": 0,
-                "end_char": 15,
-                "kind_hint": "entity | type_variable",
-                "semantic_type_hint": "Person | Film | Book | Song | Album | Series | Work | Company | Organization | University | Institution | City | Country | Region | Location | Event | Product | Entity",
-                "reason": "brief parser-protection reason"
-            }
-        ]
-    }
-
-    return f"""
-Identify only the spans that should be masked before CoreNLP parsing.
-
-Question:
-{question}
-
-Task definition:
-Return contiguous surface spans that should become one placeholder token before dependency parsing.
-The placeholder must preserve the syntactic/semantic type of the original span.
-
-This step protects complex surface spans only.
-Do not extract anchors, answer variables, implicit variables, operators, relations, AST nodes, or subquestions.
-
-Primary targets:
-
-A. Multi-token proper names
-Return every continuous multi-token proper name:
-- person names: "John Middleton Murry", "Gideon Johnson Pillow", "Holm Jølsen";
-- organization/company/institution names;
-- place, geopolitical region, and historical region names;
-- event/product names;
-- named works and titles.
-
-B. Named works and titles
-Return full title-like spans, including subtitles, numbers, punctuation, and parenthetical disambiguators:
-- "Wrong Turn 5: Bloodlines"
-- "Dark River (2017 Film)"
-- "Harry Potter and the Goblet of Fire"
-
-When a title appears after a shared type word such as film, movie, book, song, album, or series, use that word only to infer semantic_type_hint.
-Do not include the shared type word in the span.
-
-Correct:
-- films Wrong Turn 5: Bloodlines and Dark River (2017 Film)
-  -> "Wrong Turn 5: Bloodlines" with semantic_type_hint "Film"
-  -> "Dark River (2017 Film)" with semantic_type_hint "Film"
-
-Incorrect:
-- "films Wrong Turn 5: Bloodlines"
-- "Wrong Turn 5: Bloodlines and Dark River (2017 Film)"
-- "directors of films Wrong Turn 5: Bloodlines and Dark River (2017 Film)"
-
-C. Possessor names in possessive constructions
-For possessive person/name constructions, mask only the possessor name.
-Do not include "'s", the possessed noun, or the relation phrase.
-
-Correct:
-- "John Middleton Murry's wife"
-  -> "John Middleton Murry" with semantic_type_hint "Person"
-
-Incorrect:
-- "John Middleton Murry's"
-- "John Middleton Murry's wife"
-
-D. Coordinated or compared names
-When names are coordinated or compared with and/or, return each eligible name separately.
-Use the same semantic_type_hint for same-type alternatives.
-
-Correct:
-- "Gideon Johnson Pillow or Holm Jølsen"
-  -> "Gideon Johnson Pillow" with semantic_type_hint "Person"
-  -> "Holm Jølsen" with semantic_type_hint "Person"
-
-Incorrect:
-- "Gideon Johnson Pillow or Holm Jølsen"
-
-E. Compact compound type phrases
-Return compact multi-word compound noun phrases only when masking them helps CoreNLP keep one class/type expression intact.
-The phrase must have a noun head and at least one essential classifying modifier.
-
-Correct:
-- "artificial intelligence company" -> kind_hint "type_variable", semantic_type_hint "Company"
-- "chief operating officer" -> kind_hint "type_variable", semantic_type_hint "Person" or "Role"
-- "research institute" -> kind_hint "type_variable", semantic_type_hint "Institution"
-
-Incorrect:
-- "the CEO"
-- "which university"
-- "the artificial intelligence company that developed AlphaGo"
-- "CEO of the artificial intelligence company"
-- "company that developed AlphaGo"
-
-Boundary rules:
-1. The span must be a minimal contiguous substring of the original question.
-2. start_char is inclusive; end_char is exclusive.
-3. question[start_char:end_char] must exactly equal text.
-4. Exclude leading determiners such as the, a, an unless they are part of an official title.
-5. Exclude wh words such as who, whom, whose, what, which, where, when, how.
-6. Exclude relation words, prepositions, relative clauses, verbs, auxiliaries, comparison words, and coordination words unless they are part of an official title.
-7. Do not include "and" or "or" between two separate names unless the conjunction is part of one official title.
-8. Do not include possessive "'s" unless it is part of an official name, which is rare.
-9. Do not include appositive type words outside the title unless they are inside a parenthetical disambiguator, as in "Dark River (2017 Film)".
-10. Do not mask a larger phrase when a smaller name/title span is sufficient.
-
-Negative rules:
-Do not mask:
-- wh answer phrases: "which university", "what country", "whose wife";
-- simple type variables: director, CEO, university, city, country, nationality, age, population, actor;
-- determiner + single noun phrases: "the university", "the city", "the CEO";
-- relation phrases: "director of", "wife of", "CEO of", "born in", "located in";
-- full clauses or relative clauses;
-- operator/comparison cues: same, different, later, earlier, older, younger, largest, first, both;
-- single-token entities unless they are part of a larger multi-token span;
-- spans merely because they are semantically important.
-
-Semantic type hint rules:
-- Use Person for human names in contexts involving who, whom, whose, born, died, wife, husband, actor, director, CEO, author, player, president, older, younger.
-- Use Film for titles introduced by film, films, movie, movies, or parentheticals like "(2017 Film)".
-- Use Book, Song, Album, Series, or Work for other named works when locally indicated.
-- Use Company or Organization for companies/organizations.
-- Use University or Institution for universities/schools/institutions.
-- Use City, Country, Region, or Location for places.
-- Use Entity only when the local context does not support a more specific type.
-- In a coordinated or compared group, same-type alternatives must receive the same semantic_type_hint.
-
-Expected behavior examples:
-
-Example 1:
-Question: Do both directors of films Wrong Turn 5: Bloodlines and Dark River (2017 Film) have the same nationality?
-Return:
-- text: "Wrong Turn 5: Bloodlines", start_char: 27, end_char: 51, kind_hint: "entity", semantic_type_hint: "Film"
-- text: "Dark River (2017 Film)", start_char: 56, end_char: 78, kind_hint: "entity", semantic_type_hint: "Film"
-
-Example 2:
-Question: Why did John Middleton Murry's wife die?
-Return:
-- text: "John Middleton Murry", start_char: 8, end_char: 28, kind_hint: "entity", semantic_type_hint: "Person"
-
-Example 3:
-Question: Who was born later, Gideon Johnson Pillow or Holm Jølsen?
-Return:
-- text: "Gideon Johnson Pillow", start_char: 20, end_char: 41, kind_hint: "entity", semantic_type_hint: "Person"
-- text: "Holm Jølsen", start_char: 45, end_char: 56, kind_hint: "entity", semantic_type_hint: "Person"
-
-Output JSON with exactly this shape:
-{json.dumps(schema, ensure_ascii=False, indent=2)}
-""".strip()
-
+    result: dict[str, object] = {"semantic_reasoning_paths": semantic_paths}
+    for key in ("operator_intent", "score", "score_breakdown", "warnings", "reason"):
+        if key in payload:
+            result[key] = payload[key]
+    return result
 
 EXPLICIT_ENTITY_EXTRACTION_SYSTEM = """
 You are implementing DEPO Step 2: explicit entity detection before dependency parsing.
@@ -1655,23 +1278,62 @@ Return valid JSON only.
 """.strip()
 
 
-def build_explicit_entity_extraction_prompt(question: str) -> str:
-    schema = {
-        "entities": [
-            {
-                "text": "exact contiguous entity span copied from the original question",
-                "start_char": 0,
-                "end_char": 15,
-                "semantic_type_hint": (
-                    "Person | Film | Book | Song | Album | Series | Work | Game | Product | "
-                    "Company | Organization | University | Institution | City | Country | "
-                    "Region | Location | Event | Entity"
-                ),
-                "confidence": 0.95,
-                "reason": "brief reason why this is an explicit named entity",
-            }
-        ]
-    }
+def build_explicit_entity_extraction_prompt(
+    question: str,
+    entity_candidates: list[dict[str, object]] | None = None,
+) -> str:
+    if entity_candidates:
+        schema = {
+            "verified_entities": [
+                {
+                    "candidate_id": "c1",
+                    "is_entity": True,
+                    "semantic_type_hint": (
+                        "Person | Film | Book | Song | Album | Series | Work | Game | Product | "
+                        "Company | Organization | University | Institution | City | Country | "
+                        "Region | Location | Event | Entity"
+                    ),
+                    "confidence": 0.95,
+                    "reason": "brief reason why this candidate is an explicit named entity",
+                }
+            ]
+        }
+        candidate_block = f"""
+Deterministic entity candidates:
+{json.dumps(entity_candidates, ensure_ascii=False, indent=2)}
+
+Candidate-driven extraction mode:
+- You must judge only the supplied candidate_id values.
+- Do not invent new spans or offsets.
+- Do not rewrite candidate text.
+- Return every candidate that is a true explicit named entity with is_entity=true.
+- Return false or omit candidates that are roles, type variables, answer slots, relation phrases, operators, parser-protection phrases, clauses, or non-entities.
+- If a candidate is a complete named entity but has a generic semantic_type_hint, refine only semantic_type_hint.
+- If two candidates overlap, prefer the minimal complete named entity unless the longer candidate is an official title/designation.
+- The code owns offsets and boundary repair; you only verify and classify candidates.
+""".strip()
+    else:
+        schema = {
+            "entities": [
+                {
+                    "text": "exact contiguous entity span copied from the original question",
+                    "start_char": 0,
+                    "end_char": 15,
+                    "semantic_type_hint": (
+                        "Person | Film | Book | Song | Album | Series | Work | Game | Product | "
+                        "Company | Organization | University | Institution | City | Country | "
+                        "Region | Location | Event | Entity"
+                    ),
+                    "confidence": 0.95,
+                    "reason": "brief reason why this is an explicit named entity",
+                }
+            ]
+        }
+        candidate_block = """
+Free-span compatibility mode:
+- Return exact text/start_char/end_char spans.
+- The code will validate and repair offsets when possible.
+""".strip()
 
     return f"""
 Identify explicit named entity mentions in the original question.
@@ -1683,6 +1345,8 @@ This is entity recognition only.
 Do not output roles, type variables, answer slots, relation phrases, operators, parser-protection phrases, AST nodes, or subquestions.
 Return all explicit named entities, including single-token and multi-token entities.
 The code will mask every returned entity.
+
+{candidate_block}
 
 Output requirements:
 - Return JSON only.

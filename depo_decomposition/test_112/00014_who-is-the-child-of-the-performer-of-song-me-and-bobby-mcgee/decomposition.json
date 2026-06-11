@@ -1,0 +1,2209 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 14,
+  "qid": null,
+  "question": "Who is the child of the performer of song Me And Bobby Mcgee?",
+  "raw_question_item": {
+    "question": "Who is the child of the performer of song Me And Bobby Mcgee?",
+    "answer": "Dean Miller"
+  },
+  "gold_answer": "Dean Miller",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "Who is the child of the performer of song Me And Bobby Mcgee?",
+      "normalized_question": "Who is the child of the performer of the song Me And Bobby Mcgee?",
+      "changed": true,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "Who is the child of the performer of the song Me And Bobby Mcgee?",
+        "changed": false,
+        "rewrite_type": "identity",
+        "added_type_variables": [],
+        "reason": "The original question is grammatically correct and does not present a syntactic risk for dependency parsing."
+      }
+    },
+    "2_explicit_entities": {
+      "entities": [
+        {
+          "text": "Me And Bobby Mcgee",
+          "start_char": 46,
+          "end_char": 64,
+          "semantic_type_hint": "Song",
+          "confidence": 0.95,
+          "reason": "full title of the song mentioned in the question"
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "verified_entities": [
+          {
+            "candidate_id": "c1",
+            "is_entity": true,
+            "semantic_type_hint": "Song",
+            "confidence": 0.95,
+            "reason": "full title of the song mentioned in the question"
+          }
+        ],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Me And Bobby Mcgee",
+            "start_char": 46,
+            "end_char": 64,
+            "semantic_type_hint": "Song",
+            "reason": "complex title after explicit type head"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Me",
+            "start_char": 46,
+            "end_char": 48,
+            "semantic_type_hint": "Song",
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Bobby",
+            "start_char": 53,
+            "end_char": 58,
+            "semantic_type_hint": "Song",
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Mcgee",
+            "start_char": 59,
+            "end_char": 64,
+            "semantic_type_hint": "Song",
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "Me And Bobby Mcgee",
+          "start_char": 46,
+          "end_char": 64,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Song",
+          "reason": "full title of the song mentioned in the question"
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "verified_entities": [
+          {
+            "candidate_id": "c1",
+            "is_entity": true,
+            "semantic_type_hint": "Song",
+            "confidence": 0.95,
+            "reason": "full title of the song mentioned in the question"
+          }
+        ],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "Me And Bobby Mcgee",
+            "start_char": 46,
+            "end_char": 64,
+            "semantic_type_hint": "Song",
+            "reason": "complex title after explicit type head"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Me",
+            "start_char": 46,
+            "end_char": 48,
+            "semantic_type_hint": "Song",
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Bobby",
+            "start_char": 53,
+            "end_char": 58,
+            "semantic_type_hint": "Song",
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Mcgee",
+            "start_char": 59,
+            "end_char": 64,
+            "semantic_type_hint": "Song",
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      }
+    },
+    "3_entity_masking": {
+      "masked_question": "Who is the child of the performer of the song SongA?",
+      "mask_mappings": [
+        {
+          "placeholder": "SongA",
+          "original_text": "Me And Bobby Mcgee",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Song",
+          "original_char_span": [
+            46,
+            64
+          ],
+          "masked_char_span": [
+            46,
+            51
+          ],
+          "token_indices": []
+        }
+      ]
+    },
+    "3_selective_masked_question": "Who is the child of the performer of the song SongA?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "Who",
+          "character_offset_begin": 0,
+          "character_offset_end": 3,
+          "lemma": "who",
+          "pos": "WP"
+        },
+        {
+          "index": 2,
+          "word": "is",
+          "character_offset_begin": 4,
+          "character_offset_end": 6,
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "index": 3,
+          "word": "the",
+          "character_offset_begin": 7,
+          "character_offset_end": 10,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 4,
+          "word": "child",
+          "character_offset_begin": 11,
+          "character_offset_end": 16,
+          "lemma": "child",
+          "pos": "NN"
+        },
+        {
+          "index": 5,
+          "word": "of",
+          "character_offset_begin": 17,
+          "character_offset_end": 19,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 6,
+          "word": "the",
+          "character_offset_begin": 20,
+          "character_offset_end": 23,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 7,
+          "word": "performer",
+          "character_offset_begin": 24,
+          "character_offset_end": 33,
+          "lemma": "performer",
+          "pos": "NN"
+        },
+        {
+          "index": 8,
+          "word": "of",
+          "character_offset_begin": 34,
+          "character_offset_end": 36,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 9,
+          "word": "the",
+          "character_offset_begin": 37,
+          "character_offset_end": 40,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 10,
+          "word": "song",
+          "character_offset_begin": 41,
+          "character_offset_end": 45,
+          "lemma": "song",
+          "pos": "NN"
+        },
+        {
+          "index": 11,
+          "word": "SongA",
+          "character_offset_begin": 46,
+          "character_offset_end": 51,
+          "lemma": "songa",
+          "pos": "NN"
+        },
+        {
+          "index": 12,
+          "word": "?",
+          "character_offset_begin": 51,
+          "character_offset_end": 52,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "Who",
+          "relation": "cop",
+          "target": "is",
+          "source_index": 1,
+          "target_index": 2
+        },
+        {
+          "source": "child",
+          "relation": "det",
+          "target": "the",
+          "source_index": 4,
+          "target_index": 3
+        },
+        {
+          "source": "Who",
+          "relation": "nsubj",
+          "target": "child",
+          "source_index": 1,
+          "target_index": 4
+        },
+        {
+          "source": "performer",
+          "relation": "case",
+          "target": "of",
+          "source_index": 7,
+          "target_index": 5
+        },
+        {
+          "source": "performer",
+          "relation": "det",
+          "target": "the",
+          "source_index": 7,
+          "target_index": 6
+        },
+        {
+          "source": "child",
+          "relation": "nmod:of",
+          "target": "performer",
+          "source_index": 4,
+          "target_index": 7
+        },
+        {
+          "source": "SongA",
+          "relation": "case",
+          "target": "of",
+          "source_index": 11,
+          "target_index": 8
+        },
+        {
+          "source": "SongA",
+          "relation": "det",
+          "target": "the",
+          "source_index": 11,
+          "target_index": 9
+        },
+        {
+          "source": "SongA",
+          "relation": "compound",
+          "target": "song",
+          "source_index": 11,
+          "target_index": 10
+        },
+        {
+          "source": "performer",
+          "relation": "nmod:of",
+          "target": "SongA",
+          "source_index": 7,
+          "target_index": 11
+        },
+        {
+          "source": "Who",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 1,
+          "target_index": 12
+        }
+      ],
+      "edge_display": [
+        "Who[1] --cop--> is[2]",
+        "child[4] --det--> the[3]",
+        "Who[1] --nsubj--> child[4]",
+        "performer[7] --case--> of[5]",
+        "performer[7] --det--> the[6]",
+        "child[4] --nmod:of--> performer[7]",
+        "SongA[11] --case--> of[8]",
+        "SongA[11] --det--> the[9]",
+        "SongA[11] --compound--> song[10]",
+        "performer[7] --nmod:of--> SongA[11]",
+        "Who[1] --punct--> ?[12]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "Who",
+          "graph_text": "Who",
+          "text": "Who",
+          "label": "Who[1]",
+          "order": 1,
+          "pos": "WP",
+          "lemma": "who",
+          "character_offset_begin": 0,
+          "character_offset_end": 3
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "is",
+          "graph_text": "is",
+          "text": "is",
+          "label": "is[2]",
+          "order": 2,
+          "pos": "VBZ",
+          "lemma": "be",
+          "character_offset_begin": 4,
+          "character_offset_end": 6
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[3]",
+          "order": 3,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 7,
+          "character_offset_end": 10
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "child",
+          "graph_text": "child",
+          "text": "child",
+          "label": "child[4]",
+          "order": 4,
+          "pos": "NN",
+          "lemma": "child",
+          "character_offset_begin": 11,
+          "character_offset_end": 16
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[5]",
+          "order": 5,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 17,
+          "character_offset_end": 19
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[6]",
+          "order": 6,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 20,
+          "character_offset_end": 23
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "performer",
+          "graph_text": "performer",
+          "text": "performer",
+          "label": "performer[7]",
+          "order": 7,
+          "pos": "NN",
+          "lemma": "performer",
+          "character_offset_begin": 24,
+          "character_offset_end": 33
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[8]",
+          "order": 8,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 34,
+          "character_offset_end": 36
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[9]",
+          "order": 9,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 37,
+          "character_offset_end": 40
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "song",
+          "graph_text": "song",
+          "text": "song",
+          "label": "song[10]",
+          "order": 10,
+          "pos": "NN",
+          "lemma": "song",
+          "character_offset_begin": 41,
+          "character_offset_end": 45
+        },
+        {
+          "id": "11",
+          "token_index": 11,
+          "word": "SongA",
+          "graph_text": "SongA",
+          "text": "Me And Bobby Mcgee",
+          "label": "Me And Bobby Mcgee[11]",
+          "order": 11,
+          "pos": "NN",
+          "lemma": "songa",
+          "character_offset_begin": 46,
+          "character_offset_end": 51
+        },
+        {
+          "id": "12",
+          "token_index": 12,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[12]",
+          "order": 12,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 51,
+          "character_offset_end": 52
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "2",
+          "source_text": "Who",
+          "target_text": "is",
+          "relation": "cop",
+          "relations": [
+            "cop"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "2",
+              "governor_text": "Who",
+              "dependent_text": "is",
+              "governor_graph_text": "Who",
+              "dependent_graph_text": "is",
+              "governor_index": 1,
+              "dependent_index": 2,
+              "dependency_label": "cop"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "2",
+          "dependency_label": "cop",
+          "token_text": {
+            "1": "Who",
+            "2": "is"
+          },
+          "token_index": {
+            "1": 1,
+            "2": 2
+          }
+        },
+        {
+          "source": "1",
+          "target": "4",
+          "source_text": "Who",
+          "target_text": "child",
+          "relation": "nsubj",
+          "relations": [
+            "nsubj"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "4",
+              "governor_text": "Who",
+              "dependent_text": "child",
+              "governor_graph_text": "Who",
+              "dependent_graph_text": "child",
+              "governor_index": 1,
+              "dependent_index": 4,
+              "dependency_label": "nsubj"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "4",
+          "dependency_label": "nsubj",
+          "token_text": {
+            "1": "Who",
+            "4": "child"
+          },
+          "token_index": {
+            "1": 1,
+            "4": 4
+          }
+        },
+        {
+          "source": "1",
+          "target": "12",
+          "source_text": "Who",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "1",
+              "dependent": "12",
+              "governor_text": "Who",
+              "dependent_text": "?",
+              "governor_graph_text": "Who",
+              "dependent_graph_text": "?",
+              "governor_index": 1,
+              "dependent_index": 12,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "1",
+          "original_dependent": "12",
+          "dependency_label": "punct",
+          "token_text": {
+            "1": "Who",
+            "12": "?"
+          },
+          "token_index": {
+            "1": 1,
+            "12": 12
+          }
+        },
+        {
+          "source": "3",
+          "target": "4",
+          "source_text": "the",
+          "target_text": "child",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "3",
+              "governor_text": "child",
+              "dependent_text": "the",
+              "governor_graph_text": "child",
+              "dependent_graph_text": "the",
+              "governor_index": 4,
+              "dependent_index": 3,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "3",
+          "dependency_label": "det",
+          "token_text": {
+            "4": "child",
+            "3": "the"
+          },
+          "token_index": {
+            "4": 4,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "7",
+          "source_text": "child",
+          "target_text": "performer",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "7",
+              "governor_text": "child",
+              "dependent_text": "performer",
+              "governor_graph_text": "child",
+              "dependent_graph_text": "performer",
+              "governor_index": 4,
+              "dependent_index": 7,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "7",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "4": "child",
+            "7": "performer"
+          },
+          "token_index": {
+            "4": 4,
+            "7": 7
+          }
+        },
+        {
+          "source": "5",
+          "target": "7",
+          "source_text": "of",
+          "target_text": "performer",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "5",
+              "governor_text": "performer",
+              "dependent_text": "of",
+              "governor_graph_text": "performer",
+              "dependent_graph_text": "of",
+              "governor_index": 7,
+              "dependent_index": 5,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "5",
+          "dependency_label": "case",
+          "token_text": {
+            "7": "performer",
+            "5": "of"
+          },
+          "token_index": {
+            "7": 7,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "7",
+          "source_text": "the",
+          "target_text": "performer",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "6",
+              "governor_text": "performer",
+              "dependent_text": "the",
+              "governor_graph_text": "performer",
+              "dependent_graph_text": "the",
+              "governor_index": 7,
+              "dependent_index": 6,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "6",
+          "dependency_label": "det",
+          "token_text": {
+            "7": "performer",
+            "6": "the"
+          },
+          "token_index": {
+            "7": 7,
+            "6": 6
+          }
+        },
+        {
+          "source": "7",
+          "target": "11",
+          "source_text": "performer",
+          "target_text": "Me And Bobby Mcgee",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "7",
+              "dependent": "11",
+              "governor_text": "performer",
+              "dependent_text": "Me And Bobby Mcgee",
+              "governor_graph_text": "performer",
+              "dependent_graph_text": "SongA",
+              "governor_index": 7,
+              "dependent_index": 11,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "7",
+          "original_dependent": "11",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "7": "performer",
+            "11": "Me And Bobby Mcgee"
+          },
+          "token_index": {
+            "7": 7,
+            "11": 11
+          }
+        },
+        {
+          "source": "8",
+          "target": "11",
+          "source_text": "of",
+          "target_text": "Me And Bobby Mcgee",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "11",
+              "dependent": "8",
+              "governor_text": "Me And Bobby Mcgee",
+              "dependent_text": "of",
+              "governor_graph_text": "SongA",
+              "dependent_graph_text": "of",
+              "governor_index": 11,
+              "dependent_index": 8,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "11",
+          "original_dependent": "8",
+          "dependency_label": "case",
+          "token_text": {
+            "11": "Me And Bobby Mcgee",
+            "8": "of"
+          },
+          "token_index": {
+            "11": 11,
+            "8": 8
+          }
+        },
+        {
+          "source": "9",
+          "target": "11",
+          "source_text": "the",
+          "target_text": "Me And Bobby Mcgee",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "11",
+              "dependent": "9",
+              "governor_text": "Me And Bobby Mcgee",
+              "dependent_text": "the",
+              "governor_graph_text": "SongA",
+              "dependent_graph_text": "the",
+              "governor_index": 11,
+              "dependent_index": 9,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "11",
+          "original_dependent": "9",
+          "dependency_label": "det",
+          "token_text": {
+            "11": "Me And Bobby Mcgee",
+            "9": "the"
+          },
+          "token_index": {
+            "11": 11,
+            "9": 9
+          }
+        },
+        {
+          "source": "10",
+          "target": "11",
+          "source_text": "song",
+          "target_text": "Me And Bobby Mcgee",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "11",
+              "dependent": "10",
+              "governor_text": "Me And Bobby Mcgee",
+              "dependent_text": "song",
+              "governor_graph_text": "SongA",
+              "dependent_graph_text": "song",
+              "governor_index": 11,
+              "dependent_index": 10,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "11",
+          "original_dependent": "10",
+          "dependency_label": "compound",
+          "token_text": {
+            "11": "Me And Bobby Mcgee",
+            "10": "song"
+          },
+          "token_index": {
+            "11": 11,
+            "10": 10
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "Me And Bobby Mcgee",
+        "graph_node_ids": [
+          "11"
+        ],
+        "token_ids": [
+          11
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Song"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "performer",
+          "child",
+          "Who"
+        ],
+        "node_ids": [
+          "11",
+          "7",
+          "4",
+          "1"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "7",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "11",
+                "governor_text": "performer",
+                "dependent_text": "Me And Bobby Mcgee",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 7,
+                "dependent_index": 11,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "performer",
+            "target_text": "child",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "child",
+                "dependent_text": "performer",
+                "governor_graph_text": "child",
+                "dependent_graph_text": "performer",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "1",
+            "source_text": "child",
+            "target_text": "Who",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "4",
+                "governor_text": "Who",
+                "dependent_text": "child",
+                "governor_graph_text": "Who",
+                "dependent_graph_text": "child",
+                "governor_index": 1,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "performer",
+          "child",
+          "Who",
+          "is"
+        ],
+        "node_ids": [
+          "11",
+          "7",
+          "4",
+          "1",
+          "2"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "7",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "11",
+                "governor_text": "performer",
+                "dependent_text": "Me And Bobby Mcgee",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 7,
+                "dependent_index": 11,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "performer",
+            "target_text": "child",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "child",
+                "dependent_text": "performer",
+                "governor_graph_text": "child",
+                "dependent_graph_text": "performer",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "1",
+            "source_text": "child",
+            "target_text": "Who",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "4",
+                "governor_text": "Who",
+                "dependent_text": "child",
+                "governor_graph_text": "Who",
+                "dependent_graph_text": "child",
+                "governor_index": 1,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "1",
+            "target": "2",
+            "source_text": "Who",
+            "target_text": "is",
+            "relations": [
+              "cop"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "2",
+                "governor_text": "Who",
+                "dependent_text": "is",
+                "governor_graph_text": "Who",
+                "dependent_graph_text": "is",
+                "governor_index": 1,
+                "dependent_index": 2,
+                "dependency_label": "cop"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "performer",
+          "child",
+          "Who",
+          "?"
+        ],
+        "node_ids": [
+          "11",
+          "7",
+          "4",
+          "1",
+          "12"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "7",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "11",
+                "governor_text": "performer",
+                "dependent_text": "Me And Bobby Mcgee",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 7,
+                "dependent_index": 11,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "performer",
+            "target_text": "child",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "child",
+                "dependent_text": "performer",
+                "governor_graph_text": "child",
+                "dependent_graph_text": "performer",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "1",
+            "source_text": "child",
+            "target_text": "Who",
+            "relations": [
+              "nsubj"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "4",
+                "governor_text": "Who",
+                "dependent_text": "child",
+                "governor_graph_text": "Who",
+                "dependent_graph_text": "child",
+                "governor_index": 1,
+                "dependent_index": 4,
+                "dependency_label": "nsubj"
+              }
+            ]
+          },
+          {
+            "source": "1",
+            "target": "12",
+            "source_text": "Who",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "1",
+                "dependent": "12",
+                "governor_text": "Who",
+                "dependent_text": "?",
+                "governor_graph_text": "Who",
+                "dependent_graph_text": "?",
+                "governor_index": 1,
+                "dependent_index": 12,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "performer",
+          "child"
+        ],
+        "node_ids": [
+          "11",
+          "7",
+          "4"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "7",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "11",
+                "governor_text": "performer",
+                "dependent_text": "Me And Bobby Mcgee",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 7,
+                "dependent_index": 11,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "performer",
+            "target_text": "child",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "child",
+                "dependent_text": "performer",
+                "governor_graph_text": "child",
+                "dependent_graph_text": "performer",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "performer",
+          "child",
+          "the"
+        ],
+        "node_ids": [
+          "11",
+          "7",
+          "4",
+          "3"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "7",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "11",
+                "governor_text": "performer",
+                "dependent_text": "Me And Bobby Mcgee",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 7,
+                "dependent_index": 11,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "4",
+            "source_text": "performer",
+            "target_text": "child",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "7",
+                "governor_text": "child",
+                "dependent_text": "performer",
+                "governor_graph_text": "child",
+                "dependent_graph_text": "performer",
+                "governor_index": 4,
+                "dependent_index": 7,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "child",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "child",
+                "dependent_text": "the",
+                "governor_graph_text": "child",
+                "dependent_graph_text": "the",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "performer"
+        ],
+        "node_ids": [
+          "11",
+          "7"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "7",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "11",
+                "governor_text": "performer",
+                "dependent_text": "Me And Bobby Mcgee",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 7,
+                "dependent_index": 11,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "song"
+        ],
+        "node_ids": [
+          "11",
+          "10"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "10",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "song",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "11",
+                "dependent": "10",
+                "governor_text": "Me And Bobby Mcgee",
+                "dependent_text": "song",
+                "governor_graph_text": "SongA",
+                "dependent_graph_text": "song",
+                "governor_index": 11,
+                "dependent_index": 10,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "performer",
+          "of"
+        ],
+        "node_ids": [
+          "11",
+          "7",
+          "5"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "7",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "11",
+                "governor_text": "performer",
+                "dependent_text": "Me And Bobby Mcgee",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 7,
+                "dependent_index": 11,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "5",
+            "source_text": "performer",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "5",
+                "governor_text": "performer",
+                "dependent_text": "of",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "of",
+                "governor_index": 7,
+                "dependent_index": 5,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "performer",
+          "the"
+        ],
+        "node_ids": [
+          "11",
+          "7",
+          "6"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "7",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "performer",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "11",
+                "governor_text": "performer",
+                "dependent_text": "Me And Bobby Mcgee",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "SongA",
+                "governor_index": 7,
+                "dependent_index": 11,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "7",
+            "target": "6",
+            "source_text": "performer",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "7",
+                "dependent": "6",
+                "governor_text": "performer",
+                "dependent_text": "the",
+                "governor_graph_text": "performer",
+                "dependent_graph_text": "the",
+                "governor_index": 7,
+                "dependent_index": 6,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p10",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "of"
+        ],
+        "node_ids": [
+          "11",
+          "8"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "8",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "11",
+                "dependent": "8",
+                "governor_text": "Me And Bobby Mcgee",
+                "dependent_text": "of",
+                "governor_graph_text": "SongA",
+                "dependent_graph_text": "of",
+                "governor_index": 11,
+                "dependent_index": 8,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p11",
+        "entity_id": "e1",
+        "entity_text": "Me And Bobby Mcgee",
+        "nodes": [
+          "Me And Bobby Mcgee",
+          "the"
+        ],
+        "node_ids": [
+          "11",
+          "9"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "11",
+            "target": "9",
+            "source_text": "Me And Bobby Mcgee",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "11",
+                "dependent": "9",
+                "governor_text": "Me And Bobby Mcgee",
+                "dependent_text": "the",
+                "governor_graph_text": "SongA",
+                "dependent_graph_text": "the",
+                "governor_index": 11,
+                "dependent_index": 9,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "7_5_terminal_glue_path_pruning": {
+      "total_raw_paths": 11,
+      "total_kept_paths": 4,
+      "total_pruned_paths": 7,
+      "total_pruned_ratio": 0.6363636363636364,
+      "by_entity": {
+        "e1": {
+          "raw": 11,
+          "kept": 4,
+          "pruned": 7,
+          "pruned_ratio": 0.6363636363636364,
+          "fallback_used": false,
+          "pruned_examples": [
+            {
+              "path_id": "e1_p2",
+              "terminal": "is",
+              "reason": "terminal_glue_token",
+              "path_text": "Me And Bobby Mcgee -> performer -> child -> Who -> is"
+            },
+            {
+              "path_id": "e1_p3",
+              "terminal": "?",
+              "reason": "terminal_glue_token",
+              "path_text": "Me And Bobby Mcgee -> performer -> child -> Who -> ?"
+            },
+            {
+              "path_id": "e1_p5",
+              "terminal": "the",
+              "reason": "terminal_glue_token",
+              "path_text": "Me And Bobby Mcgee -> performer -> child -> the"
+            },
+            {
+              "path_id": "e1_p8",
+              "terminal": "of",
+              "reason": "terminal_glue_token",
+              "path_text": "Me And Bobby Mcgee -> performer -> of"
+            },
+            {
+              "path_id": "e1_p9",
+              "terminal": "the",
+              "reason": "terminal_glue_token",
+              "path_text": "Me And Bobby Mcgee -> performer -> the"
+            }
+          ]
+        }
+      }
+    },
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "child",
+        "semantic_chain_hint": [
+          "performer",
+          "child"
+        ],
+        "covered_cues": [
+          "who"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from the song, connects to the performer, and then to the child, effectively covering the question's intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p4",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "child",
+        "semantic_chain_hint": [
+          "performer",
+          "child"
+        ],
+        "covered_cues": [
+          "who"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from the song, connects to the performer, and then to the child, but lacks the explicit wh cue."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p6",
+        "score": 60.0,
+        "valid": true,
+        "terminal_hint": "performer",
+        "semantic_chain_hint": [
+          "performer"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "child",
+          "who"
+        ],
+        "fatal_errors": [],
+        "reason": "The path only connects the song to the performer, missing the crucial child and wh cues."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p7",
+        "score": 50.0,
+        "valid": true,
+        "terminal_hint": "song",
+        "semantic_chain_hint": [
+          "song"
+        ],
+        "covered_cues": [],
+        "missing_cues": [
+          "performer",
+          "child",
+          "who"
+        ],
+        "fatal_errors": [],
+        "reason": "The path connects the song to itself but does not reach the performer or the child, missing key elements of the question."
+      }
+    ],
+    "8_1_best_paths_by_entity": {
+      "e1": {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 90.0,
+        "valid": true,
+        "terminal_hint": "child",
+        "semantic_chain_hint": [
+          "performer",
+          "child"
+        ],
+        "covered_cues": [
+          "who"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from the song, connects to the performer, and then to the child, effectively covering the question's intent."
+      }
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "mean_path_score": 90.0
+      }
+    ],
+    "9_selected_dependency_path_evidence": [
+      {
+        "path_set_id": "ps1",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "Me And Bobby Mcgee",
+            "path_id": "e1_p1",
+            "path_text": "Me And Bobby Mcgee -> performer -> child -> Who",
+            "node_texts": [
+              "Me And Bobby Mcgee",
+              "performer",
+              "child",
+              "Who"
+            ],
+            "node_ids": [
+              "11",
+              "7",
+              "4",
+              "1"
+            ]
+          }
+        ]
+      }
+    ],
+    "9_grounded_atomic_dag_generation": {
+      "nodes": [
+        {
+          "node_id": "q1",
+          "question": "Who performed Me And Bobby Mcgee?",
+          "operation": "lookup",
+          "one_hop_relation": "performer of song",
+          "answer_type": "Person",
+          "dependencies": [],
+          "support": {
+            "semantic_path_id": "b1",
+            "semantic_edge_id": "b1_e1"
+          },
+          "source_semantic_path_id": "b1",
+          "source_semantic_edge_id": "b1_e1"
+        },
+        {
+          "node_id": "q2",
+          "question": "Who is the child of the performer of Me And Bobby Mcgee?",
+          "operation": "lookup",
+          "one_hop_relation": "child of",
+          "answer_type": "Person",
+          "dependencies": [
+            "q1"
+          ],
+          "support": {
+            "semantic_path_id": "b1",
+            "semantic_edge_id": "b1_e2"
+          },
+          "source_semantic_path_id": "b1",
+          "source_semantic_edge_id": "b1_e2"
+        }
+      ],
+      "reason": "The DAG compiles each semantic reasoning edge into one atomic lookup.",
+      "semantic_reasoning_paths": {
+        "paths": [
+          {
+            "branch_id": "b1",
+            "entity_id": "e1",
+            "source_path_id": "e1_p1",
+            "nodes": [
+              {
+                "node_id": "b1_n1",
+                "label": "Me And Bobby Mcgee",
+                "kind": "entity",
+                "semantic_type": "Song",
+                "source_path_id": "e1_p1",
+                "source_node_texts": [
+                  "Me And Bobby Mcgee"
+                ],
+                "source_node_ids": [
+                  "11"
+                ]
+              },
+              {
+                "node_id": "b1_n2",
+                "label": "performer",
+                "kind": "semantic_object",
+                "semantic_type": "Person",
+                "source_path_id": "e1_p1",
+                "source_node_texts": [
+                  "performer"
+                ],
+                "source_node_ids": [
+                  "7"
+                ]
+              },
+              {
+                "node_id": "b1_n3",
+                "label": "child",
+                "kind": "value_slot",
+                "semantic_type": "Person",
+                "source_path_id": "e1_p1",
+                "source_node_texts": [
+                  "child"
+                ],
+                "source_node_ids": [
+                  "4"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "edge_id": "b1_e1",
+                "source": "b1_n1",
+                "target": "b1_n2",
+                "relation": "performer of song",
+                "answer_type": "Person",
+                "is_one_hop": true,
+                "support": [
+                  {
+                    "path_set_id": "ps1",
+                    "path_id": "e1_p1",
+                    "node_texts": [
+                      "Me And Bobby Mcgee",
+                      "performer"
+                    ],
+                    "node_ids": [
+                      "11",
+                      "7"
+                    ],
+                    "reason": "This path segment supports asking for the performer of the song."
+                  }
+                ],
+                "atomic_question_template": "Who performed Me And Bobby Mcgee?"
+              },
+              {
+                "edge_id": "b1_e2",
+                "source": "b1_n2",
+                "target": "b1_n3",
+                "relation": "child of",
+                "answer_type": "Person",
+                "is_one_hop": true,
+                "support": [
+                  {
+                    "path_set_id": "ps1",
+                    "path_id": "e1_p1",
+                    "node_texts": [
+                      "performer",
+                      "child"
+                    ],
+                    "node_ids": [
+                      "7",
+                      "4"
+                    ],
+                    "reason": "The original question asks for the child of the performer."
+                  }
+                ],
+                "atomic_question_template": "Who is the child of b1_n2's answer?"
+              }
+            ],
+            "terminal_node_id": "b1_n3",
+            "score": 95.0,
+            "warnings": []
+          }
+        ],
+        "selected_path_set_ids": [
+          "ps1"
+        ],
+        "operator_intent": {
+          "type": "NONE",
+          "handled_downstream": true,
+          "surface_cues": []
+        },
+        "score": 95.0,
+        "score_breakdown": {
+          "question_intent_coverage": 25.0,
+          "grounding_fidelity": 25.0,
+          "one_hop_decomposability": 25.0,
+          "minimality": 15.0,
+          "branch_consistency": 10.0
+        },
+        "warnings": [],
+        "raw_payload": {
+          "semantic_reasoning_paths": [
+            {
+              "branch_id": "b1",
+              "entity_id": "e1",
+              "source_path_id": "e1_p1",
+              "nodes": [
+                {
+                  "node_id": "b1_n1",
+                  "label": "Me And Bobby Mcgee",
+                  "kind": "entity",
+                  "semantic_type": "Song",
+                  "source_path_id": "e1_p1",
+                  "source_node_texts": [
+                    "Me And Bobby Mcgee"
+                  ],
+                  "source_node_ids": [
+                    "11"
+                  ]
+                },
+                {
+                  "node_id": "b1_n2",
+                  "label": "performer",
+                  "kind": "semantic_object",
+                  "semantic_type": "Person",
+                  "source_path_id": "e1_p1",
+                  "source_node_texts": [
+                    "performer"
+                  ],
+                  "source_node_ids": [
+                    "7"
+                  ]
+                },
+                {
+                  "node_id": "b1_n3",
+                  "label": "child",
+                  "kind": "value_slot",
+                  "semantic_type": "Person",
+                  "source_path_id": "e1_p1",
+                  "source_node_texts": [
+                    "child"
+                  ],
+                  "source_node_ids": [
+                    "4"
+                  ]
+                }
+              ],
+              "edges": [
+                {
+                  "edge_id": "b1_e1",
+                  "source": "b1_n1",
+                  "target": "b1_n2",
+                  "relation": "performer of song",
+                  "answer_type": "Person",
+                  "is_one_hop": true,
+                  "support": [
+                    {
+                      "path_set_id": "ps1",
+                      "path_id": "e1_p1",
+                      "node_texts": [
+                        "Me And Bobby Mcgee",
+                        "performer"
+                      ],
+                      "node_ids": [
+                        "11",
+                        "7"
+                      ],
+                      "reason": "This path segment supports asking for the performer of the song."
+                    }
+                  ],
+                  "atomic_question_template": "Who performed Me And Bobby Mcgee?"
+                },
+                {
+                  "edge_id": "b1_e2",
+                  "source": "b1_n2",
+                  "target": "b1_n3",
+                  "relation": "child of",
+                  "answer_type": "Person",
+                  "is_one_hop": true,
+                  "support": [
+                    {
+                      "path_set_id": "ps1",
+                      "path_id": "e1_p1",
+                      "node_texts": [
+                        "performer",
+                        "child"
+                      ],
+                      "node_ids": [
+                        "7",
+                        "4"
+                      ],
+                      "reason": "The original question asks for the child of the performer."
+                    }
+                  ],
+                  "atomic_question_template": "Who is the child of b1_n2's answer?"
+                }
+              ],
+              "terminal_node_id": "b1_n3",
+              "score": 95,
+              "warnings": []
+            }
+          ],
+          "operator_intent": {
+            "type": "NONE",
+            "handled_downstream": true,
+            "surface_cues": []
+          },
+          "score": 95,
+          "score_breakdown": {
+            "question_intent_coverage": 25,
+            "grounding_fidelity": 25,
+            "one_hop_decomposability": 25,
+            "minimality": 15,
+            "branch_consistency": 10
+          },
+          "warnings": [],
+          "reason": "The semantic reasoning paths cover the required branch-level lookups.",
+          "selected_dependency_path_evidence": [
+            {
+              "path_set_id": "ps1",
+              "paths": [
+                {
+                  "entity_id": "e1",
+                  "entity_text": "Me And Bobby Mcgee",
+                  "path_id": "e1_p1",
+                  "path_text": "Me And Bobby Mcgee -> performer -> child -> Who",
+                  "node_texts": [
+                    "Me And Bobby Mcgee",
+                    "performer",
+                    "child",
+                    "Who"
+                  ],
+                  "node_ids": [
+                    "11",
+                    "7",
+                    "4",
+                    "1"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "10_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who performed Me And Bobby Mcgee?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "semantic_path_id": "b1",
+                "semantic_edge_id": "b1_e1"
+              }
+            ],
+            "operation": "lookup",
+            "one_hop_relation": "performer of song",
+            "answer_type": "Person",
+            "source_semantic_path_id": "b1",
+            "source_semantic_edge_id": "b1_e1",
+            "semantic_reasoning_path_source": true
+          },
+          "source": "grounded_atomic_dag"
+        },
+        {
+          "id": "q2",
+          "question": "Who is the child of the performer of Me And Bobby Mcgee?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "semantic_path_id": "b1",
+                "semantic_edge_id": "b1_e2"
+              }
+            ],
+            "operation": "lookup",
+            "one_hop_relation": "child of",
+            "answer_type": "Person",
+            "source_semantic_path_id": "b1",
+            "source_semantic_edge_id": "b1_e2",
+            "semantic_reasoning_path_source": true
+          },
+          "source": "grounded_atomic_dag"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "10_subquestions": [
+      {
+        "index": 1,
+        "question": "Who performed Me And Bobby Mcgee?",
+        "answer_variable": "X1",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      },
+      {
+        "index": 2,
+        "question": "Who is the child of the performer of Me And Bobby Mcgee?",
+        "answer_variable": "X2",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      }
+    ]
+  }
+}

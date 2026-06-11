@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -163,6 +164,43 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
             "the location of the EventA created?",
         )
 
+    def test_candidate_verification_handles_titles_apostrophe_and_non_ascii(self) -> None:
+        question = "Which film has the director who is older, God'S Gift To Women or Aldri Annet Enn Bråk?"
+        llm = CandidateSelectingLLM(
+            {
+                "God'S Gift To Women": "Film",
+                "Aldri Annet Enn Bråk": "Film",
+            }
+        )
+        result = ExplicitEntityExtractor(llm).extract(question)
+
+        self.assertIn("Deterministic entity candidates", llm.prompt)
+        self.assertIn("verified_entities", llm.prompt)
+        self.assertEqual(
+            [(entity.text, entity.semantic_type_hint) for entity in result.entities],
+            [("God'S Gift To Women", "Film"), ("Aldri Annet Enn Bråk", "Film")],
+        )
+        self.assertNotIn("God", [entity.text for entity in result.entities])
+        self.assertNotIn("Bråk", [entity.text for entity in result.entities])
+
+    def test_free_span_possessive_boundary_is_repaired(self) -> None:
+        question = "When did Lothair II's mother die?"
+        result = ExplicitEntityExtractor(
+            StaticEntityLLM(
+                [
+                    {
+                        "text": "Lothair II's",
+                        "start_char": question.index("Lothair"),
+                        "end_char": question.index("Lothair") + len("Lothair II's"),
+                        "semantic_type_hint": "Person",
+                        "confidence": 0.9,
+                    }
+                ]
+            )
+        ).extract(question)
+
+        self.assertEqual([entity.text for entity in result.entities], ["Lothair II"])
+
     def test_step6_does_not_redetect_extra_entities(self) -> None:
         replacement = _replacement_for_one_entity()
         graph = _graph_with_placeholders(["FilmA", "OtherNNP", "director"])
@@ -263,6 +301,41 @@ class StaticEntityLLM:
     def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
         del system_prompt, prompt
         return {self.field_name: self.entities}
+
+
+class CandidateSelectingLLM:
+    def __init__(self, selected_text_to_type: dict[str, str]) -> None:
+        self.selected_text_to_type = selected_text_to_type
+        self.prompt = ""
+
+    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
+        del system_prompt
+        self.prompt = prompt
+        marker = "Deterministic entity candidates:\n"
+        candidates_json = prompt.split(marker, 1)[1].split("\n\nCandidate-driven extraction mode:", 1)[0]
+        candidates = json.loads(candidates_json)
+        verified = []
+        for candidate in candidates:
+            text = candidate["text"]
+            if text not in self.selected_text_to_type:
+                verified.append(
+                    {
+                        "candidate_id": candidate["candidate_id"],
+                        "is_entity": False,
+                        "reason": "not selected by test",
+                    }
+                )
+                continue
+            verified.append(
+                {
+                    "candidate_id": candidate["candidate_id"],
+                    "is_entity": True,
+                    "semantic_type_hint": self.selected_text_to_type[text],
+                    "confidence": 0.98,
+                    "reason": "selected candidate",
+                }
+            )
+        return {"verified_entities": verified}
 
 
 def _entity(question: str, text: str, semantic_type: str) -> dict[str, Any]:

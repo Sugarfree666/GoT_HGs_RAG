@@ -23,7 +23,6 @@ from entity_path_projector import (  # noqa: E402
     extract_entity_start_nodes,
     parse_path_pruned_ast_payload,
     prune_terminal_glue_paths,
-    undirected_graph_edge_payloads,
     validate_selected_entity_paths,
 )
 from graph_builder import GraphBuilder  # noqa: E402
@@ -56,9 +55,9 @@ from prompts import (  # noqa: E402
     GROUNDED_ATOMIC_DAG_SYSTEM,
     PROBLEM_FRAME_SYSTEM,
     SEMANTIC_REASONING_PATH_SYSTEM,
+    build_atomic_dag_from_semantic_reasoning_path_prompt,
     build_grounded_atomic_dag_prompt,
 )
-from subquestion_generator import SubquestionGenerator  # noqa: E402
 
 
 class EntityOriginPipelineTest(unittest.TestCase):
@@ -87,78 +86,8 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual([entity.text for entity in starts], ["Young Man Luther"])
         self.assertIn(["Young Man Luther", "author", "spouse", "Who", "?"], [path.nodes for path in paths])
 
-        llm = FakeEntityPathLLM(
-            desired_paths={"e1": ["Young Man Luther", "author", "spouse", "Who", "?"]},
-            ast_payload={
-                "nodes": [
-                    {
-                        "id": "young_man_luther",
-                        "label": "Young Man Luther",
-                        "kind": "entity",
-                        "semantic_type": "Book",
-                        "source_path_ids": ["e1_p1"],
-                        "source_node_ids": ["9"],
-                    },
-                    {
-                        "id": "author",
-                        "label": "author",
-                        "kind": "type_variable",
-                        "semantic_type": "Role",
-                        "source_path_ids": ["e1_p1"],
-                        "source_node_ids": ["7"],
-                    },
-                    {
-                        "id": "spouse",
-                        "label": "spouse",
-                        "kind": "type_variable",
-                        "semantic_type": "Person",
-                        "source_path_ids": ["e1_p1"],
-                        "source_node_ids": ["4"],
-                    },
-                ],
-                "edges": [
-                    {
-                        "source": "young_man_luther",
-                        "target": "author",
-                        "relation": "author of Young Man Luther",
-                        "support_path_id": "e1_p1",
-                        "support_node_ids": ["9", "7"],
-                    },
-                    {
-                        "source": "author",
-                        "target": "spouse",
-                        "relation": "spouse of the author",
-                        "support_path_id": "e1_p1",
-                        "support_node_ids": ["7", "4"],
-                    },
-                ],
-                "branch_terminals": {"e1": "spouse"},
-            },
-        )
-        parser = EntityPathSemanticParser(llm)
-        selected, _ = parser.select_entity_paths(
-            original_question=question,
-            restored_question=question,
-            entity_start_nodes=starts,
-            entity_origin_paths=paths,
-        )
-        semantic_ast, _ = parser.build_path_pruned_ast(
-            original_question=question,
-            restored_question=question,
-            selected_entity_paths=selected,
-            entity_origin_paths=paths,
-            undirected_graph_edges=undirected_graph_edge_payloads(graph),
-        )
-
-        self.assertEqual(
-            [(edge.source, edge.target, edge.relation_hint) for edge in semantic_ast.edges],
-            [
-                ("young_man_luther", "author", "author of Young Man Luther"),
-                ("author", "spouse", "spouse of the author"),
-            ],
-        )
-        dag = SubquestionGenerator(llm).generate_dag(question, semantic_ast)
-        self.assertEqual(len(dag.nodes), 2)
+        useful_paths = [path for path in paths if path.nodes == ["Young Man Luther", "author", "spouse", "Who", "?"]]
+        self.assertEqual(len(useful_paths), 1)
 
     def test_entity_origin_paths_parallel_nationality(self) -> None:
         question = (
@@ -186,62 +115,8 @@ class EntityOriginPipelineTest(unittest.TestCase):
         paths = enumerate_entity_origin_paths(graph, starts)
         self.assertEqual([entity.text for entity in starts], ["Ten9Eight: Shoot For The Moon", "Sabotage (1936 Film)"])
 
-        llm = FakeEntityPathLLM(
-            desired_paths={
-                "e1": ["Ten9Eight: Shoot For The Moon", "director", "nationality"],
-                "e2": ["Sabotage (1936 Film)", "director", "nationality"],
-            },
-            ast_payload={
-                "nodes": [
-                    {"id": "ten9eight_shoot_for_the_moon", "label": "Ten9Eight: Shoot For The Moon", "kind": "entity", "semantic_type": "Film", "source_path_ids": ["e1_p1"], "source_node_ids": ["5"]},
-                    {"id": "director_r1", "label": "director", "kind": "type_variable", "semantic_type": "Person", "source_path_ids": ["e1_p1"], "source_node_ids": ["2"]},
-                    {"id": "nationality_r1", "label": "nationality", "kind": "type_variable", "semantic_type": "Nationality", "source_path_ids": ["e1_p1"], "source_node_ids": ["13"]},
-                    {"id": "sabotage_1936_film", "label": "Sabotage (1936 Film)", "kind": "entity", "semantic_type": "Film", "source_path_ids": ["e2_p1"], "source_node_ids": ["10"]},
-                    {"id": "director_r2", "label": "director", "kind": "type_variable", "semantic_type": "Person", "source_path_ids": ["e2_p1"], "source_node_ids": ["7"]},
-                    {"id": "nationality_r2", "label": "nationality", "kind": "type_variable", "semantic_type": "Nationality", "source_path_ids": ["e2_p1"], "source_node_ids": ["13"]},
-                ],
-                "edges": [
-                    {"source": "ten9eight_shoot_for_the_moon", "target": "director_r1", "relation": "director of Ten9Eight: Shoot For The Moon", "support_path_id": "e1_p1", "support_node_ids": ["5", "2"]},
-                    {"source": "director_r1", "target": "nationality_r1", "relation": "nationality of the director", "support_path_id": "e1_p1", "support_node_ids": ["2", "13"]},
-                    {"source": "sabotage_1936_film", "target": "director_r2", "relation": "director of Sabotage (1936 Film)", "support_path_id": "e2_p1", "support_node_ids": ["10", "7"]},
-                    {"source": "director_r2", "target": "nationality_r2", "relation": "nationality of the director", "support_path_id": "e2_p1", "support_node_ids": ["7", "13"]},
-                ],
-                "branch_terminals": {"e1": "nationality_r1", "e2": "nationality_r2"},
-            },
-        )
-        parser = EntityPathSemanticParser(llm)
-        selected, _ = parser.select_entity_paths(
-            original_question=question,
-            restored_question=question,
-            entity_start_nodes=starts,
-            entity_origin_paths=paths,
-        )
-        semantic_ast, _ = parser.build_path_pruned_ast(
-            original_question=question,
-            restored_question=question,
-            selected_entity_paths=selected,
-            entity_origin_paths=paths,
-            undirected_graph_edges=undirected_graph_edge_payloads(graph),
-        )
-
-        self.assertEqual(
-            [(edge.source, edge.target) for edge in semantic_ast.edges],
-            [
-                ("ten9eight_shoot_for_the_moon", "director_r1"),
-                ("director_r1", "nationality_r1"),
-                ("sabotage_1936_film", "director_r2"),
-                ("director_r2", "nationality_r2"),
-            ],
-        )
-        self.assertEqual(
-            [(edge.source, edge.target) for edge in semantic_ast.edges],
-            [
-                ("ten9eight_shoot_for_the_moon", "director_r1"),
-                ("director_r1", "nationality_r1"),
-                ("sabotage_1936_film", "director_r2"),
-                ("director_r2", "nationality_r2"),
-            ],
-        )
+        self.assertIn(["Ten9Eight: Shoot For The Moon", "director", "nationality"], [path.nodes for path in paths])
+        self.assertIn(["Sabotage (1936 Film)", "director", "nationality"], [path.nodes for path in paths])
 
     def test_common_answer_paths_do_not_pass_through_other_entity(self) -> None:
         dependency_parse = _dependency_parse(
@@ -545,6 +420,31 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertNotIn("Question intent metadata", prompt)
         self.assertNotIn("direct semantic decomposition draft", prompt)
 
+    def test_step10_prompt_only_contains_question_and_semantic_reasoning_paths(self) -> None:
+        semantic_payload = _semantic_two_edge_payload()
+        semantic_payload["raw_payload"] = {
+            "selected_dependency_path_evidence": _selected_dependency_path_evidence_for_two_edge_chain(),
+        }
+
+        prompt = build_atomic_dag_from_semantic_reasoning_path_prompt(
+            original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
+            semantic_reasoning_paths=semantic_payload,
+            validation_feedback="missing edge b1_e2",
+        )
+
+        self.assertIn("Which university did the CEO of the company that developed AlphaGo graduate from?", prompt)
+        self.assertIn("Semantic Reasoning Paths", prompt)
+        self.assertIn("missing edge b1_e2", prompt)
+        self.assertIn("developer company", prompt)
+        self.assertNotIn("Selected dependency path evidence", prompt)
+        self.assertNotIn("Dependency Path Evidence", prompt)
+        self.assertNotIn("selected_dependency_path_evidence", prompt)
+        self.assertNotIn("selected_path_set", prompt)
+        self.assertNotIn("path evidence", prompt.lower())
+        self.assertNotIn("AlphaGo -> developed -> company", prompt)
+        self.assertNotIn("path_set_id", prompt)
+        self.assertNotIn("e1_p1", prompt)
+
     def test_grounded_dag_requires_support(self) -> None:
         evidence = _selected_dependency_path_evidence_for_alphago()
         llm = SequenceGroundedAtomicLLM(
@@ -827,9 +727,8 @@ class EntityOriginPipelineTest(unittest.TestCase):
             semantic_reasoning_paths=semantic_payload,
         )
 
-        self.assertEqual(dag.nodes[1].question, "What region is immediately north of q1's answer?")
-        self.assertEqual(payload["dependency_variable_repairs"][0]["node_id"], "q2")
-        self.assertIn("q1's answer", payload["dependency_variable_repairs"][0]["after"])
+        self.assertEqual(dag.nodes[1].question, "What region is immediately north of the region where Israel is located?")
+        self.assertNotIn("dependency_variable_repairs", payload)
 
     def test_no_final_operator_question_in_prompt(self) -> None:
         prompt = build_grounded_atomic_dag_prompt(
@@ -887,8 +786,8 @@ class EntityOriginPipelineTest(unittest.TestCase):
             [node.question for node in result["subquestion_dag"].nodes],
             [
                 "Which company developed AlphaGo?",
-                "Who is the CEO of q1's answer?",
-                "Which university did q2's answer graduate from?",
+                "Who is the CEO of the company that developed AlphaGo?",
+                "Which university did the CEO of the company that developed AlphaGo graduate from?",
             ],
         )
         self.assertNotIn("problem_frame", result)
@@ -938,11 +837,12 @@ class EntityOriginPipelineTest(unittest.TestCase):
             [node.question for node in result["subquestion_dag"].nodes],
             [
                 "Which company developed AlphaGo?",
-                "Who is the CEO of q1's answer?",
-                "Which university did q2's answer graduate from?",
+                "Who is the CEO of the company that developed AlphaGo?",
+                "Which university did the CEO of the company that developed AlphaGo graduate from?",
             ],
         )
-        self.assertEqual(result["subquestion_dag"].nodes[0].metadata["support_path_ids"], ["e1_p1"])
+        self.assertEqual(result["subquestion_dag"].nodes[0].metadata["support"][0]["semantic_path_id"], "b1")
+        self.assertEqual(result["subquestion_dag"].nodes[0].metadata["support"][0]["semantic_edge_id"], "b1_e1")
         self.assertEqual(result["subquestion_dag"].nodes[0].metadata["source_semantic_edge_id"], "b1_e1")
 
         calls = llm.system_prompts
@@ -1026,6 +926,227 @@ class EntityOriginPipelineTest(unittest.TestCase):
                         semantic_reasoning_paths=semantic_payload,
                     )
 
+    def test_step10_atomic_nodes_can_use_semantic_edge_support_only(self) -> None:
+        evidence = _selected_dependency_path_evidence_for_two_edge_chain()
+        semantic_payload = _semantic_two_edge_payload()
+        atomic_payload = {
+            "nodes": [
+                {
+                    key: value
+                    for key, value in _atomic_node_for_edge("q1", "b1_e1").items()
+                    if key != "support"
+                },
+                {
+                    key: value
+                    for key, value in _atomic_node_for_edge("q2", "b1_e2", dependency="q1").items()
+                    if key != "support"
+                },
+            ]
+        }
+        parser = EntityPathSemanticParser(SemanticAtomicLLM(atomic_payload))
+
+        dag, _ = parser.build_grounded_atomic_dag(
+            original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
+            selected_dependency_path_evidence=evidence,
+            semantic_reasoning_paths=semantic_payload,
+        )
+
+        self.assertEqual([node.metadata["source_semantic_edge_id"] for node in dag.nodes], ["b1_e1", "b1_e2"])
+        self.assertEqual(
+            dag.nodes[0].metadata["support"],
+            [{"semantic_path_id": "b1", "semantic_edge_id": "b1_e1"}],
+        )
+
+    def test_lothair_step10_generates_self_contained_atomic_questions(self) -> None:
+        evidence = [
+            {
+                "path_set_id": "ps1",
+                "paths": [
+                    {
+                        "entity_id": "e1",
+                        "entity_text": "Lothair II",
+                        "path_id": "e1_p1",
+                        "path_text": "Lothair II -> mother -> die -> When",
+                        "node_texts": ["Lothair II", "mother", "die", "When"],
+                    }
+                ],
+            }
+        ]
+        semantic_payload = {
+            "semantic_reasoning_paths": [
+                {
+                    "branch_id": "b1",
+                    "entity_id": "e1",
+                    "source_path_id": "e1_p1",
+                    "nodes": [
+                        {"node_id": "b1_n1", "label": "Lothair II", "kind": "entity", "semantic_type": "Person"},
+                        {"node_id": "b1_n2", "label": "mother", "kind": "semantic_object", "semantic_type": "Person"},
+                        {"node_id": "b1_n3", "label": "death_date", "kind": "value_slot", "semantic_type": "Date"},
+                    ],
+                    "edges": [
+                        {
+                            "edge_id": "b1_e1",
+                            "source": "b1_n1",
+                            "target": "b1_n2",
+                            "relation": "mother of person",
+                            "answer_type": "Person",
+                            "is_one_hop": True,
+                            "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["Lothair II", "mother"]}],
+                        },
+                        {
+                            "edge_id": "b1_e2",
+                            "source": "b1_n2",
+                            "target": "b1_n3",
+                            "relation": "date of death of person",
+                            "answer_type": "Date",
+                            "is_one_hop": True,
+                            "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["mother", "die", "When"]}],
+                        },
+                    ],
+                }
+            ]
+        }
+        atomic_payload = {
+            "nodes": [
+                {
+                    "node_id": "q1",
+                    "question": "Who was the mother of Lothair II?",
+                    "operation": "lookup",
+                    "one_hop_relation": "mother of person",
+                    "answer_type": "Person",
+                    "dependencies": [],
+                    "source_semantic_path_id": "b1",
+                    "source_semantic_edge_id": "b1_e1",
+                },
+                {
+                    "node_id": "q2",
+                    "question": "When did Lothair II's mother die?",
+                    "operation": "lookup",
+                    "one_hop_relation": "date of death of person",
+                    "answer_type": "Date",
+                    "dependencies": ["q1"],
+                    "source_semantic_path_id": "b1",
+                    "source_semantic_edge_id": "b1_e2",
+                },
+            ]
+        }
+        parser = EntityPathSemanticParser(SemanticAtomicLLM(atomic_payload))
+
+        dag, _ = parser.build_grounded_atomic_dag(
+            original_question="When did Lothair II's mother die?",
+            selected_dependency_path_evidence=evidence,
+            semantic_reasoning_paths=semantic_payload,
+        )
+
+        self.assertEqual(
+            [node.question for node in dag.nodes],
+            ["Who was the mother of Lothair II?", "When did Lothair II's mother die?"],
+        )
+        forbidden_fragments = ("q1's answer", "previous answer", "answer to q1")
+        self.assertFalse(any(fragment in node.question for node in dag.nodes for fragment in forbidden_fragments))
+
+    def test_step10_rejects_variable_placeholder_questions(self) -> None:
+        evidence = _selected_dependency_path_evidence_for_two_edge_chain()
+        semantic_payload = _semantic_two_edge_payload()
+        atomic_payload = {
+            "nodes": [
+                _atomic_node_for_edge("q1", "b1_e1"),
+                {
+                    **_atomic_node_for_edge("q2", "b1_e2", dependency="q1"),
+                    "question": "Who is the CEO of q1's answer?",
+                },
+            ]
+        }
+        parser = EntityPathSemanticParser(SemanticAtomicLLM(atomic_payload))
+
+        with self.assertRaisesRegex(ValueError, "forbidden dependency placeholder"):
+            parser.build_grounded_atomic_dag(
+                original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
+                selected_dependency_path_evidence=evidence,
+                semantic_reasoning_paths=semantic_payload,
+            )
+
+    def test_semantic_reasoning_support_allows_induced_node_texts_not_in_dependency_path(self) -> None:
+        evidence = [
+            {
+                "path_set_id": "ps1",
+                "paths": [
+                    {
+                        "entity_id": "e1",
+                        "entity_text": "When The Stars Go Blue",
+                        "path_id": "e1_p4",
+                        "path_text": "When The Stars Go Blue -> nationality -> What",
+                        "node_texts": ["When The Stars Go Blue", "nationality", "What"],
+                    }
+                ],
+            }
+        ]
+        semantic_payload = {
+            "semantic_reasoning_paths": [
+                {
+                    "branch_id": "b1",
+                    "entity_id": "e1",
+                    "source_path_id": "e1_p4",
+                    "nodes": [
+                        {"node_id": "b1_n1", "label": "When The Stars Go Blue", "kind": "entity", "semantic_type": "Song"},
+                        {"node_id": "b1_n2", "label": "performer", "kind": "semantic_object", "semantic_type": "Person"},
+                        {"node_id": "b1_n3", "label": "nationality", "kind": "value_slot", "semantic_type": "Nationality"},
+                    ],
+                    "edges": [
+                        {
+                            "edge_id": "b1_e1",
+                            "source": "b1_n1",
+                            "target": "b1_n2",
+                            "relation": "performer of song",
+                            "answer_type": "Person",
+                            "is_one_hop": True,
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "e1_p4",
+                                    "node_texts": ["When The Stars Go Blue", "performer"],
+                                }
+                            ],
+                        },
+                        {
+                            "edge_id": "b1_e2",
+                            "source": "b1_n2",
+                            "target": "b1_n3",
+                            "relation": "nationality of person",
+                            "answer_type": "Nationality",
+                            "is_one_hop": True,
+                            "support": [
+                                {
+                                    "path_set_id": "ps1",
+                                    "path_id": "e1_p4",
+                                    "node_texts": ["performer", "nationality"],
+                                }
+                            ],
+                        },
+                    ],
+                    "terminal_node_id": "b1_n3",
+                }
+            ],
+            "operator_intent": {"type": "NONE", "handled_downstream": True},
+        }
+        parser = EntityPathSemanticParser(SemanticReasoningFlowLLM(
+            semantic_payload=semantic_payload,
+            atomic_payload={
+                "nodes": [
+                    _atomic_node_for_edge("q1", "b1_e1"),
+                    _atomic_node_for_edge("q2", "b1_e2", dependency="q1"),
+                ]
+            },
+        ))
+
+        result, _ = parser.build_semantic_reasoning_paths(
+            original_question="What nationality is the performer of song When The Stars Go Blue?",
+            restored_question="What nationality is the performer of song When The Stars Go Blue?",
+            selected_dependency_path_evidence=evidence,
+        )
+
+        self.assertEqual([edge.relation for edge in result.paths[0].edges], ["performer of song", "nationality of person"])
+
     def test_parallel_nationality_semantic_paths_compile_to_branch_lookup_dag(self) -> None:
         question = (
             "Do director of film Ten9Eight: Shoot For The Moon and director of film "
@@ -1053,9 +1174,9 @@ class EntityOriginPipelineTest(unittest.TestCase):
             [node.question for node in dag.nodes],
             [
                 "Who directed Ten9Eight: Shoot For The Moon?",
-                "What is q1's answer's nationality?",
+                "What is the nationality of the director of Ten9Eight: Shoot For The Moon?",
                 "Who directed Sabotage (1936 Film)?",
-                "What is q3's answer's nationality?",
+                "What is the nationality of the director of Sabotage (1936 Film)?",
             ],
         )
         self.assertEqual([node.depends_on for node in dag.nodes], [[], ["q1"], [], ["q3"]])
@@ -1110,142 +1231,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
         by_id = semantic_ast.node_by_id()
         self.assertEqual(by_id["age_r1"].source_graph_nodes, ["3"])
         self.assertEqual(by_id["age_r2"].source_graph_nodes, ["6"])
-
-    def test_selected_path_semantic_transduction_accepts_llm_ast_without_validator(self) -> None:
-        selected_paths = [
-            EntityOriginPath(
-                path_id="e1_p1",
-                entity_id="e1",
-                entity_text="Lothair II's",
-                nodes=["Lothair II's", "mother", "die", "When"],
-                node_ids=["1", "2", "3", "4"],
-                length=4,
-            )
-        ]
-        selected = [SelectedEntityPath(entity_id="e1", path_id="e1_p1")]
-        llm = FakeEntityPathLLM(
-            desired_paths={"e1": ["Lothair II's", "mother", "die", "When"]},
-            ast_payload={
-                "nodes": [
-                    {"id": "lothair_ii_mother", "label": "Lothair II's mother", "kind": "entity", "source_path_ids": ["e1_p1"], "source_node_ids": ["1", "2"]},
-                    {"id": "die", "label": "die", "kind": "type_variable", "source_path_ids": ["e1_p1"], "source_node_ids": ["3"]},
-                    {"id": "when", "label": "When", "kind": "type_variable", "source_path_ids": ["e1_p1"], "source_node_ids": ["4"]},
-                ],
-                "edges": [
-                    {"source": "lothair_ii_mother", "target": "die", "relation": "subject of die", "support_path_id": "e1_p1", "support_node_ids": ["1", "2", "3"]},
-                    {"source": "when", "target": "die", "relation": "time of die", "support_path_id": "e1_p1", "support_node_ids": ["4", "3"]},
-                ],
-                "branch_terminals": {"e1": "when"},
-            },
-        )
-        parser = EntityPathSemanticParser(llm)
-
-        semantic_ast, _ = parser.build_selected_path_semantic_ast(
-            original_question="When did Lothair II's mother die?",
-            restored_question="When did Lothair II's mother die?",
-            selected_entity_paths=selected,
-            entity_origin_paths=selected_paths,
-            undirected_graph_edges=[],
-        )
-
-        self.assertEqual(
-            [(edge.source, edge.target, edge.relation_hint) for edge in semantic_ast.edges],
-            [
-                ("lothair_ii_mother", "die", "subject of die"),
-                ("when", "die", "time of die"),
-            ],
-        )
-
-    def test_merged_parallel_ast_is_localized_per_selected_path(self) -> None:
-        selected_paths = [
-            EntityOriginPath(
-                path_id="e1_p1",
-                entity_id="e1",
-                entity_text="Edward Carfagno",
-                nodes=["Edward Carfagno", "Miklos Rozsa", "worked", "screenplay", "What"],
-                node_ids=["8", "10", "4", "2", "1"],
-                length=5,
-            ),
-            EntityOriginPath(
-                path_id="e2_p1",
-                entity_id="e2",
-                entity_text="Miklos Rozsa",
-                nodes=["Miklos Rozsa", "Edward Carfagno", "worked", "screenplay", "What"],
-                node_ids=["10", "8", "4", "2", "1"],
-                length=5,
-            ),
-        ]
-        ast_payload = {
-            "nodes": [
-                {"id": "edward_carfagno", "label": "Edward Carfagno", "kind": "entity", "source_path_ids": ["e1_p1"], "source_node_ids": ["8"]},
-                {"id": "miklos_rozsa", "label": "Miklos Rozsa", "kind": "entity", "source_path_ids": ["e2_p1"], "source_node_ids": ["10"]},
-                {"id": "screenplay", "label": "screenplay", "kind": "type_variable", "source_path_ids": ["e1_p1", "e2_p1"], "source_node_ids": ["2"]},
-            ],
-            "edges": [
-                {"source": "edward_carfagno", "target": "screenplay", "relation": "screenplay worked on by Edward Carfagno", "support_path_id": "e1_p1", "support_node_ids": ["8", "4", "2"]},
-                {"source": "miklos_rozsa", "target": "screenplay", "relation": "screenplay worked on by Miklos Rozsa", "support_path_id": "e2_p1", "support_node_ids": ["10", "4", "2"]},
-            ],
-            "branch_terminals": {"e1": "screenplay", "e2": "screenplay"},
-        }
-        llm = FakeEntityPathLLM(
-            desired_paths={
-                "e1": ["Edward Carfagno", "Miklos Rozsa", "worked", "screenplay", "What"],
-                "e2": ["Miklos Rozsa", "Edward Carfagno", "worked", "screenplay", "What"],
-            },
-            ast_payload=ast_payload,
-        )
-        parser = EntityPathSemanticParser(llm)
-        selected = [
-            SelectedEntityPath(entity_id="e1", path_id="e1_p1"),
-            SelectedEntityPath(entity_id="e2", path_id="e2_p1"),
-        ]
-        semantic_ast, _ = parser.build_path_pruned_ast(
-            original_question="What screenplay was worked on by both Edward Carfagno and Miklos Rozsa?",
-            restored_question="What screenplay was worked on by both Edward Carfagno and Miklos Rozsa?",
-            selected_entity_paths=selected,
-            entity_origin_paths=selected_paths,
-            undirected_graph_edges=[],
-        )
-        self.assertEqual(
-            [(edge.source, edge.target) for edge in semantic_ast.edges],
-            [
-                ("edward_carfagno", "screenplay_e1"),
-                ("miklos_rozsa", "screenplay_e2"),
-            ],
-        )
-
-
-class FakeEntityPathLLM:
-    def __init__(self, desired_paths: dict[str, list[str]], ast_payload: dict[str, Any]) -> None:
-        self.desired_paths = desired_paths
-        self.ast_payload = ast_payload
-
-    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
-        if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
-            raise AssertionError("legacy candidate-node/problem-frame prompt was called")
-        if "entity-origin dependency-path pipeline" in system_prompt:
-            paths_by_entity = _json_after_marker(prompt, "Entity-origin dependency paths:")
-            selected = []
-            for entity_id, desired_nodes in self.desired_paths.items():
-                path_id = next(
-                    path["path_id"]
-                    for path in paths_by_entity[entity_id]
-                    if path["nodes"] == desired_nodes
-                )
-                selected.append({"entity_id": entity_id, "path_id": path_id, "reason": "test path"})
-            return {"selected_paths": selected}
-        if "Selected Path Semantic Transduction" in system_prompt or "entity-origin path-to-AST" in system_prompt:
-            ast_payload = json.loads(json.dumps(self.ast_payload))
-            selected_paths = _json_after_marker(prompt, "Selected entity-origin dependency paths:")
-            by_entity = {path["entity_id"]: path["path_id"] for path in selected_paths}
-            for node in ast_payload.get("nodes", []):
-                node["source_path_ids"] = [by_entity.get(path_id.split("_", 1)[0], path_id) for path_id in node.get("source_path_ids", [])]
-            for edge in ast_payload.get("edges", []):
-                support_path_id = edge.get("support_path_id", "")
-                edge["support_path_id"] = by_entity.get(support_path_id.split("_", 1)[0], support_path_id)
-            return ast_payload
-        raise AssertionError(f"Unexpected prompt: {system_prompt}")
-
 
 class CandidateFlowLLM:
     def __init__(
@@ -1527,8 +1512,8 @@ def _semantic_two_edge_payload() -> dict[str, Any]:
 def _atomic_node_for_edge(node_id: str, edge_id: str, dependency: str | None = None) -> dict[str, Any]:
     dependencies = [dependency] if dependency else []
     if dependency:
-        question = f"What is {dependency}'s answer related to?"
-        raw_input = {"type": "previous_answer", "ref": dependency}
+        question = "What is the next fact in the AlphaGo semantic chain?"
+        raw_input = {"type": "semantic_context", "text": "AlphaGo semantic chain"}
     else:
         question = "Which company developed AlphaGo?"
         raw_input = {"type": "entity", "text": "AlphaGo"}
@@ -1672,9 +1657,9 @@ def _atomic_parallel_nationality_payload() -> dict[str, Any]:
             },
             {
                 "node_id": "q2",
-                "question": "What is q1's answer's nationality?",
+                "question": "What is the nationality of the director of Ten9Eight: Shoot For The Moon?",
                 "operation": "lookup",
-                "input": {"type": "previous_answer", "ref": "q1"},
+                "input": {"type": "semantic_context", "text": "director of Ten9Eight: Shoot For The Moon"},
                 "one_hop_relation": "nationality of person",
                 "answer_type": "Nationality",
                 "dependencies": ["q1"],
@@ -1696,9 +1681,9 @@ def _atomic_parallel_nationality_payload() -> dict[str, Any]:
             },
             {
                 "node_id": "q4",
-                "question": "What is q3's answer's nationality?",
+                "question": "What is the nationality of the director of Sabotage (1936 Film)?",
                 "operation": "lookup",
-                "input": {"type": "previous_answer", "ref": "q3"},
+                "input": {"type": "semantic_context", "text": "director of Sabotage (1936 Film)"},
                 "one_hop_relation": "nationality of person",
                 "answer_type": "Nationality",
                 "dependencies": ["q3"],
@@ -1876,9 +1861,9 @@ def _atomic_alphago_from_semantic_payload() -> dict[str, Any]:
             },
             {
                 "node_id": "q2",
-                "question": "Who is the CEO of q1's answer?",
+                "question": "Who is the CEO of the company that developed AlphaGo?",
                 "operation": "lookup",
-                "input": {"type": "previous_answer", "ref": "q1"},
+                "input": {"type": "semantic_context", "text": "company that developed AlphaGo"},
                 "one_hop_relation": "CEO of company",
                 "answer_type": "Person",
                 "dependencies": ["q1"],
@@ -1895,9 +1880,9 @@ def _atomic_alphago_from_semantic_payload() -> dict[str, Any]:
             },
             {
                 "node_id": "q3",
-                "question": "Which university did q2's answer graduate from?",
+                "question": "Which university did the CEO of the company that developed AlphaGo graduate from?",
                 "operation": "lookup",
-                "input": {"type": "previous_answer", "ref": "q2"},
+                "input": {"type": "semantic_context", "text": "CEO of the company that developed AlphaGo"},
                 "one_hop_relation": "university graduated from",
                 "answer_type": "University",
                 "dependencies": ["q2"],

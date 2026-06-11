@@ -437,7 +437,7 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     _print_semantic_reasoning_paths(semantic_reasoning_paths)
     print()
 
-    print("[10. Atomic DAG Compilation from Semantic Reasoning Path]")
+    print("[10. Semantic-Path-Guided Atomic DAG Generation]")
     print("Output:")
     _print_grounded_atomic_dag_payload(grounded_atomic_dag_payload)
     print()
@@ -677,20 +677,16 @@ def _print_grounded_atomic_dag_payload(payload: dict[str, Any]) -> None:
             if not isinstance(node, dict):
                 continue
             dependencies = node.get("dependencies") or []
-            support = node.get("support") or []
             semantic_edge_id = node.get("source_semantic_edge_id")
             semantic_path_id = node.get("source_semantic_path_id")
             relation = node.get("one_hop_relation")
-            support_ids = []
-            if isinstance(support, list):
-                support_ids = [str(item.get("path_id")) for item in support if isinstance(item, dict) and item.get("path_id")]
             semantic = ""
             if semantic_path_id or semantic_edge_id:
                 semantic = f" source={semantic_path_id or '?'}:{semantic_edge_id or '?'}"
             relation_text = f" relation={relation}" if relation else ""
             print(
                 f"    - {node.get('node_id')}: depends_on={dependencies or 'none'} "
-                f"support={support_ids or 'none'}{semantic}{relation_text}"
+                f"{semantic}{relation_text}"
             )
             print(f"      {node.get('question')}")
     warnings = payload.get("normalization_warnings") or []
@@ -713,6 +709,15 @@ def _print_atomic_question_dag(dag: AtomicQuestionDAG) -> None:
         support_ids = node.metadata.get("support_path_ids") if isinstance(node.metadata, dict) else None
         if support_ids:
             print(f"    support_path_ids={support_ids}")
+        if isinstance(node.metadata, dict):
+            semantic_path_id = node.metadata.get("source_semantic_path_id")
+            semantic_edge_id = node.metadata.get("source_semantic_edge_id")
+            relation = node.metadata.get("one_hop_relation")
+            if semantic_path_id or semantic_edge_id or relation:
+                print(
+                    f"    source_semantic={semantic_path_id or '?'}:{semantic_edge_id or '?'}"
+                    f" relation={relation or ''}"
+                )
 
     print("Edges:")
     if dag.edges:

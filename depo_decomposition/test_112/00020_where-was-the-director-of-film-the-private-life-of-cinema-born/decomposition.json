@@ -1,0 +1,1919 @@
+{
+  "status": "ok",
+  "dataset": "2wikimultihopqa",
+  "questions_file": "questions\\2wikimultihopqa\\questions.json",
+  "index": 20,
+  "qid": null,
+  "question": "Where was the director of film The Private Life Of Cinema born?",
+  "raw_question_item": {
+    "question": "Where was the director of film The Private Life Of Cinema born?",
+    "answer": "Montreal, Quebec"
+  },
+  "gold_answer": "Montreal, Quebec",
+  "stages": {
+    "1_semantic_normalized_question": {
+      "original_question": "Where was the director of film The Private Life Of Cinema born?",
+      "normalized_question": "Where was the director of the film The Private Life Of Cinema born?",
+      "changed": true,
+      "added_type_variables": [],
+      "warnings": [],
+      "raw_payload": {
+        "normalized_question": "Where was the director of the film The Private Life Of Cinema born?",
+        "changed": true,
+        "rewrite_type": "grammar_repair",
+        "added_type_variables": [],
+        "reason": "Added 'the' for grammatical correctness."
+      }
+    },
+    "2_explicit_entities": {
+      "entities": [
+        {
+          "text": "The Private Life Of Cinema",
+          "start_char": 35,
+          "end_char": 61,
+          "semantic_type_hint": "Film",
+          "confidence": 0.95,
+          "reason": "full title of the film mentioned in the question"
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "verified_entities": [
+          {
+            "candidate_id": "c1",
+            "is_entity": true,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "full title of the film mentioned in the question"
+          }
+        ],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "The Private Life Of Cinema",
+            "start_char": 35,
+            "end_char": 61,
+            "semantic_type_hint": "Film",
+            "reason": "complex title after explicit type head"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Private",
+            "start_char": 39,
+            "end_char": 46,
+            "semantic_type_hint": "Film",
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Life",
+            "start_char": 47,
+            "end_char": 51,
+            "semantic_type_hint": "Film",
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Cinema",
+            "start_char": 55,
+            "end_char": 61,
+            "semantic_type_hint": "Film",
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      }
+    },
+    "2_mask_spans": {
+      "mask_spans": [
+        {
+          "text": "The Private Life Of Cinema",
+          "start_char": 35,
+          "end_char": 61,
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "reason": "full title of the film mentioned in the question"
+        }
+      ],
+      "warnings": [],
+      "raw_payload": {
+        "verified_entities": [
+          {
+            "candidate_id": "c1",
+            "is_entity": true,
+            "semantic_type_hint": "Film",
+            "confidence": 0.95,
+            "reason": "full title of the film mentioned in the question"
+          }
+        ],
+        "deterministic_candidates": [
+          {
+            "candidate_id": "c1",
+            "text": "The Private Life Of Cinema",
+            "start_char": 35,
+            "end_char": 61,
+            "semantic_type_hint": "Film",
+            "reason": "complex title after explicit type head"
+          },
+          {
+            "candidate_id": "c2",
+            "text": "Private",
+            "start_char": 39,
+            "end_char": 46,
+            "semantic_type_hint": "Film",
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c3",
+            "text": "Life",
+            "start_char": 47,
+            "end_char": 51,
+            "semantic_type_hint": "Film",
+            "reason": "single-token proper-name candidate"
+          },
+          {
+            "candidate_id": "c4",
+            "text": "Cinema",
+            "start_char": 55,
+            "end_char": 61,
+            "semantic_type_hint": "Film",
+            "reason": "single-token proper-name candidate"
+          }
+        ]
+      }
+    },
+    "3_entity_masking": {
+      "masked_question": "Where was the director of the film FilmA born?",
+      "mask_mappings": [
+        {
+          "placeholder": "FilmA",
+          "original_text": "The Private Life Of Cinema",
+          "kind_hint": "entity",
+          "semantic_type_hint": "Film",
+          "original_char_span": [
+            35,
+            61
+          ],
+          "masked_char_span": [
+            35,
+            40
+          ],
+          "token_indices": []
+        }
+      ]
+    },
+    "3_selective_masked_question": "Where was the director of the film FilmA born?",
+    "4_corenlp_dependency_parse": {
+      "tokens": [
+        {
+          "index": 1,
+          "word": "Where",
+          "character_offset_begin": 0,
+          "character_offset_end": 5,
+          "lemma": "where",
+          "pos": "WRB"
+        },
+        {
+          "index": 2,
+          "word": "was",
+          "character_offset_begin": 6,
+          "character_offset_end": 9,
+          "lemma": "be",
+          "pos": "VBD"
+        },
+        {
+          "index": 3,
+          "word": "the",
+          "character_offset_begin": 10,
+          "character_offset_end": 13,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 4,
+          "word": "director",
+          "character_offset_begin": 14,
+          "character_offset_end": 22,
+          "lemma": "director",
+          "pos": "NN"
+        },
+        {
+          "index": 5,
+          "word": "of",
+          "character_offset_begin": 23,
+          "character_offset_end": 25,
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "index": 6,
+          "word": "the",
+          "character_offset_begin": 26,
+          "character_offset_end": 29,
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "index": 7,
+          "word": "film",
+          "character_offset_begin": 30,
+          "character_offset_end": 34,
+          "lemma": "film",
+          "pos": "NN"
+        },
+        {
+          "index": 8,
+          "word": "FilmA",
+          "character_offset_begin": 35,
+          "character_offset_end": 40,
+          "lemma": "filma",
+          "pos": "NN"
+        },
+        {
+          "index": 9,
+          "word": "born",
+          "character_offset_begin": 41,
+          "character_offset_end": 45,
+          "lemma": "bear",
+          "pos": "VBN"
+        },
+        {
+          "index": 10,
+          "word": "?",
+          "character_offset_begin": 45,
+          "character_offset_end": 46,
+          "lemma": "?",
+          "pos": "."
+        }
+      ],
+      "edges": [
+        {
+          "source": "was",
+          "relation": "advmod",
+          "target": "Where",
+          "source_index": 2,
+          "target_index": 1
+        },
+        {
+          "source": "born",
+          "relation": "aux:pass",
+          "target": "was",
+          "source_index": 9,
+          "target_index": 2
+        },
+        {
+          "source": "director",
+          "relation": "det",
+          "target": "the",
+          "source_index": 4,
+          "target_index": 3
+        },
+        {
+          "source": "born",
+          "relation": "nsubj:pass",
+          "target": "director",
+          "source_index": 9,
+          "target_index": 4
+        },
+        {
+          "source": "FilmA",
+          "relation": "case",
+          "target": "of",
+          "source_index": 8,
+          "target_index": 5
+        },
+        {
+          "source": "FilmA",
+          "relation": "det",
+          "target": "the",
+          "source_index": 8,
+          "target_index": 6
+        },
+        {
+          "source": "FilmA",
+          "relation": "compound",
+          "target": "film",
+          "source_index": 8,
+          "target_index": 7
+        },
+        {
+          "source": "director",
+          "relation": "nmod:of",
+          "target": "FilmA",
+          "source_index": 4,
+          "target_index": 8
+        },
+        {
+          "source": "born",
+          "relation": "punct",
+          "target": "?",
+          "source_index": 9,
+          "target_index": 10
+        }
+      ],
+      "edge_display": [
+        "was[2] --advmod--> Where[1]",
+        "born[9] --aux:pass--> was[2]",
+        "director[4] --det--> the[3]",
+        "born[9] --nsubj:pass--> director[4]",
+        "FilmA[8] --case--> of[5]",
+        "FilmA[8] --det--> the[6]",
+        "FilmA[8] --compound--> film[7]",
+        "director[4] --nmod:of--> FilmA[8]",
+        "born[9] --punct--> ?[10]"
+      ]
+    },
+    "5_undirected_dependency_graph": {
+      "nodes": [
+        {
+          "id": "1",
+          "token_index": 1,
+          "word": "Where",
+          "graph_text": "Where",
+          "text": "Where",
+          "label": "Where[1]",
+          "order": 1,
+          "pos": "WRB",
+          "lemma": "where",
+          "character_offset_begin": 0,
+          "character_offset_end": 5
+        },
+        {
+          "id": "2",
+          "token_index": 2,
+          "word": "was",
+          "graph_text": "was",
+          "text": "was",
+          "label": "was[2]",
+          "order": 2,
+          "pos": "VBD",
+          "lemma": "be",
+          "character_offset_begin": 6,
+          "character_offset_end": 9
+        },
+        {
+          "id": "3",
+          "token_index": 3,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[3]",
+          "order": 3,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 10,
+          "character_offset_end": 13
+        },
+        {
+          "id": "4",
+          "token_index": 4,
+          "word": "director",
+          "graph_text": "director",
+          "text": "director",
+          "label": "director[4]",
+          "order": 4,
+          "pos": "NN",
+          "lemma": "director",
+          "character_offset_begin": 14,
+          "character_offset_end": 22
+        },
+        {
+          "id": "5",
+          "token_index": 5,
+          "word": "of",
+          "graph_text": "of",
+          "text": "of",
+          "label": "of[5]",
+          "order": 5,
+          "pos": "IN",
+          "lemma": "of",
+          "character_offset_begin": 23,
+          "character_offset_end": 25
+        },
+        {
+          "id": "6",
+          "token_index": 6,
+          "word": "the",
+          "graph_text": "the",
+          "text": "the",
+          "label": "the[6]",
+          "order": 6,
+          "pos": "DT",
+          "lemma": "the",
+          "character_offset_begin": 26,
+          "character_offset_end": 29
+        },
+        {
+          "id": "7",
+          "token_index": 7,
+          "word": "film",
+          "graph_text": "film",
+          "text": "film",
+          "label": "film[7]",
+          "order": 7,
+          "pos": "NN",
+          "lemma": "film",
+          "character_offset_begin": 30,
+          "character_offset_end": 34
+        },
+        {
+          "id": "8",
+          "token_index": 8,
+          "word": "FilmA",
+          "graph_text": "FilmA",
+          "text": "The Private Life Of Cinema",
+          "label": "The Private Life Of Cinema[8]",
+          "order": 8,
+          "pos": "NN",
+          "lemma": "filma",
+          "character_offset_begin": 35,
+          "character_offset_end": 40
+        },
+        {
+          "id": "9",
+          "token_index": 9,
+          "word": "born",
+          "graph_text": "born",
+          "text": "born",
+          "label": "born[9]",
+          "order": 9,
+          "pos": "VBN",
+          "lemma": "bear",
+          "character_offset_begin": 41,
+          "character_offset_end": 45
+        },
+        {
+          "id": "10",
+          "token_index": 10,
+          "word": "?",
+          "graph_text": "?",
+          "text": "?",
+          "label": "?[10]",
+          "order": 10,
+          "pos": ".",
+          "lemma": "?",
+          "character_offset_begin": 45,
+          "character_offset_end": 46
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "target": "2",
+          "source_text": "Where",
+          "target_text": "was",
+          "relation": "advmod",
+          "relations": [
+            "advmod"
+          ],
+          "directed_edges": [
+            {
+              "governor": "2",
+              "dependent": "1",
+              "governor_text": "was",
+              "dependent_text": "Where",
+              "governor_graph_text": "was",
+              "dependent_graph_text": "Where",
+              "governor_index": 2,
+              "dependent_index": 1,
+              "dependency_label": "advmod"
+            }
+          ],
+          "original_governor": "2",
+          "original_dependent": "1",
+          "dependency_label": "advmod",
+          "token_text": {
+            "2": "was",
+            "1": "Where"
+          },
+          "token_index": {
+            "2": 2,
+            "1": 1
+          }
+        },
+        {
+          "source": "2",
+          "target": "9",
+          "source_text": "was",
+          "target_text": "born",
+          "relation": "aux:pass",
+          "relations": [
+            "aux:pass"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "2",
+              "governor_text": "born",
+              "dependent_text": "was",
+              "governor_graph_text": "born",
+              "dependent_graph_text": "was",
+              "governor_index": 9,
+              "dependent_index": 2,
+              "dependency_label": "aux:pass"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "2",
+          "dependency_label": "aux:pass",
+          "token_text": {
+            "9": "born",
+            "2": "was"
+          },
+          "token_index": {
+            "9": 9,
+            "2": 2
+          }
+        },
+        {
+          "source": "3",
+          "target": "4",
+          "source_text": "the",
+          "target_text": "director",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "3",
+              "governor_text": "director",
+              "dependent_text": "the",
+              "governor_graph_text": "director",
+              "dependent_graph_text": "the",
+              "governor_index": 4,
+              "dependent_index": 3,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "3",
+          "dependency_label": "det",
+          "token_text": {
+            "4": "director",
+            "3": "the"
+          },
+          "token_index": {
+            "4": 4,
+            "3": 3
+          }
+        },
+        {
+          "source": "4",
+          "target": "9",
+          "source_text": "director",
+          "target_text": "born",
+          "relation": "nsubj:pass",
+          "relations": [
+            "nsubj:pass"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "4",
+              "governor_text": "born",
+              "dependent_text": "director",
+              "governor_graph_text": "born",
+              "dependent_graph_text": "director",
+              "governor_index": 9,
+              "dependent_index": 4,
+              "dependency_label": "nsubj:pass"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "4",
+          "dependency_label": "nsubj:pass",
+          "token_text": {
+            "9": "born",
+            "4": "director"
+          },
+          "token_index": {
+            "9": 9,
+            "4": 4
+          }
+        },
+        {
+          "source": "4",
+          "target": "8",
+          "source_text": "director",
+          "target_text": "The Private Life Of Cinema",
+          "relation": "nmod:of",
+          "relations": [
+            "nmod:of"
+          ],
+          "directed_edges": [
+            {
+              "governor": "4",
+              "dependent": "8",
+              "governor_text": "director",
+              "dependent_text": "The Private Life Of Cinema",
+              "governor_graph_text": "director",
+              "dependent_graph_text": "FilmA",
+              "governor_index": 4,
+              "dependent_index": 8,
+              "dependency_label": "nmod:of"
+            }
+          ],
+          "original_governor": "4",
+          "original_dependent": "8",
+          "dependency_label": "nmod:of",
+          "token_text": {
+            "4": "director",
+            "8": "The Private Life Of Cinema"
+          },
+          "token_index": {
+            "4": 4,
+            "8": 8
+          }
+        },
+        {
+          "source": "5",
+          "target": "8",
+          "source_text": "of",
+          "target_text": "The Private Life Of Cinema",
+          "relation": "case",
+          "relations": [
+            "case"
+          ],
+          "directed_edges": [
+            {
+              "governor": "8",
+              "dependent": "5",
+              "governor_text": "The Private Life Of Cinema",
+              "dependent_text": "of",
+              "governor_graph_text": "FilmA",
+              "dependent_graph_text": "of",
+              "governor_index": 8,
+              "dependent_index": 5,
+              "dependency_label": "case"
+            }
+          ],
+          "original_governor": "8",
+          "original_dependent": "5",
+          "dependency_label": "case",
+          "token_text": {
+            "8": "The Private Life Of Cinema",
+            "5": "of"
+          },
+          "token_index": {
+            "8": 8,
+            "5": 5
+          }
+        },
+        {
+          "source": "6",
+          "target": "8",
+          "source_text": "the",
+          "target_text": "The Private Life Of Cinema",
+          "relation": "det",
+          "relations": [
+            "det"
+          ],
+          "directed_edges": [
+            {
+              "governor": "8",
+              "dependent": "6",
+              "governor_text": "The Private Life Of Cinema",
+              "dependent_text": "the",
+              "governor_graph_text": "FilmA",
+              "dependent_graph_text": "the",
+              "governor_index": 8,
+              "dependent_index": 6,
+              "dependency_label": "det"
+            }
+          ],
+          "original_governor": "8",
+          "original_dependent": "6",
+          "dependency_label": "det",
+          "token_text": {
+            "8": "The Private Life Of Cinema",
+            "6": "the"
+          },
+          "token_index": {
+            "8": 8,
+            "6": 6
+          }
+        },
+        {
+          "source": "7",
+          "target": "8",
+          "source_text": "film",
+          "target_text": "The Private Life Of Cinema",
+          "relation": "compound",
+          "relations": [
+            "compound"
+          ],
+          "directed_edges": [
+            {
+              "governor": "8",
+              "dependent": "7",
+              "governor_text": "The Private Life Of Cinema",
+              "dependent_text": "film",
+              "governor_graph_text": "FilmA",
+              "dependent_graph_text": "film",
+              "governor_index": 8,
+              "dependent_index": 7,
+              "dependency_label": "compound"
+            }
+          ],
+          "original_governor": "8",
+          "original_dependent": "7",
+          "dependency_label": "compound",
+          "token_text": {
+            "8": "The Private Life Of Cinema",
+            "7": "film"
+          },
+          "token_index": {
+            "8": 8,
+            "7": 7
+          }
+        },
+        {
+          "source": "9",
+          "target": "10",
+          "source_text": "born",
+          "target_text": "?",
+          "relation": "punct",
+          "relations": [
+            "punct"
+          ],
+          "directed_edges": [
+            {
+              "governor": "9",
+              "dependent": "10",
+              "governor_text": "born",
+              "dependent_text": "?",
+              "governor_graph_text": "born",
+              "dependent_graph_text": "?",
+              "governor_index": 9,
+              "dependent_index": 10,
+              "dependency_label": "punct"
+            }
+          ],
+          "original_governor": "9",
+          "original_dependent": "10",
+          "dependency_label": "punct",
+          "token_text": {
+            "9": "born",
+            "10": "?"
+          },
+          "token_index": {
+            "9": 9,
+            "10": 10
+          }
+        }
+      ]
+    },
+    "6_entity_start_nodes": [
+      {
+        "entity_id": "e1",
+        "text": "The Private Life Of Cinema",
+        "graph_node_ids": [
+          "8"
+        ],
+        "token_ids": [
+          8
+        ],
+        "kind_hint": "entity",
+        "semantic_type_hint": "Film"
+      }
+    ],
+    "7_entity_origin_paths": [
+      {
+        "path_id": "e1_p1",
+        "entity_id": "e1",
+        "entity_text": "The Private Life Of Cinema",
+        "nodes": [
+          "The Private Life Of Cinema",
+          "director",
+          "born",
+          "was",
+          "Where"
+        ],
+        "node_ids": [
+          "8",
+          "4",
+          "9",
+          "2",
+          "1"
+        ],
+        "length": 5,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "4",
+            "source_text": "The Private Life Of Cinema",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "8",
+                "governor_text": "director",
+                "dependent_text": "The Private Life Of Cinema",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "9",
+            "source_text": "director",
+            "target_text": "born",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "4",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 9,
+                "dependent_index": 4,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "was",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "2",
+                "governor_text": "born",
+                "dependent_text": "was",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "was",
+                "governor_index": 9,
+                "dependent_index": 2,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          },
+          {
+            "source": "2",
+            "target": "1",
+            "source_text": "was",
+            "target_text": "Where",
+            "relations": [
+              "advmod"
+            ],
+            "directed_edges": [
+              {
+                "governor": "2",
+                "dependent": "1",
+                "governor_text": "was",
+                "dependent_text": "Where",
+                "governor_graph_text": "was",
+                "dependent_graph_text": "Where",
+                "governor_index": 2,
+                "dependent_index": 1,
+                "dependency_label": "advmod"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p2",
+        "entity_id": "e1",
+        "entity_text": "The Private Life Of Cinema",
+        "nodes": [
+          "The Private Life Of Cinema",
+          "director",
+          "born"
+        ],
+        "node_ids": [
+          "8",
+          "4",
+          "9"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "4",
+            "source_text": "The Private Life Of Cinema",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "8",
+                "governor_text": "director",
+                "dependent_text": "The Private Life Of Cinema",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "9",
+            "source_text": "director",
+            "target_text": "born",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "4",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 9,
+                "dependent_index": 4,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p3",
+        "entity_id": "e1",
+        "entity_text": "The Private Life Of Cinema",
+        "nodes": [
+          "The Private Life Of Cinema",
+          "director",
+          "born",
+          "was"
+        ],
+        "node_ids": [
+          "8",
+          "4",
+          "9",
+          "2"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "4",
+            "source_text": "The Private Life Of Cinema",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "8",
+                "governor_text": "director",
+                "dependent_text": "The Private Life Of Cinema",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "9",
+            "source_text": "director",
+            "target_text": "born",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "4",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 9,
+                "dependent_index": 4,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "2",
+            "source_text": "born",
+            "target_text": "was",
+            "relations": [
+              "aux:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "2",
+                "governor_text": "born",
+                "dependent_text": "was",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "was",
+                "governor_index": 9,
+                "dependent_index": 2,
+                "dependency_label": "aux:pass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p4",
+        "entity_id": "e1",
+        "entity_text": "The Private Life Of Cinema",
+        "nodes": [
+          "The Private Life Of Cinema",
+          "director",
+          "born",
+          "?"
+        ],
+        "node_ids": [
+          "8",
+          "4",
+          "9",
+          "10"
+        ],
+        "length": 4,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "4",
+            "source_text": "The Private Life Of Cinema",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "8",
+                "governor_text": "director",
+                "dependent_text": "The Private Life Of Cinema",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "9",
+            "source_text": "director",
+            "target_text": "born",
+            "relations": [
+              "nsubj:pass"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "4",
+                "governor_text": "born",
+                "dependent_text": "director",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "director",
+                "governor_index": 9,
+                "dependent_index": 4,
+                "dependency_label": "nsubj:pass"
+              }
+            ]
+          },
+          {
+            "source": "9",
+            "target": "10",
+            "source_text": "born",
+            "target_text": "?",
+            "relations": [
+              "punct"
+            ],
+            "directed_edges": [
+              {
+                "governor": "9",
+                "dependent": "10",
+                "governor_text": "born",
+                "dependent_text": "?",
+                "governor_graph_text": "born",
+                "dependent_graph_text": "?",
+                "governor_index": 9,
+                "dependent_index": 10,
+                "dependency_label": "punct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p5",
+        "entity_id": "e1",
+        "entity_text": "The Private Life Of Cinema",
+        "nodes": [
+          "The Private Life Of Cinema",
+          "director"
+        ],
+        "node_ids": [
+          "8",
+          "4"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "4",
+            "source_text": "The Private Life Of Cinema",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "8",
+                "governor_text": "director",
+                "dependent_text": "The Private Life Of Cinema",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p6",
+        "entity_id": "e1",
+        "entity_text": "The Private Life Of Cinema",
+        "nodes": [
+          "The Private Life Of Cinema",
+          "director",
+          "the"
+        ],
+        "node_ids": [
+          "8",
+          "4",
+          "3"
+        ],
+        "length": 3,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "4",
+            "source_text": "The Private Life Of Cinema",
+            "target_text": "director",
+            "relations": [
+              "nmod:of"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "8",
+                "governor_text": "director",
+                "dependent_text": "The Private Life Of Cinema",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "FilmA",
+                "governor_index": 4,
+                "dependent_index": 8,
+                "dependency_label": "nmod:of"
+              }
+            ]
+          },
+          {
+            "source": "4",
+            "target": "3",
+            "source_text": "director",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "4",
+                "dependent": "3",
+                "governor_text": "director",
+                "dependent_text": "the",
+                "governor_graph_text": "director",
+                "dependent_graph_text": "the",
+                "governor_index": 4,
+                "dependent_index": 3,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p7",
+        "entity_id": "e1",
+        "entity_text": "The Private Life Of Cinema",
+        "nodes": [
+          "The Private Life Of Cinema",
+          "film"
+        ],
+        "node_ids": [
+          "8",
+          "7"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "7",
+            "source_text": "The Private Life Of Cinema",
+            "target_text": "film",
+            "relations": [
+              "compound"
+            ],
+            "directed_edges": [
+              {
+                "governor": "8",
+                "dependent": "7",
+                "governor_text": "The Private Life Of Cinema",
+                "dependent_text": "film",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "film",
+                "governor_index": 8,
+                "dependent_index": 7,
+                "dependency_label": "compound"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p8",
+        "entity_id": "e1",
+        "entity_text": "The Private Life Of Cinema",
+        "nodes": [
+          "The Private Life Of Cinema",
+          "of"
+        ],
+        "node_ids": [
+          "8",
+          "5"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "5",
+            "source_text": "The Private Life Of Cinema",
+            "target_text": "of",
+            "relations": [
+              "case"
+            ],
+            "directed_edges": [
+              {
+                "governor": "8",
+                "dependent": "5",
+                "governor_text": "The Private Life Of Cinema",
+                "dependent_text": "of",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "of",
+                "governor_index": 8,
+                "dependent_index": 5,
+                "dependency_label": "case"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path_id": "e1_p9",
+        "entity_id": "e1",
+        "entity_text": "The Private Life Of Cinema",
+        "nodes": [
+          "The Private Life Of Cinema",
+          "the"
+        ],
+        "node_ids": [
+          "8",
+          "6"
+        ],
+        "length": 2,
+        "evidence": [
+          {
+            "source": "8",
+            "target": "6",
+            "source_text": "The Private Life Of Cinema",
+            "target_text": "the",
+            "relations": [
+              "det"
+            ],
+            "directed_edges": [
+              {
+                "governor": "8",
+                "dependent": "6",
+                "governor_text": "The Private Life Of Cinema",
+                "dependent_text": "the",
+                "governor_graph_text": "FilmA",
+                "dependent_graph_text": "the",
+                "governor_index": 8,
+                "dependent_index": 6,
+                "dependency_label": "det"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "7_5_terminal_glue_path_pruning": {
+      "total_raw_paths": 9,
+      "total_kept_paths": 4,
+      "total_pruned_paths": 5,
+      "total_pruned_ratio": 0.5555555555555556,
+      "by_entity": {
+        "e1": {
+          "raw": 9,
+          "kept": 4,
+          "pruned": 5,
+          "pruned_ratio": 0.5555555555555556,
+          "fallback_used": false,
+          "pruned_examples": [
+            {
+              "path_id": "e1_p3",
+              "terminal": "was",
+              "reason": "terminal_glue_token",
+              "path_text": "The Private Life Of Cinema -> director -> born -> was"
+            },
+            {
+              "path_id": "e1_p4",
+              "terminal": "?",
+              "reason": "terminal_glue_token",
+              "path_text": "The Private Life Of Cinema -> director -> born -> ?"
+            },
+            {
+              "path_id": "e1_p6",
+              "terminal": "the",
+              "reason": "terminal_glue_token",
+              "path_text": "The Private Life Of Cinema -> director -> the"
+            },
+            {
+              "path_id": "e1_p8",
+              "terminal": "of",
+              "reason": "terminal_glue_token",
+              "path_text": "The Private Life Of Cinema -> of"
+            },
+            {
+              "path_id": "e1_p9",
+              "terminal": "the",
+              "reason": "terminal_glue_token",
+              "path_text": "The Private Life Of Cinema -> the"
+            }
+          ]
+        }
+      }
+    },
+    "8_path_scores": [
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "birth_location",
+        "semantic_chain_hint": [
+          "director",
+          "birth_location"
+        ],
+        "covered_cues": [
+          "where",
+          "born"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from The Private Life Of Cinema, reaches director, and includes the born predicate, effectively covering the question's intent."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p2",
+        "score": 75.0,
+        "valid": true,
+        "terminal_hint": "birth_location",
+        "semantic_chain_hint": [
+          "director",
+          "birth_location"
+        ],
+        "covered_cues": [
+          "born"
+        ],
+        "missing_cues": [
+          "where"
+        ],
+        "fatal_errors": [],
+        "reason": "The path starts from The Private Life Of Cinema and reaches director and born, but it lacks the wh cue 'where' for full coverage."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p5",
+        "score": 30.0,
+        "valid": false,
+        "terminal_hint": "none",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "where",
+          "born"
+        ],
+        "fatal_errors": [
+          "Path stops too early and does not cover necessary predicates or answer intent."
+        ],
+        "reason": "The path only reaches the director and does not include the necessary predicates or the wh cue, making it incomplete."
+      },
+      {
+        "entity_id": "e1",
+        "path_id": "e1_p7",
+        "score": 20.0,
+        "valid": false,
+        "terminal_hint": "none",
+        "semantic_chain_hint": [],
+        "covered_cues": [],
+        "missing_cues": [
+          "where",
+          "born",
+          "director"
+        ],
+        "fatal_errors": [
+          "Path does not reach the necessary predicates or answer intent."
+        ],
+        "reason": "The path only connects the film entity to the term 'film' and does not address the question's requirements."
+      }
+    ],
+    "8_1_best_paths_by_entity": {
+      "e1": {
+        "entity_id": "e1",
+        "path_id": "e1_p1",
+        "score": 85.0,
+        "valid": true,
+        "terminal_hint": "birth_location",
+        "semantic_chain_hint": [
+          "director",
+          "birth_location"
+        ],
+        "covered_cues": [
+          "where",
+          "born"
+        ],
+        "missing_cues": [],
+        "fatal_errors": [],
+        "reason": "The path starts from The Private Life Of Cinema, reaches director, and includes the born predicate, effectively covering the question's intent."
+      }
+    },
+    "8_2_path_set_candidates": [
+      {
+        "path_set_id": "ps1",
+        "path_ids_by_entity": {
+          "e1": "e1_p1"
+        },
+        "mean_path_score": 85.0
+      }
+    ],
+    "9_selected_dependency_path_evidence": [
+      {
+        "path_set_id": "ps1",
+        "paths": [
+          {
+            "entity_id": "e1",
+            "entity_text": "The Private Life Of Cinema",
+            "path_id": "e1_p1",
+            "path_text": "The Private Life Of Cinema -> director -> born -> was -> Where",
+            "node_texts": [
+              "The Private Life Of Cinema",
+              "director",
+              "born",
+              "was",
+              "Where"
+            ],
+            "node_ids": [
+              "8",
+              "4",
+              "9",
+              "2",
+              "1"
+            ]
+          }
+        ]
+      }
+    ],
+    "9_grounded_atomic_dag_generation": {
+      "nodes": [
+        {
+          "node_id": "q1",
+          "question": "Who is the director of The Private Life Of Cinema?",
+          "operation": "lookup",
+          "one_hop_relation": "director of film",
+          "answer_type": "Person",
+          "dependencies": [],
+          "support": {
+            "semantic_path_id": "b1",
+            "semantic_edge_id": "b1_e1"
+          },
+          "source_semantic_path_id": "b1",
+          "source_semantic_edge_id": "b1_e1"
+        },
+        {
+          "node_id": "q2",
+          "question": "Where was the director of The Private Life Of Cinema born?",
+          "operation": "lookup",
+          "one_hop_relation": "birthplace",
+          "answer_type": "Location",
+          "dependencies": [
+            "q1"
+          ],
+          "support": {
+            "semantic_path_id": "b1",
+            "semantic_edge_id": "b1_e2"
+          },
+          "source_semantic_path_id": "b1",
+          "source_semantic_edge_id": "b1_e2"
+        }
+      ],
+      "reason": "The DAG compiles each semantic reasoning edge into one atomic lookup.",
+      "semantic_reasoning_paths": {
+        "paths": [
+          {
+            "branch_id": "b1",
+            "entity_id": "e1",
+            "source_path_id": "e1_p1",
+            "nodes": [
+              {
+                "node_id": "b1_n1",
+                "label": "The Private Life Of Cinema",
+                "kind": "entity",
+                "semantic_type": "Film",
+                "source_path_id": "e1_p1",
+                "source_node_texts": [
+                  "The Private Life Of Cinema"
+                ],
+                "source_node_ids": [
+                  "8"
+                ]
+              },
+              {
+                "node_id": "b1_n2",
+                "label": "director",
+                "kind": "semantic_object",
+                "semantic_type": "Person",
+                "source_path_id": "e1_p1",
+                "source_node_texts": [
+                  "director"
+                ],
+                "source_node_ids": [
+                  "4"
+                ]
+              },
+              {
+                "node_id": "b1_n3",
+                "label": "birthplace",
+                "kind": "value_slot",
+                "semantic_type": "Location",
+                "source_path_id": "e1_p1",
+                "source_node_texts": [
+                  "born"
+                ],
+                "source_node_ids": [
+                  "9"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "edge_id": "b1_e1",
+                "source": "b1_n1",
+                "target": "b1_n2",
+                "relation": "director of film",
+                "answer_type": "Person",
+                "is_one_hop": true,
+                "support": [
+                  {
+                    "path_set_id": "ps1",
+                    "path_id": "e1_p1",
+                    "node_texts": [
+                      "The Private Life Of Cinema",
+                      "director"
+                    ],
+                    "node_ids": [
+                      "8",
+                      "4"
+                    ],
+                    "reason": "This path segment supports asking for the director of the film."
+                  }
+                ],
+                "atomic_question_template": "Who is the director of The Private Life Of Cinema?"
+              },
+              {
+                "edge_id": "b1_e2",
+                "source": "b1_n2",
+                "target": "b1_n3",
+                "relation": "birthplace",
+                "answer_type": "Location",
+                "is_one_hop": true,
+                "support": [
+                  {
+                    "path_set_id": "ps1",
+                    "path_id": "e1_p1",
+                    "node_texts": [
+                      "director",
+                      "born"
+                    ],
+                    "node_ids": [
+                      "4",
+                      "9"
+                    ],
+                    "reason": "The original question asks where the director was born."
+                  }
+                ],
+                "atomic_question_template": "Where was b1_n2's answer born?"
+              }
+            ],
+            "terminal_node_id": "b1_n3",
+            "score": 95.0,
+            "warnings": []
+          }
+        ],
+        "selected_path_set_ids": [
+          "ps1"
+        ],
+        "operator_intent": {
+          "type": "NONE",
+          "handled_downstream": true,
+          "surface_cues": []
+        },
+        "score": 95.0,
+        "score_breakdown": {
+          "question_intent_coverage": 25.0,
+          "grounding_fidelity": 25.0,
+          "one_hop_decomposability": 25.0,
+          "minimality": 15.0,
+          "branch_consistency": 10.0
+        },
+        "warnings": [],
+        "raw_payload": {
+          "semantic_reasoning_paths": [
+            {
+              "branch_id": "b1",
+              "entity_id": "e1",
+              "source_path_id": "e1_p1",
+              "nodes": [
+                {
+                  "node_id": "b1_n1",
+                  "label": "The Private Life Of Cinema",
+                  "kind": "entity",
+                  "semantic_type": "Film",
+                  "source_path_id": "e1_p1",
+                  "source_node_texts": [
+                    "The Private Life Of Cinema"
+                  ],
+                  "source_node_ids": [
+                    "8"
+                  ]
+                },
+                {
+                  "node_id": "b1_n2",
+                  "label": "director",
+                  "kind": "semantic_object",
+                  "semantic_type": "Person",
+                  "source_path_id": "e1_p1",
+                  "source_node_texts": [
+                    "director"
+                  ],
+                  "source_node_ids": [
+                    "4"
+                  ]
+                },
+                {
+                  "node_id": "b1_n3",
+                  "label": "birthplace",
+                  "kind": "value_slot",
+                  "semantic_type": "Location",
+                  "source_path_id": "e1_p1",
+                  "source_node_texts": [
+                    "born"
+                  ],
+                  "source_node_ids": [
+                    "9"
+                  ]
+                }
+              ],
+              "edges": [
+                {
+                  "edge_id": "b1_e1",
+                  "source": "b1_n1",
+                  "target": "b1_n2",
+                  "relation": "director of film",
+                  "answer_type": "Person",
+                  "is_one_hop": true,
+                  "support": [
+                    {
+                      "path_set_id": "ps1",
+                      "path_id": "e1_p1",
+                      "node_texts": [
+                        "The Private Life Of Cinema",
+                        "director"
+                      ],
+                      "node_ids": [
+                        "8",
+                        "4"
+                      ],
+                      "reason": "This path segment supports asking for the director of the film."
+                    }
+                  ],
+                  "atomic_question_template": "Who is the director of The Private Life Of Cinema?"
+                },
+                {
+                  "edge_id": "b1_e2",
+                  "source": "b1_n2",
+                  "target": "b1_n3",
+                  "relation": "birthplace",
+                  "answer_type": "Location",
+                  "is_one_hop": true,
+                  "support": [
+                    {
+                      "path_set_id": "ps1",
+                      "path_id": "e1_p1",
+                      "node_texts": [
+                        "director",
+                        "born"
+                      ],
+                      "node_ids": [
+                        "4",
+                        "9"
+                      ],
+                      "reason": "The original question asks where the director was born."
+                    }
+                  ],
+                  "atomic_question_template": "Where was b1_n2's answer born?"
+                }
+              ],
+              "terminal_node_id": "b1_n3",
+              "score": 95,
+              "warnings": []
+            }
+          ],
+          "operator_intent": {
+            "type": "NONE",
+            "handled_downstream": true,
+            "surface_cues": []
+          },
+          "score": 95,
+          "score_breakdown": {
+            "question_intent_coverage": 25,
+            "grounding_fidelity": 25,
+            "one_hop_decomposability": 25,
+            "minimality": 15,
+            "branch_consistency": 10
+          },
+          "warnings": [],
+          "reason": "The semantic reasoning paths cover the required branch-level lookups.",
+          "selected_dependency_path_evidence": [
+            {
+              "path_set_id": "ps1",
+              "paths": [
+                {
+                  "entity_id": "e1",
+                  "entity_text": "The Private Life Of Cinema",
+                  "path_id": "e1_p1",
+                  "path_text": "The Private Life Of Cinema -> director -> born -> was -> Where",
+                  "node_texts": [
+                    "The Private Life Of Cinema",
+                    "director",
+                    "born",
+                    "was",
+                    "Where"
+                  ],
+                  "node_ids": [
+                    "8",
+                    "4",
+                    "9",
+                    "2",
+                    "1"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "10_atomic_subquestion_dag": {
+      "nodes": [
+        {
+          "id": "q1",
+          "question": "Who is the director of The Private Life Of Cinema?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X1",
+          "depends_on": [],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "semantic_path_id": "b1",
+                "semantic_edge_id": "b1_e1"
+              }
+            ],
+            "operation": "lookup",
+            "one_hop_relation": "director of film",
+            "answer_type": "Person",
+            "source_semantic_path_id": "b1",
+            "source_semantic_edge_id": "b1_e1",
+            "semantic_reasoning_path_source": true
+          },
+          "source": "grounded_atomic_dag"
+        },
+        {
+          "id": "q2",
+          "question": "Where was the director of The Private Life Of Cinema born?",
+          "type": "lookup",
+          "inputs": [],
+          "output": "X2",
+          "depends_on": [
+            "q1"
+          ],
+          "source_node": null,
+          "target_node": null,
+          "ast_edge": null,
+          "operator": null,
+          "candidate_bindings": [],
+          "metadata": {
+            "source": "grounded_atomic_dag",
+            "support": [
+              {
+                "semantic_path_id": "b1",
+                "semantic_edge_id": "b1_e2"
+              }
+            ],
+            "operation": "lookup",
+            "one_hop_relation": "birthplace",
+            "answer_type": "Location",
+            "source_semantic_path_id": "b1",
+            "source_semantic_edge_id": "b1_e2",
+            "semantic_reasoning_path_source": true
+          },
+          "source": "grounded_atomic_dag"
+        }
+      ],
+      "edges": [
+        {
+          "source": "q1",
+          "target": "q2",
+          "variable": "X1"
+        }
+      ],
+      "variable_to_question": {
+        "X1": "q1",
+        "X2": "q2"
+      },
+      "warnings": []
+    },
+    "10_subquestions": [
+      {
+        "index": 1,
+        "question": "Who is the director of The Private Life Of Cinema?",
+        "answer_variable": "X1",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      },
+      {
+        "index": 2,
+        "question": "Where was the director of The Private Life Of Cinema born?",
+        "answer_variable": "X2",
+        "source_node": null,
+        "target_node": null,
+        "operator": null,
+        "type": "edge",
+        "source": "grounded_atomic_dag",
+        "ast_edge": null
+      }
+    ]
+  }
+}

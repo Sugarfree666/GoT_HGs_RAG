@@ -18,64 +18,17 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 
-DIRECT_LLM_DECOMPOSITION_SYSTEM = """You are a direct LLM baseline for atomic question decomposition.
-
-Your task is to decompose the original multi-hop question into an executable Atomic Subquestion DAG.
+DIRECT_LLM_DECOMPOSITION_SYSTEM = """You decompose an original question into atomic subquestions.
 
 Return valid JSON only.
 Do not answer the original question.
-Do not retrieve evidence.
-Do not include explanations outside JSON.
 
-Atomic DAG requirements:
-1. Each node must be a one-hop lookup question.
-2. Each node must be answerable independently or after replacing a dependency span with the answer of an earlier node.
-3. Dependencies must reference earlier node_id values only.
-4. Use node_id values q1, q2, q3, ...
-5. Do not generate a final comparison, yes/no, intersection, union, ranking, or aggregation question.
-6. For comparison questions, generate only branch lookup questions needed by a downstream final composer.
-7. For yes/no same/different questions, generate one branch question per compared entity or item; do not generate the final yes/no question.
-8. For serial multi-hop questions, make dependencies explicit.
-9. Keep each atomic question specific and evaluation-ready.
-10. Do not include answers.
-
-Examples:
-
-Question: "Which film whose director was born first, El Tonto or The Heart Of Doreon?"
-Return:
-{
-  "nodes": [
-    {"node_id": "q1", "question": "Who is the director of El Tonto?", "dependencies": []},
-    {"node_id": "q2", "question": "When was the director of El Tonto born?", "dependencies": ["q1"]},
-    {"node_id": "q3", "question": "Who is the director of The Heart Of Doreon?", "dependencies": []},
-    {"node_id": "q4", "question": "When was the director of The Heart Of Doreon born?", "dependencies": ["q3"]}
-  ]
-}
-
-Question: "What is the place of birth of the performer of song Changed It?"
-Return:
-{
-  "nodes": [
-    {"node_id": "q1", "question": "Who is the performer of the song Changed It?", "dependencies": []},
-    {"node_id": "q2", "question": "What is the place of birth of the performer of Changed It?", "dependencies": ["q1"]}
-  ]
-}
-
-Question: "Are Marufabad and Nasamkhrali both located in the same country?"
-Return:
-{
-  "nodes": [
-    {"node_id": "q1", "question": "Which country is Marufabad located in?", "dependencies": []},
-    {"node_id": "q2", "question": "Which country is Nasamkhrali located in?", "dependencies": []}
-  ]
-}
-
-Required output schema:
+Use this shape:
 {
   "nodes": [
     {
       "node_id": "q1",
-      "question": "one-hop atomic question",
+      "question": "atomic subquestion",
       "dependencies": []
     }
   ]
@@ -235,15 +188,14 @@ def decompose_question_direct(
 
 def build_direct_decomposition_prompt(question: str) -> str:
     return (
-        "Decompose this original question into an Atomic Subquestion DAG.\n\n"
+        "Decompose this original question into atomic subquestions.\n\n"
         f"Original question:\n{question}\n\n"
-        "Return JSON only with this exact top-level shape:\n"
+        "Return JSON only:\n"
         "{\n"
         '  "nodes": [\n'
         '    {"node_id": "q1", "question": "...", "dependencies": []}\n'
         "  ]\n"
-        "}\n\n"
-        "Reminder: do not include a final comparison, yes/no, intersection, ranking, or final answer node."
+        "}"
     )
 
 
