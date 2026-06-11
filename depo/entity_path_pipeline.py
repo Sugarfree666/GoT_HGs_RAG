@@ -10,6 +10,7 @@ from models import (
     AtomicQuestionNode,
     EntityOriginPath,
     EntityStartNode,
+    AtomicEvidence,
     EvidenceAtom,
     PathSetCandidate,
     ScoredEntityPath,
@@ -154,8 +155,8 @@ class EntityPathSemanticParser:
         restored_question: str,
         selected_dependency_path_evidence: list[dict[str, object]],
     ) -> tuple[SemanticReasoningPathResult, dict[str, Any]]:
-        evidence_atoms = extract_evidence_atoms(selected_dependency_path_evidence)
-        evidence_atom_payload = [atom.to_dict() for atom in evidence_atoms]
+        atomic_evidences = extract_atomic_evidences(selected_dependency_path_evidence)
+        atomic_evidence_payload = [atom.to_dict() for atom in atomic_evidences]
         validation_feedback: str | None = None
         last_payload: dict[str, Any] = {}
         for attempt in range(2):
@@ -163,9 +164,7 @@ class EntityPathSemanticParser:
                 SEMANTIC_REASONING_PATH_SYSTEM,
                 build_semantic_reasoning_path_prompt(
                     original_question=original_question,
-                    restored_question=restored_question,
-                    selected_dependency_path_evidence=selected_dependency_path_evidence,
-                    evidence_atoms=evidence_atom_payload,
+                    atomic_evidences=atomic_evidence_payload,
                     validation_feedback=validation_feedback,
                 ),
             )
@@ -175,7 +174,7 @@ class EntityPathSemanticParser:
                 result = _parse_semantic_reasoning_path_payload(
                     raw_payload,
                     selected_dependency_path_evidence=selected_dependency_path_evidence,
-                    evidence_atoms=evidence_atoms,
+                    evidence_atoms=atomic_evidences,
                 )
             except ValueError as exc:
                 validation_feedback = str(exc)
@@ -188,7 +187,7 @@ class EntityPathSemanticParser:
             issues = _semantic_reasoning_path_support_issues(
                 result,
                 selected_dependency_path_evidence,
-                evidence_atoms,
+                atomic_evidences,
             )
             if issues:
                 validation_feedback = "\n".join(issues)
@@ -200,7 +199,9 @@ class EntityPathSemanticParser:
                 continue
             raw_payload.setdefault("selected_dependency_path_evidence", selected_dependency_path_evidence)
             raw_payload.setdefault("semantic_reasoning_paths", [path.to_dict() for path in result.paths])
-            raw_payload["evidence_atoms"] = evidence_atom_payload
+            raw_payload["atomic_evidences"] = atomic_evidence_payload
+            raw_payload["evidence_atoms"] = atomic_evidence_payload
+            raw_payload["step9_llm_input_contains_raw_dependency_paths"] = False
             result.raw_payload = raw_payload
             return result, raw_payload
         raise ValueError("Semantic Reasoning Path induction failed. Last payload: " + repr(last_payload))
@@ -268,6 +269,7 @@ FORBIDDEN_SEMANTIC_NODE_LABELS = {
     "by",
     "compare",
     "common answer",
+    "compared to",
     "did",
     "different",
     "do",
@@ -282,7 +284,9 @@ FORBIDDEN_SEMANTIC_NODE_LABELS = {
     "later",
     "of",
     "older",
+    "produced first",
     "ranking",
+    "released first",
     "same",
     "share",
     "the",
@@ -298,6 +302,13 @@ FORBIDDEN_SEMANTIC_NODE_LABELS = {
     "with",
     "yes/no",
     "younger",
+}
+
+FORBIDDEN_SEMANTIC_RELATIONS = {
+    "compared to",
+    "or compared to",
+    "produced first",
+    "released first",
 }
 
 
@@ -326,19 +337,24 @@ def _parse_semantic_reasoning_path_payload(
             raise ValueError(f"semantic_reasoning_paths[{index}] must be a JSON object.")
         branch_id = str(raw_path.get("branch_id") or f"b{index}").strip()
         entity_id = str(raw_path.get("entity_id") or "").strip()
+        nodes = _parse_semantic_reasoning_nodes(raw_path.get("nodes"), branch_id)
+        edges = _parse_semantic_reasoning_edges(raw_path.get("edges"), branch_id, evidence_atoms=evidence_atoms)
+        inferred_atom = _first_atom_for_edges(edges, evidence_atoms)
+        if not entity_id and inferred_atom is not None:
+            entity_id = inferred_atom.entity_id
         source_path_id = str(raw_path.get("source_path_id") or raw_path.get("path_id") or "").strip()
+        if not source_path_id and inferred_atom is not None:
+            source_path_id = inferred_atom.source_path_id
         if not branch_id or not entity_id or not source_path_id:
             raise ValueError(f"Semantic reasoning path #{index} missing branch_id/entity_id/source_path_id.")
         if source_path_id not in selected_path_ids:
             raise ValueError(f"Semantic reasoning path {branch_id} references unselected source_path_id={source_path_id!r}.")
-
-        nodes = _parse_semantic_reasoning_nodes(raw_path.get("nodes"), branch_id)
-        edges = _parse_semantic_reasoning_edges(raw_path.get("edges"), branch_id, evidence_atoms=evidence_atoms)
         if len(nodes) < 2:
             raise ValueError(f"Semantic reasoning path {branch_id} must contain at least 2 nodes.")
         if not edges:
             raise ValueError(f"Semantic reasoning path {branch_id} must contain at least 1 edge.")
         node_ids = {node.node_id for node in nodes}
+        label_by_id = {node.node_id: node.label for node in nodes}
         for node in nodes:
             if _forbidden_semantic_node_label(node.label):
                 raise ValueError(f"Semantic reasoning path {branch_id} contains forbidden semantic node label={node.label!r}.")
@@ -349,6 +365,10 @@ def _parse_semantic_reasoning_path_payload(
                 raise ValueError(f"Semantic reasoning edge {edge.edge_id} has identical source and target.")
             if not edge.relation:
                 raise ValueError(f"Semantic reasoning edge {edge.edge_id} has empty relation.")
+            if _forbidden_semantic_relation(edge.relation):
+                raise ValueError(f"Semantic reasoning edge {edge.edge_id} has forbidden dependency-cue relation={edge.relation!r}.")
+            if _forbidden_semantic_node_label(label_by_id.get(edge.source, "")) or _forbidden_semantic_node_label(label_by_id.get(edge.target, "")):
+                raise ValueError(f"Semantic reasoning edge {edge.edge_id} connects through a forbidden dependency cue node.")
             if not edge.is_one_hop:
                 raise ValueError(f"Semantic reasoning edge {edge.edge_id} must be one-hop.")
             if not edge.support:
@@ -437,7 +457,7 @@ def _coerce_flat_semantic_reasoning_payload(
         first_atom = atom_by_id.get(supported_by[0]) if supported_by else None
         if first_atom is not None:
             entity_id = entity_id or first_atom.entity_id
-            source_path_id = source_path_id or first_atom.path_id
+            source_path_id = source_path_id or first_atom.source_path_id
         source_label = str(raw_edge.get("source") or "").strip()
         target_label = str(raw_edge.get("target") or "").strip()
         relation = str(raw_edge.get("semantic_relation") or raw_edge.get("relation") or "").strip()
@@ -485,6 +505,19 @@ def _first_selected_path_payload(selected_dependency_path_evidence: list[dict[st
             if isinstance(path, dict):
                 return path
     return {}
+
+
+def _first_atom_for_edges(edges: list[SemanticReasoningEdge], evidence_atoms: list[EvidenceAtom]) -> EvidenceAtom | None:
+    atom_by_id = {atom.id: atom for atom in evidence_atoms}
+    for edge in edges:
+        for support in edge.support:
+            if not isinstance(support, dict):
+                continue
+            for atom_id in _str_list(support.get("atom_ids") or support.get("supported_by")):
+                atom = atom_by_id.get(atom_id)
+                if atom is not None:
+                    return atom
+    return None
 
 
 def _parse_semantic_reasoning_nodes(raw: Any, branch_id: str) -> list[SemanticReasoningNode]:
@@ -572,7 +605,7 @@ def _normalize_semantic_reasoning_support(
     atom_by_id = {atom.id: atom for atom in evidence_atoms}
     supported_by = _str_list(edge_supported_by)
     if supported_by and raw is None:
-        return [_support_from_atom(atom_by_id[atom_id]) for atom_id in supported_by if atom_id in atom_by_id]
+        return [_support_from_atom_ids(supported_by, atom_by_id)]
 
     if isinstance(raw, dict):
         raw_items = [raw]
@@ -599,12 +632,21 @@ def _normalize_semantic_reasoning_support(
                 node_texts=node_texts,
             )
         if atom_ids and (not path_set_id or not path_id or not node_texts):
-            first_atom = atom_by_id.get(atom_ids[0])
-            if first_atom is not None:
+            known_atoms = [atom_by_id[atom_id] for atom_id in atom_ids if atom_id in atom_by_id]
+            if known_atoms:
+                first_atom = known_atoms[0]
                 path_set_id = path_set_id or first_atom.path_set_id
-                path_id = path_id or first_atom.path_id
-                node_texts = node_texts or list(first_atom.node_texts)
-                node_ids = node_ids or list(first_atom.node_ids)
+                path_id = path_id or first_atom.source_path_id
+                node_texts = node_texts or _unique_preserve(
+                    text
+                    for atom in known_atoms
+                    for text in atom.node_texts
+                )
+                node_ids = node_ids or _unique_preserve(
+                    node_id
+                    for atom in known_atoms
+                    for node_id in atom.node_ids
+                )
         result.append(
             {
                 "path_set_id": path_set_id,
@@ -619,16 +661,39 @@ def _normalize_semantic_reasoning_support(
     return result
 
 
-def _support_from_atom(atom: EvidenceAtom) -> dict[str, Any]:
+def _support_from_atom_ids(atom_ids: list[str], atom_by_id: dict[str, EvidenceAtom]) -> dict[str, Any]:
+    atom_ids = _unique_preserve(atom_ids)
+    known_atoms = [atom_by_id[atom_id] for atom_id in atom_ids if atom_id in atom_by_id]
+    first_atom = known_atoms[0] if known_atoms else None
     return {
-        "path_set_id": atom.path_set_id,
-        "path_id": atom.path_id,
-        "node_texts": list(atom.node_texts),
-        "node_ids": list(atom.node_ids),
-        "atom_ids": [atom.id],
-        "supported_by": [atom.id],
+        "path_set_id": first_atom.path_set_id if first_atom is not None else "",
+        "path_id": first_atom.source_path_id if first_atom is not None else "",
+        "node_texts": _unique_preserve(
+            text
+            for atom in known_atoms
+            for text in atom.node_texts
+        ),
+        "node_ids": _unique_preserve(
+            node_id
+            for atom in known_atoms
+            for node_id in atom.node_ids
+        ),
+        "atom_ids": atom_ids,
+        "supported_by": atom_ids,
         "reason": "",
     }
+
+
+def _unique_preserve(values: Any) -> list[str]:
+    result: list[str] = []
+    seen: set[str] = set()
+    for value in values or []:
+        text = str(value or "").strip()
+        if not text or text in seen:
+            continue
+        seen.add(text)
+        result.append(text)
+    return result
 
 
 def _matching_atom_ids_for_support(
@@ -646,7 +711,7 @@ def _matching_atom_ids_for_support(
     for atom in evidence_atoms:
         if path_set_id and atom.path_set_id != path_set_id:
             continue
-        if path_id and atom.path_id != path_id:
+        if path_id and atom.source_path_id != path_id:
             continue
         atom_texts = {_normalize_support_text(text) for text in atom.node_texts}
         atom_texts.discard("")
@@ -655,7 +720,7 @@ def _matching_atom_ids_for_support(
     if matches:
         return matches[:3]
     for atom in evidence_atoms:
-        if path_id and atom.path_id != path_id:
+        if path_id and atom.source_path_id != path_id:
             continue
         atom_texts = {_normalize_support_text(text) for text in atom.node_texts}
         if normalized_support_texts & atom_texts:
@@ -807,6 +872,12 @@ def _forbidden_semantic_node_label(label: str) -> bool:
     return normalized in FORBIDDEN_SEMANTIC_NODE_LABELS
 
 
+def _forbidden_semantic_relation(relation: str) -> bool:
+    normalized = re.sub(r"[^a-z0-9/ ]+", " ", str(relation or "").lower())
+    normalized = " ".join(normalized.split())
+    return normalized in FORBIDDEN_SEMANTIC_RELATIONS
+
+
 def select_best_path_by_entity(
     *,
     scored_paths: list[ScoredEntityPath],
@@ -951,16 +1022,15 @@ def build_selected_dependency_path_evidence(
     return evidence
 
 
-def extract_evidence_atoms(selected_dependency_path_evidence: list[dict[str, Any]]) -> list[EvidenceAtom]:
-    """Decompose selected collapsed dependency paths into local evidence atoms.
+def extract_atomic_evidences(selected_dependency_path_evidence: list[dict[str, Any]]) -> list[AtomicEvidence]:
+    """Extract local atomic evidences from selected collapsed dependency paths.
 
-    Evidence atoms are structural snippets, not semantic reasoning steps. They
-    preserve path provenance so Step 9B can ground every semantic edge in at
-    least one atom id.
+    Atomic evidences are binary local structures only. They deliberately avoid
+    full path strings and 3-hop windows so Step 9 cannot copy dependency paths
+    into semantic reasoning paths.
     """
 
-    atoms: list[EvidenceAtom] = []
-    next_id = 1
+    raw_atoms: list[AtomicEvidence] = []
     for path_set in selected_dependency_path_evidence:
         if not isinstance(path_set, dict):
             continue
@@ -972,53 +1042,213 @@ def extract_evidence_atoms(selected_dependency_path_evidence: list[dict[str, Any
             if len(node_texts) < 2:
                 continue
             node_ids = _str_list(path.get("node_ids"))
-            origin_path = str(path.get("path_text") or " ---- ".join(node_texts)).strip()
-            path_id = str(path.get("path_id") or "").strip()
+            source_path_id = str(path.get("path_id") or "").strip()
             entity_id = str(path.get("entity_id") or "").strip()
             entity_text = str(path.get("entity_text") or "").strip()
+            predicate_cues = _predicate_cues_in_path(node_texts)
 
-            for index in range(len(node_texts) - 1):
-                atom_node_texts = node_texts[index : index + 2]
-                atom_node_ids = node_ids[index : index + 2] if node_ids else []
-                atoms.append(
-                    EvidenceAtom(
-                        id=f"atom_{next_id}",
-                        text=" ---- ".join(atom_node_texts),
-                        source=atom_node_texts[0],
-                        relation_hint=atom_node_texts[1],
-                        target=None,
-                        origin_path=origin_path,
-                        path_set_id=path_set_id,
-                        path_id=path_id,
-                        entity_id=entity_id,
-                        entity_text=entity_text,
-                        node_texts=atom_node_texts,
-                        node_ids=atom_node_ids,
-                    )
-                )
-                next_id += 1
-
-                if index + 2 < len(node_texts):
-                    atom_node_texts = node_texts[index : index + 3]
-                    atom_node_ids = node_ids[index : index + 3] if node_ids else []
-                    atoms.append(
-                        EvidenceAtom(
-                            id=f"atom_{next_id}",
-                            text=" ---- ".join(atom_node_texts),
-                            source=atom_node_texts[0],
-                            relation_hint=atom_node_texts[1],
-                            target=atom_node_texts[2],
-                            origin_path=origin_path,
+            for cue in predicate_cues:
+                for anchor in _candidate_anchors_for_path(node_texts, entity_text=entity_text):
+                    if _same_text(anchor, cue):
+                        continue
+                    kind = "type_context" if _is_type_context(anchor) else "entity_predicate"
+                    raw_atoms.append(
+                        AtomicEvidence(
+                            id="",
+                            kind=kind,
+                            text=f"{anchor} ---- {cue}",
+                            anchor=anchor,
+                            cue=cue,
+                            source_path_id=source_path_id,
                             path_set_id=path_set_id,
-                            path_id=path_id,
                             entity_id=entity_id,
                             entity_text=entity_text,
-                            node_texts=atom_node_texts,
-                            node_ids=atom_node_ids,
+                            node_texts=[anchor, cue],
+                            node_ids=_node_ids_for_texts(node_texts, node_ids, [anchor, cue]),
                         )
                     )
-                    next_id += 1
+
+            for left, right in _candidate_pairs_for_path(node_texts, entity_text=entity_text):
+                raw_atoms.append(
+                    AtomicEvidence(
+                        id="",
+                        kind="candidate_pair",
+                        text=f"{left} ---- or/compared_to ---- {right}",
+                        candidates=[left, right],
+                        cue="or/compared_to",
+                        source_path_id=source_path_id,
+                        path_set_id=path_set_id,
+                        entity_id=entity_id,
+                        entity_text=entity_text,
+                        node_texts=[left, right],
+                        node_ids=_node_ids_for_texts(node_texts, node_ids, [left, right]),
+                    )
+                )
+
+            for index in range(len(node_texts) - 1):
+                left = node_texts[index]
+                right = node_texts[index + 1]
+                raw_atoms.append(
+                    AtomicEvidence(
+                        id="",
+                        kind="adjacent_pair",
+                        text=f"{left} ---- {right}",
+                        left=left,
+                        right=right,
+                        source_path_id=source_path_id,
+                        path_set_id=path_set_id,
+                        entity_id=entity_id,
+                        entity_text=entity_text,
+                        node_texts=[left, right],
+                        node_ids=node_ids[index : index + 2] if node_ids else [],
+                    )
+                )
+
+    atoms: list[AtomicEvidence] = []
+    seen: set[tuple[Any, ...]] = set()
+    seen_text_by_path: set[tuple[str, str]] = set()
+    for raw_atom in raw_atoms:
+        text_key = (_normalize_support_text(raw_atom.text), raw_atom.source_path_id)
+        if raw_atom.kind == "adjacent_pair" and text_key in seen_text_by_path:
+            continue
+        key = _atomic_evidence_key(raw_atom)
+        if key in seen:
+            continue
+        seen.add(key)
+        seen_text_by_path.add(text_key)
+        raw_atom.id = f"atom_{len(atoms) + 1}"
+        atoms.append(raw_atom)
     return atoms
+
+
+def extract_evidence_atoms(selected_dependency_path_evidence: list[dict[str, Any]]) -> list[EvidenceAtom]:
+    return extract_atomic_evidences(selected_dependency_path_evidence)
+
+
+def _predicate_cues_in_path(node_texts: list[str]) -> list[str]:
+    cues: list[str] = []
+    for text in node_texts:
+        normalized = _normalize_support_text(text)
+        if _is_predicate_cue(normalized) and text not in cues:
+            cues.append(text)
+    return cues
+
+
+def _candidate_anchors_for_path(node_texts: list[str], *, entity_text: str) -> list[str]:
+    anchors: list[str] = []
+    for text in [entity_text, *node_texts]:
+        value = str(text or "").strip()
+        if not value or value in anchors:
+            continue
+        normalized = _normalize_support_text(value)
+        if _is_predicate_cue(normalized) or _is_function_or_punctuation(normalized):
+            continue
+        if _is_type_context(value) or _looks_like_named_entity(value):
+            anchors.append(value)
+    return anchors
+
+
+def _candidate_pairs_for_path(node_texts: list[str], *, entity_text: str) -> list[tuple[str, str]]:
+    candidates = [
+        text
+        for text in _candidate_anchors_for_path(node_texts, entity_text=entity_text)
+        if not _is_type_context(text)
+    ]
+    pairs: list[tuple[str, str]] = []
+    for left_index, left in enumerate(candidates):
+        for right in candidates[left_index + 1 :]:
+            if not _same_text(left, right):
+                pairs.append((left, right))
+    return pairs
+
+
+def _atomic_evidence_key(atom: AtomicEvidence) -> tuple[Any, ...]:
+    candidates = tuple(_normalize_support_text(candidate) for candidate in atom.candidates)
+    text = _normalize_support_text(atom.text)
+    if atom.kind == "candidate_pair":
+        candidates = tuple(sorted(candidates))
+        text = "or/compared_to"
+    return (
+        atom.kind,
+        text,
+        candidates,
+        atom.source_path_id if atom.kind == "adjacent_pair" else "",
+    )
+
+
+def _node_ids_for_texts(path_texts: list[str], path_ids: list[str], wanted_texts: list[str]) -> list[str]:
+    if not path_ids:
+        return []
+    result: list[str] = []
+    used_indices: set[int] = set()
+    for wanted in wanted_texts:
+        wanted_norm = _normalize_support_text(wanted)
+        for index, text in enumerate(path_texts):
+            if index in used_indices:
+                continue
+            if _normalize_support_text(text) == wanted_norm:
+                used_indices.add(index)
+                if index < len(path_ids):
+                    result.append(path_ids[index])
+                break
+    return result
+
+
+def _is_predicate_cue(normalized: str) -> bool:
+    if not normalized:
+        return False
+    predicate_terms = {
+        "produced",
+        "released",
+        "directed",
+        "performed",
+        "written",
+        "born",
+        "died",
+        "die",
+        "located",
+        "founded",
+        "created",
+        "older",
+        "younger",
+        "first",
+        "last",
+        "earlier",
+        "later",
+        "compared to",
+        "or compared to",
+    }
+    return any(term in normalized for term in predicate_terms)
+
+
+def _is_type_context(text: str) -> bool:
+    normalized = _normalize_support_text(text)
+    if normalized.startswith(("which ", "what ")):
+        return True
+    type_terms = {"film", "movie", "song", "book", "country", "city", "place", "person"}
+    return any(normalized == term or normalized.endswith(f" {term}") for term in type_terms)
+
+
+def _looks_like_named_entity(text: str) -> bool:
+    stripped = str(text or "").strip()
+    if not stripped:
+        return False
+    if re.fullmatch(r"[\W_]+", stripped):
+        return False
+    normalized = _normalize_support_text(stripped)
+    if _is_function_or_punctuation(normalized):
+        return False
+    if len(stripped.split()) > 1:
+        return True
+    return bool(stripped[:1].isupper()) and normalized not in FORBIDDEN_SEMANTIC_NODE_LABELS
+
+
+def _is_function_or_punctuation(normalized: str) -> bool:
+    return not normalized or normalized in FORBIDDEN_SEMANTIC_NODE_LABELS or re.fullmatch(r"\W+", normalized) is not None
+
+
+def _same_text(left: str, right: str) -> bool:
+    return _normalize_support_text(left) == _normalize_support_text(right)
 
 
 def validate_grounded_atomic_dag_support(

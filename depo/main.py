@@ -264,10 +264,16 @@ def run_pipeline(
             original_question=record.question,
             selected_dependency_path_evidence=selected_dependency_path_evidence,
         )
-    evidence_atoms = (
-        semantic_reasoning_path_payload.get("evidence_atoms", [])
+    atomic_evidences = (
+        semantic_reasoning_path_payload.get("atomic_evidences")
+        or semantic_reasoning_path_payload.get("evidence_atoms", [])
         if isinstance(semantic_reasoning_path_payload, dict)
         else []
+    )
+    step9_llm_input_contains_raw_dependency_paths = (
+        bool(semantic_reasoning_path_payload.get("step9_llm_input_contains_raw_dependency_paths"))
+        if isinstance(semantic_reasoning_path_payload, dict)
+        else False
     )
     subquestions = subquestion_dag.to_subquestions()
     return {
@@ -302,7 +308,9 @@ def run_pipeline(
         "best_paths_by_entity": best_paths_by_entity,
         "path_set_candidates": path_set_candidates,
         "selected_dependency_path_evidence": selected_dependency_path_evidence,
-        "evidence_atoms": evidence_atoms,
+        "atomic_evidences": atomic_evidences,
+        "evidence_atoms": atomic_evidences,
+        "step9_llm_input_contains_raw_dependency_paths": step9_llm_input_contains_raw_dependency_paths,
         "use_semantic_reasoning_paths": use_semantic_reasoning_paths,
         "semantic_reasoning_paths": semantic_reasoning_paths,
         "semantic_reasoning_path_payload": semantic_reasoning_path_payload,
@@ -367,7 +375,7 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     best_paths_by_entity: dict[str, ScoredEntityPath] = result.get("best_paths_by_entity", {})
     path_set_candidates: list[PathSetCandidate] = result.get("path_set_candidates", [])
     selected_dependency_path_evidence: list[dict[str, Any]] = result.get("selected_dependency_path_evidence", [])
-    evidence_atoms: list[dict[str, Any]] = result.get("evidence_atoms", [])
+    atomic_evidences: list[dict[str, Any]] = result.get("atomic_evidences") or result.get("evidence_atoms", [])
     semantic_reasoning_paths: SemanticReasoningPathResult | None = result.get("semantic_reasoning_paths")
     grounded_atomic_dag_payload: dict[str, Any] = result.get("grounded_atomic_dag_payload") or {}
     subquestions: list[AtomicSubquestion] = result["subquestions"]
@@ -447,7 +455,8 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     _print_semantic_reasoning_paths(
         semantic_reasoning_paths,
         selected_dependency_path_evidence=selected_dependency_path_evidence,
-        evidence_atoms=evidence_atoms,
+        atomic_evidences=atomic_evidences,
+        llm_input_contains_raw_dependency_paths=bool(result.get("step9_llm_input_contains_raw_dependency_paths")),
     )
     print()
 
@@ -695,10 +704,11 @@ def _print_semantic_reasoning_paths(
     result: SemanticReasoningPathResult | None,
     *,
     selected_dependency_path_evidence: list[dict[str, Any]] | None = None,
-    evidence_atoms: list[dict[str, Any]] | None = None,
+    atomic_evidences: list[dict[str, Any]] | None = None,
+    llm_input_contains_raw_dependency_paths: bool = False,
 ) -> None:
     selected_dependency_path_evidence = selected_dependency_path_evidence or []
-    evidence_atoms = evidence_atoms or []
+    atomic_evidences = atomic_evidences or []
     selected_path_count = sum(
         len(path_set.get("paths", []) or [])
         for path_set in selected_dependency_path_evidence
@@ -706,14 +716,15 @@ def _print_semantic_reasoning_paths(
     )
     semantic_edge_count = sum(len(path.edges) for path in result.paths) if result is not None else 0
     print(f"  selected_dependency_paths={selected_path_count}")
-    print(f"  evidence_atoms={len(evidence_atoms)}")
+    print(f"  atomic_evidences={len(atomic_evidences)}")
+    print(f"  step9_llm_input_contains_raw_dependency_paths={str(llm_input_contains_raw_dependency_paths).lower()}")
     print(f"  semantic_edges={semantic_edge_count}")
     if result is None or not result.paths:
         print("  paths: (none)")
         return
     atom_text_by_id = {
         str(atom.get("id")): str(atom.get("text") or "")
-        for atom in evidence_atoms
+        for atom in atomic_evidences
         if isinstance(atom, dict) and atom.get("id")
     }
     for path in result.paths:

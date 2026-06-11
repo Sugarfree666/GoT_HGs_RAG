@@ -260,7 +260,8 @@ def build_decomposition_payload(
             "8_1_best_paths_by_entity": best_paths_by_entity,
             "8_2_path_set_candidates": [_dataclass_to_jsonable(candidate) for candidate in result.get("path_set_candidates", [])],
             "9_selected_dependency_path_evidence": _dataclass_to_jsonable(result.get("selected_dependency_path_evidence") or []),
-            "9a_evidence_atoms": _dataclass_to_jsonable(result.get("evidence_atoms") or []),
+            "9a_atomic_evidences": _dataclass_to_jsonable(result.get("atomic_evidences") or result.get("evidence_atoms") or []),
+            "9_step9_llm_input_contains_raw_dependency_paths": bool(result.get("step9_llm_input_contains_raw_dependency_paths")),
             "9b_semantic_reasoning_paths": _dataclass_to_jsonable(result.get("semantic_reasoning_paths")),
             "10_grounded_atomic_dag_generation": _dataclass_to_jsonable(result.get("grounded_atomic_dag_payload") or {}),
             "10_atomic_subquestion_dag": _dataclass_to_jsonable(subquestion_dag) if subquestion_dag else None,
@@ -474,14 +475,18 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("- Selected dependency path evidence: (none)")
     lines.append("")
 
-    evidence_atoms = stages.get("9a_evidence_atoms") or []
-    lines.append("### 9A Evidence Atoms")
-    for atom in evidence_atoms:
+    atomic_evidences = stages.get("9a_atomic_evidences") or stages.get("9a_evidence_atoms") or []
+    lines.append("### 9A Atomic Evidences")
+    lines.append(
+        f"- Step 9 LLM input contains raw dependency paths: "
+        f"{bool(stages.get('9_step9_llm_input_contains_raw_dependency_paths'))}"
+    )
+    for atom in atomic_evidences:
         lines.append(
-            f"- {atom.get('id')}: {atom.get('text')} "
-            f"(path={atom.get('path_id')}, source={atom.get('source')}, relation_hint={atom.get('relation_hint')}, target={atom.get('target')})"
+            f"- {atom.get('id')} [{atom.get('kind')}]: {atom.get('text')} "
+            f"(source_path_id={atom.get('source_path_id')})"
         )
-    if not evidence_atoms:
+    if not atomic_evidences:
         lines.append("(none)")
     lines.append("")
 

@@ -463,22 +463,27 @@ class PathSetCandidate:
 
 
 @dataclass
-class EvidenceAtom:
+class AtomicEvidence:
     id: str
+    kind: str
     text: str
-    source: str
-    relation_hint: str
-    target: str | None = None
-    origin_path: str = ""
+    source_path_id: str
     path_set_id: str = ""
-    path_id: str = ""
     entity_id: str = ""
     entity_text: str = ""
+    anchor: str | None = None
+    cue: str | None = None
+    left: str | None = None
+    right: str | None = None
+    candidates: list[str] = field(default_factory=list)
     node_texts: list[str] = field(default_factory=list)
     node_ids: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
+
+
+EvidenceAtom = AtomicEvidence
 
 
 @dataclass

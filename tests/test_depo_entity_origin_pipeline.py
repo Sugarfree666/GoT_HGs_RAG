@@ -16,6 +16,7 @@ from entity_path_pipeline import (  # noqa: E402
     EntityPathSemanticParser,
     build_single_path_set_candidate,
     build_selected_dependency_path_evidence,
+    extract_atomic_evidences,
     extract_evidence_atoms,
     select_best_path_by_entity,
 )
@@ -1148,45 +1149,112 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
         self.assertEqual([edge.relation for edge in result.paths[0].edges], ["performer of song", "nationality of person"])
 
-    def test_step9_extracts_evidence_atoms_and_requires_supported_by_atoms(self) -> None:
+    def test_step9_uses_atomic_evidences_without_raw_dependency_paths(self) -> None:
         evidence = [
             {
                 "path_set_id": "ps1",
                 "paths": [
                     {
                         "entity_id": "e1",
+                        "entity_text": "Which Walt Disney film",
+                        "path_id": "e1_p8",
+                        "path_text": "Which Walt Disney film -- produced first -- The Apple Dumpling Gang -- Something Wicked This Way Comes",
+                        "node_texts": [
+                            "Which Walt Disney film",
+                            "produced first",
+                            "The Apple Dumpling Gang",
+                            "Something Wicked This Way Comes",
+                        ],
+                        "node_ids": ["3", "5", "8", "10"],
+                    },
+                    {
+                        "entity_id": "e2",
                         "entity_text": "The Apple Dumpling Gang",
-                        "path_id": "e1_p1",
-                        "path_text": "The Apple Dumpling Gang -> produced first -> Walt Disney film",
-                        "node_texts": ["The Apple Dumpling Gang", "produced first", "Walt Disney film"],
-                        "node_ids": ["8", "5", "3"],
-                    }
+                        "path_id": "e2_p14",
+                        "path_text": "The Apple Dumpling Gang -- Something Wicked This Way Comes -- produced first -- Which Walt Disney film",
+                        "node_texts": [
+                            "The Apple Dumpling Gang",
+                            "Something Wicked This Way Comes",
+                            "produced first",
+                            "Which Walt Disney film",
+                        ],
+                        "node_ids": ["8", "10", "5", "3"],
+                    },
+                    {
+                        "entity_id": "e3",
+                        "entity_text": "Something Wicked This Way Comes",
+                        "path_id": "e3_p13",
+                        "path_text": "Something Wicked This Way Comes -- The Apple Dumpling Gang -- produced first -- Which Walt Disney film",
+                        "node_texts": [
+                            "Something Wicked This Way Comes",
+                            "The Apple Dumpling Gang",
+                            "produced first",
+                            "Which Walt Disney film",
+                        ],
+                        "node_ids": ["10", "8", "5", "3"],
+                    },
                 ],
             }
         ]
-        atoms = extract_evidence_atoms(evidence)
-        self.assertEqual(atoms[0].id, "atom_1")
-        self.assertEqual(atoms[0].text, "The Apple Dumpling Gang ---- produced first")
+        atoms = extract_atomic_evidences(evidence)
+        self.assertEqual(atoms[0].text, "Which Walt Disney film ---- produced first")
+        self.assertIn("The Apple Dumpling Gang ---- produced first", [atom.text for atom in atoms])
+        self.assertIn("Something Wicked This Way Comes ---- produced first", [atom.text for atom in atoms])
+        self.assertIn(
+            "The Apple Dumpling Gang ---- or/compared_to ---- Something Wicked This Way Comes",
+            [atom.text for atom in atoms],
+        )
+        self.assertFalse(any(len(atom.node_texts) > 2 for atom in atoms))
 
         llm = EvidenceGroundedSemanticLLM(
             {
-                "semantic_reasoning_path": [
+                "semantic_reasoning_paths": [
                     {
-                        "source": "The Apple Dumpling Gang",
-                        "semantic_relation": "production/release date",
-                        "target": "date_1",
-                        "supported_by": ["atom_1"],
-                        "reason": "The question asks which film was produced first.",
+                        "branch_id": "b1",
+                        "branch_root": "The Apple Dumpling Gang",
+                        "nodes": [
+                            {"node_id": "b1_n1", "label": "The Apple Dumpling Gang", "kind": "entity", "semantic_type": "Film"},
+                            {"node_id": "b1_n2", "label": "date_1", "kind": "value_slot", "semantic_type": "Date"},
+                        ],
+                        "edges": [
+                            {
+                                "edge_id": "b1_e1",
+                                "source": "b1_n1",
+                                "target": "b1_n2",
+                                "relation": "production/release date",
+                                "answer_type": "Date",
+                                "supported_by": ["atom_2", "atom_1"],
+                                "atomic_question_template": "When was The Apple Dumpling Gang released or produced?",
+                            }
+                        ],
                     },
                     {
-                        "source": "date_1",
-                        "semantic_relation": "compare earlier date",
-                        "target": "answer",
-                        "supported_by": ["atom_1"],
-                        "reason": "The phrase produced first indicates an earlier-date comparison.",
+                        "branch_id": "b2",
+                        "branch_root": "Something Wicked This Way Comes",
+                        "nodes": [
+                            {"node_id": "b2_n1", "label": "Something Wicked This Way Comes", "kind": "entity", "semantic_type": "Film"},
+                            {"node_id": "b2_n2", "label": "date_2", "kind": "value_slot", "semantic_type": "Date"},
+                        ],
+                        "edges": [
+                            {
+                                "edge_id": "b2_e1",
+                                "source": "b2_n1",
+                                "target": "b2_n2",
+                                "relation": "production/release date",
+                                "answer_type": "Date",
+                                "supported_by": ["atom_3", "atom_1"],
+                                "atomic_question_template": "When was Something Wicked This Way Comes released or produced?",
+                            }
+                        ],
                     },
                 ],
-                "operator_intent": {"type": "ARGMIN", "handled_downstream": True},
+                "operator_intent": {
+                    "type": "ARGMIN",
+                    "compare_attribute": "production/release date",
+                    "surface_cues": ["first"],
+                    "candidates": ["The Apple Dumpling Gang", "Something Wicked This Way Comes"],
+                    "description": "Compare dates and choose the earlier one.",
+                },
             }
         )
         parser = EntityPathSemanticParser(llm)
@@ -1203,15 +1271,87 @@ class EntityOriginPipelineTest(unittest.TestCase):
             selected_dependency_path_evidence=evidence,
         )
 
-        self.assertIn("Evidence atoms extracted from selected collapsed dependency paths", llm.prompts[0])
+        self.assertIn("Atomic evidences:", llm.prompts[0])
         self.assertIn("Do NOT directly convert dependency paths", llm.prompts[0])
-        self.assertEqual(payload["evidence_atoms"][0]["text"], "The Apple Dumpling Gang ---- produced first")
+        self.assertNotIn("Selected dependency path evidence", llm.prompts[0])
+        self.assertNotIn("Which Walt Disney film -- produced first -- The Apple Dumpling Gang -- Something Wicked This Way Comes", llm.prompts[0])
+        self.assertEqual(payload["atomic_evidences"][0]["text"], "Which Walt Disney film ---- produced first")
         self.assertEqual(
-            [edge.relation for edge in result.paths[0].edges],
-            ["production/release date", "compare earlier date"],
+            [edge.relation for path in result.paths for edge in path.edges],
+            ["production/release date", "production/release date"],
         )
-        self.assertEqual(result.paths[0].edges[0].support[0]["atom_ids"], ["atom_1"])
-        self.assertEqual(result.paths[0].edges[1].support[0]["supported_by"], ["atom_1"])
+        self.assertEqual(result.paths[0].edges[0].support[0]["atom_ids"], ["atom_2", "atom_1"])
+        self.assertEqual(result.paths[1].edges[0].support[0]["supported_by"], ["atom_3", "atom_1"])
+        self.assertEqual(result.operator_intent["type"], "ARGMIN")
+
+    def test_step9_rejects_dependency_cue_nodes_and_relations(self) -> None:
+        evidence = [
+            {
+                "path_set_id": "ps1",
+                "paths": [
+                    {
+                        "entity_id": "e1",
+                        "entity_text": "The Apple Dumpling Gang",
+                        "path_id": "e1_p1",
+                        "path_text": "The Apple Dumpling Gang -- produced first -- Something Wicked This Way Comes",
+                        "node_texts": [
+                            "The Apple Dumpling Gang",
+                            "produced first",
+                            "Something Wicked This Way Comes",
+                        ],
+                        "node_ids": ["8", "5", "10"],
+                    }
+                ],
+            }
+        ]
+        llm = EvidenceGroundedSemanticLLM(
+            {
+                "semantic_reasoning_paths": [
+                    {
+                        "branch_id": "b1",
+                        "nodes": [
+                            {"node_id": "b1_n1", "label": "The Apple Dumpling Gang", "kind": "entity"},
+                            {"node_id": "b1_n2", "label": "produced first", "kind": "semantic_object"},
+                            {"node_id": "b1_n3", "label": "Something Wicked This Way Comes", "kind": "entity"},
+                        ],
+                        "edges": [
+                            {
+                                "edge_id": "b1_e1",
+                                "source": "b1_n1",
+                                "target": "b1_n2",
+                                "relation": "produced first",
+                                "supported_by": ["atom_1"],
+                            },
+                            {
+                                "edge_id": "b1_e2",
+                                "source": "b1_n2",
+                                "target": "b1_n3",
+                                "relation": "produced first",
+                                "supported_by": ["atom_2"],
+                            },
+                        ],
+                    }
+                ],
+                "operator_intent": {"type": "ARGMIN", "surface_cues": ["first"]},
+            }
+        )
+        parser = EntityPathSemanticParser(llm)
+
+        with self.assertRaisesRegex(ValueError, "forbidden"):
+            parser.build_semantic_reasoning_paths(
+                original_question=(
+                    "Which Walt Disney film was produced first, "
+                    "The Apple Dumpling Gang or Something Wicked This Way Comes?"
+                ),
+                restored_question=(
+                    "Which Walt Disney film was produced first, "
+                    "The Apple Dumpling Gang or Something Wicked This Way Comes?"
+                ),
+                selected_dependency_path_evidence=evidence,
+            )
+
+        self.assertEqual(len(llm.prompts), 2)
+        self.assertIn("Previous output failed Semantic Reasoning Path validation", llm.prompts[1])
 
     def test_parallel_nationality_semantic_paths_compile_to_branch_lookup_dag(self) -> None:
         question = (

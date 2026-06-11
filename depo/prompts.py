@@ -702,33 +702,31 @@ Output JSON with exactly this shape:
 SEMANTIC_REASONING_PATH_SYSTEM = """
 You are implementing DEPO Step 9: Evidence-Grounded Semantic Reasoning Path Induction.
 
-This step has two layers:
-1. selected collapsed dependency paths have already been decomposed into local structural evidence atoms;
-2. you must infer branch-level semantic reasoning paths from the original question semantics, grounded by those atoms.
+Selected collapsed dependency paths have already been decomposed into atomic evidences before this step.
+You will see only:
+1. the original question;
+2. atomic evidences.
 
 Do NOT directly convert dependency paths into semantic reasoning paths.
-Treat dependency paths only as local structural evidence.
+Atomic evidences are local structural evidence, not semantic edges.
 Infer semantic reasoning paths mainly from the original question semantics.
-Use evidence atoms as grounding constraints.
-Every semantic edge must include a non-empty supported_by field containing evidence atom ids.
-If a semantic edge cannot be supported by any evidence atom, do not output that edge.
 
 Semantic reasoning path nodes are semantic objects:
 1. explicit named entities from the original question;
 2. intermediate semantic objects licensed by the question, such as author, director, performer, wife, company, CEO;
-3. final value slots, such as nationality, birth_date, death_place, death_reason, university.
+3. value slots such as date_1, date_2, death_place, nationality, birth_place;
+4. final answer variables.
 
-Semantic reasoning path edges are executable one-hop semantic relations.
+Semantic reasoning path edges are normalized executable one-hop semantic relations.
 Relations may be normalized, abstract, or task-oriented, for example:
 production/release date, date of birth, place of birth, compare earlier date,
 performer of song, director of film, nationality of person, CEO of company.
 
-One selected entity-origin path should normally produce one semantic reasoning path.
-Preserve branch-specific variables for multi-entity questions.
+Every semantic edge must include supported_by with valid atomic evidence ids.
+If a semantic edge cannot be supported by atomic evidence, do not output it.
 
 Do not generate atomic questions here except optional atomic_question_template per edge.
-Do not generate final comparison, ranking, boolean, intersection, union, or common-answer nodes/questions.
-For same/share/both/comparison questions, keep per-entity branches separate and place final intent only in operator_intent metadata.
+For comparison/ranking questions, generate semantic edges for attributes to query and put the comparison operation in operator_intent.
 
 Return strict JSON only.
 """.strip()
@@ -736,63 +734,26 @@ Return strict JSON only.
 
 def build_semantic_reasoning_path_prompt(
     original_question: str,
-    restored_question: str,
-    selected_dependency_path_evidence: list[dict[str, object]],
-    evidence_atoms: list[dict[str, object]] | None = None,
+    atomic_evidences: list[dict[str, object]],
     validation_feedback: str | None = None,
 ) -> str:
-    evidence_atoms = evidence_atoms or []
     schema = {
-        "evidence_atoms": [
-            {
-                "id": "atom_1",
-                "text": "The Apple Dumpling Gang ---- produced first",
-                "source": "The Apple Dumpling Gang",
-                "relation_hint": "produced first",
-                "target": None,
-                "origin_path": "The Apple Dumpling Gang -> produced first -> Walt Disney film",
-            },
-            {
-                "id": "atom_2",
-                "text": "performer ---- die ---- where",
-                "source": "performer",
-                "relation_hint": "die",
-                "target": "where",
-                "origin_path": "song -> performer -> die -> where",
-            }
-        ],
         "semantic_reasoning_paths": [
             {
                 "branch_id": "b1",
-                "entity_id": "e1",
-                "source_path_id": "e1_p1",
+                "branch_root": "The Apple Dumpling Gang",
                 "nodes": [
                     {
                         "node_id": "b1_n1",
-                        "label": "I Can'T See Myself Leaving You",
+                        "label": "The Apple Dumpling Gang",
                         "kind": "entity",
-                        "semantic_type": "Song",
-                        "source_path_id": "e1_p1",
-                        "source_node_texts": ["I Can'T See Myself Leaving You"],
-                        "source_node_ids": ["1"],
+                        "semantic_type": "Film",
                     },
                     {
                         "node_id": "b1_n2",
-                        "label": "performer",
-                        "kind": "semantic_object",
-                        "semantic_type": "Person",
-                        "source_path_id": "e1_p1",
-                        "source_node_texts": ["performer"],
-                        "source_node_ids": ["2"],
-                    },
-                    {
-                        "node_id": "b1_n3",
-                        "label": "death_place",
+                        "label": "date_1",
                         "kind": "value_slot",
-                        "semantic_type": "Location",
-                        "source_path_id": "e1_p1",
-                        "source_node_texts": ["die", "where"],
-                        "source_node_ids": ["3", "4"],
+                        "semantic_type": "Date",
                     },
                 ],
                 "edges": [
@@ -800,44 +761,14 @@ def build_semantic_reasoning_path_prompt(
                         "edge_id": "b1_e1",
                         "source": "b1_n1",
                         "target": "b1_n2",
-                        "relation": "performer of song",
-                        "answer_type": "Person",
+                        "relation": "production/release date",
+                        "answer_type": "Date",
                         "is_one_hop": True,
-                        "supported_by": ["atom_1"],
-                        "support": [
-                            {
-                                "path_set_id": "ps1",
-                                "path_id": "e1_p1",
-                                "atom_ids": ["atom_1"],
-                                "node_texts": ["I Can'T See Myself Leaving You", "performer"],
-                                "node_ids": ["1", "2"],
-                                "reason": "This path segment supports asking for the performer of the song.",
-                            }
-                        ],
-                        "atomic_question_template": "Who performed I Can'T See Myself Leaving You?",
-                    },
-                    {
-                        "edge_id": "b1_e2",
-                        "source": "b1_n2",
-                        "target": "b1_n3",
-                        "relation": "place of death",
-                        "answer_type": "Location",
-                        "is_one_hop": True,
-                        "supported_by": ["atom_2"],
-                        "support": [
-                            {
-                                "path_set_id": "ps1",
-                                "path_id": "e1_p1",
-                                "atom_ids": ["atom_2"],
-                                "node_texts": ["performer", "die", "where"],
-                                "node_ids": ["2", "3", "4"],
-                                "reason": "The original question asks where the performer died.",
-                            }
-                        ],
-                        "atomic_question_template": "Where did b1_n2's answer die?",
+                        "supported_by": ["atom_2", "atom_1"],
+                        "atomic_question_template": "When was The Apple Dumpling Gang released or produced?",
                     },
                 ],
-                "terminal_node_id": "b1_n3",
+                "terminal_node_id": "b1_n2",
                 "score": 95,
                 "warnings": [],
             }
@@ -846,6 +777,9 @@ def build_semantic_reasoning_path_prompt(
             "type": "NONE",
             "handled_downstream": True,
             "surface_cues": [],
+            "compare_attribute": None,
+            "candidates": [],
+            "description": "",
         },
         "score": 95,
         "score_breakdown": {
@@ -866,74 +800,52 @@ Previous output failed Semantic Reasoning Path validation:
 {validation_feedback}
 
 Regenerate the full JSON.
-Every semantic edge must be one-hop and must cite valid evidence atom ids in supported_by.
+Every semantic edge must be one-hop and must cite valid atomic evidence ids in supported_by.
 """
     return f"""
-Induce Semantic Reasoning Paths for DEPO using evidence atoms.
+Induce Semantic Reasoning Paths for DEPO using only atomic evidences.
 
 Original question:
 {original_question}
 
-Restored/normalized question:
-{restored_question}
-
-Selected dependency path evidence:
-{json.dumps(selected_dependency_path_evidence, ensure_ascii=False, indent=2)}
-
-Evidence atoms extracted from selected collapsed dependency paths:
-{json.dumps(evidence_atoms, ensure_ascii=False, indent=2)}
+Atomic evidences:
+{json.dumps(atomic_evidences, ensure_ascii=False, indent=2)}
 
 Task:
-Generate semantic reasoning paths under the original question semantics, using evidence atoms only as grounding constraints.
+Generate semantic reasoning paths under the original question semantics, using atomic evidences only as grounding constraints.
 
-Core rules:
-1. Output one semantic_reasoning_paths item per selected entity-origin path.
-2. The first node of each path must be the explicit entity from that path.
-3. Every node must be a semantic object, not a raw dependency token.
-4. Every edge must be one executable semantic lookup hop.
-5. Do NOT directly convert dependency paths into semantic reasoning paths.
-6. Treat dependency paths only as local structural evidence.
-7. Infer the semantic reasoning path mainly from the original question semantics.
-8. Use evidence atoms as grounding constraints.
-9. Every semantic edge must include non-empty supported_by.
-10. supported_by must contain evidence atom ids from the Evidence atoms list.
-11. If a semantic edge cannot be supported by any evidence atom, do not output that edge.
-12. The evidence atom relation_hint does not need to exactly match the semantic relation, but it must provide local structural support.
-13. Do not invent entities or unsupported relations.
-14. Do not create final comparison/ranking/boolean/common-answer nodes unless the comparison itself is an evidence-grounded semantic edge needed for the task.
-15. For same/share/both/comparison questions, keep per-entity branches separate when possible and put final intent in operator_intent.
+Definition of Semantic Reasoning Path:
+A semantic reasoning path is a directed semantic query structure that describes the one-hop semantic lookups needed to answer the original question. It is not a dependency path.
 
-Support rules:
-- Each edge must include supported_by: ["atom_..."].
-- You may also include support items with atom_ids, path_set_id, path_id, node_texts, and reason.
-- supported_by is authoritative. Empty supported_by is invalid.
+Hard rules:
+1. Do NOT directly convert dependency paths into semantic reasoning paths.
+2. Dependency paths are not semantic reasoning paths.
+3. Atomic evidences are local structural evidence, not semantic edges.
+4. Do not directly copy atomic evidence text as semantic edges.
+5. Predicate cues such as produced first, released first, older, younger, where, when, was, compared to must not become semantic nodes.
+6. Every semantic edge must include supported_by.
+7. supported_by must contain valid atomic evidence ids.
+8. If a semantic edge cannot be supported by any atomic evidence, do not output it.
+9. For comparison/ranking questions, generate semantic edges for the attributes that need to be queried, and put the comparison operation into operator_intent.
+10. Do not generate semantic edges like entity -> produced first, produced first -> entity, or entity -> compared to -> entity.
+11. For "Which X was produced first, A or B?", generate:
+    - A --production/release date--> date_1
+    - B --production/release date--> date_2
+    and put choose earlier date into operator_intent.
 
-Forbidden semantic nodes:
-- wh words: who, what, which, where, when, why
-- auxiliaries: do, did, does, is, was, were
-- determiners/prepositions: the, a, an, of, in, by, to, from, with, for
-- punctuation
-- comparison cues: same, share, different, older, younger, first, later, earlier
-- final operator nodes: compare, ranking, intersection, common answer, yes/no
+Allowed semantic nodes:
+- explicit entities from the original question;
+- intermediate variables such as director, performer, mother, company, CEO;
+- value slots such as date_1, date_2, death_place, nationality, birth_place;
+- final answer variables.
 
-Predicate/value-slot conversions:
-- where + die/death -> death_place
-- when + die/death -> death_date
-- why + die/death -> death_reason or cause_of_death
-- born + when -> birth_date
-- born + where -> birthplace
-- same nationality -> each branch terminal is nationality; no final comparison node
-
-Example semantic path:
-I Can'T See Myself Leaving You
-  --performer of song-->
-performer
-  --place of death-->
-death_place
-
-Example evidence-grounded edge for ranking:
-The Apple Dumpling Gang --production/release date--> date_1 supported_by=["atom_1"]
-date_1 --compare earlier date--> answer supported_by=["atom_1"]
+Allowed semantic relations:
+- director of film
+- performer of song
+- place of death
+- date of birth
+- production/release date
+- nationality of person
 {feedback}
 Return strict JSON only.
 Output JSON with exactly this shape:
