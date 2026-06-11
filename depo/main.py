@@ -65,6 +65,11 @@ def parse_args() -> argparse.Namespace:
         help="CoreNLP annotation timeout in milliseconds.",
     )
     parser.add_argument("--debug", action="store_true", help="Print detailed intermediate structures.")
+    parser.add_argument(
+        "--direct-dag",
+        action="store_true",
+        help="Legacy ablation: generate the Atomic DAG directly from dependency path evidence without Semantic Reasoning Paths.",
+    )
     return parser.parse_args()
 
 
@@ -112,6 +117,7 @@ def main() -> int:
                     subquestion_generator=subquestion_generator,
                     question_normalizer=question_normalizer,
                     path_semantic_parser=path_semantic_parser,
+                    use_semantic_reasoning_paths=not args.direct_dag,
                     debug=args.debug,
                 )
                 print_result(index, record, result, debug=args.debug)
@@ -136,6 +142,7 @@ def run_pipeline(
     subquestion_generator: "SubquestionGenerator",
     question_normalizer: "SemanticQuestionNormalizer | None" = None,
     path_semantic_parser: "EntityPathSemanticParser | None" = None,
+    use_semantic_reasoning_paths: bool = True,
     debug: bool = False,
 ) -> dict[str, Any]:
     del index, debug
@@ -237,16 +244,24 @@ def run_pipeline(
         entity_origin_paths=pruned_entity_origin_paths,
         max_path_sets=1,
     )
-    semantic_reasoning_paths, semantic_reasoning_path_payload = path_semantic_parser.build_semantic_reasoning_paths(
-        original_question=record.question,
-        restored_question=processing_question,
-        selected_dependency_path_evidence=selected_dependency_path_evidence,
-    )
-    subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
-        original_question=record.question,
-        selected_dependency_path_evidence=selected_dependency_path_evidence,
-        semantic_reasoning_paths=semantic_reasoning_paths,
-    )
+    semantic_reasoning_paths: SemanticReasoningPathResult | None = None
+    semantic_reasoning_path_payload: dict[str, Any] | None = None
+    if use_semantic_reasoning_paths:
+        semantic_reasoning_paths, semantic_reasoning_path_payload = path_semantic_parser.build_semantic_reasoning_paths(
+            original_question=record.question,
+            restored_question=processing_question,
+            selected_dependency_path_evidence=selected_dependency_path_evidence,
+        )
+        subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
+            original_question=record.question,
+            selected_dependency_path_evidence=selected_dependency_path_evidence,
+            semantic_reasoning_paths=semantic_reasoning_paths,
+        )
+    else:
+        subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
+            original_question=record.question,
+            selected_dependency_path_evidence=selected_dependency_path_evidence,
+        )
     subquestions = subquestion_dag.to_subquestions()
     return {
         "semantic_normalization": semantic_normalization,
@@ -270,6 +285,7 @@ def run_pipeline(
         "best_paths_by_entity": best_paths_by_entity,
         "path_set_candidates": path_set_candidates,
         "selected_dependency_path_evidence": selected_dependency_path_evidence,
+        "use_semantic_reasoning_paths": use_semantic_reasoning_paths,
         "semantic_reasoning_paths": semantic_reasoning_paths,
         "semantic_reasoning_path_payload": semantic_reasoning_path_payload,
         "grounded_atomic_dag_payload": grounded_atomic_dag_payload,
@@ -418,7 +434,6 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     print()
 
     print("[9. Semantic Reasoning Path Induction]")
-    _print_selected_dependency_path_evidence(selected_dependency_path_evidence)
     _print_semantic_reasoning_paths(semantic_reasoning_paths)
     print()
 
@@ -617,26 +632,23 @@ def _print_semantic_reasoning_paths(result: SemanticReasoningPathResult | None) 
     if result is None or not result.paths:
         print("  (none)")
         return
-    if result.selected_path_set_ids:
-        print(f"  selected_path_set_ids={result.selected_path_set_ids}")
-    if result.operator_intent:
-        print(f"  operator_intent={result.operator_intent}")
-    if result.score:
-        print(f"  score={result.score:.1f}")
     for path in result.paths:
-        print(
-          f"  - {path.branch_id}: entity_id={path.entity_id} "
-            f"source_path_id={path.source_path_id} score={path.score:.1f}"
-        )
+        label_by_id = {node.node_id: node.label for node in path.nodes}
+        if path.edges:
+            chain_parts: list[str] = []
+            first_edge = path.edges[0]
+            chain_parts.append(label_by_id.get(first_edge.source, first_edge.source))
+            for edge in path.edges:
+                chain_parts.append(f"--{edge.relation}-->")
+                chain_parts.append(label_by_id.get(edge.target, edge.target))
+            print(f"  - {path.branch_id}: {' '.join(chain_parts)}")
+        else:
+            node_labels = [node.label for node in path.nodes]
+            print(f"  - {path.branch_id}: {' -> '.join(node_labels) if node_labels else '(empty)'}")
         for edge in path.edges:
-            support_ids = [
-                str(item.get("path_id"))
-                for item in edge.support
-                if isinstance(item, dict) and item.get("path_id")
-            ]
             print(
-                f"    - {edge.edge_id}: {edge.source} --{edge.relation}--> {edge.target} "
-                f"support={support_ids or 'none'}"
+                f"    {edge.edge_id}: "
+                f"{label_by_id.get(edge.source, edge.source)} -> {label_by_id.get(edge.target, edge.target)}"
             )
         if path.warnings:
             print("    Warnings:")
@@ -667,11 +679,19 @@ def _print_grounded_atomic_dag_payload(payload: dict[str, Any]) -> None:
             dependencies = node.get("dependencies") or []
             support = node.get("support") or []
             semantic_edge_id = node.get("source_semantic_edge_id")
+            semantic_path_id = node.get("source_semantic_path_id")
+            relation = node.get("one_hop_relation")
             support_ids = []
             if isinstance(support, list):
                 support_ids = [str(item.get("path_id")) for item in support if isinstance(item, dict) and item.get("path_id")]
-            semantic = f" source_semantic_edge_id={semantic_edge_id}" if semantic_edge_id else ""
-            print(f"    - {node.get('node_id')}: depends_on={dependencies or 'none'} support={support_ids or 'none'}{semantic}")
+            semantic = ""
+            if semantic_path_id or semantic_edge_id:
+                semantic = f" source={semantic_path_id or '?'}:{semantic_edge_id or '?'}"
+            relation_text = f" relation={relation}" if relation else ""
+            print(
+                f"    - {node.get('node_id')}: depends_on={dependencies or 'none'} "
+                f"support={support_ids or 'none'}{semantic}{relation_text}"
+            )
             print(f"      {node.get('question')}")
     warnings = payload.get("normalization_warnings") or []
     if warnings:

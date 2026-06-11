@@ -796,6 +796,9 @@ class EntityOriginPipelineTest(unittest.TestCase):
                     "node_id": "q1",
                     "question": "What region is Israel located in?",
                     "operation": "lookup",
+                    "input": {"type": "entity", "text": "Israel"},
+                    "one_hop_relation": "region where located",
+                    "answer_type": "Region",
                     "dependencies": [],
                     "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["Israel", "located", "region"]}],
                     "source_semantic_path_id": "b1",
@@ -806,6 +809,8 @@ class EntityOriginPipelineTest(unittest.TestCase):
                     "question": "What region is immediately north of the region where Israel is located?",
                     "operation": "lookup",
                     "input": {"type": "previous_answer", "ref": "q1"},
+                    "one_hop_relation": "region immediately north",
+                    "answer_type": "Region",
                     "dependencies": ["q1"],
                     "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["region", "north_region"]}],
                     "source_semantic_path_id": "b1",
@@ -939,6 +944,128 @@ class EntityOriginPipelineTest(unittest.TestCase):
         )
         self.assertEqual(result["subquestion_dag"].nodes[0].metadata["support_path_ids"], ["e1_p1"])
         self.assertEqual(result["subquestion_dag"].nodes[0].metadata["source_semantic_edge_id"], "b1_e1")
+
+        calls = llm.system_prompts
+        self.assertIn(ENTITY_PATH_SCORING_SYSTEM, calls)
+        self.assertIn(SEMANTIC_REASONING_PATH_SYSTEM, calls)
+        self.assertIn(ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM, calls)
+        self.assertNotIn(GROUNDED_ATOMIC_DAG_SYSTEM, calls)
+        self.assertLess(calls.index(ENTITY_PATH_SCORING_SYSTEM), calls.index(SEMANTIC_REASONING_PATH_SYSTEM))
+        self.assertLess(calls.index(SEMANTIC_REASONING_PATH_SYSTEM), calls.index(ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM))
+
+    def test_direct_dag_fallback_requires_explicit_flag(self) -> None:
+        question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
+        dependency_parse = _dependency_parse(
+            ["GameA", "developed", "company", "CEO", "graduated", "university"],
+            [(1, 2, "dep"), (2, 3, "obj"), (3, 4, "nmod:of"), (4, 5, "dep"), (5, 6, "obl:from")],
+            pos_by_word={"GameA": "NNP"},
+        )
+        llm = NoCandidatePromptLLM()
+
+        result = run_pipeline(
+            record=QuestionRecord(question=question),
+            index=1,
+            mask_span_extractor=StaticMaskSpanExtractor(
+                [
+                    MaskSpan(
+                        text="AlphaGo",
+                        start_char=question.index("AlphaGo"),
+                        end_char=question.index("AlphaGo") + len("AlphaGo"),
+                        kind_hint="entity",
+                        semantic_type_hint="Game",
+                    )
+                ]
+            ),
+            parser=StaticParser(dependency_parse),
+            graph_builder=GraphBuilder(),
+            anchor_selector=None,
+            semantic_ast_optimizer=None,
+            subquestion_generator=StaticSubquestionGenerator(llm),
+            question_normalizer=IdentityNormalizer(),
+            path_semantic_parser=EntityPathSemanticParser(llm),
+            use_semantic_reasoning_paths=False,
+            debug=False,
+        )
+
+        self.assertFalse(result["use_semantic_reasoning_paths"])
+        self.assertIsNone(result["semantic_reasoning_paths"])
+        self.assertIn(GROUNDED_ATOMIC_DAG_SYSTEM, llm.system_prompts)
+        self.assertNotIn(SEMANTIC_REASONING_PATH_SYSTEM, llm.system_prompts)
+        self.assertNotIn(ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM, llm.system_prompts)
+
+    def test_semantic_edge_coverage_rejects_missing_unknown_and_duplicate_edges(self) -> None:
+        evidence = _selected_dependency_path_evidence_for_two_edge_chain()
+        semantic_payload = _semantic_two_edge_payload()
+
+        cases = [
+            (
+                [_atomic_node_for_edge("q1", "b1_e1")],
+                "skipped semantic reasoning edges",
+            ),
+            (
+                [_atomic_node_for_edge("q1", "missing_edge")],
+                "unknown source_semantic_edge_id",
+            ),
+            (
+                [
+                    _atomic_node_for_edge("q1", "b1_e1"),
+                    _atomic_node_for_edge("q2", "b1_e1", dependency="q1"),
+                    _atomic_node_for_edge("q3", "b1_e2", dependency="q2"),
+                ],
+                "compiled by multiple atomic nodes",
+            ),
+        ]
+
+        for nodes, error_pattern in cases:
+            with self.subTest(error_pattern=error_pattern):
+                parser = EntityPathSemanticParser(SemanticAtomicLLM({"nodes": nodes}))
+                with self.assertRaisesRegex(ValueError, error_pattern):
+                    parser.build_grounded_atomic_dag(
+                        original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
+                        selected_dependency_path_evidence=evidence,
+                        semantic_reasoning_paths=semantic_payload,
+                    )
+
+    def test_parallel_nationality_semantic_paths_compile_to_branch_lookup_dag(self) -> None:
+        question = (
+            "Do director of film Ten9Eight: Shoot For The Moon and director of film "
+            "Sabotage (1936 Film) share the same nationality?"
+        )
+        evidence = _parallel_nationality_evidence()
+        llm = SemanticReasoningFlowLLM(
+            semantic_payload=_semantic_parallel_nationality_payload(),
+            atomic_payload=_atomic_parallel_nationality_payload(),
+        )
+        parser = EntityPathSemanticParser(llm)
+
+        semantic_paths, _ = parser.build_semantic_reasoning_paths(
+            original_question=question,
+            restored_question=question,
+            selected_dependency_path_evidence=evidence,
+        )
+        dag, _ = parser.build_grounded_atomic_dag(
+            original_question=question,
+            selected_dependency_path_evidence=evidence,
+            semantic_reasoning_paths=semantic_paths,
+        )
+
+        self.assertEqual(
+            [node.question for node in dag.nodes],
+            [
+                "Who directed Ten9Eight: Shoot For The Moon?",
+                "What is q1's answer's nationality?",
+                "Who directed Sabotage (1936 Film)?",
+                "What is q3's answer's nationality?",
+            ],
+        )
+        self.assertEqual([node.depends_on for node in dag.nodes], [[], ["q1"], [], ["q3"]])
+        self.assertEqual(
+            [node.metadata["source_semantic_edge_id"] for node in dag.nodes],
+            ["b1_e1", "b1_e2", "b2_e1", "b2_e2"],
+        )
+        self.assertEqual(semantic_paths.operator_intent.get("type"), "COMPARE_SAME")
+        self.assertTrue(semantic_paths.operator_intent.get("handled_downstream"))
+        self.assertFalse(any("share the same nationality" in node.question.lower() for node in dag.nodes))
 
     def test_ordered_comparison_infers_age_from_younger_cue(self) -> None:
         selected_paths = [
@@ -1171,6 +1298,22 @@ class SemanticAtomicLLM:
         return json.loads(json.dumps(self.dag_payload))
 
 
+class SemanticReasoningFlowLLM:
+    def __init__(self, *, semantic_payload: dict[str, Any], atomic_payload: dict[str, Any]) -> None:
+        self.semantic_payload = semantic_payload
+        self.atomic_payload = atomic_payload
+        self.system_prompts: list[str] = []
+
+    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
+        del prompt
+        self.system_prompts.append(system_prompt)
+        if system_prompt == SEMANTIC_REASONING_PATH_SYSTEM:
+            return json.loads(json.dumps(self.semantic_payload))
+        if system_prompt == ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM:
+            return json.loads(json.dumps(self.atomic_payload))
+        raise AssertionError(f"Unexpected prompt: {system_prompt}")
+
+
 class SequenceGroundedAtomicLLM:
     def __init__(self, dag_payloads: list[dict[str, Any]]) -> None:
         self.dag_payloads = dag_payloads
@@ -1187,7 +1330,11 @@ class SequenceGroundedAtomicLLM:
 
 
 class NoCandidatePromptLLM:
+    def __init__(self) -> None:
+        self.system_prompts: list[str] = []
+
     def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
+        self.system_prompts.append(system_prompt)
         if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
             raise AssertionError("legacy candidate-node/problem-frame prompt was called")
         if system_prompt == ENTITY_PATH_SCORING_SYSTEM or "dependency-path judge" in system_prompt:
@@ -1315,6 +1462,254 @@ def _selected_dependency_path_evidence_for_alphago() -> list[dict[str, Any]]:
             ],
         }
     ]
+
+
+def _selected_dependency_path_evidence_for_two_edge_chain() -> list[dict[str, Any]]:
+    return [
+        {
+            "path_set_id": "ps1",
+            "paths": [
+                {
+                    "entity_id": "e1",
+                    "entity_text": "AlphaGo",
+                    "path_id": "e1_p1",
+                    "path_text": "AlphaGo -> developed -> company -> CEO -> university",
+                    "node_texts": ["AlphaGo", "developed", "company", "CEO", "university"],
+                    "node_ids": ["1", "2", "3", "4", "5"],
+                }
+            ],
+        }
+    ]
+
+
+def _semantic_two_edge_payload() -> dict[str, Any]:
+    return {
+        "paths": [
+            {
+                "branch_id": "b1",
+                "entity_id": "e1",
+                "source_path_id": "e1_p1",
+                "nodes": [
+                    {"node_id": "b1_n1", "label": "AlphaGo", "kind": "entity", "semantic_type": "Game"},
+                    {"node_id": "b1_n2", "label": "company", "kind": "semantic_object", "semantic_type": "Organization"},
+                    {"node_id": "b1_n3", "label": "CEO", "kind": "semantic_object", "semantic_type": "Person"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "b1_e1",
+                        "source": "b1_n1",
+                        "target": "b1_n2",
+                        "relation": "developer company",
+                        "answer_type": "Organization",
+                        "is_one_hop": True,
+                        "support": [
+                            {"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["AlphaGo", "developed", "company"]}
+                        ],
+                    },
+                    {
+                        "edge_id": "b1_e2",
+                        "source": "b1_n2",
+                        "target": "b1_n3",
+                        "relation": "CEO of company",
+                        "answer_type": "Person",
+                        "is_one_hop": True,
+                        "support": [
+                            {"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["company", "CEO"]}
+                        ],
+                    },
+                ],
+            }
+        ],
+        "selected_path_set_ids": ["ps1"],
+    }
+
+
+def _atomic_node_for_edge(node_id: str, edge_id: str, dependency: str | None = None) -> dict[str, Any]:
+    dependencies = [dependency] if dependency else []
+    if dependency:
+        question = f"What is {dependency}'s answer related to?"
+        raw_input = {"type": "previous_answer", "ref": dependency}
+    else:
+        question = "Which company developed AlphaGo?"
+        raw_input = {"type": "entity", "text": "AlphaGo"}
+    return {
+        "node_id": node_id,
+        "question": question,
+        "operation": "lookup",
+        "input": raw_input,
+        "one_hop_relation": "test relation",
+        "answer_type": "Entity",
+        "dependencies": dependencies,
+        "support": [
+            {"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["AlphaGo", "company"]}
+        ],
+        "source_semantic_path_id": "b1",
+        "source_semantic_edge_id": edge_id,
+    }
+
+
+def _parallel_nationality_evidence() -> list[dict[str, Any]]:
+    return [
+        {
+            "path_set_id": "ps1",
+            "paths": [
+                {
+                    "entity_id": "e1",
+                    "entity_text": "Ten9Eight: Shoot For The Moon",
+                    "path_id": "e1_p1",
+                    "path_text": "Ten9Eight: Shoot For The Moon -> director -> nationality",
+                    "node_texts": ["Ten9Eight: Shoot For The Moon", "director", "nationality"],
+                    "node_ids": ["1", "2", "3"],
+                },
+                {
+                    "entity_id": "e2",
+                    "entity_text": "Sabotage (1936 Film)",
+                    "path_id": "e2_p1",
+                    "path_text": "Sabotage (1936 Film) -> director -> nationality",
+                    "node_texts": ["Sabotage (1936 Film)", "director", "nationality"],
+                    "node_ids": ["4", "5", "6"],
+                },
+            ],
+        }
+    ]
+
+
+def _semantic_parallel_nationality_payload() -> dict[str, Any]:
+    return {
+        "semantic_reasoning_paths": [
+            {
+                "branch_id": "b1",
+                "entity_id": "e1",
+                "source_path_id": "e1_p1",
+                "nodes": [
+                    {"node_id": "b1_n1", "label": "Ten9Eight: Shoot For The Moon", "kind": "entity", "semantic_type": "Film"},
+                    {"node_id": "b1_n2", "label": "director_1", "kind": "semantic_object", "semantic_type": "Person"},
+                    {"node_id": "b1_n3", "label": "nationality_1", "kind": "value_slot", "semantic_type": "Nationality"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "b1_e1",
+                        "source": "b1_n1",
+                        "target": "b1_n2",
+                        "relation": "director of film",
+                        "answer_type": "Person",
+                        "is_one_hop": True,
+                        "support": [
+                            {"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["Ten9Eight: Shoot For The Moon", "director"]}
+                        ],
+                    },
+                    {
+                        "edge_id": "b1_e2",
+                        "source": "b1_n2",
+                        "target": "b1_n3",
+                        "relation": "nationality of person",
+                        "answer_type": "Nationality",
+                        "is_one_hop": True,
+                        "support": [
+                            {"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["director", "nationality"]}
+                        ],
+                    },
+                ],
+                "terminal_node_id": "b1_n3",
+                "score": 96,
+            },
+            {
+                "branch_id": "b2",
+                "entity_id": "e2",
+                "source_path_id": "e2_p1",
+                "nodes": [
+                    {"node_id": "b2_n1", "label": "Sabotage (1936 Film)", "kind": "entity", "semantic_type": "Film"},
+                    {"node_id": "b2_n2", "label": "director_2", "kind": "semantic_object", "semantic_type": "Person"},
+                    {"node_id": "b2_n3", "label": "nationality_2", "kind": "value_slot", "semantic_type": "Nationality"},
+                ],
+                "edges": [
+                    {
+                        "edge_id": "b2_e1",
+                        "source": "b2_n1",
+                        "target": "b2_n2",
+                        "relation": "director of film",
+                        "answer_type": "Person",
+                        "is_one_hop": True,
+                        "support": [
+                            {"path_set_id": "ps1", "path_id": "e2_p1", "node_texts": ["Sabotage (1936 Film)", "director"]}
+                        ],
+                    },
+                    {
+                        "edge_id": "b2_e2",
+                        "source": "b2_n2",
+                        "target": "b2_n3",
+                        "relation": "nationality of person",
+                        "answer_type": "Nationality",
+                        "is_one_hop": True,
+                        "support": [
+                            {"path_set_id": "ps1", "path_id": "e2_p1", "node_texts": ["director", "nationality"]}
+                        ],
+                    },
+                ],
+                "terminal_node_id": "b2_n3",
+                "score": 96,
+            },
+        ],
+        "operator_intent": {"type": "COMPARE_SAME", "handled_downstream": True, "surface_cues": ["share", "same"]},
+        "score": 96,
+    }
+
+
+def _atomic_parallel_nationality_payload() -> dict[str, Any]:
+    return {
+        "nodes": [
+            {
+                "node_id": "q1",
+                "question": "Who directed Ten9Eight: Shoot For The Moon?",
+                "operation": "lookup",
+                "input": {"type": "entity", "text": "Ten9Eight: Shoot For The Moon"},
+                "one_hop_relation": "director of film",
+                "answer_type": "Person",
+                "dependencies": [],
+                "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["Ten9Eight: Shoot For The Moon", "director"]}],
+                "source_semantic_path_id": "b1",
+                "source_semantic_edge_id": "b1_e1",
+            },
+            {
+                "node_id": "q2",
+                "question": "What is q1's answer's nationality?",
+                "operation": "lookup",
+                "input": {"type": "previous_answer", "ref": "q1"},
+                "one_hop_relation": "nationality of person",
+                "answer_type": "Nationality",
+                "dependencies": ["q1"],
+                "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["director", "nationality"]}],
+                "source_semantic_path_id": "b1",
+                "source_semantic_edge_id": "b1_e2",
+            },
+            {
+                "node_id": "q3",
+                "question": "Who directed Sabotage (1936 Film)?",
+                "operation": "lookup",
+                "input": {"type": "entity", "text": "Sabotage (1936 Film)"},
+                "one_hop_relation": "director of film",
+                "answer_type": "Person",
+                "dependencies": [],
+                "support": [{"path_set_id": "ps1", "path_id": "e2_p1", "node_texts": ["Sabotage (1936 Film)", "director"]}],
+                "source_semantic_path_id": "b2",
+                "source_semantic_edge_id": "b2_e1",
+            },
+            {
+                "node_id": "q4",
+                "question": "What is q3's answer's nationality?",
+                "operation": "lookup",
+                "input": {"type": "previous_answer", "ref": "q3"},
+                "one_hop_relation": "nationality of person",
+                "answer_type": "Nationality",
+                "dependencies": ["q3"],
+                "support": [{"path_set_id": "ps1", "path_id": "e2_p1", "node_texts": ["director", "nationality"]}],
+                "source_semantic_path_id": "b2",
+                "source_semantic_edge_id": "b2_e2",
+            },
+        ],
+        "selected_path_set_ids": ["ps1"],
+        "reason": "compiled per-branch nationality lookups only",
+    }
 
 
 def _grounded_alphago_payload() -> dict[str, Any]:

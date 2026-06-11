@@ -89,6 +89,8 @@ anchor decisions are made on restored original question text.
    such as `q1's answer`. Each atomic node keeps support copied from the source
    semantic edge and remains traceable to `source_semantic_path_id` and
    `source_semantic_edge_id`.
+   The old direct dependency-evidence-to-DAG path is retained only as an
+   explicit ablation fallback via `--direct-dag`; it is not the default.
 
 11. **Atomic Subquestion DAG**
    The final DAG contains only one-hop lookup subquestions and explicit
@@ -126,6 +128,12 @@ Run with detailed intermediate output:
 
 ```powershell
 python main.py --debug --question "Which actor is older?"
+```
+
+Run the legacy direct-DAG ablation explicitly:
+
+```powershell
+python main.py --direct-dag --question "Which actor is older?"
 ```
 
 If Stanza cannot find CoreNLP, pass the CoreNLP directory:

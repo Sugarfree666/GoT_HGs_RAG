@@ -241,6 +241,7 @@ class EntityPathSemanticParser:
                 selected_dependency_path_evidence,
             )
             hard_errors.extend(_grounded_dependency_variable_reference_errors(raw_payload))
+            hard_errors.extend(_atomic_dag_required_semantic_fields_errors(raw_payload))
             hard_errors.extend(_semantic_edge_source_errors(raw_payload, semantic_payload))
             final_support_warnings = support_warnings
             if hard_errors:
@@ -641,7 +642,7 @@ def _semantic_edge_source_errors(payload: dict[str, Any], semantic_payload: dict
     if not isinstance(raw_nodes, list):
         return []
     errors: list[str] = []
-    used_edge_ids: set[str] = set()
+    used_edge_ids: dict[str, list[str]] = {}
     for index, node in enumerate(raw_nodes, start=1):
         if not isinstance(node, dict):
             continue
@@ -653,10 +654,58 @@ def _semantic_edge_source_errors(payload: dict[str, Any], semantic_payload: dict
         if edge_id not in expected_edge_ids:
             errors.append(f"Atomic node {node_id} references unknown source_semantic_edge_id={edge_id!r}.")
             continue
-        used_edge_ids.add(edge_id)
-    missing = sorted(expected_edge_ids - used_edge_ids)
+        used_edge_ids.setdefault(edge_id, []).append(node_id)
+    duplicate_edges = {
+        edge_id: node_ids
+        for edge_id, node_ids in used_edge_ids.items()
+        if len(node_ids) > 1
+    }
+    for edge_id, node_ids in sorted(duplicate_edges.items()):
+        errors.append(
+            f"Semantic reasoning edge {edge_id!r} is compiled by multiple atomic nodes: {node_ids}. "
+            "Each semantic edge must map to exactly one atomic DAG node."
+        )
+    missing = sorted(expected_edge_ids - set(used_edge_ids))
     if missing:
-        errors.append(f"Atomic DAG skipped semantic reasoning edges: {missing}.")
+        errors.append(
+            f"Atomic DAG skipped semantic reasoning edges: {missing}. "
+            "Every semantic edge must be compiled into exactly one atomic DAG node."
+        )
+    return errors
+
+
+def _atomic_dag_required_semantic_fields_errors(payload: dict[str, Any]) -> list[str]:
+    raw_nodes = payload.get("nodes")
+    if raw_nodes is None:
+        raw_nodes = payload.get("atomic_questions") or payload.get("subquestions")
+    if not isinstance(raw_nodes, list):
+        return []
+    errors: list[str] = []
+    required_fields = (
+        "node_id",
+        "question",
+        "operation",
+        "input",
+        "one_hop_relation",
+        "answer_type",
+        "dependencies",
+        "support",
+        "source_semantic_path_id",
+        "source_semantic_edge_id",
+    )
+    for index, node in enumerate(raw_nodes, start=1):
+        if not isinstance(node, dict):
+            continue
+        node_id = str(node.get("node_id") or node.get("id") or f"q{index}").strip()
+        missing = [
+            field
+            for field in required_fields
+            if field not in node or node.get(field) in (None, "")
+        ]
+        if missing:
+            errors.append(f"Atomic node {node_id} is missing required semantic-DAG fields: {missing}.")
+        if str(node.get("operation") or "").strip() != "lookup":
+            errors.append(f"Atomic node {node_id} must have operation='lookup'.")
     return errors
 
 
