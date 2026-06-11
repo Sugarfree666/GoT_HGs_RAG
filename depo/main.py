@@ -162,6 +162,7 @@ def run_pipeline(
     from path_projector import (
         build_undirected_dependency_graph,
     )
+    from dependency_graph_collapser import collapse_dependency_graph
 
     semantic_normalization = (
         question_normalizer.normalize(record.question)
@@ -191,10 +192,11 @@ def run_pipeline(
         replacement=replacement,
     )
 
-    dependency_graph = build_undirected_dependency_graph(
+    raw_dependency_graph = build_undirected_dependency_graph(
         dependency_parse=dependency_parse,
         restored_graph_node_candidates=restored_graph_node_candidates,
     )
+    dependency_graph = collapse_dependency_graph(raw_dependency_graph)
     if path_semantic_parser is None:
         path_semantic_parser = EntityPathSemanticParser(getattr(subquestion_generator, "llm_client", None))
 
@@ -272,6 +274,16 @@ def run_pipeline(
         "entity_mask_mappings": replacement.mask_mappings,
         "replacement": replacement,
         "dependency_parse": dependency_parse,
+        "raw_dependency_graph": raw_dependency_graph,
+        "dependency_collapse_stats": {
+            "enabled": bool(dependency_graph.graph.get("dependency_collapsing_enabled")),
+            "relations": list(dependency_graph.graph.get("collapse_relations") or []),
+            "raw_node_count": dependency_graph.graph.get("raw_node_count"),
+            "raw_edge_count": dependency_graph.graph.get("raw_edge_count"),
+            "collapsed_node_count": dependency_graph.graph.get("collapsed_node_count"),
+            "collapsed_edge_count": dependency_graph.graph.get("collapsed_edge_count"),
+            "decisions": list(dependency_graph.graph.get("collapse_decisions") or []),
+        },
         "weighted_graph": dependency_graph,
         "graph_node_candidates": graph_node_candidates,
         "restored_graph_node_candidates": restored_graph_node_candidates,
@@ -405,8 +417,17 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     print()
 
     print("[5. Undirected Dependency Graph]")
+    raw_graph = result.get("raw_dependency_graph")
+    if raw_graph is not None:
+        print(f"  raw nodes={raw_graph.number_of_nodes()} edges={raw_graph.number_of_edges()}")
     graph = result.get("dependency_graph", result["weighted_graph"])
-    print(f"  nodes={graph.number_of_nodes()} edges={graph.number_of_edges()}")
+    print(f"  collapsed nodes={graph.number_of_nodes()} edges={graph.number_of_edges()}")
+    collapse_stats = result.get("dependency_collapse_stats") or {}
+    decisions = collapse_stats.get("decisions") or []
+    if decisions:
+        print(f"  collapsed {len(decisions)} node(s) by rels={collapse_stats.get('relations')}")
+    print("  collapsed dependency edges:")
+    _print_dependency_graph_edges(graph)
     print()
 
     print("[6. Entity Start Nodes from Explicit Entities]")
@@ -470,6 +491,47 @@ def _print_sample_dependency_edges(edges: list[Any], limit: int = 5) -> None:
     remaining = len(edges) - limit
     if remaining > 0:
         print(f"  ... {remaining} more edges")
+
+
+def _print_dependency_graph_edges(graph: Any) -> None:
+    edges = list(graph.edges(data=True))
+    if not edges:
+        print("    (none)")
+        return
+    for source, target, attrs in sorted(edges, key=lambda item: _dependency_graph_edge_sort_key(graph, item)):
+        relations = [str(item) for item in attrs.get("relations", []) if str(item)]
+        relation = "/".join(relations) or str(attrs.get("relation") or attrs.get("dependency_label") or "related")
+        collapsed_via = attrs.get("collapsed_via") or []
+        collapsed_text = f" collapsed_via={len(collapsed_via)}" if collapsed_via else ""
+        print(
+            f"    - {_dependency_graph_node_text(graph, source)}[{source}] "
+            f"--{relation}-- {_dependency_graph_node_text(graph, target)}[{target}]"
+            f"{collapsed_text}"
+        )
+
+
+def _dependency_graph_edge_sort_key(graph: Any, edge: tuple[Any, Any, dict[str, Any]]) -> tuple[int, int, str, str]:
+    source, target, _attrs = edge
+    source_order = _dependency_graph_node_order(graph, source)
+    target_order = _dependency_graph_node_order(graph, target)
+    return (min(source_order, target_order), max(source_order, target_order), str(source), str(target))
+
+
+def _dependency_graph_node_order(graph: Any, node_id: Any) -> int:
+    attrs = graph.nodes[node_id]
+    value = attrs.get("order")
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        try:
+            return int(node_id)
+        except (TypeError, ValueError):
+            return 10**9
+
+
+def _dependency_graph_node_text(graph: Any, node_id: Any) -> str:
+    attrs = graph.nodes[node_id]
+    return str(attrs.get("text") or attrs.get("word") or attrs.get("label") or node_id)
 
 
 def _print_entity_origin_paths(

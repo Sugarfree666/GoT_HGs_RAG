@@ -218,6 +218,7 @@ def build_decomposition_payload(
 ) -> dict[str, Any]:
     dependency_parse = result["dependency_parse"]
     dependency_graph = result["dependency_graph"]
+    raw_dependency_graph = result.get("raw_dependency_graph") or dependency_graph
     subquestion_dag = result.get("subquestion_dag")
     subquestions = result.get("subquestions", [])
 
@@ -249,7 +250,9 @@ def build_decomposition_payload(
                 "edges": [_dataclass_to_jsonable(edge) for edge in dependency_parse.edges],
                 "edge_display": [edge.display() for edge in dependency_parse.edges],
             },
-            "5_undirected_dependency_graph": _graph_payload(dependency_graph),
+            "5_undirected_dependency_graph": _graph_payload(raw_dependency_graph),
+            "5_1_collapsed_dependency_graph": _graph_payload(dependency_graph),
+            "5_2_dependency_graph_collapse_stats": _dataclass_to_jsonable(result.get("dependency_collapse_stats") or {}),
             "6_entity_start_nodes": [_dataclass_to_jsonable(entity) for entity in result["entity_start_nodes"]],
             "7_entity_origin_paths": [_dataclass_to_jsonable(path) for path in result["entity_origin_paths"]],
             "7_5_terminal_glue_path_pruning": _dataclass_to_jsonable(result.get("path_pruning_stats") or {}),
@@ -343,6 +346,36 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append(f"- {edge.get('source_text')}[{edge.get('source')}] --{relation}-- {edge.get('target_text')}[{edge.get('target')}]")
     if not stages["5_undirected_dependency_graph"]["edges"]:
         lines.append("(none)")
+    lines.append("")
+
+    collapsed_stage = stages.get("5_1_collapsed_dependency_graph") or {"edges": []}
+    lines.append("## 5.1 Collapsed Dependency Graph")
+    for edge in collapsed_stage.get("edges", []):
+        relation = "/".join(edge.get("relations", [])) or "related"
+        lines.append(f"- {edge.get('source_text')}[{edge.get('source')}] --{relation}-- {edge.get('target_text')}[{edge.get('target')}]")
+    if not collapsed_stage.get("edges"):
+        lines.append("(none)")
+    lines.append("")
+
+    collapse_stats = stages.get("5_2_dependency_graph_collapse_stats") or {}
+    lines.append("## 5.2 Dependency Graph Collapse Stats")
+    lines.append(f"- Enabled: {bool(collapse_stats.get('enabled'))}")
+    lines.append(f"- Relations: {collapse_stats.get('relations') or []}")
+    lines.append(
+        f"- Counts: raw={collapse_stats.get('raw_node_count')} nodes/{collapse_stats.get('raw_edge_count')} edges; "
+        f"collapsed={collapse_stats.get('collapsed_node_count')} nodes/{collapse_stats.get('collapsed_edge_count')} edges"
+    )
+    decisions = collapse_stats.get("decisions") or []
+    for decision in decisions:
+        if isinstance(decision, dict):
+            lines.append(
+                f"- collapse {decision.get('relation')}: "
+                f"{decision.get('child_text')} -> {decision.get('head_text_before')} => {decision.get('head_text_after')}"
+            )
+        else:
+            lines.append(f"- {decision}")
+    if not decisions:
+        lines.append("- Decisions: none")
     lines.append("")
 
     lines.append("## 6. Entity Start Nodes from Explicit Entities")

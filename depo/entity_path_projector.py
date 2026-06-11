@@ -273,7 +273,7 @@ def build_entity_start_nodes_from_explicit_entities(
             continue
         seen_placeholders.add(mapping.placeholder)
         candidate = by_placeholder.get(mapping.placeholder)
-        if candidate is None:
+        if candidate is None or str(candidate.node_id) not in {str(node_id) for node_id in dependency_graph.nodes}:
             candidate = _candidate_from_graph_placeholder(dependency_graph, mapping.placeholder)
         if candidate is None or str(candidate.node_id) not in {str(node_id) for node_id in dependency_graph.nodes}:
             missing_placeholders.append(mapping.placeholder)
@@ -322,7 +322,20 @@ def _candidate_from_graph_placeholder(
 ) -> RestoredGraphNodeCandidate | None:
     for node_id, attrs in dependency_graph.nodes(data=True):
         text = str(attrs.get("word") or attrs.get("text") or "").strip()
-        if text != placeholder:
+        collapsed_placeholders = {str(item) for item in attrs.get("collapsed_placeholders", []) if str(item)}
+        collapsed_node_ids = {str(item) for item in attrs.get("collapsed_node_ids", []) if str(item)}
+        source_tokens = attrs.get("source_tokens") or []
+        token_placeholders = {
+            str(token.get("graph_text") or token.get("word") or "")
+            for token in source_tokens
+            if isinstance(token, dict)
+        }
+        if (
+            text != placeholder
+            and placeholder not in collapsed_placeholders
+            and placeholder not in collapsed_node_ids
+            and placeholder not in token_placeholders
+        ):
             continue
         token_index = int(attrs.get("order") or node_id)
         return RestoredGraphNodeCandidate(
@@ -334,7 +347,7 @@ def _candidate_from_graph_placeholder(
             display_text=placeholder,
             is_mask_placeholder=True,
             kind_hint="entity_candidate",
-            source_token_indices=[token_index],
+            source_token_indices=list(attrs.get("source_token_indices") or [token_index]),
             text=placeholder,
         )
     return None
