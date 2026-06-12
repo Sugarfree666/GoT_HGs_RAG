@@ -42,15 +42,13 @@ def generate_atomic_dag_with_depo(
     with _prepend_sys_path(depo_dir):
         try:
             main_module = _load_depo_main(depo_dir)
-            anchor_selector_module = importlib.import_module("anchor_selector")
-            ast_builder_module = importlib.import_module("ast_builder")
             corenlp_parser_module = importlib.import_module("corenlp_parser")
+            entity_path_pipeline_module = importlib.import_module("entity_path_pipeline")
             graph_builder_module = importlib.import_module("graph_builder")
             llm_client_module = importlib.import_module("llm_client")
             mask_span_module = importlib.import_module("mask_span_extractor")
             models_module = importlib.import_module("models")
             normalizer_module = importlib.import_module("question_normalizer")
-            subquestion_module = importlib.import_module("subquestion_generator")
         except ModuleNotFoundError as exc:
             raise RuntimeError(
                 f"DEPO dependency is missing: {exc.name}. Install DEPO dependencies before using --question without --dag."
@@ -64,9 +62,7 @@ def generate_atomic_dag_with_depo(
         question_normalizer = normalizer_module.SemanticQuestionNormalizer(llm_client)
         mask_span_extractor = mask_span_module.MaskSpanExtractor(llm_client)
         graph_builder = graph_builder_module.GraphBuilder()
-        anchor_selector = anchor_selector_module.AnchorSelector(llm_client)
-        semantic_ast_optimizer = ast_builder_module.SemanticASTOptimizer(llm_client)
-        subquestion_generator = subquestion_module.SubquestionGenerator(llm_client)
+        path_semantic_parser = entity_path_pipeline_module.EntityPathSemanticParser(llm_client)
         record = models_module.QuestionRecord(question=question)
 
         try:
@@ -82,10 +78,8 @@ def generate_atomic_dag_with_depo(
                     mask_span_extractor=mask_span_extractor,
                     parser=parser,
                     graph_builder=graph_builder,
-                    anchor_selector=anchor_selector,
-                    semantic_ast_optimizer=semantic_ast_optimizer,
-                    subquestion_generator=subquestion_generator,
                     question_normalizer=question_normalizer,
+                    path_semantic_parser=path_semantic_parser,
                     debug=False,
                 )
         except Exception as exc:

@@ -467,23 +467,39 @@ class AtomicEvidence:
     id: str
     kind: str
     text: str
-    source_path_id: str
-    path_set_id: str = ""
-    entity_id: str = ""
-    entity_text: str = ""
     anchor: str | None = None
     cue: str | None = None
+    candidates: list[str] = field(default_factory=list)
     left: str | None = None
     right: str | None = None
-    candidates: list[str] = field(default_factory=list)
-    node_texts: list[str] = field(default_factory=list)
-    node_ids: list[str] = field(default_factory=list)
+    source_path_id: str | None = None
+    source_path_set_id: str | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
+    @property
+    def path_set_id(self) -> str:
+        return self.source_path_set_id or str(self.metadata.get("path_set_id") or "")
 
-EvidenceAtom = AtomicEvidence
+    @property
+    def entity_id(self) -> str:
+        return str(self.metadata.get("entity_id") or "")
+
+    @property
+    def entity_text(self) -> str:
+        return str(self.metadata.get("entity_text") or "")
+
+    @property
+    def node_texts(self) -> list[str]:
+        value = self.metadata.get("node_texts")
+        return [str(item) for item in value] if isinstance(value, list) else []
+
+    @property
+    def node_ids(self) -> list[str]:
+        value = self.metadata.get("node_ids")
+        return [str(item) for item in value] if isinstance(value, list) else []
 
 
 @dataclass

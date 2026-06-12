@@ -11,7 +11,6 @@ from models import (
     EntityOriginPath,
     EntityStartNode,
     AtomicEvidence,
-    EvidenceAtom,
     PathSetCandidate,
     ScoredEntityPath,
     SemanticReasoningEdge,
@@ -22,10 +21,8 @@ from models import (
 from prompts import (
     ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM,
     ENTITY_PATH_SCORING_SYSTEM,
-    GROUNDED_ATOMIC_DAG_SYSTEM,
     SEMANTIC_REASONING_PATH_SYSTEM,
     build_atomic_dag_from_semantic_reasoning_path_prompt,
-    build_grounded_atomic_dag_prompt,
     build_score_entity_paths_prompt,
     build_semantic_reasoning_path_prompt,
 )
@@ -68,91 +65,20 @@ class EntityPathSemanticParser:
         self,
         *,
         original_question: str,
-        selected_dependency_path_evidence: list[dict[str, object]] | None = None,
         semantic_reasoning_paths: SemanticReasoningPathResult | dict[str, Any] | None = None,
-        **legacy_kwargs: Any,
     ) -> tuple[AtomicQuestionDAG, dict[str, Any]]:
-        """Generate a grounded Atomic DAG.
-
-        New main flow compiles from Semantic Reasoning Paths. The direct
-        dependency-evidence-to-DAG behavior is retained for legacy callers.
-        """
-        if selected_dependency_path_evidence is None:
-            path_set_candidates = legacy_kwargs.get("path_set_candidates")
-            entity_origin_paths = legacy_kwargs.get("entity_origin_paths")
-            if path_set_candidates is None or entity_origin_paths is None:
-                raise TypeError(
-                    "build_grounded_atomic_dag requires selected_dependency_path_evidence. "
-                    "Legacy callers must provide path_set_candidates and entity_origin_paths "
-                    "so compact selected dependency path evidence can be built."
-                )
-            selected_dependency_path_evidence = build_selected_dependency_path_evidence(
-                path_set_candidates=path_set_candidates,
-                entity_origin_paths=entity_origin_paths,
-                max_path_sets=4,
-            )
-        if semantic_reasoning_paths is not None:
-            return self._build_atomic_dag_from_semantic_reasoning_paths(
-                original_question=original_question,
-                selected_dependency_path_evidence=selected_dependency_path_evidence,
-                semantic_reasoning_paths=semantic_reasoning_paths,
-            )
-        validation_feedback: str | None = None
-        last_payload: dict[str, Any] = {}
-        final_support_warnings: list[str] = []
-        for attempt in range(2):
-            payload = self.llm_client.chat_json(
-                GROUNDED_ATOMIC_DAG_SYSTEM,
-                build_grounded_atomic_dag_prompt(
-                    original_question=original_question,
-                    selected_dependency_path_evidence=selected_dependency_path_evidence,
-                    validation_feedback=validation_feedback,
-                ),
-            )
-            raw_payload = payload if isinstance(payload, dict) else {}
-            last_payload = raw_payload
-            dependency_repairs = _repair_dependency_variable_questions(raw_payload)
-            hard_errors, support_warnings = _grounded_atomic_dag_support_issues(
-                raw_payload,
-                selected_dependency_path_evidence,
-            )
-            hard_errors.extend(_grounded_dependency_variable_reference_errors(raw_payload))
-            final_support_warnings = support_warnings
-            if hard_errors:
-                validation_feedback = "\n".join(hard_errors)
-                if attempt == 1:
-                    raise ValueError(
-                        "Grounded Atomic DAG support validation failed after retry: "
-                        + validation_feedback
-                )
-                continue
-            if support_warnings:
-                validation_feedback = "\n".join(support_warnings)
-                if attempt == 0:
-                    continue
-
-            dag, warnings = _parse_grounded_atomic_dag_payload(
-                raw_payload,
-                selected_dependency_path_evidence=selected_dependency_path_evidence,
-            )
-            all_warnings = [*final_support_warnings, *warnings]
-            if dependency_repairs:
-                all_warnings.extend(
-                    f"Repaired dependency variable question for {repair['node_id']}: "
-                    f"{repair['before']!r} -> {repair['after']!r}"
-                    for repair in dependency_repairs
-                )
-            if all_warnings:
-                raw_payload["normalization_warnings"] = all_warnings
-            raw_payload.setdefault("selected_dependency_path_evidence", selected_dependency_path_evidence)
-            return dag, raw_payload
-        raise ValueError("Grounded Atomic DAG generation failed. Last payload: " + repr(last_payload))
+        """Compile Semantic Reasoning Paths into the Step 10 Atomic DAG."""
+        if semantic_reasoning_paths is None:
+            raise TypeError("build_grounded_atomic_dag requires semantic_reasoning_paths.")
+        return self._build_atomic_dag_from_semantic_reasoning_paths(
+            original_question=original_question,
+            semantic_reasoning_paths=semantic_reasoning_paths,
+        )
 
     def build_semantic_reasoning_paths(
         self,
         *,
         original_question: str,
-        restored_question: str,
         selected_dependency_path_evidence: list[dict[str, object]],
     ) -> tuple[SemanticReasoningPathResult, dict[str, Any]]:
         atomic_evidences = extract_atomic_evidences(selected_dependency_path_evidence)
@@ -210,7 +136,6 @@ class EntityPathSemanticParser:
         self,
         *,
         original_question: str,
-        selected_dependency_path_evidence: list[dict[str, object]],
         semantic_reasoning_paths: SemanticReasoningPathResult | dict[str, Any],
     ) -> tuple[AtomicQuestionDAG, dict[str, Any]]:
         semantic_payload = (
@@ -252,7 +177,6 @@ class EntityPathSemanticParser:
                     continue
             dag, warnings = _parse_grounded_atomic_dag_payload(
                 raw_payload,
-                selected_dependency_path_evidence=selected_dependency_path_evidence,
                 semantic_payload=semantic_payload,
             )
             all_warnings = [*final_support_warnings, *warnings]
@@ -316,7 +240,7 @@ def _parse_semantic_reasoning_path_payload(
     payload: dict[str, Any],
     *,
     selected_dependency_path_evidence: list[dict[str, Any]],
-    evidence_atoms: list[EvidenceAtom],
+    evidence_atoms: list[AtomicEvidence],
 ) -> SemanticReasoningPathResult:
     payload = _coerce_flat_semantic_reasoning_payload(
         payload,
@@ -417,7 +341,7 @@ def _parse_semantic_reasoning_path_payload(
 def _coerce_flat_semantic_reasoning_payload(
     payload: dict[str, Any],
     *,
-    evidence_atoms: list[EvidenceAtom],
+    evidence_atoms: list[AtomicEvidence],
     selected_dependency_path_evidence: list[dict[str, Any]],
 ) -> dict[str, Any]:
     if isinstance(payload.get("semantic_reasoning_paths"), list) or isinstance(payload.get("paths"), list):
@@ -507,7 +431,7 @@ def _first_selected_path_payload(selected_dependency_path_evidence: list[dict[st
     return {}
 
 
-def _first_atom_for_edges(edges: list[SemanticReasoningEdge], evidence_atoms: list[EvidenceAtom]) -> EvidenceAtom | None:
+def _first_atom_for_edges(edges: list[SemanticReasoningEdge], evidence_atoms: list[AtomicEvidence]) -> AtomicEvidence | None:
     atom_by_id = {atom.id: atom for atom in evidence_atoms}
     for edge in edges:
         for support in edge.support:
@@ -551,7 +475,7 @@ def _parse_semantic_reasoning_edges(
     raw: Any,
     branch_id: str,
     *,
-    evidence_atoms: list[EvidenceAtom],
+    evidence_atoms: list[AtomicEvidence],
 ) -> list[SemanticReasoningEdge]:
     if not isinstance(raw, list):
         raise ValueError(f"Semantic reasoning path {branch_id} edges must be a list.")
@@ -599,7 +523,7 @@ def _normalize_semantic_reasoning_node_id(raw: Any, branch_id: str, index: int, 
 def _normalize_semantic_reasoning_support(
     raw: Any,
     *,
-    evidence_atoms: list[EvidenceAtom],
+    evidence_atoms: list[AtomicEvidence],
     edge_supported_by: Any = None,
 ) -> list[dict[str, Any]]:
     atom_by_id = {atom.id: atom for atom in evidence_atoms}
@@ -661,7 +585,7 @@ def _normalize_semantic_reasoning_support(
     return result
 
 
-def _support_from_atom_ids(atom_ids: list[str], atom_by_id: dict[str, EvidenceAtom]) -> dict[str, Any]:
+def _support_from_atom_ids(atom_ids: list[str], atom_by_id: dict[str, AtomicEvidence]) -> dict[str, Any]:
     atom_ids = _unique_preserve(atom_ids)
     known_atoms = [atom_by_id[atom_id] for atom_id in atom_ids if atom_id in atom_by_id]
     first_atom = known_atoms[0] if known_atoms else None
@@ -697,7 +621,7 @@ def _unique_preserve(values: Any) -> list[str]:
 
 
 def _matching_atom_ids_for_support(
-    evidence_atoms: list[EvidenceAtom],
+    evidence_atoms: list[AtomicEvidence],
     *,
     path_set_id: str,
     path_id: str,
@@ -731,7 +655,7 @@ def _matching_atom_ids_for_support(
 def _semantic_reasoning_path_support_issues(
     result: SemanticReasoningPathResult,
     selected_dependency_path_evidence: list[dict[str, Any]],
-    evidence_atoms: list[EvidenceAtom],
+    evidence_atoms: list[AtomicEvidence],
 ) -> list[str]:
     """Validate that semantic edges are grounded by evidence atom ids."""
     support_index = _selected_dependency_support_index(selected_dependency_path_evidence)
@@ -783,7 +707,7 @@ def _semantic_edge_source_errors(payload: dict[str, Any], semantic_payload: dict
     if not isinstance(raw_nodes, list):
         return []
     errors: list[str] = []
-    used_edge_ids: dict[str, list[str]] = {}
+    used_edge_ids: set[str] = set()
     for index, node in enumerate(raw_nodes, start=1):
         if not isinstance(node, dict):
             continue
@@ -795,22 +719,12 @@ def _semantic_edge_source_errors(payload: dict[str, Any], semantic_payload: dict
         if edge_id not in expected_edge_ids:
             errors.append(f"Atomic node {node_id} references unknown source_semantic_edge_id={edge_id!r}.")
             continue
-        used_edge_ids.setdefault(edge_id, []).append(node_id)
-    duplicate_edges = {
-        edge_id: node_ids
-        for edge_id, node_ids in used_edge_ids.items()
-        if len(node_ids) > 1
-    }
-    for edge_id, node_ids in sorted(duplicate_edges.items()):
-        errors.append(
-            f"Semantic reasoning edge {edge_id!r} is compiled by multiple atomic nodes: {node_ids}. "
-            "Each semantic edge must map to exactly one atomic DAG node."
-        )
-    missing = sorted(expected_edge_ids - set(used_edge_ids))
+        used_edge_ids.add(edge_id)
+    missing = sorted(expected_edge_ids - used_edge_ids)
     if missing:
         errors.append(
             f"Atomic DAG skipped semantic reasoning edges: {missing}. "
-            "Every semantic edge must be compiled into exactly one atomic DAG node."
+            "Every semantic edge must be covered by at least one atomic DAG node."
         )
     return errors
 
@@ -1023,14 +937,16 @@ def build_selected_dependency_path_evidence(
 
 
 def extract_atomic_evidences(selected_dependency_path_evidence: list[dict[str, Any]]) -> list[AtomicEvidence]:
-    """Extract local atomic evidences from selected collapsed dependency paths.
+    """Extract adjacent local path-edge evidences from selected dependency paths.
 
-    Atomic evidences are binary local structures only. They deliberately avoid
-    full path strings and 3-hop windows so Step 9 cannot copy dependency paths
-    into semantic reasoning paths.
+    Atomic evidences are not heuristic entity-predicate combinations. Each atom
+    corresponds to one adjacent edge in a selected path, so Step 9 can ground
+    each semantic edge in a concrete local dependency fragment without seeing
+    or copying the full dependency path.
     """
 
-    raw_atoms: list[AtomicEvidence] = []
+    atoms: list[AtomicEvidence] = []
+    seen: set[tuple[Any, ...]] = set()
     for path_set in selected_dependency_path_evidence:
         if not isinstance(path_set, dict):
             continue
@@ -1045,326 +961,45 @@ def extract_atomic_evidences(selected_dependency_path_evidence: list[dict[str, A
             source_path_id = str(path.get("path_id") or "").strip()
             entity_id = str(path.get("entity_id") or "").strip()
             entity_text = str(path.get("entity_text") or "").strip()
-            predicate_cues = _predicate_cues_in_path(node_texts)
 
-            for cue in predicate_cues:
-                for anchor in _candidate_anchors_for_path(node_texts, entity_text=entity_text):
-                    if _same_text(anchor, cue):
-                        continue
-                    kind = "type_context" if _is_type_context(anchor) else "entity_predicate"
-                    raw_atoms.append(
-                        AtomicEvidence(
-                            id="",
-                            kind=kind,
-                            text=f"{anchor} ---- {cue}",
-                            anchor=anchor,
-                            cue=cue,
-                            source_path_id=source_path_id,
-                            path_set_id=path_set_id,
-                            entity_id=entity_id,
-                            entity_text=entity_text,
-                            node_texts=[anchor, cue],
-                            node_ids=_node_ids_for_texts(node_texts, node_ids, [anchor, cue]),
-                        )
-                    )
-
-            for left, right in _candidate_pairs_for_path(node_texts, entity_text=entity_text):
-                raw_atoms.append(
-                    AtomicEvidence(
-                        id="",
-                        kind="candidate_pair",
-                        text=f"{left} ---- or/compared_to ---- {right}",
-                        candidates=[left, right],
-                        cue="or/compared_to",
-                        source_path_id=source_path_id,
-                        path_set_id=path_set_id,
-                        entity_id=entity_id,
-                        entity_text=entity_text,
-                        node_texts=[left, right],
-                        node_ids=_node_ids_for_texts(node_texts, node_ids, [left, right]),
-                    )
+            for position, left in enumerate(node_texts[:-1]):
+                right = node_texts[position + 1]
+                left_node_id = node_ids[position] if position < len(node_ids) else ""
+                right_node_id = node_ids[position + 1] if position + 1 < len(node_ids) else ""
+                atom = AtomicEvidence(
+                    id="",
+                    kind="path_edge",
+                    text=f"{left} ---- {right}",
+                    left=left,
+                    right=right,
+                    source_path_id=source_path_id,
+                    source_path_set_id=path_set_id,
+                    metadata={
+                        "entity_id": entity_id,
+                        "entity_text": entity_text,
+                        "node_texts": [left, right],
+                        "node_ids": [node_id for node_id in [left_node_id, right_node_id] if node_id],
+                        "position": position,
+                    },
                 )
-
-            for index in range(len(node_texts) - 1):
-                left = node_texts[index]
-                right = node_texts[index + 1]
-                raw_atoms.append(
-                    AtomicEvidence(
-                        id="",
-                        kind="adjacent_pair",
-                        text=f"{left} ---- {right}",
-                        left=left,
-                        right=right,
-                        source_path_id=source_path_id,
-                        path_set_id=path_set_id,
-                        entity_id=entity_id,
-                        entity_text=entity_text,
-                        node_texts=[left, right],
-                        node_ids=node_ids[index : index + 2] if node_ids else [],
-                    )
-                )
-
-    atoms: list[AtomicEvidence] = []
-    seen: set[tuple[Any, ...]] = set()
-    seen_text_by_path: set[tuple[str, str]] = set()
-    for raw_atom in raw_atoms:
-        text_key = (_normalize_support_text(raw_atom.text), raw_atom.source_path_id)
-        if raw_atom.kind == "adjacent_pair" and text_key in seen_text_by_path:
-            continue
-        key = _atomic_evidence_key(raw_atom)
-        if key in seen:
-            continue
-        seen.add(key)
-        seen_text_by_path.add(text_key)
-        raw_atom.id = f"atom_{len(atoms) + 1}"
-        atoms.append(raw_atom)
+                key = _atomic_evidence_key(atom)
+                if key in seen:
+                    continue
+                seen.add(key)
+                atom.id = f"atom_{len(atoms) + 1}"
+                atoms.append(atom)
     return atoms
 
 
-def extract_evidence_atoms(selected_dependency_path_evidence: list[dict[str, Any]]) -> list[EvidenceAtom]:
-    return extract_atomic_evidences(selected_dependency_path_evidence)
-
-
-def _predicate_cues_in_path(node_texts: list[str]) -> list[str]:
-    cues: list[str] = []
-    for text in node_texts:
-        normalized = _normalize_support_text(text)
-        if _is_predicate_cue(normalized) and text not in cues:
-            cues.append(text)
-    return cues
-
-
-def _candidate_anchors_for_path(node_texts: list[str], *, entity_text: str) -> list[str]:
-    anchors: list[str] = []
-    for text in [entity_text, *node_texts]:
-        value = str(text or "").strip()
-        if not value or value in anchors:
-            continue
-        normalized = _normalize_support_text(value)
-        if _is_predicate_cue(normalized) or _is_function_or_punctuation(normalized):
-            continue
-        if _is_type_context(value) or _looks_like_named_entity(value):
-            anchors.append(value)
-    return anchors
-
-
-def _candidate_pairs_for_path(node_texts: list[str], *, entity_text: str) -> list[tuple[str, str]]:
-    candidates = [
-        text
-        for text in _candidate_anchors_for_path(node_texts, entity_text=entity_text)
-        if not _is_type_context(text)
-    ]
-    pairs: list[tuple[str, str]] = []
-    for left_index, left in enumerate(candidates):
-        for right in candidates[left_index + 1 :]:
-            if not _same_text(left, right):
-                pairs.append((left, right))
-    return pairs
-
-
 def _atomic_evidence_key(atom: AtomicEvidence) -> tuple[Any, ...]:
-    candidates = tuple(_normalize_support_text(candidate) for candidate in atom.candidates)
-    text = _normalize_support_text(atom.text)
-    if atom.kind == "candidate_pair":
-        candidates = tuple(sorted(candidates))
-        text = "or/compared_to"
     return (
         atom.kind,
-        text,
-        candidates,
-        atom.source_path_id if atom.kind == "adjacent_pair" else "",
+        _normalize_support_text(atom.text),
+        atom.source_path_set_id or "",
+        atom.source_path_id or "",
+        tuple(atom.node_ids),
+        atom.metadata.get("position"),
     )
-
-
-def _node_ids_for_texts(path_texts: list[str], path_ids: list[str], wanted_texts: list[str]) -> list[str]:
-    if not path_ids:
-        return []
-    result: list[str] = []
-    used_indices: set[int] = set()
-    for wanted in wanted_texts:
-        wanted_norm = _normalize_support_text(wanted)
-        for index, text in enumerate(path_texts):
-            if index in used_indices:
-                continue
-            if _normalize_support_text(text) == wanted_norm:
-                used_indices.add(index)
-                if index < len(path_ids):
-                    result.append(path_ids[index])
-                break
-    return result
-
-
-def _is_predicate_cue(normalized: str) -> bool:
-    if not normalized:
-        return False
-    predicate_terms = {
-        "produced",
-        "released",
-        "directed",
-        "performed",
-        "written",
-        "born",
-        "died",
-        "die",
-        "located",
-        "founded",
-        "created",
-        "older",
-        "younger",
-        "first",
-        "last",
-        "earlier",
-        "later",
-        "compared to",
-        "or compared to",
-    }
-    return any(term in normalized for term in predicate_terms)
-
-
-def _is_type_context(text: str) -> bool:
-    normalized = _normalize_support_text(text)
-    if normalized.startswith(("which ", "what ")):
-        return True
-    type_terms = {"film", "movie", "song", "book", "country", "city", "place", "person"}
-    return any(normalized == term or normalized.endswith(f" {term}") for term in type_terms)
-
-
-def _looks_like_named_entity(text: str) -> bool:
-    stripped = str(text or "").strip()
-    if not stripped:
-        return False
-    if re.fullmatch(r"[\W_]+", stripped):
-        return False
-    normalized = _normalize_support_text(stripped)
-    if _is_function_or_punctuation(normalized):
-        return False
-    if len(stripped.split()) > 1:
-        return True
-    return bool(stripped[:1].isupper()) and normalized not in FORBIDDEN_SEMANTIC_NODE_LABELS
-
-
-def _is_function_or_punctuation(normalized: str) -> bool:
-    return not normalized or normalized in FORBIDDEN_SEMANTIC_NODE_LABELS or re.fullmatch(r"\W+", normalized) is not None
-
-
-def _same_text(left: str, right: str) -> bool:
-    return _normalize_support_text(left) == _normalize_support_text(right)
-
-
-def validate_grounded_atomic_dag_support(
-    payload: dict[str, Any],
-    selected_dependency_path_evidence: list[dict[str, Any]],
-) -> list[str]:
-    hard_errors, soft_warnings = _grounded_atomic_dag_support_issues(
-        payload,
-        selected_dependency_path_evidence,
-    )
-    return [*hard_errors, *soft_warnings]
-
-
-def _grounded_atomic_dag_support_issues(
-    payload: dict[str, Any],
-    selected_dependency_path_evidence: list[dict[str, Any]],
-) -> tuple[list[str], list[str]]:
-    hard_errors: list[str] = []
-    soft_warnings: list[str] = []
-    support_index = _selected_dependency_support_index(selected_dependency_path_evidence)
-    raw_nodes = payload.get("nodes")
-    if raw_nodes is None:
-        raw_nodes = payload.get("atomic_questions") or payload.get("subquestions")
-    if not isinstance(raw_nodes, list) or not raw_nodes:
-        return ["Grounded Atomic DAG payload must contain a non-empty nodes list."], []
-
-    for index, raw_node in enumerate(raw_nodes, start=1):
-        if not isinstance(raw_node, dict):
-            hard_errors.append(f"Node at position {index} is not a JSON object.")
-            continue
-        node_id = str(raw_node.get("node_id") or raw_node.get("id") or f"q{index}").strip()
-        raw_support = raw_node.get("support")
-        if isinstance(raw_support, dict):
-            support_items = [raw_support]
-        elif isinstance(raw_support, list):
-            support_items = raw_support
-        else:
-            hard_errors.append(f"Node {node_id} has no support list.")
-            continue
-        if not support_items:
-            hard_errors.append(f"Node {node_id} has an empty support list.")
-            continue
-
-        valid_support_count = 0
-        for support_index_in_node, support in enumerate(support_items, start=1):
-            if not isinstance(support, dict):
-                hard_errors.append(f"Node {node_id} support #{support_index_in_node} is not a JSON object.")
-                continue
-            path_set_id = str(support.get("path_set_id") or "").strip()
-            path_id = str(support.get("path_id") or "").strip()
-            node_texts = _str_list(support.get("node_texts"))
-            if not node_texts:
-                hard_errors.append(f"Node {node_id} support #{support_index_in_node} has empty node_texts.")
-                continue
-            key = (path_set_id, path_id)
-            if key not in support_index:
-                repaired_key = _best_support_key_for_node_texts(node_texts, support_index)
-                if repaired_key is None:
-                    hard_errors.append(
-                        f"Node {node_id} support #{support_index_in_node} cites invalid path_set_id/path_id "
-                        f"{path_set_id!r}/{path_id!r} and node_texts do not match any selected path."
-                    )
-                    continue
-                soft_warnings.append(
-                    f"Node {node_id} support #{support_index_in_node} cites invalid path_set_id/path_id "
-                    f"{path_set_id!r}/{path_id!r}; repaired to {repaired_key[0]!r}/{repaired_key[1]!r} "
-                    "by node_text overlap."
-                )
-                key = repaired_key
-            available = support_index[key]["normalized_node_texts"]
-            missing = [
-                text
-                for text in node_texts
-                if _normalize_support_text(text) not in available
-            ]
-            if missing:
-                soft_warnings.append(
-                    f"Node {node_id} support #{support_index_in_node} cites node_texts not present in "
-                    f"{path_set_id}/{path_id}: {missing}."
-                )
-            valid_support_count += 1
-        if valid_support_count == 0:
-            hard_errors.append(f"Node {node_id} has no valid selected dependency path support.")
-    return hard_errors, soft_warnings
-
-
-def _grounded_dependency_variable_reference_errors(payload: dict[str, Any]) -> list[str]:
-    raw_nodes = payload.get("nodes")
-    if raw_nodes is None:
-        raw_nodes = payload.get("atomic_questions") or payload.get("subquestions")
-    if not isinstance(raw_nodes, list):
-        return []
-
-    errors: list[str] = []
-    seen_ids: set[str] = set()
-    for index, raw_node in enumerate(raw_nodes, start=1):
-        if not isinstance(raw_node, dict):
-            continue
-        node_id = str(raw_node.get("node_id") or raw_node.get("id") or f"q{index}").strip()
-        question = str(raw_node.get("question") or raw_node.get("subquestion") or raw_node.get("sub_question") or "").strip()
-        raw_dependencies = raw_node.get("dependencies") if "dependencies" in raw_node else raw_node.get("depends_on")
-        dependencies = _raw_dependency_ids(raw_dependencies)
-        valid_dependencies = [dependency for dependency in dependencies if dependency in seen_ids]
-        missing = [
-            dependency
-            for dependency in valid_dependencies
-            if not _question_mentions_dependency_answer(question, dependency)
-        ]
-        if missing:
-            errors.append(
-                f"Node {node_id} declares dependencies {missing} but its question must reference each one "
-                "using qX's answer, for example q1's answer."
-            )
-        if node_id:
-            seen_ids.add(node_id)
-    return errors
 
 
 def _atomic_question_variable_placeholder_errors(payload: dict[str, Any]) -> list[str]:
@@ -1400,299 +1035,6 @@ def _contains_atomic_variable_placeholder(question: str) -> bool:
         r"\bthe\s+previous\s+answer\b",
     )
     return any(re.search(pattern, text, flags=re.IGNORECASE) for pattern in patterns)
-
-
-def _repair_dependency_variable_questions(
-    payload: dict[str, Any],
-    *,
-    semantic_payload: dict[str, Any] | None = None,
-) -> list[dict[str, str]]:
-    """Repair dependent atomic questions that forgot to mention qX's answer.
-
-    The LLM sometimes declares dependencies correctly but emits a fully expanded
-    bridge question. HyperBranch needs explicit variables for deterministic
-    answer substitution, so this function mutates the raw payload before strict
-    validation.
-    """
-    raw_nodes = payload.get("nodes")
-    if raw_nodes is None:
-        raw_nodes = payload.get("atomic_questions") or payload.get("subquestions")
-    if not isinstance(raw_nodes, list):
-        return []
-
-    semantic_context = _semantic_reasoning_context(semantic_payload or {})
-    repairs: list[dict[str, str]] = []
-    seen_ids: set[str] = set()
-    for index, raw_node in enumerate(raw_nodes, start=1):
-        if not isinstance(raw_node, dict):
-            continue
-        node_id = str(raw_node.get("node_id") or raw_node.get("id") or f"q{index}").strip()
-        question = str(raw_node.get("question") or raw_node.get("subquestion") or raw_node.get("sub_question") or "").strip()
-        raw_dependencies = raw_node.get("dependencies") if "dependencies" in raw_node else raw_node.get("depends_on")
-        dependencies = _raw_dependency_ids(raw_dependencies)
-        valid_dependencies = [dependency for dependency in dependencies if dependency in seen_ids]
-        missing = [
-            dependency
-            for dependency in valid_dependencies
-            if not _question_mentions_dependency_answer(question, dependency)
-        ]
-        if missing and question:
-            repaired_question = _dependency_variable_repaired_question(
-                question=question,
-                missing_dependencies=missing,
-                raw_node=raw_node,
-                semantic_context=semantic_context,
-            )
-            if repaired_question != question:
-                raw_node.setdefault("question_before_dependency_variable_repair", question)
-                raw_node["question"] = repaired_question
-                repairs.append(
-                    {
-                        "node_id": node_id,
-                        "dependencies": ", ".join(missing),
-                        "before": question,
-                        "after": repaired_question,
-                    }
-                )
-        if node_id:
-            seen_ids.add(node_id)
-
-    if repairs:
-        existing = payload.get("dependency_variable_repairs")
-        if isinstance(existing, list):
-            existing.extend(repairs)
-        else:
-            payload["dependency_variable_repairs"] = repairs
-    return repairs
-
-
-def _dependency_variable_repaired_question(
-    *,
-    question: str,
-    missing_dependencies: list[str],
-    raw_node: dict[str, Any],
-    semantic_context: dict[str, Any],
-) -> str:
-    edge_id = str(raw_node.get("source_semantic_edge_id") or "").strip()
-    edge = semantic_context.get("edges", {}).get(edge_id) if edge_id else None
-    dependency_id = _dependency_ref_for_node(raw_node, missing_dependencies)
-    dependency_variable = f"{dependency_id}'s answer" if dependency_id else _dependency_variable_phrase(missing_dependencies)
-
-    if isinstance(edge, dict):
-        template = str(edge.get("atomic_question_template") or "").strip()
-        repaired_from_template = _repair_question_from_semantic_template(
-            template=template,
-            edge=edge,
-            dependency_variable=dependency_variable,
-            missing_dependencies=missing_dependencies,
-        )
-        if repaired_from_template:
-            return repaired_from_template
-
-        repaired_from_edge = _question_from_semantic_edge(
-            edge=edge,
-            dependency_variable=dependency_variable,
-            original_question=question,
-        )
-        if repaired_from_edge and _all_dependency_variables_present(repaired_from_edge, missing_dependencies):
-            return repaired_from_edge
-
-        source_label = str(edge.get("source_label") or "").strip()
-        if source_label:
-            replaced = _replace_label_with_dependency_variable(question, source_label, dependency_variable)
-            if _all_dependency_variables_present(replaced, missing_dependencies):
-                return replaced
-
-    prefixed = f"Using {_dependency_variable_phrase(missing_dependencies)}, {question[0].lower()}{question[1:]}" if question else question
-    return prefixed if _all_dependency_variables_present(prefixed, missing_dependencies) else question
-
-
-def _dependency_ref_for_node(raw_node: dict[str, Any], dependencies: list[str]) -> str:
-    raw_input = raw_node.get("input")
-    if isinstance(raw_input, dict):
-        ref = str(raw_input.get("ref") or "").strip()
-        if ref in dependencies:
-            return ref
-    return dependencies[0] if dependencies else ""
-
-
-def _dependency_variable_phrase(dependencies: list[str]) -> str:
-    variables = [f"{dependency}'s answer" for dependency in dependencies]
-    if not variables:
-        return "the previous answer"
-    if len(variables) == 1:
-        return variables[0]
-    return " and ".join(variables)
-
-
-def _all_dependency_variables_present(question: str, dependencies: list[str]) -> bool:
-    return all(_question_mentions_dependency_answer(question, dependency) for dependency in dependencies)
-
-
-def _repair_question_from_semantic_template(
-    *,
-    template: str,
-    edge: dict[str, Any],
-    dependency_variable: str,
-    missing_dependencies: list[str],
-) -> str:
-    if not template:
-        return ""
-    source_id = str(edge.get("source") or "").strip()
-    source_label = str(edge.get("source_label") or "").strip()
-    repaired = template
-    if source_id:
-        repaired = re.sub(rf"\b{re.escape(source_id)}\s*['\u2019]s\s+answer\b", dependency_variable, repaired)
-        repaired = re.sub(rf"\{{\s*{re.escape(source_id)}\.answer\s*\}}", dependency_variable, repaired)
-    if source_label:
-        repaired = _replace_label_with_dependency_variable(repaired, source_label, dependency_variable)
-    return repaired if _all_dependency_variables_present(repaired, missing_dependencies) else ""
-
-
-def _question_from_semantic_edge(
-    *,
-    edge: dict[str, Any],
-    dependency_variable: str,
-    original_question: str,
-) -> str:
-    relation = str(edge.get("relation") or "").strip()
-    target_label = str(edge.get("target_label") or "").strip()
-    answer_type = str(edge.get("answer_type") or edge.get("target_semantic_type") or "").strip()
-    context = " ".join([relation, target_label, answer_type, original_question]).lower()
-    target = _humanize_semantic_label(target_label)
-
-    if "north" in context:
-        return f"What region is immediately north of {dependency_variable}?"
-    if "south" in context:
-        return f"What region is immediately south of {dependency_variable}?"
-    if "east" in context:
-        return f"What region is immediately east of {dependency_variable}?"
-    if "west" in context:
-        return f"What region is immediately west of {dependency_variable}?"
-    if "death" in context or " die" in f" {context}":
-        if "reason" in context or "cause" in context or original_question.lower().startswith("why "):
-            return f"Why did {dependency_variable} die?"
-        if "place" in context or "location" in context or original_question.lower().startswith("where "):
-            return f"Where did {dependency_variable} die?"
-        return f"When did {dependency_variable} die?"
-    if "birth" in context or " born" in f" {context}":
-        if "place" in context or "location" in context or original_question.lower().startswith("where "):
-            return f"Where was {dependency_variable} born?"
-        return f"When was {dependency_variable} born?"
-    if "graduat" in context and ("university" in context or "school" in context):
-        return f"Which university did {dependency_variable} graduate from?"
-    if "nationality" in context:
-        return f"What is the nationality of {dependency_variable}?"
-    if "created" in context or "creation" in context:
-        return f"When was {dependency_variable} created?"
-    if "released" in context or "release" in context:
-        return f"When was {dependency_variable} released?"
-    if "located" in context or "location" in context:
-        if "country" in context:
-            return f"What country is {dependency_variable} located in?"
-        if "city" in context:
-            return f"What city is {dependency_variable} located in?"
-        return f"Where is {dependency_variable} located?"
-    if "ceo" in context:
-        return f"Who is the CEO of {dependency_variable}?"
-    if "director" in context:
-        return f"Who is the director of {dependency_variable}?"
-    if "author" in context:
-        return f"Who is the author of {dependency_variable}?"
-    if "performer" in context:
-        return f"Who is the performer of {dependency_variable}?"
-    if any(role in context for role in ("mother", "father", "wife", "husband", "spouse")):
-        role = next(role for role in ("mother", "father", "wife", "husband", "spouse") if role in context)
-        return f"Who is the {role} of {dependency_variable}?"
-
-    if target:
-        if answer_type.lower() == "person":
-            return f"Who is the {target} of {dependency_variable}?"
-        return f"What is the {target} of {dependency_variable}?"
-    return ""
-
-
-def _humanize_semantic_label(label: str) -> str:
-    return re.sub(r"\s+", " ", label.replace("_", " ").strip())
-
-
-def _replace_label_with_dependency_variable(question: str, label: str, dependency_variable: str) -> str:
-    label = label.strip()
-    if not label:
-        return question
-    pattern = re.compile(re.escape(label), flags=re.IGNORECASE)
-    if pattern.search(question):
-        return pattern.sub(dependency_variable, question, count=1)
-    return question
-
-
-def _semantic_reasoning_context(semantic_payload: dict[str, Any]) -> dict[str, Any]:
-    raw_paths = semantic_payload.get("paths")
-    if raw_paths is None:
-        raw_paths = semantic_payload.get("semantic_reasoning_paths")
-    if not isinstance(raw_paths, list):
-        return {"edges": {}}
-    edges: dict[str, dict[str, Any]] = {}
-    for path in raw_paths:
-        if not isinstance(path, dict):
-            continue
-        raw_nodes = path.get("nodes")
-        raw_edges = path.get("edges")
-        if not isinstance(raw_nodes, list) or not isinstance(raw_edges, list):
-            continue
-        nodes_by_id = {
-            str(node.get("node_id") or node.get("id") or "").strip(): node
-            for node in raw_nodes
-            if isinstance(node, dict) and str(node.get("node_id") or node.get("id") or "").strip()
-        }
-        for edge in raw_edges:
-            if not isinstance(edge, dict):
-                continue
-            edge_id = str(edge.get("edge_id") or edge.get("id") or "").strip()
-            if not edge_id:
-                continue
-            enriched = dict(edge)
-            source = str(edge.get("source") or "").strip()
-            target = str(edge.get("target") or "").strip()
-            source_node = nodes_by_id.get(source) or {}
-            target_node = nodes_by_id.get(target) or {}
-            enriched["source_label"] = str(source_node.get("label") or source_node.get("text") or "").strip()
-            enriched["target_label"] = str(target_node.get("label") or target_node.get("text") or "").strip()
-            enriched["source_kind"] = str(source_node.get("kind") or "").strip()
-            enriched["target_kind"] = str(target_node.get("kind") or "").strip()
-            enriched["target_semantic_type"] = str(target_node.get("semantic_type") or "").strip()
-            edges[edge_id] = enriched
-    return {"edges": edges}
-
-
-def _raw_dependency_ids(raw: Any) -> list[str]:
-    if raw is None:
-        return []
-    if isinstance(raw, str):
-        candidates = [raw]
-    elif isinstance(raw, list):
-        candidates = raw
-    else:
-        return []
-    result: list[str] = []
-    for item in candidates:
-        dependency = str(item).strip()
-        if dependency and dependency not in result:
-            result.append(dependency)
-    return result
-
-
-def _question_mentions_dependency_answer(question: str, dependency_id: str) -> bool:
-    qid = re.escape(str(dependency_id).strip())
-    if not qid:
-        return False
-    patterns = (
-        rf"\{{\s*{qid}\.answer\s*\}}",
-        rf"\b{qid}\s*['\u2019]s\s+answer\b",
-        rf"\b{qid}\s+answer\b",
-        rf"\banswer\s+(?:of|to)\s+{qid}\b",
-    )
-    return any(re.search(pattern, question, flags=re.IGNORECASE) for pattern in patterns)
 
 
 def _paths_grouped_for_prompt(
@@ -1761,8 +1103,7 @@ def _parse_scored_entity_paths(raw: Any, entity_origin_paths: list[EntityOriginP
 def _parse_grounded_atomic_dag_payload(
     payload: dict[str, Any],
     *,
-    selected_dependency_path_evidence: list[dict[str, Any]],
-    semantic_payload: dict[str, Any] | None = None,
+    semantic_payload: dict[str, Any],
 ) -> tuple[AtomicQuestionDAG, list[str]]:
     raw_nodes = payload.get("nodes")
     if raw_nodes is None:
@@ -1770,8 +1111,7 @@ def _parse_grounded_atomic_dag_payload(
     if not isinstance(raw_nodes, list) or not raw_nodes:
         raise ValueError("Grounded Atomic DAG payload must contain a non-empty nodes list.")
 
-    support_index = _selected_dependency_support_index(selected_dependency_path_evidence)
-    semantic_edge_index = _semantic_edge_index(semantic_payload) if semantic_payload is not None else {}
+    semantic_edge_index = _semantic_edge_index(semantic_payload)
     warnings: list[str] = []
     nodes: list[AtomicQuestionNode] = []
     edges: list[AtomicQuestionEdge] = []
@@ -1793,34 +1133,13 @@ def _parse_grounded_atomic_dag_payload(
             node_id=node_id,
             warnings=warnings,
         )
-        if semantic_payload is None:
-            missing_dependency_variables = [
-                dependency
-                for dependency in dependencies
-                if not _question_mentions_dependency_answer(question, dependency)
-            ]
-            if missing_dependency_variables:
-                raise ValueError(
-                    f"Node {node_id} depends on {missing_dependency_variables} but question does not "
-                    "reference each dependency as qX's answer."
-                )
-        if semantic_payload is not None:
-            support = _normalize_semantic_grounded_support(
-                raw_node.get("support"),
-                raw_node=raw_node,
-                semantic_edge_index=semantic_edge_index,
-                node_id=node_id,
-                warnings=warnings,
-            )
-        else:
-            support = _normalize_grounded_support(
-                raw_node.get("support"),
-                support_index=support_index,
-                node_id=node_id,
-                warnings=warnings,
-            )
-            if not support:
-                raise ValueError(f"Node {node_id} has no valid selected dependency path support.")
+        support = _normalize_semantic_grounded_support(
+            raw_node.get("support"),
+            raw_node=raw_node,
+            semantic_edge_index=semantic_edge_index,
+            node_id=node_id,
+            warnings=warnings,
+        )
         metadata: dict[str, Any] = {
             "source": "grounded_atomic_dag",
             "support": support,
@@ -1914,67 +1233,6 @@ def _normalize_grounded_dependencies(
     return dependencies
 
 
-def _normalize_grounded_support(
-    raw: Any,
-    *,
-    support_index: dict[tuple[str, str], dict[str, Any]],
-    node_id: str,
-    warnings: list[str],
-) -> list[dict[str, Any]]:
-    if isinstance(raw, dict):
-        raw_items = [raw]
-    elif isinstance(raw, list):
-        raw_items = raw
-    else:
-        return []
-    support: list[dict[str, Any]] = []
-    for item in raw_items:
-        if not isinstance(item, dict):
-            continue
-        path_set_id = str(item.get("path_set_id") or "").strip()
-        path_id = str(item.get("path_id") or "").strip()
-        node_texts = _str_list(item.get("node_texts"))
-        if not node_texts:
-            warnings.append(f"Ignored support with empty node_texts for {node_id}.")
-            continue
-        key = (path_set_id, path_id)
-        if key not in support_index:
-            repaired_key = _best_support_key_for_node_texts(node_texts, support_index)
-            if repaired_key is None:
-                warnings.append(f"Ignored invalid support path_set/path {path_set_id!r}/{path_id!r} for {node_id}.")
-                continue
-            warnings.append(
-                f"Repaired invalid support path_set/path {path_set_id!r}/{path_id!r} for {node_id} "
-                f"to {repaired_key[0]!r}/{repaired_key[1]!r} by node_text overlap."
-            )
-            path_set_id, path_id = repaired_key
-            key = repaired_key
-        available = support_index[key]["normalized_node_texts"]
-        invalid_node_texts = [
-            text
-            for text in node_texts
-            if _normalize_support_text(text) not in available
-        ]
-        if invalid_node_texts:
-            warnings.append(
-                f"Accepted support for {node_id} with node_texts not present in selected path {path_set_id}/{path_id}: "
-                f"{invalid_node_texts}."
-            )
-        normalized_item = {
-            "path_set_id": path_set_id,
-            "path_id": path_id,
-            "node_texts": node_texts,
-            "node_ids": _str_list(item.get("node_ids")),
-            "reason": str(item.get("reason") or "").strip(),
-        }
-        if invalid_node_texts:
-            normalized_item["node_text_warnings"] = [
-                f"node_texts not present in selected path: {invalid_node_texts}"
-            ]
-        support.append(normalized_item)
-    return support
-
-
 def _normalize_semantic_grounded_support(
     raw: Any,
     *,
@@ -2062,35 +1320,6 @@ def _semantic_edge_index(semantic_payload: dict[str, Any] | None) -> dict[str, d
             payload["branch_id"] = branch_id
             index[edge_id] = payload
     return index
-
-
-def _best_support_key_for_node_texts(
-    node_texts: list[str],
-    support_index: dict[tuple[str, str], dict[str, Any]],
-) -> tuple[str, str] | None:
-    normalized_texts = [
-        text
-        for text in (_normalize_support_text(value) for value in node_texts)
-        if text
-    ]
-    if not normalized_texts:
-        return None
-
-    best: tuple[tuple[str, str], int] | None = None
-    for key, payload in support_index.items():
-        available = payload["normalized_node_texts"]
-        overlap = sum(1 for text in normalized_texts if text in available)
-        if overlap == 0:
-            continue
-        if best is None or overlap > best[1] or (overlap == best[1] and key < best[0]):
-            best = (key, overlap)
-    if best is None:
-        return None
-
-    required_overlap = len(normalized_texts) if len(normalized_texts) <= 2 else 2
-    if best[1] < required_overlap:
-        return None
-    return best[0]
 
 
 def _selected_dependency_support_index(

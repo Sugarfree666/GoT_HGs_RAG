@@ -72,16 +72,20 @@ anchor decisions are made on restored original question text.
    entity-specific paths are used directly.
 
 9. **Semantic Reasoning Path induction**
-   The LLM receives the original question, restored question, and compact
-   selected dependency path evidence for `ps1`. It converts the syntactic
-   dependency evidence into branch-level Semantic Reasoning Paths. These paths
-   are not dependency paths and are not a Semantic AST: their nodes are semantic
-   objects such as explicit entities, licensed intermediate objects
-   (`performer`, `director`, `company`, `CEO`), or value slots (`nationality`,
-   `birth_date`, `death_place`, `university`). Their edges are executable
-   one-hop semantic relations such as `performer of song` or `place of death`.
-   Final comparison, ranking, boolean, intersection, and common-answer intent is
-   stored only as metadata for downstream composition.
+   The selected dependency paths are first decomposed into local atomic
+   evidences. Step 9 LLM receives only the original question and those atomic
+   evidences. Raw selected dependency paths are not sent to the Step 9 prompt.
+   Atomic evidences are local structural evidence, not semantic edges. The LLM
+   induces branch-level Semantic Reasoning Paths under the original question
+   semantics. These paths are not dependency paths and are not a Semantic AST:
+   their nodes are semantic objects such as explicit entities, licensed
+   intermediate objects (`performer`, `director`, `company`, `CEO`), or value
+   slots (`nationality`, `birth_date`, `death_place`, `university`). Their edges
+   are executable one-hop semantic relations such as `performer of song` or
+   `place of death`, and every semantic edge must cite non-empty
+   `supported_by` atomic evidence ids. Final comparison, ranking, boolean,
+   intersection, and common-answer intent is stored only as metadata for
+   downstream composition.
 
 10. **Atomic DAG compilation**
    The LLM compiles each Semantic Reasoning Path edge into exactly one atomic
@@ -89,8 +93,6 @@ anchor decisions are made on restored original question text.
    such as `q1's answer`. Each atomic node keeps support copied from the source
    semantic edge and remains traceable to `source_semantic_path_id` and
    `source_semantic_edge_id`.
-   The old direct dependency-evidence-to-DAG path is retained only as an
-   explicit ablation fallback via `--direct-dag`; it is not the default.
 
 11. **Atomic Subquestion DAG**
    The final DAG contains only one-hop lookup subquestions and explicit
@@ -128,12 +130,6 @@ Run with detailed intermediate output:
 
 ```powershell
 python main.py --debug --question "Which actor is older?"
-```
-
-Run the legacy direct-DAG ablation explicitly:
-
-```powershell
-python main.py --direct-dag --question "Which actor is older?"
 ```
 
 If Stanza cannot find CoreNLP, pass the CoreNLP directory:

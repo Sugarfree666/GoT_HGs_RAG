@@ -5,13 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/GoT_HGs_RAG.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/HyperBranch.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corenlp_server-6240e863a53f475f.props" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/depo/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/anchor_selector.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/ast_builder.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/entity_path_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/entity_path_pipeline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/path_ast_builder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/path_pipeline.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/prompts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_branch/depo_adapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/depo_adapter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hypergraphrag.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/run_depo_decomposition_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_depo_decomposition_batch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_depo_entity_origin_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_depo_entity_origin_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_depo_path_projection.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp_em0_analysis.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +38,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="42235" />
+    <option name="cachedIndexableFilesCount" value="42336" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -40,23 +59,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0004985410770055" />
-      <entry key="MS500" value="1.2185468611631771" />
-      <entry key="S2" value="1.7349064320232706" />
-      <entry key="S5" value="2.47264190586556" />
-      <entry key="S10" value="4.250780863092636" />
-      <entry key="S30" value="12.088922514873815" />
-      <entry key="S60" value="19.42566221809005" />
-      <entry key="M2" value="25.934110360501307" />
-      <entry key="M5" value="31.443020181263595" />
-      <entry key="M10" value="34.376997880141225" />
-      <entry key="M15" value="37.01174772139172" />
-      <entry key="M30" value="44.75833136252802" />
-      <entry key="H1" value="58.27627951592864" />
-      <entry key="H2" value="93.66468609996092" />
-      <entry key="H4" value="163.87586313901994" />
-      <entry key="D1" value="584.6087376303443" />
-      <entry key="W1" value="1891.4520233790997" />
+      <entry key="MS100" value="1.0013820552983659" />
+      <entry key="MS500" value="1.342500843717267" />
+      <entry key="S2" value="2.755626983722742" />
+      <entry key="S5" value="4.013126170745168" />
+      <entry key="S10" value="5.776090762063192" />
+      <entry key="S30" value="12.607058310913251" />
+      <entry key="S60" value="17.837359343159292" />
+      <entry key="M2" value="23.040683890696705" />
+      <entry key="M5" value="40.86253867238709" />
+      <entry key="M10" value="68.25432739830353" />
+      <entry key="M15" value="87.21573972833039" />
+      <entry key="M30" value="117.55523270551116" />
+      <entry key="H1" value="140.0452918241791" />
+      <entry key="H2" value="157.6860782569178" />
+      <entry key="H4" value="194.746166359207" />
+      <entry key="D1" value="621.4175626643248" />
+      <entry key="W1" value="2003.7002834304515" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -78,23 +97,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9664079775229535" />
-      <entry key="MS500" value="1.2092289910304348" />
-      <entry key="S2" value="1.7311691291156657" />
-      <entry key="S5" value="2.470364648849804" />
-      <entry key="S10" value="4.248572037578435" />
-      <entry key="S30" value="12.086530107917067" />
-      <entry key="S60" value="19.42368734615763" />
-      <entry key="M2" value="25.932777850259402" />
-      <entry key="M5" value="31.442370498242" />
-      <entry key="M10" value="34.37664319722991" />
-      <entry key="M15" value="37.01149467792387" />
-      <entry key="M30" value="44.7581812474735" />
-      <entry key="H1" value="58.27618329229554" />
-      <entry key="H2" value="93.66460714698451" />
-      <entry key="H4" value="163.87579092769258" />
-      <entry key="D1" value="584.6086846800691" />
-      <entry key="W1" value="1891.4519987032027" />
+      <entry key="MS100" value="0.9539637606884982" />
+      <entry key="MS500" value="1.3300295328080427" />
+      <entry key="S2" value="2.7489918559090882" />
+      <entry key="S5" value="4.0090801691867375" />
+      <entry key="S10" value="5.773163326878036" />
+      <entry key="S30" value="12.604975320002493" />
+      <entry key="S60" value="17.835900806269606" />
+      <entry key="M2" value="23.039745133657348" />
+      <entry key="M5" value="40.86186809322568" />
+      <entry key="M10" value="68.25376506360254" />
+      <entry key="M15" value="87.21526012566082" />
+      <entry key="M30" value="117.55490890762418" />
+      <entry key="H1" value="140.04509857460812" />
+      <entry key="H2" value="157.68596825755358" />
+      <entry key="H4" value="194.74609457555331" />
+      <entry key="D1" value="621.4175112680465" />
+      <entry key="W1" value="2003.7002579864877" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -230,7 +249,8 @@
       <workItem from="1780897223268" duration="2785000" />
       <workItem from="1780907980220" duration="78507000" />
       <workItem from="1781151619830" duration="8859000" />
-      <workItem from="1781161316082" duration="19230000" />
+      <workItem from="1781161316082" duration="19535000" />
+      <workItem from="1781194104607" duration="9113000" />
     </task>
     <servers />
   </component>

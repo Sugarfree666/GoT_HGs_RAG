@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import sys
 import unittest
@@ -17,7 +19,6 @@ from entity_path_pipeline import (  # noqa: E402
     build_single_path_set_candidate,
     build_selected_dependency_path_evidence,
     extract_atomic_evidences,
-    extract_evidence_atoms,
     select_best_path_by_entity,
 )
 from entity_path_projector import (  # noqa: E402
@@ -28,9 +29,8 @@ from entity_path_projector import (  # noqa: E402
     validate_selected_entity_paths,
 )
 from graph_builder import GraphBuilder  # noqa: E402
-from main import run_pipeline  # noqa: E402
+from main import _print_semantic_reasoning_paths, run_pipeline  # noqa: E402
 from models import (  # noqa: E402
-    AtomicQuestionDAG,
     CoreNLPToken,
     DependencyEdge,
     DependencyParse,
@@ -47,6 +47,10 @@ from models import (  # noqa: E402
     RestoredGraphNodeCandidate,
     ScoredEntityPath,
     SelectedEntityPath,
+    SemanticReasoningEdge,
+    SemanticReasoningNode,
+    SemanticReasoningPath,
+    SemanticReasoningPathResult,
     SemanticNormalizationResult,
 )
 from path_projector import build_undirected_dependency_graph  # noqa: E402
@@ -54,11 +58,10 @@ from prompts import (  # noqa: E402
     ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM,
     CANDIDATE_NODES_SYSTEM,
     ENTITY_PATH_SCORING_SYSTEM,
-    GROUNDED_ATOMIC_DAG_SYSTEM,
     PROBLEM_FRAME_SYSTEM,
     SEMANTIC_REASONING_PATH_SYSTEM,
     build_atomic_dag_from_semantic_reasoning_path_prompt,
-    build_grounded_atomic_dag_prompt,
+    build_semantic_reasoning_path_prompt,
 )
 
 
@@ -256,171 +259,24 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual(stats["by_entity"]["e1"]["kept"], 2)
         self.assertEqual(stats["by_entity"]["e1"]["pruned"], 2)
 
-    def test_grounded_atomic_dag_generation_uses_path_support(self) -> None:
-        paths = [
-            _entity_path("e1_p1", "e1", ["El Tonto", "director", "born"]),
-            _entity_path("e2_p1", "e2", ["The Heart Of Doreon", "director", "born"]),
-        ]
-        path_sets = [
-            PathSetCandidate(
-                path_set_id="ps1",
-                path_ids_by_entity={"e1": "e1_p1", "e2": "e2_p1"},
-                mean_path_score=95,
-            )
-        ]
-        selected_evidence = build_selected_dependency_path_evidence(
-            path_set_candidates=path_sets,
-            entity_origin_paths=paths,
-        )
-        llm = GroundedAtomicLLM(
-            {
-                "nodes": [
-                    {
-                        "node_id": "q1",
-                        "question": "Who is the director of El Tonto?",
-                        "dependencies": [],
-                        "support": [
-                            {
-                                "path_set_id": "ps1",
-                                "path_id": "e1_p1",
-                                "node_texts": ["El Tonto", "director"],
-                                "node_ids": ["1", "2"],
-                            }
-                        ],
-                    },
-                    {
-                        "node_id": "q2",
-                        "question": "When was q1's answer born?",
-                        "dependencies": ["q1"],
-                        "support": [
-                            {
-                                "path_set_id": "ps1",
-                                "path_id": "e1_p1",
-                                "node_texts": ["director", "born"],
-                                "node_ids": ["2", "3"],
-                            }
-                        ],
-                    },
-                ],
-                "selected_path_set_ids": ["ps1"],
-                "reason": "test grounded DAG",
-            }
-        )
-        parser = EntityPathSemanticParser(llm)
+    def test_step9_prompt_uses_only_atomic_evidences(self) -> None:
+        evidence = _walt_disney_selected_dependency_path_evidence()
+        atoms = [atom.to_dict() for atom in extract_atomic_evidences(evidence)]
+        raw_path_text = "Which Walt Disney film -- produced first -- The Apple Dumpling Gang -- Something Wicked This Way Comes"
 
-        dag, payload = parser.build_grounded_atomic_dag(
-            original_question="Which film whose director was born first, El Tonto or The Heart Of Doreon?",
-            selected_dependency_path_evidence=selected_evidence,
+        prompt = build_semantic_reasoning_path_prompt(
+            original_question=(
+                "Which Walt Disney film was produced first, "
+                "The Apple Dumpling Gang or Something Wicked This Way Comes?"
+            ),
+            atomic_evidences=atoms,
         )
 
-        self.assertEqual([node.id for node in dag.nodes], ["q1", "q2"])
-        self.assertEqual(dag.nodes[1].depends_on, ["q1"])
-        self.assertEqual(dag.nodes[0].metadata["support_path_ids"], ["e1_p1"])
-        self.assertEqual(dag.nodes[0].metadata["support"][0]["node_texts"], ["El Tonto", "director"])
-        self.assertEqual(payload["selected_path_set_ids"], ["ps1"])
-
-    def test_grounded_dag_requires_dependency_answer_variables(self) -> None:
-        evidence = _selected_dependency_path_evidence_for_alphago()
-        llm = SequenceGroundedAtomicLLM(
-            [
-                {
-                    "nodes": [
-                        {
-                            "node_id": "q1",
-                            "question": "Which company developed AlphaGo?",
-                            "dependencies": [],
-                            "support": [
-                                {
-                                    "path_set_id": "ps1",
-                                    "path_id": "e1_p1",
-                                    "node_texts": ["AlphaGo", "developed", "company"],
-                                }
-                            ],
-                        },
-                        {
-                            "node_id": "q2",
-                            "question": "Who is the CEO of the company that developed AlphaGo?",
-                            "dependencies": ["q1"],
-                            "support": [
-                                {
-                                    "path_set_id": "ps1",
-                                    "path_id": "e1_p1",
-                                    "node_texts": ["company", "CEO"],
-                                }
-                            ],
-                        },
-                    ]
-                },
-                {
-                    "nodes": [
-                        {
-                            "node_id": "q1",
-                            "question": "Which company developed AlphaGo?",
-                            "dependencies": [],
-                            "support": [
-                                {
-                                    "path_set_id": "ps1",
-                                    "path_id": "e1_p1",
-                                    "node_texts": ["AlphaGo", "developed", "company"],
-                                }
-                            ],
-                        },
-                        {
-                            "node_id": "q2",
-                            "question": "Who is the CEO of q1's answer?",
-                            "dependencies": ["q1"],
-                            "support": [
-                                {
-                                    "path_set_id": "ps1",
-                                    "path_id": "e1_p1",
-                                    "node_texts": ["company", "CEO"],
-                                }
-                            ],
-                        },
-                    ]
-                },
-            ]
-        )
-        parser = EntityPathSemanticParser(llm)
-
-        dag, _ = parser.build_grounded_atomic_dag(
-            original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
-            selected_dependency_path_evidence=evidence,
-        )
-
-        self.assertEqual(llm.call_count, 2)
-        self.assertEqual(dag.nodes[1].question, "Who is the CEO of q1's answer?")
-
-    def test_step9_prompt_only_contains_question_and_selected_path_evidence(self) -> None:
-        evidence = [
-            {
-                "path_set_id": "ps1",
-                "paths": [
-                    {
-                        "entity_id": "e1",
-                        "entity_text": "AlphaGo",
-                        "path_id": "e1_p1",
-                        "path_text": "AlphaGo -> developed -> company",
-                        "node_texts": ["AlphaGo", "developed", "company"],
-                    }
-                ],
-            }
-        ]
-
-        prompt = build_grounded_atomic_dag_prompt(
-            original_question="Which company developed AlphaGo?",
-            selected_dependency_path_evidence=evidence,
-        )
-
-        self.assertIn("Which company developed AlphaGo?", prompt)
-        self.assertIn("Selected dependency path evidence", prompt)
-        self.assertIn("AlphaGo -> developed -> company", prompt)
-        self.assertNotIn("Full undirected graph edges", prompt)
-        self.assertNotIn("Path-level scores", prompt)
-        self.assertNotIn("Entity start nodes", prompt)
-        self.assertNotIn("Restored/normalized question", prompt)
-        self.assertNotIn("Question intent metadata", prompt)
-        self.assertNotIn("direct semantic decomposition draft", prompt)
+        self.assertIn("Atomic evidences:", prompt)
+        self.assertIn("Which Walt Disney film ---- produced first", prompt)
+        self.assertNotIn("Selected dependency path evidence", prompt)
+        self.assertNotIn(raw_path_text, prompt)
+        self.assertNotIn(" -- ", prompt)
 
     def test_step10_prompt_only_contains_question_and_semantic_reasoning_paths(self) -> None:
         semantic_payload = _semantic_two_edge_payload()
@@ -447,302 +303,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertNotIn("path_set_id", prompt)
         self.assertNotIn("e1_p1", prompt)
 
-    def test_grounded_dag_requires_support(self) -> None:
-        evidence = _selected_dependency_path_evidence_for_alphago()
-        llm = SequenceGroundedAtomicLLM(
-            [
-                {
-                    "nodes": [
-                        {
-                            "node_id": "q1",
-                            "question": "Which company developed AlphaGo?",
-                            "dependencies": [],
-                        }
-                    ]
-                },
-                _grounded_alphago_payload(),
-            ]
-        )
-        parser = EntityPathSemanticParser(llm)
-
-        dag, _ = parser.build_grounded_atomic_dag(
-            original_question="Which company developed AlphaGo?",
-            selected_dependency_path_evidence=evidence,
-        )
-
-        self.assertEqual(llm.call_count, 2)
-        self.assertEqual([node.question for node in dag.nodes], ["Which company developed AlphaGo?"])
-        self.assertIn("Previous output failed grounding validation", llm.prompts[1])
-
-    def test_invalid_support_path_id_repaired_by_node_text_overlap(self) -> None:
-        evidence = _selected_dependency_path_evidence_for_alphago()
-        llm = SequenceGroundedAtomicLLM(
-            [
-                {
-                    "nodes": [
-                        {
-                            "node_id": "q1",
-                            "question": "Which company developed AlphaGo?",
-                            "dependencies": [],
-                            "support": [
-                                {
-                                    "path_set_id": "ps1",
-                                    "path_id": "fake_path",
-                                    "node_texts": ["AlphaGo", "developed", "company"],
-                                }
-                            ],
-                        }
-                    ]
-                },
-                {
-                    "nodes": [
-                        {
-                            "node_id": "q1",
-                            "question": "Which company developed AlphaGo?",
-                            "dependencies": [],
-                            "support": [
-                                {
-                                    "path_set_id": "ps1",
-                                    "path_id": "fake_path",
-                                    "node_texts": ["AlphaGo", "developed", "company"],
-                                }
-                            ],
-                        }
-                    ]
-                },
-            ]
-        )
-        parser = EntityPathSemanticParser(llm)
-
-        dag, payload = parser.build_grounded_atomic_dag(
-            original_question="Which company developed AlphaGo?",
-            selected_dependency_path_evidence=evidence,
-        )
-
-        self.assertEqual(llm.call_count, 2)
-        self.assertEqual(dag.nodes[0].metadata["support"][0]["path_id"], "e1_p1")
-        warnings = "\n".join(payload.get("normalization_warnings") or [])
-        self.assertIn("fake_path", warnings)
-        self.assertIn("Repaired invalid support", warnings)
-
-    def test_invalid_support_path_id_rejected_without_node_text_overlap(self) -> None:
-        evidence = _selected_dependency_path_evidence_for_alphago()
-        llm = SequenceGroundedAtomicLLM(
-            [
-                {
-                    "nodes": [
-                        {
-                            "node_id": "q1",
-                            "question": "Which company developed AlphaGo?",
-                            "dependencies": [],
-                            "support": [
-                                {
-                                    "path_set_id": "ps1",
-                                    "path_id": "fake_path",
-                                    "node_texts": ["unrelated", "nodes"],
-                                }
-                            ],
-                        }
-                    ]
-                },
-                {
-                    "nodes": [
-                        {
-                            "node_id": "q1",
-                            "question": "Which company developed AlphaGo?",
-                            "dependencies": [],
-                            "support": [
-                                {
-                                    "path_set_id": "ps1",
-                                    "path_id": "fake_path",
-                                    "node_texts": ["unrelated", "nodes"],
-                                }
-                            ],
-                        }
-                    ]
-                },
-            ]
-        )
-        parser = EntityPathSemanticParser(llm)
-
-        with self.assertRaisesRegex(ValueError, "fake_path"):
-            parser.build_grounded_atomic_dag(
-                original_question="Which company developed AlphaGo?",
-                selected_dependency_path_evidence=evidence,
-            )
-        self.assertEqual(llm.call_count, 2)
-
-    def test_support_node_texts_mismatch_retries_then_warns(self) -> None:
-        evidence = _selected_dependency_path_evidence_for_alphago()
-        llm = SequenceGroundedAtomicLLM(
-            [
-                {
-                    "nodes": [
-                        {
-                            "node_id": "q1",
-                            "question": "Which university developed AlphaGo?",
-                            "dependencies": [],
-                            "support": [
-                                {
-                                    "path_set_id": "ps1",
-                                    "path_id": "e1_p1",
-                                    "node_texts": ["AlphaGo", "university"],
-                                }
-                            ],
-                        }
-                    ]
-                },
-                {
-                    "nodes": [
-                        {
-                            "node_id": "q1",
-                            "question": "Which university developed AlphaGo?",
-                            "dependencies": [],
-                            "support": [
-                                {
-                                    "path_set_id": "ps1",
-                                    "path_id": "e1_p1",
-                                    "node_texts": ["AlphaGo", "university"],
-                                }
-                            ],
-                        }
-                    ]
-                },
-            ]
-        )
-        parser = EntityPathSemanticParser(llm)
-
-        dag, payload = parser.build_grounded_atomic_dag(
-            original_question="Which university developed AlphaGo?",
-            selected_dependency_path_evidence=evidence,
-        )
-
-        self.assertEqual(llm.call_count, 2)
-        self.assertEqual(dag.nodes[0].metadata["support"][0]["node_texts"], ["AlphaGo", "university"])
-        self.assertIn("node_text_warnings", dag.nodes[0].metadata["support"][0])
-        warnings = "\n".join(payload.get("normalization_warnings") or [])
-        self.assertIn("university", warnings)
-        self.assertIn("Previous output failed grounding validation", llm.prompts[1])
-
-    def test_atomic_node_one_hop_fields_preserved(self) -> None:
-        evidence = _selected_dependency_path_evidence_for_alphago()
-        payload = _grounded_alphago_payload()
-        payload["nodes"][0]["operation"] = "lookup"
-        payload["nodes"][0]["input"] = {"type": "entity", "text": "AlphaGo"}
-        payload["nodes"][0]["one_hop_relation"] = "developer company"
-        payload["nodes"][0]["answer_type"] = "Organization"
-        parser = EntityPathSemanticParser(GroundedAtomicLLM(payload))
-
-        dag, _ = parser.build_grounded_atomic_dag(
-            original_question="Which company developed AlphaGo?",
-            selected_dependency_path_evidence=evidence,
-        )
-
-        metadata = dag.nodes[0].metadata
-        self.assertEqual(metadata["operation"], "lookup")
-        self.assertEqual(metadata["input"], {"type": "entity", "text": "AlphaGo"})
-        self.assertEqual(metadata["one_hop_relation"], "developer company")
-        self.assertEqual(metadata["answer_type"], "Organization")
-
-    def test_atomic_dag_compilation_repairs_missing_dependency_variable_question(self) -> None:
-        evidence = [
-            {
-                "path_set_id": "ps1",
-                "paths": [
-                    {
-                        "entity_id": "e1",
-                        "entity_text": "Israel",
-                        "path_id": "e1_p1",
-                        "path_text": "Israel -> located -> region -> north_region",
-                        "node_texts": ["Israel", "located", "region", "north_region"],
-                    }
-                ],
-            }
-        ]
-        semantic_payload = {
-            "paths": [
-                {
-                    "branch_id": "b1",
-                    "entity_id": "e1",
-                    "source_path_id": "e1_p1",
-                    "nodes": [
-                        {"node_id": "b1_n1", "label": "Israel", "kind": "entity", "semantic_type": "Country"},
-                        {"node_id": "b1_n2", "label": "region where Israel is located", "kind": "semantic_object", "semantic_type": "Region"},
-                        {"node_id": "b1_n3", "label": "region immediately north", "kind": "semantic_object", "semantic_type": "Region"},
-                    ],
-                    "edges": [
-                        {
-                            "edge_id": "b1_e1",
-                            "source": "b1_n1",
-                            "target": "b1_n2",
-                            "relation": "region where Israel is located",
-                            "answer_type": "Region",
-                            "is_one_hop": True,
-                        },
-                        {
-                            "edge_id": "b1_e2",
-                            "source": "b1_n2",
-                            "target": "b1_n3",
-                            "relation": "region immediately north of region",
-                            "answer_type": "Region",
-                            "is_one_hop": True,
-                        },
-                    ],
-                }
-            ],
-            "selected_path_set_ids": ["ps1"],
-        }
-        dag_payload = {
-            "nodes": [
-                {
-                    "node_id": "q1",
-                    "question": "What region is Israel located in?",
-                    "operation": "lookup",
-                    "input": {"type": "entity", "text": "Israel"},
-                    "one_hop_relation": "region where located",
-                    "answer_type": "Region",
-                    "dependencies": [],
-                    "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["Israel", "located", "region"]}],
-                    "source_semantic_path_id": "b1",
-                    "source_semantic_edge_id": "b1_e1",
-                },
-                {
-                    "node_id": "q2",
-                    "question": "What region is immediately north of the region where Israel is located?",
-                    "operation": "lookup",
-                    "input": {"type": "previous_answer", "ref": "q1"},
-                    "one_hop_relation": "region immediately north",
-                    "answer_type": "Region",
-                    "dependencies": ["q1"],
-                    "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["region", "north_region"]}],
-                    "source_semantic_path_id": "b1",
-                    "source_semantic_edge_id": "b1_e2",
-                },
-            ],
-            "selected_path_set_ids": ["ps1"],
-        }
-
-        parser = EntityPathSemanticParser(SemanticAtomicLLM(dag_payload))
-        dag, payload = parser.build_grounded_atomic_dag(
-            original_question="When was the region immediately north of the region where Israel is located created?",
-            selected_dependency_path_evidence=evidence,
-            semantic_reasoning_paths=semantic_payload,
-        )
-
-        self.assertEqual(dag.nodes[1].question, "What region is immediately north of the region where Israel is located?")
-        self.assertNotIn("dependency_variable_repairs", payload)
-
-    def test_no_final_operator_question_in_prompt(self) -> None:
-        prompt = build_grounded_atomic_dag_prompt(
-            original_question="Are AlphaGo and Lee Sedol from the same country?",
-            selected_dependency_path_evidence=_selected_dependency_path_evidence_for_alphago(),
-        )
-
-        self.assertIn("Do not generate a final comparison question", prompt)
-        self.assertIn("Do not generate a final yes/no question", prompt)
-        self.assertIn("Do not generate a final ranking question", prompt)
-        self.assertIn("Do not generate a final count or aggregation question", prompt)
-
     def test_no_candidate_node_llm_calls(self) -> None:
         question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
         dependency_parse = _dependency_parse(
@@ -767,9 +327,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
             ),
             parser=StaticParser(dependency_parse),
             graph_builder=GraphBuilder(),
-            anchor_selector=None,
-            semantic_ast_optimizer=None,
-            subquestion_generator=StaticSubquestionGenerator(llm),
             question_normalizer=IdentityNormalizer(),
             path_semantic_parser=EntityPathSemanticParser(llm),
             debug=False,
@@ -820,9 +377,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
             ),
             parser=StaticParser(dependency_parse),
             graph_builder=GraphBuilder(),
-            anchor_selector=None,
-            semantic_ast_optimizer=None,
-            subquestion_generator=StaticSubquestionGenerator(llm),
             question_normalizer=IdentityNormalizer(),
             path_semantic_parser=EntityPathSemanticParser(llm),
             debug=False,
@@ -851,52 +405,10 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertIn(ENTITY_PATH_SCORING_SYSTEM, calls)
         self.assertIn(SEMANTIC_REASONING_PATH_SYSTEM, calls)
         self.assertIn(ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM, calls)
-        self.assertNotIn(GROUNDED_ATOMIC_DAG_SYSTEM, calls)
         self.assertLess(calls.index(ENTITY_PATH_SCORING_SYSTEM), calls.index(SEMANTIC_REASONING_PATH_SYSTEM))
         self.assertLess(calls.index(SEMANTIC_REASONING_PATH_SYSTEM), calls.index(ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM))
 
-    def test_direct_dag_fallback_requires_explicit_flag(self) -> None:
-        question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
-        dependency_parse = _dependency_parse(
-            ["GameA", "developed", "company", "CEO", "graduated", "university"],
-            [(1, 2, "dep"), (2, 3, "obj"), (3, 4, "nmod:of"), (4, 5, "dep"), (5, 6, "obl:from")],
-            pos_by_word={"GameA": "NNP"},
-        )
-        llm = NoCandidatePromptLLM()
-
-        result = run_pipeline(
-            record=QuestionRecord(question=question),
-            index=1,
-            mask_span_extractor=StaticMaskSpanExtractor(
-                [
-                    MaskSpan(
-                        text="AlphaGo",
-                        start_char=question.index("AlphaGo"),
-                        end_char=question.index("AlphaGo") + len("AlphaGo"),
-                        kind_hint="entity",
-                        semantic_type_hint="Game",
-                    )
-                ]
-            ),
-            parser=StaticParser(dependency_parse),
-            graph_builder=GraphBuilder(),
-            anchor_selector=None,
-            semantic_ast_optimizer=None,
-            subquestion_generator=StaticSubquestionGenerator(llm),
-            question_normalizer=IdentityNormalizer(),
-            path_semantic_parser=EntityPathSemanticParser(llm),
-            use_semantic_reasoning_paths=False,
-            debug=False,
-        )
-
-        self.assertFalse(result["use_semantic_reasoning_paths"])
-        self.assertIsNone(result["semantic_reasoning_paths"])
-        self.assertIn(GROUNDED_ATOMIC_DAG_SYSTEM, llm.system_prompts)
-        self.assertNotIn(SEMANTIC_REASONING_PATH_SYSTEM, llm.system_prompts)
-        self.assertNotIn(ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM, llm.system_prompts)
-
-    def test_semantic_edge_coverage_rejects_missing_unknown_and_duplicate_edges(self) -> None:
-        evidence = _selected_dependency_path_evidence_for_two_edge_chain()
+    def test_semantic_edge_coverage_rejects_missing_and_unknown_edges(self) -> None:
         semantic_payload = _semantic_two_edge_payload()
 
         cases = [
@@ -908,14 +420,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
                 [_atomic_node_for_edge("q1", "missing_edge")],
                 "unknown source_semantic_edge_id",
             ),
-            (
-                [
-                    _atomic_node_for_edge("q1", "b1_e1"),
-                    _atomic_node_for_edge("q2", "b1_e1", dependency="q1"),
-                    _atomic_node_for_edge("q3", "b1_e2", dependency="q2"),
-                ],
-                "compiled by multiple atomic nodes",
-            ),
         ]
 
         for nodes, error_pattern in cases:
@@ -924,12 +428,31 @@ class EntityOriginPipelineTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, error_pattern):
                     parser.build_grounded_atomic_dag(
                         original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
-                        selected_dependency_path_evidence=evidence,
                         semantic_reasoning_paths=semantic_payload,
                     )
 
+    def test_step10_allows_multiple_atomic_nodes_for_one_semantic_edge(self) -> None:
+        semantic_payload = _semantic_two_edge_payload()
+        parser = EntityPathSemanticParser(
+            SemanticAtomicLLM(
+                {
+                    "nodes": [
+                        _atomic_node_for_edge("q1", "b1_e1"),
+                        _atomic_node_for_edge("q2", "b1_e1", dependency="q1"),
+                        _atomic_node_for_edge("q3", "b1_e2", dependency="q2"),
+                    ]
+                }
+            )
+        )
+
+        dag, _ = parser.build_grounded_atomic_dag(
+            original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
+            semantic_reasoning_paths=semantic_payload,
+        )
+
+        self.assertEqual([node.metadata["source_semantic_edge_id"] for node in dag.nodes], ["b1_e1", "b1_e1", "b1_e2"])
+
     def test_step10_atomic_nodes_can_use_semantic_edge_support_only(self) -> None:
-        evidence = _selected_dependency_path_evidence_for_two_edge_chain()
         semantic_payload = _semantic_two_edge_payload()
         atomic_payload = {
             "nodes": [
@@ -949,7 +472,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
         dag, _ = parser.build_grounded_atomic_dag(
             original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
-            selected_dependency_path_evidence=evidence,
             semantic_reasoning_paths=semantic_payload,
         )
 
@@ -1036,7 +558,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
         dag, _ = parser.build_grounded_atomic_dag(
             original_question="When did Lothair II's mother die?",
-            selected_dependency_path_evidence=evidence,
             semantic_reasoning_paths=semantic_payload,
         )
 
@@ -1064,7 +585,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "forbidden dependency placeholder"):
             parser.build_grounded_atomic_dag(
                 original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
-                selected_dependency_path_evidence=evidence,
                 semantic_reasoning_paths=semantic_payload,
             )
 
@@ -1143,68 +663,100 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
         result, _ = parser.build_semantic_reasoning_paths(
             original_question="What nationality is the performer of song When The Stars Go Blue?",
-            restored_question="What nationality is the performer of song When The Stars Go Blue?",
             selected_dependency_path_evidence=evidence,
         )
 
         self.assertEqual([edge.relation for edge in result.paths[0].edges], ["performer of song", "nationality of person"])
 
-    def test_step9_uses_atomic_evidences_without_raw_dependency_paths(self) -> None:
+    def test_atomic_evidence_extraction_walt_disney(self) -> None:
+        evidence = _walt_disney_selected_dependency_path_evidence()
+        atoms = extract_atomic_evidences(evidence)
+        atom_texts = [atom.text for atom in atoms]
+
+        self.assertEqual(atoms[0].text, "Which Walt Disney film ---- produced first")
+        self.assertIn("produced first ---- The Apple Dumpling Gang", atom_texts)
+        self.assertIn("Something Wicked This Way Comes ---- produced first", atom_texts)
+        self.assertIn("The Apple Dumpling Gang ---- Something Wicked This Way Comes", atom_texts)
+        self.assertNotIn(
+            "Which Walt Disney film -- produced first -- The Apple Dumpling Gang -- Something Wicked This Way Comes",
+            atom_texts,
+        )
+        self.assertTrue(all(atom.kind == "path_edge" for atom in atoms))
+        self.assertFalse(any(len(atom.node_texts) > 2 for atom in atoms))
+
+    def test_atomic_evidence_extraction_uses_only_selected_path_edges(self) -> None:
         evidence = [
             {
                 "path_set_id": "ps1",
                 "paths": [
                     {
                         "entity_id": "e1",
-                        "entity_text": "Which Walt Disney film",
-                        "path_id": "e1_p8",
-                        "path_text": "Which Walt Disney film -- produced first -- The Apple Dumpling Gang -- Something Wicked This Way Comes",
-                        "node_texts": [
-                            "Which Walt Disney film",
-                            "produced first",
-                            "The Apple Dumpling Gang",
-                            "Something Wicked This Way Comes",
-                        ],
-                        "node_ids": ["3", "5", "8", "10"],
-                    },
-                    {
-                        "entity_id": "e2",
-                        "entity_text": "The Apple Dumpling Gang",
-                        "path_id": "e2_p14",
-                        "path_text": "The Apple Dumpling Gang -- Something Wicked This Way Comes -- produced first -- Which Walt Disney film",
-                        "node_texts": [
-                            "The Apple Dumpling Gang",
-                            "Something Wicked This Way Comes",
-                            "produced first",
-                            "Which Walt Disney film",
-                        ],
-                        "node_ids": ["8", "10", "5", "3"],
-                    },
-                    {
-                        "entity_id": "e3",
-                        "entity_text": "Something Wicked This Way Comes",
-                        "path_id": "e3_p13",
-                        "path_text": "Something Wicked This Way Comes -- The Apple Dumpling Gang -- produced first -- Which Walt Disney film",
-                        "node_texts": [
-                            "Something Wicked This Way Comes",
-                            "The Apple Dumpling Gang",
-                            "produced first",
-                            "Which Walt Disney film",
-                        ],
-                        "node_ids": ["10", "8", "5", "3"],
-                    },
+                        "entity_text": "Lothair II",
+                        "path_id": "e1_p1",
+                        "path_text": "Lothair II 's -> mother -> When die",
+                        "node_texts": ["Lothair II 's", "mother", "When die"],
+                        "node_ids": ["1", "2", "3"],
+                    }
                 ],
             }
         ]
+
         atoms = extract_atomic_evidences(evidence)
-        self.assertEqual(atoms[0].text, "Which Walt Disney film ---- produced first")
-        self.assertIn("The Apple Dumpling Gang ---- produced first", [atom.text for atom in atoms])
-        self.assertIn("Something Wicked This Way Comes ---- produced first", [atom.text for atom in atoms])
-        self.assertIn(
-            "The Apple Dumpling Gang ---- or/compared_to ---- Something Wicked This Way Comes",
-            [atom.text for atom in atoms],
+
+        self.assertEqual([atom.text for atom in atoms], ["Lothair II 's ---- mother", "mother ---- When die"])
+        self.assertEqual([atom.kind for atom in atoms], ["path_edge", "path_edge"])
+        self.assertEqual([atom.node_ids for atom in atoms], [["1", "2"], ["2", "3"]])
+        self.assertFalse(any("or/compared_to" in atom.text for atom in atoms))
+
+    def test_step9_console_prints_supported_atomic_evidences(self) -> None:
+        result = SemanticReasoningPathResult(
+            paths=[
+                SemanticReasoningPath(
+                    branch_id="b1",
+                    entity_id="e1",
+                    source_path_id="e1_p1",
+                    nodes=[
+                        SemanticReasoningNode(node_id="b1_n1", label="Lothair II", kind="entity"),
+                        SemanticReasoningNode(node_id="b1_n2", label="mother", kind="semantic_object"),
+                    ],
+                    edges=[
+                        SemanticReasoningEdge(
+                            edge_id="b1_e1",
+                            source="b1_n1",
+                            target="b1_n2",
+                            relation="mother of person",
+                            support=[
+                                {
+                                    "atom_ids": ["atom_1"],
+                                    "supported_by": ["atom_1"],
+                                }
+                            ],
+                        )
+                    ],
+                )
+            ]
         )
-        self.assertFalse(any(len(atom.node_texts) > 2 for atom in atoms))
+        output = io.StringIO()
+
+        with contextlib.redirect_stdout(output):
+            _print_semantic_reasoning_paths(
+                result,
+                atomic_evidences=[
+                    {
+                        "id": "atom_1",
+                        "kind": "path_edge",
+                        "text": "Lothair II 's ---- mother",
+                    }
+                ],
+            )
+
+        text = output.getvalue()
+        self.assertIn("b1_e1: Lothair II --mother of person--> mother", text)
+        self.assertIn("supported_by:", text)
+        self.assertIn("atom_1: Lothair II 's ---- mother", text)
+
+    def test_semantic_reasoning_path_for_produced_first(self) -> None:
+        evidence = _walt_disney_selected_dependency_path_evidence()
 
         llm = EvidenceGroundedSemanticLLM(
             {
@@ -1242,7 +794,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
                                 "target": "b2_n2",
                                 "relation": "production/release date",
                                 "answer_type": "Date",
-                                "supported_by": ["atom_3", "atom_1"],
+                                "supported_by": ["atom_5", "atom_1"],
                                 "atomic_question_template": "When was Something Wicked This Way Comes released or produced?",
                             }
                         ],
@@ -1264,10 +816,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
                 "Which Walt Disney film was produced first, "
                 "The Apple Dumpling Gang or Something Wicked This Way Comes?"
             ),
-            restored_question=(
-                "Which Walt Disney film was produced first, "
-                "The Apple Dumpling Gang or Something Wicked This Way Comes?"
-            ),
             selected_dependency_path_evidence=evidence,
         )
 
@@ -1281,7 +829,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
             ["production/release date", "production/release date"],
         )
         self.assertEqual(result.paths[0].edges[0].support[0]["atom_ids"], ["atom_2", "atom_1"])
-        self.assertEqual(result.paths[1].edges[0].support[0]["supported_by"], ["atom_3", "atom_1"])
+        self.assertEqual(result.paths[1].edges[0].support[0]["supported_by"], ["atom_5", "atom_1"])
         self.assertEqual(result.operator_intent["type"], "ARGMIN")
 
     def test_step9_rejects_dependency_cue_nodes_and_relations(self) -> None:
@@ -1343,10 +891,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
                     "Which Walt Disney film was produced first, "
                     "The Apple Dumpling Gang or Something Wicked This Way Comes?"
                 ),
-                restored_question=(
-                    "Which Walt Disney film was produced first, "
-                    "The Apple Dumpling Gang or Something Wicked This Way Comes?"
-                ),
                 selected_dependency_path_evidence=evidence,
             )
 
@@ -1367,12 +911,10 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
         semantic_paths, _ = parser.build_semantic_reasoning_paths(
             original_question=question,
-            restored_question=question,
             selected_dependency_path_evidence=evidence,
         )
         dag, _ = parser.build_grounded_atomic_dag(
             original_question=question,
-            selected_dependency_path_evidence=evidence,
             semantic_reasoning_paths=semantic_paths,
         )
 
@@ -1462,22 +1004,6 @@ class CandidateFlowLLM:
         raise AssertionError(f"Unexpected prompt: {system_prompt}")
 
 
-class GroundedAtomicLLM:
-    def __init__(self, dag_payload: dict[str, Any]) -> None:
-        self.dag_payload = dag_payload
-        self.prompt = ""
-
-    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
-        if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
-            raise AssertionError("legacy candidate-node/problem-frame prompt was called")
-        if "Selected Path Semantic Transduction" in system_prompt or "candidate Semantic ASTs" in system_prompt:
-            raise AssertionError("AST pipeline prompt should not be called in grounded atomic mode")
-        if system_prompt == GROUNDED_ATOMIC_DAG_SYSTEM:
-            self.prompt = prompt
-            return json.loads(json.dumps(self.dag_payload))
-        raise AssertionError(f"Unexpected prompt: {system_prompt}")
-
-
 class SemanticAtomicLLM:
     def __init__(self, dag_payload: dict[str, Any]) -> None:
         self.dag_payload = dag_payload
@@ -1515,21 +1041,6 @@ class EvidenceGroundedSemanticLLM:
         if system_prompt != SEMANTIC_REASONING_PATH_SYSTEM:
             raise AssertionError(f"Unexpected prompt: {system_prompt}")
         return json.loads(json.dumps(self.payload))
-
-
-class SequenceGroundedAtomicLLM:
-    def __init__(self, dag_payloads: list[dict[str, Any]]) -> None:
-        self.dag_payloads = dag_payloads
-        self.prompts: list[str] = []
-        self.call_count = 0
-
-    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
-        if system_prompt != GROUNDED_ATOMIC_DAG_SYSTEM:
-            raise AssertionError(f"Unexpected prompt: {system_prompt}")
-        self.prompts.append(prompt)
-        payload_index = min(self.call_count, len(self.dag_payloads) - 1)
-        self.call_count += 1
-        return json.loads(json.dumps(self.dag_payloads[payload_index]))
 
 
 class NoCandidatePromptLLM:
@@ -1583,26 +1094,6 @@ class NoCandidatePromptLLM:
             return _semantic_alphago_payload()
         if system_prompt == ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM:
             return _atomic_alphago_from_semantic_payload()
-        if system_prompt == GROUNDED_ATOMIC_DAG_SYSTEM:
-            return {
-                "nodes": [
-                    {
-                        "node_id": "q1",
-                        "question": "Which company developed AlphaGo?",
-                        "dependencies": [],
-                        "support": [
-                            {
-                                "path_set_id": "ps1",
-                                "path_id": "e1_p1",
-                                "node_texts": ["AlphaGo", "developed", "company"],
-                                "node_ids": ["1", "2", "3"],
-                            }
-                        ],
-                    }
-                ],
-                "selected_path_set_ids": ["ps1"],
-                "reason": "test grounded mode",
-            }
         return {"question": "test question?"}
 
 
@@ -1629,15 +1120,6 @@ class IdentityNormalizer:
         return SemanticNormalizationResult(original_question=question, normalized_question=question, changed=False)
 
 
-class StaticSubquestionGenerator:
-    def __init__(self, llm_client: Any) -> None:
-        self.llm_client = llm_client
-
-    def generate_dag(self, original_question: str, semantic_ast: Any) -> AtomicQuestionDAG:
-        del original_question, semantic_ast
-        return AtomicQuestionDAG()
-
-
 def _entity_path(path_id: str, entity_id: str, nodes: list[str]) -> EntityOriginPath:
     return EntityOriginPath(
         path_id=path_id,
@@ -1662,6 +1144,55 @@ def _selected_dependency_path_evidence_for_alphago() -> list[dict[str, Any]]:
                     "node_texts": ["AlphaGo", "developed", "company"],
                     "node_ids": ["1", "2", "3"],
                 }
+            ],
+        }
+    ]
+
+
+def _walt_disney_selected_dependency_path_evidence() -> list[dict[str, Any]]:
+    return [
+        {
+            "path_set_id": "ps1",
+            "paths": [
+                {
+                    "entity_id": "e1",
+                    "entity_text": "Which Walt Disney film",
+                    "path_id": "e1_p8",
+                    "path_text": "Which Walt Disney film -- produced first -- The Apple Dumpling Gang -- Something Wicked This Way Comes",
+                    "node_texts": [
+                        "Which Walt Disney film",
+                        "produced first",
+                        "The Apple Dumpling Gang",
+                        "Something Wicked This Way Comes",
+                    ],
+                    "node_ids": ["3", "5", "8", "10"],
+                },
+                {
+                    "entity_id": "e2",
+                    "entity_text": "The Apple Dumpling Gang",
+                    "path_id": "e2_p14",
+                    "path_text": "The Apple Dumpling Gang -- Something Wicked This Way Comes -- produced first -- Which Walt Disney film",
+                    "node_texts": [
+                        "The Apple Dumpling Gang",
+                        "Something Wicked This Way Comes",
+                        "produced first",
+                        "Which Walt Disney film",
+                    ],
+                    "node_ids": ["8", "10", "5", "3"],
+                },
+                {
+                    "entity_id": "e3",
+                    "entity_text": "Something Wicked This Way Comes",
+                    "path_id": "e3_p13",
+                    "path_text": "Something Wicked This Way Comes -- The Apple Dumpling Gang -- produced first -- Which Walt Disney film",
+                    "node_texts": [
+                        "Something Wicked This Way Comes",
+                        "The Apple Dumpling Gang",
+                        "produced first",
+                        "Which Walt Disney film",
+                    ],
+                    "node_ids": ["10", "8", "5", "3"],
+                },
             ],
         }
     ]

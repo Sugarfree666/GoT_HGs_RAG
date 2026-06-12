@@ -18,15 +18,11 @@ from models import (
     RestoredGraphNodeCandidate,
     EntityOriginPath,
     EntityStartNode,
-    PathSetCandidate,
-    ScoredEntityPath,
     SemanticReasoningPathResult,
     SemanticNormalizationResult,
 )
 
 if TYPE_CHECKING:
-    from anchor_selector import AnchorSelector
-    from ast_builder import SemanticASTOptimizer
     from corenlp_parser import CoreNLPParser
     from graph_builder import GraphBuilder
     from mask_span_extractor import ExplicitEntityExtractor, MaskSpanExtractor
@@ -37,7 +33,6 @@ if TYPE_CHECKING:
         select_best_path_by_entity,
     )
     from question_normalizer import SemanticQuestionNormalizer
-    from subquestion_generator import SubquestionGenerator
 
 
 def parse_args() -> argparse.Namespace:
@@ -65,11 +60,6 @@ def parse_args() -> argparse.Namespace:
         help="CoreNLP annotation timeout in milliseconds.",
     )
     parser.add_argument("--debug", action="store_true", help="Print detailed intermediate structures.")
-    parser.add_argument(
-        "--direct-dag",
-        action="store_true",
-        help="Legacy ablation: generate the Atomic DAG directly from dependency path evidence without Semantic Reasoning Paths.",
-    )
     return parser.parse_args()
 
 
@@ -90,14 +80,12 @@ def main() -> int:
         from mask_span_extractor import ExplicitEntityExtractor
         from entity_path_pipeline import EntityPathSemanticParser
         from question_normalizer import SemanticQuestionNormalizer
-        from subquestion_generator import SubquestionGenerator
 
         llm_client = LLMClient(api_key=api_key, base_url=base_url, model="gpt-4o-mini")
         question_normalizer = SemanticQuestionNormalizer(llm_client)
         mask_span_extractor = ExplicitEntityExtractor(llm_client)
         graph_builder = GraphBuilder()
         path_semantic_parser = EntityPathSemanticParser(llm_client)
-        subquestion_generator = SubquestionGenerator(llm_client)
 
         with CoreNLPParser(
             args.corenlp_url,
@@ -112,12 +100,8 @@ def main() -> int:
                     mask_span_extractor=mask_span_extractor,
                     parser=parser,
                     graph_builder=graph_builder,
-                    anchor_selector=None,
-                    semantic_ast_optimizer=None,
-                    subquestion_generator=subquestion_generator,
                     question_normalizer=question_normalizer,
                     path_semantic_parser=path_semantic_parser,
-                    use_semantic_reasoning_paths=not args.direct_dag,
                     debug=args.debug,
                 )
                 print_result(index, record, result, debug=args.debug)
@@ -137,19 +121,13 @@ def run_pipeline(
     mask_span_extractor: "MaskSpanExtractor",
     parser: "CoreNLPParser",
     graph_builder: "GraphBuilder",
-    anchor_selector: "AnchorSelector",
-    semantic_ast_optimizer: "SemanticASTOptimizer",
-    subquestion_generator: "SubquestionGenerator",
     question_normalizer: "SemanticQuestionNormalizer | None" = None,
     path_semantic_parser: "EntityPathSemanticParser | None" = None,
-    use_semantic_reasoning_paths: bool = True,
     debug: bool = False,
 ) -> dict[str, Any]:
     del index, debug
-    del anchor_selector, semantic_ast_optimizer
     from placeholder import selective_entity_masking
     from entity_path_pipeline import (
-        EntityPathSemanticParser,
         build_selected_dependency_path_evidence,
         build_single_path_set_candidate,
         select_best_path_by_entity,
@@ -198,7 +176,7 @@ def run_pipeline(
     )
     dependency_graph = collapse_dependency_graph(raw_dependency_graph)
     if path_semantic_parser is None:
-        path_semantic_parser = EntityPathSemanticParser(getattr(subquestion_generator, "llm_client", None))
+        raise TypeError("run_pipeline requires path_semantic_parser.")
 
     entity_start_nodes = build_entity_start_nodes_from_explicit_entities(
         dependency_graph=dependency_graph,
@@ -246,24 +224,14 @@ def run_pipeline(
         entity_origin_paths=pruned_entity_origin_paths,
         max_path_sets=1,
     )
-    semantic_reasoning_paths: SemanticReasoningPathResult | None = None
-    semantic_reasoning_path_payload: dict[str, Any] | None = None
-    if use_semantic_reasoning_paths:
-        semantic_reasoning_paths, semantic_reasoning_path_payload = path_semantic_parser.build_semantic_reasoning_paths(
-            original_question=record.question,
-            restored_question=processing_question,
-            selected_dependency_path_evidence=selected_dependency_path_evidence,
-        )
-        subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
-            original_question=record.question,
-            selected_dependency_path_evidence=selected_dependency_path_evidence,
-            semantic_reasoning_paths=semantic_reasoning_paths,
-        )
-    else:
-        subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
-            original_question=record.question,
-            selected_dependency_path_evidence=selected_dependency_path_evidence,
-        )
+    semantic_reasoning_paths, semantic_reasoning_path_payload = path_semantic_parser.build_semantic_reasoning_paths(
+        original_question=record.question,
+        selected_dependency_path_evidence=selected_dependency_path_evidence,
+    )
+    subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
+        original_question=record.question,
+        semantic_reasoning_paths=semantic_reasoning_paths,
+    )
     atomic_evidences = (
         semantic_reasoning_path_payload.get("atomic_evidences")
         or semantic_reasoning_path_payload.get("evidence_atoms", [])
@@ -311,7 +279,6 @@ def run_pipeline(
         "atomic_evidences": atomic_evidences,
         "evidence_atoms": atomic_evidences,
         "step9_llm_input_contains_raw_dependency_paths": step9_llm_input_contains_raw_dependency_paths,
-        "use_semantic_reasoning_paths": use_semantic_reasoning_paths,
         "semantic_reasoning_paths": semantic_reasoning_paths,
         "semantic_reasoning_path_payload": semantic_reasoning_path_payload,
         "grounded_atomic_dag_payload": grounded_atomic_dag_payload,
@@ -370,10 +337,6 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     entity_start_nodes: list[EntityStartNode] = result["entity_start_nodes"]
     entity_origin_paths: list[EntityOriginPath] = result["entity_origin_paths"]
     pruned_entity_origin_paths: list[EntityOriginPath] = result.get("pruned_entity_origin_paths") or entity_origin_paths
-    path_pruning_stats: dict[str, Any] = result.get("path_pruning_stats") or {}
-    scored_entity_paths: list[ScoredEntityPath] = result.get("scored_entity_paths", [])
-    best_paths_by_entity: dict[str, ScoredEntityPath] = result.get("best_paths_by_entity", {})
-    path_set_candidates: list[PathSetCandidate] = result.get("path_set_candidates", [])
     selected_dependency_path_evidence: list[dict[str, Any]] = result.get("selected_dependency_path_evidence", [])
     atomic_evidences: list[dict[str, Any]] = result.get("atomic_evidences") or result.get("evidence_atoms", [])
     semantic_reasoning_paths: SemanticReasoningPathResult | None = result.get("semantic_reasoning_paths")
@@ -439,25 +402,13 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     _print_entity_origin_paths(pruned_entity_origin_paths)
     print()
 
-    print("[8. LLM Path Scores]")
-    _print_scored_path_summary(scored_entity_paths)
-    print()
-
-    print("[8.1 Highest-Scored Path per Entity]")
-    _print_best_paths_by_entity(best_paths_by_entity, pruned_entity_origin_paths)
-    print()
-
-    print("[8.2 Selected Path Set]")
-    _print_path_set_candidates(path_set_candidates)
+    print("[8. Selected Dependency Paths and Atomic Evidences]")
+    _print_selected_dependency_path_evidence(selected_dependency_path_evidence)
+    _print_atomic_evidences(atomic_evidences)
     print()
 
     print("[9. Semantic Reasoning Path Induction]")
-    _print_semantic_reasoning_paths(
-        semantic_reasoning_paths,
-        selected_dependency_path_evidence=selected_dependency_path_evidence,
-        atomic_evidences=atomic_evidences,
-        llm_input_contains_raw_dependency_paths=bool(result.get("step9_llm_input_contains_raw_dependency_paths")),
-    )
+    _print_semantic_reasoning_paths(semantic_reasoning_paths, atomic_evidences=atomic_evidences)
     print()
 
     print("[10. Semantic-Path-Guided Atomic DAG Generation]")
@@ -615,76 +566,11 @@ def _print_path_pruning_stats(
         )
 
 
-def _print_scored_entity_paths(
-    scored_paths: list[ScoredEntityPath],
-    entity_origin_paths: list[EntityOriginPath],
-) -> None:
-    if not scored_paths:
-        print("  (none)")
-        return
-    path_by_id = {path.path_id: path for path in entity_origin_paths}
-    for score in sorted(scored_paths, key=lambda item: (_entity_sort_key_for_print(item.entity_id), -item.score, item.path_id)):
-        path = path_by_id.get(score.path_id)
-        path_text = f" {' -- '.join(path.nodes)}" if path is not None else ""
-        terminal = f" terminal_hint={score.terminal_hint}" if score.terminal_hint else ""
-        chain = f" semantic_chain_hint={score.semantic_chain_hint}" if score.semantic_chain_hint else ""
-        reason = f" reason={score.reason}" if score.reason else ""
-        print(
-            f"  - {score.entity_id}: {score.path_id} score={score.score:.1f} "
-            f"valid={score.valid}{terminal}{chain}{path_text}{reason}"
-        )
-
-
-def _print_scored_path_summary(scored_paths: list[ScoredEntityPath]) -> None:
-    if not scored_paths:
-        print("  (none)")
-        return
-    scores_by_entity: dict[str, list[ScoredEntityPath]] = {}
-    for score in scored_paths:
-        scores_by_entity.setdefault(score.entity_id, []).append(score)
-    print(f"  scored_paths={len(scored_paths)}")
-    for entity_id in sorted(scores_by_entity, key=_entity_sort_key_for_print):
-        scores = scores_by_entity[entity_id]
-        best = max(scores, key=lambda item: item.score)
-        valid_count = sum(1 for item in scores if item.valid)
-        print(
-            f"  - {entity_id}: scored={len(scores)} valid={valid_count} "
-            f"best={best.path_id}:{best.score:.1f}"
-        )
-
-
-def _print_best_paths_by_entity(
-    best_paths_by_entity: dict[str, ScoredEntityPath],
-    entity_origin_paths: list[EntityOriginPath],
-) -> None:
-    if not best_paths_by_entity:
-        print("  (none)")
-        return
-    path_by_id = {path.path_id: path for path in entity_origin_paths}
-    for entity_id in sorted(best_paths_by_entity, key=_entity_sort_key_for_print):
-        score = best_paths_by_entity[entity_id]
-        path = path_by_id.get(score.path_id)
-        path_text = f" ({' -- '.join(path.nodes)})" if path is not None else ""
-        print(f"  - {entity_id}: {score.path_id}:{score.score:.1f}{path_text}")
-
-
-def _print_path_set_candidates(path_set_candidates: list[PathSetCandidate]) -> None:
-    if not path_set_candidates:
-        print("  (none)")
-        return
-    for candidate in path_set_candidates:
-        mapping = ", ".join(
-            f"{entity_id}={path_id}"
-            for entity_id, path_id in sorted(candidate.path_ids_by_entity.items(), key=lambda item: _entity_sort_key_for_print(item[0]))
-        )
-        print(f"  - {candidate.path_set_id}: {mapping}; mean_path_score={candidate.mean_path_score:.1f}")
-
-
 def _print_selected_dependency_path_evidence(evidence: list[dict[str, Any]]) -> None:
     if not evidence:
-        print("  Selected dependency path evidence: (none)")
+        print("  Selected dependency paths: (none)")
         return
-    print("  Selected dependency path evidence:")
+    print("  Selected dependency paths:")
     for path_set in evidence:
         if not isinstance(path_set, dict):
             continue
@@ -700,33 +586,29 @@ def _print_selected_dependency_path_evidence(evidence: list[dict[str, Any]]) -> 
             print(f"      - {path.get('path_id')}: {path.get('path_text')}")
 
 
+def _print_atomic_evidences(atomic_evidences: list[dict[str, Any]]) -> None:
+    if not atomic_evidences:
+        print("  Atomic evidences: (none)")
+        return
+    print("  Atomic evidences:")
+    for atom in atomic_evidences:
+        if not isinstance(atom, dict):
+            continue
+        atom_id = atom.get("id") or "?"
+        kind = atom.get("kind") or "unknown"
+        text = atom.get("text") or ""
+        print(f"    - {atom_id} [{kind}]: {text}")
+
+
 def _print_semantic_reasoning_paths(
     result: SemanticReasoningPathResult | None,
     *,
-    selected_dependency_path_evidence: list[dict[str, Any]] | None = None,
     atomic_evidences: list[dict[str, Any]] | None = None,
-    llm_input_contains_raw_dependency_paths: bool = False,
 ) -> None:
-    selected_dependency_path_evidence = selected_dependency_path_evidence or []
-    atomic_evidences = atomic_evidences or []
-    selected_path_count = sum(
-        len(path_set.get("paths", []) or [])
-        for path_set in selected_dependency_path_evidence
-        if isinstance(path_set, dict)
-    )
-    semantic_edge_count = sum(len(path.edges) for path in result.paths) if result is not None else 0
-    print(f"  selected_dependency_paths={selected_path_count}")
-    print(f"  atomic_evidences={len(atomic_evidences)}")
-    print(f"  step9_llm_input_contains_raw_dependency_paths={str(llm_input_contains_raw_dependency_paths).lower()}")
-    print(f"  semantic_edges={semantic_edge_count}")
     if result is None or not result.paths:
         print("  paths: (none)")
         return
-    atom_text_by_id = {
-        str(atom.get("id")): str(atom.get("text") or "")
-        for atom in atomic_evidences
-        if isinstance(atom, dict) and atom.get("id")
-    }
+    atom_text_by_id = _atomic_evidence_text_index(atomic_evidences or [])
     for path in result.paths:
         label_by_id = {node.node_id: node.label for node in path.nodes}
         if path.edges:
@@ -741,19 +623,20 @@ def _print_semantic_reasoning_paths(
             node_labels = [node.label for node in path.nodes]
             print(f"  - {path.branch_id}: {' -> '.join(node_labels) if node_labels else '(empty)'}")
         for edge in path.edges:
-            supported_by = _semantic_edge_supported_by(edge)
-            atom_text = "; ".join(
-                f"{atom_id}: {atom_text_by_id.get(atom_id, '')}".strip()
-                for atom_id in supported_by
-            )
-            support_text = f" supported_by={supported_by}"
-            if atom_text:
-                support_text += f" ({atom_text})"
             print(
                 f"    {edge.edge_id}: "
-                f"{label_by_id.get(edge.source, edge.source)} -> {label_by_id.get(edge.target, edge.target)}"
-                f"{support_text}"
+                f"{label_by_id.get(edge.source, edge.source)} --{edge.relation}--> "
+                f"{label_by_id.get(edge.target, edge.target)}"
             )
+            support_atom_ids = _semantic_edge_supported_atom_ids(edge)
+            if support_atom_ids:
+                print("      supported_by:")
+                for atom_id in support_atom_ids:
+                    atom_text = atom_text_by_id.get(atom_id, "")
+                    suffix = f": {atom_text}" if atom_text else ""
+                    print(f"        - {atom_id}{suffix}")
+            else:
+                print("      supported_by: (none)")
         if path.warnings:
             print("    Warnings:")
             for warning in path.warnings:
@@ -764,16 +647,35 @@ def _print_semantic_reasoning_paths(
             print(f"    - {warning}")
 
 
-def _semantic_edge_supported_by(edge: Any) -> list[str]:
-    result: list[str] = []
+def _atomic_evidence_text_index(atomic_evidences: list[dict[str, Any]]) -> dict[str, str]:
+    result: dict[str, str] = {}
+    for atom in atomic_evidences:
+        if not isinstance(atom, dict):
+            continue
+        atom_id = str(atom.get("id") or "").strip()
+        if not atom_id:
+            continue
+        result[atom_id] = str(atom.get("text") or "").strip()
+    return result
+
+
+def _semantic_edge_supported_atom_ids(edge: Any) -> list[str]:
+    atom_ids: list[str] = []
+    seen: set[str] = set()
     for support in getattr(edge, "support", []) or []:
         if not isinstance(support, dict):
             continue
-        for atom_id in support.get("atom_ids") or support.get("supported_by") or []:
-            text = str(atom_id or "").strip()
-            if text and text not in result:
-                result.append(text)
-    return result
+        raw_ids = support.get("atom_ids") or support.get("supported_by") or []
+        if isinstance(raw_ids, str):
+            raw_ids = [raw_ids]
+        if not isinstance(raw_ids, list):
+            continue
+        for raw_id in raw_ids:
+            atom_id = str(raw_id or "").strip()
+            if atom_id and atom_id not in seen:
+                seen.add(atom_id)
+                atom_ids.append(atom_id)
+    return atom_ids
 
 
 def _print_grounded_atomic_dag_payload(payload: dict[str, Any]) -> None:

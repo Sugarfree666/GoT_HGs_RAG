@@ -486,219 +486,6 @@ Output JSON with exactly this shape:
 """.strip()
 
 
-GROUNDED_ATOMIC_DAG_SYSTEM = """
-You are implementing DEPO Step 9: Grounded Atomic DAG Generation.
-
-Your task is to generate an executable Atomic Subquestion DAG from:
-
-1. the original question, and
-2. selected dependency path evidence.
-
-The dependency paths are grounding evidence.
-They are not a syntax skeleton to copy.
-They are not a Semantic AST.
-They only justify the one-hop lookup questions you generate.
-
-Use the original question to infer the semantic decomposition.
-Use the selected dependency paths to ground and justify each atomic question.
-
-Each atomic question must correspond to exactly one semantic lookup hop.
-
-A one-hop semantic lookup means:
-
-* input = one explicit entity from the original question, or one previous atomic answer
-* relation = one relation, attribute, role, or event-value lookup
-* output = one entity, value, or answer slot
-
-Every DAG node must cite dependency path support.
-The support may be a short segment of a selected path, not necessarily one dependency edge.
-However, the cited path segment must justify the one-hop relation being asked.
-
-Dependency variable rule:
-If a node depends on an earlier node, its question field must explicitly use that dependency answer variable.
-Use the exact form q1's answer, q2's answer, etc.
-Do not write a complete bridge question that repeats the original entity chain.
-
-Do not generate:
-
-* a Semantic AST
-* final answers
-* retrieval evidence
-* a final comparison question
-* a final yes/no question
-* a final ranking question
-* a final aggregation/counting question
-* a final intersection/union/common-answer question
-
-For comparison, yes/no, ranking, or same/different questions:
-Generate only the lookup branches needed by downstream answer composition.
-The final comparison or judgment will be handled downstream.
-
-Return valid JSON only.
-""".strip()
-
-
-def build_grounded_atomic_dag_prompt(
-    original_question: str,
-    selected_dependency_path_evidence: list[dict[str, object]],
-    validation_feedback: str | None = None,
-) -> str:
-    schema = {
-        "nodes": [
-            {
-                "node_id": "q1",
-                "question": "Which company developed AlphaGo?",
-                "operation": "lookup",
-                "input": {
-                    "type": "entity",
-                    "text": "AlphaGo",
-                },
-                "one_hop_relation": "developer company",
-                "answer_type": "Organization",
-                "dependencies": [],
-                "support": [
-                    {
-                        "path_set_id": "ps1",
-                        "path_id": "e1_p1",
-                        "node_texts": ["AlphaGo", "developed", "company"],
-                        "reason": "This path segment supports asking for the company that developed AlphaGo.",
-                    }
-                ],
-            },
-            {
-                "node_id": "q2",
-                "question": "Who is the CEO of q1's answer?",
-                "operation": "lookup",
-                "input": {
-                    "type": "previous_answer",
-                    "ref": "q1",
-                },
-                "one_hop_relation": "CEO",
-                "answer_type": "Person",
-                "dependencies": ["q1"],
-                "support": [
-                    {
-                        "path_set_id": "ps1",
-                        "path_id": "e1_p1",
-                        "node_texts": ["company", "CEO"],
-                        "reason": "This path segment supports asking for the CEO of the previous company answer.",
-                    }
-                ],
-            }
-        ],
-        "selected_path_set_ids": ["ps1"],
-        "reason": "The DAG decomposes the question into one-hop lookup questions grounded by selected dependency path evidence.",
-    }
-    feedback = ""
-    if validation_feedback:
-        feedback = f"""
-
-Previous output failed grounding validation:
-{validation_feedback}
-
-Regenerate the full JSON.
-Every node must have at least one valid support item using only the supplied path_id/path_set_id/node_texts.
-"""
-    return f"""
-Generate a grounded Atomic Subquestion DAG for DEPO.
-
-Original question:
-{original_question}
-
-Selected dependency path evidence:
-{json.dumps(selected_dependency_path_evidence, ensure_ascii=False, indent=2)}
-
-Task:
-Generate only the one-hop atomic lookup DAG needed by downstream HyperBranch answer composition.
-
-The selected dependency paths are grounding evidence.
-They are not a syntax skeleton to copy.
-Use the original question for semantic decomposition.
-Use the selected paths only to justify each atomic lookup.
-
-Atomic node rules:
-
-1. Each node must be exactly one semantic lookup hop.
-2. Each node must have operation = "lookup".
-3. Each node input must be either:
-
-   * an explicit entity from the original question, or
-   * the answer of a previous atomic node.
-4. Each node must output one entity, value, attribute, role, or event value.
-5. Do not create a node that combines multiple unresolved hops.
-
-Bad:
-"Which university did the CEO of the company that developed AlphaGo graduate from?"
-
-Good:
-q1: "Which company developed AlphaGo?"
-q2: "Who is the CEO of q1's answer?"
-q3: "Which university did q2's answer graduate from?"
-
-Grounding rules:
-
-1. Every node must have a non-empty support list.
-2. Every support item must cite a path_id from Selected dependency path evidence.
-3. Every support item must cite path_set_id from Selected dependency path evidence.
-4. support.node_texts must be a short segment or subset of node texts from the cited path.
-5. support.reason must explain how the cited path segment supports this one-hop lookup.
-6. Do not invent path_id, path_set_id, or node_texts.
-7. If a lookup cannot be supported by any selected dependency path, do not generate that lookup.
-
-Decomposition rules:
-
-1. Use q1, q2, q3, ... in solve order.
-2. dependencies must reference only earlier node_id values.
-3. If a node depends on q1, the question must contain q1's answer.
-4. If a node depends on q1 and q2, the question must contain both q1's answer and q2's answer.
-5. Do not output complete bridge questions for dependent nodes.
-   Bad: q2: "When did Lothair II's mother die?" with dependencies ["q1"].
-   Good: q1: "Who is the mother of Lothair II?"; q2: "When did q1's answer die?".
-6. For branch comparison inputs, use dependency variables per branch.
-   Good:
-   q1: "Who is the director of The Gorgeous Hussy?"
-   q2: "When did q1's answer die?"
-   q3: "Who is the director of Mr. Ace?"
-   q4: "When did q3's answer die?"
-7. Do not expose internal variables like X1.
-8. Use natural atomic questions.
-
-Final-reasoning rules:
-
-1. Do not output final answers.
-2. Do not generate a final comparison question.
-3. Do not generate a final yes/no question.
-4. Do not generate a final ranking question.
-5. Do not generate a final count or aggregation question.
-6. Do not generate a final intersection, union, or common-answer question.
-7. For comparison or same/different questions, generate only the branch lookup questions. Downstream answer composition will perform the final comparison.
-
-Examples of desired decomposition patterns:
-
-* "director of film X" -> "Who is the director of X?"
-* "director born first/later" -> director lookup for each film, then birth-date lookup for each director.
-* "same nationality" -> per-entity or per-branch nationality lookup only; no final yes/no node.
-* "X's mother/father/spouse/wife/husband/author/director" -> first lookup that role, then ask the next attribute about that role answer.
-* Possessive role chains must be decomposed into executable role lookups instead of copied as one full bridge question.
-* "X's father/mother/spouse/wife/husband/child/sibling" -> ask that role of X first, then ask downstream facts about q1's answer.
-* "X's father-in-law" -> spouse lookup for X, then father lookup for q1's answer. Use the same pattern for mother-in-law.
-* "X's paternal grandfather" -> father of X, then father of q1's answer.
-* "X's maternal grandfather" -> mother of X, then father of q1's answer.
-* "X's paternal grandmother" -> father of X, then mother of q1's answer.
-* "X's maternal grandmother" -> mother of X, then mother of q1's answer.
-* For any multi-hop kinship expression, generate one node per kinship hop and use qX's answer in dependent questions.
-* "when did X die" -> death-date lookup.
-* "where did X die" -> death-place lookup.
-* "why did X die" -> death-reason lookup.
-* "which university did X graduate from" -> university lookup.
-* "company that developed X" -> developer-company lookup.
-{feedback}
-Return strict JSON only.
-Output JSON with exactly this shape:
-{json.dumps(schema, ensure_ascii=False, indent=2)}
-""".strip()
-
-
 SEMANTIC_REASONING_PATH_SYSTEM = """
 You are implementing DEPO Step 9: Evidence-Grounded Semantic Reasoning Path Induction.
 
@@ -708,7 +495,7 @@ You will see only:
 2. atomic evidences.
 
 Do NOT directly convert dependency paths into semantic reasoning paths.
-Atomic evidences are local structural evidence, not semantic edges.
+Atomic evidences are adjacent local path-edge fragments from selected dependency paths, not semantic edges.
 Infer semantic reasoning paths mainly from the original question semantics.
 
 Semantic reasoning path nodes are semantic objects:
@@ -765,6 +552,7 @@ def build_semantic_reasoning_path_prompt(
                         "answer_type": "Date",
                         "is_one_hop": True,
                         "supported_by": ["atom_2", "atom_1"],
+                        "support_reason": "atom_2 grounds the film-to-event cue; atom_1 grounds the question type context.",
                         "atomic_question_template": "When was The Apple Dumpling Gang released or produced?",
                     },
                 ],
@@ -801,6 +589,7 @@ Previous output failed Semantic Reasoning Path validation:
 
 Regenerate the full JSON.
 Every semantic edge must be one-hop and must cite valid atomic evidence ids in supported_by.
+For each semantic edge, explicitly list all atomic evidence ids that support that edge.
 """
     return f"""
 Induce Semantic Reasoning Paths for DEPO using only atomic evidences.
@@ -820,11 +609,11 @@ A semantic reasoning path is a directed semantic query structure that describes 
 Hard rules:
 1. Do NOT directly convert dependency paths into semantic reasoning paths.
 2. Dependency paths are not semantic reasoning paths.
-3. Atomic evidences are local structural evidence, not semantic edges.
+3. Atomic evidences are adjacent local path-edge fragments from selected dependency paths, not semantic edges.
 4. Do not directly copy atomic evidence text as semantic edges.
 5. Predicate cues such as produced first, released first, older, younger, where, when, was, compared to must not become semantic nodes.
 6. Every semantic edge must include supported_by.
-7. supported_by must contain valid atomic evidence ids.
+7. supported_by must contain valid atomic evidence ids and should include every atomic evidence fragment used to justify that semantic edge.
 8. If a semantic edge cannot be supported by any atomic evidence, do not output it.
 9. For comparison/ranking questions, generate semantic edges for the attributes that need to be queried, and put the comparison operation into operator_intent.
 10. Do not generate semantic edges like entity -> produced first, produced first -> entity, or entity -> compared to -> entity.
@@ -846,6 +635,11 @@ Allowed semantic relations:
 - date of birth
 - production/release date
 - nationality of person
+
+For each semantic edge:
+- decide which atomic evidences support the edge;
+- put their ids in supported_by;
+- optionally add support_reason explaining how those atomic evidences justify the semantic edge.
 {feedback}
 Return strict JSON only.
 Output JSON with exactly this shape:
@@ -873,6 +667,7 @@ Hard alignment constraints:
 - Do not merge multiple semantic edges into one atomic question.
 - Do not add unsupported lookup nodes.
 - Preserve source_semantic_path_id and source_semantic_edge_id for each output node.
+- A semantic edge may support more than one atomic node if the edge is broad, but each node still cites one existing source_semantic_edge_id.
 
 Do not generate final comparison, ranking, yes/no, aggregation, intersection, union, or common-answer questions.
 
@@ -943,7 +738,7 @@ Compilation rules:
 1. Generate the complete Atomic Question DAG in one pass.
 2. Use the full semantic reasoning path as global context, not isolated edges.
 3. Each atomic node must align to exactly one semantic edge.
-4. Do not skip semantic edges.
+4. Do not skip semantic edges; every semantic edge must be covered by at least one atomic node.
 5. Do not merge multiple semantic edges into one atomic question.
 6. Do not add unsupported lookup nodes.
 7. Use q1, q2, q3, ... in solve order.
@@ -951,7 +746,7 @@ Compilation rules:
 9. dependencies may preserve DAG order metadata, but the natural-language question must be self-contained.
 10. Do not use variable placeholders such as q1's answer, q2's answer, previous answer, answer to q1, answer of q1, or result of q1.
 11. Each question should include enough original anchor context to be directly searchable.
-12. Preserve source_semantic_path_id and source_semantic_edge_id for each output node.
+12. Preserve source_semantic_path_id and source_semantic_edge_id for each output node. Multiple atomic nodes may cite the same source_semantic_edge_id when needed.
 13. Optional support should cite the semantic edge, e.g. {{"semantic_path_id": "b1", "semantic_edge_id": "b1_e1"}}.
 14. Keep final comparison/ranking/yes-no/intersection/common-answer out of the DAG.
 15. operator_intent remains metadata only and must not become a node.

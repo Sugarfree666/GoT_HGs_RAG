@@ -99,14 +99,12 @@ def main() -> int:
         from mask_span_extractor import ExplicitEntityExtractor
         from models import QuestionRecord
         from question_normalizer import SemanticQuestionNormalizer
-        from subquestion_generator import SubquestionGenerator
 
         llm_client = LLMClient(api_key=api_key, base_url=base_url, model=args.model)
         question_normalizer = SemanticQuestionNormalizer(llm_client)
         mask_span_extractor = ExplicitEntityExtractor(llm_client)
         graph_builder = GraphBuilder()
         path_semantic_parser = EntityPathSemanticParser(llm_client)
-        subquestion_generator = SubquestionGenerator(llm_client)
 
         with CoreNLPParser(
             args.corenlp_url,
@@ -159,9 +157,6 @@ def main() -> int:
                                 mask_span_extractor=mask_span_extractor,
                                 parser=parser,
                                 graph_builder=graph_builder,
-                                anchor_selector=None,
-                                semantic_ast_optimizer=None,
-                                subquestion_generator=subquestion_generator,
                                 question_normalizer=question_normalizer,
                                 path_semantic_parser=path_semantic_parser,
                                 debug=args.debug,
@@ -464,8 +459,11 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append("")
 
     lines.append("## 9. Semantic Reasoning Path Induction")
-    lines.append("Inputs:")
+    lines.append("Step 9 LLM input:")
     lines.append(f"- Original question: {payload['question']}")
+    lines.append("- Atomic evidences: see 9A")
+    lines.append("")
+    lines.append("Pre-Step 9 selected dependency paths (debug only; not sent to Step 9 LLM):")
     selected_evidence = stages.get("9_selected_dependency_path_evidence") or []
     for path_set in selected_evidence:
         lines.append(f"- {path_set.get('path_set_id')}")
