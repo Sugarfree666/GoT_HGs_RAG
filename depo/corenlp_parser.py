@@ -7,7 +7,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
-from models import CoreNLPToken, DependencyEdge, DependencyParse
+from models import CoreNLPToken, CoreNLPViewAnnotation, DependencyEdge, DependencyParse, OpenIETriple
 
 
 class CoreNLPConnectionError(RuntimeError):
@@ -101,6 +101,118 @@ class CoreNLPParser:
 
         return self._parse_payload(payload)
 
+    def annotate_view(
+        self,
+        text: str,
+        *,
+        view_id: str = "view_1",
+        enable_openie: bool = True,
+        include_constituency: bool = False,
+    ) -> CoreNLPViewAnnotation:
+        """Annotate one parser-facing declarative view.
+
+        OpenIE is opportunistic: if the local CoreNLP server or stanza wrapper
+        rejects natlog/openie annotators, this method returns structural
+        dependency evidence with a warning instead of failing the pipeline.
+        """
+
+        warnings: list[str] = []
+        annotators = "tokenize,ssplit,pos,lemma,ner,depparse"
+        if include_constituency:
+            annotators += ",parse"
+        if enable_openie:
+            annotators += ",natlog,openie"
+
+        try:
+            payload = self.annotate_raw(
+                text,
+                annotators=annotators,
+                properties={
+                    **self.properties,
+                    "openie.triple.strict": "false",
+                },
+            )
+        except CoreNLPConnectionError as exc:
+            if not enable_openie:
+                raise
+            warnings.append(f"OpenIE annotation unavailable; using CoreNLP structural evidence only: {exc}")
+            payload = self.annotate_raw(
+                text,
+                annotators="tokenize,ssplit,pos,lemma,ner,depparse",
+                properties=self.properties,
+            )
+
+        annotation = self._parse_view_payload(payload, view_id=view_id, text=text)
+        annotation.warnings.extend(warnings)
+        if enable_openie and not annotation.openie_triples:
+            annotation.warnings.append("CoreNLP returned no OpenIE triples for this view.")
+        return annotation
+
+    def annotate_views(
+        self,
+        views: list[dict[str, Any]],
+        *,
+        enable_openie: bool = True,
+        include_constituency: bool = False,
+    ) -> list[CoreNLPViewAnnotation]:
+        annotations: list[CoreNLPViewAnnotation] = []
+        for index, view in enumerate(views, start=1):
+            view_id = str(view.get("id") or f"view_{index}")
+            sentence = str(view.get("sentence") or "").strip()
+            if not sentence:
+                annotations.append(
+                    CoreNLPViewAnnotation(
+                        view_id=view_id,
+                        text="",
+                        warnings=["Skipped empty declarative view."],
+                    )
+                )
+                continue
+            annotations.append(
+                self.annotate_view(
+                    sentence,
+                    view_id=view_id,
+                    enable_openie=enable_openie,
+                    include_constituency=include_constituency,
+                )
+            )
+        return annotations
+
+    def annotate_raw(
+        self,
+        text: str,
+        *,
+        annotators: str | None = None,
+        properties: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        if self.client is None:
+            self.start()
+        assert self.client is not None
+        try:
+            if annotators is None and properties is None:
+                payload = self.client.annotate(text)
+            else:
+                payload = self.client.annotate(
+                    text,
+                    annotators=annotators,
+                    output_format="json",
+                    properties=properties or {},
+                )
+        except TypeError:
+            if annotators is None and properties is None:
+                raise
+            try:
+                payload = self.client.annotate(text)
+            except Exception as exc:
+                raise CoreNLPConnectionError(
+                    f"CoreNLPClient failed to annotate text through endpoint {self.url}: {exc}"
+                ) from exc
+        except Exception as exc:
+            raise CoreNLPConnectionError(
+                f"CoreNLPClient failed to annotate text through endpoint {self.url}: {exc}"
+            ) from exc
+        return self._coerce_json_payload(payload)
+
     def _resolve_corenlp_home(self) -> Path | None:
         explicit_home = self.corenlp_home or os.getenv("CORENLP_HOME")
         if explicit_home:
@@ -175,6 +287,7 @@ class CoreNLPParser:
                         word=token.get("word", ""),
                         lemma=token.get("lemma"),
                         pos=token.get("pos"),
+                        ner=token.get("ner"),
                         character_offset_begin=int(token.get("characterOffsetBegin", -1)),
                         character_offset_end=int(token.get("characterOffsetEnd", -1)),
                     )
@@ -208,6 +321,48 @@ class CoreNLPParser:
 
         return DependencyParse(tokens=tokens, edges=edges, raw=payload)
 
+    def _parse_view_payload(self, payload: dict[str, Any], *, view_id: str, text: str) -> CoreNLPViewAnnotation:
+        dependency_parse = self._parse_payload(payload)
+        triples: list[OpenIETriple] = []
+        constituency_parse: str | None = None
+        phrase_spans: list[dict[str, Any]] = []
+
+        for sentence in payload.get("sentences", []):
+            if constituency_parse is None and isinstance(sentence.get("parse"), str):
+                constituency_parse = sentence.get("parse")
+            for triple in sentence.get("openie", []) or []:
+                if not isinstance(triple, dict):
+                    continue
+                subject = str(triple.get("subject") or "").strip()
+                relation = str(triple.get("relation") or "").strip()
+                object_value = str(triple.get("object") or "").strip()
+                if not subject or not relation or not object_value:
+                    continue
+                triples.append(
+                    OpenIETriple(
+                        subject=subject,
+                        relation=relation,
+                        object=object_value,
+                        confidence=_float_value(triple.get("confidence"), default=1.0),
+                        subject_span=_int_list(triple.get("subjectSpan")),
+                        relation_span=_int_list(triple.get("relationSpan")),
+                        object_span=_int_list(triple.get("objectSpan")),
+                        metadata={key: value for key, value in triple.items() if key not in {"subject", "relation", "object"}},
+                    )
+                )
+            phrase_spans.extend(_phrase_spans_from_sentence(sentence))
+
+        return CoreNLPViewAnnotation(
+            view_id=view_id,
+            text=text,
+            tokens=dependency_parse.tokens,
+            edges=dependency_parse.edges,
+            openie_triples=triples,
+            constituency_parse=constituency_parse,
+            phrase_spans=phrase_spans,
+            raw=payload,
+        )
+
 
 @contextmanager
 def _suppress_info_logs() -> Any:
@@ -217,3 +372,32 @@ def _suppress_info_logs() -> Any:
         yield
     finally:
         logging.disable(previous_disable)
+
+
+def _int_list(raw: Any) -> list[int]:
+    if not isinstance(raw, list):
+        return []
+    result: list[int] = []
+    for item in raw:
+        try:
+            result.append(int(item))
+        except (TypeError, ValueError):
+            continue
+    return result
+
+
+def _float_value(raw: Any, *, default: float) -> float:
+    try:
+        return float(raw)
+    except (TypeError, ValueError):
+        return default
+
+
+def _phrase_spans_from_sentence(sentence: dict[str, Any]) -> list[dict[str, Any]]:
+    # CoreNLP's JSON constituency output is primarily a bracketed parse string.
+    # We keep this as an extension point and expose an empty list unless a caller
+    # provides precomputed phrase spans in a mocked payload.
+    raw_spans = sentence.get("phraseSpans") or sentence.get("phrase_spans")
+    if not isinstance(raw_spans, list):
+        return []
+    return [item for item in raw_spans if isinstance(item, dict)]

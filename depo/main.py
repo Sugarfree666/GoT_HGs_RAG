@@ -9,6 +9,8 @@ from io_utils import read_questions
 from models import (
     AtomicQuestionDAG,
     AtomicSubquestion,
+    CoreNLPViewAnnotation,
+    DeclarativeView,
     MaskReplacement,
     MaskSpan,
     MaskSpanResult,
@@ -16,7 +18,6 @@ from models import (
     ExplicitEntityResult,
     QuestionRecord,
     RestoredGraphNodeCandidate,
-    EntityOriginPath,
     EntityStartNode,
     SemanticReasoningPathResult,
     SemanticNormalizationResult,
@@ -26,12 +27,7 @@ if TYPE_CHECKING:
     from corenlp_parser import CoreNLPParser
     from graph_builder import GraphBuilder
     from mask_span_extractor import ExplicitEntityExtractor, MaskSpanExtractor
-    from entity_path_pipeline import (
-        EntityPathSemanticParser,
-        build_selected_dependency_path_evidence,
-        build_single_path_set_candidate,
-        select_best_path_by_entity,
-    )
+    from entity_path_pipeline import EntityPathSemanticParser
     from question_normalizer import SemanticQuestionNormalizer
 
 
@@ -127,31 +123,23 @@ def run_pipeline(
 ) -> dict[str, Any]:
     del index, debug
     from placeholder import selective_entity_masking
-    from entity_path_pipeline import (
-        build_selected_dependency_path_evidence,
-        build_single_path_set_candidate,
-        select_best_path_by_entity,
-    )
+    from atomic_evidence_extractor import AtomicEvidenceExtractor
     from entity_path_projector import (
         build_entity_start_nodes_from_explicit_entities,
-        enumerate_entity_origin_paths,
-        prune_terminal_glue_paths,
     )
     from path_projector import (
         build_undirected_dependency_graph,
     )
     from dependency_graph_collapser import collapse_dependency_graph
+    from question_normalizer import RelationCarrierDeclarativeGenerator
 
-    semantic_normalization = (
-        question_normalizer.normalize(record.question)
-        if question_normalizer is not None
-        else SemanticNormalizationResult(
-            original_question=record.question,
-            normalized_question=record.question,
-            changed=False,
-        )
+    semantic_normalization = SemanticNormalizationResult(
+        original_question=record.question,
+        normalized_question=record.question,
+        changed=False,
+        warnings=["Deprecated stage bypassed: relation-carrier declarative views are generated after entity masking."],
     )
-    processing_question = semantic_normalization.normalized_question
+    processing_question = record.question
     explicit_entities = _coerce_explicit_entity_result(
         mask_span_extractor.extract(processing_question),
     )
@@ -160,83 +148,83 @@ def run_pipeline(
         original_question=processing_question,
         extracted_nodes=mask_spans,
     )
-    dependency_parse = parser.parse(replacement.masked_question)
-    graph_node_candidates = graph_builder.build_graph_node_candidates(
-        dependency_parse=dependency_parse,
-        replacement=replacement,
-    )
-    restored_graph_node_candidates = graph_builder.restore_graph_node_candidates(
-        graph_node_candidates=graph_node_candidates,
-        replacement=replacement,
-    )
+    view_generator = question_normalizer or RelationCarrierDeclarativeGenerator(None)
+    if hasattr(view_generator, "generate_relation_carrier_views"):
+        relation_carrier_result = view_generator.generate_relation_carrier_views(
+            original_question=record.question,
+            masked_question=replacement.masked_question,
+            placeholders=[mapping.placeholder for mapping in replacement.mask_mappings],
+        )
+    else:
+        relation_carrier_result = RelationCarrierDeclarativeGenerator(None).generate_relation_carrier_views(
+            original_question=record.question,
+            masked_question=replacement.masked_question,
+            placeholders=[mapping.placeholder for mapping in replacement.mask_mappings],
+        )
+    declarative_views = relation_carrier_result.declarative_views or [
+        DeclarativeView(id="view_1", sentence=replacement.masked_question, purpose="relation_carrier")
+    ]
 
-    raw_dependency_graph = build_undirected_dependency_graph(
-        dependency_parse=dependency_parse,
-        restored_graph_node_candidates=restored_graph_node_candidates,
+    corenlp_annotations = _annotate_declarative_views(parser, declarative_views)
+    dependency_parse = (
+        corenlp_annotations[0].to_dependency_parse()
+        if corenlp_annotations
+        else parser.parse(replacement.masked_question)
     )
-    dependency_graph = collapse_dependency_graph(raw_dependency_graph)
     if path_semantic_parser is None:
         raise TypeError("run_pipeline requires path_semantic_parser.")
 
-    entity_start_nodes = build_entity_start_nodes_from_explicit_entities(
-        dependency_graph=dependency_graph,
-        restored_graph_node_candidates=restored_graph_node_candidates,
-        replacement=replacement,
-    )
-    if not entity_start_nodes:
-        raise ValueError("No entity start nodes found for entity-origin path pipeline.")
+    graph_node_candidates = []
+    restored_graph_node_candidates = []
+    raw_dependency_graph = None
+    dependency_graph = None
+    entity_start_nodes = []
+    try:
+        graph_node_candidates = graph_builder.build_graph_node_candidates(
+            dependency_parse=dependency_parse,
+            replacement=replacement,
+        )
+        restored_graph_node_candidates = graph_builder.restore_graph_node_candidates(
+            graph_node_candidates=graph_node_candidates,
+            replacement=replacement,
+        )
+        raw_dependency_graph = build_undirected_dependency_graph(
+            dependency_parse=dependency_parse,
+            restored_graph_node_candidates=restored_graph_node_candidates,
+        )
+        dependency_graph = collapse_dependency_graph(raw_dependency_graph)
+        entity_start_nodes = build_entity_start_nodes_from_explicit_entities(
+            dependency_graph=dependency_graph,
+            restored_graph_node_candidates=restored_graph_node_candidates,
+            replacement=replacement,
+        )
+    except Exception:
+        raw_dependency_graph = None
+        dependency_graph = None
+        entity_start_nodes = []
 
-    entity_origin_paths = enumerate_entity_origin_paths(
-        dependency_graph=dependency_graph,
-        entity_starts=entity_start_nodes,
+    atomic_evidence_extractor = AtomicEvidenceExtractor()
+    atomic_evidence_objects = atomic_evidence_extractor.extract(
+        masked_question=replacement.masked_question,
+        explicit_entities=explicit_entities,
+        mask_mappings=replacement.mask_mappings,
+        declarative_views=declarative_views,
+        corenlp_annotations=corenlp_annotations,
+        operator_intent=relation_carrier_result.operator_intent,
     )
-    if not entity_origin_paths:
-        raise ValueError("No entity-origin dependency paths were enumerated.")
+    atomic_evidences = [evidence.to_dict() for evidence in atomic_evidence_objects]
 
-    pruned_entity_origin_paths, path_pruning_stats = prune_terminal_glue_paths(
-        entity_origin_paths=entity_origin_paths,
-        dependency_graph=dependency_graph,
-        entity_start_nodes=entity_start_nodes,
-    )
-    if not pruned_entity_origin_paths:
-        raise ValueError("No entity-origin dependency paths remained after terminal glue pruning.")
-
-    scored_entity_paths, path_scoring_payload = path_semantic_parser.score_entity_paths(
-        original_question=record.question,
-        restored_question=processing_question,
-        entity_start_nodes=entity_start_nodes,
-        entity_origin_paths=pruned_entity_origin_paths,
-    )
-
-    best_paths_by_entity = select_best_path_by_entity(
-        scored_paths=scored_entity_paths,
-        entity_start_nodes=entity_start_nodes,
-        entity_origin_paths=pruned_entity_origin_paths,
-    )
-    path_set_candidates = build_single_path_set_candidate(
-        best_paths_by_entity=best_paths_by_entity,
-    )
-    if not path_set_candidates:
-        raise ValueError("No candidate path sets were constructed for entity-origin path pipeline.")
-
-    selected_dependency_path_evidence = build_selected_dependency_path_evidence(
-        path_set_candidates=path_set_candidates,
-        entity_origin_paths=pruned_entity_origin_paths,
-        max_path_sets=1,
-    )
     semantic_reasoning_paths, semantic_reasoning_path_payload = path_semantic_parser.build_semantic_reasoning_paths(
         original_question=record.question,
-        selected_dependency_path_evidence=selected_dependency_path_evidence,
+        masked_question=replacement.masked_question,
+        explicit_entities=[entity.to_dict() for entity in explicit_entities.entities],
+        declarative_views=[view.to_dict() for view in declarative_views],
+        operator_intent=relation_carrier_result.operator_intent,
+        atomic_evidence_pool=atomic_evidence_objects,
     )
     subquestion_dag, grounded_atomic_dag_payload = path_semantic_parser.build_grounded_atomic_dag(
         original_question=record.question,
         semantic_reasoning_paths=semantic_reasoning_paths,
-    )
-    atomic_evidences = (
-        semantic_reasoning_path_payload.get("atomic_evidences")
-        or semantic_reasoning_path_payload.get("evidence_atoms", [])
-        if isinstance(semantic_reasoning_path_payload, dict)
-        else []
     )
     step9_llm_input_contains_raw_dependency_paths = (
         bool(semantic_reasoning_path_payload.get("step9_llm_input_contains_raw_dependency_paths"))
@@ -252,30 +240,26 @@ def run_pipeline(
         "masked_question": replacement.masked_question,
         "entity_mask_mappings": replacement.mask_mappings,
         "replacement": replacement,
+        "relation_carrier_views": relation_carrier_result,
+        "declarative_views": declarative_views,
+        "operator_intent": relation_carrier_result.operator_intent,
+        "corenlp_view_annotations": corenlp_annotations,
         "dependency_parse": dependency_parse,
         "raw_dependency_graph": raw_dependency_graph,
         "dependency_collapse_stats": {
-            "enabled": bool(dependency_graph.graph.get("dependency_collapsing_enabled")),
-            "relations": list(dependency_graph.graph.get("collapse_relations") or []),
-            "raw_node_count": dependency_graph.graph.get("raw_node_count"),
-            "raw_edge_count": dependency_graph.graph.get("raw_edge_count"),
-            "collapsed_node_count": dependency_graph.graph.get("collapsed_node_count"),
-            "collapsed_edge_count": dependency_graph.graph.get("collapsed_edge_count"),
-            "decisions": list(dependency_graph.graph.get("collapse_decisions") or []),
+            "enabled": bool(dependency_graph is not None and dependency_graph.graph.get("dependency_collapsing_enabled")),
+            "relations": list(dependency_graph.graph.get("collapse_relations") or []) if dependency_graph is not None else [],
+            "raw_node_count": dependency_graph.graph.get("raw_node_count") if dependency_graph is not None else 0,
+            "raw_edge_count": dependency_graph.graph.get("raw_edge_count") if dependency_graph is not None else 0,
+            "collapsed_node_count": dependency_graph.graph.get("collapsed_node_count") if dependency_graph is not None else 0,
+            "collapsed_edge_count": dependency_graph.graph.get("collapsed_edge_count") if dependency_graph is not None else 0,
+            "decisions": list(dependency_graph.graph.get("collapse_decisions") or []) if dependency_graph is not None else [],
         },
         "weighted_graph": dependency_graph,
         "graph_node_candidates": graph_node_candidates,
         "restored_graph_node_candidates": restored_graph_node_candidates,
         "dependency_graph": dependency_graph,
         "entity_start_nodes": entity_start_nodes,
-        "entity_origin_paths": entity_origin_paths,
-        "pruned_entity_origin_paths": pruned_entity_origin_paths,
-        "path_pruning_stats": path_pruning_stats,
-        "scored_entity_paths": scored_entity_paths,
-        "path_scoring_payload": path_scoring_payload,
-        "best_paths_by_entity": best_paths_by_entity,
-        "path_set_candidates": path_set_candidates,
-        "selected_dependency_path_evidence": selected_dependency_path_evidence,
         "atomic_evidences": atomic_evidences,
         "evidence_atoms": atomic_evidences,
         "step9_llm_input_contains_raw_dependency_paths": step9_llm_input_contains_raw_dependency_paths,
@@ -328,19 +312,38 @@ def _mask_span_result_from_explicit_entities(explicit_entities: ExplicitEntityRe
     )
 
 
+def _annotate_declarative_views(parser: Any, declarative_views: list[DeclarativeView]) -> list[CoreNLPViewAnnotation]:
+    view_payloads = [view.to_dict() for view in declarative_views]
+    if hasattr(parser, "annotate_views"):
+        return parser.annotate_views(view_payloads, enable_openie=True)
+
+    annotations: list[CoreNLPViewAnnotation] = []
+    for view in declarative_views:
+        dependency_parse = parser.parse(view.sentence)
+        annotations.append(
+            CoreNLPViewAnnotation(
+                view_id=view.id,
+                text=view.sentence,
+                tokens=list(dependency_parse.tokens),
+                edges=list(dependency_parse.edges),
+                raw=dependency_parse.raw,
+                warnings=["Parser does not expose OpenIE view annotation; using dependency parse only."],
+            )
+        )
+    return annotations
+
+
 def print_result(index: int, record: QuestionRecord, result: dict[str, Any], debug: bool = False) -> None:
     semantic_normalization: SemanticNormalizationResult = result["semantic_normalization"]
     explicit_entities: ExplicitEntityResult = result.get("explicit_entities") or ExplicitEntityResult()
     mask_spans: MaskSpanResult = result["mask_spans"]
     replacement: MaskReplacement = result["replacement"]
+    declarative_views: list[DeclarativeView] = result.get("declarative_views") or []
+    corenlp_view_annotations: list[CoreNLPViewAnnotation] = result.get("corenlp_view_annotations") or []
     dependency_parse = result["dependency_parse"]
     entity_start_nodes: list[EntityStartNode] = result["entity_start_nodes"]
-    entity_origin_paths: list[EntityOriginPath] = result["entity_origin_paths"]
-    pruned_entity_origin_paths: list[EntityOriginPath] = result.get("pruned_entity_origin_paths") or entity_origin_paths
-    selected_dependency_path_evidence: list[dict[str, Any]] = result.get("selected_dependency_path_evidence", [])
     atomic_evidences: list[dict[str, Any]] = result.get("atomic_evidences") or result.get("evidence_atoms", [])
     semantic_reasoning_paths: SemanticReasoningPathResult | None = result.get("semantic_reasoning_paths")
-    grounded_atomic_dag_payload: dict[str, Any] = result.get("grounded_atomic_dag_payload") or {}
     subquestions: list[AtomicSubquestion] = result["subquestions"]
     subquestion_dag: AtomicQuestionDAG | None = result.get("subquestion_dag")
 
@@ -357,24 +360,17 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     print(record.question)
     print()
 
-    print("[1. Semantic-Normalized Question]")
-    if semantic_normalization.normalized_question == record.question:
-        print("  unchanged")
-    else:
-        print(f"  {semantic_normalization.normalized_question}")
-    if debug:
-        _print_warnings(semantic_normalization.warnings)
-    print()
-
-    print("[2. Explicit Entities]")
+    print("[1. Explicit Entities]")
     if explicit_entities.entities:
         for entity in explicit_entities.entities:
             print(f"  - {entity.text}")
     else:
         print("  (none)")
+    if debug:
+        _print_warnings(semantic_normalization.warnings)
     print()
 
-    print("[3. Entity Masking]")
+    print("[2. Entity Masking]")
     if replacement.mask_mappings:
         for mapping in replacement.mask_mappings:
             print(f"  - {mapping.placeholder} -> {mapping.original_text}")
@@ -383,40 +379,53 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     print(f"  Masked question: {replacement.masked_question}")
     print()
 
-    print("[4. CoreNLP Dependency Parse]")
-    print(f"  tokens={len(dependency_parse.tokens)} edges={len(dependency_parse.edges)}")
-    _print_dependency_parse_edges(dependency_parse.edges)
+    print("[3. Relation-Carrier Declarative Views]")
+    if declarative_views:
+        for view in declarative_views:
+            print(f"  - {view.id}: {view.sentence}")
+    else:
+        print("  (none)")
     print()
 
-    print("[5. Undirected Dependency Graph]")
+    print("[4. CoreNLP + OpenIE View Annotations]")
+    if corenlp_view_annotations:
+        for annotation in corenlp_view_annotations:
+            print(
+                f"  - {annotation.view_id}: tokens={len(annotation.tokens)} "
+                f"deps={len(annotation.edges)} openie={len(annotation.openie_triples)}"
+            )
+            if debug:
+                _print_warnings(annotation.warnings)
+    else:
+        print("  (none)")
+    print()
+
+    print("[5. CoreNLP Structural Evidence Graph]")
     graph = result.get("dependency_graph", result["weighted_graph"])
-    print(f"  nodes={graph.number_of_nodes()} edges={graph.number_of_edges()}")
-    _print_dependency_graph_edges(graph)
+    if graph is None:
+        print("  (none)")
+    else:
+        print(f"  nodes={graph.number_of_nodes()} edges={graph.number_of_edges()}")
+        _print_dependency_graph_edges(graph)
     print()
 
     print("[6. Entity Start Nodes from Explicit Entities]")
     _print_entity_start_nodes(entity_start_nodes)
     print()
 
-    print("[7. Entity-Origin Dependency Paths]")
-    _print_entity_origin_paths(pruned_entity_origin_paths)
-    print()
-
-    print("[8. Selected Dependency Paths and Atomic Evidences]")
-    _print_selected_dependency_path_evidence(selected_dependency_path_evidence)
+    print("[7. Atomic Evidence Pool]")
+    structural_count = _atomic_evidence_source_count(atomic_evidences, "corenlp")
+    openie_count = _atomic_evidence_source_count(atomic_evidences, "openie")
+    print(f"  CoreNLP structural evidence count: {structural_count}")
+    print(f"  OpenIE relational evidence count: {openie_count}")
     _print_atomic_evidences(atomic_evidences)
     print()
 
-    print("[9. Semantic Reasoning Path Induction]")
+    print("[8. Semantic Reasoning Path Induction]")
     _print_semantic_reasoning_paths(semantic_reasoning_paths, atomic_evidences=atomic_evidences)
     print()
 
-    print("[10. Semantic-Path-Guided Atomic DAG Generation]")
-    print("Output:")
-    _print_grounded_atomic_dag_payload(grounded_atomic_dag_payload)
-    print()
-
-    print("[11. Atomic Subquestion DAG]")
+    print("[9. Semantic-Path-Guided Atomic DAG]")
     if subquestion_dag is not None:
         _print_atomic_question_dag(subquestion_dag)
     elif not subquestions:
@@ -495,97 +504,6 @@ def _dependency_graph_node_text(graph: Any, node_id: Any) -> str:
     return str(attrs.get("text") or attrs.get("word") or attrs.get("label") or node_id)
 
 
-def _print_entity_origin_paths(
-    entity_origin_paths: list[EntityOriginPath],
-    *,
-    include_evidence: bool = False,
-) -> None:
-    if not entity_origin_paths:
-        print("  (none)")
-        return
-    for path in entity_origin_paths:
-        print(f"  - {path.path_id} ({path.entity_id}): {' -- '.join(path.nodes)}")
-        if include_evidence:
-            for evidence in path.evidence:
-                relations = "/".join(str(item) for item in evidence.get("relations", []) if item)
-                relation_text = f" relations={relations}" if relations else ""
-                print(
-                    f"    {evidence.get('source_text', evidence.get('source'))}"
-                    f" -> {evidence.get('target_text', evidence.get('target'))}{relation_text}"
-                )
-
-
-def _print_entity_path_summary(
-    entity_origin_paths: list[EntityOriginPath],
-    entity_start_nodes: list[EntityStartNode],
-) -> None:
-    if not entity_origin_paths:
-        print("  (none)")
-        return
-    text_by_entity = {entity.entity_id: entity.text for entity in entity_start_nodes}
-    paths_by_entity: dict[str, list[EntityOriginPath]] = {}
-    for path in entity_origin_paths:
-        paths_by_entity.setdefault(path.entity_id, []).append(path)
-    print(f"  total_paths={len(entity_origin_paths)}")
-    for entity_id in sorted(paths_by_entity, key=_entity_sort_key_for_print):
-        paths = paths_by_entity[entity_id]
-        shortest = min((path.length for path in paths), default=0)
-        longest = max((path.length for path in paths), default=0)
-        entity_text = text_by_entity.get(entity_id, "")
-        label = f"{entity_id} / {entity_text}" if entity_text else entity_id
-        print(f"  - {label}: paths={len(paths)} length_range={shortest}-{longest}")
-
-
-def _print_path_pruning_stats(
-    pruning_stats: dict[str, Any],
-    entity_start_nodes: list[EntityStartNode],
-) -> None:
-    if not pruning_stats:
-        print("  (none)")
-        return
-    total_raw = int(pruning_stats.get("total_raw_paths") or 0)
-    total_kept = int(pruning_stats.get("total_kept_paths") or 0)
-    total_pruned = int(pruning_stats.get("total_pruned_paths") or 0)
-    total_ratio = float(pruning_stats.get("total_pruned_ratio") or 0.0)
-    print(f"  Total raw paths: {total_raw}")
-    print(f"  Total kept paths: {total_kept}")
-    print(f"  Total pruned paths: {total_pruned}")
-    print(f"  Total pruned ratio: {total_ratio:.2%}")
-    by_entity = pruning_stats.get("by_entity") or {}
-    if not isinstance(by_entity, dict) or not by_entity:
-        return
-    text_by_entity = {entity.entity_id: entity.text for entity in entity_start_nodes}
-    print("  By entity:")
-    for entity_id in sorted(by_entity, key=_entity_sort_key_for_print):
-        stats = by_entity.get(entity_id) or {}
-        entity_text = text_by_entity.get(entity_id, "")
-        heading = f"{entity_id} / {entity_text}" if entity_text else entity_id
-        print(
-            f"    - {heading}: raw={stats.get('raw', 0)} kept={stats.get('kept', 0)} "
-            f"pruned={stats.get('pruned', 0)} fallback_used={bool(stats.get('fallback_used'))}"
-        )
-
-
-def _print_selected_dependency_path_evidence(evidence: list[dict[str, Any]]) -> None:
-    if not evidence:
-        print("  Selected dependency paths: (none)")
-        return
-    print("  Selected dependency paths:")
-    for path_set in evidence:
-        if not isinstance(path_set, dict):
-            continue
-        path_set_id = path_set.get("path_set_id")
-        print(f"    - {path_set_id}:")
-        paths = path_set.get("paths") or []
-        if not isinstance(paths, list) or not paths:
-            print("      (no paths)")
-            continue
-        for path in paths:
-            if not isinstance(path, dict):
-                continue
-            print(f"      - {path.get('path_id')}: {path.get('path_text')}")
-
-
 def _print_atomic_evidences(atomic_evidences: list[dict[str, Any]]) -> None:
     if not atomic_evidences:
         print("  Atomic evidences: (none)")
@@ -595,9 +513,13 @@ def _print_atomic_evidences(atomic_evidences: list[dict[str, Any]]) -> None:
         if not isinstance(atom, dict):
             continue
         atom_id = atom.get("id") or "?"
-        kind = atom.get("kind") or "unknown"
+        kind = atom.get("type") or atom.get("kind") or "unknown"
         text = atom.get("text") or ""
         print(f"    - {atom_id} [{kind}]: {text}")
+
+
+def _atomic_evidence_source_count(atomic_evidences: list[dict[str, Any]], source: str) -> int:
+    return sum(1 for atom in atomic_evidences if isinstance(atom, dict) and atom.get("source") == source)
 
 
 def _print_semantic_reasoning_paths(
@@ -676,42 +598,6 @@ def _semantic_edge_supported_atom_ids(edge: Any) -> list[str]:
                 seen.add(atom_id)
                 atom_ids.append(atom_id)
     return atom_ids
-
-
-def _print_grounded_atomic_dag_payload(payload: dict[str, Any]) -> None:
-    if not payload:
-        print("  (none)")
-        return
-    reason = str(payload.get("reason") or "").strip()
-    selected_path_sets = payload.get("selected_path_set_ids")
-    if selected_path_sets:
-        print(f"  selected_path_set_ids={selected_path_sets}")
-    if reason:
-        print(f"  reason={reason}")
-    nodes = payload.get("nodes", [])
-    if isinstance(nodes, list) and nodes:
-        print("  Nodes:")
-        for node in nodes:
-            if not isinstance(node, dict):
-                continue
-            dependencies = node.get("dependencies") or []
-            semantic_edge_id = node.get("source_semantic_edge_id")
-            semantic_path_id = node.get("source_semantic_path_id")
-            relation = node.get("one_hop_relation")
-            semantic = ""
-            if semantic_path_id or semantic_edge_id:
-                semantic = f" source={semantic_path_id or '?'}:{semantic_edge_id or '?'}"
-            relation_text = f" relation={relation}" if relation else ""
-            print(
-                f"    - {node.get('node_id')}: depends_on={dependencies or 'none'} "
-                f"{semantic}{relation_text}"
-            )
-            print(f"      {node.get('question')}")
-    warnings = payload.get("normalization_warnings") or []
-    if warnings:
-        print("  Warnings:")
-        for warning in warnings:
-            print(f"    - {warning}")
 
 
 def _print_atomic_question_dag(dag: AtomicQuestionDAG) -> None:

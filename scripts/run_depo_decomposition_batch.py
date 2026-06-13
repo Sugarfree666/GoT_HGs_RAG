@@ -217,11 +217,6 @@ def build_decomposition_payload(
     subquestion_dag = result.get("subquestion_dag")
     subquestions = result.get("subquestions", [])
 
-    best_paths_by_entity = {
-        entity_id: _dataclass_to_jsonable(path)
-        for entity_id, path in (result.get("best_paths_by_entity") or {}).items()
-    }
-
     payload: dict[str, Any] = {
         "status": "ok",
         "dataset": dataset,
@@ -240,22 +235,19 @@ def build_decomposition_payload(
                 "mask_mappings": [_dataclass_to_jsonable(mapping) for mapping in result.get("entity_mask_mappings", [])],
             },
             "3_selective_masked_question": result["replacement"].masked_question,
+            "3_5_relation_carrier_declarative_views": _dataclass_to_jsonable(result.get("relation_carrier_views")),
             "4_corenlp_dependency_parse": {
                 "tokens": [_dataclass_to_jsonable(token) for token in dependency_parse.tokens],
                 "edges": [_dataclass_to_jsonable(edge) for edge in dependency_parse.edges],
                 "edge_display": [edge.display() for edge in dependency_parse.edges],
             },
+            "4_5_corenlp_openie_view_annotations": _dataclass_to_jsonable(result.get("corenlp_view_annotations") or []),
             "5_undirected_dependency_graph": _graph_payload(raw_dependency_graph),
             "5_1_collapsed_dependency_graph": _graph_payload(dependency_graph),
             "5_2_dependency_graph_collapse_stats": _dataclass_to_jsonable(result.get("dependency_collapse_stats") or {}),
             "6_entity_start_nodes": [_dataclass_to_jsonable(entity) for entity in result["entity_start_nodes"]],
-            "7_entity_origin_paths": [_dataclass_to_jsonable(path) for path in result["entity_origin_paths"]],
-            "7_5_terminal_glue_path_pruning": _dataclass_to_jsonable(result.get("path_pruning_stats") or {}),
-            "8_path_scores": [_dataclass_to_jsonable(path) for path in result.get("scored_entity_paths", [])],
-            "8_1_best_paths_by_entity": best_paths_by_entity,
-            "8_2_path_set_candidates": [_dataclass_to_jsonable(candidate) for candidate in result.get("path_set_candidates", [])],
-            "9_selected_dependency_path_evidence": _dataclass_to_jsonable(result.get("selected_dependency_path_evidence") or []),
             "9a_atomic_evidences": _dataclass_to_jsonable(result.get("atomic_evidences") or result.get("evidence_atoms") or []),
+            "9a_atomic_evidence_pool": _dataclass_to_jsonable(result.get("atomic_evidences") or result.get("evidence_atoms") or []),
             "9_step9_llm_input_contains_raw_dependency_paths": bool(result.get("step9_llm_input_contains_raw_dependency_paths")),
             "9b_semantic_reasoning_paths": _dataclass_to_jsonable(result.get("semantic_reasoning_paths")),
             "10_grounded_atomic_dag_generation": _dataclass_to_jsonable(result.get("grounded_atomic_dag_payload") or {}),
@@ -265,7 +257,6 @@ def build_decomposition_payload(
     }
     if debug:
         payload["debug_payloads"] = {
-            "path_scoring_payload": result.get("path_scoring_payload"),
             "grounded_atomic_dag_payload": result.get("grounded_atomic_dag_payload"),
         }
     return payload
@@ -331,10 +322,32 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append(str(entity_masking.get("masked_question", stages.get("3_selective_masked_question", ""))))
     lines.append("")
 
+    relation_carrier = stages.get("3_5_relation_carrier_declarative_views") or {}
+    lines.append("## 3.5 Relation-Carrier Declarative Views")
+    for view in relation_carrier.get("declarative_views", []) if isinstance(relation_carrier, dict) else []:
+        lines.append(f"- {view.get('id')}: {view.get('sentence')}")
+    if not isinstance(relation_carrier, dict) or not relation_carrier.get("declarative_views"):
+        lines.append("(none)")
+    operator_intent = relation_carrier.get("operator_intent") if isinstance(relation_carrier, dict) else {}
+    lines.append(f"- operator_intent: {operator_intent or {}}")
+    lines.append("")
+
     lines.append("## 4. CoreNLP Dependency Parse")
     for edge in stages["4_corenlp_dependency_parse"]["edge_display"]:
         lines.append(f"- {edge}")
     if not stages["4_corenlp_dependency_parse"]["edge_display"]:
+        lines.append("(none)")
+    lines.append("")
+
+    lines.append("## 4.5 CoreNLP/OpenIE View Annotations")
+    for annotation in stages.get("4_5_corenlp_openie_view_annotations", []):
+        lines.append(
+            f"- {annotation.get('view_id')}: tokens={len(annotation.get('tokens', []))} "
+            f"deps={len(annotation.get('edges', []))} openie={len(annotation.get('openie_triples', []))}"
+        )
+        for warning in annotation.get("warnings", []) or []:
+            lines.append(f"  - warning: {warning}")
+    if not stages.get("4_5_corenlp_openie_view_annotations"):
         lines.append("(none)")
     lines.append("")
 
@@ -383,115 +396,41 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 7. Entity-Origin Dependency Paths")
-    for path in stages["7_entity_origin_paths"]:
-        lines.append(f"- {path.get('path_id')} ({path.get('entity_id')}): {' -- '.join(path.get('nodes', []))}")
-    if not stages["7_entity_origin_paths"]:
+    lines.append("## 7. Atomic Evidence Pool")
+    atomic_evidences = stages.get("9a_atomic_evidence_pool") or stages.get("9a_atomic_evidences") or []
+    corenlp_count = sum(1 for atom in atomic_evidences if isinstance(atom, dict) and atom.get("source") == "corenlp")
+    openie_count = sum(1 for atom in atomic_evidences if isinstance(atom, dict) and atom.get("source") == "openie")
+    lines.append(f"- CoreNLP structural evidence count: {corenlp_count}")
+    lines.append(f"- OpenIE relational evidence count: {openie_count}")
+    for atom in atomic_evidences:
+        lines.append(f"- {atom.get('id')} [{atom.get('type') or atom.get('kind')}]: {atom.get('text')}")
+    if not atomic_evidences:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 7.5 Terminal Glue Path Pruning")
-    pruning_stats = stages.get("7_5_terminal_glue_path_pruning") or {}
-    if pruning_stats:
-        lines.append(f"Total raw paths: {pruning_stats.get('total_raw_paths', 0)}")
-        lines.append(f"Total kept paths: {pruning_stats.get('total_kept_paths', 0)}")
-        lines.append(f"Total pruned paths: {pruning_stats.get('total_pruned_paths', 0)}")
-        ratio = float(pruning_stats.get("total_pruned_ratio") or 0.0)
-        lines.append(f"Total pruned ratio: {ratio:.2%}")
-        by_entity = pruning_stats.get("by_entity") or {}
-        if by_entity:
-            lines.append("")
-            lines.append("### By Entity")
-            entity_text_by_id = {
-                entity.get("entity_id"): entity.get("text")
-                for entity in stages.get("6_entity_start_nodes", [])
-                if isinstance(entity, dict)
-            }
-            for entity_id, stats in by_entity.items():
-                label = entity_text_by_id.get(entity_id)
-                heading = f"{entity_id} / {label}" if label else str(entity_id)
-                lines.append(f"- {heading}")
-                lines.append(f"  - raw: {stats.get('raw', 0)}")
-                lines.append(f"  - kept: {stats.get('kept', 0)}")
-                lines.append(f"  - pruned: {stats.get('pruned', 0)}")
-                lines.append(f"  - fallback_used: {stats.get('fallback_used', False)}")
-                examples = stats.get("pruned_examples") or []
-                if examples:
-                    lines.append("  - examples:")
-                    for example in examples[:5]:
-                        lines.append(
-                            f"    - {example.get('path_id')}: {example.get('path_text')} "
-                            f"[terminal={example.get('terminal')}, reason={example.get('reason')}]"
-                        )
-    else:
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("## 8. LLM Path Scores")
-    for score in stages["8_path_scores"]:
-        reason = score.get("reason") or ""
-        terminal = f" terminal={score.get('terminal_hint')}" if score.get("terminal_hint") else ""
-        lines.append(
-            f"- {score.get('entity_id')}: {score.get('path_id')} "
-            f"score={score.get('score')} valid={score.get('valid')}{terminal}"
-        )
-        if reason:
-            lines.append(f"  Reason: {reason}")
-    if not stages["8_path_scores"]:
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("## 8.1 Highest-Scored Path per Entity")
-    for entity_id, path in stages["8_1_best_paths_by_entity"].items():
-        lines.append(f"- {entity_id}: {path.get('path_id', '')} score={path.get('score')}")
-    if not stages["8_1_best_paths_by_entity"]:
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("## 8.2 Selected Path Set")
-    for candidate in stages["8_2_path_set_candidates"]:
-        lines.append(
-            f"- {candidate.get('path_set_id')}: {candidate.get('path_ids_by_entity')} "
-            f"mean_path_score={candidate.get('mean_path_score')}"
-        )
-    if not stages["8_2_path_set_candidates"]:
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("## 9. Semantic Reasoning Path Induction")
+    lines.append("## 8. Semantic Reasoning Path Induction")
     lines.append("Step 9 LLM input:")
     lines.append(f"- Original question: {payload['question']}")
     lines.append("- Atomic evidences: see 9A")
     lines.append("")
-    lines.append("Pre-Step 9 selected dependency paths (debug only; not sent to Step 9 LLM):")
-    selected_evidence = stages.get("9_selected_dependency_path_evidence") or []
-    for path_set in selected_evidence:
-        lines.append(f"- {path_set.get('path_set_id')}")
-        for path in path_set.get("paths", []):
-            lines.append(f"  - {path.get('path_id')}: {path.get('path_text')}")
-    if not selected_evidence:
-        lines.append("- Selected dependency path evidence: (none)")
-    lines.append("")
-
     atomic_evidences = stages.get("9a_atomic_evidences") or stages.get("9a_evidence_atoms") or []
-    lines.append("### 9A Atomic Evidences")
+    lines.append("### Atomic Evidences")
     lines.append(
         f"- Step 9 LLM input contains raw dependency paths: "
         f"{bool(stages.get('9_step9_llm_input_contains_raw_dependency_paths'))}"
     )
     for atom in atomic_evidences:
         lines.append(
-            f"- {atom.get('id')} [{atom.get('kind')}]: {atom.get('text')} "
-            f"(source_path_id={atom.get('source_path_id')})"
+            f"- {atom.get('id')} [{atom.get('type') or atom.get('kind')}]: {atom.get('text')}"
         )
     if not atomic_evidences:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("### 9B Semantic Reasoning Paths")
+    lines.append("### Semantic Reasoning Paths")
     semantic_payload = stages.get("9b_semantic_reasoning_paths") or {}
     for path in semantic_payload.get("paths", []) if isinstance(semantic_payload, dict) else []:
-        lines.append(f"- {path.get('branch_id')} entity={path.get('entity_id')} source_path={path.get('source_path_id')}")
+        lines.append(f"- {path.get('branch_id')} entity={path.get('entity_id')}")
         node_labels = {
             node.get("node_id"): node.get("label")
             for node in path.get("nodes", [])
@@ -514,8 +453,6 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
     lines.append("## 10. Grounded Atomic DAG Generation")
     lines.append("Output:")
     grounded_payload = stages.get("10_grounded_atomic_dag_generation") or {}
-    if grounded_payload.get("selected_path_set_ids"):
-        lines.append(f"- selected_path_set_ids: {grounded_payload.get('selected_path_set_ids')}")
     if grounded_payload.get("reason"):
         lines.append(f"- reason: {grounded_payload.get('reason')}")
     for node in grounded_payload.get("nodes", []):
@@ -640,6 +577,8 @@ def _slug(value: str, max_len: int = 80) -> str:
 
 
 def _graph_payload(graph: Any) -> dict[str, Any]:
+    if graph is None:
+        return {"nodes": [], "edges": []}
     nodes = []
     for node_id, attrs in graph.nodes(data=True):
         nodes.append({"id": str(node_id), **_dataclass_to_jsonable(dict(attrs))})
@@ -687,7 +626,7 @@ def _manifest_item(payload: dict[str, Any], question_dir: Path) -> dict[str, Any
         "question": payload["question"],
         "gold_answer": payload.get("gold_answer"),
         "status": "ok",
-        "path_score_count": len(stages.get("8_path_scores", [])),
+        "atomic_evidence_count": len(stages.get("9a_atomic_evidence_pool", [])),
         "atomic_question_count": len(dag.get("nodes", [])),
         "output_dir": str(question_dir),
     }

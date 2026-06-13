@@ -14,19 +14,11 @@ DEPO_ROOT = PROJECT_ROOT / "depo"
 if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
-from entity_path_pipeline import (  # noqa: E402
-    EntityPathSemanticParser,
-    build_single_path_set_candidate,
-    build_selected_dependency_path_evidence,
-    extract_atomic_evidences,
-    select_best_path_by_entity,
-)
+from entity_path_pipeline import EntityPathSemanticParser  # noqa: E402
 from entity_path_projector import (  # noqa: E402
     enumerate_entity_origin_paths,
     extract_entity_start_nodes,
-    parse_path_pruned_ast_payload,
     prune_terminal_glue_paths,
-    validate_selected_entity_paths,
 )
 from graph_builder import GraphBuilder  # noqa: E402
 from main import _print_semantic_reasoning_paths, run_pipeline  # noqa: E402
@@ -42,11 +34,9 @@ from models import (  # noqa: E402
     MaskReplacement,
     MaskSpan,
     MaskSpanResult,
-    PathSetCandidate,
+    AtomicEvidence,
     QuestionRecord,
     RestoredGraphNodeCandidate,
-    ScoredEntityPath,
-    SelectedEntityPath,
     SemanticReasoningEdge,
     SemanticReasoningNode,
     SemanticReasoningPath,
@@ -56,9 +46,6 @@ from models import (  # noqa: E402
 from path_projector import build_undirected_dependency_graph  # noqa: E402
 from prompts import (  # noqa: E402
     ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM,
-    CANDIDATE_NODES_SYSTEM,
-    ENTITY_PATH_SCORING_SYSTEM,
-    PROBLEM_FRAME_SYSTEM,
     SEMANTIC_REASONING_PATH_SYSTEM,
     build_atomic_dag_from_semantic_reasoning_path_prompt,
     build_semantic_reasoning_path_prompt,
@@ -123,103 +110,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertIn(["Ten9Eight: Shoot For The Moon", "director", "nationality"], [path.nodes for path in paths])
         self.assertIn(["Sabotage (1936 Film)", "director", "nationality"], [path.nodes for path in paths])
 
-    def test_common_answer_paths_do_not_pass_through_other_entity(self) -> None:
-        dependency_parse = _dependency_parse(
-            ["What", "screenplay", "was", "worked", "on", "by", "both", "PersonA", "and", "PersonB", "?"],
-            [
-                (2, 1, "det"),
-                (4, 2, "nsubj:pass"),
-                (4, 3, "aux:pass"),
-                (4, 5, "compound:prt"),
-                (8, 6, "case"),
-                (8, 7, "cc:preconj"),
-                (4, 8, "obl:agent"),
-                (10, 9, "cc"),
-                (4, 10, "obl:agent"),
-                (8, 10, "conj:and"),
-                (4, 11, "punct"),
-            ],
-        )
-        replacement = _two_person_replacement()
-        restored_candidates = [
-            _restored_candidate("8", "PersonA", "Edward Carfagno", "Person"),
-            _restored_candidate("10", "PersonB", "Miklos Rozsa", "Person"),
-        ]
-        graph = build_undirected_dependency_graph(dependency_parse, restored_candidates)
-        starts = extract_entity_start_nodes(graph, restored_candidates, replacement)
-        paths = enumerate_entity_origin_paths(graph, starts)
-        paths_by_entity = {
-            entity_id: [path for path in paths if path.entity_id == entity_id]
-            for entity_id in ("e1", "e2")
-        }
-
-        self.assertEqual(paths_by_entity["e1"][0].nodes, ["Edward Carfagno", "worked", "screenplay", "What"])
-        self.assertEqual(paths_by_entity["e2"][0].nodes, ["Miklos Rozsa", "worked", "screenplay", "What"])
-
-        crossing_e1 = next(
-            path
-            for path in paths_by_entity["e1"]
-            if path.nodes == ["Edward Carfagno", "Miklos Rozsa", "worked", "screenplay", "What"]
-        )
-        clean_e2 = paths_by_entity["e2"][0]
-        with self.assertRaisesRegex(ValueError, "passes through another entity start"):
-            validate_selected_entity_paths(
-                selected_paths=[
-                    SelectedEntityPath(entity_id="e1", path_id=crossing_e1.path_id),
-                    SelectedEntityPath(entity_id="e2", path_id=clean_e2.path_id),
-                ],
-                entity_starts=starts,
-                entity_origin_paths=paths,
-            )
-
-    def test_path_scoring_selects_best_path_per_entity(self) -> None:
-        entity = EntityStartNode(entity_id="e1", text="Entity A", graph_node_ids=["1"])
-        paths = [
-            _entity_path("e1_p1", "e1", ["Entity A", "weak"]),
-            _entity_path("e1_p2", "e1", ["Entity A", "good"]),
-            _entity_path("e1_p3", "e1", ["Entity A", "best"]),
-            _entity_path("e1_p4", "e1", ["Entity A", "bad"]),
-        ]
-        llm = CandidateFlowLLM(
-            path_scores=[
-                {"entity_id": "e1", "path_id": "e1_p1", "score": 20, "valid": False},
-                {"entity_id": "e1", "path_id": "e1_p2", "score": 88, "valid": True},
-                {"entity_id": "e1", "path_id": "e1_p3", "score": 96, "valid": True},
-                {"entity_id": "e1", "path_id": "e1_p4", "score": 60, "valid": True},
-            ],
-            ast_payloads_by_path_set={},
-            best_candidate_id="",
-        )
-        parser = EntityPathSemanticParser(llm)
-        scored, _ = parser.score_entity_paths(
-            original_question="test?",
-            restored_question="test?",
-            entity_start_nodes=[entity],
-            entity_origin_paths=paths,
-        )
-        best = select_best_path_by_entity(
-            scored_paths=scored,
-            entity_start_nodes=[entity],
-            entity_origin_paths=paths,
-        )
-
-        self.assertEqual(best["e1"].path_id, "e1_p3")
-
-    def test_two_entity_best_paths_build_single_path_set(self) -> None:
-        best = {
-            "e1": ScoredEntityPath(entity_id="e1", path_id="e1_p1", score=95),
-            "e2": ScoredEntityPath(entity_id="e2", path_id="e2_p1", score=90),
-        }
-
-        path_sets = build_single_path_set_candidate(best_paths_by_entity=best)
-
-        self.assertEqual(
-            [(item.path_set_id, item.path_ids_by_entity) for item in path_sets],
-            [
-                ("ps1", {"e1": "e1_p1", "e2": "e2_p1"}),
-            ],
-        )
-
     def test_prune_terminal_glue_paths_only_checks_terminal(self) -> None:
         paths = [
             _entity_path("e1_p1", "e1", ["Changed It", "performer", "of"]),
@@ -260,8 +150,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual(stats["by_entity"]["e1"]["pruned"], 2)
 
     def test_step9_prompt_uses_only_atomic_evidences(self) -> None:
-        evidence = _walt_disney_selected_dependency_path_evidence()
-        atoms = [atom.to_dict() for atom in extract_atomic_evidences(evidence)]
+        atoms = [atom.to_dict() for atom in _walt_disney_atomic_evidence_pool()]
         raw_path_text = "Which Walt Disney film -- produced first -- The Apple Dumpling Gang -- Something Wicked This Way Comes"
 
         prompt = build_semantic_reasoning_path_prompt(
@@ -273,16 +162,13 @@ class EntityOriginPipelineTest(unittest.TestCase):
         )
 
         self.assertIn("Atomic evidences:", prompt)
-        self.assertIn("Which Walt Disney film ---- produced first", prompt)
+        self.assertIn("Which Walt Disney film produced first", prompt)
         self.assertNotIn("Selected dependency path evidence", prompt)
         self.assertNotIn(raw_path_text, prompt)
         self.assertNotIn(" -- ", prompt)
 
     def test_step10_prompt_only_contains_question_and_semantic_reasoning_paths(self) -> None:
         semantic_payload = _semantic_two_edge_payload()
-        semantic_payload["raw_payload"] = {
-            "selected_dependency_path_evidence": _selected_dependency_path_evidence_for_two_edge_chain(),
-        }
 
         prompt = build_atomic_dag_from_semantic_reasoning_path_prompt(
             original_question="Which university did the CEO of the company that developed AlphaGo graduate from?",
@@ -294,14 +180,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertIn("Semantic Reasoning Paths", prompt)
         self.assertIn("missing edge b1_e2", prompt)
         self.assertIn("developer company", prompt)
-        self.assertNotIn("Selected dependency path evidence", prompt)
-        self.assertNotIn("Dependency Path Evidence", prompt)
-        self.assertNotIn("selected_dependency_path_evidence", prompt)
-        self.assertNotIn("selected_path_set", prompt)
-        self.assertNotIn("path evidence", prompt.lower())
         self.assertNotIn("AlphaGo -> developed -> company", prompt)
-        self.assertNotIn("path_set_id", prompt)
-        self.assertNotIn("e1_p1", prompt)
 
     def test_no_candidate_node_llm_calls(self) -> None:
         question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
@@ -333,11 +212,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
         )
 
         self.assertEqual([entity.text for entity in result["entity_start_nodes"]], ["AlphaGo"])
-        self.assertTrue(result["scored_entity_paths"])
-        self.assertTrue(result["path_set_candidates"])
-        self.assertEqual(set(result["best_paths_by_entity"]), {"e1"})
-        self.assertEqual([candidate.path_set_id for candidate in result["path_set_candidates"]], ["ps1"])
-        self.assertEqual([path_set["path_set_id"] for path_set in result["selected_dependency_path_evidence"]], ["ps1"])
+        self.assertTrue(result["atomic_evidences"])
         self.assertIn("grounded_atomic_dag_payload", result)
         self.assertNotIn("candidate_asts", result)
         self.assertNotIn("semantic_ast", result)
@@ -386,8 +261,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertNotIn("semantic_ast", result)
         self.assertIn("grounded_atomic_dag_payload", result)
         self.assertIn("semantic_reasoning_paths", result)
-        self.assertEqual(set(result["best_paths_by_entity"]), {"e1"})
-        self.assertEqual([candidate.path_set_id for candidate in result["path_set_candidates"]], ["ps1"])
         self.assertIsNotNone(result["subquestion_dag"])
         self.assertEqual(
             [node.question for node in result["subquestion_dag"].nodes],
@@ -402,10 +275,8 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual(result["subquestion_dag"].nodes[0].metadata["source_semantic_edge_id"], "b1_e1")
 
         calls = llm.system_prompts
-        self.assertIn(ENTITY_PATH_SCORING_SYSTEM, calls)
         self.assertIn(SEMANTIC_REASONING_PATH_SYSTEM, calls)
         self.assertIn(ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM, calls)
-        self.assertLess(calls.index(ENTITY_PATH_SCORING_SYSTEM), calls.index(SEMANTIC_REASONING_PATH_SYSTEM))
         self.assertLess(calls.index(SEMANTIC_REASONING_PATH_SYSTEM), calls.index(ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM))
 
     def test_semantic_edge_coverage_rejects_missing_and_unknown_edges(self) -> None:
@@ -569,7 +440,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertFalse(any(fragment in node.question for node in dag.nodes for fragment in forbidden_fragments))
 
     def test_step10_rejects_variable_placeholder_questions(self) -> None:
-        evidence = _selected_dependency_path_evidence_for_two_edge_chain()
         semantic_payload = _semantic_two_edge_payload()
         atomic_payload = {
             "nodes": [
@@ -590,18 +460,8 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
     def test_semantic_reasoning_support_allows_induced_node_texts_not_in_dependency_path(self) -> None:
         evidence = [
-            {
-                "path_set_id": "ps1",
-                "paths": [
-                    {
-                        "entity_id": "e1",
-                        "entity_text": "When The Stars Go Blue",
-                        "path_id": "e1_p4",
-                        "path_text": "When The Stars Go Blue -> nationality -> What",
-                        "node_texts": ["When The Stars Go Blue", "nationality", "What"],
-                    }
-                ],
-            }
+            _atom("atom_1", "When The Stars Go Blue -> performer", node_texts=["When The Stars Go Blue", "performer"]),
+            _atom("atom_2", "performer -> nationality", node_texts=["performer", "nationality"]),
         ]
         semantic_payload = {
             "semantic_reasoning_paths": [
@@ -663,50 +523,10 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
         result, _ = parser.build_semantic_reasoning_paths(
             original_question="What nationality is the performer of song When The Stars Go Blue?",
-            selected_dependency_path_evidence=evidence,
+            atomic_evidence_pool=evidence,
         )
 
         self.assertEqual([edge.relation for edge in result.paths[0].edges], ["performer of song", "nationality of person"])
-
-    def test_atomic_evidence_extraction_walt_disney(self) -> None:
-        evidence = _walt_disney_selected_dependency_path_evidence()
-        atoms = extract_atomic_evidences(evidence)
-        atom_texts = [atom.text for atom in atoms]
-
-        self.assertEqual(atoms[0].text, "Which Walt Disney film ---- produced first")
-        self.assertIn("produced first ---- The Apple Dumpling Gang", atom_texts)
-        self.assertIn("Something Wicked This Way Comes ---- produced first", atom_texts)
-        self.assertIn("The Apple Dumpling Gang ---- Something Wicked This Way Comes", atom_texts)
-        self.assertNotIn(
-            "Which Walt Disney film -- produced first -- The Apple Dumpling Gang -- Something Wicked This Way Comes",
-            atom_texts,
-        )
-        self.assertTrue(all(atom.kind == "path_edge" for atom in atoms))
-        self.assertFalse(any(len(atom.node_texts) > 2 for atom in atoms))
-
-    def test_atomic_evidence_extraction_uses_only_selected_path_edges(self) -> None:
-        evidence = [
-            {
-                "path_set_id": "ps1",
-                "paths": [
-                    {
-                        "entity_id": "e1",
-                        "entity_text": "Lothair II",
-                        "path_id": "e1_p1",
-                        "path_text": "Lothair II 's -> mother -> When die",
-                        "node_texts": ["Lothair II 's", "mother", "When die"],
-                        "node_ids": ["1", "2", "3"],
-                    }
-                ],
-            }
-        ]
-
-        atoms = extract_atomic_evidences(evidence)
-
-        self.assertEqual([atom.text for atom in atoms], ["Lothair II 's ---- mother", "mother ---- When die"])
-        self.assertEqual([atom.kind for atom in atoms], ["path_edge", "path_edge"])
-        self.assertEqual([atom.node_ids for atom in atoms], [["1", "2"], ["2", "3"]])
-        self.assertFalse(any("or/compared_to" in atom.text for atom in atoms))
 
     def test_step9_console_prints_supported_atomic_evidences(self) -> None:
         result = SemanticReasoningPathResult(
@@ -756,7 +576,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertIn("atom_1: Lothair II 's ---- mother", text)
 
     def test_semantic_reasoning_path_for_produced_first(self) -> None:
-        evidence = _walt_disney_selected_dependency_path_evidence()
+        evidence = _walt_disney_atomic_evidence_pool()
 
         llm = EvidenceGroundedSemanticLLM(
             {
@@ -816,14 +636,13 @@ class EntityOriginPipelineTest(unittest.TestCase):
                 "Which Walt Disney film was produced first, "
                 "The Apple Dumpling Gang or Something Wicked This Way Comes?"
             ),
-            selected_dependency_path_evidence=evidence,
+            atomic_evidence_pool=evidence,
         )
 
         self.assertIn("Atomic evidences:", llm.prompts[0])
         self.assertIn("Do NOT directly convert dependency paths", llm.prompts[0])
-        self.assertNotIn("Selected dependency path evidence", llm.prompts[0])
         self.assertNotIn("Which Walt Disney film -- produced first -- The Apple Dumpling Gang -- Something Wicked This Way Comes", llm.prompts[0])
-        self.assertEqual(payload["atomic_evidences"][0]["text"], "Which Walt Disney film ---- produced first")
+        self.assertEqual(payload["atomic_evidences"][0]["text"], "Which Walt Disney film produced first")
         self.assertEqual(
             [edge.relation for path in result.paths for edge in path.edges],
             ["production/release date", "production/release date"],
@@ -834,23 +653,8 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
     def test_step9_rejects_dependency_cue_nodes_and_relations(self) -> None:
         evidence = [
-            {
-                "path_set_id": "ps1",
-                "paths": [
-                    {
-                        "entity_id": "e1",
-                        "entity_text": "The Apple Dumpling Gang",
-                        "path_id": "e1_p1",
-                        "path_text": "The Apple Dumpling Gang -- produced first -- Something Wicked This Way Comes",
-                        "node_texts": [
-                            "The Apple Dumpling Gang",
-                            "produced first",
-                            "Something Wicked This Way Comes",
-                        ],
-                        "node_ids": ["8", "5", "10"],
-                    }
-                ],
-            }
+            _atom("atom_1", "The Apple Dumpling Gang produced first", node_texts=["The Apple Dumpling Gang", "produced first"]),
+            _atom("atom_2", "produced first Something Wicked This Way Comes", node_texts=["produced first", "Something Wicked This Way Comes"]),
         ]
         llm = EvidenceGroundedSemanticLLM(
             {
@@ -891,7 +695,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
                     "Which Walt Disney film was produced first, "
                     "The Apple Dumpling Gang or Something Wicked This Way Comes?"
                 ),
-                selected_dependency_path_evidence=evidence,
+                atomic_evidence_pool=evidence,
             )
 
         self.assertEqual(len(llm.prompts), 2)
@@ -911,7 +715,7 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
         semantic_paths, _ = parser.build_semantic_reasoning_paths(
             original_question=question,
-            selected_dependency_path_evidence=evidence,
+            atomic_evidence_pool=evidence,
         )
         dag, _ = parser.build_grounded_atomic_dag(
             original_question=question,
@@ -935,74 +739,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertEqual(semantic_paths.operator_intent.get("type"), "COMPARE_SAME")
         self.assertTrue(semantic_paths.operator_intent.get("handled_downstream"))
         self.assertFalse(any("share the same nationality" in node.question.lower() for node in dag.nodes))
-
-    def test_ordered_comparison_infers_age_from_younger_cue(self) -> None:
-        selected_paths = [
-            EntityOriginPath(
-                path_id="e1_p1",
-                entity_id="e1",
-                entity_text="Term Of Trial",
-                nodes=["Term Of Trial", "director", "younger"],
-                node_ids=["1", "2", "3"],
-                length=3,
-            ),
-            EntityOriginPath(
-                path_id="e2_p1",
-                entity_id="e2",
-                entity_text="Would You Marry Me?",
-                nodes=["Would You Marry Me?", "director", "younger"],
-                node_ids=["4", "5", "6"],
-                length=3,
-            ),
-        ]
-        payload = {
-            "nodes": [
-                {"id": "term_of_trial", "label": "Term Of Trial", "kind": "entity", "source_path_ids": ["e1_p1"], "source_node_ids": ["1"]},
-                {"id": "director_r1", "label": "director", "kind": "type_variable", "source_path_ids": ["e1_p1"], "source_node_ids": ["2"]},
-                {"id": "age_r1", "label": "age", "kind": "value", "semantic_type": "Age", "source_path_ids": ["e1_p1"]},
-                {"id": "would_you_marry_me", "label": "Would You Marry Me?", "kind": "entity", "source_path_ids": ["e2_p1"], "source_node_ids": ["4"]},
-                {"id": "director_r2", "label": "director", "kind": "type_variable", "source_path_ids": ["e2_p1"], "source_node_ids": ["5"]},
-                {"id": "age_r2", "label": "age", "kind": "value", "semantic_type": "Age", "source_path_ids": ["e2_p1"]},
-            ],
-            "edges": [
-                {"source": "term_of_trial", "target": "director_r1", "relation": "director of Term Of Trial", "support_path_id": "e1_p1", "support_node_ids": ["1", "2"]},
-                {"source": "director_r1", "target": "age_r1", "relation": "age of the director", "support_path_id": "e1_p1", "support_node_ids": ["2", "3"]},
-                {"source": "would_you_marry_me", "target": "director_r2", "relation": "director of Would You Marry Me?", "support_path_id": "e2_p1", "support_node_ids": ["4", "5"]},
-                {"source": "director_r2", "target": "age_r2", "relation": "age of the director", "support_path_id": "e2_p1", "support_node_ids": ["5", "6"]},
-            ],
-            "branch_terminals": {"e1": "age_r1", "e2": "age_r2"},
-        }
-        semantic_ast = parse_path_pruned_ast_payload(
-            payload,
-            selected_paths=selected_paths,
-        )
-        by_id = semantic_ast.node_by_id()
-        self.assertEqual(by_id["age_r1"].source_graph_nodes, ["3"])
-        self.assertEqual(by_id["age_r2"].source_graph_nodes, ["6"])
-
-class CandidateFlowLLM:
-    def __init__(
-        self,
-        *,
-        path_scores: list[dict[str, Any]],
-        ast_payloads_by_path_set: dict[str, dict[str, Any]] | None = None,
-        best_candidate_id: str = "",
-    ) -> None:
-        self.path_scores = path_scores
-        self.ast_payloads_by_path_set = ast_payloads_by_path_set or {}
-        self.best_candidate_id = best_candidate_id
-
-    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
-        if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
-            raise AssertionError("legacy candidate-node/problem-frame prompt was called")
-        if system_prompt == ENTITY_PATH_SCORING_SYSTEM or "dependency-path judge" in system_prompt:
-            return {"path_scores": json.loads(json.dumps(self.path_scores))}
-        if "Selected Path Semantic Transduction" in system_prompt or "Selected Path Semantic Transduction" in prompt:
-            selected_paths = _json_after_marker(prompt, "Selected entity-origin dependency paths:")
-            path_set_id = selected_paths[0].get("path_set_id", "ps1") if selected_paths else "ps1"
-            return json.loads(json.dumps(self.ast_payloads_by_path_set[path_set_id]))
-        raise AssertionError(f"Unexpected prompt: {system_prompt}")
-
 
 class SemanticAtomicLLM:
     def __init__(self, dag_payload: dict[str, Any]) -> None:
@@ -1049,47 +785,6 @@ class NoCandidatePromptLLM:
 
     def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
         self.system_prompts.append(system_prompt)
-        if system_prompt == CANDIDATE_NODES_SYSTEM or system_prompt == PROBLEM_FRAME_SYSTEM:
-            raise AssertionError("legacy candidate-node/problem-frame prompt was called")
-        if system_prompt == ENTITY_PATH_SCORING_SYSTEM or "dependency-path judge" in system_prompt:
-            paths_by_entity = _json_after_marker(prompt, "Entity-origin dependency paths grouped by entity:")
-            scores = []
-            for entity_id, paths in paths_by_entity.items():
-                for path in paths:
-                    scores.append(
-                        {
-                            "entity_id": entity_id,
-                            "path_id": path["path_id"],
-                            "score": min(100, len(path["node_ids"]) * 20),
-                            "valid": True,
-                            "reason": "longer path score",
-                        }
-                    )
-            return {"path_scores": scores}
-        if "entity-origin dependency-path pipeline" in system_prompt:
-            paths_by_entity = _json_after_marker(prompt, "Entity-origin dependency paths:")
-            selected = []
-            for entity_id, paths in paths_by_entity.items():
-                path = max(paths, key=lambda item: len(item["node_ids"]))
-                selected.append({"entity_id": entity_id, "path_id": path["path_id"], "reason": "longest useful path"})
-            return {"selected_paths": selected}
-        if "Selected Path Semantic Transduction" in system_prompt or "entity-origin path-to-AST" in system_prompt:
-            selected_paths = _json_after_marker(prompt, "Selected entity-origin dependency paths:")
-            path_id = selected_paths[0]["path_id"]
-            return {
-                "nodes": [
-                    {"id": "alphago", "label": "AlphaGo", "kind": "entity", "source_path_ids": [path_id], "source_node_ids": ["1"]},
-                    {"id": "company", "label": "company", "kind": "type_variable", "source_path_ids": [path_id], "source_node_ids": ["3"]},
-                    {"id": "ceo", "label": "CEO", "kind": "type_variable", "source_path_ids": [path_id], "source_node_ids": ["4"]},
-                    {"id": "university", "label": "university", "kind": "type_variable", "source_path_ids": [path_id], "source_node_ids": ["6"]},
-                ],
-                "edges": [
-                    {"source": "alphago", "target": "company", "relation": "company that developed AlphaGo", "support_path_id": path_id, "support_node_ids": ["1", "3"]},
-                    {"source": "company", "target": "ceo", "relation": "CEO of the company", "support_path_id": path_id, "support_node_ids": ["3", "4"]},
-                    {"source": "ceo", "target": "university", "relation": "university the CEO graduated from", "support_path_id": path_id, "support_node_ids": ["4", "6"]},
-                ],
-                "branch_terminals": {"e1": "university"},
-            }
         if system_prompt == SEMANTIC_REASONING_PATH_SYSTEM:
             return _semantic_alphago_payload()
         if system_prompt == ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM:
@@ -1131,88 +826,35 @@ def _entity_path(path_id: str, entity_id: str, nodes: list[str]) -> EntityOrigin
     )
 
 
-def _selected_dependency_path_evidence_for_alphago() -> list[dict[str, Any]]:
+def _atom(evidence_id: str, text: str, *, node_texts: list[str] | None = None) -> AtomicEvidence:
+    return AtomicEvidence(
+        id=evidence_id,
+        type="dependency_path",
+        source="corenlp",
+        text=text,
+        metadata={"node_texts": node_texts or [text]},
+    )
+
+
+def _walt_disney_atomic_evidence_pool() -> list[AtomicEvidence]:
     return [
-        {
-            "path_set_id": "ps1",
-            "paths": [
-                {
-                    "entity_id": "e1",
-                    "entity_text": "AlphaGo",
-                    "path_id": "e1_p1",
-                    "path_text": "AlphaGo -> developed -> company",
-                    "node_texts": ["AlphaGo", "developed", "company"],
-                    "node_ids": ["1", "2", "3"],
-                }
-            ],
-        }
-    ]
-
-
-def _walt_disney_selected_dependency_path_evidence() -> list[dict[str, Any]]:
-    return [
-        {
-            "path_set_id": "ps1",
-            "paths": [
-                {
-                    "entity_id": "e1",
-                    "entity_text": "Which Walt Disney film",
-                    "path_id": "e1_p8",
-                    "path_text": "Which Walt Disney film -- produced first -- The Apple Dumpling Gang -- Something Wicked This Way Comes",
-                    "node_texts": [
-                        "Which Walt Disney film",
-                        "produced first",
-                        "The Apple Dumpling Gang",
-                        "Something Wicked This Way Comes",
-                    ],
-                    "node_ids": ["3", "5", "8", "10"],
-                },
-                {
-                    "entity_id": "e2",
-                    "entity_text": "The Apple Dumpling Gang",
-                    "path_id": "e2_p14",
-                    "path_text": "The Apple Dumpling Gang -- Something Wicked This Way Comes -- produced first -- Which Walt Disney film",
-                    "node_texts": [
-                        "The Apple Dumpling Gang",
-                        "Something Wicked This Way Comes",
-                        "produced first",
-                        "Which Walt Disney film",
-                    ],
-                    "node_ids": ["8", "10", "5", "3"],
-                },
-                {
-                    "entity_id": "e3",
-                    "entity_text": "Something Wicked This Way Comes",
-                    "path_id": "e3_p13",
-                    "path_text": "Something Wicked This Way Comes -- The Apple Dumpling Gang -- produced first -- Which Walt Disney film",
-                    "node_texts": [
-                        "Something Wicked This Way Comes",
-                        "The Apple Dumpling Gang",
-                        "produced first",
-                        "Which Walt Disney film",
-                    ],
-                    "node_ids": ["10", "8", "5", "3"],
-                },
-            ],
-        }
-    ]
-
-
-def _selected_dependency_path_evidence_for_two_edge_chain() -> list[dict[str, Any]]:
-    return [
-        {
-            "path_set_id": "ps1",
-            "paths": [
-                {
-                    "entity_id": "e1",
-                    "entity_text": "AlphaGo",
-                    "path_id": "e1_p1",
-                    "path_text": "AlphaGo -> developed -> company -> CEO -> university",
-                    "node_texts": ["AlphaGo", "developed", "company", "CEO", "university"],
-                    "node_ids": ["1", "2", "3", "4", "5"],
-                }
-            ],
-        }
+        _atom("atom_1", "Which Walt Disney film produced first", node_texts=["Which Walt Disney film", "produced first"]),
+        _atom("atom_2", "produced first The Apple Dumpling Gang", node_texts=["produced first", "The Apple Dumpling Gang"]),
+        _atom(
+            "atom_3",
+            "The Apple Dumpling Gang Something Wicked This Way Comes",
+            node_texts=["The Apple Dumpling Gang", "Something Wicked This Way Comes"],
+        ),
+        _atom(
+            "atom_4",
+            "Something Wicked This Way Comes The Apple Dumpling Gang",
+            node_texts=["Something Wicked This Way Comes", "The Apple Dumpling Gang"],
+        ),
+        _atom(
+            "atom_5",
+            "Something Wicked This Way Comes produced first",
+            node_texts=["Something Wicked This Way Comes", "produced first"],
+        ),
     ]
 
 
@@ -1237,7 +879,7 @@ def _semantic_two_edge_payload() -> dict[str, Any]:
                         "answer_type": "Organization",
                         "is_one_hop": True,
                         "support": [
-                            {"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["AlphaGo", "developed", "company"]}
+                            {"supported_by": ["atom_1"], "atom_ids": ["atom_1"]}
                         ],
                     },
                     {
@@ -1248,13 +890,12 @@ def _semantic_two_edge_payload() -> dict[str, Any]:
                         "answer_type": "Person",
                         "is_one_hop": True,
                         "support": [
-                            {"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["company", "CEO"]}
+                            {"supported_by": ["atom_2"], "atom_ids": ["atom_2"]}
                         ],
                     },
                 ],
             }
         ],
-        "selected_path_set_ids": ["ps1"],
     }
 
 
@@ -1275,36 +916,19 @@ def _atomic_node_for_edge(node_id: str, edge_id: str, dependency: str | None = N
         "answer_type": "Entity",
         "dependencies": dependencies,
         "support": [
-            {"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["AlphaGo", "company"]}
+            {"supported_by": ["atom_1"], "atom_ids": ["atom_1"]}
         ],
         "source_semantic_path_id": "b1",
         "source_semantic_edge_id": edge_id,
     }
 
 
-def _parallel_nationality_evidence() -> list[dict[str, Any]]:
+def _parallel_nationality_evidence() -> list[AtomicEvidence]:
     return [
-        {
-            "path_set_id": "ps1",
-            "paths": [
-                {
-                    "entity_id": "e1",
-                    "entity_text": "Ten9Eight: Shoot For The Moon",
-                    "path_id": "e1_p1",
-                    "path_text": "Ten9Eight: Shoot For The Moon -> director -> nationality",
-                    "node_texts": ["Ten9Eight: Shoot For The Moon", "director", "nationality"],
-                    "node_ids": ["1", "2", "3"],
-                },
-                {
-                    "entity_id": "e2",
-                    "entity_text": "Sabotage (1936 Film)",
-                    "path_id": "e2_p1",
-                    "path_text": "Sabotage (1936 Film) -> director -> nationality",
-                    "node_texts": ["Sabotage (1936 Film)", "director", "nationality"],
-                    "node_ids": ["4", "5", "6"],
-                },
-            ],
-        }
+        _atom("atom_1", "Ten9Eight: Shoot For The Moon director", node_texts=["Ten9Eight: Shoot For The Moon", "director"]),
+        _atom("atom_2", "director nationality", node_texts=["director", "nationality"]),
+        _atom("atom_3", "Sabotage (1936 Film) director", node_texts=["Sabotage (1936 Film)", "director"]),
+        _atom("atom_4", "director nationality", node_texts=["director", "nationality"]),
     ]
 
 
@@ -1329,7 +953,7 @@ def _semantic_parallel_nationality_payload() -> dict[str, Any]:
                         "answer_type": "Person",
                         "is_one_hop": True,
                         "support": [
-                            {"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["Ten9Eight: Shoot For The Moon", "director"]}
+                            {"supported_by": ["atom_1"], "atom_ids": ["atom_1"]}
                         ],
                     },
                     {
@@ -1340,7 +964,7 @@ def _semantic_parallel_nationality_payload() -> dict[str, Any]:
                         "answer_type": "Nationality",
                         "is_one_hop": True,
                         "support": [
-                            {"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["director", "nationality"]}
+                            {"supported_by": ["atom_2"], "atom_ids": ["atom_2"]}
                         ],
                     },
                 ],
@@ -1365,7 +989,7 @@ def _semantic_parallel_nationality_payload() -> dict[str, Any]:
                         "answer_type": "Person",
                         "is_one_hop": True,
                         "support": [
-                            {"path_set_id": "ps1", "path_id": "e2_p1", "node_texts": ["Sabotage (1936 Film)", "director"]}
+                            {"supported_by": ["atom_3"], "atom_ids": ["atom_3"]}
                         ],
                     },
                     {
@@ -1376,7 +1000,7 @@ def _semantic_parallel_nationality_payload() -> dict[str, Any]:
                         "answer_type": "Nationality",
                         "is_one_hop": True,
                         "support": [
-                            {"path_set_id": "ps1", "path_id": "e2_p1", "node_texts": ["director", "nationality"]}
+                            {"supported_by": ["atom_4"], "atom_ids": ["atom_4"]}
                         ],
                     },
                 ],
@@ -1400,7 +1024,7 @@ def _atomic_parallel_nationality_payload() -> dict[str, Any]:
                 "one_hop_relation": "director of film",
                 "answer_type": "Person",
                 "dependencies": [],
-                "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["Ten9Eight: Shoot For The Moon", "director"]}],
+                "support": [{"supported_by": ["atom_1"], "atom_ids": ["atom_1"]}],
                 "source_semantic_path_id": "b1",
                 "source_semantic_edge_id": "b1_e1",
             },
@@ -1412,7 +1036,7 @@ def _atomic_parallel_nationality_payload() -> dict[str, Any]:
                 "one_hop_relation": "nationality of person",
                 "answer_type": "Nationality",
                 "dependencies": ["q1"],
-                "support": [{"path_set_id": "ps1", "path_id": "e1_p1", "node_texts": ["director", "nationality"]}],
+                "support": [{"supported_by": ["atom_2"], "atom_ids": ["atom_2"]}],
                 "source_semantic_path_id": "b1",
                 "source_semantic_edge_id": "b1_e2",
             },
@@ -1424,7 +1048,7 @@ def _atomic_parallel_nationality_payload() -> dict[str, Any]:
                 "one_hop_relation": "director of film",
                 "answer_type": "Person",
                 "dependencies": [],
-                "support": [{"path_set_id": "ps1", "path_id": "e2_p1", "node_texts": ["Sabotage (1936 Film)", "director"]}],
+                "support": [{"supported_by": ["atom_3"], "atom_ids": ["atom_3"]}],
                 "source_semantic_path_id": "b2",
                 "source_semantic_edge_id": "b2_e1",
             },
@@ -1436,12 +1060,11 @@ def _atomic_parallel_nationality_payload() -> dict[str, Any]:
                 "one_hop_relation": "nationality of person",
                 "answer_type": "Nationality",
                 "dependencies": ["q3"],
-                "support": [{"path_set_id": "ps1", "path_id": "e2_p1", "node_texts": ["director", "nationality"]}],
+                "support": [{"supported_by": ["atom_4"], "atom_ids": ["atom_4"]}],
                 "source_semantic_path_id": "b2",
                 "source_semantic_edge_id": "b2_e2",
             },
         ],
-        "selected_path_set_ids": ["ps1"],
         "reason": "compiled per-branch nationality lookups only",
     }
 
@@ -1467,7 +1090,6 @@ def _grounded_alphago_payload() -> dict[str, Any]:
                 ],
             }
         ],
-        "selected_path_set_ids": ["ps1"],
         "reason": "test grounded DAG",
     }
 
@@ -1647,7 +1269,6 @@ def _atomic_alphago_from_semantic_payload() -> dict[str, Any]:
                 "source_semantic_edge_id": "b1_e3",
             },
         ],
-        "selected_path_set_ids": ["ps1"],
         "reason": "compiled from semantic reasoning path",
     }
 

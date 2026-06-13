@@ -1,18 +1,13 @@
 from __future__ import annotations
 
 import re
-from itertools import product
 from typing import Any
 
 from models import (
     AtomicQuestionDAG,
     AtomicQuestionEdge,
     AtomicQuestionNode,
-    EntityOriginPath,
-    EntityStartNode,
     AtomicEvidence,
-    PathSetCandidate,
-    ScoredEntityPath,
     SemanticReasoningEdge,
     SemanticReasoningNode,
     SemanticReasoningPath,
@@ -20,10 +15,8 @@ from models import (
 )
 from prompts import (
     ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM,
-    ENTITY_PATH_SCORING_SYSTEM,
     SEMANTIC_REASONING_PATH_SYSTEM,
     build_atomic_dag_from_semantic_reasoning_path_prompt,
-    build_score_entity_paths_prompt,
     build_semantic_reasoning_path_prompt,
 )
 
@@ -35,31 +28,6 @@ class EntityPathSemanticParser:
         if llm_client is None:
             raise TypeError("EntityPathSemanticParser requires an llm_client.")
         self.llm_client = llm_client
-
-    def score_entity_paths(
-        self,
-        *,
-        original_question: str,
-        restored_question: str,
-        entity_start_nodes: list[EntityStartNode],
-        entity_origin_paths: list[EntityOriginPath],
-    ) -> tuple[list[ScoredEntityPath], dict[str, Any]]:
-        payload = self.llm_client.chat_json(
-            ENTITY_PATH_SCORING_SYSTEM,
-            build_score_entity_paths_prompt(
-                original_question=original_question,
-                restored_question=restored_question,
-                entity_start_nodes=[entity.to_dict() for entity in entity_start_nodes],
-                entity_origin_paths_by_entity=_paths_grouped_for_prompt(
-                    entity_origin_paths,
-                    entity_start_nodes,
-                ),
-                question_intent_metadata=_lightweight_question_intent_metadata(original_question),
-            ),
-        )
-        raw_payload = payload if isinstance(payload, dict) else {}
-        scored_paths = _parse_scored_entity_paths(raw_payload.get("path_scores"), entity_origin_paths)
-        return scored_paths, raw_payload
 
     def build_grounded_atomic_dag(
         self,
@@ -79,9 +47,13 @@ class EntityPathSemanticParser:
         self,
         *,
         original_question: str,
-        selected_dependency_path_evidence: list[dict[str, object]],
+        masked_question: str | None = None,
+        explicit_entities: list[dict[str, object]] | None = None,
+        declarative_views: list[dict[str, object]] | None = None,
+        operator_intent: dict[str, object] | None = None,
+        atomic_evidence_pool: list[dict[str, object]] | list[AtomicEvidence] | None = None,
     ) -> tuple[SemanticReasoningPathResult, dict[str, Any]]:
-        atomic_evidences = extract_atomic_evidences(selected_dependency_path_evidence)
+        atomic_evidences = _coerce_atomic_evidence_pool(atomic_evidence_pool or [])
         atomic_evidence_payload = [atom.to_dict() for atom in atomic_evidences]
         validation_feedback: str | None = None
         last_payload: dict[str, Any] = {}
@@ -90,7 +62,11 @@ class EntityPathSemanticParser:
                 SEMANTIC_REASONING_PATH_SYSTEM,
                 build_semantic_reasoning_path_prompt(
                     original_question=original_question,
-                    atomic_evidences=atomic_evidence_payload,
+                    masked_question=masked_question,
+                    explicit_entities=explicit_entities,
+                    declarative_views=declarative_views,
+                    operator_intent=operator_intent,
+                    atomic_evidence_pool=atomic_evidence_payload,
                     validation_feedback=validation_feedback,
                 ),
             )
@@ -99,7 +75,6 @@ class EntityPathSemanticParser:
             try:
                 result = _parse_semantic_reasoning_path_payload(
                     raw_payload,
-                    selected_dependency_path_evidence=selected_dependency_path_evidence,
                     evidence_atoms=atomic_evidences,
                 )
             except ValueError as exc:
@@ -110,11 +85,7 @@ class EntityPathSemanticParser:
                         + validation_feedback
                     ) from exc
                 continue
-            issues = _semantic_reasoning_path_support_issues(
-                result,
-                selected_dependency_path_evidence,
-                atomic_evidences,
-            )
+            issues = _semantic_reasoning_path_support_issues(result, atomic_evidences)
             if issues:
                 validation_feedback = "\n".join(issues)
                 if attempt == 1:
@@ -123,7 +94,10 @@ class EntityPathSemanticParser:
                         + validation_feedback
                     )
                 continue
-            raw_payload.setdefault("selected_dependency_path_evidence", selected_dependency_path_evidence)
+            raw_payload.setdefault("masked_question", masked_question)
+            raw_payload.setdefault("explicit_entities", explicit_entities or [])
+            raw_payload.setdefault("declarative_views", declarative_views or [])
+            raw_payload.setdefault("operator_intent", operator_intent or result.operator_intent)
             raw_payload.setdefault("semantic_reasoning_paths", [path.to_dict() for path in result.paths])
             raw_payload["atomic_evidences"] = atomic_evidence_payload
             raw_payload["evidence_atoms"] = atomic_evidence_payload
@@ -239,13 +213,11 @@ FORBIDDEN_SEMANTIC_RELATIONS = {
 def _parse_semantic_reasoning_path_payload(
     payload: dict[str, Any],
     *,
-    selected_dependency_path_evidence: list[dict[str, Any]],
     evidence_atoms: list[AtomicEvidence],
 ) -> SemanticReasoningPathResult:
     payload = _coerce_flat_semantic_reasoning_payload(
         payload,
         evidence_atoms=evidence_atoms,
-        selected_dependency_path_evidence=selected_dependency_path_evidence,
     )
     raw_paths = payload.get("semantic_reasoning_paths")
     if raw_paths is None:
@@ -253,9 +225,8 @@ def _parse_semantic_reasoning_path_payload(
     if not isinstance(raw_paths, list) or not raw_paths:
         raise ValueError("Semantic Reasoning Path payload must contain a non-empty semantic_reasoning_paths list.")
 
-    selected_path_ids = _selected_dependency_path_ids(selected_dependency_path_evidence)
-    selected_path_set_ids = _selected_dependency_path_set_ids(selected_dependency_path_evidence)
     paths: list[SemanticReasoningPath] = []
+    known_atom_ids = {atom.id for atom in evidence_atoms}
     for index, raw_path in enumerate(raw_paths, start=1):
         if not isinstance(raw_path, dict):
             raise ValueError(f"semantic_reasoning_paths[{index}] must be a JSON object.")
@@ -269,10 +240,12 @@ def _parse_semantic_reasoning_path_payload(
         source_path_id = str(raw_path.get("source_path_id") or raw_path.get("path_id") or "").strip()
         if not source_path_id and inferred_atom is not None:
             source_path_id = inferred_atom.source_path_id
-        if not branch_id or not entity_id or not source_path_id:
-            raise ValueError(f"Semantic reasoning path #{index} missing branch_id/entity_id/source_path_id.")
-        if source_path_id not in selected_path_ids:
-            raise ValueError(f"Semantic reasoning path {branch_id} references unselected source_path_id={source_path_id!r}.")
+        if not entity_id:
+            entity_id = f"e{index}"
+        if not source_path_id:
+            source_path_id = "atomic_evidence_pool"
+        if not branch_id:
+            raise ValueError(f"Semantic reasoning path #{index} missing branch_id.")
         if len(nodes) < 2:
             raise ValueError(f"Semantic reasoning path {branch_id} must contain at least 2 nodes.")
         if not edges:
@@ -301,7 +274,7 @@ def _parse_semantic_reasoning_path_payload(
                 atom_ids = _str_list(support.get("atom_ids") or support.get("supported_by"))
                 if not atom_ids:
                     raise ValueError(f"Semantic reasoning edge {edge.edge_id} support has empty supported_by atom ids.")
-                unknown_atom_ids = [atom_id for atom_id in atom_ids if atom_id not in {atom.id for atom in evidence_atoms}]
+                unknown_atom_ids = [atom_id for atom_id in atom_ids if atom_id not in known_atom_ids]
                 if unknown_atom_ids:
                     raise ValueError(f"Semantic reasoning edge {edge.edge_id} cites unknown evidence atoms: {unknown_atom_ids}.")
 
@@ -326,10 +299,8 @@ def _parse_semantic_reasoning_path_payload(
         for key, value in (payload.get("score_breakdown") or {}).items()
         if isinstance(value, (int, float))
     } if isinstance(payload.get("score_breakdown"), dict) else {}
-    selected_ids = _str_list(payload.get("selected_path_set_ids")) or sorted(selected_path_set_ids)
     return SemanticReasoningPathResult(
         paths=paths,
-        selected_path_set_ids=selected_ids,
         operator_intent=payload.get("operator_intent") if isinstance(payload.get("operator_intent"), dict) else {},
         score=_clamp_score(payload.get("score")),
         score_breakdown=score_breakdown,
@@ -342,7 +313,6 @@ def _coerce_flat_semantic_reasoning_payload(
     payload: dict[str, Any],
     *,
     evidence_atoms: list[AtomicEvidence],
-    selected_dependency_path_evidence: list[dict[str, Any]],
 ) -> dict[str, Any]:
     if isinstance(payload.get("semantic_reasoning_paths"), list) or isinstance(payload.get("paths"), list):
         return payload
@@ -351,10 +321,9 @@ def _coerce_flat_semantic_reasoning_payload(
         return payload
 
     atom_by_id = {atom.id: atom for atom in evidence_atoms}
-    default_path = _first_selected_path_payload(selected_dependency_path_evidence)
     branch_id = "b1"
-    entity_id = str(default_path.get("entity_id") or "e1")
-    source_path_id = str(default_path.get("path_id") or "")
+    entity_id = "e1"
+    source_path_id = ""
     nodes: list[dict[str, Any]] = []
     node_id_by_label: dict[str, str] = {}
     edges: list[dict[str, Any]] = []
@@ -380,8 +349,8 @@ def _coerce_flat_semantic_reasoning_payload(
         supported_by = _str_list(raw_edge.get("supported_by"))
         first_atom = atom_by_id.get(supported_by[0]) if supported_by else None
         if first_atom is not None:
-            entity_id = entity_id or first_atom.entity_id
-            source_path_id = source_path_id or first_atom.source_path_id
+            entity_id = first_atom.entity_id or entity_id
+            source_path_id = first_atom.source_path_id or source_path_id
         source_label = str(raw_edge.get("source") or "").strip()
         target_label = str(raw_edge.get("target") or "").strip()
         relation = str(raw_edge.get("semantic_relation") or raw_edge.get("relation") or "").strip()
@@ -419,16 +388,6 @@ def _coerce_flat_semantic_reasoning_payload(
         }
     ]
     return coerced
-
-
-def _first_selected_path_payload(selected_dependency_path_evidence: list[dict[str, Any]]) -> dict[str, Any]:
-    for path_set in selected_dependency_path_evidence:
-        if not isinstance(path_set, dict):
-            continue
-        for path in path_set.get("paths", []) or []:
-            if isinstance(path, dict):
-                return path
-    return {}
 
 
 def _first_atom_for_edges(edges: list[SemanticReasoningEdge], evidence_atoms: list[AtomicEvidence]) -> AtomicEvidence | None:
@@ -633,32 +592,52 @@ def _matching_atom_ids_for_support(
     normalized_support_texts.discard("")
     matches: list[str] = []
     for atom in evidence_atoms:
-        if path_set_id and atom.path_set_id != path_set_id:
+        if path_set_id and atom.path_set_id and atom.path_set_id != path_set_id:
             continue
-        if path_id and atom.source_path_id != path_id:
+        if path_id and atom.source_path_id and atom.source_path_id != path_id:
             continue
-        atom_texts = {_normalize_support_text(text) for text in atom.node_texts}
+        atom_texts = _support_texts_for_atom(atom)
         atom_texts.discard("")
         if normalized_support_texts and normalized_support_texts.issubset(atom_texts):
             matches.append(atom.id)
     if matches:
         return matches[:3]
     for atom in evidence_atoms:
-        if path_id and atom.source_path_id != path_id:
+        if path_id and atom.source_path_id and atom.source_path_id != path_id:
             continue
-        atom_texts = {_normalize_support_text(text) for text in atom.node_texts}
+        atom_texts = _support_texts_for_atom(atom)
         if normalized_support_texts & atom_texts:
             matches.append(atom.id)
     return matches[:3]
 
 
+def _support_texts_for_atom(atom: AtomicEvidence) -> set[str]:
+    texts = list(atom.node_texts)
+    for value in (
+        atom.text,
+        atom.left,
+        atom.right,
+        atom.subject,
+        atom.relation,
+        atom.object,
+        atom.head,
+        atom.dependent,
+        atom.dependency_relation,
+    ):
+        if value:
+            texts.append(str(value))
+    for key in ("token_indices", "mask_mapping"):
+        value = atom.metadata.get(key)
+        if isinstance(value, dict):
+            texts.extend(str(item) for item in value.values() if item)
+    return {_normalize_support_text(text) for text in texts}
+
+
 def _semantic_reasoning_path_support_issues(
     result: SemanticReasoningPathResult,
-    selected_dependency_path_evidence: list[dict[str, Any]],
     evidence_atoms: list[AtomicEvidence],
 ) -> list[str]:
     """Validate that semantic edges are grounded by evidence atom ids."""
-    support_index = _selected_dependency_support_index(selected_dependency_path_evidence)
     atom_ids = {atom.id for atom in evidence_atoms}
     issues: list[str] = []
     for path in result.paths:
@@ -676,15 +655,6 @@ def _semantic_reasoning_path_support_issues(
                     )
                     continue
                 edge_atom_ids.update(support_atom_ids)
-                path_set_id = str(support.get("path_set_id") or "").strip()
-                path_id = str(support.get("path_id") or "").strip()
-                if path_set_id or path_id:
-                    key = (path_set_id, path_id)
-                    if key not in support_index:
-                        issues.append(
-                            f"Semantic edge {edge.edge_id} support #{support_index_in_edge} cites invalid "
-                            f"path_set_id/path_id {path_set_id!r}/{path_id!r}."
-                        )
             if not edge_atom_ids:
                 issues.append(f"Semantic edge {edge.edge_id} has no valid evidence atom support.")
     return issues
@@ -762,24 +732,6 @@ def _atomic_dag_required_semantic_fields_errors(payload: dict[str, Any]) -> list
     return errors
 
 
-def _selected_dependency_path_ids(selected_dependency_path_evidence: list[dict[str, Any]]) -> set[str]:
-    return {
-        str(path.get("path_id") or "").strip()
-        for path_set in selected_dependency_path_evidence
-        if isinstance(path_set, dict)
-        for path in path_set.get("paths", [])
-        if isinstance(path, dict) and str(path.get("path_id") or "").strip()
-    }
-
-
-def _selected_dependency_path_set_ids(selected_dependency_path_evidence: list[dict[str, Any]]) -> set[str]:
-    return {
-        str(path_set.get("path_set_id") or "").strip()
-        for path_set in selected_dependency_path_evidence
-        if isinstance(path_set, dict) and str(path_set.get("path_set_id") or "").strip()
-    }
-
-
 def _forbidden_semantic_node_label(label: str) -> bool:
     normalized = re.sub(r"[^a-z0-9/ ]+", " ", str(label or "").lower())
     normalized = " ".join(normalized.split())
@@ -792,214 +744,49 @@ def _forbidden_semantic_relation(relation: str) -> bool:
     return normalized in FORBIDDEN_SEMANTIC_RELATIONS
 
 
-def select_best_path_by_entity(
-    *,
-    scored_paths: list[ScoredEntityPath],
-    entity_start_nodes: list[EntityStartNode],
-    entity_origin_paths: list[EntityOriginPath],
-    min_valid_score: float = 55.0,
-) -> dict[str, ScoredEntityPath]:
-    """Select exactly one highest-scoring path for each explicit entity."""
-    path_by_id = {path.path_id: path for path in entity_origin_paths}
-    score_by_path_id = {score.path_id: score for score in scored_paths if score.path_id in path_by_id}
-    result: dict[str, ScoredEntityPath] = {}
-    for entity in entity_start_nodes:
-        entity_paths = [path for path in entity_origin_paths if path.entity_id == entity.entity_id]
-        if not entity_paths:
-            raise ValueError(f"No entity-origin paths exist for entity_id={entity.entity_id!r}.")
-        entity_scores = [
-            score_by_path_id.get(path.path_id)
-            or ScoredEntityPath(
-                entity_id=entity.entity_id,
-                path_id=path.path_id,
-                score=0.0,
-                valid=False,
-                reason="missing score for path",
+def _coerce_atomic_evidence_pool(raw_items: list[dict[str, object]] | list[AtomicEvidence]) -> list[AtomicEvidence]:
+    result: list[AtomicEvidence] = []
+    for index, item in enumerate(raw_items, start=1):
+        if isinstance(item, AtomicEvidence):
+            if not item.id:
+                item.id = f"evidence_{index}"
+            result.append(item)
+            continue
+        if not isinstance(item, dict):
+            continue
+        item_type = str(item.get("type") or item.get("kind") or "unknown").strip()
+        source = str(item.get("source") or "surface").strip()
+        evidence_id = str(item.get("id") or f"evidence_{index}").strip()
+        result.append(
+            AtomicEvidence(
+                id=evidence_id,
+                type=item_type,
+                kind=str(item.get("kind") or item_type),
+                source=source,
+                view_id=_optional_str(item.get("view_id")),
+                text=str(item.get("text") or "").strip(),
+                span=_int_list(item.get("span")),
+                subject=_optional_str(item.get("subject")),
+                relation=_optional_str(item.get("relation")),
+                object=_optional_str(item.get("object")),
+                head=_optional_str(item.get("head")),
+                dependent=_optional_str(item.get("dependent")),
+                dependency_relation=_optional_str(item.get("dependency_relation")),
+                aligned_entities=_str_list(item.get("aligned_entities")),
+                semantic_hint=_optional_str(item.get("semantic_hint")),
+                operator_hint=_optional_str(item.get("operator_hint")),
+                confidence=_float_value(item.get("confidence"), default=1.0),
+                metadata=item.get("metadata") if isinstance(item.get("metadata"), dict) else {},
+                anchor=_optional_str(item.get("anchor")),
+                cue=_optional_str(item.get("cue")),
+                candidates=_str_list(item.get("candidates")),
+                left=_optional_str(item.get("left")),
+                right=_optional_str(item.get("right")),
+                source_path_id=_optional_str(item.get("source_path_id")),
+                source_path_set_id=_optional_str(item.get("source_path_set_id")),
             )
-            for path in entity_paths
-        ]
-        ordered = sorted(entity_scores, key=lambda item: (-item.score, item.path_id))
-        eligible = [
-            item
-            for item in ordered
-            if item.valid and item.score >= min_valid_score
-        ]
-        selected = eligible[0] if eligible else ordered[0]
-        result[entity.entity_id] = selected
-        if not result[entity.entity_id].path_id:
-            raise ValueError(f"No top path could be selected for entity_id={entity.entity_id!r}.")
+        )
     return result
-
-
-def build_single_path_set_candidate(
-    *,
-    best_paths_by_entity: dict[str, ScoredEntityPath],
-) -> list[PathSetCandidate]:
-    if not best_paths_by_entity:
-        return []
-    path_ids_by_entity: dict[str, str] = {}
-    scores: list[float] = []
-    for entity_id in sorted(best_paths_by_entity, key=_entity_id_sort_key):
-        scored_path = best_paths_by_entity[entity_id]
-        if not scored_path.path_id:
-            raise ValueError(f"Entity {entity_id!r} has no selected best path.")
-        path_ids_by_entity[entity_id] = scored_path.path_id
-        scores.append(scored_path.score)
-    mean_score = sum(scores) / len(scores) if scores else 0.0
-    return [
-        PathSetCandidate(
-            path_set_id="ps1",
-            path_ids_by_entity=path_ids_by_entity,
-            mean_path_score=mean_score,
-        )
-    ]
-
-
-def build_path_set_candidates(
-    *,
-    paths_by_entity: dict[str, list[ScoredEntityPath]],
-    max_path_sets: int | None = None,
-) -> list[PathSetCandidate]:
-    if not paths_by_entity:
-        return []
-    entity_ids = sorted(paths_by_entity, key=_entity_id_sort_key)
-    for entity_id in entity_ids:
-        if not paths_by_entity[entity_id]:
-            raise ValueError(f"Entity {entity_id!r} has no selected paths.")
-
-    raw_candidates: list[tuple[dict[str, str], float]] = []
-    for combo in product(*(paths_by_entity[entity_id] for entity_id in entity_ids)):
-        path_ids_by_entity = {
-            entity_id: scored_path.path_id
-            for entity_id, scored_path in zip(entity_ids, combo, strict=True)
-        }
-        mean_score = sum(scored_path.score for scored_path in combo) / len(combo)
-        raw_candidates.append((path_ids_by_entity, mean_score))
-    if max_path_sets is not None and len(raw_candidates) > max_path_sets:
-        raw_candidates = sorted(raw_candidates, key=lambda item: item[1], reverse=True)[:max_path_sets]
-    return [
-        PathSetCandidate(
-            path_set_id=f"ps{index}",
-            path_ids_by_entity=path_ids_by_entity,
-            mean_path_score=mean_score,
-        )
-        for index, (path_ids_by_entity, mean_score) in enumerate(raw_candidates, start=1)
-    ]
-
-
-def build_selected_dependency_path_evidence(
-    *,
-    path_set_candidates: list[PathSetCandidate],
-    entity_origin_paths: list[EntityOriginPath],
-    max_path_sets: int | None = 4,
-) -> list[dict[str, Any]]:
-    if not path_set_candidates:
-        raise ValueError("No path-set candidates available for selected dependency path evidence.")
-
-    path_by_id = {path.path_id: path for path in entity_origin_paths}
-    selected_path_sets = path_set_candidates[:max_path_sets] if max_path_sets is not None else path_set_candidates
-    evidence: list[dict[str, Any]] = []
-    seen_path_set_ids: set[str] = set()
-    for path_set in selected_path_sets:
-        if path_set.path_set_id in seen_path_set_ids:
-            continue
-        seen_path_set_ids.add(path_set.path_set_id)
-        paths_payload: list[dict[str, Any]] = []
-        seen_path_ids: set[str] = set()
-        for entity_id, path_id in sorted(path_set.path_ids_by_entity.items(), key=lambda item: _entity_id_sort_key(item[0])):
-            if path_id in seen_path_ids:
-                continue
-            seen_path_ids.add(path_id)
-            path = path_by_id.get(path_id)
-            if path is None:
-                raise ValueError(
-                    f"Path-set {path_set.path_set_id!r} references missing entity-origin path {path_id!r}."
-                )
-            paths_payload.append(
-                {
-                    "entity_id": entity_id,
-                    "entity_text": path.entity_text,
-                    "path_id": path.path_id,
-                    "path_text": " -> ".join(path.nodes),
-                    "node_texts": list(path.nodes),
-                    "node_ids": list(path.node_ids),
-                }
-            )
-        evidence.append(
-            {
-                "path_set_id": path_set.path_set_id,
-                "paths": paths_payload,
-            }
-        )
-    if not evidence:
-        raise ValueError("Selected dependency path evidence is empty after path-set de-duplication.")
-    return evidence
-
-
-def extract_atomic_evidences(selected_dependency_path_evidence: list[dict[str, Any]]) -> list[AtomicEvidence]:
-    """Extract adjacent local path-edge evidences from selected dependency paths.
-
-    Atomic evidences are not heuristic entity-predicate combinations. Each atom
-    corresponds to one adjacent edge in a selected path, so Step 9 can ground
-    each semantic edge in a concrete local dependency fragment without seeing
-    or copying the full dependency path.
-    """
-
-    atoms: list[AtomicEvidence] = []
-    seen: set[tuple[Any, ...]] = set()
-    for path_set in selected_dependency_path_evidence:
-        if not isinstance(path_set, dict):
-            continue
-        path_set_id = str(path_set.get("path_set_id") or "").strip()
-        for path in path_set.get("paths", []) or []:
-            if not isinstance(path, dict):
-                continue
-            node_texts = _str_list(path.get("node_texts"))
-            if len(node_texts) < 2:
-                continue
-            node_ids = _str_list(path.get("node_ids"))
-            source_path_id = str(path.get("path_id") or "").strip()
-            entity_id = str(path.get("entity_id") or "").strip()
-            entity_text = str(path.get("entity_text") or "").strip()
-
-            for position, left in enumerate(node_texts[:-1]):
-                right = node_texts[position + 1]
-                left_node_id = node_ids[position] if position < len(node_ids) else ""
-                right_node_id = node_ids[position + 1] if position + 1 < len(node_ids) else ""
-                atom = AtomicEvidence(
-                    id="",
-                    kind="path_edge",
-                    text=f"{left} ---- {right}",
-                    left=left,
-                    right=right,
-                    source_path_id=source_path_id,
-                    source_path_set_id=path_set_id,
-                    metadata={
-                        "entity_id": entity_id,
-                        "entity_text": entity_text,
-                        "node_texts": [left, right],
-                        "node_ids": [node_id for node_id in [left_node_id, right_node_id] if node_id],
-                        "position": position,
-                    },
-                )
-                key = _atomic_evidence_key(atom)
-                if key in seen:
-                    continue
-                seen.add(key)
-                atom.id = f"atom_{len(atoms) + 1}"
-                atoms.append(atom)
-    return atoms
-
-
-def _atomic_evidence_key(atom: AtomicEvidence) -> tuple[Any, ...]:
-    return (
-        atom.kind,
-        _normalize_support_text(atom.text),
-        atom.source_path_set_id or "",
-        atom.source_path_id or "",
-        tuple(atom.node_ids),
-        atom.metadata.get("position"),
-    )
 
 
 def _atomic_question_variable_placeholder_errors(payload: dict[str, Any]) -> list[str]:
@@ -1037,69 +824,6 @@ def _contains_atomic_variable_placeholder(question: str) -> bool:
     return any(re.search(pattern, text, flags=re.IGNORECASE) for pattern in patterns)
 
 
-def _paths_grouped_for_prompt(
-    entity_origin_paths: list[EntityOriginPath],
-    entity_start_nodes: list[EntityStartNode],
-) -> dict[str, list[dict[str, Any]]]:
-    entity_text_by_node_id = {
-        str(node_id): entity.text
-        for entity in entity_start_nodes
-        for node_id in entity.graph_node_ids
-    }
-    grouped: dict[str, list[dict[str, Any]]] = {}
-    for path in entity_origin_paths:
-        other_entity_texts = [
-            entity_text_by_node_id[node_id]
-            for node_id in path.node_ids[1:-1]
-            if node_id in entity_text_by_node_id and entity_text_by_node_id[node_id] != path.entity_text
-        ]
-        payload = path.to_dict()
-        payload["passes_through_other_entity_start"] = bool(other_entity_texts)
-        payload["intermediate_entity_start_texts"] = other_entity_texts
-        grouped.setdefault(path.entity_id, []).append(payload)
-    return grouped
-
-
-def _parse_scored_entity_paths(raw: Any, entity_origin_paths: list[EntityOriginPath]) -> list[ScoredEntityPath]:
-    path_by_id = {path.path_id: path for path in entity_origin_paths}
-    scored_by_path_id: dict[str, ScoredEntityPath] = {}
-    if isinstance(raw, list):
-        for item in raw:
-            if not isinstance(item, dict):
-                continue
-            path_id = str(item.get("path_id", "") or "").strip()
-            entity_id = str(item.get("entity_id", "") or "").strip()
-            path = path_by_id.get(path_id)
-            if path is None or path.entity_id != entity_id:
-                continue
-            scored_by_path_id[path_id] = ScoredEntityPath(
-                entity_id=entity_id,
-                path_id=path_id,
-                score=_clamp_score(item.get("score")),
-                valid=_bool_value(item.get("valid"), default=True),
-                terminal_hint=_optional_str(item.get("terminal_hint")),
-                semantic_chain_hint=_str_list(item.get("semantic_chain_hint")),
-                covered_cues=_str_list(item.get("covered_cues")),
-                missing_cues=_str_list(item.get("missing_cues")),
-                fatal_errors=_str_list(item.get("fatal_errors")),
-                reason=str(item.get("reason", "") or "").strip(),
-            )
-    result: list[ScoredEntityPath] = []
-    for path in entity_origin_paths:
-        result.append(
-            scored_by_path_id.get(path.path_id)
-            or ScoredEntityPath(
-                entity_id=path.entity_id,
-                path_id=path.path_id,
-                score=0.0,
-                valid=False,
-                fatal_errors=["missing_from_llm_output"],
-                reason="missing from LLM output",
-            )
-        )
-    return result
-
-
 def _parse_grounded_atomic_dag_payload(
     payload: dict[str, Any],
     *,
@@ -1133,6 +857,8 @@ def _parse_grounded_atomic_dag_payload(
             node_id=node_id,
             warnings=warnings,
         )
+        edge_id_for_metadata = str(raw_node.get("source_semantic_edge_id") or "").strip()
+        edge_payload = semantic_edge_index.get(edge_id_for_metadata)
         support = _normalize_semantic_grounded_support(
             raw_node.get("support"),
             raw_node=raw_node,
@@ -1144,6 +870,9 @@ def _parse_grounded_atomic_dag_payload(
             "source": "grounded_atomic_dag",
             "support": support,
         }
+        supported_by_ids = _semantic_edge_supported_by_ids(edge_payload) if edge_payload else []
+        if supported_by_ids:
+            metadata["supported_by"] = supported_by_ids
         support_path_ids = sorted({item["path_id"] for item in support if item.get("path_id")})
         if support_path_ids:
             metadata["support_path_ids"] = support_path_ids
@@ -1322,55 +1051,22 @@ def _semantic_edge_index(semantic_payload: dict[str, Any] | None) -> dict[str, d
     return index
 
 
-def _selected_dependency_support_index(
-    selected_dependency_path_evidence: list[dict[str, Any]],
-) -> dict[tuple[str, str], dict[str, Any]]:
-    index: dict[tuple[str, str], dict[str, Any]] = {}
-    for path_set in selected_dependency_path_evidence:
-        if not isinstance(path_set, dict):
-            continue
-        path_set_id = str(path_set.get("path_set_id") or "").strip()
-        paths = path_set.get("paths")
-        if not path_set_id or not isinstance(paths, list):
-            continue
-        for path in paths:
-            if not isinstance(path, dict):
+def _semantic_edge_supported_by_ids(edge_payload: dict[str, Any]) -> list[str]:
+    ids: list[str] = []
+    raw_support = edge_payload.get("support")
+    if isinstance(raw_support, dict):
+        raw_support = [raw_support]
+    if isinstance(raw_support, list):
+        for item in raw_support:
+            if not isinstance(item, dict):
                 continue
-            path_id = str(path.get("path_id") or "").strip()
-            node_texts = _str_list(path.get("node_texts"))
-            if not path_id or not node_texts:
-                continue
-            index[(path_set_id, path_id)] = {
-                "node_texts": node_texts,
-                "normalized_node_texts": {_normalize_support_text(text) for text in node_texts},
-            }
-    return index
+            ids.extend(_str_list(item.get("atom_ids") or item.get("supported_by")))
+    ids.extend(_str_list(edge_payload.get("supported_by")))
+    return _unique_preserve(ids)
 
 
 def _normalize_support_text(value: str) -> str:
     return " ".join(str(value or "").strip().lower().split())
-
-
-def _lightweight_question_intent_metadata(question: str) -> dict[str, object]:
-    text = " ".join(str(question or "").strip().split())
-    lower = text.lower()
-    wh_cue = None
-    if "how many" in lower or "number of" in lower:
-        wh_cue = "how many"
-        answer_kind = "count"
-    else:
-        for cue in ("why", "when", "where", "who", "which", "what", "how"):
-            if cue in lower.split():
-                wh_cue = cue
-                break
-        answer_kind = {
-            "why": "reason",
-            "when": "temporal",
-            "where": "location",
-            "who": "person_or_entity",
-            "how": "manner_or_method",
-        }.get(wh_cue or "", "entity_or_attribute")
-    return {"wh_cue": wh_cue, "answer_kind": answer_kind}
 
 
 def _clamp_score(value: Any) -> float:
@@ -1407,7 +1103,20 @@ def _str_list(raw: Any) -> list[str]:
     return [text for item in raw for text in [str(item).strip()] if text]
 
 
-def _entity_id_sort_key(entity_id: str) -> tuple[int, str]:
-    text = str(entity_id)
-    digits = "".join(ch for ch in text if ch.isdigit())
-    return (int(digits) if digits else 10**9, text)
+def _int_list(raw: Any) -> list[int]:
+    if not isinstance(raw, list):
+        return []
+    result: list[int] = []
+    for item in raw:
+        try:
+            result.append(int(item))
+        except (TypeError, ValueError):
+            continue
+    return result
+
+
+def _float_value(raw: Any, *, default: float) -> float:
+    try:
+        return float(raw)
+    except (TypeError, ValueError):
+        return default

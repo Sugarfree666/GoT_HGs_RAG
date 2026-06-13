@@ -5,32 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/GoT_HGs_RAG.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/HyperBranch.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corenlp_server-6240e863a53f475f.props" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/depo/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/anchor_selector.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/ast_builder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/ast_validator.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/ast_validator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/corenlp_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/corenlp_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/entity_path_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/entity_path_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/entity_path_projector.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/entity_path_projector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/path_ast_builder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/depo/path_pipeline.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/prompts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_branch/depo_adapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_branch/depo_adapter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hypergraphrag.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/question_normalizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/question_normalizer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/run_depo_decomposition_batch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run_depo_decomposition_batch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_depo_entity_origin_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_depo_entity_origin_pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_depo_path_projection.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp_em0_analysis.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +24,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="42336" />
+    <option name="cachedIndexableFilesCount" value="42687" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -59,23 +45,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0013820552983659" />
-      <entry key="MS500" value="1.342500843717267" />
-      <entry key="S2" value="2.755626983722742" />
-      <entry key="S5" value="4.013126170745168" />
-      <entry key="S10" value="5.776090762063192" />
-      <entry key="S30" value="12.607058310913251" />
-      <entry key="S60" value="17.837359343159292" />
-      <entry key="M2" value="23.040683890696705" />
-      <entry key="M5" value="40.86253867238709" />
-      <entry key="M10" value="68.25432739830353" />
-      <entry key="M15" value="87.21573972833039" />
-      <entry key="M30" value="117.55523270551116" />
-      <entry key="H1" value="140.0452918241791" />
-      <entry key="H2" value="157.6860782569178" />
-      <entry key="H4" value="194.746166359207" />
-      <entry key="D1" value="621.4175626643248" />
-      <entry key="W1" value="2003.7002834304515" />
+      <entry key="MS100" value="1.0000405487619477" />
+      <entry key="MS500" value="1.1461468546887248" />
+      <entry key="S2" value="2.102352756683026" />
+      <entry key="S5" value="3.341440787750357" />
+      <entry key="S10" value="5.36208911184522" />
+      <entry key="S30" value="11.643280005591935" />
+      <entry key="S60" value="15.387850585880766" />
+      <entry key="M2" value="17.907980699257017" />
+      <entry key="M5" value="19.68643697947865" />
+      <entry key="M10" value="20.332342163066247" />
+      <entry key="M15" value="20.58685895911728" />
+      <entry key="M30" value="21.320611869557382" />
+      <entry key="H1" value="23.90050088056149" />
+      <entry key="H2" value="30.74832816576617" />
+      <entry key="H4" value="48.763731816302034" />
+      <entry key="D1" value="536.6545565612689" />
+      <entry key="W1" value="2205.5125378156004" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -97,23 +83,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9539637606884982" />
-      <entry key="MS500" value="1.3300295328080427" />
-      <entry key="S2" value="2.7489918559090882" />
-      <entry key="S5" value="4.0090801691867375" />
-      <entry key="S10" value="5.773163326878036" />
-      <entry key="S30" value="12.604975320002493" />
-      <entry key="S60" value="17.835900806269606" />
-      <entry key="M2" value="23.039745133657348" />
-      <entry key="M5" value="40.86186809322568" />
-      <entry key="M10" value="68.25376506360254" />
-      <entry key="M15" value="87.21526012566082" />
-      <entry key="M30" value="117.55490890762418" />
-      <entry key="H1" value="140.04509857460812" />
-      <entry key="H2" value="157.68596825755358" />
-      <entry key="H4" value="194.74609457555331" />
-      <entry key="D1" value="621.4175112680465" />
-      <entry key="W1" value="2003.7002579864877" />
+      <entry key="MS100" value="0.9659749572260351" />
+      <entry key="MS500" value="1.1378845406300344" />
+      <entry key="S2" value="2.098251466908315" />
+      <entry key="S5" value="3.338644833210596" />
+      <entry key="S10" value="5.359677685694842" />
+      <entry key="S30" value="11.641389690742459" />
+      <entry key="S60" value="15.386577416169148" />
+      <entry key="M2" value="17.907233285001453" />
+      <entry key="M5" value="19.686106661658844" />
+      <entry key="M10" value="20.33217130466467" />
+      <entry key="M15" value="20.586743553960318" />
+      <entry key="M30" value="21.320551985435948" />
+      <entry key="H1" value="23.900466990962094" />
+      <entry key="H2" value="30.748305856186256" />
+      <entry key="H4" value="48.76371381507773" />
+      <entry key="D1" value="536.6545184900033" />
+      <entry key="W1" value="2205.512511693815" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -148,7 +134,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/GitHub/HyperBranch/depo_decomposition&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GitHub/HyperBranch/error_sample&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -161,8 +147,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\GitHub\HyperBranch\depo_decomposition" />
       <recent name="D:\GitHub\HyperBranch\error_sample" />
+      <recent name="D:\GitHub\HyperBranch\depo_decomposition" />
       <recent name="D:\GitHub\HyperBranch" />
       <recent name="D:\GitHub\HyperBranch\questions\musique" />
       <recent name="D:\GitHub\HyperBranch\questions\hotpotqa" />
@@ -250,7 +236,9 @@
       <workItem from="1780907980220" duration="78507000" />
       <workItem from="1781151619830" duration="8859000" />
       <workItem from="1781161316082" duration="19535000" />
-      <workItem from="1781194104607" duration="9113000" />
+      <workItem from="1781194104607" duration="26969000" />
+      <workItem from="1781254262144" duration="52000" />
+      <workItem from="1781254498723" duration="20066000" />
     </task>
     <servers />
   </component>

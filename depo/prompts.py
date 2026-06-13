@@ -17,468 +17,89 @@ ALLOWED_OPERATORS = [
     "LOGICAL_OR",
 ]
 
-CANDIDATE_NODES_SYSTEM = """
-You are implementing the DEPO path-projection pipeline after CoreNLP parsing.
+RELATION_CARRIER_DECLARATIVE_SYSTEM = """
+You generate parser-facing relation-carrier declarative sentences for DEPO.
 
-Current step: produce a high-recall candidate node pool only.
+Goal:
+Help CoreNLP and OpenIE parse local relation-bearing structure in a masked question.
 
-Candidate nodes must be semantic endpoints used for dependency-path projection.
-They are not relation words, not predicates, not function words, and not final AST nodes.
-
-Do not generate a Problem Frame.
-Do not generate a full AST.
-Do not generate selected paths.
-Do not generate atomic questions.
-Return valid JSON only.
-""".strip()
-
-
-def build_candidate_nodes_prompt(
-    question: str,
-    restored_question: str,
-    graph_nodes: list[dict[str, object]],
-) -> str:
-    schema = {
-        "candidate_nodes": [
-            {
-                "id": "n1",
-                "text": "MovieA",
-                "kind": "entity",
-                "graph_node_ids": ["4"],
-                "confidence": 1.0,
-            }
-        ]
-    }
-    return f"""
-Build high-recall candidate nodes for the question.
-
-Original question:
-{question}
-
-Restored/normalized question used by the parser-facing pipeline:
-{restored_question}
-
-Restored dependency graph nodes:
-{json.dumps(graph_nodes, ensure_ascii=False, indent=2)}
-
-Candidate node rules:
-1. candidate_nodes is a high-recall pool, not final AST nodes.
-2. Include every likely semantic endpoint needed for path construction.
-3. A semantic endpoint is a named entity, explicit role noun, answer slot/value type,
-   class/type noun, constraint value, or coreference mention that can act as a path endpoint.
-4. Use kind values from:
-   entity, role, slot, type_qualifier, constraint_value, coref, other.
-5. If possible, include graph_node_ids copied from the provided graph node list.
-6. Do not invent graph_node_ids. If grounding is uncertain, omit graph_node_ids.
-7. Use other only for a semantic endpoint that does not fit the other kinds.
-
-Allowed endpoint examples:
-- named entities: AlphaGo, MovieA, The Godfather, BookA, Paris
-- roles: CEO, director, author, spouse
-- slots/value types: university, city, nationality, birth_date, death_date
-- type qualifiers when they are endpoints: company, film, book, organization
-- constraint values: 1999, France, Nobel Prize
-
-Forbidden:
-- Do not include function words or auxiliaries: did, do, does, is, was, were, be, have.
-- Do not include wh/function fragments: which, who, what, where, when, in which, by whom.
-- Do not include prepositions or particles: of, in, by, to, from, with, for, at, on.
-- Do not include relative-clause connectors: that, which, who, whom, whose.
-- Do not include conjunctions or determiners: and, or, the, a, an, this, that.
-- Do not include predicates or relation cues merely because they connect endpoints:
-  developed, graduate, graduated, located, born, died, played, share, same, different.
-- Do not output kind=operator_cue. That kind is not supported in this pipeline.
-- Do not generate a Problem Frame.
-- Do not generate a complete AST.
-- Do not select final paths.
+Hard rules:
+- Do not answer the question.
 - Do not generate atomic subquestions.
-- Do not output markdown.
+- Do not generate an execution DAG.
+- Do not introduce facts not present in the original question.
+- Preserve all masked entities exactly.
+- Prefer short SVO or copular declarative sentences.
+- Separate comparison/count/boolean/intersection/superlative/temporal intent into operator_intent instead of turning it into a factual assertion.
+- The output should only help CoreNLP/OpenIE parse relation-bearing structures.
 
-Output JSON with exactly this shape:
-{json.dumps(schema, ensure_ascii=False, indent=2)}
+Return strict JSON only.
 """.strip()
 
 
-PROBLEM_FRAME_SYSTEM = """
-You are given a complex question and its masked / normalized form.
-
-Your task is to construct a lightweight Problem Frame for path selection.
-
-The Problem Frame is NOT an AST.
-The Problem Frame is NOT a decomposition.
-The Problem Frame must NOT contain intermediate nodes.
-The Problem Frame must only specify:
-
-1. The known root entity or entities.
-2. The final target slot/value that must be reached from each root.
-3. Optional answer_focus and answer_mode.
-
-Important definitions:
-
-* root:
-  A given entity or explicit starting point in the question.
-  Examples: a movie title, book title, person name, organization name, location name.
-
-* target:
-  The final answer slot/value required by the original question.
-  The target is NOT the first intermediate variable.
-  The target is NOT a relation cue.
-  The target is NOT a preposition or function word.
-  The target should be the value that the selected path ultimately needs to reach.
-
-* requirement:
-  One branch-level search objective of the form:
-  root -> target
-
-For serial multi-hop lookup questions, create exactly ONE requirement from the known root to the final answer target.
-
-Example:
-Question: Who is the spouse of the author of BookA?
-Correct requirement:
-root = BookA
-target = spouse
-Incorrect requirement:
-root = BookA
-target = author
-Reason: author is only an intermediate node; spouse is the final answer target.
-
-For parallel or comparison questions, create one requirement per branch.
-
-Example:
-Question: Do the directors of MovieA and MovieB share the same nationality?
-Correct requirements:
-r1: root = MovieA, target = nationality
-r2: root = MovieB, target = nationality
-Do NOT create an extra operator requirement.
-Do NOT create a final comparison question.
-
-For asymmetric parallel questions, each branch may have a different implied intermediate relation, but the requirement should still point to the final target.
-
-Example:
-Question: Was the author of BookA born before the director of MovieB died?
-Correct requirements:
-r1: root = BookA, target = birth_date
-r2: root = MovieB, target = death_date
-
-For context-constrained questions, keep the main root -> target requirement and place contextual entities in context.
-
-Example:
-Question: Who is played by the director of MovieA in MovieB?
-Correct requirement:
-root = MovieA
-target = Who
-context = [MovieB]
-Reason: MovieB constrains the final relation "played in MovieB"; it is not the main target.
-
-Do not output operators such as COMPARE_SAME, ARGMAX, COUNT, NONE, VERIFY, or FILTER.
-Final comparison, verification, counting, and answer synthesis will be handled downstream using the original question and subquestion answers.
-The Problem Frame only guides path selection.
-
-Forbidden targets:
-
-* pure function words: of, in, by, to, from, with, for
-* determiners or auxiliaries: the, a, an, is, was, do, does
-* punctuation
-* generic relation cues unless they are the actual answer slot
-
-Output strict JSON only. Do not output markdown.
-
-JSON schema:
-
-{
-"answer_focus": string | null,
-"answer_mode": string | null,
-"requirements": [
-{
-"id": "r1",
-"root": string,
-"target": string,
-"context": [string],
-"description": string
-}
-]
-}
-
-Requirements:
-
-* Every requirement must have a non-empty root and target.
-* The number of requirements should equal the number of branch-level outputs needed to answer the question.
-* For ordinary serial multi-hop questions, use one requirement.
-* For parallel / comparison / intersection-style questions, use one requirement per branch.
-* Do not include intermediate nodes as separate requirements.
-* Do not include operator requirements.
-* The target must be the final slot needed for answering the original question.
-""".strip()
-
-
-def build_problem_frame_prompt(
-    question: str,
-    restored_question: str,
-    graph_nodes: list[dict[str, object]],
-    candidate_nodes: list[dict[str, object]],
-    masked_question: str | None = None,
-) -> str:
-    return f"""
-Construct the lightweight Problem Frame for this question.
-
-Complex question:
-{question}
-
-Masked / normalized form:
-{masked_question or restored_question}
-
-Restored/normalized question:
-{restored_question}
-
-High-recall candidate nodes available for path selection:
-{json.dumps(candidate_nodes, ensure_ascii=False, indent=2)}
-
-Restored dependency graph nodes:
-{json.dumps(graph_nodes, ensure_ascii=False, indent=2)}
-
-Return the strict JSON object only.
-""".strip()
-
-
-SELECT_PATHS_SYSTEM = """
-You are implementing the DEPO path-projection pipeline.
-
-Current step: choose exactly one provided candidate path for each requirement.
-
-You must only select from the supplied candidate_paths by path_id.
-Do not create paths.
-Do not generate an AST.
-Do not generate atomic questions.
-Return valid JSON only.
-""".strip()
-
-
-def build_select_paths_prompt(
-    question: str,
-    problem_frame: dict[str, object],
-    filtered_candidate_paths: list[dict[str, object]],
+def build_relation_carrier_declarative_prompt(
+    original_question: str,
+    masked_question: str,
+    placeholders: list[str] | None = None,
     validation_feedback: str | None = None,
 ) -> str:
     schema = {
-        "selected_paths": [
+        "masked_question": masked_question,
+        "declarative_views": [
             {
-                "requirement_id": "r1",
-                "path_id": "p1",
+                "id": "view_1",
+                "sentence": "The song SongA has a performer.",
+                "purpose": "relation_carrier",
             },
             {
-                "requirement_id": "r2",
-                "path_id": "p2",
-            },
-        ]
-    }
-    feedback = f"\nPrevious selection failed validation:\n{validation_feedback}\n" if validation_feedback else ""
-    return f"""
-Select candidate paths for the requirements.
-
-Original question:
-{question}
-
-Problem Frame:
-{json.dumps(problem_frame, ensure_ascii=False, indent=2)}
-
-Filtered candidate paths:
-{json.dumps(filtered_candidate_paths, ensure_ascii=False, indent=2)}
-{feedback}
-Task:
-- For each requirement in Problem Frame, choose exactly one path.
-- The number of selected paths must equal the number of requirements.
-- Use only path_id values from filtered candidate paths.
-- Do not invent or rewrite paths.
-- Do not generate an AST.
-- Do not generate atomic questions.
-
-Selection principles:
-1. For each requirement, prefer the path that best expresses root to target.
-2. If multiple paths are reasonable, prefer the shorter and more direct path.
-3. Do not choose a path that only connects two roots and does not express the requirement target.
-4. Do not choose a path that only contains type/context information unless that type is the requirement target.
-5. The selected path's candidate_for must include the requirement_id.
-
-Output JSON with exactly this shape:
-{json.dumps(schema, ensure_ascii=False, indent=2)}
-""".strip()
-
-
-LABEL_AST_EDGES_SYSTEM = """
-You are implementing the DEPO path-projection pipeline.
-
-Current step: label fixed AST skeleton edges and confirm the operator.
-
-The AST skeleton is already built by code from selected paths.
-You may only label existing edges and confirm operator metadata.
-You must not add, delete, merge, split, shortcut, or reorder AST nodes or edges.
-Return valid JSON only.
-""".strip()
-
-
-def build_label_ast_edges_prompt(
-    question: str,
-    ast_skeleton: dict[str, object],
-    selected_paths: list[dict[str, object]],
-    problem_frame: dict[str, object],
-) -> str:
-    schema = {
-        "edges": [
-            {
-                "source": "MovieA",
-                "target": "director_r1",
-                "relation": "director of MovieA",
-                "atomic_question_template": "Who directed MovieA?",
-            },
-            {
-                "source": "director_r1",
-                "target": "nationality_r1",
-                "relation": "nationality of the director",
-                "atomic_question_template": "What is the nationality of that director?",
+                "id": "view_2",
+                "sentence": "The performer has a nationality.",
+                "purpose": "relation_carrier",
             },
         ],
-        "operator": {
-            "type": "COMPARE_SAME",
-            "inputs": ["nationality_r1", "nationality_r2"],
-            "output": "boolean",
+        "operator_intent": {
+            "type": "lookup",
+            "target_hint": "nationality",
+            "answer_type_hint": "Nationality",
+            "cues": ["what nationality"],
         },
+        "warnings": [],
     }
+    feedback = f"\nPrevious output validation feedback:\n{validation_feedback}\n" if validation_feedback else ""
     return f"""
-Label the fixed AST skeleton edges.
-
-Original question:
-{question}
-
-Selected paths:
-{json.dumps(selected_paths, ensure_ascii=False, indent=2)}
-
-AST skeleton:
-{json.dumps(ast_skeleton, ensure_ascii=False, indent=2)}
-
-Problem Frame:
-{json.dumps(problem_frame, ensure_ascii=False, indent=2)}
-
-Rules:
-1. Give each existing AST edge a relation label or relation hint.
-2. You may optionally provide atomic_question_template for that one edge.
-3. Confirm the operator type and inputs from the AST skeleton and Problem Frame.
-4. Do not add AST nodes.
-5. Do not delete AST nodes.
-6. Do not add AST edges.
-7. Do not delete AST edges.
-8. Do not merge branch-specific clones.
-9. Do not create shortcut edges. For example, do not add AlphaGo -> university unless
-   those nodes are adjacent in the selected path and skeleton.
-10. Do not create selected-path-external query nodes.
-11. Do not generate executable DAG steps or final atomic questions.
-
-Output one item for every skeleton edge and only those edges.
-Output JSON with exactly this shape:
-{json.dumps(schema, ensure_ascii=False, indent=2)}
-""".strip()
-
-
-ENTITY_PATH_SCORING_SYSTEM = """
-You are a dependency-path judge for DEPO.
-
-Your task is to score each entity-origin dependency path independently.
-You are not selecting the final path.
-You are not generating an AST.
-You are not generating atomic questions.
-
-A path receives a high score if it can support Step 9 semantic transduction into an executable branch-level semantic relation chain.
-
-Use the original question and the restored question as constraints.
-
-Important principles:
-1. The path must start from the given entity.
-2. A good path should cover necessary intermediate roles.
-3. A good path should cover the focus predicate or answer slot cue when needed.
-4. A good path should cover the answer intent.
-5. Wh words are not AST nodes, but they can be important answer-intent cues.
-6. Predicate words such as die, born, graduate, develop are usually not AST nodes, but they may be important relation or event cues.
-7. Do not reward a path just because it is long.
-8. Penalize paths that stop too early.
-9. Penalize paths that end only at auxiliaries, determiners, prepositions, or punctuation.
-10. Penalize paths that miss the required intermediate role or answer target.
-11. For parallel branch questions, score whether this path can support this entity's branch only.
-12. Do not generate a final comparison operator.
-
-Score from 0 to 100:
-90-100 = excellent, directly supports a complete branch-level semantic chain.
-75-89 = good, mostly complete but may miss a minor cue.
-55-74 = partially useful but incomplete.
-30-54 = weakly related.
-0-29 = invalid or not useful.
-
-Return valid JSON only.
-""".strip()
-
-
-def build_score_entity_paths_prompt(
-    original_question: str,
-    restored_question: str,
-    entity_start_nodes: list[dict[str, object]],
-    entity_origin_paths_by_entity: dict[str, list[dict[str, object]]],
-    question_intent_metadata: dict[str, object] | None = None,
-    validation_feedback: str | None = None,
-) -> str:
-    schema = {
-        "path_scores": [
-            {
-                "entity_id": "e1",
-                "path_id": "e1_p1",
-                "score": 95,
-                "valid": True,
-                "subscores": {
-                    "entity_grounding": 15,
-                    "semantic_chain_coverage": 25,
-                    "answer_intent_coverage": 25,
-                    "ast_executability": 23,
-                    "noise_and_minimality": 7,
-                },
-                "terminal_hint": "death_reason",
-                "semantic_chain_hint": ["wife", "death_reason"],
-                "covered_cues": ["wife", "die", "why"],
-                "missing_cues": [],
-                "fatal_errors": [],
-                "reason": "The path starts from John Middleton Murry, reaches wife, covers the die predicate, and includes the Why cue.",
-            }
-        ]
-    }
-    feedback = f"\nPrevious scoring feedback:\n{validation_feedback}\n" if validation_feedback else ""
-    return f"""
-Score every entity-origin dependency path independently.
-
 Original question:
 {original_question}
 
-Restored/normalized question:
-{restored_question}
+Masked question:
+{masked_question}
 
-Entity start nodes:
-{json.dumps(entity_start_nodes, ensure_ascii=False, indent=2)}
+Masked placeholders:
+{json.dumps(placeholders or [], ensure_ascii=False, indent=2)}
 
-Question intent metadata:
-{json.dumps(question_intent_metadata or {}, ensure_ascii=False, indent=2)}
-
-Entity-origin dependency paths grouped by entity:
-{json.dumps(entity_origin_paths_by_entity, ensure_ascii=False, indent=2)}
-{feedback}
 Task:
-- Output one path_scores item for every supplied path_id unless the input path list is empty.
-- Do not choose a best path.
-- Do not output selected_paths.
-- Do not generate candidate nodes, a Problem Frame, an AST, atomic questions, or final operators.
+Generate short declarative relation-carrier views from the masked question.
 
-Scoring rules:
-1. Score must be a number from 0 to 100.
-2. path_id must come from the input paths and entity_id must match that path.
-3. valid=false paths still require score, fatal_errors, and reason.
-4. terminal_hint and semantic_chain_hint are only hints for later AST generation, not final AST nodes.
-5. Penalize paths that pass through another entity start when the entity's own branch should go to an answer slot.
-6. For common-answer, both/share/same, comparison, or parallel questions, score whether the path supports only that entity's branch toward the needed attribute.
-7. Wh words and predicates can be useful cues, but they must not be treated as final AST nodes here.
+The views are not answers. They are not atomic questions. They are only parser-facing sentences
+that expose local relations, roles, attributes, constraints, and argument boundaries.
+
+Operator intent:
+- Put global comparison, ranking, count, boolean, intersection, temporal, or superlative intent into operator_intent.
+- Do not state such global intent as a factual declarative sentence.
+
+Examples:
+Masked question:
+What is the nationality of the performer of song SongA?
+
+Good:
+- The song SongA has a performer.
+- The performer has a nationality.
+
+Bad:
+- The performer of SongA is American.
+- What is the nationality of the performer of SongA?
+- Find the performer and then find the nationality.
+
+{feedback}
 
 Return strict JSON only.
 Output JSON with exactly this shape:
@@ -487,33 +108,47 @@ Output JSON with exactly this shape:
 
 
 SEMANTIC_REASONING_PATH_SYSTEM = """
-You are implementing DEPO Step 9: Evidence-Grounded Semantic Reasoning Path Induction.
+You are DEPO Step 9: Semantic Reasoning Path Planner.
 
-Selected collapsed dependency paths have already been decomposed into atomic evidences before this step.
-You will see only:
-1. the original question;
-2. atomic evidences.
+Goal:
+Infer the semantic reasoning path needed to answer the original question.
 
-Do NOT directly convert dependency paths into semantic reasoning paths.
-Atomic evidences are adjacent local path-edge fragments from selected dependency paths, not semantic edges.
-Infer semantic reasoning paths mainly from the original question semantics.
+Definition:
+A semantic reasoning path is a directed reasoning structure whose nodes are semantic objects and whose edges are semantic relations.
 
-Semantic reasoning path nodes are semantic objects:
-1. explicit named entities from the original question;
-2. intermediate semantic objects licensed by the question, such as author, director, performer, wife, company, CEO;
-3. value slots such as date_1, date_2, death_place, nationality, birth_place;
-4. final answer variables.
+Semantic nodes can be:
+- explicit entities in the question;
+- intermediate variables, such as director, performer, mother, company, CEO;
+- value slots, such as date_1, date_2, birth_place, death_place, nationality;
+- answer slots.
 
-Semantic reasoning path edges are normalized executable one-hop semantic relations.
-Relations may be normalized, abstract, or task-oriented, for example:
-production/release date, date of birth, place of birth, compare earlier date,
-performer of song, director of film, nationality of person, CEO of company.
+Semantic edges must be:
+- normalized one-hop semantic relations;
+- directly compilable into one atomic lookup question later;
+- grounded by atomic evidences through supported_by.
 
-Every semantic edge must include supported_by with valid atomic evidence ids.
-If a semantic edge cannot be supported by atomic evidence, do not output it.
+Atomic evidences:
+- come from CoreNLP structural evidence, OpenIE relational evidence, surface cues, masking, and relation-carrier declarative views;
+- are local support evidence extracted before Step 9;
+- are not semantic edges;
+- must not be copied mechanically as semantic relations.
 
-Do not generate atomic questions here except optional atomic_question_template per edge.
-For comparison/ranking questions, generate semantic edges for attributes to query and put the comparison operation in operator_intent.
+Main rule:
+Use the original question semantics to infer the reasoning path.
+Use atomic evidences only as grounding support.
+Every semantic edge must cite valid atomic evidence ids in supported_by.
+
+Forbidden:
+- Do not turn dependency cues into semantic nodes or semantic relations.
+- Do not copy CoreNLP dependency labels as final semantic relations.
+- Do not copy OpenIE surface relation phrases as final executable semantic edges unless the original question semantics justifies the normalized one-hop relation.
+- Forbidden cue examples: produced first, released first, first, later, earlier, older, younger, compared to, where, when, was.
+- Do not generate atomic questions in Step 9.
+- Do not generate comparison/ranking/aggregation as semantic edges.
+
+For comparison or ranking questions:
+- output semantic edges only for the attributes that must be queried;
+- put the comparison/ranking operation into operator_intent.
 
 Return strict JSON only.
 """.strip()
@@ -521,9 +156,16 @@ Return strict JSON only.
 
 def build_semantic_reasoning_path_prompt(
     original_question: str,
-    atomic_evidences: list[dict[str, object]],
+    atomic_evidences: list[dict[str, object]] | None = None,
+    *,
+    masked_question: str | None = None,
+    explicit_entities: list[dict[str, object]] | None = None,
+    declarative_views: list[dict[str, object]] | None = None,
+    operator_intent: dict[str, object] | None = None,
+    atomic_evidence_pool: list[dict[str, object]] | None = None,
     validation_feedback: str | None = None,
 ) -> str:
+    evidence_payload = atomic_evidence_pool if atomic_evidence_pool is not None else (atomic_evidences or [])
     schema = {
         "semantic_reasoning_paths": [
             {
@@ -551,10 +193,9 @@ def build_semantic_reasoning_path_prompt(
                         "relation": "production/release date",
                         "answer_type": "Date",
                         "is_one_hop": True,
-                        "supported_by": ["atom_2", "atom_1"],
-                        "support_reason": "atom_2 grounds the film-to-event cue; atom_1 grounds the question type context.",
-                        "atomic_question_template": "When was The Apple Dumpling Gang released or produced?",
-                    },
+                        "supported_by": ["openie_triple_1", "corenlp_path_1"],
+                        "support_reason": "The question asks which film was produced first; this evidence links the film to the produced-first cue, which requires querying its production/release date.",
+                    }
                 ],
                 "terminal_node_id": "b1_n2",
                 "score": 95,
@@ -578,69 +219,102 @@ def build_semantic_reasoning_path_prompt(
             "branch_consistency": 10,
         },
         "warnings": [],
-        "reason": "The semantic reasoning paths cover the required branch-level lookups.",
+        "reason": "The semantic reasoning path covers the one-hop semantic lookups needed to answer the question.",
     }
+
     feedback = ""
     if validation_feedback:
         feedback = f"""
-
 Previous output failed Semantic Reasoning Path validation:
 {validation_feedback}
 
 Regenerate the full JSON.
-Every semantic edge must be one-hop and must cite valid atomic evidence ids in supported_by.
-For each semantic edge, explicitly list all atomic evidence ids that support that edge.
+Fix all validation errors.
 """
-    return f"""
-Induce Semantic Reasoning Paths for DEPO using only atomic evidences.
 
+    return f"""
 Original question:
 {original_question}
 
+Masked question:
+{masked_question or ""}
+
+Explicit entities:
+{json.dumps(explicit_entities or [], ensure_ascii=False, indent=2)}
+
+Declarative views:
+{json.dumps(declarative_views or [], ensure_ascii=False, indent=2)}
+
+Operator intent:
+{json.dumps(operator_intent or {}, ensure_ascii=False, indent=2)}
+
+Atomic evidence pool:
+{json.dumps(evidence_payload, ensure_ascii=False, indent=2)}
+
 Atomic evidences:
-{json.dumps(atomic_evidences, ensure_ascii=False, indent=2)}
+See the atomic evidence pool above. The canonical field name is atomic_evidence_pool.
 
 Task:
-Generate semantic reasoning paths under the original question semantics, using atomic evidences only as grounding constraints.
+Generate the minimal semantic reasoning path needed to answer the original question.
 
-Definition of Semantic Reasoning Path:
-A semantic reasoning path is a directed semantic query structure that describes the one-hop semantic lookups needed to answer the original question. It is not a dependency path.
+What to infer:
+1. What semantic objects are needed?
+2. What one-hop semantic relations must be queried?
+3. Which atomic evidences support each semantic edge?
+4. Is there a downstream operator such as comparison, ranking, intersection, union, or boolean judgment?
 
-Hard rules:
-1. Do NOT directly convert dependency paths into semantic reasoning paths.
-2. Dependency paths are not semantic reasoning paths.
-3. Atomic evidences are adjacent local path-edge fragments from selected dependency paths, not semantic edges.
-4. Do not directly copy atomic evidence text as semantic edges.
-5. Predicate cues such as produced first, released first, older, younger, where, when, was, compared to must not become semantic nodes.
-6. Every semantic edge must include supported_by.
-7. supported_by must contain valid atomic evidence ids and should include every atomic evidence fragment used to justify that semantic edge.
-8. If a semantic edge cannot be supported by any atomic evidence, do not output it.
-9. For comparison/ranking questions, generate semantic edges for the attributes that need to be queried, and put the comparison operation into operator_intent.
-10. Do not generate semantic edges like entity -> produced first, produced first -> entity, or entity -> compared to -> entity.
-11. For "Which X was produced first, A or B?", generate:
-    - A --production/release date--> date_1
-    - B --production/release date--> date_2
-    and put choose earlier date into operator_intent.
+Semantic reasoning path definition:
+- Nodes are semantic objects.
+- Edges are semantic relations.
+- Each edge represents exactly one one-hop lookup.
+- Each edge will later be compiled into one atomic question.
 
-Allowed semantic nodes:
-- explicit entities from the original question;
-- intermediate variables such as director, performer, mother, company, CEO;
-- value slots such as date_1, date_2, death_place, nationality, birth_place;
-- final answer variables.
+Rules:
+0. Do NOT directly convert dependency paths, dependency labels, or OpenIE surface relations into semantic reasoning paths.
+1. Infer semantic edges from the original question semantics, not by copying atomic evidence text.
+2. Every edge must have non-empty supported_by.
+3. Every supported_by id must come from the provided atomic evidence pool.
+4. If an edge cannot be grounded by atomic evidences, do not output it.
+5. Do not use dependency or predicate cues as semantic nodes.
+6. Do not use dependency or predicate cues as semantic relations.
+7. Do not generate atomic questions here.
+8. Prefer fewer well-grounded edges over many weak edges.
 
-Allowed semantic relations:
-- director of film
-- performer of song
-- place of death
-- date of birth
-- production/release date
-- nationality of person
+Comparison/ranking rule:
+For questions with cues such as first, later, earlier, older, younger, largest, smallest:
+- generate edges for the comparable attributes to query;
+- put the comparison/ranking operation into operator_intent;
+- do not create a semantic edge for the comparison itself.
 
-For each semantic edge:
-- decide which atomic evidences support the edge;
-- put their ids in supported_by;
-- optionally add support_reason explaining how those atomic evidences justify the semantic edge.
+Example A:
+Question:
+Which Walt Disney film was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?
+
+Correct semantic edges:
+- The Apple Dumpling Gang --production/release date--> date_1
+- Something Wicked This Way Comes --production/release date--> date_2
+
+Correct operator_intent:
+- type: ARGMIN
+- compare_attribute: production/release date
+- candidates: The Apple Dumpling Gang, Something Wicked This Way Comes
+- description: compare date_1 and date_2 and return the film with the earlier date
+
+Incorrect:
+- The Apple Dumpling Gang --produced first--> produced first
+- produced first --compared to--> Something Wicked This Way Comes
+- The Apple Dumpling Gang --compared to--> Something Wicked This Way Comes
+
+Example B:
+Question:
+Where was the place of death of the performer of song I Can't See Myself Leaving You?
+
+Correct semantic edges:
+- I Can't See Myself Leaving You --performer of song--> performer
+- performer --place of death--> death_place
+
 {feedback}
+
 Return strict JSON only.
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}

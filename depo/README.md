@@ -88,17 +88,13 @@ anchor decisions are made on restored original question text.
    downstream composition.
 
 10. **Atomic DAG compilation**
-   The LLM compiles each Semantic Reasoning Path edge into exactly one atomic
-   lookup question. Dependent questions must use explicit dependency variables
-   such as `q1's answer`. Each atomic node keeps support copied from the source
-   semantic edge and remains traceable to `source_semantic_path_id` and
-   `source_semantic_edge_id`.
-
-11. **Atomic Subquestion DAG**
-   The final DAG contains only one-hop lookup subquestions and explicit
-   dependencies between them. Final comparison, ranking, set, boolean, or
-   synthesis reasoning is left to the HyperBranch final answer composer, which
-   receives the original question plus atomic answers and evidence.
+   The LLM compiles the Semantic Reasoning Paths directly into the final Atomic
+   Subquestion DAG. The DAG contains only one-hop lookup subquestions and
+   explicit dependencies between them. Each atomic node remains traceable to
+   `source_semantic_path_id` and `source_semantic_edge_id`. Final comparison,
+   ranking, set, boolean, or synthesis reasoning is left to the HyperBranch
+   final answer composer, which receives the original question plus atomic
+   answers and evidence.
 
 ## Run
 

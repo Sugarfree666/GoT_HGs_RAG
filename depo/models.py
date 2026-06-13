@@ -24,6 +24,29 @@ class SemanticNormalizationResult:
 
 
 @dataclass
+class DeclarativeView:
+    id: str
+    sentence: str
+    purpose: str = "relation_carrier"
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class RelationCarrierViewResult:
+    masked_question: str
+    declarative_views: list[DeclarativeView] = field(default_factory=list)
+    operator_intent: dict[str, Any] = field(default_factory=dict)
+    warnings: list[str] = field(default_factory=list)
+    raw_payload: dict[str, Any] | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
 class ExtractedNode:
     placeholder: str
     text: str
@@ -180,6 +203,7 @@ class CoreNLPToken:
     character_offset_end: int = -1
     lemma: str | None = None
     pos: str | None = None
+    ner: str | None = None
 
 
 @dataclass
@@ -199,6 +223,40 @@ class DependencyParse:
     tokens: list[CoreNLPToken]
     edges: list[DependencyEdge]
     raw: dict[str, Any] | None = None
+
+
+@dataclass
+class OpenIETriple:
+    subject: str
+    relation: str
+    object: str
+    confidence: float = 1.0
+    subject_span: list[int] = field(default_factory=list)
+    relation_span: list[int] = field(default_factory=list)
+    object_span: list[int] = field(default_factory=list)
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class CoreNLPViewAnnotation:
+    view_id: str
+    text: str
+    tokens: list[CoreNLPToken] = field(default_factory=list)
+    edges: list[DependencyEdge] = field(default_factory=list)
+    openie_triples: list[OpenIETriple] = field(default_factory=list)
+    constituency_parse: str | None = None
+    phrase_spans: list[dict[str, Any]] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    raw: dict[str, Any] | None = None
+
+    def to_dependency_parse(self) -> DependencyParse:
+        return DependencyParse(tokens=list(self.tokens), edges=list(self.edges), raw=self.raw)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
 
 
 @dataclass
@@ -339,7 +397,7 @@ class CandidateNode:
     """High-recall candidate node proposed after dependency parsing.
 
     Candidate nodes are not final AST nodes. They are a recall-oriented pool
-    used to project the dependency graph before path selection.
+    used by dependency graph projection utilities.
     """
 
     id: str
@@ -366,33 +424,12 @@ class Requirement:
 
 
 @dataclass
-class ProblemFrame:
-    operator: str
-    requirements: list[Requirement] = field(default_factory=list)
-    answer_mode: str | None = None
-    answer_focus: str | None = None
-    notes: str | None = None
-
-    def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
-
-
-@dataclass
 class CandidatePath:
     path_id: str
     nodes: list[str]
     node_ids: list[str]
     candidate_for: list[str] = field(default_factory=list)
     evidence: list[dict[str, Any]] = field(default_factory=list)
-
-    def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
-
-
-@dataclass
-class SelectedPath:
-    requirement_id: str
-    path_id: str
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -426,47 +463,26 @@ class EntityOriginPath:
 
 
 @dataclass
-class SelectedEntityPath:
-    entity_id: str
-    path_id: str
-    reason: str = ""
-
-    def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
-
-
-@dataclass
-class ScoredEntityPath:
-    entity_id: str
-    path_id: str
-    score: float
-    valid: bool = True
-    terminal_hint: str | None = None
-    semantic_chain_hint: list[str] = field(default_factory=list)
-    covered_cues: list[str] = field(default_factory=list)
-    missing_cues: list[str] = field(default_factory=list)
-    fatal_errors: list[str] = field(default_factory=list)
-    reason: str = ""
-
-    def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
-
-
-@dataclass
-class PathSetCandidate:
-    path_set_id: str
-    path_ids_by_entity: dict[str, str]
-    mean_path_score: float = 0.0
-
-    def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
-
-
-@dataclass
 class AtomicEvidence:
     id: str
-    kind: str
-    text: str
+    type: str = ""
+    source: str = "surface"
+    view_id: str | None = None
+    text: str = ""
+    span: list[int] = field(default_factory=list)
+    subject: str | None = None
+    relation: str | None = None
+    object: str | None = None
+    head: str | None = None
+    dependent: str | None = None
+    dependency_relation: str | None = None
+    aligned_entities: list[str] = field(default_factory=list)
+    semantic_hint: str | None = None
+    operator_hint: str | None = None
+    confidence: float = 1.0
+    metadata: dict[str, Any] = field(default_factory=dict)
+    # Deprecated compatibility fields accepted from older evidence payloads.
+    kind: str = ""
     anchor: str | None = None
     cue: str | None = None
     candidates: list[str] = field(default_factory=list)
@@ -474,10 +490,23 @@ class AtomicEvidence:
     right: str | None = None
     source_path_id: str | None = None
     source_path_set_id: str | None = None
-    metadata: dict[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        if not self.type and self.kind:
+            self.type = self.kind
+        if not self.kind and self.type:
+            self.kind = self.type
+        if not self.type:
+            self.type = "unknown"
+            self.kind = "unknown"
+        if not self.kind:
+            self.kind = self.type
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        data = asdict(self)
+        data["kind"] = self.kind or self.type
+        data["type"] = self.type or self.kind
+        return data
 
     @property
     def path_set_id(self) -> str:
@@ -549,30 +578,11 @@ class SemanticReasoningPath:
 @dataclass
 class SemanticReasoningPathResult:
     paths: list[SemanticReasoningPath] = field(default_factory=list)
-    selected_path_set_ids: list[str] = field(default_factory=list)
     operator_intent: dict[str, Any] = field(default_factory=dict)
     score: float = 0.0
     score_breakdown: dict[str, float] = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)
     raw_payload: dict[str, Any] | None = None
-
-    def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
-
-
-@dataclass
-class ASTSkeleton:
-    """Program-built semantic AST skeleton derived only from selected paths."""
-
-    nodes: list["SemanticASTNode"] = field(default_factory=list)
-    edges: list["SemanticASTEdge"] = field(default_factory=list)
-    operator: "SemanticASTPrimaryOperator" = field(default_factory=lambda: SemanticASTPrimaryOperator())
-    branch_terminals: dict[str, str] = field(default_factory=dict)
-    requirement_paths: dict[str, list[str]] = field(default_factory=dict)
-    requirement_node_ids: dict[str, list[str]] = field(default_factory=dict)
-    node_surface: dict[str, str] = field(default_factory=dict)
-    node_candidate_ids: dict[str, str] = field(default_factory=dict)
-    metadata: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
