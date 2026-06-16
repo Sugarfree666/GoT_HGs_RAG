@@ -11,6 +11,7 @@ from models import (
     AtomicSubquestion,
     CoreNLPViewAnnotation,
     DeclarativeView,
+    HanLPSDPResult,
     MaskReplacement,
     MaskSpan,
     MaskSpanResult,
@@ -29,16 +30,27 @@ if TYPE_CHECKING:
     from mask_span_extractor import ExplicitEntityExtractor, MaskSpanExtractor
     from entity_path_pipeline import EntityPathSemanticParser
     from question_normalizer import SemanticQuestionNormalizer
+    from hanlp_sdp_parser import HanLPSDPParser
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="DEPO decomposition with explicit entity masking, grounded paths, and grounded atomic subquestions."
     )
+    parser.add_argument(
+        "--pipeline",
+        choices=("hanlp_sdp", "corenlp_openie"),
+        default="hanlp_sdp",
+        help="Pipeline mode. Default: hanlp_sdp.",
+    )
     parser.add_argument("--question", help="Run one manually supplied question instead of questions.json.")
     parser.add_argument("--questions-file", default="questions.json", help="Path to questions.json.")
     parser.add_argument("--api-key", help="OpenAI API key. Used only if OPENAI_API_KEY is not set.")
     parser.add_argument("--base-url", help="OpenAI base URL. Used only if OPENAI_BASE_URL is not set.")
+    parser.add_argument(
+        "--hanlp-model",
+        help="HanLP pretrained constant name from hanlp.pretrained.mtl/sdp, or a local model path.",
+    )
     parser.add_argument(
         "--corenlp-url",
         default="http://localhost:9000",
@@ -61,13 +73,61 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    records = [QuestionRecord(question=args.question)] if args.question else read_questions(args.questions_file)
+    if args.pipeline == "hanlp_sdp":
+        return _run_hanlp_sdp_cli(args, records)
+    return _run_corenlp_openie_cli(args, records)
+
+
+def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) -> int:
+    api_key = os.getenv("OPENAI_API_KEY") or args.api_key
+    base_url = os.getenv("OPENAI_BASE_URL") or args.base_url
+
+    try:
+        from hanlp_sdp_parser import HanLPSDPParser
+        from mask_span_extractor import ExplicitEntityExtractor
+
+        llm_client = None
+        if api_key:
+            from llm_client import LLMClient
+
+            llm_client = LLMClient(api_key=api_key, base_url=base_url, model="gpt-4o-mini")
+        mask_span_extractor = ExplicitEntityExtractor(llm_client)
+        parser = HanLPSDPParser(args.hanlp_model)
+
+        print("If this is the first run, HanLP may download the model automatically.")
+        print("You can set HANLP_HOME to control the cache directory.")
+        print()
+
+        for index, record in enumerate(records, start=1):
+            result = run_hanlp_sdp_pipeline(
+                record=record,
+                index=index,
+                mask_span_extractor=mask_span_extractor,
+                parser=parser,
+                debug=args.debug,
+            )
+            print_hanlp_sdp_result(index, record, result, debug=args.debug)
+    except ModuleNotFoundError as exc:
+        if "hanlp" in str(exc).lower() or getattr(exc, "name", "") == "hanlp":
+            print("Missing dependency: hanlp", file=sys.stderr)
+            print("Run: pip install hanlp", file=sys.stderr)
+            return 2
+        print(f"Missing dependency: {exc.name}. Run: pip install -r requirements.txt", file=sys.stderr)
+        return 2
+    except (RuntimeError, ValueError) as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+
+    return 0
+
+
+def _run_corenlp_openie_cli(args: argparse.Namespace, records: list[QuestionRecord]) -> int:
     api_key = os.getenv("OPENAI_API_KEY") or args.api_key
     base_url = os.getenv("OPENAI_BASE_URL") or args.base_url
     if not api_key:
         print("Missing API key. Set OPENAI_API_KEY or pass --api-key.", file=sys.stderr)
         return 2
-
-    records = [QuestionRecord(question=args.question)] if args.question else read_questions(args.questions_file)
 
     try:
         from corenlp_parser import CoreNLPConnectionError, CoreNLPParser
@@ -90,7 +150,7 @@ def main() -> int:
             corenlp_home=args.corenlp_home,
         ) as parser:
             for index, record in enumerate(records, start=1):
-                result = run_pipeline(
+                result = run_corenlp_openie_pipeline(
                     record=record,
                     index=index,
                     mask_span_extractor=mask_span_extractor,
@@ -111,7 +171,42 @@ def main() -> int:
     return 0
 
 
-def run_pipeline(
+def run_hanlp_sdp_pipeline(
+    record: QuestionRecord,
+    index: int,
+    mask_span_extractor: "MaskSpanExtractor",
+    parser: "HanLPSDPParser",
+    debug: bool = False,
+) -> dict[str, Any]:
+    del index, debug
+    from placeholder import selective_entity_masking
+
+    processing_question = record.question
+    explicit_entities = _coerce_explicit_entity_result(
+        mask_span_extractor.extract(processing_question),
+    )
+    mask_spans = _mask_span_result_from_explicit_entities(explicit_entities)
+    replacement = selective_entity_masking(
+        original_question=processing_question,
+        extracted_nodes=mask_spans,
+        placeholder_style="hanlp_sdp",
+    )
+    hanlp_sdp_result = parser.parse(
+        replacement.masked_question,
+        placeholders=[mapping.placeholder for mapping in replacement.mask_mappings],
+    )
+    return {
+        "explicit_entities": explicit_entities,
+        "explicit_entity_payload": explicit_entities.raw_payload,
+        "mask_spans": mask_spans,
+        "masked_question": replacement.masked_question,
+        "entity_mask_mappings": replacement.mask_mappings,
+        "replacement": replacement,
+        "hanlp_sdp_result": hanlp_sdp_result,
+    }
+
+
+def run_corenlp_openie_pipeline(
     record: QuestionRecord,
     index: int,
     mask_span_extractor: "MaskSpanExtractor",
@@ -269,6 +364,10 @@ def run_pipeline(
         "subquestions": subquestions,
         "subquestion_dag": subquestion_dag,
     }
+
+
+def run_pipeline(*args: Any, **kwargs: Any) -> dict[str, Any]:
+    return run_corenlp_openie_pipeline(*args, **kwargs)
 
 
 def _coerce_explicit_entity_result(raw_result: Any) -> ExplicitEntityResult:
@@ -433,6 +532,90 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
     else:
         for item in subquestions:
             print(f"  q{item.index}: {item.question}")
+    print()
+
+
+def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str, Any], debug: bool = False) -> None:
+    explicit_entities: ExplicitEntityResult = result.get("explicit_entities") or ExplicitEntityResult()
+    replacement: MaskReplacement = result["replacement"]
+    hanlp_result: HanLPSDPResult = result["hanlp_sdp_result"]
+
+    separator = "=" * 60
+    print(separator)
+    title = f"Question {index}"
+    if record.qid:
+        title += f" ({record.qid})"
+    print(title)
+    print(separator)
+    print()
+
+    print("[Original Question]")
+    print(record.question)
+    print()
+
+    print("[1. Explicit Entities]")
+    if explicit_entities.entities:
+        for entity in explicit_entities.entities:
+            semantic_type = entity.semantic_type_hint or "Entity"
+            print(f" - {entity.text} [{semantic_type}]")
+    else:
+        print(" (none)")
+    print()
+
+    print("[2. Entity Masking]")
+    if replacement.mask_mappings:
+        for mapping in replacement.mask_mappings:
+            print(f" - {mapping.placeholder} -> {mapping.original_text}")
+    else:
+        print(" (none)")
+    print(f" Masked question: {replacement.masked_question}")
+    print()
+
+    print("[3. HanLP SDP Parsing]")
+    print(f" Model: {hanlp_result.model or '(unknown)'}")
+    print()
+
+    print("[HanLP Tokens]")
+    if hanlp_result.tokens:
+        for token_index, token in enumerate(hanlp_result.tokens, start=1):
+            print(f"{token_index} {token}")
+    else:
+        print("(none)")
+    print()
+
+    print("[Available HanLP Keys]")
+    if hanlp_result.available_keys:
+        for key in hanlp_result.available_keys:
+            print(key)
+    else:
+        print("(none)")
+    print()
+
+    print("[Mask Token Check]")
+    if hanlp_result.mask_token_checks:
+        for placeholder, status in hanlp_result.mask_token_checks.items():
+            print(f"{placeholder}: {status}")
+    else:
+        print("(none)")
+    print()
+
+    print("[Readable SDP Edges]")
+    if hanlp_result.sdp_graphs:
+        for formalism in hanlp_result.sdp_graphs:
+            print(f"[SDP: {formalism}]")
+            formalism_edges = [edge for edge in hanlp_result.edges if edge.formalism == formalism]
+            if formalism_edges:
+                for edge in formalism_edges:
+                    print(edge.display())
+            else:
+                print("(no readable edges)")
+    else:
+        print("(none)")
+    if debug and hanlp_result.warnings:
+        print()
+        print("[HanLP Warnings]")
+        for warning in hanlp_result.warnings:
+            print(f" - {warning}")
     print()
 
 

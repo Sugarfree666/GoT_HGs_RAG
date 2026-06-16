@@ -156,6 +156,7 @@ def selective_entity_masking(
     *,
     question: str | None = None,
     mask_spans: MaskSpanResult | None = None,
+    placeholder_style: str = "default",
 ) -> PlaceholderReplacement:
     """Mask complex noun phrases while preserving the syntactic scaffold.
 
@@ -172,11 +173,11 @@ def selective_entity_masking(
         raise TypeError("selective_entity_masking requires a question and mask spans/extracted nodes.")
 
     if isinstance(extracted_nodes, MaskSpanResult):
-        return _selective_span_masking(original_question, extracted_nodes)
+        return _selective_span_masking(original_question, extracted_nodes, placeholder_style=placeholder_style)
 
     extraction = _coerce_extraction(original_question, extracted_nodes)
     candidates = _select_mask_candidates(original_question, extraction)
-    _assign_entity_masks(candidates, extraction)
+    _assign_entity_masks(candidates, extraction, placeholder_style=placeholder_style)
     _compute_masked_spans(candidates)
 
     masked_question = original_question
@@ -233,6 +234,8 @@ def selective_entity_masking(
 def _selective_span_masking(
     original_question: str,
     mask_span_result: MaskSpanResult,
+    *,
+    placeholder_style: str = "default",
 ) -> MaskReplacement:
     extraction = _extraction_from_mask_spans(original_question, mask_span_result.mask_spans)
     candidates: list[_MaskCandidate] = []
@@ -249,7 +252,7 @@ def _selective_span_masking(
             )
         )
     candidates = _remove_overlapping_candidates(candidates)
-    _assign_entity_masks(candidates, extraction)
+    _assign_entity_masks(candidates, extraction, placeholder_style=placeholder_style)
     _compute_masked_spans(candidates)
 
     masked_question = original_question
@@ -524,16 +527,21 @@ def _is_complex_noun_phrase(text: str, node: ExtractedNode) -> bool:
     return has_complex_punctuation or token_count >= 2
 
 
-def _assign_entity_masks(candidates: list[_MaskCandidate], extraction: ExtractionResult) -> None:
+def _assign_entity_masks(
+    candidates: list[_MaskCandidate],
+    extraction: ExtractionResult,
+    *,
+    placeholder_style: str = "default",
+) -> None:
     candidate_ids = {id(candidate.node) for candidate in candidates}
     reserved = {node.placeholder for node in extraction.nodes if id(node) not in candidate_ids}
     counters: dict[str, int] = {}
     for candidate in sorted(candidates, key=lambda item: item.start):
         base = _pos_hint_base(candidate.node)
-        mask = _pos_hint_label(base, counters.get(base, 0))
+        mask = _pos_hint_label(base, counters.get(base, 0), placeholder_style=placeholder_style)
         while mask in reserved:
             counters[base] = counters.get(base, 0) + 1
-            mask = _pos_hint_label(base, counters[base])
+            mask = _pos_hint_label(base, counters[base], placeholder_style=placeholder_style)
         candidate.mask = mask
         reserved.add(mask)
         counters[base] = counters.get(base, 0) + 1
@@ -812,7 +820,14 @@ def _pos_hint_base(node: ExtractedNode) -> str:
     return "SomeEntity"
 
 
-def _pos_hint_label(base: str, index: int) -> str:
+def _pos_hint_label(base: str, index: int, *, placeholder_style: str = "default") -> str:
+    if placeholder_style == "hanlp_sdp":
+        safe_base = re.sub(r"[^A-Za-z0-9]+", "", base).upper() or "ENTITY"
+        if safe_base in {"SOMEENTITY", "VARIABLE"}:
+            safe_base = "ENTITY"
+        return f"{safe_base}{_letter_suffix(index)}"
+    if placeholder_style != "default":
+        raise ValueError(f"Unknown placeholder style: {placeholder_style}")
     return f"{base}{_letter_suffix(index)}"
 
 

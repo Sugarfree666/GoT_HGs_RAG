@@ -226,6 +226,36 @@ class DependencyParse:
 
 
 @dataclass
+class HanLPSDPEdge:
+    formalism: str
+    head_idx: int
+    head: str
+    relation: str
+    dep_idx: int
+    dep: str
+
+    def display(self) -> str:
+        head_label = "ROOT[0]" if self.head_idx == 0 else _token_label(self.head, self.head_idx)
+        return f"{head_label} --{self.relation}--> {_token_label(self.dep, self.dep_idx)}"
+
+
+@dataclass
+class HanLPSDPResult:
+    text: str
+    tokens: list[str]
+    available_keys: list[str]
+    sdp_graphs: dict[str, Any]
+    edges: list[HanLPSDPEdge]
+    raw: dict[str, Any]
+    warnings: list[str] = field(default_factory=list)
+    model: str = ""
+    mask_token_checks: dict[str, str] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
 class OpenIETriple:
     subject: str
     relation: str
