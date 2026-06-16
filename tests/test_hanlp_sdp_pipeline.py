@@ -15,6 +15,7 @@ if str(DEPO_ROOT) not in sys.path:
 from hanlp_sdp_preprocessor import HanLPSDPPreprocessor  # noqa: E402
 from main import print_hanlp_sdp_result, run_hanlp_sdp_pipeline  # noqa: E402
 from models import HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
+from sdp_dm_simplifier import SDPDMSimplifier  # noqa: E402
 
 
 class HanLPSDPMainlineTest(unittest.TestCase):
@@ -52,9 +53,17 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("Masked question: Who is older, ENTITYA or ENTITYB?", output)
         self.assertIn("SDP input sentence: ANSWER is older, ENTITYA or ENTITYB.", output)
         self.assertIn("[3. HanLP SDP Parsing]", output)
-        self.assertIn("[Readable SDP Edges]", output)
-        self.assertIn("[SDP: sdp/pas]", output)
+        self.assertNotIn("[HanLP Tokens]", output)
+        self.assertNotIn("[Available HanLP Keys]", output)
+        self.assertIn("[Raw SDP/DM Edges]", output)
+        self.assertIn("[SDP: sdp/dm]", output)
         self.assertIn("older[3] --ARG1--> ANSWER[1]", output)
+        self.assertIn("[4. Simplified SDP/DM Graph]", output)
+        self.assertIn("[Kept / Derived Edges]", output)
+        self.assertIn("(none)", output)
+        self.assertNotIn("older --ARG2--> ENTITYA", output)
+        self.assertNotIn("older --ARG1--> ANSWER\n", output)
+        self.assertNotIn("[SDP: sdp/pas]", output)
         self.assertNotIn("Relation-Carrier Declarative Views", output)
         self.assertNotIn("CoreNLP + OpenIE View Annotations", output)
         self.assertNotIn("Semantic Reasoning Path Induction", output)
@@ -144,6 +153,82 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                     self.assertIn(mapping.placeholder, result.masked_question)
                     self.assertIn(mapping.placeholder, result.sdp_input_sentence)
 
+    def test_sdp_dm_simplifier_removes_glue_and_keeps_core_edges(self) -> None:
+        result = HanLPSDPResult(
+            text="ANSWER is whether the directors of film ENTITYA and ENTITYB share the same nationality.",
+            tokens=[],
+            available_keys=["tok", "sdp/dm"],
+            sdp_graphs={"sdp/dm": []},
+            edges=[
+                _dm("is", "ARG1", "ANSWER", 2, 1),
+                _dm("the", "BV", "directors", 4, 5),
+                _dm("share", "ARG1", "directors", 11, 5),
+                _dm("directors", "ARG1", "ENTITYA", 5, 8),
+                _dm("film", "compound", "ENTITYA", 7, 8),
+                _dm("ENTITYA", "_and_c", "ENTITYB", 8, 10),
+                _dm("is", "ARG2", "share", 2, 11),
+                _dm("share", "ARG2", "nationality", 11, 14),
+                _dm("the", "BV", "nationality", 12, 14),
+                _dm("same", "ARG1", "nationality", 13, 14),
+                HanLPSDPEdge("sdp/pas", 11, "share", "ARG0", 5, "directors"),
+            ],
+            raw={},
+        )
+
+        graph = SDPDMSimplifier().simplify(result)
+
+        self.assertEqual(
+            [edge.display() for edge in graph.edges],
+            [
+                "share --ARG1--> directors",
+                "directors --ARG1--> ENTITYA",
+                "ENTITYA --_and_c--> ENTITYB",
+                "share --ARG2--> nationality",
+                "same --ARG1--> nationality",
+            ],
+        )
+        self.assertIn("is --ARG1--> ANSWER", graph.removed_edges)
+        self.assertIn("is --ARG2--> share", graph.removed_edges)
+        self.assertIn("the --BV--> directors", graph.removed_edges)
+        self.assertIn("film --compound--> ENTITYA", graph.removed_edges)
+        self.assertNotIn("share --ARG0--> directors", [edge.display() for edge in graph.edges])
+
+    def test_sdp_dm_simplifier_collapses_preposition_arg_pairs(self) -> None:
+        result = HanLPSDPResult(
+            text="The sister of ANSWER played Susie in ENTITYA.",
+            tokens=[],
+            available_keys=["tok", "sdp/dm"],
+            sdp_graphs={"sdp/dm": []},
+            edges=[
+                _dm("The", "BV", "sister", 1, 2),
+                _dm("of", "ARG1", "sister", 3, 2),
+                _dm("played", "ARG1", "sister", 5, 2),
+                _dm("of", "ARG2", "ANSWER", 3, 4),
+                _dm("in", "ARG1", "played", 7, 5),
+                _dm("played", "ARG2", "Susie", 5, 6),
+                _dm("in", "ARG2", "ENTITYA", 7, 8),
+            ],
+            raw={},
+        )
+
+        graph = SDPDMSimplifier().simplify(result)
+
+        self.assertEqual(
+            [edge.display() for edge in graph.edges],
+            [
+                "played --in--> ENTITYA",
+                "played --ARG1--> sister",
+                "played --ARG2--> Susie",
+            ],
+        )
+        derived = [edge for edge in graph.edges if edge.derived]
+        self.assertEqual([edge.rule for edge in derived], ["collapse_preposition_arg_pair"])
+        self.assertIn("in --ARG1--> played", derived[0].provenance)
+        self.assertIn("in --ARG2--> ENTITYA", derived[0].provenance)
+        self.assertIn("of --ARG1--> sister", graph.removed_edges)
+        self.assertIn("of --ARG2--> ANSWER", graph.removed_edges)
+        self.assertIn("The --BV--> sister", graph.removed_edges)
+
 
 class FakePreprocessLLM:
     def __init__(self) -> None:
@@ -152,7 +237,7 @@ class FakePreprocessLLM:
     def chat_json(self, system_prompt: str, user_prompt: str, max_retries: int = 3) -> dict[str, object]:
         self.calls += 1
         assert max_retries == 1
-        assert "not decomposing" in system_prompt
+        assert "HanLP-SDP preprocessor" in system_prompt
         assert "Who is older, Ryan Tubridy or Mauro Massironi?" in user_prompt
         return {
             "explicit_entities": [
@@ -207,15 +292,19 @@ class FakeHanLPSDPParser:
         return HanLPSDPResult(
             text=text,
             tokens=tokens,
-            available_keys=["tok", "sdp/pas"],
-            sdp_graphs={"sdp/pas": [[(3, "ARG1")], [], [(0, "root")], [], [(3, "ARG2")], [], [(3, "ARG2")], []]},
+            available_keys=["tok", "sdp/dm", "sdp/pas"],
+            sdp_graphs={
+                "sdp/dm": [[(3, "ARG1")], [], [(0, "root")], [], [(3, "ARG2")], [], [(3, "ARG2")], []],
+                "sdp/pas": [[(3, "ARG1")]],
+            },
             edges=[
+                HanLPSDPEdge("sdp/dm", 3, "older", "ARG1", 1, "ANSWER"),
+                HanLPSDPEdge("sdp/dm", 0, "ROOT", "root", 3, "older"),
+                HanLPSDPEdge("sdp/dm", 3, "older", "ARG2", 5, "ENTITYA"),
+                HanLPSDPEdge("sdp/dm", 3, "older", "ARG2", 7, "ENTITYB"),
                 HanLPSDPEdge("sdp/pas", 3, "older", "ARG1", 1, "ANSWER"),
-                HanLPSDPEdge("sdp/pas", 0, "ROOT", "root", 3, "older"),
-                HanLPSDPEdge("sdp/pas", 3, "older", "ARG2", 5, "ENTITYA"),
-                HanLPSDPEdge("sdp/pas", 3, "older", "ARG2", 7, "ENTITYB"),
             ],
-            raw={"tok": tokens, "sdp/pas": []},
+            raw={"tok": tokens, "sdp/dm": [], "sdp/pas": []},
             warnings=[],
             model="fake.hanlp.model",
             mask_token_checks={placeholder: "OK" for placeholder in self.placeholders},
@@ -232,6 +321,10 @@ def _entity(question: str, text: str, semantic_type: str = "Entity") -> dict[str
         "confidence": 1.0,
         "reason": "test entity",
     }
+
+
+def _dm(head: str, relation: str, dep: str, head_idx: int, dep_idx: int) -> HanLPSDPEdge:
+    return HanLPSDPEdge("sdp/dm", head_idx, head, relation, dep_idx, dep)
 
 
 if __name__ == "__main__":

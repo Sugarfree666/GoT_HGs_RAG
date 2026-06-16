@@ -38,26 +38,41 @@ Return strict JSON only.
 
 
 HANLP_SDP_PREPROCESS_SYSTEM = """
-You prepare one question for HanLP semantic dependency parsing.
+You are the DEPO HanLP-SDP preprocessor.
 
-You are not decomposing the question.
-You are not generating reasoning paths.
-You are not generating atomic subquestions or an execution DAG.
-You are only producing a parser-friendly single declarative sentence for semantic dependency parsing.
+Your only task is to:
+1. detect explicit named entities in the original question;
+2. replace them with generic placeholders ENTITYA, ENTITYB, ENTITYC, ...;
+3. rewrite the masked question into one parser-friendly English declarative sentence for HanLP SDP.
 
-Hard rules:
-- Return strict JSON only.
-- Identify explicit named entities in the original question.
-- Protect multi-word explicit entities by replacing them with ENTITYA, ENTITYB, ENTITYC, ...
-- Use generic placeholders only. Do not use type-specific placeholders such as PersonA, FilmA, or SongA.
-- Preserve all placeholders exactly in both masked_question and sdp_input_sentence.
-- The sdp_input_sentence must be one English declarative sentence ending with a period.
-- The sdp_input_sentence must contain ANSWER as the answer slot.
-- Do not introduce entities not present in the original question.
-- Do not delete explicit entity placeholders.
-- Prefer parser-friendly of-chains over possessives, e.g. ENTITYA's author -> the author of ENTITYA.
-- Preserve comparison and constraint words such as older, later, same, different, both, either, and or.
-- Do not solve the question.
+Do not answer the question.
+Do not introduce facts not stated in the question.
+Return strict JSON only.
+
+Entity rules:
+- Detect only explicit named entities: people, works, titles, organizations, places, events, products, etc.
+- Do not mark roles or relation nouns as entities: author, director, spouse, sister, mother, performer, date, country, city, university.
+- Entity text must be copied exactly from the original question.
+- Do not include possessive "'s" unless it is part of the official name.
+- Use generic placeholders only: ENTITYA, ENTITYB, ENTITYC, ...
+- Preserve all placeholders exactly in masked_question and sdp_input_sentence.
+
+Rewrite rules:
+- sdp_input_sentence must be exactly one English declarative sentence ending with a period.
+- It must contain ANSWER as the answer slot.
+- It must preserve the original question semantics.
+- It must preserve comparison and constraint words such as older, later, same, different, first.
+- Prefer of-chains over possessives:
+  ENTITYA's author -> the author of ENTITYA
+- Convert wh focus into ANSWER:
+  Who is X? -> ANSWER is X.
+  What is X? -> ANSWER is X.
+  Where was X educated? -> X was educated at ANSWER.
+  When did X die? -> X died on ANSWER.
+- For Whose questions, ANSWER is the possessor, not the possessed entity:
+  Whose sister played Susie in ENTITYA?
+  -> The sister of ANSWER played Susie in ENTITYA.
+- Do not rewrite Whose sister ... as ANSWER is the sister ...
 """.strip()
 
 
@@ -66,11 +81,10 @@ def build_hanlp_sdp_preprocess_prompt(question: str) -> str:
         "explicit_entities": [
             {
                 "text": "Young Man Luther",
-                "semantic_type_hint": "Entity",
                 "start_char": 21,
                 "end_char": 37,
-                "confidence": 1.0,
-                "reason": "A named work/entity mentioned explicitly in the question.",
+                "semantic_type_hint": "Work | Person | Location | Organization | Event | Entity",
+                "confidence": 0.95,
             }
         ],
         "mask_mappings": [
@@ -83,58 +97,131 @@ def build_hanlp_sdp_preprocess_prompt(question: str) -> str:
         "sdp_input_sentence": "ANSWER is the spouse of the author of ENTITYA.",
         "warnings": [],
     }
+
     return f"""
 Original question:
 {question}
 
-Task:
-In one JSON response, do all of the following:
-1. Detect explicit named entities in the original question.
-2. Replace each explicit entity with ENTITYA, ENTITYB, ENTITYC, ... in order of first occurrence.
-3. Produce masked_question.
-4. Rewrite the masked question as one parser-friendly declarative sentence for HanLP SDP.
+Produce JSON only.
 
-Placeholder rules:
-- Use only generic placeholders ENTITYA, ENTITYB, ENTITYC, ...
-- Multi-word entities must be replaced as complete spans, never partially.
-- Every placeholder in mask_mappings must appear in masked_question.
-- Every placeholder in mask_mappings must appear in sdp_input_sentence.
-- If the original question already contains placeholders such as FilmA, treat them as explicit entities and remap them to ENTITYA, ENTITYB, ...
+Required output fields:
+- explicit_entities: all explicit named entities in the original question.
+- mask_mappings: ENTITYA, ENTITYB, ENTITYC ... mapped to original entity text.
+- masked_question: original question with entity spans replaced by placeholders.
+- sdp_input_sentence: one parser-friendly declarative sentence for HanLP SDP.
+- warnings: list of brief warnings, or [].
 
-Rewrite rules:
-- Output exactly one English declarative sentence in sdp_input_sentence.
-- End sdp_input_sentence with a period.
-- Include ANSWER exactly as the answer slot.
-- Do not output multiple sentences.
-- Do not split the question into atomic questions.
-- Do not generate a semantic reasoning path.
-- Do not generate an atomic DAG.
-- Do not add hidden facts or new named entities.
-- Convert possessives to of-chains where natural.
-- Preserve comparison, same/different, older/later, both/either, and coordination constraints.
+Good examples:
 
-Rewrite examples:
 Original:
 Who is the spouse of Young Man Luther's author?
-Output sdp_input_sentence:
-ANSWER is the spouse of the author of ENTITYA.
+Output:
+{{
+  "explicit_entities": [
+    {{
+      "text": "Young Man Luther",
+      "start_char": 21,
+      "end_char": 37,
+      "semantic_type_hint": "Work",
+      "confidence": 0.95
+    }}
+  ],
+  "mask_mappings": [
+    {{
+      "placeholder": "ENTITYA",
+      "original_text": "Young Man Luther"
+    }}
+  ],
+  "masked_question": "Who is the spouse of ENTITYA's author?",
+  "sdp_input_sentence": "ANSWER is the spouse of the author of ENTITYA.",
+  "warnings": []
+}}
 
 Original:
-What is the date of death of the director of film FilmA?
-Output sdp_input_sentence:
-ANSWER is the date of death of the director of ENTITYA.
+Whose sister played Susie in miracle on 34th street?
+Output:
+{{
+  "explicit_entities": [
+    {{
+      "text": "miracle on 34th street",
+      "start_char": 29,
+      "end_char": 51,
+      "semantic_type_hint": "Work",
+      "confidence": 0.95
+    }}
+  ],
+  "mask_mappings": [
+    {{
+      "placeholder": "ENTITYA",
+      "original_text": "miracle on 34th street"
+    }}
+  ],
+  "masked_question": "Whose sister played Susie in ENTITYA?",
+  "sdp_input_sentence": "The sister of ANSWER played Susie in ENTITYA.",
+  "warnings": []
+}}
 
 Original:
 Where was the person who wrote about the rioting being a dividing factor in Birmingham educated?
-Output sdp_input_sentence:
-The person who wrote about the rioting being a dividing factor in ENTITYA was educated at ANSWER.
+Output:
+{{
+  "explicit_entities": [
+    {{
+      "text": "Birmingham",
+      "start_char": 73,
+      "end_char": 83,
+      "semantic_type_hint": "Location",
+      "confidence": 0.95
+    }}
+  ],
+  "mask_mappings": [
+    {{
+      "placeholder": "ENTITYA",
+      "original_text": "Birmingham"
+    }}
+  ],
+  "masked_question": "Where was the person who wrote about the rioting being a dividing factor in ENTITYA educated?",
+  "sdp_input_sentence": "The person who wrote about the rioting being a dividing factor in ENTITYA was educated at ANSWER.",
+  "warnings": []
+}}
 
 Original:
 Who is older, Ryan Tubridy or Mauro Massironi?
-Output sdp_input_sentence:
-ANSWER is older, ENTITYA or ENTITYB.
+Output:
+{{
+  "explicit_entities": [
+    {{
+      "text": "Ryan Tubridy",
+      "start_char": 14,
+      "end_char": 27,
+      "semantic_type_hint": "Person",
+      "confidence": 0.95
+    }},
+    {{
+      "text": "Mauro Massironi",
+      "start_char": 31,
+      "end_char": 46,
+      "semantic_type_hint": "Person",
+      "confidence": 0.95
+    }}
+  ],
+  "mask_mappings": [
+    {{
+      "placeholder": "ENTITYA",
+      "original_text": "Ryan Tubridy"
+    }},
+    {{
+      "placeholder": "ENTITYB",
+      "original_text": "Mauro Massironi"
+    }}
+  ],
+  "masked_question": "Who is older, ENTITYA or ENTITYB?",
+  "sdp_input_sentence": "ANSWER is older, ENTITYA or ENTITYB.",
+  "warnings": []
+}}
 
-Return strict JSON only.
+Now process the original question.
+
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 """.strip()

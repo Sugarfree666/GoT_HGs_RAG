@@ -270,6 +270,34 @@ class HanLPSDPPreprocessResult:
 
 
 @dataclass
+class SimplifiedSDPDMEdge:
+    head: str
+    relation: str
+    dep: str
+    head_idx: int | None = None
+    dep_idx: int | None = None
+    source_relation: str | None = None
+    source_formalism: str = "sdp/dm"
+    derived: bool = False
+    rule: str | None = None
+    provenance: list[str] = field(default_factory=list)
+
+    def display(self) -> str:
+        return f"{self.head} --{self.relation}--> {self.dep}"
+
+
+@dataclass
+class SimplifiedSDPDMGraph:
+    nodes: list[str]
+    edges: list[SimplifiedSDPDMEdge]
+    removed_edges: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
 class OpenIETriple:
     subject: str
     relation: str

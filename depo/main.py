@@ -23,6 +23,7 @@ from models import (
     EntityStartNode,
     SemanticReasoningPathResult,
     SemanticNormalizationResult,
+    SimplifiedSDPDMGraph,
 )
 
 if TYPE_CHECKING:
@@ -185,11 +186,14 @@ def run_hanlp_sdp_pipeline(
     debug: bool = False,
 ) -> dict[str, Any]:
     del index, debug
+    from sdp_dm_simplifier import SDPDMSimplifier
+
     preprocess_result = preprocessor.preprocess(record.question)
     hanlp_sdp_result = parser.parse(
         preprocess_result.sdp_input_sentence,
         placeholders=[mapping.placeholder for mapping in preprocess_result.mask_mappings],
     )
+    simplified_graph = SDPDMSimplifier().simplify(hanlp_sdp_result)
     return {
         "preprocess_result": preprocess_result,
         "explicit_entities": preprocess_result.explicit_entities,
@@ -198,6 +202,7 @@ def run_hanlp_sdp_pipeline(
         "sdp_input_sentence": preprocess_result.sdp_input_sentence,
         "entity_mask_mappings": preprocess_result.mask_mappings,
         "hanlp_sdp_result": hanlp_sdp_result,
+        "simplified_sdp_dm_graph": simplified_graph,
     }
 
 
@@ -534,6 +539,7 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     preprocess_result: HanLPSDPPreprocessResult = result["preprocess_result"]
     explicit_entities: ExplicitEntityResult = preprocess_result.explicit_entities
     hanlp_result: HanLPSDPResult = result["hanlp_sdp_result"]
+    simplified_graph: SimplifiedSDPDMGraph = result["simplified_sdp_dm_graph"]
 
     separator = "=" * 60
     print(separator)
@@ -571,22 +577,6 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     print(f" Model: {hanlp_result.model or '(unknown)'}")
     print()
 
-    print("[HanLP Tokens]")
-    if hanlp_result.tokens:
-        for token_index, token in enumerate(hanlp_result.tokens, start=1):
-            print(f"{token_index} {token}")
-    else:
-        print("(none)")
-    print()
-
-    print("[Available HanLP Keys]")
-    if hanlp_result.available_keys:
-        for key in hanlp_result.available_keys:
-            print(key)
-    else:
-        print("(none)")
-    print()
-
     print("[Mask Token Check]")
     if hanlp_result.mask_token_checks:
         for placeholder, status in hanlp_result.mask_token_checks.items():
@@ -595,25 +585,76 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
         print("(none)")
     print()
 
-    print("[Readable SDP Edges]")
-    if hanlp_result.sdp_graphs:
-        for formalism in hanlp_result.sdp_graphs:
-            print(f"[SDP: {formalism}]")
-            formalism_edges = [edge for edge in hanlp_result.edges if edge.formalism == formalism]
-            if formalism_edges:
-                for edge in formalism_edges:
-                    print(edge.display())
-            else:
-                print("(no readable edges)")
+    print("[Raw SDP/DM Edges]")
+    _print_hanlp_edges_for_formalism(hanlp_result, "sdp/dm")
+    if debug:
+        _print_non_dm_hanlp_edges(hanlp_result)
+    print()
+
+    print("[4. Simplified SDP/DM Graph]")
+    print("[Kept / Derived Edges]")
+    if simplified_graph.edges:
+        for edge in simplified_graph.edges:
+            print(edge.display())
     else:
         print("(none)")
+    if debug:
+        _print_simplified_sdp_dm_debug(simplified_graph)
     combined_warnings = [*preprocess_result.warnings, *hanlp_result.warnings]
+    combined_warnings.extend(simplified_graph.warnings)
     if debug and combined_warnings:
         print()
         print("[HanLP SDP Warnings]")
         for warning in combined_warnings:
             print(f" - {warning}")
     print()
+
+
+def _print_hanlp_edges_for_formalism(hanlp_result: HanLPSDPResult, formalism: str) -> None:
+    if formalism not in hanlp_result.sdp_graphs:
+        print("(none)")
+        return
+    print(f"[SDP: {formalism}]")
+    edges = [edge for edge in hanlp_result.edges if edge.formalism == formalism]
+    if not edges:
+        print("(no readable edges)")
+        return
+    for edge in edges:
+        print(edge.display())
+
+
+def _print_non_dm_hanlp_edges(hanlp_result: HanLPSDPResult) -> None:
+    for formalism in hanlp_result.sdp_graphs:
+        if formalism == "sdp/dm":
+            continue
+        print(f"[SDP: {formalism}]")
+        edges = [edge for edge in hanlp_result.edges if edge.formalism == formalism]
+        if not edges:
+            print("(no readable edges)")
+            continue
+        for edge in edges:
+            print(edge.display())
+
+
+def _print_simplified_sdp_dm_debug(graph: SimplifiedSDPDMGraph) -> None:
+    print()
+    print("[Removed SDP/DM Edges]")
+    if graph.removed_edges:
+        for edge in graph.removed_edges:
+            print(edge)
+    else:
+        print("(none)")
+
+    derived_edges = [edge for edge in graph.edges if edge.derived]
+    if not derived_edges:
+        return
+    print()
+    print("[Derived Edge Provenance]")
+    for edge in derived_edges:
+        print(edge.display())
+        print("  from:")
+        for item in edge.provenance:
+            print(f"    {item}")
 
 
 def _print_entity_start_nodes(entity_start_nodes: list[EntityStartNode]) -> None:
