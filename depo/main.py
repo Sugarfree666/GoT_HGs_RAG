@@ -11,6 +11,7 @@ from models import (
     AtomicSubquestion,
     CoreNLPViewAnnotation,
     DeclarativeView,
+    HanLPSDPPreprocessResult,
     HanLPSDPResult,
     MaskReplacement,
     MaskSpan,
@@ -31,6 +32,7 @@ if TYPE_CHECKING:
     from entity_path_pipeline import EntityPathSemanticParser
     from question_normalizer import SemanticQuestionNormalizer
     from hanlp_sdp_parser import HanLPSDPParser
+    from hanlp_sdp_preprocessor import HanLPSDPPreprocessor
 
 
 def parse_args() -> argparse.Namespace:
@@ -82,17 +84,21 @@ def main() -> int:
 def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) -> int:
     api_key = os.getenv("OPENAI_API_KEY") or args.api_key
     base_url = os.getenv("OPENAI_BASE_URL") or args.base_url
+    if not api_key:
+        print(
+            "This HanLP SDP branch requires one LLM call for entity masking and SDP-oriented rewrite.",
+            file=sys.stderr,
+        )
+        print("Set OPENAI_API_KEY or pass --api-key.", file=sys.stderr)
+        return 2
 
     try:
         from hanlp_sdp_parser import HanLPSDPParser
-        from mask_span_extractor import ExplicitEntityExtractor
+        from hanlp_sdp_preprocessor import HanLPSDPPreprocessor
+        from llm_client import LLMClient
 
-        llm_client = None
-        if api_key:
-            from llm_client import LLMClient
-
-            llm_client = LLMClient(api_key=api_key, base_url=base_url, model="gpt-4o-mini")
-        mask_span_extractor = ExplicitEntityExtractor(llm_client)
+        llm_client = LLMClient(api_key=api_key, base_url=base_url, model="gpt-4o-mini")
+        preprocessor = HanLPSDPPreprocessor(llm_client)
         parser = HanLPSDPParser(args.hanlp_model)
 
         print("If this is the first run, HanLP may download the model automatically.")
@@ -103,7 +109,7 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
             result = run_hanlp_sdp_pipeline(
                 record=record,
                 index=index,
-                mask_span_extractor=mask_span_extractor,
+                preprocessor=preprocessor,
                 parser=parser,
                 debug=args.debug,
             )
@@ -174,34 +180,23 @@ def _run_corenlp_openie_cli(args: argparse.Namespace, records: list[QuestionReco
 def run_hanlp_sdp_pipeline(
     record: QuestionRecord,
     index: int,
-    mask_span_extractor: "MaskSpanExtractor",
+    preprocessor: "HanLPSDPPreprocessor",
     parser: "HanLPSDPParser",
     debug: bool = False,
 ) -> dict[str, Any]:
     del index, debug
-    from placeholder import selective_entity_masking
-
-    processing_question = record.question
-    explicit_entities = _coerce_explicit_entity_result(
-        mask_span_extractor.extract(processing_question),
-    )
-    mask_spans = _mask_span_result_from_explicit_entities(explicit_entities)
-    replacement = selective_entity_masking(
-        original_question=processing_question,
-        extracted_nodes=mask_spans,
-        placeholder_style="hanlp_sdp",
-    )
+    preprocess_result = preprocessor.preprocess(record.question)
     hanlp_sdp_result = parser.parse(
-        replacement.masked_question,
-        placeholders=[mapping.placeholder for mapping in replacement.mask_mappings],
+        preprocess_result.sdp_input_sentence,
+        placeholders=[mapping.placeholder for mapping in preprocess_result.mask_mappings],
     )
     return {
-        "explicit_entities": explicit_entities,
-        "explicit_entity_payload": explicit_entities.raw_payload,
-        "mask_spans": mask_spans,
-        "masked_question": replacement.masked_question,
-        "entity_mask_mappings": replacement.mask_mappings,
-        "replacement": replacement,
+        "preprocess_result": preprocess_result,
+        "explicit_entities": preprocess_result.explicit_entities,
+        "explicit_entity_payload": preprocess_result.explicit_entities.raw_payload,
+        "masked_question": preprocess_result.masked_question,
+        "sdp_input_sentence": preprocess_result.sdp_input_sentence,
+        "entity_mask_mappings": preprocess_result.mask_mappings,
         "hanlp_sdp_result": hanlp_sdp_result,
     }
 
@@ -536,8 +531,8 @@ def print_result(index: int, record: QuestionRecord, result: dict[str, Any], deb
 
 
 def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str, Any], debug: bool = False) -> None:
-    explicit_entities: ExplicitEntityResult = result.get("explicit_entities") or ExplicitEntityResult()
-    replacement: MaskReplacement = result["replacement"]
+    preprocess_result: HanLPSDPPreprocessResult = result["preprocess_result"]
+    explicit_entities: ExplicitEntityResult = preprocess_result.explicit_entities
     hanlp_result: HanLPSDPResult = result["hanlp_sdp_result"]
 
     separator = "=" * 60
@@ -562,13 +557,14 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
         print(" (none)")
     print()
 
-    print("[2. Entity Masking]")
-    if replacement.mask_mappings:
-        for mapping in replacement.mask_mappings:
+    print("[2. SDP-Oriented Rewrite]")
+    if preprocess_result.mask_mappings:
+        for mapping in preprocess_result.mask_mappings:
             print(f" - {mapping.placeholder} -> {mapping.original_text}")
     else:
         print(" (none)")
-    print(f" Masked question: {replacement.masked_question}")
+    print(f"Masked question: {preprocess_result.masked_question}")
+    print(f"SDP input sentence: {preprocess_result.sdp_input_sentence}")
     print()
 
     print("[3. HanLP SDP Parsing]")
@@ -611,10 +607,11 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
                 print("(no readable edges)")
     else:
         print("(none)")
-    if debug and hanlp_result.warnings:
+    combined_warnings = [*preprocess_result.warnings, *hanlp_result.warnings]
+    if debug and combined_warnings:
         print()
-        print("[HanLP Warnings]")
-        for warning in hanlp_result.warnings:
+        print("[HanLP SDP Warnings]")
+        for warning in combined_warnings:
             print(f" - {warning}")
     print()
 
