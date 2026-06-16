@@ -13,6 +13,7 @@ if str(DEPO_ROOT) not in sys.path:
     sys.path.insert(0, str(DEPO_ROOT))
 
 from hanlp_sdp_preprocessor import HanLPSDPPreprocessor  # noqa: E402
+from content_chain_compiler import compile_content_chains  # noqa: E402
 from main import print_hanlp_sdp_result, run_hanlp_sdp_pipeline  # noqa: E402
 from models import HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
 from sdp_dm_simplifier import SDPDMSimplifier  # noqa: E402
@@ -58,9 +59,11 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("[Raw SDP/DM Edges]", output)
         self.assertIn("[SDP: sdp/dm]", output)
         self.assertIn("older[3] --ARG1--> ANSWER[1]", output)
-        self.assertIn("[4. Simplified SDP/DM Graph]", output)
-        self.assertIn("[Kept / Derived Edges]", output)
-        self.assertIn("(none)", output)
+        self.assertIn("[4. Content Reasoning Chains]", output)
+        self.assertIn("ENTITYA -- older", output)
+        self.assertIn("ENTITYB -- older", output)
+        self.assertNotIn("[4. Simplified SDP/DM Graph]", output)
+        self.assertNotIn("[Kept / Derived Edges]", output)
         self.assertNotIn("older --ARG2--> ENTITYA", output)
         self.assertNotIn("older --ARG1--> ANSWER\n", output)
         self.assertNotIn("[SDP: sdp/pas]", output)
@@ -230,6 +233,145 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("The --BV--> sister", graph.removed_edges)
 
 
+class ContentChainCompilerTest(unittest.TestCase):
+    def test_performer_born_chain(self) -> None:
+        result = _hanlp_result(
+            "The performer of ENTITYA was born at ANSWER.",
+            ["The", "performer", "of", "ENTITYA", "was", "born", "at", "ANSWER", "."],
+            [
+                _pas("of", "prep_ARG1", "performer", 3, 2),
+                _pas("of", "prep_ARG2", "ENTITYA", 3, 4),
+                _dm("born", "verb_ARG2", "performer", 6, 2),
+                _pas("at", "prep_ARG1", "born", 7, 6),
+                _pas("at", "prep_ARG2", "ANSWER", 7, 8),
+            ],
+        )
+
+        compiled = compile_content_chains(result, ["ENTITYA"])
+
+        self.assertEqual(compiled.chains, {"ENTITYA": ["ENTITYA", "performer", "born"]})
+
+    def test_born_first_candidate_projection(self) -> None:
+        result = _hanlp_result(
+            "ANSWER was born first between ENTITYA and ENTITYB.",
+            ["ANSWER", "was", "born", "first", "between", "ENTITYA", "and", "ENTITYB", "."],
+            [
+                _pas("was", "ARG1", "ANSWER", 2, 1),
+                _pas("was", "ARG2", "born", 2, 3),
+                _dm("first", "RSTR", "born", 4, 3),
+                _pas("between", "prep_ARG1", "born", 5, 3),
+                _pas("between", "prep_ARG2", "and", 5, 7),
+                _pas("and", "coord_ARG1", "ENTITYA", 7, 6),
+                _pas("and", "coord_ARG2", "ENTITYB", 7, 8),
+            ],
+        )
+
+        compiled = compile_content_chains(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.chains["ENTITYA"], ["ENTITYA", "born"])
+        self.assertEqual(compiled.chains["ENTITYB"], ["ENTITYB", "born"])
+
+    def test_film_director_died_candidate_projection_ignores_scope_path(self) -> None:
+        result = _hanlp_result(
+            "ANSWER is the film that has the director who died first among ENTITYA and ENTITYB.",
+            [
+                "ANSWER",
+                "is",
+                "the",
+                "film",
+                "that",
+                "has",
+                "the",
+                "director",
+                "who",
+                "died",
+                "first",
+                "among",
+                "ENTITYA",
+                "and",
+                "ENTITYB",
+                ".",
+            ],
+            [
+                _pas("is", "ARG1", "ANSWER", 2, 1),
+                _pas("is", "ARG2", "film", 2, 4),
+                _pas("has", "ARG1", "film", 6, 4),
+                _pas("has", "ARG2", "director", 6, 8),
+                _dm("died", "ARG1", "director", 10, 8),
+                _dm("first", "RSTR", "died", 11, 10),
+                _pas("among", "prep_ARG1", "died", 12, 10),
+                _pas("among", "prep_ARG2", "and", 12, 14),
+                _pas("and", "coord_ARG1", "ENTITYA", 14, 13),
+                _pas("and", "coord_ARG2", "ENTITYB", 14, 15),
+            ],
+        )
+
+        compiled = compile_content_chains(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.chains["ENTITYA"], ["ENTITYA", "director", "died"])
+        self.assertEqual(compiled.chains["ENTITYB"], ["ENTITYB", "director", "died"])
+        rendered = "\n".join(" -- ".join(chain) for chain in compiled.chains.values())
+        self.assertNotIn("ENTITYA -- among -- died", rendered)
+        self.assertNotIn("ENTITYA -- died -- director", rendered)
+        self.assertNotIn("ENTITYA -- director -- died -- film -- ANSWER", rendered)
+
+    def test_candidate_projection_keeps_schema_after_answer_without_answer_type(self) -> None:
+        result = _hanlp_result(
+            "ANSWER director died first between ENTITYA and ENTITYB.",
+            ["ANSWER", "director", "died", "first", "between", "ENTITYA", "and", "ENTITYB", "."],
+            [
+                _dm("director", "ARG1", "ANSWER", 2, 1),
+                _dm("died", "ARG1", "director", 3, 2),
+                _dm("first", "RSTR", "died", 4, 3),
+                _pas("between", "prep_ARG1", "died", 5, 3),
+                _pas("between", "prep_ARG2", "and", 5, 7),
+                _pas("and", "coord_ARG1", "ENTITYA", 7, 6),
+                _pas("and", "coord_ARG2", "ENTITYB", 7, 8),
+            ],
+        )
+
+        compiled = compile_content_chains(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.chains["ENTITYA"], ["ENTITYA", "director", "died"])
+        self.assertEqual(compiled.chains["ENTITYB"], ["ENTITYB", "director", "died"])
+
+    def test_educated_place_started_instruction_inserts_modifier(self) -> None:
+        result = _hanlp_result(
+            "The place where ENTITYA was educated started military instruction on ANSWER.",
+            [
+                "The",
+                "place",
+                "where",
+                "ENTITYA",
+                "was",
+                "educated",
+                "started",
+                "military",
+                "instruction",
+                "on",
+                "ANSWER",
+                ".",
+            ],
+            [
+                _pas("was", "ARG1", "ENTITYA", 5, 4),
+                _pas("was", "ARG2", "educated", 5, 6),
+                _dm("educated", "ARG2", "place", 6, 2),
+                _dm("started", "ARG1", "place", 7, 2),
+                _dm("started", "ARG2", "instruction", 7, 9),
+                _dm("military", "adj_ARG1/RSTR", "instruction", 8, 9),
+                _pas("on", "prep_ARG1", "instruction", 10, 9),
+                _pas("on", "prep_ARG2", "ANSWER", 10, 11),
+            ],
+        )
+
+        compiled = compile_content_chains(result, ["ENTITYA"])
+
+        self.assertEqual(
+            compiled.chains,
+            {"ENTITYA": ["ENTITYA", "educated", "place", "started", "military", "instruction"]},
+        )
+
+
 class FakePreprocessLLM:
     def __init__(self) -> None:
         self.calls = 0
@@ -325,6 +467,22 @@ def _entity(question: str, text: str, semantic_type: str = "Entity") -> dict[str
 
 def _dm(head: str, relation: str, dep: str, head_idx: int, dep_idx: int) -> HanLPSDPEdge:
     return HanLPSDPEdge("sdp/dm", head_idx, head, relation, dep_idx, dep)
+
+
+def _pas(head: str, relation: str, dep: str, head_idx: int, dep_idx: int) -> HanLPSDPEdge:
+    return HanLPSDPEdge("sdp/pas", head_idx, head, relation, dep_idx, dep)
+
+
+def _hanlp_result(text: str, tokens: list[str], edges: list[HanLPSDPEdge]) -> HanLPSDPResult:
+    formalisms = sorted({edge.formalism for edge in edges})
+    return HanLPSDPResult(
+        text=text,
+        tokens=tokens,
+        available_keys=["tok", *formalisms],
+        sdp_graphs={formalism: [] for formalism in formalisms},
+        edges=edges,
+        raw={"tok": tokens},
+    )
 
 
 if __name__ == "__main__":
