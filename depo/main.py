@@ -54,6 +54,11 @@ def parse_args() -> argparse.Namespace:
         help="CoreNLP annotation timeout in milliseconds.",
     )
     parser.add_argument("--debug", action="store_true", help="Print detailed intermediate structures.")
+    parser.add_argument(
+        "--debug-dir",
+        default="debug/hanlp_sdp",
+        help="Directory for HanLP Tri-SDP debug JSON files when --debug is enabled.",
+    )
     return parser.parse_args()
 
 
@@ -96,6 +101,7 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
                 preprocessor=preprocessor,
                 parser=parser,
                 debug=args.debug,
+                debug_dir=args.debug_dir,
             )
             print_hanlp_sdp_result(index, record, result, debug=args.debug)
     except ModuleNotFoundError as exc:
@@ -158,19 +164,24 @@ def run_hanlp_sdp_pipeline(
     preprocessor: "HanLPSDPPreprocessor",
     parser: "HanLPSDPParser",
     debug: bool = False,
+    debug_dir: str | None = None,
 ) -> dict[str, Any]:
-    del index, debug
-    from content_chain_compiler import compile_content_chains
+    from tri_sdp_reasoning_compiler import compile_token_reasoning_structure
 
     preprocess_result = preprocessor.preprocess(record.question)
     hanlp_input_sentence = preprocess_result.masked_question
+    explicit_entities = [mapping.placeholder for mapping in preprocess_result.mask_mappings]
     hanlp_sdp_result = parser.parse(
         hanlp_input_sentence,
-        placeholders=[mapping.placeholder for mapping in preprocess_result.mask_mappings],
+        placeholders=explicit_entities,
     )
-    content_chains = compile_content_chains(
+    token_reasoning_structure = compile_token_reasoning_structure(
         hanlp_sdp_result,
-        explicit_entities=[mapping.placeholder for mapping in preprocess_result.mask_mappings],
+        explicit_entities=explicit_entities,
+        masked_question=preprocess_result.masked_question,
+        question_id=record.qid or f"q{index}",
+        debug=debug,
+        debug_dir=debug_dir,
     )
     return {
         "preprocess_result": preprocess_result,
@@ -181,7 +192,7 @@ def run_hanlp_sdp_pipeline(
         "hanlp_input_sentence": hanlp_input_sentence,
         "entity_mask_mappings": preprocess_result.mask_mappings,
         "hanlp_sdp_result": hanlp_sdp_result,
-        "content_chain_result": content_chains,
+        "token_reasoning_structure": token_reasoning_structure,
     }
 
 
@@ -216,7 +227,7 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     preprocess_result: HanLPSDPPreprocessResult = result["preprocess_result"]
     explicit_entities: ExplicitEntityResult = preprocess_result.explicit_entities
     hanlp_result: HanLPSDPResult = result["hanlp_sdp_result"]
-    content_chain_result = result["content_chain_result"]
+    token_reasoning_structure = result["token_reasoning_structure"]
 
     separator = "=" * 60
     print(separator)
@@ -266,13 +277,30 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
     _print_all_hanlp_sdp_edges(hanlp_result)
     print()
 
-    print("[4. Content Reasoning Chains]")
-    chain_entities = [mapping.placeholder for mapping in preprocess_result.mask_mappings]
-    if not chain_entities:
-        chain_entities = list(content_chain_result.chains)
-    for entity in chain_entities:
-        chain = content_chain_result.chains.get(entity) or [entity]
-        print(" -- ".join(chain))
+    print("[4. Token Reasoning Structure]")
+    print("[Graph]")
+    if token_reasoning_structure.edges:
+        for edge in token_reasoning_structure.edges:
+            print(f"{edge.source_text} ---- {edge.target_text}")
+    else:
+        print("(none)")
+    print()
+    print("[Paths]")
+    if token_reasoning_structure.paths:
+        for path in token_reasoning_structure.paths:
+            print(f"{path.path_id}: {' ---- '.join(path.nodes)}")
+    else:
+        print("(none)")
+    if token_reasoning_structure.answer_anchor:
+        print(f"answer_anchor: {token_reasoning_structure.answer_anchor}")
+    if token_reasoning_structure.entity_anchors:
+        print(f"entity_anchors: {', '.join(token_reasoning_structure.entity_anchors)}")
+    if token_reasoning_structure.constraints:
+        print(f"constraints: {_format_token_reasoning_constraints(token_reasoning_structure.constraints)}")
+    if token_reasoning_structure.candidate_sets:
+        print(f"candidate_sets: {_format_candidate_sets(token_reasoning_structure.candidate_sets)}")
+    if getattr(token_reasoning_structure, "debug_file", None):
+        print(f"Debug file: {token_reasoning_structure.debug_file}")
     combined_warnings = [*preprocess_result.warnings, *hanlp_result.warnings]
     if debug and combined_warnings:
         print()
@@ -354,6 +382,23 @@ def _print_all_hanlp_sdp_edges(hanlp_result: HanLPSDPResult) -> None:
 def _hanlp_sdp_formalism_sort_key(formalism: str) -> tuple[int, str]:
     order = {"sdp/dm": 0, "sdp/pas": 1, "sdp/psd": 2}
     return (order.get(formalism, 100), formalism)
+
+
+def _format_token_reasoning_constraints(constraints: list[dict[str, Any]]) -> str:
+    rendered: list[str] = []
+    for constraint in constraints:
+        text = str(constraint.get("text") or "")
+        target = str(constraint.get("target") or "")
+        constraint_type = str(constraint.get("type") or "")
+        if target:
+            rendered.append(f"{constraint_type}:{text}->{target}")
+        else:
+            rendered.append(f"{constraint_type}:{text}")
+    return "; ".join(rendered)
+
+
+def _format_candidate_sets(candidate_sets: list[list[str]]) -> str:
+    return "; ".join(", ".join(candidate_set) for candidate_set in candidate_sets)
 
 
 def _print_dependency_parse_edges(edges: list[Any]) -> None:
