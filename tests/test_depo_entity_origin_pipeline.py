@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import contextlib
-import io
 import json
 import sys
 import unittest
@@ -20,8 +18,6 @@ from entity_path_projector import (  # noqa: E402
     extract_entity_start_nodes,
     prune_terminal_glue_paths,
 )
-from graph_builder import GraphBuilder  # noqa: E402
-from main import _print_semantic_reasoning_paths, run_pipeline  # noqa: E402
 from models import (  # noqa: E402
     CoreNLPToken,
     DependencyEdge,
@@ -32,15 +28,10 @@ from models import (  # noqa: E402
     ExplicitEntityResult,
     MaskMapping,
     MaskReplacement,
-    MaskSpan,
     MaskSpanResult,
     AtomicEvidence,
     QuestionRecord,
     RestoredGraphNodeCandidate,
-    SemanticReasoningEdge,
-    SemanticReasoningNode,
-    SemanticReasoningPath,
-    SemanticReasoningPathResult,
     SemanticNormalizationResult,
 )
 from path_projector import build_undirected_dependency_graph  # noqa: E402
@@ -181,103 +172,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
         self.assertIn("missing edge b1_e2", prompt)
         self.assertIn("developer company", prompt)
         self.assertNotIn("AlphaGo -> developed -> company", prompt)
-
-    def test_no_candidate_node_llm_calls(self) -> None:
-        question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
-        dependency_parse = _dependency_parse(
-            ["GameA", "developed", "company", "CEO", "graduated", "university"],
-            [(1, 2, "dep"), (2, 3, "obj"), (3, 4, "nmod:of"), (4, 5, "dep"), (5, 6, "obl:from")],
-            pos_by_word={"GameA": "NNP"},
-        )
-        llm = NoCandidatePromptLLM()
-        result = run_pipeline(
-            record=QuestionRecord(question=question),
-            index=1,
-            mask_span_extractor=StaticMaskSpanExtractor(
-                [
-                    MaskSpan(
-                        text="AlphaGo",
-                        start_char=question.index("AlphaGo"),
-                        end_char=question.index("AlphaGo") + len("AlphaGo"),
-                        kind_hint="entity",
-                        semantic_type_hint="Game",
-                    )
-                ]
-            ),
-            parser=StaticParser(dependency_parse),
-            graph_builder=GraphBuilder(),
-            question_normalizer=IdentityNormalizer(),
-            path_semantic_parser=EntityPathSemanticParser(llm),
-            debug=False,
-        )
-
-        self.assertEqual([entity.text for entity in result["entity_start_nodes"]], ["AlphaGo"])
-        self.assertTrue(result["atomic_evidences"])
-        self.assertIn("grounded_atomic_dag_payload", result)
-        self.assertNotIn("candidate_asts", result)
-        self.assertNotIn("semantic_ast", result)
-        self.assertEqual(
-            [node.question for node in result["subquestion_dag"].nodes],
-            [
-                "Which company developed AlphaGo?",
-                "Who is the CEO of the company that developed AlphaGo?",
-                "Which university did the CEO of the company that developed AlphaGo graduate from?",
-            ],
-        )
-        self.assertNotIn("problem_frame", result)
-        self.assertNotIn("candidate_nodes", result)
-
-    def test_run_pipeline_uses_grounded_atomic_dag(self) -> None:
-        question = "Which university did the CEO of the company that developed AlphaGo graduate from?"
-        dependency_parse = _dependency_parse(
-            ["GameA", "developed", "company", "CEO", "graduated", "university"],
-            [(1, 2, "dep"), (2, 3, "obj"), (3, 4, "nmod:of"), (4, 5, "dep"), (5, 6, "obl:from")],
-            pos_by_word={"GameA": "NNP"},
-        )
-        llm = NoCandidatePromptLLM()
-
-        result = run_pipeline(
-            record=QuestionRecord(question=question),
-            index=1,
-            mask_span_extractor=StaticMaskSpanExtractor(
-                [
-                    MaskSpan(
-                        text="AlphaGo",
-                        start_char=question.index("AlphaGo"),
-                        end_char=question.index("AlphaGo") + len("AlphaGo"),
-                        kind_hint="entity",
-                        semantic_type_hint="Game",
-                    )
-                ]
-            ),
-            parser=StaticParser(dependency_parse),
-            graph_builder=GraphBuilder(),
-            question_normalizer=IdentityNormalizer(),
-            path_semantic_parser=EntityPathSemanticParser(llm),
-            debug=False,
-        )
-
-        self.assertNotIn("candidate_asts", result)
-        self.assertNotIn("semantic_ast", result)
-        self.assertIn("grounded_atomic_dag_payload", result)
-        self.assertIn("semantic_reasoning_paths", result)
-        self.assertIsNotNone(result["subquestion_dag"])
-        self.assertEqual(
-            [node.question for node in result["subquestion_dag"].nodes],
-            [
-                "Which company developed AlphaGo?",
-                "Who is the CEO of the company that developed AlphaGo?",
-                "Which university did the CEO of the company that developed AlphaGo graduate from?",
-            ],
-        )
-        self.assertEqual(result["subquestion_dag"].nodes[0].metadata["support"][0]["semantic_path_id"], "b1")
-        self.assertEqual(result["subquestion_dag"].nodes[0].metadata["support"][0]["semantic_edge_id"], "b1_e1")
-        self.assertEqual(result["subquestion_dag"].nodes[0].metadata["source_semantic_edge_id"], "b1_e1")
-
-        calls = llm.system_prompts
-        self.assertIn(SEMANTIC_REASONING_PATH_SYSTEM, calls)
-        self.assertIn(ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM, calls)
-        self.assertLess(calls.index(SEMANTIC_REASONING_PATH_SYSTEM), calls.index(ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM))
 
     def test_semantic_edge_coverage_rejects_missing_and_unknown_edges(self) -> None:
         semantic_payload = _semantic_two_edge_payload()
@@ -528,53 +422,6 @@ class EntityOriginPipelineTest(unittest.TestCase):
 
         self.assertEqual([edge.relation for edge in result.paths[0].edges], ["performer of song", "nationality of person"])
 
-    def test_step9_console_prints_supported_atomic_evidences(self) -> None:
-        result = SemanticReasoningPathResult(
-            paths=[
-                SemanticReasoningPath(
-                    branch_id="b1",
-                    entity_id="e1",
-                    source_path_id="e1_p1",
-                    nodes=[
-                        SemanticReasoningNode(node_id="b1_n1", label="Lothair II", kind="entity"),
-                        SemanticReasoningNode(node_id="b1_n2", label="mother", kind="semantic_object"),
-                    ],
-                    edges=[
-                        SemanticReasoningEdge(
-                            edge_id="b1_e1",
-                            source="b1_n1",
-                            target="b1_n2",
-                            relation="mother of person",
-                            support=[
-                                {
-                                    "atom_ids": ["atom_1"],
-                                    "supported_by": ["atom_1"],
-                                }
-                            ],
-                        )
-                    ],
-                )
-            ]
-        )
-        output = io.StringIO()
-
-        with contextlib.redirect_stdout(output):
-            _print_semantic_reasoning_paths(
-                result,
-                atomic_evidences=[
-                    {
-                        "id": "atom_1",
-                        "kind": "path_edge",
-                        "text": "Lothair II 's ---- mother",
-                    }
-                ],
-            )
-
-        text = output.getvalue()
-        self.assertIn("b1_e1: Lothair II --mother of person--> mother", text)
-        self.assertIn("supported_by:", text)
-        self.assertIn("atom_1: Lothair II 's ---- mother", text)
-
     def test_semantic_reasoning_path_for_produced_first(self) -> None:
         evidence = _walt_disney_atomic_evidence_pool()
 
@@ -777,42 +624,6 @@ class EvidenceGroundedSemanticLLM:
         if system_prompt != SEMANTIC_REASONING_PATH_SYSTEM:
             raise AssertionError(f"Unexpected prompt: {system_prompt}")
         return json.loads(json.dumps(self.payload))
-
-
-class NoCandidatePromptLLM:
-    def __init__(self) -> None:
-        self.system_prompts: list[str] = []
-
-    def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
-        self.system_prompts.append(system_prompt)
-        if system_prompt == SEMANTIC_REASONING_PATH_SYSTEM:
-            return _semantic_alphago_payload()
-        if system_prompt == ATOMIC_DAG_FROM_SEMANTIC_REASONING_PATH_SYSTEM:
-            return _atomic_alphago_from_semantic_payload()
-        return {"question": "test question?"}
-
-
-class StaticMaskSpanExtractor:
-    def __init__(self, mask_spans: list[MaskSpan] | None = None) -> None:
-        self.mask_spans = mask_spans or []
-
-    def extract(self, question: str) -> MaskSpanResult:
-        del question
-        return MaskSpanResult(mask_spans=list(self.mask_spans))
-
-
-class StaticParser:
-    def __init__(self, dependency_parse: DependencyParse) -> None:
-        self.dependency_parse = dependency_parse
-
-    def parse(self, question: str) -> DependencyParse:
-        del question
-        return self.dependency_parse
-
-
-class IdentityNormalizer:
-    def normalize(self, question: str) -> SemanticNormalizationResult:
-        return SemanticNormalizationResult(original_question=question, normalized_question=question, changed=False)
 
 
 def _entity_path(path_id: str, entity_id: str, nodes: list[str]) -> EntityOriginPath:

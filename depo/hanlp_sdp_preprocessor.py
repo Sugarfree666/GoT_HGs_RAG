@@ -28,17 +28,11 @@ class HanLPSDPPreprocessor:
         if raw_masked_question and raw_masked_question != masked_question:
             warnings.append("Rebuilt masked_question from validated entity spans and canonical ENTITY* placeholders.")
 
-        sdp_input_sentence = _canonicalize_sdp_input_sentence(
-            str(raw_payload.get("sdp_input_sentence") or "").strip(),
-            placeholder_rewrites,
-            explicit_entities.entities,
-            warnings,
-        )
+        sdp_input_sentence = masked_question
         mask_mappings = _mask_mappings_from_entities(masked_question, explicit_entities.entities, placeholder_rewrites)
         _validate_preprocess_result(
             question=question,
             masked_question=masked_question,
-            sdp_input_sentence=sdp_input_sentence,
             mask_mappings=mask_mappings,
             warnings=warnings,
         )
@@ -139,27 +133,6 @@ def _masked_question_from_entities(
     return masked
 
 
-def _canonicalize_sdp_input_sentence(
-    sentence: str,
-    placeholder_rewrites: dict[str, str],
-    entities: list[ExplicitEntity],
-    warnings: list[str],
-) -> str:
-    if not sentence:
-        raise ValueError("HanLP SDP preprocess payload sdp_input_sentence must be non-empty.")
-    result = sentence.strip()
-    for old, new in sorted(placeholder_rewrites.items(), key=lambda item: len(item[0]), reverse=True):
-        if old and old != new:
-            result = re.sub(rf"\b{re.escape(old)}\b", new, result)
-    for index, entity in enumerate(sorted(entities, key=lambda item: item.start_char)):
-        placeholder = f"ENTITY{_letter_suffix(index)}"
-        result = re.sub(re.escape(entity.text), placeholder, result)
-    if not result.endswith("."):
-        result = result.rstrip("?!;:") + "."
-        warnings.append("Added final period to sdp_input_sentence.")
-    return result
-
-
 def _mask_mappings_from_entities(
     masked_question: str,
     entities: list[ExplicitEntity],
@@ -185,21 +158,12 @@ def _mask_mappings_from_entities(
 def _validate_preprocess_result(
     question: str,
     masked_question: str,
-    sdp_input_sentence: str,
     mask_mappings: list[MaskMapping],
     warnings: list[str],
 ) -> None:
-    if not sdp_input_sentence.strip():
-        raise ValueError("sdp_input_sentence is empty.")
-    if not sdp_input_sentence.endswith("."):
-        raise ValueError("sdp_input_sentence must end with a period.")
-    if "ANSWER" not in sdp_input_sentence.split() and not re.search(r"\bANSWER\b", sdp_input_sentence):
-        raise ValueError("sdp_input_sentence must contain ANSWER.")
     for mapping in mask_mappings:
         if mapping.placeholder not in masked_question:
             raise ValueError(f"masked_question is missing placeholder {mapping.placeholder}.")
-        if mapping.placeholder not in sdp_input_sentence:
-            raise ValueError(f"sdp_input_sentence is missing placeholder {mapping.placeholder}.")
         if len(mapping.original_text.split()) > 1 and mapping.original_text in masked_question:
             raise ValueError(f"masked_question still contains unmasked multi-word entity {mapping.original_text!r}.")
         if mapping.original_text not in question:

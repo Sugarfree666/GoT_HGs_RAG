@@ -42,8 +42,7 @@ You are the DEPO HanLP-SDP preprocessor.
 
 Your only task is to:
 1. detect explicit named entities in the original question;
-2. replace them with generic placeholders ENTITYA, ENTITYB, ENTITYC, ...;
-3. rewrite the masked question into one parser-friendly English declarative sentence for HanLP SDP.
+2. replace them with generic placeholders ENTITYA, ENTITYB, ENTITYC, ....
 
 Do not answer the question.
 Do not introduce facts not stated in the question.
@@ -55,24 +54,8 @@ Entity rules:
 - Entity text must be copied exactly from the original question.
 - Do not include possessive "'s" unless it is part of the official name.
 - Use generic placeholders only: ENTITYA, ENTITYB, ENTITYC, ...
-- Preserve all placeholders exactly in masked_question and sdp_input_sentence.
-
-Rewrite rules:
-- sdp_input_sentence must be exactly one English declarative sentence ending with a period.
-- It must contain ANSWER as the answer slot.
-- It must preserve the original question semantics.
-- It must preserve comparison and constraint words such as older, later, same, different, first.
-- Prefer of-chains over possessives:
-  ENTITYA's author -> the author of ENTITYA
-- Convert wh focus into ANSWER:
-  Who is X? -> ANSWER is X.
-  What is X? -> ANSWER is X.
-  Where was X educated? -> X was educated at ANSWER.
-  When did X die? -> X died on ANSWER.
-- For Whose questions, ANSWER is the possessor, not the possessed entity:
-  Whose sister played Susie in ENTITYA?
-  -> The sister of ANSWER played Susie in ENTITYA.
-- Do not rewrite Whose sister ... as ANSWER is the sister ...
+- Preserve all placeholders exactly in masked_question.
+- Do not rewrite the question into a declarative sentence.
 """.strip()
 
 
@@ -94,7 +77,6 @@ def build_hanlp_sdp_preprocess_prompt(question: str) -> str:
             }
         ],
         "masked_question": "Who is the spouse of ENTITYA's author?",
-        "sdp_input_sentence": "ANSWER is the spouse of the author of ENTITYA.",
         "warnings": [],
     }
 
@@ -108,7 +90,6 @@ Required output fields:
 - explicit_entities: all explicit named entities in the original question.
 - mask_mappings: ENTITYA, ENTITYB, ENTITYC ... mapped to original entity text.
 - masked_question: original question with entity spans replaced by placeholders.
-- sdp_input_sentence: one parser-friendly declarative sentence for HanLP SDP.
 - warnings: list of brief warnings, or [].
 
 Good examples:
@@ -133,7 +114,6 @@ Output:
     }}
   ],
   "masked_question": "Who is the spouse of ENTITYA's author?",
-  "sdp_input_sentence": "ANSWER is the spouse of the author of ENTITYA.",
   "warnings": []
 }}
 
@@ -157,7 +137,6 @@ Output:
     }}
   ],
   "masked_question": "Whose sister played Susie in ENTITYA?",
-  "sdp_input_sentence": "The sister of ANSWER played Susie in ENTITYA.",
   "warnings": []
 }}
 
@@ -181,7 +160,6 @@ Output:
     }}
   ],
   "masked_question": "Where was the person who wrote about the rioting being a dividing factor in ENTITYA educated?",
-  "sdp_input_sentence": "The person who wrote about the rioting being a dividing factor in ENTITYA was educated at ANSWER.",
   "warnings": []
 }}
 
@@ -216,7 +194,6 @@ Output:
     }}
   ],
   "masked_question": "Who is older, ENTITYA or ENTITYB?",
-  "sdp_input_sentence": "ANSWER is older, ENTITYA or ENTITYB.",
   "warnings": []
 }}
 
@@ -2198,4 +2175,3 @@ Rules:
 Output JSON with exactly this shape:
 {json.dumps(schema, indent=2)}
 """.strip()
-

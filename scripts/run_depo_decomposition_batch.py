@@ -22,8 +22,7 @@ if str(PROJECT_ROOT) not in sys.path:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Run DEPO decomposition over questions/*.json and save per-question "
-            "decomposition artifacts for later LLM/manual analysis."
+            "Run DEPO parser preprocessing and CoreNLP dependency parsing over questions/*.json."
         )
     )
     parser.add_argument("--dataset", help="Dataset subdirectory under questions/, e.g. 2wikimultihopqa.")
@@ -92,19 +91,13 @@ def main() -> int:
 
     try:
         from corenlp_parser import CoreNLPParser
-        from entity_path_pipeline import EntityPathSemanticParser
-        from graph_builder import GraphBuilder
+        from hanlp_sdp_preprocessor import HanLPSDPPreprocessor
         from llm_client import LLMClient
-        from main import run_pipeline
-        from mask_span_extractor import ExplicitEntityExtractor
+        from main import run_corenlp_dependency_pipeline
         from models import QuestionRecord
-        from question_normalizer import SemanticQuestionNormalizer
 
         llm_client = LLMClient(api_key=api_key, base_url=base_url, model=args.model)
-        question_normalizer = SemanticQuestionNormalizer(llm_client)
-        mask_span_extractor = ExplicitEntityExtractor(llm_client)
-        graph_builder = GraphBuilder()
-        path_semantic_parser = EntityPathSemanticParser(llm_client)
+        preprocessor = HanLPSDPPreprocessor(llm_client)
 
         with CoreNLPParser(
             args.corenlp_url,
@@ -151,14 +144,11 @@ def main() -> int:
                         question_dir.mkdir(parents=True, exist_ok=True)
                         print(f"[run] {dataset} #{item['index']} {record.question}")
                         try:
-                            result = run_pipeline(
+                            result = run_corenlp_dependency_pipeline(
                                 record=record,
                                 index=item["index"],
-                                mask_span_extractor=mask_span_extractor,
+                                preprocessor=preprocessor,
                                 parser=parser,
-                                graph_builder=graph_builder,
-                                question_normalizer=question_normalizer,
-                                path_semantic_parser=path_semantic_parser,
                                 debug=args.debug,
                             )
                             payload = build_decomposition_payload(
@@ -211,13 +201,11 @@ def build_decomposition_payload(
     result: dict[str, Any],
     debug: bool,
 ) -> dict[str, Any]:
+    del debug
+    preprocess_result = result["preprocess_result"]
     dependency_parse = result["dependency_parse"]
-    dependency_graph = result["dependency_graph"]
-    raw_dependency_graph = result.get("raw_dependency_graph") or dependency_graph
-    subquestion_dag = result.get("subquestion_dag")
-    subquestions = result.get("subquestions", [])
 
-    payload: dict[str, Any] = {
+    return {
         "status": "ok",
         "dataset": dataset,
         "questions_file": str(questions_file),
@@ -227,39 +215,20 @@ def build_decomposition_payload(
         "raw_question_item": item.get("raw"),
         "gold_answer": item.get("answer"),
         "stages": {
-            "1_semantic_normalized_question": _dataclass_to_jsonable(result["semantic_normalization"]),
-            "2_explicit_entities": _dataclass_to_jsonable(result.get("explicit_entities")),
-            "2_mask_spans": _dataclass_to_jsonable(result["mask_spans"]),
-            "3_entity_masking": {
-                "masked_question": result["replacement"].masked_question,
-                "mask_mappings": [_dataclass_to_jsonable(mapping) for mapping in result.get("entity_mask_mappings", [])],
+            "1_explicit_entities": _dataclass_to_jsonable(preprocess_result.explicit_entities),
+            "2_entity_masking": {
+                "masked_question": preprocess_result.masked_question,
+                "corenlp_input_sentence": result.get("corenlp_input_sentence") or preprocess_result.masked_question,
+                "mask_mappings": [_dataclass_to_jsonable(mapping) for mapping in preprocess_result.mask_mappings],
+                "warnings": list(preprocess_result.warnings),
             },
-            "3_selective_masked_question": result["replacement"].masked_question,
-            "3_5_relation_carrier_declarative_views": _dataclass_to_jsonable(result.get("relation_carrier_views")),
-            "4_corenlp_dependency_parse": {
+            "3_corenlp_dependency_parse": {
                 "tokens": [_dataclass_to_jsonable(token) for token in dependency_parse.tokens],
                 "edges": [_dataclass_to_jsonable(edge) for edge in dependency_parse.edges],
                 "edge_display": [edge.display() for edge in dependency_parse.edges],
             },
-            "4_5_corenlp_openie_view_annotations": _dataclass_to_jsonable(result.get("corenlp_view_annotations") or []),
-            "5_undirected_dependency_graph": _graph_payload(raw_dependency_graph),
-            "5_1_collapsed_dependency_graph": _graph_payload(dependency_graph),
-            "5_2_dependency_graph_collapse_stats": _dataclass_to_jsonable(result.get("dependency_collapse_stats") or {}),
-            "6_entity_start_nodes": [_dataclass_to_jsonable(entity) for entity in result["entity_start_nodes"]],
-            "9a_atomic_evidences": _dataclass_to_jsonable(result.get("atomic_evidences") or result.get("evidence_atoms") or []),
-            "9a_atomic_evidence_pool": _dataclass_to_jsonable(result.get("atomic_evidences") or result.get("evidence_atoms") or []),
-            "9_step9_llm_input_contains_raw_dependency_paths": bool(result.get("step9_llm_input_contains_raw_dependency_paths")),
-            "9b_semantic_reasoning_paths": _dataclass_to_jsonable(result.get("semantic_reasoning_paths")),
-            "10_grounded_atomic_dag_generation": _dataclass_to_jsonable(result.get("grounded_atomic_dag_payload") or {}),
-            "10_atomic_subquestion_dag": _dataclass_to_jsonable(subquestion_dag) if subquestion_dag else None,
-            "10_subquestions": [_dataclass_to_jsonable(item) for item in subquestions],
         },
     }
-    if debug:
-        payload["debug_payloads"] = {
-            "grounded_atomic_dag_payload": result.get("grounded_atomic_dag_payload"),
-        }
-    return payload
 
 
 def build_error_payload(
@@ -285,7 +254,7 @@ def build_error_payload(
 def build_markdown_report(payload: dict[str, Any]) -> str:
     stages = payload["stages"]
     lines: list[str] = []
-    lines.append(f"# DEPO Decomposition #{payload['index']}")
+    lines.append(f"# DEPO CoreNLP Dependency Parse #{payload['index']}")
     lines.append("")
     lines.append(f"- Dataset: `{payload['dataset']}`")
     if payload.get("qid"):
@@ -295,13 +264,8 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append(f"- Gold answer: {payload['gold_answer']}")
     lines.append("")
 
-    normalized = stages["1_semantic_normalized_question"].get("normalized_question", payload["question"])
-    lines.append("## 1. Semantic-Normalized Question")
-    lines.append(normalized)
-    lines.append("")
-
     lines.append("## 2. Explicit Entities")
-    explicit_entities = (stages.get("2_explicit_entities") or {}).get("entities", [])
+    explicit_entities = (stages.get("1_explicit_entities") or {}).get("entities", [])
     if explicit_entities:
         for entity in explicit_entities:
             lines.append(
@@ -312,177 +276,23 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         lines.append("(none)")
     lines.append("")
 
-    lines.append("## 3. Entity Masking")
-    entity_masking = stages.get("3_entity_masking") or {}
-    for mapping in entity_masking.get("mask_mappings", []):
+    lines.append("## 2. Entity Masking")
+    masking = stages.get("2_entity_masking") or {}
+    for mapping in masking.get("mask_mappings", []):
         lines.append(f"- {mapping.get('placeholder')} -> {mapping.get('original_text')}")
-    if not entity_masking.get("mask_mappings"):
+    if not masking.get("mask_mappings"):
         lines.append("(none)")
     lines.append("")
-    lines.append(str(entity_masking.get("masked_question", stages.get("3_selective_masked_question", ""))))
-    lines.append("")
-
-    relation_carrier = stages.get("3_5_relation_carrier_declarative_views") or {}
-    lines.append("## 3.5 Relation-Carrier Declarative Views")
-    for view in relation_carrier.get("declarative_views", []) if isinstance(relation_carrier, dict) else []:
-        lines.append(f"- {view.get('id')}: {view.get('sentence')}")
-    if not isinstance(relation_carrier, dict) or not relation_carrier.get("declarative_views"):
-        lines.append("(none)")
-    operator_intent = relation_carrier.get("operator_intent") if isinstance(relation_carrier, dict) else {}
-    lines.append(f"- operator_intent: {operator_intent or {}}")
-    lines.append("")
-
-    lines.append("## 4. CoreNLP Dependency Parse")
-    for edge in stages["4_corenlp_dependency_parse"]["edge_display"]:
-        lines.append(f"- {edge}")
-    if not stages["4_corenlp_dependency_parse"]["edge_display"]:
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("## 4.5 CoreNLP/OpenIE View Annotations")
-    for annotation in stages.get("4_5_corenlp_openie_view_annotations", []):
-        lines.append(
-            f"- {annotation.get('view_id')}: tokens={len(annotation.get('tokens', []))} "
-            f"deps={len(annotation.get('edges', []))} openie={len(annotation.get('openie_triples', []))}"
-        )
-        for warning in annotation.get("warnings", []) or []:
-            lines.append(f"  - warning: {warning}")
-    if not stages.get("4_5_corenlp_openie_view_annotations"):
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("## 5. Undirected Dependency Graph")
-    for edge in stages["5_undirected_dependency_graph"]["edges"]:
-        relation = "/".join(edge.get("relations", [])) or "related"
-        lines.append(f"- {edge.get('source_text')}[{edge.get('source')}] --{relation}-- {edge.get('target_text')}[{edge.get('target')}]")
-    if not stages["5_undirected_dependency_graph"]["edges"]:
-        lines.append("(none)")
-    lines.append("")
-
-    collapsed_stage = stages.get("5_1_collapsed_dependency_graph") or {"edges": []}
-    lines.append("## 5.1 Collapsed Dependency Graph")
-    for edge in collapsed_stage.get("edges", []):
-        relation = "/".join(edge.get("relations", [])) or "related"
-        lines.append(f"- {edge.get('source_text')}[{edge.get('source')}] --{relation}-- {edge.get('target_text')}[{edge.get('target')}]")
-    if not collapsed_stage.get("edges"):
-        lines.append("(none)")
-    lines.append("")
-
-    collapse_stats = stages.get("5_2_dependency_graph_collapse_stats") or {}
-    lines.append("## 5.2 Dependency Graph Collapse Stats")
-    lines.append(f"- Enabled: {bool(collapse_stats.get('enabled'))}")
-    lines.append(f"- Relations: {collapse_stats.get('relations') or []}")
-    lines.append(
-        f"- Counts: raw={collapse_stats.get('raw_node_count')} nodes/{collapse_stats.get('raw_edge_count')} edges; "
-        f"collapsed={collapse_stats.get('collapsed_node_count')} nodes/{collapse_stats.get('collapsed_edge_count')} edges"
-    )
-    decisions = collapse_stats.get("decisions") or []
-    for decision in decisions:
-        if isinstance(decision, dict):
-            lines.append(
-                f"- collapse {decision.get('relation')}: "
-                f"{decision.get('child_text')} -> {decision.get('head_text_before')} => {decision.get('head_text_after')}"
-            )
-        else:
-            lines.append(f"- {decision}")
-    if not decisions:
-        lines.append("- Decisions: none")
-    lines.append("")
-
-    lines.append("## 6. Entity Start Nodes from Explicit Entities")
-    for entity in stages["6_entity_start_nodes"]:
-        lines.append(f"- {entity.get('entity_id')}: {entity.get('text')} graph_node_ids={entity.get('graph_node_ids')}")
-    if not stages["6_entity_start_nodes"]:
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("## 7. Atomic Evidence Pool")
-    atomic_evidences = stages.get("9a_atomic_evidence_pool") or stages.get("9a_atomic_evidences") or []
-    corenlp_count = sum(1 for atom in atomic_evidences if isinstance(atom, dict) and atom.get("source") == "corenlp")
-    openie_count = sum(1 for atom in atomic_evidences if isinstance(atom, dict) and atom.get("source") == "openie")
-    lines.append(f"- CoreNLP structural evidence count: {corenlp_count}")
-    lines.append(f"- OpenIE relational evidence count: {openie_count}")
-    for atom in atomic_evidences:
-        lines.append(f"- {atom.get('id')} [{atom.get('type') or atom.get('kind')}]: {atom.get('text')}")
-    if not atomic_evidences:
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("## 8. Semantic Reasoning Path Induction")
-    lines.append("Step 9 LLM input:")
-    lines.append(f"- Original question: {payload['question']}")
-    lines.append("- Atomic evidences: see 9A")
-    lines.append("")
-    atomic_evidences = stages.get("9a_atomic_evidences") or stages.get("9a_evidence_atoms") or []
-    lines.append("### Atomic Evidences")
-    lines.append(
-        f"- Step 9 LLM input contains raw dependency paths: "
-        f"{bool(stages.get('9_step9_llm_input_contains_raw_dependency_paths'))}"
-    )
-    for atom in atomic_evidences:
-        lines.append(
-            f"- {atom.get('id')} [{atom.get('type') or atom.get('kind')}]: {atom.get('text')}"
-        )
-    if not atomic_evidences:
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("### Semantic Reasoning Paths")
-    semantic_payload = stages.get("9b_semantic_reasoning_paths") or {}
-    for path in semantic_payload.get("paths", []) if isinstance(semantic_payload, dict) else []:
-        lines.append(f"- {path.get('branch_id')} entity={path.get('entity_id')}")
-        node_labels = {
-            node.get("node_id"): node.get("label")
-            for node in path.get("nodes", [])
-            if isinstance(node, dict)
-        }
-        for edge in path.get("edges", []):
-            supported_by = []
-            for support in edge.get("support", []) or []:
-                if isinstance(support, dict):
-                    supported_by.extend(support.get("atom_ids") or support.get("supported_by") or [])
-            lines.append(
-                f"  - {node_labels.get(edge.get('source'), edge.get('source'))} "
-                f"--{edge.get('relation')}--> {node_labels.get(edge.get('target'), edge.get('target'))} "
-                f"supported_by={supported_by}"
-            )
-    if not isinstance(semantic_payload, dict) or not semantic_payload.get("paths"):
-        lines.append("(none)")
-    lines.append("")
-
-    lines.append("## 10. Grounded Atomic DAG Generation")
-    lines.append("Output:")
-    grounded_payload = stages.get("10_grounded_atomic_dag_generation") or {}
-    if grounded_payload.get("reason"):
-        lines.append(f"- reason: {grounded_payload.get('reason')}")
-    for node in grounded_payload.get("nodes", []):
-        support = node.get("support") or []
-        support_ids = [
-            item.get("path_id")
-            for item in support
-            if isinstance(item, dict) and item.get("path_id")
-        ]
-        lines.append(
-            f"- {node.get('node_id')}: {node.get('question')} "
-            f"depends_on={node.get('dependencies') or []} support={support_ids}"
-        )
-    if not grounded_payload.get("nodes"):
-        lines.append("(none)")
-    warnings = grounded_payload.get("normalization_warnings") or []
-    for warning in warnings:
+    lines.append(f"Masked question: {masking.get('masked_question', '')}")
+    lines.append(f"CoreNLP input sentence: {masking.get('corenlp_input_sentence', masking.get('masked_question', ''))}")
+    for warning in masking.get("warnings", []) or []:
         lines.append(f"- warning: {warning}")
     lines.append("")
 
-    lines.append("## 10. Atomic Subquestion DAG")
-    dag = stages["10_atomic_subquestion_dag"] or {}
-    for node in dag.get("nodes", []):
-        metadata = node.get("metadata", {})
-        operator = f" operator={metadata.get('operator')}" if metadata.get("operator") else ""
-        lines.append(f"- {node.get('node_id')}{operator}: {node.get('question')}")
-        dependencies = node.get("dependencies") or []
-        if dependencies:
-            lines.append(f"  Depends on: {', '.join(dependencies)}")
-    if not dag.get("nodes"):
+    lines.append("## 3. CoreNLP Dependency Parse")
+    for edge in stages["3_corenlp_dependency_parse"]["edge_display"]:
+        lines.append(f"- {edge}")
+    if not stages["3_corenlp_dependency_parse"]["edge_display"]:
         lines.append("(none)")
     lines.append("")
     return "\n".join(lines)
@@ -576,26 +386,6 @@ def _slug(value: str, max_len: int = 80) -> str:
     return (slug[:max_len].strip("-") or "question")
 
 
-def _graph_payload(graph: Any) -> dict[str, Any]:
-    if graph is None:
-        return {"nodes": [], "edges": []}
-    nodes = []
-    for node_id, attrs in graph.nodes(data=True):
-        nodes.append({"id": str(node_id), **_dataclass_to_jsonable(dict(attrs))})
-    edges = []
-    for source, target, attrs in graph.edges(data=True):
-        edges.append(
-            {
-                "source": str(source),
-                "target": str(target),
-                "source_text": str(graph.nodes[source].get("text") or graph.nodes[source].get("word") or source),
-                "target_text": str(graph.nodes[target].get("text") or graph.nodes[target].get("word") or target),
-                **_dataclass_to_jsonable(dict(attrs)),
-            }
-        )
-    return {"nodes": nodes, "edges": edges}
-
-
 def _dataclass_to_jsonable(value: Any) -> Any:
     if value is None:
         return None
@@ -618,7 +408,7 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
 
 def _manifest_item(payload: dict[str, Any], question_dir: Path) -> dict[str, Any]:
     stages = payload["stages"]
-    dag = stages.get("10_atomic_subquestion_dag") or {}
+    dependency_parse = stages.get("3_corenlp_dependency_parse") or {}
     return {
         "dataset": payload["dataset"],
         "index": payload["index"],
@@ -626,8 +416,7 @@ def _manifest_item(payload: dict[str, Any], question_dir: Path) -> dict[str, Any
         "question": payload["question"],
         "gold_answer": payload.get("gold_answer"),
         "status": "ok",
-        "atomic_evidence_count": len(stages.get("9a_atomic_evidence_pool", [])),
-        "atomic_question_count": len(dag.get("nodes", [])),
+        "dependency_edge_count": len(dependency_parse.get("edges", [])),
         "output_dir": str(question_dir),
     }
 

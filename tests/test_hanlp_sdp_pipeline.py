@@ -14,13 +14,18 @@ if str(DEPO_ROOT) not in sys.path:
 
 from hanlp_sdp_preprocessor import HanLPSDPPreprocessor  # noqa: E402
 from content_chain_compiler import compile_content_chains  # noqa: E402
-from main import print_hanlp_sdp_result, run_hanlp_sdp_pipeline  # noqa: E402
-from models import HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
+from main import (  # noqa: E402
+    print_corenlp_dependency_result,
+    print_hanlp_sdp_result,
+    run_corenlp_dependency_pipeline,
+    run_hanlp_sdp_pipeline,
+)
+from models import CoreNLPToken, DependencyEdge, DependencyParse, HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
 from sdp_dm_simplifier import SDPDMSimplifier  # noqa: E402
 
 
 class HanLPSDPMainlineTest(unittest.TestCase):
-    def test_hanlp_sdp_pipeline_preprocesses_once_and_parses_declarative_sentence(self) -> None:
+    def test_hanlp_sdp_pipeline_preprocesses_once_and_parses_masked_question(self) -> None:
         record = QuestionRecord(question="Who is older, Ryan Tubridy or Mauro Massironi?")
         parser = FakeHanLPSDPParser()
         llm = FakePreprocessLLM()
@@ -35,10 +40,11 @@ class HanLPSDPMainlineTest(unittest.TestCase):
 
         preprocess_result = result["preprocess_result"]
         self.assertEqual(preprocess_result.masked_question, "Who is older, ENTITYA or ENTITYB?")
-        self.assertEqual(preprocess_result.sdp_input_sentence, "ANSWER is older, ENTITYA or ENTITYB.")
+        self.assertEqual(preprocess_result.sdp_input_sentence, "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual([mapping.placeholder for mapping in preprocess_result.mask_mappings], ["ENTITYA", "ENTITYB"])
         self.assertEqual(parser.placeholders, ["ENTITYA", "ENTITYB"])
-        self.assertEqual(parser.text, "ANSWER is older, ENTITYA or ENTITYB.")
+        self.assertEqual(result["hanlp_input_sentence"], "Who is older, ENTITYA or ENTITYB?")
+        self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(llm.calls, 1)
 
         stream = io.StringIO()
@@ -49,16 +55,21 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("[Original Question]", output)
         self.assertIn("[1. Explicit Entities]", output)
         self.assertIn(" - Ryan Tubridy [Person]", output)
-        self.assertIn("[2. SDP-Oriented Rewrite]", output)
+        self.assertIn("[2. Entity Masking]", output)
         self.assertIn(" - ENTITYA -> Ryan Tubridy", output)
         self.assertIn("Masked question: Who is older, ENTITYA or ENTITYB?", output)
-        self.assertIn("SDP input sentence: ANSWER is older, ENTITYA or ENTITYB.", output)
+        self.assertNotIn("SDP input sentence:", output)
         self.assertIn("[3. HanLP SDP Parsing]", output)
+        self.assertIn("HanLP input sentence: Who is older, ENTITYA or ENTITYB?", output)
         self.assertNotIn("[HanLP Tokens]", output)
         self.assertNotIn("[Available HanLP Keys]", output)
-        self.assertIn("[Raw SDP/DM Edges]", output)
+        self.assertIn("[Raw SDP Edges]", output)
         self.assertIn("[SDP: sdp/dm]", output)
-        self.assertIn("older[3] --ARG1--> ANSWER[1]", output)
+        self.assertIn("[SDP: sdp/pas]", output)
+        self.assertIn("[SDP: sdp/psd]", output)
+        self.assertIn("older[3] --ARG1--> Who[1]", output)
+        self.assertIn("older[3] --ARG1--> ENTITYA[5]", output)
+        self.assertIn("older[3] --ACT-arg--> ENTITYB[7]", output)
         self.assertIn("[4. Content Reasoning Chains]", output)
         self.assertIn("ENTITYA -- older", output)
         self.assertIn("ENTITYB -- older", output)
@@ -66,8 +77,52 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertNotIn("[Kept / Derived Edges]", output)
         self.assertNotIn("older --ARG2--> ENTITYA", output)
         self.assertNotIn("older --ARG1--> ANSWER\n", output)
-        self.assertNotIn("[SDP: sdp/pas]", output)
         self.assertNotIn("Relation-Carrier Declarative Views", output)
+        self.assertNotIn("CoreNLP + OpenIE View Annotations", output)
+        self.assertNotIn("Semantic Reasoning Path Induction", output)
+        self.assertNotIn("Semantic-Path-Guided Atomic DAG", output)
+
+    def test_corenlp_mainline_reuses_hanlp_preprocess_and_stops_after_dependency_parse(self) -> None:
+        record = QuestionRecord(question="Who is older, Ryan Tubridy or Mauro Massironi?")
+        parser = FakeCoreNLPParser()
+        llm = FakePreprocessLLM()
+        preprocessor = HanLPSDPPreprocessor(llm)
+
+        result = run_corenlp_dependency_pipeline(
+            record=record,
+            index=1,
+            preprocessor=preprocessor,
+            parser=parser,
+        )
+
+        preprocess_result = result["preprocess_result"]
+        self.assertEqual(preprocess_result.masked_question, "Who is older, ENTITYA or ENTITYB?")
+        self.assertEqual(preprocess_result.sdp_input_sentence, "Who is older, ENTITYA or ENTITYB?")
+        self.assertEqual(result["corenlp_input_sentence"], "Who is older, ENTITYA or ENTITYB?")
+        self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
+        self.assertEqual(llm.calls, 1)
+        self.assertNotIn("corenlp_view_annotations", result)
+        self.assertNotIn("dependency_graph", result)
+        self.assertNotIn("atomic_evidences", result)
+        self.assertNotIn("semantic_reasoning_paths", result)
+        self.assertNotIn("subquestion_dag", result)
+
+        stream = io.StringIO()
+        with redirect_stdout(stream):
+            print_corenlp_dependency_result(1, record, result)
+        output = stream.getvalue()
+
+        self.assertIn("[Original Question]", output)
+        self.assertIn("[1. Explicit Entities]", output)
+        self.assertIn(" - Ryan Tubridy [Person]", output)
+        self.assertIn("[2. Entity Masking]", output)
+        self.assertIn("Masked question: Who is older, ENTITYA or ENTITYB?", output)
+        self.assertNotIn("SDP input sentence:", output)
+        self.assertIn("CoreNLP input sentence: Who is older, ENTITYA or ENTITYB?", output)
+        self.assertIn("[3. CoreNLP Dependency Parsing]", output)
+        self.assertIn("[CoreNLP Dependency Edges]", output)
+        self.assertIn("older[3] --nsubj--> Who[1]", output)
+        self.assertNotIn("[4.", output)
         self.assertNotIn("CoreNLP + OpenIE View Annotations", output)
         self.assertNotIn("Semantic Reasoning Path Induction", output)
         self.assertNotIn("Semantic-Path-Guided Atomic DAG", output)
@@ -82,11 +137,10 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                     ],
                     "mask_mappings": [{"placeholder": "ENTITYA", "original_text": "Young Man Luther"}],
                     "masked_question": "Who is the spouse of ENTITYA's author?",
-                    "sdp_input_sentence": "ANSWER is the spouse of the author of ENTITYA.",
                     "warnings": [],
                 },
                 "Who is the spouse of ENTITYA's author?",
-                "ANSWER is the spouse of the author of ENTITYA.",
+                "Who is the spouse of ENTITYA's author?",
             ),
             (
                 "What is the date of death of the director of film FilmA?",
@@ -96,11 +150,10 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                     ],
                     "mask_mappings": [{"placeholder": "ENTITYA", "original_text": "FilmA"}],
                     "masked_question": "What is the date of death of the director of film ENTITYA?",
-                    "sdp_input_sentence": "ANSWER is the date of death of the director of ENTITYA.",
                     "warnings": [],
                 },
                 "What is the date of death of the director of film ENTITYA?",
-                "ANSWER is the date of death of the director of ENTITYA.",
+                "What is the date of death of the director of film ENTITYA?",
             ),
             (
                 "Where was the person who wrote about the rioting being a dividing factor in Birmingham educated?",
@@ -115,13 +168,10 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                     "masked_question": (
                         "Where was the person who wrote about the rioting being a dividing factor in ENTITYA educated?"
                     ),
-                    "sdp_input_sentence": (
-                        "The person who wrote about the rioting being a dividing factor in ENTITYA was educated at ANSWER."
-                    ),
                     "warnings": [],
                 },
                 "Where was the person who wrote about the rioting being a dividing factor in ENTITYA educated?",
-                "The person who wrote about the rioting being a dividing factor in ENTITYA was educated at ANSWER.",
+                "Where was the person who wrote about the rioting being a dividing factor in ENTITYA educated?",
             ),
             (
                 "Who is older, Ryan Tubridy or Mauro Massironi?",
@@ -135,11 +185,10 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                         {"placeholder": "ENTITYB", "original_text": "Mauro Massironi"},
                     ],
                     "masked_question": "Who is older, ENTITYA or ENTITYB?",
-                    "sdp_input_sentence": "ANSWER is older, ENTITYA or ENTITYB.",
                     "warnings": [],
                 },
                 "Who is older, ENTITYA or ENTITYB?",
-                "ANSWER is older, ENTITYA or ENTITYB.",
+                "Who is older, ENTITYA or ENTITYB?",
             ),
         ]
         for question, payload, expected_masked, expected_sdp in cases:
@@ -150,7 +199,6 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                 self.assertEqual(llm.calls, 1)
                 self.assertEqual(result.masked_question, expected_masked)
                 self.assertEqual(result.sdp_input_sentence, expected_sdp)
-                self.assertIn("ANSWER", result.sdp_input_sentence)
                 for mapping in result.mask_mappings:
                     self.assertTrue(mapping.placeholder.startswith("ENTITY"))
                     self.assertIn(mapping.placeholder, result.masked_question)
@@ -405,7 +453,6 @@ class FakePreprocessLLM:
                 {"placeholder": "ENTITYB", "original_text": "Mauro Massironi"},
             ],
             "masked_question": "Who is older, ENTITYA or ENTITYB?",
-            "sdp_input_sentence": "ANSWER is older, ENTITYA or ENTITYB.",
             "warnings": [],
         }
 
@@ -430,7 +477,7 @@ class FakeHanLPSDPParser:
     def parse(self, text: str, placeholders: list[str] | None = None) -> HanLPSDPResult:
         self.placeholders = list(placeholders or [])
         self.text = text
-        tokens = ["ANSWER", "is", "older", ",", "ENTITYA", "or", "ENTITYB", "."]
+        tokens = ["Who", "is", "older", ",", "ENTITYA", "or", "ENTITYB", "?"]
         return HanLPSDPResult(
             text=text,
             tokens=tokens,
@@ -438,18 +485,39 @@ class FakeHanLPSDPParser:
             sdp_graphs={
                 "sdp/dm": [[(3, "ARG1")], [], [(0, "root")], [], [(3, "ARG2")], [], [(3, "ARG2")], []],
                 "sdp/pas": [[(3, "ARG1")]],
+                "sdp/psd": [[(3, "ACT-arg")]],
             },
             edges=[
-                HanLPSDPEdge("sdp/dm", 3, "older", "ARG1", 1, "ANSWER"),
+                HanLPSDPEdge("sdp/dm", 3, "older", "ARG1", 1, "Who"),
                 HanLPSDPEdge("sdp/dm", 0, "ROOT", "root", 3, "older"),
                 HanLPSDPEdge("sdp/dm", 3, "older", "ARG2", 5, "ENTITYA"),
                 HanLPSDPEdge("sdp/dm", 3, "older", "ARG2", 7, "ENTITYB"),
-                HanLPSDPEdge("sdp/pas", 3, "older", "ARG1", 1, "ANSWER"),
+                HanLPSDPEdge("sdp/pas", 3, "older", "ARG1", 1, "Who"),
+                HanLPSDPEdge("sdp/pas", 3, "older", "ARG1", 5, "ENTITYA"),
+                HanLPSDPEdge("sdp/psd", 3, "older", "ACT-arg", 7, "ENTITYB"),
             ],
-            raw={"tok": tokens, "sdp/dm": [], "sdp/pas": []},
+            raw={"tok": tokens, "sdp/dm": [], "sdp/pas": [], "sdp/psd": []},
             warnings=[],
             model="fake.hanlp.model",
             mask_token_checks={placeholder: "OK" for placeholder in self.placeholders},
+        )
+
+
+class FakeCoreNLPParser:
+    def __init__(self) -> None:
+        self.text = ""
+
+    def parse(self, text: str) -> DependencyParse:
+        self.text = text
+        tokens = ["Who", "is", "older", ",", "ENTITYA", "or", "ENTITYB", "?"]
+        return DependencyParse(
+            tokens=[CoreNLPToken(index=index, word=word) for index, word in enumerate(tokens, start=1)],
+            edges=[
+                DependencyEdge("older", "nsubj", "Who", 3, 1),
+                DependencyEdge("older", "cop", "is", 3, 2),
+                DependencyEdge("older", "obj", "ENTITYA", 3, 5),
+                DependencyEdge("ENTITYA", "conj:or", "ENTITYB", 5, 7),
+            ],
         )
 
 
