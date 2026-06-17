@@ -650,204 +650,68 @@ def _atomic_dag_semantic_prompt_payload(payload: dict[str, object]) -> dict[str,
             result[key] = payload[key]
     return result
 
+
 EXPLICIT_ENTITY_EXTRACTION_SYSTEM = """
-You are implementing DEPO Step 2: explicit entity detection before dependency parsing.
+You are a strict explicit named-entity span extractor for QA decomposition.
 
-Your task is to identify explicit named entity mentions in the original question.
+Your only task:
+Extract explicit named entities that appear verbatim as contiguous spans in the original question.
 
-This is strict entity mention recognition only.
-This is not parser-protection span detection.
-This is not type-variable extraction.
-This is not relation extraction.
-This is not answer-slot extraction.
-This is not operator detection.
-This is not AST construction.
-This is not question decomposition.
+Do NOT:
+- generate placeholders;
+- generate a masked question;
+- rewrite or decompose the question;
+- answer the question;
+- infer hidden entities.
 
-The downstream code will mask every entity mention you return.
-Therefore, your boundaries must be precise.
+Return only valid JSON.
 
-Return every explicit named entity mention that appears as a contiguous surface span in the original question.
-Include both single-token and multi-token named entities.
+Entity definition:
+An entity must be a concrete named mention explicitly written in the question, such as a person, work title, organization, institution, location, event, treaty, battle, war, product, album, song, film, book, game, or series.
 
-Allowed explicit entity mentions include:
-- person names and person designations:
-  "John Middleton Murry", "Sisowath Kossamak", "Lothair II", "Maurice, Prince Of Orange"
-- named works and titles:
-  "Young Man Luther", "AlphaGo", "When The Stars Go Blue", "Wrong Turn 5: Bloodlines",
-  "Aas Ka Panchhi", "Phoolwari", "Ten9Eight: Shoot For The Moon", "Sabotage (1936 Film)"
-- organizations, companies, institutions, universities, schools
-- locations: cities, countries, regions, geopolitical places
-- events, products, games, albums, songs, series, creative works
-- single-token named entities when they are concrete names:
-  "AlphaGo", "Marufabad", "Nasamkhrali", "Phoolwari"
+Do NOT extract:
+- roles: president, singer, author, director, child, mother, father, wife, CEO, founder, member, body;
+- answer types: music school, country, city, date, nationality, company, university;
+- relation words or phrases: attend, approve, ratify, suffer, refused to, singer of, child of;
+- wh-phrases: who, what, which, whose, where, when;
+- inferred entities not literally present in the question;
+- demonym adjectives alone, such as American, British, French;
+- adjective + common noun phrases unless they are conventional named entities.
 
-Forbidden outputs:
-- Do not output roles or relation nouns:
-  wife, husband, mother, father, author, director, actor, CEO, founder, spouse, performer
-- Do not output answer slots or value types:
-  university, company, nationality, country, city, age, population, date, birth date, death date, reason, cause
-- Do not output type words or type phrases:
-  film, movie, book, song, album, series, game, artificial intelligence company, chief operating officer
-- Do not output wh phrases or wh words when they function as question words:
-  which film, what country, who, whom, whose, when, where, why
-- Do not output relation phrases:
-  wife of, director of, CEO of, born in, located in, graduated from, developed by, released first
-- Do not output operators or comparison cues:
-  same, different, both, share, older, younger, first, later, earlier
-- Do not output auxiliaries, determiners, prepositions, punctuation, full clauses, or relative clauses.
-- Do not output a larger phrase when a smaller span is the actual named entity.
-- Do not output a smaller substring when the full named entity title/designation is present.
+Boundary rules:
+1. Copy the exact entity text from the question.
+2. Use the smallest span that is still the complete named entity.
+3. Include full titles, subtitles, numbers, colons, and parentheticals when they are part of the name.
+4. Do not include surrounding roles, type cues, prepositions, verbs, or clauses.
+5. Split coordinated independent entities, but do not split internal coordination inside one title or event.
+6. Sort entities by start_char.
+7. Do not return duplicate or overlapping entities.
 
-Critical boundary principles:
+Examples:
+Question: What music school did the singer of The Search for Everything: Wave One attend?
+Entity: The Search for Everything: Wave One
+Do not extract: music school, singer, attend, The Search for Everything: Wave One attend
 
-1. Exact surface span
-Each entity must be copied exactly from the original question.
-start_char is inclusive and end_char is exclusive.
-question[start_char:end_char] must exactly equal text.
+Question: Who is the child of the president who suffered a major defeat when the body which approves members of the American cabinet refused to ratify the Versailles treaty?
+Entity: Versailles treaty
+Do not extract: American, American cabinet, body, president, child, United States Senate, Woodrow Wilson
 
-2. Minimal but complete named entity
-Choose the minimal span that is a complete named entity mention.
-Do not include external type cues such as film, movie, book, song, album, city, country, company unless they are part of the official name.
-But do include all internal title words, subtitles, numbers, and disambiguators that are part of the name.
-
-3. Named work/title boundaries
-For named works introduced by type cues such as song, film, movie, book, album, series, or game, include the full title after the type cue.
-The type cue itself is usually not part of the entity.
-Words that look like wh/function words may still be part of a title when they appear in Title Case inside the title.
-Do not drop an initial title word just because it is also a question word.
-
-Correct:
-- song When The Stars Go Blue -> "When The Stars Go Blue"
-Incorrect:
-- "The Stars Go Blue"
-- "When"
-- "song When The Stars Go Blue"
-
-Correct:
-- films Wrong Turn 5: Bloodlines and Dark River (2017 Film)
-  -> "Wrong Turn 5: Bloodlines"
-  -> "Dark River (2017 Film)"
-Incorrect:
-- "Wrong Turn"
-- "Wrong Turn 5"
-- "Bloodlines"
-- "films Wrong Turn 5: Bloodlines"
-
-4. Colon subtitles, sequel numbers, and title punctuation
-If a work title contains a sequel number, colon subtitle, hyphen subtitle, or subtitle-like continuation, include it.
-Do not truncate a title before a colon, number, or subtitle.
-
-Correct:
-- "Wrong Turn 5: Bloodlines"
-- "Ten9Eight: Shoot For The Moon"
-- "Star Wars: Episode IV"
-Incorrect:
-- "Wrong Turn"
-- "Wrong Turn 5"
-- "Ten9Eight"
-
-5. Parenthetical disambiguators
-If a parenthetical phrase is part of a title or disambiguated entity mention, include it.
-
-Correct:
-- "Sabotage (1936 Film)"
-- "Dark River (2017 Film)"
-Incorrect:
-- "Sabotage"
-- "Dark River"
-
-6. Possessive constructions
-Do not include possessive "'s" unless it is genuinely part of an official name, which is rare.
-In possessive relation phrases, return only the possessor entity.
-
-Correct:
-- "John Middleton Murry's wife" -> "John Middleton Murry"
-- "Lothair II's mother" -> "Lothair II"
-Incorrect:
-- "John Middleton Murry's"
-- "John Middleton Murry's wife"
-- "Lothair II's"
-- "Lothair II's mother"
-
-7. Comma appositives and explanatory designations
-A comma inside a person designation may introduce an appositive title, rank, office, or disambiguating description.
-When the comma phrase identifies or disambiguates the same person, return the full person designation as one entity mention.
-Do not split it into two independent entities.
-
-Correct:
-- "Maurice, Prince Of Orange" -> one Person entity mention
-- "William, Duke Of Normandy" -> one Person entity mention
-- "Charles, Prince Of Wales" -> one Person entity mention
-
-Incorrect:
-- "Maurice" and "Prince Of Orange" as two separate entity mentions
-- "Prince Of Orange" alone, when it is only an appositive designation for Maurice
-
-However, if the question explicitly coordinates two independent entities using and/or, return them separately.
-
-Correct:
-- "Aas Ka Panchhi or Phoolwari" -> "Aas Ka Panchhi" and "Phoolwari"
-- "Gideon Johnson Pillow or Holm Jølsen" -> "Gideon Johnson Pillow" and "Holm Jølsen"
-- "Ten9Eight: Shoot For The Moon and Sabotage (1936 Film)" -> two film entities
-
-8. Coordination and comparison
-In coordinated or compared alternatives, return each independent entity separately.
-Do not return the whole coordinated phrase unless it is one official title or official named event/designation.
-
-Correct:
-- "Aas Ka Panchhi or Phoolwari" -> two entities
-Incorrect:
-- "Aas Ka Panchhi or Phoolwari"
-
-Correct:
-- "Marufabad and Nasamkhrali" -> two entities
-Incorrect:
-- "Marufabad and Nasamkhrali"
-
-9. Internal coordination inside official named events/designations
-Some official named entities contain "and" internally. Do not split these into separate entity mentions.
-This is especially important for named events, battles, treaties, wars, operations, sieges, conferences, councils, and named geographic/designation phrases introduced by a head such as "Battle of", "Treaty of", "War of", or "Siege of".
-
-Correct:
-- "Battle of Qurah and Umm al Maradim" -> one Event entity mention
-- "Treaty of Peace and Friendship" -> one Event entity mention
-Incorrect:
-- "Battle of Qurah" and "Umm al Maradim" as two separate entities when the surface span is the single event name "Battle of Qurah and Umm al Maradim"
-- "Qurah" and "Umm al Maradim" as separate entities when they are only parts of the named battle/event
-
-Contrast:
-- "Aas Ka Panchhi or Phoolwari" are two film alternatives, so return two Film entities.
-- "Marufabad and Nasamkhrali" are two location alternatives, so return two Location entities.
-- "Battle of Qurah and Umm al Maradim" is one named event/designation, so return one Event entity.
-
-10. Entity-type consistency in parallel questions
-When two coordinated or compared entities play the same role, use the same semantic_type_hint when the local context supports it.
-Example:
-- films Wrong Turn 5: Bloodlines and Dark River (2017 Film)
-  -> both Film
-- locations Marufabad and Nasamkhrali
-  -> both Location
-
-11. When uncertain about boundary
-Prefer the full conventional name/title/designation over a truncated substring.
-Prefer:
-- "When The Stars Go Blue" over "The Stars Go Blue"
-- "Wrong Turn 5: Bloodlines" over "Wrong Turn"
-- "Maurice, Prince Of Orange" over "Maurice" + "Prince Of Orange"
-- "Battle of Qurah and Umm al Maradim" over "Battle of Qurah" + "Umm al Maradim"
-
-Semantic type hint rules:
-- Use Person for human names and person designations.
-- Use Film for film/movie titles when locally indicated by film, movie, director, released, starring, or a parenthetical like "(2017 Film)".
-- Use Song for song titles when locally indicated by song, performer, singer, recorded, released, album, etc.
-- Use Book for book/novel titles when locally indicated by book, novel, author, writer, etc.
-- Use Album, Series, Game, Product, Event, Company, Organization, University, Institution, City, Country, Region, Location, or Work when appropriate.
-- Use Work for named creative works when the exact subtype is unclear.
-- Use Entity only when the local context does not support a more specific type.
-
-Return valid JSON only.
+Output schema:
+{
+  "entities": [
+    {
+      "text": "...",
+      "start_char": 0,
+      "end_char": 0,
+      "semantic_type_hint": "Person|Work|Organization|Institution|Location|Event|Treaty|Product|Entity",
+      "confidence": 0.0
+    }
+  ],
+  "warnings": []
+}
 """.strip()
+
+
 
 
 def build_explicit_entity_extraction_prompt(
