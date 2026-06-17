@@ -41,8 +41,7 @@ HANLP_SDP_PREPROCESS_SYSTEM = """
 You are the DEPO HanLP-SDP preprocessor.
 
 Your only task is to:
-1. detect explicit named entities in the original question;
-2. replace them with generic placeholders ENTITYA, ENTITYB, ENTITYC, ....
+detect explicit named entity spans in the original question.
 
 Do not answer the question.
 Do not introduce facts not stated in the question.
@@ -53,15 +52,15 @@ Entity rules:
 - Do not mark roles or relation nouns as entities: author, director, spouse, sister, mother, performer, date, country, city, university.
 - Entity text must be copied exactly from the original question.
 - Do not include possessive "'s" unless it is part of the official name.
-- Use generic placeholders only: ENTITYA, ENTITYB, ENTITYC, ...
-- Preserve all placeholders exactly in masked_question.
+- Return character offsets for the entity text in the original question.
+- Do not output placeholders, mask mappings, or a masked question.
 - Do not rewrite the question into a declarative sentence.
 """.strip()
 
 
 def build_hanlp_sdp_preprocess_prompt(question: str) -> str:
     schema = {
-        "explicit_entities": [
+        "entities": [
             {
                 "text": "Young Man Luther",
                 "start_char": 21,
@@ -70,13 +69,6 @@ def build_hanlp_sdp_preprocess_prompt(question: str) -> str:
                 "confidence": 0.95,
             }
         ],
-        "mask_mappings": [
-            {
-                "placeholder": "ENTITYA",
-                "original_text": "Young Man Luther",
-            }
-        ],
-        "masked_question": "Who is the spouse of ENTITYA's author?",
         "warnings": [],
     }
 
@@ -87,10 +79,11 @@ Original question:
 Produce JSON only.
 
 Required output fields:
-- explicit_entities: all explicit named entities in the original question.
-- mask_mappings: ENTITYA, ENTITYB, ENTITYC ... mapped to original entity text.
-- masked_question: original question with entity spans replaced by placeholders.
+- entities: all explicit named entity spans in the original question.
 - warnings: list of brief warnings, or [].
+
+Do not output mask_mappings.
+Do not output masked_question.
 
 Good examples:
 
@@ -98,7 +91,7 @@ Original:
 Who is the spouse of Young Man Luther's author?
 Output:
 {{
-  "explicit_entities": [
+  "entities": [
     {{
       "text": "Young Man Luther",
       "start_char": 21,
@@ -107,13 +100,6 @@ Output:
       "confidence": 0.95
     }}
   ],
-  "mask_mappings": [
-    {{
-      "placeholder": "ENTITYA",
-      "original_text": "Young Man Luther"
-    }}
-  ],
-  "masked_question": "Who is the spouse of ENTITYA's author?",
   "warnings": []
 }}
 
@@ -121,7 +107,7 @@ Original:
 Whose sister played Susie in miracle on 34th street?
 Output:
 {{
-  "explicit_entities": [
+  "entities": [
     {{
       "text": "miracle on 34th street",
       "start_char": 29,
@@ -130,13 +116,6 @@ Output:
       "confidence": 0.95
     }}
   ],
-  "mask_mappings": [
-    {{
-      "placeholder": "ENTITYA",
-      "original_text": "miracle on 34th street"
-    }}
-  ],
-  "masked_question": "Whose sister played Susie in ENTITYA?",
   "warnings": []
 }}
 
@@ -144,22 +123,15 @@ Original:
 Where was the person who wrote about the rioting being a dividing factor in Birmingham educated?
 Output:
 {{
-  "explicit_entities": [
+  "entities": [
     {{
       "text": "Birmingham",
-      "start_char": 73,
-      "end_char": 83,
+      "start_char": 76,
+      "end_char": 86,
       "semantic_type_hint": "Location",
       "confidence": 0.95
     }}
   ],
-  "mask_mappings": [
-    {{
-      "placeholder": "ENTITYA",
-      "original_text": "Birmingham"
-    }}
-  ],
-  "masked_question": "Where was the person who wrote about the rioting being a dividing factor in ENTITYA educated?",
   "warnings": []
 }}
 
@@ -167,33 +139,38 @@ Original:
 Who is older, Ryan Tubridy or Mauro Massironi?
 Output:
 {{
-  "explicit_entities": [
+  "entities": [
     {{
       "text": "Ryan Tubridy",
       "start_char": 14,
-      "end_char": 27,
+      "end_char": 26,
       "semantic_type_hint": "Person",
       "confidence": 0.95
     }},
     {{
       "text": "Mauro Massironi",
-      "start_char": 31,
-      "end_char": 46,
+      "start_char": 30,
+      "end_char": 45,
       "semantic_type_hint": "Person",
       "confidence": 0.95
     }}
   ],
-  "mask_mappings": [
+  "warnings": []
+}}
+
+Original:
+What music school did the singer of The Search for Everything: Wave One attend?
+Output:
+{{
+  "entities": [
     {{
-      "placeholder": "ENTITYA",
-      "original_text": "Ryan Tubridy"
-    }},
-    {{
-      "placeholder": "ENTITYB",
-      "original_text": "Mauro Massironi"
+      "text": "The Search for Everything: Wave One",
+      "start_char": 36,
+      "end_char": 71,
+      "semantic_type_hint": "Work",
+      "confidence": 0.95
     }}
   ],
-  "masked_question": "Who is older, ENTITYA or ENTITYB?",
   "warnings": []
 }}
 

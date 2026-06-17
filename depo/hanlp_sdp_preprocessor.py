@@ -22,14 +22,9 @@ class HanLPSDPPreprocessor:
         )
         warnings = _coerce_warnings(raw_payload.get("warnings"))
         explicit_entities = _explicit_entities_from_payload(question, raw_payload, warnings)
-        placeholder_rewrites = _placeholder_rewrites(raw_payload, explicit_entities.entities, warnings)
-        masked_question = _masked_question_from_entities(question, explicit_entities.entities, placeholder_rewrites)
-        raw_masked_question = str(raw_payload.get("masked_question") or "").strip()
-        if raw_masked_question and raw_masked_question != masked_question:
-            warnings.append("Rebuilt masked_question from validated entity spans and canonical ENTITY* placeholders.")
-
+        masked_question = _masked_question_from_entities(question, explicit_entities.entities)
         sdp_input_sentence = masked_question
-        mask_mappings = _mask_mappings_from_entities(masked_question, explicit_entities.entities, placeholder_rewrites)
+        mask_mappings = _mask_mappings_from_entities(masked_question, explicit_entities.entities)
         _validate_preprocess_result(
             question=question,
             masked_question=masked_question,
@@ -52,9 +47,11 @@ def _explicit_entities_from_payload(
     payload: dict[str, Any],
     warnings: list[str],
 ) -> ExplicitEntityResult:
-    raw_entities = payload.get("explicit_entities", [])
+    raw_entities = payload.get("entities")
+    if raw_entities is None:
+        raw_entities = payload.get("explicit_entities", [])
     if not isinstance(raw_entities, list):
-        raise ValueError("HanLP SDP preprocess payload explicit_entities must be a list.")
+        raise ValueError("HanLP SDP preprocess payload entities must be a list.")
 
     entities: list[ExplicitEntity] = []
     for item in raw_entities:
@@ -90,41 +87,13 @@ def _explicit_entities_from_payload(
     return ExplicitEntityResult(entities=entities, warnings=warnings, raw_payload=payload)
 
 
-def _placeholder_rewrites(
-    payload: dict[str, Any],
-    entities: list[ExplicitEntity],
-    warnings: list[str],
-) -> dict[str, str]:
-    raw_mappings = payload.get("mask_mappings", [])
-    raw_placeholder_by_text: dict[str, str] = {}
-    if isinstance(raw_mappings, list):
-        for item in raw_mappings:
-            if not isinstance(item, dict):
-                continue
-            original_text = str(item.get("original_text") or item.get("text") or "").strip()
-            placeholder = str(item.get("placeholder") or "").strip()
-            if original_text and placeholder:
-                raw_placeholder_by_text.setdefault(_norm(original_text), placeholder)
-
-    rewrites: dict[str, str] = {}
-    for index, entity in enumerate(sorted(entities, key=lambda item: item.start_char)):
-        canonical = f"ENTITY{_letter_suffix(index)}"
-        raw_placeholder = raw_placeholder_by_text.get(_norm(entity.text), canonical)
-        if raw_placeholder != canonical:
-            warnings.append(f"Canonicalized placeholder {raw_placeholder!r} to {canonical!r}.")
-        rewrites[raw_placeholder] = canonical
-        rewrites[canonical] = canonical
-    return rewrites
-
-
 def _masked_question_from_entities(
     question: str,
     entities: list[ExplicitEntity],
-    placeholder_rewrites: dict[str, str],
 ) -> str:
     replacements: list[tuple[int, int, str]] = []
     for index, entity in enumerate(sorted(entities, key=lambda item: item.start_char)):
-        placeholder = placeholder_rewrites.get(f"ENTITY{_letter_suffix(index)}", f"ENTITY{_letter_suffix(index)}")
+        placeholder = f"ENTITY{_letter_suffix(index)}"
         replacements.append((entity.start_char, entity.end_char, placeholder))
 
     masked = question
@@ -136,11 +105,10 @@ def _masked_question_from_entities(
 def _mask_mappings_from_entities(
     masked_question: str,
     entities: list[ExplicitEntity],
-    placeholder_rewrites: dict[str, str],
 ) -> list[MaskMapping]:
     mappings: list[MaskMapping] = []
     for index, entity in enumerate(sorted(entities, key=lambda item: item.start_char)):
-        placeholder = placeholder_rewrites.get(f"ENTITY{_letter_suffix(index)}", f"ENTITY{_letter_suffix(index)}")
+        placeholder = f"ENTITY{_letter_suffix(index)}"
         masked_span = _find_placeholder_span(masked_question, placeholder)
         mappings.append(
             MaskMapping(
@@ -192,7 +160,16 @@ def _resolve_entity_span(
 
 
 def _remove_overlapping_entities(entities: list[ExplicitEntity], warnings: list[str]) -> list[ExplicitEntity]:
-    ordered = sorted(entities, key=lambda item: (item.start_char, -(item.end_char - item.start_char)))
+    ordered = sorted(
+        entities,
+        key=lambda item: (
+            -(item.end_char - item.start_char),
+            -item.confidence,
+            item.start_char,
+            item.end_char,
+            item.text.casefold(),
+        ),
+    )
     kept: list[ExplicitEntity] = []
     occupied: list[tuple[int, int]] = []
     for entity in ordered:
@@ -201,7 +178,7 @@ def _remove_overlapping_entities(entities: list[ExplicitEntity], warnings: list[
             continue
         kept.append(entity)
         occupied.append((entity.start_char, entity.end_char))
-    return kept
+    return sorted(kept, key=lambda item: (item.start_char, item.end_char, item.text.casefold()))
 
 
 def _find_placeholder_span(text: str, placeholder: str) -> tuple[int, int] | None:
@@ -243,6 +220,3 @@ def _letter_suffix(index: int) -> str:
         if current < 0:
             return label
 
-
-def _norm(text: str) -> str:
-    return re.sub(r"\s+", " ", text).strip().casefold()

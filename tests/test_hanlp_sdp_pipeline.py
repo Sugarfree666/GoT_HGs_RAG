@@ -140,11 +140,9 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             (
                 "Who is the spouse of Young Man Luther's author?",
                 {
-                    "explicit_entities": [
+                    "entities": [
                         _entity("Who is the spouse of Young Man Luther's author?", "Young Man Luther"),
                     ],
-                    "mask_mappings": [{"placeholder": "ENTITYA", "original_text": "Young Man Luther"}],
-                    "masked_question": "Who is the spouse of ENTITYA's author?",
                     "warnings": [],
                 },
                 "Who is the spouse of ENTITYA's author?",
@@ -153,11 +151,9 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             (
                 "What is the date of death of the director of film FilmA?",
                 {
-                    "explicit_entities": [
+                    "entities": [
                         _entity("What is the date of death of the director of film FilmA?", "FilmA"),
                     ],
-                    "mask_mappings": [{"placeholder": "ENTITYA", "original_text": "FilmA"}],
-                    "masked_question": "What is the date of death of the director of film ENTITYA?",
                     "warnings": [],
                 },
                 "What is the date of death of the director of film ENTITYA?",
@@ -166,16 +162,12 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             (
                 "Where was the person who wrote about the rioting being a dividing factor in Birmingham educated?",
                 {
-                    "explicit_entities": [
+                    "entities": [
                         _entity(
                             "Where was the person who wrote about the rioting being a dividing factor in Birmingham educated?",
                             "Birmingham",
                         ),
                     ],
-                    "mask_mappings": [{"placeholder": "ENTITYA", "original_text": "Birmingham"}],
-                    "masked_question": (
-                        "Where was the person who wrote about the rioting being a dividing factor in ENTITYA educated?"
-                    ),
                     "warnings": [],
                 },
                 "Where was the person who wrote about the rioting being a dividing factor in ENTITYA educated?",
@@ -184,15 +176,10 @@ class HanLPSDPMainlineTest(unittest.TestCase):
             (
                 "Who is older, Ryan Tubridy or Mauro Massironi?",
                 {
-                    "explicit_entities": [
+                    "entities": [
                         _entity("Who is older, Ryan Tubridy or Mauro Massironi?", "Ryan Tubridy", "Person"),
                         _entity("Who is older, Ryan Tubridy or Mauro Massironi?", "Mauro Massironi", "Person"),
                     ],
-                    "mask_mappings": [
-                        {"placeholder": "ENTITYA", "original_text": "Ryan Tubridy"},
-                        {"placeholder": "ENTITYB", "original_text": "Mauro Massironi"},
-                    ],
-                    "masked_question": "Who is older, ENTITYA or ENTITYB?",
                     "warnings": [],
                 },
                 "Who is older, ENTITYA or ENTITYB?",
@@ -211,6 +198,69 @@ class HanLPSDPMainlineTest(unittest.TestCase):
                     self.assertTrue(mapping.placeholder.startswith("ENTITY"))
                     self.assertIn(mapping.placeholder, result.masked_question)
                     self.assertIn(mapping.placeholder, result.sdp_input_sentence)
+
+    def test_preprocessor_builds_masked_question_from_entities_only(self) -> None:
+        question = "What music school did the singer of The Search for Everything: Wave One attend?"
+        payload = {
+            "entities": [
+                _entity(question, "The Search for Everything: Wave One", "Work"),
+            ],
+            "warnings": [],
+        }
+
+        llm = StaticPreprocessLLM(payload)
+        result = HanLPSDPPreprocessor(llm).preprocess(question)
+
+        self.assertEqual([entity.text for entity in result.explicit_entities.entities], ["The Search for Everything: Wave One"])
+        self.assertEqual(result.masked_question, "What music school did the singer of ENTITYA attend?")
+        self.assertEqual(result.sdp_input_sentence, result.masked_question)
+        self.assertEqual([(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings], [("ENTITYA", "The Search for Everything: Wave One")])
+        self.assertNotIn("attend", result.explicit_entities.entities[0].text)
+
+    def test_preprocessor_repairs_offsets_and_removes_overlaps_deterministically(self) -> None:
+        question = "Who wrote Young Man Luther?"
+        payload = {
+            "entities": [
+                {
+                    "text": "Young Man Luther",
+                    "start_char": 0,
+                    "end_char": 16,
+                    "semantic_type_hint": "Work",
+                    "confidence": 0.70,
+                },
+                {
+                    "text": "Man Luther",
+                    "start_char": question.index("Man Luther"),
+                    "end_char": question.index("Man Luther") + len("Man Luther"),
+                    "semantic_type_hint": "Work",
+                    "confidence": 0.99,
+                },
+            ],
+            "warnings": [],
+        }
+
+        result = HanLPSDPPreprocessor(StaticPreprocessLLM(payload)).preprocess(question)
+
+        self.assertEqual([entity.text for entity in result.explicit_entities.entities], ["Young Man Luther"])
+        self.assertEqual(result.masked_question, "Who wrote ENTITYA?")
+        self.assertTrue(any("Corrected explicit entity span" in warning for warning in result.warnings))
+        self.assertTrue(any("Dropped overlapping explicit entity" in warning for warning in result.warnings))
+
+    def test_preprocessor_accepts_legacy_explicit_entities_field(self) -> None:
+        question = "Who is the spouse of Young Man Luther's author?"
+        payload = {
+            "explicit_entities": [
+                _entity(question, "Young Man Luther", "Work"),
+            ],
+            "mask_mappings": [{"placeholder": "WRONG", "original_text": "Young Man Luther"}],
+            "masked_question": "SHOULD NOT BE USED",
+            "warnings": [],
+        }
+
+        result = HanLPSDPPreprocessor(StaticPreprocessLLM(payload)).preprocess(question)
+
+        self.assertEqual(result.masked_question, "Who is the spouse of ENTITYA's author?")
+        self.assertEqual([(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings], [("ENTITYA", "Young Man Luther")])
 
     def test_sdp_dm_simplifier_removes_glue_and_keeps_core_edges(self) -> None:
         result = HanLPSDPResult(
@@ -527,7 +577,7 @@ class FakePreprocessLLM:
         assert "HanLP-SDP preprocessor" in system_prompt
         assert "Who is older, Ryan Tubridy or Mauro Massironi?" in user_prompt
         return {
-            "explicit_entities": [
+            "entities": [
                 {
                     "text": "Ryan Tubridy",
                     "semantic_type_hint": "Person",
@@ -545,11 +595,6 @@ class FakePreprocessLLM:
                     "reason": "explicit person name",
                 },
             ],
-            "mask_mappings": [
-                {"placeholder": "ENTITYA", "original_text": "Ryan Tubridy"},
-                {"placeholder": "ENTITYB", "original_text": "Mauro Massironi"},
-            ],
-            "masked_question": "Who is older, ENTITYA or ENTITYB?",
             "warnings": [],
         }
 
