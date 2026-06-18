@@ -174,7 +174,7 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
         )
         result = ExplicitEntityExtractor(llm).extract(question)
 
-        self.assertIn("Deterministic entity candidates", llm.prompt)
+        self.assertIn("Candidate spans", llm.prompt)
         self.assertIn("verified_entities", llm.prompt)
         self.assertEqual(
             [(entity.text, entity.semantic_type_hint) for entity in result.entities],
@@ -182,6 +182,18 @@ class ExplicitEntityExtractionTest(unittest.TestCase):
         )
         self.assertNotIn("God", [entity.text for entity in result.entities])
         self.assertNotIn("Bråk", [entity.text for entity in result.entities])
+
+    def test_colon_subtitle_title_is_kept_as_one_work_entity(self) -> None:
+        question = "What music school did the singer of The Search for Everything: Wave One attend?"
+        title = "The Search for Everything: Wave One"
+        llm = CandidateSelectingLLM({title: "Work"})
+
+        result = ExplicitEntityExtractor(llm).extract(question)
+
+        self.assertIn("colon/subtitle", llm.prompt)
+        self.assertEqual([(entity.text, entity.semantic_type_hint) for entity in result.entities], [(title, "Work")])
+        self.assertNotIn("The Search for Everything", [entity.text for entity in result.entities])
+        self.assertNotIn("Wave One", [entity.text for entity in result.entities])
 
     def test_free_span_possessive_boundary_is_repaired(self) -> None:
         question = "When did Lothair II's mother die?"
@@ -311,8 +323,8 @@ class CandidateSelectingLLM:
     def chat_json(self, system_prompt: str, prompt: str) -> dict[str, Any]:
         del system_prompt
         self.prompt = prompt
-        marker = "Deterministic entity candidates:\n"
-        candidates_json = prompt.split(marker, 1)[1].split("\n\nCandidate-driven extraction mode:", 1)[0]
+        marker = "Candidate spans:\n"
+        candidates_json = prompt.split(marker, 1)[1].split("\n\nTask:", 1)[0]
         candidates = json.loads(candidates_json)
         verified = []
         for candidate in candidates:

@@ -870,12 +870,42 @@ def _explicit_entity_merge_key(entity: ExplicitEntity) -> tuple[int, int, float,
 def _heuristic_mask_spans(question: str) -> list[MaskSpan]:
     spans: list[MaskSpan] = []
     spans.extend(_coordinated_designation_mask_spans(question))
+    spans.extend(_colon_title_entity_spans(question))
     spans.extend(_title_spans_after_type_heads(question))
     spans.extend(_parenthetical_entity_spans(question))
     spans.extend(_quoted_spans(question))
     spans.extend(_person_name_token_spans(question))
     spans.extend(_capitalized_entity_spans(question))
     return _merge_spans(question, spans, [])
+
+
+def _colon_title_entity_spans(question: str) -> list[MaskSpan]:
+    spans: list[MaskSpan] = []
+    connector_pattern = "|".join(re.escape(item) for item in sorted(CAPITALIZED_ENTITY_CONNECTORS))
+    token_pattern = (
+        rf"{CAPITALIZED_ENTITY_TOKEN}"
+        rf"(?:\s+(?:{CAPITALIZED_ENTITY_TOKEN}|{connector_pattern}|\d+))*"
+    )
+    pattern = re.compile(
+        rf"\b(?P<title>{token_pattern})\s*:\s*(?P<subtitle>{token_pattern}(?:\s*\([^)]*\))?)",
+    )
+    for match in pattern.finditer(question):
+        start, end = _trim_explicit_entity_boundary(question, match.start(), match.end())
+        if end <= start:
+            continue
+        text = question[start:end]
+        if _is_mask_worthy(text):
+            spans.append(
+                MaskSpan(
+                    text=text,
+                    start_char=start,
+                    end_char=end,
+                    kind_hint="entity",
+                    semantic_type_hint="Work",
+                    reason="colon-connected title or subtitle",
+                )
+            )
+    return spans
 
 
 def _coordinated_designation_mask_spans(question: str) -> list[MaskSpan]:

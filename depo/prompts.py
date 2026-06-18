@@ -37,150 +37,6 @@ Return strict JSON only.
 """.strip()
 
 
-HANLP_SDP_PREPROCESS_SYSTEM = """
-You are the DEPO HanLP-SDP preprocessor.
-
-Your only task is to:
-detect explicit named entity spans in the original question.
-
-Do not answer the question.
-Do not introduce facts not stated in the question.
-Return strict JSON only.
-
-Entity rules:
-- Detect only explicit named entities: people, works, titles, organizations, places, events, products, etc.
-- Do not mark roles or relation nouns as entities: author, director, spouse, sister, mother, performer, date, country, city, university.
-- Entity text must be copied exactly from the original question.
-- Do not include possessive "'s" unless it is part of the official name.
-- Return character offsets for the entity text in the original question.
-- Do not output placeholders, mask mappings, or a masked question.
-- Do not rewrite the question into a declarative sentence.
-""".strip()
-
-
-def build_hanlp_sdp_preprocess_prompt(question: str) -> str:
-    schema = {
-        "entities": [
-            {
-                "text": "Young Man Luther",
-                "start_char": 21,
-                "end_char": 37,
-                "semantic_type_hint": "Work | Person | Location | Organization | Event | Entity",
-                "confidence": 0.95,
-            }
-        ],
-        "warnings": [],
-    }
-
-    return f"""
-Original question:
-{question}
-
-Produce JSON only.
-
-Required output fields:
-- entities: all explicit named entity spans in the original question.
-- warnings: list of brief warnings, or [].
-
-Do not output mask_mappings.
-Do not output masked_question.
-
-Good examples:
-
-Original:
-Who is the spouse of Young Man Luther's author?
-Output:
-{{
-  "entities": [
-    {{
-      "text": "Young Man Luther",
-      "start_char": 21,
-      "end_char": 37,
-      "semantic_type_hint": "Work",
-      "confidence": 0.95
-    }}
-  ],
-  "warnings": []
-}}
-
-Original:
-Whose sister played Susie in miracle on 34th street?
-Output:
-{{
-  "entities": [
-    {{
-      "text": "miracle on 34th street",
-      "start_char": 29,
-      "end_char": 51,
-      "semantic_type_hint": "Work",
-      "confidence": 0.95
-    }}
-  ],
-  "warnings": []
-}}
-
-Original:
-Where was the person who wrote about the rioting being a dividing factor in Birmingham educated?
-Output:
-{{
-  "entities": [
-    {{
-      "text": "Birmingham",
-      "start_char": 76,
-      "end_char": 86,
-      "semantic_type_hint": "Location",
-      "confidence": 0.95
-    }}
-  ],
-  "warnings": []
-}}
-
-Original:
-Who is older, Ryan Tubridy or Mauro Massironi?
-Output:
-{{
-  "entities": [
-    {{
-      "text": "Ryan Tubridy",
-      "start_char": 14,
-      "end_char": 26,
-      "semantic_type_hint": "Person",
-      "confidence": 0.95
-    }},
-    {{
-      "text": "Mauro Massironi",
-      "start_char": 30,
-      "end_char": 45,
-      "semantic_type_hint": "Person",
-      "confidence": 0.95
-    }}
-  ],
-  "warnings": []
-}}
-
-Original:
-What music school did the singer of The Search for Everything: Wave One attend?
-Output:
-{{
-  "entities": [
-    {{
-      "text": "The Search for Everything: Wave One",
-      "start_char": 36,
-      "end_char": 71,
-      "semantic_type_hint": "Work",
-      "confidence": 0.95
-    }}
-  ],
-  "warnings": []
-}}
-
-Now process the original question.
-
-Output JSON with exactly this shape:
-{json.dumps(schema, ensure_ascii=False, indent=2)}
-""".strip()
-
-
 def build_relation_carrier_declarative_prompt(
     original_question: str,
     masked_question: str,
@@ -651,298 +507,128 @@ def _atomic_dag_semantic_prompt_payload(payload: dict[str, object]) -> dict[str,
     return result
 
 
+
+
+
 EXPLICIT_ENTITY_EXTRACTION_SYSTEM = """
-You are a strict explicit named-entity span extractor for QA decomposition.
+You are DEPO Step 2: topic entity extraction.
 
-Your only task:
-Extract explicit named entities that appear verbatim as contiguous spans in the original question.
+Extract only topic entities in the original question.
 
-Do NOT:
-- generate placeholders;
-- generate a masked question;
-- rewrite or decompose the question;
-- answer the question;
-- infer hidden entities.
+A topic entity is a concrete named thing explicitly mentioned in the question and useful as an anchor for QA decomposition:
+person, creative work/title, organization, institution, location, geopolitical place, event, award, treaty, war, product, game, etc.
 
-Return only valid JSON.
+Do not extract:
+roles or common nouns; answer slots; relation words; wh-words; operators; inferred entities; bare numbers, dates, years, ordinals, quantities, or measurements.
 
-Entity definition:
-An entity must be a concrete named mention explicitly written in the question, such as a person, work title, organization, institution, location, event, treaty, battle, war, product, album, song, film, book, game, or series.
+A number or year is allowed only when it is part of a complete official name, such as "Sabotage (1936 Film)", "Wrong Turn 5: Bloodlines", or "War of 1812".
 
-Do NOT extract:
-- roles: president, singer, author, director, child, mother, father, wife, CEO, founder, member, body;
-- answer types: music school, country, city, date, nationality, company, university;
-- relation words or phrases: attend, approve, ratify, suffer, refused to, singer of, child of;
-- wh-phrases: who, what, which, whose, where, when;
-- inferred entities not literally present in the question;
-- demonym adjectives alone, such as American, British, French;
-- adjective + common noun phrases unless they are conventional named entities.
+Creative works and other titles may contain internal punctuation such as colons, hyphens, apostrophes, parentheses, and subtitles. Treat the full official-looking title as one entity when the punctuation connects title parts; do not split the subtitle into a separate person/place/entity.
 
-Boundary rules:
-1. Copy the exact entity text from the question.
-2. Use the smallest span that is still the complete named entity.
-3. Include full titles, subtitles, numbers, colons, and parentheticals when they are part of the name.
-4. Do not include surrounding roles, type cues, prepositions, verbs, or clauses.
-5. Split coordinated independent entities, but do not split internal coordination inside one title or event.
-6. Sort entities by start_char.
-7. Do not return duplicate or overlapping entities.
-
-Examples:
-Question: What music school did the singer of The Search for Everything: Wave One attend?
-Entity: The Search for Everything: Wave One
-Do not extract: music school, singer, attend, The Search for Everything: Wave One attend
-
-Question: Who is the child of the president who suffered a major defeat when the body which approves members of the American cabinet refused to ratify the Versailles treaty?
-Entity: Versailles treaty
-Do not extract: American, American cabinet, body, president, child, United States Senate, Woodrow Wilson
-
-Output schema:
-{
-  "entities": [
-    {
-      "text": "...",
-      "start_char": 0,
-      "end_char": 0,
-      "semantic_type_hint": "Person|Work|Organization|Institution|Location|Event|Treaty|Product|Entity",
-      "confidence": 0.0
-    }
-  ],
-  "warnings": []
-}
+Return JSON only.
 """.strip()
-
-
 
 
 def build_explicit_entity_extraction_prompt(
     question: str,
     entity_candidates: list[dict[str, object]] | None = None,
 ) -> str:
+    semantic_type_hint = (
+        "Person | Work | Film | Song | Book | Album | Series | Game | "
+        "Organization | Company | Institution | University | "
+        "Location | City | Country | Region | Event | Product | Entity"
+    )
+
     if entity_candidates:
         schema = {
             "verified_entities": [
                 {
-                    "candidate_id": "c1",
+                    "candidate_id": "candidate id from input",
                     "is_entity": True,
-                    "semantic_type_hint": (
-                        "Person | Film | Book | Song | Album | Series | Work | Game | Product | "
-                        "Company | Organization | University | Institution | City | Country | "
-                        "Region | Location | Event | Entity"
-                    ),
+                    "semantic_type_hint": semantic_type_hint,
                     "confidence": 0.95,
-                    "reason": "brief reason why this candidate is an explicit named entity",
+                    "reason": "brief reason",
                 }
-            ]
+            ],
+            "warnings": [],
         }
-        candidate_block = f"""
-Deterministic entity candidates:
-{json.dumps(entity_candidates, ensure_ascii=False, indent=2)}
 
-Candidate-driven extraction mode:
-- You must judge only the supplied candidate_id values.
-- Do not invent new spans or offsets.
-- Do not rewrite candidate text.
-- Return every candidate that is a true explicit named entity with is_entity=true.
-- Return false or omit candidates that are roles, type variables, answer slots, relation phrases, operators, parser-protection phrases, clauses, or non-entities.
-- If a candidate is a complete named entity but has a generic semantic_type_hint, refine only semantic_type_hint.
-- If two candidates overlap, prefer the minimal complete named entity unless the longer candidate is an official title/designation.
-- The code owns offsets and boundary repair; you only verify and classify candidates.
-""".strip()
-    else:
-        schema = {
-            "entities": [
-                {
-                    "text": "exact contiguous entity span copied from the original question",
-                    "start_char": 0,
-                    "end_char": 15,
-                    "semantic_type_hint": (
-                        "Person | Film | Book | Song | Album | Series | Work | Game | Product | "
-                        "Company | Organization | University | Institution | City | Country | "
-                        "Region | Location | Event | Entity"
-                    ),
-                    "confidence": 0.95,
-                    "reason": "brief reason why this is an explicit named entity",
-                }
-            ]
-        }
-        candidate_block = """
-Free-span compatibility mode:
-- Return exact text/start_char/end_char spans.
-- The code will validate and repair offsets when possible.
-""".strip()
-
-    return f"""
-Identify explicit named entity mentions in the original question.
-
-Question:
+        return f"""
+Original question:
 {question}
 
-This is entity recognition only.
-Do not output roles, type variables, answer slots, relation phrases, operators, parser-protection phrases, AST nodes, or subquestions.
-Return all explicit named entities, including single-token and multi-token entities.
-The code will mask every returned entity.
+Candidate spans:
+{json.dumps(entity_candidates, ensure_ascii=False, indent=2)}
 
-{candidate_block}
+Task:
+Verify which candidate spans are topic entities.
 
-Output requirements:
-- Return JSON only.
-- Use the exact schema below.
-- Every returned entity must be a contiguous substring of the question.
-- start_char is inclusive; end_char is exclusive.
-- question[start_char:end_char] must exactly equal text.
-- Sort entities by start_char.
-- Do not return duplicate or overlapping entities.
-- If a full title/designation and a truncated substring overlap, return the full title/designation only.
+Rules:
+1. Judge only the supplied candidates.
+2. Return every candidate exactly once.
+3. Do not invent, rewrite, merge, split, or offset-correct candidates.
+4. Set is_entity=true only for concrete named topic entities.
+5. Set is_entity=false for roles, common nouns, answer slots, relation phrases, wh-phrases, operators, inferred entities, and bare dates/numbers/years.
+6. Bare years such as "1956" are not entities.
+7. Years or numbers inside complete official names may be true, e.g. "Sabotage (1936 Film)" or "War of 1812".
+8. If candidate spans overlap, prefer the complete official-looking named mention over its substrings.
+9. Internal punctuation in titles, especially colon/subtitle forms, is not a split boundary. A complete title like "Wrong Turn 5: Bloodlines" should be true as one Work/Film/Album/Book/etc.; subtitle fragments alone should be false unless independently named in the question.
+10. Prefer the most specific natural semantic_type_hint from the allowed type list.
 
-Hard examples:
+Example:
+Question: The player who defeated Johnny Majors for the Heisman Trophy in 1956 was born in what year?
+True topic entities: "Johnny Majors", "Heisman Trophy"
+False candidates: "player", "1956", "what year", "born", "defeated"
 
-Example 1: Possessive person
-Question: "Why did John Middleton Murry's wife die?"
-Return only:
-- "John Middleton Murry", semantic_type_hint "Person"
-Do not return:
-- "John Middleton Murry's"
-- "John Middleton Murry's wife"
-- "wife"
-- "die"
-
-Example 2: Possessive historical person
-Question: "When did Lothair II's mother die?"
-Return only:
-- "Lothair II", semantic_type_hint "Person"
-Do not return:
-- "Lothair II's"
-- "Lothair II's mother"
-- "mother"
-- "die"
-
-Example 3: Coordinated film titles
-Question: "Which film was released first, Aas Ka Panchhi or Phoolwari?"
-Return:
-- "Aas Ka Panchhi", semantic_type_hint "Film"
-- "Phoolwari", semantic_type_hint "Film"
-Do not return:
-- "was released first, Aas Ka Panchhi or Phoolwari"
-- "Aas Ka Panchhi or Phoolwari"
-- "released first"
-- "film"
-
-Example 4: Parallel film titles with colon and parenthetical disambiguator
-Question: "Do director of film Ten9Eight: Shoot For The Moon and director of film Sabotage (1936 Film) share the same nationality?"
-Return:
-- "Ten9Eight: Shoot For The Moon", semantic_type_hint "Film"
-- "Sabotage (1936 Film)", semantic_type_hint "Film"
-Do not return:
-- "Ten9Eight"
-- "Shoot For The Moon"
-- "Sabotage"
-- "director"
-- "film"
-- "nationality"
-- "same nationality"
-- the full coordinated phrase
-
-Example 5: Single-token named work
-Question: "Which university did the CEO of the company that developed the AI game AlphaGo graduate from?"
-Return:
-- "AlphaGo", semantic_type_hint "Game" or "Work"
-Do not return:
-- "CEO"
-- "company"
-- "AI game"
-- "university"
-- "graduate from"
-- "company that developed the AI game AlphaGo"
-
-Example 6: Single-token locations
-Question: "Are Marufabad and Nasamkhrali both located in the same country?"
-Return:
-- "Marufabad", semantic_type_hint "Location"
-- "Nasamkhrali", semantic_type_hint "Location"
-Do not return:
-- "country"
-- "same country"
-- "both"
-- "located"
-
-Example 7: Song title beginning with a wh-like word
-Question: "What nationality is the performer of song When The Stars Go Blue?"
-Return:
-- "When The Stars Go Blue", semantic_type_hint "Song"
-Do not return:
-- "The Stars Go Blue"
-- "Stars Go Blue"
-- "When"
-- "song When The Stars Go Blue"
-- "performer"
-
-Explanation:
-Here, "When" is part of the song title. It is not the question's wh cue.
-
-Example 8: Film title with sequel number and colon subtitle
-Question: "Do both directors of films Wrong Turn 5: Bloodlines and Dark River (2017 Film) have the same nationality?"
-Return:
-- "Wrong Turn 5: Bloodlines", semantic_type_hint "Film"
-- "Dark River (2017 Film)", semantic_type_hint "Film"
-Do not return:
-- "Wrong Turn"
-- "Wrong Turn 5"
-- "Bloodlines"
-- "Dark River"
-- "films"
-- "directors"
-- "nationality"
-
-Example 9: Person name with comma appositive designation
-Question: "Where was the place of death of the father of Maurice, Prince Of Orange?"
-Return:
-- "Maurice, Prince Of Orange", semantic_type_hint "Person"
-Do not return:
-- "Maurice"
-- "Prince Of Orange"
-- "father"
-- "place of death"
-
-Explanation:
-"Prince Of Orange" is an appositive designation/disambiguator for Maurice in this mention.
-It should not become a second independent entity start.
-
-Example 10: Person alternatives
-Question: "Who was born later, Gideon Johnson Pillow or Holm Jølsen?"
-Return:
-- "Gideon Johnson Pillow", semantic_type_hint "Person"
-- "Holm Jølsen", semantic_type_hint "Person"
-Do not return:
-- "Gideon Johnson Pillow or Holm Jølsen"
-
-Example 11: Internal "and" inside a named event
-Question: "When was the region immediately north of the region where Israel is located and the location of the Battle of Qurah and Umm al Maradim created?"
-Return:
-- "Israel", semantic_type_hint "Country"
-- "Battle of Qurah and Umm al Maradim", semantic_type_hint "Event"
-Do not return:
-- "Battle of Qurah"
-- "Qurah"
-- "Umm al Maradim"
-- "Battle of Qurah" and "Umm al Maradim" as two separate entity mentions
-- "location"
-- "region"
-
-Explanation:
-Here, "Battle of Qurah and Umm al Maradim" is one named event/designation. The word "and" is internal to the official event name, not a coordination between two independent entity starts.
-Decision checklist before final JSON:
-1. Did I return only explicit named entities?
-2. Did I exclude roles, relation words, type words, answer slots, and operators?
-3. Did I include the full title when a work has an initial wh-like title word, number, colon subtitle, or parenthetical disambiguator?
-4. Did I avoid truncating titles such as "When The Stars Go Blue" or "Wrong Turn 5: Bloodlines"?
-5. Did I avoid splitting comma appositive person designations such as "Maurice, Prince Of Orange"?
-6. Did I keep internal "and" inside official named events/designations such as "Battle of Qurah and Umm al Maradim"?
-7. Did I split true coordinated alternatives joined by and/or into separate entities?
-8. Do all start_char/end_char offsets exactly match the returned text?
-
+Return JSON only.
 Output JSON with exactly this shape:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 """.strip()
+
+    schema = {
+        "entities": [
+            {
+                "text": "exact topic entity span copied from the question",
+                "start_char": 0,
+                "end_char": 15,
+                "semantic_type_hint": semantic_type_hint,
+                "confidence": 0.95,
+                "reason": "brief reason",
+            }
+        ],
+        "warnings": [],
+    }
+
+    return f"""
+Original question:
+{question}
+
+Task:
+Extract all topic entities explicitly mentioned in the question.
+
+Rules:
+1. A returned entity must be an exact contiguous substring of the question.
+2. start_char is inclusive; end_char is exclusive.
+3. Return the complete named mention, not a truncated substring.
+4. Do not include surrounding roles, type words, prepositions, clauses, or possessive "'s".
+5. Split independent coordinated entities, e.g. "Ryan Tubridy or Mauro Massironi".
+6. Do not split internal words inside one official name, e.g. "Battle of Qurah and Umm al Maradim".
+7. Exclude roles, answer slots, relation words, wh-phrases, operators, inferred entities, and bare dates/numbers/years.
+8. Bare years such as "1956" are not entities.
+9. Years or numbers inside complete official names may be included, e.g. "Sabotage (1936 Film)" or "War of 1812".
+10. Internal punctuation in official-looking titles, especially colon/subtitle forms, is part of the same entity; do not split the subtitle into a separate entity.
+11. Sort entities by start_char and return no duplicates or overlaps.
+
+Example:
+Question: The player who defeated Johnny Majors for the Heisman Trophy in 1956 was born in what year?
+Return: "Johnny Majors", "Heisman Trophy"
+Do not return: "player", "1956", "what year", "born", "defeated"
+
+Return JSON only.
+Output JSON with exactly this shape:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+""".strip()
+
 
 
 MASK_SPAN_EXTRACTION_SYSTEM = EXPLICIT_ENTITY_EXTRACTION_SYSTEM

@@ -16,7 +16,7 @@ from models import (
 if TYPE_CHECKING:
     from corenlp_parser import CoreNLPParser
     from hanlp_sdp_parser import HanLPSDPParser
-    from hanlp_sdp_preprocessor import HanLPSDPPreprocessor
+    from entity_masking_preprocessor import EntityMaskingPreprocessor
 
 
 def parse_args() -> argparse.Namespace:
@@ -83,11 +83,11 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
 
     try:
         from hanlp_sdp_parser import HanLPSDPParser
-        from hanlp_sdp_preprocessor import HanLPSDPPreprocessor
+        from entity_masking_preprocessor import EntityMaskingPreprocessor
         from llm_client import LLMClient
 
         llm_client = LLMClient(api_key=api_key, base_url=base_url, model="gpt-4o-mini")
-        preprocessor = HanLPSDPPreprocessor(llm_client)
+        preprocessor = EntityMaskingPreprocessor(llm_client)
         parser = HanLPSDPParser(args.hanlp_model)
 
         print("If this is the first run, HanLP may download the model automatically.")
@@ -127,11 +127,11 @@ def _run_corenlp_dependency_cli(args: argparse.Namespace, records: list[Question
 
     try:
         from corenlp_parser import CoreNLPConnectionError, CoreNLPParser
-        from hanlp_sdp_preprocessor import HanLPSDPPreprocessor
+        from entity_masking_preprocessor import EntityMaskingPreprocessor
         from llm_client import LLMClient
 
         llm_client = LLMClient(api_key=api_key, base_url=base_url, model="gpt-4o-mini")
-        preprocessor = HanLPSDPPreprocessor(llm_client)
+        preprocessor = EntityMaskingPreprocessor(llm_client)
 
         with CoreNLPParser(
             args.corenlp_url,
@@ -161,7 +161,7 @@ def _run_corenlp_dependency_cli(args: argparse.Namespace, records: list[Question
 def run_hanlp_sdp_pipeline(
     record: QuestionRecord,
     index: int,
-    preprocessor: "HanLPSDPPreprocessor",
+    preprocessor: "EntityMaskingPreprocessor",
     parser: "HanLPSDPParser",
     debug: bool = False,
     debug_dir: str | None = None,
@@ -199,7 +199,7 @@ def run_hanlp_sdp_pipeline(
 def run_corenlp_dependency_pipeline(
     record: QuestionRecord,
     index: int,
-    preprocessor: "HanLPSDPPreprocessor",
+    preprocessor: "EntityMaskingPreprocessor",
     parser: "CoreNLPParser",
     debug: bool = False,
 ) -> dict[str, Any]:
