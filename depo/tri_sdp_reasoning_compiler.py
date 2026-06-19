@@ -31,6 +31,7 @@ DERIVED_PENALTIES = {
     "restriction_closure": 0.25,
     "descriptor_lifting": 0.35,
     "candidate_expansion": 0.10,
+    "candidate_slot_substitution": 0.10,
     "function_backbone_contraction": 0.20,
 }
 
@@ -162,6 +163,67 @@ class _WorkingState:
     warnings: list[str]
 
 
+@dataclass(frozen=True)
+class _QueryFocus:
+    answer_anchor_id: str | None
+    query_root_id: str | None
+    slot_id: str | None
+    terminal_id: str | None
+    required_ids: tuple[str, ...]
+    mode: str
+
+    def to_dict(self, nodes: dict[str, TokenReasoningNode]) -> dict[str, Any]:
+        return {
+            "answer_anchor_id": self.answer_anchor_id,
+            "answer_anchor": nodes[self.answer_anchor_id].text if self.answer_anchor_id in nodes else None,
+            "query_root_id": self.query_root_id,
+            "query_root": nodes[self.query_root_id].text if self.query_root_id in nodes else None,
+            "slot_id": self.slot_id,
+            "slot": nodes[self.slot_id].text if self.slot_id in nodes else None,
+            "terminal_id": self.terminal_id,
+            "terminal": nodes[self.terminal_id].text if self.terminal_id in nodes else None,
+            "required_ids": list(self.required_ids),
+            "required": [nodes[node_id].text for node_id in self.required_ids if node_id in nodes],
+            "mode": self.mode,
+        }
+
+
+@dataclass(frozen=True)
+class _CandidatePath:
+    source_entity_id: str | None
+    node_ids: tuple[str, ...]
+    search_pass: str
+    rank: tuple[Any, ...]
+    rank_components: dict[str, Any]
+    selected: bool = False
+    rejected_reason: str = ""
+
+    def with_selection(self, *, selected: bool, rejected_reason: str = "") -> "_CandidatePath":
+        return _CandidatePath(
+            source_entity_id=self.source_entity_id,
+            node_ids=self.node_ids,
+            search_pass=self.search_pass,
+            rank=self.rank,
+            rank_components=dict(self.rank_components),
+            selected=selected,
+            rejected_reason=rejected_reason,
+        )
+
+    def to_debug(self, nodes: dict[str, TokenReasoningNode]) -> dict[str, Any]:
+        payload = {
+            "source_entity_id": self.source_entity_id,
+            "source_entity": nodes[self.source_entity_id].text if self.source_entity_id in nodes else None,
+            "node_ids": list(self.node_ids),
+            "nodes": [nodes[node_id].text for node_id in self.node_ids if node_id in nodes],
+            "search_pass": self.search_pass,
+            "rank_components": dict(self.rank_components),
+            "selected": self.selected,
+        }
+        if self.rejected_reason:
+            payload["rejected_reason"] = self.rejected_reason
+        return payload
+
+
 def compile_token_reasoning_structure(
     hanlp_sdp_result: HanLPSDPResult,
     explicit_entities: list[str],
@@ -171,60 +233,56 @@ def compile_token_reasoning_structure(
     debug: bool = False,
     debug_dir: str | Path | None = None,
 ) -> TokenReasoningStructureResult:
-    """Compile three HanLP SDP graph views into a deterministic token graph.
+    """Compile three HanLP SDP graph views into a query-focused token structure.
 
     The compiler is intentionally symbolic and deterministic: it consumes DM,
     PAS, and PSD edge evidence, adds generic virtual edges by graph operations,
-    extracts a small undirected backbone, and emits a graph plus a path cover.
-    It does not call an LLM and it does not introduce semantic relation labels.
+    selects one main entity-to-focus path or a controlled parallel path cover,
+    and emits only the graph induced by those selected paths. It does not call
+    an LLM and it does not introduce semantic relation labels.
     """
 
     state = build_evidence_graph(hanlp_sdp_result)
     explicit_entity_ids = _resolve_explicit_entity_ids(state.nodes, explicit_entities)
 
     answer_anchor_id = detect_answer_anchor(state.nodes, state.raw_edges, state.warnings)
+    query_focus = _build_query_focus(state.nodes, state.raw_edges, answer_anchor_id)
     _mark_anchors(state.nodes, explicit_entity_ids, answer_anchor_id)
 
     constraints = detect_constraints(state.nodes, state.raw_edges, answer_anchor_id)
-    candidate_sets = detect_candidate_sets(state.nodes, state.raw_edges, explicit_entity_ids)
+    direct_candidate_sets = detect_candidate_sets(state.nodes, state.raw_edges, explicit_entity_ids)
 
     add_bridge_contraction_edges(state)
     add_restriction_closure_edges(state)
     add_descriptor_lifting_edges(state, explicit_entity_ids, answer_anchor_id)
 
-    if candidate_sets:
-        final_node_ids, final_pairs, paths, path_type = _extract_candidate_path_cover(
-            state,
-            candidate_sets,
-            answer_anchor_id,
-            constraints,
-        )
-        backbone_before = _graph_snapshot(final_node_ids, final_pairs, state.nodes, state.edges)
-        backbone_after = backbone_before
-    else:
-        terminals = _select_terminals(state.nodes, state.edges, explicit_entity_ids, answer_anchor_id, constraints)
-        backbone_pairs = extract_steiner_backbone(state.nodes, state.edges, terminals)
-        backbone_before = _graph_snapshot(_node_ids_from_pairs(backbone_pairs, terminals), backbone_pairs, state.nodes, state.edges)
-        pruned_pairs = prune_backbone(state.nodes, state.edges, backbone_pairs, terminals, answer_anchor_id)
-        final_node_ids = _node_ids_from_pairs(pruned_pairs, terminals)
-        final_pairs = pruned_pairs
-        paths, path_type = linearize_paths(state.nodes, final_pairs, explicit_entity_ids, answer_anchor_id, terminals)
-        backbone_after = _graph_snapshot(final_node_ids, final_pairs, state.nodes, state.edges)
+    parallel_entity_sets = _detect_parallel_entity_sets(state, explicit_entity_ids, direct_candidate_sets)
+    paths, path_type, candidate_path_records, selection_mode = _select_query_focused_paths(
+        state=state,
+        explicit_entity_ids=explicit_entity_ids,
+        query_focus=query_focus,
+        constraints=constraints,
+        direct_candidate_sets=direct_candidate_sets,
+        parallel_entity_sets=parallel_entity_sets,
+    )
+    final_node_ids, final_pairs = _graph_from_selected_paths(paths)
+    backbone_before = _graph_snapshot(final_node_ids, final_pairs, state.nodes, state.edges)
+    backbone_after = backbone_before
 
     final_nodes = _final_nodes(state.nodes, final_node_ids)
-    final_edges = _final_edges(state.nodes, state.edges, final_pairs, paths, explicit_entity_ids, answer_anchor_id)
+    active_entity_ids = _active_entity_ids(state.nodes, paths)
+    final_edges = _final_edges(state.nodes, state.edges, final_pairs, paths, active_entity_ids, answer_anchor_id)
 
     if not final_nodes and explicit_entity_ids:
-        final_nodes = _final_nodes(state.nodes, explicit_entity_ids)
-        paths = [
-            TokenReasoningPath(path_id=f"P{index}", nodes=[state.nodes[node_id].text], node_ids=[node_id])
-            for index, node_id in enumerate(explicit_entity_ids, start=1)
-        ]
+        fallback_id = explicit_entity_ids[0]
+        final_nodes = _final_nodes(state.nodes, [fallback_id])
+        paths = [TokenReasoningPath(path_id="P1", nodes=[state.nodes[fallback_id].text], node_ids=[fallback_id])]
         path_type = "empty"
+        active_entity_ids = [fallback_id]
 
     answer_anchor = state.nodes[answer_anchor_id].text if answer_anchor_id in state.nodes else None
-    entity_anchors = [state.nodes[node_id].text for node_id in explicit_entity_ids if node_id in state.nodes]
-    terminals_for_debug = _select_terminals(state.nodes, state.edges, explicit_entity_ids, answer_anchor_id, constraints)
+    entity_anchors = [state.nodes[node_id].text for node_id in active_entity_ids if node_id in state.nodes]
+    candidate_sets = _candidate_sets_for_result(state.nodes, direct_candidate_sets, parallel_entity_sets)
     debug_payload = _build_debug_payload(
         question_id=question_id,
         masked_question=masked_question or hanlp_sdp_result.text,
@@ -235,12 +293,19 @@ def compile_token_reasoning_structure(
         entity_ids=explicit_entity_ids,
         constraints=constraints,
         candidate_sets=candidate_sets,
-        terminals=terminals_for_debug,
+        terminals=[],
         backbone_before=backbone_before,
         backbone_after=backbone_after,
         final_nodes=final_nodes,
         final_edges=final_edges,
         paths=paths,
+        query_focus=query_focus,
+        entity_candidates=explicit_entity_ids,
+        active_entity_ids=active_entity_ids,
+        parallel_entity_sets=parallel_entity_sets,
+        candidate_paths=candidate_path_records,
+        selected_paths=paths,
+        selection_mode=selection_mode,
     )
     debug_file = None
     if debug:
@@ -899,6 +964,8 @@ def add_descriptor_lifting_edges(
             state.virtual_edges.append(virtual.to_dict())
 
 
+# Legacy terminal-cover utilities retained for offline comparison only. The
+# formal Step4 path no longer calls these functions.
 def extract_steiner_backbone(
     nodes: dict[str, TokenReasoningNode],
     edges: dict[tuple[str, str], TokenReasoningEdge],
@@ -1005,6 +1072,854 @@ def linearize_paths(
     return [_path_from_ids("P1", nodes, walk_ids)], "graph_walk"
 
 
+def _build_query_focus(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    answer_anchor_id: str | None,
+) -> _QueryFocus:
+    typed_slot_id = _find_typed_wh_slot(nodes, raw_edges)
+    query_root_id = _find_query_root(nodes, raw_edges)
+    if query_root_id:
+        bare_wh = _find_bare_wh_root_argument(nodes, raw_edges, query_root_id)
+        if bare_wh:
+            wh_id, projection_slot_id = bare_wh
+            required = _unique_node_ids([projection_slot_id, query_root_id, wh_id], nodes)
+            return _QueryFocus(
+                answer_anchor_id=answer_anchor_id,
+                query_root_id=query_root_id,
+                slot_id=projection_slot_id,
+                terminal_id=wh_id,
+                required_ids=tuple(required),
+                mode="bare_wh_root_argument",
+            )
+
+    required_ids: list[str] = []
+    mode = "answer_anchor"
+    terminal_id = answer_anchor_id
+    slot_id = typed_slot_id
+    if typed_slot_id:
+        mode = "typed_wh_slot"
+        terminal_id = typed_slot_id
+        required_ids.append(typed_slot_id)
+        if query_root_id and query_root_id != typed_slot_id:
+            required_ids.append(query_root_id)
+    elif query_root_id and answer_anchor_id and query_root_id != answer_anchor_id:
+        mode = "root_projection"
+        required_ids.extend([query_root_id, answer_anchor_id])
+    elif answer_anchor_id:
+        required_ids.append(answer_anchor_id)
+    elif query_root_id:
+        mode = "root_fallback"
+        terminal_id = query_root_id
+        required_ids.append(query_root_id)
+
+    required = _unique_node_ids(required_ids or ([terminal_id] if terminal_id else []), nodes)
+    return _QueryFocus(
+        answer_anchor_id=answer_anchor_id,
+        query_root_id=query_root_id,
+        slot_id=slot_id,
+        terminal_id=terminal_id,
+        required_ids=tuple(required),
+        mode=mode,
+    )
+
+
+def _find_bare_wh_root_argument(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    query_root_id: str,
+) -> tuple[str, str] | None:
+    if query_root_id not in nodes:
+        return None
+    root_idx = nodes[query_root_id].index
+    wh_ids = {
+        node.id
+        for node in nodes.values()
+        if node.text.lower() in {"what", "who", "whom", "where", "when"} and node.id != query_root_id
+    }
+    direct_wh_ids: set[str] = set()
+    projection_candidates: dict[str, float] = {}
+    for edge in raw_edges.values():
+        for item in _raw_provenance(edge):
+            head_idx = _coerce_provenance_index(item.get("head_idx"))
+            dep_idx = _coerce_provenance_index(item.get("dep_idx"))
+            if head_idx != root_idx or dep_idx is None:
+                continue
+            dep_id = str(dep_idx)
+            relation = str(item.get("normalized_relation") or item.get("relation") or "")
+            polarity = _projection_relation_polarity(relation)
+            if dep_id in wh_ids:
+                direct_wh_ids.add(dep_id)
+                continue
+            if (
+                dep_id in nodes
+                and nodes[dep_id].kind == "content"
+                and polarity == "forward"
+            ):
+                projection_candidates[dep_id] = projection_candidates.get(dep_id, 0.0) + _coerce_float_value(
+                    item.get("support"),
+                    edge.support,
+                )
+    if not direct_wh_ids or not projection_candidates:
+        return None
+    wh_id = _sort_node_ids(direct_wh_ids, nodes)[0]
+    projection_id = sorted(
+        projection_candidates,
+        key=lambda node_id: (-projection_candidates[node_id], _node_sort_key(nodes[node_id])),
+    )[0]
+    return wh_id, projection_id
+
+
+def _select_query_focused_paths(
+    *,
+    state: _WorkingState,
+    explicit_entity_ids: list[str],
+    query_focus: _QueryFocus,
+    constraints: list[dict[str, Any]],
+    direct_candidate_sets: list[list[str]],
+    parallel_entity_sets: list[dict[str, Any]],
+) -> tuple[list[TokenReasoningPath], str, list[_CandidatePath], str]:
+    candidate_records: list[_CandidatePath] = []
+
+    typed_paths = _extract_typed_slot_candidate_path_cover(
+        state,
+        query_focus,
+        constraints,
+        direct_candidate_sets,
+    )
+    if typed_paths:
+        paths, selected_records = typed_paths
+        candidate_records.extend(selected_records)
+        return paths, "candidate_path_cover", candidate_records, "candidate_slot_substitution"
+
+    parallel_paths = _extract_actual_parallel_path_cover(
+        state,
+        query_focus,
+        parallel_entity_sets,
+    )
+    if parallel_paths:
+        paths, selected_records, all_records = parallel_paths
+        candidate_records.extend(all_records)
+        return paths, "candidate_path_cover", candidate_records, "parallel_entity_paths"
+
+    single_path, path_type, selected_record, all_records = _select_single_main_path(
+        state,
+        explicit_entity_ids,
+        query_focus,
+    )
+    candidate_records.extend(all_records)
+    if selected_record:
+        candidate_records = [
+            record.with_selection(selected=record == selected_record, rejected_reason="" if record == selected_record else "lower ranked")
+            for record in candidate_records
+        ]
+    if single_path:
+        return [single_path], path_type, candidate_records, path_type
+
+    fallback_id = _fallback_single_node_id(state.nodes, explicit_entity_ids, query_focus)
+    if fallback_id:
+        path = _path_from_ids("P1", state.nodes, [fallback_id])
+        return [path], "empty", candidate_records, "single_node_fallback"
+    return [], "empty", candidate_records, "empty"
+
+
+def _extract_typed_slot_candidate_path_cover(
+    state: _WorkingState,
+    query_focus: _QueryFocus,
+    constraints: list[dict[str, Any]],
+    direct_candidate_sets: list[list[str]],
+) -> tuple[list[TokenReasoningPath], list[_CandidatePath]] | None:
+    if not query_focus.slot_id or not direct_candidate_sets:
+        return None
+    candidate_ids = _candidate_text_set_to_ids(state.nodes, direct_candidate_sets[0])
+    if len(candidate_ids) < 2:
+        return None
+
+    focus_id = _schema_focus_id(state, query_focus, constraints)
+    if not focus_id or focus_id == query_focus.slot_id:
+        return None
+
+    schema_path = _best_schema_path(state, query_focus.slot_id, focus_id)
+    if len(schema_path) < 2:
+        return None
+
+    paths: list[TokenReasoningPath] = []
+    selected_records: list[_CandidatePath] = []
+    for path_index, candidate_id in enumerate(candidate_ids, start=1):
+        branch = _dedupe_adjacent([candidate_id, *schema_path[1:]])
+        if len(branch) != len(set(branch)):
+            continue
+        if len(branch) >= 2:
+            _ensure_candidate_slot_edge(state, candidate_id, branch[1], query_focus.slot_id, direct_candidate_sets[0], schema_path)
+        record = _rank_candidate_path(
+            state.nodes,
+            state.edges,
+            branch,
+            query_focus,
+            candidate_id,
+            "candidate_slot_substitution",
+            required_ids=schema_path[1:],
+        ).with_selection(selected=True)
+        selected_records.append(record)
+        paths.append(_path_from_ids(f"P{path_index}", state.nodes, branch))
+    if len(paths) != len(candidate_ids):
+        return None
+    return paths, selected_records
+
+
+def _extract_actual_parallel_path_cover(
+    state: _WorkingState,
+    query_focus: _QueryFocus,
+    parallel_entity_sets: list[dict[str, Any]],
+) -> tuple[list[TokenReasoningPath], list[_CandidatePath], list[_CandidatePath]] | None:
+    all_records: list[_CandidatePath] = []
+    for parallel_set in _sort_parallel_entity_sets(state.nodes, parallel_entity_sets):
+        if parallel_set.get("kind") == "direct_entity_set" and query_focus.slot_id:
+            continue
+        entity_ids = [node_id for node_id in parallel_set.get("entity_ids", []) if node_id in state.nodes]
+        if len(entity_ids) < 2:
+            continue
+        branch_heads = {
+            str(entity_id): str(head_id)
+            for entity_id, head_id in dict(parallel_set.get("branch_heads") or {}).items()
+            if str(head_id) in state.nodes
+        }
+        selected: list[_CandidatePath] = []
+        viable = True
+        for entity_id in entity_ids:
+            required_ids = list(query_focus.required_ids)
+            if entity_id in branch_heads:
+                required_ids.insert(0, branch_heads[entity_id])
+            candidates = _enumerate_entity_focus_paths(
+                state,
+                entity_id,
+                query_focus,
+                forbidden_entity_ids=set(entity_ids) - {entity_id},
+                required_ids=_unique_node_ids(required_ids, state.nodes),
+            )
+            all_records.extend(candidates)
+            if not candidates:
+                viable = False
+                break
+            selected.append(candidates[0].with_selection(selected=True))
+        if not viable or len(selected) != len(entity_ids):
+            continue
+        selected_paths = [
+            _path_from_ids(f"P{index}", state.nodes, list(record.node_ids))
+            for index, record in enumerate(selected, start=1)
+        ]
+        selected_keys = {record.node_ids for record in selected}
+        marked_records = [
+            record.with_selection(selected=record.node_ids in selected_keys, rejected_reason="" if record.node_ids in selected_keys else "lower ranked")
+            for record in all_records
+        ]
+        return selected_paths, selected, marked_records
+    return None
+
+
+def _select_single_main_path(
+    state: _WorkingState,
+    explicit_entity_ids: list[str],
+    query_focus: _QueryFocus,
+) -> tuple[TokenReasoningPath | None, str, _CandidatePath | None, list[_CandidatePath]]:
+    all_records: list[_CandidatePath] = []
+    entity_best: list[_CandidatePath] = []
+    for entity_id in explicit_entity_ids:
+        candidates = _enumerate_entity_focus_paths(
+            state,
+            entity_id,
+            query_focus,
+            forbidden_entity_ids=set(explicit_entity_ids) - {entity_id},
+            required_ids=list(query_focus.required_ids),
+        )
+        all_records.extend(candidates)
+        if candidates:
+            entity_best.append(candidates[0])
+
+    if not entity_best:
+        return None, "empty", None, all_records
+
+    selected = sorted(entity_best, key=lambda record: record.rank)[0]
+    path_type = "single_main_path"
+    if selected.rank_components.get("missing_required_focus_count", 0) or selected.search_pass != "strong":
+        path_type = "fallback_main_path"
+    return _path_from_ids("P1", state.nodes, list(selected.node_ids)), path_type, selected, all_records
+
+
+def _enumerate_entity_focus_paths(
+    state: _WorkingState,
+    entity_id: str,
+    query_focus: _QueryFocus,
+    *,
+    forbidden_entity_ids: set[str],
+    required_ids: list[str],
+) -> list[_CandidatePath]:
+    if entity_id not in state.nodes:
+        return []
+    target_id = query_focus.terminal_id
+    if not target_id or target_id not in state.nodes:
+        return []
+    candidates: list[_CandidatePath] = []
+    for search_pass, allow_weak in (("strong", False), ("weak", True)):
+        raw_paths = _bounded_k_simple_paths(
+            state.nodes,
+            state.edges,
+            source_id=entity_id,
+            target_id=target_id,
+            forbidden_nodes=forbidden_entity_ids,
+            required_ids=set(required_ids),
+            allow_weak=allow_weak,
+            max_nodes=12,
+            top_k=12,
+        )
+        for path in raw_paths:
+            candidates.append(
+                _rank_candidate_path(
+                    state.nodes,
+                    state.edges,
+                    path,
+                    query_focus,
+                    entity_id,
+                    search_pass,
+                    required_ids=required_ids,
+                )
+            )
+        if candidates:
+            break
+    candidates.sort(key=lambda record: record.rank)
+    return candidates[:12]
+
+
+def _bounded_k_simple_paths(
+    nodes: dict[str, TokenReasoningNode],
+    edges: dict[tuple[str, str], TokenReasoningEdge],
+    *,
+    source_id: str,
+    target_id: str,
+    forbidden_nodes: set[str],
+    required_ids: set[str],
+    allow_weak: bool,
+    max_nodes: int,
+    top_k: int,
+) -> list[list[str]]:
+    if source_id == target_id:
+        return [[source_id]]
+    adjacency = _adjacency(edges)
+    queue: list[list[str]] = [[source_id]]
+    results: list[list[str]] = []
+    expansions = 0
+    while queue and expansions < 5000:
+        path = queue.pop(0)
+        expansions += 1
+        current = path[-1]
+        if len(path) > max_nodes:
+            continue
+        if current == target_id:
+            results.append(path)
+            continue
+        if len(path) == max_nodes:
+            continue
+        next_paths: list[list[str]] = []
+        for neighbor_id, edge in _search_neighbor_edges(nodes, edges, adjacency, current):
+            if neighbor_id in path or neighbor_id in forbidden_nodes:
+                continue
+            if not _edge_allowed_for_path(nodes, edge, neighbor_id, target_id, required_ids, allow_weak):
+                continue
+            next_paths.append([*path, neighbor_id])
+        next_paths.sort(key=lambda item: (len(item), _path_index_tuple(item, nodes), item[-1]))
+        queue.extend(next_paths)
+    unique: dict[tuple[str, ...], list[str]] = {}
+    for path in results:
+        unique.setdefault(tuple(path), path)
+    return sorted(unique.values(), key=lambda path: _path_search_sort_key(nodes, edges, path))[: max(top_k, 1)]
+
+
+def _path_search_sort_key(
+    nodes: dict[str, TokenReasoningNode],
+    edges: dict[tuple[str, str], TokenReasoningEdge],
+    path: list[str],
+) -> tuple[float, int, int, tuple[int, ...]]:
+    total_derived_penalty = 0.0
+    descriptor_lifting_count = 0
+    for left, right in zip(path, path[1:]):
+        edge = edges.get(_edge_key(left, right))
+        if edge is None:
+            total_derived_penalty += 1_000_000.0
+            continue
+        total_derived_penalty += _edge_rule_penalty(edge)
+        if "descriptor_lifting" in edge.rule:
+            descriptor_lifting_count += 1
+    return (total_derived_penalty, descriptor_lifting_count, len(path), _path_index_tuple(path, nodes))
+
+
+def _search_neighbor_edges(
+    nodes: dict[str, TokenReasoningNode],
+    edges: dict[tuple[str, str], TokenReasoningEdge],
+    adjacency: dict[str, dict[str, tuple[str, str]]],
+    node_id: str,
+) -> list[tuple[str, TokenReasoningEdge]]:
+    neighbors = [(neighbor_id, edges[key]) for neighbor_id, key in adjacency.get(node_id, {}).items()]
+    neighbors.sort(key=lambda item: (_edge_cost(item[1], nodes[node_id], nodes[item[0]]), _node_sort_key(nodes[item[0]]), item[0]))
+    return neighbors
+
+
+def _edge_allowed_for_path(
+    nodes: dict[str, TokenReasoningNode],
+    edge: TokenReasoningEdge,
+    neighbor_id: str,
+    target_id: str,
+    required_ids: set[str],
+    allow_weak: bool,
+) -> bool:
+    if "0" in (edge.source, edge.target):
+        return False
+    if _is_scope_node(nodes[edge.source]) or _is_scope_node(nodes[edge.target]):
+        return False
+    if "COORD" in _edge_label_classes_deep(edge):
+        return False
+    if "candidate_expansion" in edge.rule or "candidate_slot_substitution" in edge.rule:
+        return False
+    if not allow_weak and "descriptor_lifting" in edge.rule:
+        return False
+    neighbor = nodes[neighbor_id]
+    if neighbor.kind == "function" and neighbor_id != target_id:
+        return False
+    if neighbor.kind == "constraint" and neighbor_id not in required_ids and neighbor_id != target_id:
+        return False
+    return True
+
+
+def _rank_candidate_path(
+    nodes: dict[str, TokenReasoningNode],
+    edges: dict[tuple[str, str], TokenReasoningEdge],
+    path_ids: list[str],
+    query_focus: _QueryFocus,
+    source_entity_id: str | None,
+    search_pass: str,
+    *,
+    required_ids: Iterable[str],
+) -> _CandidatePath:
+    required = [node_id for node_id in _unique_node_ids(required_ids, nodes) if node_id in nodes]
+    path_set = set(path_ids)
+    missing_required_count = len([node_id for node_id in required if node_id not in path_set])
+    descriptor_lifting_count = 0
+    total_derived_penalty = 0.0
+    evidence_cost = 0.0
+    for left, right in zip(path_ids, path_ids[1:]):
+        edge = edges.get(_edge_key(left, right))
+        if edge is None:
+            evidence_cost += 1_000_000.0
+            continue
+        if "descriptor_lifting" in edge.rule:
+            descriptor_lifting_count += 1
+        penalty = _edge_rule_penalty(edge)
+        total_derived_penalty += penalty
+        evidence_cost += 1.0 / max(edge.support, 1e-6) + penalty
+
+    function_node_count = sum(
+        1
+        for node_id in path_ids
+        if nodes[node_id].kind == "function" and node_id != query_focus.terminal_id
+    )
+    components = {
+        "missing_required_focus_count": missing_required_count,
+        "source_entry_tier": _source_entry_tier(edges, path_ids),
+        "low_salience_prefix_length": _low_salience_prefix_length(edges, path_ids),
+        "descriptor_lifting_count": descriptor_lifting_count,
+        "total_derived_penalty": round(total_derived_penalty, 6),
+        "function_node_count": function_node_count,
+        "evidence_cost": round(evidence_cost, 6),
+        "path_length": len(path_ids),
+        "token_index_tuple": list(_path_index_tuple(path_ids, nodes)),
+    }
+    rank = (
+        components["missing_required_focus_count"],
+        components["source_entry_tier"],
+        components["low_salience_prefix_length"],
+        components["descriptor_lifting_count"],
+        components["total_derived_penalty"],
+        components["function_node_count"],
+        components["evidence_cost"],
+        components["path_length"],
+        tuple(components["token_index_tuple"]),
+    )
+    return _CandidatePath(
+        source_entity_id=source_entity_id,
+        node_ids=tuple(path_ids),
+        search_pass=search_pass,
+        rank=rank,
+        rank_components=components,
+    )
+
+
+def _source_entry_tier(edges: dict[tuple[str, str], TokenReasoningEdge], path_ids: list[str]) -> int:
+    tiers: list[int] = []
+    for index in range(min(2, len(path_ids) - 1)):
+        edge = edges.get(_edge_key(path_ids[index], path_ids[index + 1]))
+        if edge is None:
+            continue
+        classes = _edge_label_classes_deep(edge)
+        if "CORE_ARG" in classes:
+            tiers.append(0)
+        elif "RESTRICT" in classes:
+            tiers.append(1)
+        elif classes & {"IDENTITY", "MODIFIER"}:
+            tiers.append(2)
+        else:
+            tiers.append(3)
+    return min(tiers) if tiers else 3
+
+
+def _low_salience_prefix_length(edges: dict[tuple[str, str], TokenReasoningEdge], path_ids: list[str]) -> int:
+    count = 0
+    for left, right in zip(path_ids, path_ids[1:]):
+        edge = edges.get(_edge_key(left, right))
+        if edge is None:
+            break
+        classes = _edge_label_classes_deep(edge)
+        if classes & {"CORE_ARG", "RESTRICT"}:
+            break
+        if classes & {"IDENTITY", "MODIFIER", "BRIDGE"} or not classes:
+            count += 1
+            continue
+        break
+    return count
+
+
+def _edge_rule_penalty(edge: TokenReasoningEdge) -> float:
+    total = 0.0
+    for rule, penalty in DERIVED_PENALTIES.items():
+        if rule in edge.rule:
+            total += penalty
+    return total
+
+
+def _edge_label_classes_deep(edge: TokenReasoningEdge) -> set[str]:
+    classes = set(_edge_label_classes(edge))
+
+    def visit(payload: Any) -> None:
+        if isinstance(payload, dict):
+            label_class = payload.get("label_class")
+            if label_class:
+                classes.add(str(label_class))
+            for source_edge in payload.get("source_edges") or []:
+                visit(source_edge)
+            for provenance in payload.get("provenance") or []:
+                visit(provenance)
+        elif isinstance(payload, list):
+            for item in payload:
+                visit(item)
+
+    for item in edge.provenance:
+        visit(item)
+    return classes
+
+
+def _detect_parallel_entity_sets(
+    state: _WorkingState,
+    explicit_entity_ids: list[str],
+    direct_candidate_sets: list[list[str]],
+) -> list[dict[str, Any]]:
+    parallel_sets: list[dict[str, Any]] = []
+    seen: set[tuple[str, ...]] = set()
+    for candidate_set in direct_candidate_sets:
+        entity_ids = _candidate_text_set_to_ids(state.nodes, candidate_set)
+        if len(entity_ids) < 2:
+            continue
+        key = tuple(entity_ids)
+        if key in seen:
+            continue
+        seen.add(key)
+        parallel_sets.append(
+            {
+                "kind": "direct_entity_set",
+                "entity_ids": entity_ids,
+                "branch_heads": {},
+                "evidence": {"candidate_set": candidate_set},
+            }
+        )
+
+    for left_id, right_id, evidence in _content_coordination_pairs(state):
+        left_entity = _unique_bound_entity_for_branch(state, left_id, explicit_entity_ids)
+        right_entity = _unique_bound_entity_for_branch(state, right_id, explicit_entity_ids)
+        if not left_entity or not right_entity or left_entity == right_entity:
+            continue
+        entity_ids = _sort_node_ids([left_entity, right_entity], state.nodes)
+        key = tuple(entity_ids)
+        if key in seen:
+            continue
+        seen.add(key)
+        branch_heads = {
+            left_entity: left_id,
+            right_entity: right_id,
+        }
+        parallel_sets.append(
+            {
+                "kind": "lifted_coordination",
+                "entity_ids": entity_ids,
+                "branch_heads": branch_heads,
+                "evidence": evidence,
+            }
+        )
+    return parallel_sets
+
+
+def _content_coordination_pairs(state: _WorkingState) -> list[tuple[str, str, dict[str, Any]]]:
+    pairs: list[tuple[str, str, dict[str, Any]]] = []
+    for key in _sorted_edge_keys(state.raw_edges, state.nodes):
+        edge = state.raw_edges[key]
+        source, target = key
+        if "COORD" in _edge_label_classes(edge) and state.nodes[source].kind == "content" and state.nodes[target].kind == "content":
+            pairs.append((source, target, {"rule": "content_coordination_edge", "edge": edge.to_dict()}))
+
+    adjacency = _adjacency(state.raw_edges)
+    for connector in _sorted_nodes(state.nodes.values()):
+        if connector.id == "0":
+            continue
+        if not (_is_scope_node(connector) or connector.text.lower() in {"and", "or"}):
+            continue
+        member_ids: list[str] = []
+        source_edges: list[dict[str, Any]] = []
+        for neighbor_id, edge in _neighbor_edges(connector.id, adjacency, state.raw_edges):
+            if "COORD" not in _edge_label_classes(edge):
+                continue
+            if state.nodes[neighbor_id].kind != "content":
+                continue
+            member_ids.append(neighbor_id)
+            source_edges.append(edge.to_dict())
+        ordered = _sort_node_ids(member_ids, state.nodes)
+        for index, left_id in enumerate(ordered):
+            for right_id in ordered[index + 1 :]:
+                pairs.append(
+                    (
+                        left_id,
+                        right_id,
+                        {
+                            "rule": "content_coordination_connector",
+                            "connector_id": connector.id,
+                            "connector": connector.text,
+                            "source_edges": source_edges,
+                        },
+                    )
+                )
+    unique: dict[tuple[str, str], tuple[str, str, dict[str, Any]]] = {}
+    for left_id, right_id, evidence in pairs:
+        unique.setdefault(_edge_key(left_id, right_id), (left_id, right_id, evidence))
+    return [unique[key] for key in sorted(unique, key=lambda item: (_node_sort_key(state.nodes[item[0]]), _node_sort_key(state.nodes[item[1]])))]
+
+
+def _unique_bound_entity_for_branch(
+    state: _WorkingState,
+    branch_head_id: str,
+    explicit_entity_ids: list[str],
+) -> str | None:
+    explicit = set(explicit_entity_ids)
+    adjacency = _adjacency(state.edges)
+    queue: list[list[str]] = [[branch_head_id]]
+    matches: set[str] = set()
+    while queue:
+        path = queue.pop(0)
+        current = path[-1]
+        if len(path) > 3:
+            continue
+        if current in explicit and current != branch_head_id:
+            matches.add(current)
+            continue
+        if len(path) == 3:
+            continue
+        for neighbor_id, edge in _search_neighbor_edges(state.nodes, state.edges, adjacency, current):
+            if neighbor_id in path:
+                continue
+            if "COORD" in _edge_label_classes_deep(edge):
+                continue
+            if _is_scope_node(state.nodes[neighbor_id]):
+                continue
+            if not (_edge_label_classes_deep(edge) & {"CORE_ARG", "RESTRICT", "IDENTITY", "MODIFIER", "BRIDGE", "UNKNOWN"}):
+                continue
+            if state.nodes[neighbor_id].kind == "function":
+                continue
+            queue.append([*path, neighbor_id])
+    ordered = _sort_node_ids(matches, state.nodes)
+    return ordered[0] if len(ordered) == 1 else None
+
+
+def _schema_focus_id(
+    state: _WorkingState,
+    query_focus: _QueryFocus,
+    constraints: list[dict[str, Any]],
+) -> str | None:
+    for constraint in constraints:
+        if constraint.get("type") == "order" and constraint.get("target_id") in state.nodes:
+            return str(constraint["target_id"])
+    if query_focus.query_root_id and query_focus.query_root_id in state.nodes and query_focus.query_root_id != query_focus.slot_id:
+        return query_focus.query_root_id
+    if query_focus.answer_anchor_id and query_focus.answer_anchor_id != query_focus.slot_id:
+        return query_focus.answer_anchor_id
+    if query_focus.slot_id:
+        return _candidate_focus(state.nodes, state.edges, query_focus.slot_id, constraints)
+    return query_focus.terminal_id
+
+
+def _best_schema_path(state: _WorkingState, slot_id: str, focus_id: str) -> list[str]:
+    paths = _bounded_k_simple_paths(
+        state.nodes,
+        state.edges,
+        source_id=slot_id,
+        target_id=focus_id,
+        forbidden_nodes=set(),
+        required_ids={focus_id},
+        allow_weak=False,
+        max_nodes=8,
+        top_k=8,
+    )
+    if not paths:
+        paths = _bounded_k_simple_paths(
+            state.nodes,
+            state.edges,
+            source_id=slot_id,
+            target_id=focus_id,
+            forbidden_nodes=set(),
+            required_ids={focus_id},
+            allow_weak=True,
+            max_nodes=8,
+            top_k=8,
+        )
+    if not paths:
+        return []
+    ranked = [
+        _rank_candidate_path(
+            state.nodes,
+            state.edges,
+            path,
+            _QueryFocus(focus_id, None, slot_id, focus_id, tuple([focus_id]), "schema_path"),
+            source_entity_id=None,
+            search_pass="schema",
+            required_ids=[focus_id],
+        )
+        for path in paths
+    ]
+    return list(sorted(ranked, key=lambda record: record.rank)[0].node_ids)
+
+
+def _ensure_candidate_slot_edge(
+    state: _WorkingState,
+    candidate_id: str,
+    successor_id: str,
+    slot_id: str,
+    candidate_set: list[str],
+    schema_path: list[str],
+) -> None:
+    if _edge_key(candidate_id, successor_id) in state.edges:
+        return
+    schema_edge = state.edges.get(_edge_key(slot_id, successor_id))
+    provenance = {
+        "rule": "candidate_slot_substitution",
+        "typed_wh_slot_id": slot_id,
+        "typed_wh_slot": state.nodes[slot_id].text,
+        "candidate_id": candidate_id,
+        "candidate": state.nodes[candidate_id].text,
+        "candidate_set": list(candidate_set),
+        "schema_path_ids": list(schema_path),
+        "schema_path": [state.nodes[node_id].text for node_id in schema_path if node_id in state.nodes],
+        "schema_edge": schema_edge.to_dict() if schema_edge else None,
+    }
+    virtual = _merge_edge(
+        state.edges,
+        state.nodes,
+        candidate_id,
+        successor_id,
+        support=0.80,
+        derived=True,
+        rule="candidate_slot_substitution",
+        provenance=[provenance],
+    )
+    state.virtual_edges.append(virtual.to_dict())
+
+
+def _graph_from_selected_paths(paths: list[TokenReasoningPath]) -> tuple[set[str], set[tuple[str, str]]]:
+    node_ids: set[str] = set()
+    pairs: set[tuple[str, str]] = set()
+    for path in paths:
+        node_ids.update(path.node_ids)
+        for left, right in zip(path.node_ids, path.node_ids[1:]):
+            pairs.add(_edge_key(left, right))
+    return node_ids, pairs
+
+
+def _active_entity_ids(nodes: dict[str, TokenReasoningNode], paths: list[TokenReasoningPath]) -> list[str]:
+    active: list[str] = []
+    for path in paths:
+        if path.node_ids and path.node_ids[0] in nodes and nodes[path.node_ids[0]].kind == "entity":
+            active.append(path.node_ids[0])
+    return _sort_node_ids(active, nodes)
+
+
+def _candidate_text_set_to_ids(nodes: dict[str, TokenReasoningNode], candidate_set: list[str]) -> list[str]:
+    wanted = set(candidate_set)
+    return _sort_node_ids(
+        [node.id for node in nodes.values() if node.kind == "entity" and node.text in wanted],
+        nodes,
+    )
+
+
+def _candidate_sets_for_result(
+    nodes: dict[str, TokenReasoningNode],
+    direct_candidate_sets: list[list[str]],
+    parallel_entity_sets: list[dict[str, Any]],
+) -> list[list[str]]:
+    seen: set[tuple[str, ...]] = set()
+    result: list[list[str]] = []
+    for candidate_set in direct_candidate_sets:
+        ordered = tuple(candidate_set)
+        if len(ordered) >= 2 and ordered not in seen:
+            seen.add(ordered)
+            result.append(list(ordered))
+    for parallel_set in parallel_entity_sets:
+        entity_ids = [node_id for node_id in parallel_set.get("entity_ids", []) if node_id in nodes]
+        texts = tuple(nodes[node_id].text for node_id in _sort_node_ids(entity_ids, nodes))
+        if len(texts) >= 2 and texts not in seen:
+            seen.add(texts)
+            result.append(list(texts))
+    return result
+
+
+def _sort_parallel_entity_sets(
+    nodes: dict[str, TokenReasoningNode],
+    parallel_entity_sets: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    priority = {"direct_entity_set": 0, "lifted_coordination": 1}
+    return sorted(
+        parallel_entity_sets,
+        key=lambda item: (
+            priority.get(str(item.get("kind")), 9),
+            tuple(nodes[node_id].index for node_id in item.get("entity_ids", []) if node_id in nodes),
+        ),
+    )
+
+
+def _fallback_single_node_id(
+    nodes: dict[str, TokenReasoningNode],
+    explicit_entity_ids: list[str],
+    query_focus: _QueryFocus,
+) -> str | None:
+    for node_id in explicit_entity_ids:
+        if node_id in nodes:
+            return node_id
+    for node_id in (query_focus.terminal_id, query_focus.answer_anchor_id, query_focus.query_root_id):
+        if node_id in nodes:
+            return node_id
+    return _first_content_node(nodes)
+
+
+def _unique_node_ids(node_ids: Iterable[str | None], nodes: dict[str, TokenReasoningNode]) -> list[str]:
+    result: list[str] = []
+    for node_id in node_ids:
+        if not node_id or node_id not in nodes or node_id in result:
+            continue
+        result.append(node_id)
+    return result
+
+
 def write_debug_json(payload: dict[str, Any], *, question_id: str | None, debug_dir: str | Path | None) -> str:
     directory = Path(debug_dir) if debug_dir is not None else Path("debug") / "hanlp_sdp"
     directory.mkdir(parents=True, exist_ok=True)
@@ -1014,6 +1929,8 @@ def write_debug_json(payload: dict[str, Any], *, question_id: str | None, debug_
     return str(path)
 
 
+# Legacy generic candidate expansion retained for comparison only. The formal
+# Step4 path uses the controlled candidate_slot_substitution implementation.
 def _extract_candidate_path_cover(
     state: _WorkingState,
     candidate_sets: list[list[str]],
@@ -1148,6 +2065,13 @@ def _build_debug_payload(
     final_nodes: list[TokenReasoningNode],
     final_edges: list[TokenReasoningEdge],
     paths: list[TokenReasoningPath],
+    query_focus: _QueryFocus | None = None,
+    entity_candidates: list[str] | None = None,
+    active_entity_ids: list[str] | None = None,
+    parallel_entity_sets: list[dict[str, Any]] | None = None,
+    candidate_paths: list[_CandidatePath] | None = None,
+    selected_paths: list[TokenReasoningPath] | None = None,
+    selection_mode: str | None = None,
 ) -> dict[str, Any]:
     return {
         "question_id": question_id,
@@ -1171,6 +2095,21 @@ def _build_debug_payload(
         "final_nodes": [node.to_dict() for node in final_nodes],
         "final_edges": [edge.to_dict() for edge in final_edges],
         "paths": [path.to_dict() for path in paths],
+        "query_focus": query_focus.to_dict(state.nodes) if query_focus else None,
+        "entity_candidates": [
+            {"id": node_id, "text": state.nodes[node_id].text}
+            for node_id in (entity_candidates or [])
+            if node_id in state.nodes
+        ],
+        "active_entity_anchors": [
+            {"id": node_id, "text": state.nodes[node_id].text}
+            for node_id in (active_entity_ids or [])
+            if node_id in state.nodes
+        ],
+        "parallel_entity_sets": list(parallel_entity_sets or []),
+        "candidate_paths": [record.to_debug(state.nodes) for record in (candidate_paths or [])],
+        "selected_paths": [path.to_dict() for path in (selected_paths or paths)],
+        "selection_mode": selection_mode,
         "warnings": list(state.warnings),
     }
 
