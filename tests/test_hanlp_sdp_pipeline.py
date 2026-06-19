@@ -311,6 +311,128 @@ class HanLPSDPMainlineTest(unittest.TestCase):
 
 
 class TriSDPReasoningCompilerTest(unittest.TestCase):
+    def test_root_projection_selects_predicate_target_as_answer_anchor(self) -> None:
+        result = _hanlp_result(
+            "Do director of film ENTITYA and director of film ENTITYB share the same nationality?",
+            [
+                "Do",
+                "director",
+                "of",
+                "film",
+                "ENTITYA",
+                "and",
+                "director",
+                "of",
+                "film",
+                "ENTITYB",
+                "share",
+                "the",
+                "same",
+                "nationality",
+                "?",
+            ],
+            [
+                _root("sdp/dm", "share", 11),
+                _dm("share", "ARG1", "director", 11, 2),
+                _dm("director", "ARG1", "ENTITYA", 2, 5),
+                _dm("share", "ARG1", "director", 11, 7),
+                _dm("director", "ARG1", "ENTITYB", 7, 10),
+                _dm("share", "ARG2", "nationality", 11, 14),
+                _dm("same", "RSTR", "nationality", 13, 14),
+                _pas("share", "verb_ARG1", "director", 11, 2),
+                _pas("share", "verb_ARG1", "director", 11, 7),
+                _pas("share", "verb_ARG2", "nationality", 11, 14),
+                _psd("share", "ACT-arg", "director", 11, 2),
+                _psd("share", "ACT-arg", "director", 11, 7),
+                _psd("share", "PAT-arg", "nationality", 11, 14),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.answer_anchor, "nationality")
+        self.assertEqual(compiled.answer_anchor_id, "14")
+        self.assertNotEqual(compiled.answer_anchor, "share")
+        self.assertIn("nationality", {node.text for node in compiled.nodes})
+        self.assertTrue(any("nationality" in path.nodes for path in compiled.paths))
+        self.assertTrue(any("root projection" in warning for warning in compiled.warnings))
+
+    def test_root_projection_is_structural_not_lexical(self) -> None:
+        result = _hanlp_result(
+            "Do leader of group ENTITYA and leader of group ENTITYB combine the aligned attribute?",
+            [
+                "Do",
+                "leader",
+                "of",
+                "group",
+                "ENTITYA",
+                "and",
+                "leader",
+                "of",
+                "group",
+                "ENTITYB",
+                "combine",
+                "the",
+                "aligned",
+                "attribute",
+                "?",
+            ],
+            [
+                _root("sdp/dm", "combine", 11),
+                _dm("combine", "ARG1", "leader", 11, 2),
+                _dm("leader", "ARG1", "ENTITYA", 2, 5),
+                _dm("combine", "ARG1", "leader", 11, 7),
+                _dm("leader", "ARG1", "ENTITYB", 7, 10),
+                _dm("combine", "ARG2", "attribute", 11, 14),
+                _dm("aligned", "RSTR", "attribute", 13, 14),
+                _pas("combine", "verb_ARG2", "attribute", 11, 14),
+                _psd("combine", "PAT-arg", "attribute", 11, 14),
+            ],
+        )
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.answer_anchor, "attribute")
+        self.assertEqual(compiled.answer_anchor_id, "14")
+        self.assertNotEqual(compiled.answer_anchor, "combine")
+
+    def test_answer_anchor_regressions_for_existing_wh_patterns(self) -> None:
+        older = _hanlp_result(
+            "Who is older, ENTITYA or ENTITYB?",
+            ["Who", "is", "older", ",", "ENTITYA", "or", "ENTITYB", "?"],
+            [
+                _root("sdp/dm", "older", 3),
+                _dm("older", "ARG1", "Who", 3, 1),
+                _dm("older", "ARG2", "ENTITYA", 3, 5),
+                _psd("older", "ACT-arg", "ENTITYB", 3, 7),
+            ],
+        )
+        born_where = _hanlp_result(
+            "Where was the director of film ENTITYA born?",
+            ["Where", "was", "the", "director", "of", "film", "ENTITYA", "born", "?"],
+            [
+                _dm("director", "ARG1", "ENTITYA", 4, 7),
+                _dm("born", "ARG2", "director", 8, 4),
+                _dm("Where", "loc", "born", 1, 8),
+                _pas("of", "prep_ARG1", "director", 5, 4),
+                _pas("of", "prep_ARG2", "ENTITYA", 5, 7),
+            ],
+        )
+        typed_wh = _hanlp_result(
+            "What year was ENTITYA born?",
+            ["What", "year", "was", "ENTITYA", "born", "?"],
+            [
+                _root("sdp/dm", "born", 5),
+                _dm("What", "BV", "year", 1, 2),
+                _dm("born", "ARG1", "ENTITYA", 5, 4),
+                _dm("born", "TWHEN", "year", 5, 2),
+            ],
+        )
+
+        self.assertEqual(compile_token_reasoning_structure(older, ["ENTITYA", "ENTITYB"]).answer_anchor, "older")
+        self.assertEqual(compile_token_reasoning_structure(born_where, ["ENTITYA"]).answer_anchor, "born")
+        self.assertEqual(compile_token_reasoning_structure(typed_wh, ["ENTITYA"]).answer_anchor, "year")
+
     def test_director_born_graph_and_path(self) -> None:
         result = _hanlp_result(
             "Where was the director of film ENTITYA born?",
@@ -658,6 +780,10 @@ def _pas(head: str, relation: str, dep: str, head_idx: int, dep_idx: int) -> Han
 
 def _psd(head: str, relation: str, dep: str, head_idx: int, dep_idx: int) -> HanLPSDPEdge:
     return HanLPSDPEdge("sdp/psd", head_idx, head, relation, dep_idx, dep)
+
+
+def _root(formalism: str, dep: str, dep_idx: int) -> HanLPSDPEdge:
+    return HanLPSDPEdge(formalism, 0, "ROOT", "root", dep_idx, dep)
 
 
 def _hanlp_result(text: str, tokens: list[str], edges: list[HanLPSDPEdge]) -> HanLPSDPResult:

@@ -366,6 +366,39 @@ def detect_answer_anchor(
     raw_edges: dict[tuple[str, str], TokenReasoningEdge],
     warnings: list[str],
 ) -> str | None:
+    typed_wh = _find_typed_wh_slot(nodes, raw_edges)
+    if typed_wh:
+        warnings.append("answer anchor selected by typed-wh slot")
+        return typed_wh
+
+    query_root = _find_query_root(nodes, raw_edges)
+    if query_root:
+        projection = _collect_root_projection_candidates(nodes, raw_edges, query_root)
+        if projection:
+            warnings.append("answer anchor selected by root projection")
+            return projection
+        modifier_projection = _find_modifier_projection_candidate(nodes, raw_edges, query_root)
+        if modifier_projection:
+            warnings.append("answer anchor selected by modifier projection")
+            return modifier_projection
+
+    wh_focus = _find_wh_fallback_anchor(nodes, raw_edges)
+    if wh_focus:
+        warnings.append("answer anchor selected by wh fallback")
+        return wh_focus
+
+    root_candidate = _root_candidate(nodes, raw_edges)
+    if root_candidate:
+        warnings.append("answer anchor fallback: root/high-salience content token")
+        return root_candidate
+    warnings.append("answer anchor fallback failed")
+    return None
+
+
+def _find_typed_wh_slot(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+) -> str | None:
     wh_ids = [node.id for node in _sorted_nodes(nodes.values()) if node.text.lower() in WH_WORDS]
     adjacency = _adjacency(raw_edges)
 
@@ -382,8 +415,23 @@ def detect_answer_anchor(
             )
             if nominal:
                 return nominal
-            if wh_text == "what" and _has_predicate_object_edge(nodes, neighbors):
-                return wh_id
+    return None
+
+
+def _find_wh_fallback_anchor(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+) -> str | None:
+    wh_ids = [node.id for node in _sorted_nodes(nodes.values()) if node.text.lower() in WH_WORDS]
+    adjacency = _adjacency(raw_edges)
+
+    for wh_id in wh_ids:
+        wh_text = nodes[wh_id].text.lower()
+        neighbors = _neighbor_edges(wh_id, adjacency, raw_edges)
+        if wh_text == "what" and _has_predicate_object_edge(nodes, neighbors):
+            return wh_id
+        if wh_text == "which":
+            continue
         elif wh_text == "where":
             located = _best_neighbor(
                 nodes,
@@ -407,14 +455,146 @@ def detect_answer_anchor(
 
     nearest = _nearest_content_to_wh(nodes, raw_edges, wh_ids)
     if nearest:
-        warnings.append("answer anchor fallback: nearest content token to wh token")
+        # The caller records root-level failures; keep this fallback quiet except
+        # for the existing high-level strategy warning.
         return nearest
-    root_candidate = _root_candidate(nodes, raw_edges)
-    if root_candidate:
-        warnings.append("answer anchor fallback: root/high-salience content token")
-        return root_candidate
-    warnings.append("answer anchor fallback failed")
     return None
+
+
+def _find_query_root(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+) -> str | None:
+    candidates: list[tuple[float, int, tuple[int, str], str]] = []
+    for edge in raw_edges.values():
+        for item in _raw_provenance(edge):
+            head_idx = _coerce_provenance_index(item.get("head_idx"))
+            dep_idx = _coerce_provenance_index(item.get("dep_idx"))
+            relation = str(item.get("normalized_relation") or item.get("relation") or "")
+            if head_idx != 0 or dep_idx is None or str(dep_idx) not in nodes:
+                continue
+            if _normalized_relation_key(relation) != "root":
+                continue
+            node = nodes[str(dep_idx)]
+            if node.kind == "function":
+                continue
+            support = _coerce_float_value(item.get("support"), edge.support)
+            candidates.append((-support, node.index, _node_sort_key(node), node.id))
+    return sorted(candidates)[0][3] if candidates else None
+
+
+def _collect_root_projection_candidates(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    query_root_id: str,
+) -> str | None:
+    if query_root_id not in nodes:
+        return None
+    root_idx = nodes[query_root_id].index
+    candidates: dict[str, dict[str, Any]] = {}
+    for edge in raw_edges.values():
+        for item in _raw_provenance(edge):
+            head_idx = _coerce_provenance_index(item.get("head_idx"))
+            dep_idx = _coerce_provenance_index(item.get("dep_idx"))
+            if head_idx is None or dep_idx is None:
+                continue
+            if head_idx != root_idx:
+                continue
+            candidate_id = str(dep_idx)
+            if not _is_projection_candidate_node(nodes, candidate_id, query_root_id):
+                continue
+            polarity = _projection_relation_polarity(str(item.get("normalized_relation") or item.get("relation") or ""))
+            if polarity is None:
+                continue
+            support = _coerce_float_value(item.get("support"), edge.support)
+            formalism = str(item.get("formalism") or "")
+            candidate = candidates.setdefault(
+                candidate_id,
+                {"positive": 0.0, "negative": 0.0, "formalisms": set(), "positive_count": 0},
+            )
+            if polarity == "forward":
+                candidate["positive"] += support
+                candidate["positive_count"] += 1
+                if formalism:
+                    candidate["formalisms"].add(formalism)
+            elif polarity == "subject":
+                candidate["negative"] += support
+
+    scored: list[tuple[float, int, int, str]] = []
+    for candidate_id, data in candidates.items():
+        positive = float(data["positive"])
+        if positive <= 0.0 or int(data["positive_count"]) <= 0:
+            continue
+        total = positive - float(data["negative"])
+        if total <= 0.0:
+            continue
+        formalisms = data["formalisms"]
+        node = nodes[candidate_id]
+        scored.append((-total, -len(formalisms), node.index, candidate_id))
+    return sorted(scored)[0][3] if scored else None
+
+
+def _find_modifier_projection_candidate(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    query_root_id: str,
+) -> str | None:
+    if query_root_id not in nodes:
+        return None
+    adjacency = _adjacency(raw_edges)
+    queue: list[tuple[str, list[str]]] = [(query_root_id, [query_root_id])]
+    best_by_candidate: dict[str, dict[str, Any]] = {}
+    while queue:
+        node_id, path = queue.pop(0)
+        if len(path) > 3:
+            continue
+        if len(path) > 1 and _is_projection_candidate_node(nodes, node_id, query_root_id):
+            score, formalisms = _score_modifier_projection_path(raw_edges, path)
+            if score > 0.0:
+                existing = best_by_candidate.get(node_id)
+                if existing is None or (score, len(formalisms)) > (float(existing["score"]), len(existing["formalisms"])):
+                    best_by_candidate[node_id] = {"score": score, "formalisms": formalisms}
+        if len(path) == 3:
+            continue
+        for neighbor_id in sorted(adjacency.get(node_id, {}), key=lambda item: _node_sort_key(nodes[item])):
+            if neighbor_id in path or neighbor_id == "0":
+                continue
+            queue.append((neighbor_id, [*path, neighbor_id]))
+
+    scored: list[tuple[float, int, int, str]] = []
+    for candidate_id, data in best_by_candidate.items():
+        node = nodes[candidate_id]
+        scored.append((-float(data["score"]), -len(data["formalisms"]), node.index, candidate_id))
+    return sorted(scored)[0][3] if scored else None
+
+
+def _score_modifier_projection_path(
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    path: list[str],
+) -> tuple[float, set[str]]:
+    score = 0.0
+    formalisms: set[str] = set()
+    for index in range(len(path) - 1):
+        edge = raw_edges.get(_edge_key(path[index], path[index + 1]))
+        if edge is None:
+            continue
+        for item in _raw_provenance(edge):
+            relation = str(item.get("normalized_relation") or item.get("relation") or "")
+            label_class = str(item.get("label_class") or classify_label(relation))
+            polarity = _projection_relation_polarity(relation)
+            support = _coerce_float_value(item.get("support"), edge.support)
+            if label_class in {"RESTRICT", "MODIFIER"}:
+                score += support
+            elif polarity == "forward":
+                score += support * 0.75
+            elif polarity == "subject":
+                score -= support * 0.50
+            else:
+                continue
+            formalism = str(item.get("formalism") or "")
+            if formalism:
+                formalisms.add(formalism)
+    return score, formalisms
 
 
 def detect_candidate_sets(
@@ -1102,6 +1282,65 @@ def _combine_rules(existing: str, new_rule: str) -> str:
 
 def _normalize_relation(relation: str) -> str:
     return str(relation or "").strip().lower()
+
+
+def _normalized_relation_key(relation: str) -> str:
+    return _normalize_relation(relation).replace("-", "_").replace(".", "_").replace("/", "_")
+
+
+def _projection_relation_polarity(relation: str) -> str | None:
+    key = _normalized_relation_key(relation)
+    forward_roles = {
+        "arg2",
+        "verb_arg2",
+        "pat_arg",
+        "eff_arg",
+        "compl",
+        "twhen",
+        "loc",
+        "tloc",
+        "tmp",
+        "ext",
+    }
+    subject_roles = {
+        "arg1",
+        "verb_arg1",
+        "act_arg",
+        "auth",
+    }
+    if key in forward_roles:
+        return "forward"
+    if key in subject_roles:
+        return "subject"
+    return None
+
+
+def _raw_provenance(edge: TokenReasoningEdge) -> list[dict[str, Any]]:
+    return [item for item in edge.provenance if isinstance(item, dict) and "head_idx" in item and "dep_idx" in item]
+
+
+def _coerce_provenance_index(value: Any) -> int | None:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _coerce_float_value(value: Any, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _is_projection_candidate_node(
+    nodes: dict[str, TokenReasoningNode],
+    node_id: str,
+    query_root_id: str,
+) -> bool:
+    if node_id == query_root_id or node_id == "0" or node_id not in nodes:
+        return False
+    return nodes[node_id].kind == "content"
 
 
 def _is_punctuation(text: str) -> bool:
