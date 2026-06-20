@@ -247,10 +247,10 @@ def compile_token_reasoning_structure(
     explicit_entity_ids = _resolve_explicit_entity_ids(state.nodes, explicit_entities)
 
     answer_anchor_id = detect_answer_anchor(state.nodes, state.raw_edges, state.warnings)
-    query_focus = _build_query_focus(state.nodes, state.raw_edges, answer_anchor_id)
+    constraints = detect_constraints(state.nodes, state.raw_edges, answer_anchor_id)
+    query_focus = _build_query_focus(state.nodes, state.raw_edges, answer_anchor_id, constraints)
     _mark_anchors(state.nodes, explicit_entity_ids, answer_anchor_id)
 
-    constraints = detect_constraints(state.nodes, state.raw_edges, answer_anchor_id)
     direct_candidate_sets = detect_candidate_sets(state.nodes, state.raw_edges, explicit_entity_ids)
     parallel_entity_sets = _detect_parallel_entity_sets(state, explicit_entity_ids, direct_candidate_sets, query_focus)
 
@@ -488,6 +488,23 @@ def _find_typed_wh_slot(
             )
             if nominal:
                 return nominal
+    adjacent = _surface_adjacent_typed_wh_slot(nodes)
+    if adjacent:
+        return adjacent
+    return None
+
+
+def _surface_adjacent_typed_wh_slot(nodes: dict[str, TokenReasoningNode]) -> str | None:
+    by_index = {node.index: node for node in nodes.values()}
+    for node in _sorted_nodes(nodes.values()):
+        if node.text.lower() not in {"what", "which"}:
+            continue
+        next_node = by_index.get(node.index + 1)
+        if not next_node or next_node.kind != "content":
+            continue
+        if _is_punctuation(next_node.text) or next_node.text.lower() in WH_WORDS:
+            continue
+        return next_node.id
     return None
 
 
@@ -1084,6 +1101,7 @@ def _build_query_focus(
     nodes: dict[str, TokenReasoningNode],
     raw_edges: dict[tuple[str, str], TokenReasoningEdge],
     answer_anchor_id: str | None,
+    constraints: list[dict[str, Any]],
 ) -> _QueryFocus:
     typed_slot_id = _find_typed_wh_slot(nodes, raw_edges)
     query_root_id = _find_query_root(nodes, raw_edges)
@@ -1107,8 +1125,11 @@ def _build_query_focus(
     slot_id = typed_slot_id
     if typed_slot_id:
         mode = "typed_wh_slot"
-        terminal_id = typed_slot_id
+        order_terminal_id = _order_constraint_terminal_id(nodes, raw_edges, constraints)
+        terminal_id = order_terminal_id or typed_slot_id
         required_ids.append(typed_slot_id)
+        if order_terminal_id:
+            required_ids.append(order_terminal_id)
         if query_root_id and query_root_id != typed_slot_id:
             required_ids.append(query_root_id)
     elif query_root_id and answer_anchor_id and query_root_id != answer_anchor_id:
@@ -2148,6 +2169,9 @@ def _schema_focus_id(
     query_focus: _QueryFocus,
     constraints: list[dict[str, Any]],
 ) -> str | None:
+    order_terminal_id = _order_constraint_terminal_id(state.nodes, state.raw_edges, constraints)
+    if order_terminal_id:
+        return order_terminal_id
     for constraint in constraints:
         if constraint.get("type") == "order" and constraint.get("target_id") in state.nodes:
             return str(constraint["target_id"])
@@ -2158,6 +2182,82 @@ def _schema_focus_id(
     if query_focus.slot_id:
         return _candidate_focus(state.nodes, state.edges, query_focus.slot_id, constraints)
     return query_focus.terminal_id
+
+
+def _order_constraint_terminal_id(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    constraints: list[dict[str, Any]],
+) -> str | None:
+    candidates: list[tuple[float, tuple[int, str], str]] = []
+    for constraint in constraints:
+        if constraint.get("type") != "order":
+            continue
+        cue_id = str(constraint.get("node_id") or "")
+        target_id = str(constraint.get("target_id") or "")
+        if cue_id not in nodes or target_id not in nodes:
+            continue
+        score = _predicative_order_cue_score(nodes, raw_edges, cue_id, target_id)
+        if score <= 0.0:
+            continue
+        candidates.append((-score, _node_sort_key(nodes[cue_id]), cue_id))
+    return sorted(candidates)[0][2] if candidates else None
+
+
+def _predicative_order_cue_score(
+    nodes: dict[str, TokenReasoningNode],
+    raw_edges: dict[tuple[str, str], TokenReasoningEdge],
+    cue_id: str,
+    target_id: str,
+) -> float:
+    cue_target_score = 0.0
+    complement_score = 0.0
+    cue_idx = nodes[cue_id].index
+    target_idx = nodes[target_id].index
+    for edge in raw_edges.values():
+        for item in _raw_provenance(edge):
+            head_idx = _coerce_provenance_index(item.get("head_idx"))
+            dep_idx = _coerce_provenance_index(item.get("dep_idx"))
+            if head_idx is None or dep_idx is None:
+                continue
+            relation = str(item.get("normalized_relation") or item.get("relation") or "")
+            support = _coerce_float_value(item.get("support"), edge.support)
+            if _is_order_cue_target_evidence(relation, head_idx, dep_idx, cue_idx, target_idx):
+                cue_target_score += support
+            if _is_predicative_complement_evidence(relation, head_idx, dep_idx, cue_idx, nodes):
+                complement_score += support
+    if cue_target_score <= 0.0 or complement_score <= 0.0:
+        return 0.0
+    return cue_target_score + complement_score
+
+
+def _is_order_cue_target_evidence(
+    relation: str,
+    head_idx: int,
+    dep_idx: int,
+    cue_idx: int,
+    target_idx: int,
+) -> bool:
+    if head_idx != cue_idx or dep_idx != target_idx:
+        return False
+    key = _normalized_relation_key(relation)
+    return key in {"arg1", "verb_arg1", "adj_arg1", "act_arg"} or key.endswith("_arg1")
+
+
+def _is_predicative_complement_evidence(
+    relation: str,
+    head_idx: int,
+    dep_idx: int,
+    cue_idx: int,
+    nodes: dict[str, TokenReasoningNode],
+) -> bool:
+    if dep_idx != cue_idx:
+        return False
+    key = _normalized_relation_key(relation)
+    if key not in {"arg2", "verb_arg2", "pat_arg", "eff_arg", "compl"} and not key.endswith("_arg2"):
+        return False
+    head_node = nodes.get(str(head_idx))
+    return head_node is not None and head_node.kind in {"function", "content"}
 
 
 def _best_schema_path(state: _WorkingState, slot_id: str, focus_id: str) -> list[str]:
@@ -2265,9 +2365,12 @@ def _ensure_candidate_slot_edge(
         "rule": "candidate_slot_substitution",
         "typed_wh_slot_id": slot_id,
         "typed_wh_slot": state.nodes[slot_id].text,
+        "typed_wh_evidence": _typed_wh_slot_evidence(state, slot_id),
         "candidate_id": candidate_id,
         "candidate": state.nodes[candidate_id].text,
         "candidate_set": list(candidate_set),
+        "candidate_set_entity_ids": _candidate_text_set_to_ids(state.nodes, candidate_set),
+        "candidate_set_evidence": _candidate_set_coordination_evidence(state, candidate_set),
         "schema_path_ids": list(schema_path),
         "schema_path": [state.nodes[node_id].text for node_id in schema_path if node_id in state.nodes],
         "schema_edge": schema_edge.to_dict() if schema_edge else None,
@@ -2283,6 +2386,39 @@ def _ensure_candidate_slot_edge(
         provenance=[provenance],
     )
     state.virtual_edges.append(virtual.to_dict())
+
+
+def _typed_wh_slot_evidence(state: _WorkingState, slot_id: str) -> dict[str, Any]:
+    raw_edges: list[dict[str, Any]] = []
+    for edge in state.raw_edges.values():
+        if slot_id not in (edge.source, edge.target):
+            continue
+        if any(
+            isinstance(item, dict)
+            and (
+                str(item.get("head", "")).lower() in {"what", "which"}
+                or str(item.get("dep", "")).lower() in {"what", "which"}
+            )
+            for item in edge.provenance
+        ):
+            raw_edges.append(edge.to_dict())
+
+    surface_adjacency: dict[str, Any] | None = None
+    slot = state.nodes.get(slot_id)
+    if slot is not None:
+        previous = next((node for node in state.nodes.values() if node.index == slot.index - 1), None)
+        if previous is not None and previous.text.lower() in {"what", "which"}:
+            surface_adjacency = {
+                "rule": "surface_typed_wh_adjacency",
+                "wh_id": previous.id,
+                "wh": previous.text,
+                "slot_id": slot.id,
+                "slot": slot.text,
+            }
+    return {
+        "raw_edges": raw_edges,
+        "surface_adjacency": surface_adjacency,
+    }
 
 
 def _ensure_candidate_bare_wh_edge(

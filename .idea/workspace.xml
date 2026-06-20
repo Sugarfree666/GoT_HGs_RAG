@@ -6,7 +6,33 @@
   <component name="ChangeListManager">
     <list default="true" id="3a9a8072-ddae-4340-8354-17943ee9c24b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/depo/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/ast_validator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/atomic_evidence_extractor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/content_chain_compiler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/corenlp_parser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/dependency_graph_collapser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/entity_extractor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/entity_masking_preprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/entity_masking_preprocessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/entity_path_pipeline.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/entity_path_projector.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/graph_builder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/mask_span_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/mask_span_extractor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/path_projector.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/prompts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/question_normalizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/depo/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/sdp_dm_simplifier.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/subquestion_generator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/depo/surface_validator.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/depo/tri_sdp_reasoning_compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/depo/tri_sdp_reasoning_compiler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_dependency_graph_collapser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_depo_entity_origin_pipeline.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_depo_evidence_pipeline.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_depo_explicit_entities.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_depo_explicit_entities.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_depo_surface_realization.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_hanlp_sdp_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_hanlp_sdp_pipeline.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,23 +62,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0807720519148434" />
-      <entry key="MS500" value="1.6050302734937758" />
-      <entry key="S2" value="2.0276299168116196" />
-      <entry key="S5" value="2.4138957277068966" />
-      <entry key="S10" value="2.6555738645098437" />
-      <entry key="S30" value="2.8713168704898053" />
-      <entry key="S60" value="2.9989544651701685" />
-      <entry key="M2" value="4.9578807029282" />
-      <entry key="M5" value="21.98642886505102" />
-      <entry key="M10" value="46.1113708559265" />
-      <entry key="M15" value="60.27367578934198" />
-      <entry key="M30" value="79.55492675179923" />
-      <entry key="H1" value="91.72335223951298" />
-      <entry key="H2" value="98.57501816491157" />
-      <entry key="H4" value="102.21508861905502" />
-      <entry key="D1" value="159.71638248418907" />
-      <entry key="W1" value="1563.414211412104" />
+      <entry key="MS100" value="1.000268457878948" />
+      <entry key="MS500" value="1.2719722074658397" />
+      <entry key="S2" value="2.193215112997501" />
+      <entry key="S5" value="2.624301108375205" />
+      <entry key="S10" value="2.8019448566172" />
+      <entry key="S30" value="2.9315683982310583" />
+      <entry key="S60" value="2.9654729718800157" />
+      <entry key="M2" value="2.9826579416390535" />
+      <entry key="M5" value="2.993044230793102" />
+      <entry key="M10" value="2.9965196634150546" />
+      <entry key="M15" value="2.997916048363048" />
+      <entry key="M30" value="3.1111200756510757" />
+      <entry key="H1" value="6.362533936811488" />
+      <entry key="H2" value="23.16797008968196" />
+      <entry key="H4" value="53.34134862081562" />
+      <entry key="D1" value="158.2822578479861" />
+      <entry key="W1" value="1552.6041674223807" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -74,23 +100,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.0224726640813502" />
-      <entry key="MS500" value="1.5872352967709231" />
-      <entry key="S2" value="2.013789555678511" />
-      <entry key="S5" value="2.4005739976013736" />
-      <entry key="S10" value="2.6462286136860724" />
-      <entry key="S30" value="2.867379360611494" />
-      <entry key="S60" value="2.996858570786581" />
-      <entry key="M2" value="4.95670394486935" />
-      <entry key="M5" value="21.985605609247877" />
-      <entry key="M10" value="46.110713094228174" />
-      <entry key="M15" value="60.273141125497546" />
-      <entry key="M30" value="79.55459400252279" />
-      <entry key="H1" value="91.72316522904688" />
-      <entry key="H2" value="98.57491885074488" />
-      <entry key="H4" value="102.21503741905696" />
-      <entry key="D1" value="159.71637027876514" />
-      <entry key="W1" value="1563.4141938419664" />
+      <entry key="MS100" value="0.9077661471408315" />
+      <entry key="MS500" value="1.2480482145137368" />
+      <entry key="S2" value="2.1830564898824587" />
+      <entry key="S5" value="2.6194475074723536" />
+      <entry key="S10" value="2.799354707474318" />
+      <entry key="S30" value="2.9306652261736774" />
+      <entry key="S60" value="2.9650161783938374" />
+      <entry key="M2" value="2.982428224869459" />
+      <entry key="M5" value="2.9929520249272197" />
+      <entry key="M10" value="2.996473507083735" />
+      <entry key="M15" value="2.997885263748473" />
+      <entry key="M30" value="3.11110423035242" />
+      <entry key="H1" value="6.362519505988669" />
+      <entry key="H2" value="23.167946122929173" />
+      <entry key="H4" value="53.341321657162695" />
+      <entry key="D1" value="158.28224558252427" />
+      <entry key="W1" value="1552.6041499558837" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -231,7 +257,7 @@
       <workItem from="1781254262144" duration="52000" />
       <workItem from="1781254498723" duration="29682000" />
       <workItem from="1781504689194" duration="73338000" />
-      <workItem from="1781697068518" duration="27676000" />
+      <workItem from="1781697068518" duration="33441000" />
     </task>
     <servers />
   </component>

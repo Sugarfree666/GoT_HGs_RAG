@@ -16,13 +16,10 @@ if str(DEPO_ROOT) not in sys.path:
 
 from entity_masking_preprocessor import EntityMaskingPreprocessor  # noqa: E402
 from main import (  # noqa: E402
-    print_corenlp_dependency_result,
     print_hanlp_sdp_result,
-    run_corenlp_dependency_pipeline,
     run_hanlp_sdp_pipeline,
 )
-from models import CoreNLPToken, DependencyEdge, DependencyParse, HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
-from sdp_dm_simplifier import SDPDMSimplifier  # noqa: E402
+from models import HanLPSDPEdge, HanLPSDPResult, QuestionRecord  # noqa: E402
 from tri_sdp_reasoning_compiler import compile_token_reasoning_structure  # noqa: E402
 
 
@@ -87,56 +84,6 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertNotIn("[Kept / Derived Edges]", output)
         self.assertNotIn("older --ARG2--> ENTITYA", output)
         self.assertNotIn("older --ARG1--> ANSWER\n", output)
-        self.assertNotIn("Relation-Carrier Declarative Views", output)
-        self.assertNotIn("CoreNLP + OpenIE View Annotations", output)
-        self.assertNotIn("Semantic Reasoning Path Induction", output)
-        self.assertNotIn("Semantic-Path-Guided Atomic DAG", output)
-
-    def test_corenlp_mainline_reuses_hanlp_preprocess_and_stops_after_dependency_parse(self) -> None:
-        record = QuestionRecord(question="Who is older, Ryan Tubridy or Mauro Massironi?")
-        parser = FakeCoreNLPParser()
-        llm = FakePreprocessLLM()
-        preprocessor = EntityMaskingPreprocessor(llm)
-
-        result = run_corenlp_dependency_pipeline(
-            record=record,
-            index=1,
-            preprocessor=preprocessor,
-            parser=parser,
-        )
-
-        preprocess_result = result["preprocess_result"]
-        self.assertEqual(preprocess_result.masked_question, "Who is older, ENTITYA or ENTITYB?")
-        self.assertEqual(preprocess_result.sdp_input_sentence, "Who is older, ENTITYA or ENTITYB?")
-        self.assertEqual(result["corenlp_input_sentence"], "Who is older, ENTITYA or ENTITYB?")
-        self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
-        self.assertEqual(llm.calls, 1)
-        self.assertNotIn("corenlp_view_annotations", result)
-        self.assertNotIn("dependency_graph", result)
-        self.assertNotIn("atomic_evidences", result)
-        self.assertNotIn("semantic_reasoning_paths", result)
-        self.assertNotIn("subquestion_dag", result)
-
-        stream = io.StringIO()
-        with redirect_stdout(stream):
-            print_corenlp_dependency_result(1, record, result)
-        output = stream.getvalue()
-
-        self.assertIn("[Original Question]", output)
-        self.assertIn("[1. Explicit Entities]", output)
-        self.assertIn(" - Ryan Tubridy", output)
-        self.assertNotIn(" - Ryan Tubridy [Person]", output)
-        self.assertIn("[2. Entity Masking]", output)
-        self.assertIn("Masked question: Who is older, ENTITYA or ENTITYB?", output)
-        self.assertNotIn("SDP input sentence:", output)
-        self.assertIn("CoreNLP input sentence: Who is older, ENTITYA or ENTITYB?", output)
-        self.assertIn("[3. CoreNLP Dependency Parsing]", output)
-        self.assertIn("[CoreNLP Dependency Edges]", output)
-        self.assertIn("older[3] --nsubj--> Who[1]", output)
-        self.assertNotIn("[4.", output)
-        self.assertNotIn("CoreNLP + OpenIE View Annotations", output)
-        self.assertNotIn("Semantic Reasoning Path Induction", output)
-        self.assertNotIn("Semantic-Path-Guided Atomic DAG", output)
 
     def test_preprocessor_smoke_examples(self) -> None:
         cases = [
@@ -221,6 +168,26 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("DEPO Step 2: topic entity extraction", llm.system_prompt)
         self.assertNotIn("semantic_type_hint", llm.user_prompt)
 
+    def test_preprocessor_recovers_numeric_title_in_typed_comparison_list(self) -> None:
+        question = "Which film came out first, 3 Dots or Dying God?"
+        llm = StaticPreprocessLLM(
+            {
+                "entities": [_entity(question, "Dying God", "Film")],
+                "warnings": [],
+            }
+        )
+
+        result = EntityMaskingPreprocessor(llm).preprocess(question)
+
+        self.assertEqual([entity.text for entity in result.explicit_entities.entities], ["3 Dots", "Dying God"])
+        self.assertEqual(result.masked_question, "Which film came out first, ENTITYA or ENTITYB?")
+        self.assertEqual(
+            [(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings],
+            [("ENTITYA", "3 Dots"), ("ENTITYB", "Dying God")],
+        )
+        self.assertNotIn("Dots or Dying God", [entity.text for entity in result.explicit_entities.entities])
+        self.assertIn("typed coordinate title candidate", result.explicit_entities.entities[0].reason)
+
     def test_preprocessor_ignores_legacy_mask_fields_but_accepts_legacy_entities(self) -> None:
         question = "Who is the spouse of Young Man Luther's author?"
         llm = StaticPreprocessLLM(
@@ -236,83 +203,6 @@ class HanLPSDPMainlineTest(unittest.TestCase):
 
         self.assertEqual(result.masked_question, "Who is the spouse of ENTITYA's author?")
         self.assertEqual([(mapping.placeholder, mapping.original_text) for mapping in result.mask_mappings], [("ENTITYA", "Young Man Luther")])
-
-    def test_sdp_dm_simplifier_removes_glue_and_keeps_core_edges(self) -> None:
-        result = HanLPSDPResult(
-            text="ANSWER is whether the directors of film ENTITYA and ENTITYB share the same nationality.",
-            tokens=[],
-            available_keys=["tok", "sdp/dm"],
-            sdp_graphs={"sdp/dm": []},
-            edges=[
-                _dm("is", "ARG1", "ANSWER", 2, 1),
-                _dm("the", "BV", "directors", 4, 5),
-                _dm("share", "ARG1", "directors", 11, 5),
-                _dm("directors", "ARG1", "ENTITYA", 5, 8),
-                _dm("film", "compound", "ENTITYA", 7, 8),
-                _dm("ENTITYA", "_and_c", "ENTITYB", 8, 10),
-                _dm("is", "ARG2", "share", 2, 11),
-                _dm("share", "ARG2", "nationality", 11, 14),
-                _dm("the", "BV", "nationality", 12, 14),
-                _dm("same", "ARG1", "nationality", 13, 14),
-                HanLPSDPEdge("sdp/pas", 11, "share", "ARG0", 5, "directors"),
-            ],
-            raw={},
-        )
-
-        graph = SDPDMSimplifier().simplify(result)
-
-        self.assertEqual(
-            [edge.display() for edge in graph.edges],
-            [
-                "share --ARG1--> directors",
-                "directors --ARG1--> ENTITYA",
-                "ENTITYA --_and_c--> ENTITYB",
-                "share --ARG2--> nationality",
-                "same --ARG1--> nationality",
-            ],
-        )
-        self.assertIn("is --ARG1--> ANSWER", graph.removed_edges)
-        self.assertIn("is --ARG2--> share", graph.removed_edges)
-        self.assertIn("the --BV--> directors", graph.removed_edges)
-        self.assertIn("film --compound--> ENTITYA", graph.removed_edges)
-        self.assertNotIn("share --ARG0--> directors", [edge.display() for edge in graph.edges])
-
-    def test_sdp_dm_simplifier_collapses_preposition_arg_pairs(self) -> None:
-        result = HanLPSDPResult(
-            text="The sister of ANSWER played Susie in ENTITYA.",
-            tokens=[],
-            available_keys=["tok", "sdp/dm"],
-            sdp_graphs={"sdp/dm": []},
-            edges=[
-                _dm("The", "BV", "sister", 1, 2),
-                _dm("of", "ARG1", "sister", 3, 2),
-                _dm("played", "ARG1", "sister", 5, 2),
-                _dm("of", "ARG2", "ANSWER", 3, 4),
-                _dm("in", "ARG1", "played", 7, 5),
-                _dm("played", "ARG2", "Susie", 5, 6),
-                _dm("in", "ARG2", "ENTITYA", 7, 8),
-            ],
-            raw={},
-        )
-
-        graph = SDPDMSimplifier().simplify(result)
-
-        self.assertEqual(
-            [edge.display() for edge in graph.edges],
-            [
-                "played --in--> ENTITYA",
-                "played --ARG1--> sister",
-                "played --ARG2--> Susie",
-            ],
-        )
-        derived = [edge for edge in graph.edges if edge.derived]
-        self.assertEqual([edge.rule for edge in derived], ["collapse_preposition_arg_pair"])
-        self.assertIn("in --ARG1--> played", derived[0].provenance)
-        self.assertIn("in --ARG2--> ENTITYA", derived[0].provenance)
-        self.assertIn("of --ARG1--> sister", graph.removed_edges)
-        self.assertIn("of --ARG2--> ANSWER", graph.removed_edges)
-        self.assertIn("The --BV--> sister", graph.removed_edges)
-
 
 class TriSDPReasoningCompilerTest(unittest.TestCase):
     def test_dell_constraint_entity_does_not_enter_main_path(self) -> None:
@@ -430,6 +320,66 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertTrue(all(edge.provenance for edge in substitution_edges))
         self.assert_path_union_graph(compiled)
 
+    def test_candidate_comparison_recovers_surface_typed_wh_slot(self) -> None:
+        result = self._which_film_director_younger_result()
+        self.assertFalse(any(edge.head == "Which" and edge.dep == "film" for edge in result.edges))
+
+        compiled = compile_token_reasoning_structure(result, ["ENTITYA", "ENTITYB"])
+
+        self.assertEqual(compiled.answer_anchor, "film")
+        self.assertEqual(compiled.path_type, "candidate_path_cover")
+        self.assertEqual([path.node_ids for path in compiled.paths], [["8", "4", "6"], ["10", "4", "6"]])
+        self.assertEqual([path.nodes for path in compiled.paths], [["ENTITYA", "director", "younger"], ["ENTITYB", "director", "younger"]])
+        self.assertEqual(compiled.entity_anchors, ["ENTITYA", "ENTITYB"])
+        self.assertIn(["ENTITYA", "ENTITYB"], compiled.candidate_sets)
+        self.assertTrue(all(len(path.node_ids) == len(set(path.node_ids)) for path in compiled.paths))
+        self.assert_path_union_graph(compiled)
+
+        substitution_edges = [edge for edge in compiled.edges if "candidate_slot_substitution" in edge.rule]
+        self.assertEqual(len(substitution_edges), 2)
+        for edge in substitution_edges:
+            provenance = edge.provenance[0]
+            self.assertEqual(provenance["typed_wh_slot_id"], "2")
+            self.assertEqual(provenance["schema_path_ids"], ["2", "4", "6"])
+            self.assertEqual(provenance["typed_wh_evidence"]["surface_adjacency"]["slot"], "film")
+            self.assertTrue(provenance["candidate_set_evidence"])
+
+    def test_surface_typed_wh_adjacency_positive_and_negative_cases(self) -> None:
+        what_year = _hanlp_result(
+            "What year was ENTITYA born?",
+            ["What", "year", "was", "ENTITYA", "born", "?"],
+            [
+                _root("sdp/dm", "born", 5),
+                _dm("born", "ARG1", "ENTITYA", 5, 4),
+                _dm("born", "TWHEN", "year", 5, 2),
+            ],
+        )
+        self.assertEqual(compile_token_reasoning_structure(what_year, ["ENTITYA"]).answer_anchor, "year")
+
+        what_does = _hanlp_result(
+            "What does ENTITYA call target?",
+            ["What", "does", "ENTITYA", "call", "target", "?"],
+            [
+                _root("sdp/dm", "call", 4),
+                _dm("call", "ARG1", "What", 4, 1),
+                _dm("call", "ARG2", "target", 4, 5),
+                _dm("call", "ARG1", "ENTITYA", 4, 3),
+            ],
+        )
+        self.assertNotEqual(compile_token_reasoning_structure(what_does, ["ENTITYA"]).answer_anchor, "does")
+
+        which_of = _hanlp_result(
+            "Which of ENTITYA is older?",
+            ["Which", "of", "ENTITYA", "is", "older", "?"],
+            [
+                _root("sdp/dm", "older", 5),
+                _dm("older", "ARG1", "ENTITYA", 5, 3),
+            ],
+        )
+        compiled_which_of = compile_token_reasoning_structure(which_of, ["ENTITYA"])
+        self.assertNotEqual(compiled_which_of.answer_anchor, "of")
+        self.assertNotEqual(compiled_which_of.answer_anchor, "ENTITYA")
+
     def test_bare_wh_candidate_substitution_born_later(self) -> None:
         result = self._born_later_result()
         self.assertFalse(any(edge.head_idx == 0 for edge in result.edges))
@@ -518,6 +468,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
         self.assertEqual(compile_token_reasoning_structure(self._typed_year_result(), ["ENTITYA"]).answer_anchor, "year")
         self.assertEqual(compile_token_reasoning_structure(self._nationality_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "nationality")
         self.assertEqual(compile_token_reasoning_structure(self._born_later_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "born")
+        self.assertEqual(compile_token_reasoning_structure(self._which_film_director_younger_result(), ["ENTITYA", "ENTITYB"]).answer_anchor, "film")
 
     def test_broadcaster_headquarters_remains_single_main_path(self) -> None:
         result = self._broadcaster_result()
@@ -591,6 +542,7 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
             (self._johnny_result(), ["ENTITYA", "ENTITYB"]),
             (self._nationality_result(), ["ENTITYA", "ENTITYB"]),
             (self._film_director_died_result(), ["ENTITYA", "ENTITYB"]),
+            (self._which_film_director_younger_result(), ["ENTITYA", "ENTITYB"]),
             (self._born_later_result(), ["ENTITYA", "ENTITYB"]),
             (self._director_born_result(), ["ENTITYA"]),
         ]
@@ -730,6 +682,24 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
                 _psd("or", "DISJ.member", "ENTITYA", 11, 10),
                 _psd("or", "DISJ.member", "ENTITYB", 11, 12),
                 _psd("director", "RSTR", "died", 5, 7),
+            ],
+        )
+
+    def _which_film_director_younger_result(self) -> HanLPSDPResult:
+        return _hanlp_result(
+            "Which film whose director is younger, ENTITYA or ENTITYB?",
+            ["Which", "film", "whose", "director", "is", "younger", ",", "ENTITYA", "or", "ENTITYB", "?"],
+            [
+                _dm("film", "poss", "director", 2, 4),
+                _pas("director", "ARG1", "film", 4, 2),
+                _dm("younger", "ARG1", "director", 6, 4),
+                _psd("younger", "adj_ARG1", "director", 6, 4),
+                _pas("is", "verb_ARG2", "younger", 5, 6),
+                _psd("is", "PAT-arg", "younger", 5, 6),
+                _pas("or", "coord_ARG1", "ENTITYA", 9, 8),
+                _pas("or", "coord_ARG2", "ENTITYB", 9, 10),
+                _psd("or", "DISJ.member", "ENTITYA", 9, 8),
+                _psd("or", "DISJ.member", "ENTITYB", 9, 10),
             ],
         )
 
@@ -926,24 +896,6 @@ class FakeHanLPSDPParser:
             warnings=[],
             model="fake.hanlp.model",
             mask_token_checks={placeholder: "OK" for placeholder in self.placeholders},
-        )
-
-
-class FakeCoreNLPParser:
-    def __init__(self) -> None:
-        self.text = ""
-
-    def parse(self, text: str) -> DependencyParse:
-        self.text = text
-        tokens = ["Who", "is", "older", ",", "ENTITYA", "or", "ENTITYB", "?"]
-        return DependencyParse(
-            tokens=[CoreNLPToken(index=index, word=word) for index, word in enumerate(tokens, start=1)],
-            edges=[
-                DependencyEdge("older", "nsubj", "Who", 3, 1),
-                DependencyEdge("older", "cop", "is", 3, 2),
-                DependencyEdge("older", "obj", "ENTITYA", 3, 5),
-                DependencyEdge("ENTITYA", "conj:or", "ENTITYB", 5, 7),
-            ],
         )
 
 

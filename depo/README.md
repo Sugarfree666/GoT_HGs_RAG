@@ -1,150 +1,82 @@
-# DEPO Question Decomposition Pipeline
+# DEPO HanLP-SDP Pipeline
 
-This project implements a DEPO-style question decomposition pipeline where the
-dependency graph stays aligned to a selectively masked CoreNLP parse, while LLM
-anchor decisions are made on restored original question text.
+DEPO is now a single HanLP-SDP mainline:
 
-## Architecture
+```text
+original question
+-> explicit entity detection
+-> deterministic ENTITYA/ENTITYB/... masking
+-> HanLP DM/PAS/PSD parsing
+-> query-focused token reasoning structure
+```
 
-1. **Semantic-normalized question**
-   The question is lightly normalized for parser stability while preserving the
-   original semantic content.
+The LLM is used only for explicit entity span detection. Placeholder assignment,
+overlap removal, and `masked_question` construction are deterministic Python
+logic. Step 4 consumes all three HanLP SDP views and emits a compact token graph
+plus a selected main path or parallel path cover.
 
-2. **Explicit entity detection**
-   The LLM only identifies explicit named entities in the original question. It
-   does not extract type variables, roles, relation phrases, answer slots,
-   operators, parser-protection phrases, AST nodes, or subquestions. Single-token
-   concrete entities such as `AlphaGo`, `Marufabad`, and `Phoolwari` are valid
-   entities.
+## Output Shape
 
-3. **Entity masking**
-   The program masks all detected explicit entities, including single-token
-   entities, using POS-hint placeholders such as `PersonA`, `FilmA`,
-   `LocationA`, `GameA`, `WorkA`, or `EntityA`. Possessive suffixes outside the
-   entity span are preserved, e.g. `John Middleton Murry's` becomes
-   `PersonA's`.
+The CLI prints:
 
-4. **CoreNLP parse**
-   CoreNLP parses the fully entity-masked question. The masked placeholders remain the
-   internal graph tokens so token indices and dependency node IDs stay stable.
+1. Original Question
+2. Explicit Entities
+3. Entity Masking
+4. HanLP SDP Parsing
+5. Token Reasoning Structure
 
-5. **Undirected dependency graph and restored graph**
-   The CoreNLP dependency parse is converted to an unweighted undirected graph.
-   Edge metadata preserves the original directed dependency labels for evidence
-   and later LLM prompts. Graph node candidates are restored for LLM display. The internal graph still
-   contains placeholders like `MovieA`, but the LLM sees candidate text directly
-   from the original question:
+Step 4 is query-focused and stops at the token reasoning graph/path-cover
+structure.
 
-   ```json
-   {"node_id": "8", "text": "Ten9Eight: Shoot For The Moon"}
-   ```
+## Install
 
-   It is never rendered as `MovieA [Ten9Eight: Shoot For The Moon]`.
+```powershell
+pip install -r depo/requirements.txt
+```
 
-6. **Entity start mapping**
-   Entity start nodes are not re-detected. They are deterministically built from
-   Step 2 explicit entity mappings and the corresponding placeholder graph
-   nodes. There is no POS/proper-noun fallback in the main flow, so role or slot
-   words such as `author`, `director`, `CEO`, `company`, and `nationality` cannot
-   become entity starts unless Step 2 explicitly identified them as concrete
-   named entities.
-
-7. **Entity-origin path enumeration**
-   For each entity start node, the program enumerates bounded simple paths from
-   that entity over the undirected dependency graph. Paths may include syntactic
-   noise such as determiners, prepositions, wh words, and punctuation because the
-   later grounded DAG stage uses them as evidence. Prompt size is controlled by
-   scoring and keeping the most useful paths per entity.
-
-8. **LLM path scoring**
-   The LLM receives grouped entity-origin paths and scores every path
-   independently. It does not choose a single final path, generate candidate
-   nodes, create a Problem Frame, build an AST, or generate atomic questions.
-
-8.1. **Highest-scored path per entity**
-   The program selects exactly one path for each explicit entity: the
-   highest-scoring valid path, with fallback to the highest-scoring raw path if
-   no valid high-scoring path exists.
-
-8.2. **Selected path set**
-   The selected best paths for all entities are combined into exactly one path
-   set, `ps1`. For a two-entity question this means the two highest-scoring
-   entity-specific paths are used directly.
-
-9. **Semantic Reasoning Path induction**
-   The selected dependency paths are first decomposed into local atomic
-   evidences. Step 9 LLM receives only the original question and those atomic
-   evidences. Raw selected dependency paths are not sent to the Step 9 prompt.
-   Atomic evidences are local structural evidence, not semantic edges. The LLM
-   induces branch-level Semantic Reasoning Paths under the original question
-   semantics. These paths are not dependency paths and are not a Semantic AST:
-   their nodes are semantic objects such as explicit entities, licensed
-   intermediate objects (`performer`, `director`, `company`, `CEO`), or value
-   slots (`nationality`, `birth_date`, `death_place`, `university`). Their edges
-   are executable one-hop semantic relations such as `performer of song` or
-   `place of death`, and every semantic edge must cite non-empty
-   `supported_by` atomic evidence ids. Final comparison, ranking, boolean,
-   intersection, and common-answer intent is stored only as metadata for
-   downstream composition.
-
-10. **Atomic DAG compilation**
-   The LLM compiles the Semantic Reasoning Paths directly into the final Atomic
-   Subquestion DAG. The DAG contains only one-hop lookup subquestions and
-   explicit dependencies between them. Each atomic node remains traceable to
-   `source_semantic_path_id` and `source_semantic_edge_id`. Final comparison,
-   ranking, set, boolean, or synthesis reasoning is left to the HyperBranch
-   final answer composer, which receives the original question plus atomic
-   answers and evidence.
+HanLP may download its configured model on first use. Set `HANLP_HOME` if you
+want to control the cache directory, or pass `--hanlp-model` with a local model
+path or HanLP pretrained constant.
 
 ## Run
 
-Install dependencies:
+Run one question from the repository root:
 
 ```powershell
-pip install -r requirements.txt
+python depo/main.py --question "Where was the director of film The Outlaw Express born?"
 ```
 
-Install Stanford CoreNLP for Stanza once:
+Run a questions file:
 
 ```powershell
-python -c "import stanza; stanza.install_corenlp()"
+python depo/main.py --questions-file questions/hotpotqa/questions.json
 ```
 
-Run `questions.json`:
+Enable Step 4 debug JSON:
 
 ```powershell
-python main.py
+python depo/main.py --debug --debug-dir debug/hanlp_sdp --question "Who was born later, ENTITYA or ENTITYB?"
 ```
 
-Run one question:
+Useful options:
 
-```powershell
-python main.py --question "Do director of film Ten9Eight: Shoot For The Moon and director of film Sabotage (1936 Film) share the same nationality?"
-```
-
-Run with detailed intermediate output:
-
-```powershell
-python main.py --debug --question "Which actor is older?"
-```
-
-If Stanza cannot find CoreNLP, pass the CoreNLP directory:
-
-```powershell
-python main.py --corenlp-home "C:\path\to\corenlp"
-```
-
-If a managed port is occupied, choose another endpoint:
-
-```powershell
-python main.py --corenlp-url "http://localhost:9007"
+```text
+--question
+--questions-file
+--api-key
+--base-url
+--hanlp-model
+--debug
+--debug-dir
 ```
 
 ## Tests
 
-The unit tests use mocked `DependencyParse` objects and fake LLM clients; they
-do not require a live CoreNLP server.
+DEPO unit tests use mocked HanLP SDP results and fake LLM clients; they do not
+require a live HanLP model.
 
 ```powershell
-python -m unittest
+python -m unittest tests.test_hanlp_sdp_pipeline
+python -m unittest discover -s tests
+python -m compileall depo tests
 ```

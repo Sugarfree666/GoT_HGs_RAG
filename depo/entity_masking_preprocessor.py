@@ -19,10 +19,10 @@ class EntityMaskingPreprocessor:
     """
 
     def __init__(self, llm_client: "LLMClient | None" = None) -> None:
-        self.entity_extractor = ExplicitEntityExtractor(llm_client)
+        self.explicit_extractor = ExplicitEntityExtractor(llm_client)
 
     def preprocess(self, question: str) -> HanLPSDPPreprocessResult:
-        explicit_entities = self.entity_extractor.extract(question)
+        explicit_entities = self.explicit_extractor.extract(question)
         masked_question = _masked_question_from_entities(question, explicit_entities.entities)
         mask_mappings = _mask_mappings_from_entities(masked_question, explicit_entities.entities)
         _validate_preprocess_result(

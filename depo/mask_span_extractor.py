@@ -4,13 +4,10 @@ import re
 import unicodedata
 from typing import TYPE_CHECKING, Any
 
-from entity_extractor import normalize_semantic_type
 from models import ExplicitEntity, ExplicitEntityResult, MaskSpan, MaskSpanResult
 from prompts import (
     EXPLICIT_ENTITY_EXTRACTION_SYSTEM,
-    MASK_SPAN_EXTRACTION_SYSTEM,
     build_explicit_entity_extraction_prompt,
-    build_mask_span_extraction_prompt,
 )
 
 if TYPE_CHECKING:
@@ -251,7 +248,7 @@ class ExplicitEntityExtractor:
                     base_entities = deterministic_candidates
                 return ExplicitEntityResult(
                     entities=_merge_explicit_entities(
-                        _with_coordinated_designation_entities(
+                        _with_structural_explicit_entities(
                             question,
                             base_entities,
                             warnings,
@@ -266,7 +263,7 @@ class ExplicitEntityExtractor:
 
         return ExplicitEntityResult(
             entities=_merge_explicit_entities(
-                _with_coordinated_designation_entities(
+                _with_structural_explicit_entities(
                     question,
                     deterministic_candidates,
                     warnings,
@@ -358,10 +355,10 @@ class MaskSpanExtractor:
     """Compatibility wrapper for the new explicit-entity Step 2."""
 
     def __init__(self, llm_client: "LLMClient | None" = None) -> None:
-        self.entity_extractor = ExplicitEntityExtractor(llm_client)
+        self.explicit_extractor = ExplicitEntityExtractor(llm_client)
 
     def extract(self, question: str) -> MaskSpanResult:
-        result = self.entity_extractor.extract(question)
+        result = self.explicit_extractor.extract(question)
         return MaskSpanResult(
             mask_spans=_mask_spans_from_explicit_entities(result.entities),
             warnings=result.warnings,
@@ -498,6 +495,15 @@ def _looks_like_single_token_entity_candidate(
     return False
 
 
+def _with_structural_explicit_entities(
+    question: str,
+    entities: list[ExplicitEntity],
+    warnings: list[str],
+) -> list[ExplicitEntity]:
+    entities = _with_coordinated_designation_entities(question, entities, warnings)
+    return _with_typed_coordinate_title_entities(question, entities, warnings)
+
+
 def _with_coordinated_designation_entities(
     question: str,
     entities: list[ExplicitEntity],
@@ -512,6 +518,38 @@ def _with_coordinated_designation_entities(
             warnings.append(f"Added complete coordinated named designation entity text={entity.text!r}.")
             entities.append(entity)
     return entities
+
+
+def _with_typed_coordinate_title_entities(
+    question: str,
+    entities: list[ExplicitEntity],
+    warnings: list[str],
+) -> list[ExplicitEntity]:
+    additions = _typed_coordinate_title_entities(question)
+    if not additions:
+        return entities
+    existing_spans = {(entity.start_char, entity.end_char) for entity in entities}
+    for entity in additions:
+        if (entity.start_char, entity.end_char) in existing_spans:
+            continue
+        warnings.append(f"Added typed coordinate title candidate entity text={entity.text!r}.")
+        entities.append(entity)
+        existing_spans.add((entity.start_char, entity.end_char))
+    return entities
+
+
+def _typed_coordinate_title_entities(question: str) -> list[ExplicitEntity]:
+    return [
+        ExplicitEntity(
+            text=span.text,
+            start_char=span.start_char,
+            end_char=span.end_char,
+            semantic_type_hint=span.semantic_type_hint,
+            confidence=0.82,
+            reason=span.reason,
+        )
+        for span in _typed_coordinate_title_spans(question)
+    ]
 
 
 def _coordinated_designation_entities(question: str) -> list[ExplicitEntity]:
@@ -690,7 +728,8 @@ def _normalize_entity_type(value: Any) -> str:
     raw = str(value or "").strip()
     if not raw:
         return "Entity"
-    normalized = normalize_semantic_type(raw, "entity")
+    words = re.findall(r"[A-Za-z0-9]+", raw)
+    normalized = "".join(word[:1].upper() + word[1:] for word in words) if words else "Entity"
     aliases = {
         "Movie": "Film",
         "Place": "Location",
@@ -871,6 +910,7 @@ def _heuristic_mask_spans(question: str) -> list[MaskSpan]:
     spans.extend(_coordinated_designation_mask_spans(question))
     spans.extend(_colon_title_entity_spans(question))
     spans.extend(_title_spans_after_type_heads(question))
+    spans.extend(_typed_coordinate_title_spans(question))
     spans.extend(_parenthetical_entity_spans(question))
     spans.extend(_quoted_spans(question))
     spans.extend(_person_name_token_spans(question))
@@ -951,6 +991,70 @@ def _title_spans_after_type_heads(question: str) -> list[MaskSpan]:
                 )
             )
     return spans
+
+
+def _typed_coordinate_title_spans(question: str) -> list[MaskSpan]:
+    spans: list[MaskSpan] = []
+    type_pattern = "|".join(re.escape(head) for head in sorted(TITLE_HEADS, key=len, reverse=True))
+    for comma in re.finditer(",", question):
+        prefix = question[: comma.start()]
+        type_matches = list(re.finditer(rf"\b(?P<head>{type_pattern})\b", prefix, flags=re.IGNORECASE))
+        if not type_matches or not re.search(r"\b(?:which|what)\b", prefix, flags=re.IGNORECASE):
+            continue
+        head = type_matches[-1].group("head").lower()
+        tail_start = comma.end()
+        tail_end = _coordinate_tail_end(question, tail_start)
+        for start, end in _or_coordinate_parts(question, tail_start, tail_end):
+            start, end = _trim_explicit_entity_boundary(question, start, end)
+            if end <= start:
+                continue
+            text = question[start:end]
+            if not _looks_like_typed_coordinate_title_candidate(text):
+                continue
+            spans.append(
+                MaskSpan(
+                    text=text,
+                    start_char=start,
+                    end_char=end,
+                    kind_hint="entity",
+                    semantic_type_hint=TITLE_HEADS.get(head, "Work"),
+                    reason="typed coordinate title candidate",
+                )
+            )
+    return spans
+
+
+def _coordinate_tail_end(question: str, start: int) -> int:
+    match = re.search(r"[?;]", question[start:])
+    if match:
+        return start + match.start()
+    return len(question)
+
+
+def _or_coordinate_parts(question: str, start: int, end: int) -> list[tuple[int, int]]:
+    parts: list[tuple[int, int]] = []
+    cursor = start
+    for match in re.finditer(r"\s+or\s+", question[start:end], flags=re.IGNORECASE):
+        split_start = start + match.start()
+        split_end = start + match.end()
+        parts.append((cursor, split_start))
+        cursor = split_end
+    parts.append((cursor, end))
+    return parts
+
+
+def _looks_like_typed_coordinate_title_candidate(text: str) -> bool:
+    stripped = text.strip()
+    if _is_forbidden_explicit_entity(stripped) or _starts_with_wh_span_word(stripped):
+        return False
+    if _token_count(stripped) < 2:
+        return False
+    if not re.search(r"[A-Z0-9:()\"']", stripped):
+        return False
+    lowered_tokens = {token.lower() for token in re.findall(UNICODE_WORD_TOKEN_PATTERN, stripped)}
+    if lowered_tokens and lowered_tokens <= CLAUSE_BOUNDARY:
+        return False
+    return True
 
 
 def _find_title_end(question: str, start: int) -> int:
@@ -1452,7 +1556,14 @@ def _infer_semantic_type(
         and _question_has_human_context(question, start, end)
     ):
         return "Person"
-    return normalize_semantic_type(text, "entity" if kind_hint == "entity" else "type_variable")
+    return _normalize_entity_type(text) if kind_hint == "entity" else _normalize_type_variable(text)
+
+
+def _normalize_type_variable(text: str) -> str:
+    words = re.findall(r"[A-Za-z0-9]+", text.strip())
+    if not words:
+        return "Variable"
+    return "".join(word[:1].upper() + word[1:] for word in words)
 
 
 def _semantic_type_from_local_context(
