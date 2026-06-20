@@ -44,7 +44,7 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertEqual(parser.placeholders, ["ENTITYA", "ENTITYB"])
         self.assertEqual(result["hanlp_input_sentence"], "Who is older, ENTITYA or ENTITYB?")
         self.assertEqual(parser.text, "Who is older, ENTITYA or ENTITYB?")
-        self.assertEqual(llm.calls, 1)
+        self.assertEqual(llm.calls, 2)
 
         stream = io.StringIO()
         with redirect_stdout(stream):
@@ -79,6 +79,11 @@ class HanLPSDPMainlineTest(unittest.TestCase):
         self.assertIn("P2: ENTITYB ---- older", output)
         self.assertIn("answer_anchor: older", output)
         self.assertIn("entity_anchors: ENTITYA, ENTITYB", output)
+        self.assertIn("[5. Atomic Question DAG]", output)
+        self.assertIn("q1: When was Ryan Tubridy born?", output)
+        self.assertIn("q2: When was Mauro Massironi born?", output)
+        self.assertIn("support: P1[0:1]", output)
+        self.assertIn("support: P2[0:1]", output)
         self.assertNotIn("[4. Content Reasoning Chains]", output)
         self.assertNotIn("[4. Simplified SDP/DM Graph]", output)
         self.assertNotIn("[Kept / Derived Edges]", output)
@@ -820,9 +825,35 @@ class TriSDPReasoningCompilerTest(unittest.TestCase):
 class FakePreprocessLLM:
     def __init__(self) -> None:
         self.calls = 0
+        self.step5_user_prompt = ""
 
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict[str, object]:
         self.calls += 1
+        if "DEPO Step 5" in system_prompt:
+            self.step5_user_prompt = user_prompt
+            payload = json.loads(user_prompt)
+            assert set(payload) == {"original_question", "paths"}
+            serialized = json.dumps(payload, ensure_ascii=False)
+            assert "ENTITYA" not in serialized
+            assert "ENTITYB" not in serialized
+            assert "masked_question" not in serialized
+            assert "answer_anchor" not in serialized
+            return {
+                "nodes": [
+                    {
+                        "id": "q1",
+                        "question": "When was Ryan Tubridy born?",
+                        "depends_on": [],
+                        "support": {"path_id": "P1", "start_index": 0, "end_index": 1},
+                    },
+                    {
+                        "id": "q2",
+                        "question": "When was Mauro Massironi born?",
+                        "depends_on": [],
+                        "support": {"path_id": "P2", "start_index": 0, "end_index": 1},
+                    },
+                ]
+            }
         assert "DEPO Step 2: topic entity extraction" in system_prompt
         assert "Deterministic entity candidates" in user_prompt
         assert "Who is older, Ryan Tubridy or Mauro Massironi?" in user_prompt

@@ -36,6 +36,7 @@ def parse_args() -> argparse.Namespace:
         default="debug/hanlp_sdp",
         help="Directory for HanLP Tri-SDP debug JSON files when --debug is enabled.",
     )
+    parser.add_argument("--skip-step5", action="store_true", help="Run only entity masking, HanLP SDP parsing, and Step4.")
     return parser.parse_args()
 
 
@@ -50,10 +51,10 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
     base_url = os.getenv("OPENAI_BASE_URL") or args.base_url
     if not api_key:
         print(
-            "This HanLP SDP branch requires one LLM call for explicit entity masking.",
+            "This HanLP SDP branch requires LLM calls for explicit entity masking and Step5 DAG generation.",
             file=sys.stderr,
         )
-        print("Set OPENAI_API_KEY or pass --api-key.", file=sys.stderr)
+        print("Set OPENAI_API_KEY or pass --api-key. --skip-step5 only disables the Step5 LLM call.", file=sys.stderr)
         return 2
 
     try:
@@ -77,6 +78,8 @@ def _run_hanlp_sdp_cli(args: argparse.Namespace, records: list[QuestionRecord]) 
                 parser=parser,
                 debug=args.debug,
                 debug_dir=args.debug_dir,
+                llm_client=llm_client,
+                skip_step5=args.skip_step5,
             )
             print_hanlp_sdp_result(index, record, result, debug=args.debug)
     except ModuleNotFoundError as exc:
@@ -100,7 +103,10 @@ def run_hanlp_sdp_pipeline(
     parser: "HanLPSDPParser",
     debug: bool = False,
     debug_dir: str | None = None,
+    llm_client: Any | None = None,
+    skip_step5: bool = False,
 ) -> dict[str, Any]:
+    from atomic_question_dag import PathAlignedAtomicDAGGenerator, invalid_atomic_question_dag, restore_entity_paths
     from tri_sdp_reasoning_compiler import compile_token_reasoning_structure
 
     preprocess_result = preprocessor.preprocess(record.question)
@@ -118,6 +124,24 @@ def run_hanlp_sdp_pipeline(
         debug=debug,
         debug_dir=debug_dir,
     )
+    atomic_question_dag = None
+    if not skip_step5:
+        step5_llm = llm_client or _llm_client_from_preprocessor(preprocessor)
+        if step5_llm is None:
+            atomic_question_dag = invalid_atomic_question_dag(["Step5 requires an LLM client."])
+        else:
+            try:
+                restored_paths = restore_entity_paths(
+                    token_reasoning_structure.paths,
+                    preprocess_result.mask_mappings,
+                )
+            except ValueError as exc:
+                atomic_question_dag = invalid_atomic_question_dag([str(exc)])
+            else:
+                atomic_question_dag = PathAlignedAtomicDAGGenerator(step5_llm).generate(
+                    original_question=record.question,
+                    paths=restored_paths,
+                )
     return {
         "preprocess_result": preprocess_result,
         "explicit_entities": preprocess_result.explicit_entities,
@@ -128,11 +152,17 @@ def run_hanlp_sdp_pipeline(
         "entity_mask_mappings": preprocess_result.mask_mappings,
         "hanlp_sdp_result": hanlp_sdp_result,
         "token_reasoning_structure": token_reasoning_structure,
+        "atomic_question_dag": atomic_question_dag,
     }
 
 
 def run_pipeline(*args: Any, **kwargs: Any) -> dict[str, Any]:
     return run_hanlp_sdp_pipeline(*args, **kwargs)
+
+
+def _llm_client_from_preprocessor(preprocessor: "EntityMaskingPreprocessor") -> Any | None:
+    extractor = getattr(preprocessor, "explicit_extractor", None)
+    return getattr(extractor, "llm_client", None)
 
 
 def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str, Any], debug: bool = False) -> None:
@@ -219,6 +249,25 @@ def print_hanlp_sdp_result(index: int, record: QuestionRecord, result: dict[str,
         for warning in combined_warnings:
             print(f" - {warning}")
     print()
+
+    print("[5. Atomic Question DAG]")
+    atomic_question_dag = result.get("atomic_question_dag")
+    if atomic_question_dag is None:
+        print("(skipped)")
+        print()
+        return
+    if not atomic_question_dag.valid:
+        print("(invalid)")
+        for error in atomic_question_dag.validation_errors:
+            print(f" - {error}")
+        print()
+        return
+    for node in atomic_question_dag.nodes:
+        print(f"{node.id}: {node.question}")
+        print(f"  depends_on: {', '.join(node.depends_on) if node.depends_on else '(none)'}")
+        print(f"  support: {node.support.path_id}[{node.support.start_index}:{node.support.end_index}]")
+        print(f"  path: {' ---- '.join(node.support.nodes)}")
+        print()
 
 
 def _print_hanlp_edges_for_formalism(hanlp_result: HanLPSDPResult, formalism: str) -> None:

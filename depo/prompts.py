@@ -115,3 +115,168 @@ MASK_SPAN_EXTRACTION_SYSTEM = EXPLICIT_ENTITY_EXTRACTION_SYSTEM
 
 def build_mask_span_extraction_prompt(question: str) -> str:
     return build_explicit_entity_extraction_prompt(question)
+
+
+ATOMIC_QUESTION_DAG_SYSTEM = """
+You are DEPO Step 5: Path-Aligned Evidence-Oriented Atomic Question DAG Generator.
+
+Definition of an atomic evidence question:
+
+1. It asks for exactly one retrievable fact, relation, or attribute.
+2. It has exactly one unknown answer.
+3. It performs only one semantic lookup.
+4. It must not contain an unresolved nested relation.
+5. If an argument must first be obtained from another question, use exactly a reference such as q1's answer, and make the current node depend on q1.
+6. Fixed restrictions from the original question--such as dates, awards, locations, ranges, time conditions, or descriptive clauses--may remain in one atomic question. They constrain the lookup and do not create an additional reasoning hop.
+7. A question is not atomic if it requests two facts, contains two unresolved relations, performs a final comparison, selects among candidates, or asks for the final answer to the original multi-hop question.
+
+Task:
+
+Generate an evidence-oriented atomic question DAG using:
+
+- the original question for semantic interpretation and fixed restrictions;
+- the supplied parser-grounded token paths for structural support.
+
+The paths contain original entity names. Treat them as structural evidence, not as literal natural-language templates.
+
+Rules:
+
+1. Every DAG node must be one atomic evidence-seeking question.
+2. Every node must be supported by exactly one contiguous span of exactly one supplied path.
+3. Do not create any node without path support.
+4. Do not introduce an unrelated main relation that is absent from the supporting path.
+5. You may use the original question to interpret a path relation naturally and preserve fixed restrictions.
+6. Do not answer any question.
+7. Do not generate the final comparison, equality decision, ranking decision, candidate selection, aggregation question, or final-answer question.
+8. When multiple paths are supplied, treat them as separate evidence branches.
+9. Do not create dependencies between different paths.
+10. Generate the evidence questions required by every supplied path.
+11. A dependent question may reference at most one earlier answer.
+12. Refer to a previous answer using exactly qN's answer.
+13. depends_on must exactly match the qN's answer reference in the question.
+14. Use the original entity names already present in the paths.
+15. Do not invent new named entities, dates, predicates, or restrictions.
+16. Path spans may overlap at an intermediate node. This is expected in a multi-hop chain.
+17. Cover the reasoning content of every supplied path.
+18. Return valid JSON only.
+
+Output JSON shape:
+
+{
+  "nodes": [
+    {
+      "id": "q1",
+      "question": "One atomic evidence question?",
+      "depends_on": [],
+      "support": {
+        "path_id": "P1",
+        "start_index": 0,
+        "end_index": 2
+      }
+    }
+  ]
+}
+
+Do not return edges, final operations, rationale, analysis, or chain-of-thought.
+
+Example A input:
+
+{
+  "original_question": "The player who defeated Johnny Majors for the Heisman Trophy in 1956 was born in what year?",
+  "paths": [
+    {
+      "path_id": "P1",
+      "nodes": [
+        {"index": 0, "text": "Johnny Majors"},
+        {"index": 1, "text": "defeated"},
+        {"index": 2, "text": "player"},
+        {"index": 3, "text": "born"},
+        {"index": 4, "text": "year"}
+      ]
+    }
+  ]
+}
+
+Example A output:
+
+{
+  "nodes": [
+    {
+      "id": "q1",
+      "question": "Who defeated Johnny Majors for the Heisman Trophy in 1956?",
+      "depends_on": [],
+      "support": {"path_id": "P1", "start_index": 0, "end_index": 2}
+    },
+    {
+      "id": "q2",
+      "question": "What year was q1's answer born?",
+      "depends_on": ["q1"],
+      "support": {"path_id": "P1", "start_index": 2, "end_index": 4}
+    }
+  ]
+}
+
+Example B input paths:
+
+P1: Ten9Eight: Shoot For The Moon ---- director ---- share ---- nationality
+P2: Sabotage (1936 Film) ---- director ---- share ---- nationality
+
+Example B output:
+
+{
+  "nodes": [
+    {
+      "id": "q1",
+      "question": "Who directed Ten9Eight: Shoot For The Moon?",
+      "depends_on": [],
+      "support": {"path_id": "P1", "start_index": 0, "end_index": 1}
+    },
+    {
+      "id": "q2",
+      "question": "What is the nationality of q1's answer?",
+      "depends_on": ["q1"],
+      "support": {"path_id": "P1", "start_index": 1, "end_index": 3}
+    },
+    {
+      "id": "q3",
+      "question": "Who directed Sabotage (1936 Film)?",
+      "depends_on": [],
+      "support": {"path_id": "P2", "start_index": 0, "end_index": 1}
+    },
+    {
+      "id": "q4",
+      "question": "What is the nationality of q3's answer?",
+      "depends_on": ["q3"],
+      "support": {"path_id": "P2", "start_index": 1, "end_index": 3}
+    }
+  ]
+}
+
+Do not generate a final node asking whether the two nationalities are the same.
+""".strip()
+
+
+def build_atomic_question_dag_prompt(
+    original_question: str,
+    paths: list[dict[str, object]],
+) -> str:
+    payload_paths: list[dict[str, object]] = []
+    for path in paths:
+        nodes = [str(node) for node in path.get("nodes", [])] if isinstance(path, dict) else []
+        payload_paths.append(
+            {
+                "path_id": str(path.get("path_id", "")) if isinstance(path, dict) else "",
+                "nodes": [
+                    {
+                        "index": index,
+                        "text": text,
+                    }
+                    for index, text in enumerate(nodes)
+                ],
+            }
+        )
+    payload = {
+        "original_question": original_question,
+        "paths": payload_paths,
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2)

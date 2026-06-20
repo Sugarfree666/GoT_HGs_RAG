@@ -8,12 +8,16 @@ original question
 -> deterministic ENTITYA/ENTITYB/... masking
 -> HanLP DM/PAS/PSD parsing
 -> query-focused token reasoning structure
+-> path-aligned evidence-oriented atomic question DAG
 ```
 
-The LLM is used only for explicit entity span detection. Placeholder assignment,
-overlap removal, and `masked_question` construction are deterministic Python
-logic. Step 4 consumes all three HanLP SDP views and emits a compact token graph
-plus a selected main path or parallel path cover.
+The LLM is used for Step 2 explicit entity span detection and Step 5 atomic
+question DAG generation. Placeholder assignment, overlap removal, and
+`masked_question` construction are deterministic Python logic. Step 4 consumes
+all three HanLP SDP views and emits a compact token graph plus a selected main
+path or parallel path cover. Step 5 sees only the original question and the
+Step 4 paths after entity placeholders have been deterministically restored to
+their original text.
 
 ## Output Shape
 
@@ -24,9 +28,17 @@ The CLI prints:
 3. Entity Masking
 4. HanLP SDP Parsing
 5. Token Reasoning Structure
+6. Atomic Question DAG
 
 Step 4 is query-focused and stops at the token reasoning graph/path-cover
-structure.
+structure. Step 5 converts those selected paths into an evidence-oriented DAG:
+each atomic question node must be supported by a contiguous span of exactly one
+path.
+
+Step 5 does not receive `masked_question`, entity maps, `answer_anchor`,
+constraints, candidate sets, path type, Step 4 graph/debug metadata, or raw SDP
+edges. For multi-path comparison cases it generates independent evidence
+branches only; final comparison and answer synthesis are left to a later stage.
 
 ## Install
 
@@ -58,6 +70,12 @@ Enable Step 4 debug JSON:
 python depo/main.py --debug --debug-dir debug/hanlp_sdp --question "Who was born later, ENTITYA or ENTITYB?"
 ```
 
+Skip Step 5 while debugging parsing and Step 4:
+
+```powershell
+python depo/main.py --skip-step5 --question "Where was the director of film The Outlaw Express born?"
+```
+
 Useful options:
 
 ```text
@@ -68,6 +86,7 @@ Useful options:
 --hanlp-model
 --debug
 --debug-dir
+--skip-step5
 ```
 
 ## Tests
@@ -77,6 +96,7 @@ require a live HanLP model.
 
 ```powershell
 python -m unittest tests.test_hanlp_sdp_pipeline
+python -m unittest tests.test_atomic_question_dag
 python -m unittest discover -s tests
 python -m compileall depo tests
 ```
